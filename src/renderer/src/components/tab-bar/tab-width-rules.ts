@@ -1,6 +1,7 @@
-// Definite widths prevent live titles from resizing the strip; flex-shrink still allows narrowing to the minimum.
-// Prompt: wide enough for a 15-20 character Korean session name ("[PUDDING] Sentry 이슈") plus the
-// model badge; tabs still shrink toward the minimum when the strip runs out of room.
-export const TAB_CONTAINER_WIDTH_CLASSES = 'w-[240px] min-w-[72px] min-[1280px]:w-[300px]'
+// Prompt: each tab is as wide as its whole title (plus icon, model badge and close button), as the
+// user asked for full titles. Tabs only narrow, down to the minimum, when the strip runs out of
+// room; the strip then scrolls as before. Upstream used fixed 180/220px widths so live titles could
+// not resize the strip; a tab now grows or shrinks when its title changes.
+export const TAB_CONTAINER_WIDTH_CLASSES = 'w-max min-w-[72px]'
 
-export const TAB_LABEL_WIDTH_CLASSES = 'min-w-0 flex-1 truncate'
+export const TAB_LABEL_WIDTH_CLASSES = 'min-w-0 flex-auto truncate'

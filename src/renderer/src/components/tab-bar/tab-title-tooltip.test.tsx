@@ -199,12 +199,11 @@ function textSpanHtml(markup: string, text: string): string {
 
 function expectTabContainerWidth(markup: string, root: string): void {
   const container = firstOpeningTag(markup)
-  // Assert literal widths so changing the shared constant cannot silently allow live-title tab resizing.
-  const widthClasses = 'w-[240px] min-w-[72px] min-[1280px]:w-[300px]'
+  // Prompt: tabs fit their whole title; the width classes sit on the container only.
+  const widthClasses = 'w-max min-w-[72px]'
   expect(container).toContain(widthClasses)
-  expect(root).not.toContain('w-[240px]')
+  expect(root).not.toContain('w-max')
   expect(root).not.toContain('min-w-[72px]')
-  expect(root).not.toContain('min-[1280px]:w-[300px]')
 }
 
 function expectTooltipContent(markup: string, text: string): void {
