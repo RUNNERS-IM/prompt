@@ -37,7 +37,8 @@ export class DaemonRouterRetirement {
   }
 
   private async finishIdleRetirementRequest(): Promise<DaemonIdleRetirementResult> {
-    const adapters = this.allAdapters()
+    // A daemon in the previous data folder is never retired by Prompt and does not block retiring its own.
+    const adapters = this.allAdapters().filter((adapter) => !adapter.fromPreviousDataFolder)
     if (this.spawnInFlight > 0) {
       this.admissionClosed = this.retirementAttempted
       return { state: 'busy', liveSessions: null }

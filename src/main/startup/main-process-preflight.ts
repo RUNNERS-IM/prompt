@@ -110,6 +110,7 @@ import {
   handleMainProcessPreflightFailure
 } from './main-process-preflight-failure'
 import { ensureWindowsAppDataPath } from './windows-app-data-path'
+import { pinPromptUserDataPath } from './prompt-user-data-pin'
 
 export type MainProcessPreflightOptions = {
   focusExistingWindow: () => void
@@ -130,6 +131,8 @@ function initializeMainProcessPreflight(options: MainProcessPreflightOptions): b
   const isDev = !app.isPackaged
   // Resolve Windows appData before recovery/instance-lock steps can read userData.
   ensureWindowsAppDataPath(app)
+  // Prompt keeps its own data folder; copy the inherited Orca one before anything reads userData.
+  pinPromptUserDataPath(app)
   if (runProfileStateRecoveryPreflight()) {
     return false
   }

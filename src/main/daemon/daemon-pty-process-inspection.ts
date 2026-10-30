@@ -122,6 +122,10 @@ export abstract class DaemonPtyProcessInspection extends DaemonPtyBufferSnapshot
       const { worktreeId } = parsePtySessionId(session.sessionId)
 
       if (worktreeId === null || !validWorktreeIds.has(worktreeId)) {
+        // Sessions here may belong to upstream Orca; leave them running.
+        if (this.fromPreviousDataFolder) {
+          continue
+        }
         try {
           await this.client.request('kill', { sessionId: session.sessionId })
         } catch {

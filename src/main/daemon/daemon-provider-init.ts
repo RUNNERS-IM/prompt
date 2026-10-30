@@ -8,7 +8,11 @@ import {
   releaseDaemonAdoptionLease,
   takeDaemonAdoptionLeaseRelease
 } from './daemon-endpoint-adoption'
-import { createLegacyDaemonAdapters } from './daemon-legacy-adapters'
+import {
+  createLegacyDaemonAdapters,
+  createPreviousDataFolderDaemonAdapters
+} from './daemon-legacy-adapters'
+import { getPreMigrationUserData } from '../startup/prompt-user-data-pin'
 import {
   discoverNewerProtocolHolds,
   isHoldingForNewerProtocolDaemon
@@ -125,11 +129,16 @@ export async function initDaemonPtyProvider(
     releaseDaemonAdoptionLease(newSpawner.getHandle())
 
     // Adopt older daemons; newer protocols only hold their tabs.
-    const [discoveredLegacyAdapters] = await Promise.all([
+    const previousDataFolder = getPreMigrationUserData()
+    const [discoveredLegacyAdapters, previousFolderAdapters] = await Promise.all([
       createLegacyDaemonAdapters(runtimeDir),
+      // Terminals started before Prompt moved its data folder keep running in their old daemon.
+      previousDataFolder
+        ? createPreviousDataFolderDaemonAdapters(previousDataFolder)
+        : Promise.resolve([]),
       discoverNewerProtocolHolds(runtimeDir)
     ])
-    legacyAdapters = discoveredLegacyAdapters
+    legacyAdapters = [...discoveredLegacyAdapters, ...previousFolderAdapters]
     routedAdapter =
       launchMode === 'degraded-new-pty-fallback'
         ? new DegradedDaemonPtyProvider({

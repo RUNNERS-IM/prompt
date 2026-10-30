@@ -62,7 +62,10 @@ function protectedRoots(): string[] {
     ...AGENT_HOME_ENTRIES.map((entry) => join(home, entry)),
     join(home, 'Library', 'Application Support', 'orca'),
     join(home, '.config', 'orca'),
-    join(home, 'AppData', 'Roaming', 'orca')
+    join(home, 'AppData', 'Roaming', 'orca'),
+    join(home, 'Library', 'Application Support', 'Prompt'),
+    join(home, '.config', 'Prompt'),
+    join(home, 'AppData', 'Roaming', 'Prompt')
   ])
   for (const name of INHERITED_STATE_ENV) {
     const value = process.env[name]

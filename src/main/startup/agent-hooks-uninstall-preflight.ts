@@ -3,6 +3,7 @@ import type { AgentHookInstallStatus } from '../../shared/agent-hook-types'
 import { setAppEnvironment } from '../../shared/app-environment'
 import { ElectronAppEnvironment } from '../host/electron-app-environment'
 import { ensureWindowsAppDataPath } from './windows-app-data-path'
+import { selectPromptUserDataPathWithoutCopy } from './prompt-user-data-pin'
 
 /** The NSIS uninstaller's flag (config/nsis/orca-installer-hooks.nsh); keep the two in sync. */
 export const AGENT_HOOKS_UNINSTALL_FLAG = '--orca-uninstall-remove-agent-hooks'
@@ -44,6 +45,7 @@ export function runAgentHooksUninstallPreflight(argv: readonly string[] = proces
     process.env.ORCA_BACKGROUND_LAUNCH = '1'
     // The same userData the app's managed runtime homes live under.
     ensureWindowsAppDataPath(app)
+    selectPromptUserDataPathWithoutCopy(app)
     // Removers read userData through this port (Claude's profile homes); the app's own preflight is skipped.
     setAppEnvironment(new ElectronAppEnvironment())
   } catch (error) {

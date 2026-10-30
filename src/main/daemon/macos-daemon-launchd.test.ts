@@ -255,7 +255,23 @@ it('uses one launchd label per profile and protocol', () => {
     macDaemonJobLabel('/Users/a/Library/Application Support/orca-dev')
   )
   expect(macDaemonJobLabel('/p')).toMatch(
-    new RegExp(`^com\\.stablyai\\.orca\\.terminal\\.[0-9a-f]{16}\\.v${PROTOCOL_VERSION}$`)
+    new RegExp(`^im\\.runners\\.prompt\\.terminal\\.[0-9a-f]{16}\\.v${PROTOCOL_VERSION}$`)
+  )
+  expect(macDaemonJobLabel('/Users/a/Library/Application Support/Prompt')).toMatch(
+    /^im\.runners\.prompt\.terminal\.[0-9a-f]{16}\.v\d+$/
+  )
+})
+
+it('keeps the inherited label for a profile still in the orca folder', () => {
+  // Daemons started before the data folder moved are registered under this label.
+  expect(macDaemonJobLabel('/Users/a/Library/Application Support/orca', 54)).toMatch(
+    /^com\.stablyai\.orca\.terminal\.[0-9a-f]{16}\.v54$/
+  )
+  expect(macDaemonJobLabel('/Users/a/Library/Application Support/Orca/', 54)).toMatch(
+    /^com\.stablyai\.orca\.terminal\./
+  )
+  expect(macDaemonJobLabel('/Users/a/Library/Application Support/orca-dev')).toMatch(
+    /^im\.runners\.prompt\.terminal\./
   )
 })
 

@@ -1,6 +1,7 @@
 import { app } from 'electron'
 import { createWslDistroHolder, type WslDistroHolder } from '../wsl/wsl-distro-holder'
 import { ensureWindowsAppDataPath } from './windows-app-data-path'
+import { selectPromptUserDataPathWithoutCopy } from './prompt-user-data-pin'
 
 /** The NSIS uninstaller's flag (config/nsis/orca-installer-hooks.nsh); keep the two in sync. */
 export const WSL_HOLDER_UNINSTALL_FLAG = '--orca-uninstall-release-wsl-holders'
@@ -36,6 +37,7 @@ export function runWslHolderUninstallPreflight(argv: readonly string[] = process
     process.env.ORCA_BACKGROUND_LAUNCH = '1'
     // The same userData the app records holders under; before any other preflight step.
     ensureWindowsAppDataPath(app)
+    selectPromptUserDataPathWithoutCopy(app)
     holder = createWslDistroHolder({ userDataPath: app.getPath('userData') })
   } catch (error) {
     console.warn('[wsl] uninstall could not start releasing WSL distro holders:', error)

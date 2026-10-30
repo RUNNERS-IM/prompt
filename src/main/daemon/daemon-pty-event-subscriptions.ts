@@ -92,6 +92,10 @@ export abstract class DaemonPtyEventSubscriptions extends DaemonPtySessionInvent
   }
 
   async requestIdleRetirement(): Promise<DaemonIdleRetirementResult> {
+    // Prompt does not own a daemon left in its previous data folder; it exits with its sessions.
+    if (this.fromPreviousDataFolder) {
+      return { state: 'unsupported' }
+    }
     if (this.protocolVersion < CLEAN_DISCONNECT_PROTOCOL_VERSION) {
       return { state: 'unsupported' }
     }
