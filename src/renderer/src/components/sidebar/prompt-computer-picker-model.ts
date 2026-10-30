@@ -37,12 +37,26 @@ export function promptComputerStatus(health: ExecutionHostHealth): PromptCompute
   }
 }
 
+/**
+ * Whether a host is a Prompt computer: this Mac or a paired Prompt runtime (`orca environment
+ * add`). A plain SSH host from ~/.ssh/config is not one; it stays usable in Settings → SSH Hosts
+ * and the other host menus. An SSH row that stands for a managed runtime (relay route) counts.
+ */
+export function isPromptComputerHost(
+  host: Pick<SidebarHostOption, 'kind' | 'aliasHostIds'>
+): boolean {
+  if (host.kind !== 'ssh') {
+    return true
+  }
+  return host.aliasHostIds?.some((id) => id.startsWith('runtime:')) ?? false
+}
+
 /** One row per machine, this computer first, then the rest in the registry's order. */
 export function buildPromptComputerRows(
   hostOptions: readonly SidebarHostOption[],
   localLabel: string
 ): PromptComputerRow[] {
-  const rows = pickerExecutionHosts(hostOptions).map((host): PromptComputerRow => ({
+  const rows = pickerExecutionHosts(hostOptions).filter(isPromptComputerHost).map((host): PromptComputerRow => ({
     id: host.id,
     label: host.id === LOCAL_EXECUTION_HOST_ID ? localLabel : host.label,
     isLocal: host.id === LOCAL_EXECUTION_HOST_ID,
@@ -61,8 +75,9 @@ export function buildPromptComputerRows(
 
 /**
  * The picked row, or null when the saved filter is "all hosts" or spans several machines (then
- * the picker narrows it to one). A saved runtime host whose pairing was removed falls back to null
- * once the environment list has loaded; before that, the saved choice is kept as is.
+ * the picker narrows it to one). A saved runtime host whose pairing was removed, or a saved plain
+ * SSH host (no longer listed), falls back to null once the environment list has loaded; before
+ * that, the saved choice is kept as is because an SSH row may still turn out to be a runtime.
  */
 export function resolvePromptSelectedComputer(args: {
   visibleHostIds: readonly ExecutionHostId[] | null
@@ -81,7 +96,11 @@ export function resolvePromptSelectedComputer(args: {
   if (selected === undefined) {
     return null
   }
-  if (selected.startsWith('runtime:') && args.runtimeCatalogHydrated && !byId.has(selected)) {
+  if (!args.runtimeCatalogHydrated || selected === LOCAL_EXECUTION_HOST_ID) {
+    return selected
+  }
+  const host = byId.get(selected)
+  if (!host || !isPromptComputerHost(host)) {
     return null
   }
   return selected
