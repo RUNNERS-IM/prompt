@@ -1,14 +1,40 @@
-import { app, BrowserWindow, nativeTheme } from 'electron'
+import { app, BrowserWindow, ipcMain, nativeTheme, shell } from 'electron'
 import { join } from 'node:path'
 import { mainI18n, translateMain } from '../i18n/main-i18n'
 import type { Store } from '../persistence'
 import { installPrivilegedWindowNavigationPolicy } from './privileged-window-navigation'
 import { installMacAccentColor } from './prompt-mac-accent-color'
+import {
+  PROMPT_OPEN_THIRD_PARTY_NOTICES_CHANNEL,
+  PROMPT_THIRD_PARTY_NOTICES_FILE
+} from '../../shared/prompt-third-party-notices'
 
 // Prompt's own About window (src/renderer/prompt-about.html). The native About panel cannot hold
 // the "More apps from RUNNERS" cards, so both the app menu and the menu bar menu open this one.
 
 let aboutWindow: BrowserWindow | null = null
+let noticesHandlerRegistered = false
+
+// Packaged builds carry the file in resources/ (extraResources); dev runs read the repo copy.
+function thirdPartyNoticesPath(): string {
+  return app.isPackaged
+    ? join(process.resourcesPath, PROMPT_THIRD_PARTY_NOTICES_FILE)
+    : join(app.getAppPath(), PROMPT_THIRD_PARTY_NOTICES_FILE)
+}
+
+function registerThirdPartyNoticesHandler(): void {
+  if (noticesHandlerRegistered) {
+    return
+  }
+  noticesHandlerRegistered = true
+  ipcMain.handle(PROMPT_OPEN_THIRD_PARTY_NOTICES_CHANNEL, async () => {
+    try {
+      return (await shell.openPath(thirdPartyNoticesPath())) === ''
+    } catch {
+      return false
+    }
+  })
+}
 
 function aboutTitle(): string {
   return translateMain('tray.about', 'About Prompt')
@@ -29,12 +55,13 @@ export function showPromptAboutWindow(store: Pick<Store, 'getSettings'> | null):
     return
   }
 
+  registerThirdPartyNoticesHandler()
   const isMac = process.platform === 'darwin'
   // Sized for the Split-style layout: the longest English card line (Monitor, about 360px at 11px)
-  // stays on one line, and the header, both cards and the footer fit without scrolling.
+  // stays on one line, and the header, both cards and the two footer lines fit without scrolling.
   const window = new BrowserWindow({
     width: 570,
-    height: 616,
+    height: 631,
     useContentSize: true,
     resizable: false,
     minimizable: false,

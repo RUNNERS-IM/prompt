@@ -1,6 +1,6 @@
 /* Prompt About window, laid out like Split's About window (2026-10-30 decisions 1A, 3A): 28 around
    the content (40 at the top under the hidden title bar), 96 icon, 28 under the header, 24 between
-   cards, 16 above the footer. Window background matches Prompt's window colour: #ececec light,
+   cards, 16 above the two footer lines. Window background matches Prompt's window colour: #ececec light,
    #1e1e1e dark. The top strip is draggable because the title bar is hidden. */
 html,
 body {
@@ -93,11 +93,38 @@ html.dark body {
 }
 
 .prompt-about-footer {
-  margin: 16px 0 0;
+  margin-top: 16px;
   font-size: 10px;
   line-height: 13px;
   text-align: center;
   color: rgb(0 0 0 / 0.3);
+}
+
+.prompt-about-footer p {
+  margin: 0;
+}
+
+.prompt-about-footer p + p {
+  margin-top: 2px;
+}
+
+/* Text link inside the footer line; opens the bundled third-party notices. */
+.prompt-about-notice {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--prompt-accent, #007aff);
+  font: inherit;
+  cursor: default;
+}
+
+.prompt-about-notice:hover {
+  text-decoration: underline;
+}
+
+.prompt-about-notice:focus-visible {
+  outline: 2px solid var(--prompt-accent, #007aff);
+  outline-offset: 1px;
 }
 
 html.dark .prompt-about-version {

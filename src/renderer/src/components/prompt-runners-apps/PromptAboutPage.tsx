@@ -7,19 +7,21 @@ import { PromptRunnersApps } from './PromptRunnersApps'
 import { loadPromptRunnersAppGroups, openRunnersAppUrl } from './prompt-runners-apps-source'
 import { isSafeRunnersAppUrl, pickRunnersAppsLocale } from './runners-apps-model'
 
+const COPYRIGHT = '© 2026 RUNNERS. All rights reserved.'
+
 // Written out here instead of translate(): the i18n brand post-processor turns every "Orca" into
-// "Prompt", and this line must name the original project. Same wording as native.about.originalCredit.
+// "Prompt", and this line must name the original project.
 const ORIGINAL_CREDIT = {
-  ko: '원본: Orca (Stably AI) · MIT 라이선스',
-  en: 'Based on Orca by Stably AI (MIT License)'
+  ko: { basedOn: 'Orca (Stably AI) 기반', notice: 'MIT 고지 보기', plain: 'MIT' },
+  en: { basedOn: 'Based on Orca by Stably AI', notice: 'View MIT notice', plain: 'MIT' }
 } as const
 
 const WEBSITE_URL = 'https://runners.im/prompt'
 const GITHUB_URL = 'https://github.com/RUNNERS-IM/prompt'
 
 /** Content of Prompt's About window, laid out like Split's: app icon, name, version line, website and
- *  GitHub buttons, the RUNNERS app cards, then the original Orca credit as the footer. Replaces the
- *  native About panel, which cannot hold cards. */
+ *  GitHub buttons, the RUNNERS app cards, then the copyright and the Orca credit, whose link opens
+ *  the bundled THIRD_PARTY_NOTICES.md. Replaces the native About panel, which cannot hold cards. */
 export function PromptAboutPage(): React.JSX.Element {
   const { i18n } = useTranslation()
   const [version, setVersion] = useState('')
@@ -48,6 +50,8 @@ export function PromptAboutPage(): React.JSX.Element {
     }
   }, [])
 
+  const credit = ORIGINAL_CREDIT[locale]
+  const noticesApi = window.api.promptThirdPartyNotices
   const openLink = (url: string): void => {
     if (isSafeRunnersAppUrl(url)) {
       openRunnersAppUrl(url)
@@ -61,7 +65,7 @@ export function PromptAboutPage(): React.JSX.Element {
         <h1 className="prompt-about-name">Prompt</h1>
         <p className="prompt-about-version">
           {version
-            ? translate('prompt.about.versionLine', 'Version {{version}} · Free and open source', {
+            ? translate('prompt.about.versionLine', 'Version {{version}} · Free', {
                 version
               })
             : '\u00a0'}
@@ -76,7 +80,23 @@ export function PromptAboutPage(): React.JSX.Element {
         </div>
       </header>
       <PromptRunnersApps groups={groups} locale={locale} onOpen={openRunnersAppUrl} />
-      <p className="prompt-about-footer">{ORIGINAL_CREDIT[locale]}</p>
+      <footer className="prompt-about-footer">
+        <p>{COPYRIGHT}</p>
+        <p>
+          {credit.basedOn} ·{' '}
+          {noticesApi ? (
+            <button
+              type="button"
+              className="prompt-about-notice"
+              onClick={() => void noticesApi.open()}
+            >
+              {credit.notice}
+            </button>
+          ) : (
+            credit.plain
+          )}
+        </p>
+      </footer>
     </main>
   )
 }

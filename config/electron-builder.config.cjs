@@ -138,7 +138,14 @@ const emojiShortcodeDatasetResource = {
   from: 'node_modules/emojibase-data/en/shortcodes/emojibase.json',
   to: 'node_modules/emojibase-data/en/shortcodes/emojibase.json'
 }
+// Prompt's LICENSE and the third-party notices (Orca's MIT text) as plain files in the app's
+// resources folder, so every install carries them and the About window can open the notices.
+const licenseNoticeResources = [
+  { from: 'LICENSE', to: 'LICENSE' },
+  { from: 'THIRD_PARTY_NOTICES.md', to: 'THIRD_PARTY_NOTICES.md' }
+]
 const commonExtraResources = [
+  ...licenseNoticeResources,
   relayExtraResource,
   orcadTemplateExtraResource,
   orcadTemplateNodeModulesExtraResource,
@@ -490,7 +497,10 @@ module.exports = {
     })
     chmodUnixCliLaunchers(resourcesDir, context.electronPlatformName)
     if (context.electronPlatformName === 'darwin') {
-      await signMacComputerUseHelper(join(resourcesDir, 'Prompt Computer Use.app'), context.packager)
+      await signMacComputerUseHelper(
+        join(resourcesDir, 'Prompt Computer Use.app'),
+        context.packager
+      )
       await signMacStandaloneHelper(
         join(resourcesDir, '..', 'MacOS', 'orca-notification-status'),
         'orca-notification-status',

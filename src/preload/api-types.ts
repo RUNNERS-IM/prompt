@@ -73,6 +73,7 @@ import type { LinkPreviewApi } from './api/link-preview-api'
 import type { WorkspaceSessionApi } from './api/workspace-session-api'
 import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/worktree-api'
 import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
+import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
 type Merged<T> = { [K in keyof T]: T[K] }
@@ -177,6 +178,8 @@ export type PreloadApi = {
   mobile: MobileApi
   speech: SpeechApi
   promptClaudeSessionTitle: PromptClaudeSessionTitleApi
+  /** Optional: only the desktop preload has it; the web client has no bundled notices file. */
+  promptThirdPartyNotices?: PromptThirdPartyNoticesApi
 }
 
 export type {

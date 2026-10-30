@@ -92,6 +92,7 @@ import { mobileApi } from './api/mobile-bridge'
 import { agentStatusApi } from './api/agent-status-bridge'
 import { speechApi } from './api/speech-bridge'
 import { promptClaudeSessionTitleApi } from './api/prompt-claude-session-title-bridge'
+import { promptThirdPartyNoticesApi } from './api/prompt-third-party-notices-bridge'
 
 installBrowserFindListener()
 
@@ -197,7 +198,8 @@ const api = {
   mobile: mobileApi,
   agentStatus: agentStatusApi,
   speech: speechApi,
-  promptClaudeSessionTitle: promptClaudeSessionTitleApi
+  promptClaudeSessionTitle: promptClaudeSessionTitleApi,
+  promptThirdPartyNotices: promptThirdPartyNoticesApi
 } satisfies PreloadApi
 
 if (process.contextIsolated) {
