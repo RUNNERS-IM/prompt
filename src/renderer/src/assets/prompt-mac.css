@@ -359,3 +359,43 @@ html.prompt-mac-vibrancy
 html.prompt-mac-vibrancy .jump-palette-command [data-slot='command-item'] {
   padding-block: 9px;
 }
+
+/* ===== Corners 6A: small controls 6 and floating windows 14 of the shared baseline. Tailwind
+   inlines rounded-md as calc(var(--radius) * 0.8) = 8, so the class itself is overridden here;
+   the 10 of the three layout cards (--radius) stays. ===== */
+html.prompt-mac-vibrancy .rounded-md {
+  border-radius: 6px;
+}
+
+html.prompt-mac-vibrancy
+  :is(
+    [data-slot='dialog-content'],
+    [data-slot='command-dialog-content'],
+    [data-slot='dropdown-menu-content'],
+    [data-slot='dropdown-menu-sub-content'],
+    [data-slot='context-menu-content'],
+    [data-slot='context-menu-sub-content'],
+    [data-slot='popover-content'],
+    [data-slot='select-content']
+  ) {
+  border-radius: 14px;
+}
+
+/* The ⌘J palette's inner list follows its window's corner instead of clipping it at 6. */
+html.prompt-mac-vibrancy [data-slot='command-dialog-content'] [data-slot='command'] {
+  border-radius: inherit;
+}
+
+/* Push buttons at the shared baseline: 28 high, 13 text (upstream h-9 = 36, text-sm = 14). */
+html.prompt-mac-vibrancy [data-slot='button'][data-size='default'] {
+  height: 28px;
+  padding-block: 0;
+  font-size: 13px;
+}
+
+/* Dialog titles at 13 semibold like macOS alerts (upstream text-lg = 18); the large feature-tip
+   headline (data-size=display) keeps its own size. */
+html.prompt-mac-vibrancy [data-slot='dialog-title'][data-size='default'] {
+  font-size: 13px;
+  font-weight: 600;
+}
