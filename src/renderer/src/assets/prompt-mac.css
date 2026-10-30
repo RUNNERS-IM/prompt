@@ -1,3 +1,29 @@
+/* Prompt design baseline shared with Split and Monitor (macOS native look).
+   Values: radius card 10 / floating panel 14 / small 6, text 13 / hint 11 / title 16. */
+html:root {
+  --app-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --prompt-accent: #007aff;
+  --radius: 10px;
+}
+
+html.prompt-mac-vibrancy:root:not(.dark) {
+  --background: #ececec;
+  --card: rgb(255 255 255 / 0.85);
+  --border: rgb(0 0 0 / 0.1);
+  --worktree-sidebar: #f6f6f6;
+}
+
+html.prompt-mac-vibrancy.dark {
+  --background: #1e1e1e;
+  --card: rgb(255 255 255 / 0.05);
+  --border: rgb(255 255 255 / 0.1);
+  --worktree-sidebar: #2a2a2a;
+}
+
+html.prompt-mac-vibrancy body {
+  font-size: 13px;
+}
+
 /* Prompt: System Settings style chrome. One window background everywhere;
    the sidebar floats as a rounded card on top of it. */
 html.prompt-mac-vibrancy body,
@@ -16,7 +42,7 @@ html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
   overflow: hidden;
   background: var(--worktree-sidebar);
   border: 0;
-  box-shadow: inset 0 0 0 0.5px color-mix(in srgb, var(--foreground) 10%, transparent);
+  box-shadow: inset 0 0 0 0.5px var(--border);
 }
 
 html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left,
@@ -44,18 +70,18 @@ html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] {
 }
 
 html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] button {
-  min-height: 34px;
+  min-height: 32px;
   padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   color: color-mix(in srgb, var(--worktree-sidebar-foreground) 88%, transparent);
 }
 
 html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] button svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: color-mix(in srgb, var(--worktree-sidebar-foreground) 70%, transparent);
 }
 
@@ -70,7 +96,7 @@ html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] > bu
 html.prompt-mac-vibrancy
   [data-contextual-tour-target='sidebar-navigation']
   button[aria-current='page'] {
-  background: #0a5fd8;
+  background: var(--prompt-accent);
   color: #fff;
 }
 

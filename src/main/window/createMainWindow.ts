@@ -36,6 +36,7 @@ import {
   TRAFFIC_LIGHT_X
 } from './main-window-visual-lifecycle'
 import { installMainWindowWebviewSecurity } from './main-window-webview-security'
+import { installMacAccentColor } from './prompt-mac-accent-color'
 import { rectHasVisibleAreaOnAnyDisplay } from './window-bounds-validation'
 import { installWindowsPathRegistryChangeListener } from '../pty/windows-path-registry-change'
 import { recordAgentSessionRuntimeEnd } from '../runtime/agent-session-runtime-end-record'
@@ -174,6 +175,7 @@ export function createMainWindow(
     // Keep hidden-window throttling; native sizing/frame invalidation recovers wake without an active viewport.
     mainWindow.webContents.setBackgroundThrottling(true)
     installMacosVisibilityRepaint(mainWindow)
+    installMacAccentColor(mainWindow)
   }
 
   // Resume may preserve focus and emit no visibility events; explicitly relay terminal wake and repaint stale surfaces.
