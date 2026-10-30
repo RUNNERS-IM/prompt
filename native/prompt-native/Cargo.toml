@@ -13,6 +13,19 @@ napi = { version = "3", default-features = false, features = ["napi8"] }
 napi-derive = "3"
 libc = "0.2"
 
+# Why objc2: typed, maintained bindings for Apple's Objective-C frameworks (UserNotifications here), so calls
+# and blocks are checked by the compiler instead of hand-written objc_msgSend.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+block2 = "0.6"
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSBundle", "NSString"] }
+objc2-user-notifications = { version = "0.3", default-features = false, features = [
+    "std",
+    "block2",
+    "UNUserNotificationCenter",
+    "UNNotificationSettings",
+] }
+
 [build-dependencies]
 napi-build = "2"
 

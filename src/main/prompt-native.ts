@@ -7,6 +7,8 @@ import { getAppEnvironment } from '../shared/app-environment'
 export type PromptNative = {
   /** phys_footprint per pid on macOS (empty elsewhere), read off the main thread. */
   processFootprints(): Promise<{ pid: number; bytes: number }[]>
+  /** UNUserNotificationCenter settings for this app's bundle; null outside a bundle or after a 3 s wait. */
+  notificationStatus(): Promise<{ authorization: string; alert: string } | null>
 }
 
 /** Packaged apps carry the slice's own file in Resources (electron-builder extraResources). */
