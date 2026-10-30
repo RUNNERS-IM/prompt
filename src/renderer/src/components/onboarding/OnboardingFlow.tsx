@@ -183,11 +183,12 @@ export default function OnboardingFlow({
           aria-modal="true"
           data-onboarding-modal
           className={cn(
-            'relative flex h-[calc(100vh-2rem)] max-h-[960px] min-h-0 w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-[0_10px_24px_rgba(0,0,0,0.18)] transition-[max-width] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
-            'max-w-[1100px]'
+            // Prompt: sized to its content (one switch on the first step) instead of nearly full screen.
+            'relative flex max-h-[calc(100vh-2rem)] min-h-0 w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-[0_10px_24px_rgba(0,0,0,0.18)] transition-[max-width] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+            'max-w-[560px]'
           )}
         >
-          <div className="relative flex h-full min-h-0 flex-col px-6 pb-6 pt-8 sm:px-8 sm:pb-8 sm:pt-9">
+          <div className="relative flex min-h-0 flex-1 flex-col p-6">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 text-base font-semibold tracking-tight">
                 <img
@@ -219,7 +220,7 @@ export default function OnboardingFlow({
               </div>
             </div>
 
-            <div className="mt-10 flex items-center gap-2 transition-[margin-top] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none">
+            <div className="mt-6 flex items-center gap-2 transition-[margin-top] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none">
               {flow.progressSteps.map(({ step, index: realStepIndex }, progressIdx) => {
                 const isActive = realStepIndex === stepIndex
                 const isDone = realStepIndex < stepIndex
@@ -262,20 +263,20 @@ export default function OnboardingFlow({
               </span>
             </div>
 
-            <div className="mt-8 shrink-0">
+            <div className="mt-6 shrink-0">
               {stepIndex === 0 && (
-                <div className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="mb-1.5 text-xs font-medium text-muted-foreground">
                   {translate(
                     'auto.components.onboarding.OnboardingFlow.1b5e182e9f',
                     'Welcome to Orca'
                   )}
                 </div>
               )}
-              <h1 className="text-[34px] font-semibold leading-[1.15] tracking-tight text-foreground">
+              <h1 className="text-[20px] font-semibold leading-tight text-foreground">
                 {copy.title}
               </h1>
               {copy.subtitle ? (
-                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
                   {copy.subtitle}
                 </p>
               ) : null}
@@ -286,8 +287,8 @@ export default function OnboardingFlow({
                 'min-h-0 flex-1 transition-[margin-top] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
                 // Agent permissions stay outside the capped grid scroll; other steps use the outer scroller.
                 currentStep.id === 'agent'
-                  ? 'mt-10 flex flex-col overflow-hidden'
-                  : cn('scrollbar-sleek overflow-y-auto pr-1', 'mt-10')
+                  ? 'mt-6 flex flex-col overflow-hidden'
+                  : cn('scrollbar-sleek overflow-y-auto pr-1', 'mt-6')
               )}
             >
               {currentStep.id === 'agent' && (
