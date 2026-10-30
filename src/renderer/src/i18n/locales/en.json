@@ -23176,6 +23176,14 @@
       "justNow": "{{status}} · just now",
       "ongoing": "{{status}} · {{duration}}",
       "ago": "{{status}} · {{duration}} ago"
+    },
+    "closeSession": {
+      "titleNamed": "Close '{{name}}'?",
+      "titleUnnamed": "Close this session?",
+      "agentDescription": "Its work will stop. The conversation is kept, so you can pick it up later.",
+      "commandDescription": "The command running in it will stop.",
+      "dontAskAgain": "Don't ask again",
+      "confirm": "Close"
     }
   }
 }

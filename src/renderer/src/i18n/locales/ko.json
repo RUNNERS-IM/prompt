@@ -22619,6 +22619,14 @@
       "justNow": "{{status}} · 방금",
       "ongoing": "{{status}} · {{duration}}째",
       "ago": "{{status}} · {{duration}} 전"
+    },
+    "closeSession": {
+      "titleNamed": "'{{name}}' 세션을 닫을까요?",
+      "titleUnnamed": "이 세션을 닫을까요?",
+      "agentDescription": "하던 일이 멈춥니다. 대화 기록은 남아서 나중에 이어 할 수 있어요.",
+      "commandDescription": "실행 중인 명령이 멈춥니다.",
+      "dontAskAgain": "다음부터 묻지 않기",
+      "confirm": "닫기"
     }
   }
 }

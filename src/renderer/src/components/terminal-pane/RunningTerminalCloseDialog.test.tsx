@@ -90,15 +90,25 @@ describe('RunningTerminalCloseDialog', () => {
 
     await renderDialog({ onConfirm }, updateSettings)
 
-    expect(document.body.textContent).toContain('Stop running command?')
-    expect(document.body.textContent).toContain('dev server')
+    expect(document.body.textContent).toContain("Close 'dev server'?")
 
     await act(async () => {
-      getButton('Stop and Close').click()
+      getButton('Close').click()
     })
 
     expect(updateSettings).not.toHaveBeenCalled()
     expect(onConfirm).toHaveBeenCalledTimes(1)
+  })
+
+  it('shows the current tab name, not the label captured at request time', async () => {
+    useAppStore.setState({
+      tabsByWorktree: {
+        wt: [{ id: 'tab-1', title: '[PROMPT] 개발', customTitle: 'Release notes' } as never]
+      }
+    })
+    await renderDialog({ onConfirm: vi.fn(), tabLabel: '[PROMPT] 개발' }, vi.fn())
+    expect(document.body.textContent).toContain("Close 'Release notes'?")
+    expect(document.body.textContent).not.toContain('[PROMPT] 개발')
   })
 
   it('uses the agent copy for an agent pane', async () => {
@@ -106,27 +116,28 @@ describe('RunningTerminalCloseDialog', () => {
 
     await renderDialog({ onConfirm: vi.fn(), copyKind: 'agent' }, updateSettings)
 
-    expect(document.body.textContent).toContain('Stop this agent?')
+    expect(document.body.textContent).toContain("Close 'dev server'?")
     expect(document.body.textContent).toContain(
-      'This terminal will not resume automatically. Cancel and put the workspace to sleep to resume it later.'
+      'Its work will stop. The conversation is kept, so you can pick it up later.'
     )
-    expect(getButton('Stop Agent')).toBeTruthy()
+    expect(document.body.textContent).not.toMatch(/sleep|agent/i)
+    expect(getButton('Close')).toBeTruthy()
   })
 
   it('uses truthful chat copy and the shared opt-out without terminal sleep advice', async () => {
     const updateSettings = vi.fn().mockResolvedValue(undefined)
     const onConfirm = vi.fn()
     await renderDialog({ onConfirm, copyKind: 'chat-agent' }, updateSettings)
-    expect(document.body.textContent).toContain('Stop this agent?')
+    expect(document.body.textContent).toContain("Close 'dev server'?")
     expect(document.body.textContent).toContain(
-      "Closing this chat will stop the agent's current work."
+      'Its work will stop. The conversation is kept, so you can pick it up later.'
     )
     expect(document.body.textContent).not.toContain('terminal')
     await act(async () => {
       getCheckbox().click()
     })
     await act(async () => {
-      getButton('Stop Agent').click()
+      getButton('Close').click()
     })
     expect(updateSettings).toHaveBeenCalledWith({
       skipCloseTerminalWithRunningProcessConfirm: true
@@ -143,13 +154,13 @@ describe('RunningTerminalCloseDialog', () => {
 
     await renderDialog({ onConfirm: vi.fn() }, updateSettings)
 
-    expect(document.body.textContent).not.toContain('Stop running command?')
+    expect(document.body.textContent).not.toContain("Close 'dev server'?")
 
     await act(async () => {
       useAppStore.setState({ pinnedTabCloseConfirm: null })
     })
 
-    expect(document.body.textContent).toContain('Stop running command?')
+    expect(document.body.textContent).toContain("Close 'dev server'?")
   })
 
   it('does not carry the opt-out tick over to the next queued tab', async () => {
@@ -178,7 +189,7 @@ describe('RunningTerminalCloseDialog', () => {
 
     advancePastGuard()
     await act(async () => {
-      getButton('Stop and Close').click()
+      getButton('Close').click()
     })
 
     expect(updateSettings).not.toHaveBeenCalled()
@@ -204,7 +215,7 @@ describe('RunningTerminalCloseDialog', () => {
       getCheckbox().click()
     })
     await act(async () => {
-      getButton('Stop and Close').click()
+      getButton('Close').click()
     })
 
     expect(updateSettings).toHaveBeenCalledWith({
@@ -241,7 +252,7 @@ describe('RunningTerminalCloseDialog', () => {
 
     advancePastGuard()
     await act(async () => {
-      getButton('Stop and Close').click()
+      getButton('Close').click()
     })
 
     expect(nextOnConfirm).toHaveBeenCalledTimes(1)

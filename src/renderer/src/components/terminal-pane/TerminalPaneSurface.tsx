@@ -6,6 +6,7 @@ import { DaemonActionDialog } from '@/components/shared/useDaemonActions'
 import { AgentSessionContinuationDialog } from '@/components/agent-session-continuation/AgentSessionContinuationDialog'
 import { WORKSPACE_FILE_PATH_MIME, WORKSPACE_FILE_PATHS_MIME } from '@/lib/workspace-file-drag'
 import CloseTerminalDialog from './CloseTerminalDialog'
+import { useCloseDialogSessionName } from './close-terminal-dialog-session-name'
 import TerminalContextMenu from './TerminalContextMenu'
 import TerminalPaneHeaderOverlay from './TerminalPaneHeaderOverlay'
 import { isPaneOwnerRecoveryError, TerminalErrorToast } from './TerminalErrorToast'
@@ -123,6 +124,7 @@ export function TerminalPaneSurface({
     visibleTerminalError,
     worktreeId
   } = controller
+  const closeDialogSessionName = useCloseDialogSessionName(tabId)
   // Why: an SSH, runtime, or not-yet-known host must not be described with this client's OS/shell.
   const paneOnClient = useAppStore(
     (state) => getKnownExecutionHostIdForWorktree(state, worktreeId) === LOCAL_EXECUTION_HOST_ID
@@ -386,6 +388,7 @@ export function TerminalPaneSurface({
       <CloseTerminalDialog
         open={pendingCloseConfirmation !== null}
         copyKind={pendingCloseConfirmation?.copyKind}
+        {...(closeDialogSessionName ? { tabLabel: closeDialogSessionName } : {})}
         onCancel={handleCancelClose}
         onConfirm={handleConfirmClose}
       />

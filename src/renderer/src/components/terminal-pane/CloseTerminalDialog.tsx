@@ -24,7 +24,7 @@ export default function CloseTerminalDialog({
 }: {
   open: boolean
   copyKind?: CloseTerminalDialogCopyKind
-  /** Name off-focus tab-strip/middle-click targets; omit for focused-pane keyboard closes. */
+  /** Prompt: the session name shown in the title (see useCloseDialogSessionName). */
   tabLabel?: string
   /** Changing queued subject clears the previous tab’s opt-out without reopening the dialog. */
   subjectKey?: string
@@ -96,52 +96,31 @@ function CloseTerminalDialogBody({
   onCancel: () => void
   onConfirm: (dontAskAgain: boolean) => void
 }): React.JSX.Element {
-  const isAgent = copyKind !== 'command'
-  const isChat = copyKind === 'chat-agent'
+  // Prompt: one plain shape for every kind: "Close '<name>'?", one line on what stops, a
+  // "Don't ask again" box (off at first), Cancel / Close.
+  const isCommand = copyKind === 'command'
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="text-sm">
-          {isAgent
-            ? translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.stop_agent_title',
-                'Stop this agent?'
-              )
-            : translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.stop_command_title',
-                'Stop running command?'
-              )}
+        <DialogTitle className="truncate text-sm" title={trimmedTabLabel}>
+          {trimmedTabLabel
+            ? translate('prompt.closeSession.titleNamed', "Close '{{name}}'?", {
+                name: trimmedTabLabel
+              })
+            : translate('prompt.closeSession.titleUnnamed', 'Close this session?')}
         </DialogTitle>
         <DialogDescription className="text-xs">
-          {isChat
+          {isCommand
             ? translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.stop_chat_description',
-                "Closing this chat will stop the agent's current work."
+                'prompt.closeSession.commandDescription',
+                'The command running in it will stop.'
               )
-            : isAgent
-              ? translate(
-                  'auto.components.terminal.pane.CloseTerminalDialog.stop_agent_description',
-                  "Closing this terminal will stop the agent's current work."
-                )
-              : translate(
-                  'auto.components.terminal.pane.CloseTerminalDialog.stop_command_description',
-                  'Closing this terminal will stop the command running inside it.'
-                )}
+            : translate(
+                'prompt.closeSession.agentDescription',
+                'Its work will stop. The conversation is kept, so you can pick it up later.'
+              )}
         </DialogDescription>
       </DialogHeader>
-      {copyKind === 'agent' ? (
-        <p className="text-xs text-muted-foreground">
-          {translate(
-            'auto.components.terminal.pane.CloseTerminalDialog.automatic_resume_warning',
-            'This terminal will not resume automatically. Cancel and put the workspace to sleep to resume it later.'
-          )}
-        </p>
-      ) : null}
-      {trimmedTabLabel ? (
-        <p className="truncate text-xs font-medium text-foreground" title={trimmedTabLabel}>
-          {trimmedTabLabel}
-        </p>
-      ) : null}
       <div className="flex items-center gap-2">
         <Checkbox
           id={checkboxId}
@@ -149,12 +128,7 @@ function CloseTerminalDialogBody({
           onCheckedChange={(checked) => setDontAskAgain(checked === true)}
         />
         <Label htmlFor={checkboxId} className="text-xs font-normal text-muted-foreground">
-          {isChat
-            ? translate('auto.components.confirmation.dialog.92bac3217e', "Don't ask again")
-            : translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.dont_ask_again',
-                "Don't ask again for running terminals"
-              )}
+          {translate('prompt.closeSession.dontAskAgain', "Don't ask again")}
         </Label>
       </div>
       <DialogFooter className="gap-2">
@@ -168,15 +142,7 @@ function CloseTerminalDialogBody({
           autoFocus
           onClick={() => onConfirm(dontAskAgain)}
         >
-          {isAgent
-            ? translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.stop_agent_confirm',
-                'Stop Agent'
-              )
-            : translate(
-                'auto.components.terminal.pane.CloseTerminalDialog.stop_command_confirm',
-                'Stop and Close'
-              )}
+          {translate('prompt.closeSession.confirm', 'Close')}
         </Button>
       </DialogFooter>
     </>
