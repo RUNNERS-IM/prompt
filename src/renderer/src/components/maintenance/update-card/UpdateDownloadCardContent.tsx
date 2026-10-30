@@ -5,6 +5,7 @@ import { Button } from '../../ui/button'
 import { Progress } from '../../ui/progress'
 import { translate } from '@/i18n/i18n'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { formatPromptDisplayVersion } from '../../../../../shared/prompt-display-version'
 
 function isAnimatedGif(url: string | undefined): boolean {
   return typeof url === 'string' && url.toLowerCase().endsWith('.gif')
@@ -80,7 +81,7 @@ export function UpdateDownloadingContent({
         {release
           ? release.description
           : translate('auto.components.UpdateCard.93794ea932', 'Orca v{{value0}} is downloading.', {
-              value0: version
+              value0: formatPromptDisplayVersion(version)
             })}
       </p>
       {showReleaseNotes && (

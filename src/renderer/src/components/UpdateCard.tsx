@@ -9,6 +9,7 @@ import { translate } from '@/i18n/i18n'
 import { updaterMessageText } from '@/lib/updater-message-copy'
 import { UpdateCardStateContent } from './maintenance/update-card/UpdateCardStateContent'
 import { buildUpdateCardErrorModel } from './maintenance/update-card/update-card-error-model'
+import { PROMPT_UPDATE_CARD } from './maintenance/update-card/PromptUpdateAvailableContent'
 import {
   getUpdateCardAriaLabel,
   isHttp2ProtocolError,
@@ -241,7 +242,9 @@ export function UpdateCard(): React.JSX.Element | null {
     : exiting
       ? 'animate-update-card-exit'
       : 'animate-update-card-enter'
+  // Prompt: the shared update wording has no session line (5A).
   const showReassurance =
+    !PROMPT_UPDATE_CARD &&
     !reassuranceSeen &&
     ((status.state === 'available' && !status.externallyManaged) || status.state === 'downloading')
   return (

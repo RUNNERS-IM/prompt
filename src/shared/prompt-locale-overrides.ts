@@ -23,7 +23,12 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.status.bar.SkillUpdateStatusSegment.runningOne': '{{value0}} 업데이트 중…',
   'auto.components.status.bar.SkillUpdateStatusSegment.successLabel': '스킬 업데이트됨',
   'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중',
-  'auto.components.crash.report.CrashReportDialog.50b00dc327': '세부 정보 복사'
+  'auto.components.crash.report.CrashReportDialog.50b00dc327': '세부 정보 복사',
+  // Update card and status bar show the version as 2.6.1030.2, without "v".
+  'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}}을(를) 받는 중입니다.',
+  'auto.components.status.bar.UpdateStatusSegment.248ee5d8ef':
+    'Prompt {{value0}} 받는 중… {{value1}}%',
+  'auto.components.status.bar.UpdateStatusSegment.9d13213a56': 'Prompt {{value0}} 설치 준비됨'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
@@ -45,7 +50,17 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
     'GitHub에 새 이슈 화면을 엽니다. 적은 내용과 버전이 미리 채워지며, GitHub 계정이 필요합니다.',
   'prompt.crashReport.cancel': '취소',
   'prompt.crashReport.open': 'GitHub에서 열기',
-  'prompt.crashReport.opened': 'GitHub 이슈 화면을 열었습니다. 거기서 등록해야 접수됩니다.'
+  'prompt.crashReport.opened': 'GitHub 이슈 화면을 열었습니다. 거기서 등록해야 접수됩니다.',
+  'prompt.update.title': '새 버전이 있습니다',
+  'prompt.update.bodyWithCurrent':
+    'Prompt {{version}}을(를) 설치할 수 있습니다. 지금은 {{current}}입니다. 설치하면 Prompt가 다시 시작됩니다.',
+  'prompt.update.body':
+    'Prompt {{version}}을(를) 설치할 수 있습니다. 설치하면 Prompt가 다시 시작됩니다.',
+  'prompt.update.later': '나중에',
+  'prompt.update.install': '설치',
+  'prompt.update.restartFailed':
+    '업데이트를 설치하려고 다시 시작하지 못했습니다. Prompt를 종료했다가 다시 연 뒤 시도하세요.',
+  'prompt.update.installerFailed': '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

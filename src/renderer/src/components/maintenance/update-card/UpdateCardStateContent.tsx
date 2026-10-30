@@ -14,6 +14,7 @@ import {
   UpdateAvailableSimpleContent
 } from './UpdateAvailableCardContent'
 import { UpdateDownloadingContent, UpdateReadyToInstallContent } from './UpdateDownloadCardContent'
+import { PROMPT_UPDATE_CARD, PromptUpdateAvailableContent } from './PromptUpdateAvailableContent'
 
 export function UpdateCardStateContent({
   status,
@@ -110,6 +111,13 @@ export function UpdateCardStateContent({
           {translate('auto.components.UpdateCard.09a55c39b5', 'Installing...')}
         </p>
       </div>
+    ) : PROMPT_UPDATE_CARD ? (
+      <PromptUpdateAvailableContent
+        version={status.version}
+        releaseUrl={isLocalBuild ? undefined : getReleaseNotesUrlForVersion(status.version)}
+        onInstall={onInstallRetry}
+        onLater={onCollapse}
+      />
     ) : (
       <UpdateReadyToInstallContent
         version={status.version}
@@ -140,6 +148,16 @@ export function UpdateCardStateContent({
   const releaseUrl = isLocalBuild
     ? undefined
     : (status.releaseUrl ?? getReleaseNotesUrlForVersion(status.version))
+  if (PROMPT_UPDATE_CARD && !status.externallyManaged) {
+    return (
+      <PromptUpdateAvailableContent
+        version={status.version}
+        releaseUrl={releaseUrl}
+        onInstall={onUpdate}
+        onLater={onDismiss}
+      />
+    )
+  }
   return changelog?.release ? (
     <UpdateAvailableRichContent
       release={changelog.release}

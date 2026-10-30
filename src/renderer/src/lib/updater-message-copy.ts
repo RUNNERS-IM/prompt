@@ -1,4 +1,5 @@
 import { translate } from '@/i18n/i18n'
+import { promptUpdaterInstallFailureText } from './prompt-updater-message-copy'
 import type { LinuxPackageCommandUnavailableReason } from '../../../shared/update-status-types'
 import {
   UPDATER_FAILURE_COPY as EN,
@@ -139,7 +140,11 @@ export function updaterMessageText(source: {
   messageCode?: unknown
   messageParams?: unknown
 }): string {
-  return codedText(source.messageCode, source.messageParams) ?? source.message
+  return (
+    codedText(source.messageCode, source.messageParams) ??
+    promptUpdaterInstallFailureText(source.message) ??
+    source.message
+  )
 }
 
 /** The install-instructions result already names its reason; unknown reasons keep main's English. */

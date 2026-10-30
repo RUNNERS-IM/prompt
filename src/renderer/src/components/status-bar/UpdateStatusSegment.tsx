@@ -4,6 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useAppStore } from '../../store'
 import { translate } from '@/i18n/i18n'
 import { getUpdateInstallBlockGuidance } from '../maintenance/update-card/update-install-block-guidance'
+import { formatPromptDisplayVersion } from '../../../../shared/prompt-display-version'
 
 // Always expose the collapsed update card so pending downloads and installs remain reachable.
 export function UpdateStatusSegment({
@@ -33,7 +34,7 @@ export function UpdateStatusSegment({
         tooltip: translate(
           'auto.components.status.bar.UpdateStatusSegment.248ee5d8ef',
           'Orca v{{value0}} downloading… {{value1}}%',
-          { value0: status.version, value1: pct }
+          { value0: formatPromptDisplayVersion(status.version), value1: pct }
         ),
         ariaLabel: translate(
           'auto.components.status.bar.UpdateStatusSegment.fd1d3b3a1d',
@@ -79,7 +80,7 @@ export function UpdateStatusSegment({
         tooltip: translate(
           'auto.components.status.bar.UpdateStatusSegment.9d13213a56',
           'Orca v{{value0}} ready to install',
-          { value0: readyVersion }
+          { value0: formatPromptDisplayVersion(readyVersion) }
         ),
         ariaLabel: translate(
           'auto.components.status.bar.UpdateStatusSegment.962404f68e',
