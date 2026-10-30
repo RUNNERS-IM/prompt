@@ -48,6 +48,8 @@ describe('parseTccPromptEvent', () => {
 describe('isOrcaAttributedPrompt', () => {
   it('accepts the app and detached terminal helper across Orca build identities', () => {
     for (const id of [
+      'im.runners.prompt',
+      'im.runners.prompt.helper',
       'com.stablyai.orca',
       'com.stablyai.orca.helper',
       'com.stablyai.orca.dev',
