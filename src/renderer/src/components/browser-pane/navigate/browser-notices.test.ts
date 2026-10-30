@@ -18,14 +18,14 @@ describe('browser notice formatting', () => {
         permission: 'media',
         origin: 'https://example.com'
       })
-    ).toBe('https://example.com asked for camera or microphone access, and Orca denied it.')
+    ).toBe('https://example.com asked for camera or microphone access, and Prompt denied it.')
     expect(
       formatPermissionNotice({
         browserPageId: 'browser-1',
         permission: 'geolocation',
         origin: 'unknown'
       })
-    ).toBe('this page asked for your location, and Orca denied it.')
+    ).toBe('this page asked for your location, and Prompt denied it.')
   })
 
   it.each([
@@ -35,7 +35,7 @@ describe('browser notice formatting', () => {
     ['display-capture', 'permission to capture your screen'],
     ['window-management', 'screen information and multi-screen window placement'],
     ['keyboardLock', 'permission to capture keyboard input'],
-    ['openExternal', 'permission to open a link outside Orca'],
+    ['openExternal', 'permission to open a link outside Prompt'],
     ['fileSystem', 'access to your files or folders'],
     ['hid', 'access to a connected human interface device'],
     ['usb', 'access to a USB device'],
@@ -51,7 +51,7 @@ describe('browser notice formatting', () => {
         permission,
         origin: 'https://example.com'
       })
-    ).toBe(`https://example.com asked for ${description}, and Orca denied it.`)
+    ).toBe(`https://example.com asked for ${description}, and Prompt denied it.`)
   })
 
   it('falls back to the raw permission name for anything unmapped', () => {
@@ -61,7 +61,7 @@ describe('browser notice formatting', () => {
         permission: 'some-future-permission',
         origin: 'https://example.com'
       })
-    ).toBe('https://example.com asked for some-future-permission, and Orca denied it.')
+    ).toBe('https://example.com asked for some-future-permission, and Prompt denied it.')
   })
 
   it('formats popup outcomes', () => {
@@ -87,7 +87,7 @@ describe('browser notice formatting', () => {
         origin: 'unknown',
         action: 'blocked'
       })
-    ).toBe('A site tried to open a popup Orca does not support here.')
+    ).toBe('A site tried to open a popup Prompt does not support here.')
   })
 
   it('formats download completion and byte counts', () => {

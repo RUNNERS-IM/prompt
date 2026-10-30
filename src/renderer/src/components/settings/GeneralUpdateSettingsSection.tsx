@@ -14,6 +14,7 @@ import { GeneralRemoteServerUpdates } from './GeneralRemoteServerUpdates'
 import { ReleaseChannelSection } from './ReleaseChannelSection'
 import { getReleaseNotesUrlForVersion } from '../../../../shared/release-channel'
 import { openAppHttpLinkFromAnchor } from '@/lib/app-http-link-open'
+import { formatPromptDisplayVersion } from '../../../../shared/prompt-display-version'
 
 export function GeneralUpdateSettingsSection(): React.JSX.Element {
   const updateStatus = useAppStore((s) => s.updateStatus)
@@ -69,7 +70,7 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
           description={translate(
             'auto.components.settings.GeneralUpdateSettingsSection.d91ebfb87e',
             'Current version: {{value0}}',
-            { value0: appVersion ?? '...' }
+            { value0: appVersion ? formatPromptDisplayVersion(appVersion) : '...' }
           )}
         />
       </div>

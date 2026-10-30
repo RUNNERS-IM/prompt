@@ -19,7 +19,7 @@ describe('formatClientEnvironmentInfo', () => {
   it('formats version, OS, and optional shell for copy-paste', () => {
     expect(formatClientEnvironmentInfo(SAMPLE)).toBe(
       [
-        'Orca: 1.4.178-rc.2',
+        'Prompt: 1.4.178-rc.2',
         'OS: win32 10.0.22631 (x64)',
         'Shell: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
       ].join('\n')
@@ -34,7 +34,7 @@ describe('formatClientEnvironmentInfo', () => {
         osRelease: '',
         arch: 'arm64'
       })
-    ).toBe(['Orca: unknown', 'OS: darwin (arm64)'].join('\n'))
+    ).toBe(['Prompt: unknown', 'OS: darwin (arm64)'].join('\n'))
   })
 
   it('keeps environment-controlled values on one line', () => {
@@ -48,7 +48,7 @@ describe('formatClientEnvironmentInfo', () => {
       })
     ).toBe(
       [
-        'Orca: 1.2.3 Injected: value',
+        'Prompt: 1.2.3 Injected: value',
         'OS: linux 6.8 Extra (x64)',
         'Shell: /bin/zsh More: data'
       ].join('\n')
@@ -59,9 +59,11 @@ describe('formatClientEnvironmentInfo', () => {
 describe('environment footer helpers', () => {
   it('builds a marked footer and detects when one is already present', () => {
     const footer = formatClientEnvironmentFooter(SAMPLE)
-    expect(footer.startsWith('---\nOrca:')).toBe(true)
+    expect(footer.startsWith('---\nPrompt:')).toBe(true)
     expect(hasClientEnvironmentFooter(`oops\n\n${footer}`)).toBe(true)
     expect(hasClientEnvironmentFooter('oops')).toBe(false)
+    // Footers written by builds from before the rename still count.
+    expect(hasClientEnvironmentFooter('oops\n---\nOrca: 1.4.1\nOS: darwin')).toBe(true)
   })
 
   it('appends a footer once and leaves existing footers alone', () => {
@@ -70,7 +72,7 @@ describe('environment footer helpers', () => {
       info: SAMPLE
     })
     expect(withFooter).toContain('Working directory missing.')
-    expect(withFooter).toContain('Orca: 1.4.178-rc.2')
+    expect(withFooter).toContain('Prompt: 1.4.178-rc.2')
     expect(appendClientEnvironmentFooter({ message: withFooter, info: SAMPLE })).toBe(withFooter)
   })
 
@@ -94,7 +96,7 @@ describe('environment footer helpers', () => {
   })
 
   it('still detects an edited footer block', () => {
-    const editedFooter = ['---', 'Orca: locally-built', 'OS: edited by user'].join('\n')
+    const editedFooter = ['---', 'Prompt: locally-built', 'OS: edited by user'].join('\n')
 
     expect(hasClientEnvironmentFooter(editedFooter)).toBe(true)
     expect(stripClientEnvironmentFooter(editedFooter).trim()).toBe('')
