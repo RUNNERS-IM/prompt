@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: release
+          ref: ${{ github.event_name == 'push' && 'release' || github.ref_name }}
           fetch-depth: 0 # tags tell which versions already exist
 
       - name: Bump the version and push
