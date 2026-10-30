@@ -10,6 +10,7 @@ import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import type { OnboardingState } from '../../../../shared/onboarding-state-types'
 import type { TuiAgent } from '../../../../shared/tui-agent'
 import { STEPS } from './use-onboarding-flow-types'
+import { isPromptSkippedOnboardingStep } from './prompt-onboarding-steps'
 
 type TaskSourcesSnapshotProps = EventProps<'onboarding_task_sources_snapshot'>
 type TaskSourcesGithubStatus = TaskSourcesSnapshotProps['github_status']
@@ -32,6 +33,7 @@ export type OnboardingStepSkipOptions = {
 export function isSkippedStepIndex(index: number, options: OnboardingStepSkipOptions): boolean {
   const step = STEPS[index]
   return (
+    isPromptSkippedOnboardingStep(step?.id) ||
     (options.skipIntegrations && step?.id === 'integrations') ||
     (options.skipWindowsTerminal && step?.id === 'windows_terminal')
   )

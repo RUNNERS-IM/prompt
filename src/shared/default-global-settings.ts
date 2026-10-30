@@ -197,7 +197,8 @@ export function buildDefaultSettings(args: {
     terminalMainSideEffectAuthority: true,
     terminalHiddenDeliveryGate: true,
     terminalModelQueryAuthority: true,
-    defaultTuiAgent: null,
+    // Prompt only runs Claude Code, so first launch starts with it selected.
+    defaultTuiAgent: 'claude',
     disabledTuiAgents: [...DEFAULT_DISABLED_TUI_AGENTS],
     pluginSystemEnabled: false,
     pluginSystemDefaultedOn: true,
