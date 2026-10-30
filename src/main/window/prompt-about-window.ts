@@ -31,8 +31,8 @@ export function showPromptAboutWindow(store: Pick<Store, 'getSettings'> | null):
 
   const isMac = process.platform === 'darwin'
   const window = new BrowserWindow({
-    width: 420,
-    height: 560,
+    width: 480,
+    height: 540,
     resizable: false,
     minimizable: false,
     maximizable: false,

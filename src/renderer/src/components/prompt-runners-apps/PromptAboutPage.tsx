@@ -7,6 +7,13 @@ import { PromptRunnersApps } from './PromptRunnersApps'
 import { loadPromptRunnersAppGroups, openRunnersAppUrl } from './prompt-runners-apps-source'
 import { pickRunnersAppsLocale } from './runners-apps-model'
 
+// Written out here instead of translate(): the i18n brand post-processor turns every "Orca" into
+// "Prompt", and this line must name the original project. Same wording as native.about.originalCredit.
+const ORIGINAL_CREDIT = {
+  ko: '원본: Orca (Stably AI) · MIT 라이선스',
+  en: 'Based on Orca by Stably AI (MIT License)'
+} as const
+
 /** Content of Prompt's About window: app icon, name, version, RUNNERS, the original Orca credit,
  *  then the RUNNERS app cards. Replaces the native About panel, which cannot hold cards. */
 export function PromptAboutPage(): React.JSX.Element {
@@ -46,9 +53,7 @@ export function PromptAboutPage(): React.JSX.Element {
           {version ? translate('prompt.about.version', 'Version {{version}}', { version }) : ' '}
         </p>
         <p className="prompt-about-line">© RUNNERS</p>
-        <p className="prompt-about-hint">
-          {translate('native.about.originalCredit', 'Based on Orca by Stably AI (MIT License)')}
-        </p>
+        <p className="prompt-about-hint">{ORIGINAL_CREDIT[locale]}</p>
       </header>
       <PromptRunnersApps groups={groups} locale={locale} onOpen={openRunnersAppUrl} />
     </main>
