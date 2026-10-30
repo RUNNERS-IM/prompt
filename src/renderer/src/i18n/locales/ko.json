@@ -22627,6 +22627,21 @@
       "commandDescription": "실행 중인 명령이 멈춥니다.",
       "dontAskAgain": "다음부터 묻지 않기",
       "confirm": "닫기"
+    },
+    "sessionRow": {
+      "helpers": "도우미 {{count}}",
+      "monitoring": "백그라운드 작업 지켜보는 중",
+      "done": "끝남 · 답을 기다림",
+      "tool": {
+        "command": "명령 실행 중",
+        "read": "파일 읽는 중",
+        "edit": "파일 고치는 중",
+        "search": "파일 찾는 중",
+        "web": "웹에서 찾는 중",
+        "helper": "도우미에게 맡기는 중",
+        "plan": "할 일 정리하는 중",
+        "other": "{{tool}} 쓰는 중"
+      }
     }
   }
 }

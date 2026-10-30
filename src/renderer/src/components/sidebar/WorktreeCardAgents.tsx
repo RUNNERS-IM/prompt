@@ -304,6 +304,8 @@ const WorktreeCardAgentsBody = React.memo(function WorktreeCardAgentsBody({
       : undefined
     const descendantAncestorPaneKeys = new Set(ancestorPaneKeys)
     descendantAncestorPaneKeys.add(agent.paneKey)
+    // Prompt session rows start with helpers folded into a pill; the toggled set then means "opened".
+    const branchExpanded = expandAll ? collapsedLineageParents.has(agent.paneKey) : expanded
     return (
       <div key={agent.paneKey} className="min-w-0">
         <CompactAgentRow
@@ -325,22 +327,23 @@ const WorktreeCardAgentsBody = React.memo(function WorktreeCardAgentsBody({
           sendTargetDisabledReason={sendTarget?.disabledReason}
           onSendTargetClick={isAgentSendTargetModeActive ? handleSendTargetClick : undefined}
           childAgentCount={hasChildAgents ? childAgents.length : undefined}
-          childAgentsExpanded={expanded}
+          childAgentsExpanded={branchExpanded}
           onToggleChildAgents={
             hasChildAgents ? () => toggleLineageParent(agent.paneKey) : undefined
           }
           isFocusedPane={agent.paneKey === focusedAgentPaneKey}
           cacheTimerActive={cacheTimerActive}
           trailingLabel={agent.lineage ? undefined : trailingLabel}
+          promptLayout={expandAll}
         />
         {hasChildAgents ? (
-          <CompactAgentExpansion expanded={expanded}>
+          <CompactAgentExpansion expanded={branchExpanded}>
             <div className="worktree-agent-lineage-children flex flex-col gap-0.5">
               {childAgents.map((childAgent) =>
                 renderCompactAgentBranch(
                   childAgent,
                   descendantAncestorPaneKeys,
-                  cacheTimerActive && expanded
+                  cacheTimerActive && branchExpanded
                 )
               )}
             </div>

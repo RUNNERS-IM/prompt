@@ -23184,6 +23184,21 @@
       "commandDescription": "The command running in it will stop.",
       "dontAskAgain": "Don't ask again",
       "confirm": "Close"
+    },
+    "sessionRow": {
+      "helpers": "Helpers {{count}}",
+      "monitoring": "Watching background tasks",
+      "done": "Done · waiting for you",
+      "tool": {
+        "command": "Running a command",
+        "read": "Reading a file",
+        "edit": "Editing a file",
+        "search": "Searching files",
+        "web": "Looking on the web",
+        "helper": "Handing work to a helper",
+        "plan": "Updating its plan",
+        "other": "Using {{tool}}"
+      }
     }
   }
 }

@@ -24,7 +24,10 @@ import {
   type ProgramStatusPresentation
 } from '../../../../shared/program-status/presentation'
 import { resolveRowProgramStatus } from '@/lib/program-status/agent-row-presentation'
-import { promptSessionRowText } from './prompt-session-row-name'
+import { promptSessionRowText, promptTerminalTabName } from './prompt-session-row-name'
+import { promptSessionStatusLine } from './prompt-session-status-line'
+import { PromptHelperPill } from './prompt-helper-pill'
+import { PromptSessionStateIcon } from './PromptSessionStateIcon'
 import { usePromptVisibleModelLabel } from '@/components/prompt-session-card/prompt-default-model'
 
 function getCompactAgentPrimary(
@@ -107,6 +110,8 @@ type CompactAgentRowProps = {
   isUnvisited?: boolean
   /** Small dim label at the row end, e.g. the branch when a project has several worktrees. */
   trailingLabel?: string
+  /** Prompt sidebar: session name with time on line one, what it is doing on a smaller line two. */
+  promptLayout?: boolean
 }
 
 export const CompactAgentRow = React.memo(function CompactAgentRow({
@@ -124,7 +129,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   hideIdentityIcon = false,
   cacheTimerActive = true,
   isUnvisited = false,
-  trailingLabel
+  trailingLabel,
+  promptLayout = false
 }: CompactAgentRowProps) {
   const view = useClaudeAgentRowView(agent)
   const highlighted = view ? view.current && view.focused : isFocusedPane
@@ -298,6 +304,72 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     </>
   )
 
+  const usePromptLayout = promptLayout && !agent.childRow
+  const promptName = usePromptLayout
+    ? (agent.rowSource === 'subagent' ? '' : promptTerminalTabName(agent.tab)) || leadingText
+    : ''
+  const promptStatus = usePromptLayout ? promptSessionStatusLine(agent, dotState, secondary) : ''
+  const dimText = highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'
+
+  const promptRowBody = usePromptLayout ? (
+    <>
+      <div className="flex h-5 min-w-0 items-center gap-1">
+        {/* Show the actionable disabled reason over every hit area. */}
+        <PromptSessionStateIcon
+          state={dotState}
+          title={sendTargetDisabledReason ? null : undefined}
+        />
+        {/* Prompt: every row is Claude by default, so only other agents get an identity mark. */}
+        {!hideIcon && agent.agentType !== 'claude' && (
+          <span className="inline-flex shrink-0" title={formatAgentTypeLabel(agent.agentType)}>
+            <AgentTypeIcon agentType={agent.agentType} size={13} />
+          </span>
+        )}
+        <span
+          className={cn('min-w-0 flex-1 truncate', leadClassName)}
+          title={sendTargetDisabledReason ? undefined : promptName}
+          data-prompt-session-name=""
+        >
+          {promptName}
+        </span>
+        {model && (
+          <span
+            className={cn('min-w-0 max-w-24 truncate font-mono text-[10px]', dimText)}
+            title={model}
+          >
+            {model}
+          </span>
+        )}
+        {trailingLabel ? (
+          <span
+            className="min-w-0 max-w-20 shrink-[2] truncate text-[10px] text-muted-foreground/50"
+            title={trailingLabel}
+          >
+            {trailingLabel}
+          </span>
+        ) : null}
+        {hasChildDisclosure ? (
+          <PromptHelperPill
+            count={childAgentCount ?? 0}
+            expanded={childAgentsExpanded}
+            onToggle={onToggleChildAgents ?? (() => {})}
+          />
+        ) : null}
+        {cacheTimer && <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />}
+        {timestamp}
+      </div>
+      {promptStatus ? (
+        <div
+          className={cn('min-w-0 truncate pl-[17px] text-[10px] leading-4', dimText)}
+          title={sendTargetDisabledReason ? undefined : promptStatus}
+          data-prompt-session-status=""
+        >
+          {promptStatus}
+        </div>
+      ) : null}
+    </>
+  ) : null
+
   return (
     <div
       draggable={false}
@@ -306,7 +378,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         'text-muted-foreground worktree-agent-row-hover',
         hasChildDisclosure && 'worktree-agent-lineage-parent-row',
         isLineageChild && 'worktree-agent-lineage-child-row',
-        'flex h-6 items-center gap-1',
+        usePromptLayout ? 'flex flex-col justify-center py-0.5' : 'flex h-6 items-center gap-1',
         highlighted && 'bg-worktree-sidebar-accent',
         sendTargetStatus === 'sending' && 'cursor-progress opacity-75',
         sendTargetStatus === 'disabled' && 'cursor-default opacity-60'
@@ -326,7 +398,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
       aria-expanded={hasChildDisclosure ? childAgentsExpanded : undefined}
       title={sendTargetDisabledReason}
     >
-      {rowBody}
+      {promptRowBody ?? rowBody}
     </div>
   )
 })
