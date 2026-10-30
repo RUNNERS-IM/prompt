@@ -66,6 +66,12 @@ export type DaemonPtyAdapterOptions = {
   readRunningWslDistros?: ReadRunningWslDistros
   /** Test seam; production reads each distro's boot id through the background-work gate. */
   wslBridgeBootIdentity?: WslBridgeBootIdentity
+  /**
+   * A daemon still running from the userData folder Prompt used before it moved to its own
+   * folder. Upstream Orca shares that folder, so Prompt only attaches to sessions it knows:
+   * it never kills unknown sessions there and never asks that daemon to retire.
+   */
+  fromPreviousDataFolder?: boolean
 }
 
 export type DaemonRespawnReason =
@@ -89,6 +95,7 @@ export abstract class DaemonPtyRuntimeState {
   protected readonly readRunningWslDistros: ReadRunningWslDistros | undefined
   protected readonly wslBridgeBootIdentity: WslBridgeBootIdentity
   readonly protocolVersion: number
+  readonly fromPreviousDataFolder: boolean
   protected socketPath: string
   protected tokenPath: string
   protected pidPath: string | null
@@ -226,6 +233,7 @@ export abstract class DaemonPtyRuntimeState {
 
   constructor(opts: DaemonPtyAdapterOptions) {
     this.protocolVersion = opts.protocolVersion ?? PROTOCOL_VERSION
+    this.fromPreviousDataFolder = opts.fromPreviousDataFolder === true
     this.socketPath = opts.socketPath
     this.tokenPath = opts.tokenPath
     this.pidPath = opts.pidPath ?? null

@@ -1,5 +1,4 @@
 import { homedir } from 'node:os'
-import { join } from 'node:path'
 import { readFileSync } from 'node:fs'
 import {
   findTransport,
@@ -7,6 +6,10 @@ import {
   type RuntimeMetadata
 } from '../../shared/runtime-bootstrap'
 import { RuntimeClientError } from './types'
+import {
+  redirectLegacyUserDataPath,
+  resolveDefaultPromptUserDataPath
+} from '../../shared/prompt-user-data-location'
 
 export function readMetadata(userDataPath: string): RuntimeMetadata {
   const metadataPath = getRuntimeMetadataPath(userDataPath)
@@ -44,7 +47,8 @@ export function getDefaultUserDataPath(
   homeDir = homedir()
 ): string {
   if (process.env.ORCA_USER_DATA_PATH) {
-    return process.env.ORCA_USER_DATA_PATH
+    // Terminals opened before Prompt moved its data folder still export the old one.
+    return redirectLegacyUserDataPath(process.env.ORCA_USER_DATA_PATH, platform, homeDir)
   }
   return getPlatformUserDataPath(platform, homeDir)
 }
@@ -54,19 +58,13 @@ export function getPlatformUserDataPath(
   platform: NodeJS.Platform = process.platform,
   homeDir = homedir()
 ): string {
-  if (platform === 'darwin') {
-    return join(homeDir, 'Library', 'Application Support', 'orca')
+  // Match the packaged app: its Prompt folder once ready, the inherited orca folder until then.
+  const userDataPath = resolveDefaultPromptUserDataPath(platform, homeDir)
+  if (!userDataPath) {
+    throw new RuntimeClientError(
+      'runtime_unavailable',
+      'APPDATA is not set, so the Orca runtime metadata path cannot be resolved.'
+    )
   }
-  if (platform === 'win32') {
-    const appData = process.env.APPDATA
-    if (!appData) {
-      throw new RuntimeClientError(
-        'runtime_unavailable',
-        'APPDATA is not set, so the Orca runtime metadata path cannot be resolved.'
-      )
-    }
-    return join(appData, 'orca')
-  }
-  // Match Electron’s packaged userData path.
-  return join(process.env.XDG_CONFIG_HOME || join(homeDir, '.config'), 'orca')
+  return userDataPath
 }

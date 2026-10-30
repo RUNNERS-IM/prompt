@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import { basename, join } from 'node:path'
 import {
   getEndpointFileName,
   writeEndpointFile
@@ -8,6 +8,7 @@ import {
   ORCA_HOOK_RAW_JSON_TRANSPORT
 } from '../../../shared/agent-hook-types'
 import { AgentHookServerIngestRemote } from './server-ingest-remote'
+import { mirrorEndpointToPreviousDataFolder } from './previous-folder-endpoint-mirror'
 
 export abstract class AgentHookServerRuntimeEnv extends AgentHookServerIngestRemote {
   buildPtyEnv(): Record<string, string> {
@@ -42,15 +43,20 @@ export abstract class AgentHookServerRuntimeEnv extends AgentHookServerIngestRem
       return
     }
     this.endpointFileWritten = false
-    const ok = writeEndpointFile(this.endpointDir, this.endpointFilePathCache, {
+    const endpoint = {
       port: this.port,
       token: this.token,
       env: this.env,
       version: ORCA_HOOK_PROTOCOL_VERSION,
       openCodeTui: true,
       transport: ORCA_HOOK_RAW_JSON_TRANSPORT
-    })
+    }
+    const ok = writeEndpointFile(this.endpointDir, this.endpointFilePathCache, endpoint)
     this.endpointFileWritten = ok
+    // Packaged only (dev instances are namespaced): pre-move terminals read the old folder's file.
+    if (ok && basename(this.endpointDir) === 'agent-hooks') {
+      mirrorEndpointToPreviousDataFolder((dir, file) => writeEndpointFile(dir, file, endpoint))
+    }
   }
 
   protected configureEndpointPaths(userDataPath: string, endpointNamespace?: string): void {

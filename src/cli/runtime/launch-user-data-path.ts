@@ -1,6 +1,7 @@
 import { dirname, join, resolve } from 'node:path'
 import { SERVE_USER_DATA_PATH_ENV } from '../../shared/serve-user-data-path'
 import { getPlatformUserDataPath } from './metadata'
+import { redirectLegacyUserDataPath } from '../../shared/prompt-user-data-location'
 
 /** Dev builds read ORCA_DEV_USER_DATA_PATH rather than --user-data-dir. */
 function launchesDevApp(env: NodeJS.ProcessEnv): boolean {
@@ -10,7 +11,8 @@ function launchesDevApp(env: NodeJS.ProcessEnv): boolean {
 /** Resolve absolutely: the launched child runs from the app root, not the caller’s cwd. */
 export function resolveLaunchUserDataPath(env: NodeJS.ProcessEnv = process.env): string {
   if (env.ORCA_USER_DATA_PATH) {
-    return resolve(env.ORCA_USER_DATA_PATH)
+    // Terminals opened before Prompt moved its data folder still export the old one.
+    return resolve(redirectLegacyUserDataPath(env.ORCA_USER_DATA_PATH))
   }
   if (launchesDevApp(env)) {
     return resolve(
