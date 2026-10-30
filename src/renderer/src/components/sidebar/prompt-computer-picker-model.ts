@@ -56,12 +56,14 @@ export function buildPromptComputerRows(
   hostOptions: readonly SidebarHostOption[],
   localLabel: string
 ): PromptComputerRow[] {
-  const rows = pickerExecutionHosts(hostOptions).filter(isPromptComputerHost).map((host): PromptComputerRow => ({
-    id: host.id,
-    label: host.id === LOCAL_EXECUTION_HOST_ID ? localLabel : host.label,
-    isLocal: host.id === LOCAL_EXECUTION_HOST_ID,
-    status: promptComputerStatus(host.health)
-  }))
+  const rows = pickerExecutionHosts(hostOptions)
+    .filter(isPromptComputerHost)
+    .map((host): PromptComputerRow => ({
+      id: host.id,
+      label: host.id === LOCAL_EXECUTION_HOST_ID ? localLabel : host.label,
+      isLocal: host.id === LOCAL_EXECUTION_HOST_ID,
+      status: promptComputerStatus(host.health)
+    }))
   if (!rows.some((row) => row.isLocal)) {
     rows.unshift({
       id: LOCAL_EXECUTION_HOST_ID,
