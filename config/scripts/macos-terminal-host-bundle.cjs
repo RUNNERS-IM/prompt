@@ -15,8 +15,8 @@ const { builtinModules } = require('node:module')
 const { basename, dirname, join, relative, resolve, sep } = require('node:path')
 const { pathToFileURL } = require('node:url')
 
-const MAC_TERMINAL_HOST_NAME = 'Orca Terminal Host'
-const MAC_TERMINAL_HOST_EXECUTABLE = 'orca-terminal-host'
+const MAC_TERMINAL_HOST_NAME = 'Prompt Terminal Host'
+const MAC_TERMINAL_HOST_EXECUTABLE = 'prompt-terminal-host'
 const macTerminalHostSignIgnore = [`/Contents/Helpers/${MAC_TERMINAL_HOST_NAME}\\.app(/|$)`]
 const NODE_PTY_FILES = [
   'package.json',

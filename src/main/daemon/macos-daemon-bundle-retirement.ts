@@ -1,8 +1,9 @@
+import { existsSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { runProcess } from '@orca/process-host'
 import { rm } from '../asar-transparent-fs'
-import { macDaemonCopyBundlePath } from './macos-daemon-bundle'
+import { macDaemonCopyBundlePath, macDaemonCopyBundlePaths } from './macos-daemon-bundle'
 
 const LSREGISTER =
   '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
@@ -27,13 +28,16 @@ export async function retireUnusedMacDaemonCopy(directory: string): Promise<void
     if (!unused) {
       return
     }
-    // Direct execution may register this copy with LaunchServices.
-    await runProcess({
-      program: LSREGISTER,
-      args: ['-u', macDaemonCopyBundlePath(directory)],
-      timeoutMs: 5_000,
-      maxOutputBytes: 8192
-    }).catch(() => {})
+    // Direct execution may register this copy with LaunchServices; pre-rename copies use the old name.
+    const present = macDaemonCopyBundlePaths(directory).filter((bundle) => existsSync(bundle))
+    for (const bundle of present.length > 0 ? present : [macDaemonCopyBundlePath(directory)]) {
+      await runProcess({
+        program: LSREGISTER,
+        args: ['-u', bundle],
+        timeoutMs: 5_000,
+        maxOutputBytes: 8192
+      }).catch(() => {})
+    }
     await rm(directory, { recursive: true, force: true })
   } catch {
     // Retain code when its use cannot be verified.

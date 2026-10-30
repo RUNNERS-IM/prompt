@@ -31,7 +31,7 @@ afterEach(async () => {
 
 async function copy(name: string): Promise<string> {
   const directory = join(root, name)
-  await mkdir(join(directory, 'app.noindex', 'Orca Terminal Host.app'), { recursive: true })
+  await mkdir(join(directory, 'app.noindex', 'Prompt Terminal Host.app'), { recursive: true })
   return directory
 }
 
@@ -70,7 +70,7 @@ it.each([
 
 it('unregisters an unused copy from LaunchServices, then deletes it', async () => {
   const directory = await copy('terminal-host-old')
-  const bundle = join(directory, 'app.noindex', 'Orca Terminal Host.app')
+  const bundle = join(directory, 'app.noindex', 'Prompt Terminal Host.app')
   let bundleExistedAtUnregister = false
   run.mockImplementation(async (spec) => {
     if (spec.program === LSREGISTER) {
@@ -81,6 +81,26 @@ it('unregisters an unused copy from LaunchServices, then deletes it', async () =
   })
   await retireUnusedMacDaemonCopy(directory)
   expect(bundleExistedAtUnregister).toBe(true)
+  expect(await exists(directory)).toBe(false)
+})
+
+it('keeps a pre-rename copy whose daemon is still running', async () => {
+  const directory = join(root, 'terminal-host-legacy')
+  await mkdir(join(directory, 'app.noindex', 'Orca Terminal Host.app'), { recursive: true })
+  run.mockResolvedValue(inUse)
+  await retireUnusedMacDaemonCopy(directory)
+  expect(await exists(directory)).toBe(true)
+})
+
+it('unregisters an unused pre-rename copy by its old name, then deletes it', async () => {
+  const directory = join(root, 'terminal-host-legacy')
+  const legacy = join(directory, 'app.noindex', 'Orca Terminal Host.app')
+  await mkdir(legacy, { recursive: true })
+  await retireUnusedMacDaemonCopy(directory)
+  const unregistered = run.mock.calls
+    .filter(([spec]) => spec.program === LSREGISTER)
+    .map(([spec]) => spec.args)
+  expect(unregistered).toEqual([['-u', legacy]])
   expect(await exists(directory)).toBe(false)
 })
 
