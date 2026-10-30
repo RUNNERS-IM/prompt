@@ -3,7 +3,10 @@ const { basename } = require('node:path')
 
 const EXPECTED_ARCHITECTURE_BY_FILENAME = new Map([
   ['orca-linux.AppImage', 'x64'],
-  ['orca-linux-arm64.AppImage', 'arm64']
+  ['orca-linux-arm64.AppImage', 'arm64'],
+  // Prompt publishes the same AppImages under its own artifact names.
+  ['prompt-linux.AppImage', 'x64'],
+  ['prompt-linux-arm64.AppImage', 'arm64']
 ])
 const APPIMAGE_MAGIC = Buffer.from([0x41, 0x49, 0x02])
 const RUNTIME_SOURCE = Buffer.from('https://github.com/AppImage/type2-runtime')

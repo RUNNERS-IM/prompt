@@ -150,7 +150,8 @@ jobs:
           ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
         run: |
           set -euo pipefail
-          for name in DEVELOPER_ID_P12_BASE64 DEVELOPER_ID_P12_PASSWORD ASC_API_KEY_P8 ASC_API_KEY_ID ASC_API_ISSUER_ID; do
+          # The .p12 may be exported without a password, so an empty DEVELOPER_ID_P12_PASSWORD is allowed.
+          for name in DEVELOPER_ID_P12_BASE64 ASC_API_KEY_P8 ASC_API_KEY_ID ASC_API_ISSUER_ID; do
             if [ -z "${!name}" ]; then
               echo "::error::비밀값 $name 이 없다. 서명·공증 없이는 출시하지 않는다."
               exit 1
