@@ -7,7 +7,8 @@ import {
 import { getRenderRowKey } from '../listing/render-row'
 import type { RenderRow } from '../listing/render-row'
 
-export const GROUP_HEADER_ROW_HEIGHT = 28
+// Prompt 1A: 34 (upstream 28), the roomier project header row shared with Monitor; SectionHeader uses h-[34px].
+export const GROUP_HEADER_ROW_HEIGHT = 34
 // Why: HostSectionHeader wraps its h-8 (32px) card in pt-1 (4px), so the row is 36px.
 export const HOST_HEADER_ROW_HEIGHT = 36
 export const WORKTREE_SIDEBAR_VIRTUAL_ROW_GAP = 6

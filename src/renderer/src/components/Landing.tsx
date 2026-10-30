@@ -2,7 +2,6 @@ import { useEffect, useEffectEvent, useMemo, useRef, useState } from 'react'
 import { AlertTriangle, ExternalLink, FolderPlus, GitBranchPlus, Star, X } from 'lucide-react'
 import { cn } from '../lib/utils'
 import { useAppStore } from '../store'
-import { isGitRepoKind } from '../../../shared/repo-kind'
 import type { Repo } from '../../../shared/repo-types'
 import {
   dismissPreflightIssue,
@@ -12,7 +11,7 @@ import {
 import { ShortcutKeyCombo } from './ShortcutKeyCombo'
 import { useShortcutKeyDetails, type ShortcutKeyComboDetails } from '@/hooks/useShortcutLabel'
 import { useMountedRef } from '@/hooks/useMountedRef'
-import logo from '../../../../resources/logo.svg'
+import appIconUrl from '../../../../resources/icon.png?url'
 import { translate } from '@/i18n/i18n'
 import { hasGitHubBackedProject, type PreflightIssue } from './landing-preflight-issues'
 import { useLandingPreflightRuntime } from './landing-preflight-runtime'
@@ -219,10 +218,11 @@ export default function Landing(): React.JSX.Element {
   const repos = useAppStore((s) => s.repos)
   const openModal = useAppStore((s) => s.openModal)
 
-  const createActionLabel =
-    repos.length > 0 && repos.every((repo) => isGitRepoKind(repo))
-      ? translate('auto.components.NewWorkspaceComposerModal.createWorktree', 'Create worktree')
-      : translate('auto.components.NewWorkspaceComposerModal.createWorkspace', 'Create workspace')
+  // Prompt: always "workspace"; "worktree" is git's name for what the user calls a workspace.
+  const createActionLabel = translate(
+    'auto.components.NewWorkspaceComposerModal.createWorkspace',
+    'Create workspace'
+  )
   const moveUpLabel = translate('auto.components.Landing.moveUpWorkspace', 'Move up workspace')
   const moveDownLabel = translate(
     'auto.components.Landing.moveDownWorkspace',
@@ -260,17 +260,9 @@ export default function Landing(): React.JSX.Element {
     <div className="absolute inset-0 flex items-center justify-center bg-background">
       <div className="w-full max-w-lg px-6">
         <div className="flex flex-col items-center gap-4 py-8">
-          <div
-            className="flex items-center justify-center size-20 rounded-2xl border border-border/80 shadow-lg shadow-black/40"
-            style={{ backgroundColor: '#12181e' }}
-          >
-            <img
-              src={logo}
-              alt={translate('auto.components.Landing.520304a067', 'Orca logo')}
-              className="size-12"
-            />
-          </div>
-          <h1 className="text-4xl font-bold text-foreground tracking-tight">
+          {/* Prompt: the app icon at 64 as in the About window, so light mode shows no dark tile. */}
+          <img src={appIconUrl} alt={PROMPT_APP_NAME} className="size-16" draggable={false} />
+          <h1 className="text-xl font-semibold text-foreground">
             {/* Prompt: the app name comes from code so no catalog can show the old brand. */}
             {PROMPT_APP_NAME}
           </h1>

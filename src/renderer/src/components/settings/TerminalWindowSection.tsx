@@ -44,7 +44,7 @@ export function TerminalWindowSection({
 
   return (
     <section className="space-y-4">
-      <div className="space-y-1">
+      <div className="space-y-1" data-prompt-group-title="">
         <h3 className="text-sm font-semibold">
           {translate('auto.components.settings.TerminalWindowSection.b96ba13ed1', 'Window')}
         </h3>
