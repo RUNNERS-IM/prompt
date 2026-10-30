@@ -9,7 +9,10 @@ import type { CliInstallStatus } from '../../../../shared/cli-install-types'
 import type { FeatureInteractionState } from '../../../../shared/feature-interactions'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import type { OnboardingState } from '../../../../shared/onboarding-state-types'
-import { shouldShowOnboarding } from '../onboarding/should-show-onboarding'
+
+function isFirstRunOnboarding(onboarding: OnboardingState): boolean {
+  return onboarding.closedAt === null
+}
 
 export type FeatureTipsAppOpenDecision =
   | { kind: 'open'; tipId: FeatureTipId }
@@ -70,7 +73,8 @@ export function getFeatureTipsAppOpenDecision(args: {
   suppressedByOnboardingThisSession: boolean
   webClient: boolean
 }): FeatureTipsAppOpenDecision {
-  if (args.onboarding !== null && shouldShowOnboarding(args.onboarding)) {
+  // Prompt never shows onboarding, so a first-run profile stays unclosed; keep tips quiet for it too.
+  if (args.onboarding !== null && isFirstRunOnboarding(args.onboarding)) {
     return { kind: 'suppress-for-onboarding' }
   }
 
@@ -83,7 +87,7 @@ export function getFeatureTipsAppOpenDecision(args: {
     args.activeModal !== 'none' ||
     args.cliInstalled === null ||
     args.inNativeChatUpgradeTipAudience === null ||
-    shouldShowOnboarding(args.onboarding)
+    isFirstRunOnboarding(args.onboarding)
   ) {
     return { kind: 'skip' }
   }
