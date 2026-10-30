@@ -1,4 +1,5 @@
 import { mainI18n, translateMain } from '../i18n/main-i18n'
+import { formatPromptDisplayVersion } from '../../shared/prompt-display-version'
 export type GpuAccelerationAboutPanelOptions = {
   appName: string
   appVersion: string
@@ -56,7 +57,7 @@ export function createGpuAccelerationAboutPanelOptions({
   const lines = [credit, status].join('\n')
   return {
     applicationName: appName,
-    applicationVersion: appVersion,
+    applicationVersion: formatPromptDisplayVersion(appVersion),
     ...(platform === 'linux'
       ? { copyright: `${COPYRIGHT}\n${lines}` }
       : { credits: lines, copyright: COPYRIGHT })

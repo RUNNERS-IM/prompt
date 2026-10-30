@@ -184,7 +184,7 @@ export function resolveEnvironment(selector: string): StoredWebRuntimeEnvironmen
   if (environment.compatibleEnvironmentIds?.includes(selector)) {
     return environment
   }
-  throw new Error(`Unknown Orca runtime environment: ${selector}`)
+  throw new Error(`Unknown Prompt runtime environment: ${selector}`)
 }
 
 export function requireActiveEnvironment(): StoredWebRuntimeEnvironment {

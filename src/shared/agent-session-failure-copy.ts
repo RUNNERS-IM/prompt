@@ -7,6 +7,7 @@ import {
 import type { AgentSessionRefusalReference } from './agent-session-wire-refusals'
 import type { AgentCliInstallationProblem } from './agent-cli-installation-problem'
 import { tuiAgentDisplayName } from './tui-agent-display-names'
+import { applyPromptBrand } from './prompt-brand'
 
 /** Sentences a refusal notice shows too, so a chat says them one way. */
 export const TERMINAL_AGENT_HOLDS_CHAT = 'This chat is still open in a terminal agent.'
@@ -241,7 +242,8 @@ export function agentCliInstallationFailureWords(
 export const sayAgentSessionFailureEnglish: AgentSessionFailureSay = (id, values = {}) => {
   const filled = new Map(Object.entries(values))
   // One pass over the template, so a provider's words are never read as a placeholder.
-  return AGENT_SESSION_FAILURE_COPY[id].replace(
+  // Brand the template only, so a provider's own words in the values stay as they were.
+  return applyPromptBrand(AGENT_SESSION_FAILURE_COPY[id]).replace(
     /\{\{(\w+)\}\}/g,
     (placeholder, name: string) => filled.get(name) ?? placeholder
   )
