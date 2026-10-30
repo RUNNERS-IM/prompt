@@ -521,14 +521,30 @@ jobs:
           set -euo pipefail
           assets="$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name')"
           echo "$assets"
-          required="latest-mac.yml prompt-macos-arm64.zip prompt-macos-arm64.dmg latest.yml prompt-windows-setup.exe latest-linux.yml prompt-linux.AppImage"
-          if [ "$WITH_X64" = "true" ]; then required="$required prompt-macos-x64.zip prompt-macos-x64.dmg"; fi
+          required="latest-mac.yml prompt-macos-arm64.dmg latest.yml prompt-windows-setup.exe latest-linux.yml prompt-linux.AppImage"
+          if [ "$WITH_X64" = "true" ]; then required="$required prompt-macos-x64.dmg"; fi
           for name in $required; do
             if ! grep -qx "$name" <<<"$assets"; then
               echo "::error::$TAG 초안에 $name 이 없다. 공개하지 않는다."
               exit 1
             fi
           done
+          # 앱 안 업데이트가 받는 파일은 latest*.yml 이 가리키는 이름이다. zip 이름은 electron-builder 가 정하므로
+          # (Prompt-<버전>-arm64-mac.zip) 이름을 짐작하지 않고 yml 이 가리키는 파일이 모두 올라갔는지 본다.
+          mkdir -p "$RUNNER_TEMP/manifests"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern 'latest*.yml' --dir "$RUNNER_TEMP/manifests" --clobber
+          for manifest in "$RUNNER_TEMP"/manifests/latest*.yml; do
+            for name in $(sed -n 's/^ *- url: *//p; s/^path: *//p' "$manifest" | sort -u); do
+              if ! grep -qx "$name" <<<"$assets"; then
+                echo "::error::$(basename "$manifest") 가 가리키는 $name 이 $TAG 초안에 없다. 공개하지 않는다."
+                exit 1
+              fi
+            done
+          done
+          if [ "$WITH_X64" = "true" ] && ! grep -q -- '-x64-mac.zip$' "$RUNNER_TEMP/manifests/latest-mac.yml"; then
+            echo "::error::latest-mac.yml 에 x64 zip 이 없다. 공개하지 않는다."
+            exit 1
+          fi
 
       - name: Publish the release as latest
         run: gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest
