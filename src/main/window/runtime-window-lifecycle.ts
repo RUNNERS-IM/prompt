@@ -15,6 +15,12 @@ import { requestSessionTabCloseFromRenderer } from './session-tab-close-request-
 import { revealTerminalPaneInWindow } from './terminal-pane-reveal-relay'
 import { requestTerminalTabCloseFromRenderer } from './terminal-tab-close-request-relay'
 import { ORCA_SIDEBAR_INPUTS_IS_MAIN } from '../../shared/sidebar-inputs-switch'
+import {
+  isPromptAppWindowSender,
+  promptRoutedRuntimeSend,
+  promptWindowForTab,
+  promptWindowForWorktree
+} from '../prompt-windows/prompt-window-routing'
 
 let runtimeNotifierTokenCounter = 0
 let activeRuntimeNotifierToken: number | null = null
@@ -32,7 +38,7 @@ export function registerRuntimeWindowLifecycle(
     webContents: mainWebContents,
     onFailure: (reason) => runtime.markGraphReloadFailed(mainWindow.id, reason)
   })
-  const send = rendererNotifications.send
+  const send = promptRoutedRuntimeSend(rendererNotifications.send)
   runtime.setNotifier({
     worktreesChanged: (repoId, renamed, options) => {
       // Invalidate scan TTLs before notifying renderer or its immediate read can return stale mutation results.
@@ -90,7 +96,10 @@ export function registerRuntimeWindowLifecycle(
         }, 10_000)
         const handler = (event: Electron.IpcMainEvent, reply: TerminalTabCreateReply): void => {
           // Renderer-supplied request IDs confer no authority; only this window can satisfy reveal.
-          if (event.sender !== mainWebContents || reply.requestId !== requestId) {
+          if (
+            !isPromptAppWindowSender(event.sender, mainWebContents) ||
+            reply.requestId !== requestId
+          ) {
             return
           }
           clearTimeout(timer)
@@ -151,7 +160,10 @@ export function registerRuntimeWindowLifecycle(
         }
       }),
     publishAgentLaunchTab: (request) =>
-      requestAgentLaunchTabPublishFromRenderer(mainWindow, request),
+      requestAgentLaunchTabPublishFromRenderer(
+        promptWindowForWorktree(mainWindow, request.worktreeId),
+        request
+      ),
     agentLaunchPaneVerdict: (event) => send('ui:agentLaunchPaneVerdict', event),
     rememberLaunchRecipe: (recipe) => send('ui:launchRecipe', recipe),
     resolveLegacyWorkerTerminalRecovery: (paneKey, resolution, ptyId) =>
@@ -177,10 +189,15 @@ export function registerRuntimeWindowLifecycle(
     setPaneTitle: (tabId, leafId, title) => send('ui:setPaneTitle', { tabId, leafId, title }),
     focusTerminal: (tabId, worktreeId, leafId) =>
       send('ui:focusTerminal', { tabId, worktreeId, leafId }),
-    revealTerminalPane: (target) => revealTerminalPaneInWindow(mainWindow, target),
+    revealTerminalPane: (target) =>
+      revealTerminalPaneInWindow(promptWindowForWorktree(mainWindow, target.worktreeId), target),
     focusEditorTab: (tabId, worktreeId) => send('ui:focusEditorTab', { tabId, worktreeId }),
     closeSessionTab: (tabId, worktreeId) =>
-      requestSessionTabCloseFromRenderer(mainWindow, tabId, worktreeId),
+      requestSessionTabCloseFromRenderer(
+        promptWindowForWorktree(mainWindow, worktreeId),
+        tabId,
+        worktreeId
+      ),
     moveSessionTab: (worktreeId: string, move: RuntimeMobileSessionTabMove) =>
       send('ui:moveSessionTab', { worktreeId, ...move }),
     openFile: (worktreeId, filePath, relativePath, runtimeEnvironmentId?, navigation?, position?) =>
@@ -205,7 +222,7 @@ export function registerRuntimeWindowLifecycle(
     closeTerminal: (tabId) => send('ui:closeTerminal', { kind: 'tab', tabId }),
     closeTerminalPane: (tabId, leafId) => send('ui:closeTerminal', { kind: 'pane', tabId, leafId }),
     closeTerminalTab: (tabId, options) =>
-      requestTerminalTabCloseFromRenderer(mainWindow, tabId, options),
+      requestTerminalTabCloseFromRenderer(promptWindowForTab(mainWindow, tabId), tabId, options),
     workspaceSleepChanged: (notice) => send('ui:workspaceSleep', notice),
     resumeSleepingAgents: (worktreeId) => send('ui:resumeSleepingAgents', { worktreeId }),
     terminalFitOverrideChanged: (ptyId, mode, cols, rows) =>

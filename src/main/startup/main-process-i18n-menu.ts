@@ -21,6 +21,7 @@ import {
 import { ensureAutoUpdaterConfigured } from '../window/attach-main-window-services'
 import { logStartupMilestone } from './startup-diagnostics'
 import { browserManager } from '../browser/browser-manager'
+import { promptMenuTargetWindow } from '../prompt-windows/prompt-window-routing'
 
 export async function initializeMainProcessI18nAndMenu(): Promise<void> {
   const store = state.store
@@ -61,25 +62,27 @@ export async function initializeMainProcessI18nAndMenu(): Promise<void> {
     // Zoom the focused popout rather than changing the main window behind it.
     onZoomIn: () => {
       if (!zoomDashboardPopoutIfFocused('in') && !zoomWorkspaceSpaceWindowIfFocused('in')) {
-        state.mainWindow?.webContents.send('terminal:zoom', 'in')
+        promptMenuTargetWindow(state.mainWindow)?.webContents.send('terminal:zoom', 'in')
       }
     },
     onZoomOut: () => {
       if (!zoomDashboardPopoutIfFocused('out') && !zoomWorkspaceSpaceWindowIfFocused('out')) {
-        state.mainWindow?.webContents.send('terminal:zoom', 'out')
+        promptMenuTargetWindow(state.mainWindow)?.webContents.send('terminal:zoom', 'out')
       }
     },
     onZoomReset: () => {
       if (!zoomDashboardPopoutIfFocused('reset') && !zoomWorkspaceSpaceWindowIfFocused('reset')) {
-        state.mainWindow?.webContents.send('terminal:zoom', 'reset')
+        promptMenuTargetWindow(state.mainWindow)?.webContents.send('terminal:zoom', 'reset')
       }
     },
-    onToggleLeftSidebar: () => state.mainWindow?.webContents.send('ui:toggleLeftSidebar'),
-    onToggleRightSidebar: () => state.mainWindow?.webContents.send('ui:toggleRightSidebar'),
+    onToggleLeftSidebar: () =>
+      promptMenuTargetWindow(state.mainWindow)?.webContents.send('ui:toggleLeftSidebar'),
+    onToggleRightSidebar: () =>
+      promptMenuTargetWindow(state.mainWindow)?.webContents.send('ui:toggleRightSidebar'),
     onToggleAppearance: (key) => {
       if (key === 'statusBarVisible') {
         // Renderer owns this persisted UI-state toggle; forward it rather than write settings.
-        state.mainWindow?.webContents.send('ui:toggleStatusBar')
+        promptMenuTargetWindow(state.mainWindow)?.webContents.send('ui:toggleStatusBar')
         return
       }
       const current = store.getSettings()
