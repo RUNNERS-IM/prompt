@@ -13,7 +13,7 @@ it.each([
   'tsconfig.json',
   'config/tsconfig.cli.json',
   'config/patches/node-pty@1.1.0.patch',
-  'native/windows-registry/src/addon.cc',
+  'native/windows-security/src/addon.cc',
   'config/scripts/node-pty-job-ownership.cjs',
   '.github/actions/install-node-dependencies/action.yml',
   '.github/workflows/pr.yml',

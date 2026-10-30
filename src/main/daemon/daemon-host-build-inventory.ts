@@ -6,8 +6,7 @@ import {
   buildDaemonHostManifest,
   daemonHostExeName,
   daemonHostProcessPackageDir,
-  daemonHostWindowsRegistryDir,
-  WINDOWS_REGISTRY_REQUIRED,
+  daemonHostPromptNativePath,
   destPath,
   toPosixRelative,
   type DaemonHostSources
@@ -112,14 +111,11 @@ export function collectDaemonHostBuildInventory(
       ...collectCodeFiles(join(processHostDir, 'package.json'), `${packageRel}/package.json`)
     )
     files.push(...collectCodeFiles(join(processHostDir, 'dist'), `${packageRel}/dist`))
-    const registryDir = daemonHostWindowsRegistryDir(sources)
-    const registryRel = toPosixRelative(sources.appDir, registryDir)
-    for (const relative of WINDOWS_REGISTRY_REQUIRED) {
-      files.push({
-        path: `${registryRel}/${relative}`,
-        sha256: hashDaemonHostFile(destPath(registryDir, relative))
-      })
-    }
+    const promptNativePath = daemonHostPromptNativePath(sources)
+    files.push({
+      path: toPosixRelative(sources.appDir, promptNativePath),
+      sha256: hashDaemonHostFile(promptNativePath)
+    })
     files.sort((left, right) => left.path.localeCompare(right.path, 'en'))
     const inventory = {
       runtimeVersion: runtimeVersion(),
@@ -200,12 +196,8 @@ export function daemonHostBuildRuntimeMatches(
     inventory.runtimeVersion === runtimeVersion() &&
     inventory.executableName === daemonHostExeName(sources.execPath) &&
     inventory.entryRelPath === sources.entryRelPath &&
-    WINDOWS_REGISTRY_REQUIRED.every((relative) =>
-      inventory.files.some(
-        (file) =>
-          file.path ===
-          `${toPosixRelative(sources.appDir, daemonHostWindowsRegistryDir(sources))}/${relative}`
-      )
+    inventory.files.some(
+      (file) => file.path === toPosixRelative(sources.appDir, daemonHostPromptNativePath(sources))
     ) &&
     inventory.files.some(
       (file) =>

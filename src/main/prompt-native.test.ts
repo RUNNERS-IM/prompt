@@ -38,6 +38,36 @@ describe('loadPromptNative', () => {
     expect(promptNativePath()).toBe(join(appRoot, 'native', 'prompt-native', nodeFile))
   })
 
+  it('prefers the Resources copy, which is all the relocated daemon host has', async () => {
+    const resources = join(appRoot, 'resources')
+    mkdirSync(resources)
+    writeFileSync(join(resources, 'prompt-native.node'), 'copied')
+    const original = Object.getOwnPropertyDescriptor(process, 'resourcesPath')
+    Object.defineProperty(process, 'resourcesPath', { value: resources, configurable: true })
+    try {
+      vi.resetModules()
+      ;(globalThis as Record<symbol, unknown>)[Symbol.for('orca.host.appEnvironment')] = null
+      const { promptNativePath } = await import('./prompt-native')
+
+      expect(promptNativePath()).toBe(join(resources, 'prompt-native.node'))
+    } finally {
+      if (original) {
+        Object.defineProperty(process, 'resourcesPath', original)
+      } else {
+        delete (process as { resourcesPath?: string }).resourcesPath
+      }
+    }
+  })
+
+  it('has no path without Resources or an app environment', async () => {
+    vi.resetModules()
+    ;(globalThis as Record<symbol, unknown>)[Symbol.for('orca.host.appEnvironment')] = null
+    const { promptNativePath, loadPromptNative } = await import('./prompt-native')
+
+    expect(promptNativePath()).toBeNull()
+    expect(loadPromptNative()).toBeNull()
+  })
+
   it('returns null when the module was never built', async () => {
     const { loadPromptNative } = await loadWithAppRoot(appRoot)
 

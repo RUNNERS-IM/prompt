@@ -255,7 +255,7 @@ jobs:
           path: |
             ~/.cargo/registry
             native/prompt-native/target
-          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
           restore-keys: |
             prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
 
@@ -359,7 +359,8 @@ jobs:
 
       - uses: ./.github/actions/install-mobile-dependencies
 
-      # The packaged Windows CLI launcher is a Rust program.
+      # The packaged Windows CLI launcher is a Rust program, and so is the Prompt native module
+      # (native/prompt-native, registry reads) that build:native inside build:release builds.
       - name: Ensure the Rust toolchain for the Windows CLI launcher
         shell: pwsh
         run: |
@@ -368,6 +369,17 @@ jobs:
             rustup default stable
           }
           cargo --version
+
+      # 내려받은 크레이트와 빌드 결과를 남겨 다음 실행이 처음부터 컴파일하지 않게 한다.
+      - name: Cache the Prompt native module build
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            native/prompt-native/target
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          restore-keys: |
+            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Build app
         shell: bash

@@ -43,12 +43,10 @@ const PACKAGED_RUNTIME_PACKAGE_ROOTS = [
 const DARWIN_PACKAGED_RUNTIME_PACKAGE_ROOTS = ['serve-sim']
 /** The compiled binary each workspace Windows addon loads, relative to its package. */
 const WORKSPACE_WINDOWS_ADDON_BINARIES = [
-  ['@orca/windows-registry', 'build/Release/orca_windows_registry.node'],
   ['@orca/windows-security', 'build/Release/orca_windows_security.node']
 ]
 const WINDOWS_PACKAGED_RUNTIME_PACKAGE_ROOTS = [
   '@vscode/windows-process-tree',
-  '@orca/windows-registry',
   '@orca/windows-security'
 ]
 
@@ -599,6 +597,16 @@ function assertPackagedNativeVariantsInstalled(electronPlatformName, electronArc
       if (!existsSync(addon) || readPeMachine(addon) !== PE_MACHINE[architecture]) {
         missingWindowsAddons.push(`${name} (${binary} for ${architecture})`)
       }
+    }
+    // extraResources copies this into Resources/prompt-native.node; the registry readers need it.
+    const promptNative = join(
+      projectDir,
+      'native',
+      'prompt-native',
+      `prompt-native.win32-${architecture}.node`
+    )
+    if (!existsSync(promptNative) || readPeMachine(promptNative) !== PE_MACHINE[architecture]) {
+      missingWindowsAddons.push(`@prompt/native (prompt-native.win32-${architecture}.node)`)
     }
   }
 

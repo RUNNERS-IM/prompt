@@ -1258,7 +1258,7 @@ jobs:
           echo "identity=$identity" >>"$GITHUB_OUTPUT"
           echo "Classified $TAG as $identity"
 
-      # Require cargo before builder invokes the packaged Rust launcher hook.
+      # Require cargo before builder invokes the packaged Rust launcher hook; build:native also compiles native/prompt-native.
       - name: Ensure the Rust toolchain for the Windows CLI launcher
         if: matrix.platform == 'win'
         shell: pwsh

@@ -15,7 +15,6 @@ const identity = native.runs.steps.find((step) => step.id === 'native-cache-scop
 const inputs = [...identity.env.NATIVE_SOURCE_HASH.matchAll(/'([^']+)'/g)].map((match) => match[1])
 const paths = [
   'node_modules/.pnpm/node-pty@*/node_modules/node-pty/build',
-  'native/windows-registry/build',
   'native/windows-security/build',
   'node_modules/.pnpm/@vscode+windows-process-tre*/node_modules/@vscode/windows-process-tree/build'
 ]

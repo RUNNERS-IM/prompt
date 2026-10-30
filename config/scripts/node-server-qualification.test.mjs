@@ -24,7 +24,7 @@ it.each([
 it.each([
   'package.json',
   'pnpm-lock.yaml',
-  'native/windows-registry/src/addon.cc',
+  'native/windows-security/src/addon.cc',
   'config/patches/node-pty.patch',
   '.github/actions/install-node-dependencies/action.yml',
   '.github/actions/restore-pnpm-verification/action.yml',

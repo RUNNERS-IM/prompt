@@ -79,7 +79,7 @@ it('avoids extraction for unrelated CI, documentation, and native changes', () =
       '.github/workflows/e2e.yml',
       'config/scripts/run-terminal-scale-perf-e2e.mjs',
       'docs/reference/ci-runner-efficiency.md',
-      'native/windows-registry/src/addon.cc'
+      'native/windows-security/src/addon.cc'
     ])
   ).toBe(false)
 })

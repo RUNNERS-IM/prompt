@@ -42,6 +42,10 @@ function startBuild(mode, options = {}) {
     "console.log('windows agent hook only')"
   )
   writeFileSync(
+    join(directory, 'config', 'scripts', 'build-prompt-native.mjs'),
+    "console.log('prompt native only')"
+  )
+  writeFileSync(
     join(directory, 'config', 'scripts', 'build-wayland-clipboard.mjs'),
     "console.log('wayland clipboard only')"
   )
@@ -371,6 +375,7 @@ describe.skipIf(process.platform !== 'darwin')('parallel native builds', () => {
     )
     if (platform === 'win32') {
       expect(result.output).toContain('windows agent hook only')
+      expect(result.output).toContain('prompt native only')
     }
   })
 })

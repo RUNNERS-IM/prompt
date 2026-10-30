@@ -160,7 +160,7 @@ it.each([
   'config/scripts/node-server-qualification.mjs',
   'config/scripts/node-server-native-compat-scope.mjs',
   'config/patches/node-pty@1.1.0.patch',
-  'native/windows-registry/src/addon.cc',
+  'native/windows-security/src/addon.cc',
   '.github/actions/install-node-dependencies/action.yml',
   '.github/actions/restore-pnpm-verification/action.yml',
   '.github/actions/prepare-headless-compiler/action.yml',

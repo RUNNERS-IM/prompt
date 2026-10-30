@@ -6,6 +6,7 @@
 mod keyboard_layout;
 mod notification_status;
 mod process_footprint;
+mod windows_registry;
 
 use napi::bindgen_prelude::*;
 use napi::{Env, Task};
@@ -85,4 +86,40 @@ pub fn notification_status() -> AsyncTask<NotificationStatusTask> {
 #[napi]
 pub fn keyboard_layout_snapshot() -> Option<String> {
     keyboard_layout::read_json()
+}
+
+/// One registry value: `type` is the REG_* number; `value` is absent for types the app does not read.
+#[napi(object)]
+pub struct RegistryValue {
+    pub name: Utf16String,
+    #[napi(js_name = "type")]
+    pub kind: u32,
+    pub value: Option<Either4<Utf16String, u32, Vec<u32>, Vec<Utf16String>>>,
+}
+
+/// Every value under `path` below a predefined root (HKCU 0x80000001, HKLM 0x80000002, ...), in registry order.
+/// Null when the key cannot be opened or read, and always null outside Windows.
+#[napi]
+pub fn windows_registry_key(root: u32, path: Utf16String) -> Option<Vec<RegistryValue>> {
+    use windows_registry::Decoded;
+    let entries = windows_registry::read_key(root, &path)?;
+    Some(
+        entries
+            .into_iter()
+            .map(|entry| RegistryValue {
+                name: entry.name.into(),
+                kind: entry.kind,
+                value: entry.value.map(|value| match value {
+                    Decoded::Text(text) => Either4::A(text.into()),
+                    Decoded::Dword(dword) => Either4::B(dword),
+                    Decoded::Binary(bytes) => {
+                        Either4::C(bytes.into_iter().map(u32::from).collect())
+                    }
+                    Decoded::Multi(parts) => {
+                        Either4::D(parts.into_iter().map(Into::into).collect())
+                    }
+                }),
+            })
+            .collect(),
+    )
 }

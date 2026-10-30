@@ -1,7 +1,6 @@
 import { existsSync } from 'node:fs'
-import { createRequire } from 'node:module'
 import { join } from 'node:path'
-import { getAppEnvironment } from '../shared/app-environment'
+import { getAppEnvironment, hasAppEnvironment } from '../shared/app-environment'
 
 // Prompt's one native module (native/prompt-native, napi-rs). Parts inherited from Orca move into it one at a time.
 export type PromptNative = {
@@ -11,19 +10,35 @@ export type PromptNative = {
   notificationStatus(): Promise<{ authorization: string; alert: string } | null>
   /** The keyboard layout as JSON (see macos-keyboard-layout-snapshot.ts); synchronous because TIS needs the main thread. */
   keyboardLayoutSnapshot(): string | null
+  /** Values of one registry key on Windows (null when it cannot be opened, or on other OSes). */
+  windowsRegistryKey?(
+    root: number,
+    path: string
+  ): { name: string; type: number; value?: string | number | number[] | string[] }[] | null
 }
 
 /** Packaged apps carry the slice's own file in Resources (electron-builder extraResources). */
 export const PACKAGED_PROMPT_NATIVE_FILE = 'prompt-native.node'
 
-const requireNative = createRequire(import.meta.url)
 let loaded: { module: PromptNative | null } | undefined
 
-/** Where the module lives: Resources when packaged, the build output in native/prompt-native in dev. */
-export function promptNativePath(): string {
+/**
+ * Where the module lives: Resources when packaged, the build output in native/prompt-native in dev.
+ * The relocated daemon host runs Electron as Node: it has a resourcesPath holding its own copy but no app environment.
+ */
+export function promptNativePath(): string | null {
+  if (typeof process.resourcesPath === 'string') {
+    const packaged = join(process.resourcesPath, PACKAGED_PROMPT_NATIVE_FILE)
+    if (existsSync(packaged)) {
+      return packaged
+    }
+  }
+  if (!hasAppEnvironment()) {
+    return null
+  }
   const environment = getAppEnvironment()
-  if (environment.isPackaged() && typeof process.resourcesPath === 'string') {
-    return join(process.resourcesPath, PACKAGED_PROMPT_NATIVE_FILE)
+  if (environment.isPackaged()) {
+    return null
   }
   return join(
     environment.getAppPath(),
@@ -39,9 +54,12 @@ export function loadPromptNative(): PromptNative | null {
     loaded = { module: null }
     try {
       const path = promptNativePath()
-      // Dev runs without `pnpm build:prompt-native` and non-mac installs have no file; that is not an error.
-      if (existsSync(path)) {
-        loaded.module = requireNative(path) as PromptNative
+      // Dev runs without `pnpm build:prompt-native` and Linux installs have no file; that is not an error.
+      if (path && existsSync(path)) {
+        // dlopen needs no module base: worker and orcad bundles are CommonJS, where import.meta.url is empty.
+        const holder = { exports: {} }
+        process.dlopen(holder, path)
+        loaded.module = holder.exports as PromptNative
       }
     } catch {
       // A wrong-arch or quarantined file must degrade the feature, not crash the caller.

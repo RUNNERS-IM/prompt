@@ -6739,7 +6739,7 @@
       "src/main/windows-live-tree-kill.win32.test.ts": 70,
       "src/main/windows-process-tree-kill.test.ts": 38,
       "src/main/windows-pty-root-identity.test.ts": 80,
-      "src/main/windows-registry-addon.test.ts": 39,
+      "src/main/windows-native-registry.test.ts": 39,
       "src/main/windows/windows-administrator-restart.test.ts": 68,
       "src/main/windows/windows-administrator-restart.win32.test.ts": 61,
       "src/main/windows/windows-administrator-status.test.ts": 42,

@@ -388,15 +388,6 @@ exports.loadNativeModule = function loadNativeModule(nativeName) {
   )
 }
 
-export function writeFakeWindowsRegistry(projectDir) {
-  const registryDir = join(projectDir, 'node_modules', '@orca', 'windows-registry')
-  mkdirSync(registryDir, { recursive: true })
-  writeFileSync(
-    join(registryDir, 'index.js'),
-    'exports.HK = { CU: 0x80000001 }; exports.getRegistryKey = () => ({})\n'
-  )
-}
-
 export function writeFakeWindowsSecurity(projectDir) {
   const securityDir = join(projectDir, 'node_modules', '@orca', 'windows-security')
   mkdirSync(securityDir, { recursive: true })

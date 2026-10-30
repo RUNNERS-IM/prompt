@@ -1345,6 +1345,18 @@ jobs:
       - name: Build the Windows CLI launcher
         run: node config/scripts/build-windows-cli-launcher.mjs
 
+      # Prompt's Rust module reads the registry; the boundary tests load it and packaging ships it.
+      - name: Cache the Prompt native module build
+        uses: actions/cache@v5
+        with:
+          path: native/prompt-native/target
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          restore-keys: |
+            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Build the Prompt native module
+        run: node config/scripts/build-prompt-native.mjs
+
       # Files come from WINDOWS_BOUNDARY_TESTS, the same list that decides whether this job runs.
       - name: Test Windows-specific boundaries
         env:

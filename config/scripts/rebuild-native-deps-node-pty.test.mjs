@@ -15,7 +15,6 @@ import {
   writeFakeUsableElectronPackage,
   writeFakeWindowsProcessTree,
   writeFakeWindowsProcessTreeWithNodeAddonApi,
-  writeFakeWindowsRegistry,
   writeFakeWindowsSecurity,
   writeNodePtyPatchFile,
   writePatchedNodePtyBuildArtifacts,
@@ -79,7 +78,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeUsableElectronPackage(projectDir, { platform: 'win32' })
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { nativeDir: '../build/Release/' })
-        writeFakeWindowsRegistry(projectDir)
         writeFakeWindowsProcessTree(projectDir)
         writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
@@ -268,7 +266,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir)
         writeFakeWindowsProcessTree(projectDir)
-        writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
 
         const result = runRebuildScript(projectDir, {
@@ -278,9 +275,9 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         })
 
         expect(result.status, result.stderr).toBe(0)
-        expect(result.stdout).toContain('Rebuilding failed native modules: @orca/windows-registry')
+        expect(result.stdout).toContain('Rebuilding failed native modules: @orca/windows-security')
         const rebuildCall = JSON.parse(readFileSync(rebuildLogPath, 'utf8').trim())
-        expect(rebuildCall.onlyModules).toEqual(['@orca/windows-registry'])
+        expect(rebuildCall.onlyModules).toEqual(['@orca/windows-security'])
       } finally {
         removeTreeSync(projectDir)
       }
@@ -297,7 +294,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeUsableElectronPackage(projectDir, { platform: 'win32' })
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { ownsPtyJob: false })
-        writeFakeWindowsRegistry(projectDir)
         writeFakeWindowsProcessTree(projectDir)
         writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
@@ -330,7 +326,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeUsableElectronPackage(projectDir, { platform: 'win32' })
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { cygwinBreakawayDenied: false })
-        writeFakeWindowsRegistry(projectDir)
         writeFakeWindowsProcessTree(projectDir)
         writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)

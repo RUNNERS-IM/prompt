@@ -1,0 +1,3 @@
+# Static CRT: Windows does not include VCRUNTIME140.dll, and the module must load on a clean install.
+[target.'cfg(all(windows, target_env = "msvc"))']
+rustflags = ["-C", "target-feature=+crt-static"]

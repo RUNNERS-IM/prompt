@@ -1,12 +1,13 @@
 import { execFileSync } from 'node:child_process'
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { setAppEnvironment } from '../shared/app-environment'
 import {
   loadWindowsNativeRegistry,
   WINDOWS_REG_EXPAND_SZ,
   WINDOWS_REG_SZ
 } from './windows-native-registry'
 
-// Compare the native addon with reg.exe as an independent registry reader.
+// Compare prompt-native's registry reader with reg.exe as an independent one. Needs `pnpm build:prompt-native`.
 const describeWindows = process.platform === 'win32' ? describe : describe.skip
 
 function regQuery(key: string, name: string): { type: string; data: string } | null {
@@ -28,7 +29,20 @@ function regQuery(key: string, name: string): { type: string; data: string } | n
   return match ? { type: match[2], data: match[3] } : null
 }
 
-describeWindows('vendored windows registry addon', () => {
+describeWindows('prompt-native windows registry reader', () => {
+  beforeAll(() => {
+    // The dev path: native/prompt-native/prompt-native.win32-<arch>.node under the checkout.
+    setAppEnvironment({
+      getPath: () => process.cwd(),
+      getAppPath: () => process.cwd(),
+      getVersion: () => '0.0.0-test',
+      isPackaged: () => false,
+      onWillQuit: () => {},
+      exit: () => {},
+      getAppMetrics: () => []
+    })
+  })
+
   it('decodes the user PATH exactly as reg.exe reports it', () => {
     const registry = loadWindowsNativeRegistry()
     const values = registry.getRegistryKey(registry.HK.CU, 'Environment')
@@ -61,7 +75,7 @@ describeWindows('vendored windows registry addon', () => {
 
   it('returns null for a key that does not exist instead of throwing', () => {
     const registry = loadWindowsNativeRegistry()
-    expect(registry.getRegistryKey(registry.HK.CU, 'Software\\OrcaNoSuchKey\\Absent')).toBeNull()
+    expect(registry.getRegistryKey(registry.HK.CU, 'Software\\PromptNoSuchKey\\Absent')).toBeNull()
   })
 
   it('reports every value in the key keyed by its own name', () => {

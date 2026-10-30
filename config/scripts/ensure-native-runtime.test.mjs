@@ -90,7 +90,7 @@ describe('ensure-native-runtime', () => {
         const scriptPath = join(projectDir, 'config', 'scripts', 'ensure-native-runtime.mjs')
         const logPath = join(projectDir, 'native-runtime.log')
         const markerPath = join(projectDir, 'rebuilt.marker')
-        writeFakeNativeModules(projectDir, { windowsRegistryRequiresMarker: true })
+        writeFakeNativeModules(projectDir, { windowsSecurityRequiresMarker: true })
         writeNodePtyPatchFile(projectDir)
         writeFakeNodeGyp(projectDir)
 
@@ -113,7 +113,7 @@ describe('ensure-native-runtime', () => {
           log.split('\n').filter((line) => line === `trackFileAccess=${tracking}`)
         ).toHaveLength(2)
         expect(log).toContain(join('node_modules', 'node-pty'))
-        expect(log).toContain(join('node_modules', '@orca', 'windows-registry'))
+        expect(log).toContain(join('node_modules', '@orca', 'windows-security'))
       } finally {
         rmSync(projectDir, { recursive: true, force: true })
       }
@@ -311,7 +311,7 @@ function envForNativeFixture(projectDir, extraEnv) {
   }
 }
 
-function writeFakeNativeModules(projectDir, { windowsRegistryRequiresMarker = false } = {}) {
+function writeFakeNativeModules(projectDir, { windowsSecurityRequiresMarker = false } = {}) {
   const nodePtyDir = join(projectDir, 'node_modules', 'node-pty')
   mkdirSync(join(nodePtyDir, 'lib'), { recursive: true })
   writeFileSync(
@@ -348,7 +348,7 @@ exports.loadNativeModule = function loadNativeModule(nativeName) {
 }
 `
   )
-  writeFakeWindowsRegistry(projectDir, { requiresMarker: windowsRegistryRequiresMarker })
+  writeFakeWindowsAddons(projectDir, { requiresMarker: windowsSecurityRequiresMarker })
   if (process.platform === 'win32') {
     const buildDir = join(nodePtyDir, 'build', 'Release')
     writePatchedNodePtyBuildArtifacts(projectDir)
@@ -395,26 +395,13 @@ exports.loadNativeModule = function loadNativeModule(nativeName) {
 }
 `
   )
-  writeFakeWindowsRegistry(projectDir)
+  writeFakeWindowsAddons(projectDir)
 }
 
-function writeFakeWindowsRegistry(projectDir, { requiresMarker = false } = {}) {
+function writeFakeWindowsAddons(projectDir, { requiresMarker = false } = {}) {
   if (process.platform !== 'win32') {
     return
   }
-  const registryDir = join(projectDir, 'node_modules', '@orca', 'windows-registry')
-  mkdirSync(registryDir, { recursive: true })
-  writeFileSync(
-    join(registryDir, 'package.json'),
-    '{"name":"@orca/windows-registry","version":"1.0.0","main":"index.js"}\n'
-  )
-  const markerGate = requiresMarker
-    ? `if (!require('node:fs').existsSync(process.env.ORCA_NATIVE_TEST_MARKER)) { throw new Error('registry ABI mismatch sentinel') }`
-    : ''
-  writeFileSync(
-    join(registryDir, 'index.js'),
-    `exports.HK = { CU: 0x80000001 }; exports.getRegistryKey = () => { ${markerGate}; return {} }\n`
-  )
   const processTreeDir = join(projectDir, 'node_modules', '@vscode', 'windows-process-tree')
   mkdirSync(processTreeDir, { recursive: true })
   writeFileSync(
@@ -424,8 +411,15 @@ function writeFakeWindowsRegistry(projectDir, { requiresMarker = false } = {}) {
   const securityDir = join(projectDir, 'node_modules', '@orca', 'windows-security')
   mkdirSync(securityDir, { recursive: true })
   writeFileSync(
+    join(securityDir, 'package.json'),
+    '{"name":"@orca/windows-security","version":"1.0.0","main":"index.js"}\n'
+  )
+  const markerGate = requiresMarker
+    ? `if (!require('node:fs').existsSync(process.env.ORCA_NATIVE_TEST_MARKER)) { throw new Error('security ABI mismatch sentinel') }`
+    : ''
+  writeFileSync(
     join(securityDir, 'index.js'),
-    "exports.currentUserSid = () => 'S-1-5-18'; exports.hasNativeExport = () => true\n"
+    `exports.currentUserSid = () => { ${markerGate}; return 'S-1-5-18' }; exports.hasNativeExport = () => true\n`
   )
 }
 

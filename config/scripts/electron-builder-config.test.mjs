@@ -503,9 +503,10 @@ describe('arch-aware packaging guard', () => {
   it.runIf(process.platform === 'win32')(
     'refuses a Windows workspace addon built for another architecture',
     () => {
-      for (const binary of ['orca_windows_registry.node', 'orca_windows_security.node']) {
-        expect(() => packHost(OTHER_ARCH)).toThrow(`${binary} for ${OTHER_ARCH_NAME}`)
-      }
+      expect(() => packHost(OTHER_ARCH)).toThrow(
+        `orca_windows_security.node for ${OTHER_ARCH_NAME}`
+      )
+      expect(() => packHost(OTHER_ARCH)).toThrow(`prompt-native.win32-${OTHER_ARCH_NAME}.node`)
     }
   )
 

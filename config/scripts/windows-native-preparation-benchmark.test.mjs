@@ -31,11 +31,7 @@ const candidate = () =>
   receipt([call('probe', 1), call('discovery'), call('capture'), call('preparation', 0, true)])
 
 for (const [variant, warm, calls] of [
-  [
-    'control',
-    false,
-    [call('addon-build'), call('addon-build'), call('addon-build'), call('addon-build')]
-  ],
+  ['control', false, [call('addon-build'), call('addon-build'), call('addon-build')]],
   ['control', true, []],
   ['candidate', false, candidate().calls],
   ['candidate', true, [call('probe'), call('preparation')]],
@@ -93,15 +89,10 @@ test('rejects failed preparation and unrelated or persistent environment changes
   )
 })
 
-test('requires all four initial addon failures and excludes timed header downloads', () => {
+test('requires all three initial addon failures and excludes timed header downloads', () => {
   const result = {
     code: 1,
-    stderr: [
-      'node-pty',
-      '@orca/windows-registry',
-      '@orca/windows-security',
-      '@vscode/windows-process-tree'
-    ]
+    stderr: ['node-pty', '@orca/windows-security', '@vscode/windows-process-tree']
       .map((name) => `${name}: unavailable`)
       .join('\n')
   }

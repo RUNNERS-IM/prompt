@@ -73,7 +73,7 @@ async function withSimulatedWindowsServer(
   const platform = Object.getOwnPropertyDescriptor(process, 'platform')
   Object.defineProperty(process, 'platform', { configurable: true, value: 'win32' })
   __setWindowsPathRegistryLoaderForTests(() => {
-    throw new Error('Cannot find module @orca/windows-registry')
+    throw new Error('prompt-native windows registry reader is unavailable')
   })
   runProcessMock.mockImplementation(async ({ args }: { args: string[] }) => {
     const key = args[1] ?? ''

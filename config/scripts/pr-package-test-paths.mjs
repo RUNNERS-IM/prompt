@@ -39,7 +39,7 @@ export const WINDOWS_BOUNDARY_TESTS = [
   'config/scripts/build-windows-cli-launcher.test.mjs',
   'config/scripts/verify-packaged-windows-agent-hook.test.mjs',
   'config/scripts/script-module-dependencies.test.mjs',
-  'src/main/windows-registry-addon.test.ts',
+  'src/main/windows-native-registry.test.ts',
   'src/main/daemon/daemon-host-process-package.test.ts',
   'src/shared/windows-security-addon.win32.test.ts',
   'src/shared/windows-private-credential-file.test.ts',

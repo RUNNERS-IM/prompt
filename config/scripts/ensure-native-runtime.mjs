@@ -39,7 +39,7 @@ const forceRebuild = process.argv.includes('--force')
 const NATIVE_MODULES = [
   'node-pty',
   ...(process.platform === 'win32'
-    ? ['@orca/windows-registry', '@orca/windows-security', '@vscode/windows-process-tree']
+    ? ['@orca/windows-security', '@vscode/windows-process-tree']
     : [])
 ]
 const NODE_PTY_CONPTY_RUNTIME_FILES = ['conpty.dll', 'OpenConsole.exe']
@@ -286,12 +286,6 @@ function loadNativeModule(moduleName) {
           'source. Rebuild it (pnpm run rebuild:electron) rather than using the published prebuild.'
       )
     }
-    return
-  }
-  if (moduleName === '@orca/windows-registry') {
-    const registry = require(moduleName)
-    // Why: the package defers loading its .node addon until the first registry call.
-    registry.getRegistryKey(registry.HK.CU, 'Environment')
     return
   }
   if (moduleName === '@orca/windows-security') {

@@ -579,7 +579,7 @@ describe('release install targets', () => {
     }
   )
 
-  // Transient Node-header ECONNRESET once failed windows-registry rebuild and blocked the release cut.
+  // Transient Node-header ECONNRESET once failed a native addon rebuild and blocked the release cut.
   it('retries every release-cut install so one transient download cannot fail a cut', () => {
     const installs = installSteps('release-cut')
     expect(installs.length).toBeGreaterThan(0)

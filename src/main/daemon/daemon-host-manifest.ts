@@ -14,12 +14,6 @@ export const WINDOWS_PROCESS_TREE_REQUIRED = [
   'build/Release/windows_process_tree.node'
 ] as const
 
-export const WINDOWS_REGISTRY_REQUIRED = [
-  'package.json',
-  'index.js',
-  'build/Release/orca_windows_registry.node'
-] as const
-
 export type CopyOp = {
   sourcePath: string
   /** Destination path relative to the host root, posix-separated. */
@@ -45,8 +39,9 @@ export function daemonHostProcessPackageDir(sources: DaemonHostSources): string 
   return join(sources.resourcesPath, 'node_modules', '@orca', 'process-host')
 }
 
-export function daemonHostWindowsRegistryDir(sources: DaemonHostSources): string {
-  return join(sources.resourcesPath, 'node_modules', '@orca', 'windows-registry')
+/** Prompt's native module (registry reads); loadPromptNative finds it beside the relocated host's resources. */
+export function daemonHostPromptNativePath(sources: DaemonHostSources): string {
+  return join(sources.resourcesPath, 'prompt-native.node')
 }
 
 function daemonHostNodePtyDir(sources: DaemonHostSources): string {
@@ -166,13 +161,11 @@ export function buildDaemonHostManifest(sources: DaemonHostSources): CopyOp[] {
     filter: (sourcePath) =>
       isRuntimeProcessTreePath(toPosixRelative(windowsProcessTreeDir, sourcePath))
   })
-  const registryDir = daemonHostWindowsRegistryDir(sources)
+  const promptNativePath = daemonHostPromptNativePath(sources)
   ops.push({
-    sourcePath: registryDir,
-    destRel: toPosixRelative(appDir, registryDir),
-    kind: 'dir',
-    filter: (sourcePath) =>
-      isRequiredRuntimePath(toPosixRelative(registryDir, sourcePath), WINDOWS_REGISTRY_REQUIRED)
+    sourcePath: promptNativePath,
+    destRel: toPosixRelative(appDir, promptNativePath),
+    kind: 'file'
   })
   const nodePtyDir = daemonHostNodePtyDir(sources)
   ops.push({

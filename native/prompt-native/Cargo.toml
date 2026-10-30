@@ -27,6 +27,9 @@ objc2-user-notifications = { version = "0.3", default-features = false, features
     "UNNotificationSettings",
 ] }
 
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Registry"] }
+
 [build-dependencies]
 napi-build = "2"
 

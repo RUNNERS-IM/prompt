@@ -141,7 +141,6 @@ const DEPENDENCY_ISOLATION_PREFIXES = [
   'config/build-plugins/markdown-parser-exports',
   'config/tsconfig',
   'src/packages/',
-  'native/windows-registry/package.json',
   'native/windows-security/package.json'
 ]
 
@@ -314,7 +313,6 @@ const NATIVE_CACHE_PREFIXES = [
   'config/patches/node-pty@',
   'config/patches/@vscode__windows-process-tree',
   // The vendored addons' sources: build/ and bin/ beside them are ignored, so nothing else lands here.
-  'native/windows-registry/',
   'native/windows-security/'
 ]
 
@@ -366,9 +364,11 @@ const WINDOWS_PACKAGE_PREFIXES = [
   'native/windows-cli-launcher/',
   'native/windows-agent-hook/',
   'native/computer-use-windows/',
+  'native/prompt-native/',
   'resources/win32/',
   'config/scripts/build-windows-cli-launcher',
   'config/scripts/build-windows-agent-hook',
+  'config/scripts/build-prompt-native',
   'config/scripts/windows-rust-executable-build',
   'config/scripts/verify-packaged-windows-agent-hook',
   'config/scripts/windows-pty-native-capability',
