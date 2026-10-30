@@ -23131,6 +23131,10 @@
       "rejected": "Claude kept the previous model.",
       "badgeTitle": "Model: {{model}} (click to change)",
       "submenu": "Model"
+    },
+    "sidebar": {
+      "terminal": "Terminal",
+      "openWorkspace": "Open a terminal"
     }
   }
 }

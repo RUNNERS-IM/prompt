@@ -8,6 +8,7 @@ import { useIsSleepingWorktree } from './use-worktree-sleep-state'
 import { WorktreeCardParentContent } from './worktree-card-parent-content'
 import { buildWorktreeCardPresentation } from './worktree-card-presentation'
 import type { WorktreeCardController } from './use-worktree-card-controller'
+import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
 
 export function WorktreeCardSurface({ card }: { card: WorktreeCardController }): React.JSX.Element {
   const presentation = buildWorktreeCardPresentation(card)
@@ -52,7 +53,12 @@ export function WorktreeCardSurface({ card }: { card: WorktreeCardController }):
     <div
       className={cn(
         'relative flex cursor-pointer flex-col pr-1.5 transition-[background-color,border-color,opacity,box-shadow] duration-200 outline-none select-none',
-        titleOnlyCard ? 'py-2' : 'pt-1.25 pb-1.5',
+        // Prompt two-level sidebar: the card only holds session rows, so keep it tight.
+        affiliateListMode || !isPromptTwoLevelSidebar()
+          ? titleOnlyCard
+            ? 'py-2'
+            : 'pt-1.25 pb-1.5'
+          : 'py-0.5',
         flushSurface ? 'ml-1 w-[calc(100%-0.25rem)]' : 'ml-1',
         'overflow-hidden rounded-lg',
         // Navigation updates the live attribute before React; it must own the complete active style.

@@ -44,12 +44,18 @@ type Props = {
   worktreeId: string
   agents?: DashboardAgentRowData[]
   className?: string
+  /** Prompt two-level sidebar: list every row, never the "N agents" summary. */
+  expandAll?: boolean
+  /** Dim label at each compact row's end (the branch when a project has several worktrees). */
+  trailingLabel?: string
 }
 
 const WorktreeCardAgents = React.memo(function WorktreeCardAgents({
   worktreeId,
   agents: precomputedAgents,
-  className
+  className,
+  expandAll = false,
+  trailingLabel
 }: Props) {
   useUiLanguageRevision()
   const selectedAgents = useWorktreeAgentRows(worktreeId, precomputedAgents === undefined)
@@ -58,19 +64,31 @@ const WorktreeCardAgents = React.memo(function WorktreeCardAgents({
     return null
   }
   // Only non-empty bodies mount the 30s clock, avoiding timer cost for idle worktrees.
-  return <WorktreeCardAgentsBody worktreeId={worktreeId} agents={agents} className={className} />
+  return (
+    <WorktreeCardAgentsBody
+      worktreeId={worktreeId}
+      agents={agents}
+      className={className}
+      expandAll={expandAll}
+      trailingLabel={trailingLabel}
+    />
+  )
 })
 
 type BodyProps = {
   worktreeId: string
   agents: DashboardAgentRowData[]
   className?: string
+  expandAll: boolean
+  trailingLabel?: string
 }
 
 const WorktreeCardAgentsBody = React.memo(function WorktreeCardAgentsBody({
   worktreeId,
   agents,
-  className
+  className,
+  expandAll,
+  trailingLabel
 }: BodyProps) {
   const languageRevision = useUiLanguageRevision()
   const agentActivityDisplayMode =
@@ -308,6 +326,7 @@ const WorktreeCardAgentsBody = React.memo(function WorktreeCardAgentsBody({
           }
           isFocusedPane={agent.paneKey === focusedAgentPaneKey}
           cacheTimerActive={cacheTimerActive}
+          trailingLabel={agent.lineage ? undefined : trailingLabel}
         />
         {hasChildAgents ? (
           <CompactAgentExpansion expanded={expanded}>
@@ -329,7 +348,8 @@ const WorktreeCardAgentsBody = React.memo(function WorktreeCardAgentsBody({
   if (agentActivityDisplayMode === 'compact') {
     const summaryAgents = hasLineage ? rootAgents : agents
     // Collapse compact multi-agent lists except when their rows are the send-target picker.
-    const shouldUseSummaryRow = summaryAgents.length > 1 && !isAgentSendTargetModeActive
+    const shouldUseSummaryRow =
+      !expandAll && summaryAgents.length > 1 && !isAgentSendTargetModeActive
     const subjectLabel = translate('sidebar.agentSummary.agentCount', '{{count}} agents', {
       count: hasLineage ? rootAgents.length : agents.length,
       defaultValue_one: '{{count}} agent'

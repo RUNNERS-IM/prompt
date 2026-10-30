@@ -104,6 +104,8 @@ type CompactAgentRowProps = {
   hideIdentityIcon?: boolean
   cacheTimerActive?: boolean
   isUnvisited?: boolean
+  /** Small dim label at the row end, e.g. the branch when a project has several worktrees. */
+  trailingLabel?: string
 }
 
 export const CompactAgentRow = React.memo(function CompactAgentRow({
@@ -120,7 +122,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   isFocusedPane = false,
   hideIdentityIcon = false,
   cacheTimerActive = true,
-  isUnvisited = false
+  isUnvisited = false,
+  trailingLabel
 }: CompactAgentRowProps) {
   const view = useClaudeAgentRowView(agent)
   const highlighted = view ? view.current && view.focused : isFocusedPane
@@ -261,6 +264,14 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
           {model}
         </span>
       )}
+      {trailingLabel ? (
+        <span
+          className="min-w-0 max-w-20 shrink-[2] truncate text-[10px] text-muted-foreground/50"
+          title={trailingLabel}
+        >
+          {trailingLabel}
+        </span>
+      ) : null}
       {hasChildDisclosure && !childAgentsExpanded && (
         <span
           className={cn(

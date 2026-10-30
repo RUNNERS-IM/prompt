@@ -10,6 +10,8 @@ import type { WorktreeCardPresentation } from './worktree-card-presentation'
 import { WorktreeCardSecondaryRows } from './worktree-card-secondary-rows'
 import { WorktreeCardStatusSlot } from './WorktreeCardStatusSlot'
 import { useWslHostOffForRepo } from './use-wsl-host-off-review'
+import { PromptWorktreeSessionRows } from './prompt-worktree-session-rows'
+import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
 import type { WorktreeCardController } from './use-worktree-card-controller'
 
 export function WorktreeCardParentContent({
@@ -69,6 +71,10 @@ export function WorktreeCardParentContent({
     hoverWorkspaceTitle
   } = presentation
   const reviewStale = useWslHostOffForRepo(repo)
+  if (!affiliateListMode && isPromptTwoLevelSidebar()) {
+    // Prompt: always two levels, project header then session rows (user decision 2026-10-30).
+    return <PromptWorktreeSessionRows card={card} />
+  }
 
   const identityContent = (
     <div
