@@ -139,83 +139,92 @@ export function MobilePairingConnectionOptions({
         onKeyDown={handleArrowKeys}
         className="overflow-hidden rounded-md border border-border"
       >
-        <MobilePairingPathOption
-          selected={value === 'automatic'}
-          tabIndex={value === 'automatic' && !relayDisabled ? 0 : -1}
-          disabled={relayDisabled}
-          positionInSet={1}
-          setSize={2}
-          optionRef={(el) => {
-            optionRefs.current.automatic = el
-          }}
-          onSelect={() => onChange('automatic')}
-          title={translate(
-            'auto.components.settings.MobilePairingConnectionOptions.anywhereTitle',
-            'Orca Relay'
-          )}
-          description={
-            relayUnavailable
-              ? translate(
-                  'auto.components.settings.MobilePairingConnectionOptions.relayUnavailable',
-                  'Orca Relay isn’t available in this build. Use LAN.'
-                )
-              : translate(
-                  'auto.components.settings.MobilePairingConnectionOptions.anywhereDescription',
-                  'Phone can be on cellular or any Wi‑Fi. Sign-in required for Relay only.'
-                )
-          }
-          trailing={
-            relayUnavailable ? (
-              <Badge variant="outline" className="text-[11px]">
-                {translate(
-                  'auto.components.settings.MobilePairingConnectionOptions.unavailable',
-                  'Unavailable'
-                )}
-              </Badge>
-            ) : signedIn && value === 'automatic' ? (
-              <Badge variant="outline" className="text-[11px]">
-                {relayMintRetrying
+        {/* Prompt: builds without the Orca Relay server hide the row instead of showing a greyed
+            "Unavailable" option; LAN stays as the only choice. */}
+        {relayUnavailable ? null : (
+          <>
+            <MobilePairingPathOption
+              selected={value === 'automatic'}
+              tabIndex={value === 'automatic' && !relayDisabled ? 0 : -1}
+              disabled={relayDisabled}
+              positionInSet={1}
+              setSize={2}
+              optionRef={(el) => {
+                optionRefs.current.automatic = el
+              }}
+              onSelect={() => onChange('automatic')}
+              title={translate(
+                'auto.components.settings.MobilePairingConnectionOptions.anywhereTitle',
+                'Orca Relay'
+              )}
+              description={
+                relayUnavailable
                   ? translate(
-                      'auto.components.settings.MobilePairingConnectionOptions.retrying',
-                      'Retrying'
+                      'auto.components.settings.MobilePairingConnectionOptions.relayUnavailable',
+                      'Orca Relay isn’t available in this build. Use LAN.'
                     )
-                  : relayMintFailed
-                    ? translate(
-                        'auto.components.settings.MobilePairingConnectionOptions.unavailable',
-                        'Unavailable'
-                      )
-                    : relayStatusLabel(relayStatus.status)}
-              </Badge>
-            ) : null
-          }
-        />
-        {needsSignIn ? <MobileRelaySignInPanel reconnectRequired={reconnectRequired} /> : null}
-        {signedIn &&
-        value === 'automatic' &&
-        !relayMintFailed &&
-        relayStatus.clockOffsetMs !== undefined ? (
-          <p className="border-t border-border/60 px-3 py-2 text-xs text-destructive" role="alert">
-            {relayClockSkewMessage(relayStatus.clockOffsetMs)}
-          </p>
-        ) : null}
-        {value === 'automatic' && relayCell ? (
-          <p
-            className="border-t border-border/60 py-2 pl-10 pr-3 text-xs text-muted-foreground"
-            data-testid="relay-cell-line"
-          >
-            {translate(
-              'auto.components.settings.MobilePairingConnectionOptions.relayCell',
-              'Relay cell'
-            )}
-            {`: ${relayCell}`}
-          </p>
-        ) : null}
-        <div className="border-t border-border" />
+                  : translate(
+                      'auto.components.settings.MobilePairingConnectionOptions.anywhereDescription',
+                      'Phone can be on cellular or any Wi‑Fi. Sign-in required for Relay only.'
+                    )
+              }
+              trailing={
+                relayUnavailable ? (
+                  <Badge variant="outline" className="text-[11px]">
+                    {translate(
+                      'auto.components.settings.MobilePairingConnectionOptions.unavailable',
+                      'Unavailable'
+                    )}
+                  </Badge>
+                ) : signedIn && value === 'automatic' ? (
+                  <Badge variant="outline" className="text-[11px]">
+                    {relayMintRetrying
+                      ? translate(
+                          'auto.components.settings.MobilePairingConnectionOptions.retrying',
+                          'Retrying'
+                        )
+                      : relayMintFailed
+                        ? translate(
+                            'auto.components.settings.MobilePairingConnectionOptions.unavailable',
+                            'Unavailable'
+                          )
+                        : relayStatusLabel(relayStatus.status)}
+                  </Badge>
+                ) : null
+              }
+            />
+            {needsSignIn ? <MobileRelaySignInPanel reconnectRequired={reconnectRequired} /> : null}
+            {signedIn &&
+            value === 'automatic' &&
+            !relayMintFailed &&
+            relayStatus.clockOffsetMs !== undefined ? (
+              <p
+                className="border-t border-border/60 px-3 py-2 text-xs text-destructive"
+                role="alert"
+              >
+                {relayClockSkewMessage(relayStatus.clockOffsetMs)}
+              </p>
+            ) : null}
+            {value === 'automatic' && relayCell ? (
+              <p
+                className="border-t border-border/60 py-2 pl-10 pr-3 text-xs text-muted-foreground"
+                data-testid="relay-cell-line"
+              >
+                {translate(
+                  'auto.components.settings.MobilePairingConnectionOptions.relayCell',
+                  'Relay cell'
+                )}
+                {`: ${relayCell}`}
+              </p>
+            ) : null}
+            <div className="border-t border-border" />
+          </>
+        )}
         <MobilePairingPathOption
           selected={value === 'local-only'}
           tabIndex={value === 'local-only' || relayDisabled ? 0 : -1}
-          positionInSet={2}
-          setSize={2}
+          positionInSet={relayUnavailable ? 1 : 2}
+          setSize={relayUnavailable ? 1 : 2}
           optionRef={(el) => {
             optionRefs.current['local-only'] = el
           }}
