@@ -31,7 +31,7 @@ describe('WslDriveProjectGitRow', () => {
 
   it('says where Git and terminals run once converted, with nothing to click', () => {
     const html = render({ kind: 'wsl', distro: 'Ubuntu', git: 'windows-host' })
-    expect(html).toContain('Orca runs Git on Windows for this project')
+    expect(html).toContain('Prompt runs Git on Windows for this project')
     expect(html).not.toContain('<button')
   })
 

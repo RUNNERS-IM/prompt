@@ -52,6 +52,7 @@ import { RuntimeRpcCallError } from '@/runtime/runtime-rpc-result'
 import { RUNTIME_COMPAT_BLOCK_CODE } from '@/runtime/runtime-protocol-compat'
 import type { AgentMessageSource } from '../../../shared/agent-session/agent-session-message-source'
 import { AGENT_SESSION_WRITE_NOTICE_COPY } from '../../../shared/agent-session-write-notice-copy'
+import { applyPromptBrand } from '../../../shared/prompt-brand'
 import { testOrcaSessionId } from '../../../shared/orca-session-address-test-fixture'
 import { openAgentMessageSender } from './open-agent-message-sender'
 
@@ -97,9 +98,11 @@ function versionBlock(): Error {
 }
 
 // Existing sentences, each translated whole: the cause and what to do, or which Orca to update.
-const UNREACHABLE = `${AGENT_SESSION_WRITE_NOTICE_COPY.unreachable} ${AGENT_SESSION_WRITE_NOTICE_COPY.tryAgain}`
-const UPDATE = AGENT_SESSION_WRITE_NOTICE_COPY.updateOrcaToOpenChat
-const OLDER_HOST = AGENT_SESSION_WRITE_NOTICE_COPY.unsupported
+const UNREACHABLE = applyPromptBrand(
+  `${AGENT_SESSION_WRITE_NOTICE_COPY.unreachable} ${AGENT_SESSION_WRITE_NOTICE_COPY.tryAgain}`
+)
+const UPDATE = applyPromptBrand(AGENT_SESSION_WRITE_NOTICE_COPY.updateOrcaToOpenChat)
+const OLDER_HOST = applyPromptBrand(AGENT_SESSION_WRITE_NOTICE_COPY.unsupported)
 
 beforeEach(() => {
   vi.clearAllMocks()

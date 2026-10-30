@@ -166,7 +166,7 @@ describe('a link to this computer printed in a paired-server terminal', () => {
     expect(openFileMock).not.toHaveBeenCalled()
     expect(onOpenFailure).toHaveBeenCalledWith({
       verdict: 'unverifiable',
-      error: new Error('Update Orca on build-box to open files outside its workspaces')
+      error: new Error('Update Prompt on build-box to open files outside its workspaces')
     })
   })
 

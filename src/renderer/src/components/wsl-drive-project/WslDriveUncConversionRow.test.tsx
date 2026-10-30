@@ -32,7 +32,7 @@ describe('WslDriveUncConversionRow', () => {
         String.raw`C:\src\app`
       )
     ).toEqual([
-      String.raw`C:\src\app is already a project in Orca.`,
+      String.raw`C:\src\app is already a project in Prompt.`,
       String.raw`In this distro, that folder isn’t C:\src\app: it isn’t mounted from that Windows drive.`,
       expect.stringContaining('/mnt/c/src/fix')
     ])

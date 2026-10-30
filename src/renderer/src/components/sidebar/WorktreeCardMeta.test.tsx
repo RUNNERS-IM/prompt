@@ -97,10 +97,10 @@ describe('WorktreeCardDetailsHover', () => {
     expect(markup).toContain('aria-label="Add reference"')
     expect(markup).not.toContain('Manage links…')
     expect(markup).toContain('href="https://github.com/acme/orca/pull/456"')
-    expect(markup).toContain('Open in Orca')
+    expect(markup).toContain('Open in Prompt')
     expect(markup).toContain('Unlink PR from workspace')
     expect(markup).toContain(
-      'Orca will hide PR #456 details for this workspace. The PR and branch on GitHub won’t be changed.'
+      'Prompt will hide PR #456 details for this workspace. The PR and branch on GitHub won’t be changed.'
     )
     expect(markup).not.toContain('Copy link')
     expect(markup).not.toContain('Open in Orca browser')
@@ -132,12 +132,12 @@ describe('WorktreeCardDetailsHover', () => {
     const moreActionsIndex = markup.indexOf('aria-label="More issue actions"')
     const copyLinkIndex = markup.indexOf('Copy link')
     const editIssueIndex = markup.indexOf('aria-label="Edit issue"')
-    const openInOrcaIndex = markup.indexOf('aria-label="Open in Orca"')
+    const openInOrcaIndex = markup.indexOf('aria-label="Open in Prompt"')
     const viewOnGitHubIndex = markup.indexOf('aria-label="View on GitHub"')
 
     expect(moreActionsIndex).toBeGreaterThan(-1)
     expect(copyLinkIndex).toBeGreaterThan(-1)
-    expect(markup).toContain('Open in Orca browser')
+    expect(markup).toContain('Open in Prompt browser')
     expect(markup.indexOf('Open in Orca browser')).toBeLessThan(copyLinkIndex)
     expect(editIssueIndex).toBeGreaterThan(-1)
     expect(moreActionsIndex).toBeLessThan(editIssueIndex)
@@ -172,7 +172,7 @@ describe('WorktreeCardDetailsHover', () => {
     expect(markup).toContain('aria-label="More MR actions"')
     expect(markup).toContain('Unlink MR from workspace')
     expect(markup).toContain(
-      'Orca will hide MR !77 details for this workspace. The MR and branch on GitLab won’t be changed.'
+      'Prompt will hide MR !77 details for this workspace. The MR and branch on GitLab won’t be changed.'
     )
     expect(markup).toContain('href="https://gitlab.com/acme/orca/-/merge_requests/77"')
     expect(markup).not.toContain('Open in Orca browser')

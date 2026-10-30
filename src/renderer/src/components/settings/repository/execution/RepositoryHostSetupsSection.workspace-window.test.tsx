@@ -115,7 +115,7 @@ describe('RepositoryHostSetupsSection workspace window availability', () => {
     expect(currentSetup?.textContent).not.toContain('Ready')
     // The host is reachable — this must not be reported as a lost connection.
     expect(container.textContent).not.toContain('Disconnected')
-    expect(container.textContent).toContain('Open Orca on')
+    expect(container.textContent).toContain('Open Prompt on')
   })
 
   it('keeps a graph-ready runtime owner Ready when it reports no desktop window', () => {

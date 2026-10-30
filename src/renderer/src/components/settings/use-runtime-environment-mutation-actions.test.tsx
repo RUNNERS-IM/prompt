@@ -124,7 +124,7 @@ it('says a WSL host it kept was not removed yet, instead of "Removed"', async ()
   })
   expect(toastSuccess).not.toHaveBeenCalled()
   expect(toastWarning).toHaveBeenCalledWith(
-    'Orca didn’t remove the host yet: 1 terminal kept running. Remove it again to retry, or connect it to keep it.',
+    'Prompt didn’t remove the host yet: 1 terminal kept running. Remove it again to retry, or connect it to keep it.',
     { duration: Infinity }
   )
 })

@@ -23,6 +23,7 @@ import {
   PR_GROUP_ORDER
 } from '../../../../shared/workspace-view/workspace-pr-groups'
 import { getSidebarHeaderVisual } from './worktree-list/rows/header-visuals'
+import { applyPromptBrand } from '../../../../shared/prompt-brand'
 
 // The desktop's localized copy must read, in English, exactly as the shared copy the phone shows.
 const sharedCopy = (choices: readonly { id: string; label: string; description?: string }[]) =>
@@ -58,7 +59,7 @@ describe('desktop Workspace options copy', () => {
       ).toEqual(
         WORKSPACE_CARD_DISPLAY_CHOICES.map((choice) => ({
           id: choice.id,
-          label: getWorkspaceCardDisplayChoiceLabel(choice, hasProjectGroups)
+          label: applyPromptBrand(getWorkspaceCardDisplayChoiceLabel(choice, hasProjectGroups))
         }))
       )
     }

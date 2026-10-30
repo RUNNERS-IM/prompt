@@ -64,7 +64,7 @@ describe('main-i18n lazy locale loading', () => {
     ])
 
     await setMainUiLanguage(id)
-    expect(translateMain('menu.file', 'File')).toBe('Arquivo Orca')
+    expect(translateMain('menu.file', 'File')).toBe('Arquivo Prompt')
 
     setMainPluginLanguagePacks([])
     expect(await setMainUiLanguage(id)).toBe('en')

@@ -56,7 +56,7 @@ describe('removeWslHost', () => {
     stubApi({ stopped: true, keptForOtherDesktops: ['Orca Dev'] })
     await removeWslHost('wsl:ubuntu')
     expect(mocks.info).toHaveBeenCalledWith(
-      'Removed from this Orca. The host keeps running for Orca Dev.'
+      'Removed from this Prompt. The host keeps running for Prompt Dev.'
     )
     expect(mocks.warning).not.toHaveBeenCalled()
   })
@@ -65,7 +65,7 @@ describe('removeWslHost', () => {
     stubApi({ stopped: true, keptForOtherDesktops: ['another Orca', 'another Orca', 'Orca Dev'] })
     await removeWslHost('wsl:ubuntu')
     expect(mocks.info).toHaveBeenCalledWith(
-      'Removed from this Orca. The host keeps running for another Orca, Orca Dev.'
+      'Removed from this Prompt. The host keeps running for another Prompt, Prompt Dev.'
     )
   })
 
@@ -95,7 +95,7 @@ describe('removeWslHost', () => {
     stubApi({ stopped: false, reason: '1 terminal kept running, so Orca left the server running.' })
     await removeWslHost('wsl:ubuntu')
     expect(mocks.warning).toHaveBeenCalledWith(
-      'The host was removed, but something in the distro is still running: 1 terminal kept running, so Orca left the server running.',
+      'The host was removed, but something in the distro is still running: 1 terminal kept running, so Prompt left the server running.',
       { duration: Infinity }
     )
   })
@@ -109,7 +109,7 @@ describe('removeWslHost', () => {
     })
     await removeWslHost('wsl:ubuntu')
     expect(mocks.warning).toHaveBeenCalledExactlyOnceWith(
-      'Orca didn’t remove the host yet: Start Ubuntu to finish removing it. Remove it again to retry, or connect it to keep it.',
+      'Prompt didn’t remove the host yet: Start Ubuntu to finish removing it. Remove it again to retry, or connect it to keep it.',
       { duration: Infinity }
     )
   })

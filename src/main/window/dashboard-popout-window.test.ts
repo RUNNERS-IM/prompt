@@ -152,6 +152,7 @@ import {
 } from './dashboard-popout-window'
 import { readBrowserClientHostIdArgument } from '../../shared/browser-client-host-id-argument'
 import { hasWslHostsServeOnlyArgument } from '../../shared/wsl-host-internal-gate'
+import { applyPromptBrand } from '../../shared/prompt-brand'
 import { configureWslHostsGate, resetWslHostsGateForTests } from '../wsl/wsl-host-gate'
 
 type FakeWindow = InstanceType<typeof BrowserWindowMock>
@@ -212,7 +213,7 @@ describe('createOrFocusDashboardPopout', () => {
     const win = instances[0]
     try {
       await setMainUiLanguage('es')
-      expect(win.options.title).toBe(es.native.dialog.dashboardTitle)
+      expect(win.options.title).toBe(applyPromptBrand(es.native.dialog.dashboardTitle))
       closeDashboardPopout()
       win.setTitle.mockClear()
       await setMainUiLanguage('en')
@@ -244,7 +245,7 @@ describe('createOrFocusDashboardPopout', () => {
 
     expect(instances).toHaveLength(1)
     const opts = instances[0].options
-    expect(opts.title).toBe('Orca Agent Dashboard')
+    expect(opts.title).toBe('Prompt Agent Dashboard')
     expect(opts.minWidth).toBe(480)
     expect(opts.minHeight).toBe(360)
     // Native frame: neither a custom titleBarStyle nor frame:false is set.

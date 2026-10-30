@@ -145,7 +145,7 @@ describe('recoverFromDegradedStartup', () => {
     it('says the host is unreachable and reloads once it answers', async () => {
       await recoverFrom(new Error('Could not connect to the remote Orca runtime.'))
 
-      expect(vi.mocked(toast.error).mock.calls[0]?.[0]).toBe("Couldn't reach your Orca host")
+      expect(vi.mocked(toast.error).mock.calls[0]?.[0]).toBe("Couldn't reach your Prompt host")
       statusListener?.(snapshot('connecting'))
       expect(relaunch).not.toHaveBeenCalled()
       statusListener?.(snapshot('ready'))
@@ -159,7 +159,7 @@ describe('recoverFromDegradedStartup', () => {
     ])('treats "%s" as an unreachable host', async (message) => {
       await recoverFrom(new Error(message))
 
-      expect(vi.mocked(toast.error).mock.calls[0]?.[0]).toBe("Couldn't reach your Orca host")
+      expect(vi.mocked(toast.error).mock.calls[0]?.[0]).toBe("Couldn't reach your Prompt host")
     })
 
     it('stops waiting to reload once its startup pass is torn down', async () => {
@@ -207,7 +207,7 @@ describe('recoverFromDegradedStartup', () => {
       await recoverFrom(refusal)
 
       const [title, options] = vi.mocked(toast.error).mock.calls[0] ?? []
-      expect(title).toBe('Orca refused this browser')
+      expect(title).toBe('Prompt refused this browser')
       expect(options?.description).toBe(refusal.message)
       expect(refusal.message).toContain('ORCA_ALLOW_INSECURE_WEB_PAIRING=1')
       expect(statusListener).toBeNull()

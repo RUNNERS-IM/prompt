@@ -472,7 +472,7 @@ it('keeps a lost request unconfirmed until its viewed summary retires', async ()
   continueFails = false
   await act(async () => show?.())
   expect(document.querySelector('[role="dialog"]')?.textContent).toContain(
-    'Orca couldn’t confirm the “continue” message was delivered.'
+    'Prompt couldn’t confirm the “continue” message was delivered.'
   )
   expect([...document.querySelectorAll('button')].some((row) => row.textContent === 'Retry')).toBe(
     false

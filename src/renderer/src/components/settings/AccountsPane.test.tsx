@@ -296,7 +296,7 @@ describe('Claude accounts section', () => {
     }
     const copied = render({ ...saved, systemDefaultMayBeCopied: true })
     expect(copied).toContain('System default: a@example.test')
-    expect(copied).toContain('An earlier Orca version may have copied that login there.')
+    expect(copied).toContain('An earlier Prompt version may have copied that login there.')
     expect(copied).toContain('>Dismiss</button>')
     // Saving your own login as an account too is normal: no copy evidence, no warning.
     expect(render(saved)).not.toContain('An earlier Orca version')

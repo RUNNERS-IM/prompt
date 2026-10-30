@@ -122,7 +122,7 @@ describe('UpdateCard staged install recovery', () => {
   })
 
   it.each([
-    ['busy', 'Another Orca is updating', /Wait a moment/],
+    ['busy', 'Another Prompt is updating', /Wait a moment/],
     ['unresponsive', 'Waiting for background servers', /Stop it from the terminal/]
   ] as const)('gives a specific next step for %s', (reason, title, guidance) => {
     renderWithInitialStatus({
@@ -140,7 +140,7 @@ describe('UpdateCard staged install recovery', () => {
   it('shows preparation feedback without another install button while recovery runs', () => {
     renderWithInitialStatus({ state: 'downloaded', version: '1.4.200', installing: true })
     expect(screen.getByText('Preparing your update')).toBeTruthy()
-    expect(screen.getByText(/Checking running Orca instances/)).toBeTruthy()
+    expect(screen.getByText(/Checking running Prompt instances/)).toBeTruthy()
     expect(screen.queryByRole('button', { name: 'Restart to Update' })).toBeNull()
     expect(quitAndInstall).not.toHaveBeenCalled()
   })
