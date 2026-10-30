@@ -59,7 +59,7 @@ export function SettingsRow({
     <div
       className={cn(
         'flex gap-4',
-        description ? 'py-3' : 'py-2',
+        'py-4',
         alignTop ? 'items-start' : 'items-center justify-between',
         className
       )}

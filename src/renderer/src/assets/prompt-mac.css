@@ -125,7 +125,7 @@ html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] {
 }
 
 html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] button {
-  min-height: 32px;
+  min-height: 36px;
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 13px;
@@ -314,4 +314,48 @@ html.prompt-mac-vibrancy
   circle[stroke='none'] {
   fill: #fff;
   stroke: none;
+}
+
+/* ===== Spacing 1A: the roomier Monitor menu values (monitor src/runners-menu.css, 7cf13df): rows
+   24 -> 30, window top/bottom 6 -> 10, separator gaps 5 -> 8, group heading bottom 2 -> 8. Sidebar
+   rows, the file list and settings rows get the same +6 in their own files (virtual-rows.ts,
+   SectionHeader.tsx, worktree-card-compact-agent-row.tsx, FileExplorerRow.tsx,
+   SettingsFormControls.tsx). Terminal line height is not touched. ===== */
+html.prompt-mac-vibrancy
+  :is(
+    [data-slot='dropdown-menu-content'],
+    [data-slot='dropdown-menu-sub-content'],
+    [data-slot='context-menu-content'],
+    [data-slot='context-menu-sub-content']
+  ) {
+  padding-block: 10px;
+}
+
+html.prompt-mac-vibrancy
+  :is(
+    [data-slot='dropdown-menu-item']:not([data-variant='launch']),
+    [data-slot='dropdown-menu-checkbox-item'],
+    [data-slot='dropdown-menu-radio-item'],
+    [data-slot='dropdown-menu-sub-trigger'],
+    [data-slot='context-menu-item'],
+    [data-slot='context-menu-radio-item'],
+    [data-slot='context-menu-sub-trigger']
+  ) {
+  min-height: 30px;
+  padding-block: 7px;
+}
+
+html.prompt-mac-vibrancy
+  :is([data-slot='dropdown-menu-separator'], [data-slot='context-menu-separator']) {
+  margin-block: 8px;
+}
+
+html.prompt-mac-vibrancy
+  :is([data-slot='dropdown-menu-label'], [data-slot='context-menu-label']) {
+  padding-bottom: 8px;
+}
+
+/* Cmd+J palette rows: py-1.5 (about 32) -> 9px (about 38). */
+html.prompt-mac-vibrancy .jump-palette-command [data-slot='command-item'] {
+  padding-block: 9px;
 }

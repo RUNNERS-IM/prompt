@@ -133,7 +133,7 @@ export function InlineInputRow({
 
   return (
     <div
-      className="flex items-center w-full h-[26px] px-2 gap-1"
+      className="flex items-center w-full h-[32px] px-2 gap-1"
       style={{ paddingLeft: `${depth * 16 + 8}px` }}
     >
       <span className="size-3 shrink-0" />

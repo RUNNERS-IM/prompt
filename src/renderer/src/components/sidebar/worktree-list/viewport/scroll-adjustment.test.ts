@@ -225,7 +225,7 @@ describe('getScrollTopToRevealBounds', () => {
         },
         GROUP_HEADER_ROW_HEIGHT
       )
-    ).toBe(72)
+    ).toBe(66)
   })
 
   it('includes extra reveal clearance for the highlight ring', () => {
@@ -240,7 +240,7 @@ describe('getScrollTopToRevealBounds', () => {
         },
         WORKTREE_SIDEBAR_REVEAL_TOP_INSET
       )
-    ).toBe(66)
+    ).toBe(60)
   })
 
   it('does not scroll when the bounds are below the sticky header', () => {
@@ -250,8 +250,8 @@ describe('getScrollTopToRevealBounds', () => {
       getScrollTopToRevealBounds(
         container,
         {
-          start: 128,
-          end: 244
+          start: 134,
+          end: 250
         },
         GROUP_HEADER_ROW_HEIGHT
       )
@@ -307,8 +307,8 @@ describe('estimateRenderRowSize', () => {
       secondaryHeaderIndex
     )
 
-    expect(inactiveSize).toBe(32)
-    expect(activeSize).toBe(32)
+    expect(inactiveSize).toBe(38)
+    expect(activeSize).toBe(38)
   })
 
   it('estimates imported worktree line rows with a stable compact height', () => {

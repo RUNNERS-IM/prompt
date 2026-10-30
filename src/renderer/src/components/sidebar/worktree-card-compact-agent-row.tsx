@@ -379,7 +379,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         'text-muted-foreground worktree-agent-row-hover',
         hasChildDisclosure && 'worktree-agent-lineage-parent-row',
         isLineageChild && 'worktree-agent-lineage-child-row',
-        usePromptLayout ? 'flex flex-col justify-center py-0.5' : 'flex h-6 items-center gap-1',
+        usePromptLayout ? 'flex flex-col justify-center py-[5px]' : 'flex h-6 items-center gap-1',
         highlighted && 'bg-worktree-sidebar-accent',
         sendTargetStatus === 'sending' && 'cursor-progress opacity-75',
         sendTargetStatus === 'disabled' && 'cursor-default opacity-60'
