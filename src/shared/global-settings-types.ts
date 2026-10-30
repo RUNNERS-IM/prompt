@@ -57,6 +57,8 @@ export type GlobalSettings = GlobalSettingsBase & {
   /** Per-host value is host override ?? client default, keyed by ExecutionHostId. */
   hostSettingOverrides?: Partial<Record<ExecutionHostId, HostSettingOverrides>>
   nestWorkspaces: boolean
+  /** Prompt: reopen project windows open at quit. Unset means on. */
+  promptRestoreProjectWindows?: boolean
   workspaceDirHistory?: OrcaWorkspaceLayout[]
   refreshLocalBaseRefOnWorktreeCreate: boolean
   /** Permanently dismisses the suggestion to enable local base refresh. */
