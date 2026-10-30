@@ -45,6 +45,7 @@ export const ROOT_HELP_TEXT_PRIMARY = [
   '  environment list          List saved remote Orca runtimes',
   '  environment show          Show one saved remote Orca runtime',
   '  environment rm            Remove a saved remote Orca runtime',
+  '  environment share         Print a pairing link for this computer',
   '',
   'Environment Recipes:',
   '  vm recipe doctor          Validate a per-workspace environment recipe',

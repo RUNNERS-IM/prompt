@@ -49,6 +49,7 @@ export const ROOT_HELP_TEXT_SECONDARY = [
   '  orca environment list [--json]',
   '  orca environment show --environment <selector> [--json]',
   '  orca environment rm --environment <selector> [--json]',
+  '  orca environment share --address <host> [--json]',
   '  orca worktree list [--repo <selector>] [--limit <n>] [--json]',
   '  orca worktree create --name <name> [--repo <selector>|--project <id-or-name> [--host <host>]|--project-host-setup <id>] [--agent <id>] [--prompt <text>] [--model <id>] [--effort <level>] [--setup run|skip|inherit] [--base-branch <ref>] [--issue <number>] [--pr <number>] [--linear-issue <identifier-or-url>] [--gitlab-issue <number-or-url>] [--gitlab-mr <number-or-url>] [--comment <text>] [--parent-worktree <selector>] [--no-parent] [--run-hooks] [--activate] [--json]',
   '  orca worktree show --worktree <selector> [--json]',
