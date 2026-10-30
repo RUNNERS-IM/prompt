@@ -9,6 +9,7 @@ import type {
 } from './api/agent-account-api'
 import type { HooksApi } from './api/agent-hook-api'
 import type { SkillsApi } from './api/agent-skill-api'
+import type { PromptComputersApi } from './api/prompt-computers-bridge'
 import type { AgentAwakeApi, AgentStatusApi } from './api/agent-status-api'
 import type {
   ClaudeUsageApi,
@@ -125,6 +126,7 @@ export type PreloadApi = {
   shell: ShellApi
   skills: SkillsApi
   pet: PetApi
+  promptComputers: PromptComputersApi
   browser: BrowserApi
   emulator: EmulatorApi
   hooks: HooksApi

@@ -35,6 +35,7 @@ import {
 } from '../../../../shared/workspace-view/workspace-view-options'
 import { translate } from '@/i18n/i18n'
 import { SidebarGroupByToggle } from './SidebarGroupByToggle'
+import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
 
 export function useWorkspaceOptionsFilterBadge(): {
   hasAnyFilter: boolean
@@ -201,7 +202,8 @@ function ProjectOrderOptionItem({ preserveWorkspaceBoardOpen }: OptionItemProps)
 
 /** One desktop control per shared option; a new option fails to compile until it has one. */
 const OPTION_ITEMS: Record<WorkspaceViewOptionKey, ComponentType<OptionItemProps>> = {
-  hosts: HostsOptionItem,
+  // Prompt: the computer picker at the top of the sidebar replaces this multi-select.
+  hosts: isPromptTwoLevelSidebar() ? () => null : HostsOptionItem,
   projects: SidebarRepositoryFilterSection,
   groupBy: GroupByOptionItem,
   sortBy: SortByOptionItem,

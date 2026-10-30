@@ -22581,6 +22581,17 @@
     },
     "mobile": {
       "directOnly": "Prompt 에서는 중계 연결이 꺼져 있습니다. 휴대폰이 이 컴퓨터와 같은 Wi-Fi 에 있거나 Tailscale 로 이어져 있을 때만 연결됩니다."
+    },
+    "computerPicker": {
+      "label": "컴퓨터",
+      "thisMac": "(이 맥)",
+      "thisComputer": "이 컴퓨터",
+      "connected": "연결됨",
+      "connecting": "연결 중",
+      "offline": "꺼져 있음",
+      "add": "컴퓨터 추가…",
+      "share": "이 컴퓨터 공유…",
+      "shareTitle": "이 컴퓨터 공유"
     }
   }
 }

@@ -23138,6 +23138,17 @@
     },
     "mobile": {
       "directOnly": "Relay is off in Prompt. Your phone connects only on the same Wi-Fi as this computer or through Tailscale."
+    },
+    "computerPicker": {
+      "label": "Computer",
+      "thisMac": "(this Mac)",
+      "thisComputer": "This computer",
+      "connected": "Connected",
+      "connecting": "Connecting",
+      "offline": "Offline",
+      "add": "Add computer…",
+      "share": "Share this computer…",
+      "shareTitle": "Share this computer"
     }
   }
 }

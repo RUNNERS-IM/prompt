@@ -4,6 +4,8 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { useSidebarResize } from '@/hooks/useSidebarResize'
 import SidebarHeader from './SidebarHeader'
 import SidebarNav from './SidebarNav'
+import { PromptComputerPicker } from './prompt-computer-picker'
+import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
 import { setSidebarLiveWidth } from './sidebar-live-width'
 import SetupScriptPromptCard from './SetupScriptPromptCard'
 import WorktreeList from './WorktreeList'
@@ -166,6 +168,7 @@ function Sidebar({
       >
         {sidebarOpen && (
           <>
+            {isPromptTwoLevelSidebar() ? <PromptComputerPicker /> : null}
             <SidebarNav />
             <SidebarHeader
               onWorkspaceBoardMenuOpenChange={setWorkspaceBoardMenuOpen}
