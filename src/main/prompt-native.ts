@@ -10,6 +10,8 @@ export type PromptNative = {
   notificationStatus(): Promise<{ authorization: string; alert: string } | null>
   /** The keyboard layout as JSON (see macos-keyboard-layout-snapshot.ts); synchronous because TIS needs the main thread. */
   keyboardLayoutSnapshot(): string | null
+  /** Adds ProcessType Interactive to Squirrel's ShipIt launchd job; false outside macOS or when Squirrel changed. */
+  configureShipItScheduling?(): boolean
   /** Values of one registry key on Windows (null when it cannot be opened, or on other OSes). */
   windowsRegistryKey?(
     root: number,

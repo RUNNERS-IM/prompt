@@ -1,8 +1,6 @@
-import { createRequire } from 'node:module'
-import { join } from 'node:path'
+import { loadPromptNative } from '../prompt-native'
 import { recordUpdaterLifecycle } from '../updater-lifecycle-diagnostics'
 
-const requireNative = createRequire(import.meta.url)
 let configured = false
 
 /** Keep Squirrel's native install and verification; change only its launchd resource class. */
@@ -12,18 +10,17 @@ export function configureMacShipItScheduling(): void {
   }
   let reason = 'load_failed'
   try {
-    const addon: unknown = requireNative(join(process.resourcesPath, 'orca_shipit_scheduling.node'))
+    // The hook lives in Prompt's Rust module (native/prompt-native/src/shipit_scheduling.rs).
+    const native = loadPromptNative()
+    if (!native) {
+      throw new Error('Prompt native module is unavailable')
+    }
     reason = 'missing_export'
-    if (
-      typeof addon !== 'object' ||
-      addon === null ||
-      !('configure' in addon) ||
-      typeof addon.configure !== 'function'
-    ) {
+    if (typeof native.configureShipItScheduling !== 'function') {
       throw new Error('Squirrel installer scheduling is unavailable')
     }
     reason = 'configure_failed'
-    const result = addon.configure()
+    const result = native.configureShipItScheduling()
     reason = 'contract_mismatch'
     if (result !== true) {
       throw new Error('Squirrel installer scheduling is unavailable')

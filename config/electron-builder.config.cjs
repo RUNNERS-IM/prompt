@@ -70,7 +70,6 @@ const {
   verifyAppImageNodeRuntimeServesPty
 } = require('./scripts/appimage-node-runtime.cjs')
 const { signWindowsUninstallerViaSignPath } = require('./scripts/windows-uninstaller-signing.cjs')
-const { buildMacShipItScheduling } = require('./scripts/macos-shipit-scheduling.cjs')
 const {
   assertPackagedLicenseNotices,
   licenseNoticeResources,
@@ -426,9 +425,7 @@ module.exports = {
         context.packager.appInfo.productFilename
       )
       const architecture = macSliceArch(context.arch, 'local-build compatibility')
-      const schedulingAddon = buildMacShipItScheduling(resourcesDir, architecture)
-      await signMacStandaloneHelper(schedulingAddon, 'ShipIt scheduling', context.packager)
-      // Prompt's Rust module ships beside the ShipIt addon; a release must not drop to the slower fallbacks.
+      // Prompt's Rust module also holds the ShipIt scheduling hook; a release must not drop to the slower fallbacks.
       const promptNative = join(resourcesDir, 'prompt-native.node')
       if (existsSync(promptNative)) {
         execFileSync('/usr/bin/lipo', [

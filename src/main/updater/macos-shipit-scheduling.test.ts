@@ -1,33 +1,26 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const { loadNative, record } = vi.hoisted(() => ({ loadNative: vi.fn(), record: vi.fn() }))
-vi.mock('node:module', () => ({ createRequire: () => loadNative }))
+vi.mock('../prompt-native', () => ({ loadPromptNative: () => loadNative() }))
 vi.mock('../updater-lifecycle-diagnostics', () => ({ recordUpdaterLifecycle: record }))
 
 const originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform')!
-const originalResources = Object.getOwnPropertyDescriptor(process, 'resourcesPath')
 
 beforeEach(() => {
   vi.resetModules()
   loadNative.mockReset()
   record.mockReset()
   Object.defineProperty(process, 'platform', { value: 'darwin', configurable: true })
-  Object.defineProperty(process, 'resourcesPath', { value: '/orca-resources', configurable: true })
 })
 
 afterEach(() => {
   Object.defineProperty(process, 'platform', originalPlatform)
-  if (originalResources) {
-    Object.defineProperty(process, 'resourcesPath', originalResources)
-  } else {
-    Reflect.deleteProperty(process, 'resourcesPath')
-  }
 })
 
 describe('macOS installer scheduling', () => {
   it('configures once before native staging and records the resource class', async () => {
     const configure = vi.fn(() => true)
-    loadNative.mockReturnValue({ configure })
+    loadNative.mockReturnValue({ configureShipItScheduling: configure })
     const { configureMacShipItScheduling } = await import('./macos-shipit-scheduling')
     configureMacShipItScheduling()
     configureMacShipItScheduling()
@@ -38,12 +31,12 @@ describe('macOS installer scheduling', () => {
   })
 
   it.each([
-    { addon: null, reason: 'missing_export' },
+    { addon: null, reason: 'load_failed' },
     { addon: {}, reason: 'missing_export' },
-    { addon: { configure: () => false }, reason: 'contract_mismatch' },
+    { addon: { configureShipItScheduling: () => false }, reason: 'contract_mismatch' },
     {
       addon: {
-        configure: () => {
+        configureShipItScheduling: () => {
           throw new Error('unsupported')
         }
       },
@@ -52,7 +45,9 @@ describe('macOS installer scheduling', () => {
   ])(
     'keeps the updater usable and retries when the native hook is unavailable: %j',
     async ({ addon, reason }) => {
-      loadNative.mockReturnValueOnce(addon).mockReturnValue({ configure: () => true })
+      loadNative
+        .mockReturnValueOnce(addon)
+        .mockReturnValue({ configureShipItScheduling: () => true })
       const { configureMacShipItScheduling } = await import('./macos-shipit-scheduling')
       expect(() => configureMacShipItScheduling()).not.toThrow()
       configureMacShipItScheduling()
@@ -68,9 +63,9 @@ describe('macOS installer scheduling', () => {
   it('records a native load failure and retries the same module on the next attempt', async () => {
     loadNative
       .mockImplementationOnce(() => {
-        throw new Error('missing addon')
+        throw new Error('loader bug')
       })
-      .mockReturnValue({ configure: () => true })
+      .mockReturnValue({ configureShipItScheduling: () => true })
     const { configureMacShipItScheduling } = await import('./macos-shipit-scheduling')
     expect(() => configureMacShipItScheduling()).not.toThrow()
     expect(record).toHaveBeenCalledWith(

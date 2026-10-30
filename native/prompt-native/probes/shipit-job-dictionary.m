@@ -1,7 +1,13 @@
+// Contract probe for native/prompt-native/src/shipit_scheduling.rs, built and run by
+// config/scripts/macos-shipit-scheduling.test.mjs inside a throwaway Probe.app (Squirrel names the job after the
+// main bundle's identifier, so the probe needs one). It loads the pinned Electron's real Squirrel frameworks, reads
+// the job dictionary, installs the hook through prompt-native's C export, reads it again and prints the result as
+// JSON only if exactly ProcessType changed. Exit codes: 2 framework load, 3 module load, 4 missing export,
+// 5 hook refused, 6 other keys changed.
 #import <Foundation/Foundation.h>
 #import <dlfcn.h>
 
-@interface NSObject (OrcaShipItProbe)
+@interface NSObject (PromptShipItProbe)
 + (id)shipItJobDictionary;
 - (id)subscribeNext:(void (^)(id))next;
 @end
@@ -14,9 +20,10 @@ int main(int argc, char **argv) {
       NSString *file = [frameworks stringByAppendingFormat:@"/%@.framework/%@", name, name];
       if (!dlopen(file.UTF8String, RTLD_LAZY | RTLD_GLOBAL)) return 2;
     }
-    void *addon = dlopen(argv[2], RTLD_LAZY | RTLD_LOCAL);
-    if (!addon) return 3;
-    bool (*configure)(void) = dlsym(addon, "configureShipItScheduling");
+    // The N-API symbols stay unresolved: nothing here calls them, and RTLD_LAZY binds functions on first call.
+    void *module = dlopen(argv[2], RTLD_LAZY | RTLD_LOCAL);
+    if (!module) return 3;
+    bool (*configure)(void) = dlsym(module, "prompt_native_configure_shipit_scheduling");
     if (!configure) return 4;
     Class launcher = NSClassFromString(@"SQRLShipItLauncher");
     [[launcher shipItJobDictionary] subscribeNext:^(NSDictionary *before) {

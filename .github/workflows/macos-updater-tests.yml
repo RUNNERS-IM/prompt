@@ -8,7 +8,9 @@ on:
       - 'src/main/macos-update-running-instances*'
       - 'src/main/updater*'
       - 'src/main/updater/**'
-      - 'native/macos-shipit-scheduling/**'
+      - 'native/prompt-native/src/**'
+      - 'native/prompt-native/probes/**'
+      - 'native/prompt-native/Cargo.*'
       - 'config/scripts/macos-shipit-scheduling*'
       - 'config/electron-builder.config.cjs'
       - 'src/main/startup/main-process-quit*'
@@ -45,6 +47,21 @@ jobs:
           cache-electron-package: 'true'
       - name: Install the pinned Electron binary for native updater probes
         run: node config/scripts/install-electron-package-binary.mjs
+      # The ShipIt scheduling hook is part of Prompt's Rust module; its unit tests cover the fallbacks and the
+      # probe in macos-shipit-scheduling.test.mjs loads the built module against the real Squirrel framework.
+      - name: Cache the Prompt native module build
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            native/prompt-native/target
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          restore-keys: |
+            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
+      - name: Test and build the Prompt native module
+        run: |
+          cargo test --locked --manifest-path native/prompt-native/Cargo.toml
+          node config/scripts/build-prompt-native.mjs
       - name: Exercise native application registry and update shutdown
         env:
           ORCA_BACKGROUND_LAUNCH: '1'

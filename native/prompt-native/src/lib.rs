@@ -6,6 +6,7 @@
 mod keyboard_layout;
 mod notification_status;
 mod process_footprint;
+mod shipit_scheduling;
 mod windows_registry;
 
 use napi::bindgen_prelude::*;
@@ -122,4 +123,20 @@ pub fn windows_registry_key(root: u32, path: Utf16String) -> Option<Vec<Registry
             })
             .collect(),
     )
+}
+
+/// Adds `ProcessType: Interactive` to the launchd job Squirrel submits for ShipIt, so the bundle swap after quit is
+/// not throttled like a background daemon. True once the hook is in place (or already was); false outside macOS,
+/// when Squirrel is not loaded in this process, or when its private method changed shape.
+/// Synchronous: it only swaps one Objective-C method implementation.
+#[napi(js_name = "configureShipItScheduling")]
+pub fn configure_ship_it_scheduling() -> bool {
+    shipit_scheduling::configure()
+}
+
+/// The same hook for a plain C caller. Only `config/scripts/macos-shipit-scheduling.test.mjs` uses it: its probe app
+/// loads Electron's real Squirrel frameworks without starting Node, so it cannot call the N-API export above.
+#[unsafe(no_mangle)]
+pub extern "C" fn prompt_native_configure_shipit_scheduling() -> bool {
+    shipit_scheduling::configure()
 }
