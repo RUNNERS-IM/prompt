@@ -7,6 +7,7 @@ import {
   getPreviousVisibleContextualTourStepIndex
 } from '../../../components/contextual-tours/contextual-tour-gate'
 import { hasFeatureInteraction } from '../../../../../shared/feature-interactions'
+import { arePromptContextualToursEnabled } from '../../../components/contextual-tours/prompt-contextual-tours'
 
 export function createUiTourActions(set: UISliceSet, get: UISliceGet): Partial<UISlice> {
   return {
@@ -47,6 +48,10 @@ export function createUiTourActions(set: UISliceSet, get: UISliceGet): Partial<U
       ),
     requestContextualTour: (id, source, wasFeaturePreviouslyInteracted, options) =>
       set((s) => {
+        // Prompt: no contextual tours, automatic or forced.
+        if (!arePromptContextualToursEnabled()) {
+          return s
+        }
         const tour = getContextualTour(id)
         const decision = getContextualTourRequestDecision({
           tour,

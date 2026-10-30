@@ -11,6 +11,11 @@ const mocks = vi.hoisted(() => ({
   toastError: vi.fn()
 }))
 
+// Prompt turns tours off; these tests cover the tour mechanics themselves.
+vi.mock('../../components/contextual-tours/prompt-contextual-tours', () => ({
+  arePromptContextualToursEnabled: () => true
+}))
+
 vi.mock('@/lib/active-agent-note-send', () => ({
   activeAgentNotesSendFailureMessage: (
     status: string,

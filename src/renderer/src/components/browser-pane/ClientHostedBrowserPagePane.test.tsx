@@ -17,6 +17,11 @@ const mocks = vi.hoisted(() => ({
   }
 }))
 
+// Prompt turns tours off; these tests cover the tour mechanics themselves.
+vi.mock('../contextual-tours/prompt-contextual-tours', () => ({
+  arePromptContextualToursEnabled: () => true
+}))
+
 vi.mock('@/runtime/web-runtime-browser-creation', () => ({
   createWebRuntimeSessionBrowserTab: mocks.createBrowserTab
 }))
