@@ -30,9 +30,12 @@ export function showPromptAboutWindow(store: Pick<Store, 'getSettings'> | null):
   }
 
   const isMac = process.platform === 'darwin'
+  // Sized for the Split-style layout: the longest English card line (Monitor, about 360px at 11px)
+  // stays on one line, and the header, both cards and the footer fit without scrolling.
   const window = new BrowserWindow({
-    width: 480,
-    height: 540,
+    width: 570,
+    height: 616,
+    useContentSize: true,
     resizable: false,
     minimizable: false,
     maximizable: false,

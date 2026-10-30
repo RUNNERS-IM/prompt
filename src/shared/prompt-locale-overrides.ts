@@ -21,7 +21,8 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
   'prompt.about.menuLabel': '{{name}} 정보',
-  'prompt.about.version': '버전 {{version}}'
+  'prompt.about.versionLine': '버전 {{version}} · 무료 오픈소스',
+  'prompt.about.website': '웹사이트'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */
