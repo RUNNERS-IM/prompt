@@ -10,6 +10,7 @@ use std::env;
 fn main() {
     println!("cargo:rerun-if-changed=app.manifest");
     println!("cargo:rerun-if-env-changed=ORCA_LAUNCHER_VERSION");
+    println!("cargo:rerun-if-env-changed=PROMPT_WINDOWS_FILE_VERSION");
     println!("cargo:rerun-if-env-changed=ORCA_LAUNCHER_ICON");
     println!("cargo:rerun-if-env-changed=ORCA_LAUNCHER_FILENAME");
 
@@ -21,7 +22,7 @@ fn main() {
     // the launcher always reports the release it shipped in.
     let version = env::var("ORCA_LAUNCHER_VERSION")
         .expect("ORCA_LAUNCHER_VERSION must be set; build through build-windows-cli-launcher.mjs");
-    let (major, minor, patch) = numeric_version_parts(&version);
+    let (major, minor, patch, build) = file_version_parts(&version);
 
     let mut resource = winresource::WindowsResource::new();
     resource.set("ProductName", "Orca");
@@ -34,15 +35,15 @@ fn main() {
     let filename = env::var("ORCA_LAUNCHER_FILENAME").unwrap_or_else(|_| "orca.exe".into());
     resource.set("InternalName", &filename);
     resource.set("OriginalFilename", &filename);
-    resource.set("FileVersion", &format!("{major}.{minor}.{patch}.0"));
+    resource.set("FileVersion", &format!("{major}.{minor}.{patch}.{build}"));
     resource.set("ProductVersion", &version);
     resource.set_version_info(
         winresource::VersionInfo::FILEVERSION,
-        (major << 48) | (minor << 32) | (patch << 16),
+        (major << 48) | (minor << 32) | (patch << 16) | build,
     );
     resource.set_version_info(
         winresource::VersionInfo::PRODUCTVERSION,
-        (major << 48) | (minor << 32) | (patch << 16),
+        (major << 48) | (minor << 32) | (patch << 16) | build,
     );
     resource.set_manifest_file("app.manifest");
     if let Ok(icon) = env::var("ORCA_LAUNCHER_ICON") {
@@ -53,11 +54,18 @@ fn main() {
         .expect("failed to compile Windows resources");
 }
 
-/// Strips any prerelease or build suffix; the PE numeric version accepts digits only.
-fn numeric_version_parts(version: &str) -> (u64, u64, u64) {
-    let base = version.split(['-', '+']).next().unwrap_or_default();
+/// Uses PROMPT_WINDOWS_FILE_VERSION from windows-rust-executable-build.mjs, which already split
+/// a 2.6.MMDDNN release into four fields that each fit in 16 bits (2.6.1030.1). Without it,
+/// strips any prerelease or build suffix; the PE numeric version accepts digits only.
+fn file_version_parts(version: &str) -> (u64, u64, u64, u64) {
+    let file_version = env::var("PROMPT_WINDOWS_FILE_VERSION").ok();
+    let base = match file_version.as_deref() {
+        Some(value) => value,
+        None => version.split(['-', '+']).next().unwrap_or_default(),
+    };
     let mut parts = base.split('.').map(|part| part.parse::<u64>().unwrap_or(0));
     (
+        parts.next().unwrap_or(0),
         parts.next().unwrap_or(0),
         parts.next().unwrap_or(0),
         parts.next().unwrap_or(0),

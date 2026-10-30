@@ -27,6 +27,7 @@ const {
   assertNoWindowsExecutablesInRuntimeNodeModules
 } = require('./packaged-windows-only-runtime-files.cjs')
 const { verifyLinuxGlibcFloor } = require('./scripts/verify-linux-glibc-floor.cjs')
+const { windowsFileVersion } = require('./scripts/windows-file-version.cjs')
 const {
   verifyPackagedWindowsAgentHook
 } = require('./scripts/verify-packaged-windows-agent-hook.cjs')
@@ -237,6 +238,24 @@ const macUsageDescriptions = {
   NSBonjourServices: ['_http._tcp', '_https._tcp'],
   ...MACOS_FOLDER_USAGE_DESCRIPTIONS
 }
+// Windows 실행 파일·설치 관리자의 버전 칸은 칸마다 65535 까지라 2.6.103001 을 그대로 못 적는다.
+// Windows 에서 빌드할 때만 2.6.1030.1 처럼 나눈 값을 쓴다. 업데이트 비교에 쓰는 version 은 그대로다.
+// mac 빌드는 Windows 에서 돌지 않으므로 CFBundleVersion 은 바뀌지 않는다.
+const windowsBuildVersion =
+  process.platform === 'win32'
+    ? windowsFileVersion(
+        devChannelBuildVersion ?? localBuildVersion ?? require('../package.json').version
+      )
+    : undefined
+const extraMetadata = {
+  ...(devChannelBuildVersion
+    ? { version: devChannelBuildVersion }
+    : localBuildVersion
+      ? { version: localBuildVersion }
+      : {}),
+  ...(windowsBuildVersion ? { shortVersionWindows: windowsBuildVersion } : {})
+}
+
 // Developer ID team that signs every release-channel mac build.
 const ORCA_MAC_TEAM_ID = 'RGWVXJ8URP'
 
@@ -248,11 +267,8 @@ module.exports = {
   copyright: 'Copyright © 2026 Runners Co., Ltd. All rights reserved.',
   protocols: [{ name: 'Prompt', schemes: ['prompt'] }],
   toolsets: { appimage: '1.0.3' },
-  ...(devChannelBuildVersion
-    ? { extraMetadata: { version: devChannelBuildVersion } }
-    : localBuildVersion
-      ? { extraMetadata: { version: localBuildVersion } }
-      : {}),
+  ...(Object.keys(extraMetadata).length > 0 ? { extraMetadata } : {}),
+  ...(windowsBuildVersion ? { buildVersion: windowsBuildVersion } : {}),
   directories: {
     buildResources: 'resources/build'
   },

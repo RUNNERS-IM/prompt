@@ -220,7 +220,14 @@ describe('Windows CLI launcher', () => {
   it('reduces a prerelease to the numeric version Windows can record', () => {
     expect(windowsRustExecutableFileVersion('1.4.214-daily.202609281300')).toBe('1.4.214.0')
     expect(windowsRustExecutableFileVersion('1.4.214')).toBe('1.4.214.0')
-    for (const version of ['1.4.65535', '1.4', '1.4.214"', undefined]) {
+  })
+
+  it('splits a 2.6.MMDDNN release into date and serial fields that fit in 16 bits', () => {
+    expect(windowsRustExecutableFileVersion('2.6.103001')).toBe('2.6.1030.1')
+    expect(windowsRustExecutableFileVersion('2.6.103002')).toBe('2.6.1030.2')
+    expect(windowsRustExecutableFileVersion('2.6.10501')).toBe('2.6.105.1')
+    expect(windowsRustExecutableFileVersion('2.6.123199')).toBe('2.6.1231.99')
+    for (const version of ['1.4.65535', '1.4', '1.4.214"', '2.6.103000', '2.6.133001', undefined]) {
       expect(() => windowsRustExecutableFileVersion(version)).toThrow('Invalid Windows')
     }
   })
@@ -253,7 +260,7 @@ describe('Windows CLI launcher', () => {
         expect(info.CompanyName).toBe('Stably AI')
         expect(info.ProductName).toBe('Orca')
         expect(info.FileDescription).toBe('Orca CLI Launcher')
-        expect(info.FileVersion).toBe(`${version.split(/[+-]/)[0]}.0`)
+        expect(info.FileVersion).toBe(windowsRustExecutableFileVersion(version))
         expect(info.ProductVersion).toBe(version)
         const binary = readFileSync(launcherPath)
         expect(binary.includes(Buffer.from('requestedExecutionLevel level="asInvoker"'))).toBe(true)
