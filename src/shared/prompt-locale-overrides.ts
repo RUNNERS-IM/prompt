@@ -14,7 +14,15 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   // Workspace right-click: "Update" opens the rename / comment dialog, not an app update.
   'auto.components.sidebar.WorktreeContextMenu.439fa94d53': '이름 · 메모 바꾸기',
   // Settings sidebar group "Set Up" (general + integrations); "설정 시작" read as a verb.
-  'auto.components.settings.Settings.9abb9be3bc': '기본'
+  'auto.components.settings.Settings.9abb9be3bc': '기본',
+  // English words left in the Korean catalog.
+  'tray.activityWaitingSuffix': '활동 대기 중',
+  'auto.components.NewWorkspaceComposerCard.ba64270bdb': '에이전트 구성',
+  'auto.components.NewWorkspaceComposerCard.ab63f25397': '에이전트 설정 열기',
+  'auto.components.status.bar.SkillUpdateStatusSegment.runningLabel': '스킬 업데이트 중',
+  'auto.components.status.bar.SkillUpdateStatusSegment.runningOne': '{{value0}} 업데이트 중…',
+  'auto.components.status.bar.SkillUpdateStatusSegment.successLabel': '스킬 업데이트됨',
+  'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
@@ -26,7 +34,11 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.about.notices': '오픈소스 고지',
   'prompt.about.noticesMissing': '고지 파일을 읽을 수 없습니다.',
   'prompt.about.close': '닫기',
-  'prompt.about.chromiumLicenses': 'Chromium 라이선스 열기'
+  'prompt.about.chromiumLicenses': 'Chromium 라이선스 열기',
+  'prompt.timeAgo.now': '방금',
+  'prompt.timeAgo.minutes': '{{value}}분',
+  'prompt.timeAgo.hours': '{{value}}시간',
+  'prompt.timeAgo.days': '{{value}}일'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */
