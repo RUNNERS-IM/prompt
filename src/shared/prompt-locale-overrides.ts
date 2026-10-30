@@ -36,7 +36,15 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   // App menu: same wording as the menu bar menu (업데이트 확인…, 설정…).
   'menu.checkForUpdates': '업데이트 확인…',
   'menu.settings': '설정…',
-  'menu.quitAndStopAllSessions': '완전히 종료…'
+  'menu.quitAndStopAllSessions': '완전히 종료…',
+  // Close window / Quit Completely: "~할까요?" titles, one or two sentence explanations.
+  'auto.components.Terminal.2fa9c69ff3': '창을 닫을까요?',
+  'auto.components.Terminal.7958465754': '명령이 실행 중인 터미널이 있습니다.',
+  'auto.components.Terminal.b7c1f0a934':
+    '원격 호스트에 연결할 수 없어 그곳에서 작업이 실행 중인지 알 수 없습니다.',
+  'quitAndStopAllSessions.message': '모든 터미널 세션을 멈추고 Orca를 종료할까요?',
+  'quitAndStopAllSessions.detail':
+    '실행 중인 에이전트를 포함해 모든 터미널 세션이 멈추고, 닫힌 탭은 다음에 다시 열리지 않습니다. 그냥 종료하면 세션은 계속 돌아갑니다.'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
