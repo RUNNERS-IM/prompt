@@ -1,6 +1,8 @@
 import { shell } from 'electron'
+import { promptOr } from '../../shared/prompt-upstream'
 
-const MACOS_PACKAGED_BUNDLE_ID = 'com.stablyai.orca'
+// Prompt: the packaged app is im.runners.prompt (config/electron-builder.config.cjs appId).
+const MACOS_PACKAGED_BUNDLE_ID = promptOr('im.runners.prompt', 'com.stablyai.orca')
 const MACOS_NOTIFICATION_SETTINGS_URL =
   'x-apple.systempreferences:com.apple.Notifications-Settings.extension'
 
