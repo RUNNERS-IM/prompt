@@ -1,14 +1,21 @@
 import { net } from 'electron'
 import { parse } from 'yaml'
 import { compareVersions, isPrereleaseVersion, isValidVersion } from './updater-fallback'
+import { MAIN_RELEASE_REPO } from '../shared/release-channel'
+import { escapeRegex } from '../shared/string-utils'
 
-const ATOM_FEED_URL = 'https://github.com/RUNNERS-IM/prompt/releases.atom'
-const RELEASES_DOWNLOAD_BASE = 'https://github.com/RUNNERS-IM/prompt/releases/download'
+// Prompt: RUNNERS-IM/prompt in every real build; upstream's repo only under unit tests (shared/prompt-upstream).
+const RELEASES_PATH = `/${MAIN_RELEASE_REPO}/releases`
+const RELEASES_URL = `https://github.com${RELEASES_PATH}`
+const ATOM_FEED_URL = `${RELEASES_URL}.atom`
+const RELEASES_DOWNLOAD_BASE = `${RELEASES_URL}/download`
 const FETCH_TIMEOUT_MS = 5000
 const MAX_MANIFEST_PROBE_CANDIDATES = 6
 
 // Atom includes stable and prerelease tags without channel filtering.
-const TAG_HREF_RE = /href="https:\/\/github\.com\/RUNNERS-IM\/prompt\/releases\/tag\/([^"]+)"/g
+const TAG_HREF_RE = new RegExp(`href="${escapeRegex(RELEASES_URL)}/tag/([^"]+)"`, 'g')
+const RELEASE_DOWNLOAD_URL_RE = new RegExp(`^${escapeRegex(RELEASES_DOWNLOAD_BASE)}/`, 'i')
+const RELEASE_TAG_PATH_RE = new RegExp(`^${escapeRegex(RELEASES_PATH)}/tag/([^/]+)$`)
 
 export function getReleaseDownloadUrl(tag: string): string {
   return `${RELEASES_DOWNLOAD_BASE}/${encodeURIComponent(tag)}`
@@ -156,9 +163,7 @@ async function getGitHubReleaseAssetReadiness(assetUrl: string): Promise<Release
 async function getReleaseAssetReadiness(tag: string, assetName: string): Promise<ReleaseReadiness> {
   const isRelativeAsset = !/^https?:\/\//i.test(assetName)
   const isGitHubReleaseAsset =
-    process.platform === 'win32' &&
-    (isRelativeAsset ||
-      /^https:\/\/github\.com\/RUNNERS-IM\/prompt\/releases\/download\//i.test(assetName))
+    process.platform === 'win32' && (isRelativeAsset || RELEASE_DOWNLOAD_URL_RE.test(assetName))
   const assetUrl = isRelativeAsset
     ? getReleaseAssetUrl(tag, assetName.split('/').findLast(Boolean) ?? assetName)
     : assetName
@@ -217,13 +222,13 @@ async function getPlatformManifestReadiness(tag: string): Promise<ReleaseReadine
 export async function fetchLatestStableReleaseTag(): Promise<string | null> {
   try {
     // Resolve only the release-page redirect; installer redirects continue on to signed storage URLs.
-    const latestUrl = 'https://github.com/RUNNERS-IM/prompt/releases/latest'
+    const latestUrl = `${RELEASES_URL}/latest`
     const response = await requestGitHubReleaseHead(latestUrl)
     if (!response?.redirectUrl || response.statusCode < 300 || response.statusCode >= 400) {
       return null
     }
     const target = new URL(response.redirectUrl, latestUrl)
-    const match = target.pathname.match(/^\/RUNNERS-IM\/prompt\/releases\/tag\/([^/]+)$/)
+    const match = target.pathname.match(RELEASE_TAG_PATH_RE)
     if (target.origin !== 'https://github.com' || !match) {
       return null
     }
