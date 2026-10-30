@@ -9,6 +9,11 @@ import { translateMain } from '../i18n/main-i18n'
 import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
 import { stampTrayDevBadge } from './tray-dev-badge'
 import { buildTrayMenuTemplate } from './tray-menu-template'
+import {
+  isMenuBarCursorVisible,
+  startMenuBarCursorBlink,
+  stopMenuBarCursorBlink
+} from './prompt-menu-bar-cursor'
 
 export type SystemTrayOptions = {
   /** App icon id from settings; the tray reuses the app icon image. */
@@ -29,6 +34,8 @@ export type SystemTrayOptions = {
   onOpenHelp: () => void
   /** Live terminal count for the status line; omitted hides the line. */
   getRunningTerminalCount?: () => number
+  /** Agents seen working right now; the menu bar cursor blinks only while this is above zero. */
+  getWorkingAgentCount?: () => number
   /** Caller must mark quit intent; serve-mode user Quit may close only desktop windows. */
   onQuit: () => void
   /** Confirm, then quit with every terminal session stopped; omitted where the item must not show (serve mode). */
@@ -42,32 +49,10 @@ let trayOptions: SystemTrayOptions | null = null
 // Cache the plain icon so attention changes do not reload the app PNG.
 let baseTrayImage: NativeImage | null = null
 
-// Prompt's menu bar cursor blinks every 2.4s (half on, half off) regardless of activity.
-const CURSOR_BLINK_HALF_PERIOD_MS = 1200
 let cursorOffTrayImage: NativeImage | null = null
-let cursorVisible = true
-let cursorBlinkTimer: ReturnType<typeof setInterval> | null = null
 
 function currentMacTrayFrame(): NativeImage | null {
-  return cursorVisible || !cursorOffTrayImage ? baseTrayImage : cursorOffTrayImage
-}
-
-function startCursorBlink(): void {
-  if (cursorBlinkTimer || !cursorOffTrayImage) {
-    return
-  }
-  cursorBlinkTimer = setInterval(() => {
-    cursorVisible = !cursorVisible
-    scheduleTrayImage()
-  }, CURSOR_BLINK_HALF_PERIOD_MS)
-}
-
-function stopCursorBlink(): void {
-  if (cursorBlinkTimer) {
-    clearInterval(cursorBlinkTimer)
-    cursorBlinkTimer = null
-  }
-  cursorVisible = true
+  return isMenuBarCursorVisible() || !cursorOffTrayImage ? baseTrayImage : cursorOffTrayImage
 }
 
 // Remember attention before deferred tray creation so its first image is current.
@@ -311,7 +296,9 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
     )
   } else {
     watchMacAppearance()
-    startCursorBlink()
+    if (cursorOffTrayImage) {
+      startMenuBarCursorBlink(() => trayOptions?.getWorkingAgentCount, scheduleTrayImage)
+    }
   }
   startTerminalCountWatch()
   return tray
@@ -363,7 +350,7 @@ export function setTrayAttention(active: boolean): void {
 export function destroySystemTray(): void {
   stopWatchingMacAppearance()
   stopTerminalCountWatch()
-  stopCursorBlink()
+  stopMenuBarCursorBlink()
   cursorOffTrayImage = null
   if (tray && !tray.isDestroyed()) {
     tray.destroy()

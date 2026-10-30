@@ -231,6 +231,7 @@ export function getSystemTrayOptions(): SystemTrayOptions | null {
     onOpenHelp: () => void shell.openExternal(PROMPT_HELP_FEEDBACK_URL),
     // Every live terminal the app routes (local daemon and SSH) has one ownership entry.
     getRunningTerminalCount: () => ptyOwnership.size,
+    getWorkingAgentCount: () => state.agentAwakeService?.getWorkingAgentCount() ?? 0,
     onQuit: quitFromSystemTray,
     ...(state.isServeMode
       ? {}

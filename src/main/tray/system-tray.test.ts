@@ -321,6 +321,37 @@ describe('createSystemTray', () => {
     expect(builtMenuItems()[0].label).toBe('2 terminals running')
   })
 
+  it('blinks the menu bar cursor only while an agent is working', async () => {
+    setPlatform('darwin')
+    const offImage = { ...baseMacImage, name: 'mac-cursor-off', setTemplateImage: vi.fn() }
+    createFromPathMock.mockImplementation((path: string) =>
+      path.includes('@2x') ? retinaMacImage : path.includes('off') ? offImage : baseMacImage
+    )
+    const { createSystemTray } = await loadModule()
+    let working = 0
+    createSystemTray({ ...createOptions(), getWorkingAgentCount: () => working })
+    const shownImages = (): unknown[] => trayInstances[0].setImage.mock.calls.map((call) => call[0])
+
+    trayInstances[0].setImage.mockClear()
+    vi.advanceTimersByTime(1200 * 3 + 1)
+    expect(shownImages()).toEqual([])
+
+    working = 1
+    vi.advanceTimersByTime(1200 + 1)
+    expect(shownImages().at(-1)).toBe(offImage)
+    vi.advanceTimersByTime(1200 + 1)
+    expect(shownImages().at(-1)).toBe(baseMacImage)
+    vi.advanceTimersByTime(1200 + 1)
+    expect(shownImages().at(-1)).toBe(offImage)
+
+    working = 0
+    vi.advanceTimersByTime(1200 + 1)
+    expect(shownImages().at(-1)).toBe(baseMacImage)
+    trayInstances[0].setImage.mockClear()
+    vi.advanceTimersByTime(1200 * 3 + 1)
+    expect(shownImages()).toEqual([])
+  })
+
   it.each(['win32', 'darwin'] as const)(
     'offers Quit Completely directly below Quit on %s when a handler is supplied',
     async (platform) => {
