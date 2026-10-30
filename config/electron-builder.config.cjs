@@ -511,12 +511,12 @@ module.exports = {
   },
   win: {
     executableName: 'Prompt',
-    // SignPath signs Windows installers after packaging, so set release publisherName explicitly.
+    // Release publisherName is the signer's certificate name (Runners Co., Ltd, same as the Apple Developer ID).
     // Unsigned dev channels omit it or updater signature checks reject dev updates and return to stable.
     // Sign hook signs nothing: it relays transient NSIS uninstaller files to CI SignPath; unset relay env leaves local/dev builds inert.
     signtoolOptions: {
       sign: signWindowsUninstallerViaSignPath,
-      ...(isWinDevChannel ? {} : { publisherName: 'SignPath Foundation' })
+      ...(isWinDevChannel ? {} : { publisherName: 'Runners Co., Ltd' })
     },
     ...(isWinDevChannel ? { verifyUpdateCodeSignature: false } : {}),
     extraResources: [
