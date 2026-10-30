@@ -23199,6 +23199,28 @@
         "plan": "Updating its plan",
         "other": "Using {{tool}}"
       }
+    },
+    "timeAgo": {
+      "now": "now",
+      "minutes": "{{value}}m",
+      "hours": "{{value}}h",
+      "days": "{{value}}d"
+    },
+    "crashReport": {
+      "title": "Report a crash",
+      "description": "Opens a new GitHub issue with your notes and the version filled in. A GitHub account is required.",
+      "cancel": "Cancel",
+      "open": "Open in GitHub",
+      "opened": "Opened the GitHub issue page. The report is filed once you submit it there."
+    },
+    "update": {
+      "title": "New version available",
+      "bodyWithCurrent": "Prompt {{version}} is ready to install. You have {{current}}. Installing restarts Prompt.",
+      "body": "Prompt {{version}} is ready to install. Installing restarts Prompt.",
+      "later": "Later",
+      "install": "Install",
+      "restartFailed": "Could not restart to install the update. Quit and reopen Prompt, then try again.",
+      "installerFailed": "Could not start the update installer. Prompt remains open."
     }
   }
 }
