@@ -1,0 +1,126 @@
+/* RUNNERS app cards, design standard A (macOS default look).
+   Card radius 10, 0.5px hairline, row 14/10 padding, 12 gap, section header 11 semibold 6 above
+   the card, 18 between sections. Light: card white 85%; dark (html.dark): white 5%. */
+.runners-apps {
+  --runners-apps-card: rgb(255 255 255 / 0.85);
+  --runners-apps-hairline: rgb(0 0 0 / 0.1);
+  --runners-apps-text: rgb(0 0 0 / 0.85);
+  --runners-apps-secondary: rgb(0 0 0 / 0.5);
+  --runners-apps-button: rgb(0 0 0 / 0.06);
+  --runners-apps-button-hover: rgb(0 0 0 / 0.1);
+  --runners-apps-accent: var(--prompt-accent, #007aff);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: var(--app-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  text-align: left;
+}
+
+.dark .runners-apps {
+  --runners-apps-card: rgb(255 255 255 / 0.05);
+  --runners-apps-hairline: rgb(255 255 255 / 0.08);
+  --runners-apps-text: rgb(255 255 255 / 0.9);
+  --runners-apps-secondary: rgb(255 255 255 / 0.55);
+  --runners-apps-button: rgb(255 255 255 / 0.1);
+  --runners-apps-button-hover: rgb(255 255 255 / 0.16);
+}
+
+.runners-apps-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.runners-apps-title {
+  margin: 0;
+  padding: 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 14px;
+  color: var(--runners-apps-secondary);
+}
+
+.runners-apps-card {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 10px;
+  background: var(--runners-apps-card);
+  outline: 0.5px solid var(--runners-apps-hairline);
+  outline-offset: -0.5px;
+  overflow: hidden;
+}
+
+.runners-apps-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+/* Inset separator between rows, starting after the icon like macOS lists. */
+.runners-apps-row + .runners-apps-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 58px;
+  right: 0;
+  height: 0.5px;
+  background: var(--runners-apps-hairline);
+}
+
+.runners-apps-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+span.runners-apps-icon {
+  background: var(--runners-apps-button);
+}
+
+.runners-apps-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.runners-apps-name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--runners-apps-text);
+}
+
+.runners-apps-desc {
+  margin-top: 1px;
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--runners-apps-secondary);
+}
+
+.runners-apps-get {
+  flex: none;
+  min-width: 52px;
+  height: 22px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--runners-apps-button);
+  color: var(--runners-apps-accent);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.runners-apps-get:hover {
+  background: var(--runners-apps-button-hover);
+}
+
+.runners-apps-get:focus-visible {
+  outline: 2px solid var(--runners-apps-accent);
+  outline-offset: 1px;
+}

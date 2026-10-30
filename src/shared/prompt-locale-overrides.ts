@@ -19,7 +19,9 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
-  'prompt.settings.sidebarTitle': 'Prompt 설정'
+  'prompt.settings.sidebarTitle': 'Prompt 설정',
+  'prompt.about.menuLabel': '{{name}} 정보',
+  'prompt.about.version': '버전 {{version}}'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

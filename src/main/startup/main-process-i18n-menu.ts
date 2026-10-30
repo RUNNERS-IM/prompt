@@ -13,6 +13,7 @@ import {
   getAppMenuQuitHandlers,
   openSettingsFromSystemMenu,
   runUserInitiatedUpdateCheck,
+  showAboutFromSystemMenu,
   sendOpenCrashReport,
   sendOpenFeatureTour,
   sendOpenSetupGuide
@@ -42,6 +43,7 @@ export async function initializeMainProcessI18nAndMenu(): Promise<void> {
       recordCrashBreadcrumb('manual_reload_requested', { ignoreCache })
     },
     onOpenSettings: openSettingsFromSystemMenu,
+    onShowAbout: showAboutFromSystemMenu,
     toggleFocusedPageDevTools: (focused) => browserManager.toggleDevToolsOfFocusedPage(focused),
     onOpenSetupGuide: (targetWindow) => {
       recordCrashBreadcrumb('setup_guide_opened')

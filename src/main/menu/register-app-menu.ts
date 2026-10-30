@@ -12,6 +12,7 @@ import { createAppMenuQuitItems, type AppMenuQuitHandlers } from './app-menu-qui
 import { createAppMenuReloadAndDevToolsItems } from './app-menu-reload-devtools-items'
 import { createAppWindowMenu } from './app-menu-window'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_NEW_ISSUE_URL } from '../../shared/prompt-upstream'
+import { createPromptAboutItem } from './prompt-app-menu-about-item'
 
 export type AppearanceMenuState = {
   showTasksButton: boolean
@@ -45,6 +46,7 @@ type RegisterAppMenuOptions = AppMenuQuitHandlers & {
   toggleFocusedPageDevTools?: (focused: Electron.WebContents) => boolean
   // app.name stays stable for Keychain; menus use the per-branch development label.
   appMenuLabel?: string
+  onShowAbout?: () => void // Prompt: own About window (prompt-app-menu-about-item.ts)
 }
 
 function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
@@ -139,7 +141,7 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
   const macAppMenu: Electron.MenuItemConstructorOptions = {
     label: options.appMenuLabel ?? app.name,
     submenu: [
-      { role: 'about' },
+      createPromptAboutItem(options),
       checkForUpdatesItem,
       settingsItem,
       { type: 'separator' },
@@ -303,7 +305,7 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
         ? []
         : ([
             { type: 'separator' },
-            { role: 'about' },
+            createPromptAboutItem(options),
             checkForUpdatesItem
           ] satisfies Electron.MenuItemConstructorOptions[]))
     ]

@@ -1,0 +1,69 @@
+/* Prompt About window (design standard A). Window background matches Prompt's window colour:
+   #ececec light, #1e1e1e dark. The top strip is draggable because the title bar is hidden. */
+html,
+body {
+  margin: 0;
+  background: #ececec;
+  color: rgb(0 0 0 / 0.85);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html.dark,
+html.dark body {
+  background: #1e1e1e;
+  color: rgb(255 255 255 / 0.9);
+}
+
+.prompt-about-drag {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 28px;
+  -webkit-app-region: drag;
+}
+
+.prompt-about {
+  padding: 36px 20px 20px;
+}
+
+.prompt-about-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.prompt-about-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+}
+
+.prompt-about-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.prompt-about-version,
+.prompt-about-line,
+.prompt-about-hint {
+  margin: 2px 0 0;
+  font-size: 11px;
+  line-height: 14px;
+  color: rgb(0 0 0 / 0.5);
+}
+
+.prompt-about-line {
+  margin-top: 6px;
+}
+
+html.dark .prompt-about-version,
+html.dark .prompt-about-line,
+html.dark .prompt-about-hint {
+  color: rgb(255 255 255 / 0.55);
+}

@@ -24,6 +24,7 @@ import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormContr
 import { translate } from '@/i18n/i18n'
 import { DefaultWindowsProjectRuntimeSetting } from './DefaultWindowsProjectRuntimeSetting'
 import { defaultScopeHost } from '@/lib/default-creation-host'
+import { PromptRunnersAppsSettingsSection } from '../prompt-runners-apps/PromptRunnersAppsSettingsSection'
 
 export {
   createAutoSaveDelayDraftState,
@@ -282,6 +283,7 @@ export function GeneralPane({
           hasPrecedingSections={visibleSections.some((section) => section !== null)}
         />
       ) : null}
+      <PromptRunnersAppsSettingsSection />
     </div>
   )
 }
