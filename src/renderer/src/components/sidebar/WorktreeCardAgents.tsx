@@ -30,12 +30,13 @@ import { selectAgentRowsUnread } from './worktree-card-agent-ack-inputs'
 import { opensClaudeParentConversation } from '@/lib/claude-agent-row-view'
 import { withPromptClaudeModelRowMenu } from '@/components/prompt-claude-model-menu'
 import { withPromptSessionHoverCard } from '@/components/prompt-session-card/PromptSessionCard'
+import { withPromptSessionRowMenu } from './prompt-session-row-menu'
 
 const DashboardAgentRow = withPromptSessionHoverCard(
   withPromptClaudeModelRowMenu(DashboardAgentRowBase)
 )
 const CompactAgentRow = withPromptSessionHoverCard(
-  withPromptClaudeModelRowMenu(CompactAgentRowBase)
+  withPromptClaudeModelRowMenu(withPromptSessionRowMenu(CompactAgentRowBase))
 )
 
 export const SUPPRESS_WORKTREE_LIST_SCROLL_ADJUSTMENT_EVENT =

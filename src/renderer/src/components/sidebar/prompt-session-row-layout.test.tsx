@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/dashboard/useDashboardData'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { CompactAgentRow } from './worktree-card-compact-agent-row'
+import { withPromptSessionRowMenu } from './prompt-session-row-menu'
 import { promptSessionStatusLine } from './prompt-session-status-line'
 import {
   PromptSessionStateIcon,
@@ -38,7 +39,11 @@ function makeAgent(fields: {
   const state = fields.state ?? 'working'
   return {
     paneKey: 'tab-1:leaf-1',
-    tab: fields.tab ?? { id: 'tab-1', title: '✳ Claude Code', customTitle: '[PROMPT] 개선' },
+    tab: fields.tab ?? {
+      id: 'tab-1',
+      title: '✳ Claude Code',
+      customTitle: '[PROMPT] 개선'
+    },
     agentType: fields.agentType ?? 'claude',
     rowSource: fields.rowSource,
     state,
@@ -131,11 +136,99 @@ describe('Prompt session row layout', () => {
     )
     expect(container.textContent).not.toContain('general-purpose')
   })
+
+  it('swaps the time for a × on hover, on a session row only (2A)', () => {
+    const Row = withPromptSessionRowMenu(CompactAgentRow)
+    const render = (agent: DashboardAgentRowData): HTMLElement => {
+      const container = document.createElement('div')
+      document.body.appendChild(container)
+      root = createRoot(container)
+      act(() => {
+        root!.render(
+          <TooltipProvider>
+            <Row agent={agent} now={2000} onActivate={() => {}} promptLayout />
+          </TooltipProvider>
+        )
+      })
+      return container
+    }
+    const container = render(
+      makeAgent({
+        tab: { id: 'tab-1', worktreeId: 'wt-1', title: 'x', customTitle: '[PROMPT] 개선' }
+      })
+    )
+    const close = container.querySelector('[data-prompt-session-close]')
+    expect(close?.getAttribute('aria-label')).toBe('Close [PROMPT] 개선')
+    expect(container.querySelector('[data-prompt-session-menu="tab-1"]')).not.toBeNull()
+    const time = [...container.querySelectorAll('span')].find((el) =>
+      el.className.includes('tabular-nums')
+    )
+    expect(time?.className).toContain('group-hover/prompt-session-row:invisible')
+    act(() => root?.unmount())
+
+    const helper = render(
+      makeAgent({
+        rowSource: 'subagent',
+        tab: { id: 'tab-1', worktreeId: 'wt-1', title: 'x', customTitle: null }
+      })
+    )
+    expect(helper.querySelector('[data-prompt-session-close]')).toBeNull()
+    expect(helper.querySelector('[data-prompt-session-menu]')).toBeNull()
+  })
+
+  it('names a fresh session "New Session" until its first conversation (4A)', () => {
+    const fresh = renderRow(
+      makeAgent({
+        state: 'idle',
+        prompt: '',
+        tab: {
+          id: 'tab-1',
+          worktreeId: 'wt-1',
+          title: '✳ Claude Code',
+          customTitle: null
+        }
+      })
+    )
+    expect(fresh.querySelector('[data-prompt-session-name]')?.textContent).toBe('New Session')
+    act(() => root?.unmount())
+
+    const asked = renderRow(
+      makeAgent({
+        prompt: 'fix the sidebar',
+        tab: {
+          id: 'tab-1',
+          worktreeId: 'wt-1',
+          title: '✳ Claude Code',
+          customTitle: null
+        }
+      })
+    )
+    expect(asked.querySelector('[data-prompt-session-name]')?.textContent).toBe('fix the sidebar')
+  })
+
+  it('drops the role tail from a helper child row (5B)', () => {
+    const agent = {
+      ...makeAgent({}),
+      childRow: {
+        name: 'Prompt 간격 고치기',
+        displayState: 'working',
+        detail: { kind: 'role', agentType: 'general-purpose' },
+        recencyAt: 1000
+      }
+    } as unknown as DashboardAgentRowData
+    const container = renderRow(agent)
+    expect(container.textContent).toContain('Prompt 간격 고치기')
+    expect(container.textContent).not.toContain('general-purpose')
+    expect(container.textContent).not.toContain(' - ')
+  })
 })
 
 describe('promptSessionStatusLine', () => {
   it('says a finished turn is waiting for the person', () => {
-    const agent = makeAgent({ state: 'done', lastAssistantMessage: 'All set.' })
+    const agent = makeAgent({
+      state: 'done',
+      lastAssistantMessage: 'All set.'
+    })
     expect(promptSessionStatusLine(agent, 'done', 'All set.')).toBe('Done · waiting for you')
   })
 
