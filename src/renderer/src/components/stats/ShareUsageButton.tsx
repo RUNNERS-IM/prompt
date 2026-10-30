@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 import { ShareUsageCard, type ShareUsageCardProps } from './ShareUsageCard'
 import { getIntlLocale, translate } from '@/i18n/i18n'
+import { PROMPT_REPO_URL } from '../../../../shared/prompt-upstream'
 
 type ShareUsageButtonProps = ShareUsageCardProps
 
@@ -105,11 +106,11 @@ export function ShareUsageButton(props: ShareUsageButtonProps): React.JSX.Elemen
     }
 
     const lines = [
-      `My ${rangeLabel} ${providerName} usage via @orca_build`,
+      `My ${rangeLabel} ${providerName} usage via Prompt`,
       '',
       `${fmtTokens(totalTokens)} tokens · ${costStr} est. cost`,
       '',
-      'github.com/stablyai/orca'
+      PROMPT_REPO_URL.replace('https://', '')
     ]
     const url = `https://x.com/intent/post?text=${encodeURIComponent(lines.join('\n'))}`
     await window.api.shell.openUrl(url)

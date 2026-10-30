@@ -18,6 +18,8 @@ import { hasGitHubBackedProject, type PreflightIssue } from './landing-preflight
 import { useLandingPreflightRuntime } from './landing-preflight-runtime'
 import { useLandingOrcaStarState, type LandingStarState } from './landing-github-star-state'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { PROMPT_APP_NAME } from '../../../shared/prompt-brand'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_REPO_URL } from '../../../shared/prompt-upstream'
 
 type ShortcutItem = {
   id: string
@@ -26,7 +28,7 @@ type ShortcutItem = {
 }
 
 // Do not deep-link to /stargazers: GitHub 404s that page for users without repo write access.
-const ORCA_GITHUB_URL = 'https://github.com/stablyai/orca'
+const ORCA_GITHUB_URL = PROMPT_REPO_URL
 
 type StarButtonProps = {
   hasRepos: boolean
@@ -228,7 +230,9 @@ export default function Landing(): React.JSX.Element {
   )
   const hasProjects = repos.length > 0
   const hasGitHubProject = useMemo(() => hasGitHubBackedProject(repos), [repos])
-  const showGitHubSupportFooter = repos.length === 0 || hasGitHubProject
+  // Prompt: no "Star on GitHub" footer.
+  const showGitHubSupportFooter =
+    !PROMPT_BLOCK_UPSTREAM_SERVICES && (repos.length === 0 || hasGitHubProject)
 
   // Probe the active execution host, including remote runtimes.
   const { preflightIssues } = useLandingPreflightRuntime()
@@ -267,7 +271,8 @@ export default function Landing(): React.JSX.Element {
             />
           </div>
           <h1 className="text-4xl font-bold text-foreground tracking-tight">
-            {translate('auto.components.Landing.6ca6ff404e', 'ORCA')}
+            {/* Prompt: the app name comes from code so no catalog can show the old brand. */}
+            {PROMPT_APP_NAME}
           </h1>
 
           {preflightIssues.length > 0 && <PreflightBanner issues={preflightIssues} repos={repos} />}

@@ -10,6 +10,7 @@ import { track } from '@/lib/telemetry'
 import { translate } from '@/i18n/i18n'
 import { getLocalizedFeatureWallTileTitle } from './feature-wall-tour-localized-copy'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 export function PreviewMedia(props: {
   posterUrl: string | null
@@ -63,7 +64,8 @@ export function RelatedFeatures(props: {
   const items = workflow.relatedTileIds
     .map((id) => getFeatureWallMediaTile(id))
     .filter((tile): tile is NonNullable<typeof tile> => tile !== null)
-  if (items.length === 0) {
+  // Prompt: every related link opens Orca's docs site, so the list is not shown.
+  if (items.length === 0 || PROMPT_BLOCK_UPSTREAM_SERVICES) {
     return null
   }
   return (

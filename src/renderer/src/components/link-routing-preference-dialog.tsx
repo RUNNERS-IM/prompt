@@ -19,6 +19,7 @@ import {
   type LinkRoutingPreferenceDialogContextValue,
   type LinkRoutingPreferenceDialogOptions
 } from './link-routing-preference-dialog-context'
+import { PROMPT_REPO_URL } from '../../../shared/prompt-upstream'
 
 type LinkRoutingPreferenceDialogRequest = {
   id: number
@@ -94,7 +95,7 @@ export function LinkRoutingPreferenceDialogProvider({
     void requestPreference({
       openLinksInAppDefault: previewDefault === 'orca',
       preview: true,
-      url: 'https://github.com/stablyai/orca/pull/1234'
+      url: `${PROMPT_REPO_URL}/pull/1234`
     })
   }, [requestPreference])
 

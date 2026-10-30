@@ -23135,6 +23135,9 @@
     "sidebar": {
       "terminal": "Terminal",
       "openWorkspace": "Open a terminal"
+    },
+    "mobile": {
+      "directOnly": "Relay is off in Prompt. Your phone connects only on the same Wi-Fi as this computer or through Tailscale."
     }
   }
 }

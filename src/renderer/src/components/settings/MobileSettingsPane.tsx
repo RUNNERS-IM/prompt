@@ -10,10 +10,12 @@ import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
 import { MobileRelayBetaNotice } from './MobileRelayBetaNotice'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { PROMPT_MOBILE_DOWNLOAD_URL } from '../../../../shared/prompt-upstream'
 export { getMobileSettingsPaneSearchEntries }
 
-const ORCA_IOS_APP_STORE_URL = 'https://apps.apple.com/app/orca-ide/id6766130217'
-const ORCA_ANDROID_APK_URL = 'https://www.onorca.dev/download/android'
+// Prompt: Prompt mobile is not on Orca's store listings; both links open Prompt's releases.
+const ORCA_IOS_APP_STORE_URL = PROMPT_MOBILE_DOWNLOAD_URL
+const ORCA_ANDROID_APK_URL = PROMPT_MOBILE_DOWNLOAD_URL
 
 export function MobileSettingsPane(): React.JSX.Element {
   const showMobileButton = useAppStore((s) => s.settings?.showMobileButton !== false)

@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, app } from 'electron'
+import { BrowserWindow, Menu, app, shell } from 'electron'
 import {
   formatKeybindingList,
   getEffectiveKeybindingsForAction,
@@ -11,6 +11,7 @@ import { createAppMenuSelectionItem, resolveNativeEditTarget } from './app-menu-
 import { createAppMenuQuitItems, type AppMenuQuitHandlers } from './app-menu-quit-item'
 import { createAppMenuReloadAndDevToolsItems } from './app-menu-reload-devtools-items'
 import { createAppWindowMenu } from './app-menu-window'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_NEW_ISSUE_URL } from '../../shared/prompt-upstream'
 
 export type AppearanceMenuState = {
   showTasksButton: boolean
@@ -126,6 +127,15 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
     click: (_menuItem, window) => onOpenCrashReport(window)
   }
 
+  // Prompt: feedback opens a new issue in Prompt's GitHub repository (same place as the sidebar dialog).
+  const sendFeedbackItem: Electron.MenuItemConstructorOptions = {
+    label: translateMain(
+      'auto.components.sidebar.SidebarSettingsHelpMenu.4cf5b868d7',
+      'Send Feedback'
+    ),
+    click: () => void shell.openExternal(`${PROMPT_NEW_ISSUE_URL}?labels=feedback`)
+  }
+
   const macAppMenu: Electron.MenuItemConstructorOptions = {
     label: options.appMenuLabel ?? app.name,
     submenu: [
@@ -226,12 +236,17 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
         checked: appearance.showAutomationsButton,
         click: () => onToggleAppearance('showAutomationsButton')
       },
-      {
-        label: translateMain('menu.showMobileButton', 'Show Orca Mobile Button'),
-        type: 'checkbox',
-        checked: appearance.showMobileButton,
-        click: () => onToggleAppearance('showMobileButton')
-      },
+      // Prompt: the mobile button is hidden by default and its menu toggle is not offered.
+      ...(PROMPT_BLOCK_UPSTREAM_SERVICES
+        ? []
+        : ([
+            {
+              label: translateMain('menu.showMobileButton', 'Show Orca Mobile Button'),
+              type: 'checkbox',
+              checked: appearance.showMobileButton,
+              click: () => onToggleAppearance('showMobileButton')
+            }
+          ] satisfies Electron.MenuItemConstructorOptions[])),
       {
         label: translateMain('menu.showTitlebarAppName', 'Show Titlebar App Name'),
         type: 'checkbox',
@@ -279,6 +294,7 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
   const helpMenu: Electron.MenuItemConstructorOptions = {
     label: translateMain('menu.help', 'Help'),
     submenu: [
+      ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [sendFeedbackItem] : []),
       crashReportItem,
       { type: 'separator' },
       featureTourItem,

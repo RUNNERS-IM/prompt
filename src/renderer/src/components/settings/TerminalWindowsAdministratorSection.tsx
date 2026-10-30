@@ -19,6 +19,7 @@ import { useAppStore } from '../../store'
 import { translate } from '@/i18n/i18n'
 import { isWebClientLocation } from '@/lib/web-client-location'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { PROMPT_REPO_URL } from '../../../../shared/prompt-upstream'
 
 export function TerminalWindowsAdministratorSection(): React.JSX.Element {
   const [administrator, setAdministrator] = useState<boolean | null | undefined>()
@@ -237,12 +238,7 @@ export function TerminalWindowsAdministratorSection(): React.JSX.Element {
               <Button
                 variant="link"
                 size="sm"
-                onClick={(event) =>
-                  openAppHttpLink(
-                    'https://www.onorca.dev/docs/terminal#windows-administrator-mode',
-                    { event }
-                  )
-                }
+                onClick={(event) => openAppHttpLink(PROMPT_REPO_URL, { event })}
               >
                 {translate(
                   'settings.terminal.windows.administratorDocumentation',

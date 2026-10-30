@@ -10,8 +10,9 @@ import { isRenderableProjectViewLayout } from '../../../../shared/github/project
 import type { GitHubProjectViewSummary } from '../../../../shared/github/project-types'
 import type { GitHubProjectViewError } from '../../../../shared/github/project-result-types'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import { PROMPT_NEW_ISSUE_URL } from '../../../../shared/prompt-upstream'
 
-const ORCA_FEATURE_REQUEST_URL = 'https://github.com/stablyai/orca/issues/new'
+const ORCA_FEATURE_REQUEST_URL = PROMPT_NEW_ISSUE_URL
 
 export function ProjectViewTabStrip({
   views,

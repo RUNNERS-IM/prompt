@@ -35,6 +35,11 @@ import type * as SidebarFeedbackDialogModule from './SidebarFeedbackDialog'
 import { translate } from '@/i18n/i18n'
 import { getUpdateCheckClickOptions, getUpdateCheckHint } from '@/lib/update-check-click-options'
 import { openAppHttpLink } from '@/lib/app-http-link-open'
+import {
+  PROMPT_BLOCK_UPSTREAM_SERVICES,
+  PROMPT_RELEASES_URL,
+  PROMPT_REPO_URL
+} from '../../../../shared/prompt-upstream'
 
 // Keep feedback off the boot graph; menu warming and selection share the same lazy module entry.
 const loadSidebarFeedbackDialog = (): Promise<typeof SidebarFeedbackDialogModule> =>
@@ -46,8 +51,10 @@ const SidebarFeedbackDialog = lazyWithRetry(
 )
 
 const DOCS_URL = 'https://www.onorca.dev/docs'
-const CHANGELOG_URL = 'https://onorca.dev/changelog'
-const GITHUB_URL = 'https://github.com/stablyai/orca'
+const CHANGELOG_URL = PROMPT_RELEASES_URL
+const GITHUB_URL = PROMPT_REPO_URL
+// Prompt: Orca's docs site, Discord and X are hidden; GitHub and Changelog point at Prompt's repository.
+const SHOW_ORCA_COMMUNITY_LINKS = !PROMPT_BLOCK_UPSTREAM_SERVICES
 const DISCORD_URL = 'https://discord.gg/fzjDKHxv8Q'
 const X_URL = 'https://x.com/orca_build'
 const NO_UPDATE_CHECK_MODIFIERS = {
@@ -284,14 +291,16 @@ export function SidebarSettingsHelpMenu(): React.JSX.Element {
                 'Onboarding'
               )}
             </DropdownMenuItem>
-            <ExternalMenuItem
-              label={translate(
-                'auto.components.sidebar.SidebarSettingsHelpMenu.cdc87f897e',
-                'Docs'
-              )}
-              url={DOCS_URL}
-              icon={<BookOpen className="size-3.5" />}
-            />
+            {SHOW_ORCA_COMMUNITY_LINKS ? (
+              <ExternalMenuItem
+                label={translate(
+                  'auto.components.sidebar.SidebarSettingsHelpMenu.cdc87f897e',
+                  'Docs'
+                )}
+                url={DOCS_URL}
+                icon={<BookOpen className="size-3.5" />}
+              />
+            ) : null}
             <ExternalMenuItem
               label={translate(
                 'auto.components.sidebar.SidebarSettingsHelpMenu.5f83d86d92',
@@ -309,16 +318,23 @@ export function SidebarSettingsHelpMenu(): React.JSX.Element {
               url={GITHUB_URL}
               icon={<Github className="size-3.5" />}
             />
-            <DropdownMenuItem onSelect={() => openAppHttpLink(DISCORD_URL)}>
-              <DiscordIcon />
-              {translate('auto.components.sidebar.SidebarSettingsHelpMenu.eb9884e55b', 'Discord')}
-              <ExternalLink className="ml-auto size-3 text-muted-foreground" />
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => openAppHttpLink(X_URL)}>
-              <XIcon />
-              {translate('auto.components.sidebar.SidebarSettingsHelpMenu.c4f8e1b72a', 'X')}
-              <ExternalLink className="ml-auto size-3 text-muted-foreground" />
-            </DropdownMenuItem>
+            {SHOW_ORCA_COMMUNITY_LINKS ? (
+              <>
+                <DropdownMenuItem onSelect={() => openAppHttpLink(DISCORD_URL)}>
+                  <DiscordIcon />
+                  {translate(
+                    'auto.components.sidebar.SidebarSettingsHelpMenu.eb9884e55b',
+                    'Discord'
+                  )}
+                  <ExternalLink className="ml-auto size-3 text-muted-foreground" />
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => openAppHttpLink(X_URL)}>
+                  <XIcon />
+                  {translate('auto.components.sidebar.SidebarSettingsHelpMenu.c4f8e1b72a', 'X')}
+                  <ExternalLink className="ml-auto size-3 text-muted-foreground" />
+                </DropdownMenuItem>
+              </>
+            ) : null}
             <DropdownMenuSeparator />
             <DropdownMenuItem
               disabled={updateStatus.state === 'checking' || updateStatus.state === 'downloading'}

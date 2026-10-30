@@ -3,8 +3,9 @@ import { Check, ExternalLink, Loader2, Star, X } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_REPO_URL, promptOr } from '../../../../shared/prompt-upstream'
 
-const ORCA_REPO_URL = 'https://github.com/stablyai/orca'
+const ORCA_REPO_URL = promptOr(PROMPT_REPO_URL, 'https://github.com/stablyai/orca')
 type StarNagMode = 'gh' | 'web'
 type StarNagToastStatus = 'idle' | 'busy' | 'starred' | 'opened'
 

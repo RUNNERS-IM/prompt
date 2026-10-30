@@ -5,6 +5,7 @@ import type {
 import type { CodexUsageDailyPoint, CodexUsageSummary } from '../../../../shared/codex-usage-types'
 import { getIntlLocale, translate } from '@/i18n/i18n'
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
+import { PROMPT_REPO_URL } from '../../../../shared/prompt-upstream'
 
 export type ClaudeShareData = {
   provider: 'claude'
@@ -222,10 +223,7 @@ export function CardFooter(props: {
             marginLeft: 5
           }}
         >
-          {translate(
-            'auto.components.stats.share.card.utils.19f4b4dc75',
-            'github.com/stablyai/orca'
-          )}
+          {PROMPT_REPO_URL.replace('https://', '')}
         </span>
       </div>
     </div>

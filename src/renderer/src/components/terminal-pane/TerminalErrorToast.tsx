@@ -20,6 +20,7 @@ import {
   describeSshSignInRequiredTerminalError,
   isSshSignInRequiredTerminalError
 } from './terminal-ssh-sign-in-error'
+import { PROMPT_ISSUES_URL } from '../../../../shared/prompt-upstream'
 
 const SSH_PREFIX = 'SSH connection is not active'
 // Produced by pty-connection.ts reportError() when a PTY reattach can't reach its SSH host.
@@ -350,10 +351,7 @@ export function TerminalErrorToast({
                 'auto.components.terminal.pane.TerminalErrorToast.5c8ce20be6',
                 'If this persists, please'
               )}{' '}
-              <a
-                href="https://github.com/stablyai/orca/issues"
-                style={{ color: 'inherit', textDecoration: 'underline' }}
-              >
+              <a href={PROMPT_ISSUES_URL} style={{ color: 'inherit', textDecoration: 'underline' }}>
                 {translate(
                   'auto.components.terminal.pane.TerminalErrorToast.a7e2fd2699',
                   'file an issue'
