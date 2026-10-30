@@ -29,9 +29,14 @@ import { activateRetainedAgentRow } from './activate-retained-agent-row'
 import { selectAgentRowsUnread } from './worktree-card-agent-ack-inputs'
 import { opensClaudeParentConversation } from '@/lib/claude-agent-row-view'
 import { withPromptClaudeModelRowMenu } from '@/components/prompt-claude-model-menu'
+import { withPromptSessionHoverCard } from '@/components/prompt-session-card/PromptSessionCard'
 
-const DashboardAgentRow = withPromptClaudeModelRowMenu(DashboardAgentRowBase)
-const CompactAgentRow = withPromptClaudeModelRowMenu(CompactAgentRowBase)
+const DashboardAgentRow = withPromptSessionHoverCard(
+  withPromptClaudeModelRowMenu(DashboardAgentRowBase)
+)
+const CompactAgentRow = withPromptSessionHoverCard(
+  withPromptClaudeModelRowMenu(CompactAgentRowBase)
+)
 
 export const SUPPRESS_WORKTREE_LIST_SCROLL_ADJUSTMENT_EVENT =
   'orca-suppress-worktree-list-scroll-adjustment'

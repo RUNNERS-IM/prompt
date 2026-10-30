@@ -7,6 +7,7 @@ import { getLocalExecutionHostLabel } from '../../../../shared/execution-host'
 import { useAppStore } from '@/store'
 import { AgentAwakeSetting } from './AgentAwakeSetting'
 import { AgentCacheTimerSection } from './AgentCacheTimerSection'
+import { PromptDefaultModelSetting } from '../prompt-session-card/PromptDefaultModelSetting'
 import { AgentRuntimeSetting } from './AgentRuntimeSetting'
 import { CodexTerminalServerIsolationSetting } from './CodexTerminalServerIsolationSetting'
 import { CodexHistorySharingSetting } from './CodexHistorySharingSetting'
@@ -117,6 +118,7 @@ export function AgentsPane({
         {!isPairedWebClientWindow() ? (
           <AgentAwakeSetting settings={settings} updateSettings={updateSettings} />
         ) : null}
+        <PromptDefaultModelSetting settings={settings} updateSettings={updateSettings} />
         <AgentCacheTimerSection settings={settings} updateSettings={updateSettings} />
       </section>
     </div>

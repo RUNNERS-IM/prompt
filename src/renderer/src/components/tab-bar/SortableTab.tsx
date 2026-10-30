@@ -51,6 +51,8 @@ export type SortableTabProps = {
   agent: TerminalAgent | null
   /** Rendered after the title, e.g. the focused pane's model badge. */
   titleAccessory?: React.ReactNode
+  /** Extra rows for the hover card, e.g. the Prompt session summary. */
+  hoverDetails?: React.ReactNode
   unifiedTabId: string
   groupId: string
   tabCount: number
@@ -86,6 +88,7 @@ export default function SortableTab({
   tab,
   agent: tabAgent,
   titleAccessory,
+  hoverDetails,
   unifiedTabId,
   groupId,
   tabCount,
@@ -360,6 +363,7 @@ export default function SortableTab({
         ) : (
           <TabHoverCard
             title={displayTitle}
+            details={hoverDetails}
             programName={
               tabAgent
                 ? getAgentLabel(tabAgent)

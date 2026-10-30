@@ -24,6 +24,7 @@ import { isTerminalLeafId, makePaneKey, parsePaneKey } from '../../../shared/sta
 import type { DashboardAgentRow } from './dashboard/useDashboardData'
 import { sendNativeChatMessageVerified } from './native-chat/native-chat-runtime-send'
 import { createClaudeModelSwitchConfirmationObserver } from './native-chat/claude-model-switch-confirmation'
+import { usePromptVisibleModelLabel } from './prompt-session-card/prompt-default-model'
 
 const CLAUDE_MODELS = CLAUDE_SESSION_OPTION_CATALOG.models
 
@@ -194,7 +195,7 @@ export function PromptClaudeModelRowMenu({
   )
 }
 
-/** Small mono badge beside a terminal tab title showing the focused pane's Claude model. */
+/** Small mono badge beside a terminal tab title when the focused pane's Claude model is not the default. */
 export function PromptClaudeModelTabBadge({ tabId }: { tabId: string }): React.JSX.Element | null {
   useUiLanguageRevision()
   const [open, setOpen] = useState(false)
@@ -207,7 +208,9 @@ export function PromptClaudeModelTabBadge({ tabId }: { tabId: string }): React.J
     const entry = paneKey ? s.agentStatusByPaneKey[paneKey] : undefined
     return entry?.agentType === 'claude' ? (entry.model?.trim() ?? '') : ''
   })
-  if (!paneKey || !model) {
+  // The default model would only repeat on every tab; the tab's right-click menu still switches it.
+  const shownModel = usePromptVisibleModelLabel(model)
+  if (!paneKey || !shownModel) {
     return null
   }
   return (

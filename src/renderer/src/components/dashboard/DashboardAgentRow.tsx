@@ -35,6 +35,7 @@ import {
 } from '@/components/agent-child-row-text'
 import { translate } from '@/i18n/i18n'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
+import { usePromptVisibleModelLabel } from '@/components/prompt-session-card/prompt-default-model'
 
 function formatTimeAgo(ts: number, now: number): string {
   const delta = now - ts
@@ -162,6 +163,8 @@ const DashboardAgentRow = React.memo(function DashboardAgentRow({
       agent.childRow?.displayState ?? asDotState(agent.state, agent.entry.workingMode)
     )
   const model = agent.entry.model?.trim() ?? ''
+  // Prompt: the label only shows when the session runs a model other than the default.
+  const shownModel = usePromptVisibleModelLabel(model)
   const isMonitoring = agent.state === 'working' && agent.entry.workingMode === 'monitoring'
   const isWorking = agent.state === 'working' && !isMonitoring
   // Show tool details only for working/approval waits; ended or monitoring turns have stale last-tool metadata.
@@ -324,7 +327,7 @@ const DashboardAgentRow = React.memo(function DashboardAgentRow({
         >
           {displayLabel}
         </span>
-        {model && (
+        {shownModel && (
           <span
             className={cn(
               'max-w-24',
@@ -334,9 +337,9 @@ const DashboardAgentRow = React.memo(function DashboardAgentRow({
                 : 'shrink-0',
               'truncate font-mono text-[10px] text-muted-foreground/70'
             )}
-            title={model}
+            title={shownModel}
           >
-            {model}
+            {shownModel}
           </span>
         )}
         {/* Why: "+N" badge shows the hidden child count when collapsed; redundant once children are expanded below. */}

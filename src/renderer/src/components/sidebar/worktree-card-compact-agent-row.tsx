@@ -25,6 +25,7 @@ import {
 } from '../../../../shared/program-status/presentation'
 import { resolveRowProgramStatus } from '@/lib/program-status/agent-row-presentation'
 import { promptSessionRowText } from './prompt-session-row-name'
+import { usePromptVisibleModelLabel } from '@/components/prompt-session-card/prompt-default-model'
 
 function getCompactAgentPrimary(
   agent: DashboardAgentRowData,
@@ -160,7 +161,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     getCompactAgentLineOrder(agent, dotState, primary, secondary)
   )
   const rowTitle = `${leadingText}${trailingText ? ` - ${trailingText}` : ''}`
-  const model = agent.entry.model?.trim() ?? ''
+  // Prompt: the label only shows when the session runs a model other than the default.
+  const model = usePromptVisibleModelLabel(agent.entry.model)
   const shortTime = getCompactAgentTime(agent, now)
   const cacheTimer = usePromptCacheCountdownForPane(agent.paneKey, cacheTimerActive)
 

@@ -22592,6 +22592,24 @@
       "add": "컴퓨터 추가…",
       "share": "이 컴퓨터 공유…",
       "shareTitle": "이 컴퓨터 공유"
+    },
+    "defaultModel": {
+      "title": "기본 모델",
+      "description": "탭과 왼쪽 목록에는 이 모델과 다른 모델을 쓰는 세션에만 모델 이름이 보입니다. 탭이나 줄에 마우스를 올리면 모델을 볼 수 있습니다."
+    },
+    "sessionCard": {
+      "model": "모델",
+      "status": "상태",
+      "task": "하는 일",
+      "folder": "폴더",
+      "subagents": "보조",
+      "subagentsRunning": "{{count}}개 돌아가는 중",
+      "minutes": "{{m}}분",
+      "hours": "{{h}}시간",
+      "hoursMinutes": "{{h}}시간 {{m}}분",
+      "justNow": "{{status}} · 방금",
+      "ongoing": "{{status}} · {{duration}}째",
+      "ago": "{{status}} · {{duration}} 전"
     }
   }
 }

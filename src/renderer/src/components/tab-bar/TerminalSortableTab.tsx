@@ -2,6 +2,7 @@ import { useTabAgent } from '@/lib/use-tab-agent'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import SortableTab, { type SortableTabProps } from './SortableTab'
 import { PromptClaudeModelTabBadge } from '../prompt-claude-model-menu'
+import { PromptTabSessionDetails } from '../prompt-session-card/PromptSessionCard'
 
 type TerminalSortableTabProps = Omit<SortableTabProps, 'tab' | 'agent'> & { tab: TerminalTab }
 
@@ -13,6 +14,7 @@ export default function TerminalSortableTab(props: TerminalSortableTabProps): Re
       {...props}
       agent={agent}
       titleAccessory={<PromptClaudeModelTabBadge tabId={props.tab.id} />}
+      hoverDetails={<PromptTabSessionDetails tab={props.tab} />}
     />
   )
 }

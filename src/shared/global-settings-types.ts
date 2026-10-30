@@ -302,6 +302,8 @@ export type GlobalSettings = GlobalSettingsBase & {
   promptCacheTimerEnabled: boolean
   /** Prompt-cache TTL (ms); only 300000 (5 min standard) or 3600000 (1 hr, extended-TTL plans). */
   promptCacheTtlMs: number
+  /** Prompt: Claude model id most sessions run; tabs and sidebar rows show a model label only when it differs. */
+  promptDefaultClaudeModel?: string
   /** Why: durable main-owned pref so Orca can prepare shared ~/.codex before the renderer hydrates. */
   codexManagedAccounts: CodexManagedAccount[]
   activeCodexManagedAccountId: string | null

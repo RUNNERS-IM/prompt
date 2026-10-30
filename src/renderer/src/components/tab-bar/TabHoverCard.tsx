@@ -8,6 +8,8 @@ export function TabHoverCard({
   icon,
   programName,
   description,
+  details,
+  side = 'bottom',
   alert
 }: {
   children: ReactNode
@@ -15,6 +17,9 @@ export function TabHoverCard({
   icon: ReactNode
   programName: string
   description?: string
+  /** Prompt: session summary (model, status, task, folder) under the program row. */
+  details?: ReactNode
+  side?: 'bottom' | 'right'
   /** Controls below the program row; the card then stays open under the pointer. */
   alert?: ReactNode | ((dismiss: () => void) => ReactNode)
 }): React.JSX.Element {
@@ -38,9 +43,9 @@ export function TabHoverCard({
       <TooltipContent
         variant={interactive ? 'tab-preview-interactive' : 'tab-preview'}
         showArrow={false}
-        side="bottom"
+        side={side}
         align="start"
-        sideOffset={0}
+        sideOffset={side === 'right' ? 6 : 0}
         data-tab-hover-card="true"
         // Why: React bubbles portal events to the tab strip, whose handlers would act on the tab.
         onContextMenu={stopTabStripEvent}
@@ -65,6 +70,7 @@ export function TabHoverCard({
             </span>
             <span className="min-w-0 break-all">{programName}</span>
           </div>
+          {details}
           {typeof alert === 'function' ? alert(dismiss) : alert}
         </div>
       </TooltipContent>

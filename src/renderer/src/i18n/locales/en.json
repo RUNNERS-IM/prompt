@@ -23149,6 +23149,24 @@
       "add": "Add computer…",
       "share": "Share this computer…",
       "shareTitle": "Share this computer"
+    },
+    "defaultModel": {
+      "title": "Default model",
+      "description": "Tabs and sidebar rows show a model name only when a session runs a different model. Hover a tab or row to see its model."
+    },
+    "sessionCard": {
+      "model": "Model",
+      "status": "Status",
+      "task": "Task",
+      "folder": "Folder",
+      "subagents": "Subagents",
+      "subagentsRunning": "{{count}} running",
+      "minutes": "{{m}}m",
+      "hours": "{{h}}h",
+      "hoursMinutes": "{{h}}h {{m}}m",
+      "justNow": "{{status}} · just now",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · {{duration}} ago"
     }
   }
 }
