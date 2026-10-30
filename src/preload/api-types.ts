@@ -72,6 +72,7 @@ import type { LocalhostWorktreeLabelsApi, WorkspacePortsApi } from './api/worksp
 import type { LinkPreviewApi } from './api/link-preview-api'
 import type { WorkspaceSessionApi } from './api/workspace-session-api'
 import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/worktree-api'
+import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
 type Merged<T> = { [K in keyof T]: T[K] }
@@ -175,6 +176,7 @@ export type PreloadApi = {
   agentStatus: AgentStatusApi
   mobile: MobileApi
   speech: SpeechApi
+  promptClaudeSessionTitle: PromptClaudeSessionTitleApi
 }
 
 export type {

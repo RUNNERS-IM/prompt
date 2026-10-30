@@ -24,6 +24,7 @@ import {
   installMainWindowAgentStatusListeners
 } from './main-window-agent-status'
 import { mainProcessState as state } from './main-process-state'
+import { installPromptClaudeRenameRuntime } from './prompt-claude-rename-runtime'
 import {
   clearExpectedRendererReload,
   markExpectedRendererReload,
@@ -227,6 +228,7 @@ export function openMainWindow(options: { revealOnDidFinishLoad?: boolean } = {}
         minIntervalMs: AGENT_STATE_CRASH_BREADCRUMB_MIN_INTERVAL_MS
       })
   })
+  installPromptClaudeRenameRuntime()
   window.on('closed', () => {
     if (state.mainWindow === window) {
       state.mainWindow = null

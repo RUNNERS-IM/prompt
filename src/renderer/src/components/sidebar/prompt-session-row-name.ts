@@ -3,14 +3,18 @@ import { formatAgentTypeLabel } from '@/lib/agent-status'
 import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 
-/** The name its terminal tab shows: a set title (create --title, rename) or the live title without the agent glyph. */
+/** The name its terminal tab shows: a set title (create --title, rename), the agent session's title, or the live title without the agent glyph. */
 export function promptTerminalTabName(
-  tab: Pick<TerminalTab, 'title' | 'customTitle'> | undefined
+  tab: Pick<TerminalTab, 'title' | 'customTitle' | 'aiVaultTitle'> | undefined
 ): string {
   if (!tab) {
     return ''
   }
-  return (tab.customTitle?.trim() || stripLeadingAgentTitleDecoration(tab.title ?? '').trim()) ?? ''
+  return (
+    tab.customTitle?.trim() ||
+    tab.aiVaultTitle?.title.trim() ||
+    stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
+  )
 }
 
 /**
