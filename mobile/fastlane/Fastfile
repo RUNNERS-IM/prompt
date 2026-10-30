@@ -10,12 +10,13 @@ default_platform(:ios)
 MOBILE_ROOT = File.expand_path("..", __dir__)
 # Fastlane runs from mobile/fastlane regardless of the caller’s working directory.
 APP_CONFIG_PATH = File.join(MOBILE_ROOT, "app.json")
-WORKSPACE = File.join(MOBILE_ROOT, "ios", "Orca.xcworkspace")
+WORKSPACE = File.join(MOBILE_ROOT, "ios", "Prompt.xcworkspace")
 BUILD_OUTPUT_DIRECTORY = File.join(MOBILE_ROOT, "build")
-SCHEME = "Orca"
-BUNDLE_ID = "com.stably.orca.mobile"
-TESTFLIGHT_GROUPS = ["peeps"].freeze
-DEFAULT_TESTFLIGHT_CHANGELOG = "Latest Orca Mobile updates and fixes.".freeze
+SCHEME = "Prompt"
+BUNDLE_ID = ENV.fetch("IOS_BUNDLE_IDENTIFIER", "im.runners.prompt.mobile")
+# Prompt: comma-separated external TestFlight groups; empty skips external distribution.
+TESTFLIGHT_GROUPS = ENV.fetch("TESTFLIGHT_GROUPS", "").split(",").map(&:strip).reject(&:empty?).freeze
+DEFAULT_TESTFLIGHT_CHANGELOG = "Latest Prompt updates and fixes.".freeze
 TESTFLIGHT_PROCESSING_TIMEOUT_SECONDS = 20 * 60
 
 # Only terminal App Store states close TestFlight trains; in-review/processing states still accept builds.
@@ -139,10 +140,10 @@ platform :ios do
     config.fetch("expo").fetch("ios")["buildNumber"] = build_number.to_s
     write_mobile_app_config(config)
 
-    UI.message("Prepared Orca Mobile iOS #{version} (#{build_number})")
+    UI.message("Prepared Prompt iOS #{version} (#{build_number})")
   end
 
-  desc "Build, sign, and upload Orca Mobile to App Store Connect / TestFlight"
+  desc "Build, sign, and upload Prompt to App Store Connect / TestFlight"
   lane :build_and_upload do
     api_key = app_store_connect_api_key_from_env
 
@@ -175,7 +176,7 @@ platform :ios do
         },
       },
       output_directory: BUILD_OUTPUT_DIRECTORY,
-      output_name: "Orca.ipa",
+      output_name: "Prompt.ipa",
       clean: true,
     )
 
@@ -193,6 +194,11 @@ platform :ios do
     build_number = options[:build_number].to_s.strip
     UI.user_error!("version is required") if version.empty?
     UI.user_error!("build_number is required") if build_number.empty?
+
+    if TESTFLIGHT_GROUPS.empty?
+      UI.important("TESTFLIGHT_GROUPS is empty; skipping external TestFlight distribution.")
+      next
+    end
 
     api_key = app_store_connect_api_key_from_env
     app = Spaceship::ConnectAPI::App.find(BUNDLE_ID)
@@ -227,7 +233,7 @@ platform :ios do
     )
   end
 
-  desc "Build, upload, and distribute Orca Mobile to external TestFlight testers"
+  desc "Build, upload, and distribute Prompt to external TestFlight testers"
   lane :release do
     build_and_upload
 

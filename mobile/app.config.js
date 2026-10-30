@@ -1,5 +1,8 @@
 // Bare expo-notifications defaults to sandbox entitlements while non-dev push-token.ts reports production, silently losing TestFlight/App Store pushes.
 // Derive APNs mode from release workflow env; Expo still supplies app.json, including Fastlane version/buildNumber rewrites, for everything else.
+const fs = require('node:fs')
+const path = require('node:path')
+
 const APS_ENVIRONMENT =
   process.env.ORCA_IOS_APS_ENVIRONMENT === 'production' ? 'production' : 'development'
 
@@ -12,7 +15,11 @@ module.exports = ({ config }) => ({
     ...config.ios,
     entitlements: { ...config.ios?.entitlements, 'aps-environment': APS_ENVIRONMENT }
   },
-  plugins: (config.plugins ?? []).map((plugin) =>
+  // Prompt: upstream's google-services.json is Orca's Firebase project; without our own file Android builds skip FCM.
+  android: fs.existsSync(path.join(__dirname, config.android?.googleServicesFile ?? ''))
+    ? config.android
+    : { ...config.android, googleServicesFile: undefined },
+  plugins: [...(config.plugins ?? []), './plugins/android-release-signing.js'].map((plugin) =>
     plugin === 'expo-notifications'
       ? [
           'expo-notifications',
