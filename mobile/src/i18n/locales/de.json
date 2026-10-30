@@ -97,7 +97,7 @@
       "connecting": "Verbindung wird hergestellt…",
       "invalidPairingCode": "Kein gültiger Kopplungscode – vom Computer kopieren und erneut einfügen",
       "invalidQrCode": "Kein gültiger Orca-QR-Code",
-      "downloadQrCode": "Das ist der Download-Code. Scanne den Kopplungscode in Schritt 2 auf deinem Computer.",
+      "downloadQrCode": "Das ist der Download-Code. Scannen Sie den Kopplungscode in Schritt 2 auf Ihrem Computer.",
       "openDesktopStep": "Orca auf dem Computer öffnen",
       "openMobileSettingsStep": "Einstellungen → Mobil öffnen",
       "openSettings": "Einstellungen öffnen",
@@ -1022,7 +1022,7 @@
       "disconnected": "Getrennt",
       "hostFallback": "Host",
       "hostOffline": "{{host}} ist offline",
-      "hostOfflineDetail": "Prüfen, ob der Computer wach ist, Orca läuft und du angemeldet bist",
+      "hostOfflineDetail": "Prüfen, ob der Computer wach ist, Orca läuft und Sie angemeldet sind",
       "labelWithHint": "{{label}} – {{hint}}",
       "pairingInvalid": "Kopplung ungültig – erneut mit dem Computer koppeln",
       "rePairDetail": "Erneut mit dem Computer koppeln",
@@ -1556,7 +1556,7 @@
       "codexFinished": "Codex ist fertig",
       "now": "jetzt",
       "testsPassing": "Tests bestanden.",
-      "waitingOnYou": "Wartet auf dich."
+      "waitingOnYou": "Wartet auf Sie."
     },
     "onboardingPage": {
       "enableAgentNotifications": "Agenten-Benachrichtigungen aktivieren",
@@ -1565,7 +1565,7 @@
       "notNow": "Jetzt nicht",
       "notificationsDescription": "Auf diesem Smartphone benachrichtigt werden, wenn ein Agent fertig ist oder wartet – auch wenn die App gerade nicht genutzt wird.",
       "notificationsDisclosure": "Zustellung über den Push-Dienst von Orca, sobald der Computer 3 Minuten lang inaktiv ist. Jederzeit in den Einstellungen änderbar.",
-      "notificationsTitle": "Nicht verpassen, wenn ein Agent dich braucht",
+      "notificationsTitle": "Nicht verpassen, wenn ein Agent Sie braucht",
       "openInChatUi": "Sitzungen in der Chat-Oberfläche öffnen",
       "openInTerminal": "Sitzungen im Terminal öffnen",
       "sessionViewDescription": "Festlegen, ob unterstützte Agenten-Sitzungen auf diesem Gerät im Terminal oder in der Chat-Oberfläche geöffnet werden. Einen Sitzungs-Tab gedrückt halten, um die Ansicht zu wechseln, oder den Standard später in den Einstellungen ändern.",
@@ -2526,7 +2526,7 @@
     },
     "useSessionTerminalSendActions": {
       "inputTooLarge": "Eingabe zu groß (max. 256 KiB)",
-      "liveInputInterrupted": "Live-Eingabe unterbrochen. Eingabefeld geleert; prüfe das Terminal, bevor du fortfährst."
+      "liveInputInterrupted": "Live-Eingabe unterbrochen. Eingabefeld geleert; prüfen Sie das Terminal, bevor Sie fortfahren."
     },
     "useStartup": {
       "wakeAgents": "Orca auf dem Host öffnen, um schlafende Agenten zu wecken."
@@ -3443,7 +3443,7 @@
     },
     "listSurface": {
       "connectLinearButton": "Linear verbinden",
-      "connectLinearMessage": "Dir zugewiesene Linear-Issues direkt unter „Aufgaben“ durchsuchen und die Arbeit daran starten.",
+      "connectLinearMessage": "Ihnen zugewiesene Linear-Issues direkt unter „Aufgaben“ durchsuchen und die Arbeit daran starten.",
       "connectLinearTitle": "Linear-Konto verbinden",
       "jiraStatusFailed": "Jira-Status konnte nicht gelesen werden.",
       "updateDesktopMessage": "Diese mobile Aufgabenansicht benötigt eine neuere Version von Orca auf dem Desktop.",
@@ -3458,7 +3458,7 @@
       "closedState": "Geschlossen",
       "completedState": "Abgeschlossen",
       "createdState": "Erstellt",
-      "githubAssignedIssuesDescription": "Offene Issues, die dir zugewiesen sind",
+      "githubAssignedIssuesDescription": "Offene Issues, die Ihnen zugewiesen sind",
       "githubDescription": "Issues und Pull Requests",
       "githubIssuesDescription": "GitHub-Issues",
       "githubOpenIssuesDescription": "Offene GitHub-Issues",
@@ -3474,9 +3474,9 @@
       "jiraDescription": "Zugewiesene und gemeldete Issues",
       "labels": "Labels",
       "linearAllDescription": "Offene Issues aus verbundenen Arbeitsbereichen",
-      "linearAssignedDescription": "Dir zugewiesene Issues",
+      "linearAssignedDescription": "Ihnen zugewiesene Issues",
       "linearCompletedDescription": "Kürzlich abgeschlossene Issues",
-      "linearCreatedDescription": "Von dir erstellte Issues",
+      "linearCreatedDescription": "Von Ihnen erstellte Issues",
       "linearDescription": "Zugewiesene Issues und Team-Issues",
       "list": "Liste",
       "listDescription": "Kompakte Issue-Zeilen",
@@ -3497,7 +3497,7 @@
       "pullRequests": "PRs",
       "repository": "Repository",
       "repositorySortDescription": "Nach Repository gruppieren, dann neueste Aktivität zuerst",
-      "reviewRequestsDescription": "Review-Anfragen, die dir zugewiesen sind",
+      "reviewRequestsDescription": "Review-Anfragen, die Ihnen zugewiesen sind",
       "status": "Status",
       "team": "Team",
       "updated": "Aktualisiert",
@@ -3703,13 +3703,13 @@
     },
     "taskViewOptions": {
       "allSubtitle": "Ungelöste Issues auf den ausgewählten Sites",
-      "assignedSubtitle": "Dir zugewiesene ungelöste Issues",
+      "assignedSubtitle": "Ihnen zugewiesene ungelöste Issues",
       "doneSubtitle": "Eigene kürzlich gelöste Issues",
       "noGitHubTasks": "Keine GitHub-Aufgaben",
       "noGitLabTasks": "Keine GitLab-Aufgaben",
       "noJiraTasks": "Keine Jira-Aufgaben",
       "noLinearTasks": "Keine Linear-Aufgaben",
-      "reportedSubtitle": "Von dir gemeldete ungelöste Issues"
+      "reportedSubtitle": "Von Ihnen gemeldete ungelöste Issues"
     },
     "tasksCreateDrawers": {
       "connect": "Verbinden",
@@ -3810,7 +3810,7 @@
       "setupTitle": "Einrichtungsskript ausführen?",
       "skipSetupAndCreate": "Ohne Einrichtung erstellen",
       "trustFailed": "Das Einrichtungsskript konnte nicht als vertrauenswürdig markiert werden.",
-      "trustSubtitle": "Die orca.yaml dieses Repositorys wird vor dem Start des Arbeitsbereichs auf deinem Rechner ausgeführt. Nur ausführen, wenn du diesem Repository vertraust."
+      "trustSubtitle": "Die orca.yaml dieses Repositorys wird vor dem Start des Arbeitsbereichs auf Ihrem Rechner ausgeführt. Nur ausführen, wenn Sie diesem Repository vertrauen."
     },
     "worktreeCreateRetry": {
       "createFailed": "Arbeitsbereich konnte nicht erstellt werden."

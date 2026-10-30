@@ -85,7 +85,7 @@
       "useHereRefusedOk": "OK",
       "useHereSupersededBy": "{{names}} wurden nach diesem Projekt auf den {{distro}}-Host verschoben. Zuerst diese Projekte wieder auf diesem Computer verwenden, dann dieses Projekt.",
       "useHereMoveRunning": "Ein Verschiebevorgang auf den {{distro}}-Host läuft noch. Nach dessen Abschluss erneut versuchen.",
-      "useHereHostKeptForPeers": "{{project}} wurde auf den Host {{distro}} verschoben, der für ein anderes Orca weiterläuft. Füge den Host erneut hinzu, um es hier wieder zu verwenden.",
+      "useHereHostKeptForPeers": "{{project}} wurde auf den Host {{distro}} verschoben, der für ein anderes Orca weiterläuft. Fügen Sie den Host erneut hinzu, um es hier wieder zu verwenden.",
       "useHereHostUnreachable": "Der {{distro}}-Host antwortet nicht, daher kann Orca die dortige Kopie dieses Projekts nicht stoppen, und die zugehörigen Agenten laufen dort möglicherweise noch. Den Host in den Einstellungen verbinden oder entfernen und dann erneut versuchen.",
       "useHereHostStillRunning": "In der Kopie dieses Projekts auf dem {{distro}}-Host laufen noch Terminals, sodass die zugehörigen Agenten doppelt ausgeführt werden könnten. Einen Moment warten und dann erneut versuchen.",
       "useHereHostTerminalsAsleep": "Die Terminals des Projekts auf dem {{distro}}-Host wurden in den Ruhezustand versetzt. Das Projekt öffnen, um sie fortzusetzen.",
@@ -804,8 +804,8 @@
       "approveForMe": "für mich genehmigen",
       "codexHistorySharing": {
         "title": "Codex-Verlauf zwischen Konten teilen",
-        "description": "Erlaubt jedem Codex-Konto und deinem eigenen ~/.codex, Unterhaltungen fortzusetzen, die in den anderen begonnen wurden. Schalte es aus, um den Verlauf jedes Kontos getrennt zu halten. Beim Ausschalten wird nichts entfernt, was bereits geteilt wurde.",
-        "unsupported": "Aktualisiere Orca auf {{host}}, um diese Einstellung dort zu ändern.",
+        "description": "Erlaubt jedem Codex-Konto und Ihrem eigenen ~/.codex, Unterhaltungen fortzusetzen, die in den anderen begonnen wurden. Schalten Sie es aus, um den Verlauf jedes Kontos getrennt zu halten. Beim Ausschalten wird nichts entfernt, was bereits geteilt wurde.",
+        "unsupported": "Aktualisieren Sie Orca auf {{host}}, um diese Einstellung dort zu ändern.",
         "updateFailed": "Die Einstellung auf {{host}} konnte nicht aktualisiert werden."
       }
     },
@@ -5690,7 +5690,7 @@
           "bundleDescription": "Ein Vorschaupaket mit allen Warnstufen.",
           "instructionsOnlyDescription": "Anweisungen, die vollständig in SKILL.md enthalten sind.",
           "supportingFilesDescription": "Enthält lesbare Referenzdateien zusätzlich zu den Hauptanweisungen.",
-          "runnableFilesDescription": "Enthält Skripte, die ein Agent mit deinen Zugriffsrechten ausführen kann.",
+          "runnableFilesDescription": "Enthält Skripte, die ein Agent mit Ihren Zugriffsrechten ausführen kann.",
           "binaryFilesDescription": "Enthält nicht einsehbare Ressourcen und eine ausführbare Binärdatei."
         },
         "SkillDelete": {
@@ -6009,10 +6009,10 @@
           "archiveChangedBody": "<code>orca.yaml</code> wurde seit der letzten Genehmigung geändert. Vor der Ausführung beim Entfernen dieses Arbeitsbereichs erneut prüfen.",
           "issueCommandChangedBody": "<code>orca.yaml</code> wurde seit der letzten Genehmigung geändert. Vor der Ausführung beim Start dieses Arbeitsbereichs mit einem verknüpften Issue erneut prüfen.",
           "vmRecipeChangedBody": "<code>orca.yaml</code> wurde seit der letzten Genehmigung geändert. Vor der Ausführung vor der VM-Bereitstellung erneut prüfen.",
-          "setupRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Erstellen dieses Arbeitsbereichs auf deinem Rechner ausgeführt. Nur ausführen, wenn du <repo/> vertraust.",
-          "archiveRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Entfernen dieses Arbeitsbereichs auf deinem Rechner ausgeführt. Nur ausführen, wenn du <repo/> vertraust.",
-          "issueCommandRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Start dieses Arbeitsbereichs mit einem verknüpften Issue auf deinem Rechner ausgeführt. Nur ausführen, wenn du <repo/> vertraust.",
-          "vmRecipeRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird vor der VM-Bereitstellung auf deinem Rechner ausgeführt. Nur ausführen, wenn du <repo/> vertraust.",
+          "setupRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Erstellen dieses Arbeitsbereichs auf Ihrem Rechner ausgeführt. Nur ausführen, wenn Sie <repo/> vertrauen.",
+          "archiveRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Entfernen dieses Arbeitsbereichs auf Ihrem Rechner ausgeführt. Nur ausführen, wenn Sie <repo/> vertrauen.",
+          "issueCommandRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird beim Start dieses Arbeitsbereichs mit einem verknüpften Issue auf Ihrem Rechner ausgeführt. Nur ausführen, wenn Sie <repo/> vertrauen.",
+          "vmRecipeRunBody": "Die <code>orca.yaml</code> dieses Repositorys wird vor der VM-Bereitstellung auf Ihrem Rechner ausgeführt. Nur ausführen, wenn Sie <repo/> vertrauen.",
           "newSetupScript": "Neues Einrichtungsskript",
           "setupScript": "Einrichtungsskript",
           "newArchiveScript": "Neues Archivierungsskript",
@@ -6904,7 +6904,7 @@
           "serverTitle": "Entfernten Server hinzufügen",
           "sshTitle": "SSH-Host hinzufügen",
           "serverDescription": "Mit Orca auf einem anderen Computer koppeln.",
-          "serverRunsAsYou": "Dieses Gerät kann auf diesem Server Befehle mit deinem Benutzerkonto ausführen.",
+          "serverRunsAsYou": "Dieses Gerät kann auf diesem Server Befehle mit Ihrem Benutzerkonto ausführen.",
           "sshDescription": "Einen dauerhaft eingerichteten Rechner mit SSH-Zugang hinzufügen.",
           "serverSshTitle": "SSH-Host zu {{server}} hinzufügen",
           "serverSshDescription": "{{server}} speichert diesen Host und stellt die Verbindung zu ihm her. Passwörter und Passphrasen werden beim Verbindungsaufbau abgefragt.",
@@ -7077,7 +7077,7 @@
           "wslUnverifiableTitle": "Konnte nicht bestätigen, dass die WSL-Distribution {{value0}} läuft",
           "wslRetained": "Angezeigt werden die Worktrees, die Orca bereits kannte. Sie werden aktualisiert, sobald Orca die Distribution laufen sieht.",
           "wslStartAndScan": "Distribution starten und scannen",
-          "wslStartAndScanHint": "Klicke auf das Symbol, um die Distribution zu starten und erneut zu scannen."
+          "wslStartAndScanHint": "Klicken Sie auf das Symbol, um die Distribution zu starten und erneut zu scannen."
         },
         "LocalGitToolchainScanBanner": {
           "xcodeLicenseTitle": "Xcode-Lizenz akzeptieren, um Git zu verwenden",
@@ -8288,7 +8288,7 @@
         },
         "MobileSettingsPane": {
           "b5a2ed83ff": "App Store",
-          "installIntro": "Installiere Orca Mobile aus dem",
+          "installIntro": "Installieren Sie Orca Mobile aus dem",
           "installOutro": ", dann kopple es unten.",
           "androidApkLabel": "Android-APK",
           "e7a3ae8c4e": "Mobil",
@@ -8554,7 +8554,7 @@
           "issueCommandSharedDefault": "Leer lassen, um den Repository-Standard aus <yaml>orca.yaml</yaml> zu verwenden.",
           "issueCommandOptionalDefault": "Leer lassen, um den Repository-Standard aus <yaml>orca.yaml</yaml> zu verwenden, sofern vorhanden.",
           "commandSourceDescription": "Wenn sowohl <yaml>orca.yaml</yaml> als auch lokale Befehle vorhanden sind, auswählen, welche ausgeführt werden.",
-          "issueCommandWslStopped": "Die WSL-Distribution {{distro}} ist gestoppt. Öffne darin ein Terminal, um diesen Befehl anzuzeigen oder zu bearbeiten."
+          "issueCommandWslStopped": "Die WSL-Distribution {{distro}} ist gestoppt. Öffnen Sie darin ein Terminal, um diesen Befehl anzuzeigen oder zu bearbeiten."
         },
         "RepositoryIconPicker": {
           "2b7d27b93c": "Repository-Farbe {{value0}} verwenden",
@@ -12862,7 +12862,7 @@
           "installHostPlaceholder": "Einen SSH-Host ohne Orca auswählen",
           "oneActiveLink": "1 aktiver Link",
           "activeLinks": "{{value0}} aktive Links",
-          "shareDialogDescriptionRuns": "Alle Personen mit dem Link können auf diesem Computer Befehle unter deinem Benutzerkonto ausführen, bis du den Link widerrufst.",
+          "shareDialogDescriptionRuns": "Alle Personen mit dem Link können auf diesem Computer Befehle unter Ihrem Benutzerkonto ausführen, bis Sie den Link widerrufen.",
           "shownAs": "Anderen als {{name}} angezeigt",
           "editName": "Bearbeiten",
           "close": "Schließen",
@@ -14219,7 +14219,7 @@
             "daysAgo": "vor {{value0}} T.",
             "monthsAgo": "vor {{value0}} Mon.",
             "yearsAgo": "vor {{value0}} J.",
-            "userRole": "du",
+            "userRole": "Sie",
             "agentRole": "Agent",
             "toolRole": "Werkzeug",
             "systemRole": "System",
@@ -14263,7 +14263,7 @@
             "showDetails": "Details anzeigen",
             "moreSessionActions": "Weitere Sitzungsaktionen",
             "moreActions": "Weitere Aktionen",
-            "userRole": "du",
+            "userRole": "Sie",
             "agentRole": "Agent",
             "toolRole": "Werkzeug",
             "systemRole": "System",
@@ -14825,7 +14825,7 @@
           "aa97420ba4": "Installationslink kopieren",
           "ac1eb64952": "Android",
           "711e6f4b47": "iOS",
-          "e75647ace0": "Scanne diesen Download-QR-Code mit der Kamera deines Smartphones. Orca Mobile ist schon installiert? Weiter zu Schritt 2 für den Kopplungs-QR-Code.",
+          "e75647ace0": "Scannen Sie diesen Download-QR-Code mit der Kamera Ihres Smartphones. Orca Mobile ist schon installiert? Weiter zu Schritt 2 für den Kopplungs-QR-Code.",
           "0d9b33299e": "App herunterladen.",
           "92ddfdfa1f": "Schritt 1 von 2",
           "ff48d9d520": "Weiteres Gerät koppeln",
@@ -15015,7 +15015,7 @@
           "rateLimitedBody": "Orca Relay ist ausgelastet. Eine Minute warten und erneut versuchen oder LAN verwenden, um über Tailscale oder dasselbe Wi‑Fi-Netzwerk zu koppeln."
         },
         "relayClockSkewMessage": {
-          "message": "Die Uhr deines Computers geht um etwa {{seconds}} Sekunden falsch. Aktiviere die automatische Zeiteinstellung und versuche es erneut."
+          "message": "Die Uhr Ihres Computers geht um etwa {{seconds}} Sekunden falsch. Aktivieren Sie die automatische Zeiteinstellung und versuchen Sie es erneut."
         }
       },
       "gitlab": {
@@ -15189,7 +15189,7 @@
             "6299297dac": "Einrichtungsskript gespeichert",
             "f0bbf7da77": "Ausprobieren",
             "522cce9e33": "Projekt hinzufügen",
-            "addProjectFirst": "Zuerst ein Projekt hinzufügen, an dem du arbeiten möchtest."
+            "addProjectFirst": "Zuerst ein Projekt hinzufügen, an dem Sie arbeiten möchten."
           },
           "FeatureWallTourPanel": {
             "af7d622f6f": "Optional"
@@ -17920,7 +17920,7 @@
             "openGithub": "GitHub öffnen",
             "starOnGithub": "Stern auf GitHub vergeben",
             "onboardingCompleted": "Einführung abgeschlossen!",
-            "body": "Wenn dir Orca bisher gefällt, hilft ein Stern auf GitHub anderen Entwicklern, die App zu entdecken.",
+            "body": "Wenn Ihnen Orca bisher gefällt, hilft ein Stern auf GitHub anderen Entwicklern, die App zu entdecken.",
             "dismiss": "Ausblenden",
             "later": "Später"
           }
@@ -18386,7 +18386,7 @@
         "permission": "Aufmerksamkeit erforderlich"
       },
       "issueComments": {
-        "you": "du"
+        "you": "Sie"
       },
       "ZoomOverlay": {
         "uiZoom": "Oberflächenzoom",
@@ -19392,7 +19392,7 @@
         "stopped": "{{distro}} ist gestoppt",
         "start": "Starten",
         "unverifiable": "Orca konnte nicht prüfen, ob {{distro}} läuft",
-        "startToSend": "Starte {{distro}}, um zu senden."
+        "startToSend": "Starten Sie {{distro}}, um zu senden."
       },
       "interruptedContinue": {
         "continue": "Fortfahren",
@@ -20073,7 +20073,7 @@
     },
     "settingsTooltip": "Dashboard-Einstellungen",
     "card": {
-      "you": "du",
+      "you": "Sie",
       "time": {
         "justNow": "Gerade eben",
         "minutes": "{{count}} Min.",
@@ -20169,7 +20169,7 @@
       "demoPrompt": "Diesen Diff auf Sonderfälle prüfen und Tests für alle gefundenen Fälle hinzufügen.",
       "startDictation": "Diktat starten",
       "agentPromptTitle": "Agenten-Prompt",
-      "listening": "Warte auf Spracheingabe…",
+      "listening": "Warten auf Spracheingabe…",
       "unassignedInstruction": "Vor dem Diktieren in einem fokussierten Bereich ein Tastenkürzel für das Diktat zuweisen.",
       "shortcutInstruction": "Ein Terminal, einen Editor oder einen Agenten-Prompt fokussieren und <shortcut/> drücken, um das Diktat zu starten. Zum Beenden erneut <shortcut/> drücken.",
       "changeInSettings": "Modell, Diktatmodus oder Tastenkürzel jederzeit unter <link>Einstellungen → Spracheingabe</link> ändern.",
@@ -21281,8 +21281,8 @@
         "noName": "Der Agent zur Chat-Benennung hat keinen Namen zurückgegeben.",
         "agentNotRun": "Orca konnte den Agenten zur Chat-Benennung nicht ausführen.",
         "noAgentAvailable": "In diesem Arbeitsbereich kann kein Agent zur Chat-Benennung ausgeführt werden.",
-        "grokFailed": "Grok konnte diesen Chat nicht benennen. Versuche erneut, den Namen zu generieren.",
-        "antigravityFailed": "Antigravity konnte diesen Chat nicht benennen. Versuche erneut, den Namen zu generieren."
+        "grokFailed": "Grok konnte diesen Chat nicht benennen. Versuchen Sie erneut, den Namen zu generieren.",
+        "antigravityFailed": "Antigravity konnte diesen Chat nicht benennen. Versuchen Sie erneut, den Namen zu generieren."
       }
     }
   },
@@ -21342,13 +21342,13 @@
       "releaseListFailed": "{{channel}}-Builds konnten nicht aufgelistet werden (HTTP {{status}}).",
       "releaseListUnreadable": "Die Release-Liste für {{channel}} konnte nicht gelesen werden.",
       "rateLimitedSoon": "GitHub-Ratenlimit erreicht. In einigen Minuten erneut versuchen.",
-      "rateLimitedSoonSignedOut": "GitHub-Ratenlimit erreicht. In einigen Minuten erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit deines Kontos nutzen kann.",
+      "rateLimitedSoonSignedOut": "GitHub-Ratenlimit erreicht. In einigen Minuten erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit Ihres Kontos nutzen kann.",
       "rateLimitedInMinute": "GitHub-Ratenlimit erreicht. In etwa einer Minute erneut versuchen.",
-      "rateLimitedInMinuteSignedOut": "GitHub-Ratenlimit erreicht. In etwa einer Minute erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit deines Kontos nutzen kann.",
+      "rateLimitedInMinuteSignedOut": "GitHub-Ratenlimit erreicht. In etwa einer Minute erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit Ihres Kontos nutzen kann.",
       "rateLimitedInMinutes_one": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minute erneut versuchen.",
       "rateLimitedInMinutes_other": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minuten erneut versuchen.",
-      "rateLimitedInMinutesSignedOut_one": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minute erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit deines Kontos nutzen kann.",
-      "rateLimitedInMinutesSignedOut_other": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minuten erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit deines Kontos nutzen kann."
+      "rateLimitedInMinutesSignedOut_one": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minute erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit Ihres Kontos nutzen kann.",
+      "rateLimitedInMinutesSignedOut_other": "GitHub-Ratenlimit erreicht. In etwa {{count}} Minuten erneut versuchen oder `gh auth login` ausführen, damit Orca das höhere Limit Ihres Kontos nutzen kann."
     }
   },
   "jira": {
@@ -21761,8 +21761,8 @@
       "email": "E-Mail-Adresse einsehen",
       "allSites": "Alle Daten auf allen Websites lesen und ändern",
       "someSites": "Daten auf {{hosts}} lesen und ändern",
-      "manyOtherSites_one": "Deine Daten auf {{hosts}} und {{count}} weiteren Website lesen und ändern",
-      "manyOtherSites_other": "Deine Daten auf {{hosts}} und {{count}} weiteren Websites lesen und ändern"
+      "manyOtherSites_one": "Ihre Daten auf {{hosts}} und {{count}} weiteren Website lesen und ändern",
+      "manyOtherSites_other": "Ihre Daten auf {{hosts}} und {{count}} weiteren Websites lesen und ändern"
     },
     "install": {
       "title": "{{name}} hinzufügen?",
@@ -22090,13 +22090,13 @@
     "remoteServerPairingErrors": {
       "invalidPairingCode": "Ungültiger Kopplungscode. Eine URL im Format orca://pair?... oder reine Kopplungsdaten erwartet.",
       "selfPairingCode": "Dieser Kopplungscode gehört zu dieser Orca-Instanz selbst. Den Code stattdessen auf dem anderen Computer erzeugen.",
-      "managedDeployment": "Orca betreibt diesen Server für dich auf einem SSH-Host; seine Kopplung kann hier nicht ersetzt oder entfernt werden. Zur Stilllegung `orca environment stop --environment <name> --yes` ausführen oder Einstellungen > Orca auf SSH-Hosts verwenden; falls der Host nicht mehr vorhanden ist, `orca environment forget --environment <name> --yes` ausführen.",
+      "managedDeployment": "Orca betreibt diesen Server für Sie auf einem SSH-Host; seine Kopplung kann hier nicht ersetzt oder entfernt werden. Zur Stilllegung `orca environment stop --environment <name> --yes` ausführen oder Einstellungen > Orca auf SSH-Hosts verwenden; falls der Host nicht mehr vorhanden ist, `orca environment forget --environment <name> --yes` ausführen.",
       "sshAccessChangePending": "Die Änderung des SSH-Zugriffs für diesen Server wurde nicht abgeschlossen. Unter Einstellungen > Entfernte Orca-Server > SSH-Zugriff für gekoppelte Server erneut versuchen oder abbrechen, bevor die Kopplung ersetzt oder der Server entfernt wird.",
       "sshAccessLinked": "Die Verknüpfung des SSH-Zugriffs für diesen Server unter Einstellungen > Entfernte Orca-Server > SSH-Zugriff für gekoppelte Server aufheben, bevor die Kopplung ersetzt oder der Server entfernt wird.",
       "alreadyPairedCloudWorkspace": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Er gehört zu einem Cloud-Arbeitsbereich, der ihn beim Fortsetzen erneut koppelt.",
       "alreadyPairedCloudIdentity": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Der Server des Cloud-Arbeitsbereichs verwendet die Identität dieses Servers erneut und wurde daher nicht gespeichert.",
       "alreadyPairedWslHost": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Orca verwaltet ihn als WSL-Host, daher kann seine Kopplung hier nicht ersetzt werden.",
-      "alreadyPairedManagedDeployment": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Orca betreibt diesen Server für dich auf einem SSH-Host; seine Kopplung kann hier nicht ersetzt oder entfernt werden. Zur Stilllegung `orca environment stop --environment <name> --yes` ausführen oder Einstellungen > Orca auf SSH-Hosts verwenden; falls der Host nicht mehr vorhanden ist, `orca environment forget --environment <name> --yes` ausführen.",
+      "alreadyPairedManagedDeployment": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Orca betreibt diesen Server für Sie auf einem SSH-Host; seine Kopplung kann hier nicht ersetzt oder entfernt werden. Zur Stilllegung `orca environment stop --environment <name> --yes` ausführen oder Einstellungen > Orca auf SSH-Hosts verwenden; falls der Host nicht mehr vorhanden ist, `orca environment forget --environment <name> --yes` ausführen.",
       "alreadyPairedSshAccessChangePending": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Die Änderung des SSH-Zugriffs für diesen Server wurde nicht abgeschlossen. Unter Einstellungen > Entfernte Orca-Server > SSH-Zugriff für gekoppelte Server erneut versuchen oder abbrechen, bevor die Kopplung ersetzt oder der Server entfernt wird.",
       "alreadyPairedSshAccessLinked": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Die Verknüpfung des SSH-Zugriffs für diesen Server unter Einstellungen > Entfernte Orca-Server > SSH-Zugriff für gekoppelte Server aufheben, bevor die Kopplung ersetzt oder der Server entfernt wird.",
       "alreadyPairedAddAgain": "Dieser Server ist bereits als „{{name}}“ gekoppelt. Zum Aktualisieren seiner Verbindung unter Einstellungen > Entfernte Orca-Server erneut hinzufügen.",
@@ -22262,7 +22262,7 @@
       "agentNeverStarted": "Der Agent der Automatisierung wurde nach dem Absenden des Prompts nie gestartet.",
       "agentNoCompletion": "Der Agent der Automatisierung hat keinen Abschluss gemeldet.",
       "watchTimedOut": "Orca hat die Überwachung dieser Ausführung nach 6 Stunden ohne Abschlusssignal beendet.",
-      "wslDistroStopped": "Die WSL-Distribution {{distro}} ist gestoppt, daher hat dieser geplante Lauf sie nicht gestartet. Starte die Distribution oder nutze „Jetzt ausführen“; spätere Läufe finden statt, solange sie läuft.",
+      "wslDistroStopped": "Die WSL-Distribution {{distro}} ist gestoppt, daher hat dieser geplante Lauf sie nicht gestartet. Starten Sie die Distribution oder nutzen Sie „Jetzt ausführen“; spätere Läufe finden statt, solange sie läuft.",
       "projectSetupState": {
         "notSetUp": "Das Projekt ist auf dem ausgewählten Automatisierungs-Host nicht eingerichtet.",
         "settingUp": "Das Projekt wird auf dem ausgewählten Automatisierungs-Host noch eingerichtet.",
