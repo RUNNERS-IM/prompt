@@ -1,4 +1,4 @@
-import { translateMain } from '../i18n/main-i18n'
+import { mainI18n, translateMain } from '../i18n/main-i18n'
 export type GpuAccelerationAboutPanelOptions = {
   appName: string
   appVersion: string
@@ -34,6 +34,12 @@ export function describeGpuAcceleration(
   return translateMain('native.about.gpu.unknown', 'Unknown ({{status}})', { status: compositing })
 }
 
+const COPYRIGHT = 'Copyright © 2026 Runners Co., Ltd. All rights reserved.'
+const ORIGINAL_CREDIT = {
+  ko: '원본: Orca (Stably AI) · MIT 라이선스',
+  en: 'Based on Orca by Stably AI (MIT License)'
+} as const
+
 export function createGpuAccelerationAboutPanelOptions({
   appName,
   appVersion,
@@ -44,15 +50,15 @@ export function createGpuAccelerationAboutPanelOptions({
   const status = translateMain('native.about.gpu.summary', 'GPU acceleration: {{status}}', {
     status: describeGpuAcceleration(gpuFeatureStatus, gpuFallbackActive)
   })
-  // 공통.md 정보 창: "앱 이름 · 버전 · RUNNERS" + 원본 표기 한 줄(MIT).
-  const credit = translateMain(
-    'native.about.originalCredit',
-    'Based on Orca by Stably AI (MIT License)'
-  )
-  const lines = ['RUNNERS', credit, status].join('\n')
+  // Same copyright as LICENSE and the mac app's NSHumanReadableCopyright. The Orca credit is
+  // written out, not translated: the brand post-processor would turn "Orca" into "Prompt".
+  const credit = ORIGINAL_CREDIT[mainI18n.language?.startsWith('ko') ? 'ko' : 'en']
+  const lines = [credit, status].join('\n')
   return {
     applicationName: appName,
     applicationVersion: appVersion,
-    ...(platform === 'linux' ? { copyright: lines } : { credits: lines, copyright: '© RUNNERS' })
+    ...(platform === 'linux'
+      ? { copyright: `${COPYRIGHT}\n${lines}` }
+      : { credits: lines, copyright: COPYRIGHT })
   }
 }

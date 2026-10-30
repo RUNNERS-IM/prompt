@@ -245,7 +245,7 @@ module.exports = {
   appId,
   productName: 'Prompt',
   // Prompt: without this electron-builder writes "Copyright © <year> stablyai" from the package.json author.
-  copyright: 'Copyright © RUNNERS. Based on Orca (MIT)',
+  copyright: 'Copyright © 2026 Runners Co., Ltd. All rights reserved.',
   protocols: [{ name: 'Prompt', schemes: ['prompt'] }],
   toolsets: { appimage: '1.0.3' },
   ...(devChannelBuildVersion

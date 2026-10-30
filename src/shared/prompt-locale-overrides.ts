@@ -22,7 +22,9 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
   'prompt.about.menuLabel': '{{name}} 정보',
   'prompt.about.versionLine': '버전 {{version}} · 무료',
-  'prompt.about.website': '웹사이트'
+  'prompt.about.website': '웹사이트',
+  'prompt.about.notices': '오픈소스 고지',
+  'prompt.about.noticesMissing': '고지 파일을 읽을 수 없습니다.'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */
