@@ -137,6 +137,14 @@ export function createMainWindow(
       : {}),
     icon: getAppIconPath(settings?.appIcon),
     ...platformBlurOptions,
+    // Prompt: System Settings style translucent sidebar on macOS.
+    ...(process.platform === 'darwin'
+      ? {
+          vibrancy: 'sidebar' as const,
+          visualEffectState: 'followWindow' as const,
+          backgroundColor: '#00000000'
+        }
+      : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true,

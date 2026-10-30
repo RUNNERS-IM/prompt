@@ -131,12 +131,12 @@ export function AppWorkspaceShell(props: {
               {titlebarMainStrip}
             </div>
           ) : null}
-          <div className="flex flex-row flex-1 min-h-0 overflow-hidden">
+          <div className="prompt-shell-row flex flex-row flex-1 min-h-0 overflow-hidden">
             {layout.showSidebar ? (
               layout.leftTitlebarChromeLayout.shouldMount ? (
                 /* Remove the collapsed header from flex layout so panes reclaim the left edge. */
                 <div
-                  className={`flex min-h-0 flex-col shrink-0${layout.sidebarOpen ? '' : ' relative w-0 overflow-visible'}`}
+                  className={`flex min-h-0 flex-col shrink-0${layout.sidebarOpen ? ' prompt-sidebar-column' : ' relative w-0 overflow-visible'}`}
                 >
                   <div
                     // The floating header covers the center border; restore the seam and size to its own controls.
@@ -163,7 +163,7 @@ export function AppWorkspaceShell(props: {
                 <WorktreeSidebar layout={layout} scrollRefs={sidebarScrollRefs} />
               )
             ) : null}
-            <div className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
+            <div className="prompt-main-column flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
               {/* Automations/artifacts own their headers; another titlebar would leave an empty stripe. */}
               {layout.stackedSidebarOpen &&
               layout.activeView !== 'automations' &&
