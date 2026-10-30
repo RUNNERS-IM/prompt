@@ -4,7 +4,7 @@
     {
       "id": "apps",
       "title": {
-        "ko": "RUNNERS 의 다른 앱",
+        "ko": "RUNNERS의 다른 앱",
         "en": "More apps from RUNNERS"
       },
       "items": [
@@ -16,7 +16,7 @@
             "ko": "단축키 한 번으로 창을 반반·3분할·모서리로 정리",
             "en": "Snap windows to halves, thirds and corners with one shortcut"
           },
-          "url": "https://runners.im/tools/split"
+          "url": "https://runners.im/split"
         },
         {
           "id": "prompt",
@@ -43,7 +43,7 @@
     {
       "id": "services",
       "title": {
-        "ko": "RUNNERS 의 서비스",
+        "ko": "RUNNERS의 서비스",
         "en": "Services from RUNNERS"
       },
       "items": [
