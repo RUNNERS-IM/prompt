@@ -1033,7 +1033,15 @@
       "body": "Orca is still running in the system tray"
     },
     "activityWaiting": "Orca - activity waiting",
-    "activityWaitingSuffix": "activity waiting"
+    "activityWaitingSuffix": "activity waiting",
+    "runningTerminals_one": "{{count}} terminal running",
+    "runningTerminals_other": "{{count}} terminals running",
+    "openApp": "Open Prompt",
+    "about": "About Prompt",
+    "checkForUpdates": "Check for Updates…",
+    "settings": "Settings…",
+    "helpFeedback": "Help & Feedback",
+    "quitApp": "Quit Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Go to {{value0}}",
@@ -22624,7 +22632,8 @@
         "unavailable": "Unavailable",
         "unknown": "Unknown ({{status}})",
         "summary": "GPU acceleration: {{status}}"
-      }
+      },
+      "originalCredit": "Based on Orca by Stably AI (MIT License)"
     },
     "dialog": {
       "spaceTitle": "Orca Space Beta",

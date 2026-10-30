@@ -44,9 +44,15 @@ export function createGpuAccelerationAboutPanelOptions({
   const status = translateMain('native.about.gpu.summary', 'GPU acceleration: {{status}}', {
     status: describeGpuAcceleration(gpuFeatureStatus, gpuFallbackActive)
   })
+  // 공통.md 정보 창: "앱 이름 · 버전 · RUNNERS" + 원본 표기 한 줄(MIT).
+  const credit = translateMain(
+    'native.about.originalCredit',
+    'Based on Orca by Stably AI (MIT License)'
+  )
+  const lines = ['RUNNERS', credit, status].join('\n')
   return {
     applicationName: appName,
     applicationVersion: appVersion,
-    ...(platform === 'linux' ? { copyright: status } : { credits: status })
+    ...(platform === 'linux' ? { copyright: lines } : { credits: lines, copyright: '© RUNNERS' })
   }
 }

@@ -2,6 +2,7 @@ import {
   app,
   clipboard,
   dialog,
+  shell,
   type BrowserWindow,
   type MessageBoxOptions,
   type MessageBoxReturnValue,
@@ -23,6 +24,7 @@ import {
 import { ensureAutoUpdaterConfigured } from '../window/attach-main-window-services'
 import { focusExistingMainWindow, safelyRevealWindow } from '../window/focus-existing-window'
 import { mainProcessState as state } from './main-process-state'
+import { ptyOwnership } from '../ipc/pty/provider/ownership-state'
 import { getDashboardPopoutWindow } from '../window/dashboard-popout-window'
 import { getWorkspaceSpaceWindow } from '../window/workspace-space-window'
 import { markUserQuitWindowClose } from '../window/user-quit-window-close'
@@ -206,6 +208,9 @@ export function runUserInitiatedUpdateCheck(options?: UpdateCheckOptions): void 
   checkForUpdatesFromMenu(options)
 }
 
+// 공통.md: 도움말 · 피드백은 github.com/RUNNERS-IM/<앱>/issues
+const PROMPT_HELP_FEEDBACK_URL = 'https://github.com/RUNNERS-IM/prompt/issues'
+
 export function getSystemTrayOptions(): SystemTrayOptions | null {
   const store = state.store
   if (!store) {
@@ -221,6 +226,11 @@ export function getSystemTrayOptions(): SystemTrayOptions | null {
       showMainWindowFromTray()
       runUserInitiatedUpdateCheck()
     },
+    // Native About panel; its credits (RUNNERS + original MIT line) come from gpu-acceleration-about-panel.ts.
+    onShowAbout: () => app.showAboutPanel(),
+    onOpenHelp: () => void shell.openExternal(PROMPT_HELP_FEEDBACK_URL),
+    // Every live terminal the app routes (local daemon and SSH) has one ownership entry.
+    getRunningTerminalCount: () => ptyOwnership.size,
     onQuit: quitFromSystemTray,
     ...(state.isServeMode
       ? {}

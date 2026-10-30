@@ -6,7 +6,6 @@ import {
   Github,
   Keyboard,
   Loader2,
-  MessageSquareText,
   RefreshCw,
   RotateCw,
   School,
@@ -248,7 +247,7 @@ export function SidebarSettingsHelpMenu(): React.JSX.Element {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={handleOpenFeedback}>
-              <MessageSquareText className="size-3.5" />
+              <CircleHelp className="size-3.5" />
               {translate(
                 'auto.components.sidebar.SidebarSettingsHelpMenu.4cf5b868d7',
                 'Send Feedback'

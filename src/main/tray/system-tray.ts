@@ -6,9 +6,9 @@ import menuBarOffIconRetinaPath from '../../../resources/tray/prompt-menu-bar-of
 import { deferAppKitSceneMutation } from '../appkit-scene-mutation'
 import { createAppIconImage } from '../app-icon'
 import { translateMain } from '../i18n/main-i18n'
-import { quitAndStopAllSessionsMenuText } from '../menu/app-menu-quit-item'
 import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
 import { stampTrayDevBadge } from './tray-dev-badge'
+import { buildTrayMenuTemplate } from './tray-menu-template'
 
 export type SystemTrayOptions = {
   /** App icon id from settings; the tray reuses the app icon image. */
@@ -23,6 +23,12 @@ export type SystemTrayOptions = {
   onOpenSettings: () => void
   /** Run the existing user-initiated update check. */
   onCheckForUpdates: () => void
+  /** Show the About window (name, version, RUNNERS, original MIT credit). */
+  onShowAbout: () => void
+  /** Open the Help & Feedback page (GitHub issues). */
+  onOpenHelp: () => void
+  /** Live terminal count for the status line; omitted hides the line. */
+  getRunningTerminalCount?: () => number
   /** Caller must mark quit intent; serve-mode user Quit may close only desktop windows. */
   onQuit: () => void
   /** Confirm, then quit with every terminal session stopped; omitted where the item must not show (serve mode). */
@@ -71,6 +77,39 @@ let attentionActive = false
 let devIndicator: { label: string | null } | null = null
 
 let nativeThemeUpdatedListener: (() => void) | null = null
+
+// The status line is baked into the native menu, so poll the count and rebuild only when it changes.
+const TERMINAL_COUNT_POLL_MS = 2000
+let terminalCountTimer: ReturnType<typeof setInterval> | null = null
+let shownTerminalCount: number | null = null
+
+function readTerminalCount(opts: SystemTrayOptions): number | null {
+  try {
+    return opts.getRunningTerminalCount?.() ?? null
+  } catch (error) {
+    console.warn('[system-tray] terminal count unavailable', error)
+    return null
+  }
+}
+
+function startTerminalCountWatch(): void {
+  if (terminalCountTimer || !trayOptions?.getRunningTerminalCount) {
+    return
+  }
+  terminalCountTimer = setInterval(() => {
+    if (trayOptions && readTerminalCount(trayOptions) !== shownTerminalCount) {
+      rebuildSystemTrayMenu()
+    }
+  }, TERMINAL_COUNT_POLL_MS)
+}
+
+function stopTerminalCountWatch(): void {
+  if (terminalCountTimer) {
+    clearInterval(terminalCountTimer)
+    terminalCountTimer = null
+  }
+  shownTerminalCount = null
+}
 
 // Per-worktree tooltips distinguish concurrent dev instances.
 function baseTooltip(): string {
@@ -274,47 +313,17 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
     watchMacAppearance()
     startCursorBlink()
   }
+  startTerminalCountWatch()
   return tray
 }
 
 function buildTrayMenu(opts: SystemTrayOptions): Menu {
-  return Menu.buildFromTemplate([
-    ...(devIndicator
-      ? ([
-          // Label dev trays by worktree/branch to distinguish concurrent instances.
-          { label: baseTooltip(), enabled: false },
-          { type: 'separator' }
-        ] satisfies Electron.MenuItemConstructorOptions[])
-      : []),
-    {
-      label: translateMain('tray.openOrca', 'Open Orca'),
-      click: safeMenuAction(() => opts.onOpen())
-    },
-    { type: 'separator' },
-    // Share app-menu translation keys so tray labels cannot drift.
-    ...(process.platform === 'darwin'
-      ? ([
-          {
-            label: translateMain('menu.settings', 'Settings'),
-            click: safeMenuAction(() => opts.onOpenSettings())
-          },
-          {
-            label: translateMain('menu.checkForUpdates', 'Check for Updates...'),
-            click: safeMenuAction(() => opts.onCheckForUpdates())
-          },
-          { type: 'separator' }
-        ] satisfies Electron.MenuItemConstructorOptions[])
-      : []),
-    ...(opts.onQuitAndStopAllSessions
-      ? ([
-          {
-            ...quitAndStopAllSessionsMenuText(),
-            click: safeMenuAction(opts.onQuitAndStopAllSessions)
-          }
-        ] satisfies Electron.MenuItemConstructorOptions[])
-      : []),
-    { label: translateMain('tray.quit', 'Quit'), click: safeMenuAction(() => opts.onQuit()) }
-  ])
+  const terminalCount = readTerminalCount(opts)
+  shownTerminalCount = terminalCount
+  const devLabel = devIndicator ? baseTooltip() : null
+  return Menu.buildFromTemplate(
+    buildTrayMenuTemplate(opts, { devLabel, terminalCount, wrap: safeMenuAction })
+  )
 }
 
 /** Refreshes translated labels without recreating the tray or its actions. */
@@ -353,6 +362,7 @@ export function setTrayAttention(active: boolean): void {
 
 export function destroySystemTray(): void {
   stopWatchingMacAppearance()
+  stopTerminalCountWatch()
   stopCursorBlink()
   cursorOffTrayImage = null
   if (tray && !tray.isDestroyed()) {

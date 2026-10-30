@@ -110,8 +110,20 @@ vi.mock('./tray-dev-badge', () => ({
   stampTrayDevBadge: stampDevBadgeMock
 }))
 
+vi.mock('./tray-menu-icons', () => ({
+  // Mirrors the real loader: icons only on macOS, where template images follow dark/light.
+  trayMenuIcon: (name: string) => (process.platform === 'darwin' ? `icon:${name}` : undefined)
+}))
+
 type TrayModule = typeof SystemTrayModule
-type MenuItem = { label?: string; type?: string; click?: () => void }
+type MenuItem = {
+  label?: string
+  type?: string
+  enabled?: boolean
+  icon?: unknown
+  accelerator?: string
+  click?: () => void
+}
 
 const originalPlatform = process.platform
 
@@ -134,6 +146,8 @@ function createOptions(
     onOpen: vi.fn(),
     onOpenSettings: vi.fn(),
     onCheckForUpdates: vi.fn(),
+    onShowAbout: vi.fn(),
+    onOpenHelp: vi.fn(),
     onQuit: vi.fn()
   }
 }
@@ -191,7 +205,7 @@ afterEach(() => {
 })
 
 describe('createSystemTray', () => {
-  it('keeps the Windows icon, Open/Quit menu, and left-click behavior', async () => {
+  it('keeps the Windows icon, a short menu, and left-click behavior', async () => {
     setPlatform('win32')
     const { createSystemTray } = await loadModule()
     const options = createOptions()
@@ -200,14 +214,23 @@ describe('createSystemTray', () => {
 
     expect(trayInstances).toHaveLength(1)
     expect(trayInstances[0].image).toBe(resizedImage)
-    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Orca')
-    expect(builtMenuItems().map((item) => item.label)).toEqual(['Open Orca', undefined, 'Quit'])
+    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Prompt')
+    expect(builtMenuItems().map((item) => item.label)).toEqual([
+      'Open Prompt',
+      undefined,
+      'About Prompt',
+      'Help & Feedback',
+      undefined,
+      'Quit Prompt'
+    ])
+    // Windows menus have no template tinting, so no icons there.
+    expect(builtMenuItems().every((item) => item.icon === undefined)).toBe(true)
     const clickHandler = trayInstances[0].on.mock.calls.find((call) => call[0] === 'click')?.[1]
     expect(clickHandler).toBeTypeOf('function')
 
     builtMenuItems()[0].click?.()
     ;(clickHandler as () => void)()
-    builtMenuItems()[2].click?.()
+    builtMenuItems().at(-1)?.click?.()
     expect(options.onOpen).toHaveBeenCalledTimes(2)
     expect(options.onQuit).toHaveBeenCalledOnce()
   })
@@ -227,21 +250,25 @@ describe('createSystemTray', () => {
       dataURL: 'data:image/png;base64,mac-retina'
     })
     expect(builtMenuItems().map((item) => item.label)).toEqual([
-      'Open Orca',
+      'Open Prompt',
       undefined,
-      'Settings',
-      'Check for Updates...',
+      'About Prompt',
+      'Check for Updates…',
+      'Settings…',
+      'Help & Feedback',
       undefined,
-      'Quit'
+      'Quit Prompt'
     ])
     expect(trayInstances[0].on).not.toHaveBeenCalled()
     expect(nativeThemeMock.on).toHaveBeenCalledWith('updated', expect.any(Function))
 
     for (const [label, callback] of [
-      ['Open Orca', options.onOpen],
-      ['Settings', options.onOpenSettings],
-      ['Check for Updates...', options.onCheckForUpdates],
-      ['Quit', options.onQuit]
+      ['Open Prompt', options.onOpen],
+      ['About Prompt', options.onShowAbout],
+      ['Check for Updates…', options.onCheckForUpdates],
+      ['Settings…', options.onOpenSettings],
+      ['Help & Feedback', options.onOpenHelp],
+      ['Quit Prompt', options.onQuit]
     ] as const) {
       builtMenuItems()
         .find((item) => item.label === label)
@@ -250,8 +277,52 @@ describe('createSystemTray', () => {
     }
   })
 
+  it('gives every macOS row its Lucide icon from the shared table', async () => {
+    setPlatform('darwin')
+    const { createSystemTray } = await loadModule()
+
+    createSystemTray({
+      ...createOptions(),
+      getRunningTerminalCount: () => 3,
+      onQuitAndStopAllSessions: vi.fn()
+    })
+
+    const rows = builtMenuItems().filter((item) => item.type !== 'separator')
+    expect(rows.map((item) => [item.label, item.icon])).toEqual([
+      ['3 terminals running', 'icon:status-dot-green'],
+      ['Open Prompt', 'icon:app-window'],
+      ['About Prompt', 'icon:info'],
+      ['Check for Updates…', 'icon:refresh-cw'],
+      ['Settings…', 'icon:settings'],
+      ['Help & Feedback', 'icon:circle-help'],
+      ['Quit Prompt', 'icon:square-x'],
+      ['Quit Completely...', 'icon:circle-x']
+    ])
+    expect(rows[0].enabled).toBe(false)
+    expect(rows.find((item) => item.label === 'Settings…')?.accelerator).toBe('CmdOrCtrl+,')
+    expect(rows.find((item) => item.label === 'Quit Prompt')?.accelerator).toBe('CmdOrCtrl+Q')
+  })
+
+  it('rebuilds the status line only when the terminal count changes', async () => {
+    setPlatform('darwin')
+    const { createSystemTray } = await loadModule()
+    let count = 1
+    createSystemTray({ ...createOptions(), getRunningTerminalCount: () => count })
+    expect(builtMenuItems()[0].label).toBe('1 terminal running')
+
+    menuFromTemplateMock.mockClear()
+    vi.advanceTimersByTime(2000)
+    expect(menuFromTemplateMock).not.toHaveBeenCalled()
+
+    count = 2
+    vi.advanceTimersByTime(2000)
+    // The rebuild is deferred to a fresh timer turn after the poll tick.
+    vi.advanceTimersByTime(1)
+    expect(builtMenuItems()[0].label).toBe('2 terminals running')
+  })
+
   it.each(['win32', 'darwin'] as const)(
-    'offers Quit Completely directly above Quit on %s when a handler is supplied',
+    'offers Quit Completely directly below Quit on %s when a handler is supplied',
     async (platform) => {
       setPlatform(platform)
       const { createSystemTray } = await loadModule()
@@ -259,20 +330,12 @@ describe('createSystemTray', () => {
 
       createSystemTray(options)
 
-      expect(builtMenuItems().map((item) => item.label)).toEqual(
-        platform === 'darwin'
-          ? [
-              'Open Orca',
-              undefined,
-              'Settings',
-              'Check for Updates...',
-              undefined,
-              'Quit Completely...',
-              'Quit'
-            ]
-          : ['Open Orca', undefined, 'Quit Completely...', 'Quit']
-      )
-      builtMenuItems().at(-2)?.click?.()
+      expect(
+        builtMenuItems()
+          .slice(-3)
+          .map((item) => item.label)
+      ).toEqual([undefined, 'Quit Prompt', 'Quit Completely...'])
+      builtMenuItems().at(-1)?.click?.()
       expect(options.onQuitAndStopAllSessions).toHaveBeenCalledOnce()
       expect(options.onQuit).not.toHaveBeenCalled()
     }
@@ -318,9 +381,9 @@ describe('dev instance indicator', () => {
     expect(devBadgeImage.setTemplateImage).toHaveBeenCalledWith(true)
     expect(trayInstances[0].image).toBe(devBadgeImage)
     expect(trayInstances[0].setTitle).not.toHaveBeenCalled()
-    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Orca DEV (my-branch)')
+    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Prompt DEV (my-branch)')
     expect(builtMenuItems()[0]).toMatchObject({
-      label: 'Orca DEV (my-branch)',
+      label: 'Prompt DEV (my-branch)',
       enabled: false
     })
   })
@@ -358,8 +421,8 @@ describe('dev instance indicator', () => {
 
     createSystemTray(createOptions({ isDevInstance: true }))
 
-    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Orca DEV')
-    expect(builtMenuItems()[0]).toMatchObject({ label: 'Orca DEV', enabled: false })
+    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Prompt DEV')
+    expect(builtMenuItems()[0]).toMatchObject({ label: 'Prompt DEV', enabled: false })
   })
 
   it('keeps the DEV marker in the tooltip across the attention toggle', async () => {
@@ -371,10 +434,10 @@ describe('dev instance indicator', () => {
 
     setTrayAttention(true)
     flushTraySceneMutation()
-    expect(created.setToolTip).toHaveBeenCalledWith('Orca DEV (my-branch) - activity waiting')
+    expect(created.setToolTip).toHaveBeenCalledWith('Prompt DEV (my-branch) - activity waiting')
     setTrayAttention(false)
     flushTraySceneMutation()
-    expect(created.setToolTip).toHaveBeenLastCalledWith('Orca DEV (my-branch)')
+    expect(created.setToolTip).toHaveBeenLastCalledWith('Prompt DEV (my-branch)')
   })
 
   it('marks the Windows tooltip without badging the icon', async () => {
@@ -383,9 +446,9 @@ describe('dev instance indicator', () => {
 
     createSystemTray(createOptions({ isDevInstance: true, devInstanceLabel: 'my-branch' }))
 
-    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Orca DEV (my-branch)')
+    expect(trayInstances[0].setToolTip).toHaveBeenCalledWith('Prompt DEV (my-branch)')
     expect(stampDevBadgeMock).not.toHaveBeenCalled()
-    expect(builtMenuItems()[0]).toMatchObject({ label: 'Orca DEV (my-branch)', enabled: false })
+    expect(builtMenuItems()[0]).toMatchObject({ label: 'Prompt DEV (my-branch)', enabled: false })
   })
 
   it('adds no DEV marker for production instances', async () => {
@@ -396,7 +459,7 @@ describe('dev instance indicator', () => {
 
     expect(stampDevBadgeMock).not.toHaveBeenCalled()
     expect(trayInstances[0].image).toBe(baseMacImage)
-    expect(builtMenuItems()[0].label).toBe('Open Orca')
+    expect(builtMenuItems()[0].label).toBe('Open Prompt')
   })
 })
 
@@ -454,13 +517,13 @@ describe('setTrayAttention', () => {
     })
     expect(attentionImage.setTemplateImage).toHaveBeenCalledWith(false)
     expect(created.setImage).toHaveBeenCalledWith(attentionImage)
-    expect(created.setToolTip).toHaveBeenCalledWith('Orca - activity waiting')
+    expect(created.setToolTip).toHaveBeenCalledWith('Prompt - activity waiting')
 
     setTrayAttention(false)
     flushTraySceneMutation()
     expect(baseMacImage.setTemplateImage).toHaveBeenLastCalledWith(true)
     expect(created.setImage).toHaveBeenLastCalledWith(baseMacImage)
-    expect(created.setToolTip).toHaveBeenLastCalledWith('Orca')
+    expect(created.setToolTip).toHaveBeenLastCalledWith('Prompt')
   })
 
   it('recomposes active macOS attention when the system appearance changes', async () => {
@@ -625,7 +688,7 @@ describe('macOS hardening', () => {
     setTrayAttention(true)
     expect(() => flushTraySceneMutation()).not.toThrow()
     expect(created.setImage).toHaveBeenLastCalledWith(baseMacImage)
-    expect(created.setToolTip).toHaveBeenLastCalledWith('Orca')
+    expect(created.setToolTip).toHaveBeenLastCalledWith('Prompt')
     expect(warn).toHaveBeenCalledWith(
       '[system-tray] macOS attention icon failed; showing plain icon',
       expect.any(Error)
@@ -642,7 +705,7 @@ describe('macOS hardening', () => {
     })
     createSystemTray(options)
 
-    const settingsItem = builtMenuItems().find((item) => item.label === 'Settings')
+    const settingsItem = builtMenuItems().find((item) => item.label === 'Settings…')
     expect(() => settingsItem?.click?.()).not.toThrow()
     expect(error).toHaveBeenCalledWith('[system-tray] menu action failed', expect.any(Error))
   })
@@ -656,33 +719,41 @@ describe('language changes', () => {
       const { createSystemTray, rebuildSystemTrayMenu } = await loadModule()
       const { setMainUiLanguage } = await import('../i18n/main-i18n')
       await setMainUiLanguage('en')
-      const options = { ...createOptions(), onQuitAndStopAllSessions: vi.fn() }
+      const options = {
+        ...createOptions(),
+        getRunningTerminalCount: () => 2,
+        onQuitAndStopAllSessions: vi.fn()
+      }
       createSystemTray(options)
-      expect(builtMenuItems()[0].label).toBe('Open Orca')
+      expect(builtMenuItems()[0].label).toBe('2 terminals running')
+      expect(builtMenuItems()[2].label).toBe('Open Prompt')
 
-      await setMainUiLanguage('ja')
+      await setMainUiLanguage('ko')
       rebuildSystemTrayMenu()
-      expect(builtMenuItems()[0].label).toBe('Open Orca')
       flushTraySceneMutation()
 
       expect(trayInstances).toHaveLength(1)
       expect(trayInstances[0].setContextMenu).toHaveBeenCalledTimes(2)
-      expect(builtMenuItems()[0].label).toBe('Orca を開く')
-      expect(builtMenuItems().at(-2)?.label).toBe('完全に終了…')
-      expect(builtMenuItems().at(-1)?.label).toBe('終了')
-      builtMenuItems()[0].click?.()
-      builtMenuItems().at(-2)?.click?.()
+      const labels = builtMenuItems().map((item) => item.label)
+      expect(labels).toEqual([
+        '터미널 2개 실행 중',
+        undefined,
+        'Prompt 열기',
+        undefined,
+        'Prompt 정보',
+        ...(platform === 'darwin' ? ['업데이트 확인…', '설정…'] : []),
+        '도움말 · 피드백',
+        undefined,
+        'Prompt 종료',
+        '완전히 종료...'
+      ])
+      builtMenuItems()[2].click?.()
       builtMenuItems().at(-1)?.click?.()
+      builtMenuItems().at(-2)?.click?.()
       expect(options.onOpen).toHaveBeenCalledOnce()
       expect(options.onQuitAndStopAllSessions).toHaveBeenCalledOnce()
       expect(options.onQuit).toHaveBeenCalledOnce()
       if (platform === 'darwin') {
-        expect(builtMenuItems()[2].label).toBe('設定')
-        expect(builtMenuItems()[3].label).toBe('アップデートを確認…')
-        builtMenuItems()[2].click?.()
-        builtMenuItems()[3].click?.()
-        expect(options.onOpenSettings).toHaveBeenCalledOnce()
-        expect(options.onCheckForUpdates).toHaveBeenCalledOnce()
         expect(nativeThemeMock.on).toHaveBeenCalledTimes(1)
       } else {
         expect(trayInstances[0].on).toHaveBeenCalledTimes(1)
@@ -702,15 +773,15 @@ describe('language changes', () => {
     rebuildSystemTrayMenu()
     flushTraySceneMutation()
     expect(trayInstances[0].setToolTip).toHaveBeenLastCalledWith(
-      'Orca DEV (language-test) - 件のアクティビティが待機中'
+      'Prompt DEV (language-test) - 件のアクティビティが待機中'
     )
-    expect(builtMenuItems()[0].label).toBe('Orca DEV (language-test)')
+    expect(builtMenuItems()[0].label).toBe('Prompt DEV (language-test)')
     expect(composeAttentionMock).toHaveBeenCalled()
 
-    mainI18n.addResource('ja', 'translation', 'tray.openOrca', 'Orca を表示')
+    mainI18n.addResource('ja', 'translation', 'tray.openApp', 'Prompt を表示')
     rebuildSystemTrayMenu()
     flushTraySceneMutation()
-    expect(builtMenuItems()[2].label).toBe('Orca を表示')
+    expect(builtMenuItems()[2].label).toBe('Prompt を表示')
   })
 
   it('does nothing without a tray or when destroyed before the deferred refresh', async () => {

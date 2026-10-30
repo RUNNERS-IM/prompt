@@ -547,7 +547,14 @@
       "body": "Orca가 시스템 트레이에서 계속 실행 중입니다"
     },
     "activityWaiting": "Orca - 활동 대기 중",
-    "activityWaitingSuffix": "activity waiting"
+    "activityWaitingSuffix": "activity waiting",
+    "runningTerminals_other": "터미널 {{count}}개 실행 중",
+    "openApp": "Prompt 열기",
+    "about": "Prompt 정보",
+    "checkForUpdates": "업데이트 확인…",
+    "settings": "설정…",
+    "helpFeedback": "도움말 · 피드백",
+    "quitApp": "Prompt 종료"
   },
   "worktreeJumpPalette": {
     "matchLabel": {
@@ -21912,7 +21919,8 @@
         "software": "소프트웨어 렌더링",
         "unknown": "알 수 없음({{status}})",
         "summary": "GPU 가속: {{status}}"
-      }
+      },
+      "originalCredit": "원본: Orca (Stably AI) · MIT 라이선스"
     },
     "dialog": {
       "importCookies": "쿠키 가져오기",
