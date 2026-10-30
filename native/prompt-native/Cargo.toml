@@ -1,0 +1,23 @@
+[package]
+name = "prompt-native"
+version = "0.0.0"
+description = "Prompt's one native module: the OS features the app used to reach through helper programs"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "3", default-features = false, features = ["napi8"] }
+napi-derive = "3"
+libc = "0.2"
+
+[build-dependencies]
+napi-build = "2"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+strip = true

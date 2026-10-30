@@ -46,7 +46,7 @@ const exitCodes = await Promise.all(
     'build:computer-macos',
     'build:keyboard-layout-macos',
     'build:notification-status-macos',
-    'build:process-footprint-macos'
+    'build:prompt-native'
   ].map((scriptName) => runPnpmScript(scriptName))
 )
 clearTimeout(forceTimer)

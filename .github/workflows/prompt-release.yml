@@ -236,6 +236,29 @@ jobs:
       - name: Verify macOS entitlements
         run: pnpm verify:macos-entitlements
 
+      # Prompt 네이티브 모듈(native/prompt-native, Rust)은 build:release 안의 build:native 가 만든다.
+      # Intel 판을 안 내도 두 CPU 를 다 만든다(build:prompt-native 기본). 그래서 x86_64 대상도 깐다.
+      - name: Ensure the Rust toolchain for the Prompt native module
+        run: |
+          set -euo pipefail
+          if ! command -v cargo >/dev/null; then
+            rustup toolchain install stable --profile minimal
+            rustup default stable
+          fi
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          cargo --version
+
+      # 내려받은 크레이트와 빌드 결과를 남겨 다음 실행이 처음부터 컴파일하지 않게 한다.
+      - name: Cache the Prompt native module build
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            native/prompt-native/target
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          restore-keys: |
+            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
+
       - name: Build app
         run: pnpm run build:release
 

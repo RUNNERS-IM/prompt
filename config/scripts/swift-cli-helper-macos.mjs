@@ -48,12 +48,7 @@ export function buildSwiftCliHelper({ nativeDir, executable, argv }) {
 }
 
 const DEV_SWIFT_CLI_HELPERS = [
-  [
-    'keyboard-layout-macos',
-    'orca-keyboard-layout',
-    'shifted Option composition stays conservative'
-  ],
-  ['process-footprint-macos', 'orca-process-footprint', 'memory panel falls back to top']
+  ['keyboard-layout-macos', 'orca-keyboard-layout', 'shifted Option composition stays conservative']
 ]
 
 /** Dev bundles build each helper for the host arch; a missing swiftc only degrades that helper's feature. */

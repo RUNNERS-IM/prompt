@@ -1,17 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import type * as NodeFs from 'node:fs'
 import os from 'node:os'
 import type { MemorySnapshotStore } from './collector'
 
 const MB = 1024 * 1024
 
-const { appMetricsMock, runProcessMock, execMock, listRegisteredPtysMock, helperPresent } =
+const { appMetricsMock, runProcessMock, execMock, listRegisteredPtysMock, loadPromptNativeMock } =
   vi.hoisted(() => ({
-    helperPresent: { value: false },
     appMetricsMock: vi.fn(),
     runProcessMock: vi.fn(),
     execMock: vi.fn(),
-    listRegisteredPtysMock: vi.fn()
+    listRegisteredPtysMock: vi.fn(),
+    loadPromptNativeMock: vi.fn()
   }))
 
 vi.mock('child_process', () => ({
@@ -21,14 +20,7 @@ vi.mock('child_process', () => ({
 vi.mock('@orca/process-host', () => ({
   runProcess: (spec: { program: string }) => runProcessMock(spec)
 }))
-vi.mock('node:fs', async (importOriginal) => {
-  const actual = await importOriginal<typeof NodeFs>()
-  return {
-    ...actual,
-    existsSync: (path: string) =>
-      path.endsWith('orca-process-footprint') ? helperPresent.value : actual.existsSync(path)
-  }
-})
+vi.mock('../prompt-native', () => ({ loadPromptNative: () => loadPromptNativeMock() }))
 vi.mock('./pty-registry', () => ({ listRegisteredPtys: listRegisteredPtysMock }))
 
 const emptyStore = {
@@ -69,7 +61,8 @@ const TOP_OUTPUT = [
 describe('darwin memory footprint', () => {
   beforeEach(() => {
     vi.restoreAllMocks()
-    helperPresent.value = false
+    loadPromptNativeMock.mockReset()
+    loadPromptNativeMock.mockReturnValue(null)
     runProcessMock.mockReset()
     vi.spyOn(os, 'platform').mockReturnValue('darwin')
     appMetricsMock.mockReturnValue([
@@ -106,37 +99,41 @@ describe('darwin memory footprint', () => {
     expect(snapshot.totalMemory).toBe((140 + 427 + 30 + 2) * MB)
   })
 
-  it('prefers the bundled helper over top when it is present', async () => {
-    helperPresent.value = true
-    runProcessMock.mockImplementation((spec: { program: string }) =>
-      Promise.resolve(
-        spec.program.endsWith('orca-process-footprint')
-          ? {
-              code: 0,
-              signal: null,
-              stdout: `100 ${150 * MB}\n101 ${400 * MB}\n`,
-              stderr: '',
-              timedOut: false
-            }
-          : { code: 1, signal: null, stdout: '', stderr: '', timedOut: false }
-      )
-    )
+  it('prefers the native module over top when it loads', async () => {
+    const processFootprints = vi.fn().mockResolvedValue([
+      { pid: 100, bytes: 150 * MB },
+      { pid: 101, bytes: 400 * MB }
+    ])
+    loadPromptNativeMock.mockReturnValue({ processFootprints })
     const { collectMemorySnapshot } = await loadCollector()
 
     const snapshot = await collectMemorySnapshot(emptyStore)
 
     expect(snapshot.processMemoryMetric).toBe('footprint')
     expect(snapshot.app.main.memory).toBe(150 * MB)
+    expect(processFootprints).toHaveBeenCalledTimes(1)
     expect(runProcessMock.mock.calls.map(([spec]) => spec.program)).not.toContain('/usr/bin/top')
   })
 
-  it('falls back to top when the bundled helper fails', async () => {
-    helperPresent.value = true
+  it('uses top when the native module cannot load', async () => {
+    loadPromptNativeMock.mockReturnValue(null)
     const { collectMemorySnapshot } = await loadCollector()
 
     const snapshot = await collectMemorySnapshot(emptyStore)
 
     expect(snapshot.app.main.memory).toBe(140 * MB)
+    expect(runProcessMock.mock.calls.map(([spec]) => spec.program)).toContain('/usr/bin/top')
+  })
+
+  it('falls back to top when the native module loads but its read fails', async () => {
+    const processFootprints = vi.fn().mockRejectedValue(new Error('proc_listallpids failed'))
+    loadPromptNativeMock.mockReturnValue({ processFootprints })
+    const { collectMemorySnapshot } = await loadCollector()
+
+    const snapshot = await collectMemorySnapshot(emptyStore)
+
+    expect(snapshot.app.main.memory).toBe(140 * MB)
+    expect(processFootprints).toHaveBeenCalledTimes(1)
   })
 
   it('falls back to RSS when top is unavailable', async () => {

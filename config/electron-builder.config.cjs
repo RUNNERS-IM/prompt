@@ -428,6 +428,16 @@ module.exports = {
       const architecture = macSliceArch(context.arch, 'local-build compatibility')
       const schedulingAddon = buildMacShipItScheduling(resourcesDir, architecture)
       await signMacStandaloneHelper(schedulingAddon, 'ShipIt scheduling', context.packager)
+      // Prompt's Rust module ships beside the ShipIt addon; a release must not drop to the slower fallbacks.
+      const promptNative = join(resourcesDir, 'prompt-native.node')
+      if (existsSync(promptNative)) {
+        execFileSync('/usr/bin/lipo', [
+          promptNative,
+          '-verify_arch',
+          architecture === 'x64' ? 'x86_64' : 'arm64'
+        ])
+      }
+      await signMacStandaloneHelper(promptNative, 'prompt-native', context.packager)
       const version = context.packager.appInfo.version
       let commit = process.env.ORCA_BUILD_COMMIT || process.env.GITHUB_SHA || 'unknown'
       if (commit === 'unknown') {
@@ -525,11 +535,6 @@ module.exports = {
       await signMacStandaloneHelper(
         join(resourcesDir, '..', 'MacOS', 'orca-keyboard-layout'),
         'orca-keyboard-layout',
-        context.packager
-      )
-      await signMacStandaloneHelper(
-        join(resourcesDir, '..', 'MacOS', 'orca-process-footprint'),
-        'orca-process-footprint',
         context.packager
       )
       await packageMacTerminalHost(join(resourcesDir, '..', '..'), context)
@@ -638,6 +643,11 @@ module.exports = {
         from: 'native/computer-use-macos/.build/release/Prompt Computer Use.app',
         to: 'Prompt Computer Use.app'
       },
+      // Built per CPU by build:prompt-native; Resources keeps it on real disk (native/ never enters app.asar).
+      {
+        from: 'native/prompt-native/prompt-native.darwin-${arch}.node',
+        to: 'prompt-native.node'
+      },
       featureWallResources
     ],
     // macOS 26 UNUserNotificationCenter aborts helpers launched from Resources; execute from Contents/MacOS (#7929).
@@ -649,10 +659,6 @@ module.exports = {
       {
         from: 'native/keyboard-layout-macos/.build/release/orca-keyboard-layout',
         to: 'MacOS/orca-keyboard-layout'
-      },
-      {
-        from: 'native/process-footprint-macos/.build/release/orca-process-footprint',
-        to: 'MacOS/orca-process-footprint'
       }
     ],
     target: [

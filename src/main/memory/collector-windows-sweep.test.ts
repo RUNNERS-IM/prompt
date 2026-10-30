@@ -31,6 +31,9 @@ vi.mock('./pty-registry', () => ({
   listRegisteredPtys: listRegisteredPtysMock
 }))
 
+// A locally built native module would answer for darwin; this suite covers the RSS path.
+vi.mock('../prompt-native', () => ({ loadPromptNative: () => null }))
+
 function appEnvironment() {
   return {
     getPath: () => process.cwd(),
