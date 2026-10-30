@@ -30,6 +30,7 @@ import { TerminalAppearanceSection } from './TerminalAppearanceSection'
 import type { UseGhosttyImportReturn } from './useGhosttyImport'
 import type { UseWarpThemeImportReturn } from './useWarpThemeImport'
 import { AppIconSelector } from './AppIconSelector'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { normalizeAppIconId } from '../../../../shared/app-icon'
 import { getRendererAppPlatform } from '@/lib/renderer-app-platform'
 import { isWebClientLocation } from '@/lib/web-client-location'
@@ -266,7 +267,8 @@ export function AppearancePane({
       ) : null}
 
       {/* Keep the App Icon easter egg at the bottom instead of inside Interface advanced. */}
-      {appIconMatches ? (
+      {/* Prompt: the icon choices are Orca whale icons, so the picker is not shown. */}
+      {appIconMatches && !PROMPT_BLOCK_UPSTREAM_SERVICES ? (
         <SearchableSetting
           title={translate('auto.components.settings.AppearancePane.ca1590d42f', 'App Icon')}
           description={translate(

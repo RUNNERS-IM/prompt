@@ -3,8 +3,27 @@ import type { PostProcessorModule } from 'i18next'
 // Prompt keeps upstream catalogs untouched so daily merges stay conflict-free; the brand is swapped as strings render.
 export const PROMPT_BRAND_POST_PROCESSOR = 'promptBrand'
 
+/** The product name shown where upstream code wrote "Orca" without going through translations. */
+export const PROMPT_APP_NAME = 'Prompt'
+
+// Only whole words change, so env names (ORCA_WORKSPACE_NAME), files (orca.yaml) and the `orca` CLI stay as they are.
+const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
+  [/github\.com\/stablyai\/orca\b/g, 'github.com/RUNNERS-IM/prompt'],
+  // Pairing links: desktop and mobile both use the prompt:// scheme.
+  [/\borca:\/\//g, 'prompt://'],
+  [/\bOrca\b/g, PROMPT_APP_NAME],
+  // Some catalogs (en title, machine-translated ko) spell the brand in capitals.
+  [/\bORCA\b/g, 'PROMPT'],
+  // French catalog translated the brand itself.
+  [/\bOrque\b/g, PROMPT_APP_NAME]
+]
+
 export function applyPromptBrand(value: string): string {
-  return value.replace(/\bOrca\b/g, 'Prompt')
+  let result = value
+  for (const [pattern, replacement] of BRAND_REPLACEMENTS) {
+    result = result.replace(pattern, replacement)
+  }
+  return result
 }
 
 export const promptBrandPostProcessor: PostProcessorModule = {

@@ -237,6 +237,8 @@ const ORCA_MAC_TEAM_ID = 'RGWVXJ8URP'
 module.exports = {
   appId,
   productName: 'Prompt',
+  // Prompt: without this electron-builder writes "Copyright © <year> stablyai" from the package.json author.
+  copyright: 'Copyright © RUNNERS. Based on Orca (MIT)',
   protocols: [{ name: 'Prompt', schemes: ['prompt'] }],
   toolsets: { appimage: '1.0.3' },
   ...(devChannelBuildVersion

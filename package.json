@@ -1,9 +1,9 @@
 {
   "name": "orca",
   "version": "1.4.214",
-  "description": "Next-gen IDE for parallel agentic development",
-  "homepage": "https://github.com/stablyai/orca",
-  "author": "stablyai",
+  "description": "Prompt: run and manage many Claude Code sessions side by side",
+  "homepage": "https://github.com/RUNNERS-IM/prompt",
+  "author": "RUNNERS",
   "bin": {
     "orca": "./out/cli/index.js",
     "orca-dev": "./config/scripts/orca-dev.mjs"
