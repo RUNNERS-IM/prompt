@@ -181,3 +181,12 @@ html.prompt-mac-vibrancy .titlebar {
   background: var(--prompt-window);
   border-bottom-color: transparent;
 }
+
+/* ===== Prompt UI pass: status bar text (P7), settings sidebar (P8), one selection style (P9).
+   Only this block belongs to that pass; config/scripts/prompt-check-css-hooks.mjs checks every hook in this file. ===== */
+
+/* P7: status bar text at the hint size 11 of the shared baseline (upstream uses text-xs = 12). */
+html.prompt-mac-vibrancy .prompt-status-bar,
+html.prompt-mac-vibrancy .prompt-status-bar .text-xs {
+  font-size: 11px;
+}

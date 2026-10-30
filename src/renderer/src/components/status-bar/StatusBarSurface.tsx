@@ -21,6 +21,7 @@ import { SkillUpdateStatusSegment } from './SkillUpdateStatusSegment'
 import { NativeChatResumeStatusSegment } from './NativeChatResumeStatusSegment'
 import { CaffeinateStatusSegment } from './CaffeinateStatusSegment'
 import { PluginsStatusSegment } from './PluginsStatusSegment'
+import { promptShowsStatusSegment } from './prompt-status-bar'
 import { RemoteServerUpdateStatusSegment } from './RemoteServerUpdateStatusSegment'
 import { TOGGLE_FLOATING_TERMINAL_EVENT } from '@/lib/floating-terminal'
 import { FloatingTerminalIconContextMenu } from '@/components/floating-terminal/FloatingTerminalIconContextMenu'
@@ -293,16 +294,20 @@ export function StatusBarSurface({
         <div ref={segmentsRef} className="flex w-max items-center gap-3">
           {!isPairedWebClientWindow() ? (
             <>
-              <PluginsStatusSegment />
+              {promptShowsStatusSegment('plugins') ? <PluginsStatusSegment /> : null}
               <CaffeinateStatusSegment iconOnly={segmentsIconOnly} />
             </>
           ) : null}
-          <RemoteServerUpdateStatusSegment iconOnly={segmentsIconOnly} />
-          <SkillUpdateStatusSegment iconOnly={segmentsIconOnly} />
+          {promptShowsStatusSegment('remote-server-update') ? (
+            <RemoteServerUpdateStatusSegment iconOnly={segmentsIconOnly} />
+          ) : null}
+          {promptShowsStatusSegment('skill-update') ? (
+            <SkillUpdateStatusSegment iconOnly={segmentsIconOnly} />
+          ) : null}
           <NativeChatResumeStatusSegment iconOnly={segmentsIconOnly} />
           <UpdateStatusSegment compact={compact} iconOnly={segmentsIconOnly} />
           <React.Suspense fallback={null}>
-            {petEnabled ? <PetStatusSegment /> : null}
+            {petEnabled && promptShowsStatusSegment('pet') ? <PetStatusSegment /> : null}
             {showResourceUsage ? (
               <ResourceUsageStatusSegment compact={compact} iconOnly={segmentsIconOnly} />
             ) : null}
