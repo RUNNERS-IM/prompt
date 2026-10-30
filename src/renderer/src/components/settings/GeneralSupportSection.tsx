@@ -10,7 +10,8 @@ import { SettingsSubsectionHeader } from './SettingsFormControls'
 import { translate } from '@/i18n/i18n'
 
 // Do not deep-link to /stargazers: GitHub 404s that page for users without repo write access.
-const ORCA_GITHUB_URL = 'https://github.com/stablyai/orca'
+// Prompt: the star button points at our fork, same repo as ORCA_REPO in main/github/client.
+const ORCA_GITHUB_URL = 'https://github.com/RUNNERS-IM/prompt'
 
 type SupportState =
   | 'loading'
