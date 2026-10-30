@@ -1,6 +1,7 @@
-/* RUNNERS app cards, design standard A (macOS default look).
-   Card radius 10, 0.5px hairline, row 14/10 padding, 12 gap, section header 11 semibold 6 above
-   the card, 18 between sections. Light: card white 85%; dark (html.dark): white 5%. */
+/* RUNNERS app cards, same values as Split's settings and About cards (2026-10-30 decision 1A).
+   Card radius 12, 0.5px hairline, row 16 left/right and 13 top/bottom, 12 between icon and text,
+   section title 11 semibold 8 above the card, 24 between cards.
+   Light: card white 85%; dark (html.dark): white 5%. */
 .runners-apps {
   --runners-apps-card: rgb(255 255 255 / 0.85);
   --runners-apps-hairline: rgb(0 0 0 / 0.1);
@@ -11,7 +12,7 @@
   --runners-apps-accent: var(--prompt-accent, #007aff);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
   font-family: var(--app-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
   text-align: left;
 }
@@ -28,7 +29,7 @@
 .runners-apps-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .runners-apps-title {
@@ -44,7 +45,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--runners-apps-card);
   outline: 0.5px solid var(--runners-apps-hairline);
   outline-offset: -0.5px;
@@ -56,7 +57,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 13px 16px;
 }
 
 /* Inset separator between rows, starting after the icon like macOS lists. */
@@ -64,7 +65,7 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 58px;
+  left: 60px;
   right: 0;
   height: 0.5px;
   background: var(--runners-apps-hairline);
