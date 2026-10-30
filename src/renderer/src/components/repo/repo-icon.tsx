@@ -27,6 +27,7 @@ import type { RepoIcon } from '../../../../shared/repo-icon'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
+import { useIsWhiteGlyphImage } from './repo-icon-white-glyph'
 
 export const getRepoLucideIconOptions = createLocalizedCatalog(() => [
   {
@@ -145,6 +146,22 @@ export function RepoIconGlyph({
   const imageSrc = repoIcon?.type === 'image' ? repoIcon.src : null
   // Private GHES avatars may require cookies; track failed URLs without hiding later replacement icons.
   const [failedImageSrc, setFailedImageSrc] = React.useState<string | null>(null)
+  const whiteGlyph = useIsWhiteGlyphImage(imageSrc)
+
+  if (imageSrc !== null && failedImageSrc !== imageSrc && whiteGlyph) {
+    // White logo: paint it with the text colour so it stays visible on the light sidebar.
+    const mask = `url(${JSON.stringify(imageSrc)}) center / contain no-repeat`
+    return (
+      <span className={cn('inline-flex items-center justify-center overflow-hidden', className)}>
+        <span
+          aria-hidden="true"
+          className={cn('size-full bg-current', iconClassName)}
+          style={{ mask, WebkitMask: mask }}
+          data-repo-icon-white-glyph=""
+        />
+      </span>
+    )
+  }
 
   if (imageSrc !== null && failedImageSrc !== imageSrc) {
     return (
