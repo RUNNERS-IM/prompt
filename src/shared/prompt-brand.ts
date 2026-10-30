@@ -12,8 +12,9 @@ const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   // Pairing links: desktop and mobile both use the prompt:// scheme.
   [/\borca:\/\//g, 'prompt://'],
   [/\bOrca\b/g, PROMPT_APP_NAME],
-  // Some catalogs (en title, machine-translated ko) spell the brand in capitals.
-  [/\bORCA\b/g, 'PROMPT'],
+  // Some catalogs (en title, machine-translated ko) spell the brand in capitals. A hyphen on either
+  // side means an identifier such as the Jira/Linear issue key ORCA-123, which must stay as typed.
+  [/(?<![\w-])ORCA(?![\w-])/g, 'PROMPT'],
   // French catalog translated the brand itself.
   [/\bOrque\b/g, PROMPT_APP_NAME]
 ]
