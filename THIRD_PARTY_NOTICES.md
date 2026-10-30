@@ -37,8 +37,9 @@ SOFTWARE.
 
 Prompt runs on Electron (<https://github.com/electron/electron>), distributed under the MIT
 License; its copyright and permission notice follow. Electron includes Chromium; the license
-notices for Chromium and its components ship as `LICENSES.chromium.html` (on Windows and Linux,
-next to the Prompt executable).
+notices for Chromium and its components ship with the app as `LICENSES.chromium.html` (on
+macOS in the app's Resources folder, on Windows and Linux next to the Prompt executable). The
+Open Source Notices window in Prompt's About window can open that file.
 
 ```text
 Copyright (c) Electron contributors

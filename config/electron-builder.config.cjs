@@ -70,6 +70,11 @@ const {
 } = require('./scripts/appimage-node-runtime.cjs')
 const { signWindowsUninstallerViaSignPath } = require('./scripts/windows-uninstaller-signing.cjs')
 const { buildMacShipItScheduling } = require('./scripts/macos-shipit-scheduling.cjs')
+const {
+  assertPackagedLicenseNotices,
+  licenseNoticeResources,
+  macChromiumLicensesResource
+} = require('./scripts/prompt-license-notice-resources.cjs')
 
 // Dev channels need release bundle ID/signature/notarization so Squirrel.Mac accepts updates and macOS retains app identity.
 const isMacHourly = process.env.ORCA_MAC_HOURLY === '1'
@@ -138,12 +143,6 @@ const emojiShortcodeDatasetResource = {
   from: 'node_modules/emojibase-data/en/shortcodes/emojibase.json',
   to: 'node_modules/emojibase-data/en/shortcodes/emojibase.json'
 }
-// Prompt's LICENSE and the third-party notices (Orca's MIT text) as plain files in the app's
-// resources folder, so every install carries them and the About window can open the notices.
-const licenseNoticeResources = [
-  { from: 'LICENSE', to: 'LICENSE' },
-  { from: 'THIRD_PARTY_NOTICES.md', to: 'THIRD_PARTY_NOTICES.md' }
-]
 const commonExtraResources = [
   ...licenseNoticeResources,
   relayExtraResource,
@@ -471,6 +470,7 @@ module.exports = {
     }
     // Validate real electron-builder output so broken extraResources mappings fail before shipping.
     verifyPackagedPluginResources(resourcesDir)
+    assertPackagedLicenseNotices(resourcesDir, context.electronPlatformName)
     assertPackagedWebClient(resourcesDir)
     assertPackagedServeSelectionEntry(resourcesDir)
     finalizePackagedRipgrep(resourcesDir)
@@ -607,6 +607,7 @@ module.exports = {
     notarize: isMacRelease,
     extraResources: [
       ...commonExtraResources,
+      macChromiumLicensesResource,
       ...createPackagedRuntimeNodeModuleResources('darwin'),
       macSpeechNativeResource,
       {
