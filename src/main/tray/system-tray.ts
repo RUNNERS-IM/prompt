@@ -1,6 +1,8 @@
 import { Menu, Tray, nativeImage, nativeTheme, type NativeImage } from 'electron'
 import menuBarIconPath from '../../../resources/tray/orca-menu-barTemplate.png?asset&asarUnpack'
 import menuBarIconRetinaPath from '../../../resources/tray/orca-menu-barTemplate@2x.png?asset&asarUnpack'
+import menuBarOffIconPath from '../../../resources/tray/prompt-menu-bar-offTemplate.png?asset&asarUnpack'
+import menuBarOffIconRetinaPath from '../../../resources/tray/prompt-menu-bar-offTemplate@2x.png?asset&asarUnpack'
 import { deferAppKitSceneMutation } from '../appkit-scene-mutation'
 import { createAppIconImage } from '../app-icon'
 import { translateMain } from '../i18n/main-i18n'
@@ -34,6 +36,34 @@ let trayOptions: SystemTrayOptions | null = null
 // Cache the plain icon so attention changes do not reload the app PNG.
 let baseTrayImage: NativeImage | null = null
 
+// Prompt's menu bar cursor blinks every 2.4s (half on, half off) regardless of activity.
+const CURSOR_BLINK_HALF_PERIOD_MS = 1200
+let cursorOffTrayImage: NativeImage | null = null
+let cursorVisible = true
+let cursorBlinkTimer: ReturnType<typeof setInterval> | null = null
+
+function currentMacTrayFrame(): NativeImage | null {
+  return cursorVisible || !cursorOffTrayImage ? baseTrayImage : cursorOffTrayImage
+}
+
+function startCursorBlink(): void {
+  if (cursorBlinkTimer || !cursorOffTrayImage) {
+    return
+  }
+  cursorBlinkTimer = setInterval(() => {
+    cursorVisible = !cursorVisible
+    scheduleTrayImage()
+  }, CURSOR_BLINK_HALF_PERIOD_MS)
+}
+
+function stopCursorBlink(): void {
+  if (cursorBlinkTimer) {
+    clearInterval(cursorBlinkTimer)
+    cursorBlinkTimer = null
+  }
+  cursorVisible = true
+}
+
 // Remember attention before deferred tray creation so its first image is current.
 let attentionActive = false
 
@@ -45,9 +75,9 @@ let nativeThemeUpdatedListener: (() => void) | null = null
 // Per-worktree tooltips distinguish concurrent dev instances.
 function baseTooltip(): string {
   if (!devIndicator) {
-    return 'Orca'
+    return 'Prompt'
   }
-  return devIndicator.label ? `Orca DEV (${devIndicator.label})` : 'Orca DEV'
+  return devIndicator.label ? `Prompt DEV (${devIndicator.label})` : 'Prompt DEV'
 }
 
 // Downscale the app image for Windows' 16px notification-area slot.
@@ -59,17 +89,18 @@ function applyTrayImage(): void {
   }
 
   if (process.platform === 'darwin') {
+    const frame = currentMacTrayFrame() ?? baseTrayImage
     if (attentionActive) {
       try {
         // Disabling template tint enables amber attention but requires theme-appropriate literal glyph pixels.
         const useLightGlyph = nativeTheme.shouldUseDarkColors
         const attentionImage = composeTrayAttentionIcon(
-          tintTrayTemplateForAttention(baseTrayImage, useLightGlyph)
+          tintTrayTemplateForAttention(frame, useLightGlyph)
         )
-        if (baseTrayImage.getScaleFactors().includes(2)) {
+        if (frame.getScaleFactors().includes(2)) {
           // toBitmap reads 1x only; explicitly rebuild the 2x representation for Retina.
           const retinaAttentionImage = composeTrayAttentionIcon(
-            tintTrayTemplateForAttention(baseTrayImage, useLightGlyph, 2)
+            tintTrayTemplateForAttention(frame, useLightGlyph, 2)
           )
           attentionImage.addRepresentation({
             scaleFactor: 2,
@@ -90,8 +121,8 @@ function applyTrayImage(): void {
       }
     }
 
-    baseTrayImage.setTemplateImage(true)
-    tray.setImage(baseTrayImage)
+    frame.setTemplateImage(true)
+    tray.setImage(frame)
     tray.setToolTip(baseTooltip())
     return
   }
@@ -114,15 +145,18 @@ function scheduleTrayImage(): void {
   })
 }
 
-function createMacMenuBarImage(): NativeImage | null {
-  const image = nativeImage.createFromPath(menuBarIconPath)
+function createMacMenuBarImage(
+  iconPath: string = menuBarIconPath,
+  retinaIconPath: string = menuBarIconRetinaPath
+): NativeImage | null {
+  const image = nativeImage.createFromPath(iconPath)
   const { width, height } = image.getSize()
   if (width <= 0 || height <= 0) {
     console.warn('[system-tray] macOS menu bar icon could not be loaded')
     return null
   }
 
-  const retinaImage = nativeImage.createFromPath(menuBarIconRetinaPath)
+  const retinaImage = nativeImage.createFromPath(retinaIconPath)
   const retinaSize = retinaImage.getSize()
   if (retinaSize.width > 0 && retinaSize.height > 0) {
     try {
@@ -214,6 +248,8 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
     }
     if (devIndicator) {
       baseTrayImage = stampMacDevBadge(baseTrayImage)
+    } else {
+      cursorOffTrayImage = createMacMenuBarImage(menuBarOffIconPath, menuBarOffIconRetinaPath)
     }
   } else {
     baseTrayImage = createAppIconImage(opts.appIcon).resize({
@@ -236,6 +272,7 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
     )
   } else {
     watchMacAppearance()
+    startCursorBlink()
   }
   return tray
 }
@@ -316,6 +353,8 @@ export function setTrayAttention(active: boolean): void {
 
 export function destroySystemTray(): void {
   stopWatchingMacAppearance()
+  stopCursorBlink()
+  cursorOffTrayImage = null
   if (tray && !tray.isDestroyed()) {
     tray.destroy()
   }

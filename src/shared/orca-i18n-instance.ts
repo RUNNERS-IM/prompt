@@ -10,6 +10,7 @@ import { isPseudoLocalizationLocale, pseudoLocalizeString } from './pseudo-local
 import { DEFAULT_UI_LOCALE } from './ui-locale'
 import type { PluginLanguagePackRegistration } from './plugins/artifacts/plugin-language-pack-artifact'
 import { replacePluginLanguagePackResources } from './plugins/plugin-language-pack-i18n-resources'
+import { PROMPT_BRAND_POST_PROCESSOR, promptBrandPostProcessor } from './prompt-brand'
 
 export type OrcaI18n = {
   i18n: I18nInstance
@@ -51,6 +52,7 @@ export function createOrcaI18n(options: {
   }
 
   i18n.use(backend)
+  i18n.use(promptBrandPostProcessor)
   for (const module of options.modules ?? []) {
     i18n.use(module)
   }
@@ -66,6 +68,7 @@ export function createOrcaI18n(options: {
     // An empty catalog value falls back to English instead of rendering blank.
     returnEmptyString: false,
     interpolation: { escapeValue: false },
+    postProcess: [PROMPT_BRAND_POST_PROCESSOR],
     ...options.initOptions
   })
 
