@@ -11,31 +11,19 @@ import WorktreeCardAgents from './WorktreeCardAgents'
 import { useWorktreeAgentRows } from './useWorktreeAgentRows'
 import { promptTerminalTabName } from './prompt-session-row-name'
 import type { WorktreeCardController } from './use-worktree-card-controller'
+import { PromptWorkspaceIdentity } from './prompt-workspace-identity'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
 
 const ROW_CLASS =
   'compact-agent-row min-w-0 cursor-pointer rounded-sm px-1 text-[11px] leading-none text-muted-foreground worktree-agent-row-hover flex h-6 items-center gap-1'
 
-function BranchLabel({ label }: { label: string | undefined }): React.JSX.Element | null {
-  return label ? (
-    <span
-      className="min-w-0 max-w-20 shrink-[2] truncate text-[10px] text-muted-foreground/50"
-      title={label}
-    >
-      {label}
-    </span>
-  ) : null
-}
-
 function PromptTerminalRow({
   worktreeId,
-  tab,
-  branchLabel
+  tab
 }: {
   worktreeId: string
   tab: TerminalTab
-  branchLabel: string | undefined
 }): React.JSX.Element {
   const focused = useAppStore(
     (s) => s.activeWorktreeId === worktreeId && s.activeTabIdByWorktree?.[worktreeId] === tab.id
@@ -62,27 +50,25 @@ function PromptTerminalRow({
     >
       <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
       <span className="min-w-0 flex-1 truncate">{name}</span>
-      <BranchLabel label={branchLabel} />
     </div>
   )
 }
 
 /**
  * Prompt two-level sidebar: under a project header only session rows show — agent rows (named like
- * their tab) and plain terminals. The workspace title row, branch/path line and "N agents" row are gone.
+ * their tab) and plain terminals. A one-workspace project shows its branch, connection dot and
+ * "Default" chip on the project header; with several workspaces each gets one line (name, then
+ * those same marks) above its sessions.
  */
 export function PromptWorktreeSessionRows({
   card
 }: {
   card: WorktreeCardController
 }): React.JSX.Element {
-  const { worktree, repo, branchIdentityDisplay } = card
+  const { worktree, repo } = card
   const hasSiblingWorktrees = useAppStore((s) =>
     repo ? (s.worktreesByRepo?.[repo.id]?.length ?? 0) > 1 : false
   )
-  const branchLabel = hasSiblingWorktrees
-    ? branchIdentityDisplay || worktree.displayName
-    : undefined
   const agents = useWorktreeAgentRows(worktree.id, true)
   const tabs = useAppStore(useShallow((s) => s.tabsByWorktree?.[worktree.id] ?? EMPTY_TABS))
   const plainTabs = useMemo(() => {
@@ -92,20 +78,20 @@ export function PromptWorktreeSessionRows({
 
   return (
     <div className="flex min-w-0 flex-col gap-0.5" data-prompt-session-rows="">
-      <WorktreeCardAgents
-        worktreeId={worktree.id}
-        agents={agents}
-        expandAll
-        trailingLabel={branchLabel}
-        className="mt-0"
-      />
+      {hasSiblingWorktrees ? (
+        <div
+          className="flex h-6 min-w-0 items-center gap-1.5 px-1 text-[12px] text-foreground/85"
+          data-prompt-workspace-row=""
+        >
+          <span className="min-w-0 truncate font-medium" title={worktree.displayName}>
+            {worktree.displayName}
+          </span>
+          <PromptWorkspaceIdentity worktree={worktree} repo={repo ?? undefined} />
+        </div>
+      ) : null}
+      <WorktreeCardAgents worktreeId={worktree.id} agents={agents} expandAll className="mt-0" />
       {plainTabs.map((tab) => (
-        <PromptTerminalRow
-          key={tab.id}
-          worktreeId={worktree.id}
-          tab={tab}
-          branchLabel={branchLabel}
-        />
+        <PromptTerminalRow key={tab.id} worktreeId={worktree.id} tab={tab} />
       ))}
       {agents.length === 0 && plainTabs.length === 0 ? (
         // An empty workspace still needs a way in: the click reaches the card, which opens the workspace.
@@ -114,7 +100,6 @@ export function PromptWorktreeSessionRows({
           <span className="min-w-0 flex-1 truncate">
             {translate('prompt.sidebar.openWorkspace', 'Open a terminal')}
           </span>
-          <BranchLabel label={branchLabel} />
         </div>
       ) : null}
     </div>
