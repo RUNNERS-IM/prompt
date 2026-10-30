@@ -53,6 +53,11 @@ function makeState(customTitle: string | null = null) {
       if (tabId === tab.id) {
         tab = { ...tab, aiVaultTitle }
       }
+    },
+    setTabCustomTitle: (tabId: string, title: string | null) => {
+      if (tabId === tab.id) {
+        tab = { ...tab, customTitle: title }
+      }
     }
     // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the test state carries only the slices the title request collector reads.
   } as unknown as AppState
@@ -72,15 +77,40 @@ describe('applyPromptClaudeSessionTitle', () => {
     expect(promptTerminalTabName(tab())).toBe('new name')
   })
 
-  it('keeps a name the user set on the tab', () => {
-    const { state, tab } = makeState('my tab')
+  it('lets a /rename made after the tab was named replace that name, also after a restart', () => {
+    // `terminal create --title X` stores X as the tab's set name.
+    const { state, tab } = makeState('X')
     applyPromptClaudeSessionTitle(state, {
       paneKey: 'tab-1:leaf-1',
       sessionId: 'claude-session',
-      title: 'new name'
+      title: 'Y'
     })
-    expect(resolveTerminalTabTitle(tab(), false)).toBe('my tab')
-    expect(promptTerminalTabName(tab())).toBe('my tab')
+    expect(resolveTerminalTabTitle(tab(), false)).toBe('Y')
+    expect(promptTerminalTabName(tab())).toBe('Y')
+    // A restart restores the saved tab; the set name is gone, so Y is still shown.
+    const restored: TerminalTab = JSON.parse(JSON.stringify(tab()))
+    expect(restored.customTitle).toBeNull()
+    expect(resolveTerminalTabTitle(restored, false)).toBe('Y')
+    expect(promptTerminalTabName(restored)).toBe('Y')
+  })
+
+  it('keeps a tab name set after the /rename when Claude repeats the same title', () => {
+    const { state, tab } = makeState()
+    applyPromptClaudeSessionTitle(state, {
+      paneKey: 'tab-1:leaf-1',
+      sessionId: 'claude-session',
+      title: 'Y'
+    })
+    // The user renames the tab from the tab menu afterwards.
+    state.setTabCustomTitle('tab-1', 'Z')
+    // Claude re-appends its custom-title record (for example after a restart and resume).
+    applyPromptClaudeSessionTitle(state, {
+      paneKey: 'tab-1:leaf-1',
+      sessionId: 'claude-session',
+      title: 'Y'
+    })
+    expect(resolveTerminalTabTitle(tab(), false)).toBe('Z')
+    expect(promptTerminalTabName(tab())).toBe('Z')
   })
 
   it('ignores a title from a session the tab no longer tracks', () => {
