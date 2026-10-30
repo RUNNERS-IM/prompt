@@ -29,6 +29,7 @@ import {
 } from './normalize-loaded-state-collections'
 import { normalizeRetiredNameRegistryMap } from './retired-name-registry-normalization'
 import { hydrateWorktreeMetaAliasProjection } from './worktree-meta-alias-projection'
+import { applyPromptDefaultsOnce } from './prompt-defaults-migration'
 
 export function normalizeLoadedProfileState(
   parsed: PersistedState,
@@ -67,7 +68,10 @@ export function normalizeLoadedProfileState(
     workspaceLineageByChildKey: normalizeWorkspaceLineageByChildKey(
       parsed.workspaceLineageByChildKey
     ),
-    settings: normalizeLoadedGlobalSettings(parsed, terminal, profile),
+    settings: applyPromptDefaultsOnce(
+      normalizeLoadedGlobalSettings(parsed, terminal, profile),
+      markNeedsSave
+    ),
     ui: normalizeLoadedUiState(
       parsed,
       defaults,
