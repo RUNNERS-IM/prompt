@@ -23,6 +23,7 @@ import type { PluginLanguagePackRegistration } from '../../../shared/plugins/art
 import { withTimeout } from '../../../shared/promise-timeout-fallback'
 import { supportedIntlLocale } from './intl-locale-support'
 import { createOrcaI18n } from '../../../shared/orca-i18n-instance'
+import { applyPromptLocaleOverrides } from '../../../shared/prompt-locale-overrides'
 
 // Fetch catalogs as data: Chromium caches rejected module imports for the document's lifetime.
 const NON_DEFAULT_LOCALE_URLS: Record<Exclude<SupportedUiLocale, 'en'>, string> = {
@@ -126,7 +127,15 @@ export async function loadRendererUiLanguage(language: UiLanguage): Promise<stri
     }
     if (!i18n.hasResourceBundle(locale, 'translation')) {
       // Freshly parsed and never mutated, so skip i18next's defensive deep copy.
-      i18n.addResourceBundle(locale, 'translation', catalog, false, false, { skipCopy: true })
+      // Prompt: this path skips the backend read, so lay the Prompt wording over it here too.
+      i18n.addResourceBundle(
+        locale,
+        'translation',
+        applyPromptLocaleOverrides(locale, catalog),
+        false,
+        false,
+        { skipCopy: true }
+      )
     }
   }
   return locale
