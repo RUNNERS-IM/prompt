@@ -1,0 +1,151 @@
+# 매일 아침(KST 07:00) upstream(stablyai/orca)의 main 을 우리 main 에 병합하고, 그 main 을 release 에 합쳐
+# Prompt Release 워크플로(prompt-release.yml)가 새 판을 내게 한다.
+#
+# 순서:
+# 1) stablyai/orca main 을 가져온다(태그는 안 가져온다. upstream 의 v1.4.x 태그가 우리 버전 판단을 흐리지 않게).
+# 2) 우리 main 에 병합한다. 충돌이 나면 병합을 취소하고 이슈를 열고 멈춘다. 사람이 손으로 풀어야 한다.
+# 3) 깨끗하면 main 을 올리고, main 을 release 에 병합해 올린다.
+#    release 에는 날마다 버전 커밋이 쌓이고 upstream 도 package.json 의 version 줄을 자주 바꿔서,
+#    release 병합에서 package.json "한 파일만" 충돌하면 main 쪽 파일을 그대로 쓴다(버전은 출시 때 다시 올린다).
+#    다른 파일이 충돌하면 이슈를 열고 멈춘다.
+# 4) upstream 에 새 커밋이 없고 release 가 이미 main 을 담고 있으면 아무것도 하지 않는다(같은 판을 또 내지 않는다).
+#
+# 토큰: 저장소(또는 조직) 비밀값 PROMPT_SYNC_TOKEN 을 쓴다. 없으면 GITHUB_TOKEN 으로 돈다.
+# - GITHUB_TOKEN 으로 올린 push 는 다른 워크플로를 깨우지 않는다. 그래서 그때는 마지막에
+#   `gh workflow run prompt-release.yml` 로 출시를 직접 부른다.
+# - 또 GITHUB_TOKEN 은 .github/workflows 아래 파일을 바꾸는 push 를 거부당한다(workflows 권한을 받을 수 없다).
+#   upstream 은 워크플로 파일을 자주 고치므로, GITHUB_TOKEN 만으로는 그런 날 push 가 실패한다.
+#   PROMPT_SYNC_TOKEN 은 이 저장소에 Contents(쓰기)·Workflows(쓰기)·Issues(쓰기) 권한이 있는 fine-grained PAT
+#   (또는 GitHub App 토큰)이어야 한다. 이 토큰으로 올린 release push 는 prompt-release.yml 을 스스로 깨운다.
+name: Prompt Upstream Sync
+
+on:
+  schedule:
+    # 22:00 UTC = 다음 날 07:00 KST
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: prompt-upstream-sync
+  cancel-in-progress: false
+
+env:
+  UPSTREAM_URL: https://github.com/stablyai/orca.git
+  ISSUE_TITLE_PREFIX: 'upstream 동기화 충돌'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HAS_SYNC_TOKEN: ${{ secrets.PROMPT_SYNC_TOKEN != '' }}
+      GH_TOKEN: ${{ secrets.PROMPT_SYNC_TOKEN || github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.PROMPT_SYNC_TOKEN || github.token }}
+
+      - name: Fetch upstream main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --no-tags "$UPSTREAM_URL" "+refs/heads/main:refs/remotes/upstream/main"
+          git fetch --no-tags origin "+refs/heads/release:refs/remotes/origin/release" || echo "release 브랜치가 아직 없다."
+
+      - name: Merge upstream into main
+        id: main
+        run: |
+          set -euo pipefail
+          if git merge-base --is-ancestor upstream/main HEAD; then
+            echo "upstream 에 새 커밋이 없다."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git merge --no-edit -m "Merge stablyai/orca main ($(TZ=Asia/Seoul date +%F))" upstream/main; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git diff --name-only --diff-filter=U > "$RUNNER_TEMP/conflicts.txt"
+          git merge --abort
+          echo "conflict=main" >> "$GITHUB_OUTPUT"
+
+      - name: Push main
+        if: steps.main.outputs.changed == 'true'
+        run: git push origin HEAD:main
+
+      - name: Merge main into release
+        id: release
+        if: steps.main.outputs.conflict == ''
+        run: |
+          set -euo pipefail
+          MAIN_SHA=$(git rev-parse HEAD)
+          if ! git rev-parse -q --verify refs/remotes/origin/release >/dev/null; then
+            echo "release 브랜치를 main 에서 새로 만든다."
+            git push origin "$MAIN_SHA:refs/heads/release"
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if git merge-base --is-ancestor "$MAIN_SHA" origin/release; then
+            echo "release 가 이미 main 을 담고 있다. 낼 것이 없다."
+            exit 0
+          fi
+          git checkout -q -B release origin/release
+          if ! git merge --no-edit -m "Merge main into release ($(TZ=Asia/Seoul date +%F))" "$MAIN_SHA"; then
+            conflicts=$(git diff --name-only --diff-filter=U)
+            if [ "$conflicts" = "package.json" ]; then
+              # release 쪽 차이는 버전 커밋뿐이다. main 쪽 파일을 쓰고, 버전은 출시 워크플로가 다시 올린다.
+              git checkout --theirs package.json
+              git add package.json
+              git commit --no-edit -q
+            else
+              echo "$conflicts" > "$RUNNER_TEMP/conflicts.txt"
+              git merge --abort
+              echo "conflict=release" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          git push origin HEAD:release
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # GITHUB_TOKEN 으로 올린 push 는 prompt-release.yml 을 깨우지 않으므로 직접 부른다.
+      # PROMPT_SYNC_TOKEN 으로 올렸으면 push 가 이미 깨웠으니 또 부르지 않는다(두 번 돌면 같은 날 두 번째 출시로 막힌다).
+      - name: Start the release workflow
+        if: steps.release.outputs.pushed == 'true' && env.HAS_SYNC_TOKEN != 'true'
+        run: gh workflow run prompt-release.yml --repo "$GITHUB_REPOSITORY" --ref release -f publish=true
+
+      - name: Report the conflict as an issue
+        if: steps.main.outputs.conflict != '' || steps.release.outputs.conflict != ''
+        env:
+          WHERE: ${{ steps.main.outputs.conflict || steps.release.outputs.conflict }}
+        run: |
+          set -euo pipefail
+          today=$(TZ=Asia/Seoul date +%F)
+          upstream_sha=$(git rev-parse --short=12 upstream/main)
+          {
+            if [ "$WHERE" = "main" ]; then
+              echo "stablyai/orca main(\`$upstream_sha\`)을 우리 main 에 병합하다 충돌이 났다. 자동 동기화를 멈췄다."
+            else
+              echo "main 을 release 에 병합하다 package.json 말고 다른 파일에서도 충돌이 났다. 자동 출시를 멈췄다."
+            fi
+            echo
+            echo "충돌한 파일:"
+            sed 's/^/- `/; s/$/`/' "$RUNNER_TEMP/conflicts.txt"
+            echo
+            echo "실행 기록: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > "$RUNNER_TEMP/issue.md"
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$ISSUE_TITLE_PREFIX\"" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/issue.md"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$ISSUE_TITLE_PREFIX ($WHERE, $today)" --body-file "$RUNNER_TEMP/issue.md"
+          fi
+          # 실행도 실패로 남겨 알림이 가게 한다
+          exit 1
