@@ -259,9 +259,10 @@ html.prompt-mac-vibrancy.dark {
   --prompt-tab-idle: color-mix(in srgb, #fff 10%, var(--prompt-card));
 }
 
+/* No bottom border at all: a transparent one still shows the strip fill as a line under the tabs. */
 html.prompt-mac-vibrancy [data-tab-group-strip-id] {
   background: var(--prompt-tab-strip);
-  border-bottom-color: transparent;
+  border-bottom: 0;
 }
 
 html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip {
