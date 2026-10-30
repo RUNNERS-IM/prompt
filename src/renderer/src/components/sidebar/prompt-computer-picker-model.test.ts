@@ -3,6 +3,7 @@ import type { SidebarHostOption } from './sidebar-host-options'
 import {
   buildPromptComputerRows,
   fallbackPromptComputer,
+  isPromptComputerHost,
   newlyAddedRuntimeHostId,
   promptComputerStatus,
   promptComputerVisibleHostIds,
@@ -65,6 +66,41 @@ describe('buildPromptComputerRows', () => {
       'm2-pro-1'
     )
     expect(rows.map((row) => row.id)).toEqual(['local', 'ssh:box'])
+  })
+
+  it('leaves out plain SSH hosts from ~/.ssh/config', () => {
+    const rows = buildPromptComputerRows(
+      [
+        host('local', 'macOS', 'local'),
+        host('ssh:github.com', 'github.com', 'disconnected'),
+        host('ssh:macbook-pro-3', 'macbook-pro-3', 'available'),
+        host('runtime:env-1', 'm2-pro-2', 'available'),
+        host('ssh:macbook-pro-3-dup', 'macbook-pro-3', 'disconnected')
+      ],
+      'm2-pro-1'
+    )
+    expect(rows.map((row) => row.id)).toEqual(['local', 'runtime:env-1'])
+  })
+
+  it('lists only this computer when nothing is paired', () => {
+    const rows = buildPromptComputerRows(
+      [host('ssh:github.com', 'github.com', 'disconnected')],
+      'm2-pro-1'
+    )
+    expect(rows.map((row) => row.id)).toEqual(['local'])
+  })
+})
+
+describe('isPromptComputerHost', () => {
+  it('accepts this computer, runtimes and an SSH row that stands for a runtime', () => {
+    expect(isPromptComputerHost(host('local', 'macOS', 'local'))).toBe(true)
+    expect(isPromptComputerHost(host('runtime:env-1', 'm2-pro-2', 'available'))).toBe(true)
+    expect(
+      isPromptComputerHost(
+        host('ssh:box', 'box', 'available', { aliasHostIds: ['runtime:box-orcad'] })
+      )
+    ).toBe(true)
+    expect(isPromptComputerHost(host('ssh:github.com', 'github.com', 'available'))).toBe(false)
   })
 })
 
@@ -135,6 +171,27 @@ describe('resolvePromptSelectedComputer', () => {
         runtimeCatalogHydrated: true
       })
     ).toBeNull()
+  })
+
+  it('drops a saved plain SSH host once the paired list has loaded', () => {
+    const hostOptions = [...HOSTS, host('ssh:macbook-pro-3', 'macbook-pro-3', 'available')]
+    expect(
+      resolvePromptSelectedComputer({
+        hostOptions,
+        visibleHostIds: ['ssh:macbook-pro-3'],
+        runtimeCatalogHydrated: false
+      })
+    ).toBe('ssh:macbook-pro-3')
+    expect(
+      resolvePromptSelectedComputer({
+        hostOptions,
+        visibleHostIds: ['ssh:macbook-pro-3'],
+        runtimeCatalogHydrated: true
+      })
+    ).toBeNull()
+    expect(
+      fallbackPromptComputer(['ssh:macbook-pro-3'], buildPromptComputerRows(hostOptions, 'm'))
+    ).toBe('local')
   })
 })
 

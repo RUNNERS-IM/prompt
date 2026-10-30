@@ -127,7 +127,7 @@ export function useMobileSessionStartup(scope: MobileSessionKeyboardStateModel) 
           showToast(
             translate(
               'session.useStartup.wakeAgents',
-              'Open Orca on the host to wake sleeping agents.'
+              'Open Prompt on the host to wake sleeping agents.'
             ),
             3000
           )

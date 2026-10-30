@@ -356,7 +356,7 @@ export function renderMobileTasksGitHubProjectViewPicker(model: ConnectionPresen
           model.setGithubProjectError(
             translate(
               'tasks.githubProjectPickers.unsupportedLayout',
-              "Orca doesn't support this GitHub Project layout yet."
+              "Prompt doesn't support this GitHub Project layout yet."
             )
           )
           return

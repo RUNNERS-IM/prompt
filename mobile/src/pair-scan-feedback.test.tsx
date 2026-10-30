@@ -210,7 +210,7 @@ it.each([
   mocks.permission = { granted: true, canAskAgain: true }
   await render()
   await act(async () => findByHostType(root(), 'CameraView').props.onBarcodeScanned({ data }))
-  expect(screen()).toContain('Not a valid Orca QR code')
+  expect(screen()).toContain('Not a valid Prompt QR code')
   expect(mocks.start).not.toHaveBeenCalled()
 })
 

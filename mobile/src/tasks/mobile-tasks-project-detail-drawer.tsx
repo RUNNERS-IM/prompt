@@ -54,12 +54,15 @@ export function renderMobileTasksProjectMissingRepoDrawer(model: ConnectionPrese
         <View>
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetTitle}>
-              {translate('tasks.projectDetailDrawer.repositoryNotInOrca', 'Repository not in Orca')}
+              {translate(
+                'tasks.projectDetailDrawer.repositoryNotInOrca',
+                'Repository not in Prompt'
+              )}
             </Text>
             <Text style={styles.sheetSubtitle}>
               {translate(
                 'tasks.projectDetailDrawer.addRepositoryFromDesktop',
-                '{{repository}} is not added to Orca. Add this repository from the desktop app, then refresh mobile Tasks.',
+                '{{repository}} is not added to Prompt. Add this repository from the desktop app, then refresh mobile Tasks.',
                 { repository: `${projectRepoNotInOrca.owner}/${projectRepoNotInOrca.repo}` }
               )}
             </Text>
@@ -392,7 +395,7 @@ export function renderMobileTasksProjectDetailDrawer(model: ConnectionPresentati
                   <Text style={styles.emptyInlineText}>
                     {translate(
                       'tasks.projectDetailDrawer.mergeRepositoryRequirement',
-                      'Merge requires this repository in Orca.'
+                      'Merge requires this repository in Prompt.'
                     )}
                   </Text>
                 ) : null}
