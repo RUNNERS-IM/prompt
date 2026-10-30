@@ -70,7 +70,7 @@ if (ignoreModules.length > 0) {
 const NATIVE_MODULES = [
   'node-pty',
   'cpu-features',
-  ...(rebuildPlatform === 'win32' ? ['@orca/windows-security', '@vscode/windows-process-tree'] : [])
+  ...(rebuildPlatform === 'win32' ? ['@vscode/windows-process-tree'] : [])
 ]
 const onlyModules = NATIVE_MODULES.filter((m) => !ignoreModules.includes(m))
 // Global pnpm store shares packages across worktrees; publish per-ABI build beside build/Release instead of mutating it.
@@ -568,11 +568,6 @@ if (failures.length > 0) {
 }
 
 function loadNativeModule(moduleName) {
-  if (moduleName === '@orca/windows-security') {
-    const security = projectRequire(moduleName)
-    if (!security.currentUserSid() || !security.hasNativeExport('isolatedSpawnBreaksAwayFromJob')) throw new Error('stale build without the newest export; rebuild it')
-    return
-  }
   if (moduleName === 'node-pty') {
     projectRequire('node-pty')
     const { assertNodePtyJobOwnership, nodePtyAddonPath } = projectRequire(

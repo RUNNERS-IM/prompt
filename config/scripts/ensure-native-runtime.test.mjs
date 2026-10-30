@@ -82,7 +82,7 @@ describe('ensure-native-runtime', () => {
     { trackingEnv: { trackfileaccess: 'true' }, tracking: 'true' },
     { trackingEnv: { tRaCkFiLeAcCeSs: 'false' }, tracking: 'false' }
   ])(
-    'rebuilds other failed Windows addons with patched node-pty and tracking=$tracking',
+    'rebuilds patched node-pty on Windows with tracking=$tracking',
     ({ trackingEnv, tracking }) => {
       const projectDir = mkTempProject()
 
@@ -90,7 +90,7 @@ describe('ensure-native-runtime', () => {
         const scriptPath = join(projectDir, 'config', 'scripts', 'ensure-native-runtime.mjs')
         const logPath = join(projectDir, 'native-runtime.log')
         const markerPath = join(projectDir, 'rebuilt.marker')
-        writeFakeNativeModules(projectDir, { windowsSecurityRequiresMarker: true })
+        writeFakeNativeModules(projectDir)
         writeNodePtyPatchFile(projectDir)
         writeFakeNodeGyp(projectDir)
 
@@ -108,12 +108,11 @@ describe('ensure-native-runtime', () => {
         const log = readFileSync(logPath, 'utf8')
         expect(
           log.split('\n').filter((line) => line === `node-gyp rebuild --arch=${process.arch}`)
-        ).toHaveLength(2)
+        ).toHaveLength(1)
         expect(
           log.split('\n').filter((line) => line === `trackFileAccess=${tracking}`)
-        ).toHaveLength(2)
+        ).toHaveLength(1)
         expect(log).toContain(join('node_modules', 'node-pty'))
-        expect(log).toContain(join('node_modules', '@orca', 'windows-security'))
       } finally {
         rmSync(projectDir, { recursive: true, force: true })
       }
@@ -311,7 +310,7 @@ function envForNativeFixture(projectDir, extraEnv) {
   }
 }
 
-function writeFakeNativeModules(projectDir, { windowsSecurityRequiresMarker = false } = {}) {
+function writeFakeNativeModules(projectDir) {
   const nodePtyDir = join(projectDir, 'node_modules', 'node-pty')
   mkdirSync(join(nodePtyDir, 'lib'), { recursive: true })
   writeFileSync(
@@ -348,7 +347,7 @@ exports.loadNativeModule = function loadNativeModule(nativeName) {
 }
 `
   )
-  writeFakeWindowsAddons(projectDir, { requiresMarker: windowsSecurityRequiresMarker })
+  writeFakeWindowsAddons(projectDir)
   if (process.platform === 'win32') {
     const buildDir = join(nodePtyDir, 'build', 'Release')
     writePatchedNodePtyBuildArtifacts(projectDir)
@@ -398,7 +397,7 @@ exports.loadNativeModule = function loadNativeModule(nativeName) {
   writeFakeWindowsAddons(projectDir)
 }
 
-function writeFakeWindowsAddons(projectDir, { requiresMarker = false } = {}) {
+function writeFakeWindowsAddons(projectDir) {
   if (process.platform !== 'win32') {
     return
   }
@@ -407,19 +406,6 @@ function writeFakeWindowsAddons(projectDir, { requiresMarker = false } = {}) {
   writeFileSync(
     join(processTreeDir, 'index.js'),
     'exports.supportedProcessDataFlags = 4; exports.getProcessCreationTime = () => 1\n'
-  )
-  const securityDir = join(projectDir, 'node_modules', '@orca', 'windows-security')
-  mkdirSync(securityDir, { recursive: true })
-  writeFileSync(
-    join(securityDir, 'package.json'),
-    '{"name":"@orca/windows-security","version":"1.0.0","main":"index.js"}\n'
-  )
-  const markerGate = requiresMarker
-    ? `if (!require('node:fs').existsSync(process.env.ORCA_NATIVE_TEST_MARKER)) { throw new Error('security ABI mismatch sentinel') }`
-    : ''
-  writeFileSync(
-    join(securityDir, 'index.js'),
-    `exports.currentUserSid = () => { ${markerGate}; return 'S-1-5-18' }; exports.hasNativeExport = () => true\n`
   )
 }
 

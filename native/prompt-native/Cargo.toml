@@ -30,7 +30,18 @@ objc2-user-notifications = { version = "0.3", default-features = false, features
 ] }
 
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Registry"] }
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Security_Credentials",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Console",
+    # ReadFile and WriteFile take an OVERLAPPED, which lives in System_IO.
+    "Win32_System_IO",
+    "Win32_System_Registry",
+    "Win32_System_Threading",
+] }
 
 [build-dependencies]
 napi-build = "2"

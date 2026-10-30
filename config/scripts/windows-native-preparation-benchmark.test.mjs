@@ -89,10 +89,10 @@ test('rejects failed preparation and unrelated or persistent environment changes
   )
 })
 
-test('requires all three initial addon failures and excludes timed header downloads', () => {
+test('requires both initial addon failures and excludes timed header downloads', () => {
   const result = {
     code: 1,
-    stderr: ['node-pty', '@orca/windows-security', '@vscode/windows-process-tree']
+    stderr: ['node-pty', '@vscode/windows-process-tree']
       .map((name) => `${name}: unavailable`)
       .join('\n')
   }

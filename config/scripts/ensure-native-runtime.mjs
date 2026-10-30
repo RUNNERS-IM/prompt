@@ -38,9 +38,7 @@ const forceRebuild = process.argv.includes('--force')
 
 const NATIVE_MODULES = [
   'node-pty',
-  ...(process.platform === 'win32'
-    ? ['@orca/windows-security', '@vscode/windows-process-tree']
-    : [])
+  ...(process.platform === 'win32' ? ['@vscode/windows-process-tree'] : [])
 ]
 const NODE_PTY_CONPTY_RUNTIME_FILES = ['conpty.dll', 'OpenConsole.exe']
 const CHILD_CHECK_FLAG = '--check-only'
@@ -285,14 +283,6 @@ function loadNativeModule(moduleName) {
         'the loaded addon still calls ReadProcessMemory, so it was not built from the patched ' +
           'source. Rebuild it (pnpm run rebuild:electron) rather than using the published prebuild.'
       )
-    }
-    return
-  }
-  if (moduleName === '@orca/windows-security') {
-    const security = require(moduleName)
-    // currentUserSid loads the addon; a stale build that still loads lacks the newest export.
-    if (!security.currentUserSid() || !security.hasNativeExport('isolatedSpawnBreaksAwayFromJob')) {
-      throw new Error('stale build without the newest export; rebuild it')
     }
     return
   }

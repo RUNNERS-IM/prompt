@@ -320,7 +320,18 @@ function observeDacls(
     `,
     {
       eval: true,
-      workerData: { dir, durationMs, addonPath: require.resolve('@orca/windows-security') }
+      workerData: {
+        dir,
+        durationMs,
+        addonPath: join(
+          __dirname,
+          '..',
+          '..',
+          'native',
+          'prompt-native',
+          `prompt-native.win32-${process.arch}.node`
+        )
+      }
     }
   )
   let markReady: () => void = () => undefined

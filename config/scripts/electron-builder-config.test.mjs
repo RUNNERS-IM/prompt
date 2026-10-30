@@ -503,9 +503,6 @@ describe('arch-aware packaging guard', () => {
   it.runIf(process.platform === 'win32')(
     'refuses a Windows workspace addon built for another architecture',
     () => {
-      expect(() => packHost(OTHER_ARCH)).toThrow(
-        `orca_windows_security.node for ${OTHER_ARCH_NAME}`
-      )
       expect(() => packHost(OTHER_ARCH)).toThrow(`prompt-native.win32-${OTHER_ARCH_NAME}.node`)
     }
   )
@@ -521,8 +518,8 @@ describe('arch-aware packaging guard', () => {
     } else {
       expect(packWindows).toThrow('@vscode/windows-process-tree')
       expect(packWindows).toThrow('Windows packaging requires a Windows host')
-      // A workspace link exists everywhere; only its compiled binary proves the addon will load.
-      expect(packWindows).toThrow('@orca/windows-security')
+      // Only a compiled binary for the target CPU proves the module will load.
+      expect(packWindows).toThrow('@prompt/native')
     }
   })
 })

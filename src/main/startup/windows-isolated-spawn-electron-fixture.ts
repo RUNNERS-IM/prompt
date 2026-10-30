@@ -3,14 +3,15 @@
 import { app } from 'electron'
 import { writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import type * as WindowsSecurity from '@orca/windows-security'
 import {
   setIsolatedSpawner,
   spawnDetachedWithoutInheritance
 } from '@orca/process-host/isolated-detached-spawn'
+import type { WindowsSecurityAddon } from '../../shared/windows-security-addon'
 
 const [addonPath, mode, holderMs, resultFile] = process.argv.slice(-4)
-const addon: typeof WindowsSecurity = createRequire(__filename)(addonPath)
+// addonPath is the built prompt-native module, whose isolated spawn this fixture exercises.
+const addon: WindowsSecurityAddon = createRequire(__filename)(addonPath)
 if (mode === 'isolated') {
   setIsolatedSpawner(addon.spawnDetachedIsolated)
 }

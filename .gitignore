@@ -27,10 +27,6 @@ native/windows-agent-hook/target/
 # Prompt's Rust module: cargo output and the per-CPU .node files build:prompt-native leaves (CI builds its own).
 native/prompt-native/target/
 native/prompt-native/*.node
-# node-gyp output for the Windows native addon; generated per host and ABI.
-native/windows-security/build/
-native/windows-security/bin/
-.build/windows-security/
 
 .pnpm-store/
 package-lock.json

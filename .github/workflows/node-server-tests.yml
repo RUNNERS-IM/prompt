@@ -225,8 +225,6 @@ jobs:
       - uses: ./.github/actions/build-mobile-web-bundle
         if: needs.changes.outputs.qualification == 'false'
       - run: pnpm build:orcad
-        env:
-          ORCA_REUSE_PREPARED_WINDOWS_SECURITY: ${{ runner.os == 'Windows' && steps.dependencies.outcome == 'success' }}
       - wait: bun-orcad
       - run: pnpm test:node-server --artifact ${{ runner.os == 'Linux' && '--cross-runtime' || '' }}
         env:
@@ -277,21 +275,22 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           overwrite: true
-      # orcad's data-root privacy check fails closed without it, so every Windows slot needs one.
-      # Older requested refs use the previous security implementation and have no addon builder.
-      - name: Build the Windows security addons for the desktop template
-        if: inputs.build_template && matrix.os == 'windows-2022' && hashFiles('config/scripts/build-windows-security-addon.mjs') != ''
+      # Prompt's native module carries the Windows ACL calls. orcad's data-root privacy check fails closed
+      # without it, so every Windows slot needs one; arm64 cross-compiles here.
+      # Requested refs from before the Rust module have no windows_security.rs and skip this.
+      - name: Build the Prompt native modules for the desktop template
+        if: inputs.build_template && matrix.os == 'windows-2022' && hashFiles('native/prompt-native/src/windows_security.rs') != ''
         shell: bash
         run: |
-          node config/scripts/build-windows-security-addon.mjs --arch=x64
-          node config/scripts/build-windows-security-addon.mjs --arch=arm64
-          node -e "require('./.build/windows-security/x64/windows-security.node').currentUserSid()"
-      - name: Keep the Windows security addons for the desktop template
-        if: inputs.build_template && matrix.os == 'windows-2022' && hashFiles('config/scripts/build-windows-security-addon.mjs') != ''
+          node config/scripts/build-prompt-native.mjs --arch x64
+          node config/scripts/build-prompt-native.mjs --arch arm64
+          node -e "require('./native/prompt-native/prompt-native.win32-x64.node').currentUserSid()"
+      - name: Keep the Prompt native modules for the desktop template
+        if: inputs.build_template && matrix.os == 'windows-2022' && hashFiles('native/prompt-native/src/windows_security.rs') != ''
         uses: actions/upload-artifact@v7
         with:
-          name: orcad-windows-security
-          path: .build/windows-security/*/windows-security.node
+          name: orcad-prompt-native
+          path: native/prompt-native/prompt-native.win32-*.node
           if-no-files-found: error
           retention-days: 7
           overwrite: true
@@ -636,12 +635,12 @@ jobs:
         with:
           name: orcad-windows-cli-launcher
           path: .build/windows-cli-launcher
-      - name: Collect the Windows security addons
-        if: hashFiles('config/scripts/build-windows-security-addon.mjs') != ''
+      - name: Collect the Prompt native modules
+        if: hashFiles('native/prompt-native/src/windows_security.rs') != ''
         uses: actions/download-artifact@v8
         with:
-          name: orcad-windows-security
-          path: .build/windows-security
+          name: orcad-prompt-native
+          path: native/prompt-native
       - name: Merge the lanes and gate the full slot matrix
         shell: bash
         run: |

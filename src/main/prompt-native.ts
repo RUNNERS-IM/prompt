@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { getAppEnvironment, hasAppEnvironment } from '../shared/app-environment'
+import { openPromptNative } from '../shared/prompt-native-module'
 
 // Prompt's one native module (native/prompt-native, napi-rs). Parts inherited from Orca move into it one at a time.
 export type PromptNative = {
@@ -17,6 +18,7 @@ export type PromptNative = {
     root: number,
     path: string
   ): { name: string; type: number; value?: string | number | number[] | string[] }[] | null
+  // The Windows security exports (DACLs, credentials, isolated spawn) are typed in src/shared/windows-security-addon.ts.
 }
 
 /** Packaged apps carry the slice's own file in Resources (electron-builder extraResources). */
@@ -58,10 +60,8 @@ export function loadPromptNative(): PromptNative | null {
       const path = promptNativePath()
       // Dev runs without `pnpm build:prompt-native` and Linux installs have no file; that is not an error.
       if (path && existsSync(path)) {
-        // dlopen needs no module base: worker and orcad bundles are CommonJS, where import.meta.url is empty.
-        const holder = { exports: {} }
-        process.dlopen(holder, path)
-        loaded.module = holder.exports as PromptNative
+        // Shared with the Windows security loader, which opens the same file.
+        loaded.module = openPromptNative(path) as PromptNative
       }
     } catch {
       // A wrong-arch or quarantined file must degrade the feature, not crash the caller.

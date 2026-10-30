@@ -51,14 +51,14 @@ const publicExports = {
 
 it('inventories every declared package manifest without requiring built or source exports', () => {
   const root = fixture({
-    patterns: ['src/packages/*', 'native/windows-security'],
+    patterns: ['src/packages/*', 'native/example-addon'],
     extra: {
-      'native/windows-security/package.json': JSON.stringify({ name: '@orca/windows-security' }),
+      'native/example-addon/package.json': JSON.stringify({ name: '@orca/example-addon' }),
       'mobile/packages/model/package.json': JSON.stringify({ name: '@orca/mobile-model' })
     }
   })
   expect(workspacePackageManifests(root)).toEqual([
-    'native/windows-security/package.json',
+    'native/example-addon/package.json',
     'src/packages/process-host/package.json'
   ])
 })
@@ -123,15 +123,15 @@ it('respects excluded workspace packages and independent workspaces', () => {
 
 it('retains deliberately external native workspace packages', () => {
   const root = fixture({
-    patterns: ['native/windows-security'],
+    patterns: ['native/example-addon'],
     extra: {
-      'native/windows-security/package.json': JSON.stringify({
-        name: '@orca/windows-security',
+      'native/example-addon/package.json': JSON.stringify({
+        name: '@orca/example-addon',
         main: 'index.js'
       })
     }
   })
-  expect(createWorkspaceSourceResolver(root).resolve('@orca/windows-security')).toBeNull()
+  expect(createWorkspaceSourceResolver(root).resolve('@orca/example-addon')).toBeNull()
 })
 
 it.each([

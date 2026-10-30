@@ -27,7 +27,7 @@ import {
   hash
 } from './windows-native-benchmark-observer.mjs'
 
-const addonNames = ['node-pty', '@orca/windows-security', '@vscode/windows-process-tree']
+const addonNames = ['node-pty', '@vscode/windows-process-tree']
 const candidate = 'initialize-windows-native-toolchain.mjs'
 const control = 'ensure-native-runtime.mjs'
 const unchangedFiles = [
@@ -153,7 +153,6 @@ function binaryReceipt(snapshot) {
     join(dirname(require.resolve('node-pty/package.json')), 'build/Release/conpty.node'),
     join(dirname(require.resolve('node-pty/package.json')), 'build/Release/conpty/conpty.dll'),
     join(dirname(require.resolve('node-pty/package.json')), 'build/Release/conpty/OpenConsole.exe'),
-    join(snapshot, 'native/windows-security/build/Release/orca_windows_security.node'),
     join(
       dirname(require.resolve('@vscode/windows-process-tree/package.json')),
       'build/Release/windows_process_tree.node'

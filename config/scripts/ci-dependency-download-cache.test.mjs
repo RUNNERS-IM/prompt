@@ -344,7 +344,6 @@ describe('CI dependency download caches', () => {
           '.github/workflows/ci-cache-warmup-platform-jobs.yml',
           '.github/actions/install-node-dependencies/**',
           '.github/actions/prepare-native-runtime/**',
-          'native/windows-security/**',
           'pnpm-lock.yaml'
         ])
       )

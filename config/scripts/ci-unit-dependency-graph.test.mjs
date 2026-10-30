@@ -94,7 +94,7 @@ it.each([
   [
     'an assigned native loader',
     'src/main/windows-native-registry.ts',
-    "import { createRequire } from 'node:module'; const requireFromMain = createRequire(__filename); export const loadWindowsNativeRegistry = () => requireFromMain('@orca/windows-security')",
+    "import { createRequire } from 'node:module'; const requireFromMain = createRequire(__filename); export const loadWindowsNativeRegistry = () => requireFromMain('@vscode/windows-process-tree')",
     'src/main/windows-native-registry.test.ts',
     "import { loadWindowsNativeRegistry } from './windows-native-registry'"
   ],

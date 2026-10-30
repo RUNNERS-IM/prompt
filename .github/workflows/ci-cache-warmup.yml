@@ -45,7 +45,6 @@ on:
       - 'config/scripts/shared-electron-dist-cache.mjs'
       - 'config/scripts/space-sharing-copy.mjs'
       - 'config/patches/**'
-      - 'native/windows-security/**'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
     paths:

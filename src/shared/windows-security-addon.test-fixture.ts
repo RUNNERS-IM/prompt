@@ -84,7 +84,7 @@ function plainPath(addonPath: string): string {
   return addonPath.startsWith('\\\\?\\') ? addonPath.slice(4) : addonPath
 }
 
-/** An in-memory stand-in for native/windows-security; files it creates are real. */
+/** An in-memory stand-in for the Windows security exports of prompt-native; files it creates are real. */
 export function createFakeWindowsSecurity(): FakeWindowsSecurity {
   const parked: (() => void)[] = []
   const credentials = new Map<string, Buffer>()

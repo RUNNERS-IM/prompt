@@ -725,8 +725,6 @@ jobs:
       - uses: ./.github/actions/build-mobile-web-bundle
       - name: Build the e2e app, CLI, orcad slot and template
         shell: bash
-        env:
-          ORCA_REUSE_PREPARED_WINDOWS_SECURITY: 'true'
         run: |
           pnpm run build:wsl-guest
           pnpm exec electron-vite build --mode e2e

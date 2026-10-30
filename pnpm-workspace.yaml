@@ -1,8 +1,5 @@
 # Exclude mobile’s independent workspace/lockfile: recursive discovery causes ERR_PNPM_UNUSED_PATCH.
-# An explicit security workspace avoids file:-dependency relinks, whose virtual-store churn
-# raced Windows node-gyp and removed @vscode/windows-process-tree’s binding.gyp mid-rebuild.
 packages:
-  - native/windows-security
   - src/packages/*
 
 minimumReleaseAge: 4320
@@ -63,7 +60,6 @@ allowBuilds:
   msw: false
   node-pty: true
   ssh2: false
-  '@orca/windows-security': false
 
 # Link @types/<peer> beside peer dependents (e.g. React/lucide) for global-virtual-store resolution.
 addMissingPeerTypes: true

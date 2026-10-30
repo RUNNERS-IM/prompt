@@ -12,7 +12,6 @@ export const NATIVE_MODULE_BUILD_PACKAGES = [
 ]
 // Only the release matters: it fixes the ABI and headers; its downloader closure does not.
 export const NATIVE_MODULE_TARGET_PACKAGES = ['electron']
-export const NATIVE_MODULE_WORKSPACES = ['native/windows-security']
 // Resolution-only settings, plus patches, whose native effect already shows in snapshot ids.
 const RESOLUTION_ONLY_WORKSPACE_SETTINGS = new Set([
   'addMissingPeerTypes',
@@ -139,8 +138,7 @@ export function nativeDependencyLockDigest({
 if (process.argv[1]?.endsWith('native-dependency-lock-digest.mjs')) {
   const { digest, closure } = nativeDependencyLockDigest({
     packages: NATIVE_MODULE_BUILD_PACKAGES,
-    versionOnly: NATIVE_MODULE_TARGET_PACKAGES,
-    workspaces: NATIVE_MODULE_WORKSPACES
+    versionOnly: NATIVE_MODULE_TARGET_PACKAGES
   })
   console.error(`[native-cache] locked inputs: ${closure.join(' ')}`)
   console.log(digest)

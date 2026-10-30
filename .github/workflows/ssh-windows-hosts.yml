@@ -27,9 +27,9 @@ on:
       - 'config/scripts/orcad-prebuild-*.mjs'
       - 'config/scripts/orcad-windows-process-tree.mjs'
       - 'config/scripts/orcad-windows-cli-launcher.mjs'
-      - 'config/scripts/orcad-windows-security.mjs'
-      - 'config/scripts/build-windows-security-addon.mjs'
-      - 'native/windows-security/**'
+      - 'config/scripts/orcad-prompt-native.mjs'
+      - 'config/scripts/build-prompt-native.mjs'
+      - 'native/prompt-native/**'
       - 'config/scripts/build-windows-cli-launcher.mjs'
       - 'config/scripts/windows-rust-executable-build.mjs'
       - 'native/windows-cli-launcher/**'
@@ -201,8 +201,6 @@ jobs:
         run: node -e "require('./config/scripts/verify-packaged-mobile-web-bundle.cjs').assertMobileWebBundleBuilt()"
       - name: Build the win32 template
         shell: bash
-        env:
-          ORCA_REUSE_PREPARED_WINDOWS_SECURITY: ${{ github.event_name == 'pull_request' && steps.dependencies.outcome == 'success' }}
         run: |
           pnpm build:orcad-prebuilds --require-slots "win32-${{ matrix.arch }}"
           node config/scripts/build-orcad-template.mjs --targets "win32-${{ matrix.arch }}"

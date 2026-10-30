@@ -375,7 +375,6 @@
     "zustand": "^5.0.15"
   },
   "optionalDependencies": {
-    "@orca/windows-security": "workspace:*",
     "@vscode/windows-process-tree": "0.8.0",
     "sherpa-onnx-darwin-arm64": "1.12.37",
     "sherpa-onnx-darwin-x64": "1.12.37",

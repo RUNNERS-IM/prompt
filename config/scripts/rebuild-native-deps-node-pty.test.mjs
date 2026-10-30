@@ -15,7 +15,6 @@ import {
   writeFakeUsableElectronPackage,
   writeFakeWindowsProcessTree,
   writeFakeWindowsProcessTreeWithNodeAddonApi,
-  writeFakeWindowsSecurity,
   writeNodePtyPatchFile,
   writePatchedNodePtyBuildArtifacts,
   writeWindowsProcessTreePatchFile
@@ -33,7 +32,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir)
         writeFakeWindowsProcessTree(projectDir)
-        writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
 
         const env = {
@@ -79,7 +77,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { nativeDir: '../build/Release/' })
         writeFakeWindowsProcessTree(projectDir)
-        writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
 
         const result = runRebuildScript(projectDir, {
@@ -265,7 +262,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeUsableElectronPackage(projectDir, { platform: 'win32' })
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir)
-        writeFakeWindowsProcessTree(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
 
         const result = runRebuildScript(projectDir, {
@@ -275,9 +271,11 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         })
 
         expect(result.status, result.stderr).toBe(0)
-        expect(result.stdout).toContain('Rebuilding failed native modules: @orca/windows-security')
+        expect(result.stdout).toContain(
+          'Rebuilding failed native modules: @vscode/windows-process-tree'
+        )
         const rebuildCall = JSON.parse(readFileSync(rebuildLogPath, 'utf8').trim())
-        expect(rebuildCall.onlyModules).toEqual(['@orca/windows-security'])
+        expect(rebuildCall.onlyModules).toEqual(['@vscode/windows-process-tree'])
       } finally {
         removeTreeSync(projectDir)
       }
@@ -295,7 +293,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { ownsPtyJob: false })
         writeFakeWindowsProcessTree(projectDir)
-        writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
 
         const result = runRebuildScript(projectDir, {
@@ -327,7 +324,6 @@ describe('rebuild-native-deps patched node-pty rebuild', () => {
         writeFakeElectronRebuild(projectDir, { logPathEnv: 'ORCA_REBUILD_TEST_LOG' })
         writeFakeLoadableNodePty(projectDir, { cygwinBreakawayDenied: false })
         writeFakeWindowsProcessTree(projectDir)
-        writeFakeWindowsSecurity(projectDir)
         writeFakeNodePtyConptyPayload(projectDir, process.arch)
         writeFakeNodePtyConptySource(projectDir)
 

@@ -41,14 +41,7 @@ const PACKAGED_RUNTIME_PACKAGE_ROOTS = [
 ]
 // serve-sim drives iOS Simulator; its Mach-O addon fails Windows PE signing.
 const DARWIN_PACKAGED_RUNTIME_PACKAGE_ROOTS = ['serve-sim']
-/** The compiled binary each workspace Windows addon loads, relative to its package. */
-const WORKSPACE_WINDOWS_ADDON_BINARIES = [
-  ['@orca/windows-security', 'build/Release/orca_windows_security.node']
-]
-const WINDOWS_PACKAGED_RUNTIME_PACKAGE_ROOTS = [
-  '@vscode/windows-process-tree',
-  '@orca/windows-security'
-]
+const WINDOWS_PACKAGED_RUNTIME_PACKAGE_ROOTS = ['@vscode/windows-process-tree']
 
 const NODE_PTY_PREBUILD_PREFIX_BY_PLATFORM = {
   darwin: 'darwin-',
@@ -584,21 +577,14 @@ function assertPackagedNativeVariantsInstalled(electronPlatformName, electronArc
     }
   }
 
-  // Why one package: @vscode/windows-process-tree is the only os: win32 npm addon;
-  // the @orca/windows-* addons are workspace links present on every host, so their presence proves nothing.
+  // Why one package: @vscode/windows-process-tree is the only os: win32 npm addon.
   const missingWindowsAddons = []
   if (electronPlatformName === 'win32' && !isInstalled('@vscode/windows-process-tree')) {
     missingWindowsAddons.push('@vscode/windows-process-tree')
   }
-  // Check actual target binary, not universal workspace link, or packaged secure-file/orcad failures appear only at runtime.
+  // Check the actual target binary, or packaged registry, secure-file and isolated-spawn failures appear only at runtime.
   if (electronPlatformName === 'win32') {
-    for (const [name, binary] of WORKSPACE_WINDOWS_ADDON_BINARIES) {
-      const addon = join(nodeModulesDir, name, binary)
-      if (!existsSync(addon) || readPeMachine(addon) !== PE_MACHINE[architecture]) {
-        missingWindowsAddons.push(`${name} (${binary} for ${architecture})`)
-      }
-    }
-    // extraResources copies this into Resources/prompt-native.node; the registry readers need it.
+    // extraResources copies this into Resources/prompt-native.node.
     const promptNative = join(
       projectDir,
       'native',

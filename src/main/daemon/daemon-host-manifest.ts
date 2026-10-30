@@ -39,7 +39,7 @@ export function daemonHostProcessPackageDir(sources: DaemonHostSources): string 
   return join(sources.resourcesPath, 'node_modules', '@orca', 'process-host')
 }
 
-/** Prompt's native module (registry reads); loadPromptNative finds it beside the relocated host's resources. */
+/** Prompt's native module (registry reads, file DACLs, credentials, isolated spawn); its loaders find it beside the relocated host's resources. */
 export function daemonHostPromptNativePath(sources: DaemonHostSources): string {
   return join(sources.resourcesPath, 'prompt-native.node')
 }

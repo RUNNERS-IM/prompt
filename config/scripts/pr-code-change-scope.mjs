@@ -140,8 +140,7 @@ const DEPENDENCY_ISOLATION_PREFIXES = [
   'config/scripts/undeclared-dependency-resolution',
   'config/build-plugins/markdown-parser-exports',
   'config/tsconfig',
-  'src/packages/',
-  'native/windows-security/package.json'
+  'src/packages/'
 ]
 
 const MOBILE_WEB_APP_PREFIXES = [
@@ -311,9 +310,7 @@ const NATIVE_CACHE_PREFIXES = [
   'config/scripts/native-build-entry',
   'config/scripts/shared-',
   'config/patches/node-pty@',
-  'config/patches/@vscode__windows-process-tree',
-  // The vendored addons' sources: build/ and bin/ beside them are ignored, so nothing else lands here.
-  'native/windows-security/'
+  'config/patches/@vscode__windows-process-tree'
 ]
 
 const SHARED_PACKAGE_PREFIXES = [

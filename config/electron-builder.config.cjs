@@ -567,7 +567,7 @@ module.exports = {
         from: 'native/computer-use-windows/runtime.ps1',
         to: 'computer-use-windows/runtime.ps1'
       },
-      // Built per CPU by build:prompt-native (registry reads); the relocated daemon host copies it from here.
+      // Built per CPU by build:prompt-native (registry reads, file DACLs, credentials, isolated spawn); the relocated daemon host copies it from here.
       {
         from: 'native/prompt-native/prompt-native.win32-${arch}.node',
         to: 'prompt-native.node'

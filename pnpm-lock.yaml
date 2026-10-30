@@ -650,9 +650,6 @@ importers:
         specifier: ^5.0.15
         version: 5.0.15(@types/react@19.2.18)(@types/use-sync-external-store@0.0.6)(react@19.2.8)(use-sync-external-store@1.6.0(@types/react@19.2.18)(react@19.2.8))
     optionalDependencies:
-      '@orca/windows-security':
-        specifier: workspace:*
-        version: link:native/windows-security
       '@vscode/windows-process-tree':
         specifier: 0.8.0
         version: 0.8.0(patch_hash=a09f2e8b2b4e73ef20c317af91f9e06c09abf62fa2c891d99b16f53047f596fd)
@@ -671,12 +668,6 @@ importers:
       sherpa-onnx-win-x64:
         specifier: 1.12.37
         version: 1.12.37
-
-  native/windows-security:
-    dependencies:
-      node-addon-api:
-        specifier: ^8.5.0
-        version: 8.9.2
 
   src/packages/process-host:
     devDependencies:
@@ -6542,10 +6533,6 @@ packages:
 
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
-
-  node-addon-api@8.9.2:
-    resolution: {integrity: sha512-VijLXbi3UACN69I0JVXJsX4tjACjNoQDgv2gTF6sx2wWEi8tkSg2eX8p5gSIFi8z2+DL3oHmY6OyKce38SDolg==}
-    engines: {node: ^18 || ^20 || >= 21}
 
   node-api-version@0.2.1:
     resolution: {integrity: sha512-2xP/IGGMmmSQpI1+O/k72jF/ykvZ89JeuKX3TLJAYPDVLUalrshrLHkeVcCCZqG/eEa635cr8IBYzgnDvM2O8Q==}
@@ -13722,8 +13709,6 @@ snapshots:
     optional: true
 
   node-addon-api@7.1.1: {}
-
-  node-addon-api@8.9.2: {}
 
   node-api-version@0.2.1:
     dependencies:

@@ -7,7 +7,15 @@ import { afterAll, describe, expect, it } from 'vitest'
 import { spawnProcess } from '@orca/process-host'
 
 const describeOnWindows = process.platform === 'win32' ? describe : describe.skip
-const ADDON = resolve(__dirname, '..', '..', '..', 'native', 'windows-security', 'index.js')
+const ADDON = resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'native',
+  'prompt-native',
+  `prompt-native.win32-${process.arch}.node`
+)
 const root = mkdtempSync(join(tmpdir(), 'orca-std-handles-'))
 const entry = join(root, 'main.cjs')
 
