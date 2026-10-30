@@ -7,6 +7,7 @@ import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useReducedMotionEnabled } from '../platform/use-reduced-motion'
+import { PROMPT_APP_NAME } from '../../../src/shared/prompt-brand'
 
 function sampleNotifications(t: Translate) {
   return [
@@ -114,7 +115,7 @@ function SampleBanner({
       </View>
       <View style={styles.cardCopy}>
         <View style={styles.cardMeta}>
-          <Text style={styles.appName}>Orca</Text>
+          <Text style={styles.appName}>{PROMPT_APP_NAME}</Text>
           <Text style={styles.now}>{t('onboarding.notificationOnboardingPreview.now', 'now')}</Text>
         </View>
         <Text style={styles.cardTitle} numberOfLines={1}>

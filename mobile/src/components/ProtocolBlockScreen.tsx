@@ -10,9 +10,14 @@ import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import type { CompatVerdict } from '../transport/protocol-compat'
 import type { MobileWebBundleCompatVerdict } from '../transport/mobile-web-bundle-compat'
 import type { PageRouteRefusalVerdict } from '../mobile-web-shell/page-route-policy'
+import { PROMPT_RELEASES_URL, promptOr } from '../../../src/shared/prompt-upstream'
 
-const RELEASES_URL = 'https://github.com/stablyai/orca/releases'
-const IOS_APP_STORE_URL = 'itms-apps://apps.apple.com/app/orca-ide/id6766130217'
+// Prompt: Prompt mobile has no App Store listing yet, so both platforms open Prompt's releases.
+const RELEASES_URL = promptOr(PROMPT_RELEASES_URL, 'https://github.com/stablyai/orca/releases')
+const IOS_APP_STORE_URL = promptOr(
+  PROMPT_RELEASES_URL,
+  'itms-apps://apps.apple.com/app/orca-ide/id6766130217'
+)
 
 // Protocol/bundle/page-route walls are terminal: no native workspace fallback; update the relevant app or bundle.
 export type BlockedVerdict =

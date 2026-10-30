@@ -1,4 +1,5 @@
 import { clampUtf8TextPrefix } from '../../../src/shared/utf8-byte-limits'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../src/shared/prompt-upstream'
 
 const CONNECTION_DIAGNOSTICS_ENDPOINT = 'https://www.onorca.dev/v1/feedback'
 const SUBMISSION_TIMEOUT_MS = 10_000
@@ -17,6 +18,10 @@ export async function submitConnectionDiagnostics(
   submission: ConnectionDiagnosticsSubmission,
   fetchImpl: (url: string, init: RequestInit) => Promise<Response> = fetch
 ): Promise<ConnectionDiagnosticsSubmissionResult> {
+  // Prompt: the endpoint belongs to Orca's company; nothing is sent from Prompt mobile.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return { ok: false, error: 'Sending diagnostics is turned off in Prompt.' }
+  }
   const report = boundConnectionDiagnosticsReport(submission.report)
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), SUBMISSION_TIMEOUT_MS)

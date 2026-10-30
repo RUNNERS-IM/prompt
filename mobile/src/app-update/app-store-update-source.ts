@@ -1,8 +1,10 @@
 import { z } from 'zod'
 import type { AppUpdateCheckResult, AppUpdateSource } from './app-update-source'
 import { isNewerReleaseVersion } from './app-update-source'
+import { promptOr } from '../../../src/shared/prompt-upstream'
 
-const LOOKUP_URL = 'https://itunes.apple.com/lookup?bundleId=com.stably.orca.mobile'
+// Prompt: look up Prompt mobile's own listing; with no listing yet the lookup is empty and the app stays quiet.
+const LOOKUP_URL = `https://itunes.apple.com/lookup?bundleId=${promptOr('im.runners.prompt.mobile', 'com.stably.orca.mobile')}`
 
 type Fetch = typeof fetch
 

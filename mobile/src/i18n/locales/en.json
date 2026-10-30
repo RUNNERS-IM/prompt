@@ -3933,5 +3933,10 @@
     "webviewReadyWatchdog": {
       "initializeFailed": "Terminal did not initialize - no ready signal from the terminal view"
     }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Your phone and computer must be on the same Wi-Fi or Tailscale. Relay is off in Prompt."
+    }
   }
 }

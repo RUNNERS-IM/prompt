@@ -2,8 +2,10 @@ import { z } from 'zod'
 import { compareAppVersions } from '../../../src/shared/app-version'
 import type { AppUpdateCheckResult, AppUpdateSource } from './app-update-source'
 import { isNewerReleaseVersion } from './app-update-source'
+import { PROMPT_REPO_SLUG, promptOr } from '../../../src/shared/prompt-upstream'
 
-const REPO_API = 'https://api.github.com/repos/stablyai/orca'
+// Prompt: Android APKs are published as mobile-android-v* releases of Prompt's repository.
+const REPO_API = `https://api.github.com/repos/${promptOr(PROMPT_REPO_SLUG, 'stablyai/orca')}`
 // Use tag refs: newest-first release/Atom windows can fill with desktop releases and hide mobile updates; mobile-android releases all carry prerelease flag.
 const TAG_PREFIX = 'mobile-android-v'
 // Probe bounded older candidates: workflow tags before APK build, so failed build can leave unpublished tag.

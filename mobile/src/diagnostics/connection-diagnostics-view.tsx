@@ -10,6 +10,7 @@ import type { ConnectionLogEntry, ConnectionState } from '../transport/types'
 import type { ConnectionDiagnosis } from './connection-diagnostics-analysis'
 import type { DiagnosticsSubmissionState } from './connection-diagnostics-screen-data'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../src/shared/prompt-upstream'
 
 export function ConnectionDiagnosticsView({
   hostPicker,
@@ -100,7 +101,8 @@ export function ConnectionDiagnosticsView({
               </Text>
               <Text style={styles.diagnosisText}>{diagnosis.likelyCause}</Text>
               <Text style={styles.diagnosisNext}>{diagnosis.nextStep}</Text>
-              {diagnosis.reportability === 'orca-relay' && (
+              {/* Prompt: reports went to Orca's onorca.dev feedback endpoint, so sending is not offered. */}
+              {!PROMPT_BLOCK_UPSTREAM_SERVICES && diagnosis.reportability === 'orca-relay' && (
                 <>
                   <Text style={styles.privacyHint}>
                     {t(

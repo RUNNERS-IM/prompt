@@ -30,6 +30,7 @@ import {
   mobileOnboardingDestination
 } from '../src/onboarding/mobile-onboarding-plan'
 import { pairScanStyles as styles } from '../src/pair-scan-styles'
+import { PairScanDirectOnlyHint } from '../src/pair-scan-direct-only-hint'
 
 // Bound initial pairing at ~25s (one connect timeout plus retry) so broken routes show an actionable error/log; live RPC retries indefinitely.
 const PAIRING_OVERALL_TIMEOUT_MS = 25_000
@@ -323,6 +324,7 @@ export default function PairScanScreen() {
           text={t('app.pairScan.openMobileSettingsStep', 'Go to Settings → Mobile')}
         />
         <Step number={3} text={t('app.pairScan.scanCodeStep', 'Scan the QR code')} />
+        <PairScanDirectOnlyHint />
       </View>
 
       {status === 'scanning' && (

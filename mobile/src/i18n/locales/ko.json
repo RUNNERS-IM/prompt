@@ -3918,5 +3918,10 @@
       "inReview": "리뷰 중",
       "pinned": "고정됨"
     }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "휴대폰과 컴퓨터가 같은 Wi-Fi 나 Tailscale 에 있어야 연결됩니다. Prompt 에서는 중계 연결이 꺼져 있습니다."
+    }
   }
 }

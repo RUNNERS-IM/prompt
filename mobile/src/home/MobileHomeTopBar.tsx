@@ -2,6 +2,7 @@ import { Settings } from 'lucide-react-native'
 import { Pressable, Text, View } from 'react-native'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { OrcaLogo } from '../components/OrcaLogo'
+import { PROMPT_APP_NAME } from '../../../src/shared/prompt-brand'
 import { colors, spacing } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
@@ -15,7 +16,7 @@ export function MobileHomeTopBar({ onOpenSettings }: { onOpenSettings: () => voi
         <View style={styles.logoMark}>
           <OrcaLogo size={18} />
         </View>
-        <Text style={styles.brandName}>Orca</Text>
+        <Text style={styles.brandName}>{PROMPT_APP_NAME}</Text>
       </View>
       <Pressable
         style={({ pressed }) => [styles.iconButton, pressed && styles.iconButtonPressed]}

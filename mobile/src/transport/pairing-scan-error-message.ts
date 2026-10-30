@@ -1,4 +1,5 @@
 import type { Translate } from '../i18n/mobile-i18n'
+import { PROMPT_REPO_SLUG } from '../../../src/shared/prompt-upstream'
 
 function isOrcaInstallUrl(data: string): boolean {
   try {
@@ -14,6 +15,10 @@ function isOrcaInstallUrl(data: string): boolean {
       case 'https://testflight.apple.com':
         return path === '/join/YjeGMQBA'
       case 'https://github.com':
+        // Prompt: the desktop download QR opens Prompt's releases page.
+        if (path.startsWith(`/${PROMPT_REPO_SLUG}/releases`)) {
+          return true
+        }
         return /^\/stablyai\/orca\/releases\/download\/mobile-android-v[^/]+\/app-release\.apk$/.test(
           path
         )

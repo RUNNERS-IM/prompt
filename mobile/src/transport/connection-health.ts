@@ -3,6 +3,7 @@ import { translate } from '../i18n/mobile-i18n'
 import type { RelayHostReachability } from './relay-host-reachability'
 import type { MobileConnectionPath } from './stable-logical-rpc-client'
 import type { ConnectionState } from './types'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../src/shared/prompt-upstream'
 
 // Absorb brief wake/network failures before warning; keep unreachable aligned with the retry loop’s GIVE_UP_AFTER_ATTEMPTS.
 // After a prior success, stale time distinguishes a changed/unreachable host from a transient drop.
@@ -168,7 +169,8 @@ export function classifyConnection(args: {
         kind: 'unreachable',
         label: translate('connection.connectionHealth.desktopUnreachable', "Can't reach desktop"),
         reason: 'never-connected',
-        hint
+        hint,
+        ...promptDirectOnlyDetail()
       }
     }
     if (now - lastConnectedAt >= STALE_SINCE_LAST_CONNECT_MS) {
@@ -176,7 +178,8 @@ export function classifyConnection(args: {
         kind: 'unreachable',
         label: translate('connection.connectionHealth.desktopUnreachable', "Can't reach desktop"),
         reason: 'stale',
-        hint
+        hint,
+        ...promptDirectOnlyDetail()
       }
     }
   }
@@ -218,4 +221,16 @@ export function verdictDisplayLabel(verdict: ConnectionVerdict): string {
     })
   }
   return verdict.label
+}
+
+// Prompt: relay is off, so say why a phone away from the computer's network cannot connect.
+function promptDirectOnlyDetail(): { detail?: string } {
+  return PROMPT_BLOCK_UPSTREAM_SERVICES
+    ? {
+        detail: translate(
+          'prompt.connection.directOnly',
+          'Your phone and computer must be on the same Wi-Fi or Tailscale. Relay is off in Prompt.'
+        )
+      }
+    : {}
 }

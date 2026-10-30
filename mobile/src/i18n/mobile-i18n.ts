@@ -4,6 +4,8 @@ import { pseudoLocalizeString } from '../../../src/shared/pseudo-localization'
 import { DEFAULT_UI_LOCALE, type SupportedUiLocale } from '../../../src/shared/ui-locale'
 import enRuntimeRequired from './en-runtime-required.json'
 import { importLocaleCatalog } from './locale-catalog-imports'
+import { applyPromptBrand } from '../../../src/shared/prompt-brand'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../src/shared/prompt-upstream'
 
 export type Translate = (key: string, fallback: string, options?: TOptions) => string
 
@@ -40,12 +42,14 @@ function publish(): void {
 }
 
 function translateUncached(key: string, fallback: string, options?: TOptions): string {
-  const value = mobileI18n.t(resolvePluralFamilyKey(key, options), {
+  const translated = mobileI18n.t(resolvePluralFamilyKey(key, options), {
     defaultValue: fallback,
     ...options,
     // Catalog text never nests keys; interpolated values must not either.
     nest: false
   })
+  // Prompt: catalogs keep upstream text for easy merges; the brand is swapped as strings render.
+  const value = PROMPT_BLOCK_UPSTREAM_SERVICES ? applyPromptBrand(translated) : translated
   return pseudoLocalization ? pseudoLocalizeString(value, { expand: true }) : value
 }
 
