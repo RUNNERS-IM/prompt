@@ -124,7 +124,7 @@ describe('migrateLegacyUserData', () => {
     ]) {
       expect(existsSync(join(targetDir, name)), name).toBe(false)
     }
-    expect(readPromptUserDataMarker(targetDir)).toEqual({
+    expect(readPromptUserDataMarker(targetDir)).toStrictEqual({
       version: 1,
       createdAtMs: 1_000,
       migratedFrom: legacyDir
@@ -139,6 +139,7 @@ describe('migrateLegacyUserData', () => {
     expect(result.outcome).toBe('fresh')
     expect(result.userDataPath).toBe(targetDir)
     expect(readPromptUserDataMarker(targetDir)?.migratedFrom).toBeNull()
+    expect(readPromptUserDataMarker(targetDir)?.firstRunProfile).toBe(true)
     expect(existsSync(legacyDir)).toBe(false)
   })
 

@@ -23,6 +23,11 @@ export type PromptUserDataMarker = {
   createdAtMs: number
   /** Folder copied from, or null for a fresh install. */
   migratedFrom: string | null
+  /**
+   * Set only when this folder was created empty: no Prompt data and nothing inherited from Orca.
+   * Folders from earlier builds lack it, so their profiles never count as first-run.
+   */
+  firstRunProfile?: true
 }
 
 /** Electron's default appData root for this platform (before the app name is appended). */
@@ -52,10 +57,14 @@ export function readPromptUserDataMarker(userDataPath: string): PromptUserDataMa
     if (parsed?.version !== 1 || typeof parsed.createdAtMs !== 'number') {
       return null
     }
+    const migratedFrom = typeof parsed.migratedFrom === 'string' ? parsed.migratedFrom : null
     return {
       version: 1,
       createdAtMs: parsed.createdAtMs,
-      migratedFrom: typeof parsed.migratedFrom === 'string' ? parsed.migratedFrom : null
+      migratedFrom,
+      ...(parsed.firstRunProfile === true && migratedFrom === null
+        ? { firstRunProfile: true as const }
+        : {})
     }
   } catch {
     return null

@@ -90,7 +90,12 @@ export function migrateLegacyUserData(options: UserDataMigrationOptions): UserDa
     try {
       setAsideIncompleteTarget(targetDir, now)
       mkdirSync(targetDir, { recursive: true, mode: 0o700 })
-      writeMarker(targetDir, { version: 1, createdAtMs: now(), migratedFrom: null })
+      writeMarker(targetDir, {
+        version: 1,
+        createdAtMs: now(),
+        migratedFrom: null,
+        firstRunProfile: true
+      })
       return { userDataPath: targetDir, outcome: 'fresh' }
     } catch (error) {
       return { userDataPath: legacyDir, outcome: 'failed', error }
