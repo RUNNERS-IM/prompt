@@ -11,6 +11,7 @@ import { DEFAULT_UI_LOCALE } from './ui-locale'
 import type { PluginLanguagePackRegistration } from './plugins/artifacts/plugin-language-pack-artifact'
 import { replacePluginLanguagePackResources } from './plugins/plugin-language-pack-i18n-resources'
 import { PROMPT_BRAND_POST_PROCESSOR, promptBrandPostProcessor } from './prompt-brand'
+import { applyPromptLocaleOverrides } from './prompt-locale-overrides'
 
 export type OrcaI18n = {
   i18n: I18nInstance
@@ -45,7 +46,7 @@ export function createOrcaI18n(options: {
         return
       }
       load.then(
-        (catalog) => callback(null, catalog),
+        (catalog) => callback(null, applyPromptLocaleOverrides(language, catalog)),
         (error) => callback(error instanceof Error ? error : new Error(String(error)), false)
       )
     }
