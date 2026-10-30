@@ -8,6 +8,9 @@ import {
   promptPtyWebContents,
   promptReposMainWindowMustNotWrite,
   promptShouldHideMainWindowOnClose,
+  recordPromptPtyOwner,
+  runPromptSpawnFor,
+  notePromptMintedPtyId,
   recordPromptPtyWorktree,
   registerPromptProjectWindow,
   releasePromptReposHeldForMainReload,
@@ -84,5 +87,21 @@ describe('prompt project window registry', () => {
     expect(promptPtyControlAllowed(main, 'repoA::/a@@x')).toBe(true)
     expect(promptPtyControlAllowed(project, 'repoA::/a@@x')).toBe(false)
     expect(promptAllPtyWebContents(main)).toEqual([main, project])
+  })
+
+  it('routes a terminal to the window that opened it, whatever its project', () => {
+    const main = contents(1)
+    const extra = contents(2)
+    registerPromptProjectWindow('repoB', extra)
+    recordPromptPtyOwner('repoA::/a@@x', extra)
+    expect(promptPtyWebContents(main, 'repoA::/a@@x')).toBe(extra)
+    expect(promptPtyControlAllowed(main, 'repoA::/a@@x')).toBe(false)
+    expect(promptPtyControlAllowed(extra, 'repoA::/a@@x')).toBe(true)
+    recordPromptPtyOwner('repoA::/a@@x', main)
+    expect(promptPtyWebContents(main, 'repoA::/a@@x')).toBe(main)
+    runPromptSpawnFor(extra, () => notePromptMintedPtyId('repoA::/a@@y'))
+    expect(promptPtyWebContents(main, 'repoA::/a@@y')).toBe(extra)
+    runPromptSpawnFor(main, () => notePromptMintedPtyId('repoA::/a@@z'))
+    expect(promptPtyWebContents(main, 'repoA::/a@@z')).toBe(main)
   })
 })

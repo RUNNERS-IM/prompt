@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from 'node:async_hooks'
 import { promptRepoIdOfWorktreeId } from '../../shared/prompt-project-windows'
 import { parsePtySessionId } from '../../shared/pty-session-id-format'
 
@@ -20,6 +21,9 @@ const repoIdByWebContentsId = new Map<number, string>()
  *  until the main window has reloaded and read them back. */
 const heldForMainReload = new Set<string>()
 const worktreeIdByPtyId = new Map<string, string>()
+/** Terminals shown by an extra window, by the web contents id of that window. */
+const ownerIdByPtyId = new Map<string, number>()
+const spawnOwner = new AsyncLocalStorage<number>()
 /** Project windows whose terminal data dispatcher said it is listening (see pty delivery). */
 const dispatcherReadyWebContentsIds = new Set<number>()
 
@@ -100,14 +104,60 @@ export function recordPromptPtyWorktree(ptyId: unknown, worktreeId: unknown): vo
   }
 }
 
+function extraWindowWebContents(webContentsId: number): WebContentsLike | null {
+  const repoId = repoIdByWebContentsId.get(webContentsId)
+  const contents = repoId ? webContentsByRepoId.get(repoId) : undefined
+  return contents && contents.id === webContentsId && !contents.isDestroyed() ? contents : null
+}
+
+/** The window that asked for a terminal now shows it (null or the main window: main shows it). */
+export function recordPromptPtyOwner(
+  ptyId: unknown,
+  sender: { id: number } | null | undefined
+): void {
+  if (typeof ptyId !== 'string' || !ptyId) {
+    return
+  }
+  if (sender && extraWindowWebContents(sender.id)) {
+    ownerIdByPtyId.set(ptyId, sender.id)
+  } else {
+    ownerIdByPtyId.delete(ptyId)
+  }
+}
+
+/** Runs a spawn so that a terminal id minted during it is owned by the requesting window. */
+export function runPromptSpawnFor<T>(sender: { id: number } | null | undefined, spawn: () => T): T {
+  return sender && extraWindowWebContents(sender.id) ? spawnOwner.run(sender.id, spawn) : spawn()
+}
+
+/** Called where terminal ids are minted, before the first output byte can be produced. */
+export function notePromptMintedPtyId(ptyId: string): void {
+  const owner = spawnOwner.getStore()
+  if (owner !== undefined) {
+    ownerIdByPtyId.set(ptyId, owner)
+  }
+}
+
+export function forgetPromptPtyOwner(ptyId: string): void {
+  ownerIdByPtyId.delete(ptyId)
+}
+
 /**
- * The project window that owns a pty's project, or null (main window). Pty ids minted by Orca
- * start with their worktree id ("<worktreeId>@@<suffix>"), so a pty is routed correctly from its
- * very first byte, before spawn registration records it.
+ * The extra window that shows a pty, or null (main window). A terminal's own owner (the window
+ * that opened or attached it) wins; otherwise a pty of a project open in its own window belongs
+ * to that window. Pty ids minted by Orca start with their worktree id ("<worktreeId>@@<suffix>").
  */
 function ownerOfPty(ptyId: string): WebContentsLike | null {
   if (webContentsByRepoId.size === 0 || typeof ptyId !== 'string') {
     return null
+  }
+  const ownerId = ownerIdByPtyId.get(ptyId)
+  if (ownerId !== undefined) {
+    const contents = extraWindowWebContents(ownerId)
+    if (contents) {
+      return contents
+    }
+    ownerIdByPtyId.delete(ptyId)
   }
   const worktreeId = worktreeIdByPtyId.get(ptyId) ?? parsePtySessionId(ptyId).worktreeId
   const repoId = worktreeId ? promptRepoIdOfWorktreeId(worktreeId) : null
@@ -170,14 +220,9 @@ export function promptPtyControlAllowed(
   if (!sender) {
     return true
   }
-  const senderRepoId = promptProjectRepoIdOfSender(sender)
-  if (senderRepoId) {
-    // A project window restores the whole saved session; it controls only its own project's ptys.
-    const worktreeId = worktreeIdByPtyId.get(ptyId) ?? parsePtySessionId(ptyId).worktreeId
-    return (worktreeId ? promptRepoIdOfWorktreeId(worktreeId) : null) === senderRepoId
-  }
+  // Each window also holds stale copies of tabs shown in other windows; only the showing one counts.
   const owner = ownerOfPty(ptyId)
-  return !owner || owner.id === sender.id
+  return owner ? owner.id === sender.id : !extraWindowWebContents(sender.id)
 }
 
 let quitting = false
@@ -207,6 +252,7 @@ export function resetPromptProjectWindowRegistryForTests(): void {
   repoIdByWebContentsId.clear()
   heldForMainReload.clear()
   worktreeIdByPtyId.clear()
+  ownerIdByPtyId.clear()
   dispatcherReadyWebContentsIds.clear()
   quitting = false
 }
