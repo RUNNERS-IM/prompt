@@ -5,16 +5,14 @@ import { getConnectionExecutionHostId } from '../../../../shared/execution-host'
 import { attachOnlyViewOf, attachViewAfterHiddenStart } from '../pane/attach-only-view'
 import {
   recordPromptPtyOwner,
-  recordPromptPtyWorktree,
   runPromptSpawnFor
-} from '../../../prompt-windows/prompt-project-window-registry'
+} from '../../../prompt-windows/prompt-window-registry'
 
 export function installPtySpawnIpcHandler(deps: PtySpawnIpcDeps): void {
   const ipcMain = getPtyIpc()
   const { getLocalPtyStartupPromise } = deps
 
   ipcMain.handle('pty:spawn', async (_event, args: PtySpawnIpcArgs) => {
-    recordPromptPtyWorktree(args.sessionId, args.worktreeId)
     recordPromptPtyOwner(args.sessionId, _event?.sender)
     const startupPromise = getLocalPtyStartupPromise(
       getConnectionExecutionHostId(args.connectionId)

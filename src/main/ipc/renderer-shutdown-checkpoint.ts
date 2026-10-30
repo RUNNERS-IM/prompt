@@ -16,7 +16,7 @@ import { reportWindowSaveDrift } from '../persistence/window-save-divergence'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { formatShutdownCheckpointFailureReason } from '../../shared/renderer-shutdown-events'
 import { scopePromptWindowSessionWrite } from '../prompt-windows/prompt-session-scope'
-import { isPromptProjectWindowSender } from '../prompt-windows/prompt-project-window-registry'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 
 type StageBeforeUnloadSyncArgs = {
   sessions: { state: WorkspaceSessionState; hostId?: ExecutionHostId }[]
@@ -123,7 +123,7 @@ export function registerRendererShutdownCheckpointHandler(
           )
         }
       }
-      if (!isWslMoveWindowWriteHeld() && !isPromptProjectWindowSender(event.sender)) {
+      if (!isWslMoveWindowWriteHeld() && !isPromptExtraWindowSender(event.sender)) {
         store.updateUI(args.ui)
       }
     } catch (stagingError) {

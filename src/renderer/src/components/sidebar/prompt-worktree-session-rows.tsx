@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { AppWindow, SquareTerminal } from 'lucide-react'
+import { SquareTerminal } from 'lucide-react'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -10,10 +10,6 @@ import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import WorktreeCardAgents from './WorktreeCardAgents'
 import { useWorktreeAgentRows } from './useWorktreeAgentRows'
 import { promptTerminalTabName } from './prompt-session-row-name'
-import {
-  focusPromptProjectWindow,
-  usePromptProjectShownElsewhere
-} from '@/lib/prompt-project-windows'
 import type { WorktreeCardController } from './use-worktree-card-controller'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
@@ -80,35 +76,6 @@ export function PromptWorktreeSessionRows({
 }: {
   card: WorktreeCardController
 }): React.JSX.Element {
-  const { repo } = card
-  if (usePromptProjectShownElsewhere(repo?.id)) {
-    return <PromptShownElsewhereRow repoId={repo!.id} />
-  }
-  return <PromptWorktreeSessionList card={card} />
-}
-
-/** Main window, project open in its own window: one row that brings that window forward. */
-function PromptShownElsewhereRow({ repoId }: { repoId: string }): React.JSX.Element {
-  return (
-    <div
-      className={cn(ROW_CLASS, 'text-muted-foreground/70')}
-      onClick={(event) => {
-        event.stopPropagation()
-        focusPromptProjectWindow(repoId)
-      }}
-      onMouseDown={(e) => e.stopPropagation()}
-      onPointerDown={(e) => e.stopPropagation()}
-      data-prompt-terminal-row="elsewhere"
-    >
-      <AppWindow className="size-3 shrink-0" strokeWidth={1.5} />
-      <span className="min-w-0 flex-1 truncate">
-        {translate('prompt.projectWindow.openElsewhere', 'Open in its own window')}
-      </span>
-    </div>
-  )
-}
-
-function PromptWorktreeSessionList({ card }: { card: WorktreeCardController }): React.JSX.Element {
   const { worktree, repo, branchIdentityDisplay } = card
   const hasSiblingWorktrees = useAppStore((s) =>
     repo ? (s.worktreesByRepo?.[repo.id]?.length ?? 0) > 1 : false

@@ -1,19 +1,19 @@
 /**
- * Prompt project windows: checks in front of Orca's terminal resize / visibility IPC.
+ * Prompt extra windows: checks in front of Orca's terminal resize / visibility IPC.
  *
- * Orca assumes one renderer. With project windows, several renderers send these messages:
+ * Orca assumes one renderer. With extra windows, several renderers send these messages:
  * - resize, active, visible and hidden reports apply only when they come from the window that
- *   shows the pty (each renderer also holds stale copies of tabs shown in other windows);
- * - a project window's dispatcher handshake and resync answers are handled per window, so they
+ *   shows the pty (a window that just handed a tab to another window may still report on it);
+ * - an extra window's dispatcher handshake and resync answers are handled per window, so they
  *   do not reset or settle the main window's delivery state.
  */
 
 import type { PtyIpcSurface } from '../ipc/pty/pty-host-bindings'
 import type { PtyIpcSession } from '../ipc/pty/session'
-import { promptPtyControlAllowed } from './prompt-project-window-registry'
+import { promptPtyControlAllowed } from './prompt-window-registry'
 import {
-  promptProjectWindowDispatcherReady,
-  promptProjectWindowResyncResponse
+  promptExtraWindowDispatcherReady,
+  promptExtraWindowResyncResponse
 } from './prompt-pty-window-delivery'
 
 type Listener = Parameters<PtyIpcSurface['on']>[1]
@@ -48,14 +48,14 @@ export function promptGuardPtyIpcListener(
   }
   if (channel === 'pty:rendererDispatcherReady') {
     return (event, ...args) => {
-      if (!promptProjectWindowDispatcherReady(senderOf(event), session)) {
+      if (!promptExtraWindowDispatcherReady(senderOf(event), session)) {
         listener(event, ...args)
       }
     }
   }
   if (channel === 'pty:deliveryResyncResponse') {
     return (event, ...args) => {
-      if (!promptProjectWindowResyncResponse(senderOf(event), args[0] as never, session)) {
+      if (!promptExtraWindowResyncResponse(senderOf(event), args[0] as never, session)) {
         listener(event, ...args)
       }
     }

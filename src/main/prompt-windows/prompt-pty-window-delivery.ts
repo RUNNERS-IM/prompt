@@ -1,13 +1,13 @@
 /**
- * Terminal output delivery for Prompt project windows.
+ * Terminal output delivery for Prompt extra windows.
  *
  * Orca delivers pty output to one window and keeps one "dispatcher ready" flag, one set of
- * in-flight accounting and one resync probe for it. With project windows, each window receives
- * the output of its own project's ptys (see `promptPtyWebContents`), so:
- * - each project window has its own ready flag; its ptys wait for its handshake, and its
+ * in-flight accounting and one resync probe for it. With extra windows, each window receives
+ * the output of the ptys it shows (see `promptPtyWebContents`), so:
+ * - each extra window has its own ready flag; its ptys wait for its handshake, and its
  *   handshake no longer resets the main window's delivery state;
- * - when a project window reloads or goes away, only its ptys' in-flight bytes are written off;
- * - when the main window reloads, the project windows' ptys keep their delivery state;
+ * - when an extra window reloads or goes away, only its ptys' in-flight bytes are written off;
+ * - when the main window reloads, the extra windows' ptys keep their delivery state;
  * - resync probes go to every window and every window's answer is applied.
  */
 
@@ -20,11 +20,12 @@ import {
   isRuntimeOwnedHiddenRendererPty
 } from '../ipc/pty/delivery/pty-hidden-delivery-gate'
 import {
-  isPromptProjectWindowDispatcherReady,
-  promptProjectRepoIdOfSender,
-  promptPtyOwnerRepoId,
-  setPromptProjectWindowDispatcherReady
-} from './prompt-project-window-registry'
+  isPromptExtraWindowDispatcherReady,
+  isPromptExtraWindowSender,
+  promptPtyOwnerWebContentsId,
+  promptRecordedPtyOwnerId,
+  setPromptExtraWindowDispatcherReady
+} from './prompt-window-registry'
 
 let boundSession: PtyIpcSession | null = null
 
@@ -32,11 +33,11 @@ function ptyIdsOf(session: PtyIpcSession): Set<string> {
   return new Set([...session.rendererDeliveryAccountingByPty.keys(), ...session.pendingData.keys()])
 }
 
-/** Forget what was sent to a project window that can no longer acknowledge it. */
-function writeOffProjectWindowDelivery(session: PtyIpcSession, repoId: string): void {
+/** Forget what was sent to an extra window that can no longer acknowledge it. */
+function writeOffExtraWindowDelivery(session: PtyIpcSession, webContentsId: number): void {
   let creditedAny = false
   for (const id of ptyIdsOf(session)) {
-    if (promptPtyOwnerRepoId(id) !== repoId) {
+    if (promptRecordedPtyOwnerId(id) !== webContentsId) {
       continue
     }
     const accounting = session.rendererDeliveryAccountingByPty.get(id)
@@ -60,52 +61,51 @@ function writeOffProjectWindowDelivery(session: PtyIpcSession, repoId: string): 
 }
 
 /**
- * `pty:rendererDispatcherReady` from a project window. Returns true when handled here (the sender
- * is a project window), so Orca's main-window handshake logic does not run for it.
+ * `pty:rendererDispatcherReady` from an extra window. Returns true when handled here (the sender
+ * is an extra window), so Orca's main-window handshake logic does not run for it.
  */
-export function promptProjectWindowDispatcherReady(
+export function promptExtraWindowDispatcherReady(
   sender: { id: number } | null | undefined,
   session: PtyIpcSession
 ): boolean {
-  const repoId = promptProjectRepoIdOfSender(sender)
-  if (!sender || !repoId) {
+  if (!sender || !isPromptExtraWindowSender(sender)) {
     return false
   }
   boundSession = session
-  if (isPromptProjectWindowDispatcherReady(sender.id)) {
+  if (isPromptExtraWindowDispatcherReady(sender.id)) {
     // A second handshake means the page was replaced without us seeing it.
-    writeOffProjectWindowDelivery(session, repoId)
+    writeOffExtraWindowDelivery(session, sender.id)
   }
-  // The main window may have hidden these ptys before the project moved; this window decides now.
+  // Another window may have hidden these ptys before the tab moved; this window decides now.
   for (const id of getHiddenRendererPtyIds()) {
-    if (promptPtyOwnerRepoId(id) === repoId && !isRuntimeOwnedHiddenRendererPty(id)) {
+    if (promptPtyOwnerWebContentsId(id) === sender.id && !isRuntimeOwnedHiddenRendererPty(id)) {
       session.transitionSpawnHiddenRendererPtyDeliveryState(id, false)
     }
   }
-  setPromptProjectWindowDispatcherReady(sender.id, true)
+  setPromptExtraWindowDispatcherReady(sender.id, true)
   session.pendingData.reactivateBlocked()
   session.schedulePendingDataFlush(0)
   return true
 }
 
-/** A project window navigated, crashed or closed: its ptys wait for the next handshake. */
-export function resetPromptProjectWindowDelivery(repoId: string, webContentsId: number): void {
-  setPromptProjectWindowDispatcherReady(webContentsId, false)
+/** An extra window navigated, crashed or closed: its ptys wait for the next handshake. */
+export function resetPromptExtraWindowDelivery(webContentsId: number): void {
+  setPromptExtraWindowDispatcherReady(webContentsId, false)
   if (boundSession) {
-    writeOffProjectWindowDelivery(boundSession, repoId)
+    writeOffExtraWindowDelivery(boundSession, webContentsId)
   }
 }
 
 /**
- * `pty:deliveryResyncResponse` from a project window: apply its acknowledged totals (a max-merge,
+ * `pty:deliveryResyncResponse` from an extra window: apply its acknowledged totals (a max-merge,
  * so applying late answers is safe) without settling the main window's probe.
  */
-export function promptProjectWindowResyncResponse(
+export function promptExtraWindowResyncResponse(
   sender: { id: number } | null | undefined,
   args: { processedCharsByPty?: Record<string, number> } | undefined,
   session: PtyIpcSession
 ): boolean {
-  if (!promptProjectRepoIdOfSender(sender)) {
+  if (!isPromptExtraWindowSender(sender)) {
     return false
   }
   let creditedAny = false
@@ -134,17 +134,17 @@ type KeptPtyDelivery = {
 
 /**
  * Called just before the main window's lifecycle reset clears all delivery state. Returns a
- * function to call right after it that puts back the state of ptys shown in project windows,
+ * function to call right after it that puts back the state of ptys shown in extra windows,
  * which did not reload.
  */
-export function keepPromptProjectWindowDelivery(): () => void {
+export function keepPromptExtraWindowDelivery(): () => void {
   const session = boundSession
   if (!session) {
     return () => {}
   }
   const kept = new Map<string, KeptPtyDelivery>()
   for (const id of ptyIdsOf(session)) {
-    if (!promptPtyOwnerRepoId(id)) {
+    if (promptPtyOwnerWebContentsId(id) === null) {
       continue
     }
     const accounting = session.rendererDeliveryAccountingByPty.get(id)
@@ -158,7 +158,7 @@ export function keepPromptProjectWindowDelivery(): () => void {
     })
   }
   for (const id of [...activeRendererPtys, ...visibleRendererPtys]) {
-    if (!kept.has(id) && promptPtyOwnerRepoId(id)) {
+    if (!kept.has(id) && promptPtyOwnerWebContentsId(id) !== null) {
       kept.set(id, {
         overflowMarked: false,
         restoreNeeded: false,

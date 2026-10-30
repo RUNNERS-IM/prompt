@@ -1,35 +1,35 @@
 import type React from 'react'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
-import { isPromptRestoreProjectWindowsOn } from '../../../../shared/prompt-project-windows'
+import { isPromptRestoreWindowsOn } from '../../../../shared/prompt-windows'
 import { SearchableSetting } from './SearchableSetting'
 import { SettingsSwitchRow } from './SettingsFormControls'
 import { translate } from '@/i18n/i18n'
 
-/** Prompt: reopen the project windows that were open at quit ("Remember Open Windows"). */
-export function PromptProjectWindowsSetting({
+/** Prompt: reopen the windows that were open at quit, with their tabs ("Remember Open Windows"). */
+export function PromptWindowsSetting({
   settings,
   updateSettings
 }: {
   settings: GlobalSettings
   updateSettings: (updates: Partial<GlobalSettings>) => void
 }): React.JSX.Element {
-  const title = translate('prompt.projectWindow.rememberTitle', 'Remember Open Windows')
+  const title = translate('prompt.windows.rememberTitle', 'Remember Open Windows')
   const description = translate(
-    'prompt.projectWindow.rememberDescription',
-    'Reopen project windows that were open when Prompt quit.'
+    'prompt.windows.rememberDescription',
+    'Reopen every window with its tabs, size and position when Prompt starts.'
   )
-  const on = isPromptRestoreProjectWindowsOn(settings)
+  const on = isPromptRestoreWindowsOn(settings)
   return (
     <SearchableSetting
       title={title}
       description={description}
-      keywords={['window', 'project', 'restore', 'reopen', '창', '기억']}
+      keywords={['window', 'restore', 'reopen', '창', '기억']}
     >
       <SettingsSwitchRow
         label={title}
         description={description}
         checked={on}
-        onChange={() => updateSettings({ promptRestoreProjectWindows: !on })}
+        onChange={() => updateSettings({ promptRestoreWindows: !on })}
       />
     </SearchableSetting>
   )

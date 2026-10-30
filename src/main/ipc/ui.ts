@@ -11,7 +11,7 @@ import type { PersistedUIState } from '../../shared/persisted-ui-state-types'
 import { isFeatureInteractionId } from '../../shared/feature-interactions'
 import { isWslMoveWindowWriteHeld } from '../persistence/moving-wsl-projects/wsl-move-window-write-hold'
 import { isTrustedMainRendererSender } from './main-renderer-sender-trust'
-import { isPromptProjectWindowSender } from '../prompt-windows/prompt-project-window-registry'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 
 let trustedUIRendererWebContentsId: number | null = null
 
@@ -84,7 +84,7 @@ export function registerUIHandlers(
   ipcMain.handle('ui:set', (event, args: Partial<PersistedUIState>) => {
     // A window a WSL move rewrote under is stale until main reloads it.
     // Prompt project windows keep their own filter and layout; only the main window saves UI.
-    if (!isWslMoveWindowWriteHeld() && !isPromptProjectWindowSender(event.sender)) {
+    if (!isWslMoveWindowWriteHeld() && !isPromptExtraWindowSender(event.sender)) {
       store.updateUI(args)
     }
   })

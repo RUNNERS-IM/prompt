@@ -15,7 +15,6 @@ import { finishPtyShutdown, isPtyAlreadyGoneError } from '../provider/liveness'
 import { PtyExitProof } from '../../../pty-exit-proof'
 import { errorMessage } from '../../../../shared/error-message'
 import { retirePersistedStablePaneOwner } from './stable-owner'
-import { recordPromptPtyWorktree } from '../../../prompt-windows/prompt-project-window-registry'
 
 /** Track before saving; failed save/stop must not make a potentially live process disappear from ownership. */
 export function admitPtySpawnOwnership(
@@ -117,7 +116,6 @@ export function registerPersistedPtySpawn(
   claim: PtyRegistrationClaim | undefined,
   ...args: Parameters<OrcaRuntimeService['registerPty']>
 ): Promise<never> | undefined {
-  recordPromptPtyWorktree(args[0], args[1])
   try {
     if (claim && !runtime?.narrowPtyRegistration(args[0], claim, args[3]?.incarnationId)) {
       throw new PaneOwnerContentionError()

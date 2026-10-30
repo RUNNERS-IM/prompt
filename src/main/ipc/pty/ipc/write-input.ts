@@ -15,16 +15,16 @@ import type { TerminalInputKind } from '../../../../shared/terminal-input-kind'
 import { interactiveOutputCharsByPty, lastInputAtByPty } from '../delivery/visibility-state'
 import { isSettledWrite, type WriteSettlement } from '../../../../shared/pty-write-settlement'
 import {
-  isPromptProjectWindowSender,
+  isPromptExtraWindowSender,
   promptPtyWebContents
-} from '../../../prompt-windows/prompt-project-window-registry'
+} from '../../../prompt-windows/prompt-window-registry'
 
 export function isMainWindowPtyIpcEvent(
   event: IpcMainEvent | IpcMainInvokeEvent,
   mainWindow: PtyRendererDelivery | undefined
 ): boolean {
   const mainWebContents = mainWindow?.webContents
-  if (isPromptProjectWindowSender(event.sender)) {
+  if (isPromptExtraWindowSender(event.sender)) {
     return true
   }
   return (

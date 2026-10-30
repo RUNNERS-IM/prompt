@@ -22,6 +22,8 @@ import { ensureAutoUpdaterConfigured } from '../window/attach-main-window-servic
 import { logStartupMilestone } from './startup-diagnostics'
 import { browserManager } from '../browser/browser-manager'
 import { promptMenuTargetWindow } from '../prompt-windows/prompt-window-routing'
+import { openPromptNewWindowFromMenu } from '../prompt-windows/prompt-windows'
+import { setPromptNewWindowHandler } from '../menu/prompt-window-menu'
 
 export async function initializeMainProcessI18nAndMenu(): Promise<void> {
   const store = state.store
@@ -30,6 +32,7 @@ export async function initializeMainProcessI18nAndMenu(): Promise<void> {
   }
   await setMainUiLanguage(store.getSettings().uiLanguage)
   logStartupMilestone('i18n-ready')
+  setPromptNewWindowHandler(openPromptNewWindowFromMenu)
   registerAppMenu({
     appMenuLabel: state.devInstanceIdentity?.name ?? app.name,
     ...getAppMenuQuitHandlers(),

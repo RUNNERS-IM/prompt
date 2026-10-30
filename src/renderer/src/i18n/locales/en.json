@@ -23168,12 +23168,15 @@
       "ongoing": "{{status}} · {{duration}}",
       "ago": "{{status}} · {{duration}} ago"
     },
-    "projectWindow": {
+    "windows": {
+      "newWindow": "New Window",
       "openInNewWindow": "Open in New Window",
-      "showWindow": "Show Its Window",
-      "openElsewhere": "Open in its own window",
+      "moveTabToWindow": "Move Tab to Window",
+      "windowLabel": "Window {{index}}",
+      "windowLabelNamed": "Window {{index}} — {{name}}",
+      "mainWindowSuffix": "(main)",
       "rememberTitle": "Remember Open Windows",
-      "rememberDescription": "Reopen project windows that were open when Prompt quit."
+      "rememberDescription": "Reopen every window with its tabs, size and position when Prompt starts."
     }
   }
 }

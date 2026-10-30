@@ -1,13 +1,8 @@
-import React from 'react'
+import type React from 'react'
 import { AppWindow } from 'lucide-react'
 import { DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { translate } from '@/i18n/i18n'
-import {
-  focusPromptProjectWindow,
-  isPromptProjectWindow,
-  openPromptProjectWindow,
-  usePromptOpenProjectWindows
-} from '@/lib/prompt-project-windows'
+import { openPromptProjectWindow } from '@/lib/prompt-windows'
 import {
   PromptClaudeModelSubmenu,
   claudeModelPaneKeyFromTarget
@@ -36,23 +31,13 @@ export function promptContextMenuTargetFromEvent(
   }
 }
 
-function PromptProjectWindowItem({ repoId }: { repoId: string }): React.JSX.Element | null {
-  const open = usePromptOpenProjectWindows()
-  if (isPromptProjectWindow) {
-    return null
-  }
-  const alreadyOpen = open.includes(repoId)
+/** Opens a new window showing the project; every click opens another one. */
+function PromptProjectWindowItem({ repoId }: { repoId: string }): React.JSX.Element {
   return (
     <>
-      <DropdownMenuItem
-        onSelect={() =>
-          alreadyOpen ? focusPromptProjectWindow(repoId) : openPromptProjectWindow(repoId)
-        }
-      >
+      <DropdownMenuItem onSelect={() => openPromptProjectWindow(repoId)}>
         <AppWindow className="size-3.5" />
-        {alreadyOpen
-          ? translate('prompt.projectWindow.showWindow', 'Show Its Window')
-          : translate('prompt.projectWindow.openInNewWindow', 'Open in New Window')}
+        {translate('prompt.windows.openInNewWindow', 'Open in New Window')}
       </DropdownMenuItem>
       <DropdownMenuSeparator />
     </>

@@ -19,7 +19,7 @@ import type {
   RateLimitsApi
 } from './api/agent-usage-api'
 import type { AiVaultApi } from './api/ai-vault-api'
-import type { PromptProjectWindowsApi } from './api/prompt-project-windows-bridge'
+import type { PromptWindowsApi } from './api/prompt-windows-bridge'
 import type { AppApi, E2EApi, PlatformApi } from './api/app-api'
 import type { AutomationsApi } from './api/automation-api'
 import type { BrowserApi } from './api/browser-api'
@@ -123,7 +123,7 @@ export type PreloadApi = {
   dashboard: DashboardApi
   terminalPreview: TerminalPreviewApi
   macosTccPrompts: MacosTccPromptsApi
-  promptProjectWindows: PromptProjectWindowsApi
+  promptWindows: PromptWindowsApi
   developerPermissions: DeveloperPermissionsApi
   computerUsePermissions: ComputerUsePermissionsApi
   shell: ShellApi

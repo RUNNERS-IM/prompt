@@ -9,7 +9,7 @@ import type { MainWindowFocusLifecycle } from './main-window-focus-lifecycle'
 import type { MainWindowStateLifecycle } from './main-window-state-lifecycle'
 import { syncTrafficLightPosition } from './main-window-visual-lifecycle'
 import { consumeUserQuitWindowClose } from './user-quit-window-close'
-import { promptShouldHideMainWindowOnClose } from '../prompt-windows/prompt-project-window-registry'
+import { promptShouldHideMainWindowOnClose } from '../prompt-windows/prompt-window-registry'
 
 export const WINDOW_QUIT_RENDERER_ACK_TIMEOUT_MS = QUIT_RENDERER_ACK_TIMEOUT_MS
 

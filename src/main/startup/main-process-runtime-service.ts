@@ -48,7 +48,7 @@ import { startAgentStateRulesLiveUpdates } from '../runtime/agent-state-rules/ag
 import { recordDurableCrashBreadcrumb } from '../crash-reporting/durable-crash-breadcrumb'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { getRuntimeEnvironmentRegistryRoot } from '../ipc/runtime-environments/runtime-environment-registry-root'
-import { promptPtyWebContents } from '../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../prompt-windows/prompt-window-registry'
 
 export function getDesktopWindowStatus(): RuntimeDesktopWindowStatus {
   const activation = state.desktopActivationGate

@@ -14,7 +14,10 @@ import type {
   WorkspaceSessionPatch,
   WorkspaceSessionState
 } from '../../shared/workspace-session-state-types'
-import { scopePromptWindowSessionWrite } from '../prompt-windows/prompt-session-scope'
+import {
+  promptWindowSessionView,
+  scopePromptWindowSessionWrite
+} from '../prompt-windows/prompt-session-scope'
 
 export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeService): void {
   // Why: renderer saves would change a fenced host's frozen source partition, or write back what a
@@ -23,8 +26,8 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
     isFrozenOrcadSourceSessionPartition(store, hostId) || isWslMoveWindowWriteHeld()
 
   // Optional hostId preserves local-partition behavior for older renderers.
-  ipcMain.handle('session:get', (_event, hostId?: string | null) => {
-    return store.getWorkspaceSession(hostId)
+  ipcMain.handle('session:get', (event, hostId?: string | null) => {
+    return promptWindowSessionView(event.sender, store.getWorkspaceSession(hostId))
   })
 
   // Repo catalogs omit folder-only SSH hosts; enumerate session partitions directly (#12723).

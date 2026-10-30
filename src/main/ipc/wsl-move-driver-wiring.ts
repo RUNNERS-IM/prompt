@@ -75,7 +75,6 @@ import {
 import { listRemoteOrcadFolderCatalog } from '../ssh/orcad-server-folder-workspaces'
 import { makeTerminalScrollbackSnapshotRef } from '../terminal-scrollback-snapshots'
 import { pauseWorkspacesForProjectMove } from '../window/project-move-pause'
-import { promptWindowForWorktrees } from '../prompt-windows/prompt-window-routing'
 import { getWslHostService } from '../wsl/wsl-host-service-instance'
 import { readWslGuestProcessTable } from '../wsl/wsl-guest-process-table'
 import { isWslDistroRegistered } from '../wsl/wsl-distro-registry-id'
@@ -186,11 +185,7 @@ export function createWslMoveDriverDeps(
           throw new Error('renderer_unavailable')
         }
         // Main's pause barrier: keeps browser tabs and waits for the window's session to persist.
-        const outcomes = await pauseWorkspacesForProjectMove(
-          promptWindowForWorktrees(window, workspaceIds),
-          runtime,
-          workspaceIds
-        )
+        const outcomes = await pauseWorkspacesForProjectMove(window, runtime, workspaceIds)
         return {
           failedWorktreeIds: outcomes
             .filter((outcome) => outcome.failure || outcome.chatFailed || outcome.vmSuspendFailure)

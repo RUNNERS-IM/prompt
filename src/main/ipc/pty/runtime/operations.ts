@@ -15,7 +15,7 @@ import {
   type WriteSettlement
 } from '../../../../shared/pty-write-settlement'
 import { isDrivingInputKind, type TerminalInputKind } from '../../../../shared/terminal-input-kind'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 type RuntimeWriteDeps = Pick<PtyRuntimeControllerDeps, 'runtime'>
 

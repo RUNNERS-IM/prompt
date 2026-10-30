@@ -68,7 +68,8 @@ export const KEYBINDING_DEFINITION_CORE_1: readonly KeybindingDefinition[] = [
     group: 'Global',
     scope: 'global',
     searchKeywords: ['shortcut', 'global', 'worktree', 'create', 'new workspace'],
-    defaultBindings: platformBindings(['Mod+N', 'Mod+Shift+N'])
+    // Prompt: Mod+N opens a new window (Window > New Window).
+    defaultBindings: platformBindings(['Mod+Shift+N'])
   },
   {
     id: 'workspace.rename',

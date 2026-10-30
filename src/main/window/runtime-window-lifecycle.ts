@@ -18,8 +18,7 @@ import { ORCA_SIDEBAR_INPUTS_IS_MAIN } from '../../shared/sidebar-inputs-switch'
 import {
   isPromptAppWindowSender,
   promptRoutedRuntimeSend,
-  promptWindowForTab,
-  promptWindowForWorktree
+  promptWindowForTab
 } from '../prompt-windows/prompt-window-routing'
 
 let runtimeNotifierTokenCounter = 0
@@ -160,10 +159,7 @@ export function registerRuntimeWindowLifecycle(
         }
       }),
     publishAgentLaunchTab: (request) =>
-      requestAgentLaunchTabPublishFromRenderer(
-        promptWindowForWorktree(mainWindow, request.worktreeId),
-        request
-      ),
+      requestAgentLaunchTabPublishFromRenderer(mainWindow, request),
     agentLaunchPaneVerdict: (event) => send('ui:agentLaunchPaneVerdict', event),
     rememberLaunchRecipe: (recipe) => send('ui:launchRecipe', recipe),
     resolveLegacyWorkerTerminalRecovery: (paneKey, resolution, ptyId) =>
@@ -190,14 +186,10 @@ export function registerRuntimeWindowLifecycle(
     focusTerminal: (tabId, worktreeId, leafId) =>
       send('ui:focusTerminal', { tabId, worktreeId, leafId }),
     revealTerminalPane: (target) =>
-      revealTerminalPaneInWindow(promptWindowForWorktree(mainWindow, target.worktreeId), target),
+      revealTerminalPaneInWindow(promptWindowForTab(mainWindow, target.tabId), target),
     focusEditorTab: (tabId, worktreeId) => send('ui:focusEditorTab', { tabId, worktreeId }),
     closeSessionTab: (tabId, worktreeId) =>
-      requestSessionTabCloseFromRenderer(
-        promptWindowForWorktree(mainWindow, worktreeId),
-        tabId,
-        worktreeId
-      ),
+      requestSessionTabCloseFromRenderer(promptWindowForTab(mainWindow, tabId), tabId, worktreeId),
     moveSessionTab: (worktreeId: string, move: RuntimeMobileSessionTabMove) =>
       send('ui:moveSessionTab', { worktreeId, ...move }),
     openFile: (worktreeId, filePath, relativePath, runtimeEnvironmentId?, navigation?, position?) =>

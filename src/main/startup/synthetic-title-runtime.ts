@@ -15,7 +15,7 @@ import {
 import { shouldSendSyntheticTitleFrame } from '../synthetic-title-visibility'
 import { shouldCopySyntheticTitleFrameToPtyData } from '../synthetic-title-frame-routing'
 import { mainProcessState as state } from './main-process-state'
-import { promptPtyWebContents } from '../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../prompt-windows/prompt-window-registry'
 
 // Cursor redraws overwrite one-shot OSC titles; reassert at Pi's 80ms cadence and share the animation with OpenCode.
 const SPINNER_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']

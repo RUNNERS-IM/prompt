@@ -18,6 +18,7 @@ import { TAB_CONTEXT_MENU_CONTENT_CLASS } from './tab-context-menu-sizing'
 import { CopyTabIdMenuItem } from './CopyTabIdMenuItem'
 import { CloseSplitPaneMenuItem } from './CloseSplitPaneMenuItem'
 import { PromptClaudeTabModelSubmenu } from '../prompt-claude-model-menu'
+import { PromptMoveTabToWindowSubmenu } from './prompt-move-tab-to-window-menu'
 
 const TAB_COLORS = [
   {
@@ -202,6 +203,7 @@ export function SortableTabContextMenu({
             : translate('auto.components.tab.bar.SortableTabContextMenu.60f958ec75', 'Pin Tab')}
         </DropdownMenuItem>
         <CopyTabIdMenuItem unifiedTabId={unifiedTabId} />
+        <PromptMoveTabToWindowSubmenu tabId={tab.id} />
         <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={() => !isPinned && onClose(tab.id)} disabled={isPinned}>
           <X className="size-3.5" />

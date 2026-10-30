@@ -18,7 +18,7 @@ import {
   invalidatePendingPtyDrainPriority,
   visibleRendererPtys
 } from './visibility-state'
-import { keepPromptProjectWindowDelivery } from '../../../prompt-windows/prompt-pty-window-delivery'
+import { keepPromptExtraWindowDelivery } from '../../../prompt-windows/prompt-pty-window-delivery'
 
 export function clearDidFinishLoadHandler(): void {
   if (didFinishLoadHandler && didFinishLoadWebContents) {
@@ -31,12 +31,12 @@ export function markRendererPtysHiddenForRendererLifecycleReset(): void {
   mainDeliveryBreadcrumbs.record('renderer-lifecycle-reset')
   // Visibility hints belong to the dead page; surviving PTYs must wait for fresh reports.
   const activePriorityChanged = activeRendererPtys.size > 0
-  const restorePromptProjectWindows = keepPromptProjectWindowDelivery()
+  const restorePromptExtraWindows = keepPromptExtraWindowDelivery()
   activeRendererPtys.clear()
   visibleRendererPtys.clear()
   // The dead page cannot ACK; retire its accounting so surviving PTYs do not remain gated.
   resetRendererDeliveryAccountingForLifecycleReset()
-  restorePromptProjectWindows()
+  restorePromptExtraWindows()
   if (activePriorityChanged) {
     invalidatePendingPtyDrainPriority()
   }

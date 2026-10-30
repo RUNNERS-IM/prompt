@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { isAbsolute, join, relative, resolve, sep } from 'node:path'
 import { PTY_SESSION_ID_SEPARATOR } from '../../shared/pty-session-id-format'
-import { notePromptMintedPtyId } from '../prompt-windows/prompt-project-window-registry'
+import { notePromptMintedPtyId } from '../prompt-windows/prompt-window-registry'
 
 /** Keep session-ID format aligned so cold restore and legacy cleanup recover the owning workspace. */
 export function mintPtySessionId(worktreeId?: string): string {

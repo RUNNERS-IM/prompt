@@ -24,7 +24,7 @@ import {
   takePtyGapEscapeState
 } from './pty-gap-escape-state'
 import type { PtyIpcSession } from '../session'
-import { promptPtyDispatcherReady } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptPtyDispatcherReady } from '../../../prompt-windows/prompt-window-registry'
 
 export function rendererPtyIsKnownHidden(id: string): boolean {
   return rendererVisibilityKnownPtys.has(id) && !visibleRendererPtys.has(id)

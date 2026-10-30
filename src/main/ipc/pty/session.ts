@@ -19,7 +19,7 @@ import {
 } from './delivery/pty-hidden-delivery-gate'
 import type { CodexHomePtySpawnedLifecycleArgs, PrepareCodexSessionResume } from './host-env/types'
 import { tryGetProviderForPty } from './provider/registry'
-import { promptPtyDispatcherReady } from '../../prompt-windows/prompt-project-window-registry'
+import { promptPtyDispatcherReady } from '../../prompt-windows/prompt-window-registry'
 
 export type PtyDataPayload = {
   id: string

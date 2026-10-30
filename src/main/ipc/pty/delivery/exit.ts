@@ -10,7 +10,7 @@ import { makePtyDataPayload, sendPtyDataToRenderer } from './payload'
 import { getRendererInFlightCharsForPty } from './accounting'
 import { clearFlushTimerIfIdle } from './flush'
 import type { PtyIpcSession } from '../session'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function rememberSyntheticKillExit(
   session: PtyIpcSession,

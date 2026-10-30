@@ -1,71 +1,138 @@
 import { describe, expect, it } from 'vitest'
-import { scopePromptSessionWrite } from './prompt-session-scope'
+import {
+  promptFixSharedGroups,
+  promptScopeSessionWrite,
+  promptSessionView,
+  type PromptSessionOwnership
+} from './prompt-session-scope'
 
-const A = 'repoA::/a'
-const B = 'repoB::/b'
+const WT = 'repoA::/a'
 
-const stored = {
-  activeWorktreeId: A,
-  tabsByWorktree: { [A]: [{ id: 'ta' }], [B]: [{ id: 'tb' }] },
-  terminalLayoutsByTabId: { ta: { leaf: 1 }, tb: { leaf: 1 } },
-  terminalPtyIncarnationsByPaneKey: { 'ta:l1': 'i1', 'tb:l1': 'i1' },
-  terminalTopologyRevisionByRepoId: { repoA: 1, repoB: 1 }
+function stored(): Record<string, unknown> {
+  return {
+    activeWorktreeId: WT,
+    tabsByWorktree: { [WT]: [{ id: 't-main' }, { id: 't-extra' }] },
+    unifiedTabs: {
+      [WT]: [
+        { id: 'u-main', entityId: 't-main', groupId: 'g1' },
+        { id: 'u-extra', entityId: 't-extra', groupId: 'g1' }
+      ]
+    },
+    tabGroups: {
+      [WT]: [{ id: 'g1', activeTabId: 'u-main', tabOrder: ['u-main', 'u-extra'], recentTabIds: [] }]
+    },
+    terminalLayoutsByTabId: { 't-main': { a: 1 }, 't-extra': { b: 2 } },
+    terminalPtyIncarnationsByPaneKey: { 't-main:l1': 1, 't-extra:l1': 2 }
+  }
 }
 
-describe('scopePromptSessionWrite', () => {
-  it('leaves saves alone when no project window is open', () => {
-    const incoming = { ...stored, activeWorktreeId: B }
-    expect(scopePromptSessionWrite(incoming, stored, null, new Set(), true)).toBe(incoming)
+function owners(table: Record<string, string>) {
+  const own = new Map(Object.entries(table))
+  const pending = new Set<string>()
+  const ctx = (windowKey: string): PromptSessionOwnership => ({
+    windowKey,
+    ownerOf: (id) => own.get(id) ?? 'main',
+    isPending: (id) => pending.has(`${windowKey}/${id}`),
+    claim: (id) => own.set(id, windowKey),
+    seen: (id) => pending.delete(`${windowKey}/${id}`)
+  })
+  return { own, pending, ctx }
+}
+
+describe('prompt session scope', () => {
+  it('shows each window only its own tabs, and an extra window its own selection', () => {
+    const { ctx } = owners({ 't-extra': 'w1', 'u-extra': 'w1' })
+    const mainView = promptSessionView(stored(), 'main', ctx('main').ownerOf)
+    expect(mainView.tabsByWorktree).toEqual({ [WT]: [{ id: 't-main' }] })
+    expect(mainView.terminalLayoutsByTabId).toEqual({ 't-main': { a: 1 } })
+    expect(mainView.terminalPtyIncarnationsByPaneKey).toEqual({ 't-main:l1': 1 })
+    expect(mainView.activeWorktreeId).toBe(WT)
+    expect(
+      (mainView.tabGroups as Record<string, { tabOrder: string[] }[]>)[WT]![0]!.tabOrder
+    ).toEqual(['u-main'])
+
+    const extraView = promptSessionView(stored(), 'w1', ctx('w1').ownerOf, {
+      activeWorktreeId: WT
+    })
+    expect(extraView.tabsByWorktree).toEqual({ [WT]: [{ id: 't-extra' }] })
+    expect(extraView.unifiedTabs).toEqual({
+      [WT]: [{ id: 'u-extra', entityId: 't-extra', groupId: 'g1' }]
+    })
+    expect(extraView.activeWorktreeId).toBe(WT)
+    expect(extraView.tabGroups).toEqual({})
   })
 
-  it('takes only its own project from a project window and keeps the shared scalars', () => {
-    const incoming = {
-      activeWorktreeId: B,
-      tabsByWorktree: { [B]: [{ id: 'tb' }, { id: 'tb2' }] },
-      terminalLayoutsByTabId: { tb: { leaf: 2 }, tb2: { leaf: 1 } },
-      terminalPtyIncarnationsByPaneKey: { 'tb2:l1': 'i2' },
-      terminalTopologyRevisionByRepoId: { repoB: 2 }
-    }
-    const result = scopePromptSessionWrite(incoming, stored, 'repoB', new Set(['repoB']), true)
-    expect(result.activeWorktreeId).toBe(A)
-    expect(result.tabsByWorktree).toEqual({
-      [A]: [{ id: 'ta' }],
-      [B]: [{ id: 'tb' }, { id: 'tb2' }]
+  it('replaces only the saving window part and keeps the other windows tabs', () => {
+    const { ctx } = owners({ 't-extra': 'w1' })
+    const { session } = promptScopeSessionWrite(
+      { tabsByWorktree: { [WT]: [{ id: 't-main', title: 'new' }] }, terminalLayoutsByTabId: {} },
+      stored(),
+      ctx('main'),
+      false
+    )
+    expect(session.tabsByWorktree).toEqual({
+      [WT]: [{ id: 't-main', title: 'new' }, { id: 't-extra' }]
     })
-    expect(result.terminalLayoutsByTabId).toEqual({
-      ta: { leaf: 1 },
-      tb: { leaf: 2 },
-      tb2: { leaf: 1 }
-    })
-    expect(result.terminalPtyIncarnationsByPaneKey).toEqual({ 'ta:l1': 'i1', 'tb2:l1': 'i2' })
-    expect(result.terminalTopologyRevisionByRepoId).toEqual({ repoA: 1, repoB: 2 })
+    expect(session.terminalLayoutsByTabId).toEqual({ 't-extra': { b: 2 } })
   })
 
-  it('keeps the stored records of a project another window owns when the main window saves', () => {
-    const incoming = {
-      activeWorktreeId: A,
-      tabsByWorktree: { [A]: [{ id: 'ta' }, { id: 'ta2' }], [B]: [] },
-      terminalLayoutsByTabId: { ta: { leaf: 1 }, ta2: { leaf: 1 } }
-    }
-    const result = scopePromptSessionWrite(incoming, stored, null, new Set(['repoB']), true)
-    expect(result.tabsByWorktree).toEqual({
-      [A]: [{ id: 'ta' }, { id: 'ta2' }],
-      [B]: [{ id: 'tb' }]
+  it('lets an extra window claim a tab it created and keeps its selection outside the session', () => {
+    const { ctx, own } = owners({ 't-extra': 'w1' })
+    const { session, view } = promptScopeSessionWrite(
+      {
+        activeWorktreeId: 'repoB::/b',
+        tabsByWorktree: { [WT]: [{ id: 't-extra' }, { id: 't-new' }, { id: 't-main' }] }
+      },
+      stored(),
+      ctx('w1'),
+      false
+    )
+    expect(own.get('t-new')).toBe('w1')
+    // t-main belongs to the main window and is already stored: the extra window cannot take it.
+    expect(own.get('t-main')).toBeUndefined()
+    expect(session.tabsByWorktree).toEqual({
+      [WT]: [{ id: 't-extra' }, { id: 't-new' }, { id: 't-main' }]
     })
-    expect(result.terminalLayoutsByTabId).toEqual({
-      ta: { leaf: 1 },
-      ta2: { leaf: 1 },
-      tb: { leaf: 1 }
-    })
-    expect((result as Record<string, unknown>).terminalPtyIncarnationsByPaneKey).toEqual({
-      'tb:l1': 'i1'
-    })
+    expect(view).toEqual({ activeWorktreeId: 'repoB::/b' })
+    // The main window selection stays as stored.
+    expect(session.activeWorktreeId).toBe(WT)
   })
 
-  it('patches only the keys a project window sent', () => {
-    const patch = { tabsByWorktree: { [B]: [{ id: 'tb' }], [A]: [] } }
-    const result = scopePromptSessionWrite(patch, stored, 'repoB', new Set(['repoB']), false)
-    expect(Object.keys(result)).toEqual(['tabsByWorktree'])
-    expect(result.tabsByWorktree).toEqual({ [A]: [{ id: 'ta' }], [B]: [{ id: 'tb' }] })
+  it('keeps a tab moved into a window until that window has saved it', () => {
+    const { ctx, pending } = owners({ 't-extra': 'main' })
+    pending.add('main/t-extra')
+    const first = promptScopeSessionWrite(
+      { tabsByWorktree: { [WT]: [{ id: 't-main' }] } },
+      stored(),
+      ctx('main'),
+      false
+    )
+    expect(first.session.tabsByWorktree).toEqual({ [WT]: [{ id: 't-main' }, { id: 't-extra' }] })
+    promptScopeSessionWrite(
+      { tabsByWorktree: { [WT]: [{ id: 't-main' }, { id: 't-extra' }] } },
+      stored(),
+      ctx('main'),
+      false
+    )
+    expect(pending.has('main/t-extra')).toBe(false)
+  })
+
+  it('puts other windows tabs in a stored group', () => {
+    const owner = (id: string) => (id === 't-x' ? 'w1' : 'main')
+    const fixed = promptFixSharedGroups(
+      { [WT]: [{ id: 'g1', tabOrder: ['u-main'] }] },
+      {
+        [WT]: [
+          { id: 'u-main', entityId: 't-main', groupId: 'g1' },
+          { id: 'u-x', entityId: 't-x', groupId: 'gone' }
+        ]
+      },
+      owner
+    )
+    expect((fixed.tabGroups[WT] as { tabOrder: string[] }[])[0]!.tabOrder).toEqual([
+      'u-main',
+      'u-x'
+    ])
+    expect((fixed.unifiedTabs[WT] as { groupId: string }[])[1]!.groupId).toBe('g1')
   })
 })

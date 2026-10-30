@@ -1,24 +1,19 @@
 import { BrowserWindow } from 'electron'
-import { promptRepoIdOfWorktreeId } from '../../shared/prompt-project-windows'
 import {
-  isPromptProjectWindowSender,
-  promptProjectWindowList,
-  promptProjectWindowOf,
-  promptPtyOwnerRepoId,
-  promptStoredWorkspaceSession
-} from './prompt-project-window-registry'
-
-const promptProjectBrowserWindow = (repoId: string | null | undefined): BrowserWindow | null =>
-  promptProjectWindowOf<BrowserWindow>(repoId)
-const promptProjectBrowserWindows = (): BrowserWindow[] => promptProjectWindowList<BrowserWindow>()
+  isPromptExtraWindowSender,
+  promptExtraWindowList,
+  promptExtraWindowOf,
+  promptPtyWebContents,
+  promptTabOwnerKey
+} from './prompt-window-registry'
 
 /**
- * Which window a request about a project goes to. Orca sends runtime requests (new terminal from
- * the CLI, reveal a pane, close a tab, menu commands …) to the main window. While a project is
- * open in its own window, requests about that project go to that window instead.
+ * Which window a runtime request goes to. Orca sends runtime requests (reveal a pane, close a
+ * tab, focus a terminal, menu commands …) to the main window. With extra windows, a request
+ * about a tab or terminal goes to the window that shows it; the rest stay with the main window.
  */
 
-/** Notices every window needs, whatever project they name. */
+/** Notices every window needs, whatever they name. */
 const BROADCAST_CHANNELS = new Set([
   'worktrees:changed',
   'repos:changed',
@@ -29,66 +24,28 @@ const BROADCAST_CHANNELS = new Set([
   'worktree:remoteBranchConflict'
 ])
 
-const TAB_LIST_KEYS = ['tabsByWorktree', 'unifiedTabs', 'browserTabsByWorktree'] as const
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === 'object' && !Array.isArray(value)
 }
 
-/** The project a saved tab belongs to, or null when the tab is not saved yet. */
-export function promptRepoIdOfTab(tabId: string): string | null {
-  const session = promptStoredWorkspaceSession()
-  if (!isRecord(session)) {
-    return null
-  }
-  for (const key of TAB_LIST_KEYS) {
-    const byWorktree = session[key]
-    if (!isRecord(byWorktree)) {
-      continue
-    }
-    for (const [worktreeId, list] of Object.entries(byWorktree)) {
-      if (Array.isArray(list) && list.some((tab) => isRecord(tab) && tab.id === tabId)) {
-        return promptRepoIdOfWorktreeId(worktreeId)
-      }
-    }
-  }
-  return null
-}
-
-export function promptWindowForWorktree<T extends BrowserWindow>(main: T, worktreeId: unknown): T {
-  const repoId = typeof worktreeId === 'string' ? promptRepoIdOfWorktreeId(worktreeId) : null
-  return (promptProjectBrowserWindow(repoId) as T | null) ?? main
-}
-
+/** The window that shows a tab (main when the tab belongs to the main window or is unknown). */
 export function promptWindowForTab<T extends BrowserWindow>(main: T, tabId: unknown): T {
-  const repoId = typeof tabId === 'string' ? promptRepoIdOfTab(tabId) : null
-  return (promptProjectBrowserWindow(repoId) as T | null) ?? main
+  const key = typeof tabId === 'string' ? promptTabOwnerKey(tabId) : null
+  return (promptExtraWindowOf<T>(key) as T | null) ?? main
 }
 
-/** The project window when every worktree belongs to its project, else the main window. */
-export function promptWindowForWorktrees<T extends BrowserWindow>(
-  main: T,
-  worktreeIds: readonly string[]
-): T {
-  const repoIds = new Set(worktreeIds.map((id) => promptRepoIdOfWorktreeId(id)))
-  return repoIds.size === 1 ? promptWindowForWorktree(main, worktreeIds[0]) : main
-}
-
-function scopeRepoIdOf(payload: unknown): string | null {
+function targetOf(payload: unknown): BrowserWindow | null {
   if (!isRecord(payload)) {
     return null
   }
-  if (typeof payload.worktreeId === 'string') {
-    return promptRepoIdOfWorktreeId(payload.worktreeId)
-  }
-  if (typeof payload.repoId === 'string') {
-    return payload.repoId
-  }
   if (typeof payload.tabId === 'string') {
-    return promptRepoIdOfTab(payload.tabId)
+    return promptExtraWindowOf<BrowserWindow>(promptTabOwnerKey(payload.tabId))
   }
   if (typeof payload.ptyId === 'string') {
-    return promptPtyOwnerRepoId(payload.ptyId)
+    const contents = promptPtyWebContents<unknown>(null, payload.ptyId)
+    return contents
+      ? (promptExtraWindowList<BrowserWindow>().find((win) => win.webContents === contents) ?? null)
+      : null
   }
   return null
 }
@@ -106,14 +63,14 @@ function sendTo(win: BrowserWindow, channel: string, values: unknown[]): boolean
 }
 
 /**
- * Wraps the main window's runtime notice sender: notices about a project open in its own window
- * go to that window, shared notices go to every window, the rest to the main window as before.
+ * Wraps the main window's runtime notice sender: notices about a tab or terminal shown in an
+ * extra window go to that window, shared notices go to every window, the rest to the main window.
  */
 export function promptRoutedRuntimeSend(
   send: (channel: string, ...values: unknown[]) => boolean
 ): (channel: string, ...values: unknown[]) => boolean {
   return (channel, ...values) => {
-    const windows = promptProjectBrowserWindows()
+    const windows = promptExtraWindowList<BrowserWindow>()
     if (windows.length === 0) {
       return send(channel, ...values)
     }
@@ -121,25 +78,25 @@ export function promptRoutedRuntimeSend(
       windows.forEach((win) => sendTo(win, channel, values))
       return send(channel, ...values)
     }
-    const target = promptProjectBrowserWindow(scopeRepoIdOf(values[0]))
+    const target = targetOf(values[0])
     return target ? sendTo(target, channel, values) : send(channel, ...values)
   }
 }
 
-/** A reply to a runtime request may come from the main window or a project window. */
+/** A reply to a runtime request may come from the main window or an extra window. */
 export function isPromptAppWindowSender(sender: { id: number }, main: { id: number }): boolean {
-  return sender === main || sender.id === main.id || isPromptProjectWindowSender(sender)
+  return sender === main || sender.id === main.id || isPromptExtraWindowSender(sender)
 }
 
-/** Menu commands act on the focused project window, else on the main window. */
+/** Menu commands act on the focused extra window, else on the main window. */
 export function promptMenuTargetWindow<T extends BrowserWindow>(
   main: T | null | undefined
 ): T | null {
-  if (promptProjectWindowList().length === 0) {
+  if (promptExtraWindowList().length === 0) {
     return main ?? null
   }
   const focused = BrowserWindow.getFocusedWindow()
-  if (focused && !focused.isDestroyed() && isPromptProjectWindowSender(focused.webContents)) {
+  if (focused && !focused.isDestroyed() && isPromptExtraWindowSender(focused.webContents)) {
     return focused as T
   }
   return main ?? null

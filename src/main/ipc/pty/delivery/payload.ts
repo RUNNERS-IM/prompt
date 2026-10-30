@@ -3,7 +3,7 @@ import type { PtyModelRestoreReason } from '../../../../shared/pty-model-restore
 import { mainDeliveryBreadcrumbs } from './debug'
 import { recordPtyRendererDeliveryPressure } from './accounting'
 import type { PtyDataPayload, PtyIpcSession } from '../session'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function makePtyDataPayload(
   id: string,

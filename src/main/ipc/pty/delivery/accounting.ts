@@ -13,7 +13,7 @@ import {
 } from './constants'
 import type { PtyIpcSession } from '../session'
 import type { PendingPtyData } from './pty-pending-data-drain-contract'
-import { promptAllPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptAllPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function getRendererInFlightCharsForPty(session: PtyIpcSession, id: string): number {
   const accounting = session.rendererDeliveryAccountingByPty.get(id)

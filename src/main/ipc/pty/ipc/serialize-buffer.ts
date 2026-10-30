@@ -3,7 +3,7 @@ import { getPtyIpc } from '../pty-host-bindings'
 import { parseTerminalKittyKeyboardFlags } from '../../../../shared/terminal-kitty-keyboard-flags'
 import { isMainWindowPtyIpcEvent } from './write-input'
 import type { PtyIpcSession, SerializeResult } from '../session'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function settleSerializeRequest(
   session: PtyIpcSession,
