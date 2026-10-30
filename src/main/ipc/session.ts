@@ -14,6 +14,7 @@ import type {
   WorkspaceSessionPatch,
   WorkspaceSessionState
 } from '../../shared/workspace-session-state-types'
+import { scopePromptWindowSessionWrite } from '../prompt-windows/prompt-session-scope'
 
 export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeService): void {
   // Why: renderer saves would change a fenced host's frozen source partition, or write back what a
@@ -47,8 +48,14 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
     )
   }
 
-  ipcMain.handle('session:set', (_event, args: WorkspaceSessionState, hostId?: string | null) => {
+  ipcMain.handle('session:set', (event, sent: WorkspaceSessionState, hostId?: string | null) => {
     if (!isFenced(hostId)) {
+      const args = scopePromptWindowSessionWrite(
+        event.sender,
+        sent,
+        store.getWorkspaceSession(hostId),
+        true
+      )
       store.setWorkspaceSession(
         ORCA_LAYOUT_OWNER_IS_MAIN
           ? sessionForMain(args, hostId)
@@ -58,8 +65,14 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
     }
   })
 
-  ipcMain.handle('session:patch', (_event, args: WorkspaceSessionPatch, hostId?: string | null) => {
+  ipcMain.handle('session:patch', (event, sent: WorkspaceSessionPatch, hostId?: string | null) => {
     if (!isFenced(hostId)) {
+      const args = scopePromptWindowSessionWrite(
+        event.sender,
+        sent,
+        store.getWorkspaceSession(hostId),
+        false
+      )
       store.patchWorkspaceSession(
         ORCA_LAYOUT_OWNER_IS_MAIN
           ? patchForMain(args, hostId)
