@@ -17,6 +17,7 @@ import { deferAfterStarNagWebHandoff } from './web-handoff'
 import { runStarNagDirectStarAttempt } from './direct-star-attempt'
 import { handleStarNagOnboardingCompleted } from './onboarding-completed'
 import { ensureStarNagBaseline, shouldShowStarNagThresholdPrompt } from './threshold-trigger'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../shared/prompt-upstream'
 
 const STAR_NAG_COOLDOWN_DAYS = 3
 const STAR_NAG_COOLDOWN_MS = STAR_NAG_COOLDOWN_DAYS * 24 * 60 * 60 * 1000
@@ -159,6 +160,10 @@ export class StarNagService {
     mode: StarNagPromptMode,
     surface: StarNagSurface = 'card'
   ): boolean {
+    // Prompt: no "star us on GitHub" prompts.
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+      return false
+    }
     const win = BrowserWindow.getAllWindows().find((w) => !w.isDestroyed())
     if (!win) {
       this.promptVisible = false

@@ -3,6 +3,10 @@ import {
   cleanCloudServiceUrl as cleanUrl,
   cleanCloudServiceOrigin as cleanOrigin
 } from '../../shared/cloud-service-url'
+import {
+  PROMPT_BLOCK_UPSTREAM_SERVICES,
+  PROMPT_CLOUD_UNAVAILABLE_MESSAGE
+} from '../../shared/prompt-upstream'
 import { resolvePushGatewayOrigin } from '../runtime/push/push-gateway-origin'
 
 export type OrcaCloudAuthConfig = {
@@ -43,6 +47,10 @@ export function getOrcaCloudAuthConfig(
   env: NodeJS.ProcessEnv = process.env,
   packaged: boolean = isPackagedOrcaBuild()
 ): { configured: true; config: OrcaCloudAuthConfig } | { configured: false; setupMessage: string } {
+  // Prompt: no account, relay or connector service of Orca's company; every caller handles "not configured".
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return { configured: false, setupMessage: PROMPT_CLOUD_UNAVAILABLE_MESSAGE }
+  }
   // Plain HTTP token endpoints are development-only.
   const allowLoopbackHttp = !packaged
   const cleanEndpointUrl = (value: string | undefined): string | null =>

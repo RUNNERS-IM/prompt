@@ -21,6 +21,7 @@ import {
   type AgentStateRulesBundle
 } from './agent-state-rules-bundle'
 import { AGENT_STATE_RULES_ENGINE_VERSION } from './agent-state-rules-schema'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 
 const REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000
 const FETCH_TIMEOUT_MS = 30_000
@@ -231,7 +232,8 @@ export function startAgentStateRulesLiveUpdates(
   const updater = new AgentStateRulesLiveUpdater({
     userDataPath: environment.getPath('userData'),
     appVersion: environment.getVersion(),
-    isPackaged: environment.isPackaged(),
+    // Prompt: rule updates were published by Orca; Prompt keeps the rules bundled with the app.
+    isPackaged: environment.isPackaged() && !PROMPT_BLOCK_UPSTREAM_SERVICES,
     fetch: (url, init) => getMainHttpClient().fetch(url, init),
     readSettings: () => store.getSettings(),
     onActivated

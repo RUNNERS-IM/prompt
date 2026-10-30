@@ -2,6 +2,7 @@ import { net } from 'electron'
 import type { ChangelogData } from '../shared/update-status-types'
 import { compareVersions } from './updater-fallback'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from './prompt-upstream-services'
+import { PROMPT_RELEASES_URL, promptOr } from '../shared/prompt-upstream'
 
 type ChangelogEntry = {
   version: string
@@ -11,7 +12,7 @@ type ChangelogEntry = {
   releaseNotesUrl: string
 }
 
-const CHANGELOG_URL = 'https://onorca.dev/changelog'
+const CHANGELOG_URL = promptOr(PROMPT_RELEASES_URL, 'https://onorca.dev/changelog')
 
 function isValidEntry(entry: ChangelogEntry): boolean {
   return (

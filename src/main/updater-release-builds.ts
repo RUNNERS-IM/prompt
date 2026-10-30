@@ -3,6 +3,7 @@ import {
   findInstallerAssetName,
   getReleaseRepoForChannel,
   getVersionChannel,
+  hasDedicatedReleaseRepo,
   hasInstallableArtifactForPlatform,
   normalizeTagToVersion,
   sortReleaseBuildsNewestFirst,
@@ -14,6 +15,7 @@ import { getGhRateLimitBlockedUntilMs, recordGhPrimaryRateLimit } from './git/gh
 import { isValidVersion } from './updater-fallback'
 import { rejectReleaseApiToken, resolveReleaseApiToken } from './updater-release-api-token'
 import { UpdaterCodedError } from './updater/updater-coded-error'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../shared/prompt-upstream'
 
 const FETCH_TIMEOUT_MS = 8000
 const MAX_LISTED_BUILDS = 100
@@ -155,6 +157,10 @@ export async function listReleaseBuilds(
   channel: ReleaseChannel,
   platform: NodeJS.Platform = process.platform
 ): Promise<ReleaseBuild[]> {
+  // Prompt: hourly/daily/adhoc builds do not exist for Prompt; skip the request instead of listing nothing.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES && hasDedicatedReleaseRepo(channel)) {
+    return []
+  }
   const repo = getReleaseRepoForChannel(channel)
   // Skip a known-exhausted token bucket and try the separate per-IP quota.
   const credential = await resolveReleaseApiToken()

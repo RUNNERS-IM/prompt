@@ -31,6 +31,7 @@ import { agentHookServer } from '../agent-hooks/server'
 import { emitPluginWorktreeLifecycle } from './main-process-pty-startup'
 import { mainProcessState as state } from './main-process-state'
 import type { OrcaRuntimeService } from '../runtime/orca-runtime'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../shared/prompt-upstream'
 
 const PLUGIN_AUTO_UPDATE_STARTUP_DELAY_MS = 60_000
 // Why: the official catalog fetch must not compete with first paint; opening the marketplace seeds sooner.
@@ -57,7 +58,8 @@ export async function initializeMainProcessPlugins(runtime: OrcaRuntimeService):
     hostVersion: pluginHostVersion(app.getVersion())
   })
   const requestOfficialMarketplaceSeed = (): void => {
-    if (store.getSettings().pluginSystemEnabled !== true) {
+    // Prompt: the official catalog is Orca's stablyai/orca-plugins repository, so it is never added.
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES || store.getSettings().pluginSystemEnabled !== true) {
       return
     }
     void state.pluginMarketplaceService

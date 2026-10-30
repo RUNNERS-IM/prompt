@@ -1,5 +1,8 @@
+import { PROMPT_REPO_URL } from './prompt-upstream'
+
 // COMPAT(wsl-bridge): removed when WSL runs as an orcad host.
-export const ORCA_SKILLS_REPOSITORY_URL = 'https://github.com/stablyai/orca'
+// Prompt: skills come from Prompt's repository, which also holds the commit this build was made from.
+export const ORCA_SKILLS_REPOSITORY_URL = PROMPT_REPO_URL
 
 // Pin one CLI across install rails: 1.5.x lacks commit fetch and bare npx may reuse stale/wrong binaries (#18687).
 export const SKILLS_CLI_VERSION = '1.7.2'

@@ -12,6 +12,7 @@ import type { OrcaRuntimeRpcServer } from '../runtime-rpc'
 import { PushDispatcher } from './push-dispatcher'
 import { PushGatewayClient } from './push-gateway-client'
 import { PushRegisterThrottle } from './push-register-throttle'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 import type { PushUnregisterOutbox } from './push-unregister-outbox'
 
 const OUTBOX_RETRY_BASE_MS = 30_000
@@ -70,6 +71,10 @@ export class DesktopPushService {
 
   /** Returns null when the mobile runtime never came up, so there is nothing to push for. */
   static create(options: DesktopPushServiceOptions): DesktopPushService | null {
+    // Prompt: phone push goes through Orca's push.onorca.dev gateway, so it stays off.
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+      return null
+    }
     const keypair = options.runtimeRpc.getE2EEKeypair()
     const registry = options.runtimeRpc.getDeviceRegistry()
     if (!keypair || !registry) {

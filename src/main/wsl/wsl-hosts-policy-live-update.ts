@@ -11,6 +11,7 @@ import {
 } from '../../shared/wsl-hosts-policy'
 import { getMainHttpClient } from '../network/http-client'
 import { writePluginFileAtomically } from '../plugins/installation/plugin-atomic-file-write'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../shared/prompt-upstream'
 
 const REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000
 const FETCH_TIMEOUT_MS = 30_000
@@ -179,7 +180,8 @@ export function startWslHostsPolicyLiveUpdates(): void {
   const updater = new WslHostsPolicyLiveUpdater({
     userDataPath: environment.getPath('userData'),
     appVersion: environment.getVersion(),
-    isPackaged: environment.isPackaged(),
+    // Prompt: the policy was published by Orca; Prompt keeps the bundled default.
+    isPackaged: environment.isPackaged() && !PROMPT_BLOCK_UPSTREAM_SERVICES,
     fetch: (url, init) => getMainHttpClient().fetch(url, init)
   })
   void updater.start()

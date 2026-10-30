@@ -6,6 +6,7 @@ import {
   type PluginKillListEntry
 } from '../../../shared/plugins/catalog/plugin-kill-list'
 import { PluginKillListStore } from './plugin-kill-list-store'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 
 export const PLUGIN_KILL_LIST_URL = 'https://onorca.dev/plugins/kill-list.json'
 const PLUGIN_KILL_LIST_DOWNLOAD_LIMIT = 4 * 1024 * 1024
@@ -155,6 +156,10 @@ export async function fetchPluginKillList(
   fetcher: typeof fetch = fetch,
   url = PLUGIN_KILL_LIST_URL
 ): Promise<PluginKillList> {
+  // Prompt: the list lives on onorca.dev; Prompt ships no plugin catalog, so nothing can be revoked.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return emptyKillList()
+  }
   const response = await fetcher(url, {
     cache: 'no-store',
     signal: AbortSignal.timeout(PLUGIN_KILL_LIST_FETCH_TIMEOUT_MS)

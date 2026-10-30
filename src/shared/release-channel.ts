@@ -1,4 +1,5 @@
 import { compareAppVersions, isValidAppVersion } from './app-version'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_REPO_SLUG } from './prompt-upstream'
 
 export type ReleaseChannel = 'stable' | 'rc' | 'hourly' | 'daily' | 'adhoc'
 
@@ -19,10 +20,17 @@ export const RELEASE_CHANNEL_LABELS: Readonly<Record<ReleaseChannel, string>> = 
 }
 
 /** Keep dev tags out of the 10-entry main releases feed, where hourlies would evict stable/RC updates. */
-export const HOURLY_RELEASE_REPO = 'stablyai/orca-hourly'
-export const DAILY_RELEASE_REPO = 'stablyai/orca-daily'
-export const ADHOC_RELEASE_REPO = 'stablyai/orca-adhoc'
-export const MAIN_RELEASE_REPO = 'stablyai/orca'
+// Prompt: every channel reads Prompt's own releases so no picker, rules or policy download reaches Orca's repos.
+export const HOURLY_RELEASE_REPO = PROMPT_BLOCK_UPSTREAM_SERVICES
+  ? PROMPT_REPO_SLUG
+  : 'stablyai/orca-hourly'
+export const DAILY_RELEASE_REPO = PROMPT_BLOCK_UPSTREAM_SERVICES
+  ? PROMPT_REPO_SLUG
+  : 'stablyai/orca-daily'
+export const ADHOC_RELEASE_REPO = PROMPT_BLOCK_UPSTREAM_SERVICES
+  ? PROMPT_REPO_SLUG
+  : 'stablyai/orca-adhoc'
+export const MAIN_RELEASE_REPO = PROMPT_BLOCK_UPSTREAM_SERVICES ? PROMPT_REPO_SLUG : 'stablyai/orca'
 
 /** The dev channels, each published to its own repo rather than the main one. */
 const DEDICATED_REPO_CHANNELS = ['hourly', 'daily', 'adhoc'] as const
