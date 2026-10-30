@@ -87,3 +87,8 @@ html.prompt-mac-vibrancy .prompt-status-bar {
   min-height: 36px;
   padding: 0 18px 6px;
 }
+
+/* Lighter Lucide strokes, closer to SF Symbols. */
+html.prompt-mac-vibrancy svg.lucide {
+  stroke-width: 1.5;
+}
