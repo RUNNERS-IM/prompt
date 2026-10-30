@@ -355,17 +355,18 @@ describe('createMainWindow', () => {
     expect(webContents.send).not.toHaveBeenCalledWith('ui:toggleLeftSidebar')
 
     webContents.send.mockClear()
+    // Prompt: Mod+N opens a new window, so New Workspace is Mod+Shift+N only.
     const newWorkspacePreventDefault = vi.fn()
     windowHandlers['before-input-event'](
       { preventDefault: newWorkspacePreventDefault } as never,
       {
         type: 'keyDown',
         code: 'KeyN',
-        key: 'n',
+        key: 'N',
         meta: isDarwin,
         control: !isDarwin,
         alt: false,
-        shift: false
+        shift: true
       } as never
     )
 
