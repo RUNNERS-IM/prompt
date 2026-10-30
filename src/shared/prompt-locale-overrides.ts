@@ -76,7 +76,8 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.update.install': '설치',
   'prompt.update.restartFailed':
     '업데이트를 설치하려고 다시 시작하지 못했습니다. Prompt를 종료했다가 다시 연 뒤 시도하세요.',
-  'prompt.update.installerFailed': '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.'
+  'prompt.update.installerFailed':
+    '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

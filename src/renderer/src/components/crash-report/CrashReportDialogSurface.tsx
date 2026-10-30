@@ -396,7 +396,10 @@ export function CrashReportDialogSurface({
           >
             {PROMPT_CRASH_REPORT_OPENS_GITHUB
               ? promptCrashReportCancelLabel()
-              : translate('auto.components.crash.report.CrashReportDialog.88fea8e84e', "Don't Send")}
+              : translate(
+                  'auto.components.crash.report.CrashReportDialog.88fea8e84e',
+                  "Don't Send"
+                )}
           </Button>
           <Button type="button" size="sm" onClick={handleSubmit} disabled={loading || submitting}>
             {PROMPT_CRASH_REPORT_OPENS_GITHUB ? (
@@ -406,7 +409,10 @@ export function CrashReportDialogSurface({
             )}
             {PROMPT_CRASH_REPORT_OPENS_GITHUB
               ? promptCrashReportOpenLabel()
-              : translate('auto.components.crash.report.CrashReportDialog.b4951cd27c', 'Send Report')}
+              : translate(
+                  'auto.components.crash.report.CrashReportDialog.b4951cd27c',
+                  'Send Report'
+                )}
           </Button>
         </DialogFooter>
       </DialogContent>
