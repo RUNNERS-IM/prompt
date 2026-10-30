@@ -1,5 +1,6 @@
 // Prompt: the upstream updater tests run against Orca's repository (see shared/prompt-upstream).
 // This case checks the first feed a real Prompt build hands to electron-updater.
+import type * as PromptUpstream from '../shared/prompt-upstream'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { loadUpdaterModule, warmUpdaterModule } from './updater-test-module-loader'
 import { updaterMainWindow } from './updater-test-main-window'
@@ -23,7 +24,7 @@ vi.mock('./local-builds/local-build-feed-server', () => moduleFactories.localBui
 
 // What every packaged build sees: the switch is only off while Vitest runs.
 vi.mock('../shared/prompt-upstream', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../shared/prompt-upstream')>()),
+  ...(await importOriginal<typeof PromptUpstream>()),
   PROMPT_BLOCK_UPSTREAM_SERVICES: true,
   promptOr: <T>(promptValue: T): T => promptValue
 }))

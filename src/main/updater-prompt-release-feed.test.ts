@@ -1,6 +1,7 @@
 // Prompt: the upstream updater tests run against Orca's repository (see shared/prompt-upstream).
 // These cases run the same feed code the way a real Prompt build does: RUNNERS-IM/prompt releases
 // tagged v2.{last digit of year}.{MMDD}{NN} by config/scripts/prompt-bump-release.sh.
+import type * as PromptUpstream from '../shared/prompt-upstream'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { installNetRequestFetchAdapter } from './updater-net-request.fixture'
 
@@ -19,7 +20,7 @@ vi.mock('electron', () => ({
 
 // What every packaged build sees: the switch is only off while Vitest runs.
 vi.mock('../shared/prompt-upstream', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../shared/prompt-upstream')>()),
+  ...(await importOriginal<typeof PromptUpstream>()),
   PROMPT_BLOCK_UPSTREAM_SERVICES: true,
   promptOr: <T>(promptValue: T): T => promptValue
 }))
