@@ -199,7 +199,7 @@ export function buildDefaultSettings(args: {
     terminalModelQueryAuthority: true,
     defaultTuiAgent: null,
     disabledTuiAgents: [...DEFAULT_DISABLED_TUI_AGENTS],
-    pluginSystemEnabled: true,
+    pluginSystemEnabled: false,
     pluginSystemDefaultedOn: true,
     disabledPlugins: [],
     pluginConsents: {},

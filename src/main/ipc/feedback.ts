@@ -1,5 +1,5 @@
 import os from 'node:os'
-import { app, ipcMain } from 'electron'
+import { app, ipcMain, shell } from 'electron'
 import { readFeedbackImagesDelivered, validateFeedbackImages } from './feedback-image-attachments'
 import type {
   FeedbackImageAttachment,
@@ -17,6 +17,7 @@ import {
   type FeedbackSubmissionType,
   type FeedbackSubmitBody
 } from './feedback-request'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../prompt-upstream-services'
 
 export type {
   FeedbackDiagnosticBundleAttachment,
@@ -180,9 +181,36 @@ async function submitFeedbackWithDiagnosticBundle(
   }
 }
 
+const PROMPT_FEEDBACK_ISSUES_URL = 'https://github.com/RUNNERS-IM/prompt/issues/new'
+const PROMPT_FEEDBACK_MAX_BODY = 4000
+
+async function openPromptFeedbackIssue(
+  args: InternalFeedbackSubmitArgs
+): Promise<FeedbackSubmitResult> {
+  const text = typeof args.feedback === 'string' ? args.feedback : ''
+  const body = [
+    text.slice(0, PROMPT_FEEDBACK_MAX_BODY),
+    '',
+    `Prompt ${app.getVersion()} · ${os.platform()} ${os.release()} · ${os.arch()}`
+  ].join('\n')
+  const url = new URL(PROMPT_FEEDBACK_ISSUES_URL)
+  url.searchParams.set('labels', args.submissionType === 'crash' ? 'crash' : 'feedback')
+  url.searchParams.set('body', body)
+  try {
+    await shell.openExternal(url.toString())
+    return { ok: true }
+  } catch (error) {
+    return { ok: false, ...errorFailure(error) }
+  }
+}
+
 export async function submitFeedback(
   args: InternalFeedbackSubmitArgs
 ): Promise<FeedbackSubmitResult> {
+  // Prompt: feedback goes to our issue tracker instead of Orca's servers.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return openPromptFeedbackIssue(args)
+  }
   // Ignore discarded crash-lane images instead of rejecting over unused attachments.
   if (args.submissionType !== 'crash' && args.images !== undefined) {
     const imageError = validateFeedbackImages(args.images)

@@ -1,5 +1,6 @@
 import { net } from 'electron'
 import { compareVersions, isValidVersion } from './updater-fallback'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from './prompt-upstream-services'
 
 export type NudgeConfig = {
   id: string
@@ -8,6 +9,10 @@ export type NudgeConfig = {
 }
 
 export async function fetchNudge(): Promise<NudgeConfig | null> {
+  // Prompt: the upstream nudge feed is for Orca releases, not ours.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return null
+  }
   try {
     const res = await net.fetch('https://onorca.dev/whats-new/nudge.json', {
       signal: AbortSignal.timeout(5000)

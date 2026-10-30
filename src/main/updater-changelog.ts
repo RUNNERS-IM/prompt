@@ -1,6 +1,7 @@
 import { net } from 'electron'
 import type { ChangelogData } from '../shared/update-status-types'
 import { compareVersions } from './updater-fallback'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from './prompt-upstream-services'
 
 type ChangelogEntry = {
   version: string
@@ -29,6 +30,10 @@ export async function fetchChangelog(
   incomingVersion: string,
   localVersion: string
 ): Promise<ChangelogData | null> {
+  // Prompt: Orca's changelog does not describe our releases.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+    return null
+  }
   const res = await net.fetch('https://onorca.dev/whats-new/changelog.json', {
     signal: AbortSignal.timeout(5000)
   })

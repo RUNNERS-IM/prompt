@@ -118,3 +118,9 @@ html.prompt-mac-vibrancy .prompt-status-bar {
 html.prompt-mac-vibrancy svg.lucide {
   stroke-width: 1.5;
 }
+
+/* The title strip blends into the window instead of using the card fill. */
+html.prompt-mac-vibrancy .titlebar {
+  background: var(--background);
+  border-bottom-color: transparent;
+}
