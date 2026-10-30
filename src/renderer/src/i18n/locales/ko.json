@@ -22569,6 +22569,14 @@
     }
   },
   "prompt": {
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "시작하기 전에",
+        "subtitle": "Prompt는 Claude를 사용합니다. Claude가 묻지 않고 실행해도 될지 고르세요.",
+        "tooltip": "Yolo 모드"
+      },
+      "close": "닫기"
+    },
     "claudeModel": {
       "change": "모델 바꾸기",
       "rejected": "Claude가 이전 모델을 그대로 유지했습니다.",

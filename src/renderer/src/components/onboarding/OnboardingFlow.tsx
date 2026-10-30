@@ -1,35 +1,32 @@
 import { OnboardingLanguageSwitcher } from './OnboardingLanguageSwitcher'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { isEditableTarget } from '@/lib/editable-target'
 import { getScreenSubmitModifierLabel, isScreenSubmitShortcut } from '@/lib/screen-submit-shortcut'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { OnboardingState } from '../../../../shared/onboarding-state-types'
-import { AgentStep } from './AgentStep'
+import { YoloPermissionsControl } from './AgentStep'
 import { ThemeStep } from './ThemeStep'
 import { NotificationStep } from './NotificationStep'
 import { IntegrationsStep } from './IntegrationsStep'
 import { WindowsTerminalStep } from './WindowsTerminalStep'
 import { useOnboardingFlow } from './use-onboarding-flow'
-import { OnboardingSkipConfirmationDialog } from './OnboardingSkipConfirmationDialog'
 import { OnboardingFooter } from './OnboardingFooter'
-import { shouldRequestOnboardingSkipConfirmation } from './onboarding-dismiss-target'
 import logo from '../../../../../resources/logo.svg'
 import { translate } from '@/i18n/i18n'
 import { addAppKeyListener, removeAppKeyListener } from '@/lib/app-keyboard-router'
 
 const stepCopy = {
+  // Prompt: Claude is the only agent, so this step keeps just Yolo mode.
   agent: {
     get title() {
-      return translate(
-        'auto.components.onboarding.OnboardingFlow.198b148b3c',
-        'Pick your default agent'
-      )
+      return translate('prompt.onboarding.beforeYouStart.title', 'Before you start')
     },
     get subtitle() {
       return translate(
-        'auto.components.onboarding.OnboardingFlow.322fc50a18',
-        "Orca works with every CLI agent. Choose the one you'll reach for most. Switch any time."
+        'prompt.onboarding.beforeYouStart.subtitle',
+        'Prompt uses Claude. Choose whether Claude may act without asking.'
       )
     }
   },
@@ -94,7 +91,7 @@ const stepCopy = {
 const stepTooltipLabels = {
   agent: {
     get value() {
-      return translate('components.onboarding.flow.stepTooltip.agent', 'Default Agent')
+      return translate('prompt.onboarding.beforeYouStart.tooltip', 'Yolo mode')
     }
   },
   theme: {
@@ -140,31 +137,12 @@ export default function OnboardingFlow({
       ? translate('components.onboarding.flow.actions.addFirstProject', 'Add your first project')
       : translate('components.onboarding.flow.actions.continue', 'Continue'))
   const [languagePickerOpen, setLanguagePickerOpen] = useState(false)
-  const [skipConfirmOpen, setSkipConfirmOpen] = useState(false)
-  const skipConfirmAdvancedViaRef = useRef<'button' | 'keyboard'>('button')
   const { next: flowNext, dismissOnboarding: flowDismissOnboarding } = flow
-
-  const requestSkipConfirmation = useCallback(
-    (advancedVia: 'button' | 'keyboard') => {
-      if (busyLabel || skipConfirmOpen || languagePickerOpen) {
-        return
-      }
-      skipConfirmAdvancedViaRef.current = advancedVia
-      setSkipConfirmOpen(true)
-    },
-    [busyLabel, skipConfirmOpen, languagePickerOpen]
-  )
-
-  const confirmSkipOnboarding = useCallback(() => {
-    const advancedVia = skipConfirmAdvancedViaRef.current
-    setSkipConfirmOpen(false)
-    void flowDismissOnboarding(advancedVia)
-  }, [flowDismissOnboarding])
 
   // Depend on stable callbacks/step ID so the changing flow object cannot churn the key listener.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent): void => {
-      if (languagePickerOpen || skipConfirmOpen) {
+      if (languagePickerOpen) {
         return
       }
       // Do not submit while typing in clone URL or another editable field.
@@ -180,31 +158,15 @@ export default function OnboardingFlow({
     }
     addAppKeyListener('keydown', onKeyDown)
     return () => removeAppKeyListener('keydown', onKeyDown)
-  }, [flowNext, languagePickerOpen, skipConfirmOpen])
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent): void => {
-      if (event.key !== 'Escape' || skipConfirmOpen || languagePickerOpen) {
-        return
-      }
-      event.preventDefault()
-      requestSkipConfirmation('keyboard')
-    }
-    addAppKeyListener('keydown', onKeyDown)
-    return () => removeAppKeyListener('keydown', onKeyDown)
-  }, [requestSkipConfirmation, skipConfirmOpen, languagePickerOpen])
+  }, [flowNext, languagePickerOpen])
 
   return (
     <TooltipProvider delayDuration={0} skipDelayDuration={0}>
+      {/* Prompt: darker and blurred so the terminal behind cannot be read; clicks on it do
+          nothing, the X button closes. */}
       <div
-        className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black/50 p-4 text-foreground"
+        className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black/70 p-4 text-foreground backdrop-blur-[8px]"
         data-onboarding-overlay
-        onPointerDown={(event) => {
-          if (!shouldRequestOnboardingSkipConfirmation(event)) {
-            return
-          }
-          requestSkipConfirmation('button')
-        }}
       >
         <div
           className="absolute inset-x-0 top-0 h-8"
@@ -238,10 +200,23 @@ export default function OnboardingFlow({
                   {translate('auto.components.onboarding.OnboardingFlow.a249f81538', 'Orca')}
                 </span>
               </div>
-              <OnboardingLanguageSwitcher
-                open={languagePickerOpen}
-                onOpenChange={setLanguagePickerOpen}
-              />
+              <div className="flex items-center gap-1">
+                <OnboardingLanguageSwitcher
+                  open={languagePickerOpen}
+                  onOpenChange={setLanguagePickerOpen}
+                />
+                <button
+                  type="button"
+                  className="grid size-8 place-items-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+                  aria-label={translate('prompt.onboarding.close', 'Close')}
+                  title={translate('prompt.onboarding.close', 'Close')}
+                  disabled={Boolean(busyLabel)}
+                  onClick={() => void flowDismissOnboarding('button')}
+                  data-onboarding-close
+                >
+                  <X className="size-4" strokeWidth={1.5} />
+                </button>
+              </div>
             </div>
 
             <div className="mt-10 flex items-center gap-2 transition-[margin-top] duration-[760ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none">
@@ -316,11 +291,7 @@ export default function OnboardingFlow({
               )}
             >
               {currentStep.id === 'agent' && (
-                <AgentStep
-                  selectedAgent={flow.selectedAgent}
-                  onSelect={flow.setSelectedAgent}
-                  detectedSet={flow.detectedSet}
-                  isDetecting={flow.isDetectingAgents}
+                <YoloPermissionsControl
                   yoloPermissions={flow.yoloPermissions}
                   onYoloPermissionsChange={flow.setYoloPermissions}
                 />
@@ -359,11 +330,6 @@ export default function OnboardingFlow({
             />
           </div>
         </section>
-        <OnboardingSkipConfirmationDialog
-          open={skipConfirmOpen}
-          onOpenChange={setSkipConfirmOpen}
-          onSkip={confirmSkipOnboarding}
-        />
       </div>
     </TooltipProvider>
   )

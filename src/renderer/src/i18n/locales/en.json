@@ -23126,6 +23126,14 @@
     }
   },
   "prompt": {
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "Before you start",
+        "subtitle": "Prompt uses Claude. Choose whether Claude may act without asking.",
+        "tooltip": "Yolo mode"
+      },
+      "close": "Close"
+    },
     "claudeModel": {
       "change": "Change model",
       "rejected": "Claude kept the previous model.",

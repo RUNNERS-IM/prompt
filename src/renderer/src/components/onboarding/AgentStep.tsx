@@ -147,7 +147,7 @@ export function AgentStep({
   )
 }
 
-function YoloPermissionsControl({
+export function YoloPermissionsControl({
   yoloPermissions,
   onYoloPermissionsChange
 }: {
