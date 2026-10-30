@@ -1,3 +1,5 @@
+import promptKoFill from './prompt-ko-fill.json'
+
 // Prompt keeps the upstream catalogs (src/renderer/src/i18n/locales/*.json) untouched so the
 // daily merge from Orca does not conflict. Wording Prompt wants different, and keys the
 // Korean catalog has not translated yet, live here instead and are laid over the catalog when
@@ -21,7 +23,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */
-export const PROMPT_KO_FILL: Readonly<Record<string, string>> = {}
+export const PROMPT_KO_FILL: Readonly<Record<string, string>> = promptKoFill
 
 type LocaleOverrides = {
   /** Applied only where the upstream catalog has no value, so a later upstream translation wins. */

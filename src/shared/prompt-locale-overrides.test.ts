@@ -58,6 +58,19 @@ describe('Prompt locale overrides', () => {
     )
   })
 
+  it('lets a later upstream translation win over a fill entry', () => {
+    const [key] = Object.keys(PROMPT_KO_FILL)
+    const catalog: Record<string, unknown> = {}
+    const segments = key.split('.')
+    let node = catalog
+    for (const segment of segments.slice(0, -1)) {
+      node[segment] = {}
+      node = node[segment] as Record<string, unknown>
+    }
+    node[segments.at(-1) as string] = 'upstream'
+    expect(lookup(applyPromptLocaleOverrides('ko', catalog), key)).toBe('upstream')
+  })
+
   it('leaves other languages alone', () => {
     const catalog = { a: 'b' }
     expect(applyPromptLocaleOverrides('ja', catalog)).toBe(catalog)
