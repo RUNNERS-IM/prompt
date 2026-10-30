@@ -1,6 +1,10 @@
 import { PairingOfferSchema, type PairingOffer } from './types'
 import { normalizePairingBase64 } from '../../../src/shared/mobile-pairing-base64'
 import { PAIRING_INPUT_MAX_CHARACTERS } from '../../../src/shared/mobile-pairing-protocol-limits'
+import {
+  PROMPT_BLOCK_UPSTREAM_SERVICES,
+  startsWithPairingLinkScheme
+} from '../../../src/shared/prompt-upstream'
 
 // Keep parsing aligned with src/shared/pairing.ts; use mobile base64 APIs instead of Node Buffer.
 
@@ -22,7 +26,8 @@ export function extractPairingCodeFromUrl(url: string): string | null {
     return null
   }
   const trimmed = url.trim()
-  const match = /^orca:\/\/([^/?#]*)([^?#]*)?/i.exec(trimmed)
+  // Prompt: desktop writes prompt://pair; orca://pair from older hosts still parses.
+  const match = /^(?:prompt|orca):\/\/([^/?#]*)([^?#]*)?/i.exec(trimmed)
   if (!match) {
     return null
   }
@@ -58,7 +63,7 @@ export function parsePairingCode(input: string): PairingOffer | null {
     return null
   }
   try {
-    if (/^orca:\/\//i.test(trimmed)) {
+    if (startsWithPairingLinkScheme(trimmed)) {
       return decodePairingUrl(trimmed)
     }
     return decodePairingBase64(trimmed)
@@ -70,5 +75,14 @@ export function parsePairingCode(input: string): PairingOffer | null {
 function decodePairingBase64(base64url: string): PairingOffer {
   // Restore desktop-stripped QR padding for runtimes that reject unpadded atob input.
   const json = atob(normalizePairingBase64(base64url))
-  return PairingOfferSchema.parse(JSON.parse(json))
+  return withoutRelayForPrompt(PairingOfferSchema.parse(JSON.parse(json)))
+}
+
+// Prompt: relay runs on Orca's relay.onorca.dev, so pairing keeps only the direct (same network) path.
+function withoutRelayForPrompt(offer: PairingOffer): PairingOffer {
+  if (!PROMPT_BLOCK_UPSTREAM_SERVICES || !offer.relay) {
+    return offer
+  }
+  const { relay: _relay, ...direct } = offer
+  return direct
 }

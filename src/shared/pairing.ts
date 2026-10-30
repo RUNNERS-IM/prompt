@@ -8,6 +8,12 @@ import {
   PAIRING_CODE_MAX_CHARACTERS,
   PAIRING_INPUT_MAX_CHARACTERS
 } from './mobile-pairing-protocol-limits'
+import {
+  isPairingLinkProtocol,
+  PROMPT_PAIRING_LINK_PREFIX,
+  promptOr,
+  startsWithPairingLinkScheme
+} from './prompt-upstream'
 
 export { PAIRING_OFFER_VERSION, PairingOfferSchema }
 export type { PairingOffer }
@@ -23,7 +29,7 @@ export function encodePairingOffer(offer: PairingOffer): string {
     throw new Error('Pairing offer exceeds safe size')
   }
   // Android camera intents and Expo Router retain custom-scheme query parameters more reliably than fragments.
-  return `orca://pair?code=${base64url}`
+  return `${promptOr(PROMPT_PAIRING_LINK_PREFIX, 'orca://pair')}?code=${base64url}`
 }
 
 export function decodePairingOffer(url: string): PairingOffer {
@@ -32,7 +38,7 @@ export function decodePairingOffer(url: string): PairingOffer {
   }
   const code = extractPairingCodeFromUrl(url)
   if (!code) {
-    throw new Error('Invalid pairing URL: must start with orca://pair and include a pairing code')
+    throw new Error('Invalid pairing URL: must start with prompt://pair and include a pairing code')
   }
   return decodePairingBase64(code)
 }
@@ -45,7 +51,7 @@ function extractPairingCodeFromUrl(url: string): string | null {
     return null
   }
   // Exact pairing host prevents prefix matches such as orca://pairing from carrying runtime credentials.
-  if (parsed.protocol !== 'orca:' || parsed.hostname !== 'pair') {
+  if (!isPairingLinkProtocol(parsed.protocol) || parsed.hostname !== 'pair') {
     return null
   }
   if (parsed.pathname !== '' && parsed.pathname !== '/') {
@@ -68,7 +74,7 @@ export function parsePairingCode(input: string): PairingOffer | null {
     return null
   }
   try {
-    if (trimmed.toLowerCase().startsWith('orca://')) {
+    if (startsWithPairingLinkScheme(trimmed)) {
       return decodePairingOffer(trimmed)
     }
     return decodePairingBase64(trimmed)
