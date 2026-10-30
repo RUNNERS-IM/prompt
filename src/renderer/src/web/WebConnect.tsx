@@ -28,7 +28,7 @@ export default function WebConnect({
   onConnected
 }: WebConnectProps): React.JSX.Element {
   const existingEnvironment = readStoredWebRuntimeEnvironment()
-  const [name, setName] = useState(existingEnvironment?.name ?? 'Orca Server')
+  const [name, setName] = useState(existingEnvironment?.name ?? 'Prompt Server')
   const [pairingCode, setPairingCode] = useState(initialPairingInput ?? '')
   const [error, setError] = useState<string | null>(null)
   const [connecting, setConnecting] = useState(false)

@@ -12,11 +12,15 @@ const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   // Pairing links: desktop and mobile both use the prompt:// scheme.
   [/\borca:\/\//g, 'prompt://'],
   [/\bOrca\b/g, PROMPT_APP_NAME],
+  // German genitive ("Orcas Terminaldienst") and plural "Orcas" use the same word with an s.
+  [/\bOrcas\b/g, `${PROMPT_APP_NAME}s`],
   // Some catalogs (en title, machine-translated ko) spell the brand in capitals. A hyphen on either
   // side means an identifier such as the Jira/Linear issue key ORCA-123, which must stay as typed.
   [/(?<![\w-])ORCA(?![\w-])/g, 'PROMPT'],
   // French catalog translated the brand itself.
-  [/\bOrque\b/g, PROMPT_APP_NAME]
+  [/\bOrque\b/g, PROMPT_APP_NAME],
+  // Korean catalog transliterated the brand once; both words end in a vowel, so particles still fit.
+  [/오르카/g, '프롬프트']
 ]
 
 export function applyPromptBrand(value: string): string {
