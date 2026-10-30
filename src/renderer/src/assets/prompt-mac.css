@@ -80,3 +80,10 @@ html.prompt-mac-vibrancy
   svg {
   color: #fff;
 }
+
+/* Lift the status bar off the window's rounded bottom edge. */
+html.prompt-mac-vibrancy .prompt-status-bar {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 18px 6px;
+}
