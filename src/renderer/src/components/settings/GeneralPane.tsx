@@ -25,6 +25,7 @@ import { translate } from '@/i18n/i18n'
 import { DefaultWindowsProjectRuntimeSetting } from './DefaultWindowsProjectRuntimeSetting'
 import { defaultScopeHost } from '@/lib/default-creation-host'
 import { PromptRunnersAppsSettingsSection } from '../prompt-runners-apps/PromptRunnersAppsSettingsSection'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 export {
   createAutoSaveDelayDraftState,
@@ -278,7 +279,9 @@ export function GeneralPane({
   return (
     <div className="space-y-6">
       <SettingsSectionStack sections={visibleSections} spacing="section" />
-      {matchesSettingsSearch(searchQuery, getGeneralSupportSearchEntries()) ? (
+      {/* Prompt: no "Star on GitHub" row in an in-house app. */}
+      {!PROMPT_BLOCK_UPSTREAM_SERVICES &&
+      matchesSettingsSearch(searchQuery, getGeneralSupportSearchEntries()) ? (
         <GeneralSupportSection
           hasPrecedingSections={visibleSections.some((section) => section !== null)}
         />

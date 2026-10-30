@@ -1,5 +1,6 @@
 import type { TuiAgent } from '../../../../shared/tui-agent'
 import type { StatusBarItem } from '../../../../shared/ui-chrome-types'
+import { promptShowsStatusBarItem } from './prompt-status-bar'
 
 // Hide missing CLI items and toggles after detection; unknown detection preserves them to avoid cold-start flicker.
 const CLI_GATED_ITEMS: ReadonlySet<StatusBarItem> = new Set([
@@ -16,6 +17,9 @@ export function isStatusBarItemAvailable(
   id: StatusBarItem,
   detectedAgentIds: TuiAgent[] | null
 ): boolean {
+  if (!promptShowsStatusBarItem(id)) {
+    return false
+  }
   if (!CLI_GATED_ITEMS.has(id)) {
     return true
   }

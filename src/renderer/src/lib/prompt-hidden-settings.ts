@@ -17,7 +17,10 @@ export const PROMPT_HIDDEN_SETTINGS_SECTION_IDS: ReadonlySet<string> = new Set([
   'servers',
   'plugins',
   'automations',
-  'tasks'
+  'tasks',
+  // Telemetry is off in Prompt builds (main/telemetry/client.ts TELEMETRY_ENABLED = false), so the
+  // opt-out switch would control nothing.
+  'privacy'
 ])
 
 export function isPromptVisibleSettingsSection(section: Pick<SettingsNavSection, 'id'>): boolean {

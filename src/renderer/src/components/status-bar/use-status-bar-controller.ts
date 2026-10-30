@@ -6,6 +6,7 @@ import type { ProviderRateLimits } from '../../../../shared/rate-limit-types'
 import { normalizeUsagePercentageDisplay } from '../../../../shared/usage-percentage-display'
 import { normalizeStatusBarUsageMode } from '../../../../shared/status-bar-usage-mode'
 import { isStatusBarItemAvailable } from './status-bar-agent-gating'
+import { PROMPT_SHOWS_USAGE_EMPTY_CTA, usePromptStatusBarItems } from './prompt-status-bar'
 import { getVisibleUsageProvider, isUsageEmptyState } from './status-bar-provider-visibility'
 import {
   getUsageProviderAccountsSectionId,
@@ -36,7 +37,7 @@ export function useStatusBarController(floatingTerminalOpen: boolean) {
   const [usageMenuOpen, setUsageMenuOpen] = useState(false)
   const usageMenuFocusHandoff = useStatusBarMenuFocusHandoff()
   const statusBarVisible = useAppStore((s) => s.statusBarVisible)
-  const statusBarItems = useAppStore((s) => s.statusBarItems)
+  const statusBarItems = usePromptStatusBarItems(useAppStore((s) => s.statusBarItems))
   const recordFeatureInteraction = useAppStore((s) => s.recordFeatureInteraction)
   // Why: reuse the floating-button's unread dot so activity shows for either trigger location (see FloatingTerminalToggleButton).
   const hasFloatingUnread = useAppStore(selectFloatingWorkspaceHasUnread)
@@ -194,7 +195,8 @@ export function useStatusBarController(floatingTerminalOpen: boolean) {
     usageSettings
   )
   // Why: one-time nudge — once dismissed, stays hidden even if providers reconnect later.
-  const showEmptyUsageCta = isEmptyUsageState && !usageEmptyStateDismissed
+  const showEmptyUsageCta =
+    PROMPT_SHOWS_USAGE_EMPTY_CTA && isEmptyUsageState && !usageEmptyStateDismissed
   const anyFetching =
     claude?.status === 'fetching' ||
     codex?.status === 'fetching' ||
