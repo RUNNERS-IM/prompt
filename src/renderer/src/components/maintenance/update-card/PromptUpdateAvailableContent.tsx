@@ -74,11 +74,7 @@ export function PromptUpdateAvailableContent({
         <Button variant="outline" size="sm" onClick={onLater} className="cursor-pointer">
           {translate('prompt.update.later', 'Later')}
         </Button>
-        <Button
-          size="sm"
-          onClick={onInstall}
-          className="cursor-pointer bg-[var(--prompt-accent)] text-white hover:bg-[var(--prompt-accent)] hover:opacity-90"
-        >
+        <Button size="sm" onClick={onInstall} data-prompt-accent-button className="cursor-pointer">
           {translate('prompt.update.install', 'Install')}
         </Button>
       </div>

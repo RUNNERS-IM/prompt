@@ -315,3 +315,15 @@ html.prompt-mac-vibrancy
   fill: #fff;
   stroke: none;
 }
+
+/* Primary action filled with the macOS accent (update card Install). Kept here because <Button>
+   owns its color in the design-system lint. */
+button[data-prompt-accent-button] {
+  background: var(--prompt-accent);
+  color: #fff;
+}
+
+button[data-prompt-accent-button]:hover {
+  background: var(--prompt-accent);
+  opacity: 0.9;
+}
