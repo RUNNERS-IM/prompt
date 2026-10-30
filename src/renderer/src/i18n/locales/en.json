@@ -23115,5 +23115,12 @@
       "needsPermission": "Agent needs permission",
       "statusStale": "Agent status is stale"
     }
+  },
+  "prompt": {
+    "claudeModel": {
+      "change": "Change model",
+      "rejected": "Claude kept the previous model.",
+      "badgeTitle": "Model: {{model}} (click to change)"
+    }
   }
 }

@@ -2,7 +2,7 @@ import { useWorktreeAgentActivation } from './use-worktree-agent-activation'
 import React, { useCallback, useLayoutEffect, useMemo, useRef } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from '@/store'
-import DashboardAgentRow from '@/components/dashboard/DashboardAgentRow'
+import DashboardAgentRowBase from '@/components/dashboard/DashboardAgentRow'
 import { useNow } from '@/hooks/use-now'
 import { deriveRunningAgentSendTargets } from '@/lib/running-agent-targets'
 import {
@@ -15,7 +15,7 @@ import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/da
 import { useFocusedAgentPaneKey } from './focused-agent-row-highlight'
 import {
   CompactAgentExpansion,
-  CompactAgentRow,
+  CompactAgentRow as CompactAgentRowBase,
   CompactAgentSummaryButton
 } from './worktree-card-compact-agents'
 import { buildAgentRowLineageTree } from '@/components/dashboard/agent-row-lineage-model'
@@ -28,6 +28,10 @@ import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { activateRetainedAgentRow } from './activate-retained-agent-row'
 import { selectAgentRowsUnread } from './worktree-card-agent-ack-inputs'
 import { opensClaudeParentConversation } from '@/lib/claude-agent-row-view'
+import { withPromptClaudeModelRowMenu } from '@/components/prompt-claude-model-menu'
+
+const DashboardAgentRow = withPromptClaudeModelRowMenu(DashboardAgentRowBase)
+const CompactAgentRow = withPromptClaudeModelRowMenu(CompactAgentRowBase)
 
 export const SUPPRESS_WORKTREE_LIST_SCROLL_ADJUSTMENT_EVENT =
   'orca-suppress-worktree-list-scroll-adjustment'

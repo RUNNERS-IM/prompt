@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { X, Minimize2, Pin } from 'lucide-react'
 import { stripLeadingAgentTitleDecoration } from '../../../../shared/agent-title-decoration'
@@ -22,6 +22,7 @@ import { useSortableTabRename } from './use-sortable-tab-rename'
 import { useTabRenameReturnFocus } from './use-tab-rename-return-focus'
 import { SortableTabContextMenu } from './SortableTabContextMenu'
 import { useSortableTabContextMenu } from './use-sortable-tab-context-menu'
+import { useSortableTabMenuDismiss } from './use-sortable-tab-menu-dismiss'
 import { translate } from '@/i18n/i18n'
 import { TAB_LABEL_WIDTH_CLASSES } from './tab-width-rules'
 import { useTabStripSlotProps } from './use-tab-strip-slot-props'
@@ -48,6 +49,8 @@ export type SortableTabProps = {
   tab: SortableTabModel
   /** The tab's agent, resolved by the caller from its own source of truth (pane signals or the chat's provider). */
   agent: TerminalAgent | null
+  /** Rendered after the title, e.g. the focused pane's model badge. */
+  titleAccessory?: React.ReactNode
   unifiedTabId: string
   groupId: string
   tabCount: number
@@ -82,6 +85,7 @@ export type SortableTabProps = {
 export default function SortableTab({
   tab,
   agent: tabAgent,
+  titleAccessory,
   unifiedTabId,
   groupId,
   tabCount,
@@ -169,21 +173,7 @@ export default function SortableTab({
   const showUnreadActivity =
     hasUnreadActivity && !isEditing && !isTerminalTabActivityLive(activityStatus)
 
-  useEffect(() => {
-    const closeMenu = (): void => setMenuOpen(false)
-    window.addEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, closeMenu)
-    return () => window.removeEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, closeMenu)
-  }, [setMenuOpen])
-
-  // Why: webview clicks miss the renderer pointerdown Radix uses for outside-click, so dismiss on window blur instead.
-  useEffect(() => {
-    if (!menuOpen) {
-      return
-    }
-    const dismiss = (): void => setMenuOpen(false)
-    window.addEventListener('blur', dismiss)
-    return () => window.removeEventListener('blur', dismiss)
-  }, [menuOpen, setMenuOpen])
+  useSortableTabMenuDismiss(menuOpen, setMenuOpen)
 
   // Why: while editing, drop drag listeners so typing can't start a drag; attributes stay spread to keep dnd-kit a11y.
   const dragListeners = isEditing ? undefined : listeners
@@ -288,6 +278,7 @@ export default function SortableTab({
       ) : (
         <span className={`${TAB_LABEL_WIDTH_CLASSES} mr-1`}>{displayTitle}</span>
       )}
+      {!isEditing && titleAccessory}
       {tab.color && !isEditing && (
         <span
           className="mr-1.5 size-2 rounded-full shrink-0"

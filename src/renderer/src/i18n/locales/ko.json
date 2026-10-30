@@ -22559,5 +22559,12 @@
       "needsPermission": "에이전트에 권한이 필요합니다",
       "statusStale": "에이전트 상태 정보가 오래되었습니다"
     }
+  },
+  "prompt": {
+    "claudeModel": {
+      "change": "모델 바꾸기",
+      "rejected": "Claude가 이전 모델을 그대로 유지했습니다.",
+      "badgeTitle": "모델: {{model}} (눌러서 바꾸기)"
+    }
   }
 }

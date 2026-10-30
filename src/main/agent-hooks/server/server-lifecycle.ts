@@ -121,6 +121,7 @@ export abstract class AgentHookServerLifecycle extends AgentHookServerStatusHook
           if (statusLineEvent) {
             this.onClaudeStatusLine?.(statusLineEvent)
           }
+          this.applyClaudeStatusLineModel(body)
           res.writeHead(204)
           res.end()
           return

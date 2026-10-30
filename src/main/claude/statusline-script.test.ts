@@ -307,11 +307,26 @@ describe.skipIf(process.platform === 'win32')('statusline curl throttle (posix b
     expect(readFileSync(stampPathFor(dir, 'legacy-tab-b_1'), 'utf8')).toBe('1')
   })
 
-  it('never touches curl or the stamp for payloads without rate_limits', async () => {
+  it('never touches curl or the stamp for payloads without rate_limits or model', async () => {
     const { scriptPath, dir, curlLog, dateLog } = makeHarness()
-    await runScript(scriptPath, dir, '{"model":{"id":"claude-fable-5"}}')
+    await runScript(scriptPath, dir, '{"cwd":"/tmp/model"}')
     expect(lineCount(curlLog)).toBe(0)
     expect(lineCount(dateLog)).toBe(0)
     expect(() => readFileSync(stampPathFor(dir), 'utf8')).toThrow()
+  })
+
+  it('posts model-only payloads and bypasses the throttle only when the model changes', async () => {
+    const { scriptPath, dir, curlLog } = makeHarness()
+    const modelPayload = (id: string, durationMs: number): string =>
+      JSON.stringify({
+        cost: { total_duration_ms: durationMs },
+        model: { id, display_name: id.toUpperCase() }
+      })
+    await runScript(scriptPath, dir, modelPayload('claude-opus', 1_000))
+    await runScript(scriptPath, dir, modelPayload('claude-opus', 2_000))
+    expect(lineCount(curlLog)).toBe(1)
+    await runScript(scriptPath, dir, modelPayload('claude-haiku', 3_000))
+    expect(lineCount(curlLog)).toBe(2)
+    expect(readFileSync(`${stampPathFor(dir)}-model`, 'utf8')).toBe('claude-haiku')
   })
 })

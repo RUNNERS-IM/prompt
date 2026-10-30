@@ -22,6 +22,7 @@ import { isForeignTurnHook } from './server-foreign-turn-hook'
 import { resolveCancelVerdictLatch } from './server-cancel-verdict-latch'
 import { AgentHookServerStatusApplication } from './server-status-application'
 import { claimsPaneAfterExit } from './agent-exit-evidence'
+import { preserveClaudeStatusLineModel } from '../../../shared/prompt-claude-statusline-model'
 
 export abstract class AgentHookServerStatusUpdate extends AgentHookServerStatusApplication {
   protected readonly claudeOwedNotificationExpiry = new ClaudeOwedNotificationExpiryTimers(
@@ -203,7 +204,14 @@ export abstract class AgentHookServerStatusUpdate extends AgentHookServerStatusA
             ...rootContextPreservingPayload,
             payload: { ...rootContextPreservingPayload.payload, agentType: identity.agentType }
           }
-    const attachedPayload = attachClaudePermissionToolUseId(previous, identityResolvedPayload)
+    const attachedPayload = attachClaudePermissionToolUseId(
+      previous,
+      preserveClaudeStatusLineModel(
+        previous,
+        identityResolvedPayload,
+        previous !== undefined && this.sameTerminalOwner(previous, identityResolvedPayload)
+      )
+    )
     // Resolve cancellation before permission holds adopt a replayed main-agent observation.
     const latch = resolveCancelVerdictLatch(previous, attachedPayload, Date.now())
     if (latch.hold) {

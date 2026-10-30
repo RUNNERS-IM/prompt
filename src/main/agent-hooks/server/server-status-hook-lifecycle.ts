@@ -1,6 +1,8 @@
 import { drainAgentHookSpoolAsync, type SpoolRecord } from '../../../shared/agent-hook-spool'
 import { AgentHookServerRuntimeEnv } from './server-runtime-env'
 import { ClaudeAgentViewBridge } from '../../claude/agent-view-bridge'
+import { parseClaudeStatusLineModel } from '../../../shared/prompt-claude-statusline-model'
+import type { EnrichedAgentHookEventPayload } from './server-types'
 
 export abstract class AgentHookServerStatusHookLifecycle extends AgentHookServerRuntimeEnv {
   readonly claudeAgentViews = new ClaudeAgentViewBridge()
@@ -71,5 +73,31 @@ export abstract class AgentHookServerStatusHookLifecycle extends AgentHookServer
       }
       this.ownerStateInitialized = true
     }
+  }
+
+  // Statusline ticks are the only Claude model evidence; restamp the live row only when it changes.
+  protected applyClaudeStatusLineModel(body: unknown): void {
+    const event = parseClaudeStatusLineModel(body)
+    if (!event) {
+      return
+    }
+    // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: Main admits enriched legacy rows; the shared view declares their base event type.
+    const previous = (this.state.lastStatusByPaneKey.get(this.resolvePaneKeyAlias(event.paneKey)) ??
+      this.state.lastStatusByPaneKey.get(event.paneKey)) as
+      | EnrichedAgentHookEventPayload
+      | undefined
+    if (
+      !previous ||
+      previous.payload.agentType !== 'claude' ||
+      previous.payload.model === event.model ||
+      previous.providerSessionOnly
+    ) {
+      return
+    }
+    this.refreshTerminalStatusEvidence(
+      { ...previous, payload: { ...previous.payload, model: event.model } },
+      previous,
+      true
+    )
   }
 }

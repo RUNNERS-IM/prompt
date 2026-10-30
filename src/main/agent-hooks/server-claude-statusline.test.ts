@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { AgentHookServer } from './server'
 import type { ClaudeStatusLineRateLimits } from '../../shared/claude-statusline-rate-limits'
+import { buildBody, PANE, postHookEvent } from './server.test-fixtures'
 
 describe('AgentHookServer /statusline/claude', () => {
   let server: AgentHookServer
@@ -71,5 +72,22 @@ describe('AgentHookServer /statusline/claude', () => {
     await expect(post('payload=not-json')).resolves.toMatchObject({ status: 204 })
 
     expect(events).toEqual([])
+  })
+  it('stamps the Claude row with the statusline model and keeps it across hooks', async () => {
+    await postHookEvent(server, buildBody({ hook_event_name: 'UserPromptSubmit', prompt: 'task' }))
+    const modelBody = (displayName: string): string =>
+      new URLSearchParams({
+        paneKey: PANE,
+        payload: JSON.stringify({ model: { id: 'claude-x', display_name: displayName } })
+      }).toString()
+
+    await expect(post(modelBody('Opus 4.1'))).resolves.toMatchObject({ status: 204 })
+    expect(server.getStatusSnapshot()[0]).toMatchObject({ paneKey: PANE, model: 'Opus 4.1' })
+
+    await postHookEvent(server, buildBody({ hook_event_name: 'Stop' }))
+    expect(server.getStatusSnapshot()[0]).toMatchObject({ state: 'done', model: 'Opus 4.1' })
+
+    await post(modelBody('Haiku 4.5'))
+    expect(server.getStatusSnapshot()[0]?.model).toBe('Haiku 4.5')
   })
 })

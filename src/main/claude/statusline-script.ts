@@ -50,9 +50,8 @@ export function getManagedStatusLineScript(target: 'local' | 'posix' = 'local'):
       `if not defined ORCA_STATUSLINE_ELAPSED goto :${STATUSLINE_PROBE_LABEL}`,
       `if %ORCA_STATUSLINE_ELAPSED% GEQ 0 if %ORCA_STATUSLINE_ELAPSED% LSS ${CLAUDE_STATUSLINE_MIN_POST_INTERVAL_SECONDS} goto :${STATUSLINE_CLEANUP_LABEL}`,
       `:${STATUSLINE_PROBE_LABEL}`,
-      // Non-subscriber payloads lack rate_limits; skip their endpoint lookup and curl spawn.
-      // Escaped quotes match the JSON key, avoiding false matches in paths.
-      '"%SystemRoot%\\System32\\findstr.exe" /c:\\"rate_limits\\" "%ORCA_STATUSLINE_PAYLOAD_FILE%" >nul 2>nul',
+      // Post only payloads carrying rate_limits or the session model; escaped quotes match JSON keys, not paths.
+      '"%SystemRoot%\\System32\\findstr.exe" /c:\\"rate_limits\\" /c:\\"model\\" "%ORCA_STATUSLINE_PAYLOAD_FILE%" >nul 2>nul',
       `if errorlevel 1 goto :${STATUSLINE_CLEANUP_LABEL}`,
       // Refresh stale endpoint coordinates after Orca restarts, falling back to PTY env.
       'if defined ORCA_AGENT_HOOK_ENDPOINT if exist "%ORCA_AGENT_HOOK_ENDPOINT%" call "%ORCA_AGENT_HOOK_ENDPOINT%" 2>nul',
@@ -95,9 +94,9 @@ export function getManagedStatusLineScript(target: 'local' | 'posix' = 'local'):
     '  exit 0',
     'fi',
     ...buildPosixClaudeBackgroundJobGuardLines(),
-    // Non-subscriber payloads lack rate_limits; avoid spawning curl for them.
+    // Post only payloads carrying rate_limits or the session model; avoid spawning curl for others.
     'case "$payload" in',
-    '  *\'"rate_limits"\'*) ;;',
+    '  *\'"rate_limits"\'*|*\'"model"\'*) ;;',
     '  *) exit 0 ;;',
     'esac',
     'if [ -n "$ORCA_AGENT_HOOK_ENDPOINT" ] && [ -r "$ORCA_AGENT_HOOK_ENDPOINT" ]; then',
@@ -120,6 +119,21 @@ export function getManagedStatusLineScript(target: 'local' | 'posix' = 'local'):
     '    ;;',
     'esac',
     'orca_statusline_stamp="${TMPDIR:-/tmp}/orca-claude-statusline-last-${orca_statusline_pane_id}"',
+    // A changed model id bypasses the throttle so /model switches show up on the next tick.
+    'orca_statusline_model=',
+    'case "$payload" in',
+    '  *\'"model"\'*\'"id"\'*)',
+    '    orca_statusline_model=${payload#*\'"model"\'}',
+    '    orca_statusline_model=${orca_statusline_model#*\'"id"\'}',
+    "    orca_statusline_model=${orca_statusline_model#*'\"'}",
+    "    orca_statusline_model=${orca_statusline_model%%'\"'*}",
+    '    ;;',
+    'esac',
+    'orca_statusline_model_stamp="${orca_statusline_stamp}-model"',
+    'orca_statusline_last_model=',
+    'if [ -n "$orca_statusline_model" ] && [ -f "$orca_statusline_model_stamp" ]; then',
+    '  IFS= read -r orca_statusline_last_model <"$orca_statusline_model_stamp" 2>/dev/null || :',
+    'fi',
     // Use the payload clock to avoid per-tick date spawns; fall back if the schema changes.
     'orca_statusline_now=',
     'case "$payload" in',
@@ -149,13 +163,16 @@ export function getManagedStatusLineScript(target: 'local' | 'posix' = 'local'):
     '  if [ "${#orca_statusline_last}" -gt 15 ]; then orca_statusline_last=; fi',
     '  if [ -n "$orca_statusline_last" ]; then',
     '    orca_statusline_elapsed=$((orca_statusline_now - orca_statusline_last))',
-    `    if [ "$orca_statusline_elapsed" -ge 0 ] && [ "$orca_statusline_elapsed" -lt ${CLAUDE_STATUSLINE_MIN_POST_INTERVAL_SECONDS} ]; then`,
+    `    if [ "$orca_statusline_elapsed" -ge 0 ] && [ "$orca_statusline_elapsed" -lt ${CLAUDE_STATUSLINE_MIN_POST_INTERVAL_SECONDS} ] && [ "$orca_statusline_model" = "$orca_statusline_last_model" ]; then`,
     '      exit 0',
     '    fi',
     '  fi',
     'fi',
     'if [ -n "$orca_statusline_now" ]; then',
     '  printf \'%s\' "$orca_statusline_now" >"$orca_statusline_stamp" 2>/dev/null || :',
+    'fi',
+    'if [ -n "$orca_statusline_model" ]; then',
+    '  printf \'%s\' "$orca_statusline_model" >"$orca_statusline_model_stamp" 2>/dev/null || :',
     'fi',
     `printf '%s' "$payload" | ${posixCurlCommand()} -sS -X POST "http://127.0.0.1:\${ORCA_AGENT_HOOK_PORT}${CLAUDE_STATUSLINE_PATHNAME}" \\`,
     '  --connect-timeout 0.5 --max-time 1.5 \\',
