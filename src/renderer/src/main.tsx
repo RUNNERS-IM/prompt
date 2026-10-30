@@ -4,6 +4,7 @@ import './lib/react-commit-cascade-observer'
 import './assets/main.css'
 import './assets/prompt-mac.css'
 import './lib/prompt-mac-chrome'
+import './lib/prompt-terminal-theme-default'
 
 import { StrictMode } from 'react'
 import { useTranslation } from 'react-i18next'

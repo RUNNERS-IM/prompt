@@ -6,61 +6,116 @@ html:root {
   --radius: 10px;
 }
 
+/* Layout 1B: the left sidebar, the center (tabs + terminal) and the right panel are three equal
+   rounded cards on the window background, 8px apart and 8px from the window edge. --prompt-card
+   equals the default terminal theme background (Prompt Dark / Builtin Tango Light), so the tab
+   strip and terminal read as one surface. */
 html.prompt-mac-vibrancy:root:not(.dark) {
   --background: #ececec;
   --card: rgb(255 255 255 / 0.85);
   --border: rgb(0 0 0 / 0.1);
-  --worktree-sidebar: #f6f6f6;
+  --prompt-window: #ececec;
+  --prompt-card: #ffffff;
+  --prompt-hairline: rgb(0 0 0 / 0.1);
+  --worktree-sidebar: var(--prompt-card);
+  --sidebar: var(--prompt-card);
+  --sidebar-border: var(--prompt-hairline);
 }
 
+/* Dark card #292929 is white 5% over the #1e1e1e window, made opaque so the terminal can match it. */
 html.prompt-mac-vibrancy.dark {
   --background: #1e1e1e;
   --card: rgb(255 255 255 / 0.05);
-  --border: rgb(255 255 255 / 0.1);
-  --worktree-sidebar: #2a2a2a;
+  --border: rgb(255 255 255 / 0.08);
+  --prompt-window: #1e1e1e;
+  --prompt-card: #292929;
+  --prompt-hairline: rgb(255 255 255 / 0.08);
+  --worktree-sidebar: var(--prompt-card);
+  --sidebar: var(--prompt-card);
+  --sidebar-border: var(--prompt-hairline);
+}
+
+html.prompt-mac-vibrancy:root {
+  --prompt-gap: 8px;
 }
 
 html.prompt-mac-vibrancy body {
   font-size: 13px;
 }
 
-/* Prompt: System Settings style chrome. One window background everywhere;
-   the sidebar floats as a rounded card on top of it. */
 html.prompt-mac-vibrancy body,
 html.prompt-mac-vibrancy .app-layout,
 html.prompt-mac-vibrancy .prompt-shell-row,
-html.prompt-mac-vibrancy .prompt-main-column,
 html.prompt-mac-vibrancy .app-layout > :not(:first-child) {
-  background: var(--background);
+  background: var(--prompt-window);
   border-top-color: transparent;
 }
 
 html.prompt-mac-vibrancy .prompt-sidebar-column,
-html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
-  margin: 8px 0 8px 8px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--worktree-sidebar);
+html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar,
+html.prompt-mac-vibrancy .prompt-main-column,
+html.prompt-mac-vibrancy .prompt-right-panel {
+  --card: var(--prompt-card);
+  --border: var(--prompt-hairline);
+  background: var(--prompt-card);
   border: 0;
-  box-shadow: inset 0 0 0 0.5px var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  outline: 0.5px solid var(--prompt-hairline);
+  outline-offset: -0.5px;
+}
+
+html.prompt-mac-vibrancy .prompt-sidebar-column,
+html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
+  margin: var(--prompt-gap) 0 var(--prompt-gap) var(--prompt-gap);
+}
+
+html.prompt-mac-vibrancy .prompt-main-column {
+  margin: var(--prompt-gap);
+}
+
+/* The right panel draws its left seam inline; inside a card it is not needed. */
+html.prompt-mac-vibrancy .prompt-right-panel {
+  margin: var(--prompt-gap) var(--prompt-gap) var(--prompt-gap) 0;
+  border-left: 0 !important;
+}
+
+/* The tab group wrapper draws a seam toward the sidebar; the card edge replaces it. */
+html.prompt-mac-vibrancy
+  .prompt-main-column
+  :has(> [data-terminal-focus-release-surface].h-\[4px\]) {
+  border-left-color: transparent;
+}
+
+/* Tabs keep their side separators but drop the top line against the card edge. */
+html.prompt-mac-vibrancy .prompt-main-column [data-tab-group-strip-id] .border-t {
+  border-top-color: transparent;
 }
 
 html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left,
-html.prompt-mac-vibrancy .prompt-sidebar-column .prompt-sidebar,
-html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
+html.prompt-mac-vibrancy .prompt-sidebar-column .prompt-sidebar {
   background: transparent;
   border-right-color: transparent;
-}
-
-/* Header row centered on the traffic lights (TITLEBAR_CSS_CENTER 22 = 8px inset + 28px / 2). */
-html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left {
-  height: 28px;
-  min-height: 28px;
   border-bottom-color: transparent;
 }
 
-html.prompt-mac-vibrancy .titlebar-traffic-light-pad {
-  width: calc(88px / var(--ui-zoom-factor, 1));
+/* Layout 2B: no branch line under each worktree row (the row hover card still shows it). */
+html.prompt-mac-vibrancy
+  [data-worktree-card-meta-row]
+  > div:first-child
+  > span.truncate.leading-none {
+  display: none;
+}
+
+/* A row left with only the hover-details icon goes too; the same details open on row hover. */
+html.prompt-mac-vibrancy
+  [data-worktree-card-meta-row]:not(:has(> div:first-child > :not(span.truncate.leading-none))) {
+  display: none;
+}
+
+/* Layout 2C: no "Add a setup script" card at the bottom of the sidebar. */
+html.prompt-mac-vibrancy [data-setup-script-prompt-layer] {
+  display: none;
 }
 
 /* Roomier navigation like System Settings. */
@@ -107,11 +162,13 @@ html.prompt-mac-vibrancy
   color: #fff;
 }
 
-/* Lift the status bar off the window's rounded bottom edge. */
-html.prompt-mac-vibrancy .prompt-status-bar {
+/* The status bar sits on the window background below the three cards. */
+html.prompt-mac-vibrancy .app-layout .prompt-status-bar {
   height: 36px;
   min-height: 36px;
   padding: 0 18px 6px;
+  background: var(--prompt-window);
+  border-top: 0;
 }
 
 /* Lighter Lucide strokes, closer to SF Symbols. */
@@ -121,6 +178,6 @@ html.prompt-mac-vibrancy svg.lucide {
 
 /* The title strip blends into the window instead of using the card fill. */
 html.prompt-mac-vibrancy .titlebar {
-  background: var(--background);
+  background: var(--prompt-window);
   border-bottom-color: transparent;
 }

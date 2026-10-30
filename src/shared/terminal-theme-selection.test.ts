@@ -4,7 +4,7 @@ import { TERMINAL_THEME_CATALOG } from './terminal-themes'
 
 const base = {
   theme: 'system' as const,
-  terminalThemeDark: 'Ghostty Default Style Dark',
+  terminalThemeDark: 'Prompt Dark',
   terminalUseSeparateLightTheme: true,
   terminalThemeLight: 'Builtin Tango Light'
 }
@@ -21,7 +21,7 @@ describe('the terminal colours a host configures', () => {
     })
     expect(resolveConfiguredTerminalColors(base, true)).toEqual({
       foreground: '#ffffff',
-      background: '#282c34'
+      background: '#292929'
     })
   })
 
@@ -41,7 +41,7 @@ describe('the terminal colours a host configures', () => {
     ).toEqual({ foreground: '#ffffff', background: '#101010' })
     expect(
       resolveConfiguredTerminalColors({ ...base, terminalThemeDark: 'no such theme' }, true)
-    ).toEqual({ foreground: '#ffffff', background: '#282c34' })
+    ).toEqual({ foreground: '#ffffff', background: '#292929' })
   })
 })
 

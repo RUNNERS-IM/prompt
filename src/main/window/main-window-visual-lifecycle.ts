@@ -92,8 +92,8 @@ export function installMacosVisibilityRepaint(window: BrowserWindow): void {
   })
 }
 
-// Prompt: center is 22 CSS px (sidebar card inset) × zoom; 12px traffic lights start 6px above it.
-export const TITLEBAR_CSS_CENTER = 22
+// Prompt: center is 26 CSS px (8px card inset + 36px header / 2) × zoom; 12px traffic lights start 6px above it.
+export const TITLEBAR_CSS_CENTER = 26
 export const TRAFFIC_LIGHT_RADIUS = 6
 export const TRAFFIC_LIGHT_X = 24
 export const MIN_WIDTH = 600
