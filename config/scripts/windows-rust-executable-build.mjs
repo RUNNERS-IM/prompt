@@ -3,6 +3,9 @@ import { createHash } from 'node:crypto'
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { findDynamicVcRuntimeImports, readPeImportedDllNames } from './windows-pe-imports.mjs'
+import windowsFileVersionModule from './windows-file-version.cjs'
+
+const { windowsFileVersion } = windowsFileVersionModule
 
 // Why explicit triples: both architectures cross-compile from one x64 runner.
 const RUST_TARGETS = {
@@ -29,11 +32,7 @@ export function shouldReuseCompiledWindowsRustExecutable(outputPath, fingerprint
 
 // PE stores four numeric version fields; prerelease survives only in free-form ProductVersion.
 export function windowsRustExecutableFileVersion(version) {
-  const match = /^(\d+)\.(\d+)\.(\d+)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.exec(version ?? '')
-  if (!match || match.slice(1).some((part) => Number(part) > 65534)) {
-    throw new Error(`Invalid Windows executable version: ${version}`)
-  }
-  return `${match.slice(1).join('.')}.0`
+  return windowsFileVersion(version)
 }
 
 export function windowsRustExecutableTarget(arch) {
@@ -65,7 +64,7 @@ export function compileWindowsRustExecutable({
   const manifestPath = join(crateRoot, 'Cargo.toml')
   const { version } = JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8'))
   // Throws on a version the PE cannot represent, before anything is compiled.
-  windowsRustExecutableFileVersion(version)
+  const fileVersion = windowsRustExecutableFileVersion(version)
   const rustTarget = windowsRustExecutableTarget(arch)
   const fingerprint = windowsRustExecutableFingerprint(
     [
@@ -76,6 +75,7 @@ export function compileWindowsRustExecutable({
       join(crateRoot, 'app.manifest'),
       join(crateRoot, '.cargo', 'config.toml'),
       join(repoRoot, 'config/scripts/windows-rust-executable-build.mjs'),
+      join(repoRoot, 'config/scripts/windows-file-version.cjs'),
       ...fingerprintInputs
     ],
     rustTarget ? `${version}\0${rustTarget}` : version
@@ -104,7 +104,7 @@ export function compileWindowsRustExecutable({
     {
       cwd: crateRoot,
       stdio: 'inherit',
-      env: { ...process.env, ...buildEnv(version) }
+      env: { ...process.env, ...buildEnv(version), PROMPT_WINDOWS_FILE_VERSION: fileVersion }
     }
   )
 
