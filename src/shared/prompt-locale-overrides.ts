@@ -24,7 +24,9 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.about.versionLine': '버전 {{version}} · 무료',
   'prompt.about.website': '웹사이트',
   'prompt.about.notices': '오픈소스 고지',
-  'prompt.about.noticesMissing': '고지 파일을 읽을 수 없습니다.'
+  'prompt.about.noticesMissing': '고지 파일을 읽을 수 없습니다.',
+  'prompt.about.close': '닫기',
+  'prompt.about.chromiumLicenses': 'Chromium 라이선스 열기'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

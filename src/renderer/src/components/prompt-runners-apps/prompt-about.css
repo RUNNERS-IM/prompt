@@ -137,18 +137,19 @@ html.dark .prompt-about-footer {
   color: rgb(255 255 255 / 0.3);
 }
 
-/* Open source notices window: title under the hidden title bar, then the notices file as
-   selectable, scrollable plain text. */
+/* Open Source Notices window, same values as Split's notices sheet: 480x420, 20 around the
+   content, 13 semibold title, 10 above the text, 11px secondary text with 12 semibold headings,
+   14 above the button row, default Close button bottom right. */
 .prompt-notices {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   height: 100vh;
-  padding-top: 40px;
+  padding: 20px;
 }
 
 .prompt-notices-title {
-  margin: 0 28px 12px;
+  margin: 0 0 10px;
   font-size: 13px;
   font-weight: 600;
   line-height: 16px;
@@ -157,19 +158,83 @@ html.dark .prompt-about-footer {
 .prompt-notices-text {
   flex: 1;
   min-height: 0;
-  margin: 0;
-  padding: 0 28px 28px;
+  padding: 4px 0;
   overflow: auto;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
-  line-height: 16px;
-  white-space: pre-wrap;
+  line-height: 14px;
   overflow-wrap: anywhere;
-  color: rgb(0 0 0 / 0.75);
+  color: rgb(0 0 0 / 0.5);
   -webkit-user-select: text;
   user-select: text;
 }
 
+.prompt-notices-text p {
+  margin: 0 0 14px;
+}
+
+.prompt-notices-line {
+  display: block;
+}
+
+.prompt-notices-heading {
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  color: rgb(0 0 0 / 0.85);
+}
+
+.prompt-notices-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.prompt-notices-chromium {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--prompt-accent, #007aff);
+  font: inherit;
+  font-size: 11px;
+  cursor: default;
+}
+
+.prompt-notices-chromium:hover {
+  text-decoration: underline;
+}
+
+/* macOS default (accent) push button. */
+.prompt-notices-close {
+  min-width: 64px;
+  height: 22px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--prompt-accent, #007aff);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  line-height: 22px;
+  cursor: default;
+}
+
+.prompt-notices-close:active {
+  filter: brightness(0.9);
+}
+
+.prompt-notices-chromium:focus-visible,
+.prompt-notices-close:focus-visible {
+  outline: 2px solid var(--prompt-accent, #007aff);
+  outline-offset: 1px;
+}
+
 html.dark .prompt-notices-text {
-  color: rgb(255 255 255 / 0.75);
+  color: rgb(255 255 255 / 0.55);
+}
+
+html.dark .prompt-notices-heading {
+  color: rgb(255 255 255 / 0.9);
 }

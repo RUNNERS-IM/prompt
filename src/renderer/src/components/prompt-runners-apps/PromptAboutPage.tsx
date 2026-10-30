@@ -83,7 +83,7 @@ export function PromptAboutPage(): React.JSX.Element {
               className="prompt-about-notice"
               onClick={() => void noticesApi.open()}
             >
-              {translate('prompt.about.notices', 'Open source notices')}
+              {translate('prompt.about.notices', 'Open Source Notices')}
             </button>
           </>
         ) : null}

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, nativeTheme } from 'electron'
+import { app, BrowserWindow, ipcMain, nativeTheme, shell } from 'electron'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { mainI18n, translateMain } from '../i18n/main-i18n'
@@ -6,10 +6,15 @@ import type { Store } from '../persistence'
 import { installPrivilegedWindowNavigationPolicy } from './privileged-window-navigation'
 import { installMacAccentColor } from './prompt-mac-accent-color'
 import {
+  PROMPT_OPEN_CHROMIUM_LICENSES_CHANNEL,
   PROMPT_OPEN_THIRD_PARTY_NOTICES_CHANNEL,
-  PROMPT_READ_THIRD_PARTY_NOTICES_CHANNEL,
-  PROMPT_THIRD_PARTY_NOTICES_FILE
+  PROMPT_READ_THIRD_PARTY_NOTICES_CHANNEL
 } from '../../shared/prompt-third-party-notices'
+import {
+  chromiumLicensesPath,
+  thirdPartyNoticesPath,
+  type LicenseFileContext
+} from './prompt-license-file-paths'
 
 // Prompt's own About window and its "Open source notices" window, both from
 // src/renderer/prompt-about.html (the notices one with ?view=notices). The native About panel
@@ -30,9 +35,11 @@ const INFO_WINDOWS: Record<InfoWindowKind, InfoWindowSpec> = {
     // 11px) stays on one line, and the header, both cards and the footer fit without scrolling.
     options: { width: 570, height: 616, resizable: false }
   },
+  // Same size as Split's notices sheet. On macOS the title bar and its buttons are hidden so it
+  // reads like that sheet; the page's Close button, Return and Escape close it.
   notices: {
-    title: () => translateMain('prompt.about.notices', 'Open source notices'),
-    options: { width: 560, height: 520, minWidth: 400, minHeight: 300, resizable: true }
+    title: () => translateMain('prompt.about.notices', 'Open Source Notices'),
+    options: { width: 480, height: 420, resizable: false }
   }
 }
 
@@ -40,11 +47,14 @@ const openWindows: Partial<Record<InfoWindowKind, BrowserWindow>> = {}
 let lastStore: Pick<Store, 'getSettings'> | null = null
 let noticesHandlersRegistered = false
 
-// Packaged builds carry the file in resources/ (extraResources); dev runs read the repo copy.
-function thirdPartyNoticesPath(): string {
-  return app.isPackaged
-    ? join(process.resourcesPath, PROMPT_THIRD_PARTY_NOTICES_FILE)
-    : join(app.getAppPath(), PROMPT_THIRD_PARTY_NOTICES_FILE)
+function licenseFileContext(): LicenseFileContext {
+  return {
+    platform: process.platform,
+    isPackaged: app.isPackaged,
+    resourcesPath: process.resourcesPath,
+    execPath: process.execPath,
+    appPath: app.getAppPath()
+  }
 }
 
 function registerThirdPartyNoticesHandlers(): void {
@@ -57,9 +67,16 @@ function registerThirdPartyNoticesHandlers(): void {
   })
   ipcMain.handle(PROMPT_READ_THIRD_PARTY_NOTICES_CHANNEL, async () => {
     try {
-      return await readFile(thirdPartyNoticesPath(), 'utf8')
+      return await readFile(thirdPartyNoticesPath(licenseFileContext()), 'utf8')
     } catch {
       return null
+    }
+  })
+  ipcMain.handle(PROMPT_OPEN_CHROMIUM_LICENSES_CHANNEL, async () => {
+    try {
+      return (await shell.openPath(chromiumLicensesPath(licenseFileContext()))) === ''
+    } catch {
+      return false
     }
   })
 }
@@ -91,7 +108,9 @@ function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> 
     title: spec.title(),
     show: false,
     autoHideMenuBar: true,
-    ...(isMac ? { titleBarStyle: 'hiddenInset' as const } : {}),
+    ...(isMac
+      ? { titleBarStyle: kind === 'about' ? ('hiddenInset' as const) : ('hidden' as const) }
+      : {}),
     backgroundColor: prefersDark(store) ? '#1e1e1e' : '#ececec',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -109,6 +128,9 @@ function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> 
   window.webContents.session.setPermissionCheckHandler(() => false)
   if (isMac) {
     installMacAccentColor(window)
+    if (kind === 'notices') {
+      window.setWindowButtonVisibility(false)
+    }
   }
   window.once('ready-to-show', () => window.show())
   window.on('page-title-updated', (event) => event.preventDefault())
