@@ -15,6 +15,7 @@ import {
   type WriteSettlement
 } from '../../../../shared/pty-write-settlement'
 import { isDrivingInputKind, type TerminalInputKind } from '../../../../shared/terminal-input-kind'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
 
 type RuntimeWriteDeps = Pick<PtyRuntimeControllerDeps, 'runtime'>
 
@@ -200,7 +201,9 @@ export async function clearBufferFromRuntimeController(
 ): Promise<void> {
   // Clear renderer and provider histories so mobile resubscribe cannot restore stale output.
   if (deps.mainWindow && !deps.mainWindow.isDestroyed()) {
-    deps.mainWindow.webContents.send('pty:clearBuffer:request', { ptyId })
+    promptPtyWebContents(deps.mainWindow.webContents, ptyId).send('pty:clearBuffer:request', {
+      ptyId
+    })
   }
   try {
     await getProviderForPty(ptyId).clearBuffer(ptyId)
@@ -215,7 +218,9 @@ export async function resetInputModesFromRuntimeController(
 ): Promise<void> {
   // Remote reset must also ground this host window's pane.
   if (deps.mainWindow && !deps.mainWindow.isDestroyed()) {
-    deps.mainWindow.webContents.send('pty:resetInputModes:request', { ptyId })
+    promptPtyWebContents(deps.mainWindow.webContents, ptyId).send('pty:resetInputModes:request', {
+      ptyId
+    })
   }
   try {
     await getProviderForPty(ptyId).resetInputModes(ptyId)

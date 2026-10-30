@@ -1,4 +1,5 @@
 import { getPtyIpc } from '../pty-host-bindings'
+import { promptGuardedPtyIpc } from '../../../prompt-windows/prompt-pty-ipc-guards'
 import type {
   PtyDeliveryWriteOff,
   PtyRendererDeliveryHealthReply,
@@ -34,7 +35,7 @@ import type { PaintedRestoreAck } from '../../../../shared/painted-restore-ack'
 import type { PtyIpcSession } from '../session'
 
 export function installPtyResizeVisibilityIpc(session: PtyIpcSession): void {
-  const ipcMain = getPtyIpc()
+  const ipcMain = promptGuardedPtyIpc(getPtyIpc(), session)
   const { runtime, mainWindow } = session
 
   // Fire-and-forget resize avoids an empty acknowledgement round trip.

@@ -16,6 +16,7 @@ import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switc
 import { providerSnapshotRequiredPtys, visibleRendererPtys } from '../delivery/visibility-state'
 import type { PtyIpcSession } from '../session'
 import { publishPtyEndpointLoss } from '../../../runtime/terminal/pty-endpoint-loss-signal'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-project-window-registry'
 
 export function bindProviderListeners(session: PtyIpcSession): void {
   localDataUnsub?.()
@@ -36,7 +37,12 @@ export function bindProviderListeners(session: PtyIpcSession): void {
       ) {
         return
       }
-      session.mainWindow.webContents.send('pty:writeUnavailable', { id: payload.id })
+      promptPtyWebContents(session.mainWindow.webContents, payload.id).send(
+        'pty:writeUnavailable',
+        {
+          id: payload.id
+        }
+      )
     }) ?? null
   )
 

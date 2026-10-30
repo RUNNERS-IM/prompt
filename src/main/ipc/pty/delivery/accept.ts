@@ -24,6 +24,7 @@ import {
   takePtyGapEscapeState
 } from './pty-gap-escape-state'
 import type { PtyIpcSession } from '../session'
+import { promptPtyDispatcherReady } from '../../../prompt-windows/prompt-project-window-registry'
 
 export function rendererPtyIsKnownHidden(id: string): boolean {
   return rendererVisibilityKnownPtys.has(id) && !visibleRendererPtys.has(id)
@@ -110,7 +111,10 @@ export function acceptPtyDataForRenderer(
     nextData,
     performance.now()
   )
-  if (isInteractiveOutput && session.rendererPtyDispatcherReady) {
+  if (
+    isInteractiveOutput &&
+    promptPtyDispatcherReady(session.rendererPtyDispatcherReady, payload.id)
+  ) {
     if (!session.canSendPtyDataToRenderer(payload.id, { interactive: true })) {
       session.setPendingPtyData(payload.id, pending)
       if (shouldEmitPendingCapRestoreMarker) {
