@@ -323,7 +323,7 @@ describe('PluginUpdateAllDialog', () => {
       orcaVersion: '1.4.0'
     })
 
-    expect(container.textContent).toContain('Needs Orca 9.0.0 or later')
+    expect(container.textContent).toContain('Needs Prompt 9.0.0 or later')
     const checkbox = container.querySelector<HTMLButtonElement>('#plugin-update-a')
     expect(checkbox?.disabled).toBe(true)
     expect(checkbox?.getAttribute('aria-checked')).toBe('false')

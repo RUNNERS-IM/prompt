@@ -275,7 +275,7 @@ describe('useStructuredAgentSession options', () => {
 
     // Show one uncertainty notice without raw transport text or an unproved outcome.
     expect(mocks.toastError).toHaveBeenCalledWith(
-      "Orca couldn't confirm what happened. Check the chat."
+      "Prompt couldn't confirm what happened. Check the chat."
     )
     expect(mocks.enqueueSettingsWrite).not.toHaveBeenCalled()
     expect(result.current.error).toBeNull()
@@ -436,7 +436,7 @@ describe('useStructuredAgentSession options', () => {
       expect(mocks.toastError).toHaveBeenCalledTimes(schedule === 'same-pane' ? 1 : 0)
       if (schedule === 'same-pane') {
         expect(mocks.toastError).toHaveBeenCalledWith(
-          "Orca couldn't confirm what happened. Check the chat."
+          "Prompt couldn't confirm what happened. Check the chat."
         )
       }
       expect(mocks.enqueueSettingsWrite).not.toHaveBeenCalled()

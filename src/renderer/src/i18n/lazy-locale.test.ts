@@ -157,7 +157,7 @@ describe('renderer i18n lazy locale loading', () => {
 
     await i18n.changeLanguage(await loadRendererUiLanguage(id))
     expect(i18n.language).toBe(pluginLanguageResourceId(id))
-    expect(i18n.t('menu.file', { defaultValue: 'File' })).toBe('Arquivo Orca')
+    expect(i18n.t('menu.file', { defaultValue: 'File' })).toBe('Arquivo Prompt')
 
     setRendererPluginLanguagePacks([])
     await i18n.changeLanguage(await loadRendererUiLanguage(id))

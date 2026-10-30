@@ -3,6 +3,7 @@ import { i18n } from '@/i18n/i18n'
 import es from '@/i18n/locales/es.json'
 import { describeRuntimeCompatBlock, getExecutionHostHealthLabel } from './runtime-host-copy'
 import { describeRuntimeCompatBlock as describeRuntimeCompatBlockEnglish } from '../../../shared/protocol-compat'
+import { applyPromptBrand } from '../../../shared/prompt-brand'
 
 const originalLanguage = i18n.language
 
@@ -24,9 +25,11 @@ describe('runtime host copy', () => {
       requiredClientProtocolVersion: 3
     } as const
     expect(describeRuntimeCompatBlock(verdict)).toBe(
-      es.runtime.compat.clientTooOld
-        .replace('{{clientProtocol}}', '2')
-        .replace('{{requiredProtocol}}', '3')
+      applyPromptBrand(
+        es.runtime.compat.clientTooOld
+          .replace('{{clientProtocol}}', '2')
+          .replace('{{requiredProtocol}}', '3')
+      )
     )
     expect(describeRuntimeCompatBlockEnglish(verdict)).toContain('Client protocol 2')
     await i18n.changeLanguage('en')

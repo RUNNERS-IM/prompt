@@ -132,6 +132,6 @@ describe('the compact SSH host row', () => {
       orcadFence: { environmentId: 'env-1' }
     })
 
-    expect(container.textContent).toContain('Orca server')
+    expect(container.textContent).toContain('Prompt server')
   })
 })

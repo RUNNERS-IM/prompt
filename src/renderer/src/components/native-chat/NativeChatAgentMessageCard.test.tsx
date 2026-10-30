@@ -19,6 +19,7 @@ import { useAgentMessageSenderView } from './native-chat-agent-message-sender-vi
 import { useAgentMessageSenderSource } from './native-chat-agent-message-sender-source'
 import { AgentStateDot } from '@/components/AgentStateDot'
 import { AGENT_SESSION_WRITE_NOTICE_COPY } from '../../../../shared/agent-session-write-notice-copy'
+import { applyPromptBrand } from '../../../../shared/prompt-brand'
 import * as markdown from './NativeChatMarkdown'
 import * as display from '../../../../shared/agent-session/agent-message-display-text'
 import type * as SonnerModule from 'sonner'
@@ -266,7 +267,9 @@ it.each(['task', 'mail'] as const)(
       { address: 'term_1' }
     )
     expect(navigation.toast).toHaveBeenCalledWith(
-      `${AGENT_SESSION_WRITE_NOTICE_COPY.unreachable} ${AGENT_SESSION_WRITE_NOTICE_COPY.tryAgain}`
+      applyPromptBrand(
+        `${AGENT_SESSION_WRITE_NOTICE_COPY.unreachable} ${AGENT_SESSION_WRITE_NOTICE_COPY.tryAgain}`
+      )
     )
     expect(screen.queryByRole('button', { name: 'Show more' })).toBeNull()
     act(() => {

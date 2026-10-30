@@ -211,9 +211,9 @@ describe('removing a managed server host', () => {
     })
     expect(mocks.requestRemove).not.toHaveBeenCalled()
     expect(removeTarget).not.toHaveBeenCalled()
-    expect(document.body.textContent).toContain('Orca runs on Build box')
+    expect(document.body.textContent).toContain('Prompt runs on Build box')
     const open = Array.from(document.body.querySelectorAll('button')).find(
-      (button) => button.textContent === 'Open Remote Orca Servers'
+      (button) => button.textContent === 'Open Remote Prompt Servers'
     )
     await act(async () => {
       open?.click()

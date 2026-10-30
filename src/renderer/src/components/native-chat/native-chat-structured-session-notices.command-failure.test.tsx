@@ -26,7 +26,7 @@ it('names the Command setting when it is not a program Orca can run', () => {
   )
   expect(
     screen.getByText(
-      "Chat could not be started. Claude's Command in Settings → Agents must start with a program Orca can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
+      "Chat could not be started. Claude's Command in Settings → Agents must start with a program Prompt can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
     )
   ).toBeTruthy()
   expect(screen.getByRole('button', { name: 'Retry' })).toBeTruthy()

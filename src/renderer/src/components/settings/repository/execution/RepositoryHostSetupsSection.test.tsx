@@ -437,7 +437,7 @@ describe('RepositoryHostSetupsSection', () => {
     })
     const localRepo = makeRepo({
       id: 'local-repo',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       path: '/Users/alice/orca'
     })
     useAppStore.setState({
@@ -482,7 +482,7 @@ describe('RepositoryHostSetupsSection', () => {
       hostId: 'ssh:openclaw%202',
       path: '/home/alice/orca',
       kind: 'git',
-      displayName: 'Orca'
+      displayName: 'Prompt'
     })
     expect(setSettingsProjectHostSelection).toHaveBeenCalledWith(
       'github:stablyai/orca',
@@ -514,7 +514,7 @@ describe('RepositoryHostSetupsSection', () => {
     })
     const localRepo = makeRepo({
       id: 'local-repo',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       path: '/Users/alice/orca'
     })
     useAppStore.setState({
@@ -564,7 +564,7 @@ describe('RepositoryHostSetupsSection', () => {
       hostId: 'ssh:openclaw%202',
       url: 'https://github.com/stablyai/orca.git',
       destination: '/home/alice',
-      displayName: 'Orca'
+      displayName: 'Prompt'
     })
     expect(setSettingsProjectHostSelection).toHaveBeenCalledWith(
       'github:stablyai/orca',
@@ -628,7 +628,7 @@ describe('RepositoryHostSetupsSection', () => {
     })
     const localRepo = makeRepo({
       id: 'local-repo',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       path: '/Users/alice/orca'
     })
     useAppStore.setState({
@@ -685,7 +685,7 @@ describe('RepositoryHostSetupsSection', () => {
     expect(createProjectHostSetup).toHaveBeenCalledWith({
       projectId: 'github:stablyai/orca',
       hostId: 'runtime:gpu',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       setupState: 'not-set-up',
       setupMethod: 'provisioned'
     })
@@ -741,7 +741,7 @@ describe('RepositoryHostSetupsSection', () => {
     renderSection(localRepo)
     clickButton('Add to another host')
 
-    expect(container.textContent).toContain('Update Orca on this host to set up projects')
+    expect(container.textContent).toContain('Update Prompt on this host to set up projects')
     const browseButton = findButton('Browse folder')
     const plannedButton = findButton('Add host placeholder')
     expect(browseButton?.disabled).toBe(true)
@@ -771,7 +771,7 @@ describe('RepositoryHostSetupsSection', () => {
     })
     const localRepo = makeRepo({
       id: 'local-repo',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       path: '/Users/alice/orca'
     })
     useAppStore.setState({
@@ -827,7 +827,7 @@ describe('RepositoryHostSetupsSection', () => {
     expect(createProjectHostSetup).toHaveBeenCalledWith({
       projectId: 'github:stablyai/orca',
       hostId: 'runtime:gpu',
-      displayName: 'Orca',
+      displayName: 'Prompt',
       setupState: 'not-set-up',
       setupMethod: 'provisioned'
     })

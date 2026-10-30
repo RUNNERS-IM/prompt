@@ -24,7 +24,7 @@ vi.mock('electron', () => ({
     sendActionToFirstResponder: sendActionToFirstResponderMock
   },
   app: {
-    name: 'Orca'
+    name: 'Prompt'
   },
   webContents: {
     getFocusedWebContents: getFocusedWebContentsMock
@@ -96,7 +96,7 @@ describe('registerAppMenu', () => {
       getKeybindings: () => ({ 'app.settings': ['Mod+Comma'] })
     })
 
-    const submenu = getSubmenu(getTemplate(), isMac ? 'Orca' : 'File')
+    const submenu = getSubmenu(getTemplate(), isMac ? 'Prompt' : 'File')
     expect(submenu).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ label: `Settings\t${isMac ? '⌘,' : 'Ctrl+,'}` })
@@ -193,7 +193,7 @@ describe('registerAppMenu', () => {
     const options = buildMenuOptions()
     registerAppMenu(options)
 
-    const parentLabel = isMac ? 'Orca' : 'Help'
+    const parentLabel = isMac ? 'Prompt' : 'Help'
     const item = getSubmenu(getTemplate(), parentLabel).find(
       (entry) => entry.label === 'Check for Updates...'
     )
@@ -480,7 +480,7 @@ describe('registerAppMenu', () => {
     registerAppMenu(buildMenuOptions())
 
     const template = getTemplate()
-    const appSubmenu = getSubmenu(template, 'Orca')
+    const appSubmenu = getSubmenu(template, 'Prompt')
     const appLabels = appSubmenu.map((item) => item.label)
     expect(appLabels).toEqual(expect.arrayContaining(['Check for Updates...', 'Settings']))
     expect(template.find((item) => item.label === 'File')).toBeUndefined()
@@ -488,8 +488,8 @@ describe('registerAppMenu', () => {
     expect(helpLabels).toEqual([
       'Report Crash...',
       undefined,
-      'Explore Orca',
-      'Getting Started with Orca'
+      'Explore Prompt',
+      'Getting Started with Prompt'
     ])
   })
 
@@ -498,7 +498,7 @@ describe('registerAppMenu', () => {
     registerAppMenu(options)
 
     const setupGuideItem = getSubmenu(getTemplate(), 'Help').find(
-      (entry) => entry.label === 'Getting Started with Orca'
+      (entry) => entry.label === 'Getting Started with Prompt'
     )
     expect(setupGuideItem?.accelerator).toBeUndefined()
 
@@ -514,7 +514,7 @@ describe('registerAppMenu', () => {
     registerAppMenu(options)
 
     const featureTourItem = getSubmenu(getTemplate(), 'Help').find(
-      (entry) => entry.label === 'Explore Orca'
+      (entry) => entry.label === 'Explore Prompt'
     )
     expect(featureTourItem?.accelerator).toBeUndefined()
 
@@ -567,7 +567,7 @@ describe('registerAppMenu', () => {
     expect(automationsItem?.type).toBe('checkbox')
     expect(automationsItem?.checked).toBe(false)
 
-    const mobileItem = appearanceSubmenu.find((item) => item.label === 'Show Orca Mobile Button')
+    const mobileItem = appearanceSubmenu.find((item) => item.label === 'Show Prompt Mobile Button')
     expect(mobileItem?.type).toBe('checkbox')
     expect(mobileItem?.checked).toBe(true)
 
@@ -593,7 +593,7 @@ describe('registerAppMenu', () => {
       .find((item) => item.label === 'Show Automations Button')
       ?.click?.({} as never, {} as never, {} as never)
     appearanceSubmenu
-      .find((item) => item.label === 'Show Orca Mobile Button')
+      .find((item) => item.label === 'Show Prompt Mobile Button')
       ?.click?.({} as never, {} as never, {} as never)
     appearanceSubmenu
       .find((item) => item.label === 'Show Titlebar App Name')
@@ -634,7 +634,7 @@ describe('registerAppMenu', () => {
     'keeps the native quit role unless the host supplies a quit handler (%s, #15537)',
     (platform) => {
       vi.spyOn(process, 'platform', 'get').mockReturnValue(platform)
-      const quitMenu = platform === 'darwin' ? 'Orca' : 'File'
+      const quitMenu = platform === 'darwin' ? 'Prompt' : 'File'
       const findQuit = (): Electron.MenuItemConstructorOptions | undefined =>
         getSubmenu(getTemplate(), quitMenu).find(
           (item) =>
@@ -649,7 +649,7 @@ describe('registerAppMenu', () => {
       registerAppMenu({ ...buildMenuOptions(), onQuit })
       const quit = findQuit()
       expect(quit?.role).toBeUndefined()
-      expect(quit?.label).toBe(platform === 'darwin' ? 'Quit Orca' : 'Exit')
+      expect(quit?.label).toBe(platform === 'darwin' ? 'Quit Prompt' : 'Exit')
       expect(quit?.accelerator).toBe(platform === 'win32' ? undefined : 'CmdOrCtrl+Q')
       const click: unknown = quit?.click
       if (typeof click === 'function') {
@@ -663,7 +663,7 @@ describe('registerAppMenu', () => {
     'offers Quit Completely directly above Quit only when a handler is supplied (%s)',
     (platform) => {
       vi.spyOn(process, 'platform', 'get').mockReturnValue(platform)
-      const quitMenu = platform === 'darwin' ? 'Orca' : 'File'
+      const quitMenu = platform === 'darwin' ? 'Prompt' : 'File'
       const label = 'Quit Completely...'
 
       registerAppMenu(buildMenuOptions())

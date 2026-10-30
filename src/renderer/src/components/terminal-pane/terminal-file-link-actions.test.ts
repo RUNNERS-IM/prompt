@@ -114,10 +114,10 @@ describe('terminal file link actions', () => {
     const [systemFirst, orcaFirst] = request.mock.calls.map(([call]) => call)
     expect([systemFirst.primary.label, systemFirst.alternate.label]).toEqual([
       'System Browser',
-      'Orca Browser'
+      'Prompt Browser'
     ])
     expect([orcaFirst.primary.label, orcaFirst.alternate.label]).toEqual([
-      'Orca Browser',
+      'Prompt Browser',
       'System Browser'
     ])
     systemFirst.primary.run()

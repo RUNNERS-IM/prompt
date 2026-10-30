@@ -874,7 +874,7 @@ describe('project group store routing', () => {
           LOCAL_OWNER
         )
     ).rejects.toThrow(
-      'Folder not found. Orca cannot find /srv/app. Remove and re-import the folder.'
+      'Folder not found. Prompt cannot find /srv/app. Remove and re-import the folder.'
     )
   })
 })

@@ -173,7 +173,7 @@ it.each([
 
     fireEvent.click(install)
 
-    await screen.findByRole('button', { name: "Replace with Orca's copy" })
+    await screen.findByRole('button', { name: "Replace with Prompt's copy" })
     expect(screen.getByText('Review skill')).toBeDefined()
     expect(screen.getByRole('button', { name: 'Details' })).toBeDefined()
     expect(mocks.execute).toHaveBeenCalledOnce()

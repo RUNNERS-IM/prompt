@@ -142,9 +142,9 @@ describe('browser notice formatting', () => {
       "The certificate for localhost:3443 isn't valid at the current date and time."
     )
     expect(describeCode(-202)).toBe(
-      "Orca doesn't trust the authority that issued the certificate for localhost:3443."
+      "Prompt doesn't trust the authority that issued the certificate for localhost:3443."
     )
-    expect(describeCode(-208)).toBe("Orca couldn't verify the certificate for localhost:3443.")
+    expect(describeCode(-208)).toBe("Prompt couldn't verify the certificate for localhost:3443.")
     expect(isCertificateLoadError(loadError(-219))).toBe(true)
     expect(isCertificateLoadError(loadError(-215))).toBe(false)
   })

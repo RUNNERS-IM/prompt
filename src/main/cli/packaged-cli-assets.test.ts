@@ -35,7 +35,7 @@ const unixLauncherFixtures = [
   {
     name: 'Linux',
     asset: linuxLauncherAsset,
-    appDir: ['Orca'],
+    appDir: ['Prompt'],
     launcher: ['resources', 'bin', 'orca-ide'],
     executable: ['orca-ide'],
     cli: ['resources', 'app.asar.unpacked', 'out', 'cli', 'index.js']
@@ -45,7 +45,7 @@ const unixLauncherFixtures = [
     asset: darwinLauncherAsset,
     appDir: ['Orca.app'],
     launcher: ['Contents', 'Resources', 'bin', 'orca'],
-    executable: ['Contents', 'MacOS', 'Orca'],
+    executable: ['Contents', 'MacOS', 'Prompt'],
     cli: ['Contents', 'Resources', 'app.asar.unpacked', 'out', 'cli', 'index.js']
   }
 ] as const
@@ -205,7 +205,7 @@ server.listen(0, '127.0.0.1', () => {
     async () => {
       const root = await mkdtemp(join(tmpdir(), 'orca-linux-cli-'))
       try {
-        const appDir = join(root, 'Orca')
+        const appDir = join(root, 'Prompt')
         const resourcesDir = join(appDir, 'resources')
         const launcherDir = join(resourcesDir, 'bin')
         const cliDir = join(resourcesDir, 'app.asar.unpacked', 'out', 'cli')

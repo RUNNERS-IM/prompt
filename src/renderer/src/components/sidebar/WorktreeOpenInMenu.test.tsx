@@ -355,7 +355,7 @@ describe('WorktreeOpenInMenu', () => {
       disabled: true,
       metadata: 'Local only',
       disabledReason:
-        'Apps on this computer can open this server’s files only when Orca reaches it over SSH.'
+        'Apps on this computer can open this server’s files only when Prompt reaches it over SSH.'
     })
   })
 
@@ -366,7 +366,7 @@ describe('WorktreeOpenInMenu', () => {
       disabled: true,
       metadata: 'Local only',
       disabledReason:
-        'Apps on this computer can open this server’s files only when Orca reaches it over SSH.'
+        'Apps on this computer can open this server’s files only when Prompt reaches it over SSH.'
     })
     expect(getOpenInEntryAvailability(fileManager, null, null, true)).toEqual({
       disabled: true,
@@ -462,7 +462,7 @@ describe('WorktreeOpenInMenu', () => {
         disabled: true,
         metadata: 'Local only',
         disabledReason:
-          'Apps on this computer can open this server’s files only when Orca reaches it over SSH.'
+          'Apps on this computer can open this server’s files only when Prompt reaches it over SSH.'
       })
     })
   })
