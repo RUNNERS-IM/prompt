@@ -291,3 +291,16 @@ html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip [data-act
 html.prompt-mac-vibrancy [data-tab-group-strip-id] [data-active='true'] > .h-\[2px\].bg-foreground {
   display: none;
 }
+
+/* On the accent fill the coloured status strokes (blue "!", green check) would vanish; draw the
+   whole icon white there, as Finder does with its sidebar glyphs. Line two stays dimmer through
+   its own text-foreground/70 class. */
+html.prompt-mac-vibrancy
+  [data-worktree-card-active='primary']
+  [data-prompt-session-rows]
+  [data-focused-agent-pane='true']
+  [data-prompt-session-icon]
+  svg
+  :is(circle, path) {
+  stroke: #fff;
+}
