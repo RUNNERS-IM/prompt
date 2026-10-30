@@ -43,8 +43,8 @@ describe('terminal host Info.plist', () => {
     expect(info).toMatchObject({
       ...usageDescriptions,
       CFBundleIdentifier: 'com.stablyai.orca',
-      CFBundleName: 'Orca',
-      CFBundleDisplayName: 'Orca',
+      CFBundleName: 'Prompt',
+      CFBundleDisplayName: 'Prompt',
       CFBundleExecutable: 'orca-terminal-host',
       CFBundleVersion: '0',
       LSMinimumSystemVersion: '13.5',

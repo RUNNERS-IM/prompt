@@ -67,7 +67,7 @@ export const COMPUTER_HANDLERS: Record<string, CommandHandler> = {
           ? `Next: ${value.nextStep}`
           : 'Computer Use permissions are already granted.',
         value.launchedHelper
-          ? 'Use the Allow buttons or drag "Orca Computer Use" into the macOS permission list.'
+          ? 'Use the Allow buttons or drag "Prompt Computer Use" into the macOS permission list.'
           : null
       ]
         .filter((line) => line !== null)
@@ -256,9 +256,9 @@ function permissionSetupHeadline(result: {
   launchQueued?: boolean
 }): string {
   if (result.launchQueued) {
-    return 'Queued Orca Computer Use permission setup; a newer request or a reset may replace it.'
+    return 'Queued Prompt Computer Use permission setup; a newer request or a reset may replace it.'
   }
   return result.launchedHelper
-    ? 'Opened Orca Computer Use permission setup.'
+    ? 'Opened Prompt Computer Use permission setup.'
     : 'Computer Use permissions checked.'
 }
