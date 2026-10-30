@@ -46,6 +46,7 @@ import {
   applyBackgroundActivationPolicy,
   applyServeDesktopWindowActivationPolicy
 } from '../window/foreground-activation-policy'
+import { attachPromptProjectWindows } from '../prompt-windows/prompt-project-windows'
 
 const TRAY_CREATE_FALLBACK_MS = 12_000
 const AGENT_STATE_CRASH_BREADCRUMB_MIN_INTERVAL_MS = 30_000
@@ -200,6 +201,7 @@ export function openMainWindow(options: { revealOnDidFinishLoad?: boolean } = {}
   })
   state.mainWindow = window
   state.hasOpenedMainWindow = true
+  attachPromptProjectWindows(window, store, () => keybindings.getOverrides())
   const publishResourceVisibility = (): void => {
     if (!window.isDestroyed()) {
       window.webContents.send('memory:resourceWindowVisibility', isResourceWindowVisible(window))

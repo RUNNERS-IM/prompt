@@ -22610,6 +22610,11 @@
       "justNow": "{{status}} · 방금",
       "ongoing": "{{status}} · {{duration}}째",
       "ago": "{{status}} · {{duration}} 전"
+    },
+    "projectWindow": {
+      "openInNewWindow": "새 창에서 열기",
+      "showWindow": "열린 창 보기",
+      "openElsewhere": "별도 창에서 열려 있음"
     }
   }
 }

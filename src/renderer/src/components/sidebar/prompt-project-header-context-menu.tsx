@@ -3,6 +3,7 @@ import { useAppStore } from '@/store'
 import type { Repo } from '../../../../shared/repo-types'
 import type { Worktree } from '../../../../shared/worktree/types'
 import WorktreeContextMenu from './WorktreeContextMenu'
+import { PROMPT_PROJECT_WINDOW_REPO_ATTR } from './prompt-context-menu-lead'
 
 const EMPTY_WORKTREES: readonly Worktree[] = []
 
@@ -23,7 +24,13 @@ export function PromptProjectHeaderContextMenu({
   if (!target) {
     return <>{children}</>
   }
-  return <WorktreeContextMenu worktree={target}>{children}</WorktreeContextMenu>
+  return (
+    <WorktreeContextMenu worktree={target}>
+      <div className="contents" {...{ [PROMPT_PROJECT_WINDOW_REPO_ATTR]: repo.id }}>
+        {children}
+      </div>
+    </WorktreeContextMenu>
+  )
 }
 
 /** Wraps a project header so right-click opens the workspace menu (Prompt two-level sidebar). */

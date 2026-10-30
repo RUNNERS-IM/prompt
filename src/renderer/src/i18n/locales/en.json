@@ -23167,6 +23167,11 @@
       "justNow": "{{status}} · just now",
       "ongoing": "{{status}} · {{duration}}",
       "ago": "{{status}} · {{duration}} ago"
+    },
+    "projectWindow": {
+      "openInNewWindow": "Open in New Window",
+      "showWindow": "Show Its Window",
+      "openElsewhere": "Open in its own window"
     }
   }
 }
