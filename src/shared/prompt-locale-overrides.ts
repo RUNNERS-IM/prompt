@@ -28,7 +28,11 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}}을(를) 받는 중입니다.',
   'auto.components.status.bar.UpdateStatusSegment.248ee5d8ef':
     'Prompt {{value0}} 받는 중… {{value1}}%',
-  'auto.components.status.bar.UpdateStatusSegment.9d13213a56': 'Prompt {{value0}} 설치 준비됨'
+  'auto.components.status.bar.UpdateStatusSegment.9d13213a56': 'Prompt {{value0}} 설치 준비됨',
+  // Help menu: "…" only on items that open a window.
+  'menu.reportCrash': '크래시 신고…',
+  'auto.components.setup.guide.SetupGuideModal.3598a3ca0c':
+    'Orca를 병렬 에이전트 작업에 유용하게 만드는 핵심 워크플로를 완료합니다.'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */

@@ -130,11 +130,9 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
   }
 
   // Prompt: feedback opens a new issue in Prompt's GitHub repository (same place as the sidebar dialog).
+  // Same wording as the menu bar menu ("Help & Feedback").
   const sendFeedbackItem: Electron.MenuItemConstructorOptions = {
-    label: translateMain(
-      'auto.components.sidebar.SidebarSettingsHelpMenu.4cf5b868d7',
-      'Send Feedback'
-    ),
+    label: translateMain('tray.helpFeedback', 'Help & Feedback'),
     click: () => void shell.openExternal(`${PROMPT_NEW_ISSUE_URL}?labels=feedback`)
   }
 
@@ -299,7 +297,8 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
       ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [sendFeedbackItem] : []),
       crashReportItem,
       { type: 'separator' },
-      featureTourItem,
+      // Prompt: the feature tour plays Orca's screen recordings, so it stays out of the menu.
+      ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : [featureTourItem]),
       setupGuideItem,
       ...(isMac
         ? []
