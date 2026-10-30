@@ -161,11 +161,13 @@ describe('compact acknowledgement emphasis through WorktreeCardAgents', () => {
     expect(label?.nextElementSibling?.className).toBe('text-foreground/70')
   })
 
-  it('emphasizes the monitoring label while preserving prompt ordering', () => {
+  it('leads with the tab name and keeps the monitoring label before the prompt', () => {
     const [label] = renderLabels([agentRow(PANE_A, 'working', { workingMode: 'monitoring' })])
     expectEmphasis(label, true)
-    expect(label?.textContent).toBe('Monitoring background tasks')
-    expect(label?.nextElementSibling?.textContent).toContain('Review agent A')
+    expect(label?.textContent).toBe('tab-a')
+    expect(label?.nextElementSibling?.textContent).toMatch(
+      /Monitoring background tasks.*Review agent A/
+    )
   })
 
   it('keeps interruption text secondary to the acknowledgement signal', () => {

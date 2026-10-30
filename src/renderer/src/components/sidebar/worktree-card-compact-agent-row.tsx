@@ -24,6 +24,7 @@ import {
   type ProgramStatusPresentation
 } from '../../../../shared/program-status/presentation'
 import { resolveRowProgramStatus } from '@/lib/program-status/agent-row-presentation'
+import { promptSessionRowText } from './prompt-session-row-name'
 
 function getCompactAgentPrimary(
   agent: DashboardAgentRowData,
@@ -150,11 +151,10 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   const stableMessage =
     turnHoldable && !currentMessage && held?.turn === turn ? held.message : undefined
   const secondary = getCompactAgentSecondary(agent, now, stableMessage, presentation)
-  const { leadingText, trailingText } = getCompactAgentLineOrder(
+  // Prompt: the row is named like its terminal tab; Claude's live task text follows dimmed.
+  const { leadingText, trailingText } = promptSessionRowText(
     agent,
-    dotState,
-    primary,
-    secondary
+    getCompactAgentLineOrder(agent, dotState, primary, secondary)
   )
   const rowTitle = `${leadingText}${trailingText ? ` - ${trailingText}` : ''}`
   const model = agent.entry.model?.trim() ?? ''
