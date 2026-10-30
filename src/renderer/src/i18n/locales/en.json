@@ -23171,7 +23171,9 @@
     "projectWindow": {
       "openInNewWindow": "Open in New Window",
       "showWindow": "Show Its Window",
-      "openElsewhere": "Open in its own window"
+      "openElsewhere": "Open in its own window",
+      "rememberTitle": "Remember Open Windows",
+      "rememberDescription": "Reopen project windows that were open when Prompt quit."
     }
   }
 }

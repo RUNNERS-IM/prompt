@@ -22614,7 +22614,9 @@
     "projectWindow": {
       "openInNewWindow": "새 창에서 열기",
       "showWindow": "열린 창 보기",
-      "openElsewhere": "별도 창에서 열려 있음"
+      "openElsewhere": "별도 창에서 열려 있음",
+      "rememberTitle": "열어 둔 창 기억하기",
+      "rememberDescription": "Prompt 를 끌 때 열려 있던 프로젝트 창을 다음에 켤 때 다시 엽니다."
     }
   }
 }
