@@ -135,9 +135,9 @@ export function OnboardingLanguageSwitcher({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm" className="shrink-0" lang="en">
+        <Button variant="ghost" size="sm" className="shrink-0">
           <Globe />
-          <span>Switch language</span>
+          <span>{translate('onboarding.language.switch', 'Switch language')}</span>
           <ChevronDown className="size-3" />
         </Button>
       </PopoverTrigger>

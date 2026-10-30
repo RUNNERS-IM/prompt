@@ -31,7 +31,7 @@ export function MobileEmulatorAgentSetupGuideSteps({
         )}
         description={translate(
           'auto.components.emulator.pane.MobileEmulatorAgentSetupGuideSteps.64fb057667',
-          'Teaches agents the orca emulator commands for this worktree.'
+          'Teaches agents the emulator CLI commands for this worktree.'
         )}
         skillNames={[ORCA_CLI_SKILL_NAME]}
         target={setup.skillRuntime.bundledSkillTarget}

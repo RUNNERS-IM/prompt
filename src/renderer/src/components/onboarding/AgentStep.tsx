@@ -164,7 +164,7 @@ export function YoloPermissionsControl({
         <span className="block text-xs text-muted-foreground">
           {translate(
             'auto.components.onboarding.AgentStep.yoloPermissionsDescription',
-            'Agents run commands and edit files without asking, and some also bypass their sandbox. Use only in projects you trust.'
+            'Claude runs commands and edits files without asking and may bypass its sandbox. Use only in projects you trust.'
           )}
         </span>
       </label>

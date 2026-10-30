@@ -79,7 +79,7 @@ export function TerminalSlide(): React.JSX.Element {
           <span className="mp-term-dim">
             {translate(
               'auto.components.mobile.slides.TerminalSlide.e0f98be657',
-              'orca/feat-mobile-page'
+              'prompt/feat-mobile-page'
             )}
           </span>{' '}
           <span className="mp-term-prompt">$</span>{' '}
