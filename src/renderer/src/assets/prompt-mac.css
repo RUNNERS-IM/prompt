@@ -304,3 +304,14 @@ html.prompt-mac-vibrancy
   :is(circle, path) {
   stroke: #fff;
 }
+
+html.prompt-mac-vibrancy
+  [data-worktree-card-active='primary']
+  [data-prompt-session-rows]
+  [data-focused-agent-pane='true']
+  [data-prompt-session-icon]
+  svg
+  circle[stroke='none'] {
+  fill: #fff;
+  stroke: none;
+}

@@ -6,7 +6,12 @@ import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/da
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { CompactAgentRow } from './worktree-card-compact-agent-row'
 import { promptSessionStatusLine } from './prompt-session-status-line'
-import { promptSessionIconKind } from './PromptSessionStateIcon'
+import {
+  PromptSessionStateIcon,
+  promptSessionIconKind,
+  resetPromptSessionIconMemoryForTest
+} from './PromptSessionStateIcon'
+import type { AgentDotState } from '@/components/AgentStateDot'
 
 ;(globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true
 
@@ -154,5 +159,76 @@ describe('promptSessionIconKind', () => {
     expect(promptSessionIconKind('done')).toBe('done')
     expect(promptSessionIconKind('monitoring')).toBe('waiting')
     expect(promptSessionIconKind('idle')).toBe('waiting')
+  })
+})
+
+describe('PromptSessionStateIcon done draw', () => {
+  afterEach(() => resetPromptSessionIconMemoryForTest())
+
+  function mountIcon(state: AgentDotState): {
+    rerender: (next: AgentDotState) => void
+    el: () => Element | null
+    unmount: () => void
+  } {
+    const container = document.createElement('div')
+    document.body.appendChild(container)
+    const iconRoot = createRoot(container)
+    const draw = (next: AgentDotState): void =>
+      act(() =>
+        iconRoot.render(<PromptSessionStateIcon state={next} animationKey="tab-1:leaf-1" />)
+      )
+    draw(state)
+    return {
+      rerender: draw,
+      el: () => container.querySelector('[data-prompt-session-icon]'),
+      unmount: () => act(() => iconRoot.unmount())
+    }
+  }
+
+  it('draws the check once when a session turns done, never on re-render or remount', () => {
+    const icon = mountIcon('working')
+    expect(icon.el()?.hasAttribute('data-prompt-done-draw')).toBe(false)
+    icon.rerender('done')
+    expect(icon.el()?.hasAttribute('data-prompt-done-draw')).toBe(true)
+    expect(icon.el()?.querySelector('.a-ring')).not.toBeNull()
+    expect(icon.el()?.querySelector('.a-check')).not.toBeNull()
+    // A re-render keeps the same element and class, so the running draw is not restarted.
+    const ring = icon.el()?.querySelector('circle')
+    icon.rerender('done')
+    expect(icon.el()?.querySelector('circle')).toBe(ring)
+    icon.unmount()
+
+    // Scrolling a virtualized list remounts the row: it shows the finished check, no draw.
+    const again = mountIcon('done')
+    expect(again.el()?.hasAttribute('data-prompt-done-draw')).toBe(false)
+    expect(again.el()?.querySelector('.a-ring')).toBeNull()
+    again.unmount()
+  })
+
+  it('does not draw for a session that was already done when first shown', () => {
+    const icon = mountIcon('done')
+    expect(icon.el()?.querySelector('.a-ring')).toBeNull()
+    icon.unmount()
+  })
+
+  it('draws again after the session works and finishes once more', () => {
+    const icon = mountIcon('working')
+    icon.rerender('done')
+    icon.rerender('working')
+    icon.rerender('done')
+    expect(icon.el()?.querySelector('.a-ring')).not.toBeNull()
+    icon.unmount()
+  })
+
+  it('uses the chosen motion classes for the other looks', () => {
+    const working = mountIcon('working')
+    expect(working.el()?.querySelector('.a-arc')).not.toBeNull()
+    working.unmount()
+    const ask = mountIcon('permission')
+    expect(ask.el()?.querySelector('svg.a-ask')).not.toBeNull()
+    ask.unmount()
+    const wait = mountIcon('monitoring')
+    expect(wait.el()?.querySelector('.a-hand')).not.toBeNull()
+    wait.unmount()
   })
 })

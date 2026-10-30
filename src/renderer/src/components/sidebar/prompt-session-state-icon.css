@@ -1,0 +1,67 @@
+/* Prompt session status icon motion ("부드럽게" 1A). Classes match the chosen mock-up. */
+@keyframes prompt-icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes prompt-icon-arc-length {
+  0%,
+  100% {
+    stroke-dashoffset: 34;
+  }
+  50% {
+    stroke-dashoffset: 12;
+  }
+}
+@keyframes prompt-icon-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes prompt-icon-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Working: the orange arc turns once per 1.2s while it grows and shrinks. */
+[data-prompt-session-icon] .a-arc {
+  transform-origin: 8px 8px;
+  animation: prompt-icon-spin 1.2s linear infinite;
+}
+[data-prompt-session-icon] .a-arc path {
+  stroke-dasharray: 38;
+  animation: prompt-icon-arc-length 1.6s ease-in-out infinite;
+}
+/* Needs permission: the blue "!" breathes. */
+[data-prompt-session-icon] .a-ask {
+  transform-origin: 8px 8px;
+  animation: prompt-icon-breathe 1.8s ease-in-out infinite;
+}
+/* Done: drawn once, ring first then the check. */
+[data-prompt-session-icon] .a-ring {
+  stroke-dasharray: 38;
+  stroke-dashoffset: 38;
+  animation: prompt-icon-draw 0.45s ease-out forwards;
+}
+[data-prompt-session-icon] .a-check {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: prompt-icon-draw 0.5s 0.2s ease-out forwards;
+}
+/* Waiting / background: the clock hand turns once per 6s. */
+[data-prompt-session-icon] .a-hand {
+  transform-origin: 8px 8px;
+  animation: prompt-icon-spin 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-prompt-session-icon] * {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

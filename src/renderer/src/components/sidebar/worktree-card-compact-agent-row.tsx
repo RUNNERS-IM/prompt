@@ -318,6 +318,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         <PromptSessionStateIcon
           state={dotState}
           title={sendTargetDisabledReason ? null : undefined}
+          animationKey={agent.paneKey}
         />
         {/* Prompt: every row is Claude by default, so only other agents get an identity mark. */}
         {!hideIcon && agent.agentType !== 'claude' && (
