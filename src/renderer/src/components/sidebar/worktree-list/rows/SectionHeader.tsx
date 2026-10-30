@@ -37,8 +37,8 @@ import {
   ProjectGroupCreateWorkspaceButton,
   ProjectGroupHeaderMenu
 } from './project-group-header-actions'
+import { PromptRepoHeaderNewButton } from '../../prompt-sidebar-new-menu'
 import {
-  RepoHeaderCreateWorkspaceButton,
   RepoHeaderProjectActionsMenu,
   type RepoHeaderProjectActions
 } from './repo-header-project-actions'
@@ -400,7 +400,8 @@ export function renderWorktreeSectionHeaderRow(args: {
               ) : null}
 
               {row.repo && ctx.groupBy === 'repo' ? (
-                <RepoHeaderCreateWorkspaceButton
+                // Prompt: "+" opens New Claude Session / New Terminal / New Workspace… (decision 1B).
+                <PromptRepoHeaderNewButton
                   key={`${row.repo.executionHostId ?? 'local'}:${row.repo.connectionId ?? ''}`}
                   repo={row.repo}
                   label={label}
