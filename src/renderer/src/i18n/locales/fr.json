@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "Nouvelle session",
+      "newClaudeSession": "Nouvelle session Claude",
+      "newTerminal": "Nouveau terminal",
+      "newWorkspace": "Nouvel espace de travail…",
+      "newIn": "Nouveau dans {{name}}",
+      "rename": "Renommer…",
+      "tabColor": "Couleur de l’onglet",
+      "close": "Fermer la session",
+      "closeNamed": "Fermer {{name}}"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "Cette version d’OpenCode ne peut pas démarrer de façon sûre avec le modèle choisi. Mettez OpenCode à jour vers une version compatible ou ne précisez pas de modèle.",

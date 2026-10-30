@@ -23127,6 +23127,17 @@
     }
   },
   "prompt": {
+    "sidebarSessions": {
+      "newSession": "New Session",
+      "newClaudeSession": "New Claude Session",
+      "newTerminal": "New Terminal",
+      "newWorkspace": "New Workspace…",
+      "newIn": "New in {{name}}",
+      "rename": "Rename…",
+      "tabColor": "Tab Color",
+      "close": "Close Session",
+      "closeNamed": "Close {{name}}"
+    },
     "onboarding": {
       "beforeYouStart": {
         "title": "Before you start",

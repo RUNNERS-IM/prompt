@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "Neue Sitzung",
+      "newClaudeSession": "Neue Claude-Sitzung",
+      "newTerminal": "Neues Terminal",
+      "newWorkspace": "Neuer Arbeitsbereich…",
+      "newIn": "Neu in {{name}}",
+      "rename": "Umbenennen…",
+      "tabColor": "Tab-Farbe",
+      "close": "Sitzung schließen",
+      "closeNamed": "{{name}} schließen"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "OpenCode kann in dieser Version nicht sicher mit einem ausgewählten Modell starten. OpenCode auf eine unterstützte Version aktualisieren oder die Modellauswahl weglassen.",

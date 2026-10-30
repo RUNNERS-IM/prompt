@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "新しいセッション",
+      "newClaudeSession": "新しい Claude セッション",
+      "newTerminal": "新しいターミナル",
+      "newWorkspace": "新しいワークスペース…",
+      "newIn": "「{{name}}」に新規作成",
+      "rename": "名前を変更…",
+      "tabColor": "タブの色",
+      "close": "セッションを閉じる",
+      "closeNamed": "「{{name}}」を閉じる"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "このバージョンの OpenCode では、選択したモデルで安全に起動できません。OpenCode を対応バージョンに更新するか、モデルの指定を省略してください。",
