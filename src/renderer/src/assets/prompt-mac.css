@@ -190,3 +190,11 @@ html.prompt-mac-vibrancy .prompt-status-bar,
 html.prompt-mac-vibrancy .prompt-status-bar .text-xs {
   font-size: 11px;
 }
+
+/* P8: settings group headers as section heads: 11 semibold, normal case, no letter-spacing. */
+html.prompt-mac-vibrancy [data-prompt-settings-sidebar] p.uppercase {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}

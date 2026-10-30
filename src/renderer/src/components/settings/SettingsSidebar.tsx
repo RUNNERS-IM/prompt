@@ -197,8 +197,12 @@ export function SettingsSidebar({
     <aside
       className="flex w-[280px] shrink-0 flex-col border-r border-worktree-sidebar-border bg-worktree-sidebar"
       style={leftSidebarStyle}
+      data-prompt-settings-sidebar=""
     >
       <div className="border-b border-worktree-sidebar-border px-3 py-3">
+        <h1 className="px-3 pb-2 text-base font-bold text-foreground">
+          {translate('prompt.settings.sidebarTitle', 'Prompt Settings')}
+        </h1>
         <Button
           variant="ghost"
           size="sm"
