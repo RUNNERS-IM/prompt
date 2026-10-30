@@ -2,14 +2,17 @@ import './components/prompt-runners-apps/prompt-about.css'
 import { StrictMode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PromptAboutPage } from './components/prompt-runners-apps/PromptAboutPage'
+import { PromptNoticesPage } from './components/prompt-runners-apps/PromptNoticesPage'
 import { I18nProvider } from './i18n/I18nProvider'
 import { applyDocumentTheme } from './lib/document-theme'
 import { getOrCreateRendererRoot } from './lib/react-renderer-root'
 import { useAppStore } from './store'
 import type { GlobalSettings } from '../../shared/global-settings-types'
 
-// Prompt's About window: its own small React root (src/renderer/prompt-about.html). It only reads
-// settings for theme and UI language; everything else comes from the bundled RUNNERS app list.
+// Prompt's About window and, with ?view=notices, its "Open source notices" window: one small React
+// root (src/renderer/prompt-about.html). It only reads settings for theme and UI language.
+
+const view = new URLSearchParams(window.location.search).get('view')
 
 let startupSettings: GlobalSettings | null = null
 try {
@@ -56,7 +59,7 @@ function AboutSettingsSync(): null {
 function AboutRoot(): React.JSX.Element {
   // Re-render when the catalog finishes loading so the credit line switches language.
   useTranslation()
-  return <PromptAboutPage />
+  return view === 'notices' ? <PromptNoticesPage /> : <PromptAboutPage />
 }
 
 const rootElement = document.getElementById('root')

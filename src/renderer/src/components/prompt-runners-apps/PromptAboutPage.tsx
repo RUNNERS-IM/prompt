@@ -5,17 +5,17 @@ import { translate } from '@/i18n/i18n'
 import appIconUrl from '../../../../../resources/icon.png?url'
 import { PromptRunnersApps } from './PromptRunnersApps'
 import { loadPromptRunnersAppGroups, openRunnersAppUrl } from './prompt-runners-apps-source'
-import { pickRunnersAppsLocale } from './runners-apps-model'
+import { isSafeRunnersAppUrl, pickRunnersAppsLocale } from './runners-apps-model'
 
-// Written out here instead of translate(): the i18n brand post-processor turns every "Orca" into
-// "Prompt", and this line must name the original project. Same wording as native.about.originalCredit.
-const ORIGINAL_CREDIT = {
-  ko: '원본: Orca (Stably AI) · MIT 라이선스',
-  en: 'Based on Orca by Stably AI (MIT License)'
-} as const
+const COPYRIGHT = '© 2026 RUNNERS. All rights reserved.'
 
-/** Content of Prompt's About window: app icon, name, version, RUNNERS, the original Orca credit,
- *  then the RUNNERS app cards. Replaces the native About panel, which cannot hold cards. */
+const WEBSITE_URL = 'https://runners.im/prompt'
+const GITHUB_URL = 'https://github.com/RUNNERS-IM/prompt'
+
+/** Content of Prompt's About window, laid out like Split's: app icon, name, version line, website and
+ *  GitHub buttons, the RUNNERS app cards, then one footer line with the copyright and a link to the
+ *  open source notices window (the Orca credit lives there). Replaces the native About panel,
+ *  which cannot hold cards. */
 export function PromptAboutPage(): React.JSX.Element {
   const { i18n } = useTranslation()
   const [version, setVersion] = useState('')
@@ -44,18 +44,50 @@ export function PromptAboutPage(): React.JSX.Element {
     }
   }, [])
 
+  const noticesApi = window.api.promptThirdPartyNotices
+  const openLink = (url: string): void => {
+    if (isSafeRunnersAppUrl(url)) {
+      openRunnersAppUrl(url)
+    }
+  }
+
   return (
     <main className="prompt-about">
       <header className="prompt-about-header">
         <img className="prompt-about-icon" src={appIconUrl} alt="" draggable={false} />
         <h1 className="prompt-about-name">Prompt</h1>
         <p className="prompt-about-version">
-          {version ? translate('prompt.about.version', 'Version {{version}}', { version }) : ' '}
+          {version
+            ? translate('prompt.about.versionLine', 'Version {{version}} · Free', {
+                version
+              })
+            : '\u00a0'}
         </p>
-        <p className="prompt-about-line">© RUNNERS</p>
-        <p className="prompt-about-hint">{ORIGINAL_CREDIT[locale]}</p>
+        <div className="prompt-about-links">
+          <button type="button" className="prompt-about-link" onClick={() => openLink(WEBSITE_URL)}>
+            {translate('prompt.about.website', 'Website')}
+          </button>
+          <button type="button" className="prompt-about-link" onClick={() => openLink(GITHUB_URL)}>
+            GitHub
+          </button>
+        </div>
       </header>
       <PromptRunnersApps groups={groups} locale={locale} onOpen={openRunnersAppUrl} />
+      <footer className="prompt-about-footer">
+        {COPYRIGHT}
+        {noticesApi ? (
+          <>
+            {' · '}
+            <button
+              type="button"
+              className="prompt-about-notice"
+              onClick={() => void noticesApi.open()}
+            >
+              {translate('prompt.about.notices', 'Open source notices')}
+            </button>
+          </>
+        ) : null}
+      </footer>
     </main>
   )
 }

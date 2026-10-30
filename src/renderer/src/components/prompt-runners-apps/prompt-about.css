@@ -1,5 +1,7 @@
-/* Prompt About window (design standard A). Window background matches Prompt's window colour:
-   #ececec light, #1e1e1e dark. The top strip is draggable because the title bar is hidden. */
+/* Prompt About window, laid out like Split's About window (2026-10-30 decisions 1A, 3A): 28 around
+   the content (40 at the top under the hidden title bar), 96 icon, 28 under the header, 24 between
+   cards, 16 above the footer line. Window background matches Prompt's window colour: #ececec light,
+   #1e1e1e dark. The top strip is draggable because the title bar is hidden. */
 html,
 body {
   margin: 0;
@@ -25,45 +27,149 @@ html.dark body {
 }
 
 .prompt-about {
-  padding: 36px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 28px 28px;
 }
 
 .prompt-about-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   text-align: center;
 }
 
 .prompt-about-icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 8px;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 12px;
 }
 
 .prompt-about-name {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
-.prompt-about-version,
-.prompt-about-line,
-.prompt-about-hint {
-  margin: 2px 0 0;
-  font-size: 11px;
-  line-height: 14px;
+.prompt-about-version {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 16px;
   color: rgb(0 0 0 / 0.5);
 }
 
-.prompt-about-line {
-  margin-top: 6px;
+.prompt-about-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
 }
 
-html.dark .prompt-about-version,
-html.dark .prompt-about-line,
-html.dark .prompt-about-hint {
+/* macOS push button look, like Split's NSButton pair. */
+.prompt-about-link {
+  height: 22px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow:
+    0 0 0 0.5px rgb(0 0 0 / 0.15),
+    0 0.5px 1px rgb(0 0 0 / 0.12);
+  color: rgb(0 0 0 / 0.85);
+  font: inherit;
+  font-size: 13px;
+  line-height: 22px;
+  cursor: default;
+}
+
+.prompt-about-link:active {
+  background: #f0f0f0;
+}
+
+.prompt-about-link:focus-visible {
+  outline: 2px solid var(--prompt-accent, #007aff);
+  outline-offset: 1px;
+}
+
+.prompt-about-footer {
+  margin-top: 16px;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  color: rgb(0 0 0 / 0.3);
+}
+
+/* Text link inside the footer line; opens the open source notices window. */
+.prompt-about-notice {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--prompt-accent, #007aff);
+  font: inherit;
+  cursor: default;
+}
+
+.prompt-about-notice:hover {
+  text-decoration: underline;
+}
+
+.prompt-about-notice:focus-visible {
+  outline: 2px solid var(--prompt-accent, #007aff);
+  outline-offset: 1px;
+}
+
+html.dark .prompt-about-version {
   color: rgb(255 255 255 / 0.55);
+}
+
+html.dark .prompt-about-link {
+  background: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0.5px 0 rgb(255 255 255 / 0.1);
+  color: rgb(255 255 255 / 0.9);
+}
+
+html.dark .prompt-about-link:active {
+  background: rgb(255 255 255 / 0.24);
+}
+
+html.dark .prompt-about-footer {
+  color: rgb(255 255 255 / 0.3);
+}
+
+/* Open source notices window: title under the hidden title bar, then the notices file as
+   selectable, scrollable plain text. */
+.prompt-notices {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100vh;
+  padding-top: 40px;
+}
+
+.prompt-notices-title {
+  margin: 0 28px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.prompt-notices-text {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0 28px 28px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  line-height: 16px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: rgb(0 0 0 / 0.75);
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+html.dark .prompt-notices-text {
+  color: rgb(255 255 255 / 0.75);
 }

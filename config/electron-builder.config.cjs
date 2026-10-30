@@ -138,7 +138,14 @@ const emojiShortcodeDatasetResource = {
   from: 'node_modules/emojibase-data/en/shortcodes/emojibase.json',
   to: 'node_modules/emojibase-data/en/shortcodes/emojibase.json'
 }
+// Prompt's LICENSE and the third-party notices (Orca's MIT text) as plain files in the app's
+// resources folder, so every install carries them and the About window can open the notices.
+const licenseNoticeResources = [
+  { from: 'LICENSE', to: 'LICENSE' },
+  { from: 'THIRD_PARTY_NOTICES.md', to: 'THIRD_PARTY_NOTICES.md' }
+]
 const commonExtraResources = [
+  ...licenseNoticeResources,
   relayExtraResource,
   orcadTemplateExtraResource,
   orcadTemplateNodeModulesExtraResource,
@@ -238,7 +245,7 @@ module.exports = {
   appId,
   productName: 'Prompt',
   // Prompt: without this electron-builder writes "Copyright © <year> stablyai" from the package.json author.
-  copyright: 'Copyright © RUNNERS. Based on Orca (MIT)',
+  copyright: 'Copyright © 2026 Runners Co., Ltd. All rights reserved.',
   protocols: [{ name: 'Prompt', schemes: ['prompt'] }],
   toolsets: { appimage: '1.0.3' },
   ...(devChannelBuildVersion
@@ -490,7 +497,10 @@ module.exports = {
     })
     chmodUnixCliLaunchers(resourcesDir, context.electronPlatformName)
     if (context.electronPlatformName === 'darwin') {
-      await signMacComputerUseHelper(join(resourcesDir, 'Prompt Computer Use.app'), context.packager)
+      await signMacComputerUseHelper(
+        join(resourcesDir, 'Prompt Computer Use.app'),
+        context.packager
+      )
       await signMacStandaloneHelper(
         join(resourcesDir, '..', 'MacOS', 'orca-notification-status'),
         'orca-notification-status',
@@ -511,12 +521,12 @@ module.exports = {
   },
   win: {
     executableName: 'Prompt',
-    // SignPath signs Windows installers after packaging, so set release publisherName explicitly.
+    // Release publisherName is the signer's certificate name (Runners Co., Ltd, same as the Apple Developer ID).
     // Unsigned dev channels omit it or updater signature checks reject dev updates and return to stable.
     // Sign hook signs nothing: it relays transient NSIS uninstaller files to CI SignPath; unset relay env leaves local/dev builds inert.
     signtoolOptions: {
       sign: signWindowsUninstallerViaSignPath,
-      ...(isWinDevChannel ? {} : { publisherName: 'SignPath Foundation' })
+      ...(isWinDevChannel ? {} : { publisherName: 'Runners Co., Ltd' })
     },
     ...(isWinDevChannel ? { verifyUpdateCodeSignature: false } : {}),
     extraResources: [

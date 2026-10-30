@@ -34,12 +34,12 @@ afterEach(() => {
 })
 
 describe('electron-builder dev-channel identity', () => {
-  it('keeps the SignPath publisherName on stable Windows builds', () => {
+  it('keeps the RUNNERS publisherName on stable Windows builds', () => {
     const config = loadConfigWithEnv({})
 
-    expect(config.win.signtoolOptions.publisherName).toBe('SignPath Foundation')
+    expect(config.win.signtoolOptions.publisherName).toBe('Runners Co., Ltd')
     expect(config.win.verifyUpdateCodeSignature).toBeUndefined()
-    expect(config.publish.repo).toBe('orca')
+    expect(config.publish.repo).toBe('prompt')
     expect(config.publish.releaseType).toBe('draft')
   })
 
