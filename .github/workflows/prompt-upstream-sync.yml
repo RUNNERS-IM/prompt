@@ -77,6 +77,12 @@ jobs:
           git merge --abort
           echo "conflict=main" >> "$GITHUB_OUTPUT"
 
+      # prompt-mac.css 가 겨누는 class · data-* 표시가 병합 뒤에도 원래 코드에 남아 있는지 본다.
+      # 없어졌으면 모양이 조용히 깨진 판이 나가므로, main 을 올리기 전에 멈춘다(실행 실패로 알림이 간다).
+      - name: Check prompt-mac.css hooks
+        if: steps.main.outputs.changed == 'true'
+        run: node config/scripts/prompt-check-css-hooks.mjs
+
       - name: Push main
         if: steps.main.outputs.changed == 'true'
         run: git push origin HEAD:main
