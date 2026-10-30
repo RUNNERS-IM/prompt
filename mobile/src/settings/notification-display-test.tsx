@@ -71,7 +71,7 @@ export function NotificationDisplayTest({ onTroubleshoot }: { onTroubleshoot: ()
           setMessage(
             t(
               'settings.notificationDisplayTest.accepted',
-              'Accepted by Orca’s push service. Check for the notification.'
+              'Accepted by Prompt’s push service. Check for the notification.'
             )
           )
           return
@@ -91,7 +91,7 @@ export function NotificationDisplayTest({ onTroubleshoot }: { onTroubleshoot: ()
               )
             : t(
                 'settings.notificationDisplayTest.pushServiceFailed',
-                'Could not send through Orca’s push service. Try again.'
+                'Could not send through Prompt’s push service. Try again.'
               )
         )
       }
@@ -118,7 +118,7 @@ export function NotificationDisplayTest({ onTroubleshoot }: { onTroubleshoot: ()
       <Text style={styles.detail}>
         {t(
           'settings.notificationDisplayTest.description',
-          'Send a test through Orca’s push service.'
+          'Send a test through Prompt’s push service.'
         )}
       </Text>
       <Pressable

@@ -87,7 +87,7 @@ describe('a write refused on a journal a newer Orca wrote', () => {
         ok: false,
         refusal: {
           code: 'agent_session_journal_unreadable',
-          message: 'Chats were saved by a newer Orca. Update Orca to keep using them.',
+          message: 'Chats were saved by a newer Prompt. Update Prompt to keep using them.',
           details: { reason: 'journalWrittenByNewerOrca' }
         }
       }
@@ -99,12 +99,12 @@ describe('a write refused on a journal a newer Orca wrote', () => {
     [
       'agentSession.send',
       { body: { kind: 'message', role: 'user', blocks: [{ type: 'text', text: 'hello' }] } },
-      'Chats were saved by a newer Orca. Your message was not sent. Update Orca to keep using them.'
+      'Chats were saved by a newer Prompt. Your message was not sent. Update Prompt to keep using them.'
     ],
     [
       'agentSession.cancel',
       { turnId: 'turn-1' },
-      "Chats were saved by a newer Orca. The agent wasn't stopped. Update Orca to keep using them."
+      "Chats were saved by a newer Prompt. The agent wasn't stopped. Update Prompt to keep using them."
     ]
   ] as const)('says to update Orca for %s', async (method, fields, message) => {
     const result = await requestStructuredAgentSessionMutation({

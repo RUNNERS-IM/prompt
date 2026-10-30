@@ -135,7 +135,7 @@ describe('MobileNativeChatMessage status notices', () => {
       { hostName: 'MacBook Pro' }
     )
     expect(text.props.children).toBe(
-      'Orca on MacBook Pro stopped while this response was in progress. You can continue in this conversation.'
+      'Prompt on MacBook Pro stopped while this response was in progress. You can continue in this conversation.'
     )
   })
 

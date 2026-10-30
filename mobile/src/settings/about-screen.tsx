@@ -65,7 +65,7 @@ export default function AboutScreen({
         <Pressable
           style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
           accessibilityRole="button"
-          accessibilityLabel={t('settings.aboutScreen.sourceCode', 'Orca source code')}
+          accessibilityLabel={t('settings.aboutScreen.sourceCode', 'Prompt source code')}
           onPress={() => openLink(PROMPT_REPO_URL)}
         >
           <GithubIcon />
