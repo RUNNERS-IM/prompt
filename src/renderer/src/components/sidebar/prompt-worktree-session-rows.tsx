@@ -58,6 +58,7 @@ function PromptTerminalRow({
       onPointerDown={(e) => e.stopPropagation()}
       title={name}
       data-prompt-terminal-row=""
+      data-prompt-row-current={focused ? 'true' : undefined}
     >
       <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
       <span className="min-w-0 flex-1 truncate">{name}</span>

@@ -202,7 +202,10 @@ html.prompt-mac-vibrancy [data-prompt-settings-sidebar] p.uppercase {
 /* P9: one selection style in the sidebars, the macOS accent fill with white text (as Finder).
    The top navigation rows already use it above; workspace / project cards and settings rows
    follow. Text colour tokens are reset inside the selected card so muted labels stay legible. */
-html.prompt-mac-vibrancy [data-worktree-card-surface][data-worktree-card-active='primary'],
+html.prompt-mac-vibrancy
+  [data-worktree-card-surface][data-worktree-card-active='primary']:not(
+    :has([data-prompt-session-rows])
+  ),
 html.prompt-mac-vibrancy [data-prompt-settings-sidebar] button[data-current='true'] {
   --foreground: #fff;
   --muted-foreground: rgb(255 255 255 / 0.78);
@@ -211,5 +214,32 @@ html.prompt-mac-vibrancy [data-prompt-settings-sidebar] button[data-current='tru
   border-color: transparent;
   background: var(--prompt-accent);
   box-shadow: none;
+  color: #fff;
+}
+
+/* Two-level sidebar (project header, then session rows): like Finder and Mail, only the session
+   being viewed is filled, never the whole workspace card that holds the rows. */
+html.prompt-mac-vibrancy
+  [data-worktree-card-surface][data-worktree-card-active]:has([data-prompt-session-rows]) {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+html.prompt-mac-vibrancy
+  [data-worktree-card-active='primary']
+  [data-prompt-session-rows]
+  :is([data-prompt-row-current='true'], [data-focused-agent-pane='true']) {
+  --foreground: #fff;
+  --muted-foreground: rgb(255 255 255 / 0.78);
+  background: var(--prompt-accent);
+  color: #fff;
+}
+
+html.prompt-mac-vibrancy
+  [data-worktree-card-active='primary']
+  [data-prompt-session-rows]
+  :is([data-prompt-row-current='true'], [data-focused-agent-pane='true'])
+  svg {
   color: #fff;
 }
