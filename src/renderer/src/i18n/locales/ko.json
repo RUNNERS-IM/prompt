@@ -22572,7 +22572,8 @@
     "claudeModel": {
       "change": "모델 바꾸기",
       "rejected": "Claude가 이전 모델을 그대로 유지했습니다.",
-      "badgeTitle": "모델: {{model}} (눌러서 바꾸기)"
+      "badgeTitle": "모델: {{model}} (눌러서 바꾸기)",
+      "submenu": "모델"
     }
   }
 }

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,6 +46,10 @@ import {
   shouldUseNativeContextMenu
 } from './worktree-context-menu-policy'
 import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
+import {
+  PromptClaudeModelSubmenu,
+  claudeModelPaneKeyFromTarget
+} from '@/components/prompt-claude-model-menu'
 
 export default function WorktreeContextMenuView({ model }: { model: WorktreeContextMenuModel }) {
   const {
@@ -102,6 +107,8 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
     workspaceStatuses
   } = model
   const deleteShortcut = useOptionalShortcutLabel('workspace.delete')
+  // Right-click on a live Claude row keeps this menu and adds "Model ▸" first (decision 3A).
+  const [claudeModelPaneKey, setClaudeModelPaneKey] = useState<string | null>(null)
   return (
     <div
       ref={scopeRef}
@@ -121,6 +128,7 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
         contextMenuOpenedAtRef.current = Date.now()
         window.dispatchEvent(new Event(CLOSE_ALL_CONTEXT_MENUS_EVENT))
         setDeveloperMenuRevealed(event.altKey)
+        setClaudeModelPaneKey(claudeModelPaneKeyFromTarget(event.target))
         setContextWorktrees(onContextMenuSelect?.(event) ?? effectiveSelectedWorktrees)
         const bounds = event.currentTarget.getBoundingClientRect()
         setMenuPoint({ x: event.clientX - bounds.left, y: event.clientY - bounds.top })
@@ -154,6 +162,7 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
           onClickCapture={suppressOpeningPointerEvent}
           onCloseAutoFocus={handleCloseAutoFocus}
         >
+          <PromptClaudeModelSubmenu paneKey={claudeModelPaneKey} />
           <DropdownMenuLabel>
             {translate('auto.components.sidebar.WorktreeContextMenu.workspaceSection', 'Workspace')}
           </DropdownMenuLabel>

@@ -23129,7 +23129,8 @@
     "claudeModel": {
       "change": "Change model",
       "rejected": "Claude kept the previous model.",
-      "badgeTitle": "Model: {{model}} (click to change)"
+      "badgeTitle": "Model: {{model}} (click to change)",
+      "submenu": "Model"
     }
   }
 }

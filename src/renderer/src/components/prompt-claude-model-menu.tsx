@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -22,7 +22,6 @@ import type { CatalogModel } from '../../../shared/agent-session-option-catalog-
 import { matchNativeChatCatalogModelId } from '../../../shared/native-chat/input/native-chat-session-option-state'
 import { isTerminalLeafId, makePaneKey, parsePaneKey } from '../../../shared/stable-pane-id'
 import type { DashboardAgentRow } from './dashboard/useDashboardData'
-import { WORKTREE_NATIVE_CONTEXT_MENU_ATTR } from './sidebar/worktree-context-menu-policy'
 import { sendNativeChatMessageVerified } from './native-chat/native-chat-runtime-send'
 import { createClaudeModelSwitchConfirmationObserver } from './native-chat/claude-model-switch-confirmation'
 
@@ -129,7 +128,55 @@ function offersClaudeModelMenu(agent: DashboardAgentRow): boolean {
   )
 }
 
-/** Right-click on a live Claude agent row opens "Change model" instead of the workspace menu. */
+/** Marks a live Claude row; the workspace context menu reads it to add "Model ▸" on top. */
+export const PROMPT_CLAUDE_MODEL_PANE_ATTR = 'data-prompt-claude-model-pane'
+
+/** Pane key of the live Claude row a right-click landed in, or null. */
+export function claudeModelPaneKeyFromTarget(target: EventTarget | null): string | null {
+  const element = target as { closest?: (selector: string) => Element | null } | null
+  return (
+    element
+      ?.closest?.(`[${PROMPT_CLAUDE_MODEL_PANE_ATTR}]`)
+      ?.getAttribute(PROMPT_CLAUDE_MODEL_PANE_ATTR) ?? null
+  )
+}
+
+/** "Model ▸" submenu plus a separator, placed first in an existing context menu. Renders nothing when the pane is not a Claude session. */
+export function PromptClaudeModelSubmenu({
+  paneKey
+}: {
+  paneKey: string | null
+}): React.JSX.Element | null {
+  useUiLanguageRevision()
+  const entry = useAppStore((s) => (paneKey ? s.agentStatusByPaneKey?.[paneKey] : undefined))
+  if (!paneKey || entry?.agentType !== 'claude') {
+    return null
+  }
+  return (
+    <>
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger>
+          {translate('prompt.claudeModel.submenu', 'Model')}
+        </DropdownMenuSubTrigger>
+        <DropdownMenuSubContent>
+          <ClaudeModelRadioItems paneKey={paneKey} reportedModel={entry.model?.trim()} />
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+      <DropdownMenuSeparator />
+    </>
+  )
+}
+
+/** Tab variant: the submenu targets the tab's focused pane. */
+export function PromptClaudeTabModelSubmenu({ tabId }: { tabId: string }): React.JSX.Element {
+  const paneKey = useAppStore((s) => {
+    const leafId = s.terminalLayoutsByTabId?.[tabId]?.activeLeafId
+    return leafId && isTerminalLeafId(leafId) ? makePaneKey(tabId, leafId) : null
+  })
+  return <PromptClaudeModelSubmenu paneKey={paneKey} />
+}
+
+/** Marks live Claude rows so right-click keeps the workspace menu and adds "Model ▸" first. */
 export function PromptClaudeModelRowMenu({
   agent,
   children
@@ -137,55 +184,12 @@ export function PromptClaudeModelRowMenu({
   agent: DashboardAgentRow
   children: React.ReactNode
 }): React.JSX.Element {
-  useUiLanguageRevision()
-  const [open, setOpen] = useState(false)
-  const [point, setPoint] = useState({ x: 0, y: 0 })
-  useCloseOnGlobalMenuEvent(open, setOpen)
-  const offered = offersClaudeModelMenu(agent)
-  const handleContextMenu = useCallback((event: React.MouseEvent) => {
-    event.preventDefault()
-    event.stopPropagation()
-    window.dispatchEvent(new Event(CLOSE_ALL_CONTEXT_MENUS_EVENT))
-    setPoint({ x: event.clientX, y: event.clientY })
-    setOpen(true)
-  }, [])
-  if (!offered) {
+  if (!offersClaudeModelMenu(agent)) {
     return <>{children}</>
   }
   return (
-    <div
-      className="contents"
-      {...{ [WORKTREE_NATIVE_CONTEXT_MENU_ATTR]: 'claude-model' }}
-      onContextMenu={handleContextMenu}
-    >
+    <div className="contents" {...{ [PROMPT_CLAUDE_MODEL_PANE_ATTR]: agent.paneKey }}>
       {children}
-      {/* Mount only while open: rows stay cheap and server renders never touch document. */}
-      {open ? (
-        <DropdownMenu open onOpenChange={setOpen} modal={false}>
-          {/* Portal the anchor so transformed sidebar ancestors cannot offset its fixed position. */}
-          {createPortal(
-            <DropdownMenuTrigger asChild>
-              <button
-                aria-hidden
-                tabIndex={-1}
-                className="pointer-events-none fixed size-px opacity-0"
-                style={{ left: point.x, top: point.y }}
-              />
-            </DropdownMenuTrigger>,
-            document.body
-          )}
-          <DropdownMenuContent sideOffset={0} align="start" {...MENU_EVENT_GUARDS}>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                {translate('prompt.claudeModel.change', 'Change model')}
-              </DropdownMenuSubTrigger>
-              <DropdownMenuSubContent>
-                <ClaudeModelRadioItems paneKey={agent.paneKey} reportedModel={agent.entry.model} />
-              </DropdownMenuSubContent>
-            </DropdownMenuSub>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ) : null}
     </div>
   )
 }

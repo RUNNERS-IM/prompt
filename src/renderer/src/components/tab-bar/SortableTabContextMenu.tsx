@@ -17,6 +17,7 @@ import type { NativeChatTabSession } from './tab-session-history-switch'
 import { TAB_CONTEXT_MENU_CONTENT_CLASS } from './tab-context-menu-sizing'
 import { CopyTabIdMenuItem } from './CopyTabIdMenuItem'
 import { CloseSplitPaneMenuItem } from './CloseSplitPaneMenuItem'
+import { PromptClaudeTabModelSubmenu } from '../prompt-claude-model-menu'
 
 const TAB_COLORS = [
   {
@@ -158,6 +159,8 @@ export function SortableTabContextMenu({
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className={TAB_CONTEXT_MENU_CONTENT_CLASS} sideOffset={0} align="start">
+        {/* Live Claude tab: "Model ▸" first, then the usual tab menu (decision 3A). */}
+        {open ? <PromptClaudeTabModelSubmenu tabId={tab.id} /> : null}
         <TerminalTabSplitMenuSection
           unifiedTabId={unifiedTabId}
           groupId={groupId}
