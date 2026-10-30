@@ -1,5 +1,5 @@
 /* Prompt: System Settings style chrome. The window shows macOS sidebar vibrancy;
-   the sidebar floats as a rounded translucent card and the workspace stays opaque. */
+   the sidebar floats as a rounded translucent card and everything around it shares one background. */
 html.prompt-mac-vibrancy,
 html.prompt-mac-vibrancy body,
 html.prompt-mac-vibrancy #root,
@@ -8,18 +8,23 @@ html.prompt-mac-vibrancy .prompt-shell-row {
   background: transparent;
 }
 
-html.prompt-mac-vibrancy .prompt-main-column {
+html.prompt-mac-vibrancy .prompt-main-column,
+html.prompt-mac-vibrancy .app-layout > :not(:first-child) {
   background: var(--background);
+  border-top-color: transparent;
 }
 
+/* The card's outer ring paints the gutter opaque so only the card itself shows vibrancy. */
 html.prompt-mac-vibrancy .prompt-sidebar-column,
 html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
-  margin: 4px 0 8px 8px;
-  border-radius: 12px;
+  margin: 8px 0 8px 8px;
+  border-radius: 14px;
   overflow: hidden;
   background: color-mix(in srgb, var(--worktree-sidebar) 55%, transparent);
-  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+  border: 0;
+  box-shadow:
+    0 0 0 8px var(--background),
+    inset 0 0 0 0.5px color-mix(in srgb, var(--foreground) 12%, transparent);
 }
 
 html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left,
@@ -29,12 +34,57 @@ html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
   border-right-color: transparent;
 }
 
-html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left {
-  border-bottom-color: transparent;
-}
-
-/* Keep the header row centered on the traffic lights (36px titlebar center) after the 4px card inset. */
+/* Header row centered on the traffic lights (TITLEBAR_CSS_CENTER 22 = 8px inset + 28px / 2). */
 html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left {
   height: 28px;
   min-height: 28px;
+  border-bottom-color: transparent;
+}
+
+html.prompt-mac-vibrancy .titlebar-traffic-light-pad {
+  width: calc(88px / var(--ui-zoom-factor, 1));
+}
+
+/* Roomier navigation like System Settings. */
+html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] {
+  gap: 2px;
+  padding: 12px 10px 8px;
+}
+
+html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] button {
+  min-height: 34px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: color-mix(in srgb, var(--worktree-sidebar-foreground) 88%, transparent);
+}
+
+html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] button svg {
+  width: 18px;
+  height: 18px;
+  color: color-mix(in srgb, var(--worktree-sidebar-foreground) 70%, transparent);
+}
+
+html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] > button:first-child {
+  margin-bottom: 8px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: color-mix(in srgb, var(--worktree-sidebar-foreground) 9%, transparent);
+  color: color-mix(in srgb, var(--worktree-sidebar-foreground) 50%, transparent);
+}
+
+html.prompt-mac-vibrancy
+  [data-contextual-tour-target='sidebar-navigation']
+  button[aria-current='page'] {
+  background: #0a5fd8;
+  color: #fff;
+}
+
+html.prompt-mac-vibrancy
+  [data-contextual-tour-target='sidebar-navigation']
+  button[aria-current='page']
+  svg {
+  color: #fff;
 }
