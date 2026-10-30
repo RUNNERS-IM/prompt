@@ -19,6 +19,7 @@ import {
 } from './delivery/pty-hidden-delivery-gate'
 import type { CodexHomePtySpawnedLifecycleArgs, PrepareCodexSessionResume } from './host-env/types'
 import { tryGetProviderForPty } from './provider/registry'
+import { promptPtyDispatcherReady } from '../../prompt-windows/prompt-window-registry'
 
 export type PtyDataPayload = {
   id: string
@@ -266,7 +267,7 @@ export function createPtyIpcSession(args: {
         return runnableLane
       }
       if (
-        !session.rendererPtyDispatcherReady ||
+        !promptPtyDispatcherReady(session.rendererPtyDispatcherReady, id) ||
         !session.canSendPtyDataToRenderer(id, { interactive: activeRendererPtys.has(id) })
       ) {
         return 'blocked'

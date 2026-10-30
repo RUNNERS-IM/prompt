@@ -4,6 +4,7 @@ import { OpenInMenuSetting } from './OpenInMenuSetting'
 import { SearchableSetting } from './SearchableSetting'
 import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormControls'
 import { WorkspaceDirectorySetting } from './WorkspaceDirectorySetting'
+import { PromptWindowsSetting } from './prompt-windows-setting'
 import { translate } from '@/i18n/i18n'
 import { GlobalWorktreeVisibilitySourcesSetting } from './GlobalWorktreeVisibilitySourcesSetting'
 import { GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID } from '@/lib/settings-navigation-types'
@@ -100,6 +101,7 @@ export function GeneralWorkspaceSettingsSection({
           onChange={() => updateSettings({ nestWorkspaces: !settings.nestWorkspaces })}
         />
       </SearchableSetting>
+      <PromptWindowsSetting settings={settings} updateSettings={updateSettings} />
 
       {/* Keep this ID stable: the delete-worktree Don’t ask again toast deep-links here. */}
       <div id="general-skip-delete-worktree-confirm" className="scroll-mt-6">

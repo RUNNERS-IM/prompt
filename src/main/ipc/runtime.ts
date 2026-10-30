@@ -15,6 +15,8 @@ import { RpcDispatcher } from '../runtime/rpc/dispatcher'
 import { DESKTOP_RPC_CALLER } from '../runtime/rpc/rpc-caller-identity'
 import { ALL_RPC_METHODS } from '../runtime/rpc/methods'
 import { DesktopRuntimeSenderLifecycle } from './desktop-runtime-sender-lifecycle'
+import { promptSyncWindowGraph } from '../prompt-windows/prompt-window-graph'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 import { publishMobileProjectSections } from '../runtime/mobile-project-sections-snapshot'
 
 function boundTerminalFitRestore(pending: Promise<boolean>): Promise<boolean> {
@@ -35,6 +37,9 @@ export function registerRuntimeHandlers(runtime: OrcaRuntimeService): void {
   ipcMain.removeHandler('runtime:subscribe')
   ipcMain.removeAllListeners('runtime:unsubscribe')
 
+  const publishGraph = (windowId: number, graph: RuntimeRendererSyncWindowGraph) =>
+    runtime.syncWindowGraph(windowId, graph)
+  const statusOnly = (): RuntimeSyncWindowGraphResult => runtime.getStatus()
   ipcMain.handle(
     'runtime:syncWindowGraph',
     (event, graph: RuntimeRendererSyncWindowGraph): RuntimeSyncWindowGraphResult => {
@@ -49,7 +54,11 @@ export function registerRuntimeHandlers(runtime: OrcaRuntimeService): void {
       if (typeof graph.rendererGeneration !== 'string' || graph.rendererGeneration.length === 0) {
         throw new Error('Runtime graph sync requires a renderer generation')
       }
-      const result = runtime.syncWindowGraph(window.id, graph)
+      // Prompt: extra windows' graphs are published as part of the main window's.
+      const result = promptSyncWindowGraph(event.sender, window.id, graph, publishGraph, statusOnly)
+      if (isPromptExtraWindowSender(event.sender)) {
+        return result
+      }
       // Only the authoritative window's accepted graph may publish its project catalog.
       if (graph.projectSectionCatalog) {
         publishMobileProjectSections(graph.projectSectionCatalog)

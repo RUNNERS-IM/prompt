@@ -49,6 +49,7 @@ vi.mock('@/components/ui/dropdown-menu', () => ({
 }))
 
 vi.mock('lucide-react', () => ({
+  AppWindow: () => null,
   ArrowDown: () => null,
   ArrowLeft: () => null,
   ArrowRight: () => null,
@@ -98,6 +99,12 @@ const moveMock = vi.hoisted(() => ({ moveTabToNewPaneColumn: vi.fn(() => true) }
 vi.mock('./tab-move-to-pane-column', async (importOriginal) => ({
   ...(await importOriginal<object>()),
   moveTabToNewPaneColumn: moveMock.moveTabToNewPaneColumn
+}))
+
+const windowsMock = vi.hoisted(() => ({ movePromptTabToWindow: vi.fn() }))
+vi.mock('@/lib/prompt-windows', () => ({
+  listPromptWindows: async () => [],
+  movePromptTabToWindow: windowsMock.movePromptTabToWindow
 }))
 
 vi.mock('../../store', () => ({
@@ -389,5 +396,12 @@ describe('SortableTabContextMenu', () => {
     expect(onCloseSplitPane).toHaveBeenCalledOnce()
 
     expect(renderMenu().container.textContent).not.toContain('Close split pane')
+  })
+
+  it('moves the terminal tab to a new window from the window submenu', () => {
+    const { container } = renderMenu()
+    expect(container.textContent).toContain('Move Tab to Window')
+    act(() => getButton(container, 'New Window').click())
+    expect(windowsMock.movePromptTabToWindow).toHaveBeenCalledWith('term-1', 'new')
   })
 })

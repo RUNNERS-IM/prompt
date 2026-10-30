@@ -13,6 +13,7 @@ import {
 } from './constants'
 import type { PtyIpcSession } from '../session'
 import type { PendingPtyData } from './pty-pending-data-drain-contract'
+import { promptAllPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function getRendererInFlightCharsForPty(session: PtyIpcSession, id: string): number {
   const accounting = session.rendererDeliveryAccountingByPty.get(id)
@@ -147,7 +148,9 @@ export function requestDeliveryResyncForGatedPty(session: PtyIpcSession): void {
     })
   }, PTY_DELIVERY_RESYNC_TIMEOUT_MS)
   session.deliveryResyncTimer.unref?.()
-  session.mainWindow.webContents.send('pty:requestDeliveryResync', { requestId })
+  for (const target of promptAllPtyWebContents(session.mainWindow.webContents)) {
+    target.send('pty:requestDeliveryResync', { requestId })
+  }
 }
 
 export function writeOffLostRendererDelivery(

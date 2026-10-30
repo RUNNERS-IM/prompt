@@ -14,12 +14,19 @@ import { LOCAL_EXECUTION_HOST_ID } from '../../../../shared/execution-host'
 import type { TerminalInputKind } from '../../../../shared/terminal-input-kind'
 import { interactiveOutputCharsByPty, lastInputAtByPty } from '../delivery/visibility-state'
 import { isSettledWrite, type WriteSettlement } from '../../../../shared/pty-write-settlement'
+import {
+  isPromptExtraWindowSender,
+  promptPtyWebContents
+} from '../../../prompt-windows/prompt-window-registry'
 
 export function isMainWindowPtyIpcEvent(
   event: IpcMainEvent | IpcMainInvokeEvent,
   mainWindow: PtyRendererDelivery | undefined
 ): boolean {
   const mainWebContents = mainWindow?.webContents
+  if (isPromptExtraWindowSender(event.sender)) {
+    return true
+  }
   return (
     !!mainWindow &&
     !!mainWebContents &&
@@ -58,7 +65,7 @@ export function createPtyWriteInput(deps: {
     ) {
       return
     }
-    mainWindow.webContents.send('pty:writeUnavailable', { id })
+    promptPtyWebContents(mainWindow.webContents, id).send('pty:writeUnavailable', { id })
   }
 
   const reportUnavailablePtyWrite = (id: string, error: unknown): void => {

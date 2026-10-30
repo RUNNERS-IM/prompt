@@ -48,6 +48,7 @@ import { startAgentStateRulesLiveUpdates } from '../runtime/agent-state-rules/ag
 import { recordDurableCrashBreadcrumb } from '../crash-reporting/durable-crash-breadcrumb'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { getRuntimeEnvironmentRegistryRoot } from '../ipc/runtime-environments/runtime-environment-registry-root'
+import { promptPtyWebContents } from '../prompt-windows/prompt-window-registry'
 
 export function getDesktopWindowStatus(): RuntimeDesktopWindowStatus {
   const activation = state.desktopActivationGate
@@ -104,7 +105,10 @@ export function initializeMainProcessRuntime(): OrcaRuntimeService {
     // Serve can activate in place; wire now, but enable desktop scanners only for a ready renderer.
     onTerminalSideEffects: (batch: TerminalSideEffectBatch) => {
       if (state.mainWindow && !state.mainWindow.isDestroyed()) {
-        state.mainWindow.webContents.send('pty:sideEffect', batch)
+        promptPtyWebContents(state.mainWindow.webContents, batch.ptyId).send(
+          'pty:sideEffect',
+          batch
+        )
       }
     },
     getDesktopWindowStatus,

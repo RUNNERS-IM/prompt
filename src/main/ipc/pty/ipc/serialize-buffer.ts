@@ -3,6 +3,7 @@ import { getPtyIpc } from '../pty-host-bindings'
 import { parseTerminalKittyKeyboardFlags } from '../../../../shared/terminal-kitty-keyboard-flags'
 import { isMainWindowPtyIpcEvent } from './write-input'
 import type { PtyIpcSession, SerializeResult } from '../session'
+import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
 
 export function settleSerializeRequest(
   session: PtyIpcSession,
@@ -106,6 +107,6 @@ export function requestSerializedBuffer(
     if (opts) {
       payload.opts = opts
     }
-    mainWindow.webContents.send('pty:serializeBuffer:request', payload)
+    promptPtyWebContents(mainWindow.webContents, ptyId).send('pty:serializeBuffer:request', payload)
   })
 }

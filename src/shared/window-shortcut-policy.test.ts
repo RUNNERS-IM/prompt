@@ -432,7 +432,7 @@ describe('resolveWindowShortcutAction', () => {
       ],
       [{ code: 'KeyR', key: 'p', meta: true, alt: false, shift: false }, { type: 'openQuickOpen' }],
       [
-        { code: 'KeyL', key: 'n', meta: true, alt: false, shift: false },
+        { code: 'KeyL', key: 'n', meta: true, alt: false, shift: true },
         { type: 'openNewWorkspace' }
       ],
       [
@@ -459,7 +459,7 @@ describe('resolveWindowShortcutAction', () => {
         { type: 'toggleLeftSidebar' }
       ],
       [
-        { code: 'KeyN', key: 'Dead', meta: true, alt: false, shift: false },
+        { code: 'KeyN', key: 'Dead', meta: true, alt: false, shift: true },
         { type: 'openNewWorkspace' }
       ],
       [{ code: 'KeyP', meta: true, alt: false, shift: false }, { type: 'openQuickOpen' }]

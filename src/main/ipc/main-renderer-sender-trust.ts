@@ -1,4 +1,5 @@
 import type { WebContents } from 'electron'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 
 export function isTrustedMainRendererSender(
   sender: WebContents,
@@ -8,7 +9,7 @@ export function isTrustedMainRendererSender(
     return false
   }
   if (pinnedWebContentsId != null) {
-    return sender.id === pinnedWebContentsId
+    return sender.id === pinnedWebContentsId || isPromptExtraWindowSender(sender)
   }
 
   const rendererUrl = process.env.ELECTRON_RENDERER_URL

@@ -15,6 +15,8 @@ import { windowViewSaveForMain, type ReconnectFactsFor } from '../persistence/wi
 import { reportWindowSaveDrift } from '../persistence/window-save-divergence'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { formatShutdownCheckpointFailureReason } from '../../shared/renderer-shutdown-events'
+import { scopePromptWindowSessionWrite } from '../prompt-windows/prompt-session-scope'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 
 type StageBeforeUnloadSyncArgs = {
   sessions: { state: WorkspaceSessionState; hostId?: ExecutionHostId }[]
@@ -105,8 +107,14 @@ export function registerRendererShutdownCheckpointHandler(
     try {
       // A window a WSL move rewrote under is stale; main reloads it and keeps what is on disk.
       const sessions = isWslMoveWindowWriteHeld() ? [] : args.sessions
-      for (const { state, hostId } of sessions) {
+      for (const { state: sent, hostId } of sessions) {
         if (!isFrozenOrcadSourceSessionPartition(store, hostId)) {
+          const state = scopePromptWindowSessionWrite(
+            event.sender,
+            sent,
+            store.getWorkspaceSession(hostId),
+            true
+          )
           store.stageWorkspaceSessionBeforeUnload(
             ORCA_LAYOUT_OWNER_IS_MAIN
               ? stagedSessionForMain(store, state, hostId, quitResumeRecordsFor, reconnectFactsFor)
@@ -115,7 +123,7 @@ export function registerRendererShutdownCheckpointHandler(
           )
         }
       }
-      if (!isWslMoveWindowWriteHeld()) {
+      if (!isWslMoveWindowWriteHeld() && !isPromptExtraWindowSender(event.sender)) {
         store.updateUI(args.ui)
       }
     } catch (stagingError) {

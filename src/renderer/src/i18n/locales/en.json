@@ -23232,6 +23232,16 @@
       "install": "Install",
       "restartFailed": "Could not restart to install the update. Quit and reopen Prompt, then try again.",
       "installerFailed": "Could not start the update installer. Prompt remains open."
+    },
+    "windows": {
+      "newWindow": "New Window",
+      "openInNewWindow": "Open in New Window",
+      "moveTabToWindow": "Move Tab to Window",
+      "windowLabel": "Window {{index}}",
+      "windowLabelNamed": "Window {{index}} — {{name}}",
+      "mainWindowSuffix": "(main)",
+      "rememberTitle": "Remember Open Windows",
+      "rememberDescription": "Reopen every window with its tabs, size and position when Prompt starts."
     }
   }
 }

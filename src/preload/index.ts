@@ -49,6 +49,7 @@ import { onboardingApi } from './api/onboarding-bridge'
 import { dashboardApi } from './api/dashboard-bridge'
 import { terminalPreviewApi } from './api/terminal-preview-bridge'
 import { macosTccPromptsApi } from './api/macos-tcc-prompts-bridge'
+import { promptWindowsApi } from './api/prompt-windows-bridge'
 import { developerPermissionsApi } from './api/developer-permissions-bridge'
 import { computerUsePermissionsApi } from './api/computer-use-permissions-bridge'
 import { shellApi } from './api/shell-bridge'
@@ -156,6 +157,7 @@ const api = {
   dashboard: dashboardApi,
   terminalPreview: terminalPreviewApi,
   macosTccPrompts: macosTccPromptsApi,
+  promptWindows: promptWindowsApi,
   developerPermissions: developerPermissionsApi,
   computerUsePermissions: computerUsePermissionsApi,
   shell: shellApi,

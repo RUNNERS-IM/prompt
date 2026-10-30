@@ -10,7 +10,7 @@ import { translateMain } from '../i18n/main-i18n'
 import { createAppMenuSelectionItem, resolveNativeEditTarget } from './app-menu-selection-item'
 import { createAppMenuQuitItems, type AppMenuQuitHandlers } from './app-menu-quit-item'
 import { createAppMenuReloadAndDevToolsItems } from './app-menu-reload-devtools-items'
-import { createAppWindowMenu } from './app-menu-window'
+import { createPromptWindowMenu } from './prompt-window-menu'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_NEW_ISSUE_URL } from '../../shared/prompt-upstream'
 import { createPromptAboutItem } from './prompt-app-menu-about-item'
 
@@ -289,7 +289,7 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
     ]
   }
 
-  const windowMenu = createAppWindowMenu(translateMain('menu.window', 'Window'), isMac)
+  const windowMenu = createPromptWindowMenu(isMac)
 
   const helpMenu: Electron.MenuItemConstructorOptions = {
     label: translateMain('menu.help', 'Help'),
