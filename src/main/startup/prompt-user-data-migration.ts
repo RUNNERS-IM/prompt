@@ -12,13 +12,12 @@ import {
   renameSync,
   rmSync,
   rmdirSync,
-  statSync,
-  writeFileSync
+  statSync
 } from 'node:fs'
 import { basename, dirname, join, relative, sep } from 'node:path'
 import {
-  PROMPT_USER_DATA_MARKER_FILE,
   isPromptUserDataReady,
+  writePromptUserDataMarker,
   type PromptUserDataMarker
 } from '../../shared/prompt-user-data-location'
 
@@ -94,7 +93,8 @@ export function migrateLegacyUserData(options: UserDataMigrationOptions): UserDa
         version: 1,
         createdAtMs: now(),
         migratedFrom: null,
-        firstRunProfile: true
+        firstRunProfile: true,
+        startYoloOff: true
       })
       return { userDataPath: targetDir, outcome: 'fresh' }
     } catch (error) {
@@ -152,9 +152,7 @@ export function copyUserDataTree(from: string, to: string): void {
 }
 
 function writeMarker(dir: string, marker: PromptUserDataMarker): void {
-  writeFileSync(join(dir, PROMPT_USER_DATA_MARKER_FILE), `${JSON.stringify(marker)}\n`, {
-    mode: 0o600
-  })
+  writePromptUserDataMarker(dir, marker)
 }
 
 function hasEntries(dir: string): boolean {

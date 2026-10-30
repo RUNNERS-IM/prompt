@@ -3,6 +3,7 @@ import { sanitizeOnboardingUpdate, type Store } from '../persistence'
 import type { OnboardingState } from '../../shared/onboarding-state-types'
 import type { NativeChatUpgradeTipVariant } from '../../shared/native-chat/native-chat-upgrade-tip-audience'
 import {
+  applyPromptFirstRunYoloDefault,
   notePromptOnboardingUpdate,
   withPromptFirstRun
 } from '../prompt-onboarding/prompt-first-run-onboarding'
@@ -11,6 +12,8 @@ export function registerOnboardingHandlers(store: Store): void {
   ipcMain.removeHandler('onboarding:get')
   ipcMain.removeHandler('onboarding:update')
   ipcMain.removeHandler('onboarding:getNativeChatUpgradeTipVariant')
+  // Prompt: before the first onboarding read, so its Yolo switch starts off on a new profile.
+  applyPromptFirstRunYoloDefault(store, app.getPath('userData'))
 
   // Prompt: reads carry whether this is a brand-new profile, so upgrades never see onboarding.
   ipcMain.handle('onboarding:get', (): OnboardingState =>

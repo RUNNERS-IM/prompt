@@ -101,6 +101,8 @@ describe('migrateLegacyUserData', () => {
     })
 
     expect(result).toEqual({ userDataPath: targetDir, outcome: 'migrated' })
+    // Copied Orca settings keep their own Yolo choice.
+    expect(readPromptUserDataMarker(targetDir)?.startYoloOff).toBeUndefined()
     expect(snapshot(legacyDir)).toEqual(before)
     expect(readFileSync(join(targetDir, 'orca-profile-index.json'), 'utf8')).toContain(
       'local-default'
@@ -140,6 +142,8 @@ describe('migrateLegacyUserData', () => {
     expect(result.userDataPath).toBe(targetDir)
     expect(readPromptUserDataMarker(targetDir)?.migratedFrom).toBeNull()
     expect(readPromptUserDataMarker(targetDir)?.firstRunProfile).toBe(true)
+    // A brand-new profile asks the first launch to start with Yolo mode off.
+    expect(readPromptUserDataMarker(targetDir)?.startYoloOff).toBe(true)
     expect(existsSync(legacyDir)).toBe(false)
   })
 
