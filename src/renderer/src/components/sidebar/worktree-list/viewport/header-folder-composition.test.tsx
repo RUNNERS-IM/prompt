@@ -278,12 +278,11 @@ it('composes real dispatched headers, current repo gates and folder cache refres
       ?.getAttribute('data-worktree-sticky-header-active')
   ).toBe('')
   // Reuse the virtual row key for another owner: the mounted JSX control reads its new resource.
+  // Prompt: an online owner's "+" is the New Session / Terminal / Workspace menu (decision 1B).
   view.rerender(
     <Viewport rows={[{ ...rows[0]!, repo: { ...repo, executionHostId: 'runtime:B' } }, rows[1]!]} />
   )
-  expect(
-    view.getByRole('button', { name: 'Create new worktree for Repo' }).hasAttribute('disabled')
-  ).toBe(false)
+  expect(view.getByRole('button', { name: 'New in Repo' }).hasAttribute('disabled')).toBe(false)
 })
 
 it('keeps empty requests inert, deduplicates owner routes and still fetches null snapshots', () => {

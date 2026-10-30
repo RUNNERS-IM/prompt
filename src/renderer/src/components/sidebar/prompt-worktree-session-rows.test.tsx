@@ -11,12 +11,41 @@ vi.mock('@/store', () => ({
     getState: () => state
   })
 }))
-vi.mock('@/lib/worktree-activation', () => ({ activateAndRevealWorktree: vi.fn() }))
-vi.mock('@/lib/activate-tab-and-focus-pane', () => ({ activateTabAndFocusPane: vi.fn() }))
-vi.mock('./useWorktreeAgentRows', () => ({ useWorktreeAgentRows: () => agents }))
-vi.mock('./use-worktree-activity-status', () => ({ useWorktreeActivityStatus: () => 'active' }))
+vi.mock('@/lib/worktree-activation', () => ({
+  activateAndRevealWorktree: vi.fn()
+}))
+vi.mock('@/lib/activate-tab-and-focus-pane', () => ({
+  activateTabAndFocusPane: vi.fn()
+}))
+vi.mock('./useWorktreeAgentRows', () => ({
+  useWorktreeAgentRows: () => agents
+}))
+vi.mock('./use-worktree-activity-status', () => ({
+  useWorktreeActivityStatus: () => 'active'
+}))
 vi.mock('./StatusIndicator', () => ({
   default: ({ status }: { status: string }) => <span data-status-dot={status} />
+}))
+vi.mock('./prompt-sidebar-new-menu', () => ({
+  PROMPT_WORKSPACE_ROW_GROUP_CLASS: 'group/prompt-workspace-row',
+  PromptNewSessionMenuButton: ({ worktreeId }: { worktreeId: string }) => (
+    <span data-new-menu-for={worktreeId} />
+  )
+}))
+vi.mock('./prompt-session-row-menu', () => ({
+  PromptSessionRowMenu: ({
+    tab,
+    name,
+    children
+  }: {
+    tab: { id: string }
+    name: string
+    children: unknown
+  }) => (
+    <div data-row-menu={tab.id} data-row-menu-name={name}>
+      {children as never}
+    </div>
+  )
 }))
 vi.mock('./WorktreeCardAgents', () => ({
   default: (props: Record<string, unknown>) => {
@@ -87,5 +116,39 @@ describe('PromptWorktreeSessionRows', () => {
     const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
     expect(markup).toContain('data-prompt-terminal-row="empty"')
     expect(markup).toContain('Open a terminal')
+  })
+
+  it('gives each terminal row its right-click menu and hover ×, labeled by its name', async () => {
+    const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+    state.tabsByWorktree = { 'wt-1': [{ id: 't1', title: 'zsh' }] }
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    expect(markup).toContain('data-row-menu="t1" data-row-menu-name="zsh"')
+  })
+
+  it('calls a just-launched Claude tab "New Session" until it has a name', async () => {
+    const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+    state.tabsByWorktree = {
+      'wt-1': [
+        {
+          id: 't1',
+          title: 'Terminal 2',
+          defaultTitle: 'Terminal 2',
+          launchAgent: 'claude'
+        },
+        { id: 't2', title: 'Terminal 3', defaultTitle: 'Terminal 3' }
+      ]
+    }
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    expect(markup).toContain('New Session')
+    expect(markup).toContain('Terminal 3')
+    expect(markup).not.toContain('Terminal 2')
+  })
+
+  it('puts the "+" menu on a workspace line, aimed at that workspace', async () => {
+    const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+    state.worktreesByRepo = { 'repo-1': [{}, {}] }
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    expect(markup).toMatch(/data-prompt-workspace-row[^>]*>.*data-new-menu-for="wt-1"/s)
+    expect(markup).toContain('group/prompt-workspace-row')
   })
 })

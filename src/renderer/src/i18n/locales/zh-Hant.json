@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "新工作階段",
+      "newClaudeSession": "新 Claude 工作階段",
+      "newTerminal": "新終端機",
+      "newWorkspace": "新工作區…",
+      "newIn": "在「{{name}}」中新增",
+      "rename": "重新命名…",
+      "tabColor": "分頁顏色",
+      "close": "關閉工作階段",
+      "closeNamed": "關閉「{{name}}」"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "此版本的 OpenCode 無法使用所選模型安全啟動。請將 OpenCode 更新至受支援的版本，或不要指定模型。",

@@ -24,7 +24,9 @@ import {
   type ProgramStatusPresentation
 } from '../../../../shared/program-status/presentation'
 import { resolveRowProgramStatus } from '@/lib/program-status/agent-row-presentation'
-import { promptSessionRowText, promptTerminalTabName } from './prompt-session-row-name'
+import { promptSessionRowName, promptSessionRowText } from './prompt-session-row-name'
+import { PROMPT_SESSION_TIME_HOVER_CLASS } from './prompt-session-row-menu'
+import { promptChildRowWithoutRoleTail } from './prompt-child-row'
 import { promptSessionStatusLine } from './prompt-session-status-line'
 import { PromptHelperPill } from './prompt-helper-pill'
 import { PromptSessionStateIcon } from './PromptSessionStateIcon'
@@ -205,7 +207,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     <span
       className={cn(
         'shrink-0 text-[10px] tabular-nums',
-        highlighted ? 'text-foreground/70' : 'text-muted-foreground/60'
+        highlighted ? 'text-foreground/70' : 'text-muted-foreground/60',
+        promptLayout && PROMPT_SESSION_TIME_HOVER_CLASS
       )}
     >
       {shortTime}
@@ -223,7 +226,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
       {agent.childRow ? (
         // Share chat-strip child content so both surfaces report the same state.
         <AgentChildRowContent
-          row={agent.childRow}
+          // Prompt: a helper's role ("general-purpose") says nothing to the person (decision 5B).
+          row={promptLayout ? promptChildRowWithoutRoleTail(agent.childRow) : agent.childRow}
           now={now}
           leadClassName={leadClassName}
           trailClassName={highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'}
@@ -305,9 +309,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   )
 
   const usePromptLayout = promptLayout && !agent.childRow
-  const promptName = usePromptLayout
-    ? (agent.rowSource === 'subagent' ? '' : promptTerminalTabName(agent.tab)) || leadingText
-    : ''
+  const asked = Boolean(conversationName ?? getAgentRowPrimaryText(agent.entry))
+  const promptName = usePromptLayout ? promptSessionRowName(agent, leadingText, asked) : ''
   const promptStatus = usePromptLayout ? promptSessionStatusLine(agent, dotState, secondary) : ''
   const dimText = highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'
 

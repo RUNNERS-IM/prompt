@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "Новый сеанс",
+      "newClaudeSession": "Новый сеанс Claude",
+      "newTerminal": "Новый терминал",
+      "newWorkspace": "Новое рабочее пространство…",
+      "newIn": "Создать в {{name}}",
+      "rename": "Переименовать…",
+      "tabColor": "Цвет вкладки",
+      "close": "Закрыть сеанс",
+      "closeNamed": "Закрыть {{name}}"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "Эта версия OpenCode не поддерживает безопасный запуск с выбранной моделью. Обновите OpenCode до поддерживаемой версии или не указывайте модель.",

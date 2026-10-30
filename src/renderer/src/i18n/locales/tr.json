@@ -1,4 +1,17 @@
 {
+  "prompt": {
+    "sidebarSessions": {
+      "newSession": "Yeni Oturum",
+      "newClaudeSession": "Yeni Claude Oturumu",
+      "newTerminal": "Yeni Terminal",
+      "newWorkspace": "Yeni Çalışma Alanı…",
+      "newIn": "{{name}} içinde yeni",
+      "rename": "Yeniden Adlandır…",
+      "tabColor": "Sekme Rengi",
+      "close": "Oturumu Kapat",
+      "closeNamed": "{{name}} kapat"
+    }
+  },
   "agentLaunch": {
     "opencode": {
       "updateRequired": "OpenCode bu sürümde seçilen modelle güvenli biçimde başlatılamıyor. OpenCode'u desteklenen bir sürüme güncelleyin veya model seçimini kaldırın.",
