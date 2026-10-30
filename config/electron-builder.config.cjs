@@ -527,11 +527,6 @@ module.exports = {
         join(resourcesDir, 'Prompt Computer Use.app'),
         context.packager
       )
-      await signMacStandaloneHelper(
-        join(resourcesDir, '..', 'MacOS', 'orca-keyboard-layout'),
-        'orca-keyboard-layout',
-        context.packager
-      )
       await packageMacTerminalHost(join(resourcesDir, '..', '..'), context)
     }
   },
@@ -644,13 +639,6 @@ module.exports = {
         to: 'prompt-native.node'
       },
       featureWallResources
-    ],
-    // macOS 26 UNUserNotificationCenter aborts helpers launched from Resources; execute from Contents/MacOS (#7929).
-    extraFiles: [
-      {
-        from: 'native/keyboard-layout-macos/.build/release/orca-keyboard-layout',
-        to: 'MacOS/orca-keyboard-layout'
-      }
     ],
     target: [
       {

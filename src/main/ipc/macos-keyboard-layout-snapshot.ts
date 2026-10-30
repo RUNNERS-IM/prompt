@@ -1,30 +1,8 @@
-import { execFile } from 'node:child_process'
-import { existsSync } from 'node:fs'
-import { dirname, join } from 'node:path'
 import type {
   KeyboardLayoutKeyCharacters,
   KeyboardLayoutSnapshot
 } from '../../shared/keyboard-layout-snapshot'
-
-const HELPER_EXECUTABLE = 'orca-keyboard-layout'
-const HELPER_TIMEOUT_MS = 1000
-const MAX_HELPER_OUTPUT_BYTES = 64 * 1024
-
-let cachedHelperPath: string | null | undefined
-let readInFlight: Promise<KeyboardLayoutSnapshot | null> | null = null
-
-function resolveHelperPath(): string | null {
-  if (cachedHelperPath !== undefined) {
-    return cachedHelperPath
-  }
-  if (process.platform !== 'darwin') {
-    cachedHelperPath = null
-    return cachedHelperPath
-  }
-  const candidate = join(dirname(process.execPath), HELPER_EXECUTABLE)
-  cachedHelperPath = existsSync(candidate) ? candidate : null
-  return cachedHelperPath
-}
+import { loadPromptNative } from '../prompt-native'
 
 function optionalString(value: unknown): string | null {
   return typeof value === 'string' ? value : null
@@ -62,35 +40,20 @@ export function parseKeyboardLayoutSnapshot(stdout: string): KeyboardLayoutSnaps
   }
 }
 
+/** Reads through Prompt's native module, which calls Carbon's TIS API on this (main) thread as macOS requires. */
 export function readMacKeyboardLayoutSnapshot(): Promise<KeyboardLayoutSnapshot | null> {
-  const helperPath = resolveHelperPath()
-  if (!helperPath) {
+  if (process.platform !== 'darwin') {
     return Promise.resolve(null)
   }
-  if (readInFlight) {
-    return readInFlight
+  let json: string | null = null
+  try {
+    json = loadPromptNative()?.keyboardLayoutSnapshot() ?? null
+  } catch {
+    // An older module without this export, or a failed read, leaves the renderer on its conservative defaults.
+    return Promise.resolve(null)
   }
-  readInFlight = runHelper(helperPath).finally(() => {
-    readInFlight = null
-  })
-  return readInFlight
+  return Promise.resolve(json === null ? null : parseKeyboardLayoutSnapshot(json))
 }
 
-export async function waitForMacKeyboardLayoutSnapshotIdle(): Promise<void> {
-  while (readInFlight) {
-    await readInFlight
-  }
-}
-
-function runHelper(helperPath: string): Promise<KeyboardLayoutSnapshot | null> {
-  return new Promise((resolve) => {
-    execFile(
-      helperPath,
-      [],
-      { timeout: HELPER_TIMEOUT_MS, maxBuffer: MAX_HELPER_OUTPUT_BYTES },
-      (error, stdout) => {
-        resolve(error ? null : parseKeyboardLayoutSnapshot(String(stdout).trim()))
-      }
-    )
-  })
-}
+/** Reads finish synchronously, so a layout change never has to wait for one in flight. */
+export async function waitForMacKeyboardLayoutSnapshotIdle(): Promise<void> {}

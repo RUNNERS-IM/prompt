@@ -9,6 +9,8 @@ export type PromptNative = {
   processFootprints(): Promise<{ pid: number; bytes: number }[]>
   /** UNUserNotificationCenter settings for this app's bundle; null outside a bundle or after a 3 s wait. */
   notificationStatus(): Promise<{ authorization: string; alert: string } | null>
+  /** The keyboard layout as JSON (see macos-keyboard-layout-snapshot.ts); synchronous because TIS needs the main thread. */
+  keyboardLayoutSnapshot(): string | null
 }
 
 /** Packaged apps carry the slice's own file in Resources (electron-builder extraResources). */

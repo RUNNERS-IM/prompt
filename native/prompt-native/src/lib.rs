@@ -3,6 +3,7 @@
 //! so each part inherited from Orca moves here as its own file (one `mod` per part) behind platform cfg gates.
 //! Every part compiles on every OS; a part with nothing to do on an OS returns an empty answer there.
 
+mod keyboard_layout;
 mod notification_status;
 mod process_footprint;
 
@@ -77,4 +78,11 @@ impl Task for NotificationStatusTask {
 #[napi(ts_return_type = "Promise<NotificationStatus | null>")]
 pub fn notification_status() -> AsyncTask<NotificationStatusTask> {
     AsyncTask::new(NotificationStatusTask(notification_status::request()))
+}
+
+/// The current keyboard layout as the Swift helper's JSON, or null when it kept changing or on other platforms.
+/// Synchronous on purpose: Carbon's TIS API must run on a UI app's main thread, which is where this is called.
+#[napi]
+pub fn keyboard_layout_snapshot() -> Option<String> {
+    keyboard_layout::read_json()
 }

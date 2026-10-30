@@ -41,7 +41,6 @@ import {
 import { withRolldownThreadLimit } from './rolldown-thread-limit.mjs'
 import { withDevRolldownRuntimeEnv } from './dev-rolldown-runtime-env.mjs'
 import { copyPrivateTree } from './space-sharing-copy.mjs'
-import { buildDevSwiftCliHelpers } from './swift-cli-helper-macos.mjs'
 import {
   DEV_BUNDLE_ID,
   getDevBundlePlistPatches,
@@ -245,7 +244,7 @@ function prepareMacDevElectronApp() {
     2
   )
   const executablePath = path.join(appPath, 'Contents', 'MacOS', 'Electron')
-  // Require Chromium resources to avoid blank crash; optional swiftc keyboard helper only degrades keyboard behavior when absent.
+  // Require Chromium resources to avoid blank crash.
   const chromiumResourcePath = path.join(
     appPath,
     'Contents',
@@ -254,10 +253,7 @@ function prepareMacDevElectronApp() {
     'Resources',
     'icudtl.dat'
   )
-  const requiredResourcePaths = [
-    chromiumResourcePath,
-    path.join(appPath, 'Contents', 'MacOS', 'orca-keyboard-layout')
-  ]
+  const requiredResourcePaths = [chromiumResourcePath]
 
   function copiedAppIsUsable() {
     if (!existsSync(markerPath) || !existsSync(appPath)) {
@@ -288,7 +284,7 @@ function prepareMacDevElectronApp() {
   if (
     rebuildProcessTable !== null &&
     isDevBundleInUse(distDir, rebuildProcessTable) &&
-    // Reject live-looking broken bundle despite orphan crashpad PID; test required Chromium resources only, not optional swiftc helper, to avoid deleting usable app.
+    // Reject live-looking broken bundle despite orphan crashpad PID; test required Chromium resources only to avoid deleting usable app.
     existsSync(executablePath) &&
     existsSync(chromiumResourcePath)
   ) {
@@ -321,8 +317,6 @@ function prepareMacDevElectronApp() {
   for (const { key, value } of getDevHelperPlistPatches()) {
     setPlistValue(helperPlistPath, key, value)
   }
-
-  buildDevSwiftCliHelpers(path.join(appPath, 'Contents', 'MacOS'))
 
   // Re-sign after copy/plist edits or macOS rejects notification registration (UNErrorDomain 1); signing failure stays nonfatal for dev.
   let signed = true
