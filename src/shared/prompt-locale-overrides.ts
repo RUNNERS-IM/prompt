@@ -32,7 +32,11 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   // Help menu: "…" only on items that open a window.
   'menu.reportCrash': '크래시 신고…',
   'auto.components.setup.guide.SetupGuideModal.3598a3ca0c':
-    'Orca를 병렬 에이전트 작업에 유용하게 만드는 핵심 워크플로를 완료합니다.'
+    'Orca를 병렬 에이전트 작업에 유용하게 만드는 핵심 워크플로를 완료합니다.',
+  // App menu: same wording as the menu bar menu (업데이트 확인…, 설정…).
+  'menu.checkForUpdates': '업데이트 확인…',
+  'menu.settings': '설정…',
+  'menu.quitAndStopAllSessions': '완전히 종료…'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
