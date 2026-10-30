@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
 
@@ -28,6 +28,11 @@ export type PromptUserDataMarker = {
    * Folders from earlier builds lack it, so their profiles never count as first-run.
    */
   firstRunProfile?: true
+  /**
+   * Set with firstRunProfile: the next launch turns Yolo mode off once, then clears this flag.
+   * Profiles made by earlier builds never have it, so their permission choice is never touched.
+   */
+  startYoloOff?: true
 }
 
 /** Electron's default appData root for this platform (before the app name is appended). */
@@ -63,12 +68,21 @@ export function readPromptUserDataMarker(userDataPath: string): PromptUserDataMa
       createdAtMs: parsed.createdAtMs,
       migratedFrom,
       ...(parsed.firstRunProfile === true && migratedFrom === null
-        ? { firstRunProfile: true as const }
+        ? {
+            firstRunProfile: true as const,
+            ...(parsed.startYoloOff === true ? { startYoloOff: true as const } : {})
+          }
         : {})
     }
   } catch {
     return null
   }
+}
+
+export function writePromptUserDataMarker(dir: string, marker: PromptUserDataMarker): void {
+  writeFileSync(join(dir, PROMPT_USER_DATA_MARKER_FILE), `${JSON.stringify(marker)}\n`, {
+    mode: 0o600
+  })
 }
 
 export function isPromptUserDataReady(userDataPath: string): boolean {
