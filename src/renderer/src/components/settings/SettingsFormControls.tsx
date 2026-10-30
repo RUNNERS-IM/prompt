@@ -57,19 +57,22 @@ export function SettingsRow({
 }: SettingsRowProps): React.JSX.Element {
   return (
     <div
+      data-prompt-settings-row=""
       className={cn(
-        'flex gap-4',
-        'py-4',
+        'flex gap-3',
+        'py-[13px]',
         alignTop ? 'items-start' : 'items-center justify-between',
         className
       )}
     >
-      <div className={cn('min-w-0 flex-1', description ? 'space-y-1' : 'space-y-0.5')}>
-        <Label id={labelId} className="select-text">
+      <div className="min-w-0 flex-1 space-y-0.5">
+        <Label id={labelId} className="select-text text-[13px] leading-4">
           {label}
         </Label>
         {description ? (
-          <p className="select-text text-xs text-muted-foreground">{description}</p>
+          <p className="select-text text-[11px] leading-[14px] text-muted-foreground">
+            {description}
+          </p>
         ) : null}
       </div>
       <div className="shrink-0">{control}</div>
@@ -236,7 +239,10 @@ export function SettingsSubsectionHeader({
   className
 }: SettingsSubsectionHeaderProps): React.JSX.Element {
   return (
-    <div className={cn('flex items-start justify-between gap-3', className)}>
+    <div
+      data-prompt-group-title=""
+      className={cn('flex items-start justify-between gap-3', className)}
+    >
       <div className="space-y-1">
         <h3 className="text-sm font-semibold">{title}</h3>
         {description ? <p className="text-xs text-muted-foreground">{description}</p> : null}

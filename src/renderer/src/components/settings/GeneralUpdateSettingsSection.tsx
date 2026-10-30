@@ -56,6 +56,7 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
   return (
     <section key="updates" className="space-y-4">
       <div
+        data-prompt-group-title=""
         onClick={(event) => {
           if (event.altKey) {
             setChannelSwitcherRevealed((revealed) => !revealed)

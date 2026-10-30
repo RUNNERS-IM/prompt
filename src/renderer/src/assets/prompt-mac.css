@@ -389,7 +389,7 @@ html.prompt-mac-vibrancy [data-slot='command-dialog-content'] [data-slot='comman
 /* Push buttons at the shared baseline: 28 high, 13 text (upstream h-9 = 36, text-sm = 14). */
 html.prompt-mac-vibrancy [data-slot='button'][data-size='default'] {
   height: 28px;
-  padding-block: 0;
+  padding: 0 14px;
   font-size: 13px;
 }
 
@@ -398,4 +398,119 @@ html.prompt-mac-vibrancy [data-slot='button'][data-size='default'] {
 html.prompt-mac-vibrancy [data-slot='dialog-title'][data-size='default'] {
   font-size: 13px;
   font-weight: 600;
+}
+
+/* ===== Settings 7A: the page body at the shared window values (monitor src/runners-window.css):
+   edge 28, title 16 bold, text 13 / 11, boxes corner 12 with a 0.5 line and the card fill,
+   rows 13 / 16. Rows themselves (13 / 16, title-description 2) are set in SettingsFormControls.tsx. ===== */
+html.prompt-mac-vibrancy .settings-view-shell .px-8.pt-10 {
+  padding: 28px;
+}
+
+html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child h2 + p {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Pages still drawn as one card per page. */
+html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > .rounded-xl.border {
+  padding: 4px 16px;
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: none;
+}
+
+/* Section titles 1A ([SPLIT] 설정 칸 제목 통일): on the pages in prompt-settings-cards.ts every
+   group of rows becomes its own box with a small grey title 8 above it, boxes 24 apart (the
+   stack's space-y-6) with the old separators gone. The rows after a title are drawn as one box:
+   the first one rounds the top, the last one the bottom, and a hairline inset 16 parts them. */
+html.prompt-mac-vibrancy [data-prompt-cards] {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-slot='separator'] {
+  display: none;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] {
+  margin: 0 0 8px;
+  padding: 0 2px;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] [data-prompt-group-title] {
+  margin: 0;
+  padding: 0;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] :is(h2, h3) {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 14px;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] p {
+  font-size: 11px;
+  line-height: 14px;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ * {
+  margin: 0;
+  padding: 13px 16px;
+  border: 0.5px solid var(--border);
+  border-block: 0;
+  border-radius: 0;
+  background: var(--card) no-repeat top center / calc(100% - 32px) 0.5px;
+  box-shadow: none;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ * + * {
+  background-image: linear-gradient(var(--border), var(--border));
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] + * {
+  border-top-width: 0.5px;
+  border-top-style: solid;
+  border-radius: 12px 12px 0 0;
+}
+
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ :last-child {
+  border-bottom-width: 0.5px;
+  border-bottom-style: solid;
+  border-end-start-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+/* A row's own 13 comes from the box; rows that share one piece keep 13 between them. */
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ * [data-prompt-settings-row] {
+  padding-block: 0;
+}
+
+html.prompt-mac-vibrancy
+  [data-prompt-cards]
+  [data-prompt-group-title]
+  ~ *
+  [data-prompt-settings-row]
+  + [data-prompt-settings-row] {
+  margin-top: 13px;
+}
+
+/* Switches in the accent colour, as in System Settings (upstream fills them with the text colour). */
+html.prompt-mac-vibrancy [data-settings-section] [data-slot='switch'][data-state='checked'] {
+  background: var(--prompt-accent);
 }

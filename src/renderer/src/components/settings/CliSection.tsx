@@ -148,7 +148,7 @@ export function CliSection({
 
   return (
     <section className="space-y-4" data-settings-section="cli">
-      <div className="space-y-1">
+      <div className="space-y-1" data-prompt-group-title="">
         <h2 className="text-sm font-semibold">
           {translate('auto.components.settings.CliSection.c5c0f2641d', 'Orca CLI')}
         </h2>

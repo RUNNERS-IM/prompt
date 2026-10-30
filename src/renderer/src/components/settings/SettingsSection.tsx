@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { useAppStore } from '../../store'
 import type { SettingsSearchEntry } from './settings-search'
 import { matchesSettingsSearch } from './settings-search'
+import { PROMPT_CARD_SECTION_IDS } from './prompt-settings-cards'
 
 // Share active section through context to avoid threading it through every section call.
 const ActiveSettingsSectionContext = createContext<string | null>(null)
@@ -88,6 +89,7 @@ export function SettingsSection({
       </div>
       {/* Contain row groups in a distinct band so they cannot read as sidebar continuations. */}
       <div
+        data-prompt-cards={PROMPT_CARD_SECTION_IDS.has(id) ? '' : undefined}
         className={cn(
           'rounded-xl border border-border/50 bg-card/50 px-7 py-6 shadow-xs',
           bodyClassName
