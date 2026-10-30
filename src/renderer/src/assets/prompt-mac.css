@@ -1,30 +1,22 @@
-/* Prompt: System Settings style chrome. The window shows macOS sidebar vibrancy;
-   the sidebar floats as a rounded translucent card and everything around it shares one background. */
-html.prompt-mac-vibrancy,
+/* Prompt: System Settings style chrome. One window background everywhere;
+   the sidebar floats as a rounded card on top of it. */
 html.prompt-mac-vibrancy body,
-html.prompt-mac-vibrancy #root,
 html.prompt-mac-vibrancy .app-layout,
-html.prompt-mac-vibrancy .prompt-shell-row {
-  background: transparent;
-}
-
+html.prompt-mac-vibrancy .prompt-shell-row,
 html.prompt-mac-vibrancy .prompt-main-column,
 html.prompt-mac-vibrancy .app-layout > :not(:first-child) {
   background: var(--background);
   border-top-color: transparent;
 }
 
-/* The card's outer ring paints the gutter opaque so only the card itself shows vibrancy. */
 html.prompt-mac-vibrancy .prompt-sidebar-column,
 html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar {
   margin: 8px 0 8px 8px;
   border-radius: 14px;
   overflow: hidden;
-  background: color-mix(in srgb, var(--worktree-sidebar) 55%, transparent);
+  background: var(--worktree-sidebar);
   border: 0;
-  box-shadow:
-    0 0 0 8px var(--background),
-    inset 0 0 0 0.5px color-mix(in srgb, var(--foreground) 12%, transparent);
+  box-shadow: inset 0 0 0 0.5px color-mix(in srgb, var(--foreground) 10%, transparent);
 }
 
 html.prompt-mac-vibrancy .prompt-sidebar-column .titlebar-left,
