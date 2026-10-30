@@ -1,5 +1,5 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
-import { AlertTriangle, Clipboard, Send } from 'lucide-react'
+import { AlertTriangle, Clipboard, ExternalLink, Send } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -29,6 +29,14 @@ import {
   getCrashReportSubmitWarningNotice
 } from './crash-report-submit-notice'
 import { useCrashReportCopy } from './use-crash-report-copy'
+import {
+  PROMPT_CRASH_REPORT_OPENS_GITHUB,
+  promptCrashReportCancelLabel,
+  promptCrashReportDescription,
+  promptCrashReportOpenedMessage,
+  promptCrashReportOpenLabel,
+  promptCrashReportTitle
+} from './prompt-crash-report-copy'
 
 function formatSummary(report: CrashReportRecord): string {
   if (isReactErrorBoundaryReport(report)) {
@@ -50,6 +58,9 @@ function formatSummary(report: CrashReportRecord): string {
 }
 
 function getDialogTitle(report: CrashReportRecord | null): string {
+  if (!report && PROMPT_CRASH_REPORT_OPENS_GITHUB) {
+    return promptCrashReportTitle()
+  }
   if (!report) {
     return translate(
       'auto.components.crash.report.CrashReportDialogSurface.reportTitle',
@@ -68,6 +79,9 @@ function getDialogTitle(report: CrashReportRecord | null): string {
 }
 
 function getDialogDescription(report: CrashReportRecord | null): string {
+  if (PROMPT_CRASH_REPORT_OPENS_GITHUB) {
+    return promptCrashReportDescription()
+  }
   if (!report) {
     return translate(
       'auto.components.crash.report.CrashReportDialogSurface.reportDescription',
@@ -120,7 +134,9 @@ export function CrashReportDialogSurface({
 }: CrashReportDialogSurfaceProps): React.JSX.Element {
   const mountedRef = useMountedRef()
   const [notes, setNotes] = useState('')
-  const [includeDiagnosticLogs, setIncludeDiagnosticLogs] = useState(true)
+  const [includeDiagnosticLogs, setIncludeDiagnosticLogs] = useState(
+    !PROMPT_CRASH_REPORT_OPENS_GITHUB
+  )
   const [submitting, setSubmitting] = useState(false)
   const [viewer, setViewer] = useState<GitHubViewer | null>(null)
   // Sequence viewer lookups so late close/reopen results cannot supply a stale submission identity.
@@ -161,7 +177,7 @@ export function CrashReportDialogSurface({
       clearViewer()
       return
     }
-    setIncludeDiagnosticLogs(true)
+    setIncludeDiagnosticLogs(!PROMPT_CRASH_REPORT_OPENS_GITHUB)
     loadViewerForOpenDialog()
   }, [clearViewer, loadViewerForOpenDialog, open])
 
@@ -226,7 +242,9 @@ export function CrashReportDialogSurface({
       setNotes('')
       toast.dismiss(CRASH_REPORT_SUBMIT_FAILURE_TOAST_ID)
       const warningNotice = getCrashReportSubmitWarningNotice(result, includeDiagnosticLogs)
-      if (warningNotice) {
+      if (PROMPT_CRASH_REPORT_OPENS_GITHUB) {
+        toast.info(promptCrashReportOpenedMessage())
+      } else if (warningNotice) {
         toast.warning(warningNotice.title, { description: warningNotice.description })
       } else {
         toast.success(
@@ -299,7 +317,7 @@ export function CrashReportDialogSurface({
                 </pre>
               </div>
             </>
-          ) : (
+          ) : PROMPT_CRASH_REPORT_OPENS_GITHUB && !loading ? null : (
             <div className="rounded-md border border-border/70 bg-muted/30 p-3 text-xs text-muted-foreground">
               {loading
                 ? translate(
@@ -330,7 +348,10 @@ export function CrashReportDialogSurface({
               {MAX_USER_NOTES_LENGTH.toLocaleString(getIntlLocale())}
             </div>
           </div>
-          <div className="flex items-start gap-2 rounded-md border border-border/70 bg-muted/20 p-3">
+          <div
+            hidden={PROMPT_CRASH_REPORT_OPENS_GITHUB}
+            className="flex items-start gap-2 rounded-md border border-border/70 bg-muted/20 p-3"
+          >
             <Checkbox
               id="crash-report-attach-diagnostics"
               checked={includeDiagnosticLogs}
@@ -373,11 +394,19 @@ export function CrashReportDialogSurface({
             onClick={handleDismiss}
             disabled={submitting}
           >
-            {translate('auto.components.crash.report.CrashReportDialog.88fea8e84e', "Don't Send")}
+            {PROMPT_CRASH_REPORT_OPENS_GITHUB
+              ? promptCrashReportCancelLabel()
+              : translate('auto.components.crash.report.CrashReportDialog.88fea8e84e', "Don't Send")}
           </Button>
           <Button type="button" size="sm" onClick={handleSubmit} disabled={loading || submitting}>
-            <Send className="size-3.5" />
-            {translate('auto.components.crash.report.CrashReportDialog.b4951cd27c', 'Send Report')}
+            {PROMPT_CRASH_REPORT_OPENS_GITHUB ? (
+              <ExternalLink className="size-3.5" />
+            ) : (
+              <Send className="size-3.5" />
+            )}
+            {PROMPT_CRASH_REPORT_OPENS_GITHUB
+              ? promptCrashReportOpenLabel()
+              : translate('auto.components.crash.report.CrashReportDialog.b4951cd27c', 'Send Report')}
           </Button>
         </DialogFooter>
       </DialogContent>

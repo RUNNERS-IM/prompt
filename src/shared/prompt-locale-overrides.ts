@@ -22,7 +22,8 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.status.bar.SkillUpdateStatusSegment.runningLabel': '스킬 업데이트 중',
   'auto.components.status.bar.SkillUpdateStatusSegment.runningOne': '{{value0}} 업데이트 중…',
   'auto.components.status.bar.SkillUpdateStatusSegment.successLabel': '스킬 업데이트됨',
-  'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중'
+  'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중',
+  'auto.components.crash.report.CrashReportDialog.50b00dc327': '세부 정보 복사'
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
@@ -38,7 +39,13 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.timeAgo.now': '방금',
   'prompt.timeAgo.minutes': '{{value}}분',
   'prompt.timeAgo.hours': '{{value}}시간',
-  'prompt.timeAgo.days': '{{value}}일'
+  'prompt.timeAgo.days': '{{value}}일',
+  'prompt.crashReport.title': '크래시 신고',
+  'prompt.crashReport.description':
+    'GitHub에 새 이슈 화면을 엽니다. 적은 내용과 버전이 미리 채워지며, GitHub 계정이 필요합니다.',
+  'prompt.crashReport.cancel': '취소',
+  'prompt.crashReport.open': 'GitHub에서 열기',
+  'prompt.crashReport.opened': 'GitHub 이슈 화면을 열었습니다. 거기서 등록해야 접수됩니다.'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */
