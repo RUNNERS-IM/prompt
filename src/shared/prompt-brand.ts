@@ -20,7 +20,8 @@ const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   // French catalog translated the brand itself.
   [/\bOrque\b/g, PROMPT_APP_NAME],
   // Korean catalog transliterated the brand once; both words end in a vowel, so particles still fit.
-  [/오르카/g, '프롬프트']
+  // Written as \u escapes because the orcad server bundle must stay ASCII (orcad-entry-build.mjs).
+  [/\uC624\uB974\uCE74/g, '\uD504\uB86C\uD504\uD2B8']
 ]
 
 export function applyPromptBrand(value: string): string {
