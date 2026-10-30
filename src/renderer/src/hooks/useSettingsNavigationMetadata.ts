@@ -34,6 +34,7 @@ import { buildRemoteSettingsSections } from './settings-navigation-remote-sectio
 import { buildWorkflowSettingsSections } from './settings-navigation-workflow-sections'
 import { useWindowsTerminalCapabilityOwnerKey } from './useWindowsTerminalCapabilityOwnerKey'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
+import { isPromptVisibleSettingsSection } from '@/lib/prompt-hidden-settings'
 
 export { isWebClientLocation } from '@/lib/web-client-location'
 
@@ -179,7 +180,7 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
           projects: projectHostSetupProjection.projects,
           projectHostSetups: projectHostSetupProjection.setups
         }
-      }),
+      }).filter(isPromptVisibleSettingsSection),
     // oxlint-disable-next-line react-hooks/exhaustive-deps -- translate() inside buildSettingsNavigationMetadata reads the UI language and catalogs implicitly.
     [
       isMac,
