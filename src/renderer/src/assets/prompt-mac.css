@@ -243,3 +243,50 @@ html.prompt-mac-vibrancy
   svg {
   color: #fff;
 }
+
+/* ===== Tab shape 2A: rectangular tabs like Safari and Xcode. The strip shows even with one tab
+   (upstream never hides it). Each tab is a rectangle with rounded top corners and as wide as its
+   title (tab-width-rules.ts). Inactive tabs are a step lighter than the strip; the active tab takes
+   the card colour, which equals the default terminal background, so it joins the terminal below.
+   The underline marker under the active tab is dropped. ===== */
+html.prompt-mac-vibrancy:root:not(.dark) {
+  --prompt-tab-strip: color-mix(in srgb, #000 9%, var(--prompt-card));
+  --prompt-tab-idle: color-mix(in srgb, #000 4%, var(--prompt-card));
+}
+
+html.prompt-mac-vibrancy.dark {
+  --prompt-tab-strip: color-mix(in srgb, #fff 5%, var(--prompt-card));
+  --prompt-tab-idle: color-mix(in srgb, #fff 10%, var(--prompt-card));
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] {
+  background: var(--prompt-tab-strip);
+  border-bottom-color: transparent;
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip {
+  gap: 4px;
+  padding: 5px 0 0 6px;
+  border-right-color: transparent;
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip [data-active] {
+  border-color: transparent;
+  border-radius: 6px 6px 0 0;
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip [data-active='false'] {
+  background: var(--prompt-tab-idle);
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip [data-active='false']:hover {
+  background: color-mix(in srgb, var(--prompt-tab-idle) 50%, var(--prompt-card));
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] .terminal-tab-strip [data-active='true'] {
+  background: var(--prompt-card);
+}
+
+html.prompt-mac-vibrancy [data-tab-group-strip-id] [data-active='true'] > .h-\[2px\].bg-foreground {
+  display: none;
+}
