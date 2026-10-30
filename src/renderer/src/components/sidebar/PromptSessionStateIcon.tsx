@@ -3,7 +3,7 @@ import { agentStateLabel, type AgentDotState } from '@/components/AgentStateDot'
 import './prompt-session-state-icon.css'
 
 /** The four looks a Prompt session row can show. */
-export type PromptSessionIconKind = 'working' | 'attention' | 'done' | 'waiting'
+export type PromptSessionIconKind = 'working' | 'attention' | 'failed' | 'done' | 'waiting'
 
 export function promptSessionIconKind(state: AgentDotState): PromptSessionIconKind {
   switch (state) {
@@ -12,9 +12,11 @@ export function promptSessionIconKind(state: AgentDotState): PromptSessionIconKi
     case 'permission':
     case 'blocked':
     case 'waiting':
-    case 'failed':
     case 'interrupted':
       return 'attention'
+    // Prompt (7B): only a failed session gets its own red cross; interrupted/blocked stay "!".
+    case 'failed':
+      return 'failed'
     case 'done':
       return 'done'
     case 'monitoring':
@@ -54,6 +56,7 @@ export function resetPromptSessionIconMemoryForTest(): void {
 const COLORS = {
   working: '#e5a33a',
   attention: '#4c8dff',
+  failed: '#e5484d',
   done: '#4caf6a',
   waiting: '#8d8d92'
 } as const
@@ -61,7 +64,7 @@ const COLORS = {
 /**
  * Prompt session status icon: thin line glyphs, 13px, 1.6 stroke, with the chosen motion
  * (prompt-session-state-icon.css). Working: an orange arc turning over a faint ring. Attention:
- * a breathing blue "!". Done: ring then check drawn once when the session finishes. Waiting /
+ * a breathing blue "!". Failed: a still red "×". Done: ring then check drawn once when the session finishes. Waiting /
  * background: a clock whose hand turns. Reduced motion shows every icon still and fully drawn.
  */
 export function PromptSessionStateIcon({
@@ -126,6 +129,12 @@ export function PromptSessionStateIcon({
           <>
             <circle cx="8" cy="8" r="6" stroke={color} />
             <path d="M8 5v3.5M8 11h.01" stroke={color} />
+          </>
+        ) : null}
+        {kind === 'failed' ? (
+          <>
+            <circle cx="8" cy="8" r="6" stroke={color} />
+            <path d="M6 6l4 4M10 6l-4 4" stroke={color} />
           </>
         ) : null}
         {kind === 'done' ? (
