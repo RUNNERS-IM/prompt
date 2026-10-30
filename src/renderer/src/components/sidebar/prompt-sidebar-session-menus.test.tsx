@@ -11,7 +11,8 @@ const mocks = vi.hoisted(() => ({
   rename: vi.fn(),
   color: vi.fn(),
   startClaude: vi.fn(),
-  startTerminal: vi.fn()
+  startTerminal: vi.fn(),
+  openCopy: vi.fn()
 }))
 
 vi.mock('@/store', () => ({
@@ -71,6 +72,9 @@ vi.mock('@/components/ui/dropdown-menu', () => ({
   ),
   DropdownMenuShortcut: ({ children }: { children?: ReactNode }) => <kbd>{children}</kbd>,
   DropdownMenuTrigger: ({ children }: { children?: ReactNode }) => children
+}))
+vi.mock('@/lib/prompt-windows', () => ({
+  openPromptSessionCopyWindow: mocks.openCopy
 }))
 vi.mock('./prompt-sidebar-session-actions', () => ({
   closePromptSession: mocks.close,
@@ -148,6 +152,30 @@ describe('PromptSessionRowMenu', () => {
     expect(mocks.color).toHaveBeenCalledWith('term-1', null)
     click(container, 'Close Session')
     expect(mocks.close).toHaveBeenCalledWith('wt-1', 'term-1')
+  })
+
+  it('offers a copy in a new window only when it has the copy command', () => {
+    const command = 'claude --resume fb734d47-9c9f-462d-a948-faab45a52682 --fork-session'
+    const container = render(
+      <PromptSessionRowMenu
+        tab={{ id: 'term-1', worktreeId: 'wt-1' }}
+        name="[PROMPT] 개발"
+        copyCommand={command}
+      >
+        <div>row</div>
+      </PromptSessionRowMenu>
+    )
+    expect(items(container).at(-2)).toBe('Copy to New Window')
+    click(container, 'Copy to New Window')
+    expect(mocks.openCopy).toHaveBeenCalledWith('wt-1', command)
+    act(() => root?.unmount())
+    root = undefined
+    const plain = render(
+      <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
+        <div>row</div>
+      </PromptSessionRowMenu>
+    )
+    expect(items(plain)).not.toContain('Copy to New Window')
   })
 
   it('puts the hover × over the time spot, labeled by the row name', () => {

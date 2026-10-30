@@ -9,7 +9,8 @@
       "rename": "Renomear…",
       "tabColor": "Cor da aba",
       "close": "Fechar sessão",
-      "closeNamed": "Fechar {{name}}"
+      "closeNamed": "Fechar {{name}}",
+      "copyToNewWindow": "Copiar para nova janela"
     }
   },
   "agentLaunch": {

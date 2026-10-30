@@ -23136,7 +23136,8 @@
       "rename": "Rename…",
       "tabColor": "Tab Color",
       "close": "Close Session",
-      "closeNamed": "Close {{name}}"
+      "closeNamed": "Close {{name}}",
+      "copyToNewWindow": "Copy to New Window"
     },
     "onboarding": {
       "beforeYouStart": {

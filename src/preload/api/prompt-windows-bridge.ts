@@ -12,6 +12,8 @@ export type PromptWindowsApi = {
   /** `target` is a window key, or "new" for a new window. */
   moveTab: (tabId: string, target: string) => Promise<void>
   takeFocusRequest: () => Promise<PromptWindowFocusRequest | null>
+  /** New window that runs `command` (a Claude session copy) in a new terminal of the workspace. */
+  openSessionCopy: (worktreeId: string, command: string) => Promise<void>
 }
 
 export const promptWindowsApi: PromptWindowsApi = {
@@ -19,5 +21,7 @@ export const promptWindowsApi: PromptWindowsApi = {
   openProject: (repoId) => ipcRenderer.invoke(CH.openProject, repoId),
   list: () => ipcRenderer.invoke(CH.list),
   moveTab: (tabId, target) => ipcRenderer.invoke(CH.moveTab, tabId, target),
-  takeFocusRequest: () => ipcRenderer.invoke(CH.takeFocusRequest)
+  takeFocusRequest: () => ipcRenderer.invoke(CH.takeFocusRequest),
+  openSessionCopy: (worktreeId, command) =>
+    ipcRenderer.invoke(CH.openSessionCopy, worktreeId, command)
 }

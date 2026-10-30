@@ -9,7 +9,8 @@
       "rename": "Yeniden Adlandır…",
       "tabColor": "Sekme Rengi",
       "close": "Oturumu Kapat",
-      "closeNamed": "{{name}} kapat"
+      "closeNamed": "{{name}} kapat",
+      "copyToNewWindow": "Yeni pencereye kopyala"
     }
   },
   "agentLaunch": {

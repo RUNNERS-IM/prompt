@@ -9,6 +9,7 @@ import {
 } from '../window/foreground-activation-policy'
 import type { KeybindingOverrides } from '../../shared/keybindings'
 import {
+  isPromptClaudeSessionCopyCommand,
   isPromptRestoreWindowsOn,
   PROMPT_MAIN_WINDOW_KEY as MAIN,
   PROMPT_NEW_WINDOW_TARGET,
@@ -275,6 +276,17 @@ function installIpc(): void {
   ipcMain.handle(CH.moveTab, (event, tabId: unknown, target: unknown) => {
     if (typeof tabId === 'string' && typeof target === 'string') {
       moveTabFromWindow(promptWindowKeyOfSender(event.sender), tabId, target)
+    }
+  })
+  ipcMain.handle(CH.openSessionCopy, (_event, worktreeId: unknown, command: unknown) => {
+    if (
+      typeof worktreeId === 'string' &&
+      typeof command === 'string' &&
+      isPromptClaudeSessionCopyCommand(command)
+    ) {
+      const key = newWindowKey()
+      focusRequests.set(key, { worktreeId, tabId: null, startCommand: command })
+      openPromptWindow({ key })
     }
   })
   ipcMain.handle(CH.takeFocusRequest, (event) => {

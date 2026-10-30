@@ -9,7 +9,8 @@
       "rename": "重命名…",
       "tabColor": "标签页颜色",
       "close": "关闭会话",
-      "closeNamed": "关闭“{{name}}”"
+      "closeNamed": "关闭“{{name}}”",
+      "copyToNewWindow": "复制到新窗口"
     }
   },
   "agentLaunch": {

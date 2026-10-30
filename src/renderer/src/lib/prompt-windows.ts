@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useAppStore } from '@/store'
 import { revealWorkspaceSurface } from '@/lib/workspace-surface-reveal'
 import { focusTerminalInitiatedTab } from '@/hooks/ipc-events/terminal-command-state'
+import { persistAgentLaunchTabOrder } from '@/lib/launch-agent-tab-order'
 import {
   PROMPT_MAIN_WINDOW_KEY,
   PROMPT_OPEN_REPO_QUERY,
@@ -45,6 +46,22 @@ export function movePromptTabToWindow(tabId: string, target: string): void {
   void window.api?.promptWindows?.moveTab(tabId, target)
 }
 
+/** Copy of a Claude session in a new window (`command` from promptClaudeSessionCopyCommand). */
+export function openPromptSessionCopyWindow(worktreeId: string, command: string): void {
+  void window.api?.promptWindows?.openSessionCopy(worktreeId, command)
+}
+
+/** A new terminal tab in this window that runs `command` once its shell is ready. */
+function startTabWithCommand(worktreeId: string, command: string): string {
+  const store = useAppStore.getState()
+  const tab = store.createTab(worktreeId, undefined, undefined, {
+    pendingStartup: { command }
+  })
+  store.setActiveTabType('terminal', worktreeId)
+  persistAgentLaunchTabOrder(worktreeId, tab.id)
+  return tab.id
+}
+
 function mainWorktreeIdOf(repoId: string): string | null {
   const worktrees = useAppStore.getState().worktreesByRepo?.[repoId] ?? []
   return (worktrees.find((w) => w.isMainWorktree) ?? worktrees[0])?.id ?? null
@@ -72,7 +89,8 @@ function dropOpenRepoQuery(): void {
 
 /**
  * Once the session has loaded: a window opened for a project selects that project's main
- * workspace; a window that just received tabs selects the first of them.
+ * workspace; a window that just received tabs selects the first of them; a window opened for a
+ * session copy starts the copy in a new tab.
  */
 export function usePromptWindowStartup(): void {
   const ready = useAppStore((s) => s.workspaceSessionReady)
@@ -97,9 +115,13 @@ export function usePromptWindowStartup(): void {
       return
     }
     void window.api?.promptWindows?.takeFocusRequest().then((request) => {
-      if (request) {
-        showTab(request.worktreeId, request.tabId)
+      if (!request) {
+        return
       }
+      const tabId = request.startCommand
+        ? startTabWithCommand(request.worktreeId, request.startCommand)
+        : request.tabId
+      showTab(request.worktreeId, tabId)
     })
   }, [ready])
 }

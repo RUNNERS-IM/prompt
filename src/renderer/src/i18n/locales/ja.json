@@ -9,7 +9,8 @@
       "rename": "名前を変更…",
       "tabColor": "タブの色",
       "close": "セッションを閉じる",
-      "closeNamed": "「{{name}}」を閉じる"
+      "closeNamed": "「{{name}}」を閉じる",
+      "copyToNewWindow": "新しいウインドウにコピー"
     }
   },
   "agentLaunch": {

@@ -9,7 +9,8 @@
       "rename": "重新命名…",
       "tabColor": "分頁顏色",
       "close": "關閉工作階段",
-      "closeNamed": "關閉「{{name}}」"
+      "closeNamed": "關閉「{{name}}」",
+      "copyToNewWindow": "複製到新視窗"
     }
   },
   "agentLaunch": {

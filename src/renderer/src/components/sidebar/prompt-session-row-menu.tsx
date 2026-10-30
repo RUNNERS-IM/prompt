@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Layers, Pencil, X } from 'lucide-react'
+import { Copy, Layers, Pencil, X } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +20,8 @@ import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import { TAB_COLORS } from '@/components/tab-bar/tab-colors'
 import { PromptClaudeModelSubmenu } from '@/components/prompt-claude-model-menu'
 import { WORKTREE_CONTEXT_MENU_SCOPE_ATTR } from './worktree-context-menu-policy'
+import { openPromptSessionCopyWindow } from '@/lib/prompt-windows'
+import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-windows'
 import type { DashboardAgentRow } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { promptNewSessionLabel, promptSessionTabName } from './prompt-session-row-name'
@@ -81,6 +83,7 @@ export function PromptSessionCloseButton({
 
 /**
  * Right-click menu of one sidebar session row (decision 2A): rename, tab color, close session.
+ * A Claude row with a known session id also offers a copy in a new window ([PROMPT] 창 복사 1A).
  * A live Claude row keeps "Model ▸" on top, as the workspace menu offered it before. The scope
  * attribute tells the workspace menu around the row to leave this right-click alone.
  */
@@ -88,12 +91,15 @@ export function PromptSessionRowMenu({
   tab,
   name,
   paneKey = null,
+  copyCommand = null,
   children
 }: {
   tab: SessionTab
   /** The row's name, for the ×'s label. */
   name: string
   paneKey?: string | null
+  /** Command that starts a copy of this Claude session; null hides the menu item. */
+  copyCommand?: string | null
   children: React.ReactNode
 }): React.JSX.Element {
   useUiLanguageRevision()
@@ -185,6 +191,17 @@ export function PromptSessionRowMenu({
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuSeparator />
+          {copyCommand ? (
+            <>
+              <DropdownMenuItem
+                onSelect={() => openPromptSessionCopyWindow(worktreeId, copyCommand)}
+              >
+                <Copy className="size-3.5" />
+                {translate('prompt.sidebarSessions.copyToNewWindow', 'Copy to New Window')}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </>
+          ) : null}
           <DropdownMenuItem
             variant="destructive"
             onSelect={() => closePromptSession(worktreeId, tabId)}
@@ -212,8 +229,18 @@ export function withPromptSessionRowMenu<
       return <Row {...props} />
     }
     const name = promptSessionTabName(agent.tab, agent.agentType) || promptNewSessionLabel()
+    const session = agent.entry.providerSession
+    const copyCommand =
+      agent.agentType === 'claude' && session?.key === 'session_id'
+        ? promptClaudeSessionCopyCommand(session.id)
+        : null
     return (
-      <PromptSessionRowMenu tab={agent.tab} name={name} paneKey={agent.paneKey}>
+      <PromptSessionRowMenu
+        tab={agent.tab}
+        name={name}
+        paneKey={agent.paneKey}
+        copyCommand={copyCommand}
+      >
         <Row {...props} />
       </PromptSessionRowMenu>
     )

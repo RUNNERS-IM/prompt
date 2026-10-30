@@ -27,14 +27,39 @@ export type PromptWindowSummary = {
   isSelf: boolean
 }
 
-/** What a window should select after it loaded tabs moved into it. */
-export type PromptWindowFocusRequest = { worktreeId: string; tabId: string }
+/**
+ * What a window should do once its session loaded: select tabs moved into it, or (a session copy)
+ * open a new terminal in a workspace and run the copy command there.
+ */
+export type PromptWindowFocusRequest = {
+  worktreeId: string
+  tabId: string | null
+  startCommand?: string
+}
+
+/** A Claude session id as Claude writes it; the copy command is built only from such an id. */
+const CLAUDE_SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+/**
+ * Command that starts a copy of a Claude session: the same conversation under a new id, so the
+ * original keeps running on its own (claude --fork-session). Null for anything but a session id.
+ */
+export function promptClaudeSessionCopyCommand(sessionId: string): string | null {
+  return CLAUDE_SESSION_ID.test(sessionId) ? `claude --resume ${sessionId} --fork-session` : null
+}
+
+/** Main only runs commands this file builds, never free text from a window. */
+export function isPromptClaudeSessionCopyCommand(command: string): boolean {
+  const match = /^claude --resume (\S+) --fork-session$/.exec(command)
+  return match !== null && promptClaudeSessionCopyCommand(match[1]!) === command
+}
 
 export const PROMPT_WINDOWS_CHANNELS = {
   newWindow: 'promptWindows:new',
   openProject: 'promptWindows:openProject',
   list: 'promptWindows:list',
   moveTab: 'promptWindows:moveTab',
+  openSessionCopy: 'promptWindows:openSessionCopy',
   takeFocusRequest: 'promptWindows:takeFocusRequest',
   changed: 'promptWindows:changed'
 } as const

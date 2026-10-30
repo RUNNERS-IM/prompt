@@ -22579,7 +22579,8 @@
       "rename": "이름 바꾸기…",
       "tabColor": "탭 색",
       "close": "세션 닫기",
-      "closeNamed": "'{{name}}' 닫기"
+      "closeNamed": "'{{name}}' 닫기",
+      "copyToNewWindow": "복사해서 새 창에서 열기"
     },
     "onboarding": {
       "beforeYouStart": {

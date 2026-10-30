@@ -9,7 +9,8 @@
       "rename": "Переименовать…",
       "tabColor": "Цвет вкладки",
       "close": "Закрыть сеанс",
-      "closeNamed": "Закрыть {{name}}"
+      "closeNamed": "Закрыть {{name}}",
+      "copyToNewWindow": "Копировать в новое окно"
     }
   },
   "agentLaunch": {

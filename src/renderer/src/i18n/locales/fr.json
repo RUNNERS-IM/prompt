@@ -9,7 +9,8 @@
       "rename": "Renommer…",
       "tabColor": "Couleur de l’onglet",
       "close": "Fermer la session",
-      "closeNamed": "Fermer {{name}}"
+      "closeNamed": "Fermer {{name}}",
+      "copyToNewWindow": "Copier dans une nouvelle fenêtre"
     }
   },
   "agentLaunch": {
