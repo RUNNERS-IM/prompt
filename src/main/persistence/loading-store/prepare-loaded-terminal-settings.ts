@@ -125,8 +125,8 @@ export function prepareLoadedTerminalSettings(
     parsed.settings?.floatingTerminalDefaultedForAllUsers === true
   // Flip the old persisted off default once; retain later opt-outs.
   const migratedFloatingTerminalEnabled = floatingTerminalDefaultedForAllUsers
-    ? (parsed.settings?.floatingTerminalEnabled ?? true)
-    : true
+    ? (parsed.settings?.floatingTerminalEnabled ?? false)
+    : false // Prompt: floating terminal starts hidden for a simpler window.
   // Legacy off values conflate default and opt-out; migrate only unstamped profiles.
   const migratedOsc52Clipboard = normalizeOsc52ClipboardDefaultOn(parsed.settings)
   const osc52ClipboardNoticePending =

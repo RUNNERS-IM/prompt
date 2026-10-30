@@ -111,7 +111,10 @@ export async function initializeReadyFoundation(): Promise<void> {
     app.setAppUserModelId(app.isPackaged ? identity.appUserModelId : process.execPath)
   }
   // Post-ready naming preserves packaged Keychain identity; dev already renamed before ready.
+  // Prompt: keep the shared settings folder when the display name changes from Orca.
+  const userDataPath = app.getPath('userData')
   app.setName(identity.appName)
+  app.setPath('userData', userDataPath)
   updateGpuAccelerationAboutPanel()
   if (state.isServeMode) {
     // Profile loading can decrypt and hang; fence unreachable keychains first.

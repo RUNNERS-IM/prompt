@@ -1,17 +1,4 @@
 import type { StatusBarItem } from './ui-chrome-types'
 
-export const DEFAULT_STATUS_BAR_ITEMS: StatusBarItem[] = [
-  'claude',
-  'codex',
-  'gemini',
-  'antigravity',
-  'opencode-go',
-  'kimi',
-  'minimax',
-  'grok',
-  'cursor',
-  'zcode',
-  'ssh',
-  'resource-usage',
-  'ports'
-]
+// Prompt: only Claude usage by default; other segments can be turned back on from the status bar menu.
+export const DEFAULT_STATUS_BAR_ITEMS: StatusBarItem[] = ['claude']
