@@ -49,6 +49,7 @@ vi.mock('electron', () => ({
     on: vi.fn(),
     setName: vi.fn(),
     getPath: vi.fn(() => mocks.userDataPath),
+    setPath: vi.fn(),
     getVersion: vi.fn(() => '1.0.0'),
     get isPackaged() {
       return mocks.isPackaged

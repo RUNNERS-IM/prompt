@@ -43,6 +43,9 @@ vi.mock('./headless-serve-ssh-registration', () => ({
   })
 }))
 vi.mock('../ipc/mobile', () => ({ registerMobileHandlers: vi.fn() }))
+vi.mock('../prompt-computers/prompt-computers-ipc', () => ({
+  registerPromptComputerHandlers: vi.fn()
+}))
 vi.mock('../ipc/runtime-environments/runtime-environment-mobile-relay-hosts', () => ({
   createRuntimeEnvironmentMobileRelayHosts: vi.fn()
 }))
