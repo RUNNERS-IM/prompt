@@ -8,6 +8,12 @@ import { createMockSubprocess } from './daemon-pty-adapter-test-harness'
 import { createPreviousDataFolderDaemonAdapters } from './daemon-legacy-adapters'
 import { DaemonPtyAdapter } from './daemon-pty-adapter'
 import { DaemonRouterRetirement } from './daemon-router-retirement'
+import { DaemonPtyRouter } from './daemon-pty-router'
+import {
+  previousFolderSessionTrace,
+  previousFolderSessionTraceKey
+} from './previous-folder-session-trace'
+import { _resetTracerForTests, setActiveSink } from '../observability/tracer'
 import { DaemonServer } from './daemon-server'
 import { getDaemonPidPath, getDaemonSocketPath, getDaemonTokenPath } from './daemon-spawner'
 import { daemonRuntimeDirFor } from './daemon-runtime-dir'
@@ -172,5 +178,77 @@ describe('idle retirement with a previous-folder daemon attached', () => {
     expect(own.requestIdleRetirement).toHaveBeenCalledTimes(1)
     expect(previous.listSessions).not.toHaveBeenCalled()
     expect(previous.requestIdleRetirement).not.toHaveBeenCalled()
+  })
+})
+
+describe('previous-folder session trace through the router', () => {
+  it('lists the sessions found, records the one a tab attaches to, and reports the rest', async () => {
+    const root = mkdtempSync(join(tmpdir(), 'pdt-'))
+    const previousRuntime = daemonRuntimeDirFor(join(root, 'orca'))
+    const currentRuntime = daemonRuntimeDirFor(join(root, 'Prompt'))
+    mkdirSync(previousRuntime, { recursive: true })
+    mkdirSync(currentRuntime, { recursive: true })
+    const servers = [previousRuntime, currentRuntime].map(
+      (runtimeDir) =>
+        new DaemonServer({
+          socketPath: getDaemonSocketPath(runtimeDir),
+          tokenPath: getDaemonTokenPath(runtimeDir),
+          log: { log: () => {}, close() {} },
+          spawnSubprocess: () => createMockSubprocess()
+        })
+    )
+    await Promise.all(servers.map((server) => server.start()))
+    const spans: { name: string; attributes: Record<string, unknown> }[] = []
+    setActiveSink({
+      push: (record) => spans.push(record as (typeof spans)[number]),
+      flush() {},
+      close() {}
+    })
+    const oldApp = new DaemonPtyAdapter({
+      socketPath: getDaemonSocketPath(previousRuntime),
+      tokenPath: getDaemonTokenPath(previousRuntime)
+    })
+    await oldApp.spawn({ cols: 80, rows: 24, cwd: '/project', sessionId: PROMPT_SESSION })
+    await oldApp.spawn({ cols: 80, rows: 24, cwd: '/other', sessionId: UPSTREAM_ORCA_SESSION })
+    await oldApp.disconnectOnly()
+    const router = new DaemonPtyRouter({
+      current: new DaemonPtyAdapter({
+        socketPath: getDaemonSocketPath(currentRuntime),
+        tokenPath: getDaemonTokenPath(currentRuntime)
+      }),
+      legacy: [
+        new DaemonPtyAdapter({
+          socketPath: getDaemonSocketPath(previousRuntime),
+          tokenPath: getDaemonTokenPath(previousRuntime),
+          fromPreviousDataFolder: true
+        })
+      ]
+    })
+    try {
+      await router.discoverLegacySessions()
+      const listed = spans.filter((span) => span.name === 'daemon.previous-folder.sessions')
+      expect(listed).toHaveLength(1)
+      expect(listed[0].attributes['sessions.count']).toBe(2)
+
+      await router.spawn({ cols: 80, rows: 24, cwd: '/project', sessionId: PROMPT_SESSION })
+      const attaches = spans.filter((span) => span.name === 'daemon.previous-folder.attach')
+      expect(attaches.map((span) => span.attributes['session.key'])).toEqual([
+        previousFolderSessionTraceKey(PROMPT_SESSION)
+      ])
+      expect(previousFolderSessionTrace.unattachedSessionIds()).toEqual([UPSTREAM_ORCA_SESSION])
+
+      previousFolderSessionTrace.reportUnattached('quit')
+      const report = spans.find((span) => span.name === 'daemon.previous-folder.unattached')
+      expect(report?.attributes).toMatchObject({
+        'report.reason': 'quit',
+        'sessions.unattached': 1,
+        'sessions.keys': previousFolderSessionTraceKey(UPSTREAM_ORCA_SESSION)
+      })
+    } finally {
+      _resetTracerForTests()
+      await router.disconnectOnly()
+      await Promise.all(servers.map((server) => server.shutdown()))
+      rmSync(root, { recursive: true, force: true })
+    }
   })
 })

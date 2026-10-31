@@ -22,6 +22,7 @@ import { findLegacySessionOwner } from './daemon-router-legacy-owner'
 import { retireExitedLegacyAdapter, type ExitedLegacyVerdict } from './daemon-router-exited-legacy'
 import type { WriteSettlement } from '../../shared/pty-write-settlement'
 import type { TerminalOscColorQueryReplyColors } from '../../shared/terminal-osc-color-reply'
+import { previousFolderSessionTrace } from './previous-folder-session-trace'
 
 export class DaemonPtyRouter implements IPtyProvider {
   private current: DaemonPtyAdapter
@@ -60,6 +61,7 @@ export class DaemonPtyRouter implements IPtyProvider {
   async discoverLegacySessions(): Promise<void> {
     await this.ownerResolver.discoverRoutes()
     this.legacyExitProof.record(this.legacy)
+    previousFolderSessionTrace.recordDiscovered(this.sessionAdapters)
   }
 
   async spawn(opts: PtySpawnOptions): Promise<PtySpawnResult> {
@@ -70,7 +72,10 @@ export class DaemonPtyRouter implements IPtyProvider {
     this.retirement.spawnInFlight++
     try {
       if (opts.attachOnly && opts.sessionId) {
-        return await this.ownerResolver.spawnAttachOnly({ ...opts, sessionId: opts.sessionId })
+        const sessionId = opts.sessionId
+        const attached = await this.ownerResolver.spawnAttachOnly({ ...opts, sessionId })
+        previousFolderSessionTrace.noteAttach(this.sessionAdapters, sessionId, 'attach-only')
+        return attached
       }
       const adapter =
         (opts.sessionId ? this.sessionAdapters.get(opts.sessionId) : undefined) ??
@@ -79,6 +84,7 @@ export class DaemonPtyRouter implements IPtyProvider {
       const result = await target.spawn(opts)
       if (!result.exitedBeforeSpawnReply) {
         this.ownerResolver.recordRoute(result.id, target, result.incarnationId)
+        previousFolderSessionTrace.noteAttach(this.sessionAdapters, result.id, 'spawn')
       }
       return result
     } finally {
@@ -127,6 +133,7 @@ export class DaemonPtyRouter implements IPtyProvider {
   }
 
   async attach(id: string): ReturnType<IPtyProvider['attach']> {
+    previousFolderSessionTrace.noteAttach(this.sessionAdapters, id, 'attach')
     return await this.adapterFor(id).attach(id)
   }
 

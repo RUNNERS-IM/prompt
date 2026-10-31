@@ -6,6 +6,7 @@ import { disposeWorktreeBaseDirectoryWatchers } from '../ipc/worktree-base-direc
 import { stopFolderRepoGitUpgradeWatch } from '../ipc/folder-repo-git-upgrade'
 import { killAllPty } from '../ipc/pty/kill-all'
 import { disconnectDaemon, shutdownDaemon } from '../daemon/daemon-provider-state'
+import { previousFolderSessionTrace } from '../daemon/previous-folder-session-trace'
 import { beginSshShutdown } from '../ipc/ssh/ssh-shutdown-drain'
 import { agentHookServer } from '../agent-hooks/server'
 import { wslHookRelayManager } from '../agent-hooks/wsl-hook-relay-manager'
@@ -259,6 +260,8 @@ function installWillQuitHandler(): void {
       structuredAgentSessionShutdown,
       rpcStopAndClear
     ]).then(() => state.runtime?.closeNotificationDismissals())
+    // Previous-folder terminals no tab attached to this run, while the trace sink is still open.
+    previousFolderSessionTrace.reportUnattached('quit')
     // Normal quits preserve the detached daemon for warm reattach; dev-parent death leaves its temporary profile ownerless.
     const daemonTeardown = isDevParentShutdownRequested() ? shutdownDaemon() : disconnectDaemon()
     // Bound unsettled transports and final writes so quit cannot hang (#9447). Failures still exit; atomic swaps preserve old files if the final debounce is lost.
