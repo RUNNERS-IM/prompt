@@ -89,6 +89,7 @@ describe('dropping a session row on another workspace', () => {
     for (const target of [SIBLING, OTHER]) {
       const store = seededStore()
       const plan = commitPromptSessionCrossWorkspaceDrop({
+        tabId: 't1',
         sourceWorktreeId: SOURCE,
         targetWorktreeId: target,
         panes: CLAUDE_PANES
@@ -107,11 +108,10 @@ describe('dropping a session row on another workspace', () => {
     }
   })
 
-  it('cancels a drop on a remote workspace, a plain terminal, or a pane whose agent left', async () => {
+  it('cancels a drop on a remote workspace, or a pane whose agent left', async () => {
     const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
     const cases = [
       { targetWorktreeId: REMOTE, panes: CLAUDE_PANES, reason: 'remote' },
-      { targetWorktreeId: OTHER, panes: null, reason: 'shell' },
       {
         targetWorktreeId: OTHER,
         panes: CLAUDE_PANES,
@@ -129,6 +129,7 @@ describe('dropping a session row on another workspace', () => {
       const before = store.getState()
       expect(
         commitPromptSessionCrossWorkspaceDrop({
+          tabId: 't1',
           sourceWorktreeId: SOURCE,
           targetWorktreeId: testCase.targetWorktreeId,
           panes: testCase.panes
@@ -145,6 +146,7 @@ describe('dropping a session row on another workspace', () => {
     seededStore()
     expect(
       commitPromptSessionCrossWorkspaceDrop({
+        tabId: 't1',
         sourceWorktreeId: SOURCE,
         targetWorktreeId: SOURCE,
         panes: CLAUDE_PANES

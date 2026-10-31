@@ -16,9 +16,9 @@ import { cn } from '@/lib/utils'
 import { mirrorWebRuntimeTabMove } from '../tab-bar/web-runtime-tab-move-mirror'
 import { dropTabThroughLayoutOwner } from '../tab-group/tab-group-layout-owner-commands'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
-import { getRepoExecutionHostId, isLocalExecutionHost } from '../../../../shared/execution-host'
+import { isPromptLocalWorktree } from '@/lib/prompt-local-worktree'
 import { openPromptSessionCopyInWorkspace } from '@/lib/prompt-windows'
-import type { AppState } from '@/store/types'
+import { moveShellTabToWorkspace } from '@/lib/shell-tab-workspace-move'
 import { resolvePaneAgentSessionId } from '../terminal-pane/pane-agent-session-id'
 import {
   buildPromptSessionTabSlots,
@@ -114,22 +114,6 @@ export function handlePromptSessionDragEnd(
 /** A pane of a dragged tab that may hold a conversation (its id is read from the store on drop). */
 export type PromptSessionDragPane = { paneKey: string; agentType: string }
 
-/** True only when the workspace and its project run on this machine (not SSH, not a runtime host). */
-export function isPromptLocalWorktree(
-  state: Pick<AppState, 'repos' | 'getKnownWorktreeById'>,
-  worktreeId: string
-): boolean {
-  const worktree = state.getKnownWorktreeById?.(worktreeId)
-  if (!worktree) {
-    return false
-  }
-  if (worktree.hostId && !isLocalExecutionHost(worktree.hostId)) {
-    return false
-  }
-  const repo = (state.repos ?? []).find((candidate) => candidate.id === worktree.repoId)
-  return repo ? isLocalExecutionHost(getRepoExecutionHostId(repo)) : false
-}
-
 /** Decide what dropping a session row on `targetWorktreeId` does, from the store as it is now. */
 export function planPromptSessionDropFromStore(args: {
   sourceWorktreeId: string
@@ -154,9 +138,11 @@ export function planPromptSessionDropFromStore(args: {
 
 /**
  * Apply a drop on another workspace: a Claude session row opens a copy of the conversation in a
- * new tab there (the original keeps running) and shows it. Returns the plan that was applied.
+ * new tab there (the original keeps running) and shows it; a plain terminal row moves its tab and
+ * shell there once the shell is idle. Returns the plan that was applied.
  */
 export function commitPromptSessionCrossWorkspaceDrop(args: {
+  tabId: string
   sourceWorktreeId: string
   targetWorktreeId: string | null
   panes: readonly PromptSessionDragPane[] | null
@@ -164,6 +150,12 @@ export function commitPromptSessionCrossWorkspaceDrop(args: {
   const plan = planPromptSessionDropFromStore(args)
   if (plan.kind === 'fork') {
     openPromptSessionCopyInWorkspace(plan.targetWorktreeId, plan.command)
+  } else if (plan.kind === 'move-shell') {
+    void moveShellTabToWorkspace({
+      tabId: args.tabId,
+      targetWorktreeId: plan.targetWorktreeId,
+      reveal: true
+    })
   }
   return plan
 }
@@ -254,9 +246,9 @@ export function PromptSessionDragList({
           setHighlight(null)
           return
         }
-        // Light up another workspace only when a drop there would start a copy.
+        // Light up another workspace only when a drop there would copy or move the session.
         const { element, plan } = crossWorkspaceTarget(String(event.active.id))
-        setHighlight(plan.kind === 'fork' ? element : null)
+        setHighlight(plan.kind === 'fork' || plan.kind === 'move-shell' ? element : null)
       }}
       onDragCancel={() => {
         setHighlight(null)
@@ -268,6 +260,7 @@ export function PromptSessionDragList({
           return
         }
         commitPromptSessionCrossWorkspaceDrop({
+          tabId: String(event.active.id),
           sourceWorktreeId: worktreeId,
           targetWorktreeId: promptSessionDropWorktreeIdOf(dropElementAt(pointerRef.current)),
           panes: panesOfTab(String(event.active.id))

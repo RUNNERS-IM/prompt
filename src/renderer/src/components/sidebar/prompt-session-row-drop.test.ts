@@ -51,9 +51,9 @@ describe('planPromptSessionDrop', () => {
     }
   })
 
-  it('cancels a plain terminal row (live shells do not move between workspaces)', () => {
+  it('moves a plain terminal row with its shell', () => {
     expect(planPromptSessionDrop({ ...BASE, targetWorktreeId: 'repo-2::/x', panes: null })).toEqual(
-      { kind: 'cancel', reason: 'shell' }
+      { kind: 'move-shell', targetWorktreeId: 'repo-2::/x' }
     )
   })
 

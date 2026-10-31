@@ -3,10 +3,9 @@ import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-window
 /**
  * Dropping a Prompt sidebar session row on another workspace. A Claude session row starts a copy
  * of the conversation in the target workspace's folder (claude --resume <id> --fork-session), and
- * the original tab keeps running. Everything else cancels:
- * - a plain terminal row: moving a live shell between workspaces is not supported, because main
- *   names each terminal after the workspace it was started in and stops it with that workspace;
- * - a remote workspace on either side: the conversation file lives on this machine;
+ * the original tab keeps running. A plain terminal row moves its tab, shell and all, to the target
+ * (moveShellTabToWorkspace, which still refuses a shell with a program running). Everything else cancels:
+ * - a remote workspace on either side: the conversation file and the shell live on this machine;
  * - a tab with no Claude conversation, or with more than one (split panes), since it is unclear which to copy.
  */
 
@@ -19,7 +18,6 @@ export const PROMPT_SESSION_DROP_TARGET_ATTR = 'data-prompt-session-drop-target'
 export type PromptSessionDropCancelReason =
   | 'no-target'
   | 'remote'
-  | 'shell'
   | 'no-claude-session'
   | 'several-claude-sessions'
 
@@ -27,6 +25,8 @@ export type PromptSessionDropPlan =
   /** Same workspace: the existing reorder handles it. */
   | { kind: 'reorder' }
   | { kind: 'fork'; targetWorktreeId: string; command: string }
+  /** A plain terminal row: move the tab and its running shell to the target. */
+  | { kind: 'move-shell'; targetWorktreeId: string }
   | { kind: 'cancel'; reason: PromptSessionDropCancelReason }
 
 /** One pane of the dragged tab that may hold a conversation. */
@@ -55,7 +55,7 @@ export function planPromptSessionDrop(args: {
     return { kind: 'cancel', reason: 'remote' }
   }
   if (!args.panes) {
-    return { kind: 'cancel', reason: 'shell' }
+    return { kind: 'move-shell', targetWorktreeId }
   }
   const commands = new Set<string>()
   for (const pane of args.panes) {
