@@ -6,10 +6,18 @@ import {
   TriangleAlertIcon
 } from 'lucide-react'
 import type { SyntheticEvent } from 'react'
-import { Toaster as Sonner, type ToasterProps } from 'sonner'
+import { Toaster as Sonner, toast, type ToasterProps } from 'sonner'
 import { useAppStore } from '@/store'
+import { installPromptBrandToasts } from '@/lib/prompt-brand-toast'
 import { MODAL_OVERLAY_CHILD_SELECTOR } from '@/lib/body-overlay-attributes'
 import { NOTIFICATION_CARD_STACK_HEIGHT_VAR } from '@/lib/notification-card-stack-height'
+
+// Error toasts often show main-process error.message text that bypassed translations.
+try {
+  installPromptBrandToasts(toast)
+} catch {
+  // Test doubles of sonner may not export toast.
+}
 
 // Why: a short outcome reads best with its action beside it; the toaster's default wraps actions below.
 export const INLINE_ACTION_CLASS_NAMES = {

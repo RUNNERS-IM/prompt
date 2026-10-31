@@ -98,7 +98,9 @@ describe('Orca cloud PKCE flow', () => {
     expect(validResponse.statusCode).toBe(200)
     expect(validResponse.headers['cache-control']).toBe('no-store')
     expect(validResponse.headers['content-security-policy']).toContain("default-src 'none'")
-    expect(validResponse.body).toContain('<h1>Signed in to Orca</h1>')
+    expect(validResponse.body).toContain('<h1>Signed in to Prompt</h1>')
+    expect(validResponse.body).toContain('<title>Signed in to Prompt</title>')
+    expect(validResponse.body).not.toContain('Orca')
     expect(validResponse.body).toContain('You can close this tab and return to the app.')
     expect(validResponse.body).not.toContain('class="brand"')
     await expect(flow).resolves.toMatchObject({
