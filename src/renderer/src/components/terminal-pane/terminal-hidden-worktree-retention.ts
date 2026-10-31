@@ -1,6 +1,9 @@
 import { isRemoteRuntimePtyId } from '../../../../shared/remote-runtime/remote-runtime-pty-id'
 import { isRemoteExecutionHostPtyId } from '../../../../shared/remote-execution-host-pty-id'
-import { PTY_SESSION_ID_SEPARATOR } from '../../../../shared/pty-session-id-format'
+import {
+  isPtySessionIdOwnedByWorktree,
+  PTY_SESSION_ID_SEPARATOR
+} from '../../../../shared/pty-session-id-format'
 import { terminalProviderHasAuthoritativeSnapshot } from '../terminal/terminal-provider-snapshot-capability'
 import {
   TERMINAL_WORKTREE_COLD_PARK_DELAY_MS,
@@ -64,7 +67,8 @@ export function classifyEvictionExemptTerminalPty(
   if (separatorIdx === -1) {
     return 'fail-open'
   }
-  if (ptyId.slice(0, separatorIdx) !== worktreeId) {
+  // A terminal moved into this workspace is its own, though its id names the first workspace.
+  if (!isPtySessionIdOwnedByWorktree(ptyId, worktreeId)) {
     return 'foreign-worktree'
   }
   return terminalProviderHasAuthoritativeSnapshot(ptyId) ? null : 'capability-unknown'
