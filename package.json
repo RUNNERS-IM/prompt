@@ -1,6 +1,6 @@
 {
   "name": "orca",
-  "version": "2.6.103101",
+  "version": "2.6.110101",
   "description": "Prompt: run and manage many Claude Code sessions side by side",
   "homepage": "https://github.com/RUNNERS-IM/prompt",
   "author": "RUNNERS",
