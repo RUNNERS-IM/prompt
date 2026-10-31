@@ -14,6 +14,7 @@ import {
   TerminalCreateParams,
   TerminalFocus,
   TerminalHandle,
+  TerminalMoveToWorkspace,
   TerminalReveal,
   TerminalSplit,
   TerminalWait
@@ -225,6 +226,22 @@ export const TERMINAL_LIFECYCLE_METHODS = [
           executionHostId: params.executionHostId ?? null
         })
       }
+    }
+  }),
+  defineMethod({
+    // The tab, its idle shells and their history move; a busy or remote shell is refused with a reason.
+    name: 'terminal.moveToWorkspace',
+    permission: 'workspace',
+    params: TerminalMoveToWorkspace,
+    handler: async (params, { runtime, clientKind }) => {
+      // Moves this machine's window state; paired callers act on their own hosts.
+      if (clientKind !== undefined) {
+        throw Object.assign(
+          new Error('terminal.moveToWorkspace is available only to callers on this machine.'),
+          { code: 'forbidden' }
+        )
+      }
+      return { move: await runtime.moveTerminalToWorkspace(params.terminal, params.worktree) }
     }
   }),
   defineMethod({

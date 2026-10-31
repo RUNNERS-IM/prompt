@@ -1,4 +1,8 @@
 import type {
+  ShellTabWorkspaceMoveReply,
+  ShellTabWorkspaceMoveRequest
+} from '../../shared/shell-tab-workspace-move-types'
+import type {
   RuntimeEditorTabReveal,
   RuntimeFileOpenPosition
 } from '../../shared/runtime-file-contracts'
@@ -229,6 +233,9 @@ export type UiCommandEventApi = {
   onAgentLaunchPaneVerdict: (callback: (data: AgentLaunchPaneVerdictEvent) => void) => () => void
   onLaunchRecipe: (callback: (data: PaneLaunchRecipe) => void) => () => void
   onRevealTerminalPane: (callback: (data: TerminalPaneRevealRequest) => void) => () => void
+  /** Desktop windows only; the web client has no shells of this machine to move. */
+  onMoveShellTabToWorkspace?: (callback: (data: ShellTabWorkspaceMoveRequest) => void) => () => void
+  replyShellTabWorkspaceMove?: (reply: ShellTabWorkspaceMoveReply) => void
   replyTerminalPaneReveal: (reply: TerminalPaneRevealReply) => void
   onSplitTerminal: (
     callback: (data: {

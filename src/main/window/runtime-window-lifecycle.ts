@@ -13,6 +13,7 @@ import { registerRendererDocumentNavigation } from './renderer-document-navigati
 import { createRuntimeRendererNotificationSender } from './runtime-renderer-notification-sender'
 import { requestSessionTabCloseFromRenderer } from './session-tab-close-request-relay'
 import { revealTerminalPaneInWindow } from './terminal-pane-reveal-relay'
+import { requestShellTabWorkspaceMove } from './shell-tab-workspace-move-relay'
 import { requestTerminalTabCloseFromRenderer } from './terminal-tab-close-request-relay'
 import { ORCA_SIDEBAR_INPUTS_IS_MAIN } from '../../shared/sidebar-inputs-switch'
 import {
@@ -187,6 +188,8 @@ export function registerRuntimeWindowLifecycle(
       send('ui:focusTerminal', { tabId, worktreeId, leafId }),
     revealTerminalPane: (target) =>
       revealTerminalPaneInWindow(promptWindowForTab(mainWindow, target.tabId), target),
+    moveShellTabToWorkspace: (tabId, targetWorktreeId) =>
+      requestShellTabWorkspaceMove(promptWindowForTab(mainWindow, tabId), tabId, targetWorktreeId),
     focusEditorTab: (tabId, worktreeId) => send('ui:focusEditorTab', { tabId, worktreeId }),
     closeSessionTab: (tabId, worktreeId) =>
       requestSessionTabCloseFromRenderer(promptWindowForTab(mainWindow, tabId), tabId, worktreeId),
