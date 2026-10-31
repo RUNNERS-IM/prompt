@@ -96,7 +96,7 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
     foregroundAgent: TerminalAgent | null | undefined,
     title: string | null,
     paneKey: string | null
-  ): { agentIdentity?: TerminalAgent } {
+  ): { agentIdentity?: TerminalAgent; agentSessionId?: string } {
     const hookRow = paneKey
       ? selectRuntimeHookAgentRowForPane(this.getAgentProviderSessionRowsForPaneFn?.(paneKey) ?? [])
       : null
@@ -108,7 +108,13 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
       foregroundAgent,
       title
     })
-    return agentIdentity ? { agentIdentity } : {}
+    if (!agentIdentity) {
+      return {}
+    }
+    // The hook's conversation id belongs to the published agent only; another agent's id would resume the wrong chat.
+    const agentSessionId =
+      hookAgent === agentIdentity ? hookRow?.providerSession?.id?.trim() : undefined
+    return agentSessionId ? { agentIdentity, agentSessionId } : { agentIdentity }
   }
 
   /** A user's pane name from the saved layout: every client's pane rename lands there. */
