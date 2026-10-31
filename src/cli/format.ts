@@ -2,6 +2,7 @@ import type { CliStatusCaller } from '../shared/orchestration-caller-status'
 import type { CliStatusResult } from '../shared/runtime-types'
 import { prepareComputerCliJsonResult } from './computer-format'
 import type { RuntimeRpcSuccess } from './runtime-client'
+import { applyPromptJsonListShape } from './command-tree/prompt-output'
 
 export { formatCliError, reportCliError, type CliErrorContext } from './cli-error'
 
@@ -72,7 +73,9 @@ export function printResult<TResult>(
   formatter: (value: TResult) => string
 ): void {
   if (json) {
-    console.log(JSON.stringify(prepareComputerCliJsonResult(response), null, 2))
+    const result = applyPromptJsonListShape(response.result)
+    const shaped = result === response.result ? response : { ...response, result }
+    console.log(JSON.stringify(prepareComputerCliJsonResult(shaped), null, 2))
     return
   }
   console.log(formatter(response.result))

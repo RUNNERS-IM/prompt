@@ -18,6 +18,10 @@ export type CommandSpec = {
   browserPageTarget?: boolean
   // Caller flags must match the acting agent session; target flags may name another session.
   identityFlagRoles?: Partial<Record<IdentityFlag, 'caller' | 'target'>>
+  // `prompt` commands reuse legacy handlers; the handler key is this path when it differs from `path`.
+  handlerPath?: string[]
+  // Shown flag name -> flag name the handler reads (`prompt` says --workspace where handlers read --worktree).
+  flagAliases?: Readonly<Record<string, string>>
 }
 
 export type IdentityFlag = 'from' | 'terminal'

@@ -1,5 +1,6 @@
 import { specPaths, type CommandSpec } from './command-spec'
 import { levenshtein } from '../shared/edit-distance'
+import { getCliProgramName } from './command-tree/cli-surface'
 
 const SUGGESTION_THRESHOLD = 3
 const MAX_SUGGESTIONS = 3
@@ -91,7 +92,7 @@ export function suggestCommands(specs: CommandSpec[], commandPath: string[]): st
 export function unknownCommandData(specs: CommandSpec[], commandPath: string[]): CommandErrorData {
   const suggestions = suggestCommands(specs, commandPath)
   const nextSteps = suggestions.length
-    ? [`Did you mean: ${suggestions.map((path) => `orca ${path}`).join(', ')}`]
+    ? [`Did you mean: ${suggestions.map((path) => `${getCliProgramName()} ${path}`).join(', ')}`]
     : []
   return { suggestions, nextSteps }
 }

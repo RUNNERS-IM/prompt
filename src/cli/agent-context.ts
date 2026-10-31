@@ -1,5 +1,6 @@
 import type { CommandSpec } from './args'
 import { effectiveAllowedFlags } from './args'
+import { getCliProgramName } from './command-tree/cli-surface'
 
 const SCHEMA_VERSION = 1
 
@@ -24,6 +25,14 @@ export type AgentContextSchema = {
   commands: AgentContextCommand[]
 }
 
+/** Flags as the user types them: prompt specs show --workspace where the handler reads --worktree. */
+function shownFlags(spec: CommandSpec): string[] {
+  const shownByInternal = new Map(
+    Object.entries(spec.flagAliases ?? {}).map(([shown, internal]) => [internal, shown])
+  )
+  return effectiveAllowedFlags(spec).map((flag) => shownByInternal.get(flag) ?? flag)
+}
+
 export function buildAgentContext(specs: CommandSpec[]): AgentContextSchema {
   const commands = specs
     // Hidden commands dispatch but stay off discovery surfaces.
@@ -36,7 +45,7 @@ export function buildAgentContext(specs: CommandSpec[]): AgentContextSchema {
       summary: spec.summary,
       usage: spec.usage,
       // Include globals and conditional flags so discovery matches validation.
-      flags: effectiveAllowedFlags(spec),
+      flags: shownFlags(spec),
       positionalArgs: spec.positionalArgs ?? [],
       ...(spec.variadicPositional ? { variadicPositional: true } : {}),
       ...(spec.repeatableFlags ? { repeatableFlags: spec.repeatableFlags } : {}),
@@ -54,6 +63,6 @@ export function buildAgentContext(specs: CommandSpec[]): AgentContextSchema {
 export function formatAgentContextSummary(schema: AgentContextSchema): string {
   return [
     `${schema.commandCount} commands (schema v${schema.schemaVersion}).`,
-    'Run `orca agent-context --json` for the full machine-readable command schema.'
+    `Run \`${getCliProgramName() === 'prompt' ? 'prompt app agent-context' : 'orca agent-context'} --json\` for the full machine-readable command schema.`
   ].join('\n')
 }
