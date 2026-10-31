@@ -136,7 +136,7 @@ async function launchInRealShell(shell: LiveShell, prompt: string): Promise<Agen
   } finally {
     onData.dispose()
     proc.kill()
-    expect(readdirSync(caseDir).filter((name) => name.startsWith('orca-launch-'))).toEqual([])
+    expect(readdirSync(caseDir).filter((name) => name.startsWith('prompt-launch-'))).toEqual([])
   }
 }
 

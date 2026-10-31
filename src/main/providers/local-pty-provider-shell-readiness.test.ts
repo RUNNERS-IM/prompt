@@ -229,7 +229,7 @@ describe('LocalPtyProvider', () => {
 
         expect(result).not.toHaveProperty('startupDelivery')
         const staged = writeFileSyncMock.mock.calls.find(([path]) =>
-          String(path).includes('orca-launch-')
+          String(path).includes('prompt-launch-')
         )
         expect(staged?.[1]).toContain(`\n${command}\n`)
         await vi.advanceTimersByTimeAsync(200)
@@ -253,7 +253,7 @@ describe('LocalPtyProvider', () => {
         await provider.spawn({ cols: 80, rows: 24, command })
 
         expect(received.join('')).toContain(
-          '[orca] Could not stage the launch command (ENOSPC: no space left on device)'
+          '[Prompt] Could not stage the launch command (ENOSPC: no space left on device)'
         )
         await vi.advanceTimersByTimeAsync(200)
         expect(mockProc.write).toHaveBeenCalledWith(`${command}\r`)

@@ -1,4 +1,4 @@
-import { CLAUDE_AGENT_VIEW_PATH } from '../../shared/claude-agent-view'
+import { CLAUDE_AGENT_VIEW_COMMAND, CLAUDE_AGENT_VIEW_PATH } from '../../shared/claude-agent-view'
 import { parseAgentHookEndpointFile } from '../../shared/agent-hook-endpoint-file'
 
 export const CLAUDE_AGENT_VIEW_MOD_SOURCE = String.raw`
@@ -49,6 +49,7 @@ let viewRevision = 0
       if (identity !== session || endedSessionId === sessionId) return {}
       return await post($, 'register', {
         keybindings,
+        command: ${JSON.stringify(CLAUDE_AGENT_VIEW_COMMAND)},
         ...(observedView?.sessionId === sessionId ? { view: observedView.view } : {})
       }, session)
     } catch {
@@ -82,13 +83,13 @@ export function register(on) {
     configDir = await $.env.get('CLAUDE_CONFIG_DIR') || await $.env.get('ORCA_CLAUDE_CONFIG_DIR')
     if (!configDir) return result
     endedSessionId = undefined
-    await $.command.register({ name: 'orca-agent-view', description: 'Open the agent selected in Orca', immediate: true })
+    await $.command.register({ name: ${JSON.stringify(CLAUDE_AGENT_VIEW_COMMAND)}, description: 'Open the agent selected in Prompt', immediate: true })
     void announce($)
     $.clock.every(5000, () => announce($))
     return result
   })
 
-  on('command.run', { command: 'orca-agent-view' }, async ($) => {
+  on('command.run', { command: ${JSON.stringify(CLAUDE_AGENT_VIEW_COMMAND)} }, async ($) => {
     try {
       const session = identity
       if (!session || session.sessionId !== await $.session.id()) return {}

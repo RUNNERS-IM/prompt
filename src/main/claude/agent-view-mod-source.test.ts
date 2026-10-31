@@ -38,6 +38,7 @@ it.each(['{}', '', 'not-json', 'null'])(
     let takeStarted: (() => void) | undefined
     const posts: {
       action: string
+      command?: string
       sessionId: string
       instanceId: string
       view?: { agentId?: string; revision: number }
@@ -62,7 +63,7 @@ it.each(['{}', '', 'not-json', 'null'])(
               {
                 context: 'Chat',
                 bindings: {
-                  'Alt+Control+G': 'command:orca-agent-view'
+                  'Alt+Control+G': 'command:prompt-agent-view'
                 }
               }
             ]
@@ -116,6 +117,11 @@ it.each(['{}', '', 'not-json', 'null'])(
     await invoke('session.start', { isInteractive: true, surface: 'terminal' })
     await vi.waitFor(() => expect(posts.at(-1)).toMatchObject({ action: 'register', sessionId }))
     expect(read).toHaveBeenCalledWith('/test/actual-claude-config/keybindings.json')
+    // The bridge matches the chord against the command this plugin registers.
+    expect(posts.at(-1)).toMatchObject({ command: 'prompt-agent-view' })
+    expect(api.command.register).toHaveBeenCalledWith(
+      expect.objectContaining({ name: 'prompt-agent-view' })
+    )
     await invoke('ui.render', { surface: 'terminal', props: { view: {} } })
     await vi.waitFor(() =>
       expect(posts.at(-1)).toMatchObject({ action: 'observe', view: { revision: 1 } })

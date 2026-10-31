@@ -75,7 +75,7 @@ it('installs alongside other skills and plugins without changing their settings 
     custom: true,
     bindings: [
       userBlock,
-      { context: 'Chat', bindings: { 'ctrl+alt+h': 'command:orca-agent-view' } }
+      { context: 'Chat', bindings: { 'ctrl+alt+h': 'command:prompt-agent-view' } }
     ]
   })
   expect(readFileSync(join(root, 'settings.json'), 'utf8')).toBe(settings)
@@ -135,7 +135,7 @@ it('respects equivalent modifier orders and chord prefixes, and declines exhaust
         }
       ]
     })?.bindings
-  ).toContainEqual({ context: 'Chat', bindings: { 'ctrl+alt+v': 'command:orca-agent-view' } })
+  ).toContainEqual({ context: 'Chat', bindings: { 'ctrl+alt+v': 'command:prompt-agent-view' } })
   expect(
     withClaudeAgentViewShortcut({
       bindings: [
@@ -181,8 +181,8 @@ it('removes only its recorded binding across reinstalls, preserving other contex
   installClaudeAgentView(settings)
   const config = JSON.parse(readFileSync(path, 'utf8'))
   const userBindings = [
-    { context: 'Global', bindings: { 'ctrl+alt+g': 'command:orca-agent-view' } },
-    { context: 'Chat', bindings: { 'ctrl+x': 'command:orca-agent-view' } }
+    { context: 'Global', bindings: { 'ctrl+alt+g': 'command:prompt-agent-view' } },
+    { context: 'Chat', bindings: { 'ctrl+x': 'command:prompt-agent-view' } }
   ]
   config.bindings.push(...userBindings)
   writeFileSync(path, JSON.stringify(config))
@@ -197,7 +197,7 @@ it.each([false, true])('preserves reused user bindings with a legacy marker: %s'
   const settings = join(root, 'settings.json')
   const path = join(root, 'keybindings.json')
   const original = JSON.stringify({
-    bindings: [{ context: 'Chat', bindings: { 'ctrl+alt+g': 'command:orca-agent-view' } }]
+    bindings: [{ context: 'Chat', bindings: { 'ctrl+alt+g': 'command:prompt-agent-view' } }]
   })
   writeFileSync(path, original)
   if (legacy) {
@@ -225,7 +225,7 @@ it('remembers removed and edited bindings across launches', () => {
   expect(readFileSync(bindings, 'utf8')).toBe('{"bindings": []}')
   writeFileSync(
     bindings,
-    '{"bindings": [{"context":"Chat","bindings":{"ctrl+x":"command:orca-agent-view"}}]}'
+    '{"bindings": [{"context":"Chat","bindings":{"ctrl+x":"command:prompt-agent-view"}}]}'
   )
   expect(installClaudeAgentView(settings)).toBe(false)
   expect(claudeAgentViewChord(readFileSync(bindings, 'utf8'))).toBeUndefined()

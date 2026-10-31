@@ -232,4 +232,56 @@ describe('Claude agent view delivery', () => {
     expect(await bridge.view({ ...identity, trigger })).toEqual({ status: 'unsupported' })
     expect(trigger).not.toHaveBeenCalled()
   })
+
+  describe('command name of the registering plugin', () => {
+    const register = (bridge: ClaudeAgentViewBridge, action: string, command?: string) =>
+      bridge.receive({
+        ...identity,
+        action: 'register',
+        ...(command ? { command } : {}),
+        view: { agentId: 'previous', revision: 1 },
+        keybindings: JSON.stringify({
+          bindings: [{ context: 'Chat', bindings: { 'ctrl+alt+g': action } }]
+        })
+      })
+    const inputs = async (bridge: ClaudeAgentViewBridge) => {
+      const sent: string[] = []
+      const result = await bridge.view({
+        ...identity,
+        agentId: 'child',
+        trigger: async (input) => {
+          sent.push(input)
+          return false
+        }
+      })
+      return { result, sent }
+    }
+
+    it('presses the chord bound to /prompt-agent-view for a renamed plugin', async () => {
+      const bridge = new ClaudeAgentViewBridge()
+      register(bridge, 'command:prompt-agent-view', 'prompt-agent-view')
+      expect((await inputs(bridge)).sent).toEqual(['\u001b[103;7u'])
+    })
+
+    it('still finds the chord bound to /orca-agent-view for a plugin from before the rename', async () => {
+      const bridge = new ClaudeAgentViewBridge()
+      register(bridge, 'command:orca-agent-view')
+      expect((await inputs(bridge)).sent).toEqual(['\u001b[103;7u'])
+    })
+
+    it('does not press a chord bound to the other command name', async () => {
+      const renamed = new ClaudeAgentViewBridge()
+      register(renamed, 'command:orca-agent-view', 'prompt-agent-view')
+      expect(await inputs(renamed)).toEqual({ result: { status: 'unsupported' }, sent: [] })
+      const old = new ClaudeAgentViewBridge()
+      register(old, 'command:prompt-agent-view')
+      expect(await inputs(old)).toEqual({ result: { status: 'unsupported' }, sent: [] })
+    })
+
+    it('ignores a registration naming an unknown command', async () => {
+      const bridge = new ClaudeAgentViewBridge()
+      register(bridge, 'command:user', 'user')
+      expect(await inputs(bridge)).toEqual({ result: { status: 'unsupported' }, sent: [] })
+    })
+  })
 })

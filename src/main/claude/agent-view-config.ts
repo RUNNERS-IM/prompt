@@ -1,5 +1,5 @@
 import { dirname, join } from 'node:path'
-import { readFile } from 'node:fs/promises'
+import { readFile, rm } from 'node:fs/promises'
 import { parseHooksJsonText } from '../agent-hooks/hooks-json-read'
 import { writeHooksJsonAsync } from '../agent-hooks/hooks-json-write-async'
 import {
@@ -9,6 +9,7 @@ import {
 import {
   ownership,
   markerName,
+  legacyMarkerName,
   planClaudeAgentViewInstall,
   planClaudeAgentViewDisable
 } from './agent-view-binding-plan'
@@ -46,7 +47,10 @@ export async function reconcileClaudeAgentViewConfig(
       if (!config) {
         return
       }
-      const plan = planClaudeAgentViewInstall(raw, config, previous)
+      const legacyPath = join(configDir, legacyMarkerName)
+      const legacyRaw = previous === undefined ? await readOptional(legacyPath) : null
+      const legacy = legacyRaw === null ? undefined : parseHooksJsonText(legacyRaw)
+      const plan = planClaudeAgentViewInstall(raw, config, previous, legacy)
       if (!plan.marker) {
         return
       }
@@ -54,6 +58,9 @@ export async function reconcileClaudeAgentViewConfig(
       await writeHooksJsonAsync(path, plan.config, {
         serialized: serializeClaudeAgentViewBindings(raw, plan.config)
       })
+      if (plan.retireLegacyMarker) {
+        await rm(legacyPath, { force: true })
+      }
     } else if (previous) {
       const plan = planClaudeAgentViewDisable(config, previous)
       await writeHooksJsonAsync(markerPath, plan.marker)
