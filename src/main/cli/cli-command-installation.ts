@@ -73,8 +73,8 @@ export class CliCommandInstallation extends CliCommandInspection {
     await this.discardQuarantinedCommand(quarantine)
   }
 
-  protected async removeSymlink(commandPath: string): Promise<void> {
-    const launcherPath = await this.resolveLauncherPath()
+  protected async removeSymlink(commandPath: string, expectedLauncherPath?: string): Promise<void> {
+    const launcherPath = expectedLauncherPath ?? (await this.resolveLauncherPath())
     if (!launcherPath) {
       throw new Error('The Orca CLI launcher is no longer available.')
     }
