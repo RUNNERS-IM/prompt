@@ -8,6 +8,7 @@ import {
 import { resolveTerminalLayoutPtyOwnershipTransfers } from '../../../../shared/terminal-layout-pty-ownership'
 import { sanitizeTerminalLayoutPaneTitles } from '../../../../shared/terminal-pane-title-sanitization'
 import type { TerminalLayoutPtyOwnershipTransfer } from './workspace-terminal-hydration-patch'
+import { adoptRowPtyIdIntoSinglePaneLayout } from './single-pane-row-pty-adoption'
 
 export function buildWorkspaceTerminalLayoutPlan({
   ownershipTransfersByTabId,
@@ -24,14 +25,17 @@ export function buildWorkspaceTerminalLayoutPlan({
   tabById: ReadonlyMap<string, TerminalTab>
   validTabIds: ReadonlySet<string>
 }): Record<string, TerminalLayoutSnapshot> {
+  const adoptRowPtyId = adoptRowPtyIdIntoSinglePaneLayout(session)
   return Object.fromEntries(
     Object.entries(session.terminalLayoutsByTabId)
       .filter(([tabId]) => validTabIds.has(tabId))
       .map(([tabId, persisted]) => {
         const releasedPtyIds = releasedPtyIdsByTabId.get(tabId)
-        const layout = releasedPtyIds
-          ? releaseTerminalLayoutPtyIds(persisted, releasedPtyIds)
-          : persisted
+        const layout = adoptRowPtyId(
+          tabId,
+          releasedPtyIds ? releaseTerminalLayoutPtyIds(persisted, releasedPtyIds) : persisted,
+          releasedPtyIds
+        )
         const normalization = normalizeTerminalLayoutSnapshot(layout)
         const normalized = normalization.snapshot
         if (
