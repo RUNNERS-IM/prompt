@@ -99,7 +99,7 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     notes: [
       SELECTOR_NOTE,
       PROJECT_ID_NOTE,
-      '--icon <file> takes a PNG or WebP image of at most 256 KB. emoji:<emoji> and lucide:<IconName> pick a built-in icon; none restores the default.',
+      '--icon <file> takes a PNG or WebP image. On macOS a file over 256 KB or over 96px on its longest side is shrunk to a 96px PNG first; elsewhere it must be at most 256 KB. emoji:<emoji> and lucide:<IconName> pick a built-in icon; none restores the default.',
       '--color takes a hex color such as #22c55e; none restores the default.',
       '--base-ref sets the default base ref for new workspaces.'
     ],

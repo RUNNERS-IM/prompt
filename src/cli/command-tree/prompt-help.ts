@@ -86,7 +86,7 @@ const PROMPT_FLAG_HELP: Readonly<Record<string, Readonly<Record<string, string>>
   },
   icon: {
     'project set':
-      '--icon <file>          PNG/WebP file (256 KB max), emoji:<emoji>, lucide:<Icon>, or none'
+      '--icon <file>          PNG/WebP file (shrunk to 96px on macOS), emoji:<emoji>, lucide:<Icon>, or none'
   },
   color: { 'project set': '--color <#hex>         Badge color, or none for the default' },
   'base-ref': { 'project set': '--base-ref <ref>       Default base ref for new workspaces' },
