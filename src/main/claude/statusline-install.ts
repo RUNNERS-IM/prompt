@@ -1,5 +1,6 @@
 import { existsSync, rmSync, writeFileSync } from 'node:fs'
 import { writeManagedScript, type HooksConfig } from '../agent-hooks/installer-utils'
+import { skipWriteOutsideTestAppData } from '../agent-hooks/test-app-data-write-guard'
 import { getManagedStatusLineCommand, getManagedStatusLineScript } from './statusline-script'
 import {
   applyManagedStatusLine,
@@ -30,7 +31,9 @@ export function installClaudeManagedStatusLine(
     scriptFileName
   )
   try {
-    writeFileSync(markerPath, '')
+    if (!skipWriteOutsideTestAppData(markerPath)) {
+      writeFileSync(markerPath, '')
+    }
   } catch {
     // Marker failure may cause a later user deletion to be reinstalled.
   }
@@ -48,7 +51,10 @@ export function retireClaudeManagedStatusLine(
   )
   if (changed) {
     try {
-      rmSync(getStatusLineInstallMarkerPath(settings), { force: true })
+      const markerPath = getStatusLineInstallMarkerPath(settings)
+      if (!skipWriteOutsideTestAppData(markerPath)) {
+        rmSync(markerPath, { force: true })
+      }
     } catch {
       // A stale marker can suppress reinstall after an upgrade.
     }

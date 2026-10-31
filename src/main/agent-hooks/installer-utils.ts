@@ -16,6 +16,7 @@ import { grantDirAcl, isPermissionError } from '../win32-utils'
 import { resolveHooksJsonWritePath } from './hook-config-write-path'
 import { writeRollingFileBackup } from '../rolling-file-backup'
 import { renameOverLockedTarget } from './locked-executable-rename'
+import { skipWriteOutsideTestAppData } from './test-app-data-write-guard'
 import {
   getWindowsNativeHookAgent,
   WINDOWS_NATIVE_HOOK_EXECUTABLE_NAME
@@ -247,6 +248,9 @@ export function writeManagedScript(
   content: string | Buffer,
   options: { moveLockedTargetAside?: boolean } = {}
 ): void {
+  if (skipWriteOutsideTestAppData(scriptPath)) {
+    return
+  }
   const dir = dirname(scriptPath)
   mkdirSync(dir, { recursive: true })
 
@@ -308,6 +312,9 @@ export function writeHooksJson(
   options?: { preserveMode?: boolean; defaultMode?: number; serialized?: string }
 ): void {
   const writePath = resolveHooksJsonWritePath(configPath)
+  if (skipWriteOutsideTestAppData(writePath)) {
+    return
+  }
   const dir = dirname(writePath)
   mkdirSync(dir, { recursive: true })
 
