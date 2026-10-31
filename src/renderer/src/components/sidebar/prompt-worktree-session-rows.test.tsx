@@ -3,7 +3,17 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { WorktreeCardController } from './use-worktree-card-controller'
 
 let state: Record<string, unknown> = {}
-let agents: { tab: { id: string } }[] = []
+type FakeAgent = {
+  paneKey: string
+  tab: { id: string }
+  entry: { orchestration?: { parentPaneKey?: string } }
+}
+let agents: FakeAgent[] = []
+const agent = (paneKey: string, tabId: string, parentPaneKey?: string): FakeAgent => ({
+  paneKey,
+  tab: { id: tabId },
+  entry: parentPaneKey ? { orchestration: { parentPaneKey } } : {}
+})
 const agentProps: Record<string, unknown>[] = []
 
 vi.mock('@/store', () => ({
@@ -13,6 +23,12 @@ vi.mock('@/store', () => ({
 }))
 vi.mock('@/lib/worktree-activation', () => ({
   activateAndRevealWorktree: vi.fn()
+}))
+vi.mock('../tab-bar/web-runtime-tab-move-mirror', () => ({
+  mirrorWebRuntimeTabMove: vi.fn()
+}))
+vi.mock('../tab-group/tab-group-layout-owner-commands', () => ({
+  dropTabThroughLayoutOwner: vi.fn(() => false)
 }))
 vi.mock('@/lib/activate-tab-and-focus-pane', () => ({
   activateTabAndFocusPane: vi.fn()
@@ -83,7 +99,7 @@ describe('PromptWorktreeSessionRows', () => {
         { id: 't2', title: 'claude', customTitle: null }
       ]
     }
-    agents = [{ tab: { id: 't2' } }]
+    agents = [agent('t2:1', 't2')]
     const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
     expect(markup).toContain('Build server')
     expect(markup).not.toContain('>claude<')
@@ -103,6 +119,7 @@ describe('PromptWorktreeSessionRows', () => {
     const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
     state.worktreesByRepo = { 'repo-1': [{}, {}] }
     state.tabsByWorktree = { 'wt-1': [{ id: 't1', title: 'zsh' }] }
+    agents = [agent('t1:1', 't1')]
     const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
     expect(markup).toContain('data-prompt-workspace-row')
     expect(markup).toMatch(
@@ -150,5 +167,109 @@ describe('PromptWorktreeSessionRows', () => {
     const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
     expect(markup).toMatch(/data-prompt-workspace-row[^>]*>.*data-new-menu-for="wt-1"/s)
     expect(markup).toContain('group/prompt-workspace-row')
+  })
+
+  describe('order and drag (decision 1C)', () => {
+    const unified = (id: string, entityId: string, contentType = 'terminal') => ({
+      id,
+      entityId,
+      contentType,
+      groupId: 'g1'
+    })
+
+    function seedTabBar(tabOrder: string[]): void {
+      state.tabsByWorktree = {
+        'wt-1': [
+          { id: 't1', title: 'one', sortOrder: 0 },
+          { id: 't2', title: 'two', sortOrder: 1 },
+          { id: 't3', title: 'three', sortOrder: 2 }
+        ]
+      }
+      state.unifiedTabsByWorktree = {
+        'wt-1': [
+          unified('u1', 't1'),
+          unified('u2', 't2'),
+          unified('u3', 't3'),
+          unified('/src/app/README.md', '/src/app/README.md', 'editor')
+        ]
+      }
+      state.groupsByWorktree = { 'wt-1': [{ id: 'g1', worktreeId: 'wt-1', tabOrder }] }
+      state.reorderUnifiedTabs = vi.fn((groupId: string, next: string[]) => {
+        const groups = (state.groupsByWorktree as Record<string, { id: string }[]>)['wt-1']
+        state.groupsByWorktree = {
+          'wt-1': groups.map((group) =>
+            group.id === groupId ? { ...group, tabOrder: next } : group
+          )
+        }
+      })
+      state.reorderTabs = vi.fn((worktreeId: string, ids: string[]) => {
+        const current = (state.tabsByWorktree as Record<string, { id: string }[]>)[worktreeId]
+        state.tabsByWorktree = {
+          [worktreeId]: ids.map((id, sortOrder) => ({
+            ...current.find((tab) => tab.id === id),
+            sortOrder
+          }))
+        }
+      })
+    }
+
+    function rowOrder(markup: string): string[] {
+      return [...markup.matchAll(/data-prompt-session-drag-item="([^"]+)"/g)].map((m) => m[1])
+    }
+
+    it('lists sessions in the tab bar order, not by start time', async () => {
+      const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+      seedTabBar(['u3', '/src/app/README.md', 'u1', 'u2'])
+      const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+      expect(rowOrder(markup)).toEqual(['t3', 't1', 't2'])
+    })
+
+    it('a drop reorders the tab bar and the terminals, keeping the editor tab in its place', async () => {
+      const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+      const { handlePromptSessionDragEnd } = await import('./prompt-session-row-drag')
+      seedTabBar(['u1', '/src/app/README.md', 'u2', 'u3'])
+      const moved = handlePromptSessionDragEnd('wt-1', ['t1', 't2', 't3'], {
+        active: { id: 't3' },
+        over: { id: 't1' }
+      } as never)
+      expect(moved).toBe(true)
+      expect(state.reorderUnifiedTabs).toHaveBeenCalledWith('g1', [
+        'u3',
+        '/src/app/README.md',
+        'u1',
+        'u2'
+      ])
+      expect(
+        (state.tabsByWorktree as Record<string, { id: string }[]>)['wt-1'].map((tab) => tab.id)
+      ).toEqual(['t3', 't1', 't2'])
+      const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+      expect(rowOrder(markup)).toEqual(['t3', 't1', 't2'])
+    })
+
+    it('releasing outside the workspace changes nothing', async () => {
+      const { handlePromptSessionDragEnd } = await import('./prompt-session-row-drag')
+      seedTabBar(['u1', 'u2', 'u3'])
+      const moved = handlePromptSessionDragEnd('wt-1', ['t1', 't2', 't3'], {
+        active: { id: 't3' },
+        over: null
+      } as never)
+      expect(moved).toBe(false)
+      expect(state.reorderUnifiedTabs).not.toHaveBeenCalled()
+      expect(state.reorderTabs).not.toHaveBeenCalled()
+    })
+
+    it('moves a tab as one item: its split-pane agents and a helper drawn under it', async () => {
+      const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+      seedTabBar(['u2', 'u1', 'u3'])
+      agents = [agent('t1:1', 't1'), agent('t1:2', 't1'), agent('t3:1', 't3', 't1:1')]
+      const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+      expect(rowOrder(markup)).toEqual(['t2', 't1'])
+      expect(agentProps).toHaveLength(1)
+      expect((agentProps[0].agents as FakeAgent[]).map((row) => row.paneKey)).toEqual([
+        't1:1',
+        't1:2',
+        't3:1'
+      ])
+    })
   })
 })

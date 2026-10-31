@@ -7,6 +7,7 @@ import { translate } from '@/i18n/i18n'
 import { activateAndRevealWorktree } from '@/lib/worktree-activation'
 import { activateTabAndFocusPane } from '@/lib/activate-tab-and-focus-pane'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
+import type { Tab, TabGroup } from '../../../../shared/tab-types'
 import WorktreeCardAgents from './WorktreeCardAgents'
 import { useWorktreeAgentRows } from './useWorktreeAgentRows'
 import {
@@ -21,8 +22,16 @@ import {
 } from './prompt-sidebar-new-menu'
 import type { WorktreeCardController } from './use-worktree-card-controller'
 import { PromptWorkspaceIdentity } from './prompt-workspace-identity'
+import { buildPromptSessionItems, buildPromptSessionTabSlots } from './prompt-session-row-order'
+import {
+  PromptSessionDragItem,
+  PromptSessionDragList,
+  type PromptSessionDragSection
+} from './prompt-session-row-drag'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
+const EMPTY_GROUPS: readonly TabGroup[] = []
+const EMPTY_UNIFIED_TABS: readonly Tab[] = []
 
 const ROW_CLASS =
   'compact-agent-row min-w-0 cursor-pointer rounded-sm px-1 text-[11px] leading-none text-muted-foreground worktree-agent-row-hover flex h-6 items-center gap-1 group-hover/prompt-session-row:pr-5'
@@ -85,10 +94,33 @@ export function PromptWorktreeSessionRows({
   )
   const agents = useWorktreeAgentRows(worktree.id, true)
   const tabs = useAppStore(useShallow((s) => s.tabsByWorktree?.[worktree.id] ?? EMPTY_TABS))
-  const plainTabs = useMemo(() => {
-    const agentTabIds = new Set(agents.map((agent) => agent.tab.id))
-    return tabs.filter((tab) => !agentTabIds.has(tab.id))
-  }, [agents, tabs])
+  const groups = useAppStore((s) => s.groupsByWorktree?.[worktree.id] ?? EMPTY_GROUPS)
+  const unifiedTabs = useAppStore(
+    (s) => s.unifiedTabsByWorktree?.[worktree.id] ?? EMPTY_UNIFIED_TABS
+  )
+  // One item per tab, in the tab bar's order (not the agents' start time), so the sidebar and the
+  // tab strip read the same way and a drag here reorders both.
+  const { items, orderedTabIds, sections } = useMemo(() => {
+    const ordered = buildPromptSessionItems({
+      agents,
+      terminals: tabs,
+      slots: buildPromptSessionTabSlots(groups, unifiedTabs)
+    })
+    const grouped: PromptSessionDragSection[] = []
+    for (const item of ordered) {
+      const last = grouped.at(-1)
+      if (last && last.groupKey === item.groupKey) {
+        last.tabIds.push(item.tabId)
+      } else {
+        grouped.push({ groupKey: item.groupKey, tabIds: [item.tabId] })
+      }
+    }
+    return {
+      items: new Map(ordered.map((item) => [item.tabId, item])),
+      orderedTabIds: ordered.map((item) => item.tabId),
+      sections: grouped
+    }
+  }, [agents, tabs, groups, unifiedTabs])
 
   return (
     <div className="flex min-w-0 flex-col gap-0.5" data-prompt-session-rows="">
@@ -110,11 +142,35 @@ export function PromptWorktreeSessionRows({
           </span>
         </div>
       ) : null}
-      <WorktreeCardAgents worktreeId={worktree.id} agents={agents} expandAll className="mt-0" />
-      {plainTabs.map((tab) => (
-        <PromptTerminalRow key={tab.id} worktreeId={worktree.id} tab={tab} />
-      ))}
-      {agents.length === 0 && plainTabs.length === 0 ? (
+      <PromptSessionDragList
+        worktreeId={worktree.id}
+        orderedTabIds={orderedTabIds}
+        sections={sections}
+      >
+        {(section) =>
+          section.tabIds.map((tabId) => {
+            const item = items.get(tabId)
+            if (!item) {
+              return null
+            }
+            return (
+              <PromptSessionDragItem key={tabId} tabId={tabId} groupKey={item.groupKey}>
+                {item.agents ? (
+                  <WorktreeCardAgents
+                    worktreeId={worktree.id}
+                    agents={item.agents}
+                    expandAll
+                    className="mt-0"
+                  />
+                ) : item.terminal ? (
+                  <PromptTerminalRow worktreeId={worktree.id} tab={item.terminal} />
+                ) : null}
+              </PromptSessionDragItem>
+            )
+          })
+        }
+      </PromptSessionDragList>
+      {orderedTabIds.length === 0 ? (
         // An empty workspace still needs a way in: the click reaches the card, which opens the workspace.
         <div className={cn(ROW_CLASS, 'text-muted-foreground/60')} data-prompt-terminal-row="empty">
           <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
