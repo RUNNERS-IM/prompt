@@ -45,7 +45,7 @@ describe('locale-translation-policy ko round 5', () => {
         localeValue: '에이전트가 Orca CLI 사용 방법을 알 수 있도록 Orca 기술을 설치합니다.',
         locale: 'ko'
       })
-    ).toBe('에이전트가 Orca CLI를 사용하도록 Orca 스킬을 설치하세요.')
+    ).toBe('에이전트가 Orca CLI를 쓸 수 있도록 Orca 스킬을 설치하세요.')
     expect(
       repairTranslatedValue({
         key: 'auto.components.editor.MarkdownPreview.322afab6ff',

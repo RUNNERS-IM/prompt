@@ -157,7 +157,7 @@
         "portsToggleDescription": "라이브 워크스페이스 포트를 표시합니다. 워크스페이스 범위 포트 및 외부 수신기를 보려면 클릭하세요.",
         "antigravityToggleDescription": "활성 워크스페이스의 Antigravity 구독 사용량을 표시합니다.",
         "grokToggleDescription": "Grok CLI로 로그인했다면 Grok 구독 크레딧 사용량을 표시합니다.",
-        "cursorToggleDescription": "cursor-agent나 Cursor IDE로 로그인했다면 Cursor 플랜 사용량을 표시합니다.",
+        "cursorToggleDescription": "cursor-agent 또는 Cursor IDE로 로그인했다면 Cursor 플랜 사용량을 표시합니다.",
         "zcodeToggleDescription": "ZCode Coding Plan 할당량 사용량을 표시합니다."
       },
       "menuBarIcon": {
@@ -1458,7 +1458,7 @@
         "de0c2907a1": "원격 Orca 서버",
         "b351014180": "Orca 통계와 Claude, Codex, OpenCode, Muse 토큰 분석 및 Grok 구독 사용량.",
         "d72a58b5b9": "통계 및 사용량",
-        "dcd0d9b74f": "일반 작업에 대한 키보드 단축키입니다.",
+        "dcd0d9b74f": "자주 쓰는 작업의 키보드 단축키입니다.",
         "94295ebfb3": "단축키",
         "7682607591": "agent 및 terminal 이벤트에 대한 네이티브 데스크톱 알림입니다.",
         "2eece16ad1": "알림",
@@ -8423,7 +8423,7 @@
           "reconnectOnLaunch": "시작 시 다시 연결",
           "reconnectOnLaunchHelp": "끄면 Orca를 시작해도, 직접 연결하기 전까지 이 호스트와 이 호스트를 거치는 Orca 서버에 연결하지 않습니다.",
           "allowRemoteCliControl": "이 호스트의 CLI가 Orca를 제어하도록 허용",
-          "allowRemoteCliControlHelp": "새 호스트에서는 기본으로 켜져 있습니다. 켜면 두 가지가 가능합니다. 첫째, 이 호스트에서 실행한 CLI 명령이 연결되어 있는 동안 이 호스트의 작업 공간 안에서만 이 데스크톱의 Orca 브라우저 탭을 열고 조작할 수 있습니다. 둘째, 이 호스트에서 이전 버전 Orca가 시작한 터미널이 자기가 관리받는 작업에 오케스트레이션 명령(check, inbox, send, ask, reply)을 실행할 수 있습니다. 파일, 클립보드, 쿠키는 읽을 수 없습니다. 끄면 이 호스트 자체의 Orca 서버에만 접근합니다.",
+          "allowRemoteCliControlHelp": "새 호스트에서는 기본으로 켜져 있습니다. 켜면 두 가지가 가능합니다. 첫째, 이 호스트에서 실행한 CLI 명령이 연결되어 있는 동안 이 호스트의 워크스페이스 안에서만 이 데스크톱의 Orca 브라우저 탭을 열고 조작할 수 있습니다. 둘째, 이 호스트에서 이전 버전 Orca가 시작한 터미널이 자기가 관리받는 작업에 오케스트레이션 명령(check, inbox, send, ask, reply)을 실행할 수 있습니다. 파일, 클립보드, 쿠키는 읽을 수 없습니다. 끄면 이 호스트 자체의 Orca 서버에만 접근합니다.",
           "addHost": "호스트 추가",
           "proxyConnectionReuse": "프록시 연결 하나를 재사용",
           "proxyConnectionReuseHelp": "느린 ProxyCommand나 ProxyJump 호스트를 거치는 연결이 빨라집니다. ssh_config가 호스트별 Match나 %h 규칙을 쓰지 않을 때만 켜세요."
@@ -9670,7 +9670,7 @@
             "564942ffc5": "origin/main",
             "28192e3a63": "master",
             "e3e9adde59": "main",
-            "0e993bf00f": "워크스페이스를 만들면 Orca가 원격 기준 브랜치를 새로 고치고, main이나 master 같은 같은 이름의 로컬 브랜치를 안전하게 fast-forward합니다. git diff main...HEAD 같은 명령이 오래된 이력과 비교하지 않게 하려는 동작입니다. 그 브랜치에 커밋하지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca는 업데이트를 건너뜁니다.",
+            "0e993bf00f": "워크스페이스를 만들면 Orca가 원격 기준 브랜치를 새로고침하고, main이나 master 같은 같은 이름의 로컬 브랜치를 안전하게 fast-forward 합니다. git diff main...HEAD 같은 명령이 오래된 이력과 비교하지 않게 하려는 동작입니다. 그 브랜치에 커밋하지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca는 업데이트를 건너뜁니다.",
             "f8bda25f29": "로컬 메인을 최신 상태로 유지",
             "769ddd7f81": "custom",
             "1d2fae1fa2": "Git 사용자 이름",
@@ -10845,7 +10845,7 @@
         "RepositoryForkSyncSection": {
           "defaultBranch": "기본 브랜치",
           "synced": "포크가 업데이트됨",
-          "syncedDescriptionSingular": "{{branch}} 브랜치를 커밋 1개만큼 fast-forward했습니다.",
+          "syncedDescriptionSingular": "{{branch}} 브랜치를 커밋 1개만큼 fast-forward 했습니다.",
           "syncedDescriptionPlural": "{{branch}} 브랜치를 커밋 {{count}}개만큼 fast-forward 했습니다.",
           "upToDate": "포크가 이미 최신 상태입니다",
           "upToDateDescription": "{{branch}} 브랜치가 이미 upstream과 일치합니다.",
@@ -11162,7 +11162,7 @@
           "overview": "QR 코드를 생성한 후 Orca Mobile의 Pair Desktop에서 스캔하세요.",
           "step1Title": "연결 방식",
           "step2Title": "이 컴퓨터의 주소",
-          "step2LocalDescription": "휴대폰이 Tailscale이나 Wi‑Fi로 이 주소에 접근할 수 있어야 합니다.",
+          "step2LocalDescription": "휴대폰이 Tailscale 또는 Wi‑Fi로 이 주소에 접근할 수 있어야 합니다.",
           "step2RelayDescription": "선택 사항. 근처에 있을 때(같은 Wi‑Fi 또는 Tailscale) 휴대폰이 사용할 주소를 고르세요. 보통 Relay보다 빠릅니다. 외부에 있을 때는 여전히 Relay를 사용합니다.",
           "step2RelayDisclosure": "더 빠른 로컬 경로도 사용"
         },
@@ -11726,7 +11726,7 @@
           "openArtifacts": "아티팩트 열기",
           "showButton": "아티팩트 버튼 표시",
           "showButtonDescription": "사이드바에 아티팩트 바로가기를 표시합니다.",
-          "openArtifactsDescriptionV2": "계정으로 공유한 링크를 미리 보고, 복사하고, 관리하세요.",
+          "openArtifactsDescriptionV2": "계정으로 공유한 링크를 미리 보거나 복사하고 관리하세요.",
           "signInTitle": "아티팩트를 공유하려면 로그인하세요.",
           "signInDescription": "Orca 계정으로 아티팩트를 올리고 공개 링크를 관리하세요.",
           "signInAgain": "다시 로그인",

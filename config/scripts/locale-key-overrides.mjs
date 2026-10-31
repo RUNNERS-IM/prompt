@@ -226,7 +226,7 @@ const BASE_LOCALE_KEY_OVERRIDES = {
     ja: 'コマンド'
   },
   'auto.components.settings.AgentsPane.1c9a9679ec': {
-    ko: '{{value0}} 사용 가능 여부',
+    ko: '{{value0}} 사용 가능',
     zh: '{{value0}} 可用性',
     ja: '{{value0}} の利用可否'
   },
