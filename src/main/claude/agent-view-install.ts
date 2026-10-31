@@ -29,7 +29,7 @@ import {
   writeHooksJsonRemote,
   renamePlain
 } from '../agent-hooks/installer-utils-remote'
-import { CLAUDE_AGENT_VIEW_PLUGIN } from '../../shared/claude-agent-view'
+import { CLAUDE_AGENT_VIEW_LEGACY_NAME } from '../../shared/claude-agent-view'
 export { withClaudeAgentViewShortcut } from './agent-view-binding-plan'
 export { ensureClaudeAgentViewPlugin } from './agent-view-plugin'
 
@@ -43,7 +43,7 @@ export function installClaudeAgentView(configPath: string): boolean {
     return false
   }
   const marker = join(configDir, markerName)
-  const legacyRoot = join(configDir, 'skills', CLAUDE_AGENT_VIEW_PLUGIN)
+  const legacyRoot = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
   const legacy = readHooksJson(join(legacyRoot, '.claude-plugin', 'orca-managed.json'))
   if (legacy?.owner === ownership.owner) {
     writeHooksJson(marker, { ...legacy, setup: 'attempted' })
@@ -63,7 +63,7 @@ export function installClaudeAgentView(configPath: string): boolean {
 
 export function removeClaudeAgentView(configPath: string): void {
   const configDir = dirname(configPath)
-  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_PLUGIN)
+  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
   const legacy = readHooksJson(join(root, '.claude-plugin', 'orca-managed.json'))
   const markerPath = join(configDir, markerName)
   const marker = legacy?.owner === ownership.owner ? legacy : readHooksJson(markerPath)
@@ -104,7 +104,7 @@ export function refreshClaudeAgentView(configPath: string): Promise<void> {
 
 async function retireLegacyClaudeAgentView(configPath: string): Promise<void> {
   const configDir = dirname(configPath)
-  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_PLUGIN)
+  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
   const legacy = parseHooksJsonText(
     await readFile(join(root, '.claude-plugin', 'orca-managed.json'), 'utf8').catch(() => '{}')
   )
@@ -143,7 +143,7 @@ export async function removeClaudeAgentViewRemote(
   configPath: string
 ): Promise<void> {
   const configDir = posix.dirname(configPath)
-  const root = posix.join(configDir, 'skills', CLAUDE_AGENT_VIEW_PLUGIN)
+  const root = posix.join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
   const legacy = await readHooksJsonRemote(
     sftp,
     posix.join(root, '.claude-plugin', 'orca-managed.json')

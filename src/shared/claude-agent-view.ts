@@ -3,7 +3,9 @@ import { z } from 'zod'
 export const CLAUDE_AGENT_VIEW_PATH = '/claude/agent-view'
 export const CLAUDE_AGENT_VIEW_RELAY_METHOD = 'agent_hook.claudeAgentView'
 export const CLAUDE_AGENT_VIEW_COMMAND = 'orca-agent-view'
-export const CLAUDE_AGENT_VIEW_PLUGIN = 'orca-agent-view'
+export const CLAUDE_AGENT_VIEW_PLUGIN = 'prompt-agent-view'
+/** Plugin folder name used by Orca, and by Prompt before it was renamed. */
+export const CLAUDE_AGENT_VIEW_LEGACY_NAME = 'orca-agent-view'
 export const CLAUDE_AGENT_VIEW_SUBSCRIBE = 'terminal.subscribeClaudeAgentViews'
 
 export const ClaudeAgentViewObservation = z.object({
