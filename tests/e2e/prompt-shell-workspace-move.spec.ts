@@ -13,10 +13,12 @@ import {
   dragSessionRow,
   markShell,
   openShellTab,
+  paneConversationFacts,
   paneKeyOf,
   processAlive,
   readShellIdentity,
   realFolder,
+  waitForSavedMove,
   waitForTabPtyIds,
   workspaceOfTab
 } from './helpers/prompt-shell-move'
@@ -129,6 +131,7 @@ test.describe('moving a shell tab to another workspace', () => {
     const { pid } = await readShellIdentity(page, testInfo, ptyId)
     expect((await dragSessionRow(page, tabId, ws.b.id)).targetLit).toBe(true)
     await expect.poll(() => workspaceOfTab(page, tabId), { timeout: 15_000 }).toBe(ws.b.id)
+    await waitForSavedMove(page, tabId, ptyId, ws.b.id)
 
     await removeWorkspace(page, ws.a.id)
     // ast-grep-ignore: test-no-real-time-wait -- the shell must still be alive after teardown had time to kill it
@@ -160,6 +163,7 @@ test.describe('moving a shell tab to another workspace', () => {
       const { pid } = await readShellIdentity(first.page, testInfo, ptyId)
       expect((await dragSessionRow(first.page, tabId, ws.b.id)).targetLit).toBe(true)
       await expect.poll(() => workspaceOfTab(first.page, tabId), { timeout: 15_000 }).toBe(ws.b.id)
+      await waitForSavedMove(first.page, tabId, ptyId, ws.b.id)
       // Removing the original workspace must not take the moved shell with it on the next start.
       await removeWorkspace(first.page, ws.a.id)
 
@@ -194,9 +198,7 @@ test.describe('moving a shell tab to another workspace', () => {
     }
   })
 
-  test('an SSH workspace is not a drop target for a local shell', async ({
-    testRepoPath
-  }, testInfo) => {
+  test('a local shell cannot be moved to an SSH workspace', async ({ testRepoPath }, testInfo) => {
     // The SSH fixture launches the app twice to seed a stopped profile.
     test.setTimeout(240_000)
     const launched = await launchWithUnreachableSshWorkspaces(testInfo, testRepoPath, {
@@ -204,13 +206,21 @@ test.describe('moving a shell tab to another workspace', () => {
       workspaces: [{ name: 'remote-move', displayName: 'Remote move target' }]
     })
     try {
-      const { page, ssh, localWorktreeId } = launched
+      const { page, app, ssh, localWorktreeId } = launched
       const sshWorktreeId = ssh.worktreeIds['remote-move']!
-      const { tabId } = await openShellTab(page, localWorktreeId)
-      const { targetLit } = await dragSessionRow(page, tabId, sshWorktreeId)
-      expect(targetLit).toBe(false)
-      // ast-grep-ignore: test-no-real-time-wait -- proving the tab did not move needs a quiet period
-      await page.waitForTimeout(3_000)
+      const { tabId, ptyId } = await openShellTab(page, localWorktreeId)
+      // The sidebar lists one host's projects at a time, so an SSH row is never beside a local
+      // one to drop on; the runtime call is the only way to aim a local shell at it.
+      await expect(
+        page.locator(`[data-prompt-session-drop-worktree=${JSON.stringify(sshWorktreeId)}]`)
+      ).toHaveCount(0)
+      const outcome = await moveByRuntime(
+        await runtimeClient(app),
+        await paneKeyOf(page, tabId, ptyId),
+        sshWorktreeId
+      ).catch((error: unknown) => ({ moved: false as const, reason: String(error) }))
+      testInfo.annotations.push({ type: 'ssh-move-outcome', description: JSON.stringify(outcome) })
+      expect(outcome.moved).toBe(false)
       expect(await workspaceOfTab(page, tabId)).toBe(localWorktreeId)
       await attachScreenshot(page, testInfo, '6-ssh-target-refused')
     } finally {
@@ -295,7 +305,14 @@ test.describe('moving a shell tab to another workspace', () => {
       ws.b.id
     )
 
-    expect((await dragSessionRow(page, tabId, ws.b.id)).targetLit).toBe(true)
+    // The drop planner copies only a pane whose conversation id it can read.
+    expect(await paneConversationFacts(page, paneKey)).toEqual({
+      sessionId: CLAUDE_SESSION_ID,
+      restoredUnconfirmed: false,
+      shellForeground: false
+    })
+    const drag = await dragSessionRow(page, tabId, ws.b.id)
+    expect(drag).toEqual({ dragStarted: true, targetLit: true })
 
     let copyTabId: string | undefined
     await expect

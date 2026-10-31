@@ -167,7 +167,7 @@ export async function dragSessionRow(
   page: Page,
   tabId: string,
   targetWorktreeId: string
-): Promise<{ targetLit: boolean }> {
+): Promise<{ targetLit: boolean; dragStarted: boolean }> {
   const source = page.locator(`[data-prompt-session-drag-item=${JSON.stringify(tabId)}]`).first()
   const target = page.locator(dropTarget(targetWorktreeId)).first()
   await source.scrollIntoViewIfNeeded()
@@ -192,8 +192,10 @@ export async function dragSessionRow(
     steps: 12
   })
   const targetLit = (await target.getAttribute('data-prompt-session-drop-target')) === 'true'
+  // dnd-kit marks the dragged row; without it the pointer never armed a drag at all.
+  const dragStarted = (await page.locator('[data-dragging="true"]').count()) > 0
   await page.mouse.up()
-  return { targetLit }
+  return { targetLit, dragStarted }
 }
 
 export async function attachScreenshot(
@@ -202,4 +204,46 @@ export async function attachScreenshot(
   name: string
 ): Promise<void> {
   await testInfo.attach(name, { body: await page.screenshot(), contentType: 'image/png' })
+}
+
+/**
+ * Wait until main's saved session records the move. Main decides whose terminal it is from that
+ * saved copy, which the window writes shortly after the move, not at the same moment.
+ */
+export async function waitForSavedMove(
+  page: Page,
+  tabId: string,
+  ptyId: string,
+  worktreeId: string
+): Promise<void> {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(
+          async ({ tabId, ptyId, worktreeId }) => {
+            const saved = await window.api.session.get()
+            const tab = saved.tabsByWorktree?.[worktreeId]?.find((entry) => entry.id === tabId)
+            return tab?.adoptedPtyIds?.includes(ptyId) ?? false
+          },
+          { tabId, ptyId, worktreeId }
+        ),
+      { timeout: 10_000, message: 'main never saved the moved tab under its new workspace' }
+    )
+    .toBe(true)
+}
+
+/** What the drop planner reads to find a pane's Claude conversation. */
+export function paneConversationFacts(
+  page: Page,
+  paneKey: string
+): Promise<{ sessionId: string | null; restoredUnconfirmed: boolean; shellForeground: boolean }> {
+  return page.evaluate((paneKey) => {
+    const state = window.__store?.getState()
+    const live = state?.agentStatusByPaneKey[paneKey]
+    return {
+      sessionId: live?.providerSession?.id ?? null,
+      restoredUnconfirmed: live?.restoredUnconfirmed === true,
+      shellForeground: state?.paneForegroundAgentByPaneKey[paneKey]?.shellForeground === true
+    }
+  }, paneKey)
 }

@@ -61,6 +61,8 @@ export async function launchWithUnreachableSshWorkspaces(
   input: Parameters<typeof seedUnreachableSshWorkspaces>[1]
 ): Promise<{
   page: Page
+  /** The running app, for main-process reads such as its userData folder. */
+  app: ElectronApplication
   ssh: SeededSshWorkspaces
   /** The local test repo's primary workspace. */
   localWorktreeId: string
@@ -94,7 +96,13 @@ export async function launchWithUnreachableSshWorkspaces(
       )
       .toBe(true)
     const running = app
-    return { page: launched.page, ssh, localWorktreeId, dispose: () => session.dispose(running) }
+    return {
+      page: launched.page,
+      app: running,
+      ssh,
+      localWorktreeId,
+      dispose: () => session.dispose(running)
+    }
   } catch (error) {
     await session.dispose(app)
     throw error
