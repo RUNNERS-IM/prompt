@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, realpathSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, realpathSync, rmSync, symlinkSync } from 'node:fs'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import type { Page, TestInfo } from '@stablyai/playwright-test'
@@ -246,4 +246,37 @@ export function paneConversationFacts(
       shellForeground: state?.paneForegroundAgentByPaneKey[paneKey]?.shellForeground === true
     }
   }, paneKey)
+}
+
+/**
+ * Run a foreground process the app recognizes as Claude: a link named `claude` to `sleep`, so the
+ * process table shows `claude` the way a real session does. Waits until the pane reads it as Claude.
+ */
+export async function startFakeClaude(
+  page: Page,
+  testInfo: TestInfo,
+  ptyId: string,
+  paneKey: string
+): Promise<void> {
+  const sleep = ['/usr/bin/sleep', '/bin/sleep'].find((candidate) => existsSync(candidate))
+  if (!sleep) {
+    throw new Error('no sleep binary to stand in for claude')
+  }
+  const dir = path.join(testInfo.outputDir, 'fake-claude-bin')
+  mkdirSync(dir, { recursive: true })
+  const claude = path.join(dir, 'claude')
+  if (!existsSync(claude)) {
+    symlinkSync(sleep, claude)
+  }
+  await execInTerminal(page, ptyId, `'${claude.replaceAll("'", "'\\''")}' 300`)
+  await expect
+    .poll(
+      () =>
+        page.evaluate(
+          (paneKey) => window.__store?.getState().paneForegroundAgentByPaneKey[paneKey] ?? null,
+          paneKey
+        ),
+      { timeout: 20_000, message: 'the pane never read its foreground process as Claude' }
+    )
+    .toMatchObject({ agent: 'claude', shellForeground: false })
 }

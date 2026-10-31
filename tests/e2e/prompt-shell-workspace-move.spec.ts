@@ -18,6 +18,7 @@ import {
   processAlive,
   readShellIdentity,
   realFolder,
+  startFakeClaude,
   waitForSavedMove,
   waitForTabPtyIds,
   workspaceOfTab
@@ -279,12 +280,11 @@ test.describe('moving a shell tab to another workspace', () => {
     await waitForSessionReady(page)
     const ws = await createMoveWorkspaces(page, 'claude')
     const { tabId, ptyId } = await openShellTab(page, ws.a.id)
-    // A running foreground command keeps the pane from being read as an idle shell, which would
-    // hide its conversation id; the status below stands in for a real Claude hook report.
-    await execInTerminal(page, ptyId, 'sleep 300')
-    // ast-grep-ignore: test-no-real-time-wait -- the shell exposes no event for handing the terminal to sleep
-    await page.waitForTimeout(1_500)
     const paneKey = await paneKeyOf(page, tabId, ptyId)
+    // A process named claude in the foreground, as in a real session; a plain sleep left the pane
+    // marked as an idle shell, which hides its conversation id. The status below stands in for
+    // the session id a real Claude hook reports.
+    await startFakeClaude(page, testInfo, ptyId, paneKey)
     await page.evaluate(
       ({ paneKey, worktreeId, sessionId }) => {
         window.__store
