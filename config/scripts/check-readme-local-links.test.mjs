@@ -176,6 +176,23 @@ describe('README local link check', () => {
     ])
   })
 
+  it("checks Orca's original READMEs kept under docs/upstream", () => {
+    const root = makeFixture({
+      ...validReadmes,
+      'docs/upstream/README.orca.md': '<img src="../../resources/build/icon.png" />',
+      'docs/upstream/readme/README.ja.md':
+        '<a href="../README.orca.md">English</a> <img src="../../assets/missing.png" />'
+    })
+
+    expect(findBrokenReadmeLinks(root)).toEqual([
+      {
+        readme: 'docs/upstream/readme/README.ja.md',
+        target: '../../assets/missing.png',
+        resolved: 'docs/assets/missing.png'
+      }
+    ])
+  })
+
   // Single-quoted HTML is valid; double-quote-only parsing would miss this broken image.
   it('reports a missing target in a single-quoted attribute', () => {
     const files = {

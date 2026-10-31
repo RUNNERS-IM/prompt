@@ -1,21 +1,24 @@
 import { execFileSync } from 'node:child_process'
-import { readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
 
 // Docs-only CI skips some media owners; check index paths because GitHub cannot render uncommitted docs-site/feature-wall assets.
-const TRANSLATED_README_DIR = path.join('docs', 'readme')
+// docs/readme holds the translated READMEs; docs/upstream keeps Orca's original READMEs for reference.
+const README_DIRS = ['docs/readme', 'docs/upstream', 'docs/upstream/readme']
 const EXTERNAL_TARGET = /^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i
 const HTML_ATTRIBUTE = /\b(src|srcset|href)\s*=\s*(?:"([^"]*)"|'([^']*)')/g
 const MARKDOWN_LINK = /!?\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g
 
 function readmeFiles(root) {
-  const translated = readdirSync(path.join(root, TRANSLATED_README_DIR))
-    .filter((name) => name.endsWith('.md'))
-    .sort()
-    .map((name) => path.posix.join('docs', 'readme', name))
-  return ['README.md', ...translated]
+  const nested = README_DIRS.filter((dir) => existsSync(path.join(root, dir))).flatMap((dir) =>
+    readdirSync(path.join(root, dir), { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+      .map((entry) => path.posix.join(dir, entry.name))
+      .sort()
+  )
+  return ['README.md', ...nested]
 }
 
 // Bound ls-files to referenced pathspecs; full-tree output overflows the child buffer.

@@ -1,10 +1,10 @@
 <h1 align="center">
-  <a href="https://onOrca.dev"><img src="../../resources/build/icon.png" alt="Orca" width="64" valign="middle" /></a> Orca
+  <a href="https://onOrca.dev"><img src="../../../resources/build/icon.png" alt="Orca" width="64" valign="middle" /></a> Orca
 </h1>
 
 <p align="center">
   <a href="https://github.com/stablyai/orca"><img src="https://img.shields.io/github/stars/stablyai/orca?style=flat&amp;label=%E2%98%85&amp;color=08C" alt="GitHub yıldızları" /></a>
-  <a href="https://github.com/stablyai/orca/releases"><img src="../assets/readme-downloads.svg" alt="Tüm sürümlerdeki toplam indirme sayısı" /></a>
+  <a href="https://github.com/stablyai/orca/releases"><img src="../../assets/readme-downloads.svg" alt="Tüm sürümlerdeki toplam indirme sayısı" /></a>
   <img src="https://img.shields.io/badge/license-MIT-08C?style=flat" alt="Lisans: MIT" />
   <a href="https://discord.gg/fzjDKHxv8Q"><img src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white" alt="Orca Discord'una katılın" /></a>
   <a href="https://x.com/orca_build"><img src="https://img.shields.io/badge/X-000000?logo=x&logoColor=white" alt="Orca'yı X'te takip edin" /></a>
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">English</a> · <a href="README.zh-CN.md">中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.pt.md">Português</a> · <a href="README.ru.md">Русский</a></sub>
+  <sub><a href="../README.orca.md">English</a> · <a href="README.zh-CN.md">中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.pt.md">Português</a> · <a href="README.ru.md">Русский</a></sub>
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 <h3 align="center"><a href="https://onorca.dev/download"><ins>Orca'yı indirin</ins></a></h3>
 
 <p align="center">
-  <img src="../assets/readme-hero.jpg" alt="Paralel worktree'lerde ajan çalıştıran Orca masaüstü uygulaması, köşede Orca mobil yardımcı uygulaması" width="960" />
+  <img src="../../assets/readme-hero.jpg" alt="Paralel worktree'lerde ajan çalıştıran Orca masaüstü uygulaması, köşede Orca mobil yardımcı uygulaması" width="960" />
 </p>
 
 ## Özellikler
@@ -40,7 +40,7 @@ Ajanlarınızı telefonunuzdan izleyin ve yönlendirin - bir ajan işini bitirdi
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/mobile"><picture><source srcset="../assets/feature-wall/mobile-companion-app-showcase.gif" type="image/gif"><img src="../assets/feature-wall/mobile-companion-app-showcase.jpg" alt="Mobil yardımcı uygulamayla birlikte Orca masaüstü" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/mobile"><picture><source srcset="../../assets/feature-wall/mobile-companion-app-showcase.gif" type="image/gif"><img src="../../assets/feature-wall/mobile-companion-app-showcase.jpg" alt="Mobil yardımcı uygulamayla birlikte Orca masaüstü" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -54,7 +54,7 @@ Tek bir prompt'u beş ajana birden dağıtın; her biri kendi izole git worktree
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/model/worktrees"><picture><source srcset="../site/public/docs/tab-split.gif" type="image/gif"><img src="../site/public/docs/posters/tab-split.jpg" alt="Paralel worktree orkestrasyonu" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/model/worktrees"><picture><source srcset="../../site/public/docs/tab-split.gif" type="image/gif"><img src="../../site/public/docs/posters/tab-split.jpg" alt="Paralel worktree orkestrasyonu" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -68,7 +68,7 @@ WebGL ile çizilen Ghostty ayarında terminaller, sınırsız bölme ve yeniden 
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/terminal"><picture><source srcset="../../resources/onboarding/feature-wall/tile-02.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-02.poster.jpg" alt="Terminal bölmeleri" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/terminal"><picture><source srcset="../../../resources/onboarding/feature-wall/tile-02.webp" type="image/webp"><img src="../../../resources/onboarding/feature-wall/tile-02.poster.jpg" alt="Terminal bölmeleri" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -82,7 +82,7 @@ Gerçek bir Chromium penceresindeki herhangi bir arayüz öğesine tıklayın; �
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/browser/design-mode"><picture><source srcset="../site/public/docs/orca-design-mode.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-05.poster.jpg" alt="Gömülü tarayıcı ve Tasarım Modu" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/browser/design-mode"><picture><source srcset="../../site/public/docs/orca-design-mode.gif" type="image/gif"><img src="../../../resources/onboarding/feature-wall/tile-05.poster.jpg" alt="Gömülü tarayıcı ve Tasarım Modu" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -96,7 +96,7 @@ PR'ları, issue'ları ve proje panolarını uygulamanın içinde gezin - herhang
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/review/linear"><picture><source srcset="../../resources/onboarding/feature-wall/tile-03.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-03.poster.jpg" alt="Orca'da GitHub ve Linear görev akışları" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/review/linear"><picture><source srcset="../../../resources/onboarding/feature-wall/tile-03.webp" type="image/webp"><img src="../../../resources/onboarding/feature-wall/tile-03.poster.jpg" alt="Orca'da GitHub ve Linear görev akışları" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@ Ajanları güçlü bir uzak makinede çalıştırın; dosya düzenleme, git ve t
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/ssh"><picture><source srcset="../../resources/onboarding/feature-wall/tile-06.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-06.poster.jpg" alt="SSH üzerinden uzak worktree'ler" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/ssh"><picture><source srcset="../../../resources/onboarding/feature-wall/tile-06.webp" type="image/webp"><img src="../../../resources/onboarding/feature-wall/tile-06.poster.jpg" alt="SSH üzerinden uzak worktree'ler" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -124,7 +124,7 @@ Herhangi bir diff satırına yorum bırakın ve ajana geri gönderin - Orca'dan 
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/review/annotate-ai-diff"><picture><source srcset="../site/public/docs/annotate-ai-diff.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-08.poster.jpg" alt="Yapay zekâ tarafından üretilen diff'lere not düşme" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/review/annotate-ai-diff"><picture><source srcset="../../site/public/docs/annotate-ai-diff.gif" type="image/gif"><img src="../../../resources/onboarding/feature-wall/tile-08.poster.jpg" alt="Yapay zekâ tarafından üretilen diff'lere not düşme" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -138,7 +138,7 @@ Her yerde otomatik kaydeden VS Code editörü - dosyaları veya görselleri doğ
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/editing/file-explorer"><picture><source srcset="../../resources/onboarding/feature-wall/tile-07.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-07.poster.jpg" alt="Bir ajan prompt'una dosya ve görsel sürükleme" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/editing/file-explorer"><picture><source srcset="../../../resources/onboarding/feature-wall/tile-07.gif" type="image/gif"><img src="../../../resources/onboarding/feature-wall/tile-07.poster.jpg" alt="Bir ajan prompt'una dosya ve görsel sürükleme" width="100%" /></picture></a>
 </td>
 </tr>
 <tr>
@@ -152,7 +152,7 @@ Orca'yı ajanlar da kullanır - her akışı `orca worktree create`, `snapshot`,
 
 </td>
 <td width="50%">
-  <a href="https://www.onorca.dev/docs/cli/overview"><picture><source srcset="../../resources/onboarding/feature-wall/tile-09.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-09.poster.jpg" alt="Orca'yı CLI'dan script'leme" width="100%" /></picture></a>
+  <a href="https://www.onorca.dev/docs/cli/overview"><picture><source srcset="../../../resources/onboarding/feature-wall/tile-09.webp" type="image/webp"><img src="../../../resources/onboarding/feature-wall/tile-09.poster.jpg" alt="Orca'yı CLI'dan script'leme" width="100%" /></picture></a>
 </td>
 </tr>
 </table>
@@ -173,18 +173,18 @@ Orca'yı ajanlar da kullanır - her akışı `orca worktree create`, `snapshot`,
 **Herhangi bir CLI ajanıyla** çalışır - terminalde çalışan her şey Orca'da da çalışır.
 
 <p>
-  <a href="https://docs.anthropic.com/claude/docs/claude-code"><kbd><img src="../assets/claude-logo.svg" alt="Claude Code logosu" width="16" valign="middle" /> Claude Code</kbd></a> &nbsp;
+  <a href="https://docs.anthropic.com/claude/docs/claude-code"><kbd><img src="../../assets/claude-logo.svg" alt="Claude Code logosu" width="16" valign="middle" /> Claude Code</kbd></a> &nbsp;
   <a href="https://github.com/openai/codex"><kbd><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="Codex logosu" width="16" valign="middle" /> Codex</kbd></a> &nbsp;
   <a href="https://x.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=x.ai&sz=64" alt="Grok logosu" width="16" valign="middle" /> Grok</kbd></a> &nbsp;
   <a href="https://cursor.com/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=cursor.com&sz=64" alt="Cursor logosu" width="16" valign="middle" /> Cursor</kbd></a> &nbsp;
   <a href="https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli"><kbd><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub Copilot logosu" width="16" valign="middle" /> GitHub Copilot</kbd></a> &nbsp;
-  <a href="https://dev.meta.ai/docs/muse-code"><kbd><img src="../../src/shared/agent-icons/muse.png" alt="Muse logosu" width="16" valign="middle" /> Muse</kbd></a> &nbsp;
-  <a href="https://deepseek-harness.github.io/deepseek-harness/"><kbd><img src="../../src/shared/agent-icons/dsh.png" alt="DeepSeek Harness logosu" width="16" valign="middle" /> DeepSeek Harness</kbd></a> &nbsp;
-  <a href="https://zcode.z.ai/en/docs"><kbd><img src="../../src/shared/agent-icons/zcode.png" alt="ZCode logosu" width="16" valign="middle" /> ZCode</kbd></a> &nbsp;
+  <a href="https://dev.meta.ai/docs/muse-code"><kbd><img src="../../../src/shared/agent-icons/muse.png" alt="Muse logosu" width="16" valign="middle" /> Muse</kbd></a> &nbsp;
+  <a href="https://deepseek-harness.github.io/deepseek-harness/"><kbd><img src="../../../src/shared/agent-icons/dsh.png" alt="DeepSeek Harness logosu" width="16" valign="middle" /> DeepSeek Harness</kbd></a> &nbsp;
+  <a href="https://zcode.z.ai/en/docs"><kbd><img src="../../../src/shared/agent-icons/zcode.png" alt="ZCode logosu" width="16" valign="middle" /> ZCode</kbd></a> &nbsp;
   <a href="https://opencode.ai/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=opencode.ai&sz=64" alt="OpenCode logosu" width="16" valign="middle" /> OpenCode</kbd></a> &nbsp;
   <a href="https://mimo.xiaomi.com/coder"><kbd><img src="https://www.google.com/s2/favicons?domain=mimo.xiaomi.com&sz=64" alt="MiMo Code logosu" width="16" valign="middle" /> MiMo Code</kbd></a> &nbsp;
   <a href="https://ampcode.com/manual#install"><kbd><img src="https://www.google.com/s2/favicons?domain=ampcode.com&sz=64" alt="Amp logosu" width="16" valign="middle" /> Amp</kbd></a> &nbsp;
-  <a href="https://openclaude.gitlawb.com/"><kbd><img src="../../resources/openclaude-logo.png" alt="OpenClaude logosu" width="16" valign="middle" /> OpenClaude</kbd></a> &nbsp;
+  <a href="https://openclaude.gitlawb.com/"><kbd><img src="../../../resources/openclaude-logo.png" alt="OpenClaude logosu" width="16" valign="middle" /> OpenClaude</kbd></a> &nbsp;
   <a href="https://antigravity.google/docs/cli-overview"><kbd><img src="https://www.google.com/s2/favicons?domain=antigravity.google&sz=64" alt="Antigravity logosu" width="16" valign="middle" /> Antigravity</kbd></a> &nbsp;
   <a href="https://pi.dev"><kbd><img src="https://pi.dev/favicon.svg" alt="Pi logosu" width="16" valign="middle" /> Pi</kbd></a> &nbsp;
   <a href="https://omp.sh"><kbd><img src="https://omp.sh/favicon.svg" alt="oh-my-pi logosu" width="16" valign="middle" /> oh-my-pi</kbd></a> &nbsp;
@@ -197,10 +197,10 @@ Orca'yı ajanlar da kullanır - her akışı `orca worktree create`, `snapshot`,
   <a href="https://docs.cline.bot/cline-cli/overview"><kbd><img src="https://www.google.com/s2/favicons?domain=cline.bot&sz=64" alt="Cline logosu" width="16" valign="middle" /> Cline</kbd></a> &nbsp;
   <a href="https://www.codebuddy.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=codebuddy.ai&sz=64" alt="CodeBuddy logosu" width="16" valign="middle" /> CodeBuddy</kbd></a> &nbsp;
   <a href="https://www.codebuff.com/docs/help/quick-start"><kbd><img src="https://www.google.com/s2/favicons?domain=codebuff.com&sz=64" alt="Codebuff logosu" width="16" valign="middle" /> Codebuff</kbd></a> &nbsp;
-  <a href="https://freebuff.com"><kbd><img src="../../src/shared/agent-icons/freebuff.png" alt="Freebuff logosu" width="16" valign="middle" /> Freebuff</kbd></a> &nbsp;
+  <a href="https://freebuff.com"><kbd><img src="../../../src/shared/agent-icons/freebuff.png" alt="Freebuff logosu" width="16" valign="middle" /> Freebuff</kbd></a> &nbsp;
   <a href="https://commandcode.ai/docs/quickstart"><kbd><img src="https://www.google.com/s2/favicons?domain=commandcode.ai&sz=64" alt="Command Code logosu" width="16" valign="middle" /> Command Code</kbd></a> &nbsp;
   <a href="https://docs.continue.dev/cli/quickstart"><kbd><img src="https://www.google.com/s2/favicons?domain=continue.dev&sz=64" alt="Continue logosu" width="16" valign="middle" /> Continue</kbd></a> &nbsp;
-  <a href="https://docs.factory.ai/cli/getting-started/quickstart"><kbd><img src="../assets/droid-logo.svg" alt="Droid logosu" width="16" valign="middle" /> Droid</kbd></a> &nbsp;
+  <a href="https://docs.factory.ai/cli/getting-started/quickstart"><kbd><img src="../../assets/droid-logo.svg" alt="Droid logosu" width="16" valign="middle" /> Droid</kbd></a> &nbsp;
   <a href="https://kilo.ai/docs/cli"><kbd><img src="https://raw.githubusercontent.com/Kilo-Org/kilocode/main/packages/kilo-vscode/assets/icons/kilo-light.svg" alt="Kilocode logosu" width="16" valign="middle" /> Kilocode</kbd></a> &nbsp;
   <a href="https://www.kimi.com/code/docs/en/kimi-code-cli/getting-started.html"><kbd><img src="https://www.google.com/s2/favicons?domain=moonshot.cn&sz=64" alt="Kimi logosu" width="16" valign="middle" /> Kimi</kbd></a> &nbsp;
   <a href="https://kiro.dev/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=kiro.dev&sz=64" alt="Kiro logosu" width="16" valign="middle" /> Kiro</kbd></a> &nbsp;
@@ -244,7 +244,7 @@ Ajanlarınızı telefonunuzdan izlemek ve yönlendirmek için masaüstü uygulam
 - **Twitter / X:** Güncellemeler ve duyurular için **[@orca_build](https://x.com/orca_build)** hesabını takip edin.
 - **WeChat:** Orca topluluğunun WeChat grubuna katılmak için karekodu okutun.
 
-  <img src="../assets/wechat-qr.jpg" alt="Orca topluluğunun WeChat grubu karekodu" width="160" />
+  <img src="../../assets/wechat-qr.jpg" alt="Orca topluluğunun WeChat grubu karekodu" width="160" />
 
 - **Geri bildirim ve fikirler:** Hızlı sürüm çıkarıyoruz. Eksik bulduğunuz bir şey mi var? [Yeni bir özellik isteyin](https://github.com/stablyai/orca/issues).
 - **Gizlilik:** Orca'nın hangi anonim kullanım verisini topladığını ve bunu nasıl kapatacağınızı [gizlilik ve telemetri dokümanlarında](https://www.onorca.dev/docs/telemetry) bulabilirsiniz.
@@ -254,17 +254,17 @@ Ajanlarınızı telefonunuzdan izlemek ve yönlendirmek için masaüstü uygulam
 
 ## Geliştirme
 
-Katkıda bulunmak veya yerelde çalıştırmak ister misiniz? [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) rehberimize bakın.
+Katkıda bulunmak veya yerelde çalıştırmak ister misiniz? [CONTRIBUTING.md](../../../.github/CONTRIBUTING.md) rehberimize bakın.
 
 Mobil uygulamayı bir masaüstü sunucusuyla eşleştiren relay de bu repoda,
-[`cloud/`](../../cloud/README.md) altında yer alıyor; ayrı bir pnpm workspace'i ve kurulum rehberi var.
+[`cloud/`](../../../cloud/README.md) altında yer alıyor; ayrı bir pnpm workspace'i ve kurulum rehberi var.
 
 <a href="https://github.com/stablyai/orca/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=stablyai/orca" alt="Orca katkıda bulunanlar" />
 </a>
 
 <p align="center">
-  <img src="../assets/star-history.png" alt="stablyai/orca için GitHub yıldız geçmişi grafiği" width="880" />
+  <img src="../../assets/star-history.png" alt="stablyai/orca için GitHub yıldız geçmişi grafiği" width="880" />
 </p>
 
 ## İmzalı Derlemeler
@@ -273,4 +273,4 @@ Windows kod imzalama [SignPath.io](https://signpath.io) tarafından sağlanmakta
 
 ## Lisans
 
-Orca, [MIT Lisansı](../../LICENSE) altında ücretsiz ve açık kaynaktır.
+Orca, [MIT Lisansı](../../../LICENSE) altında ücretsiz ve açık kaynaktır.
