@@ -23140,6 +23140,18 @@
       "closeNamed": "Close {{name}}",
       "copyToNewWindow": "Copy to New Window"
     },
+    "projectRemoval": {
+      "menuItem": "Remove project from list…",
+      "title": "Remove the '{{name}}' project from the list?",
+      "wholeProject": "This removes the whole project, not just one session.",
+      "runningSessions_one": "Its running session will be stopped.",
+      "runningSessions_other": "All {{count}} running sessions in it will be stopped.",
+      "filesLocal": "Its folder and files stay where they are.",
+      "filesSsh": "Its folder and files stay on {{host}}. Add that SSH host again to bring it back.",
+      "filesVmRecipe": "Its VM recipe determines whether the environment and its files are permanently deleted.",
+      "closeOneSession": "To close just one session, use the × on its row.",
+      "confirm": "Remove Project"
+    },
     "onboarding": {
       "beforeYouStart": {
         "title": "Before you start",

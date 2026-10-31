@@ -12,6 +12,7 @@ import {
   rm
 } from 'node:fs/promises'
 import { dirname } from 'node:path'
+import { skipWriteOutsideTestAppData } from './test-app-data-write-guard'
 
 export async function writeHooksJsonAsync(
   configPath: string,
@@ -25,6 +26,9 @@ export async function writeHooksJsonAsync(
     throw error
   })
   const writePath = link?.isSymbolicLink() ? await realpath(configPath) : configPath
+  if (skipWriteOutsideTestAppData(writePath)) {
+    return
+  }
   const serialized = options?.serialized ?? `${JSON.stringify(config, null, 2)}\n`
   const original = await readFile(writePath, 'utf8').catch((error: unknown) => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {

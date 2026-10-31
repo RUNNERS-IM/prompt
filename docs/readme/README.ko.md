@@ -1,275 +1,82 @@
 <h1 align="center">
-  <a href="https://onOrca.dev"><img src="../../resources/build/icon.png" alt="Orca" width="64" valign="middle" /></a> Orca
+  <img src="../../resources/build/icon.png" alt="" width="64" valign="middle" /> Prompt
 </h1>
 
 <p align="center">
-  <a href="https://github.com/stablyai/orca"><img src="https://img.shields.io/github/stars/stablyai/orca?style=flat&amp;label=%E2%98%85&amp;color=08C" alt="GitHub 스타" /></a>
-  <a href="https://github.com/stablyai/orca/releases"><img src="../assets/readme-downloads.svg" alt="전체 릴리스 누적 다운로드 수" /></a>
-  <img src="https://img.shields.io/badge/license-MIT-08C?style=flat" alt="라이선스: MIT" />
-  <a href="https://discord.gg/fzjDKHxv8Q"><img src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white" alt="Orca Discord 참여" /></a>
-  <a href="https://x.com/orca_build"><img src="https://img.shields.io/badge/X-000000?logo=x&logoColor=white" alt="X에서 Orca 팔로우" /></a>
-  <img src="https://img.shields.io/badge/macOS%20%7C%20Windows%20%7C%20Linux-4493F8?style=flat-square" alt="지원 플랫폼: macOS, Windows, Linux" />
+  Claude Code 세션 여러 개를 프로젝트별로 묶어 한 창에서 돌리는 맥용 터미널입니다.<br/>
+  <a href="https://runners.im/prompt">runners.im/prompt</a>
 </p>
 
 <p align="center">
-  <sub><a href="../../README.md">English</a> · <a href="README.zh-CN.md">中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.es.md">Español</a> · <a href="README.fr.md">Français</a> · <a href="README.pt.md">Português</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.ru.md">Русский</a></sub>
+  <sub><a href="../../README.md">English</a> · 한국어</sub>
 </p>
 
-<p align="center">
-  <strong>100x 빌더를 위한 AI 오케스트레이터.</strong><br/>
-  Codex, Claude Code, OpenCode, Pi를 나란히 실행하세요. — 각 에이전트는 자체 worktree에서 실행되고 한곳에서 추적됩니다.
-</p>
+<!-- runners.im/prompt 의 화면 캡처가 들어갈 자리 -->
 
-<h3 align="center"><a href="https://onorca.dev/download"><ins>Orca 다운로드</ins></a></h3>
+## 먼저 알아 둘 말
 
-<p align="center">
-  <img src="../assets/readme-hero.jpg" alt="병렬 worktree에서 에이전트를 실행 중인 Orca 데스크톱 앱과 한쪽 모서리에 보이는 Orca 모바일 companion 앱" width="960" />
-</p>
+- **Claude Code**: 터미널에서 실행하는 Anthropic 의 AI 코딩 도구입니다. Prompt 는 이 도구를 여러 개 동시에 띄워 두고 관리하려고 만든 앱입니다.
+- **세션**: Claude Code 를 한 번 실행해서 대화를 이어 가는 단위입니다. Prompt 에서는 세션 하나가 탭 하나에 들어 있습니다.
+- **프로젝트**: Prompt 에 추가한 코드 폴더(git 저장소)입니다. 세션은 프로젝트 아래에 묶여서 보입니다.
+- **상태 막대**: Prompt 창 맨 아래에 있는 가는 줄입니다. 사용량 같은 정보를 늘 보이게 하려고 있습니다.
+- **메뉴 막대**: 맥 화면 맨 위의 줄입니다. 시계와 와이파이 아이콘이 있는 곳이고, Prompt 도 여기에 아이콘을 하나 둡니다.
+- **CLI**: 마우스 대신 터미널에 명령어를 쳐서 앱을 다루는 방법입니다. 스크립트나 AI 가 앱을 직접 조작할 수 있게 하려고 있습니다.
 
-## 기능
+## 1. 설치
 
-<table>
-<tr>
-<td width="50%" valign="middle">
+Prompt 는 [GitHub Releases](https://github.com/RUNNERS-IM/prompt/releases/latest) 에 올라갑니다. GitHub Releases 는 GitHub 저장소에 설치 파일을 버전별로 올려 두는 곳입니다.
 
-### 모바일 Companion
+**맥 (Apple silicon, M1 이후 칩):**
+[`prompt-macos-arm64.dmg`](https://github.com/RUNNERS-IM/prompt/releases/latest/download/prompt-macos-arm64.dmg)
+를 받아 열고, Prompt 를 응용 프로그램 폴더로 끌어다 놓으면 됩니다. 맥 판은 Apple 개발자 인증서로 서명하고 Apple 의 공증(Apple 이 악성 코드가 없는지 검사하고 확인해 주는 절차)까지 받았기 때문에, 처음 열 때 보안 경고가 뜨지 않습니다.
 
-휴대폰에서 에이전트를 모니터링하고 조종하세요 — 에이전트가 완료되면 알림을 받고 어디서든 후속 지시를 보낼 수 있습니다.
+같은 페이지에 다른 운영체제용 파일도 있습니다.
 
-[iOS App Store](https://apps.apple.com/us/app/orca-ide/id6766130217) · [Android APK](https://www.onorca.dev/download/android) · [문서 →](https://www.onorca.dev/docs/mobile)
+- **Windows (x64):** `prompt-windows-setup.exe`. 아직 코드 서명이 없어서, 처음 설치할 때 Windows 의 SmartScreen(모르는 프로그램을 실행하기 전에 경고하는 기능)이 경고를 띄웁니다. "추가 정보"를 누른 뒤 "실행"을 누르면 됩니다.
+- **Linux (x64):** `prompt-linux.AppImage`, 그리고 `.deb` · `.rpm` 꾸러미.
 
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/mobile"><picture><source srcset="../assets/feature-wall/mobile-companion-app-showcase.gif" type="image/gif"><img src="../assets/feature-wall/mobile-companion-app-showcase.jpg" alt="Orca 데스크톱과 모바일 companion 앱" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
+인텔 칩 맥용 파일은 지금은 없습니다.
 
-### 병렬 Worktree
+**업데이트:** Prompt 는 같은 GitHub Releases 에서 새 버전을 확인하고, 있으면 설치할지 물어봅니다. 메뉴 막대 아이콘이나 앱 메뉴의 "업데이트 확인"으로 직접 확인할 수도 있습니다.
 
-하나의 프롬프트를 다섯 에이전트에 동시에 보내세요. 각 에이전트는 격리된 자체 git worktree에서 실행됩니다 — 결과를 비교하고 가장 좋은 것을 머지하세요.
+## 2. 할 수 있는 일
 
-[문서 →](https://www.onorca.dev/docs/model/worktrees)
+1. **사이드바에서 세션을 프로젝트별로 봅니다.** 사이드바는 두 단계입니다. 프로젝트마다 한 줄이 있고, 그 아래에 세션이 한 줄씩 붙습니다. 세션 줄에는 이름, 마지막으로 움직인 시간, 지금 하고 있는 일, 상태 아이콘(일하는 중 · 내 답을 기다리는 중 · 끝남 · 실패)이 나옵니다. 어느 세션이 나를 기다리는지 한눈에 찾으려고 있는 기능입니다.
+2. **사이드바에서 세션을 다룹니다.** 세션 줄을 오른쪽 클릭하면 이름 바꾸기, 탭 색 정하기, 복사해서 새 창에서 열기, 닫기를 할 수 있습니다. 프로젝트 줄에는 새 세션을 여는 메뉴가 있습니다.
+3. **세션마다 Claude 모델을 고릅니다.** 세션마다 모델 메뉴가 있고, 모델을 고르면 Prompt 가 그 세션에 `/model` 명령을 대신 입력합니다. 기본 모델이 아닐 때만 탭과 사이드바에 모델 이름이 보입니다.
+4. **창을 여러 개 씁니다.** 새 창을 열고, 탭을 다른 창이나 새 창으로 옮기고, 프로젝트를 따로 창으로 열 수 있습니다. 설정의 "열어 둔 창 기억하기"를 켜 두면, 다음에 Prompt 를 켤 때 창과 탭, 창 크기와 위치가 그대로 다시 열립니다.
+5. **Claude 계정을 바꾸고 사용량을 봅니다.** 상태 막대에 Claude 사용량이 나오고, 거기서 Claude 계정을 바꿀 수 있습니다. 계정은 설정에서 추가합니다.
+6. **메뉴 막대에서 Claude 가 일하는 중인지 봅니다.** 메뉴 막대의 `>_` 아이콘은 에이전트(Claude 처럼 스스로 작업을 이어 가는 AI 프로그램)가 일하는 동안 커서가 깜박이고, 모두 쉬고 있으면 멈춰 있습니다.
+7. **터미널을 나눕니다.** 탭 하나 안에서 터미널을 여러 칸으로 나눠 나란히 볼 수 있습니다.
+8. **맥 기본 앱과 같은 모양으로 씁니다.** 시스템 글꼴과 맥에서 고른 강조색을 쓰고, 맥의 라이트 · 다크 모드를 따라갑니다. 터미널은 기본으로 "Prompt Dark" 색 구성을 씁니다.
+9. **한국어로 씁니다.** 화면을 한국어와 다른 여러 언어로 볼 수 있습니다. 원래 Orca 에서 번역이 빠져 있던 한국어 문구도 채워 두었습니다.
 
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/model/worktrees"><picture><source srcset="../site/public/docs/tab-split.gif" type="image/gif"><img src="../site/public/docs/posters/tab-split.jpg" alt="병렬 worktree 오케스트레이션" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
+## 3. CLI
 
-### 터미널 분할
+Prompt 에는 명령줄 도구가 들어 있습니다. **명령 이름은 아직 `orca`** (Orca 에서 쓰던 이름)이고, 지금 새로 설계하는 중이라 명령 이름은 앞으로 바뀔 수 있습니다.
 
-WebGL 렌더링, 무한 분할, 재시작 후에도 유지되는 스크롤백을 갖춘 Ghostty급 터미널.
+- Prompt 안에서 연 터미널에서는 따로 설정하지 않아도 `orca` 를 쓸 수 있습니다.
+- 다른 터미널 앱에서도 쓰려면 설정 > 일반 의 CLI 항목에서 켭니다. 맥에서는 `/usr/local/bin` 에 `orca` 가 등록됩니다.
+- `orca --help` 를 치면 전체 명령 목록이 나옵니다. 지금 있는 명령 예: `orca status`, `orca worktree list`, `orca terminal list`.
 
-[문서 →](https://www.onorca.dev/docs/terminal)
+## 4. Orca 와 다른 점
 
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/terminal"><picture><source srcset="../../resources/onboarding/feature-wall/tile-02.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-02.poster.jpg" alt="터미널 분할" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
+Prompt 는 [Orca](https://github.com/stablyai/orca) 를 바탕으로 만들었습니다. Orca 는 Stably AI 가 MIT 라이선스로 공개한 AI 코딩 도구용 데스크톱 앱입니다. 터미널, 워크트리(git 저장소 하나에서 브랜치마다 작업 폴더를 따로 만드는 기능), 편집기 같은 바탕은 Orca 의 것을 쓰고, Orca 의 새 코드(업스트림)를 주기적으로 합쳐 옵니다. Prompt 에서 바뀐 점은 아래와 같습니다.
 
-### 디자인 모드
+- **이름과 앱 정보:** 앱 이름은 Prompt, 번들 ID(맥이 앱을 구별하는 고유 이름)는 `im.runners.prompt`, 앱을 여는 링크는 `prompt://` 로 시작합니다.
+- **Orca 서버를 쓰지 않음:** Prompt 는 Orca 회사의 서버와 통신하지 않습니다. Orca 로그인, 중계, 푸시 알림, 플러그인 목록, 업데이트 확인이 모두 꺼져 있고, 텔레메트리(앱 사용 기록을 개발사로 보내는 기능)도 보내지 않습니다.
+- **데이터 폴더를 따로 씀:** 설정과 세션은 `Prompt` 폴더에 저장됩니다. 처음 켤 때 기존 Orca 폴더가 있으면 그 내용을 `Prompt` 폴더로 복사합니다. Orca 폴더는 읽기만 하고 고치지 않습니다.
+- **Claude 중심 화면:** 위에 적은 두 단계 사이드바, 세션별 모델 메뉴, 여러 창, 메뉴 막대 아이콘은 Prompt 에서 더한 것입니다. Claude 가 아닌 다른 AI 의 사용량 표시는 숨겼습니다.
+- **설정 화면을 줄임:** Orca 에서만 쓰는 기능(오케스트레이션, 컴퓨터 사용, 음성, Orca 계정, 모바일, 플러그인, 자동화, 작업 등)의 설정 화면은 숨겼습니다.
+- **처음 실행 안내를 줄임:** 처음 쓰는 프로필에서만 나오고, 테마 · 알림 · Yolo 모드(Claude 가 매번 허락을 묻지 않고 바로 실행하게 하는 설정)만 고릅니다.
+- **업데이트와 문의:** 업데이트 파일은 [RUNNERS-IM/prompt](https://github.com/RUNNERS-IM/prompt) 에서 받고, 문제 신고도 이 저장소로 갑니다.
 
-실제 Chromium 창에서 UI 요소를 클릭하면 해당 HTML, CSS, 잘라낸 스크린샷이 에이전트 프롬프트로 바로 전송됩니다.
+Orca 의 원래 README 는 [docs/upstream/README.orca.md](../upstream/README.orca.md) 에 남겨 두었습니다.
 
-[문서 →](https://www.onorca.dev/docs/browser/design-mode)
+## 5. 만든 곳 · 라이선스
 
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/browser/design-mode"><picture><source srcset="../site/public/docs/orca-design-mode.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-05.poster.jpg" alt="내장 브라우저와 디자인 모드" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
+Prompt 는 RUNNERS(Runners Co., Ltd.)가 만듭니다.
 
-### GitHub &amp; Linear 네이티브
+Copyright (c) 2026 Runners Co., Ltd. All rights reserved. 자세한 내용은 [LICENSE](../../LICENSE) 를 보세요.
 
-PR, issue, 프로젝트 보드를 앱 안에서 탐색하세요 — 어떤 작업에서든 worktree를 열고 컨텍스트 전환 없이 리뷰할 수 있습니다.
-
-[문서 →](https://www.onorca.dev/docs/review/linear)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/review/linear"><picture><source srcset="../../resources/onboarding/feature-wall/tile-03.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-03.poster.jpg" alt="Orca의 GitHub 및 Linear 작업 워크플로" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### SSH Worktree
-
-강력한 원격 머신에서 에이전트를 실행하세요. 파일 편집, git, 터미널을 모두 지원하며 자동 재연결과 포트 포워딩도 포함됩니다.
-
-[문서 →](https://www.onorca.dev/docs/ssh)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/ssh"><picture><source srcset="../../resources/onboarding/feature-wall/tile-06.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-06.poster.jpg" alt="SSH를 통한 원격 worktree" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### AI Diff 주석
-
-diff의 어느 줄에든 코멘트를 남기고 에이전트에게 바로 보내세요 — Orca를 떠나지 않고 리뷰하고 수정하고 커밋할 수 있습니다.
-
-[문서 →](https://www.onorca.dev/docs/review/annotate-ai-diff)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/review/annotate-ai-diff"><picture><source srcset="../site/public/docs/annotate-ai-diff.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-08.poster.jpg" alt="AI가 생성한 diff에 주석 달기" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### 에이전트로 파일 드래그
-
-어디서나 자동 저장되는 VS Code 에디터 — 파일이나 이미지를 에이전트 프롬프트로 바로 드래그하세요.
-
-[문서 →](https://www.onorca.dev/docs/editing/file-explorer)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/editing/file-explorer"><picture><source srcset="../../resources/onboarding/feature-wall/tile-07.gif" type="image/gif"><img src="../../resources/onboarding/feature-wall/tile-07.poster.jpg" alt="파일과 이미지를 에이전트 프롬프트로 드래그" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Orca CLI
-
-에이전트도 Orca를 조작할 수 있습니다 — `orca worktree create`, `snapshot`, `click`, `fill`로 모든 워크플로를 스크립팅하세요.
-
-[문서 →](https://www.onorca.dev/docs/cli/overview)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/cli/overview"><picture><source srcset="../../resources/onboarding/feature-wall/tile-09.webp" type="image/webp"><img src="../../resources/onboarding/feature-wall/tile-09.poster.jpg" alt="CLI에서 Orca 스크립팅" width="100%" /></picture></a>
-</td>
-</tr>
-</table>
-
-**그 밖에 기본으로 제공되는 기능:**
-
-- **[빠른 열기](https://www.onorca.dev/docs/model/quick-open)** — 작업 흐름을 벗어나지 않고 worktree, 파일, 에이전트, 커맨드, 리포지토리 컨텍스트를 검색하세요.
-- **[계정 전환 및 사용량 추적](https://www.onorca.dev/docs/agents/usage-tracking)** — Claude와 Codex의 사용량과 rate limit 초기화 시점을 확인하고, 다시 로그인하지 않고 계정을 바로 전환하세요.
-- **[풍부한 리포지토리 미리보기](https://www.onorca.dev/docs/editing/markdown)** — Markdown, 이미지, PDF, 리포지토리 문서를 워크스페이스에서 미리 볼 수 있습니다.
-- **[Computer Use](https://www.onorca.dev/docs/cli/computer-use)** — 워크플로에 실제 상호작용이 필요할 때 에이전트가 데스크톱 앱과 화면에 보이는 UI를 직접 조작하게 하세요.
-- **[알림과 읽지 않음 상태](https://www.onorca.dev/docs/notifications)** — 에이전트가 완료되거나 주의가 필요할 때 알림을 받고, 스레드를 읽지 않음으로 표시해 나중에 다시 확인하세요.
-- **그리고 훨씬 더 많은 기능** — 새로운 기능이 매일 출시되므로 이 목록은 늘 한 발 늦습니다. 진짜 기능은 [체인지로그](https://github.com/stablyai/orca/releases)에서 확인하세요.
-
----
-
-## 지원 에이전트
-
-**모든 CLI 에이전트**와 함께 작동합니다 — 터미널에서 실행되는 에이전트라면 Orca에서도 실행됩니다.
-
-<p>
-  <a href="https://docs.anthropic.com/claude/docs/claude-code"><kbd><img src="../assets/claude-logo.svg" alt="Claude Code logo" width="16" valign="middle" /> Claude Code</kbd></a> &nbsp;
-  <a href="https://github.com/openai/codex"><kbd><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="Codex logo" width="16" valign="middle" /> Codex</kbd></a> &nbsp;
-  <a href="https://x.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=x.ai&sz=64" alt="Grok logo" width="16" valign="middle" /> Grok</kbd></a> &nbsp;
-  <a href="https://cursor.com/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=cursor.com&sz=64" alt="Cursor logo" width="16" valign="middle" /> Cursor</kbd></a> &nbsp;
-  <a href="https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli"><kbd><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub Copilot logo" width="16" valign="middle" /> GitHub Copilot</kbd></a> &nbsp;
-  <a href="https://dev.meta.ai/docs/muse-code"><kbd><img src="../../src/shared/agent-icons/muse.png" alt="Muse logo" width="16" valign="middle" /> Muse</kbd></a> &nbsp;
-  <a href="https://deepseek-harness.github.io/deepseek-harness/"><kbd><img src="../../src/shared/agent-icons/dsh.png" alt="DeepSeek Harness logo" width="16" valign="middle" /> DeepSeek Harness</kbd></a> &nbsp;
-  <a href="https://zcode.z.ai/en/docs"><kbd><img src="../../src/shared/agent-icons/zcode.png" alt="ZCode logo" width="16" valign="middle" /> ZCode</kbd></a> &nbsp;
-  <a href="https://opencode.ai/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=opencode.ai&sz=64" alt="OpenCode logo" width="16" valign="middle" /> OpenCode</kbd></a> &nbsp;
-  <a href="https://mimo.xiaomi.com/coder"><kbd><img src="https://www.google.com/s2/favicons?domain=mimo.xiaomi.com&sz=64" alt="MiMo Code logo" width="16" valign="middle" /> MiMo Code</kbd></a> &nbsp;
-  <a href="https://ampcode.com/manual#install"><kbd><img src="https://www.google.com/s2/favicons?domain=ampcode.com&sz=64" alt="Amp logo" width="16" valign="middle" /> Amp</kbd></a> &nbsp;
-  <a href="https://openclaude.gitlawb.com/"><kbd><img src="../../resources/openclaude-logo.png" alt="OpenClaude logo" width="16" valign="middle" /> OpenClaude</kbd></a> &nbsp;
-  <a href="https://antigravity.google/docs/cli-overview"><kbd><img src="https://www.google.com/s2/favicons?domain=antigravity.google&sz=64" alt="Antigravity logo" width="16" valign="middle" /> Antigravity</kbd></a> &nbsp;
-  <a href="https://pi.dev"><kbd><img src="https://pi.dev/favicon.svg" alt="Pi logo" width="16" valign="middle" /> Pi</kbd></a> &nbsp;
-  <a href="https://omp.sh"><kbd><img src="https://omp.sh/favicon.svg" alt="oh-my-pi logo" width="16" valign="middle" /> oh-my-pi</kbd></a> &nbsp;
-  <a href="https://hermes-agent.nousresearch.com/docs/"><kbd><img src="https://www.google.com/s2/favicons?domain=nousresearch.com&sz=64" alt="Hermes Agent logo" width="16" valign="middle" /> Hermes Agent</kbd></a> &nbsp;
-  <a href="https://devin.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=devin.ai&sz=64" alt="Devin logo" width="16" valign="middle" /> Devin</kbd></a> &nbsp;
-  <a href="https://goose-docs.ai/docs/quickstart/"><kbd><img src="https://www.google.com/s2/favicons?domain=goose-docs.ai&sz=64" alt="Goose logo" width="16" valign="middle" /> Goose</kbd></a> &nbsp;
-  <a href="https://docs.augmentcode.com/cli/overview"><kbd><img src="https://www.google.com/s2/favicons?domain=augmentcode.com&sz=64" alt="Auggie logo" width="16" valign="middle" /> Auggie</kbd></a> &nbsp;
-  <a href="https://github.com/autohandai/code-cli"><kbd><img src="https://www.google.com/s2/favicons?domain=autohand.ai&sz=64" alt="Autohand Code logo" width="16" valign="middle" /> Autohand Code</kbd></a> &nbsp;
-  <a href="https://github.com/charmbracelet/crush"><kbd><img src="https://www.google.com/s2/favicons?domain=charm.sh&sz=64" alt="Charm logo" width="16" valign="middle" /> Charm</kbd></a> &nbsp;
-  <a href="https://docs.cline.bot/cline-cli/overview"><kbd><img src="https://www.google.com/s2/favicons?domain=cline.bot&sz=64" alt="Cline logo" width="16" valign="middle" /> Cline</kbd></a> &nbsp;
-  <a href="https://www.codebuff.com/docs/help/quick-start"><kbd><img src="https://www.google.com/s2/favicons?domain=codebuff.com&sz=64" alt="Codebuff logo" width="16" valign="middle" /> Codebuff</kbd></a> &nbsp;
-  <a href="https://freebuff.com/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=freebuff.com&sz=64" alt="Freebuff logo" width="16" valign="middle" /> Freebuff</kbd></a> &nbsp;
-  <a href="https://commandcode.ai/docs/quickstart"><kbd><img src="https://www.google.com/s2/favicons?domain=commandcode.ai&sz=64" alt="Command Code logo" width="16" valign="middle" /> Command Code</kbd></a> &nbsp;
-  <a href="https://docs.continue.dev/cli/quickstart"><kbd><img src="https://www.google.com/s2/favicons?domain=continue.dev&sz=64" alt="Continue logo" width="16" valign="middle" /> Continue</kbd></a> &nbsp;
-  <a href="https://docs.factory.ai/cli/getting-started/quickstart"><kbd><img src="../assets/droid-logo.svg" alt="Droid logo" width="16" valign="middle" /> Droid</kbd></a> &nbsp;
-  <a href="https://kilo.ai/docs/cli"><kbd><img src="https://raw.githubusercontent.com/Kilo-Org/kilocode/main/packages/kilo-vscode/assets/icons/kilo-light.svg" alt="Kilocode logo" width="16" valign="middle" /> Kilocode</kbd></a> &nbsp;
-  <a href="https://www.kimi.com/code/docs/en/kimi-code-cli/getting-started.html"><kbd><img src="https://www.google.com/s2/favicons?domain=moonshot.cn&sz=64" alt="Kimi logo" width="16" valign="middle" /> Kimi</kbd></a> &nbsp;
-  <a href="https://kiro.dev/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=kiro.dev&sz=64" alt="Kiro logo" width="16" valign="middle" /> Kiro</kbd></a> &nbsp;
-  <a href="https://github.com/mistralai/mistral-vibe"><kbd><img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=64" alt="Mistral Vibe logo" width="16" valign="middle" /> Mistral Vibe</kbd></a> &nbsp;
-  <a href="https://github.com/QwenLM/qwen-code"><kbd><img src="https://www.google.com/s2/favicons?domain=qwenlm.github.io&sz=64" alt="Qwen Code logo" width="16" valign="middle" /> Qwen Code</kbd></a> &nbsp;
-  <a href="https://support.atlassian.com/rovo/docs/install-and-run-rovo-dev-cli-on-your-device/"><kbd><img src="https://www.google.com/s2/favicons?domain=atlassian.com&sz=64" alt="Rovo Dev logo" width="16" valign="middle" /> Rovo Dev</kbd></a> &nbsp;
-  <kbd>+ any CLI agent</kbd>
-</p>
-
----
-
-## 설치
-
-### 데스크톱 — macOS, Windows, Linux
-
-- **[onOrca.dev에서 다운로드](https://onorca.dev/download)**
-- 또는 빌드를 직접 받기: [macOS Apple Silicon](https://github.com/stablyai/orca/releases/latest/download/orca-macos-arm64.dmg) · [macOS Intel](https://github.com/stablyai/orca/releases/latest/download/orca-macos-x64.dmg) · [Windows (.exe)](https://github.com/stablyai/orca/releases/latest/download/orca-windows-setup.exe) · [Linux AppImage](https://github.com/stablyai/orca/releases/latest/download/orca-linux.AppImage) · [전체 빌드](https://github.com/stablyai/orca/releases/latest)
-
-_또는 패키지 매니저로 설치:_
-
-```bash
-# macOS (Homebrew)
-# 항상 전체 이름을 사용하세요. 그냥 `orca`는 관련 없는 Plotly cask입니다.
-brew install --cask stablyai/orca/orca
-# 기존 설치 업그레이드
-brew upgrade --cask stablyai/orca/orca
-
-# Arch Linux (AUR) — or stably-orca-git to build from source
-yay -S stably-orca-bin
-```
-
-### 모바일 Companion — iOS, Android
-
-데스크톱 앱과 페어링해 휴대폰에서 에이전트를 모니터링하고 조종하세요.
-
-- **iOS:** [App Store에서 다운로드](https://apps.apple.com/us/app/orca-ide/id6766130217)
-- **Android:** [APK 다운로드](https://www.onorca.dev/download/android) · [설치 가이드](https://www.onorca.dev/docs/android-apk)
-
----
-
-## 커뮤니티와 지원
-
-- **Discord:** **[Discord](https://discord.gg/fzjDKHxv8Q)** 커뮤니티에 참여하세요.
-- **Twitter / X:** 업데이트와 공지는 **[@orca_build](https://x.com/orca_build)** 를 팔로우하세요.
-- **WeChat:** QR 코드를 스캔해 Orca 커뮤니티 WeChat 그룹에 참여하세요.
-
-  <img src="../assets/wechat-qr.jpg" alt="Orca 커뮤니티 WeChat 그룹 QR 코드" width="160" />
-
-- **피드백과 아이디어:** 우리는 빠르게 출시합니다. 필요한 기능이 있나요? [새 기능을 요청](https://github.com/stablyai/orca/issues)하세요.
-- **개인정보 보호:** Orca가 수집하는 익명 사용 데이터와 수집 거부 방법은 [개인정보 및 텔레메트리 문서](https://www.onorca.dev/docs/telemetry)를 참고하세요.
-- **응원하기:** 이 리포지토리에 [Star](https://github.com/stablyai/orca)를 눌러 매일 공개되는 릴리스 소식을 확인해 주세요.
-
----
-
-## 개발
-
-기여하거나 로컬에서 실행하고 싶으신가요? [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) 가이드를 확인하세요.
-
-<a href="https://github.com/stablyai/orca/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=stablyai/orca" alt="Orca 기여자" />
-</a>
-
-<p align="center">
-  <img src="../assets/star-history.png" alt="stablyai/orca GitHub Star 히스토리 차트" width="880" />
-</p>
-
-## 서명된 빌드
-
-Windows 코드 서명은 [SignPath.io](https://signpath.io)가 후원·제공하며, 인증서는 [SignPath Foundation](https://signpath.org)에서 제공합니다.
-
-## 라이선스
-
-Orca는 [MIT 라이선스](../../LICENSE)에 따라 자유롭게 사용할 수 있는 오픈 소스입니다.
+Prompt 는 Stably AI 의 Orca 를 바탕으로 했고, Orca 는 MIT 라이선스(Copyright (c) 2026 Lovecast Inc.)로 배포됩니다. Orca 의 저작권 표시와 허가 문구 전문, 그리고 다른 외부 구성 요소의 고지는 [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md) 에 있습니다.

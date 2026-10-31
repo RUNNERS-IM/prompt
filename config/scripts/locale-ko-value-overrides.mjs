@@ -54,16 +54,16 @@ export const KO_VALUE_OVERRIDES = {
     '이 이슈를 제출하기 전에 프로젝트 워크스페이스에서 팀을 선택하세요.',
   'Issue has no repo slug.': '이슈에 저장소 슬러그가 없습니다.',
   'Install the GitLab CLI to enable merge requests, issues, and pipelines.':
-    'MR, 이슈 및 파이프라인을 활성화하려면 GitLab CLI를 설치하세요.',
+    'MR, 이슈, 파이프라인을 쓰려면 GitLab CLI를 설치하세요.',
   'Install the GitHub CLI to enable pull requests, issues, and checks.':
-    'PR, 이슈 및 검사를 활성화하려면 GitHub CLI를 설치하세요.',
+    'PR, 이슈, 검사를 쓰려면 GitHub CLI를 설치하세요.',
   'Pull requests, issues, and checks via the': 'PR, 이슈 및 검사는 다음을 통해 이루어집니다.',
   'Merge requests, issues, todos, and pipelines via the':
     '다음을 통해 MR, 이슈, 할 일, 파이프라인을 병합합니다.',
   'Orca uses the GitHub CLI (gh) to show pull requests, issues, and checks.':
     'Orca는 GitHub CLI(gh)를 사용하여 PR, 이슈 및 검사를 표시합니다.',
   'Shared hook and issue-automation defaults are defined in the repo and available to everyone who uses it.':
-    '공유 후크 및 이슈 자동화 기본값은 저장소에 정의되어 있으며 이를 사용하는 모든 사람이 사용할 수 있습니다.',
+    '공유 훅과 이슈 자동화 기본값은 repo에 정의되어 있어서, 이 repo를 쓰는 모든 사람이 함께 씁니다.',
   DRAFT_ISSUE: 'DRAFT_ISSUE',
   Reviewer: '리뷰어',
   Reviewers: '리뷰어',
@@ -138,7 +138,7 @@ export const KO_VALUE_OVERRIDES = {
   'Orca CLI skill': 'Orca CLI 스킬',
   'No checks reported yet': '아직 보고된 체크가 없습니다.',
   'This pull request has no reported checks yet': '이 PR에는 아직 보고된 체크가 없습니다.',
-  'Keyboard shortcuts for common actions.': '일반 작업에 대한 키보드 단축키입니다.',
+  'Keyboard shortcuts for common actions.': '자주 쓰는 작업의 키보드 단축키입니다.',
   'Common emulator commands': '일반 에뮬레이터 명령',
   'GitHub Integration': 'GitHub 연동',
   'GitLab Integration': 'GitLab 연동',
@@ -166,9 +166,9 @@ export const KO_VALUE_OVERRIDES = {
   'Checks require a Git branch and hosted review context':
     '검사에는 Git 브랜치 및 호스팅 PR 컨텍스트가 필요합니다.',
   'Start an agent from failed hosted-review checks.':
-    '실패한 호스팅 PR 체크에서 에이전트를 시작합니다.',
+    '호스팅 PR 체크가 실패하면 에이전트를 시작합니다.',
   'Start an agent for local or hosted-review merge conflicts.':
-    '로컬 또는 호스팅 PR 병합 충돌에 대한 에이전트를 시작합니다.',
+    '로컬 또는 호스팅 PR에 병합 충돌이 있으면 에이전트를 시작합니다.',
   'Review the workspace error below, then refresh.':
     '아래 워크스페이스 오류를 확인한 후 새로고침하세요.',
   'Review inactive workspaces before deleting their local files and Orca state.':
@@ -205,7 +205,7 @@ export const KO_VALUE_OVERRIDES = {
   'check #': '체크 #',
   'to submit.': '제출.',
   'Install the Orca skill so agents know to use the Orca CLI.':
-    '에이전트가 Orca CLI를 사용하도록 Orca 스킬을 설치하세요.',
+    '에이전트가 Orca CLI를 쓸 수 있도록 Orca 스킬을 설치하세요.',
   'Local project, Git repo, or folder with many repos':
     '로컬 프로젝트, Git 저장소 또는 저장소가 많은 폴더',
   'Linear, GitLab, Bitbucket, Azure DevOps, Gitea, and Jira live in Settings > Integrations.':

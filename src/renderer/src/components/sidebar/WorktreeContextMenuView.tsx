@@ -40,6 +40,7 @@ import { WorktreeContextMenuOverlays } from './WorktreeContextMenuOverlays'
 import {
   WORKTREE_CONTEXT_MENU_SCOPE_ATTR,
   getWorktreeParentPickerLabel,
+  isSessionRowContextMenuTarget,
   isWorktreeParentPickerDisabled,
   shouldIgnoreNestedWorktreeContextMenuScope,
   shouldRevealWorktreeDeveloperMenu,
@@ -110,6 +111,9 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
   const deleteShortcut = useOptionalShortcutLabel('workspace.delete')
   // Right-click on a live Claude row keeps this menu and adds "Model ▸" first (decision 3A).
   const [promptMenuTarget, setPromptMenuTarget] = useState(EMPTY_PROMPT_CONTEXT_MENU_TARGET)
+  // A right-click on a session row never offers removing the whole project (decision 1B).
+  const [openedOnSessionRow, setOpenedOnSessionRow] = useState(false)
+  const offersProjectRemoval = removesProject && !openedOnSessionRow
   return (
     <div
       ref={scopeRef}
@@ -130,6 +134,7 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
         window.dispatchEvent(new Event(CLOSE_ALL_CONTEXT_MENUS_EVENT))
         setDeveloperMenuRevealed(event.altKey)
         setPromptMenuTarget(promptContextMenuTargetFromEvent(event.target))
+        setOpenedOnSessionRow(isSessionRowContextMenuTarget(event.target))
         setContextWorktrees(onContextMenuSelect?.(event) ?? effectiveSelectedWorktrees)
         const bounds = event.currentTarget.getBoundingClientRect()
         setMenuPoint({ x: event.clientX - bounds.left, y: event.clientY - bounds.top })
@@ -324,7 +329,7 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
             onSleepSubtree={handleSleepSubtree}
           />
           {/* Git cannot remove primary checkouts; keep disabled Delete beside the enabled Remove Project action. */}
-          {!isMultiContext && removesProject ? (
+          {!isMultiContext && offersProjectRemoval ? (
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>
@@ -346,51 +351,50 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
             </Tooltip>
           ) : null}
           {/* Use Radix’s direct title prop for project-removal copy; wrapper elements break flat roving-keyboard navigation. */}
-          <DropdownMenuItem
-            variant="destructive"
-            onSelect={handleDelete}
-            disabled={
-              contextDeletePending ||
-              (!isMultiContext && worktree.isMainWorktree && !removesProject) ||
-              (isMultiContext && batchDeleteWorktrees.length === 0)
-            }
-            title={
-              !isMultiContext && worktree.isMainWorktree && !removesProject
-                ? translate(
-                    'auto.components.sidebar.WorktreeContextMenu.e091caab15',
-                    'The project could not be found'
-                  )
-                : undefined
-            }
-          >
-            <Trash2 className="size-3.5" />
-            {contextDeletePending
-              ? translate('auto.components.sidebar.WorktreeContextMenu.b42391d8bf', 'Deleting…')
-              : isMultiContext
-                ? deleteLabel
-                : folderWorkspaceId
+          {!isMultiContext && removesProject && !offersProjectRemoval ? null : (
+            <DropdownMenuItem
+              variant="destructive"
+              onSelect={handleDelete}
+              disabled={
+                contextDeletePending ||
+                (!isMultiContext && worktree.isMainWorktree && !removesProject) ||
+                (isMultiContext && batchDeleteWorktrees.length === 0)
+              }
+              title={
+                !isMultiContext && worktree.isMainWorktree && !removesProject
                   ? translate(
-                      'auto.components.sidebar.WorktreeContextMenu.250de158fd',
-                      'Remove Workspace'
+                      'auto.components.sidebar.WorktreeContextMenu.e091caab15',
+                      'The project could not be found'
                     )
-                  : removesProject
+                  : undefined
+              }
+            >
+              <Trash2 className="size-3.5" />
+              {contextDeletePending
+                ? translate('auto.components.sidebar.WorktreeContextMenu.b42391d8bf', 'Deleting…')
+                : isMultiContext
+                  ? deleteLabel
+                  : folderWorkspaceId
                     ? translate(
-                        'auto.components.sidebar.WorktreeContextMenu.f5ac91531d',
-                        'Remove Project from Orca'
+                        'auto.components.sidebar.WorktreeContextMenu.250de158fd',
+                        'Remove Workspace'
                       )
-                    : lineageDescendantCount > 0
-                      ? translate(
-                          'auto.components.sidebar.WorktreeContextMenu.deleteWithDescendants',
-                          'Delete with Descendants…'
-                        )
-                      : translate(
-                          'auto.components.sidebar.WorktreeContextMenu.f4475537d8',
-                          'Delete'
-                        )}
-            {!isMultiContext && !removesProject && deleteShortcut ? (
-              <DropdownMenuShortcut>{deleteShortcut}</DropdownMenuShortcut>
-            ) : null}
-          </DropdownMenuItem>
+                    : removesProject
+                      ? translate('prompt.projectRemoval.menuItem', 'Remove project from list…')
+                      : lineageDescendantCount > 0
+                        ? translate(
+                            'auto.components.sidebar.WorktreeContextMenu.deleteWithDescendants',
+                            'Delete with Descendants…'
+                          )
+                        : translate(
+                            'auto.components.sidebar.WorktreeContextMenu.f4475537d8',
+                            'Delete'
+                          )}
+              {!isMultiContext && !removesProject && deleteShortcut ? (
+                <DropdownMenuShortcut>{deleteShortcut}</DropdownMenuShortcut>
+              ) : null}
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
       <WorktreeContextMenuOverlays model={model} />

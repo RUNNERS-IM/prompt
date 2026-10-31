@@ -26,9 +26,6 @@ import {
   selectWorktreesByRepo
 } from '@/store/workspace-record-selectors'
 
-// NUL cannot occur in project names, so translated name-token splitting is unambiguous.
-const NAME_TOKEN = '\u0000'
-
 const RemoveFolderDialog = React.memo(function RemoveFolderDialog() {
   useUiLanguageRevision()
   const activeModal = useAppStore((s) => s.activeModal)
@@ -80,41 +77,46 @@ const RemoveFolderDialog = React.memo(function RemoveFolderDialog() {
     [detectedWorktreesByRepo, hostId, repoId, worktreesByRepo]
   )
 
-  const openTerminalCount = useAppStore((s) =>
+  const runningSessionCount = useAppStore((s) =>
     repoId && hostId ? countOpenRepoTerminalTabs(s, repoId, hostId) : 0
   )
-  const openTerminalWarning =
-    openTerminalCount === 0
+
+  // Say plainly that the whole project goes, not one session, so a session-level intent stops here.
+  const sentences = [
+    translate(
+      'prompt.projectRemoval.wholeProject',
+      'This removes the whole project, not just one session.'
+    ),
+    runningSessionCount === 0
       ? null
       : translate(
-          'auto.components.sidebar.RemoveFolderDialog.openTerminalWarning',
-          '{{count}} open terminals in this project will be closed.',
+          'prompt.projectRemoval.runningSessions',
+          'All {{count}} running sessions in it will be stopped.',
           {
-            count: openTerminalCount,
-            defaultValue_one: '{{count}} open terminal in this project will be closed.'
+            count: runningSessionCount,
+            defaultValue_one: 'Its running session will be stopped.'
           }
-        )
-
-  // Translate the whole sentence for reorderable locales, then restore emphasis at the name sentinel.
-  const description =
+        ),
     onRecipeVmServer || isRuntimeOwnedSshTargetId(sshConnectionId)
       ? translate(
-          'auto.components.sidebar.RemoveFolderDialog.removeDescriptionVmRecipe',
-          'This removes {{name}} from Orca. Its VM recipe determines whether the environment and its files are permanently deleted.',
-          { name: NAME_TOKEN }
+          'prompt.projectRemoval.filesVmRecipe',
+          'Its VM recipe determines whether the environment and its files are permanently deleted.'
         )
       : sshHostLabel
         ? translate(
-            'auto.components.sidebar.RemoveFolderDialog.removeDescriptionSsh',
-            'This only removes {{name}} from Orca. Its files stay on {{host}} — re-add that SSH host to recover it.',
-            { name: NAME_TOKEN, host: sshHostLabel }
+            'prompt.projectRemoval.filesSsh',
+            'Its folder and files stay on {{host}}. Add that SSH host again to bring it back.',
+            { host: sshHostLabel }
           )
         : translate(
-            'auto.components.sidebar.RemoveFolderDialog.removeDescriptionLocal',
-            'This only removes {{name}} from Orca. It is still on your disk.',
-            { name: NAME_TOKEN }
-          )
-  const [descriptionBeforeName, descriptionAfterName] = description.split(NAME_TOKEN)
+            'prompt.projectRemoval.filesLocal',
+            'Its folder and files stay where they are.'
+          ),
+    translate(
+      'prompt.projectRemoval.closeOneSession',
+      'To close just one session, use the × on its row.'
+    )
+  ].filter((sentence): sentence is string => sentence !== null)
 
   const handleConfirm = useCallback(() => {
     // Require the opener’s host so same-ID rows on other hosts cannot be removed.
@@ -141,17 +143,16 @@ const RemoveFolderDialog = React.memo(function RemoveFolderDialog() {
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent surface="security" className="max-w-sm sm:max-w-sm" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle className="text-sm">
-            {translate('auto.components.sidebar.RemoveFolderDialog.b79b39d865', 'Remove Project')}
+          <DialogTitle className="text-sm break-words">
+            {translate(
+              'prompt.projectRemoval.title',
+              "Remove the '{{name}}' project from the list?",
+              {
+                name: displayName
+              }
+            )}
           </DialogTitle>
-          <DialogDescription className="text-xs">
-            {descriptionBeforeName}
-            <span className="break-all font-medium text-foreground">{displayName}</span>
-            {descriptionAfterName}
-          </DialogDescription>
-          {openTerminalWarning ? (
-            <p className="text-xs font-medium text-foreground">{openTerminalWarning}</p>
-          ) : null}
+          <DialogDescription className="text-xs">{sentences.join(' ')}</DialogDescription>
         </DialogHeader>
         <RemovalUnsavedFilesNotice targets={unsavedTargets} enabled={isOpen} />
         <DialogFooter>
@@ -159,7 +160,7 @@ const RemoveFolderDialog = React.memo(function RemoveFolderDialog() {
             {translate('auto.components.sidebar.RemoveFolderDialog.d36883e046', 'Cancel')}
           </Button>
           <Button variant="destructive" onClick={handleConfirm}>
-            {translate('auto.components.sidebar.RemoveFolderDialog.4dc5b5065b', 'Remove')}
+            {translate('prompt.projectRemoval.confirm', 'Remove Project')}
           </Button>
         </DialogFooter>
       </DialogContent>

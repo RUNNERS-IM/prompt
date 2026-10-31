@@ -72,26 +72,26 @@ beforeEach(() => {
 })
 
 const TABLE = `
-  100  100 ttys001
-  101  101 ttys001
-  102  101 ttys001
-  103  103 ttys001
-  200  200 ttys002
-  300  300 ??
+  100   50  100 ttys001
+  101  100  101 ttys001
+  102  101  101 ttys001
+  103  100  103 ttys001
+  200   50  200 ttys002
+  300   50  300 ??
 `
 
 const ALL_PROCESS_ARGS = [
   '-e',
   '-o',
-  'pid=PROCESS_ID,pgid=PROCESS_GID,tty=TERMINAL_DEVICE_NUMBER,stat=PROCESS_STATE'
+  'pid=PROCESS_ID,ppid=PARENT_PROCESS_ID,pgid=PROCESS_GID,tty=TERMINAL_DEVICE_NUMBER,stat=PROCESS_STATE'
 ]
 const BUSYBOX_TABLE = `
-PROCESS_ID PROCESS_GID TERMINAL_DEVICE_NUMBER
-100 100 136,100
-101 101 136,100
-200 200 136,10
-201 201 136,10
-999 999 ?
+PROCESS_ID PARENT_PROCESS_ID PROCESS_GID TERMINAL_DEVICE_NUMBER
+100 1 100 136,100
+101 100 101 136,100
+200 1 200 136,10
+201 200 201 136,10
+999 1 999 ?
 `
 const unsupportedSelection = (stderr = 'ps: unrecognized option: p\n'): ProcessResult => ({
   code: 1,
@@ -111,14 +111,14 @@ describe('ps selection compatibility', () => {
     'falls back after a rejected %s selector and caches only the dialect (%s)',
     async (option, stderr) => {
       if (option === 't') {
-        runProcessMock.mockResolvedValueOnce({ code: 0, stdout: '100 100 pts/100' })
+        runProcessMock.mockResolvedValueOnce({ code: 0, stdout: '100 1 100 pts/100' })
       }
       runProcessMock
         .mockResolvedValueOnce(unsupportedSelection(stderr))
         .mockResolvedValueOnce({ code: 0, stdout: BUSYBOX_TABLE })
         .mockResolvedValueOnce({
           code: 0,
-          stdout: BUSYBOX_TABLE.replace('201 201 136,10', '202 202 136,10')
+          stdout: BUSYBOX_TABLE.replace('201 200 201 136,10', '202 200 202 136,10')
         })
 
       const first = await readPosixPtyProcessTable(100)
@@ -127,8 +127,8 @@ describe('ps selection compatibility', () => {
       expect(getPosixPtyProcessGroups(first, 100, 999)).toEqual([101, 100])
       expect(getPosixPtyProcessGroups(second, 200, 999)).toEqual([202, 200])
       expect(runProcessMock.mock.calls.map(([spec]) => spec.args)).toEqual([
-        ['-p', '100', '-o', 'pid=,pgid=,tty=,stat='],
-        ...(option === 't' ? [['-t', 'pts/100', '-o', 'pid=,pgid=,tty=,stat=']] : []),
+        ['-p', '100', '-o', 'pid=,ppid=,pgid=,tty=,stat='],
+        ...(option === 't' ? [['-t', 'pts/100', '-o', 'pid=,ppid=,pgid=,tty=,stat=']] : []),
         ALL_PROCESS_ARGS,
         ALL_PROCESS_ARGS
       ])
@@ -162,7 +162,7 @@ describe('ps selection compatibility', () => {
     expect(getPosixPtyProcessGroups(await first, 100, 999)).toEqual([101, 100])
     expect(getPosixPtyProcessGroups(await second, 200, 999)).toEqual([201, 200])
     expect(runProcessMock.mock.calls.map(([spec]) => spec.args)).toEqual([
-      ['-p', '100', '-o', 'pid=,pgid=,tty=,stat='],
+      ['-p', '100', '-o', 'pid=,ppid=,pgid=,tty=,stat='],
       ALL_PROCESS_ARGS,
       ALL_PROCESS_ARGS
     ])
@@ -196,7 +196,7 @@ describe('ps selection compatibility', () => {
     await readPosixPtyProcessTable(100)
     runProcessSyncMock.mockReturnValue({
       code: 0,
-      stdout: BUSYBOX_TABLE.replace('101 101 136,100', '102 102 136,100')
+      stdout: BUSYBOX_TABLE.replace('101 100 101 136,100', '102 100 102 136,100')
     })
     const signalProcessGroup = vi.fn()
     const fallback = vi.fn()
@@ -240,14 +240,14 @@ describe('ps selection compatibility', () => {
     await expect(readPosixPtyProcessTable(100)).rejects.toThrow('unavailable')
     expect(runProcessMock).toHaveBeenCalledOnce()
     runProcessMock
-      .mockResolvedValueOnce({ code: 0, stdout: '100 100 ttys001' })
+      .mockResolvedValueOnce({ code: 0, stdout: '100 50 100 ttys001' })
       .mockResolvedValueOnce({ code: 0, stdout: TABLE })
     await readPosixPtyProcessTable(100)
     expect(runProcessMock.mock.calls[1][0].args).toEqual([
       '-p',
       '100',
       '-o',
-      'pid=,pgid=,tty=,stat='
+      'pid=,ppid=,pgid=,tty=,stat='
     ])
   })
 
@@ -279,7 +279,7 @@ describe('ps selection compatibility', () => {
     })
     await expect(readPosixPtyProcessTable(100, controller.signal)).rejects.toThrow()
     expect(runProcessMock).toHaveBeenCalledOnce()
-    runProcessMock.mockResolvedValueOnce({ code: 0, stdout: '100 100 ?' })
+    runProcessMock.mockResolvedValueOnce({ code: 0, stdout: '100 1 100 ?' })
     await readPosixPtyProcessTable(100)
     expect(runProcessMock.mock.calls[1][0].args[0]).toBe('-p')
   })
@@ -287,7 +287,7 @@ describe('ps selection compatibility', () => {
   it.each(['?', '??', '-', '0', '0,0'])(
     'refuses to group processes without a controlling terminal (%s)',
     (tty) => {
-      expect(getPosixPtyProcessGroups(`100 100 ${tty}\n101 101 ${tty}`, 100, 999)).toBeNull()
+      expect(getPosixPtyProcessGroups(`100 1 100 ${tty}\n101 100 101 ${tty}`, 100, 999)).toBeNull()
     }
   )
 
@@ -300,19 +300,21 @@ describe('ps selection compatibility', () => {
 
 describe('asynchronous PTY process discovery', () => {
   it('requires a stopped state for the exact shell process', () => {
-    expect(isPosixPtyRootStopped('100 100 pts/test Ts\n101 101 pts/test R+', 100)).toBe(true)
-    expect(isPosixPtyRootStopped('100 100 pts/test S\n101 101 pts/test T', 100)).toBe(false)
-    expect(isPosixPtyRootStopped('101 101 pts/test T', 100)).toBe(false)
-    expect(isPosixPtyRootStopped('100 100 pts/test\n101 101 pts/test T', 100)).toBe(false)
+    expect(isPosixPtyRootStopped('100 1 100 pts/test Ts\n101 100 101 pts/test R+', 100)).toBe(true)
+    expect(isPosixPtyRootStopped('100 1 100 pts/test S\n101 100 101 pts/test T', 100)).toBe(false)
+    expect(isPosixPtyRootStopped('101 100 101 pts/test T', 100)).toBe(false)
+    expect(isPosixPtyRootStopped('100 1 100 pts/test\n101 100 101 pts/test T', 100)).toBe(false)
   })
 
   it('bounds each lookup and selects the root terminal without synchronous subprocesses', async () => {
     const controller = new AbortController()
     runProcessMock
-      .mockResolvedValueOnce({ code: 0, stdout: '100 100 ttys001' })
+      .mockResolvedValueOnce({ code: 0, stdout: '100 50 100 ttys001' })
       .mockResolvedValueOnce({ code: 0, stdout: TABLE })
 
-    expect(await readPosixPtyProcessTable(100, controller.signal)).toBe(`100 100 ttys001\n${TABLE}`)
+    expect(await readPosixPtyProcessTable(100, controller.signal)).toBe(
+      `100 50 100 ttys001\n${TABLE}`
+    )
     expect(
       runProcessMock.mock.calls.map(([spec]) => [{ ...spec, env: { LC_ALL: spec.env.LC_ALL } }])
     ).toEqual([
@@ -320,7 +322,7 @@ describe('asynchronous PTY process discovery', () => {
         {
           program: 'ps',
           env: { LC_ALL: 'C' },
-          args: ['-p', '100', '-o', 'pid=,pgid=,tty=,stat='],
+          args: ['-p', '100', '-o', 'pid=,ppid=,pgid=,tty=,stat='],
           timeoutMs: 1000,
           maxOutputBytes: 1048576,
           signal: controller.signal
@@ -330,7 +332,7 @@ describe('asynchronous PTY process discovery', () => {
         {
           program: 'ps',
           env: { LC_ALL: 'C' },
-          args: ['-t', 'ttys001', '-o', 'pid=,pgid=,tty=,stat='],
+          args: ['-t', 'ttys001', '-o', 'pid=,ppid=,pgid=,tty=,stat='],
           timeoutMs: 1000,
           maxOutputBytes: 1048576,
           signal: controller.signal
@@ -353,7 +355,7 @@ describe('asynchronous PTY process discovery', () => {
     const controller = new AbortController()
     runProcessMock.mockImplementation(async () => {
       controller.abort()
-      return { code: 0, stdout: '100 100 ttys001' }
+      return { code: 0, stdout: '100 50 100 ttys001' }
     })
     await expect(readPosixPtyProcessTable(100, controller.signal)).rejects.toThrow()
     expect(runProcessMock).toHaveBeenCalledOnce()
@@ -394,7 +396,7 @@ describe('POSIX PTY process-group termination', () => {
     await signalPosixPtyProcessGroups(100, signal, vi.fn(), {
       platform: 'linux',
       currentPid: 999,
-      readProcessTable: async () => TABLE.replace('100  100', '100  99'),
+      readProcessTable: async () => TABLE.replace('100   50  100', '100   50   99'),
       signalProcessGroup
     })
     expect(signalProcessGroup.mock.calls.map(([pgid]) => pgid)).toEqual(expected)
@@ -493,12 +495,13 @@ describe('POSIX PTY process-group termination', () => {
 
 describe('Linux terminal session identity (#27337)', () => {
   // Container devpts instances reuse pts numbers: tty alone cannot tell host pts/6 from a container's.
+  // 500 is a setsid descendant of the shell; 600 belongs to an unrelated process tree.
   const COLLIDING_TABLE = `
-100 100 pts/6 Ss
-101 101 pts/6 S+
-500 500 pts/6 Ss
-501 500 pts/6 S
-600 600 pts/6 Ss
+100 50 100 pts/6 Ss
+101 100 101 pts/6 S+
+500 101 500 pts/6 Ss
+501 500 500 pts/6 S
+600 1 600 pts/6 Ss
 `
 
   it('parses the session id past a comm containing spaces and parentheses', () => {
@@ -560,7 +563,7 @@ describe('Linux terminal session identity (#27337)', () => {
     expect(signalProcessGroup).not.toHaveBeenCalled()
   })
 
-  it('keeps macOS selection by terminal alone without reading /proc', async () => {
+  it('keeps macOS selection to the shell descendants without reading /proc', async () => {
     const signalProcessGroup = vi.fn()
     await forceKillPosixPtyProcessGroups(100, vi.fn(), {
       platform: 'darwin',
@@ -568,8 +571,58 @@ describe('Linux terminal session identity (#27337)', () => {
       readProcessTable: async () => COLLIDING_TABLE,
       signalProcessGroup
     })
-    expect(signalProcessGroup.mock.calls).toEqual([[101], [500], [600], [100]])
+    expect(signalProcessGroup.mock.calls).toEqual([[101], [500], [100]])
     expect(readFileMock).not.toHaveBeenCalled()
+  })
+})
+
+describe('reused terminal names on macOS', () => {
+  // ps -t selects by name only: a new tab that reopened ttys004 lists 300/301 beside the old shell 100.
+  const REUSED_TTY_TABLE = `
+100 1 100 ttys004 Ss
+100 1 100 ttys004 Ss
+150 100 150 ttys004 S+
+152 150 150 ttys004 S+
+300 1 300 ttys004 Ss
+301 300 301 ttys004 S+
+`
+
+  it('kills only the old shell tree, not the new tab sharing its terminal name', async () => {
+    const signalProcessGroup = vi.fn()
+    const fallback = vi.fn()
+    await forceKillPosixPtyProcessGroups(100, fallback, {
+      platform: 'darwin',
+      currentPid: 999,
+      readProcessTable: async () => REUSED_TTY_TABLE,
+      signalProcessGroup
+    })
+    expect(signalProcessGroup.mock.calls).toEqual([[150], [100]])
+    expect(fallback).not.toHaveBeenCalled()
+  })
+
+  it('applies the same filter to synchronous teardown', () => {
+    const signalProcessGroup = vi.fn()
+    forceKillPosixPtyProcessGroupsSync(100, vi.fn(), {
+      platform: 'darwin',
+      currentPid: 999,
+      readProcessTable: () => REUSED_TTY_TABLE,
+      signalProcessGroup
+    })
+    expect(signalProcessGroup.mock.calls).toEqual([[150], [100]])
+  })
+
+  it('still selects the new tab tree for its own shell', () => {
+    expect(getPosixPtyProcessGroups(REUSED_TTY_TABLE, 300, 999)).toEqual([301, 300])
+  })
+
+  it('no longer catches jobs reparented to init or a missing parent link', () => {
+    const table = `${REUSED_TTY_TABLE}160 1 160 ttys004 S\n170 165 170 ttys004 S\n`
+    expect(getPosixPtyProcessGroups(table, 100, 999)).toEqual([150, 100])
+  })
+
+  it('stops on a parent cycle left by pid reuse', () => {
+    const table = `${REUSED_TTY_TABLE}400 401 400 ttys004 S\n401 400 401 ttys004 S\n`
+    expect(getPosixPtyProcessGroups(table, 100, 999)).toEqual([150, 100])
   })
 })
 

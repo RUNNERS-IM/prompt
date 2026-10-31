@@ -201,28 +201,28 @@
     "ko": "워크스페이스를 만들기 전에 프로젝트, 워크스페이스 이름, agent를 선택하세요."
   },
   "auto.components.PullRequestConfirmation.closeTitle": {
-    "ko": "PR #{{number}}을(를) 닫으시겠습니까?"
+    "ko": "PR #{{number}}을(를) 닫을까요?"
   },
   "auto.components.PullRequestConfirmation.mergeLabel": {
     "ko": "병합 커밋 생성"
   },
   "auto.components.PullRequestConfirmation.mergeTitle": {
-    "ko": "병합 커밋을 생성하여 PR #{{number}}을(를) 병합하시겠습니까?"
+    "ko": "병합 커밋을 만들어 PR #{{number}}을(를) 병합할까요?"
   },
   "auto.components.PullRequestConfirmation.rebaseLabel": {
     "ko": "리베이스 및 병합"
   },
   "auto.components.PullRequestConfirmation.rebaseTitle": {
-    "ko": "PR #{{number}}을(를) 리베이스하여 병합하시겠습니까?"
+    "ko": "PR #{{number}}을(를) 리베이스해서 병합할까요?"
   },
   "auto.components.PullRequestConfirmation.reopenTitle": {
-    "ko": "PR #{{number}}을(를) 다시 여시겠습니까?"
+    "ko": "PR #{{number}}을(를) 다시 열까요?"
   },
   "auto.components.PullRequestConfirmation.squashLabel": {
     "ko": "스쿼시 및 병합"
   },
   "auto.components.PullRequestConfirmation.squashTitle": {
-    "ko": "PR #{{number}}을(를) 스쿼시하여 병합하시겠습니까?"
+    "ko": "PR #{{number}}을(를) 스쿼시해서 병합할까요?"
   },
   "auto.components.PullRequestPage.00b7b82329": {
     "ko": "헤드 브랜치"
@@ -453,7 +453,7 @@
     "ko": "agent CLI를 찾지 못했습니다. 하나를 설치하거나 설정에서 기본 agent를 선택하세요."
   },
   "auto.components.Terminal.7958465754": {
-    "ko": "실행 중인 프로세스가 있는 terminals이 있습니다. 그래도 창을 닫으시겠습니까?"
+    "ko": "실행 중인 프로세스가 있는 터미널이 있습니다. 그래도 창을 닫을까요?"
   },
   "auto.components.Terminal.e57db40c11": {
     "ko": "{{value0}} 실행 명령을 만들 수 없습니다."
@@ -1569,10 +1569,10 @@
     "ko": "워크스페이스 연결을 확인할 수 없습니다."
   },
   "auto.components.right.sidebar.source.control.discard.confirmation.2ae5a785b3": {
-    "ko": "스테이징되지 않은 변경 사항을 모두 삭제하시겠습니까?"
+    "ko": "스테이징하지 않은 변경 사항을 모두 버릴까요?"
   },
   "auto.components.right.sidebar.source.control.discard.confirmation.5ddd8cac7f": {
-    "ko": "스테이징된 변경 사항을 모두 삭제하시겠습니까?"
+    "ko": "스테이징한 변경 사항을 모두 버릴까요?"
   },
   "auto.components.right.sidebar.source.control.discard.confirmation.ddf36f291c": {
     "ko": "그러면 모든 스테이징된 변경 사항이 언스테이징되고 되돌려집니다. 스테이징된 새 파일이 삭제됩니다. 이 작업은 취소할 수 없습니다."
@@ -1650,7 +1650,7 @@
     "ko": "{{value0}} -> {{value1}}. 이전 세션을 계속하기 전에 실행 중인 Claude terminals을 다시 시작하세요."
   },
   "auto.components.settings.AccountsPane.d70a5287a4": {
-    "ko": "자동 조회가 실패할 때 사용할 선택적 워크스페이스 ID 재정의입니다."
+    "ko": "자동 조회가 실패할 때 대신 쓸 워크스페이스 ID입니다(선택)."
   },
   "auto.components.settings.AdvancedNetworkSettingsSection.0adfce9fa7": {
     "ko": "http, https, SOCKS, SOCKS4, SOCKS5 URL을 지원합니다."
@@ -1671,7 +1671,7 @@
     "ko": "에이전트 권한 정보"
   },
   "auto.components.settings.AgentsPane.f9f127d664": {
-    "ko": "이 agent의 바이너리 경로나 이름을 재정의하고 기본 실행 인수 또는 환경을 편집합니다."
+    "ko": "이 에이전트의 바이너리 경로나 이름을 바꾸고, 기본 실행 인수나 환경을 편집합니다."
   },
   "auto.components.settings.AppearancePane.932ff1fbff": {
     "ko": "테마"
@@ -1734,10 +1734,10 @@
     "ko": "배포판 선택"
   },
   "auto.components.settings.DefaultWindowsProjectRuntimeSetting.windowsDescription": {
-    "ko": "프로젝트에서 재정의하지 않는 한 Windows를 상속합니다."
+    "ko": "프로젝트에서 따로 정하지 않으면 Windows를 따릅니다."
   },
   "auto.components.settings.DefaultWindowsProjectRuntimeSetting.wslDescription": {
-    "ko": "프로젝트는 별도로 재정의하지 않는 한 WSL을 통해 {{value0}}을(를) 상속합니다."
+    "ko": "프로젝트에서 따로 정하지 않으면 WSL의 {{value0}}을(를) 따릅니다."
   },
   "auto.components.settings.DefaultWindowsProjectRuntimeSetting.wslUnavailable": {
     "ko": "WSL을 사용할 수 없습니다. WSL을 상속하는 프로젝트는 복구가 필요합니다."
@@ -1752,10 +1752,10 @@
     "ko": "자동화"
   },
   "auto.components.settings.DeveloperPermissionsPane.f903bf20b5": {
-    "ko": "터미널과 개발 도구가 로컬 네트워크의 서비스에 연결할 수 있도록 허용합니다. macOS는 이 권한의 현재 상태를 Orca에 보고하지 않습니다."
+    "ko": "터미널과 개발 도구가 로컬 네트워크의 서비스에 연결하도록 허용합니다. macOS는 이 권한의 현재 상태를 Orca에 알려 주지 않습니다."
   },
   "auto.components.settings.ExperimentalPane.agentHibernation.idleMinutesDescription": {
-    "ko": "완료된 백그라운드 agent를 Orca가 최대 절전 모드로 전환하기 전에 기다릴 유휴 시간(분)입니다."
+    "ko": "끝난 백그라운드 에이전트를 Orca가 절전 모드로 바꾸기 전까지 기다릴 유휴 시간(분)입니다."
   },
   "auto.components.settings.ExperimentalPane.agentHibernation.idleMinutesLabel": {
     "ko": "최대 절전까지"
@@ -1791,7 +1791,7 @@
     "ko": "프로젝트 런타임"
   },
   "auto.components.settings.GeneralPane.projectRuntimeDescription": {
-    "ko": "별도로 재정의하지 않은 로컬 Windows 프로젝트의 기본 런타임입니다."
+    "ko": "따로 바꾸지 않은 로컬 Windows 프로젝트에서 쓸 기본 런타임입니다."
   },
   "auto.components.settings.GeneralSupportSection.6922c1fa2b": {
     "ko": "GitHub에서 Orca 스타 누르기"
@@ -1830,7 +1830,7 @@
     "ko": "세션 {{value0}} 종료"
   },
   "auto.components.settings.McpConfigSection.6bac9ddfc6": {
-    "ko": "SSH repos는 원격 파일 시스템을 통해 읽힙니다. 스타터 생성은 워크스페이스 루트 구성으로 제한됩니다."
+    "ko": "SSH repo는 원격 파일 시스템에서 읽어 옵니다. 시작 파일은 워크스페이스 루트 설정으로만 만들 수 있습니다."
   },
   "auto.components.settings.MobileEmulatorExamples.4daa95f25a": {
     "ko": "Orca CLI 스킬이 설치된 프로젝트의 Claude Code, Codex 또는 다른 에이전트에 이들 중 하나를 붙여넣으세요."
@@ -1851,10 +1851,10 @@
     "ko": "키 지우기"
   },
   "auto.components.settings.PrivacyPane.79a0f3c16c": {
-    "ko": "텔레메트리는 다음에 의해 비활성화됩니다."
+    "ko": "다음 이유로 텔레메트리가 꺼져 있습니다."
   },
   "auto.components.settings.PrivacyPane.e3970bbbf5": {
-    "ko": "CI 환경 변수가 설정되었기 때문에 텔레메트리가 비활성화되었습니다. 설정을 해제하고 다시 시작하세요."
+    "ko": "CI 환경 변수가 설정되어 있어서 텔레메트리가 꺼져 있습니다. 변수를 지우고 다시 시작하세요."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.applyRuntimeChange": {
     "ko": "런타임 변경 적용"
@@ -1869,10 +1869,10 @@
     "ko": "WSL 배포판을 선택하거나 이 프로젝트를 Windows로 전환하세요."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.inheritedWindows": {
-    "ko": "프로젝트 재정의가 없습니다. 일반 설정에서 Windows를 선택합니다."
+    "ko": "프로젝트에서 따로 정한 값이 없습니다. 일반 설정에서 Windows를 선택했습니다."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.inheritedWsl": {
-    "ko": "프로젝트 재정의가 없습니다. 일반 설정에서 WSL을 통해 {{value0}}을(를) 선택합니다."
+    "ko": "프로젝트에서 따로 정한 값이 없습니다. 일반 설정에서 WSL의 {{value0}}을(를) 선택했습니다."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.pendingRuntimeChange": {
     "ko": "런타임 변경이 대기 중입니다. 적용한 뒤 새 프로젝트 작업은 선택한 런타임을 사용합니다."
@@ -1884,7 +1884,7 @@
     "ko": "이 프로젝트는 Windows에서 실행됩니다."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.projectWsl": {
-    "ko": "이 프로젝트는 WSL을 통해 {{value0}}에서 실행됩니다."
+    "ko": "이 프로젝트는 WSL의 {{value0}}에서 실행됩니다."
   },
   "auto.components.settings.ProjectWindowsRuntimeSetting.runtimeChangeHelp": {
     "ko": "런타임 변경은 이 프로젝트의 새 터미널, 에이전트 확인 및 스킬 탐색에 적용됩니다. 기존 터미널은 현재 런타임을 유지합니다."
@@ -1908,7 +1908,7 @@
     "ko": "저장소에 커밋된 명령만 실행하고 로컬 명령은 무시합니다."
   },
   "auto.components.settings.RepositoryHooksSection.2cc27dc12b": {
-    "ko": "연결된 이슈 명령에 대한 선택적 사용자별 재정의입니다."
+    "ko": "연결된 이슈 명령을 사용자마다 바꿀 때 씁니다(선택)."
   },
   "auto.components.settings.RepositoryHooksSection.2d03a514db": {
     "ko": "로컬"
@@ -1995,7 +1995,7 @@
     "ko": "기존 폴더"
   },
   "auto.components.settings.RepositoryPane.hostAvailability": {
-    "ko": "호스트 사용 가능 여부"
+    "ko": "호스트 사용 가능"
   },
   "auto.components.settings.RepositoryPane.hostAvailabilityHelp": {
     "ko": "같은 프로젝트를 연결된 다른 호스트에도 추가합니다."
@@ -2067,16 +2067,16 @@
     "ko": "전역 또는 프로젝트별로 적용되는 저장된 터미널 명령입니다."
   },
   "auto.components.settings.Settings.7210ac09c4": {
-    "ko": "에이전트 활동과 터미널 이벤트에 대한 네이티브 데스크톱 알림입니다."
+    "ko": "에이전트 활동과 터미널 이벤트를 알려 주는 데스크톱 알림입니다."
   },
   "auto.components.settings.Settings.9b83cc62c2": {
-    "ko": "terminal에서 실행되는 개발자 도구의 macOS 개인정보 보호 접근 권한입니다."
+    "ko": "터미널에서 실행하는 개발자 도구의 macOS 개인정보 보호 접근 권한입니다."
   },
   "auto.components.settings.Settings.b79b5b31e9": {
     "ko": "셸, 렌더러, 세션, 터미널 동작."
   },
   "auto.components.settings.Settings.c2ee313198": {
-    "ko": "SSH를 통해 기존 머신의 파일, 터미널, Git, 워크스페이스를 사용합니다."
+    "ko": "SSH로 기존 컴퓨터의 파일, 터미널, Git, 워크스페이스를 씁니다."
   },
   "auto.components.settings.SettingsFormControls.c822571b2e": {
     "ko": " \"{{value0}}\"과(와) 일치"
@@ -2109,10 +2109,10 @@
     "ko": "수정"
   },
   "auto.components.settings.SparsePresetSettingsSection.17f8c4ce10": {
-    "ko": "스파스 워크트리 생성을 위해 저장된 디렉터리 세트를 관리합니다."
+    "ko": "스파스 워크트리를 만들 때 쓸 디렉터리 묶음을 관리합니다."
   },
   "auto.components.settings.SparsePresetSettingsSection.88bfbf1a9c": {
-    "ko": "이 repos에 저장된 스파스 사전 설정이 없습니다."
+    "ko": "이 repo에 저장된 스파스 사전 설정이 없습니다."
   },
   "auto.components.settings.SparsePresetSettingsSection.8deb7024ab": {
     "ko": "스파스 사전 설정 로드 중..."
@@ -2142,7 +2142,7 @@
     "ko": "개인 키 파일"
   },
   "auto.components.settings.SshTargetForm.cb91f6375c": {
-    "ko": "선택 사항. 기본적으로 SSH agent가 사용됩니다."
+    "ko": "선택 사항입니다. 비워 두면 SSH agent를 씁니다."
   },
   "auto.components.settings.SshTargetForm.d6a5f2ee5c": {
     "ko": "~/.ssh/id_ed25519(SSH agent를 사용하려면 비워 두세요)"
@@ -2178,7 +2178,7 @@
     "ko": "Option을 Alt로 사용"
   },
   "auto.components.settings.TerminalPane.1c337bef4a": {
-    "ko": "JIS 엔(¥) 키를 누르면 백슬래시(\\\\)가 대신 전송되는지 여부를 제어합니다."
+    "ko": "JIS 엔(¥) 키를 누르면 대신 백슬래시(\\\\)를 보낼지 정합니다."
   },
   "auto.components.settings.TerminalPane.2fba319f21": {
     "ko": "렌더링"
@@ -2193,7 +2193,7 @@
     "ko": "{{value0}} 메가바이트"
   },
   "auto.components.settings.TerminalPane.6e6480a7df": {
-    "ko": "terminal의 프로그램(Zellij, tmux, Neovim, fzf, Grok, SSH)이 시스템 클립보드에 복사할 수 있게 합니다."
+    "ko": "터미널 안의 프로그램(Zellij, tmux, Neovim, fzf, Grok, SSH)이 시스템 클립보드에 복사할 수 있게 합니다."
   },
   "auto.components.settings.TerminalPane.8eefeaa3da": {
     "ko": "마우스를 따라 포커스 이동"
@@ -2337,13 +2337,13 @@
     "ko": "WSL에 `{{value0}}`을(를) 등록하지 못했습니다."
   },
   "auto.components.settings.WslCliRegistration.7ee4e52b99": {
-    "ko": "Orca는 명령이 WSL terminals에서 작동하도록 {{value0}}을(를) 등록합니다."
+    "ko": "WSL 터미널에서도 명령을 쓸 수 있도록 Orca가 {{value0}}을(를) 등록합니다."
   },
   "auto.components.settings.WslCliRegistration.951536dda5": {
     "ko": "WSL에 `{{value0}}`을(를) 등록했습니다."
   },
   "auto.components.settings.WslCliRegistration.e49688f67f": {
-    "ko": "WSL에 `{{value0}}`을(를) 등록하시겠습니까?"
+    "ko": "WSL에 `{{value0}}`을(를) 등록할까요?"
   },
   "auto.components.settings.YamlThemeImportButton.label": {
     "ko": "YAML에서 가져오기"
@@ -2511,10 +2511,10 @@
     "ko": "Edge 프로필"
   },
   "auto.components.settings.cli.source.control.integration.cards.2e44dda68a": {
-    "ko": "GitHub CLI가 설치되어 있지만 인증되지 않았습니다. terminal에서 다음 명령을 실행하세요."
+    "ko": "GitHub CLI가 설치되어 있지만 인증되지 않았습니다. 터미널에서 다음 명령을 실행하세요."
   },
   "auto.components.settings.cli.source.control.integration.cards.4be0616873": {
-    "ko": "GitLab CLI가 설치되어 있지만 인증되지 않았습니다. terminal에서 다음 명령을 실행하세요."
+    "ko": "GitLab CLI가 설치되어 있지만 인증되지 않았습니다. 터미널에서 다음 명령을 실행하세요."
   },
   "auto.components.settings.cli.source.control.integration.cards.54a640af7a": {
     "ko": "GitLab CLI 설치"
@@ -2568,7 +2568,7 @@
     "ko": "Whisper"
   },
   "auto.components.settings.developer.permissions.search.05ab708ee5": {
-    "ko": "보호된 프로젝트 및 워크트리 파일 액세스를 위해 macOS 개인정보 보호 창을 엽니다."
+    "ko": "보호된 프로젝트와 워크트리 파일에 접근할 수 있도록 macOS 개인정보 보호 창을 엽니다."
   },
   "auto.components.settings.developer.permissions.search.2270ccff3f": {
     "ko": "개인정보 보호"
@@ -2691,7 +2691,7 @@
     "ko": "전환"
   },
   "auto.components.settings.git.search.0e993bf00f": {
-    "ko": "워크스페이스를 만들면 Orca가 원격 기준 브랜치를 새로고침하고 main 또는 master 등 일치하는 로컬 브랜치를 안전하게 fast-forward합니다. git diff main...HEAD 같은 명령이 오래된 이력과 비교하지 않도록 하기 위한 동작입니다. 해당 브랜치에 커밋되지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca가 업데이트를 건너뜁니다."
+    "ko": "워크스페이스를 만들면 Orca가 원격 기준 브랜치를 새로고침하고, main이나 master 같은 같은 이름의 로컬 브랜치를 안전하게 fast-forward 합니다. git diff main...HEAD 같은 명령이 오래된 이력과 비교하지 않게 하려는 동작입니다. 그 브랜치에 커밋하지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca는 업데이트를 건너뜁니다."
   },
   "auto.components.settings.git.search.1d2fae1fa2": {
     "ko": "Git 사용자 이름"
@@ -2952,7 +2952,7 @@
     "ko": "클라이언트"
   },
   "auto.components.settings.settingOwnership.agentLaunchDefaults": {
-    "ko": "기본 에이전트, 명령 재정의, CLI 인수 및 실행 환경은 선택한 호스트에 저장됩니다."
+    "ko": "기본 에이전트, 명령 변경, CLI 인수, 실행 환경은 선택한 호스트에 저장됩니다."
   },
   "auto.components.settings.settingOwnership.clientDefault": {
     "ko": "클라이언트 기본값"
@@ -2970,13 +2970,13 @@
     "ko": "공급자 호스트"
   },
   "auto.components.settings.settingOwnership.repositorySourceControlAi": {
-    "ko": "이 재정의는 이 프로젝트 설정에 적용되며, 사용자 지정하기 전까지 클라이언트의 Source Control AI 기본값을 상속합니다."
+    "ko": "이 설정은 이 프로젝트에만 적용됩니다. 직접 바꾸기 전까지는 클라이언트의 Source Control AI 기본값을 그대로 따릅니다."
   },
   "auto.components.settings.settingOwnership.sourceControlAiDefaults": {
-    "ko": "레시피, 프롬프트, 호스팅 리뷰 기본값은 이 클라이언트에서 공유됩니다. 모델 선택과 탐색은 agent가 실행되는 호스트 범위에 유지됩니다."
+    "ko": "레시피, 프롬프트, 호스팅 리뷰 기본값은 이 클라이언트 전체에서 함께 씁니다. 모델 선택과 탐색은 에이전트가 실행되는 호스트마다 따로 저장됩니다."
   },
   "auto.components.settings.settingOwnership.workspaceDirectory": {
-    "ko": "호스트에 자체 워크트리 디렉터리가 필요하기 전까지 클라이언트 기본값을 상속합니다."
+    "ko": "호스트에 워크트리 디렉터리를 따로 정하기 전까지는 클라이언트 기본값을 따릅니다."
   },
   "auto.components.settings.shortcuts.search.0ecba9aa5f": {
     "ko": "키보드"
@@ -3009,7 +3009,7 @@
     "ko": "서버"
   },
   "auto.components.settings.source.control.action.recipe.options.commitMessage": {
-    "ko": "스테이징된 변경 사항에서 commit 메시지를 생성합니다."
+    "ko": "스테이징된 변경 사항으로 커밋 메시지를 만듭니다."
   },
   "auto.components.settings.task.tracker.integration.cards.1a12e33fe5": {
     "ko": "Linear 액세스 추가"
@@ -3066,7 +3066,7 @@
     "ko": "neovim"
   },
   "auto.components.settings.terminal.clipboard.search.459fea094a": {
-    "ko": "SSH를 포함하여 OSC 52를 통해 terminal의 프로그램이 시스템 클립보드에 복사할 수 있도록 허용합니다."
+    "ko": "터미널 안의 프로그램이 OSC 52로 시스템 클립보드에 복사할 수 있게 합니다(SSH 포함)."
   },
   "auto.components.settings.terminal.clipboard.search.5fb3512e8c": {
     "ko": "붙여넣기"
@@ -3090,7 +3090,7 @@
     "ko": "ANSI"
   },
   "auto.components.settings.terminal.search.17cc3ea102": {
-    "ko": "터미널 패널 위에 마우스를 올리면 클릭하지 않고도 활성화됩니다. Ghostty의 focus-follows-mouse 설정과 같은 동작입니다. 선택 및 창 전환은 안전하게 유지됩니다."
+    "ko": "터미널 패널 위에 마우스를 올리면 클릭하지 않아도 그 패널이 활성화됩니다. Ghostty의 focus-follows-mouse 설정과 같은 동작입니다. 텍스트 선택과 창 전환은 그대로 안전하게 작동합니다."
   },
   "auto.components.settings.terminal.search.18ce996647": {
     "ko": "수직"
@@ -3186,7 +3186,7 @@
     "ko": "키보드"
   },
   "auto.components.settings.terminal.search.ask_before_closing_running_terminals_description": {
-    "ko": "실행 중인 명령이나 agent가 있는 terminal을 닫기 전에 확인을 표시합니다."
+    "ko": "실행 중인 명령이나 에이전트가 있는 터미널을 닫기 전에 확인을 받습니다."
   },
   "auto.components.settings.terminal.search.ask_before_closing_running_terminals_title": {
     "ko": "실행 중인 Terminals을 닫기 전에 확인"
@@ -3279,7 +3279,7 @@
     "ko": "붙여넣기"
   },
   "auto.components.settings.token.source.control.integration.cards.05863d2599": {
-    "ko": "Gitea REST API를 통한 PR 및 commit 상태입니다."
+    "ko": "Gitea REST API로 가져온 PR 및 커밋 상태입니다."
   },
   "auto.components.settings.token.source.control.integration.cards.0613928cb3": {
     "ko": "이 런타임에서는 아직 Gitea 상태를 사용할 수 없습니다."
@@ -3288,7 +3288,7 @@
     "ko": ", 또는 설정"
   },
   "auto.components.settings.token.source.control.integration.cards.0b5242f8a2": {
-    "ko": "{{value0}} · PR 및 commit 상태"
+    "ko": "{{value0}} · PR 및 커밋 상태"
   },
   "auto.components.settings.token.source.control.integration.cards.0eb50d5593": {
     "ko": "Azure DevOps REST API 토큰을 통한 PR 및 빌드 상태입니다."
@@ -3297,7 +3297,7 @@
     "ko": "PR 및 빌드 상태"
   },
   "auto.components.settings.token.source.control.integration.cards.19fb419c12": {
-    "ko": "Gitea 자격 증명이 구성되어 있지만 인증할 수 없습니다. 토큰, API 기본 URL, repos 권한을 확인하고, 환경 변수가 변경되었다면 Orca를 다시 시작하세요."
+    "ko": "Gitea 자격 증명이 설정되어 있지만 인증할 수 없습니다. 토큰, API 기본 URL, repo 권한을 확인하고, 환경 변수를 바꿨다면 Orca를 다시 시작하세요."
   },
   "auto.components.settings.token.source.control.integration.cards.1a9475dace": {
     "ko": "자세히 알아보기"
@@ -3306,19 +3306,19 @@
     "ko": "이 런타임에서는 아직 Bitbucket 상태를 사용할 수 없습니다."
   },
   "auto.components.settings.token.source.control.integration.cards.40f678df73": {
-    "ko": "Azure DevOps 자격 증명이 구성되어 있지만 인증할 수 없습니다. 토큰, API 기본 URL, repos 권한을 확인하고, 환경 변수가 변경되었다면 Orca를 다시 시작하세요."
+    "ko": "Azure DevOps 자격 증명이 설정되어 있지만 인증할 수 없습니다. 토큰, API 기본 URL, repo 권한을 확인하고, 환경 변수를 바꿨다면 Orca를 다시 시작하세요."
   },
   "auto.components.settings.token.source.control.integration.cards.52f75876be": {
-    "ko": "감지된 repos의 PR 및 commit 상태"
+    "ko": "감지된 repo의 PR 및 커밋 상태"
   },
   "auto.components.settings.token.source.control.integration.cards.54636c65d4": {
     "ko": "감지된 Azure Repos의 PR 및 빌드 상태"
   },
   "auto.components.settings.token.source.control.integration.cards.60708f23da": {
-    "ko": "Orca가 원격에서 API URL을 추론할 수 없는 경우에만 사용하세요."
+    "ko": "Orca가 원격에서 API URL을 알아내지 못할 때만 쓰세요."
   },
   "auto.components.settings.token.source.control.integration.cards.6154b02093": {
-    "ko": "Bitbucket 자격 증명이 구성되어 있지만 인증할 수 없습니다. 토큰과 repos 권한을 확인하고, 환경 변수가 변경되었다면 Orca를 다시 시작하세요."
+    "ko": "Bitbucket 자격 증명이 설정되어 있지만 인증할 수 없습니다. 토큰과 repo 권한을 확인하고, 환경 변수를 바꿨다면 Orca를 다시 시작하세요."
   },
   "auto.components.settings.token.source.control.integration.cards.6da9dfa5de": {
     "ko": "비공개 repos의 경우, 그리고"
@@ -3327,7 +3327,7 @@
     "ko": "다시 확인"
   },
   "auto.components.settings.token.source.control.integration.cards.7bd345e3f6": {
-    "ko": "Orca가 Git 원격에서 API 기본 URL을 추론할 수 없는 경우에만 사용하세요."
+    "ko": "Orca가 Git 원격에서 API 기본 URL을 알아내지 못할 때만 쓰세요."
   },
   "auto.components.settings.token.source.control.integration.cards.b8a10b07c1": {
     "ko": ". 설정하세요"
@@ -4248,7 +4248,7 @@
     "ko": "핸드오프, 작업 트리 핸드오버, 순차 또는 병렬 하위 에이전트 작업에 오케스트레이션을 사용하도록 조율 에이전트에게 요청하세요."
   },
   "auto.components.settings.OrchestrationPane.9bedd2a6e5": {
-    "ko": "에이전트가 Orca를 통해 컨텍스트를 인계하고 작업을 조율할 수 있습니다."
+    "ko": "에이전트가 Orca로 컨텍스트를 넘겨주고 작업을 함께 조율할 수 있습니다."
   },
   "auto.components.settings.OrchestrationPane.2aacdb0517": {
     "ko": "핸드오프, 작업 트리 핸드오버, 하위 에이전트 작업 전반에 걸쳐 코딩 에이전트를 조율합니다."
@@ -4275,10 +4275,10 @@
     "ko": "감지된 {{value1}}개 에이전트 중 {{value0}}개에 스킬이 설치되어 있습니다."
   },
   "auto.components.settings.Settings.475980f53d": {
-    "ko": "Orca를 통해 여러 코딩 에이전트를 조율합니다."
+    "ko": "Orca로 여러 코딩 에이전트를 함께 조율합니다."
   },
   "sessionHistory.settings.computersConsent": {
-    "ko": "각 컴퓨터는 자체 에이전트 대화와 도구 출력의 검색 가능한 사본을 보관합니다. 이 데이터는 해당 컴퓨터 밖으로 전송되지 않습니다."
+    "ko": "컴퓨터마다 그 컴퓨터의 에이전트 대화와 도구 출력을 검색용 사본으로 보관합니다. 이 데이터는 그 컴퓨터 밖으로 나가지 않습니다."
   },
   "settings.appearance.statusBar.zcodeToggleDescription": {
     "ko": "ZCode Coding Plan 할당량 사용량을 표시합니다."
@@ -4317,7 +4317,7 @@
     "ko": "다크 모드에서 사용되는 터미널 테마를 선택하세요."
   },
   "auto.components.settings.TerminalWindowSection.e86e09b5c7": {
-    "ko": "개별 터미널 색상을 재정의합니다."
+    "ko": "터미널 색상을 하나씩 바꿉니다."
   },
   "auto.components.settings.TerminalWindowSection.1846f6ee6a": {
     "ko": "터미널 그리드 주변의 수직 패딩(픽셀)입니다."
@@ -4353,7 +4353,7 @@
     "ko": "상태 표시줄에 ZCode Coding Plan 할당량 사용량을 표시합니다."
   },
   "auto.components.settings.terminal.search.3023e01415": {
-    "ko": "개별 터미널 색상을 재정의합니다."
+    "ko": "터미널 색상을 하나씩 바꿉니다."
   },
   "auto.components.settings.terminal.search.4655567c37": {
     "ko": "터미널 그리드 주변의 수직 패딩(픽셀)입니다."
@@ -4392,10 +4392,10 @@
     "ko": "PowerShell 7+ 다운로드"
   },
   "auto.components.settings.TerminalPane.5ed5c95344": {
-    "ko": "새 터미널 패널을 위해 Windows PowerShell과 PowerShell 7+ 중에서 선택하세요."
+    "ko": "새 터미널 패널에서 쓸 Windows PowerShell과 PowerShell 7+ 중 하나를 선택하세요."
   },
   "auto.components.settings.TerminalPane.3d88af864d": {
-    "ko": "PowerShell 셸 옵션이 새 터미널 패널에 대해 Windows PowerShell을 시작할지 아니면 PowerShell 7+를 시작할지 선택합니다."
+    "ko": "PowerShell 셸 옵션으로 새 터미널 패널에서 Windows PowerShell과 PowerShell 7+ 중 무엇을 시작할지 정합니다."
   },
   "auto.components.settings.TerminalPane.81d86b2dd2": {
     "ko": "새 패널과 열린 패널에 보관할 데스크톱 터미널 행입니다."
@@ -4407,7 +4407,7 @@
     "ko": "스크롤백, 단어 경계 및 플랫폼별 터미널 동작."
   },
   "auto.components.settings.TerminalPane.9129b7e805": {
-    "ko": "터미널 패널 위에 마우스를 올리면 클릭하지 않고도 활성화됩니다."
+    "ko": "터미널 패널 위에 마우스를 올리면 클릭하지 않아도 그 패널이 활성화됩니다."
   },
   "auto.components.settings.TerminalPane.96fe15def8": {
     "ko": "터미널 패널의 마우스 및 클립보드 동작."
@@ -4416,16 +4416,16 @@
     "ko": "터미널 상호작용"
   },
   "auto.components.settings.TerminalPane.7eaccc1424": {
-    "ko": "WebGL은 항상 터미널 패널에 대해 시도됩니다."
+    "ko": "터미널 패널에서 항상 WebGL을 씁니다."
   },
   "auto.components.settings.TerminalPane.72bc9334a0": {
-    "ko": "라이브 창과 새 창에 대한 터미널 렌더러 동작입니다."
+    "ko": "열려 있는 창과 새 창의 터미널 렌더러 동작입니다."
   },
   "auto.components.settings.TerminalPane.bd68f3170d": {
-    "ko": "Windows의 새 터미널 패널에 대한 기본 셸을 선택합니다."
+    "ko": "Windows에서 새 터미널 패널에 쓸 기본 셸을 선택합니다."
   },
   "auto.components.settings.TerminalPane.a55eee649f": {
-    "ko": "Windows의 새 터미널 패널에 대한 기본 셸입니다."
+    "ko": "Windows에서 새 터미널 패널에 쓸 기본 셸입니다."
   },
   "auto.components.settings.TerminalPane.87e678a8af": {
     "ko": "Windows 셸"
@@ -4434,7 +4434,7 @@
     "ko": "지원되는 Ghostty 터미널 설정을 한 번만 가져옵니다."
   },
   "auto.components.settings.terminal.search.063914c486": {
-    "ko": "JIS 엔(¥) 키를 눌렀을 때 백슬래시(\\)를 대신 보낼지 여부를 설정합니다."
+    "ko": "JIS 엔(¥) 키를 누르면 대신 백슬래시(\\)를 보낼지 정합니다."
   },
   "auto.components.settings.terminal.search.f036794286": {
     "ko": "활성"
@@ -4464,10 +4464,10 @@
     "ko": "색상"
   },
   "auto.components.settings.terminal.windows.search.41a69bc24d": {
-    "ko": "PowerShell 셸 옵션이 새 터미널 패널에 대해 Windows PowerShell을 시작할지 아니면 PowerShell 7+를 시작할지 선택합니다."
+    "ko": "PowerShell 셸 옵션으로 새 터미널 패널에서 Windows PowerShell과 PowerShell 7+ 중 무엇을 시작할지 정합니다."
   },
   "auto.components.settings.terminal.windows.search.713c4a2f92": {
-    "ko": "Windows의 새 터미널 패널에 대한 기본 셸을 선택합니다."
+    "ko": "Windows에서 새 터미널 패널에 쓸 기본 셸을 선택합니다."
   },
   "auto.components.settings.contrast.offDescription": {
     "ko": "흐린 텍스트와 Powerline 구분 기호를 포함해 프로그램 색상을 그대로 유지합니다."
@@ -4515,7 +4515,7 @@
     "ko": "호스트"
   },
   "auto.components.settings.developer.permissions.search.acad3d4743": {
-    "ko": "터미널 세션에서 사용되는 장치 도구와 LAN 액세스를 허용합니다."
+    "ko": "터미널 세션에서 쓰는 장치 도구와 LAN 접근을 허용합니다."
   },
   "auto.components.settings.DeveloperPermissionsPane.appStatus": {
     "ko": "앱: "
@@ -4527,10 +4527,10 @@
     "ko": "터미널이 보호된 파일을 읽지 못하면 작업을 저장한 뒤 터미널 → 세션 관리에서 닫으세요. 새 터미널도 영향을 받는다면 데몬을 다시 시작하세요. 다시 시작하면 현재 터미널이 모두 닫힙니다."
   },
   "auto.components.settings.CliSection.e8012c03a1": {
-    "ko": "에이전트가 Orca 워크스페이스, 터미널 및 진행 명령을 사용할 수 있도록 합니다."
+    "ko": "에이전트가 Orca 워크스페이스, 터미널, 진행 명령을 쓸 수 있게 합니다."
   },
   "auto.components.settings.CliSection.36a6f919ba": {
-    "ko": "에이전트가 Orca를 활용해 워크스페이스, 터미널 및 진행 상황을 관리할 수 있도록 합니다."
+    "ko": "에이전트가 Orca로 워크스페이스, 터미널, 진행 상황을 관리할 수 있게 합니다."
   },
   "auto.components.settings.CliSection.04873eea3e": {
     "ko": "에이전트 스킬"
@@ -4557,7 +4557,7 @@
     "ko": "업데이트 다운로드 ("
   },
   "auto.components.settings.GeneralUpdateSettingsSection.e3b9d21c07": {
-    "ko": "업데이트가 준비되었습니다. 시스템 패키지 관리자를 통해 Orca를 업데이트하세요. Orca 자체적으로는 이번 릴리스를 설치할 수 없습니다."
+    "ko": "업데이트가 준비되었습니다. 시스템 패키지 관리자로 Orca를 업데이트하세요. 이번 릴리스는 Orca가 직접 설치할 수 없습니다."
   },
   "auto.components.settings.GeneralWorkspaceSettingsSection.bf46474e33": {
     "ko": "공유 아티팩트를 삭제하기 전에 확인창을 표시합니다. 삭제하면 공개 링크가 있는 사람도 더 이상 접근할 수 없습니다."
@@ -4662,13 +4662,13 @@
     "ko": "Adhoc 빌드는 아직 병합되지 않은 브랜치에서 만들어지며, Windows 빌드는 서명되지 않습니다. 빌드를 만든 사람이 관리를 중단할 수 있으니 안정적인 빌드를 준비해 두세요."
   },
   "auto.components.settings.AccountsPane.codexConfigSyncMissingSource": {
-    "ko": "{{value0}} 파일이 없어 Codex가 마지막으로 동기화된 설정을 계속 사용합니다. 동기화를 재개하려면 해당 파일을 복원하세요."
+    "ko": "{{value0}} 파일이 없어서 Codex가 마지막으로 동기화한 설정을 계속 씁니다. 다시 동기화하려면 이 파일을 복원하세요."
   },
   "auto.components.settings.AccountsPane.codexConfigSyncBlankSource": {
     "ko": "{{value0}}이(가) 비어 있어 Codex가 마지막으로 동기화된 설정을 계속 사용합니다. 동기화 폴더의 다운로드가 끝나는 동안에는 정상입니다."
   },
   "auto.components.settings.AccountsPane.codexConfigSyncUnreadableSource": {
-    "ko": "{{value0}} 파일을 읽을 수 없어 Codex가 마지막으로 동기화된 설정을 계속 사용하고 있습니다. 해당 파일의 권한을 확인하세요."
+    "ko": "{{value0}} 파일을 읽을 수 없어서 Codex가 마지막으로 동기화한 설정을 계속 쓰고 있습니다. 이 파일의 권한을 확인하세요."
   },
   "auto.components.settings.AccountsPane.d5267cce63": {
     "ko": "). auth 쿠키로 워크스페이스 탐색은 계속 가능하지만, 사용량 조회에는 auth만으로 충분하지 않습니다. OpenCode Go 인증은 웹 기반이며 Windows와 WSL 터미널에서 공유됩니다."
@@ -4749,7 +4749,7 @@
     "ko": "저장된 키 삭제"
   },
   "auto.components.settings.ZcodePlanAccountsSection.keyHelp": {
-    "ko": "코딩 도구가 이 요금제에 사용하는 것과 같은 키입니다(예: ANTHROPIC_BASE_URL을 해당 사이트로 지정한 Claude Code). 위에서 사이트를 바꾸면 키를 받는 호스트도 바뀝니다."
+    "ko": "코딩 도구가 이 요금제에 쓰는 것과 같은 키입니다(예: ANTHROPIC_BASE_URL을 이 사이트로 지정한 Claude Code). 위에서 사이트를 바꾸면 키를 보내는 호스트도 바뀝니다."
   },
   "auto.components.settings.ZcodePlanAccountsSection.usageTitle": {
     "ko": "요금제 사용량"
@@ -4773,7 +4773,7 @@
     "ko": "로그인된 agy 자체 계정이 없습니다."
   },
   "accounts.antigravity.changed": {
-    "ko": "agy 자체 계정이 변경되었습니다. agy를 시작하기 전에 저장된 계정을 다시 선택하세요."
+    "ko": "agy 자체 계정이 바뀌었습니다. agy를 시작하기 전에 저장된 계정을 다시 선택하세요."
   },
   "accounts.antigravity.save": {
     "ko": "현재 계정 저장"
@@ -4830,13 +4830,13 @@
     "ko": "Z.AI 브라우저 로그인"
   },
   "auto.components.settings.ExperimentalPane.a20d5ea365": {
-    "ko": "해당 패널과 상호 작용할 때까지 터미널 벨 또는 에이전트 완료 이벤트 후에 패널 수준 강조 표시를 유지합니다. 신호를 조정하는 동안 실험적입니다."
+    "ko": "터미널 벨이 울리거나 에이전트가 끝나면, 그 패널을 사용할 때까지 패널 강조 표시를 유지합니다. 신호를 다듬는 중이라 실험 기능입니다."
   },
   "auto.components.settings.ExperimentalPane.ec897e8d89": {
     "ko": "터미널 강조 표시"
   },
   "auto.components.settings.ExperimentalPane.88b7613afb": {
-    "ko": "터미널 벨 및 에이전트 완료 이벤트에 대한 지속적인 패널 강조 표시입니다."
+    "ko": "터미널 벨과 에이전트 완료 때 패널 강조 표시를 유지합니다."
   },
   "auto.components.settings.ExperimentalPane.agentHibernation.copy": {
     "ko": "설정된 유휴 시간이 지난 백그라운드 에이전트 터미널을 중지하고, 다시 열 때 지원되는 세션을 재개합니다. 에이전트 최대 절전은 Orca에서 시작한 에이전트의 시작 옵션을 보존합니다. 수동으로 시작한 에이전트는 현재 Orca 기본값으로 재개될 수 있습니다. 안전 모델을 조정하는 동안 제공되는 실험적 기능입니다."
@@ -4848,7 +4848,7 @@
     "ko": "에이전트"
   },
   "auto.components.settings.experimental.search.11877246fc": {
-    "ko": "터미널 벨 및 에이전트 완료 이벤트에 대한 지속적인 패널 강조 표시입니다."
+    "ko": "터미널 벨과 에이전트 완료 때 패널 강조 표시를 유지합니다."
   },
   "auto.components.settings.experimental.search.9e4ddf776d": {
     "ko": "터미널 강조 표시"
@@ -4944,7 +4944,7 @@
     "ko": "기본 에이전트 사용"
   },
   "auto.components.settings.SourceControlAiActionRecipeDefaults.bf84dea6af": {
-    "ko": "Orca가 컨텍스트를 삽입하도록 하려는 경우에만 변수를 사용하십시오. 일반 에이전트 기본 설정을 따르려면 에이전트를 기본값으로 둡니다."
+    "ko": "Orca가 컨텍스트를 넣게 하고 싶을 때만 변수를 쓰세요. 일반 에이전트 기본 설정을 따르려면 에이전트를 기본값으로 두세요."
   },
   "auto.components.settings.SourceControlAiActionRecipeDefaults.cf01d41bce": {
     "ko": "각 소스 제어 AI 버튼에서 사용되는 에이전트, CLI 인수 및 명령 템플릿입니다."
@@ -5022,7 +5022,7 @@
     "ko": "에이전트"
   },
   "auto.components.settings.agents.search.01926b9d8c": {
-    "ko": "AI 코딩 에이전트, 기본 에이전트 및 명령 재정의를 구성합니다."
+    "ko": "AI 코딩 에이전트, 기본 에이전트, 명령 변경을 설정합니다."
   },
   "auto.components.settings.agents.search.agentRuntime": {
     "ko": "에이전트 런타임"
@@ -5046,7 +5046,7 @@
     "ko": "사용 방법"
   },
   "auto.components.settings.OrchestrationSetupCard.e7d2a5146c": {
-    "ko": "에이전트가 Orca를 통해 컨텍스트를 인계하고 작업을 조율할 수 있습니다."
+    "ko": "에이전트가 Orca로 컨텍스트를 넘겨주고 작업을 함께 조율할 수 있습니다."
   },
   "auto.components.settings.OrchestrationSkillAgentCoverage.fullCoverage_one": {
     "ko": "감지된 에이전트 1개에 스킬이 설치되어 있습니다."
@@ -5058,16 +5058,16 @@
     "ko": "멀티 에이전트"
   },
   "auto.components.settings.orchestration.search.e05ff36753": {
-    "ko": "메시징, 작업 DAG, 디스패치 및 의사결정 게이트를 통해 여러 코딩 에이전트를 조율합니다."
+    "ko": "메시지, 작업 DAG, 작업 배정, 결정 단계로 여러 코딩 에이전트를 함께 조율합니다."
   },
   "auto.components.settings.orchestration.search.c34045764e": {
     "ko": "에이전트 오케스트레이션"
   },
   "auto.components.settings.MobileEmulatorAgentControlRow.d94ca6a623": {
-    "ko": "에이전트가 모바일 에뮬레이터 제어를 포함하여 Orca CLI 명령을 사용할 수 있도록 합니다."
+    "ko": "에이전트가 모바일 에뮬레이터 제어를 비롯한 Orca CLI 명령을 쓸 수 있게 합니다."
   },
   "auto.components.settings.MobileEmulatorAgentControlRow.ff4b7e65d6": {
-    "ko": "코딩 에이전트가 Orca CLI 명령을 사용하여 활성 모바일 에뮬레이터를 제어하도록 합니다."
+    "ko": "코딩 에이전트가 Orca CLI 명령으로 활성 모바일 에뮬레이터를 제어하게 합니다."
   },
   "auto.components.settings.MobileEmulatorAgentControlRow.2a674aa810": {
     "ko": "에이전트 모바일 에뮬레이터 제어"
@@ -5076,16 +5076,16 @@
     "ko": "에이전트 모바일 에뮬레이터 제어"
   },
   "auto.components.settings.MobileEmulatorSettingsPane.f9af91ea26": {
-    "ko": "새 모바일 에뮬레이터 작업을 표시하고 에이전트가 활성 에뮬레이터에 연결할 수 있도록 합니다."
+    "ko": "새 모바일 에뮬레이터 작업을 표시하고, 에이전트가 활성 에뮬레이터에 연결할 수 있게 합니다."
   },
   "auto.components.settings.MobileEmulatorSettingsPane.bc39d0f115": {
-    "ko": "Orca 및 코딩 에이전트에 대한 모바일 에뮬레이터 지원을 구성합니다."
+    "ko": "Orca와 코딩 에이전트의 모바일 에뮬레이터 지원을 설정합니다."
   },
   "auto.components.settings.MobileEmulatorSettingsPane.b2fd62ea75": {
     "ko": "새 에뮬레이터 탭 및 에이전트 연결 명령을 위한 기본 장치입니다. 자동 선택은 이미 실행 중인 장치를 선호합니다."
   },
   "auto.components.settings.Settings.01f9d36292": {
-    "ko": "Orca 및 코딩 에이전트에 대한 모바일 에뮬레이터 지원을 구성합니다."
+    "ko": "Orca와 코딩 에이전트의 모바일 에뮬레이터 지원을 설정합니다."
   },
   "auto.components.settings.mobile.emulator.search.f8b871d655": {
     "ko": "에이전트 CLI"
@@ -5097,7 +5097,7 @@
     "ko": "에이전트 에뮬레이터"
   },
   "auto.components.settings.mobile.emulator.search.9595354cff": {
-    "ko": "Orca 및 코딩 에이전트에 대한 모바일 에뮬레이터 지원을 구성합니다."
+    "ko": "Orca와 코딩 에이전트의 모바일 에뮬레이터 지원을 설정합니다."
   },
   "auto.components.settings.MobileEmulatorSdkStatus.b94ff260e6": {
     "ko": "Android Studio 다운로드"
@@ -5139,7 +5139,7 @@
     "ko": "저장소 명령"
   },
   "auto.components.settings.repository.search.d42d1e49c0": {
-    "ko": "orca.yaml과 선택적인 로컬 재정의로 설정하는 파일 기반의 연결된 이슈 명령입니다."
+    "ko": "orca.yaml과 로컬 설정(선택)으로 정하는 파일 기반 연결 이슈 명령입니다."
   },
   "auto.components.settings.repository.search.cdfe398068": {
     "ko": "설정 스크립트 실행 시기"
@@ -5178,7 +5178,7 @@
     "ko": "{{count}}개의 실행 중인 터미널"
   },
   "auto.components.settings.QuickCommandsPane.c36912efd5": {
-    "ko": "탭 표시줄의 빠른 명령 버튼을 사용하여 실행하거나 터미널 내부를 마우스 오른쪽 버튼으로 클릭하세요."
+    "ko": "탭 표시줄의 빠른 명령 버튼으로 실행하거나 터미널 안에서 마우스 오른쪽 버튼을 클릭하세요."
   },
   "auto.components.settings.QuickCommandsPane.9b3e338d62": {
     "ko": "Enter로 실행"
@@ -5229,7 +5229,7 @@
     "ko": "링크가 Orca에서 열리므로, {{chord}}+클릭 시 시스템 기본 브라우저에서 대신 열립니다."
   },
   "auto.components.settings.BrowserLinkRoutingModifierSetting.descriptionOrca": {
-    "ko": "링크가 시스템 기본 브라우저에서 열립니다. 활성화하면 {{chord}}+클릭 시 Orca 내장 브라우저에서 대신 열립니다."
+    "ko": "링크는 시스템 기본 브라우저에서 열립니다. 켜면 {{chord}}+클릭할 때 Orca 내장 브라우저에서 엽니다."
   },
   "auto.components.settings.BrowserTerminalLinkActionsSetting.actionsLabel": {
     "ko": "동작 메뉴 표시"
@@ -5244,7 +5244,7 @@
     "ko": "에이전트와 Orca CLI의 스킬 링크 게시 허용"
   },
   "auto.components.settings.shareSkills.allowAgentPublishingDescription": {
-    "ko": "설치된 스킬 중 명령어에 이름을 명시한 스킬을 게시하도록 허용합니다. 스킬 폴더에는 스크립트, 설정 또는 비밀정보가 포함될 수 있으므로 기본적으로 꺼져 있습니다."
+    "ko": "설치된 스킬 중 명령에 이름을 적은 스킬을 게시할 수 있게 합니다. 스킬 폴더에는 스크립트, 설정, 비밀 정보가 들어 있을 수 있어서 기본으로 꺼져 있습니다."
   },
   "auto.components.settings.shareSkills.selectTitle": {
     "ko": "스킬을 하나 이상 선택하세요."
@@ -5277,7 +5277,7 @@
     "ko": "터미널 우선"
   },
   "auto.components.settings.ShortcutsPane.f0b35b0b2e": {
-    "ko": "터미널 또는 TUI에 키보드 포커스가 있는 동안에는 비활성화됩니다."
+    "ko": "터미널이나 TUI에 키보드 포커스가 있으면 작동하지 않습니다."
   },
   "auto.components.settings.ShortcutsPane.5c65d5db9d": {
     "ko": "터미널 우선"
@@ -5361,7 +5361,7 @@
     "ko": "삭제 명령 없음"
   },
   "auto.components.settings.RuntimeEnvironmentsPane.b2290ed203": {
-    "ko": "Orca가 이 호스트로 포커스를 옮기고 해당 프로젝트를 불러옵니다. 다른 호스트의 기존 터미널과 브라우저 탭은 계속 유지됩니다."
+    "ko": "Orca가 이 호스트로 포커스를 옮기고 그 프로젝트를 불러옵니다. 다른 호스트에 열려 있던 터미널과 브라우저 탭은 그대로 남습니다."
   },
   "auto.components.settings.RuntimeEnvironmentsPane.updateServer": {
     "ko": "업데이트"
@@ -5397,7 +5397,7 @@
     "ko": "{{value0}} (사용 불가)"
   },
   "auto.components.settings.SettingsHostScopePicker.unavailableNotice": {
-    "ko": "이 서버는 더 이상 저장되어 있지 않아 정보를 표시할 수 없습니다. 설정 상단에서 다른 호스트를 선택하세요."
+    "ko": "이 서버는 더 이상 저장되어 있지 않아서 정보를 표시할 수 없습니다. 설정 위쪽에서 다른 호스트를 선택하세요."
   },
   "auto.components.settings.SshPassphraseDialog.c624f64b86": {
     "ko": "계속"
@@ -5406,7 +5406,7 @@
     "ko": "이 호스트의 orca CLI가 Orca를 제어하도록 허용"
   },
   "auto.components.settings.SshTargetForm.allowRemoteCliControlHelp": {
-    "ko": "새 호스트에서는 기본적으로 켜져 있습니다. 이 호스트에서 실행한 orca 명령이 이 호스트의 작업 공간에서만, 연결되어 있는 동안에만 이 데스크톱의 Orca 브라우저 탭을 열고 조작할 수 있게 하고, 이 호스트에서 이전 버전의 Orca가 시작한 터미널이 자신이 감독받는 작업에 대해 오케스트레이션 명령(check, inbox, send, ask, reply)을 실행할 수 있게 합니다. 파일, 클립보드, 쿠키는 읽을 수 없습니다. 끄면 이 호스트 자체의 Orca 서버에만 접근합니다."
+    "ko": "새 호스트에서는 기본으로 켜져 있습니다. 켜면 두 가지가 가능합니다. 첫째, 이 호스트에서 실행한 CLI 명령이 연결되어 있는 동안 이 호스트의 워크스페이스 안에서만 이 데스크톱의 Orca 브라우저 탭을 열고 조작할 수 있습니다. 둘째, 이 호스트에서 이전 버전 Orca가 시작한 터미널이 자기가 관리받는 작업에 오케스트레이션 명령(check, inbox, send, ask, reply)을 실행할 수 있습니다. 파일, 클립보드, 쿠키는 읽을 수 없습니다. 끄면 이 호스트 자체의 Orca 서버에만 접근합니다."
   },
   "auto.components.settings.AdvancedNetworkSettingsSection.3e431564b5": {
     "ko": "localhost, 127.0.0.1, *.internal"
@@ -5496,7 +5496,7 @@
     "ko": "Orca Relay는 베타 버전입니다."
   },
   "auto.components.settings.MobilePairingConnectionOptions.relaySignInDetail": {
-    "ko": "이 데스크톱에서 Orca에 로그인하고 휴대폰 연결을 Orca 서버를 통해 전달합니다. LAN 연결에는 계정이 필요하지 않습니다."
+    "ko": "이 데스크톱에서 Orca에 로그인하고, 휴대폰 연결을 Orca 서버를 거쳐 전달합니다. LAN 연결에는 계정이 필요 없습니다."
   },
   "auto.components.settings.SshPassphraseDialog.ce4fdf7914": {
     "ko": "다음 연결 대상에 사용할 SSH 키의 암호 문구를 입력하세요:"
@@ -5571,13 +5571,13 @@
     "ko": "터미널에서 명령을 사용할 수 있도록 Orca가 {{value0}}을(를) 등록합니다."
   },
   "auto.components.settings.EphemeralVmCleanupStopDialog.title": {
-    "ko": "정리를 중지하시겠습니까?"
+    "ko": "정리를 중지할까요?"
   },
   "auto.components.settings.EphemeralVmRuntimesSection.stopCleanupFailed": {
     "ko": "클라우드 VM 정리를 중지할 수 없습니다."
   },
   "auto.components.settings.EphemeralVmsPane.whatBuild": {
-    "ko": "재사용 가능한 기본 이미지를 빌드하고 에이전트를 로그인시킵니다."
+    "ko": "다시 쓸 수 있는 기본 이미지를 만들고 에이전트를 로그인시킵니다."
   },
   "auto.components.settings.EphemeralVmsPane.promptHint": {
     "ko": "어떤 워크스페이스에서든 에이전트에게 다음과 같이 요청하세요:"
@@ -5589,7 +5589,7 @@
     "ko": "왼쪽 클릭 시 동작 메뉴를 표시할지, URL을 열지, 터미널에 맡길지 선택하세요. Cmd/Ctrl 키를 누른 채 클릭하면 항상 바로 열립니다."
   },
   "auto.components.settings.NotificationsPane.2772d2f257": {
-    "ko": "알림을 발생시킨 워크트리가 이미 화면에 보이면 알림을 건너뜁니다."
+    "ko": "알림을 보낸 워크트리가 이미 화면에 보이면 알림을 건너뜁니다."
   },
   "auto.components.settings.SshPassphraseDialog.1f3dde805d": {
     "ko": "SSH 키 암호 문구"
@@ -5607,13 +5607,13 @@
     "ko": "워크스페이스를 만들면 Orca가 원격 기준 브랜치를 새로고침하고 <mainBranch>main</mainBranch>이나 <masterBranch>master</masterBranch> 같은 해당 로컬 브랜치를 안전하게 앞으로 이동(fast-forward)합니다. 그러면 <diffCommand>git diff main...HEAD</diffCommand> 같은 명령이 오래된 이력과 비교하지 않습니다. 해당 브랜치에 커밋되지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca는 업데이트를 건너뜁니다."
   },
   "auto.components.settings.RepositoryHooksSection.issueCommandDescription": {
-    "ko": "필요하면 기본 명령을 재정의할 수 있습니다. 연결된 이슈 또는 PR의 URL에는 <artifactUrl>{{artifact_url}}</artifactUrl> 변수를 사용하세요."
+    "ko": "필요하면 기본 명령을 바꿀 수 있습니다. 연결된 이슈나 PR의 URL에는 <artifactUrl>{{artifact_url}}</artifactUrl> 변수를 쓰세요."
   },
   "auto.components.settings.RepositoryHooksSection.issueCommandSharedDefault": {
     "ko": "비워 두면 <yaml>orca.yaml</yaml>에 지정된 저장소 기본값을 사용합니다."
   },
   "auto.components.settings.RepositoryHooksSection.issueCommandOptionalDefault": {
-    "ko": "비워 두면 <yaml>orca.yaml</yaml>에 지정된 저장소 기본값이 있는 경우 사용합니다."
+    "ko": "비워 두면 <yaml>orca.yaml</yaml>에 저장소 기본값이 있을 때 그 값을 씁니다."
   },
   "auto.components.settings.RepositoryHooksSection.commandSourceDescription": {
     "ko": "<yaml>orca.yaml</yaml>의 명령과 로컬 명령이 모두 있으면 실행할 명령을 선택하세요."

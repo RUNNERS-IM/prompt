@@ -34,7 +34,7 @@ export const CROSS_LOCALE_KEY_OVERRIDES = {
   },
   // ko/zh put the quoted query before the verb phrase; MT tends to move it after.
   'auto.components.settings.Settings.noSettingsFoundForQuery': {
-    ko: '"{{value0}}"에 대한 설정을 찾을 수 없습니다.',
+    ko: '"{{value0}}"와(과) 맞는 설정이 없습니다.',
     zh: '找不到“{{value0}}”的设置'
   },
   'auto.components.settings.TasksPane.6b23a34f6d': {
