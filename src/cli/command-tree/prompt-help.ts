@@ -76,7 +76,12 @@ const PROMPT_FLAG_HELP: Readonly<Record<string, Readonly<Record<string, string>>
   },
   path: { 'project add': '--path <path>          Folder to add' },
   project: {
-    '*': '--project <project>    Project name, short id, full id, or project id'
+    '*': '--project <project>    Project name, short id, full id, or project id',
+    'workspace create': '--project <project>    Project name, short id, full id, or project id'
+  },
+  host: {
+    'workspace create':
+      '--host <host>          Create where the project is set up on this host (default: this computer)'
   },
   workspace: {
     '*': '--workspace <workspace> Workspace selector: name, short id, identity:<id>, path:<path>, branch:<branch>, or active'
@@ -102,8 +107,11 @@ export function promptFlagHelp(spec: CommandSpec, shownFlag: string): string | n
     return null
   }
   if (spec.handlerPath?.[0] !== 'prompt') {
-    // Moved commands keep their own help; only a respelled flag needs new wording.
-    return spec.flagAliases?.[shownFlag] ? (byCommand['*'] ?? null) : null
+    // Moved commands keep their own help unless reworded here; a respelled flag needs new wording.
+    return (
+      byCommand[spec.path.join(' ')] ??
+      (spec.flagAliases?.[shownFlag] ? (byCommand['*'] ?? null) : null)
+    )
   }
   return byCommand[spec.path.join(' ')] ?? byCommand['*'] ?? null
 }

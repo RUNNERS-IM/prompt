@@ -5,6 +5,7 @@ import { RuntimeClientError } from '../runtime/types'
 import {
   resolvePromptDurableProjectSelector,
   resolvePromptProjectSelector,
+  resolvePromptSidebarProjectSelector,
   resolvePromptTerminalSelector,
   resolvePromptWorkspaceSelector
 } from './prompt-selectors'
@@ -75,6 +76,49 @@ function selectorResolvers(spec: CommandSpec): SelectorResolver[] {
 }
 
 /**
+ * `prompt workspace create --project` without --host means this computer: the project's sidebar
+ * folder, as legacy --repo. With --host (or the hidden --project-host-setup) it stays the durable
+ * project id, which picks the project's setup on that host.
+ */
+async function routeLocalWorkspaceCreateProject(
+  spec: CommandSpec,
+  flags: Map<string, string | boolean>,
+  client: () => RuntimeClient,
+  hostScoped: boolean
+): Promise<void> {
+  const project = flags.get('project')
+  if (
+    spec.handlerPath?.join(' ') !== 'worktree create' ||
+    typeof project !== 'string' ||
+    !project ||
+    hostScoped ||
+    flags.has('host') ||
+    flags.has('project-host-setup') ||
+    flags.has('repo')
+  ) {
+    return
+  }
+  let repo: string
+  try {
+    repo = await resolvePromptSidebarProjectSelector(client(), project)
+  } catch (error) {
+    if (error instanceof RuntimeClientError && error.code === 'not_in_sidebar') {
+      const data = (error.data ?? {}) as { nextSteps?: string[] }
+      throw new RuntimeClientError(error.code, error.message, {
+        ...data,
+        nextSteps: [
+          'Pass --host <host> to create the workspace where the project is set up.',
+          ...(data.nextSteps ?? [])
+        ]
+      })
+    }
+    throw error
+  }
+  flags.delete('project')
+  flags.set('repo', repo)
+}
+
+/**
  * Turn name and short-id selectors into canonical ones before the handler runs, so every
  * `prompt` command accepts them the same way and refuses ambiguous ones before acting.
  */
@@ -84,6 +128,7 @@ export async function preResolvePromptSelectors(
   client: () => RuntimeClient,
   options: { hostScoped: boolean }
 ): Promise<void> {
+  await routeLocalWorkspaceCreateProject(spec, flags, client, options.hostScoped)
   for (const { flag, resolve, hostScoped } of selectorResolvers(spec)) {
     // A --host scope narrows repo matches on the host; resolving here would ignore it.
     if (options.hostScoped && hostScoped) {

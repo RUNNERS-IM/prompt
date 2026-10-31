@@ -87,11 +87,49 @@ function deriveMovedSpec(spec: CommandSpec, promptPath: string[]): CommandSpec {
   }
 }
 
+const LEGACY_WORKSPACE_TARGET_USAGE =
+  '[--repo <selector>|--project <id-or-name> [--host <host>]|--project-host-setup <id>]'
+
+// Legacy notes about the target flags; the prompt command explains --project and --host itself.
+const LEGACY_WORKSPACE_TARGET_NOTE =
+  /^(If --repo is omitted|Use --project to create on a ready project host setup|--host is only needed|--host takes )/
+
+/** `prompt workspace create` picks the project with --project, like every other prompt command. */
+function promptWorkspaceCreateSpec(spec: CommandSpec): CommandSpec {
+  const notes = spec.notes ?? []
+  const firstTargetNote = notes.findIndex((note) => LEGACY_WORKSPACE_TARGET_NOTE.test(note))
+  const kept = notes.filter((note) => !LEGACY_WORKSPACE_TARGET_NOTE.test(note))
+  const targetNotes = [
+    'Pass --project to pick the project: its name, short id, full id, or project id from `prompt project list`. Without --project, the project of the workspace you are in is used.',
+    "Without --host the workspace is created on this computer, in the project's folder in the sidebar.",
+    'With --host it is created where the project is set up on that host (`prompt project setup list` shows where). --host takes local, ssh:<target-id>, runtime:<environment-id>, or the bare host name `prompt env host list` prints.'
+  ]
+  const at = firstTargetNote === -1 ? kept.length : firstTargetNote
+  return {
+    ...spec,
+    usage: spec.usage
+      .replace(LEGACY_WORKSPACE_TARGET_USAGE, '[--project <project> [--host <host>]]')
+      .replace('--repo <selector>', '--project <project>'),
+    // Old scripts still pass these; they work but are not advertised.
+    hiddenFlags: ['repo', 'project-host-setup'],
+    notes: [...kept.slice(0, at), ...targetNotes, ...kept.slice(at)],
+    examples: spec.examples?.map((example) =>
+      example.replace('--repo id:<repoId>', '--project <project>')
+    )
+  }
+}
+
+// Moved commands whose prompt help differs from the legacy one beyond flag respelling.
+const PROMPT_MOVED_SPEC_OVERRIDES: Readonly<Record<string, (spec: CommandSpec) => CommandSpec>> = {
+  'workspace create': promptWorkspaceCreateSpec
+}
+
 function buildPromptCommandSpecs(): CommandSpec[] {
   const legacyByPath = new Map(COMMAND_SPECS.map((spec) => [spec.path.join(' '), spec]))
-  const moved = buildCommandMoves(COMMAND_SPECS).map((move) =>
-    deriveMovedSpec(legacyByPath.get(move.legacyPath.join(' '))!, move.promptPath)
-  )
+  const moved = buildCommandMoves(COMMAND_SPECS).map((move) => {
+    const spec = deriveMovedSpec(legacyByPath.get(move.legacyPath.join(' '))!, move.promptPath)
+    return PROMPT_MOVED_SPEC_OVERRIDES[move.promptPath.join(' ')]?.(spec) ?? spec
+  })
   const specs = [...PROMPT_NEW_COMMAND_SPECS, ...moved]
   // A kept legacy verb never shadows a real command (old `project list` vs `project setup list`).
   const primary = new Set(specs.map((spec) => spec.path.join(' ')))

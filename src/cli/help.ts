@@ -49,12 +49,13 @@ export function formatCommandHelp(spec: CommandSpec): string {
     '',
     spec.summary
   ]
-  const displayedFlags =
+  const displayedFlags = (
     spec.argumentMode === 'passthrough'
       ? []
       : supportsBrowserPageFlag(spec)
         ? [...spec.allowedFlags, 'page']
         : spec.allowedFlags
+  ).filter((flag) => !spec.hiddenFlags?.includes(flag))
 
   if (displayedFlags.length > 0) {
     lines.push('', 'Options:')

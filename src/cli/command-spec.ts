@@ -8,6 +8,8 @@ export type CommandSpec = {
   summary: string
   usage: string
   allowedFlags: string[]
+  // Accepted but left out of the Options list, so old scripts keep working without advertising them.
+  hiddenFlags?: string[]
   // Flag repeatability varies by command, even for the same flag name.
   repeatableFlags?: string[]
   positionalArgs?: string[]

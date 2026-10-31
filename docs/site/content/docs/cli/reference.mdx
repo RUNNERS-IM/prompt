@@ -111,12 +111,14 @@ prompt workspace list --project id:<repoId> --json
 prompt workspace ps --json
 prompt workspace current --json
 prompt workspace show --workspace active --json
-prompt workspace create --repo id:<repoId> --name fix-login --json
+prompt workspace create --project <project> --name fix-login --json
 prompt workspace create --name child-task --agent codex --prompt "Investigate the flaky login test" --json
 prompt workspace set --workspace active --comment "reproduced failure; testing token refresh fix" --json
 prompt workspace set --workspace active --workspace-status in-review --unread --json
 prompt workspace remove --workspace id:<worktreeId> --force --json
 ```
+
+`--project` takes the project name, short id, full id, or project id from `prompt project list`. Without `--host` the workspace is created on this computer, in the project's folder in the sidebar; with `--host` it is created where the project is set up on that host (`prompt project setup list` shows where). Without `--project`, the project of the workspace you are in is used.
 
 When `workspace create` runs from inside an Orca-managed worktree, Orca records the new worktree as a child when it can infer the relationship. Pass `--parent-worktree active` to be explicit, or `--no-parent` when the new work is independent.
 
@@ -137,8 +139,8 @@ prompt workspace create --name hidden-setup --setup inherit --json
 Link issues and reviews using the existing workspace metadata:
 
 ```bash
-prompt workspace create --repo id:<repoId> --name review-task --pr 123 --json
-prompt workspace create --repo id:<repoId> --name gitlab-task --gitlab-issue 42 --gitlab-mr 77 --json
+prompt workspace create --project <project> --name review-task --pr 123 --json
+prompt workspace create --project <project> --name gitlab-task --gitlab-issue 42 --gitlab-mr 77 --json
 prompt workspace set --workspace active --gitlab-issue '#42' --gitlab-mr '!77' --json
 prompt workspace set --workspace active --gitlab-issue https://gitlab.example.com/group/project/-/work_items/42 --json
 prompt workspace set --workspace active --pr null --gitlab-mr null --json
