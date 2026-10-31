@@ -5930,13 +5930,8 @@
           "confirm": "休眠"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "移除",
           "d36883e046": "取消",
-          "b79b39d865": "移除專案",
-          "removeDescriptionSsh": "此操作僅將 {{name}} 從 Orca 中移除。檔案仍保留在 {{host}} 上 — 重新新增該 SSH 主機即可恢復。",
-          "removeDescriptionLocal": "此操作僅將 {{name}} 從 Orca 中移除。檔案仍保留在您的磁碟上。",
-          "removeDescriptionVmRecipe": "這會從 Orca 中移除 {{name}}。其 VM 配方決定是否永久刪除環境及其檔案。",
-          "openTerminalWarning_other": "此專案中開啟的 {{count}} 個終端機將會關閉。"
+          "b79b39d865": "移除專案"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "顯示目前的工作區"
@@ -6284,7 +6279,6 @@
           "3350101edb": "複製路徑",
           "copyWorktreeName": "複製工作樹名稱",
           "f4475537d8": "刪除",
-          "f5ac91531d": "從 Orca 中移除專案",
           "b42391d8bf": "正在刪除...",
           "0918b35e4f": "關閉此工作區中所有使用中的面板以釋放記憶體和 CPU。",
           "7d190f7d2b": "關閉選定工作區中所有使用中的面板以釋放記憶體和 CPU。",
@@ -6314,7 +6308,6 @@
           "f9dc6cc5d3": "重新命名專案群組",
           "370c6a55dd": "清除篩選條件",
           "b7acbf038b": "未找到工作區",
-          "c83968f87f": "移除專案",
           "64e55f7f01": "從群組中移除",
           "4a08fb55f2": "移至群組",
           "cbfd565f83": "從專案建立新群組",
