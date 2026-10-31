@@ -15,7 +15,14 @@ export function parseClaudeAgentViewBindings(text: string | null): HooksConfig |
   return errors.length === 0 && isPlainObject(config) ? config : null
 }
 
-export function claudeAgentViewChord(text: string): string | undefined {
+/**
+ * The default chord bound to `command:<command>`. Pass the legacy name for a Claude session whose
+ * plugin still registers `/orca-agent-view` (started before the rename).
+ */
+export function claudeAgentViewChord(
+  text: string,
+  command: string = CLAUDE_AGENT_VIEW_COMMAND
+): string | undefined {
   const config = parseClaudeAgentViewBindings(text)
   if (!Array.isArray(config?.bindings)) {
     return undefined
@@ -35,7 +42,7 @@ export function claudeAgentViewChord(text: string): string | undefined {
         }
       }
     }
-    if (action === `command:${CLAUDE_AGENT_VIEW_COMMAND}`) {
+    if (action === `command:${command}`) {
       return chord
     }
   }
@@ -89,6 +96,12 @@ export function serializeClaudeAgentViewBindings(
           text = applyEdits(
             text,
             modify(text, ['bindings', index, 'bindings', key], undefined, options)
+          )
+        } else if (JSON.stringify(before.bindings[key]) !== JSON.stringify(after.bindings[key])) {
+          // A moved binding keeps its chord and only changes the command it runs.
+          text = applyEdits(
+            text,
+            modify(text, ['bindings', index, 'bindings', key], after.bindings[key], options)
           )
         }
       }

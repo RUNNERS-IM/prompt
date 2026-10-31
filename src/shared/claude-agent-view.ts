@@ -2,9 +2,12 @@ import { z } from 'zod'
 
 export const CLAUDE_AGENT_VIEW_PATH = '/claude/agent-view'
 export const CLAUDE_AGENT_VIEW_RELAY_METHOD = 'agent_hook.claudeAgentView'
-export const CLAUDE_AGENT_VIEW_COMMAND = 'orca-agent-view'
+export const CLAUDE_AGENT_VIEW_COMMAND = 'prompt-agent-view'
 export const CLAUDE_AGENT_VIEW_PLUGIN = 'prompt-agent-view'
-/** Plugin folder name used by Orca, and by Prompt before it was renamed. */
+/**
+ * Slash command and plugin folder name used by Orca, and by Prompt before the rename. Still
+ * recognized so Claude sessions started before the update keep working and old installs move over.
+ */
 export const CLAUDE_AGENT_VIEW_LEGACY_NAME = 'orca-agent-view'
 export const CLAUDE_AGENT_VIEW_SUBSCRIBE = 'terminal.subscribeClaudeAgentViews'
 

@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { parsePaneKey } from '../../shared/stable-pane-id'
 import { claudeAgentViewChord } from './agent-view-keybindings'
 import {
+  CLAUDE_AGENT_VIEW_COMMAND,
+  CLAUDE_AGENT_VIEW_LEGACY_NAME,
   CLAUDE_AGENT_VIEW_SHORTCUTS,
   ClaudeAgentViewObservation,
   type ClaudeAgentViewSnapshot,
@@ -21,6 +23,8 @@ const Message = z.discriminatedUnion('action', [
   Identity.extend({
     action: z.literal('register'),
     keybindings: z.string().max(128 * 1024),
+    // Sent by the renamed plugin; plugins from before the rename omit it and run /orca-agent-view.
+    command: z.enum([CLAUDE_AGENT_VIEW_COMMAND, CLAUDE_AGENT_VIEW_LEGACY_NAME]).optional(),
     view: ClaudeAgentViewObservation.optional()
   }),
   Identity.extend({ action: z.literal('observe'), view: ClaudeAgentViewObservation }),
@@ -111,7 +115,10 @@ export class ClaudeAgentViewBridge {
     this.prune()
     const current = this.sessions.get(message.paneKey)
     if (message.action === 'register') {
-      const chord = claudeAgentViewChord(message.keybindings)
+      const chord = claudeAgentViewChord(
+        message.keybindings,
+        message.command ?? CLAUDE_AGENT_VIEW_LEGACY_NAME
+      )
       if (!chord) {
         if (current?.instanceId === message.instanceId && current.sessionId === message.sessionId) {
           current.pending?.finish({ status: 'unavailable' })

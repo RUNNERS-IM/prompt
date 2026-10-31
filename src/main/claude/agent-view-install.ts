@@ -2,6 +2,8 @@ import { serializeClaudeAgentViewConfig } from './agent-view-config-lock'
 import {
   ownership,
   markerName,
+  legacyOwnership,
+  legacyMarkerName,
   planClaudeAgentViewInstall,
   planClaudeAgentViewDisable,
   withoutOwnedBinding
@@ -19,7 +21,6 @@ import {
 } from '../agent-hooks/installer-utils'
 import { parseHooksJsonText, readHooksJsonWithRaw } from '../agent-hooks/hooks-json-read'
 import {
-  claudeAgentViewChord,
   parseClaudeAgentViewBindings,
   serializeClaudeAgentViewBindings
 } from './agent-view-keybindings'
@@ -33,6 +34,15 @@ import { CLAUDE_AGENT_VIEW_LEGACY_NAME } from '../../shared/claude-agent-view'
 export { withClaudeAgentViewShortcut } from './agent-view-binding-plan'
 export { ensureClaudeAgentViewPlugin } from './agent-view-plugin'
 
+// The skills/orca-agent-view layout predates both markers and always carries the legacy owner.
+function legacySkillsRoot(configDir: string): string {
+  return join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
+}
+
+function readLegacySkillsMarker(root: string): HooksConfig | null {
+  return readHooksJson(join(root, '.claude-plugin', 'orca-managed.json'))
+}
+
 // Called only after the user opts in; a surviving marker remembers deletions and edited chords.
 export function installClaudeAgentView(configPath: string): boolean {
   const configDir = dirname(configPath)
@@ -43,33 +53,31 @@ export function installClaudeAgentView(configPath: string): boolean {
     return false
   }
   const marker = join(configDir, markerName)
-  const legacyRoot = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
-  const legacy = readHooksJson(join(legacyRoot, '.claude-plugin', 'orca-managed.json'))
-  if (legacy?.owner === ownership.owner) {
-    writeHooksJson(marker, { ...legacy, setup: 'attempted' })
-    rmSync(legacyRoot, { recursive: true, force: true })
-    return claudeAgentViewChord(raw ?? '') !== undefined
+  const legacyMarker = join(configDir, legacyMarkerName)
+  const skillsRoot = legacySkillsRoot(configDir)
+  const skills = readLegacySkillsMarker(skillsRoot)
+  if (skills?.owner === legacyOwnership.owner) {
+    // Fold the old layout into the legacy marker; the migration below then moves it over.
+    writeHooksJson(legacyMarker, { ...skills, setup: 'attempted' })
+    rmSync(skillsRoot, { recursive: true, force: true })
   }
   const previous = existsSync(marker) ? readHooksJson(marker) : undefined
-  const plan = planClaudeAgentViewInstall(raw, config, previous)
+  const legacy =
+    previous === undefined && existsSync(legacyMarker) ? readHooksJson(legacyMarker) : undefined
+  const plan = planClaudeAgentViewInstall(raw, config, previous, legacy)
   if (plan.marker) {
     writeHooksJson(marker, plan.marker)
     writeHooksJson(keybindings, plan.config, {
       serialized: serializeClaudeAgentViewBindings(raw, plan.config)
     })
   }
+  if (plan.retireLegacyMarker) {
+    rmSync(legacyMarker, { force: true })
+  }
   return plan.supported
 }
 
-export function removeClaudeAgentView(configPath: string): void {
-  const configDir = dirname(configPath)
-  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
-  const legacy = readHooksJson(join(root, '.claude-plugin', 'orca-managed.json'))
-  const markerPath = join(configDir, markerName)
-  const marker = legacy?.owner === ownership.owner ? legacy : readHooksJson(markerPath)
-  if (marker?.owner !== ownership.owner) {
-    return
-  }
+function removeOwnedBinding(configDir: string, markerPath: string, marker: HooksConfig): void {
   const keybindings = join(configDir, 'keybindings.json')
   const { raw } = readHooksJsonWithRaw(keybindings)
   const config = raw === null ? readHooksJson(keybindings) : parseClaudeAgentViewBindings(raw)
@@ -80,39 +88,69 @@ export function removeClaudeAgentView(configPath: string): void {
       serialized: serializeClaudeAgentViewBindings(raw, plan.config)
     })
   }
-  if (legacy?.owner === ownership.owner) {
-    rmSync(root, { recursive: true, force: true })
+}
+
+/**
+ * Removes Prompt's own shortcut (recorded in prompt-agent-view.json) and retires the old skills
+ * layout. A binding recorded only in the legacy marker is left alone: once Prompt has run with
+ * the feature on, a live one there is upstream Orca's or one the user changed.
+ */
+export function removeClaudeAgentView(configPath: string): void {
+  const configDir = dirname(configPath)
+  const skillsRoot = legacySkillsRoot(configDir)
+  const skills = readLegacySkillsMarker(skillsRoot)
+  if (skills?.owner === legacyOwnership.owner) {
+    removeOwnedBinding(configDir, join(configDir, legacyMarkerName), skills)
+    rmSync(skillsRoot, { recursive: true, force: true })
+  }
+  const markerPath = join(configDir, markerName)
+  const marker = readHooksJson(markerPath)
+  if (marker?.owner === ownership.owner) {
+    removeOwnedBinding(configDir, markerPath, marker)
   }
 }
 
 function retirementMarker(
   previous: HooksConfig | null,
-  legacy: HooksConfig,
-  config: HooksConfig | null
+  retiring: HooksConfig,
+  config: HooksConfig | null,
+  owner: string
 ): HooksConfig {
-  const removed = config && withoutOwnedBinding(config, legacy)
+  const removed = config && withoutOwnedBinding(config, retiring)
   return {
-    ...(previous?.owner === ownership.owner ? previous : { ...legacy, setup: 'attempted' }),
+    ...(previous?.owner === owner ? previous : { ...retiring, setup: 'attempted' }),
     ...(config && JSON.stringify(config) !== JSON.stringify(removed) ? { setup: 'pending' } : {}),
     cleanupPending: !config
   }
 }
 
 export function refreshClaudeAgentView(configPath: string): Promise<void> {
-  return serializeClaudeAgentViewConfig(configPath, () => retireLegacyClaudeAgentView(configPath))
+  return serializeClaudeAgentViewConfig(configPath, async () => {
+    // Legacy first: unchanged cleanup of what Orca-era builds left (old skills layout, and a
+    // legacy marker whose binding removal could not finish).
+    await retireClaudeAgentViewMarker(configPath, legacyOwnership.owner, legacyMarkerName, true)
+    await retireClaudeAgentViewMarker(configPath, ownership.owner, markerName, false)
+  })
 }
 
-async function retireLegacyClaudeAgentView(configPath: string): Promise<void> {
+async function retireClaudeAgentViewMarker(
+  configPath: string,
+  owner: string,
+  name: string,
+  withSkills: boolean
+): Promise<void> {
   const configDir = dirname(configPath)
-  const root = join(configDir, 'skills', CLAUDE_AGENT_VIEW_LEGACY_NAME)
-  const legacy = parseHooksJsonText(
-    await readFile(join(root, '.claude-plugin', 'orca-managed.json'), 'utf8').catch(() => '{}')
-  )
-  const markerPath = join(configDir, markerName)
+  const root = legacySkillsRoot(configDir)
+  const skills = withSkills
+    ? parseHooksJsonText(
+        await readFile(join(root, '.claude-plugin', 'orca-managed.json'), 'utf8').catch(() => '{}')
+      )
+    : null
+  const markerPath = join(configDir, name)
   const previous = parseHooksJsonText(await readFile(markerPath, 'utf8').catch(() => '{}'))
   const marker =
-    legacy?.owner === ownership.owner ? legacy : previous?.cleanupPending === true ? previous : null
-  if (marker?.owner !== ownership.owner) {
+    skills?.owner === owner ? skills : previous?.cleanupPending === true ? previous : null
+  if (marker?.owner !== owner) {
     return
   }
   const keybindings = join(configDir, 'keybindings.json')
@@ -124,7 +162,7 @@ async function retireLegacyClaudeAgentView(configPath: string): Promise<void> {
     return undefined
   })
   const config = raw === undefined ? null : parseClaudeAgentViewBindings(raw)
-  await writeHooksJsonAsync(markerPath, retirementMarker(previous, marker, config))
+  await writeHooksJsonAsync(markerPath, retirementMarker(previous, marker, config, owner))
   if (config && raw !== undefined) {
     const next = withoutOwnedBinding(config, marker)
     if (JSON.stringify(config) !== JSON.stringify(next)) {
@@ -133,11 +171,13 @@ async function retireLegacyClaudeAgentView(configPath: string): Promise<void> {
       })
     }
   }
-  if (legacy?.owner === ownership.owner) {
+  if (skills?.owner === owner) {
     await rm(root, { recursive: true, force: true })
   }
 }
 
+// Remote hosts never got the renamed install; this only retires what Orca-era builds left there,
+// so it keeps looking for the legacy names.
 export async function removeClaudeAgentViewRemote(
   sftp: SFTPWrapper,
   configPath: string
@@ -148,11 +188,15 @@ export async function removeClaudeAgentViewRemote(
     sftp,
     posix.join(root, '.claude-plugin', 'orca-managed.json')
   )
-  const markerPath = posix.join(configDir, markerName)
+  const markerPath = posix.join(configDir, legacyMarkerName)
   const previous = await readHooksJsonRemote(sftp, markerPath)
   const marker =
-    legacy?.owner === ownership.owner ? legacy : previous?.cleanupPending === true ? previous : null
-  if (marker?.owner !== ownership.owner) {
+    legacy?.owner === legacyOwnership.owner
+      ? legacy
+      : previous?.cleanupPending === true
+        ? previous
+        : null
+  if (marker?.owner !== legacyOwnership.owner) {
     return
   }
   const keybindings = posix.join(configDir, 'keybindings.json')
@@ -161,7 +205,11 @@ export async function removeClaudeAgentViewRemote(
     return undefined
   })
   const config = raw === undefined ? null : parseClaudeAgentViewBindings(raw)
-  await writeHooksJsonRemote(sftp, markerPath, retirementMarker(previous, marker, config))
+  await writeHooksJsonRemote(
+    sftp,
+    markerPath,
+    retirementMarker(previous, marker, config, legacyOwnership.owner)
+  )
   if (config && raw !== undefined) {
     const next = withoutOwnedBinding(config, marker)
     if (JSON.stringify(config) !== JSON.stringify(next)) {
@@ -170,7 +218,7 @@ export async function removeClaudeAgentViewRemote(
       })
     }
   }
-  if (legacy?.owner === ownership.owner) {
+  if (legacy?.owner === legacyOwnership.owner) {
     await renamePlain(sftp, root, posix.join(configDir, `orca-agent-view-retired-${randomUUID()}`))
   }
 }

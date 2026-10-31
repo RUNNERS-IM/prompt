@@ -9,6 +9,9 @@ export const PROMPT_APP_NAME = 'Prompt'
 // Only whole words change, so env names (ORCA_WORKSPACE_NAME), files (orca.yaml) and the `orca` CLI stay as they are.
 const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   [/github\.com\/stablyai\/orca\b/g, 'github.com/RUNNERS-IM/prompt'],
+  // Claude keybinding action renamed with the Prompt plugin (subagent navigation setup hint, all
+  // languages). Commands of the `orca` CLI are left for the CLI rename.
+  [/\bcommand:orca-agent-view\b/g, 'command:prompt-agent-view'],
   // Pairing links: desktop and mobile both use the prompt:// scheme.
   [/\borca:\/\//g, 'prompt://'],
   [/\bOrca\b/g, PROMPT_APP_NAME],

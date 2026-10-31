@@ -47,10 +47,10 @@ it.each([{}, { claudeSubagentNavigationEnabled: true }])(
     expect(
       claudeAgentViewChord(await readFile(join(config, 'keybindings.json'), 'utf8'))
     ).toBeUndefined()
-    expect(JSON.parse(await readFile(join(config, 'orca-agent-view.json'), 'utf8')).setup).toBe(
+    expect(JSON.parse(await readFile(join(config, 'prompt-agent-view.json'), 'utf8')).setup).toBe(
       'pending'
     )
-    expect(JSON.parse(await readFile(join(profile, 'orca-agent-view.json'), 'utf8')).setup).toBe(
+    expect(JSON.parse(await readFile(join(profile, 'prompt-agent-view.json'), 'utf8')).setup).toBe(
       'attempted'
     )
     await reconcileClaudeAgentViewConfig(join(config, 'settings.json'), false)
@@ -90,7 +90,7 @@ it.each(['edited', 'reused', 'malformed'] as const)(
                 context: 'Chat',
                 bindings: {
                   [kind === 'edited' ? 'ctrl+x' : 'ctrl+alt+g']:
-                    kind === 'edited' ? 'command:orca-agent-view' : 'command:user'
+                    kind === 'edited' ? 'command:prompt-agent-view' : 'command:user'
                 }
               }
             ]
@@ -101,7 +101,7 @@ it.each(['edited', 'reused', 'malformed'] as const)(
     if (kind === 'malformed') {
       await writeFile(
         bindings,
-        '{ // repaired\n "bindings": [{"context":"Chat", "bindings":{"ctrl+alt+g":"command:orca-agent-view"}}]}'
+        '{ // repaired\n "bindings": [{"context":"Chat", "bindings":{"ctrl+alt+g":"command:prompt-agent-view"}}]}'
       )
       await reconcileClaudeAgentViewConfig(settings, false)
       expect(claudeAgentViewChord(await readFile(bindings, 'utf8'))).toBeUndefined()
@@ -198,9 +198,9 @@ it('cleans an owned shortcut in a cached login-shell config on a fresh disabled 
   })
   await service.reconcile({ claudeSubagentNavigationEnabled: false })
   expect(claudeAgentViewChord(await readFile(bindings, 'utf8'))).toBeUndefined()
-  expect(JSON.parse(await readFile(join(cachedConfig, 'orca-agent-view.json'), 'utf8')).setup).toBe(
-    'pending'
-  )
+  expect(
+    JSON.parse(await readFile(join(cachedConfig, 'prompt-agent-view.json'), 'utf8')).setup
+  ).toBe('pending')
   expect(loginEnv.mock.calls).toEqual([[{ cachedOnly: true }]])
   expect(spawner).toHaveBeenCalledOnce()
 })
