@@ -57,18 +57,14 @@ const singleLeaf = (leafId = LEAF) => ({
 describe('hydration keeps a single-pane tab’s row PTY id', () => {
   it('copies tab.ptyId onto the only leaf of a tab outside the reconnect plan', () => {
     const store = seededStore()
-    store
-      .getState()
-      .hydrateWorkspaceSession(
-        sessionWith(
-          {
-            [CLOSED_WT]: [
-              makeTab({ id: 'tab-closed', worktreeId: CLOSED_WT, ptyId: 'old-session' })
-            ]
-          },
-          { 'tab-closed': singleLeaf() }
-        )
+    store.getState().hydrateWorkspaceSession(
+      sessionWith(
+        {
+          [CLOSED_WT]: [makeTab({ id: 'tab-closed', worktreeId: CLOSED_WT, ptyId: 'old-session' })]
+        },
+        { 'tab-closed': singleLeaf() }
       )
+    )
 
     const state = store.getState()
     expect(state.pendingReconnectWorktreeIds).not.toContain(CLOSED_WT)
@@ -141,5 +137,28 @@ describe('hydration keeps a single-pane tab’s row PTY id', () => {
     expect(store.getState().terminalLayoutsByTabId['tab-b']?.ptyIdsByLeafId).toEqual({
       [LEAF_B]: 'shared'
     })
+  })
+})
+
+describe('a tab made for a previous-version terminal', () => {
+  it('records the session on its leaf and keeps it across the next launch', () => {
+    const store = seededStore()
+    const sessionId = `${CLOSED_WT}@@previous`
+    const tab = store.getState().createTab(CLOSED_WT, undefined, undefined, {
+      activate: false,
+      recordInteraction: false,
+      initialPtyId: sessionId
+    })
+    const saved = buildWorkspaceSessionPayload(store.getState())
+    expect(Object.values(saved.terminalLayoutsByTabId[tab.id]?.ptyIdsByLeafId ?? {})).toEqual([
+      sessionId
+    ])
+
+    const nextLaunch = seededStore()
+    nextLaunch.getState().hydrateWorkspaceSession({ ...saved, activeWorktreeIdsOnShutdown: [] })
+    expect(
+      Object.values(nextLaunch.getState().terminalLayoutsByTabId[tab.id]?.ptyIdsByLeafId ?? {})
+    ).toEqual([sessionId])
+    expect(nextLaunch.getState().tabsByWorktree[CLOSED_WT]?.map((row) => row.id)).toEqual([tab.id])
   })
 })

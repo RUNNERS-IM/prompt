@@ -19,6 +19,7 @@ import type {
   PrepareCodexSessionResume
 } from '../ipc/pty/host-env/types'
 import { registerDaemonManagementHandlers } from '../ipc/pty/pty-management'
+import { registerPreviousVersionSessionTabsHandler } from '../ipc/pty/previous-version-session-tabs-ipc'
 import { registerSshHandlers } from '../ipc/ssh/ssh'
 import { browserManager } from '../browser/browser-manager'
 import { hasSystemMediaAccess, requestSystemMediaAccess } from '../browser/browser-media-access'
@@ -105,6 +106,7 @@ export function attachMainWindowServices(
   )
   // Register after PTY handlers so macOS reactivation reinstalls management IPC (docs/daemon-staleness-ux.md §Phase 1).
   registerDaemonManagementHandlers()
+  registerPreviousVersionSessionTabsHandler(options?.awaitLocalPtyProviderStartup)
   // Background git worktree list can trigger protected-folder prompts on macOS; use remembered IDs.
   scheduleHistoryGc(async () => {
     return getKnownWorktreeIdsForHistoryGc(store)

@@ -21,6 +21,7 @@ import {
   timeRendererStartupSyncStep
 } from '../startup/startup-diagnostics'
 import { recoverFromDegradedStartup } from '../startup/startup-degraded-recovery'
+import { createPreviousVersionSessionTabs } from '../startup/previous-version-session-tabs'
 import { restoreSshConnectionsForStartup } from '../startup/startup-ssh-connection-restore'
 import { collectActiveWorkspaceSshTargetIds } from '../startup/active-workspace-ssh-targets'
 import { publishTerminalViewAttributesAtAppStart } from '../components/terminal-pane/terminal-appearance'
@@ -282,6 +283,10 @@ export function useAppStartupHydration(onOnboardingLoaded: (state: OnboardingSta
           void startupWorktreeRefresh.then((results) => {
             if (!cancelled) {
               finishStartupWorktreeHydration(results)
+              // Needs the worktree listing so sessions of deleted workspaces are skipped.
+              void createPreviousVersionSessionTabs().catch((error: unknown) =>
+                console.warn('[startup] previous-version terminal tabs failed:', error)
+              )
             }
           })
           // Require opt-in dev seeding so empty profiles can exercise onboarding without selection hijacking.

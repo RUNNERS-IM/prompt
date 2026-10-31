@@ -1,5 +1,9 @@
 import type { DaemonPtyCwdClass } from '../../shared/daemon-adoption-telemetry'
 import type { DaemonAsyncIoStatus } from '../../shared/daemon-async-io-health'
+import type {
+  PreviousVersionSessionTabsListResult,
+  PreviousVersionSessionTabsReport
+} from '../../shared/previous-version-session-tabs'
 
 // Mirrors DaemonSessionInfo; preload cannot import main-only daemon protocol types.
 export type PtyManagementSession = {
@@ -73,4 +77,9 @@ export type PtyManagementApi = {
   restartSeveredDaemon: (
     expected: Pick<PtyManagementSeveredDaemon, 'pid' | 'linuxStartTicks' | 'bootId'>
   ) => Promise<PtyManagementSeveredDaemonRestartResult>
+  /** One-time tabs for recently used terminals left running by the previous version. */
+  previousVersionSessionTabs: {
+    list: () => Promise<PreviousVersionSessionTabsListResult>
+    report: (report: PreviousVersionSessionTabsReport) => Promise<void>
+  }
 }

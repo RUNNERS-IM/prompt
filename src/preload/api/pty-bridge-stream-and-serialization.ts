@@ -1,5 +1,6 @@
 import type { PtySessionLifecycle } from '../../shared/pty-listed-session'
 import { ipcRenderer } from 'electron'
+import { PREVIOUS_VERSION_SESSION_TABS_CHANNEL } from '../../shared/previous-version-session-tabs'
 import type { PtyModelRestoreNeededEvent } from '../../shared/pty-model-restore-marker'
 import type { TerminalSideEffectBatch } from '../../shared/terminal-side-effect-facts'
 import type { PreloadApi } from '../api-types'
@@ -179,6 +180,15 @@ export const ptyStreamAndSerializationApi = {
     resetFolderAccess: () => ipcRenderer.invoke('pty:management:resetFolderAccess'),
     severedDaemon: () => ipcRenderer.invoke('pty:management:severedDaemon'),
     restartSeveredDaemon: (expected) =>
-      ipcRenderer.invoke('pty:management:restartSeveredDaemon', expected)
+      ipcRenderer.invoke('pty:management:restartSeveredDaemon', expected),
+    previousVersionSessionTabs: {
+      list: () => ipcRenderer.invoke(PREVIOUS_VERSION_SESSION_TABS_CHANNEL, { phase: 'list' }),
+      report: async (report) => {
+        await ipcRenderer.invoke(PREVIOUS_VERSION_SESSION_TABS_CHANNEL, {
+          phase: 'report',
+          ...report
+        })
+      }
+    }
   }
 } satisfies Partial<PreloadApi['pty']>
