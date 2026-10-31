@@ -7,12 +7,12 @@ import type { ProcessResult } from '@orca/process-host/process-spec'
 
 const PROCESS_TABLE_TIMEOUT_MS = 1_000
 const PROCESS_TABLE_MAX_BYTES = 1024 * 1024
-const SELECTED_COLUMNS = 'pid=,pgid=,tty=,stat='
+const SELECTED_COLUMNS = 'pid=,ppid=,pgid=,tty=,stat='
 // Explicit widths prevent BusyBox from truncating device numbers into another terminal's identity.
 const ALL_PROCESS_ARGS = [
   '-e',
   '-o',
-  'pid=PROCESS_ID,pgid=PROCESS_GID,tty=TERMINAL_DEVICE_NUMBER,stat=PROCESS_STATE'
+  'pid=PROCESS_ID,ppid=PARENT_PROCESS_ID,pgid=PROCESS_GID,tty=TERMINAL_DEVICE_NUMBER,stat=PROCESS_STATE'
 ]
 let psDialect: 'selected' | 'all' | undefined
 let dialectProbe: Promise<void> | undefined
@@ -26,6 +26,7 @@ export function resetPosixPtyProcessTableDialectForTests(): void {
 
 type ProcessRow = {
   pid: number
+  ppid: number
   pgid: number
   tty: string
   state?: string
@@ -167,14 +168,14 @@ export async function readPosixPtyProcessTable(
 export function parseProcessRows(output: string): ProcessRow[] {
   const rows: ProcessRow[] = []
   for (const line of output.split(/\r?\n/)) {
-    const match = /^\s*(\d+)\s+(\d+)\s+(\S+)(?:\s+(\S+))?/.exec(line)
+    const match = /^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\S+)(?:\s+(\S+))?/.exec(line)
     if (!match) {
       continue
     }
     const pid = Number(match[1])
-    const pgid = Number(match[2])
+    const pgid = Number(match[3])
     if (pid > 0 && pgid > 1) {
-      rows.push({ pid, pgid, tty: match[3], state: match[4] })
+      rows.push({ pid, ppid: Number(match[2]), pgid, tty: match[4], state: match[5] })
     }
   }
   return rows

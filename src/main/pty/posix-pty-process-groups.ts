@@ -51,7 +51,12 @@ export function getPosixPtyProcessGroups(
   if (rows.some((row) => row.pid === currentPid && row.tty === root.tty)) {
     return null
   }
-  let members = rows.filter((row) => row.tty === root.tty)
+  // A reused TTY name also lists the next terminal's processes; keep only the root's descendants.
+  // Accepted gap: jobs reparented to init after the shell died no longer match.
+  const parents = new Map(rows.map((row) => [row.pid, row.ppid]))
+  let members = rows.filter(
+    (row) => row.tty === root.tty && descendsFrom(row.pid, rootPid, parents)
+  )
   if (readSessionId) {
     // Container devpts numbers overlap: prove the root leads this session; setsid descendants no longer own its TTY (#16714).
     if (readSessionId(rootPid) !== rootPid) {
@@ -72,6 +77,20 @@ export function getPosixPtyProcessGroups(
     }
     return left - right
   })
+}
+
+function descendsFrom(pid: number, rootPid: number, parents: Map<number, number>): boolean {
+  // The visited set stops a cycle that pid reuse can leave in one snapshot.
+  const visited = new Set<number>()
+  let current: number | undefined = pid
+  while (current !== undefined && current > 1 && !visited.has(current)) {
+    if (current === rootPid) {
+      return true
+    }
+    visited.add(current)
+    current = parents.get(current)
+  }
+  return false
 }
 
 function isProcessAlreadyGone(error: unknown): boolean {
