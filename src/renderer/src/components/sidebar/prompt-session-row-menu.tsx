@@ -127,7 +127,11 @@ export function PromptSessionRowMenu({
     event.preventDefault()
     event.stopPropagation()
     window.dispatchEvent(new Event(CLOSE_ALL_CONTEXT_MENUS_EVENT))
-    setPoint({ x: event.clientX, y: event.clientY })
+    // Why: the virtual list moves rows with `transform`, and a transformed ancestor becomes the
+    // box `position: fixed` measures from, so viewport coordinates would land the menu one row
+    // offset lower. Measure from this wrapper (it is `relative`) like the workspace menu does.
+    const bounds = event.currentTarget.getBoundingClientRect()
+    setPoint({ x: event.clientX - bounds.left, y: event.clientY - bounds.top })
     setOpen(true)
   }, [])
 
@@ -145,7 +149,7 @@ export function PromptSessionRowMenu({
           <button
             aria-hidden
             tabIndex={-1}
-            className="pointer-events-none fixed size-px opacity-0"
+            className="pointer-events-none absolute size-px opacity-0"
             style={{ left: point.x, top: point.y }}
           />
         </DropdownMenuTrigger>

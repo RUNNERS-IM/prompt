@@ -86,6 +86,7 @@ vi.mock('./prompt-sidebar-session-actions', () => ({
     list.find((w) => w.isMainWorktree) ?? list[0]
 }))
 
+import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import { PromptSessionCloseButton, PromptSessionRowMenu } from './prompt-session-row-menu'
 import { PromptNewSessionMenuButton, PromptRepoHeaderNewButton } from './prompt-sidebar-new-menu'
 import type { Repo } from '../../../../shared/repo-types'
@@ -210,6 +211,53 @@ describe('PromptSessionRowMenu', () => {
     })
     expect(event.defaultPrevented).toBe(true)
     expect(outer).not.toHaveBeenCalled()
+  })
+
+  it('places the menu at the pointer even inside a transformed (virtual list) row', () => {
+    const container = render(
+      <div style={{ transform: 'translateY(400px)' }}>
+        <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
+          <div data-row="">row</div>
+        </PromptSessionRowMenu>
+      </div>
+    )
+    const wrapper = container.querySelector<HTMLElement>('[data-prompt-session-menu="term-1"]')!
+    // The row sits 400px down the window; the pointer lands 12px right and 9px down inside it.
+    wrapper.getBoundingClientRect = () => new DOMRect(20, 400, 240, 36)
+    act(() => {
+      container
+        .querySelector('[data-row]')!
+        .dispatchEvent(
+          new MouseEvent('contextmenu', {
+            bubbles: true,
+            cancelable: true,
+            clientX: 32,
+            clientY: 409
+          })
+        )
+    })
+    const trigger = wrapper.querySelector<HTMLElement>('button[aria-hidden]')!
+    expect(trigger.className).toContain('absolute')
+    expect(trigger.className).not.toContain('fixed')
+    expect(trigger.style.left).toBe('12px')
+    expect(trigger.style.top).toBe('9px')
+  })
+
+  it('asks open hover cards to close when the menu opens', () => {
+    const closeAll = vi.fn()
+    window.addEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, closeAll)
+    const container = render(
+      <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
+        <div data-row="">row</div>
+      </PromptSessionRowMenu>
+    )
+    act(() => {
+      container
+        .querySelector('[data-row]')!
+        .dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true }))
+    })
+    window.removeEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, closeAll)
+    expect(closeAll).toHaveBeenCalledTimes(1)
   })
 })
 
