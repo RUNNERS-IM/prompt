@@ -13,6 +13,7 @@ import {
 import { readHistoryMetaAsync } from './terminal-history'
 import { resolveFishHistoryDir, sweepOrphanedFishHistoryFiles } from './fish-history-session'
 import { hashWorktreeId } from './terminal-history-id'
+import { worktreeIdsNamedByMovedTerminals } from '../shared/moved-terminal-owner'
 import { forEachWithConcurrency } from '../shared/map-with-concurrency'
 import { yieldToEventLoop } from '../shared/event-loop-yield'
 
@@ -185,7 +186,13 @@ export function runHistoryGc(liveWorktreeIds: Set<string>): Promise<void> {
   }
   const controller = new AbortController()
   activeHistoryGcAbort = controller
-  activeHistoryGc = executeHistoryGc(liveWorktreeIds, controller.signal).finally(() => {
+  // Moved shells keep writing the history of the workspace their id names, even after it is gone.
+  // An empty live set means loading failed; leave it empty so the pass still skips.
+  const kept =
+    liveWorktreeIds.size === 0
+      ? liveWorktreeIds
+      : new Set([...liveWorktreeIds, ...worktreeIdsNamedByMovedTerminals()])
+  activeHistoryGc = executeHistoryGc(kept, controller.signal).finally(() => {
     activeHistoryGc = null
     activeHistoryGcAbort = null
   })

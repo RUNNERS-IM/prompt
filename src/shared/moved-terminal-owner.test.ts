@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import {
   movedTerminalOwnerOf,
-  movedTerminalOwnerReaderFor,
   movedTerminalOwnersOf,
-  setMovedTerminalOwnerReader,
+  setMovedTerminalOwnerSession,
+  worktreeIdsNamedByMovedTerminals,
   type MovedTerminalOwnerSession
 } from './moved-terminal-owner'
 import { isPtySessionIdOwnedByWorktree, ptyOwnerWorktreeId } from './pty-session-id-format'
@@ -29,7 +29,7 @@ function movedSession(overrides: Partial<{ ptyId: string | null; leafPty: string
   } satisfies MovedTerminalOwnerSession
 }
 
-afterEach(() => setMovedTerminalOwnerReader(null))
+afterEach(() => setMovedTerminalOwnerSession(null))
 
 describe('movedTerminalOwnersOf', () => {
   it('names the workspace whose tab took the terminal', () => {
@@ -54,14 +54,15 @@ describe('movedTerminalOwnersOf', () => {
   })
 })
 
-describe('ownership through the installed reader', () => {
-  it('answers by prefix with no reader, and by the move with one', () => {
+describe('ownership through the installed session', () => {
+  it('answers by prefix with no session, and by the move with one', () => {
     expect(ptyOwnerWorktreeId(PTY)).toBe(SOURCE)
     expect(isPtySessionIdOwnedByWorktree(PTY, SOURCE)).toBe(true)
 
     const session = movedSession()
-    setMovedTerminalOwnerReader(movedTerminalOwnerReaderFor(() => session))
+    setMovedTerminalOwnerSession(() => session)
     expect(movedTerminalOwnerOf(PTY)).toBe(TARGET)
+    expect([...worktreeIdsNamedByMovedTerminals()]).toEqual([SOURCE])
     expect(ptyOwnerWorktreeId(PTY)).toBe(TARGET)
     expect(isPtySessionIdOwnedByWorktree(PTY, TARGET)).toBe(true)
     expect(isPtySessionIdOwnedByWorktree(PTY, SOURCE)).toBe(false)
@@ -69,8 +70,8 @@ describe('ownership through the installed reader', () => {
     expect(ptyOwnerWorktreeId(`${SOURCE}@@00000000`)).toBe(SOURCE)
   })
 
-  it('falls back to the prefix when the reader throws', () => {
-    setMovedTerminalOwnerReader(() => {
+  it('falls back to the prefix when the session cannot be read', () => {
+    setMovedTerminalOwnerSession(() => {
       throw new Error('session unreadable')
     })
     expect(ptyOwnerWorktreeId(PTY)).toBe(SOURCE)

@@ -4,8 +4,8 @@
  * is the terminal's current owner. Everything that decides "whose terminal is this" (teardown,
  * restart inventory, restore placement, reattach) asks here before reading the id's prefix.
  *
- * Each process installs one reader over its own copy of the workspace session: main over the saved
- * session, the window over its store. Without a reader every terminal belongs to its id's prefix.
+ * Each process installs its own copy of the workspace session: main the saved session, the window its
+ * store. With none installed every terminal belongs to its id's prefix.
  */
 
 type OwnerTab = { id: string; ptyId: string | null; adoptedPtyIds?: readonly string[] }
@@ -72,31 +72,43 @@ export function movedTerminalOwnersOf(
   return result
 }
 
-let readOwner: ((ptyId: string) => string | null | undefined) | null = null
+let getInstalledSession: (() => MovedTerminalOwnerSession | null | undefined) | null = null
 
-/** Install this process's reader (main: saved session; window: store). Null removes it. */
-export function setMovedTerminalOwnerReader(
-  reader: ((ptyId: string) => string | null | undefined) | null
+/** Install this process's session (main: the saved local session; window: its store). Null removes it. */
+export function setMovedTerminalOwnerSession(
+  getSession: (() => MovedTerminalOwnerSession | null | undefined) | null
 ): void {
-  readOwner = reader
+  getInstalledSession = getSession
+}
+
+function installedOwners(): ReadonlyMap<string, string> {
+  if (!getInstalledSession) {
+    return EMPTY_OWNERS
+  }
+  try {
+    return movedTerminalOwnersOf(getInstalledSession())
+  } catch {
+    // An unreadable session must not stop teardown or restore; the prefix still answers.
+    return EMPTY_OWNERS
+  }
 }
 
 /** The workspace a moved terminal now belongs to, or null when it was never moved. */
 export function movedTerminalOwnerOf(ptyId: string): string | null {
-  if (!readOwner || !ptyId) {
-    return null
-  }
-  try {
-    return readOwner(ptyId) || null
-  } catch {
-    // An unreadable session must not stop teardown or restore; the prefix still answers.
-    return null
-  }
+  return ptyId ? (installedOwners().get(ptyId) ?? null) : null
 }
 
-/** Reader over a session getter, for installing with setMovedTerminalOwnerReader. */
-export function movedTerminalOwnerReaderFor(
-  getSession: () => MovedTerminalOwnerSession | null | undefined
-): (ptyId: string) => string | null {
-  return (ptyId) => movedTerminalOwnersOf(getSession()).get(ptyId) ?? null
+/**
+ * Workspaces named by the ids of terminals that moved away. A live moved shell still writes the
+ * command history file of the workspace its id names, so that workspace's history must outlive it.
+ */
+export function worktreeIdsNamedByMovedTerminals(): Set<string> {
+  const named = new Set<string>()
+  for (const ptyId of installedOwners().keys()) {
+    const separator = ptyId.lastIndexOf('@@')
+    if (separator > 0) {
+      named.add(ptyId.slice(0, separator))
+    }
+  }
+  return named
 }

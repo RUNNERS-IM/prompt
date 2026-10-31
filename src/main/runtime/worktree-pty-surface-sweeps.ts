@@ -3,6 +3,7 @@
 import type { IPtyProvider } from '../providers/pty-provider-contract'
 import { listRegisteredPtys } from '../memory/pty-registry'
 import { worktreePtyOwnership } from '../providers/worktree-pty-ownership'
+import { movedTerminalOwnerOf } from '../../shared/moved-terminal-owner'
 import { mapWithConcurrency } from '../../shared/map-with-concurrency'
 import { teardownRpcDeadline } from './worktree-teardown-deadline'
 
@@ -65,7 +66,10 @@ export async function sweepRegistryForWorktree(
   onPtyStopped?: (ptyId: string) => void
 ): Promise<number> {
   const rpcDeadline = teardownRpcDeadline(deadline)
-  const entries = listRegisteredPtys().filter((r) => r.worktreeId === worktreeId)
+  // Registry rows keep the workspace they were spawned for; a moved terminal answers to its new one.
+  const entries = listRegisteredPtys().filter(
+    (r) => (movedTerminalOwnerOf(r.ptyId) ?? r.worktreeId) === worktreeId
+  )
   const stopped = await mapWithConcurrency(
     entries,
     WORKTREE_TEARDOWN_CONCURRENCY,

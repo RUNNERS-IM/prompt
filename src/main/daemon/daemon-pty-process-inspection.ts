@@ -1,6 +1,6 @@
 import { isShellProcess } from '../../shared/agent-detection'
 import { DaemonPtyBufferSnapshots } from './daemon-pty-buffer-snapshots'
-import { parsePtySessionId } from '../../shared/pty-session-id-format'
+import { ptyOwnerWorktreeId } from '../../shared/pty-session-id-format'
 import {
   COMPLETION_PROCESS_INSPECTION_PROTOCOL_VERSION,
   GET_FOREGROUND_PROCESS_PROTOCOL_VERSION,
@@ -119,7 +119,8 @@ export abstract class DaemonPtyProcessInspection extends DaemonPtyBufferSnapshot
         continue
       }
       // Unminted IDs cannot establish workspace membership and are treated as orphans.
-      const { worktreeId } = parsePtySessionId(session.sessionId)
+      // A moved terminal lives as long as the workspace that took it, not the one its id names.
+      const worktreeId = ptyOwnerWorktreeId(session.sessionId)
 
       if (worktreeId === null || !validWorktreeIds.has(worktreeId)) {
         // Sessions here may belong to upstream Orca; leave them running.
