@@ -16,11 +16,14 @@ import {
 
 const resolveHelperAppPathMock = vi.hoisted(() => vi.fn())
 const resolveHelperExecutablePathMock = vi.hoisted(() => vi.fn())
+const resolveHostAppPathMock = vi.hoisted(() => vi.fn())
 const permissionStatusTempDir = '/tmp/orca-computer-use-permissions-test'
 const helperAppPath = '/Applications/Prompt Computer Use.app'
-const helperInfoPlistPath = join(helperAppPath, 'Contents', 'Info.plist')
+const helperExecutablePath = `${helperAppPath}/Contents/MacOS/orca-computer-use-macos`
+const hostAppPath = '/Applications/Prompt.app'
+const hostInfoPlistPath = join(hostAppPath, 'Contents', 'Info.plist')
 
-const plistBuddyStdout = vi.hoisted(() => ({ value: 'com.example.orca.computer-use\n' }))
+const plistBuddyStdout = vi.hoisted(() => ({ value: 'com.example.prompt\n' }))
 let monotonicOffset = 0
 const gate = vi.hoisted((): { current: PermissionStatusGate | null } => ({ current: null }))
 
@@ -49,7 +52,8 @@ vi.mock('fs/promises', () => ({
 
 vi.mock('./macos-native-provider-paths', () => ({
   resolveMacOSComputerUseAppPath: resolveHelperAppPathMock,
-  resolveMacOSComputerUseExecutablePath: resolveHelperExecutablePathMock
+  resolveMacOSComputerUseExecutablePath: resolveHelperExecutablePathMock,
+  resolveMacOSHostAppPath: resolveHostAppPathMock
 }))
 
 describe('openComputerUsePermissions', () => {
@@ -71,9 +75,9 @@ describe('openComputerUsePermissions', () => {
     vi.mocked(stat).mockReset()
     resolveHelperAppPathMock.mockReset()
     resolveHelperExecutablePathMock.mockReset()
-    resolveHelperExecutablePathMock.mockReturnValue(
-      '/Applications/Prompt Computer Use.app/Contents/MacOS/orca-computer-use-macos'
-    )
+    resolveHelperExecutablePathMock.mockReturnValue(helperExecutablePath)
+    resolveHostAppPathMock.mockReset()
+    resolveHostAppPathMock.mockReturnValue(hostAppPath)
     vi.mocked(mkdtemp).mockResolvedValue(permissionStatusTempDir)
     vi.mocked(stat).mockResolvedValue({} as Awaited<ReturnType<typeof stat>>)
     mockPermissionStatus('{"accessibility":"granted","screenshots":"granted"}')
@@ -105,8 +109,8 @@ describe('openComputerUsePermissions', () => {
       nextStep: null
     })
     expect(spawn).not.toHaveBeenCalledWith(
-      '/usr/bin/open',
-      ['-n', '/Applications/Prompt Computer Use.app', '--args', '--permissions'],
+      helperExecutablePath,
+      ['--permissions', '--host-app', hostAppPath],
       { detached: true, stdio: 'ignore' }
     )
   })
@@ -126,7 +130,7 @@ describe('openComputerUsePermissions', () => {
         { id: 'accessibility', status: 'granted' },
         { id: 'screenshots', status: 'not-granted' }
       ],
-      nextStep: 'Grant Screen Recording to Prompt Computer Use, then retry get-app-state.'
+      nextStep: 'Grant Screen Recording to Prompt, then retry get-app-state.'
     })
     expect(spawnSync).toHaveBeenCalledWith(
       '/usr/bin/pkill',
@@ -138,11 +142,13 @@ describe('openComputerUsePermissions', () => {
       ['-f', 'orca-computer-use-macos[[:space:]]+--permissions([[:space:]]|$)'],
       { stdio: 'ignore' }
     )
+    // Spawned directly, never through LaunchServices, so TCC charges the helper to Prompt.
     expect(spawn).toHaveBeenCalledWith(
-      '/usr/bin/open',
-      ['-n', '/Applications/Prompt Computer Use.app', '--args', '--permissions'],
+      helperExecutablePath,
+      ['--permissions', '--host-app', hostAppPath],
       { detached: true, stdio: 'ignore' }
     )
+    expect(spawn).not.toHaveBeenCalledWith('/usr/bin/open', expect.anything(), expect.anything())
   })
 
   it('launches a targeted permission helper flow', async () => {
@@ -160,11 +166,11 @@ describe('openComputerUsePermissions', () => {
         { id: 'accessibility', status: 'not-granted' },
         { id: 'screenshots', status: 'not-granted' }
       ],
-      nextStep: 'Grant Accessibility to Prompt Computer Use, then retry get-app-state.'
+      nextStep: 'Grant Accessibility to Prompt, then retry get-app-state.'
     })
     expect(spawn).toHaveBeenCalledWith(
-      '/usr/bin/open',
-      ['-n', '/Applications/Prompt Computer Use.app', '--args', '--permission', 'accessibility'],
+      helperExecutablePath,
+      ['--permission', 'accessibility', '--host-app', hostAppPath],
       { detached: true, stdio: 'ignore' }
     )
   })
@@ -184,11 +190,11 @@ describe('openComputerUsePermissions', () => {
         { id: 'accessibility', status: 'granted' },
         { id: 'screenshots', status: 'not-granted' }
       ],
-      nextStep: 'Grant Screen Recording to Prompt Computer Use, then retry get-app-state.'
+      nextStep: 'Grant Screen Recording to Prompt, then retry get-app-state.'
     })
     expect(spawn).toHaveBeenCalledWith(
-      '/usr/bin/open',
-      ['-n', '/Applications/Prompt Computer Use.app', '--args', '--permission', 'accessibility'],
+      helperExecutablePath,
+      ['--permission', 'accessibility', '--host-app', hostAppPath],
       { detached: true, stdio: 'ignore' }
     )
   })
@@ -228,7 +234,7 @@ describe('openComputerUsePermissions', () => {
     )
   })
 
-  it('resets stale macOS TCC grants for the helper bundle id', async () => {
+  it('resets macOS TCC grants for the host app bundle id, which TCC charges the helper to', async () => {
     resolveHelperAppPathMock.mockReturnValue('/Applications/Prompt Computer Use.app')
     vi.mocked(readFile).mockResolvedValueOnce(
       '{"accessibility":"not-granted","screenshots":"not-granted"}'
@@ -239,7 +245,7 @@ describe('openComputerUsePermissions', () => {
       platform: 'darwin',
       helperAppPath: '/Applications/Prompt Computer Use.app',
       helperUnavailableReason: null,
-      bundleId: 'com.example.orca.computer-use',
+      bundleId: 'com.example.prompt',
       permissions: [
         { id: 'accessibility', status: 'not-granted' },
         { id: 'screenshots', status: 'not-granted' }
@@ -248,23 +254,44 @@ describe('openComputerUsePermissions', () => {
     const throughChokepoint = expect.objectContaining({ shell: false, windowsHide: true })
     expect(spawn).toHaveBeenCalledWith(
       '/usr/libexec/PlistBuddy',
-      ['-c', 'Print :CFBundleIdentifier', helperInfoPlistPath],
+      ['-c', 'Print :CFBundleIdentifier', hostInfoPlistPath],
       throughChokepoint
     )
     expect(spawn).toHaveBeenCalledWith(
       '/usr/bin/tccutil',
-      ['reset', 'Accessibility', 'com.example.orca.computer-use'],
+      ['reset', 'Accessibility', 'com.example.prompt'],
       throughChokepoint
     )
     expect(spawn).toHaveBeenCalledWith(
       '/usr/bin/tccutil',
-      ['reset', 'ScreenCapture', 'com.example.orca.computer-use'],
+      ['reset', 'ScreenCapture', 'com.example.prompt'],
       throughChokepoint
     )
     // Keep resets asynchronous so helper commands cannot block the main process.
     expect(spawnSync).not.toHaveBeenCalledWith(
       '/usr/bin/tccutil',
       expect.anything(),
+      expect.anything()
+    )
+  })
+  it('falls back to the packaged Prompt bundle id when the host app is unknown', async () => {
+    resolveHelperAppPathMock.mockReturnValue('/Applications/Prompt Computer Use.app')
+    resolveHostAppPathMock.mockReturnValue(null)
+    vi.mocked(readFile).mockResolvedValueOnce(
+      '{"accessibility":"not-granted","screenshots":"not-granted"}'
+    )
+
+    await expect(resetComputerUsePermissions()).resolves.toMatchObject({
+      bundleId: 'im.runners.prompt'
+    })
+    expect(spawn).not.toHaveBeenCalledWith(
+      '/usr/libexec/PlistBuddy',
+      expect.anything(),
+      expect.anything()
+    )
+    expect(spawn).toHaveBeenCalledWith(
+      '/usr/bin/tccutil',
+      ['reset', 'Accessibility', 'im.runners.prompt'],
       expect.anything()
     )
   })
@@ -281,9 +308,8 @@ describe('setup helper launch window', () => {
     vi.mocked(mkdtemp).mockResolvedValue(permissionStatusTempDir)
     vi.mocked(stat).mockResolvedValue({} as Awaited<ReturnType<typeof stat>>)
     resolveHelperAppPathMock.mockReturnValue(helperAppPath)
-    resolveHelperExecutablePathMock.mockReturnValue(
-      `${helperAppPath}/Contents/MacOS/orca-computer-use-macos`
-    )
+    resolveHelperExecutablePathMock.mockReturnValue(helperExecutablePath)
+    resolveHostAppPathMock.mockReturnValue(hostAppPath)
     mockPermissionStatus('{"accessibility":"not-granted","screenshots":"not-granted"}')
     setPlatform('darwin')
     vi.useFakeTimers()
@@ -303,11 +329,11 @@ describe('setup helper launch window', () => {
       .mocked(spawn)
       .mock.calls.filter(
         ([program, args]) =>
-          program === '/usr/bin/open' &&
+          program === helperExecutablePath &&
           Array.isArray(args) &&
           !args.includes('--permission-status-file')
       )
-      .map(([, args]) => (Array.isArray(args) ? args.slice(3) : []))
+      .map(([, args]) => (Array.isArray(args) ? args.slice(0, args.indexOf('--host-app')) : []))
 
   const setupKills = (): number =>
     vi.mocked(spawnSync).mock.calls.filter(([program]) => program === '/usr/bin/pkill').length
@@ -390,7 +416,11 @@ describe('setup helper launch window', () => {
   it('never fires a queued setup spawn early when the timer delay is fractional', async () => {
     const spawnedAt: number[] = []
     vi.mocked(spawn).mockImplementation((program, args) => {
-      if (program === '/usr/bin/open') {
+      if (
+        program === helperExecutablePath &&
+        Array.isArray(args) &&
+        !args.includes('--permission-status-file')
+      ) {
         spawnedAt.push(performance.now())
       }
       return fakeSpawnDispatch(() => ({}))(program, Array.isArray(args) ? args : [])
@@ -420,7 +450,11 @@ describe('setup helper launch window', () => {
       return pkillResult
     })
     vi.mocked(spawn).mockImplementation((program, args) => {
-      if (program === '/usr/bin/open') {
+      if (
+        program === helperExecutablePath &&
+        Array.isArray(args) &&
+        !args.includes('--permission-status-file')
+      ) {
         spawnedAt.push(performance.now())
       }
       return fakeSpawnDispatch(() => ({}))(program, Array.isArray(args) ? args : [])

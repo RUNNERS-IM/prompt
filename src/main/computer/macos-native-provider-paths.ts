@@ -25,3 +25,11 @@ export function resolveMacOSComputerUseExecutablePath(): string | null {
   const executablePath = join(appPath, 'Contents', 'MacOS', 'orca-computer-use-macos')
   return existsSync(executablePath) ? executablePath : null
 }
+
+// TCC charges a directly spawned helper's access to the app that launched it, so this is the
+// bundle that needs Accessibility and Screen Recording. The outermost `.app` also covers Helpers.
+export function resolveMacOSHostAppPath(execPath: string = process.execPath): string | null {
+  const marker = '.app/Contents/'
+  const index = execPath.indexOf(marker)
+  return index === -1 ? null : execPath.slice(0, index + '.app'.length)
+}

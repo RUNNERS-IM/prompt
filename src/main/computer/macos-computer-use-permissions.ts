@@ -2,7 +2,11 @@ import { spawn, spawnSync } from 'node:child_process'
 import { RuntimeClientError } from './runtime-client-error'
 import { isHostShuttingDown } from '../host-shutdown-state'
 import { readMacosBundleId, resetMacosTccPermission } from '../macos-tcc-reset'
-import { resolveMacOSComputerUseAppPath } from './macos-native-provider-paths'
+import {
+  resolveMacOSComputerUseAppPath,
+  resolveMacOSComputerUseExecutablePath,
+  resolveMacOSHostAppPath
+} from './macos-native-provider-paths'
 import { resolveComputerUseHelperUnavailableReason } from './macos-computer-use-permission-status'
 import { computerUsePermissionStatusGate } from './macos-computer-use-permission-status-gate'
 import type {
@@ -12,14 +16,15 @@ import type {
   ComputerUsePermissionStatusResult
 } from '../../shared/computer-use-permissions-types'
 
-const DEFAULT_COMPUTER_USE_BUNDLE_ID = 'com.stablyai.orca.computer-use'
+// TCC charges the directly spawned helper to Prompt, so Prompt's own rows are the ones to reset.
+const DEFAULT_COMPUTER_USE_BUNDLE_ID = 'im.runners.prompt'
 
 export { getComputerUsePermissionStatus } from './macos-computer-use-permission-status'
 
 // One setup-helper spawn per 5s across every permission, on the monotonic clock; claimed synchronously.
 const SETUP_HELPER_LAUNCH_WINDOW_MS = 5_000
 // Requests are numbered on arrival; a queued request loses to any later one (latest wins).
-type SetupLaunchRequest = { seq: number; helperAppPath: string; helperArgs: string[] }
+type SetupLaunchRequest = { seq: number; helperExecutablePath: string; helperArgs: string[] }
 let setupRequestSeq = 0
 let lastLaunch: { seq: number; coversSeq: number; argsKey: string; at: number } | null = null
 let queuedSetupLaunch: SetupLaunchRequest | null = null
@@ -106,11 +111,11 @@ function launchSetupHelper(request: SetupLaunchRequest): void {
   }
   // Kill and relaunch so a repeated click always brings the helper back to the front.
   closeExistingPermissionHelpers()
-  const helper = spawn(
-    '/usr/bin/open',
-    ['-n', request.helperAppPath, '--args', ...request.helperArgs],
-    { detached: true, stdio: 'ignore' }
-  )
+  // Spawned directly, not via `open`, so the setup prompts and grants land on Prompt's row.
+  const helper = spawn(request.helperExecutablePath, request.helperArgs, {
+    detached: true,
+    stdio: 'ignore'
+  })
   // Measured after the spawn so a slow pkill can't pull the next spawn inside the window.
   lastLaunch = {
     seq: request.seq,
@@ -153,6 +158,13 @@ async function openComputerUsePermissionsAsync(
   if (status.helperUnavailableReason) {
     throw new RuntimeClientError('accessibility_error', status.helperUnavailableReason)
   }
+  const helperExecutablePath = resolveMacOSComputerUseExecutablePath()
+  if (!helperExecutablePath) {
+    throw new RuntimeClientError(
+      'accessibility_error',
+      `${helperAppPath}/Contents/MacOS/orca-computer-use-macos was not found`
+    )
+  }
   const nextStep = nextPermissionStep(status.permissions)
   if (generation !== setupGeneration || isHostShuttingDown()) {
     // An error rather than launchedHelper: false, which clients render as "setup complete".
@@ -173,8 +185,13 @@ async function openComputerUsePermissionsAsync(
       nextStep
     }
   }
-  const helperArgs = permissionId ? ['--permission', permissionId] : ['--permissions']
-  const launch = requestSetupHelperLaunch({ seq, helperAppPath, helperArgs })
+  const hostAppPath = resolveMacOSHostAppPath()
+  // The setup window offers this bundle as the drag tile, since it is the one TCC lists.
+  const helperArgs = [
+    ...(permissionId ? ['--permission', permissionId] : ['--permissions']),
+    ...(hostAppPath ? ['--host-app', hostAppPath] : [])
+  ]
+  const launch = requestSetupHelperLaunch({ seq, helperExecutablePath, helperArgs })
 
   return {
     platform: process.platform,
@@ -225,7 +242,9 @@ async function resetComputerUsePermissionsAsync(): Promise<ComputerUsePermission
     throw new RuntimeClientError('accessibility_error', unavailableReason)
   }
 
-  const bundleId = (await readMacosBundleId(helperAppPath)) ?? DEFAULT_COMPUTER_USE_BUNDLE_ID
+  const hostAppPath = resolveMacOSHostAppPath()
+  const bundleId =
+    (hostAppPath ? await readMacosBundleId(hostAppPath) : null) ?? DEFAULT_COMPUTER_USE_BUNDLE_ID
   closeExistingPermissionHelpers()
   try {
     await resetTccPermission('Accessibility', bundleId)
@@ -255,7 +274,7 @@ function closeExistingPermissionHelpers(): void {
 }
 
 async function resetTccPermission(service: string, bundleId: string): Promise<void> {
-  // TCC grants survive uninstall; explicitly reset the helper's stable bundle identity.
+  // TCC grants survive uninstall; explicitly reset the responsible app's stable bundle identity.
   const result = await resetMacosTccPermission(service, bundleId)
   if (!result.ok) {
     throw new RuntimeClientError(
@@ -272,5 +291,5 @@ function nextPermissionStep(
   if (!missing) {
     return null
   }
-  return `Grant ${missing.id === 'accessibility' ? 'Accessibility' : 'Screen Recording'} to Prompt Computer Use, then retry get-app-state.`
+  return `Grant ${missing.id === 'accessibility' ? 'Accessibility' : 'Screen Recording'} to Prompt, then retry get-app-state.`
 }

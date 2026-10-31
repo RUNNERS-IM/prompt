@@ -60,6 +60,10 @@ vi.mock('../ipc/ssh/ssh-host-user-disconnect', () => ({
   holdLaunchReconnectOptOuts: holdLaunchReconnectOptOutsMock
 }))
 vi.mock('../macos-tcc-prompt-notice', () => ({ initTccPromptNotice: initTccPromptNoticeMock }))
+vi.mock('electron', () => ({ app: { getPath: vi.fn(() => '/tmp/prompt-user-data') } }))
+vi.mock('../computer/macos-computer-use-legacy-tcc-cleanup', () => ({
+  scheduleLegacyComputerUseTccCleanup: vi.fn()
+}))
 vi.mock('../updater', () => ({ resolveUpdateInstallMode: vi.fn(() => 'interactive') }))
 vi.mock('./main-process-state', () => ({ mainProcessState: state }))
 vi.mock('../agent-auth-restart-preservation', () => ({

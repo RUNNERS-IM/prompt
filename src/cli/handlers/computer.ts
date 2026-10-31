@@ -67,7 +67,7 @@ export const COMPUTER_HANDLERS: Record<string, CommandHandler> = {
           ? `Next: ${value.nextStep}`
           : 'Computer Use permissions are already granted.',
         value.launchedHelper
-          ? 'Use the Allow buttons or drag "Prompt Computer Use" into the macOS permission list.'
+          ? 'Use the Allow buttons or drag "Prompt" into the macOS permission list.'
           : null
       ]
         .filter((line) => line !== null)

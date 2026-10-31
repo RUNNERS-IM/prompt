@@ -664,7 +664,7 @@ final class Provider {
             // should open macOS privacy prompts/settings; runtime calls stay quiet.
             throw ProviderError.coded(
                 "permission_denied",
-                "Accessibility permission is required for Prompt Computer Use. Run `orca computer permissions` or open Settings > Computer Use, grant Accessibility to Prompt Computer Use, then retry."
+                "Accessibility permission is required for Computer Use. Run `orca computer permissions` or open Settings > Computer Use, grant Accessibility to Prompt, then retry."
             )
         }
         let appElement = AXUIElementCreateApplication(app.pid)
@@ -711,7 +711,7 @@ final class Provider {
         let screenshotStatus: ScreenshotStatus = if screenshot != nil {
             .captured
         } else if includeScreenshot && !canCaptureScreenshot {
-            .failed("Screen Recording permission is required for Prompt Computer Use; grant permission or pass --no-screenshot to inspect accessibility state only.")
+            .failed("Screen Recording permission is required for Computer Use; grant it to Prompt or pass --no-screenshot to inspect accessibility state only.")
         } else if includeScreenshot {
             .failed("window screenshot capture returned no image; retry with --no-screenshot if accessibility state is sufficient.")
         } else {
@@ -1196,7 +1196,7 @@ private func focusedWindow(appElement: AXUIElement, app: AppDescriptor, visibleW
         if let window = settledWindow, outcome.settled {
             return window
         }
-        throw ProviderError.coded("permission_denied", "app '\(app.name)' has visible windows but no accessibility window (AX reads stayed blocked for \(outcome.waitedMs)ms after retries). macOS Accessibility may need Prompt Computer Use toggled off and on again in System Settings.")
+        throw ProviderError.coded("permission_denied", "app '\(app.name)' has visible windows but no accessibility window (AX reads stayed blocked for \(outcome.waitedMs)ms after retries). macOS Accessibility may need Prompt toggled off and on again in System Settings.")
     }
     throw ProviderError.coded("window_not_found", "app '\(app.name)' has no accessibility window; make sure the app has a visible window, then retry with --restore-window.")
 }
@@ -3199,7 +3199,7 @@ private final class PermissionWindowController: NSWindowController {
             backing: .buffered,
             defer: false
         )
-        window.title = "Enable Prompt Computer Use"
+        window.title = "Enable Computer Use"
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
         window.backgroundColor = PermissionPalette.background
@@ -3325,9 +3325,9 @@ private enum PermissionKind: CaseIterable {
     var dragInstruction: String {
         switch self {
         case .accessibility:
-            "Drag Prompt Computer Use into the list above to allow Accessibility."
+            "Drag \(responsibleAppName) into the list above to allow Accessibility."
         case .screenshots:
-            "Drag Prompt Computer Use into the list above to allow Screenshots."
+            "Drag \(responsibleAppName) into the list above to allow Screenshots."
         }
     }
 
@@ -3379,7 +3379,7 @@ private enum PermissionKind: CaseIterable {
 }
 
 private final class PermissionView: NSView {
-    private let appURL = Bundle.main.bundleURL
+    private let appURL = responsibleAppURL
     private let showDragAssistant: (PermissionKind) -> Void
     private let close: () -> Void
     private var contentStack: NSStackView?
@@ -3429,7 +3429,7 @@ private final class PermissionView: NSView {
 
         let titleText = checking
             ? "Checking Computer Use"
-            : (ready ? "Computer Use is Ready" : "Enable Prompt Computer Use")
+            : (ready ? "Computer Use is Ready" : "Enable Computer Use")
         let title = label(titleText, size: 22, weight: .bold)
         let subtitle = label(
             checking
@@ -3608,7 +3608,7 @@ private final class PermissionDragAssistantController: NSWindowController {
             backing: .buffered,
             defer: false
         )
-        window.title = "Drag Prompt Computer Use"
+        window.title = "Drag \(responsibleAppName)"
         window.backgroundColor = .clear
         window.isOpaque = false
         window.isReleasedWhenClosed = false
@@ -3627,7 +3627,7 @@ private final class PermissionDragAssistantController: NSWindowController {
             onRefreshPermissions: onRefreshPermissions,
             onClose: onClose
         )
-        window.contentView = PermissionDragAssistantView(permission: permission, appURL: Bundle.main.bundleURL) { [weak self] in
+        window.contentView = PermissionDragAssistantView(permission: permission, appURL: responsibleAppURL) { [weak self] in
             self?.dismissFromCloseButton()
         }
     }
@@ -4020,7 +4020,7 @@ private final class DraggableAppTile: NSView, NSDraggingSource {
         icon.imageScaling = .scaleProportionallyUpOrDown
         icon.translatesAutoresizingMaskIntoConstraints = false
 
-        let title = NSTextField(labelWithString: "Prompt Computer Use")
+        let title = NSTextField(labelWithString: ResponsibleApplicationLocation.displayName(of: appURL))
         title.font = NSFont.systemFont(ofSize: 15, weight: .semibold)
         title.textColor = PermissionPalette.primaryText
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -4486,6 +4486,12 @@ private func writeAll(_ data: Data, to fd: Int32) -> Bool {
 }
 
 let arguments = Array(CommandLine.arguments.dropFirst())
+// TCC lists Prompt, not this helper, so setup shows and drags Prompt's bundle.
+let responsibleAppURL = ResponsibleApplicationLocation.resolve(
+    arguments: arguments,
+    helperBundleURL: Bundle.main.bundleURL
+)
+let responsibleAppName = ResponsibleApplicationLocation.displayName(of: responsibleAppURL)
 if arguments.first == "--agent" {
     guard arguments.count >= 2 else {
         fputs("usage: orca-computer-use-macos --agent <socket-path> --token-file <token-path>\n", stderr)

@@ -2,6 +2,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ComputerUsePermissionStatusResult } from '../../shared/computer-use-permissions-types'
 import type * as PermissionsModule from './macos-computer-use-permissions'
 
+const helperExecutablePath = vi.hoisted(
+  () => '/Applications/Prompt Computer Use.app/Contents/MacOS/orca-computer-use-macos'
+)
 const mocks = vi.hoisted(() => ({
   spawn: vi.fn(),
   spawnSync: vi.fn(),
@@ -11,7 +14,9 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock('node:child_process', () => ({ spawn: mocks.spawn, spawnSync: mocks.spawnSync }))
 vi.mock('./macos-native-provider-paths', () => ({
-  resolveMacOSComputerUseAppPath: () => '/Applications/Prompt Computer Use.app'
+  resolveMacOSComputerUseAppPath: () => '/Applications/Prompt Computer Use.app',
+  resolveMacOSComputerUseExecutablePath: () => helperExecutablePath,
+  resolveMacOSHostAppPath: () => '/Applications/Prompt.app'
 }))
 vi.mock('./macos-computer-use-permission-status', () => ({
   getComputerUsePermissionStatus: vi.fn(),
@@ -37,8 +42,8 @@ const denied: ComputerUsePermissionStatusResult = {
 
 function setupLaunches(): unknown[] {
   return mocks.spawn.mock.calls
-    .filter(([program]) => program === '/usr/bin/open')
-    .map(([, args]) => (Array.isArray(args) ? args.slice(3) : []))
+    .filter(([program]) => program === helperExecutablePath)
+    .map(([, args]) => (Array.isArray(args) ? args.slice(0, args.indexOf('--host-app')) : []))
 }
 
 function deferredStatus(): {
