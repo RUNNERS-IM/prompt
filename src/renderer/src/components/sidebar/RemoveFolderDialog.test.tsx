@@ -100,7 +100,7 @@ describe('RemoveFolderDialog', () => {
     const html = renderToStaticMarkup(<RemoveFolderDialog />)
 
     expect(html).toContain('Its VM recipe determines whether the environment')
-    expect(html).not.toContain('It is still on your disk')
+    expect(html).not.toContain('Its folder and files stay where they are')
   })
 
   it('warns that VM recipe cleanup controls file deletion', () => {
@@ -111,7 +111,7 @@ describe('RemoveFolderDialog', () => {
 
     expect(html).toContain('Its VM recipe determines whether the environment')
     expect(html).toContain('files are permanently deleted')
-    expect(html).not.toContain('Its files stay on')
+    expect(html).not.toContain('Its folder and files stay on')
   })
 
   it('warns about VM recipe cleanup for an adopted provisioned root before the catalog loads', () => {
@@ -131,11 +131,29 @@ describe('RemoveFolderDialog', () => {
 
     const html = renderToStaticMarkup(<RemoveFolderDialog />)
 
-    expect(html).toContain('Its files stay on Persistent host')
+    expect(html).toContain('Its folder and files stay on Persistent host')
     expect(html).not.toContain('VM recipe')
   })
 
-  it('says how many open terminals removal will close', () => {
+  it('names the project and says the whole project goes, not one session', () => {
+    mocks.state.repos = [repo('target-1', 'ssh:target-1')]
+
+    const html = renderToStaticMarkup(<RemoveFolderDialog />)
+
+    expect(html).toContain('Remove the &#x27;Example&#x27; project from the list?')
+    expect(html).toContain('This removes the whole project, not just one session.')
+    expect(html).toContain('To close just one session, use the × on its row.')
+    expect(html).toContain('Remove Project')
+    expect(html).not.toContain('Orca')
+  })
+
+  it('leaves out the running-session sentence when nothing is running', () => {
+    mocks.state.repos = [repo('target-1', 'ssh:target-1')]
+
+    expect(renderToStaticMarkup(<RemoveFolderDialog />)).not.toContain('running session')
+  })
+
+  it('says how many running sessions removal will stop', () => {
     mocks.state.repos = [repo('target-1', 'ssh:target-1')]
     mocks.state.worktreesByRepo = {
       'repo-1': [{ id: 'repo-1::/workspace/example', hostId: 'ssh:target-1' }]
@@ -144,7 +162,7 @@ describe('RemoveFolderDialog', () => {
     mocks.state.ptyIdsByTabId = { a: ['pty-a'], b: ['pty-b'] }
 
     expect(renderToStaticMarkup(<RemoveFolderDialog />)).toContain(
-      '2 open terminals in this project will be closed.'
+      'All 2 running sessions in it will be stopped.'
     )
   })
 })
