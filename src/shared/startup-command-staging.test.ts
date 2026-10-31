@@ -182,18 +182,25 @@ describe('discardStagedStartupCommand', () => {
 })
 
 describe('sweepStaleStagedStartupCommands', () => {
-  it('removes only staged scripts older than an hour', () => {
+  it('removes only staged scripts older than an hour, under the current and old prefix', () => {
     const now = Date.now()
-    const stale = join(directory, 'orca-launch-aaaa.sh')
-    const fresh = join(directory, 'orca-launch-bbbb.sh')
+    const stale = join(directory, 'prompt-launch-aaaa.sh')
+    const staleLegacy = join(directory, 'orca-launch-aaaa.sh')
+    const fresh = join(directory, 'prompt-launch-bbbb.sh')
+    const freshLegacy = join(directory, 'orca-launch-bbbb.sh')
     const unrelated = join(directory, 'something-else.sh')
-    for (const path of [stale, fresh, unrelated]) {
+    for (const path of [stale, staleLegacy, fresh, freshLegacy, unrelated]) {
       writeFileSync(path, '')
     }
     const staleSeconds = (now - STAGED_STARTUP_COMMAND_STALE_MS - 1000) / 1000
-    utimesSync(stale, staleSeconds, staleSeconds)
-    utimesSync(unrelated, staleSeconds, staleSeconds)
+    for (const path of [stale, staleLegacy, unrelated]) {
+      utimesSync(path, staleSeconds, staleSeconds)
+    }
     sweepStaleStagedStartupCommands({ directory, now })
-    expect(readdirSync(directory).sort()).toEqual(['orca-launch-bbbb.sh', 'something-else.sh'])
+    expect(readdirSync(directory).sort()).toEqual([
+      'orca-launch-bbbb.sh',
+      'prompt-launch-bbbb.sh',
+      'something-else.sh'
+    ])
   })
 })

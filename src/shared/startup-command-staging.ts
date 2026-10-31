@@ -7,7 +7,10 @@ import { join } from 'node:path'
 import { hasControlByte, TYPED_STARTUP_LINE_PROMPT_BUDGET_BYTES } from './startup-line-prompt-carry'
 import { quoteStartupArg } from './tui-agent-startup-shell'
 
-export const STAGED_STARTUP_COMMAND_PREFIX = 'orca-launch-'
+export const STAGED_STARTUP_COMMAND_PREFIX = 'prompt-launch-'
+/** Prefix before the Prompt rename; upstream Orca still writes it. The sweep's age gate keeps
+ * another app's in-flight launch safe, so crash leftovers under either name are cleaned. */
+export const STAGED_STARTUP_COMMAND_LEGACY_PREFIX = 'orca-launch-'
 
 /** Which delivery ran for a spawn's typed startup line, decided by the host that owns the PTY. */
 export type StartupLineDelivery = 'typed' | 'staged' | 'typed-after-stage-failed'
@@ -128,7 +131,7 @@ export function startupStagingFailureNotice(staging: StartupCommandStaging): str
   const reason = [...staging.failure]
     .map((char) => (char < ' ' || char === '\x7f' ? ' ' : char))
     .join('')
-  return `\r\n[orca] Could not stage the launch command (${reason}); typed it in full. If the shell shows quote> or waits for more input, press Ctrl-C and launch again.\r\n`
+  return `\r\n[Prompt] Could not stage the launch command (${reason}); typed it in full. If the shell shows quote> or waits for more input, press Ctrl-C and launch again.\r\n`
 }
 
 export function discardStagedStartupCommand(staging: StartupCommandStaging | undefined): void {
@@ -153,7 +156,13 @@ export function sweepStaleStagedStartupCommands(args: { directory?: string; now?
     return
   }
   for (const name of names) {
-    if (!name.startsWith(STAGED_STARTUP_COMMAND_PREFIX) || !name.endsWith('.sh')) {
+    if (
+      !(
+        name.startsWith(STAGED_STARTUP_COMMAND_PREFIX) ||
+        name.startsWith(STAGED_STARTUP_COMMAND_LEGACY_PREFIX)
+      ) ||
+      !name.endsWith('.sh')
+    ) {
       continue
     }
     const path = join(directory, name)

@@ -261,7 +261,7 @@ describe('TerminalHost', () => {
 
       const written = (lastSubprocess.write as ReturnType<typeof vi.fn>).mock.calls[0]?.[0]
       // Multiline launch commands are staged in a sourced script and submitted with Enter CR.
-      const scriptPath = /^\. '(.*orca-launch-[0-9a-f]+\.sh)'\r$/.exec(written)?.[1]
+      const scriptPath = /^\. '(.*prompt-launch-[0-9a-f]+\.sh)'\r$/.exec(written)?.[1]
       expect(scriptPath).toBeDefined()
       expect(readFileSync(scriptPath!, 'utf8')).toContain('claude "line one\nline two"\n')
       rmSync(scriptPath!, { force: true })
