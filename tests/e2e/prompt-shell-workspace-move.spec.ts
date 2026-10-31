@@ -331,9 +331,20 @@ test.describe('moving a shell tab to another workspace', () => {
     // The original keeps running where it was.
     expect(await workspaceOfTab(page, tabId)).toBe(ws.a.id)
     const copyPty = (await waitForTabPtyIds(page, copyTabId!, 1))[0]!
+    // The app may add its own flags (such as --plugin-dir) to the launch, so check the two that
+    // make it a copy; line breaks are dropped in case the long command wrapped.
     await expect
-      .poll(() => getTerminalContentForPtyId(page, copyPty, 20_000), { timeout: 20_000 })
-      .toContain(`claude --resume ${CLAUDE_SESSION_ID} --fork-session`)
+      .poll(
+        async () => {
+          const shown = (await getTerminalContentForPtyId(page, copyPty, 20_000)).replace(
+            /[\r\n]/g,
+            ''
+          )
+          return shown.includes(`--resume ${CLAUDE_SESSION_ID}`) && shown.includes('--fork-session')
+        },
+        { timeout: 20_000, message: 'the copy tab never ran claude --resume <id> --fork-session' }
+      )
+      .toBe(true)
     await attachScreenshot(page, testInfo, '8-claude-row-forked')
     await execInTerminal(page, ptyId, '\x03')
   })
