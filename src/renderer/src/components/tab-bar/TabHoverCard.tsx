@@ -1,6 +1,12 @@
-import { useState, type ReactNode, type SyntheticEvent } from 'react'
+import { useEffect, useRef, useState, type ReactNode, type SyntheticEvent } from 'react'
 import { flushSync } from 'react-dom'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
+
+/** True while a dropdown menu whose trigger sits inside `root` is open. */
+export function hasOpenMenuInside(root: Element | null): boolean {
+  return Boolean(root?.querySelector('[aria-haspopup="menu"][data-state="open"]'))
+}
 
 export function TabHoverCard({
   children,
@@ -10,7 +16,8 @@ export function TabHoverCard({
   description,
   details,
   side = 'bottom',
-  alert
+  alert,
+  closeOnMenuOpen = false
 }: {
   children: ReactNode
   title: string
@@ -22,14 +29,37 @@ export function TabHoverCard({
   side?: 'bottom' | 'right'
   /** Controls below the program row; the card then stays open under the pointer. */
   alert?: ReactNode | ((dismiss: () => void) => ReactNode)
+  /**
+   * Close when a right-click menu opens (CLOSE_ALL_CONTEXT_MENUS_EVENT) and stay closed while a
+   * menu inside the trigger is open, so the card never covers the menu it sits next to.
+   */
+  closeOnMenuOpen?: boolean
 }): React.JSX.Element {
   const [open, setOpen] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!closeOnMenuOpen || !open) {
+      return
+    }
+    const close = (): void => setOpen(false)
+    window.addEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, close)
+    return () => window.removeEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, close)
+  }, [closeOnMenuOpen, open])
+  const handleOpenChange = (next: boolean): void => {
+    // Why: rows stop pointerdown, so Radix cannot close the card itself, and its dwell timer
+    // may still fire after the menu has opened.
+    if (next && closeOnMenuOpen && hasOpenMenuInside(triggerRef.current)) {
+      return
+    }
+    setOpen(next)
+  }
   // Remove the portal before navigation can start rendering a slower destination.
   const dismiss = () => flushSync(() => setOpen(false))
   const interactive = alert !== undefined && alert !== null
   return (
-    <Tooltip open={open} onOpenChange={setOpen} disableHoverableContent={!interactive}>
+    <Tooltip open={open} onOpenChange={handleOpenChange} disableHoverableContent={!interactive}>
       <TooltipTrigger
+        ref={triggerRef}
         asChild
         onFocus={(event) => {
           // Nested controls own their focus hints.

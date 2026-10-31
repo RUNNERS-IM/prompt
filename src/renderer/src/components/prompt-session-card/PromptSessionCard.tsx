@@ -133,6 +133,7 @@ export function withPromptSessionHoverCard<P extends { agent: DashboardAgentRow 
           icon={<AgentTypeIcon agentType={agent.agentType} size={14} />}
           programName={programName}
           side="right"
+          closeOnMenuOpen
           details={
             <PromptSessionDetails
               worktreeId={agent.tab.worktreeId}
