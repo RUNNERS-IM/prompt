@@ -154,6 +154,16 @@ describe('headless hook agent-status projection (#11761)', () => {
     expect((await runtime.listTerminals()).terminals).toEqual([
       expect.objectContaining({ agentIdentity: 'claude' })
     ])
+    // The codex row's conversation id must not be offered for resuming the claude pane.
+    expect((await runtime.listTerminals()).terminals[0]).not.toHaveProperty('agentSessionId')
+  })
+
+  it("lists the hook's conversation id as the terminal's agent session id", async () => {
+    const runtime = await createRuntimeWithHookRows([hookRow()])
+
+    expect((await runtime.listTerminals()).terminals).toEqual([
+      expect.objectContaining({ agentIdentity: 'claude', agentSessionId: PROVIDER_SESSION.id })
+    ])
   })
 
   it('carries the hook state, tool and interactivePrompt to paired clients', async () => {

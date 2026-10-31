@@ -7,7 +7,7 @@ This discovery stub loads the version-matched guide from the Orca executable use
 ## Load the version-matched guide before running Orca commands
 
 ```text
-ORCA skills get orca-jira
+PROMPT skill get orca-jira
 ```
 
 <!-- shared: no-guessing -->

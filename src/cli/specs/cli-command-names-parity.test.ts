@@ -2,13 +2,19 @@ import { describe, expect, it, vi } from 'vitest'
 import { CLI_COMMAND_NAMES } from '../../main/startup/cli-command-names'
 import { getCliLaunchArgs, getDirectServeLaunch } from '../../main/startup/cli-launch-redirect'
 import { COMMAND_SPECS } from './index'
+import { PROMPT_COMMAND_SPECS } from '../command-tree/prompt-command-specs'
 
 vi.mock('electron', () => ({ app: { commandLine: { getSwitchValue: () => '' } } }))
 
 describe('CLI launch redirect command names', () => {
   it('routes every CLI root through command redirect or direct serve', () => {
     // Why agent-teams-tmux: the CLI dispatches it before spec parsing, and the tmux shim runs it.
-    const roots = new Set([...COMMAND_SPECS.map((spec) => spec.path[0]), 'agent-teams-tmux'])
+    // Prompt roots too: the packaged binary forwards `app`, `session`, ... the same way.
+    const roots = new Set([
+      ...COMMAND_SPECS.map((spec) => spec.path[0]),
+      ...PROMPT_COMMAND_SPECS.map((spec) => spec.path[0]),
+      'agent-teams-tmux'
+    ])
     const options = {
       platform: 'linux',
       isPackaged: true,

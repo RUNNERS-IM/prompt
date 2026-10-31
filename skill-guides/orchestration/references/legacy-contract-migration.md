@@ -56,14 +56,14 @@ terminal and filesystem work continue.
 Read-only inspection does not consume mail:
 
 ```text
-ORCA orchestration run-list --json
-ORCA orchestration run-show --id run_legacy_local --json
-ORCA orchestration run-show --id <adopted_run_id> --json
-ORCA orchestration task-list --run <adopted_run_id> --json
-ORCA orchestration inbox --full --json
-ORCA orchestration check --terminal <legacy_handle> --peek --format --json
-ORCA terminal read --terminal <legacy_handle> --json
-ORCA terminal wait --terminal <legacy_handle> --for tui-idle --timeout-ms 60000 --json
+PROMPT orchestration run-list --json
+PROMPT orchestration run-show --id run_legacy_local --json
+PROMPT orchestration run-show --id <adopted_run_id> --json
+PROMPT orchestration task-list --run <adopted_run_id> --json
+PROMPT orchestration inbox --full --json
+PROMPT orchestration check --terminal <legacy_handle> --peek --format --json
+PROMPT terminal read --terminal <legacy_handle> --json
+PROMPT terminal wait --terminal <legacy_handle> --for tui-idle --timeout-ms 60000 --json
 ```
 
 `run_legacy_local` is an empty audit tombstone after adoption. Find the ordinary
@@ -73,8 +73,8 @@ Only when the original coordinator is unavailable or cannot prove retained
 authority may a new live coordinator take over from its own terminal:
 
 ```text
-ORCA orchestration run-use --id <adopted_run_id> --takeover-legacy --json
-ORCA orchestration check --run <adopted_run_id> --json
+PROMPT orchestration run-use --id <adopted_run_id> --takeover-legacy --json
+PROMPT orchestration check --run <adopted_run_id> --json
 ```
 
 Takeover binds the authenticated invoking terminal; `--from` cannot nominate

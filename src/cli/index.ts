@@ -22,11 +22,17 @@ import { COMMAND_SPECS } from './specs'
 import { resolveOrchestrationCliExecutable } from './runtime/orchestration-recovery-command'
 import { refuseConflictingSessionCallerFlags } from './session-caller-flags'
 import { ignoresRemoteSelection } from './remote-selection-scope'
+import { setCliProgramName, type CliExecutable } from './command-tree/cli-surface'
+import { PROMPT_COMMAND_SPECS } from './command-tree/prompt-command-specs'
+import { selectCliSurface } from './command-tree/surface-selection'
+import { applyPromptFlagAliases, preResolvePromptSelectors } from './command-tree/prompt-dispatch'
+import { setPromptJsonListShape } from './command-tree/prompt-output'
 
 export { COMMAND_SPECS } from './specs'
 export { buildCurrentWorktreeSelector, normalizeWorktreeSelector } from './selectors'
 
 const COMMAND_PATHS = COMMAND_SPECS.flatMap((spec) => specPaths(spec))
+const PROMPT_COMMAND_PATHS = PROMPT_COMMAND_SPECS.flatMap((spec) => specPaths(spec))
 
 // Defer the runtime graph until after help and validation; await it to keep ctx.client synchronous.
 async function loadRuntimeClientClass(): Promise<typeof RuntimeClient> {
@@ -39,9 +45,14 @@ function resolveInvocationCwd(): string {
   return typeof override === 'string' && override.length > 0 ? override : process.cwd()
 }
 
+/**
+ * `executable` is the name the user typed: `prompt` serves the new tree, `orca` the legacy one
+ * with a rename notice. Embedded callers pass nothing and get the legacy tree without notices.
+ */
 export async function main(
   argv = process.argv.slice(2),
-  cwd = resolveInvocationCwd()
+  cwd = resolveInvocationCwd(),
+  executable: CliExecutable | null = null
 ): Promise<void> {
   // Why: version audits use the bundled launcher; Electron intercepts direct binary version flags.
   if (argv.length === 1 && (argv[0] === '--version' || argv[0] === '-v')) {
@@ -62,43 +73,65 @@ export async function main(
     await runClaudeTeams(argv.slice(1), cwd)
     return
   }
-  const parsed = normalizeCommandPositionals(
-    COMMAND_SPECS,
-    parseArgs(argv, COMMAND_PATHS, COMMAND_SPECS)
+  // Passthrough: everything after `session teams` belongs to Claude Code, as with claude-teams.
+  if (executable === 'prompt' && argv[0] === 'session' && argv[1] === 'teams') {
+    await runClaudeTeams(argv.slice(2), cwd)
+    return
+  }
+  const selection = selectCliSurface(
+    argv,
+    executable,
+    { specs: COMMAND_SPECS, paths: COMMAND_PATHS },
+    { specs: PROMPT_COMMAND_SPECS, paths: PROMPT_COMMAND_PATHS }
   )
+  // stderr only: --json output on stdout must stay one parseable document.
+  if (selection.notice) {
+    process.stderr.write(`${selection.notice}\n`)
+  }
+  const prompt = selection.surface === 'prompt'
+  setCliProgramName(selection.surface)
+  const specs = prompt ? PROMPT_COMMAND_SPECS : COMMAND_SPECS
+  const paths = prompt ? PROMPT_COMMAND_PATHS : COMMAND_PATHS
+  const parsed = normalizeCommandPositionals(specs, parseArgs(argv, paths, specs))
   const helpPath = resolveHelpPath(parsed)
   if (helpPath !== null) {
-    printHelp(COMMAND_SPECS, helpPath)
+    printHelp(specs, helpPath)
     if (
       helpPath.length > 0 &&
-      !findCommandSpec(COMMAND_SPECS, helpPath) &&
-      !isCommandGroup(COMMAND_SPECS, helpPath)
+      !findCommandSpec(specs, helpPath) &&
+      !isCommandGroup(specs, helpPath)
     ) {
       process.exitCode = 1
     }
     return
   }
   if (parsed.commandPath.length === 0) {
-    printHelp(COMMAND_SPECS, [])
+    printHelp(specs, [])
     return
   }
   if (
     parsed.flags.size === 0 &&
-    !findCommandSpec(COMMAND_SPECS, parsed.commandPath) &&
-    isCommandGroup(COMMAND_SPECS, parsed.commandPath)
+    !findCommandSpec(specs, parsed.commandPath) &&
+    isCommandGroup(specs, parsed.commandPath)
   ) {
-    printHelp(COMMAND_SPECS, parsed.commandPath)
+    printHelp(specs, parsed.commandPath)
     return
   }
   const json = parsed.flags.has('json')
+  const commandSpec = findCommandSpec(specs, parsed.commandPath)
+  // Prompt specs reuse legacy handlers; errors and routing speak the handler's path.
+  const handlerPath = commandSpec?.handlerPath ?? parsed.commandPath
 
   try {
+    if (prompt && commandSpec) {
+      parsed.flags = applyPromptFlagAliases(commandSpec, parsed.flags)
+    }
     // Report invalid commands before runtime lookup can mask them with connection errors.
-    validateCommandAndFlags(COMMAND_SPECS, parsed)
-    const commandSpec = findCommandSpec(COMMAND_SPECS, parsed.commandPath)
+    validateCommandAndFlags(specs, parsed)
     refuseConflictingSessionCallerFlags(commandSpec, parsed.flags)
+    const hostScoped = parsed.flags.has('host')
     const RuntimeClientClass = await loadRuntimeClientClass()
-    const ignoreRemoteSelection = ignoresRemoteSelection(parsed.commandPath)
+    const ignoreRemoteSelection = ignoresRemoteSelection(handlerPath)
     const pairingCode = ignoreRemoteSelection ? null : parsed.flags.get('pairing-code')
     const environmentSelector = ignoreRemoteSelection ? null : parsed.flags.get('environment')
     // Eagerly resolve explicit --environment; stale ambient config must not break local-only commands.
@@ -139,19 +172,32 @@ export async function main(
       hostEnvironmentId !== null ? null : typeof pairingCode === 'string' ? pairingCode : suppressed
     const remoteEnvironment = hostEnvironmentId ?? storeEnvironmentSelector ?? suppressed
     let client: RuntimeClient | undefined
-    await dispatch(parsed.commandPath, {
+    // Why: local-only handlers must not resolve runtime metadata just to dispatch.
+    const getClient = (): RuntimeClient => {
+      client ??= new RuntimeClientClass(
+        undefined,
+        undefined,
+        remotePairingCode,
+        remoteEnvironment,
+        resolveOrchestrationCliExecutable(),
+        argv
+      )
+      return client
+    }
+    if (prompt && commandSpec) {
+      await preResolvePromptSelectors(commandSpec, parsed.flags, getClient, { hostScoped })
+    }
+    // Moved list commands print their list as result.items, like the new ones; legacy never does.
+    setPromptJsonListShape(
+      prompt &&
+        commandSpec !== undefined &&
+        commandSpec.handlerPath?.[0] !== 'prompt' &&
+        commandSpec.path.at(-1) === 'list'
+    )
+    await dispatch(handlerPath, {
       flags: parsed.flags,
-      // Why: local-only handlers must not resolve runtime metadata just to dispatch.
       get client() {
-        client ??= new RuntimeClientClass(
-          undefined,
-          undefined,
-          remotePairingCode,
-          remoteEnvironment,
-          resolveOrchestrationCliExecutable(),
-          argv
-        )
-        return client
+        return getClient()
       },
       cwd,
       json,
@@ -162,7 +208,7 @@ export async function main(
     const repoSelector = parsed.flags.get('repo')
     const hostFlag = parsed.flags.get('host')
     reportCliError(error, json, {
-      commandPath: parsed.commandPath,
+      commandPath: handlerPath,
       ...(typeof worktreeSelector === 'string' ? { worktreeSelector } : {}),
       ...(typeof repoSelector === 'string' ? { repoSelector } : {}),
       remoteServerSelected:
@@ -218,5 +264,5 @@ async function runAgentTeamsTmuxShim(argv: string[]): Promise<void> {
 }
 
 if (require.main === module) {
-  void main()
+  void main(undefined, undefined, 'orca')
 }

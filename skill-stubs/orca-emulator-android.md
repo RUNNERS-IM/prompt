@@ -7,7 +7,7 @@ This discovery stub loads the version-matched guide from the Orca executable use
 ## Load the version-matched guide before running Orca commands
 
 ```text
-ORCA skills get orca-emulator-android
+PROMPT skill get orca-emulator-android
 ```
 
 <!-- shared: no-guessing -->

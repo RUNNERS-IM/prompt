@@ -37,6 +37,8 @@ export type RuntimeTerminalSummary = {
   preview: string
   /** Host-resolved observed agent identity; absent when unknown. Does not imply launch support. */
   agentIdentity?: TerminalAgent
+  /** The agent's own conversation id (what `--resume` takes), from its status hook; absent until reported. */
+  agentSessionId?: string
   /** Absent while running or when the host predates the field; never infer a clean finish. */
   exitCause?: TerminalExitCause
   /** Absent when the host predates the field or could not name the execution host. */

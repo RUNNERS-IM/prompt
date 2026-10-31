@@ -1,5 +1,6 @@
+import { existsSync } from 'node:fs'
 import { mkdir, unlink } from 'node:fs/promises'
-import { dirname } from 'node:path'
+import { dirname, join } from 'node:path'
 import type { CliInstallStatus } from '../../shared/cli-install-types'
 import {
   pruneAppImageExtractedRoots,
@@ -13,6 +14,7 @@ import {
   resolveLegacyAppImageNamespacePath
 } from './appimage-extracted-root'
 import { isAppImageStableLauncherReady } from './appimage-stable-launcher'
+import { MAC_PROMPT_COMMAND_NAME } from './cli-install-constants'
 import { CliPathRegistration } from './cli-path-registration'
 import { removeLinuxBareOrcaDispatcher } from './linux-bare-orca-dispatcher'
 
@@ -98,9 +100,69 @@ export class CliInstaller extends CliPathRegistration {
             detail: `${spec.commandPath} does not point to the current Orca AppImage payload.`
           }
         : inspectedStatus
+    const promptStatus = await this.withMacPromptCommandStatus(baseStatus)
     const pathDirectory = dirname(spec.commandPath)
     const pathProbe = await this.probePathConfiguration(pathDirectory)
-    return this.withPathInfo(baseStatus, pathDirectory, pathProbe)
+    return this.withPathInfo(promptStatus, pathDirectory, pathProbe)
+  }
+
+  /** `prompt` beside the registered `orca`, when this build ships its launcher. */
+  private macPromptCommand(
+    status: Pick<CliInstallStatus, 'commandPath' | 'launcherPath'>
+  ): { commandPath: string; launcherPath: string } | null {
+    if (
+      this.platform !== 'darwin' ||
+      !this.isPackaged ||
+      this.commandPathOverride ||
+      !status.commandPath ||
+      !status.launcherPath
+    ) {
+      return null
+    }
+    const launcherPath = join(dirname(status.launcherPath), MAC_PROMPT_COMMAND_NAME)
+    return existsSync(launcherPath)
+      ? { commandPath: join(dirname(status.commandPath), MAC_PROMPT_COMMAND_NAME), launcherPath }
+      : null
+  }
+
+  // A registration made before `prompt` shipped reads as stale so Settings offers to register again.
+  private async withMacPromptCommandStatus(status: CliInstallStatus): Promise<CliInstallStatus> {
+    const prompt = this.macPromptCommand(status)
+    if (!prompt || status.state !== 'installed') {
+      return status
+    }
+    const promptStatus = await this.inspectSymlink(prompt.commandPath, prompt.launcherPath)
+    if (promptStatus.state === 'installed') {
+      return status
+    }
+    return {
+      ...status,
+      state: 'stale',
+      detail:
+        promptStatus.state === 'conflict'
+          ? `${prompt.commandPath} already exists and is not a Prompt command. Remove it to use \`prompt\` from the terminal.`
+          : `${prompt.commandPath} is not registered yet. Register again to add the \`prompt\` command.`
+    }
+  }
+
+  private async installMacPromptCommand(status: CliInstallStatus): Promise<void> {
+    const prompt = this.macPromptCommand(status)
+    if (!prompt) {
+      return
+    }
+    await this.installSymlink(await this.inspectSymlink(prompt.commandPath, prompt.launcherPath))
+  }
+
+  private async removeMacPromptCommand(status: CliInstallStatus): Promise<void> {
+    const prompt = this.macPromptCommand(status)
+    if (!prompt) {
+      return
+    }
+    // Someone else's `prompt` is left alone; it must not block removing `orca`.
+    const promptStatus = await this.inspectSymlink(prompt.commandPath, prompt.launcherPath)
+    if (promptStatus.state === 'installed' || promptStatus.state === 'stale') {
+      await this.removeSymlink(prompt.commandPath, prompt.launcherPath)
+    }
   }
 
   async install(): Promise<CliInstallStatus> {
@@ -137,6 +199,7 @@ export class CliInstaller extends CliPathRegistration {
 
     if (status.installMethod === 'symlink') {
       await this.installSymlink(status)
+      await this.installMacPromptCommand(status)
       await this.removeLegacyLinuxCommandIfManaged(status.launcherPath)
     } else if (this.isWindowsPackagedBundledCommand(status.commandPath, status.launcherPath)) {
       // Why: packaged Windows already ships resources/bin/orca.exe; registration only owns the PATH entry.
@@ -193,6 +256,7 @@ export class CliInstaller extends CliPathRegistration {
     }
 
     if (status.installMethod === 'symlink') {
+      await this.removeMacPromptCommand(status)
       await this.removeSymlink(status.commandPath)
       await this.removeLegacyLinuxCommandIfManaged(status.launcherPath)
     } else if (this.isWindowsPackagedBundledCommand(status.commandPath, status.launcherPath)) {

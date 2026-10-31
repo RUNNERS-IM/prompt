@@ -20,6 +20,7 @@ import { getTarProgram } from './zip-extractor-command.mjs'
 
 const REQUIRED_FILES = [
   'cli/index.js',
+  'cli/prompt.js',
   'main/index.js',
   'preload/index.js',
   'renderer/index.html',

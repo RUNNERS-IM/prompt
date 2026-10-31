@@ -5,6 +5,12 @@ import { formatCommandScopedFlagHelp } from './command-scoped-flag-help'
 import { FLAG_HELP_TEXT } from './flag-help-text'
 import { ROOT_HELP_TEXT_PRIMARY } from './root-help-text-primary'
 import { ROOT_HELP_TEXT_SECONDARY } from './root-help-text-secondary'
+import { getCliProgramName, isPromptSurface } from './command-tree/cli-surface'
+import {
+  PROMPT_ROOT_HELP_TEXT,
+  promptFlagHelp,
+  promptSubgroupSummary
+} from './command-tree/prompt-help'
 
 const ROOT_HELP_TEXT = [ROOT_HELP_TEXT_PRIMARY, ROOT_HELP_TEXT_SECONDARY].join('\n')
 
@@ -26,11 +32,23 @@ export function printHelp(specs: CommandSpec[], commandPath: string[] = []): voi
     console.log(`Unknown command: ${commandPath.join(' ')}${recovery ? `\n${recovery}` : ''}\n`)
   }
 
-  console.log(ROOT_HELP_TEXT)
+  console.log(isPromptSurface() ? PROMPT_ROOT_HELP_TEXT : ROOT_HELP_TEXT)
+}
+
+// Prompt specs show --workspace/--project where the reused handler reads --worktree/--repo.
+function shownFlagName(spec: CommandSpec, flag: string): string {
+  const alias = Object.entries(spec.flagAliases ?? {}).find(([, internal]) => internal === flag)
+  return alias?.[0] ?? flag
 }
 
 export function formatCommandHelp(spec: CommandSpec): string {
-  const lines = [`orca ${spec.path.join(' ')}`, '', `Usage: ${spec.usage}`, '', spec.summary]
+  const lines = [
+    `${getCliProgramName()} ${spec.path.join(' ')}`,
+    '',
+    `Usage: ${spec.usage}`,
+    '',
+    spec.summary
+  ]
   const displayedFlags =
     spec.argumentMode === 'passthrough'
       ? []
@@ -41,7 +59,11 @@ export function formatCommandHelp(spec: CommandSpec): string {
   if (displayedFlags.length > 0) {
     lines.push('', 'Options:')
     for (const flag of displayedFlags) {
-      lines.push(`  ${formatCommandFlagHelp(flag, spec.path)}`)
+      const shown = shownFlagName(spec, flag)
+      const promptHelp = isPromptSurface() ? promptFlagHelp(spec, shown) : null
+      // Moved specs look up their legacy wording, then respell the flag.
+      const legacyHelp = formatCommandFlagHelp(flag, spec.handlerPath ?? spec.path)
+      lines.push(`  ${promptHelp ?? legacyHelp.replace(`--${flag}`, `--${shown}`)}`)
     }
   }
 
@@ -64,7 +86,19 @@ export function formatCommandHelp(spec: CommandSpec): string {
 
 export function formatGroupHelp(specs: CommandSpec[], groupPath: string[]): string {
   const group = groupPath.join(' ')
-  const lines = [`orca ${group}`, '', `Usage: orca ${group} <command> [options]`, '', 'Commands:']
+  const program = getCliProgramName()
+  const lines = [
+    `${program} ${group}`,
+    '',
+    `Usage: ${program} ${group} <command> [options]`,
+    '',
+    'Commands:'
+  ]
+  if (isPromptSurface()) {
+    lines.push(...formatCollapsedGroupCommands(specs, groupPath))
+    lines.push('', `Run \`${program} ${group} <command> --help\` for command-specific usage.`)
+    return lines.join('\n')
+  }
   for (const spec of specs) {
     if (
       spec.hidden === true ||
@@ -77,6 +111,38 @@ export function formatGroupHelp(specs: CommandSpec[], groupPath: string[]): stri
   }
   lines.push('', `Run \`orca ${group} <command> --help\` for command-specific usage.`)
   return lines.join('\n')
+}
+
+// One line per direct command, and one line per subgroup, so `prompt browser --help` stays short.
+function formatCollapsedGroupCommands(specs: CommandSpec[], groupPath: string[]): string[] {
+  const entries: ({ command: string; summary: string } | { subgroup: string })[] = []
+  const subgroupSizes = new Map<string, number>()
+  for (const spec of specs) {
+    if (
+      spec.hidden === true ||
+      spec.path.length <= groupPath.length ||
+      !matches(spec.path.slice(0, groupPath.length), groupPath)
+    ) {
+      continue
+    }
+    const [head, ...rest] = spec.path.slice(groupPath.length)
+    if (rest.length === 0) {
+      entries.push({ command: head, summary: spec.summary })
+      continue
+    }
+    if (!subgroupSizes.has(head)) {
+      entries.push({ subgroup: head })
+    }
+    subgroupSizes.set(head, (subgroupSizes.get(head) ?? 0) + 1)
+  }
+  return entries.map((entry) =>
+    'command' in entry
+      ? `  ${entry.command.padEnd(18)} ${entry.summary}`
+      : `  ${`${entry.subgroup} ...`.padEnd(18)} ${promptSubgroupSummary(
+          [...groupPath, entry.subgroup],
+          subgroupSizes.get(entry.subgroup) ?? 0
+        )}`
+  )
 }
 
 function formatCommandFlagHelp(flag: string, commandPath: string[]): string {

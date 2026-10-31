@@ -1,4 +1,6 @@
 export const DEFAULT_MAC_COMMAND_PATH = '/usr/local/bin/orca'
+// Registered beside `orca` on macOS; `orca` stays until the legacy command names are removed.
+export const MAC_PROMPT_COMMAND_NAME = 'prompt'
 export const DEV_COMMAND_NAME = 'orca-dev'
 export const LEGACY_LINUX_COMMAND_NAME = 'orca'
 export const DEV_LAUNCHER_DIR = ['cli', 'bin'] as const
