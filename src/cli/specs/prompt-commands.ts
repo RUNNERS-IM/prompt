@@ -10,6 +10,9 @@ function promptSpec(spec: Omit<CommandSpec, 'handlerPath'>): CommandSpec {
 const SELECTOR_NOTE =
   'Selectors accept a name, a short id prefix (6+ characters, like a git short sha), or the full id. When more than one item matches, nothing runs and the command fails with code `ambiguous` and the candidates. Scripts should pass full ids from --json.'
 
+const PROJECT_ID_NOTE =
+  'A project also answers to its project id, the projectId field of `prompt project list --json` (repo:<id> for a folder or a repository without a remote, github:owner/name for a GitHub repository).'
+
 const SESSION_SELECTOR_NOTE =
   'A session is an agent conversation (Claude, Codex, ...) running in a terminal. <session> takes its name, a short id prefix, the full terminal id, or its resume id. Omit it to use the session in the current terminal.'
 
@@ -45,10 +48,14 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
   }),
   promptSpec({
     path: ['project', 'list'],
-    summary: 'List projects in the sidebar',
+    summary: 'List projects and the hosts each is set up on',
     usage: 'prompt project list [--json]',
     allowedFlags: [...GLOBAL_FLAGS],
-    notes: ['--json lists projects under result.items, each with id, name, kind, and path.'],
+    notes: [
+      'HOST shows where each project is set up: this machine, an SSH target, or a paired server. A project set up on several hosts lists them comma-separated, with the state of any host that is not ready, e.g. `this machine, gpu-box (not set up)`.',
+      '--json lists projects under result.items, each with id, name, kind, path, projectId, and hosts. hosts holds { id, name, state } per host; id is the value --host takes. projectId is the project id that `prompt project setup`, `prompt workspace create --project`, and `prompt automation` flags take.',
+      'A project that is set up only as a host setup, with no folder in the sidebar, is listed with its project id as id.'
+    ],
     examples: ['prompt project list', 'prompt project list --json']
   }),
   promptSpec({
@@ -72,7 +79,7 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     usage: 'prompt project show <project> [--json]',
     allowedFlags: [...GLOBAL_FLAGS, 'project'],
     positionalArgs: ['project'],
-    notes: [SELECTOR_NOTE]
+    notes: [SELECTOR_NOTE, PROJECT_ID_NOTE]
   }),
   promptSpec({
     path: ['project', 'set'],
@@ -91,6 +98,7 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     positionalArgs: ['project'],
     notes: [
       SELECTOR_NOTE,
+      PROJECT_ID_NOTE,
       '--icon <file> takes a PNG or WebP image of at most 256 KB. emoji:<emoji> and lucide:<IconName> pick a built-in icon; none restores the default.',
       '--color takes a hex color such as #22c55e; none restores the default.',
       '--base-ref sets the default base ref for new workspaces.'
@@ -107,7 +115,7 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     usage: 'prompt project remove <project> [--json]',
     allowedFlags: [...GLOBAL_FLAGS, 'project'],
     positionalArgs: ['project'],
-    notes: [SELECTOR_NOTE]
+    notes: [SELECTOR_NOTE, PROJECT_ID_NOTE]
   }),
   promptSpec({
     path: ['project', 'clone'],
@@ -132,6 +140,7 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     allowedFlags: [...GLOBAL_FLAGS, 'project', 'limit'],
     notes: [
       SELECTOR_NOTE,
+      PROJECT_ID_NOTE,
       '--json lists workspaces under result.items, each with id, name, project, branch, and path.'
     ]
   }),

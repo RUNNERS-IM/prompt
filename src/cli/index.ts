@@ -186,11 +186,14 @@ export async function main(
     }
     if (prompt && commandSpec) {
       await preResolvePromptSelectors(commandSpec, parsed.flags, getClient, { hostScoped })
-      // Moved list commands print their list as result.items, like the new ones.
-      setPromptJsonListShape(
-        commandSpec.handlerPath?.[0] !== 'prompt' && commandSpec.path.at(-1) === 'list'
-      )
     }
+    // Moved list commands print their list as result.items, like the new ones; legacy never does.
+    setPromptJsonListShape(
+      prompt &&
+        commandSpec !== undefined &&
+        commandSpec.handlerPath?.[0] !== 'prompt' &&
+        commandSpec.path.at(-1) === 'list'
+    )
     await dispatch(handlerPath, {
       flags: parsed.flags,
       get client() {

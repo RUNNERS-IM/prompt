@@ -16,6 +16,8 @@ export const SUPERSEDED_LEGACY_COMMANDS: Readonly<Record<string, string>> = {
   'repo show': 'project show',
   'repo set': 'project set',
   'repo set-base-ref': 'project set --base-ref',
+  // Durable projects merged into the sidebar list: its host column shows where each is set up.
+  'project list': 'project list',
   'worktree list': 'workspace list',
   'terminal list': 'terminal list'
 }
@@ -32,7 +34,6 @@ const EXACT_MOVES: Readonly<Record<string, string>> = {
   'open-url': 'browser open',
   'terminal switch': 'terminal focus',
   'repo search-refs': 'project refs',
-  'project list': 'project setup projects',
   'project setups': 'project setup list',
   'project setup-existing-folder': 'project setup add-folder',
   'project setup-clone': 'project setup clone',

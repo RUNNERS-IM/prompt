@@ -9,14 +9,9 @@ import { printResult } from '../format'
 import { getOptionalStringFlag, getRequiredStringFlag } from '../flags'
 import { resolveRepoPathArgument } from '../repo-path-arguments'
 import { RuntimeClientError } from '../runtime/types'
-import {
-  columnHeaders,
-  emptyListText,
-  formatTable,
-  shortenHomePath,
-  shortId
-} from '../command-tree/prompt-output'
+import { shortenHomePath, shortId } from '../command-tree/prompt-output'
 import { resolvePromptProjectSelector } from '../command-tree/prompt-selectors'
+import { formatProjectList, listProjectItems } from './prompt-project-list'
 
 export type ProjectItem = {
   id: string
@@ -36,16 +31,6 @@ export function projectItem(repo: Repo): ProjectItem {
     badgeColor: repo.badgeColor,
     icon: repo.repoIcon ?? null
   }
-}
-
-export function formatProjectList(result: { items: ProjectItem[] }): string {
-  if (result.items.length === 0) {
-    return emptyListText()
-  }
-  return formatTable(
-    columnHeaders(['id', 'name', 'kind', 'path']),
-    result.items.map((item) => [shortId(item.id), item.name, item.kind, shortenHomePath(item.path)])
-  )
 }
 
 function formatProject(result: { project: ProjectItem }): string {
@@ -149,12 +134,7 @@ const PROJECT_SET_FLAGS = ['name', 'icon', 'color', 'base-ref', 'external-worktr
 
 export const PROMPT_PROJECT_HANDLERS: Record<string, CommandHandler> = {
   'prompt project list': async ({ client, json }) => {
-    const response = await client.call<{ repos: Repo[] }>('repo.list')
-    printResult(
-      { ...response, result: { items: response.result.repos.map(projectItem) } },
-      json,
-      formatProjectList
-    )
+    printResult(await listProjectItems(client), json, formatProjectList)
   },
   'prompt project add': async ({ flags, client, cwd, json }) => {
     const path = resolveRepoPathArgument(

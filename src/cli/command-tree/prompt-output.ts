@@ -3,10 +3,16 @@ import { resolveCliLocale, type CliLocale } from './cli-surface'
 
 const SHORT_ID_LENGTH = 8
 
-/** The id body users type: terminal handles drop their `term_` prefix, identities their host. */
+/**
+ * The id body users type: terminal handles drop their `term_` prefix, identities their host,
+ * and host-local durable project ids (`repo:<repo id>`) their `repo:`.
+ */
 export function idBody(id: string): string {
   if (id.startsWith('term_')) {
     return id.slice('term_'.length)
+  }
+  if (id.startsWith('repo:')) {
+    return id.slice('repo:'.length)
   }
   // Workspace identity keys are `wt2:<host>:<instance>`; the instance is the unique part.
   const identity = /^wt2:[^:]*:(.+)$/.exec(id)
@@ -95,6 +101,7 @@ type ColumnKey =
   | 'id'
   | 'name'
   | 'kind'
+  | 'host'
   | 'path'
   | 'project'
   | 'branch'
@@ -108,6 +115,7 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     id: 'ID',
     name: 'NAME',
     kind: 'KIND',
+    host: 'HOST',
     path: 'PATH',
     project: 'PROJECT',
     branch: 'BRANCH',
@@ -120,6 +128,7 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     id: 'ID',
     name: '이름',
     kind: '종류',
+    host: '호스트',
     path: '경로',
     project: '프로젝트',
     branch: '브랜치',

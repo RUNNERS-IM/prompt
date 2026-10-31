@@ -1,3 +1,4 @@
+import type { Project } from '../../shared/project-types'
 import type { Repo } from '../../shared/repo-types'
 import type {
   RuntimeTerminalListResult,
@@ -7,6 +8,7 @@ import type {
 import type { RuntimeClient, RuntimeRpcSuccess } from '../runtime-client'
 import { RuntimeClientError } from '../runtime/types'
 import { idBody, shortenHomePath, shortId } from './prompt-output'
+import { listDurableProjects, repoLessProjects } from './prompt-project-catalog'
 
 /** Shortest id prefix accepted, like a git short sha: shorter prefixes collide too easily. */
 export const MIN_SHORT_ID_LENGTH = 6
@@ -108,12 +110,35 @@ const WORKSPACE_KEYWORDS = new Set(['active', 'current', 'all'])
 
 export type ProjectCandidate = SelectorCandidate & { repo: Repo }
 
-export function projectCandidates(repos: readonly Repo[]): ProjectCandidate[] {
-  return repos.map((repo) => ({
-    id: repo.id,
-    name: repo.displayName,
-    project: shortenHomePath(repo.path),
-    repo
+/** Sidebar repos; with `projects`, each also answers to the durable project ids that hold it. */
+export function projectCandidates(
+  repos: readonly Repo[],
+  projects: readonly Project[] = []
+): ProjectCandidate[] {
+  return repos.map((repo) => {
+    const durableIds = projects
+      .filter((project) => project.sourceRepoIds.includes(repo.id))
+      .map((project) => project.id)
+    return {
+      id: repo.id,
+      name: repo.displayName,
+      project: shortenHomePath(repo.path),
+      ...(durableIds.length > 0 ? { otherIds: durableIds } : {}),
+      repo
+    }
+  })
+}
+
+/** Durable projects, matched by their id, their repos' ids, or their name. */
+export function durableProjectCandidates(
+  projects: readonly Project[]
+): (SelectorCandidate & { durable: Project })[] {
+  return projects.map((project) => ({
+    id: project.id,
+    name: project.displayName,
+    project: project.id,
+    otherIds: project.sourceRepoIds,
+    durable: project
   }))
 }
 
@@ -121,7 +146,15 @@ export async function listRepos(client: RuntimeClient): Promise<Repo[]> {
   return (await client.call<{ repos: Repo[] }>('repo.list')).result.repos
 }
 
-/** Canonical `id:<repo id>` for name/short-id selectors; other grammar passes to the host unchanged. */
+async function listDurableProjectsOrNone(client: RuntimeClient): Promise<Project[]> {
+  // A failed lookup must not block a selector the host can still resolve itself.
+  return listDurableProjects(client).catch(() => [])
+}
+
+/**
+ * Canonical `id:<repo id>` for name, short-id, repo-id, and durable project id (`repo:<id>`,
+ * `github:owner/name`) selectors; other grammar passes to the host unchanged.
+ */
 export async function resolvePromptProjectSelector(
   client: RuntimeClient,
   value: string
@@ -132,8 +165,46 @@ export async function resolvePromptProjectSelector(
   ) {
     return value
   }
-  const match = matchSelector(value, projectCandidates(await listRepos(client)), 'project')
-  return match ? `id:${match.id}` : value
+  const repos = await listRepos(client)
+  const direct = matchSelector(value, projectCandidates(repos), 'project')
+  if (direct) {
+    return `id:${direct.id}`
+  }
+  const projects = await listDurableProjectsOrNone(client)
+  const viaProject = matchSelector(value, projectCandidates(repos, projects), 'project')
+  if (viaProject) {
+    return `id:${viaProject.id}`
+  }
+  const repoIds = new Set(repos.map((repo) => repo.id))
+  const repoLess = matchSelector(
+    value,
+    durableProjectCandidates(repoLessProjects(projects, repoIds)),
+    'project'
+  )
+  if (repoLess) {
+    throw new RuntimeClientError(
+      'not_in_sidebar',
+      `Project ${repoLess.name} (${repoLess.id}) has no folder in the sidebar, so this command cannot use it.`,
+      {
+        nextSteps: [
+          `Run \`prompt project setup list --project ${repoLess.id}\` to see where it is set up.`
+        ]
+      }
+    )
+  }
+  return value
+}
+
+/**
+ * The durable project id (`repo:<id>`, `github:owner/name`, ...) that project setup, workspace
+ * create, and automation `--project` flags take, from a name, short id, repo id, or project id.
+ */
+export async function resolvePromptDurableProjectSelector(
+  client: RuntimeClient,
+  value: string
+): Promise<string> {
+  const projects = await listDurableProjectsOrNone(client)
+  return matchSelector(value, durableProjectCandidates(projects), 'project')?.id ?? value
 }
 
 export async function resolvePromptWorkspaceSelector(

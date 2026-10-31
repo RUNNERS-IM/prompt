@@ -76,7 +76,7 @@ const PROMPT_FLAG_HELP: Readonly<Record<string, Readonly<Record<string, string>>
   },
   path: { 'project add': '--path <path>          Folder to add' },
   project: {
-    '*': '--project <project>    Project name, short id, or full id'
+    '*': '--project <project>    Project name, short id, full id, or project id'
   },
   workspace: {
     '*': '--workspace <workspace> Workspace selector: name, short id, identity:<id>, path:<path>, branch:<branch>, or active'

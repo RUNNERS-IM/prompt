@@ -3,6 +3,7 @@ import type { RuntimeClient } from '../runtime-client'
 import { REPEATED_FLAG_SEPARATOR } from '../args'
 import { RuntimeClientError } from '../runtime/types'
 import {
+  resolvePromptDurableProjectSelector,
   resolvePromptProjectSelector,
   resolvePromptTerminalSelector,
   resolvePromptWorkspaceSelector
@@ -36,19 +37,39 @@ export function applyPromptFlagAliases(
 
 type Resolver = (client: RuntimeClient, value: string) => Promise<string>
 
-function selectorResolvers(spec: CommandSpec): [flag: string, resolve: Resolver][] {
+/** hostScoped resolvers match host-local rows (repos, worktrees, terminals) and skip under --host. */
+type SelectorResolver = { flag: string; resolve: Resolver; hostScoped: boolean }
+
+// Legacy groups whose --project names a durable project (setups, workspace create, automations);
+// Linear and Jira --project flags name their own projects and pass through.
+const DURABLE_PROJECT_FLAG_GROUPS = new Set(['project', 'worktree', 'automations'])
+
+function selectorResolvers(spec: CommandSpec): SelectorResolver[] {
   const isNew = spec.handlerPath?.[0] === 'prompt'
   if (isNew) {
     // New handlers resolve --project themselves; --workspace feeds shared worktree helpers.
-    return [['workspace', resolvePromptWorkspaceSelector]]
+    return [{ flag: 'workspace', resolve: resolvePromptWorkspaceSelector, hostScoped: true }]
   }
-  const resolvers: [string, Resolver][] = [
-    ['worktree', resolvePromptWorkspaceSelector],
-    ['repo', resolvePromptProjectSelector]
+  const resolvers: SelectorResolver[] = [
+    { flag: 'worktree', resolve: resolvePromptWorkspaceSelector, hostScoped: true },
+    { flag: 'repo', resolve: resolvePromptProjectSelector, hostScoped: true }
   ]
+  const legacyGroup = spec.handlerPath?.[0] ?? spec.path[0]
+  if (DURABLE_PROJECT_FLAG_GROUPS.has(legacyGroup) && spec.allowedFlags.includes('project')) {
+    // Durable ids are the same on every host, so --host does not change the answer.
+    resolvers.push({
+      flag: 'project',
+      resolve: resolvePromptDurableProjectSelector,
+      hostScoped: false
+    })
+  }
   // Orchestration --terminal names the calling agent; only terminal commands take a target here.
   if (spec.path[0] === 'terminal') {
-    resolvers.push(['terminal', (client, value) => resolvePromptTerminalSelector(client, value)])
+    resolvers.push({
+      flag: 'terminal',
+      resolve: (client, value) => resolvePromptTerminalSelector(client, value),
+      hostScoped: true
+    })
   }
   return resolvers
 }
@@ -63,11 +84,11 @@ export async function preResolvePromptSelectors(
   client: () => RuntimeClient,
   options: { hostScoped: boolean }
 ): Promise<void> {
-  // A --host scope narrows repo matches on the host; resolving here would ignore it.
-  if (options.hostScoped) {
-    return
-  }
-  for (const [flag, resolve] of selectorResolvers(spec)) {
+  for (const { flag, resolve, hostScoped } of selectorResolvers(spec)) {
+    // A --host scope narrows repo matches on the host; resolving here would ignore it.
+    if (options.hostScoped && hostScoped) {
+      continue
+    }
     const value = flags.get(flag)
     if (typeof value !== 'string' || !value || value.includes(REPEATED_FLAG_SEPARATOR)) {
       continue

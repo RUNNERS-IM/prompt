@@ -58,6 +58,9 @@ const REPOS = [
   repo('f9e8d7c6-0000-4000-8000-000000000003', 'web', '/tmp/web')
 ]
 
+// Older hosts and most tests have no durable catalog; the list still works from repos alone.
+const EMPTY_CATALOG = { 'project.list': { projects: [] }, 'projectHostSetup.list': { setups: [] } }
+
 function terminal(handle: string, overrides: Record<string, unknown> = {}) {
   return {
     handle,
@@ -173,7 +176,7 @@ describe('prompt command surface', () => {
   })
 
   it('prints new lists as result.items with id and name', async () => {
-    routeCalls({ 'repo.list': { repos: REPOS } })
+    routeCalls({ 'repo.list': { repos: REPOS }, ...EMPTY_CATALOG })
     const { stdout, stderr } = await run(['project', 'list', '--json'], 'prompt')
 
     expect(stderr).toBe('')
@@ -192,12 +195,12 @@ describe('prompt command surface', () => {
   })
 
   it('prints a human table with a header and short ids', async () => {
-    routeCalls({ 'repo.list': { repos: REPOS } })
+    routeCalls({ 'repo.list': { repos: REPOS }, ...EMPTY_CATALOG })
     const { stdout } = await run(['project', 'list'], 'prompt')
     const lines = stdout.trim().split('\n')
 
-    expect(lines[0]).toMatch(/^ID\s+NAME\s+KIND\s+PATH$/)
-    expect(lines[3]).toMatch(/^f9e8d7c6\s+web\s+git\s+\/tmp\/web$/)
+    expect(lines[0]).toMatch(/^ID\s+NAME\s+KIND\s+HOST\s+PATH$/)
+    expect(lines[3]).toMatch(/^f9e8d7c6\s+web\s+git\s+this machine\s+\/tmp\/web$/)
   })
 
   it('refuses an ambiguous name and lists the candidates', async () => {
