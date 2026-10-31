@@ -33,6 +33,7 @@ function fixture() {
   directories.push(root)
   for (const file of [
     'cli/index.js',
+    'cli/prompt.js',
     'main/index.js',
     'preload/index.js',
     'renderer/index.html',

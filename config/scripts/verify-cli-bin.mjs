@@ -15,6 +15,25 @@ function buildOutPackageJson(version, commit) {
   )}\n`
 }
 
+function verifyBinEntry(projectDir, name, binTarget) {
+  if (typeof binTarget !== 'string' || binTarget.length === 0) {
+    throw new Error(`package.json must declare bin.${name}`)
+  }
+  const binPath = path.resolve(projectDir, binTarget)
+  const stats = statSync(binPath)
+  if (!stats.isFile()) {
+    throw new Error(`bin.${name} target is not a file: ${binTarget}`)
+  }
+  if (stats.size === 0) {
+    throw new Error(`bin.${name} target is empty: ${binTarget}`)
+  }
+  const content = readFileSync(binPath, 'utf8')
+  if (!content.startsWith('#!/usr/bin/env node\n')) {
+    throw new Error(`bin.${name} target must start with a Node shebang: ${binTarget}`)
+  }
+  return { name, binPath, binTarget, stats }
+}
+
 export function verifyPackageCliBin({
   projectDir = path.resolve(import.meta.dirname, '..', '..'),
   fixExecutable = false,
@@ -24,24 +43,14 @@ export function verifyPackageCliBin({
 } = {}) {
   const packageJsonPath = path.join(projectDir, 'package.json')
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
-  const binTarget = packageJson.bin?.orca
-  if (typeof binTarget !== 'string' || binTarget.length === 0) {
+  if (typeof packageJson.bin?.orca !== 'string' || packageJson.bin.orca.length === 0) {
     throw new Error('package.json must declare bin.orca')
   }
-
-  const binPath = path.resolve(projectDir, binTarget)
-  const stats = statSync(binPath)
-  if (!stats.isFile()) {
-    throw new Error(`bin.orca target is not a file: ${binTarget}`)
-  }
-  if (stats.size === 0) {
-    throw new Error(`bin.orca target is empty: ${binTarget}`)
-  }
-
-  const content = readFileSync(binPath, 'utf8')
-  if (!content.startsWith('#!/usr/bin/env node\n')) {
-    throw new Error(`bin.orca target must start with a Node shebang: ${binTarget}`)
-  }
+  // `prompt` is the renamed entrypoint; `orca` stays as the legacy alias until it is removed.
+  const bins = ['orca', 'prompt']
+    .filter((name) => packageJson.bin?.[name] !== undefined)
+    .map((name) => verifyBinEntry(projectDir, name, packageJson.bin[name]))
+  const { binPath } = bins[0]
 
   const outPackageJsonPath = path.join(projectDir, 'out', 'package.json')
   if (fixPackageJson) {
@@ -72,11 +81,13 @@ export function verifyPackageCliBin({
     )
   }
 
-  if (process.platform !== 'win32' && (stats.mode & 0o111) === 0) {
-    if (!fixExecutable) {
-      throw new Error(`bin.orca target is not executable: ${binTarget}`)
+  for (const bin of bins) {
+    if (process.platform !== 'win32' && (bin.stats.mode & 0o111) === 0) {
+      if (!fixExecutable) {
+        throw new Error(`bin.${bin.name} target is not executable: ${bin.binTarget}`)
+      }
+      chmodSync(bin.binPath, bin.stats.mode | 0o755)
     }
-    chmodSync(binPath, stats.mode | 0o755)
   }
 
   if (runHelp) {

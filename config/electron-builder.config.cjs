@@ -628,6 +628,10 @@ module.exports = {
         to: 'bin/orca'
       },
       {
+        from: 'resources/darwin/bin/prompt',
+        to: 'bin/prompt'
+      },
+      {
         from: 'node_modules/agent-browser/bin/agent-browser-darwin-${arch}',
         to: 'agent-browser-darwin-${arch}'
       },
