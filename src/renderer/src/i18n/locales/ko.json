@@ -22582,6 +22582,17 @@
       "closeNamed": "'{{name}}' 닫기",
       "copyToNewWindow": "복사해서 새 창에서 열기"
     },
+    "projectRemoval": {
+      "menuItem": "프로젝트를 목록에서 빼기…",
+      "title": "'{{name}}' 프로젝트를 목록에서 뺄까요?",
+      "wholeProject": "세션 하나가 아니라 프로젝트 전체가 빠집니다.",
+      "runningSessions_other": "돌고 있는 세션 {{count}}개가 모두 꺼집니다.",
+      "filesLocal": "폴더와 파일은 그대로 남습니다.",
+      "filesSsh": "폴더와 파일은 {{host}}에 그대로 남습니다. 그 SSH 호스트를 다시 추가하면 되살릴 수 있습니다.",
+      "filesVmRecipe": "환경과 파일을 영구히 지울지는 이 프로젝트의 VM 레시피가 정합니다.",
+      "closeOneSession": "세션 하나만 끄려면 세션 줄의 × 를 쓰세요.",
+      "confirm": "프로젝트 빼기"
+    },
     "onboarding": {
       "beforeYouStart": {
         "title": "시작하기 전에",

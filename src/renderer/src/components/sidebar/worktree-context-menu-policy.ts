@@ -85,6 +85,25 @@ export function shouldIgnoreNestedWorktreeContextMenuScope(
   return closestScope != null && closestScope !== currentTarget
 }
 
+// Agent rows (full and compact) and Prompt terminal rows all carry one of these classes.
+const SESSION_ROW_SELECTOR = '.agent-disclosure-row, .compact-agent-row'
+
+/**
+ * True when a right-click landed on a session row. Such a click often means "this one session",
+ * so the workspace menu it falls back to (helper rows, closed sessions kept for history) must not
+ * offer removing the whole project; that stays on the project header.
+ */
+export function isSessionRowContextMenuTarget(target: EventTarget | null): boolean {
+  const maybeElement = target as {
+    closest?: (selector: string) => Element | null
+    parentElement?: { closest?: (selector: string) => Element | null }
+  } | null
+  return (
+    (maybeElement?.closest?.(SESSION_ROW_SELECTOR) ??
+      maybeElement?.parentElement?.closest?.(SESSION_ROW_SELECTOR)) != null
+  )
+}
+
 export function shouldSuppressContextMenuFollowUpClick(
   contextMenuOpenedAt: number,
   now: number

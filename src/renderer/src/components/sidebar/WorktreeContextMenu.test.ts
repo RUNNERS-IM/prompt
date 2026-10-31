@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   isContextWorktreeDeletable,
+  isSessionRowContextMenuTarget,
   shouldUseNativeContextMenu,
   shouldIgnoreNestedWorktreeContextMenuScope,
   shouldRemoveProjectFromContextMenu,
@@ -110,6 +111,28 @@ describe('shouldUseNativeContextMenu', () => {
     } as unknown as EventTarget
 
     expect(shouldUseNativeContextMenu(target)).toBe(false)
+  })
+})
+
+describe('isSessionRowContextMenuTarget', () => {
+  const rowTarget = (matches: boolean) =>
+    ({
+      closest: (selector: string) =>
+        matches && selector.includes('.compact-agent-row') ? ({} as Element) : null
+    }) as unknown as EventTarget
+
+  it('recognizes a click inside a session row', () => {
+    expect(isSessionRowContextMenuTarget(rowTarget(true))).toBe(true)
+  })
+
+  it('recognizes a text node inside a session row', () => {
+    const target = { parentElement: rowTarget(true) } as unknown as EventTarget
+    expect(isSessionRowContextMenuTarget(target)).toBe(true)
+  })
+
+  it('leaves other targets, such as the project header, alone', () => {
+    expect(isSessionRowContextMenuTarget(rowTarget(false))).toBe(false)
+    expect(isSessionRowContextMenuTarget(null)).toBe(false)
   })
 })
 

@@ -184,7 +184,7 @@ export const RepoHeaderProjectActionsMenu = React.memo(function RepoHeaderProjec
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive" onSelect={() => actions.onRemoveProject(repo)}>
           <Trash2 className="size-3.5" />
-          {translate('auto.components.sidebar.WorktreeList.c83968f87f', 'Remove Project')}
+          {translate('prompt.projectRemoval.menuItem', 'Remove project from list…')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
