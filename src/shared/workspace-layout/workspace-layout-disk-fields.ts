@@ -132,7 +132,9 @@ const ROW = {
   agentLaunchPane: 'unwritten',
   pendingActivationSpawn: 'unwritten',
   recovery: 'unwritten',
-  restoredFromSession: 'unwritten'
+  restoredFromSession: 'unwritten',
+  // Layout-owner builds refuse moving a terminal between workspaces, so main's model never holds one.
+  adoptedPtyIds: 'unwritten'
 } as const satisfies Record<keyof TerminalTab, DiskFieldWritten>
 
 const ENTRY_FIELDS = {

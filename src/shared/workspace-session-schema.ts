@@ -63,6 +63,8 @@ export const terminalTabSchema = z.object({
   createdAt: z.number(),
   generation: z.number().optional(),
   startupCwd: z.string().min(1).optional(),
+  // Terminals this tab took from another workspace; malformed lists drop rather than reset the tab.
+  adoptedPtyIds: z.array(z.string().min(1)).max(64).optional().catch(undefined),
   // Retain the idle agent icon before hooks fire; unknown IDs degrade to absent without resetting the session.
   launchAgent: z
     .custom<TuiAgent>((v) => isTuiAgent(v))
