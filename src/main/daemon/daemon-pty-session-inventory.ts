@@ -11,7 +11,7 @@ import { recordAuthenticatedInventory } from './daemon-audit-classifier'
 import { isMissingWindowsNamedPipeError } from './daemon-endpoint-errors'
 import { DaemonPtyProcessInspection } from './daemon-pty-process-inspection'
 import { remainingDaemonRequestTimeoutMs } from './daemon-request-deadline'
-import { parsePtySessionId } from '../../shared/pty-session-id-format'
+import { ptyOwnerWorktreeId } from '../../shared/pty-session-id-format'
 import type { ListSessionsResult, SessionInfo } from './types'
 import { PtyProcessListAdmission } from '../providers/pty-process-list-admission'
 import type { PtyProcessInfo } from '../providers/pty-provider-contract'
@@ -38,7 +38,8 @@ export abstract class DaemonPtySessionInventory extends DaemonPtyProcessInspecti
               continue
             }
             aliveSessionIds.set(session.sessionId, session.incarnationId)
-            const { worktreeId } = parsePtySessionId(session.sessionId)
+            // Restart inventory: a moved terminal reports the workspace that took it.
+            const worktreeId = ptyOwnerWorktreeId(session.sessionId)
             processes.push(
               admission.admit({
                 id: session.sessionId,

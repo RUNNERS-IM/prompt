@@ -1,7 +1,7 @@
 import { getRepoExecutionHostId, LOCAL_EXECUTION_HOST_ID } from '../../shared/execution-host'
 import { throwIfSignalAborted, waitForPromiseWithSignal } from '../../shared/abort-signal-reason'
 import { mapSettledWithConcurrency } from '../../shared/map-with-concurrency'
-import { parsePtySessionId } from '../../shared/pty-session-id-format'
+import { ptyOwnerWorktreeId } from '../../shared/pty-session-id-format'
 import { isFolderRepo } from '../../shared/repo-kind'
 import type { Repo } from '../../shared/repo-types'
 import { splitWorktreeId, worktreeIdentityKey } from '../../shared/worktree/id'
@@ -96,7 +96,7 @@ async function hydrateLocalPtyRegistry(
       if (alreadyRegistered.has(info.sessionId)) {
         continue
       }
-      const parsed = splitWorktreeId(parsePtySessionId(info.sessionId).worktreeId ?? '')
+      const parsed = splitWorktreeId(ptyOwnerWorktreeId(info.sessionId) ?? '')
       if (!parsed || resolvedRepoIds.has(parsed.repoId)) {
         continue
       }
@@ -169,7 +169,8 @@ async function hydrateLocalPtyRegistry(
     if (alreadyRegistered.has(info.sessionId)) {
       continue
     }
-    const { worktreeId } = parsePtySessionId(info.sessionId)
+    // A moved terminal registers under the workspace that now holds its tab.
+    const worktreeId = ptyOwnerWorktreeId(info.sessionId)
     if (!worktreeId || !isVerifiedLocalWorktree(worktreeId)) {
       continue
     }

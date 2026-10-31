@@ -1,6 +1,7 @@
 import { registerStructuredSelectionCatalogStore } from '@/lib/structured-agent-session-selection-controller'
 import { canOfferHttpLinkGroupAction } from '@/lib/http-link-in-group-availability'
 import { create, type StateCreator } from 'zustand'
+import { setMovedTerminalOwnerSession } from '../../../shared/moved-terminal-owner'
 import type { AppState } from './types'
 import { createRepoSlice } from './slices/repos'
 import { createSparsePresetsSlice } from './slices/sparse-presets'
@@ -155,6 +156,8 @@ registerStructuredSelectionCatalogStore({
   read: useAppStore.getState,
   subscribe: useAppStore.subscribe
 })
+// Terminal ownership checks in this window read moved shells from the live tabs.
+setMovedTerminalOwnerSession(() => useAppStore.getState())
 registerHttpLinkStoreAccessor(() => useAppStore.getState(), useAppStore.subscribe)
 registerHttpLinkGroupActionAvailability((request) =>
   canOfferHttpLinkGroupAction(useAppStore.getState(), request)

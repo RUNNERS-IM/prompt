@@ -80,6 +80,11 @@ export const TerminalReveal = z.object({
   executionHostId: OptionalExecutionHostId
 })
 
+/** `terminal.moveToWorkspace`: the terminal's tab, shell and all, into the workspace `worktree` names. */
+export const TerminalMoveToWorkspace = TerminalHandle.extend({
+  worktree: requiredString('Missing target workspace').pipe(z.string().max(1024))
+})
+
 /** Only inspectProcess accepts the decision-bearing process scan; sibling handle methods must not acquire this option. */
 export const TerminalInspectProcess = TerminalHandle.extend({
   // Additive request member understood by newer hosts; legacy hosts safely ignore it.

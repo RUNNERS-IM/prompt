@@ -1,7 +1,8 @@
-import type { BrowserWindow } from 'electron'
+import { app, type BrowserWindow } from 'electron'
 import { registerCoreHandlers } from '../ipc/register-core-handlers/register-core-handlers'
 import { attachMainWindowServices } from '../window/attach-main-window-services'
 import { initTccPromptNotice } from '../macos-tcc-prompt-notice'
+import { scheduleLegacyComputerUseTccCleanup } from '../computer/macos-computer-use-legacy-tcc-cleanup'
 import { resolveUpdateInstallMode } from '../updater'
 import { desktopConnectorCloud } from './main-process-connector-startup'
 import { mainProcessState as state } from './main-process-state'
@@ -154,6 +155,8 @@ export function attachMainWindowCoreServices(
   )
   // Attach durable diagnostic pulls now, defer process launch past first paint.
   initTccPromptNotice(window, { deferWatchUntilReadyToShow: true })
+  // Computer Use now shares Prompt's TCC rows; drop the old helper's once so only one remains.
+  scheduleLegacyComputerUseTccCleanup(app.getPath('userData'))
   rateLimits.attach(window)
   // Quota probes spawn CLIs/use network; defer to show/focus refresh so they do not compete with first paint.
   rateLimits.start({ fetchImmediately: false })

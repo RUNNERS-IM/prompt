@@ -1,5 +1,6 @@
 import { OrcaRuntimeWithWaitForLeafPtyId } from '../view/renderer-terminal-snapshot'
 import type { RuntimeTerminalFocus } from '../../../../shared/runtime-types'
+import type { RuntimeTerminalWorkspaceMove } from '../../../../shared/shell-tab-workspace-move-types'
 import type {
   RuntimeTerminalReveal,
   TerminalPaneRevealTarget
@@ -181,6 +182,24 @@ export abstract class OrcaRuntimeWithFocusTerminal extends OrcaRuntimeWithWaitFo
       throw new Error('renderer_unavailable')
     }
     return { ...target, navigated: await notifier.revealTerminalPane(target) }
+  }
+
+  /**
+   * Moves the tab holding terminal `handle`, shell and all, into the workspace `worktreeSelector`
+   * names. The window decides and applies the move (moveShellTabToWorkspace), so the sidebar drag
+   * and this call follow the same rules; a refusal comes back as `moved: false` with its reason.
+   */
+  async moveTerminalToWorkspace(
+    handle: string,
+    worktreeSelector: string
+  ): Promise<RuntimeTerminalWorkspaceMove> {
+    const { tabId } = await this.focusTerminal(handle, { navigateHost: false })
+    const target = await this.resolveWorkspaceSelector(worktreeSelector)
+    const notifier = this.notifier
+    if (!notifier?.moveShellTabToWorkspace) {
+      return { handle, tabId, moved: false, reason: 'renderer-unavailable' }
+    }
+    return { handle, tabId, ...(await notifier.moveShellTabToWorkspace(tabId, target.id)) }
   }
 
   protected getPtyIdsForExplicitTabClose(worktreeId: string, tabId: string): string[] {

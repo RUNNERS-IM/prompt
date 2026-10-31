@@ -12,6 +12,7 @@ import {
 import { hashWorktreeId } from './terminal-history-id'
 import { deleteWslFishHistoryFile } from './wsl-fish-history-cleanup'
 import { deferUntilWslDistroRunning } from './wsl-background-distro-gate'
+import { worktreeIdsNamedByMovedTerminals } from '../shared/moved-terminal-owner'
 
 const pendingHistoryTreeRemovals = new Map<string, Promise<void>>()
 export const MAX_PENDING_HISTORY_TREE_REMOVALS = 64
@@ -316,6 +317,10 @@ export async function flushPendingWorktreeHistoryDeletions(): Promise<void> {
 
 // Never recursively remove history on the caller's critical path.
 export function deleteWorktreeHistoryDir(worktreeId: string): void {
+  // A shell moved to another workspace still writes this history file; GC prunes it once that shell is gone.
+  if (worktreeIdsNamedByMovedTerminals().has(worktreeId)) {
+    return
+  }
   const worktreeHash = hashWorktreeId(worktreeId)
   const historyRoot = getHistoryRoot()
   try {

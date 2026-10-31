@@ -1,7 +1,7 @@
 /** Merge local/paired-host samples and daemon sessions by project/workspace; unsampled metrics are null and paired rows are read-only. */
 
 import type { MemorySnapshot, WorktreeMemory } from '../../../../shared/process-stats-types'
-import { parsePtySessionId } from '../../../../shared/pty-session-id-format'
+import { ptyOwnerWorktreeId } from '../../../../shared/pty-session-id-format'
 import { getRepoIdFromWorktreeId } from '../../../../shared/worktree/id'
 import type {
   DaemonSession,
@@ -172,7 +172,7 @@ export function mergeSnapshotAndSessions(
 
     // Prefer daemon metadata; older publishers may only encode the workspace in the session id.
     if (!worktreeId) {
-      worktreeId = session.worktreeId || parsePtySessionId(session.id).worktreeId
+      worktreeId = session.worktreeId || ptyOwnerWorktreeId(session.id)
     }
 
     const isUnattributed = !worktreeId

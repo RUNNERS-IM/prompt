@@ -26,6 +26,7 @@ import { buildPromptSessionItems, buildPromptSessionTabSlots } from './prompt-se
 import {
   PromptSessionDragItem,
   PromptSessionDragList,
+  type PromptSessionDragPane,
   type PromptSessionDragSection
 } from './prompt-session-row-drag'
 
@@ -121,9 +122,31 @@ export function PromptWorktreeSessionRows({
       sections: grouped
     }
   }, [agents, tabs, groups, unifiedTabs])
+  // The tab's own conversation panes (not helpers drawn under it); a drop on another workspace copies one.
+  const panesOfTab = useCallback(
+    (tabId: string): PromptSessionDragPane[] | null => {
+      const rows = items.get(tabId)?.agents
+      if (!rows) {
+        return null
+      }
+      return rows
+        .filter((row) => row.tab.id === tabId && !row.childRow && row.rowSource !== 'subagent')
+        .map((row) => ({ paneKey: row.paneKey, agentType: row.agentType }))
+    },
+    [items]
+  )
 
   return (
-    <div className="flex min-w-0 flex-col gap-0.5" data-prompt-session-rows="">
+    <div
+      className={cn(
+        'flex min-w-0 flex-col gap-0.5 rounded-sm',
+        // Lit while a session row dragged from another workspace would be copied here.
+        'data-[prompt-session-drop-target=true]:bg-worktree-sidebar-accent/60 data-[prompt-session-drop-target=true]:ring-1 data-[prompt-session-drop-target=true]:ring-inset data-[prompt-session-drop-target=true]:ring-worktree-sidebar-ring/60'
+      )}
+      data-prompt-session-rows=""
+      // Read by the drop lookup (PROMPT_SESSION_DROP_WORKTREE_ATTR).
+      data-prompt-session-drop-worktree={worktree.id}
+    >
       {hasSiblingWorktrees ? (
         <div
           className={cn(
@@ -147,6 +170,7 @@ export function PromptWorktreeSessionRows({
         worktreeId={worktree.id}
         orderedTabIds={orderedTabIds}
         sections={sections}
+        panesOfTab={panesOfTab}
       >
         {(section) =>
           section.tabIds.map((tabId) => {

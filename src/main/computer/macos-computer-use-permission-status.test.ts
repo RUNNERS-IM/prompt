@@ -180,7 +180,9 @@ describe('getComputerUsePermissionStatus', () => {
       message: 'Timed out launching permission helper'
     })
 
-    await vi.advanceTimersByTimeAsync(5000)
+    await vi.advanceTimersByTimeAsync(9_999)
+    expect(settled).toBe(false)
+    await vi.advanceTimersByTimeAsync(1)
 
     expect(settled).toBe(true)
     await rejection
@@ -192,7 +194,7 @@ describe('getComputerUsePermissionStatus', () => {
     })
   })
 
-  it('reads permission status through the helper app identity', async () => {
+  it('reads permission status by spawning the helper directly', async () => {
     const { getComputerUsePermissionStatus } = await import('./macos-computer-use-permissions')
     mockPermissionStatus('{"accessibility":"granted","screenshots":"not-granted"}')
 
@@ -205,15 +207,10 @@ describe('getComputerUsePermissionStatus', () => {
         { id: 'screenshots', status: 'not-granted' }
       ]
     })
+    // No LaunchServices hop: TCC must answer for Prompt, which also runs the agent helper.
     expect(spawn).toHaveBeenCalledWith(
-      '/usr/bin/open',
-      [
-        '-n',
-        '/Applications/Prompt Computer Use.app',
-        '--args',
-        '--permission-status-file',
-        permissionStatusPath
-      ],
+      '/Applications/Prompt Computer Use.app/Contents/MacOS/orca-computer-use-macos',
+      ['--permission-status-file', permissionStatusPath],
       { stdio: ['ignore', 'pipe', 'pipe'] }
     )
     expect(spawnSync).not.toHaveBeenCalled()

@@ -1,6 +1,7 @@
 /** Share minted-session parsing across main/renderer hydration and memory attribution; divergent copies caused REMOTE mislabels. */
 
 import { parseWorkspaceKey } from './workspace-scope'
+import { movedTerminalOwnerOf } from './moved-terminal-owner'
 
 export const PTY_SESSION_ID_SEPARATOR = '@@'
 export const WORKTREE_ID_SEPARATOR = '::'
@@ -23,8 +24,20 @@ export function parsePtySessionId(sessionId: string): { worktreeId: string | nul
   return { worktreeId: candidate }
 }
 
-/** False only for an id minted for another worktree; an id in no minted form names no owner. */
+/**
+ * The workspace a terminal belongs to now: the one a moved terminal was dropped on, else the one its
+ * id was minted for. Use this, not parsePtySessionId, wherever ownership decides an action.
+ */
+export function ptyOwnerWorktreeId(sessionId: string): string | null {
+  return movedTerminalOwnerOf(sessionId) ?? parsePtySessionId(sessionId).worktreeId
+}
+
+/** False only for an id owned by another worktree; an id in no minted form names no owner. */
 export function isPtySessionIdOwnedByWorktree(sessionId: string, worktreeId: string): boolean {
+  const moved = movedTerminalOwnerOf(sessionId)
+  if (moved !== null) {
+    return moved === worktreeId
+  }
   const separatorIdx = sessionId.lastIndexOf(PTY_SESSION_ID_SEPARATOR)
   return separatorIdx === -1 || sessionId.slice(0, separatorIdx) === worktreeId
 }

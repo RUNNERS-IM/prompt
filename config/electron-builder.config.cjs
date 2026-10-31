@@ -799,8 +799,8 @@ async function signMacComputerUseHelper(helperAppPath, packager) {
   if (!identity) {
     throw new Error('Missing signing identity for Prompt Computer Use helper app')
   }
-  // Why: TCC grants attach to this nested app's code identity. Sign it before
-  // the outer Orca.app is sealed so production builds preserve that identity.
+  // Why: nested code must be signed before the outer Prompt.app is sealed. TCC grants
+  // belong to Prompt, which spawns this helper as its responsible child.
   execFileSync('codesign', codesignArgs(identity, helperAppPath), { stdio: 'inherit' })
   execFileSync('codesign', ['--verify', '--deep', '--strict', helperAppPath], {
     stdio: 'inherit'

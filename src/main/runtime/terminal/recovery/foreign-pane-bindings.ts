@@ -4,6 +4,7 @@ import { isPtySessionIdOwnedByWorktree } from '../../../../shared/pty-session-id
 import { isRemoteRuntimePtyId } from '../../../../shared/remote-runtime/remote-runtime-pty-id'
 import { parseAppSshPtyId } from '../../../../shared/ssh-pty-id'
 import type { WorkspaceSessionState } from '../../../../shared/workspace-session-state-types'
+import { movedTerminalOwnersOf } from '../../../../shared/moved-terminal-owner'
 
 /** An SSH id names its connection, never a workspace, so only a local minted id can be foreign. */
 export function isPtyIdMintedForAnotherWorkspace(ptyId: string, worktreeId: string): boolean {
@@ -18,11 +19,15 @@ export type PaneBinding = { worktreeId: string; tabId: string; leafId: string; p
 
 /** Every pane `session` binds to a terminal minted for another workspace. */
 export function panesBoundToAnotherWorkspace(session: WorkspaceSessionState): PaneBinding[] {
+  // A terminal this session's own tab took from another workspace is home, not foreign.
+  const movedOwners = movedTerminalOwnersOf(session)
   return Object.entries(session.tabsByWorktree ?? {}).flatMap(([worktreeId, rows]) =>
     rows.flatMap((row) =>
       Object.entries(session.terminalLayoutsByTabId?.[row.id]?.ptyIdsByLeafId ?? {}).flatMap(
         ([leafId, ptyId]) =>
-          ptyId && isPtyIdMintedForAnotherWorkspace(ptyId, worktreeId)
+          ptyId &&
+          movedOwners.get(ptyId) !== worktreeId &&
+          isPtyIdMintedForAnotherWorkspace(ptyId, worktreeId)
             ? [{ worktreeId, tabId: row.id, leafId, ptyId }]
             : []
       )

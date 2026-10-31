@@ -14,7 +14,8 @@ const entitlementsPath = path.join(
   'build',
   'entitlements.computer-use.mac.plist'
 )
-const bundleId = process.env.ORCA_COMPUTER_MACOS_BUNDLE_ID ?? 'com.stablyai.orca.computer-use'
+// Prompt spawns the helper directly, so TCC charges its access to Prompt; this id names no row.
+const bundleId = process.env.ORCA_COMPUTER_MACOS_BUNDLE_ID ?? 'im.runners.prompt.computer-use'
 const displayName = 'Prompt Computer Use'
 const signingIdentity = resolveSigningIdentity()
 const universalTriples = ['arm64-apple-macosx', 'x86_64-apple-macosx']
@@ -134,9 +135,9 @@ function infoPlist() {
   <key>LSUIElement</key>
   <true/>
   <key>NSAccessibilityUsageDescription</key>
-  <string>Prompt Computer Use needs Accessibility permission to read and interact with app interfaces when you ask Prompt to use apps.</string>
+  <string>Prompt needs Accessibility permission to read and interact with app interfaces when you ask Prompt to use apps.</string>
   <key>NSScreenCaptureUsageDescription</key>
-  <string>Prompt Computer Use needs Screen Recording permission to capture app windows when you ask Prompt to inspect your screen.</string>
+  <string>Prompt needs Screen Recording permission to capture app windows when you ask Prompt to inspect your screen.</string>
 </dict>
 </plist>
 `

@@ -102,7 +102,8 @@ export async function startMacOSNativeProviderSocket({
   const socketToken = randomUUID()
   const socketTokenPath = join(socketDirectory, 'provider.token')
   writeFileSync(socketTokenPath, socketToken, { encoding: 'utf8', mode: 0o600 })
-  // Spawn the signed helper directly so TCC does not charge LaunchServices activity to Orca.app.
+  // Spawn directly, never via LaunchServices: the helper stays Prompt's responsible child, so TCC
+  // checks Prompt's own Accessibility and Screen Recording grants instead of a second app row.
   const provider = spawnProvider(helperExecutablePath, socketPath, socketTokenPath)
   // Own the helper before connecting so shutdown during startup cannot strand it.
   providerProcess.adopt(provider)

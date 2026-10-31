@@ -4,6 +4,7 @@ import { revealWorkspaceSurface } from '@/lib/workspace-surface-reveal'
 import { focusTerminalInitiatedTab } from '@/hooks/ipc-events/terminal-command-state'
 import { persistAgentLaunchTabOrder } from '@/lib/launch-agent-tab-order'
 import {
+  isPromptClaudeSessionCopyCommand,
   PROMPT_MAIN_WINDOW_KEY,
   PROMPT_OPEN_REPO_QUERY,
   PROMPT_WINDOW_QUERY,
@@ -85,6 +86,23 @@ function dropOpenRepoQuery(): void {
   } catch {
     // Keeping the query only means a reload selects the project again.
   }
+}
+
+/**
+ * Copy of a Claude session in this window (a sidebar row dropped on another workspace): a new tab
+ * in that workspace runs the copy command, then that workspace and tab are shown. Null when
+ * `command` is not one promptClaudeSessionCopyCommand built.
+ */
+export function openPromptSessionCopyInWorkspace(
+  worktreeId: string,
+  command: string
+): string | null {
+  if (!isPromptClaudeSessionCopyCommand(command)) {
+    return null
+  }
+  const tabId = startTabWithCommand(worktreeId, command)
+  showTab(worktreeId, tabId)
+  return tabId
 }
 
 /**

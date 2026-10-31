@@ -69,6 +69,9 @@ export type TerminalTab = {
   forceHostRuntime?: boolean
   /** An explorer cwd below root retains workspace tab/session ownership. */
   startupCwd?: string
+  /** Terminals this tab took from another workspace (sidebar or CLI move). Their ids still name the
+   *  first workspace; shared/moved-terminal-owner.ts makes this tab's workspace their owner. */
+  adoptedPtyIds?: string[]
   /** Show the launched agent’s icon before its first hook; live status later wins. Plain terminals/manually started agents omit this. */
   launchAgent?: TuiAgent
   /** Session-only agent.launch pane reservation, cleared on attachment/return to an ordinary terminal.

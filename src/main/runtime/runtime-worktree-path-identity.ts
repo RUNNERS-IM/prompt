@@ -5,7 +5,7 @@ import {
   isPathInsideOrEqual,
   normalizeRuntimePathForComparison
 } from '../../shared/cross-platform-path'
-import { parsePtySessionId } from '../../shared/pty-session-id-format'
+import { ptyOwnerWorktreeId } from '../../shared/pty-session-id-format'
 import { splitWorktreeId, worktreeIdentityKey, worktreeIdsEqual } from '../../shared/worktree/id'
 import { normalizeLocalBranchName } from './runtime-worktree-selection'
 
@@ -69,8 +69,9 @@ export function resolveTerminalSessionWorktreeId(
   return matches.length > 1 ? null : (matches[0] ?? targetWorktreeId)
 }
 
+/** The workspace a terminal belongs to: the one that took a moved terminal, else its id's prefix. */
 export function inferWorktreeIdFromPtyId(ptyId: string): string | null {
-  return parsePtySessionId(ptyId).worktreeId
+  return ptyOwnerWorktreeId(ptyId)
 }
 
 export function parseRuntimeWorktreeId(

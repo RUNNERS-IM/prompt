@@ -22,6 +22,7 @@ import type {
   WorktreeRemoteBranchConflictEvent
 } from '../../shared/worktree/base-ref-drift-types'
 import type { CreateWorktreeResult } from '../../shared/worktree/create-types'
+import type { ShellTabMoveResult } from '../../shared/shell-tab-workspace-move-types'
 import type { WorktreeStartupLaunch } from '../../shared/worktree/launch-types'
 import type {
   RuntimeBrowserDriverState,
@@ -130,6 +131,8 @@ export type RuntimeNotifier = {
   focusTerminal(tabId: string, worktreeId: string, leafId?: string | null): void
   /** Raises the window onto a pane it shows; resolves false when the window does not know the worktree. */
   revealTerminalPane?(target: TerminalPaneRevealTarget): Promise<boolean>
+  /** Moves an idle shell tab with its terminals into another workspace (moveShellTabToWorkspace in the window). */
+  moveShellTabToWorkspace?(tabId: string, targetWorktreeId: string): Promise<ShellTabMoveResult>
   focusEditorTab?(tabId: string, worktreeId: string): void
   closeSessionTab?(tabId: string, worktreeId: string): void | Promise<void>
   moveSessionTab?(worktreeId: string, move: RuntimeMobileSessionTabMove): void

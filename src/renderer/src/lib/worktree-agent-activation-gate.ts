@@ -1,6 +1,7 @@
 import { useAppStore } from '@/store'
 import type { PtyListedSession } from '../../../shared/pty-listed-session'
 import { parsePtySessionId, PTY_SESSION_ID_SEPARATOR } from '../../../shared/pty-session-id-format'
+import { movedTerminalOwnerOf } from '../../../shared/moved-terminal-owner'
 import { parsePaneKey } from '../../../shared/stable-pane-id'
 import { parseWorkspaceKey } from '../../../shared/workspace-scope'
 import { worktreeIdsEqual } from '../../../shared/worktree/id'
@@ -91,6 +92,10 @@ function hasStructuredSession(store: ActivationStore, worktreeId: string): boole
 }
 
 function sessionBelongsToWorkspace(sessionId: string, worktreeId: string): boolean {
+  const moved = movedTerminalOwnerOf(sessionId)
+  if (moved !== null) {
+    return moved === worktreeId
+  }
   if (parsePtySessionId(sessionId).worktreeId === worktreeId) {
     return true
   }

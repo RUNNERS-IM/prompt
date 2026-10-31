@@ -65,6 +65,7 @@ import { isAgentStatusHooksEnabled } from '../agent-hooks/managed-agent-hook-con
 import { reportProfileStateWriteFailure } from './profile-state-write-failure'
 import { reportProfileStateSaveDelay } from './profile-state-save-delay'
 import { preloadSsh2 } from '../ssh/ssh2-module-load'
+import { installMovedTerminalOwners } from '../terminal-owner/install-moved-terminal-owners'
 
 export async function initializeReadyFoundation(): Promise<void> {
   logStartupMilestone('app-ready')
@@ -175,6 +176,7 @@ export async function initializeReadyFoundation(): Promise<void> {
   }
   const store = profileState.store
   state.store = store
+  installMovedTerminalOwners(() => state.store)
   // SSH users keep ssh2 loaded before interactive use, as before #35731; others load it on first connect.
   if (store.getSshTargets().length > 0) {
     preloadSsh2()
