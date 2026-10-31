@@ -127,7 +127,8 @@ export function PromptWorktreeSessionRows({
       {hasSiblingWorktrees ? (
         <div
           className={cn(
-            'flex h-6 min-w-0 items-center gap-1.5 px-1 text-[12px] text-foreground/85',
+            // The workspace line is the card's drag handle (sessions below it stop that drag).
+            'flex h-6 min-w-0 cursor-grab items-center gap-1.5 px-1 text-[12px] text-foreground/85 active:cursor-grabbing',
             PROMPT_WORKSPACE_ROW_GROUP_CLASS
           )}
           data-prompt-workspace-row=""
