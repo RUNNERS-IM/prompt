@@ -23,4 +23,6 @@ export type SessionInfo = {
 /** Router/adapter metadata for legacy-session labels; never transmitted on the daemon wire. */
 export type DaemonSessionInfo = SessionInfo & {
   protocolVersion: number
+  /** Runs in the daemon from Prompt's previous data folder and no tab has attached to it yet. */
+  previousVersionUnattached?: boolean
 }

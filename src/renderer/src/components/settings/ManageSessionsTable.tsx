@@ -158,6 +158,14 @@ export function ManageSessionsTable({
                       <span className="truncate font-mono font-medium">
                         {formatWorkspace(session)}
                       </span>
+                      {session.previousVersionUnattached && tabId === null ? (
+                        <span className="block text-[11px] text-muted-foreground">
+                          {translate(
+                            'auto.components.settings.ManageSessionsSection.8f1bcdf9ab',
+                            'Previous version · not in a tab yet'
+                          )}
+                        </span>
+                      ) : null}
                     </td>
                     <td
                       className="px-3 py-1.5 font-mono text-[11px] text-muted-foreground"

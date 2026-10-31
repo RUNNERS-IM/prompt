@@ -28,6 +28,7 @@ import type { DaemonEndpointIdentity } from '../../daemon/daemon-hello-protocol'
 import { sameEndpointIdentity } from '../../daemon/daemon-endpoint-incarnation'
 import type { DaemonSessionInfo } from '../../daemon/daemon-session-info'
 import type { DaemonAsyncIoStatus } from '../../../shared/daemon-async-io-health'
+import { previousFolderSessionTrace } from '../../daemon/previous-folder-session-trace'
 
 // Poll beyond the daemon's 5s SIGTERM-to-SIGKILL ladder to avoid false refusal reports.
 // A window, not an attempt count: a wedged generation fails each listing only after the request timeout.
@@ -67,7 +68,10 @@ async function listSessionsOfEveryAdapter(
       const sessions = await adapter.listSessions()
       return sessions.map<DaemonSessionInfo>((s) => ({
         ...s,
-        protocolVersion: adapter.protocolVersion
+        protocolVersion: adapter.protocolVersion,
+        ...(adapter.fromPreviousDataFolder && !previousFolderSessionTrace.isAttached(s.sessionId)
+          ? { previousVersionUnattached: true }
+          : {})
       }))
     })
   )

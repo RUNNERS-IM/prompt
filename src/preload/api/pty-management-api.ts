@@ -13,6 +13,8 @@ export type PtyManagementSession = {
   rows: number
   createdAt: number
   protocolVersion: number
+  /** Left running by the previous version of the app and not attached to any tab yet. */
+  previousVersionUnattached?: boolean
 }
 
 // severed: macOS privacy grants stop applying to daemon terminals until daemon restart.
