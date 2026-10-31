@@ -3,7 +3,7 @@ import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import type { Page, TestInfo } from '@stablyai/playwright-test'
 import { expect } from './orca-app'
-import { execInTerminal } from './terminal'
+import { execInTerminal, focusActiveTerminalInput } from './terminal'
 import { waitForPtyShellEcho } from '../terminal-pty-readiness'
 
 /** Two fresh workspaces of the seeded project: the shell starts in `a` and moves to `b`. */
@@ -250,7 +250,8 @@ export function paneConversationFacts(
 
 /**
  * Run a foreground process the app recognizes as Claude: a link named `claude` to `sleep`, so the
- * process table shows `claude` the way a real session does. Waits until the pane reads it as Claude.
+ * process shows up as `claude` the way a real session does, started by typing `claude` like a
+ * person would. Waits until the pane reads it as Claude.
  */
 export async function startFakeClaude(
   page: Page,
@@ -268,7 +269,12 @@ export async function startFakeClaude(
   if (!existsSync(claude)) {
     symlinkSync(sleep, claude)
   }
-  await execInTerminal(page, ptyId, `'${claude.replaceAll("'", "'\\''")}' 300`)
+  await execInTerminal(page, ptyId, `export PATH='${dir.replaceAll("'", "'\\''")}':"$PATH"`)
+  // Typed into the terminal like a person: the pane learns a command started (and reads its
+  // process) from typed input or launch metadata, not from bytes written straight to the PTY.
+  await focusActiveTerminalInput(page)
+  await page.keyboard.type('claude 300')
+  await page.keyboard.press('Enter')
   await expect
     .poll(
       () =>
