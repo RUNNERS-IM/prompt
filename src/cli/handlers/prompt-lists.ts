@@ -26,7 +26,10 @@ import {
 type NamedRef = { id: string; name: string }
 
 export type WorkspaceItem = {
+  /** `<repoId>::<path>`, the id `--workspace id:` selectors and the guides use. */
   id: string
+  /** Stable instance key when the host has one; its prefix is the short id shown in tables. */
+  identity: string | null
   name: string
   project: NamedRef
   branch: string
@@ -92,7 +95,7 @@ function formatWorkspaceItems(result: { items: WorkspaceItem[] }): string {
   return formatTable(
     columnHeaders(['id', 'name', 'project', 'branch', 'path']),
     result.items.map((item) => [
-      shortId(item.id),
+      shortId(item.identity ?? item.id),
       item.name,
       item.project.name,
       item.branch || '-',
@@ -127,7 +130,8 @@ export const PROMPT_LIST_HANDLERS: Record<string, CommandHandler> = {
       listRepos(client)
     ])
     const items = response.result.worktrees.map((worktree): WorkspaceItem => ({
-      id: worktree.identity?.key ?? worktree.id,
+      id: worktree.id,
+      identity: worktree.identity?.key ?? null,
       name: worktree.displayName,
       project: projectRef(repos, worktree.repoId) ?? { id: worktree.repoId, name: '-' },
       branch: worktree.branch,

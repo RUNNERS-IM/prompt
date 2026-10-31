@@ -236,6 +236,36 @@ describe('prompt command surface', () => {
     )
   })
 
+  it('keeps the selector id on workspace items and shows the instance short id', async () => {
+    routeCalls({
+      'repo.list': { repos: REPOS },
+      'worktree.list': {
+        worktrees: [
+          {
+            id: `${REPOS[2].id}::/tmp/web`,
+            repoId: REPOS[2].id,
+            path: '/tmp/web',
+            branch: 'main',
+            displayName: 'web',
+            identity: { key: 'wt2:local:5e6f7a8b-instance' }
+          }
+        ],
+        totalCount: 1,
+        truncated: false
+      }
+    })
+    const json = await run(['workspace', 'list', '--json'], 'prompt')
+    const human = await run(['workspace', 'list'], 'prompt')
+
+    expect(JSON.parse(json.stdout).result.items[0]).toMatchObject({
+      id: `${REPOS[2].id}::/tmp/web`,
+      identity: 'wt2:local:5e6f7a8b-instance',
+      name: 'web',
+      project: { id: REPOS[2].id, name: 'web' }
+    })
+    expect(human.stdout.split('\n')[1]).toMatch(/^5e6f7a8b\s+web\s+web\s+main\s+\/tmp\/web$/)
+  })
+
   it('lists terminals without their screen content', async () => {
     routeCalls({
       'repo.list': { repos: REPOS },
