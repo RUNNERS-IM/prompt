@@ -1,0 +1,122 @@
+name: Prompt E2E one spec
+
+run-name: Prompt E2E ${{ github.ref_name }}
+
+# Runs a few chosen E2E specs on a pushed e2e-run/** branch: the build and changed-e2e
+# path of e2e.yml on GitHub's free runner, no secrets, results uploaded even on success.
+# Pick other specs by editing TEST_FILES_JSON below on the e2e-run branch.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: ['e2e-run/**']
+
+concurrency:
+  group: prompt-e2e-one-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TEST_FILES_JSON: '["tests/e2e/prompt-shell-workspace-move.spec.ts"]'
+
+jobs:
+  build:
+    name: build e2e app
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ORCA_BACKGROUND_LAUNCH: '1'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install native build tools
+        env:
+          ORCA_E2E_APT_PACKAGES: build-essential python3
+        run: &install_e2e_tools |
+          if [ "$ORCA_E2E_APT_PACKAGES" = 'build-essential python3' ] &&
+            command -v make >/dev/null && command -v g++ >/dev/null && command -v python3 >/dev/null; then
+            exit 0
+          fi
+          read -r -a packages <<< "$ORCA_E2E_APT_PACKAGES"
+          bash .github/scripts/prepare-ubuntu-apt.sh
+          timeout 120 sudo apt-get update
+          timeout 300 sudo apt-get install -y "${packages[@]}" || timeout 300 sudo apt-get install -y --fix-missing "${packages[@]}"
+
+      # The build's plain-Node daemon smoke load resolves node-pty.
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: node
+          persist-native-cache: 'false'
+          cache-electron-package: 'true'
+
+      - name: Build E2E outputs
+        env:
+          VITE_EXPOSE_STORE: 'true'
+          ORCA_CI_MAIN_SOURCEMAPS: '0'
+        run: pnpm run build:electron-vite:parallel --mode e2e
+
+      # The CLI emits into out/main too, so it starts after the Electron build.
+      - name: Build shared E2E CLI
+        run: pnpm run build:cli
+
+      - name: Project shared E2E web client
+        run: pnpm run build:web-from-renderer
+
+      - name: Upload E2E build output
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-build-out
+          path: out/
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+
+  e2e:
+    name: e2e specs
+    needs: [build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install native build and headless UI tools
+        env:
+          ORCA_E2E_APT_PACKAGES: build-essential fonts-noto-cjk openssh-client python3 ripgrep xvfb zsh openbox x11-utils xdotool
+        run: *install_e2e_tools
+
+      - uses: ./.github/actions/install-node-dependencies
+        with:
+          native-runtime: electron
+
+      - name: Download E2E build output
+        uses: actions/download-artifact@v8
+        with:
+          name: e2e-build-out
+          path: out/
+
+      - name: Run E2E specs
+        run: |
+          mapfile -t TEST_FILES < <(jq -r '.[]' <<<"$TEST_FILES_JSON")
+          E2E_ENV=(SKIP_BUILD=1 ORCA_E2E_FORWARD_APP_LOGS=1 ORCA_E2E_WEB_CLIENT=1)
+          # The HTML report keeps testInfo.attach screenshots, which the list reporter drops.
+          E2E_ENV+=(PLAYWRIGHT_HTML_OUTPUT_DIR="$PWD/playwright-report" PLAYWRIGHT_HTML_OPEN=never)
+          E2E_PROJECT_ARGS=()
+          if grep -l '@headful' "${TEST_FILES[@]}" >/dev/null; then
+            E2E_PROJECT_ARGS+=(--project=electron-headful)
+          fi
+          xvfb-run --auto-servernum bash .github/scripts/e2e-with-window-manager.sh env "${E2E_ENV[@]}" \
+            pnpm run test:e2e "${TEST_FILES[@]}" --workers=1 --reporter=list,html "${E2E_PROJECT_ARGS[@]}"
+
+      - name: Upload Playwright report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-attempt-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+          if-no-files-found: warn
