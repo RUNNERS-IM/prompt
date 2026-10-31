@@ -10,7 +10,7 @@ handles device scoping, helper lifecycle, and worktree context.
 ## Load the version-matched guide before running Orca commands
 
 ```text
-ORCA skills get orca-emulator
+PROMPT skill get orca-emulator
 ```
 
 <!-- shared: no-guessing -->

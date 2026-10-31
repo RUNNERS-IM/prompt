@@ -11,7 +11,7 @@ Send heartbeats only at the cadence required by the live preamble. Skip them
 while blocked inside `ask` or `check --wait`; those calls are liveness signals.
 
 ```text
-ORCA orchestration send --from <worker_handle> --type heartbeat --subject "alive" --task-id <task_id> --dispatch-id <dispatch_id> --phase "<investigating|implementing|reviewing|waiting>"
+PROMPT orchestration send --from <worker_handle> --type heartbeat --subject "alive" --task-id <task_id> --dispatch-id <dispatch_id> --phase "<investigating|implementing|reviewing|waiting>"
 ```
 
 Use typed lifecycle flags, not a hand-written JSON payload. A heartbeat proves
@@ -23,9 +23,9 @@ Use Orca `ask` whenever the coordinator must answer. Never open a local question
 TUI the coordinator cannot answer.
 
 ```text
-ORCA orchestration ask --from <worker_handle> --question "<question>" --options "<choice-a>,<choice-b>" --timeout-ms 600000
+PROMPT orchestration ask --from <worker_handle> --question "<question>" --options "<choice-a>,<choice-b>" --timeout-ms 600000
 
-ORCA orchestration ask --from <worker_handle> --resume <message_id> --timeout-ms 600000
+PROMPT orchestration ask --from <worker_handle> --resume <message_id> --timeout-ms 600000
 ```
 
 Each wait defaults to 600000 ms (10 minutes). `--timeout-ms` accepts a positive
@@ -43,7 +43,7 @@ enqueue is durable but does not interrupt you, so nothing arrives unless you
 look:
 
 ```text
-ORCA orchestration check --terminal <worker_handle> --json
+PROMPT orchestration check --terminal <worker_handle> --json
 ```
 
 Run it at each natural checkpoint — before starting a new file, after a test
@@ -56,7 +56,7 @@ Process every message in the batch, then acknowledge it with the returned
 unacknowledged batch replays and hides newer mail:
 
 ```text
-ORCA orchestration check --terminal <worker_handle> --ack <delivery_id> --json
+PROMPT orchestration check --terminal <worker_handle> --ack <delivery_id> --json
 ```
 
 Do not use `run-use` to check your Dispatch's mail or bind the Run you work for.
@@ -77,8 +77,8 @@ When the preamble has a SUB-DISPATCH section, start helpers on your own
 Dispatch's Run. Do not `run-create` or `run-use` for them.
 
 ```text
-ORCA orchestration worker-start --from <worker_handle> --spec "<sub-task>" --worktree current --agent <agent> --json
-ORCA orchestration reply --from <worker_handle> --id <message_id> --body "<answer>"
+PROMPT orchestration worker-start --from <worker_handle> --spec "<sub-task>" --workspace current --agent <agent> --json
+PROMPT orchestration reply --from <worker_handle> --id <message_id> --body "<answer>"
 ```
 
 Their questions, escalations, and `worker_done` arrive in your own `check`, next
@@ -91,7 +91,7 @@ still running reports to your coordinator's Run.
 Escalate only before completion and only when the coordinator must intervene:
 
 ```text
-ORCA orchestration send --from <worker_handle> --type escalation --subject "Blocked: <reason>" --body "<details>" --task-id <task_id> --dispatch-id <dispatch_id>
+PROMPT orchestration send --from <worker_handle> --type escalation --subject "Blocked: <reason>" --body "<details>" --task-id <task_id> --dispatch-id <dispatch_id>
 ```
 
 ## Completion
@@ -104,7 +104,7 @@ Append `--files-modified` or `--report-path` only when applicable, using actual
 paths. Do not send documentation placeholders as metadata.
 
 ```text
-ORCA orchestration send --from <worker_handle> --type worker_done --subject "<short status>" --body "<three sentences: work, findings, remaining>" --task-id <task_id> --dispatch-id <dispatch_id> --outcome succeeded
+PROMPT orchestration send --from <worker_handle> --type worker_done --subject "<short status>" --body "<three sentences: work, findings, remaining>" --task-id <task_id> --dispatch-id <dispatch_id> --outcome succeeded
 ```
 
 After `worker_done`, end the dispatched turn and idle. Do not poll, close your

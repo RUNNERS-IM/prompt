@@ -7,7 +7,7 @@ This discovery stub loads the version-matched guide from the Orca executable use
 ## Load the version-matched guide before running Orca commands
 
 ```text
-ORCA skills get orca-per-workspace-env
+PROMPT skill get orca-per-workspace-env
 ```
 
 <!-- shared: no-guessing -->

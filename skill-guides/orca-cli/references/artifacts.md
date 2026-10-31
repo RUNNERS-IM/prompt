@@ -5,11 +5,11 @@
 The publish gate, explicit-intent rule, and denial recovery are in the guide body.
 
 ```text
-ORCA artifacts share <file> --json
-ORCA artifacts update <file> --json
-ORCA artifacts unshare <file> --json
-ORCA artifacts list [--cursor <cursor>] --json
-ORCA artifacts delete <id> --json
+PROMPT util artifacts share <file> --json
+PROMPT util artifacts update <file> --json
+PROMPT util artifacts unshare <file> --json
+PROMPT util artifacts list [--cursor <cursor>] --json
+PROMPT util artifacts delete <id> --json
 ```
 
 - `share`, `update`, and `unshare` accept `.html`, `.htm`, `.md`, and `.markdown` files.

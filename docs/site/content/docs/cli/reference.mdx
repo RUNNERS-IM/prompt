@@ -5,7 +5,15 @@ description: Commands, selectors, and agent-friendly patterns for driving Orca f
 
 import { Callout } from '@/components/docs/prose'
 
-The `orca` CLI talks to a running Orca runtime. Use it when a shell script or agent needs to inspect worktrees, launch terminals, open files, automate the built-in browser, or report progress back into Orca.
+The `prompt` CLI talks to a running Orca runtime. Use it when a shell script or agent needs to inspect worktrees, launch terminals, open files, automate the built-in browser, or report progress back into Orca.
+
+Commands are grouped by what they act on: `app`, `project`, `workspace`, `session`, `terminal`, `browser`, `computer`, `emulator`, `connect`, `automation`, `orchestration`, `skill`, `account`, `env`, and `util`. Run `prompt --help` for the list and `prompt <group> --help` for a group's commands.
+
+<Callout title="The orca command names are deprecated">
+  The `orca` executable and every pre-rename command path (`orca worktree list`, `orca repo show`,
+  and the rest) still work until 2.7 and keep their old output. Each run prints one notice line on
+  stderr naming the replacement.
+</Callout>
 
 ## Verify the runtime
 
@@ -15,28 +23,35 @@ Register the CLI under [Settings → General → Orca CLI](/docs/settings), then
   GNOME Orca — the screen reader that ships with most GNOME desktops — already owns `/usr/bin/orca`,
   so Orca's Linux CLI installs as `orca-ide`. Do not check for it with `command -v orca`: that
   succeeds on a GNOME desktop and resolves to the screen reader, not to Orca. This page writes
-  `orca` throughout — read it as `orca-ide` on Linux. See [Install → Linux](/docs/install#linux).
+  `prompt` throughout — read it as `orca-ide` on Linux and `orca` on Windows. See [Install →
+  Linux](/docs/install#linux).
 </Callout>
 
-On macOS and Windows:
+On macOS:
 
 ```bash
-command -v orca
-orca status --json
+command -v prompt
+prompt app status --json
+```
+
+On Windows:
+
+```bash
+orca app status --json
 ```
 
 On Linux:
 
 ```bash
 command -v orca-ide
-orca-ide status --json
+orca-ide app status --json
 ```
 
 If Orca is not already running:
 
 ```bash
-orca open --json
-orca status --json
+prompt app open --json
+prompt app status --json
 ```
 
 Use `--json` when another tool will parse the result. Human-readable output is for quick terminal checks.
@@ -46,11 +61,11 @@ Use `--json` when another tool will parse the result. Human-readable output is f
 Most commands accept selectors instead of requiring long IDs:
 
 ```bash
-orca repo show --repo id:<repoId> --json
-orca worktree show --worktree active --json
-orca worktree show --worktree path:/abs/path/to/worktree --json
-orca worktree show --worktree branch:feature-name --json
-orca worktree show --worktree issue:123 --json
+prompt project show --project id:<repoId> --json
+prompt workspace show --workspace active --json
+prompt workspace show --workspace path:/abs/path/to/worktree --json
+prompt workspace show --workspace branch:feature-name --json
+prompt workspace show --workspace issue:123 --json
 ```
 
 `active` and `current` resolve to the enclosing Orca-managed worktree from the shell's current directory or terminal context. Use explicit selectors in scripts that may run outside the target worktree. For remote runtimes, prefer full server-side selectors such as `id:<repoId>::<absolute-worktree-path>` or `path:<absolute-server-path>` because the local shell's current directory may not exist on the runtime host.
@@ -60,7 +75,7 @@ orca worktree show --worktree issue:123 --json
 List every machine the current Orca host can target and the selector for each one:
 
 ```bash
-orca host list --json
+prompt env host list --json
 ```
 
 The result includes this machine, its registered [SSH targets](/docs/ssh), and paired [Remote Orca Servers](/docs/remote-servers). Use `--host local` for this machine, `--host ssh:<target-id>` for an SSH target, and `--environment <server-name>` for a paired server. SSH rows include the detected remote platform (`linux`, `darwin`, or `win32`) after the target connects; older or disconnected targets report `platform unknown`. They also include `connected` and, when known, the SSH lifecycle `connectionStatus`. If you put a machine name on the wrong selector, Orca reports the matching machine and the flag to use instead of returning an empty result.
@@ -70,21 +85,21 @@ The result includes this machine, its registered [SSH targets](/docs/ssh), and p
 ## Runtime commands
 
 ```bash
-orca open --json
-orca status --json
-orca serve --port 6768 --pairing-address 100.64.1.20 --json
+prompt app open --json
+prompt app status --json
+prompt app serve --port 6768 --pairing-address 100.64.1.20 --json
 ```
 
-`orca serve` starts a runtime server in the foreground without opening the desktop window. Use it for [Remote Orca Servers](/docs/remote-servers) or headless environments, and stop it with `Ctrl-C`.
+`prompt app serve` starts a runtime server in the foreground without opening the desktop window. Use it for [Remote Orca Servers](/docs/remote-servers) or headless environments, and stop it with `Ctrl-C`.
 
 ## Repos
 
 ```bash
-orca repo list --json
-orca repo add --path /abs/path/to/repo --json
-orca repo show --repo id:<repoId> --json
-orca repo set-base-ref --repo id:<repoId> --ref origin/main --json
-orca repo search-refs --repo id:<repoId> --query main --limit 10 --json
+prompt project list --json
+prompt project add --path /abs/path/to/repo --json
+prompt project show --project id:<repoId> --json
+prompt project set --project id:<repoId> --base-ref origin/main --json
+prompt project refs --project id:<repoId> --query main --limit 10 --json
 ```
 
 Set the repo base ref before creating lots of worktrees so new tasks branch from the right place by default.
@@ -92,29 +107,29 @@ Set the repo base ref before creating lots of worktrees so new tasks branch from
 ## Worktrees
 
 ```bash
-orca worktree list --repo id:<repoId> --json
-orca worktree ps --json
-orca worktree current --json
-orca worktree show --worktree active --json
-orca worktree create --repo id:<repoId> --name fix-login --json
-orca worktree create --name child-task --agent codex --prompt "Investigate the flaky login test" --json
-orca worktree set --worktree active --comment "reproduced failure; testing token refresh fix" --json
-orca worktree set --worktree active --workspace-status in-review --unread --json
-orca worktree rm --worktree id:<worktreeId> --force --json
+prompt workspace list --project id:<repoId> --json
+prompt workspace ps --json
+prompt workspace current --json
+prompt workspace show --workspace active --json
+prompt workspace create --repo id:<repoId> --name fix-login --json
+prompt workspace create --name child-task --agent codex --prompt "Investigate the flaky login test" --json
+prompt workspace set --workspace active --comment "reproduced failure; testing token refresh fix" --json
+prompt workspace set --workspace active --workspace-status in-review --unread --json
+prompt workspace remove --workspace id:<worktreeId> --force --json
 ```
 
-When `worktree create` runs from inside an Orca-managed worktree, Orca records the new worktree as a child when it can infer the relationship. Pass `--parent-worktree active` to be explicit, or `--no-parent` when the new work is independent.
+When `workspace create` runs from inside an Orca-managed worktree, Orca records the new worktree as a child when it can infer the relationship. Pass `--parent-worktree active` to be explicit, or `--no-parent` when the new work is independent.
 
 Pass `--branch DAT-111-fix-login` to name the Git branch yourself instead of applying the configured branch prefix. `--name` still sets the workspace name and `--base-branch` the starting ref. If that branch already exists and cannot be reused, or the workspace path is already taken, Orca appends a numeric suffix to both, as it does in the new-workspace composer, so `--name task --branch exact` can produce branch `exact-2` even when `exact` is free.
 
-`worktree set --unread` puts the unread dot on the workspace in the sidebar, the same one Orca shows when an agent finishes; `--read` clears it.
+`workspace set --unread` puts the unread dot on the workspace in the sidebar, the same one Orca shows when an agent finishes; `--read` clears it.
 
 Agent startup flags:
 
 ```bash
-orca worktree create --name review-api --agent claude --setup run --json
-orca worktree create --name quick-check --agent codex --prompt "Summarize the diff" --setup skip --json
-orca worktree create --name hidden-setup --setup inherit --json
+prompt workspace create --name review-api --agent claude --setup run --json
+prompt workspace create --name quick-check --agent codex --prompt "Summarize the diff" --setup skip --json
+prompt workspace create --name hidden-setup --setup inherit --json
 ```
 
 `--agent` launches the selected agent in the first terminal. `--prompt` sends initial work to that agent. `--setup run|skip|inherit` controls repo setup hooks; `inherit` follows the repo policy.
@@ -122,25 +137,25 @@ orca worktree create --name hidden-setup --setup inherit --json
 Link issues and reviews using the existing workspace metadata:
 
 ```bash
-orca worktree create --repo id:<repoId> --name review-task --pr 123 --json
-orca worktree create --repo id:<repoId> --name gitlab-task --gitlab-issue 42 --gitlab-mr 77 --json
-orca worktree set --worktree active --gitlab-issue '#42' --gitlab-mr '!77' --json
-orca worktree set --worktree active --gitlab-issue https://gitlab.example.com/group/project/-/work_items/42 --json
-orca worktree set --worktree active --pr null --gitlab-mr null --json
+prompt workspace create --repo id:<repoId> --name review-task --pr 123 --json
+prompt workspace create --repo id:<repoId> --name gitlab-task --gitlab-issue 42 --gitlab-mr 77 --json
+prompt workspace set --workspace active --gitlab-issue '#42' --gitlab-mr '!77' --json
+prompt workspace set --workspace active --gitlab-issue https://gitlab.example.com/group/project/-/work_items/42 --json
+prompt workspace set --workspace active --pr null --gitlab-mr null --json
 ```
 
 `--pr` is a GitHub pull request number. `--gitlab-issue` accepts an issue number or `#42`; `--gitlab-mr` accepts a merge request number or `!77`. Numbers must be positive safe integers. The GitLab flags also accept HTTP(S) issue or merge request URLs, including self-hosted instances and nested groups. The URL's host and project must match the workspace's stored GitLab source context or the repository's stored remote. If that identity is missing or different, the command fails before updating metadata. A URL cannot choose another project, change the checkout, or fetch a review branch.
 
 Omitting a flag leaves its link unchanged. On `set`, literal `null` clears only the named link; `create` refuses `null`. Each provider has separate fields, so setting a GitLab issue or merge request preserves GitHub and Linear links.
 
-Folder-based repositories can store numeric links through these commands, but a number does not supply a provider host or project. Without existing source context or a stored remote, pasted GitLab URLs are refused and provider details or clickable links may be unavailable. These flags use fields already supported by the runtime; an older runtime that predates a field may ignore it, so check `worktree show --json` after writing to an older host.
+Folder-based repositories can store numeric links through these commands, but a number does not supply a provider host or project. Without existing source context or a stored remote, pasted GitLab URLs are refused and provider details or clickable links may be unavailable. These flags use fields already supported by the runtime; an older runtime that predates a field may ignore it, so check `workspace show --json` after writing to an older host.
 
 ## Ports
 
 ```bash
-orca ports --json
-orca ports --worktree branch:feature/login --json
-orca ports --all
+prompt util ports --json
+prompt util ports --workspace branch:feature/login --json
+prompt util ports --all
 ```
 
 `ports` lists the listening ports Orca tied to a workspace, from the host the workspace runs on. It defaults to the workspace that contains the current directory. Each row has `port`, `pid`, `processName`, `connectHost`, `protocol`, how Orca matched it (`owner.confidence`: `cwd` or `command`), and `advertisedUrl` when the dev server printed one in an Orca terminal. `--all` lists every listener on that host. Native folder workspaces need `--all`, because Orca does not tie ports to them. If `unavailableReason` is set, the scan could not run on that host; SSH workspaces opened directly from the desktop report this for now, while a workspace on a managed Orca server is scanned on that server.
@@ -150,25 +165,25 @@ orca ports --all
 A workspace can link multiple reviews and issues, including sources outside its repository.
 
 ```bash
-orca reference list --worktree name:api --json
-orca reference add https://github.com/acme/api/pull/5123 https://linear.app/acme/issue/STA-1234 --worktree name:api --json
-orca reference remove https://github.com/acme/api/pull/5123 --worktree name:api --json
-orca reference remove --key '<key-from-list>' --worktree name:api --json
-orca worktree create --name fix --reference https://github.com/acme/api/pull/5123 --reference https://linear.app/acme/issue/STA-1234 --json
-orca reference find STA-1234 --json
+prompt util reference list --workspace name:api --json
+prompt util reference add https://github.com/acme/api/pull/5123 https://linear.app/acme/issue/STA-1234 --workspace name:api --json
+prompt util reference remove https://github.com/acme/api/pull/5123 --workspace name:api --json
+prompt util reference remove --key '<key-from-list>' --workspace name:api --json
+prompt workspace create --name fix --reference https://github.com/acme/api/pull/5123 --reference https://linear.app/acme/issue/STA-1234 --json
+prompt util reference find STA-1234 --json
 ```
 
 - **Writes:** full URLs only; no custom shorthand. `remove --key` supports older entries without URLs. Source-unknown legacy links cannot match an exact URL; native issue keys remain searchable when stored. Duplicate adds and absent removals are no-ops. Unrelated links and current selection are preserved. Older hosts without safe delta merging refuse writes.
 - **Create:** repeat `--reference`; incompatible with `--pr`, `--issue`, `--linear-issue`, `--gitlab-issue`, and `--gitlab-mr`. References persist before setup or agent startup.
-- **Find:** a full URL or native issue key; bare numbers are rejected. Keys search all matching sources. Reads stored metadata, without provider requests or conversation searches. Use `orca search` for conversation text.
+- **Find:** a full URL or native issue key; bare numbers are rejected. Keys search all matching sources. Reads stored metadata, without provider requests or conversation searches. Use `prompt util search` for conversation text.
 - **Scope:** `--worktree` selects a worktree or folder workspace. Find also accepts `--repo` instead, plus `--include-archived` and `--limit` (default 50 workspaces). `truncated: true` means more matched. Remote selectors refer to the execution host; `current` is local only.
 - **Output:** list returns `references` with opaque `key` and `selected`; writes also return `changes`. Worktree show/list/ps retain `linkedItems`. Find returns workspace matches and agents with `linked`, `liveness`, and available `terminal`/`mailbox` addresses. `linked: false` means ownership is unknown; sharing a workspace is insufficient evidence.
 
 Choose an agent from `find`, then use its exact address:
 
 ```bash
-orca terminal send --terminal '<terminal-from-find>' --text 'Status?' --enter
-orca orchestration send --to '<mailbox-from-find>' --subject 'Status?' --type question
+prompt terminal send --terminal '<terminal-from-find>' --text 'Status?' --enter
+prompt orchestration send --to '<mailbox-from-find>' --subject 'Status?' --type question
 ```
 
 Mailboxes are `dispatch:<id>` or `orca_session_id:<id>`; a `run:<id>` addresses a coordinator. Find never sends messages or assigns ownership. Adding references from a shell does not associate that shell with an agent.
@@ -176,20 +191,20 @@ Mailboxes are `dispatch:<id>` or `orca_session_id:<id>`; a `run:<id>` addresses 
 ## Terminals
 
 ```bash
-orca terminal list --worktree active --json
-orca terminal show --terminal <handle> --json
-orca terminal read --terminal <handle> --json
-orca terminal read --terminal <handle> --screen --json
-orca terminal read --terminal <handle> --cursor <cursor> --limit 1000 --json
-orca terminal send --terminal <handle> --text "continue" --enter --json
-orca terminal wait --terminal <handle> --for tui-idle --timeout-ms 300000 --json
-orca terminal create --worktree active --title "tests" --command "npm test" --json
-orca terminal split --terminal <handle> --direction horizontal --command "npm run dev" --json
-orca terminal rename --terminal <handle> --title "runner" --json
-orca terminal set-pane-title --terminal <handle> --title "reviewer" --json
-orca terminal switch --terminal <handle> --json
-orca terminal close --terminal <handle> --json
-orca terminal close --worktree active --all --json
+prompt terminal list --workspace active --json
+prompt terminal show --terminal <handle> --json
+prompt terminal read --terminal <handle> --json
+prompt terminal read --terminal <handle> --screen --json
+prompt terminal read --terminal <handle> --cursor <cursor> --limit 1000 --json
+prompt terminal send --terminal <handle> --text "continue" --enter --json
+prompt terminal wait --terminal <handle> --for tui-idle --timeout-ms 300000 --json
+prompt terminal create --workspace active --title "tests" --command "npm test" --json
+prompt terminal split --terminal <handle> --direction horizontal --command "npm run dev" --json
+prompt terminal rename --terminal <handle> --title "runner" --json
+prompt terminal set-pane-title --terminal <handle> --title "reviewer" --json
+prompt terminal focus --terminal <handle> --json
+prompt terminal close --terminal <handle> --json
+prompt terminal close --workspace active --all --json
 ```
 
 Omit `--terminal` to target the active terminal in the current worktree. Read before sending when you are not sure what the terminal is waiting for.
@@ -203,7 +218,7 @@ close returns a failing `unverifiable` result rather than claiming the processes
 
 <Callout title="Terminal handles">
   Terminal handles are runtime-scoped. If Orca restarts or a command reports a stale terminal
-  handle, run `orca terminal list --json` and reacquire the handle.
+  handle, run `prompt terminal list --json` and reacquire the handle.
 </Callout>
 
 `terminal list` reports each terminal's `executionHostId` when Orca can verify it, plus a result-level `hostScope` with covered and omitted host IDs. Treat a missing host identity or scope as **unverifiable**, not local. A missing terminal is evidence that it exited only when its execution host is listed in `hostScope.hostIds`.
@@ -215,10 +230,10 @@ For long output, use cursor reads. Save `nextCursor` from one stream read, then 
 ## Files
 
 ```bash
-orca file open src/App.tsx --worktree active --json
-orca file open src/App.tsx --line 42 --column 7 --worktree active --focus --json
-orca file diff src/App.tsx --staged --worktree active --json
-orca file open-changed --mode both --worktree active --json
+prompt util file open src/App.tsx --workspace active --json
+prompt util file open src/App.tsx --line 42 --column 7 --workspace active --focus --json
+prompt util file diff src/App.tsx --staged --workspace active --json
+prompt util file open-changed --mode both --workspace active --json
 ```
 
 Paths are relative to the selected worktree. `--line` and `--column` are 1-based; a column requires a line. Positions are applied when you select the file, or immediately with `--focus`. Markdown switches to source view for positioning. Older hosts open the file without positioning. `open-changed` reads git status and opens changed files in edit, diff, or both modes. Tabs open without changing what you are looking at; pass `--focus` to be brought to them.
@@ -230,12 +245,12 @@ Browser commands control Orca's embedded browser tab for the selected worktree. 
 Use a snapshot -> act -> snapshot loop:
 
 ```bash
-orca goto --url http://localhost:3000 --worktree active --json
-orca snapshot --worktree active --json
-orca click --element @e3 --worktree active --json
-orca fill --element @e1 --value "user@example.com" --worktree active --json
-orca wait --text "Welcome" --worktree active --json
-orca screenshot --worktree active --json
+prompt browser goto --url http://localhost:3000 --workspace active --json
+prompt browser snapshot --workspace active --json
+prompt browser click --element @e3 --workspace active --json
+prompt browser fill --element @e1 --value "user@example.com" --workspace active --json
+prompt browser wait --text "Welcome" --workspace active --json
+prompt browser screenshot --workspace active --json
 ```
 
 Refs such as `@e3` come from `snapshot`. Re-snapshot after navigation, tab switches, clicks that change the page, and any stale-ref error.
@@ -243,35 +258,35 @@ Refs such as `@e3` come from `snapshot`. Re-snapshot after navigation, tab switc
 Tab and capture commands:
 
 ```bash
-orca tab list --worktree active --json
-orca tab create --url http://localhost:3000 --worktree active --json
-orca tab switch --index 1 --worktree active --json
-orca capture start --worktree active --json
-orca console --limit 50 --worktree active --json
-orca network --limit 50 --worktree active --json
-orca full-screenshot --worktree active --json
-orca pdf --worktree active --json
+prompt browser tab list --workspace active --json
+prompt browser tab create --url http://localhost:3000 --workspace active --json
+prompt browser tab switch --index 1 --workspace active --json
+prompt browser capture start --workspace active --json
+prompt browser console --limit 50 --workspace active --json
+prompt browser network --limit 50 --workspace active --json
+prompt browser full-screenshot --workspace active --json
+prompt browser pdf --workspace active --json
 ```
 
-Use `orca exec --command "<agent-browser command>" --json` only for browser actions that do not have a typed Orca command yet.
+Use `prompt browser exec --command "<agent-browser command>" --json` only for browser actions that do not have a typed Orca command yet.
 
 Browser device emulation:
 
 ```bash
-orca set device --name "iPhone 12" --worktree active --json
-orca screenshot --worktree active --json
+prompt browser set device --name "iPhone 12" --workspace active --json
+prompt browser screenshot --workspace active --json
 ```
 
 ## Desktop computer use
 
-Use `orca computer` for native desktop apps outside the built-in browser:
+Use `prompt computer` for native desktop apps outside the built-in browser:
 
 ```bash
-orca computer permissions --json
-orca computer list-apps --json
-orca computer get-app-state --app com.apple.Safari --json
-orca computer click --app com.apple.Safari --element-index 12 --json
-orca computer paste-text --app com.apple.Safari --text "hello" --json
+prompt computer permissions --json
+prompt computer list-apps --json
+prompt computer get-app-state --app com.apple.Safari --json
+prompt computer click --app com.apple.Safari --element-index 12 --json
+prompt computer paste-text --app com.apple.Safari --text "hello" --json
 ```
 
 See [Computer use](/docs/cli/computer-use) for the full workflow and permission setup.
@@ -281,37 +296,37 @@ See [Computer use](/docs/cli/computer-use) for the full workflow and permission 
 The mobile emulator commands control iOS Simulator devices through Orca's worktree-scoped bridge. Use them instead of raw `serve-sim` or `simctl` when an agent is operating from inside Orca, so lifecycle and active-device state stay attached to the current worktree.
 
 ```bash
-orca emulator list --worktree active --json
-orca emulator attach "<device-name-or-udid>" --worktree active --json
-orca emulator tap 0.5 0.7 --worktree active --json
-orca emulator type "hello" --worktree active --json
-orca emulator gesture '[{"type":"begin","x":0.5,"y":0.8},{"type":"move","x":0.5,"y":0.4},{"type":"end","x":0.5,"y":0.2}]' --worktree active --json
-orca emulator button home --worktree active --json
-orca emulator rotate landscape_left --worktree active --json
-orca emulator exec --command "tap 0.5 0.7" --worktree active --json
-orca emulator kill --worktree active --json
-orca emulator shutdown --worktree active --json
+prompt emulator list --workspace active --json
+prompt emulator attach "<device-name-or-udid>" --workspace active --json
+prompt emulator tap 0.5 0.7 --workspace active --json
+prompt emulator type "hello" --workspace active --json
+prompt emulator gesture '[{"type":"begin","x":0.5,"y":0.8},{"type":"move","x":0.5,"y":0.4},{"type":"end","x":0.5,"y":0.2}]' --workspace active --json
+prompt emulator button home --workspace active --json
+prompt emulator rotate landscape_left --workspace active --json
+prompt emulator exec --command "tap 0.5 0.7" --workspace active --json
+prompt emulator kill --workspace active --json
+prompt emulator shutdown --workspace active --json
 ```
 
 Coordinates are normalized from `0` to `1`. Prefer `tap` for single taps, and use `gesture` for drags or multi-step touch input. Pass `--device <udid-or-name>` or `--emulator <id>` when a script must target a specific simulator instead of the worktree's active emulator.
 
 ## Linear
 
-The `orca linear` surface is what agents use via the `orca-linear` skill (legacy install name `linear-tickets` still works). Prefer `--json`. Linked worktrees resolve with `--current`.
+The `prompt connect linear` surface is what agents use via the `orca-linear` skill (legacy install name `linear-tickets` still works). Prefer `--json`. Linked worktrees resolve with `--current`.
 
 ### Read
 
 ```bash
-orca linear issue --current --full --json
-orca linear issue ENG-123 --comments --children --relations --activity --json
-orca linear search "auth bug" --workspace all --json
-orca linear list --filter assigned --limit 10 --json
-orca linear list-issues --team ENG --state started --assignee me --json
-orca linear list-issues --query auth --updated-at -P7D --cursor <cursor> --workspace <id> --json
-orca linear team list --json
-orca linear team states --team ENG --json
-orca linear team labels --team ENG --json
-orca linear project list --query launch --json
+prompt connect linear issue --current --full --json
+prompt connect linear issue ENG-123 --comments --children --relations --activity --json
+prompt connect linear search "auth bug" --workspace all --json
+prompt connect linear list --filter assigned --limit 10 --json
+prompt connect linear list-issues --team ENG --state started --assignee me --json
+prompt connect linear list-issues --query auth --updated-at -P7D --cursor <cursor> --workspace <id> --json
+prompt connect linear team list --json
+prompt connect linear team states --team ENG --json
+prompt connect linear team labels --team ENG --json
+prompt connect linear project list --query launch --json
 ```
 
 `--full` expands comments, children, attachments, relations, and activity. Section flags (`--comments`, `--children`, `--attachments`, `--relations`, `--activity`) work individually.
@@ -320,12 +335,12 @@ orca linear project list --query launch --json
 
 ```bash
 # Create or update (omit id/--current to create; requires --team and --title on create)
-orca linear save-issue --team ENG --title "Fix auth" --priority high --json
-orca linear save-issue ENG-123 --state "In Progress" --assignee me --json
-orca linear save-issue --current --project null --due-date null --json
+prompt connect linear save-issue --team ENG --title "Fix auth" --priority high --json
+prompt connect linear save-issue ENG-123 --state "In Progress" --assignee me --json
+prompt connect linear save-issue --current --project null --due-date null --json
 
-orca linear relation add ENG-1 --related ENG-2 --type blocks --json
-orca linear relation remove ENG-1 --related ENG-2 --type related --json
+prompt connect linear relation add ENG-1 --related ENG-2 --type blocks --json
+prompt connect linear relation remove ENG-1 --related ENG-2 --type related --json
 ```
 
 `save-issue` labels **replace** the full label set (Linear MCP `save_issue` semantics). Literal `null` clears assignee, estimate, due date, project, or parent.
@@ -333,44 +348,44 @@ orca linear relation remove ENG-1 --related ENG-2 --type related --json
 ### Field helpers (still valid)
 
 ```bash
-orca linear status set --current --to "In Progress" --json
-orca linear assignee set --current --me --json
-orca linear priority set ENG-123 --to high --json
-orca linear estimate set --current --to 3 --json
-orca linear due-date set --current --to 2026-08-01 --json
-orca linear label add --current --label backend --json
-orca linear comment add --current --body "Investigating regression" --json
-orca linear attach --current --url https://example.com/repro --title "Repro" --json
-orca linear create --title "Flaky login test" --team ENG --priority high --json
+prompt connect linear status set --current --to "In Progress" --json
+prompt connect linear assignee set --current --me --json
+prompt connect linear priority set ENG-123 --to high --json
+prompt connect linear estimate set --current --to 3 --json
+prompt connect linear due-date set --current --to 2026-08-01 --json
+prompt connect linear label add --current --label backend --json
+prompt connect linear comment add --current --body "Investigating regression" --json
+prompt connect linear attach --current --url https://example.com/repro --title "Repro" --json
+prompt connect linear create --title "Flaky login test" --team ENG --priority high --json
 ```
 
-Run `orca linear --help` or `orca skills get orca-linear` for the version-matched list. Pass an explicit issue id (e.g. `ENG-123`) when a script may run outside an Orca-linked worktree.
+Run `prompt connect linear --help` or `prompt skill get orca-linear` for the version-matched list. Pass an explicit issue id (e.g. `ENG-123`) when a script may run outside an Orca-linked worktree.
 
 ## Skills (local, no runtime required)
 
 List bundled guides, print a version-matched guide, or install/update hybrid skill packages without the desktop Settings UI:
 
 ```bash
-orca skills list
-orca skills get orca-cli
-orca skills get orchestration --references
-orca skills get orchestration --reference recovery-and-cleanup
-orca skills get orchestration --full
-orca skills install --skill orca-cli --skill orchestration
-orca skills install --all --dry-run
-orca skills update --all
+prompt skill list
+prompt skill get orca-cli
+prompt skill get orchestration --references
+prompt skill get orchestration --reference recovery-and-cleanup
+prompt skill get orchestration --full
+prompt skill install --skill orca-cli --skill orchestration
+prompt skill install --all --dry-run
+prompt skill update --all
 ```
 
 `install` / `update` run Orca's own skill installer on the machine that runs them, the same planner the app's **Update skills** uses. They do not contact the Orca runtime or need `npx`. See [Orca skills](/docs/cli/skills#keep-skills-up-to-date).
 
 ## Account (host-local runtime)
 
-On a headless host running Orca (`orca serve` or the desktop app), add managed Claude/Codex accounts when the remote client cannot use **Add account** (remote runtime scope disables that button):
+On a headless host running Orca (`prompt app serve` or the desktop app), add managed Claude/Codex accounts when the remote client cannot use **Add account** (remote runtime scope disables that button):
 
 ```bash
-orca account list
-orca account add                 # Claude by default
-orca account add --agent codex
+prompt account list
+prompt account add                 # Claude by default
+prompt account add --agent codex
 ```
 
 `account add` runs `claude login` / `codex login` in **this** terminal on the host, then registers the captured credentials with the local runtime. Codex uses device authorization so the browser can finish on another machine. Run these on the machine that owns the accounts — not through a client-only remote session.
@@ -380,13 +395,13 @@ orca account add --agent codex
 Publish HTML or Markdown through the signed-in Orca account. Viewing a public link does not require sign-in; create/list/update/delete do. **Publishing is off by default** — a human must enable **Settings → Artifacts → Allow publishing public artifact links** on the device. There is no CLI flag that grants the gate. `list`, `unshare`, and `delete` stay available so you can audit or revoke links after turning publishing off.
 
 ```bash
-orca artifacts share ./report.html --json
-orca artifacts share ./notes.md --json
-orca artifacts update ./notes.md --json
-orca artifacts unshare ./notes.md --json
-orca artifacts list --json
-orca artifacts list --cursor <cursor> --json
-orca artifacts delete <id> --json
+prompt util artifacts share ./report.html --json
+prompt util artifacts share ./notes.md --json
+prompt util artifacts update ./notes.md --json
+prompt util artifacts unshare ./notes.md --json
+prompt util artifacts list --json
+prompt util artifacts list --cursor <cursor> --json
+prompt util artifacts delete <id> --json
 ```
 
 - Accepted files: `.html`, `.htm`, `.md`, `.markdown`.
@@ -402,25 +417,25 @@ orca artifacts delete <id> --json
 Scheduled prompts:
 
 ```bash
-orca automations list --json
-orca automations create --name "Daily review" --trigger daily --time 09:00 --prompt "Review open changes" --provider codex --repo id:<repoId> --disabled --json
-orca automations run <automationId> --json
+prompt automation list --json
+prompt automation create --name "Daily review" --trigger daily --time 09:00 --prompt "Review open changes" --provider codex --repo id:<repoId> --disabled --json
+prompt automation run <automationId> --json
 ```
 
 Remote runtime environments:
 
 ```bash
-orca environment add --name work-laptop --pairing-code "orca://pair?code=..." --json
-orca environment list --json
-orca environment rm --environment <selector> --json
+prompt env environment add --name work-laptop --pairing-code "orca://pair?code=..." --json
+prompt env environment list --json
+prompt env environment remove --environment <selector> --json
 ```
 
 Agent status hooks:
 
 ```bash
-orca agent hooks status --json
-orca agent hooks on --json
-orca agent hooks off --json
+prompt app agent-hooks status --json
+prompt app agent-hooks on --json
+prompt app agent-hooks off --json
 ```
 
 ## Agent habits

@@ -86,7 +86,7 @@ describe('bundled skill guide generator', () => {
       expect(projection).toEqual(
         composeStubProjection(source, stubBody, `skill-stubs/${name}.md`, { sharedBlocks })
       )
-      expect(projection).toContain(`skills get ${name}`)
+      expect(projection).toContain(`skill get ${name}`)
     }
   })
 

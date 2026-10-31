@@ -42,7 +42,7 @@ absence included, is a checkpoint.
 | No live preamble and no explicit supervision                                                                                                   | Ordinary terminal agent | Do not emit lifecycle messages; use `orca-cli` for terminal/worktree work      |
 
 Model or effort selection does not make a handoff supervised: `orca-cli`'s
-`worktree create --agent` and `agent launch` take `--model` and `--effort`, and
+`workspace create --agent` and `session start` take `--model` and `--effort`, and
 open a chat or a terminal per the user's Chat UI setting, as `worker-start` does.
 Never substitute a non-Orca subagent tool when Orca orchestration provenance was
 requested.
@@ -67,10 +67,10 @@ requested.
   as absent. A new stream operation requires advertised capability because old
   decoders may silently drop unknown opcodes. Never fall back to local execution
   when remote authority or capability is unproven.
-- Use the executable you used to run `skills get` for the entire run. In the
-  examples below, replace `ORCA` with it; do not create a shell variable or run
-  `ORCA` literally. If it fails, report that exact error instead of switching.
-- `ORCA status --json` shows your Orca session ID as `caller.orcaSessionId` when you have one.
+- Use the executable you used to run `skill get` for the entire run. In the
+  examples below, replace `PROMPT` with it; do not create a shell variable or run
+  `PROMPT` literally. If it fails, report that exact error instead of switching.
+- `PROMPT app status --json` shows your Orca session ID as `caller.orcaSessionId` when you have one.
 - A successful `orchestration send` proves durable enqueue; its wake or nudge is
   best-effort attention only and does not prove the recipient read or accepted it.
 
@@ -86,10 +86,10 @@ The injected preamble is authoritative. A dispatched worker must:
    expires mid-task, and stop it before `worker_done`.
 3. Read coordinator follow-ups at each natural checkpoint — before starting a
    new file, after a test run — and once more immediately before `worker_done`:
-   `ORCA orchestration check --terminal <your_handle> --json`.
+   `PROMPT orchestration check --terminal <your_handle> --json`.
    After processing every message, ack the batch, which returns the next one, and
    repeat until `count` is 0; an unacked batch replays and hides newer mail:
-   `ORCA orchestration check --terminal <your_handle> --ack <delivery_id> --json`.
+   `PROMPT orchestration check --terminal <your_handle> --ack <delivery_id> --json`.
 4. Send `worker_done` exactly once, from the dispatched terminal, with a
    three-sentence executive summary, both lifecycle IDs, and explicit
    `--outcome succeeded` or `--outcome failed`. Never encode failure only in prose.
@@ -106,11 +106,11 @@ Confirm the runtime, bind one Run, and start the full independent wave before
 waiting. `worker-start --spec` creates the Task and its attempt in one call:
 
 ```text
-ORCA status --json
-ORCA orchestration run-create --objective "<objective>" --json
-ORCA orchestration worker-start --spec "<worker A task>" --worktree current --agent codex --json
-ORCA orchestration worker-start --spec "<worker B task>" --worktree current --agent claude --json
-ORCA orchestration check --wait --types "worker_done,escalation,question" --timeout-ms 900000 --json
+PROMPT app status --json
+PROMPT orchestration run-create --objective "<objective>" --json
+PROMPT orchestration worker-start --spec "<worker A task>" --workspace current --agent codex --json
+PROMPT orchestration worker-start --spec "<worker B task>" --workspace current --agent claude --json
+PROMPT orchestration check --wait --types "worker_done,escalation,question" --timeout-ms 900000 --json
 ```
 
 After a restart, resume your own Run with `run-use --id <run_id>`. A worker
@@ -137,9 +137,9 @@ message: reply to questions, validate each `worker_done` against the expected
 active Dispatch, and decide each settled terminal's next owner before the ack:
 
 ```text
-ORCA orchestration reply --id <message_id> --body "<answer>" --json
-ORCA orchestration worker-release --dispatch <dispatch_id> --json
-ORCA orchestration check --ack <delivery_id> --wait --types "worker_done,escalation,question" --timeout-ms 900000 --json
+PROMPT orchestration reply --id <message_id> --body "<answer>" --json
+PROMPT orchestration worker-release --dispatch <dispatch_id> --json
+PROMPT orchestration check --ack <delivery_id> --wait --types "worker_done,escalation,question" --timeout-ms 900000 --json
 ```
 
 Keep waiting until every expected Dispatch settles. A timeout or empty result is
@@ -147,7 +147,7 @@ a checkpoint, not a failure. Do not stop, retry, release, or launch a duplicate
 editor without the positive proof `## Outcome` requires.
 
 After three consecutive empty waits, stop waiting blindly and enumerate with
-`ORCA orchestration worker-list --include-remote --json` (defaults to the bound
+`PROMPT orchestration worker-list --include-remote --json` (defaults to the bound
 Run; `--run <run_id>` overrides; the receipt's `scope` names which), acting on
 each row's `projection.attention` categories, `projection.attention.requiresAction`, and literal `projection.nextAction` argv.
 Rows come newest first and page at 100: while `page.hasMore`, follow `page.nextCursor` with `--cursor <value>`.
@@ -194,9 +194,9 @@ and do not end the coordinator turn until it returns none.
 ## Conditional references
 
 This compact guide is sufficient for the normal local loop. At an action gate
-below, run `ORCA skills get orchestration --reference references/<file>.md` and
+below, run `PROMPT skill get orchestration --reference references/<file>.md` and
 read only that document; `--references` lists the names. If the CLI rejects
-`--reference`, run `ORCA skills get orchestration --full` once instead: it
+`--reference`, run `PROMPT skill get orchestration --full` once instead: it
 returns this exact kernel and every reference, so read only the named one. If an
 older CLI rejects `--full`, keep this kernel's safety floor, use that command's
 `--help`, and never guess newer flags.

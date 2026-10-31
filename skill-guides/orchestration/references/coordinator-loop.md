@@ -10,8 +10,8 @@ Create independent Tasks before the first wait. Encode only real dependencies,
 then use the ready view as external memory:
 
 ```text
-ORCA orchestration task-create --spec "<dependent work>" --deps <json_array> --json
-ORCA orchestration task-list --ready --brief --json
+PROMPT orchestration task-create --spec "<dependent work>" --deps <json_array> --json
+PROMPT orchestration task-list --ready --brief --json
 ```
 
 `--brief` collapses whitespace and caps echoed specs at 160 characters;
@@ -29,8 +29,8 @@ otherwise omit it so the worker inherits the user's configured agent default.
 Add `--effort` only when that model supports it:
 
 ```text
-ORCA orchestration worker-start --task <task_id> --worktree current --agent claude --model opus --effort high --json
-ORCA orchestration worker-start --task <task_id> --worktree current --agent muse --model muse-spark-1.3 --json
+PROMPT orchestration worker-start --task <task_id> --workspace current --agent claude --model opus --effort high --json
+PROMPT orchestration worker-start --task <task_id> --workspace current --agent muse --model muse-spark-1.3 --json
 ```
 
 OpenCode also accepts `--model` in an existing worktree when the execution host
@@ -52,8 +52,8 @@ same exact agent has immediate follow-up work, recover the proven handle and
 transfer cleanup ownership to the new Dispatch:
 
 ```text
-ORCA orchestration worker-show --dispatch <dispatch_id> --json
-ORCA orchestration worker-start --task <next_task_id> --terminal <agent_terminal_handle> --json
+PROMPT orchestration worker-show --dispatch <dispatch_id> --json
+PROMPT orchestration worker-start --task <next_task_id> --terminal <agent_terminal_handle> --json
 ```
 
 Otherwise explicitly retain or release the settled worker. Do not leave it live

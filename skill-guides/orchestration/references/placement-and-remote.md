@@ -12,13 +12,13 @@ sharing unsafe.
 
 ```text
 # Current workspace; setup is not rerun.
-ORCA orchestration worker-start --task <task_id> --worktree current --agent codex --json
+PROMPT orchestration worker-start --task <task_id> --workspace current --agent codex --json
 
 # Stacked child worktree.
-ORCA orchestration worker-start --task <task_id> --worktree new-child --agent codex --setup run --json
+PROMPT orchestration worker-start --task <task_id> --workspace new-child --agent codex --setup run --json
 
 # Independent top-level worktree.
-ORCA orchestration worker-start --task <task_id> --worktree new-top-level --agent codex --setup run --json
+PROMPT orchestration worker-start --task <task_id> --workspace new-top-level --agent codex --setup run --json
 ```
 
 `--name` is optional: without it Orca picks a name as it does for an unnamed
@@ -28,11 +28,11 @@ Current and exact existing workspaces create a fresh terminal unless
 `--terminal` is explicit. Folder workspaces are first-class; do not invoke Git
 or require worktree lineage when the selected workspace is a folder.
 
-Register a folder workspace through project setup. `repo add --path <dir>`
-requires a valid Git repository and rejects a plain directory:
+Register a folder workspace on a host through project setup. `project add --path <dir>`
+registers a repository or, with `--kind folder`, a plain folder, but it sets up no host:
 
 ```text
-ORCA project setup-existing-folder --project <project_id> --host <host_id> --path <abs_path> --kind folder --json
+PROMPT project setup add-folder --project <project_id> --host <host_id> --path <abs_path> --kind folder --json
 ```
 
 Then place work on the returned workspace with an exact selector. A worktree
@@ -52,7 +52,7 @@ The Run and Tasks remain authoritative on the current server. `--on` selects
 only the worker's execution server and appears only on `worker-start`:
 
 ```text
-ORCA orchestration worker-start --task <task_id> --on <environment> --worktree new-top-level --repo <exact_remote_repo_selector> --name <name> --agent codex --setup run --json
+PROMPT orchestration worker-start --task <task_id> --on <environment> --workspace new-top-level --project <exact_remote_repo_selector> --name <name> --agent codex --setup run --json
 ```
 
 Remote `current` and `new-child` are invalid because they are ambiguous across
@@ -62,10 +62,10 @@ stop, and cleanup by Dispatch ID; never repeat `--on` or substitute a remote
 terminal handle.
 
 ```text
-ORCA orchestration worker-show --dispatch <dispatch_id> --json
-ORCA orchestration worker-read --dispatch <dispatch_id> --limit 50 --json
-ORCA orchestration send --to dispatch:<dispatch_id> --subject "Follow-up" --body "<guidance>" --json
-ORCA orchestration worker-list --run <run_id> --include-remote --json
+PROMPT orchestration worker-show --dispatch <dispatch_id> --json
+PROMPT orchestration worker-read --dispatch <dispatch_id> --limit 50 --json
+PROMPT orchestration send --to dispatch:<dispatch_id> --subject "Follow-up" --body "<guidance>" --json
+PROMPT orchestration worker-list --run <run_id> --include-remote --json
 ```
 
 `worker-list` reads local fleet state only; enumerate remote workers with

@@ -45,7 +45,7 @@ import { BUNDLED_SKILL_GUIDES } from '../bundled-skill-guides'
 import { main } from '../index'
 import { GUIDE_HOST_CAPABILITIES } from './skill-guide-host-gate'
 
-const PUBLISHING_TEXT = /artifacts share|skills share|## Artifacts|## Skill Sharing/
+const PUBLISHING_TEXT = /artifacts share|skills? share|## Artifacts|## Skill Sharing/
 
 async function skillsGet(args: string[], host: Host): Promise<{ stdout: string; stderr: string }> {
   hostState.host = host
@@ -125,8 +125,8 @@ describe('skills get host-capability gating', () => {
     const listed = await skillsGet(['--references'], host)
 
     expect(full.stdout).toContain('## Artifacts')
-    expect(full.stdout).toContain('ORCA artifacts share <file> --json')
-    expect(full.stdout).toContain('ORCA skills share --skill')
+    expect(full.stdout).toContain('PROMPT util artifacts share <file> --json')
+    expect(full.stdout).toContain('PROMPT skill share --skill')
     expect(full.stdout).not.toContain('host-capability')
     expect(listed.stdout.trim().split('\n')).toEqual([
       'artifacts',

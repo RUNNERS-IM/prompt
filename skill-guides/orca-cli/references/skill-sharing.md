@@ -9,11 +9,11 @@ no CLI or RPC way to grant it. Manual publishing from the reviewed desktop flow 
 available without this agent permission.
 
 ```text
-ORCA skills installed --json
-ORCA skills share --skill <selector> [--skill <selector> ...] --bundle-name <name> --json
+PROMPT skill installed --json
+PROMPT skill share --skill <selector> [--skill <selector> ...] --bundle-name <name> --json
 ```
 
-- `skills installed` returns safe discovery IDs and names. It does not expose local skill
+- `skill installed` returns safe discovery IDs and names. It does not expose local skill
   paths in CLI output. Sharing then verifies that each `SKILL.md` declares a portable
   lowercase name containing only letters, numbers, and hyphens.
 - Each `--skill` must be an exact discovery ID or an unambiguous installed-skill name.
