@@ -1,4 +1,5 @@
 import { worktreeIdsEqual } from '../../../../shared/worktree/id'
+import { movedTerminalOwnerOf } from '../../../../shared/moved-terminal-owner'
 import type { RuntimePtyWorktreeRecord } from '../../runtime-terminal-state-records'
 import { worktreePtyBelongsToHost, type WorktreePtyHostFence } from '../../worktree-pty-host-fence'
 
@@ -11,10 +12,13 @@ export function collectWorktreePtyIds(
   includeDisconnected = false
 ): Set<string> {
   const ptyIds = new Set<string>()
+  // Leaves and PTY records keep the workspace a terminal started in; a moved one answers to its new one.
+  const ownerOf = (ptyId: string, recorded: string): string =>
+    movedTerminalOwnerOf(ptyId) ?? recorded
   for (const leaf of leaves) {
     if (
-      worktreeIdsEqual(leaf.worktreeId, worktreeId) &&
       leaf.ptyId &&
+      worktreeIdsEqual(ownerOf(leaf.ptyId, leaf.worktreeId), worktreeId) &&
       worktreePtyBelongsToHost(leaf.ptyId, ptysById.get(leaf.ptyId)?.connectionId, hostFence)
     ) {
       ptyIds.add(leaf.ptyId)
@@ -22,7 +26,7 @@ export function collectWorktreePtyIds(
   }
   for (const pty of ptysById.values()) {
     if (
-      worktreeIdsEqual(pty.worktreeId, worktreeId) &&
+      worktreeIdsEqual(ownerOf(pty.ptyId, pty.worktreeId), worktreeId) &&
       (includeDisconnected || pty.connected) &&
       worktreePtyBelongsToHost(pty.ptyId, pty.connectionId, hostFence)
     ) {
