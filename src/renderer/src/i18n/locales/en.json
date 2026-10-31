@@ -23138,7 +23138,8 @@
       "tabColor": "Tab Color",
       "close": "Close Session",
       "closeNamed": "Close {{name}}",
-      "copyToNewWindow": "Copy to New Window"
+      "copyToNewWindow": "Copy to New Window",
+      "duplicate": "Duplicate"
     },
     "projectRemoval": {
       "menuItem": "Remove project from list…",

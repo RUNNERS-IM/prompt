@@ -10,7 +10,8 @@
       "tabColor": "タブの色",
       "close": "セッションを閉じる",
       "closeNamed": "「{{name}}」を閉じる",
-      "copyToNewWindow": "新しいウインドウにコピー"
+      "copyToNewWindow": "新しいウインドウにコピー",
+      "duplicate": "複製"
     }
   },
   "agentLaunch": {

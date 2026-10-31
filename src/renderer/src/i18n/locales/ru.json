@@ -10,7 +10,8 @@
       "tabColor": "Цвет вкладки",
       "close": "Закрыть сеанс",
       "closeNamed": "Закрыть {{name}}",
-      "copyToNewWindow": "Копировать в новое окно"
+      "copyToNewWindow": "Копировать в новое окно",
+      "duplicate": "Дублировать"
     }
   },
   "agentLaunch": {

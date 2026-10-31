@@ -9,6 +9,9 @@ import { getProjectedWorktreeLineage } from '../../../../shared/sidebar-list/wor
 import { getWorkspaceStatus } from './workspace-status'
 import { translate } from '@/i18n/i18n'
 import { worktreeWorkspaceKey } from '../../../../shared/workspace-scope'
+import { parseAgentStatusPaneIdentity } from '../../../../shared/agent-status-worktree-attribution'
+import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-windows'
+import { resolveRowAgentType } from './worktree-agent-row-type'
 
 export const WORKTREE_CONTEXT_MENU_SCOPE_ATTR = 'data-worktree-context-menu-scope'
 export const WORKTREE_NATIVE_CONTEXT_MENU_ATTR = 'data-worktree-native-context-menu'
@@ -102,6 +105,55 @@ export function isSessionRowContextMenuTarget(target: EventTarget | null): boole
     (maybeElement?.closest?.(SESSION_ROW_SELECTOR) ??
       maybeElement?.parentElement?.closest?.(SESSION_ROW_SELECTOR)) != null
   )
+}
+
+export type WorktreeDuplicateSessionState = Pick<
+  AppState,
+  | 'activeWorktreeId'
+  | 'activeTabId'
+  | 'activeTabIdByWorktree'
+  | 'tabsByWorktree'
+  | 'terminalLayoutsByTabId'
+  | 'agentStatusByPaneKey'
+>
+
+/**
+ * Command behind the workspace menu's "Duplicate" ([PROMPT] decision 1B): the same copy the
+ * session row menu offers, for the workspace's active tab (its first tab when none is active).
+ * Null when that tab has no known Claude session id, such as a plain shell tab.
+ */
+export function getWorktreeDuplicateSessionCommand(
+  state: WorktreeDuplicateSessionState,
+  worktreeId: string
+): string | null {
+  const tabs = state.tabsByWorktree?.[worktreeId] ?? []
+  const activeTabIds = [
+    state.activeWorktreeId === worktreeId ? state.activeTabId : null,
+    state.activeTabIdByWorktree?.[worktreeId] ?? null
+  ]
+  const tab =
+    activeTabIds
+      .map((tabId) => (tabId ? tabs.find((item) => item.id === tabId) : undefined))
+      .find((item) => item !== undefined) ?? tabs[0]
+  if (!tab) {
+    return null
+  }
+  const activeLeafId = state.terminalLayoutsByTabId?.[tab.id]?.activeLeafId
+  const activePaneKey = activeLeafId ? `${tab.id}:${activeLeafId}` : null
+  const entries = Object.entries(state.agentStatusByPaneKey ?? {})
+    .filter(([paneKey]) => parseAgentStatusPaneIdentity(paneKey)?.tabId === tab.id)
+    // A split tab can hold several agents; the focused pane wins.
+    .sort(([a], [b]) => Number(b === activePaneKey) - Number(a === activePaneKey))
+  for (const [, entry] of entries) {
+    const session = entry.providerSession
+    if (resolveRowAgentType(entry, tab) === 'claude' && session?.key === 'session_id') {
+      const command = promptClaudeSessionCopyCommand(session.id)
+      if (command) {
+        return command
+      }
+    }
+  }
+  return null
 }
 
 export function shouldSuppressContextMenuFollowUpClick(

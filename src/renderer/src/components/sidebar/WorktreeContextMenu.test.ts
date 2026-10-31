@@ -12,6 +12,7 @@ import {
   hasWorktreeParentLink,
   isWorktreeParentPickerDisabled,
   getSharedWorkspaceStatus,
+  getWorktreeDuplicateSessionCommand,
   planWorkspaceStatusAssignment,
   selectMenuScopedMap,
   shouldRevealWorktreeDeveloperMenu
@@ -20,6 +21,7 @@ import { getDeleteStateForWorktreeHost } from './worktree-delete-state-host-matc
 import type { WorktreeLineage } from '../../../../shared/worktree/lineage-types'
 import type { WorkspaceStatusDefinition, Worktree } from '../../../../shared/worktree/types'
 import { getWorktreeHostIdentity } from '../../../../shared/worktree/host-qualified-identity'
+import type { WorktreeDuplicateSessionState } from './worktree-context-menu-policy'
 
 describe('shouldRevealWorktreeDeveloperMenu', () => {
   it('stays hidden for an ordinary right-click', () => {
@@ -337,5 +339,112 @@ describe('planWorkspaceStatusAssignment (context-menu "Move to Status" routing)'
         false
       )
     ).toEqual({ kind: 'local-only', localWriteIds: [] })
+  })
+})
+
+describe('getWorktreeDuplicateSessionCommand (workspace menu "Duplicate")', () => {
+  const WT = 'repo::wt-1'
+  const LEAF_A = '11111111-1111-4111-8111-111111111111'
+  const LEAF_B = '22222222-2222-4222-8222-222222222222'
+  const SESSION_1 = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+  const SESSION_2 = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'
+  const tab = (id: string) => ({ id, worktreeId: WT, title: 'Terminal' })
+  const claude = (paneKey: string, sessionId: string) => ({
+    paneKey,
+    agentType: 'claude',
+    providerSession: { key: 'session_id', id: sessionId }
+  })
+  function stateWith(overrides: Record<string, unknown>): WorktreeDuplicateSessionState {
+    // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the policy reads only these fields.
+    return {
+      activeWorktreeId: null,
+      activeTabId: null,
+      activeTabIdByWorktree: {},
+      tabsByWorktree: { [WT]: [tab('tab-1'), tab('tab-2')] },
+      terminalLayoutsByTabId: {},
+      agentStatusByPaneKey: {},
+      ...overrides
+    } as unknown as WorktreeDuplicateSessionState
+  }
+
+  it("forks the active tab's Claude session", () => {
+    const state = stateWith({
+      activeTabIdByWorktree: { [WT]: 'tab-2' },
+      agentStatusByPaneKey: {
+        [`tab-1:${LEAF_A}`]: claude(`tab-1:${LEAF_A}`, SESSION_1),
+        [`tab-2:${LEAF_A}`]: claude(`tab-2:${LEAF_A}`, SESSION_2)
+      }
+    })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBe(
+      `claude --resume ${SESSION_2} --fork-session`
+    )
+  })
+
+  it('reads the live active tab when the workspace is the active one', () => {
+    const state = stateWith({
+      activeWorktreeId: WT,
+      activeTabId: 'tab-1',
+      activeTabIdByWorktree: { [WT]: 'tab-2' },
+      agentStatusByPaneKey: {
+        [`tab-1:${LEAF_A}`]: claude(`tab-1:${LEAF_A}`, SESSION_1),
+        [`tab-2:${LEAF_A}`]: claude(`tab-2:${LEAF_A}`, SESSION_2)
+      }
+    })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBe(
+      `claude --resume ${SESSION_1} --fork-session`
+    )
+  })
+
+  it('falls back to the first tab when no tab is active', () => {
+    const state = stateWith({
+      agentStatusByPaneKey: { [`tab-1:${LEAF_A}`]: claude(`tab-1:${LEAF_A}`, SESSION_1) }
+    })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBe(
+      `claude --resume ${SESSION_1} --fork-session`
+    )
+  })
+
+  it('prefers the focused pane of a split tab', () => {
+    const state = stateWith({
+      activeTabIdByWorktree: { [WT]: 'tab-1' },
+      terminalLayoutsByTabId: { 'tab-1': { activeLeafId: LEAF_B } },
+      agentStatusByPaneKey: {
+        [`tab-1:${LEAF_A}`]: claude(`tab-1:${LEAF_A}`, SESSION_1),
+        [`tab-1:${LEAF_B}`]: claude(`tab-1:${LEAF_B}`, SESSION_2)
+      }
+    })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBe(
+      `claude --resume ${SESSION_2} --fork-session`
+    )
+  })
+
+  it('returns null for a shell tab with no agent', () => {
+    const state = stateWith({ activeTabIdByWorktree: { [WT]: 'tab-1' } })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBeNull()
+  })
+
+  it('does not borrow a Claude session from another tab', () => {
+    const state = stateWith({
+      activeTabIdByWorktree: { [WT]: 'tab-1' },
+      agentStatusByPaneKey: { [`tab-2:${LEAF_A}`]: claude(`tab-2:${LEAF_A}`, SESSION_2) }
+    })
+    expect(getWorktreeDuplicateSessionCommand(state, WT)).toBeNull()
+  })
+
+  it('returns null for a non-Claude agent or an id that is not a Claude session id', () => {
+    const codex = stateWith({
+      agentStatusByPaneKey: {
+        [`tab-1:${LEAF_A}`]: { ...claude(`tab-1:${LEAF_A}`, SESSION_1), agentType: 'codex' }
+      }
+    })
+    const badId = stateWith({
+      agentStatusByPaneKey: { [`tab-1:${LEAF_A}`]: claude(`tab-1:${LEAF_A}`, 'not-a-uuid') }
+    })
+    expect(getWorktreeDuplicateSessionCommand(codex, WT)).toBeNull()
+    expect(getWorktreeDuplicateSessionCommand(badId, WT)).toBeNull()
+  })
+
+  it('returns null for a workspace without tabs', () => {
+    expect(getWorktreeDuplicateSessionCommand(stateWith({ tabsByWorktree: {} }), WT)).toBeNull()
   })
 })

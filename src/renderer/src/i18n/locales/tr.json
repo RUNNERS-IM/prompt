@@ -10,7 +10,8 @@
       "tabColor": "Sekme Rengi",
       "close": "Oturumu Kapat",
       "closeNamed": "{{name}} kapat",
-      "copyToNewWindow": "Yeni pencereye kopyala"
+      "copyToNewWindow": "Yeni pencereye kopyala",
+      "duplicate": "Çoğalt"
     }
   },
   "agentLaunch": {
