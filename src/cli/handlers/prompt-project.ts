@@ -1,8 +1,6 @@
-import { readFile, stat } from 'node:fs/promises'
-import { basename, resolve as resolvePath } from 'node:path'
 import type { RepoCreateFailure } from '../../shared/repo-create-failure-copy'
 import { DEFAULT_REPO_BADGE_COLOR, normalizeRepoBadgeColor } from '../../shared/repo-badge-color'
-import { MAX_REPO_ICON_UPLOAD_BYTES, sanitizeRepoIcon, type RepoIcon } from '../../shared/repo-icon'
+import type { RepoIcon } from '../../shared/repo-icon'
 import type { Repo } from '../../shared/repo-types'
 import type { CommandHandler } from '../dispatch'
 import { printResult } from '../format'
@@ -12,6 +10,7 @@ import { RuntimeClientError } from '../runtime/types'
 import { shortenHomePath, shortId } from '../command-tree/prompt-output'
 import { resolvePromptProjectSelector } from '../command-tree/prompt-selectors'
 import { formatProjectList, listProjectItems } from './prompt-project-list'
+import { parseProjectIconFlag } from './prompt-project-icon'
 
 export type ProjectItem = {
   id: string
@@ -49,64 +48,6 @@ function getKindFlag(flags: Map<string, string | boolean>): 'git' | 'folder' | u
     throw new RuntimeClientError('invalid_argument', '--kind must be git or folder.')
   }
   return kind
-}
-
-function isPng(bytes: Buffer): boolean {
-  return bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
-}
-
-function isWebp(bytes: Buffer): boolean {
-  return (
-    bytes.subarray(0, 4).toString('latin1') === 'RIFF' &&
-    bytes.subarray(8, 12).toString('latin1') === 'WEBP'
-  )
-}
-
-/** Read --icon into the repo icon the sidebar renders; the host silently drops icons it rejects. */
-export async function parseProjectIconFlag(value: string, cwd: string): Promise<RepoIcon | null> {
-  if (value === 'none') {
-    return null
-  }
-  let candidate: unknown
-  if (value.startsWith('emoji:')) {
-    candidate = { type: 'emoji', emoji: value.slice('emoji:'.length) }
-  } else if (value.startsWith('lucide:')) {
-    candidate = { type: 'lucide', name: value.slice('lucide:'.length) }
-  } else {
-    const path = resolvePath(cwd, value)
-    const size = await stat(path).then(
-      (stats) => (stats.isFile() ? stats.size : null),
-      () => null
-    )
-    if (size === null) {
-      throw new RuntimeClientError('invalid_argument', `--icon file not found: ${path}`)
-    }
-    if (size > MAX_REPO_ICON_UPLOAD_BYTES) {
-      throw new RuntimeClientError(
-        'invalid_argument',
-        `--icon file is ${Math.ceil(size / 1024)} KB; the limit is ${MAX_REPO_ICON_UPLOAD_BYTES / 1024} KB.`
-      )
-    }
-    const bytes = await readFile(path)
-    const mime = isPng(bytes) ? 'image/png' : isWebp(bytes) ? 'image/webp' : null
-    if (!mime) {
-      throw new RuntimeClientError('invalid_argument', '--icon file must be a PNG or WebP image.')
-    }
-    candidate = {
-      type: 'image',
-      src: `data:${mime};base64,${bytes.toString('base64')}`,
-      source: 'file',
-      label: basename(path)
-    }
-  }
-  const icon = sanitizeRepoIcon(candidate)
-  if (!icon) {
-    throw new RuntimeClientError(
-      'invalid_argument',
-      '--icon must be a PNG/WebP file, emoji:<emoji>, lucide:<IconName>, or none.'
-    )
-  }
-  return icon
 }
 
 function parseColorFlag(value: string): string {

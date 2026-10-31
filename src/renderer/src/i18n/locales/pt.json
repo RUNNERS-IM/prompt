@@ -11049,7 +11049,6 @@
           "f9dc6cc5d3": "Renomear Grupo de Projeto",
           "370c6a55dd": "Limpar Filtros",
           "b7acbf038b": "Nenhum espaço de trabalho encontrado",
-          "c83968f87f": "Remover Projeto",
           "64e55f7f01": "Remover do grupo",
           "4a08fb55f2": "Mover para o grupo",
           "cbfd565f83": "Novo grupo a partir do projeto",
@@ -11160,7 +11159,6 @@
           "503ec0f8e6": "Novo grupo a partir do projeto",
           "3350101edb": "Copiar Caminho",
           "f4475537d8": "Excluir",
-          "f5ac91531d": "Remover Projeto do Orca",
           "b42391d8bf": "Excluindo…",
           "0918b35e4f": "Fecha todos os painéis ativos neste espaço de trabalho para liberar memória e CPU.",
           "7d190f7d2b": "Fecha todos os painéis ativos nos espaços de trabalho selecionados para liberar memória e CPU.",
@@ -11954,14 +11952,8 @@
           "9906cae183": "Parar escaneamento"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "Remover",
           "d36883e046": "Cancelar",
           "b79b39d865": "Remover Projeto",
-          "removeDescriptionSsh": "Isso remove {{name}} apenas do Orca. Seus arquivos permanecem em {{host}} — adicione novamente esse host SSH para recuperá-lo.",
-          "removeDescriptionLocal": "Isso remove {{name}} apenas do Orca. Ele ainda está no seu disco.",
-          "removeDescriptionVmRecipe": "Isso remove {{name}} do Orca. A receita de VM determina se o ambiente e seus arquivos são excluídos permanentemente.",
-          "openTerminalWarning_one": "{{count}} terminal aberto neste projeto será fechado.",
-          "openTerminalWarning_other": "{{count}} terminais abertos neste projeto serão fechados.",
           "openTerminalWarning_many": "{{count}} terminais abertos neste projeto serão fechados."
         },
         "WorktreeCardMetadataStatusBadges": {

@@ -6087,14 +6087,8 @@
           "confirm": "In Ruhezustand versetzen"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "Entfernen",
           "d36883e046": "Abbrechen",
-          "b79b39d865": "Projekt entfernen",
-          "removeDescriptionSsh": "Dies entfernt {{name}} nur aus Orca. Die Dateien bleiben auf {{host}} — zum Wiederherstellen diesen SSH-Host erneut hinzufügen.",
-          "removeDescriptionLocal": "Dies entfernt {{name}} nur aus Orca. Es bleibt auf dem Datenträger erhalten.",
-          "removeDescriptionVmRecipe": "Dies entfernt {{name}} aus Orca. Das zugehörige VM-Rezept legt fest, ob die Umgebung und ihre Dateien dauerhaft gelöscht werden.",
-          "openTerminalWarning_one": "{{count}} offenes Terminal in diesem Projekt wird geschlossen.",
-          "openTerminalWarning_other": "{{count}} offene Terminals in diesem Projekt werden geschlossen."
+          "b79b39d865": "Projekt entfernen"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "Aktiven Arbeitsbereich anzeigen"
@@ -6448,7 +6442,6 @@
           "3350101edb": "Pfad kopieren",
           "copyWorktreeName": "Worktree-Namen kopieren",
           "f4475537d8": "Löschen",
-          "f5ac91531d": "Projekt aus Orca entfernen",
           "b42391d8bf": "Wird gelöscht…",
           "0918b35e4f": "Alle aktiven Panels in diesem Arbeitsbereich schließen, um Arbeitsspeicher und CPU-Ressourcen freizugeben.",
           "7d190f7d2b": "Alle aktiven Panels in den ausgewählten Arbeitsbereichen schließen, um Arbeitsspeicher und CPU-Ressourcen freizugeben.",
@@ -6478,7 +6471,6 @@
           "f9dc6cc5d3": "Projektgruppe umbenennen",
           "370c6a55dd": "Filter zurücksetzen",
           "b7acbf038b": "Keine Arbeitsbereiche gefunden",
-          "c83968f87f": "Projekt entfernen",
           "64e55f7f01": "Aus Gruppe entfernen",
           "4a08fb55f2": "In Gruppe verschieben",
           "cbfd565f83": "Neue Gruppe aus Projekt erstellen",

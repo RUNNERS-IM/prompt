@@ -76,7 +76,12 @@ const PROMPT_FLAG_HELP: Readonly<Record<string, Readonly<Record<string, string>>
   },
   path: { 'project add': '--path <path>          Folder to add' },
   project: {
-    '*': '--project <project>    Project name, short id, full id, or project id'
+    '*': '--project <project>    Project name, short id, full id, or project id',
+    'workspace create': '--project <project>    Project name, short id, full id, or project id'
+  },
+  host: {
+    'workspace create':
+      '--host <host>          Create where the project is set up on this host (default: this computer)'
   },
   workspace: {
     '*': '--workspace <workspace> Workspace selector: name, short id, identity:<id>, path:<path>, branch:<branch>, or active'
@@ -86,7 +91,7 @@ const PROMPT_FLAG_HELP: Readonly<Record<string, Readonly<Record<string, string>>
   },
   icon: {
     'project set':
-      '--icon <file>          PNG/WebP file (256 KB max), emoji:<emoji>, lucide:<Icon>, or none'
+      '--icon <file>          PNG/WebP file (shrunk to 96px on macOS), emoji:<emoji>, lucide:<Icon>, or none'
   },
   color: { 'project set': '--color <#hex>         Badge color, or none for the default' },
   'base-ref': { 'project set': '--base-ref <ref>       Default base ref for new workspaces' },
@@ -102,8 +107,11 @@ export function promptFlagHelp(spec: CommandSpec, shownFlag: string): string | n
     return null
   }
   if (spec.handlerPath?.[0] !== 'prompt') {
-    // Moved commands keep their own help; only a respelled flag needs new wording.
-    return spec.flagAliases?.[shownFlag] ? (byCommand['*'] ?? null) : null
+    // Moved commands keep their own help unless reworded here; a respelled flag needs new wording.
+    return (
+      byCommand[spec.path.join(' ')] ??
+      (spec.flagAliases?.[shownFlag] ? (byCommand['*'] ?? null) : null)
+    )
   }
   return byCommand[spec.path.join(' ')] ?? byCommand['*'] ?? null
 }

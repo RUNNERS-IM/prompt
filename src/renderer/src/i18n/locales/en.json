@@ -6154,14 +6154,8 @@
           "confirm": "Sleep"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "Remove",
           "d36883e046": "Cancel",
-          "b79b39d865": "Remove Project",
-          "removeDescriptionSsh": "This only removes {{name}} from Orca. Its files stay on {{host}} — re-add that SSH host to recover it.",
-          "removeDescriptionLocal": "This only removes {{name}} from Orca. It is still on your disk.",
-          "removeDescriptionVmRecipe": "This removes {{name}} from Orca. Its VM recipe determines whether the environment and its files are permanently deleted.",
-          "openTerminalWarning_one": "{{count}} open terminal in this project will be closed.",
-          "openTerminalWarning_other": "{{count}} open terminals in this project will be closed."
+          "b79b39d865": "Remove Project"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "Reveal active workspace"
@@ -6515,7 +6509,6 @@
           "3350101edb": "Copy Path",
           "copyWorktreeName": "Copy Worktree Name",
           "f4475537d8": "Delete",
-          "f5ac91531d": "Remove Project from Orca",
           "b42391d8bf": "Deleting…",
           "0918b35e4f": "Close all active panels in this workspace to free up memory and CPU.",
           "7d190f7d2b": "Close all active panels in the selected workspaces to free up memory and CPU.",
@@ -6545,7 +6538,6 @@
           "f9dc6cc5d3": "Rename Project Group",
           "370c6a55dd": "Clear Filters",
           "b7acbf038b": "No workspaces found",
-          "c83968f87f": "Remove Project",
           "64e55f7f01": "Remove from group",
           "4a08fb55f2": "Move to group",
           "cbfd565f83": "New group from project",

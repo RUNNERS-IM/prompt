@@ -196,6 +196,27 @@ export async function resolvePromptProjectSelector(
 }
 
 /**
+ * Like resolvePromptProjectSelector, but a selector that names no sidebar project is refused
+ * here instead of reaching the host as a repo selector it would read differently.
+ */
+export async function resolvePromptSidebarProjectSelector(
+  client: RuntimeClient,
+  value: string
+): Promise<string> {
+  const resolved = await resolvePromptProjectSelector(client, value)
+  if (
+    resolved !== value ||
+    PROJECT_SELECTOR_PREFIXES.some((prefix) => value.startsWith(prefix)) ||
+    looksLikePath(value)
+  ) {
+    return resolved
+  }
+  throw new RuntimeClientError('selector_not_found', `No project matches "${value}".`, {
+    nextSteps: ['Run `prompt project list` to see projects and their ids.']
+  })
+}
+
+/**
  * The durable project id (`repo:<id>`, `github:owner/name`, ...) that project setup, workspace
  * create, and automation `--project` flags take, from a name, short id, repo id, or project id.
  */

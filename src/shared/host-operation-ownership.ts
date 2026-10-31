@@ -54,6 +54,8 @@ export const HOST_OPERATION_OWNERSHIP = {
   project: 'host',
   projectGroup: 'host',
   projectHostSetup: 'host',
+  // Prompt: prompt.environment.share mints this host's share link, so it runs where pairing does.
+  prompt: 'host',
   reference: 'host',
   repo: 'host',
   runtime: 'host',

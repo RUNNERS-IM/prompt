@@ -5938,14 +5938,8 @@
           "confirm": "Sleep"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "Supprimer",
           "d36883e046": "Annuler",
           "b79b39d865": "Retirer le projet",
-          "removeDescriptionSsh": "Ceci retire uniquement {{name}} d'Orca. Ses fichiers restent sur {{host}} — rajoutez cet hôte SSH pour le récupérer.",
-          "removeDescriptionLocal": "Ceci retire uniquement {{name}} d'Orca. Il est toujours sur votre disque.",
-          "removeDescriptionVmRecipe": "Ceci retire {{name}} d'Orca. Sa recette de VM détermine si l'environnement et ses fichiers sont définitivement supprimés.",
-          "openTerminalWarning_one": "{{count}} terminal ouvert dans ce projet sera fermé.",
-          "openTerminalWarning_other": "{{count}} terminaux ouverts dans ce projet seront fermés.",
           "openTerminalWarning_many": "{{count}} terminaux ouverts dans ce projet seront fermés."
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
@@ -6307,7 +6301,6 @@
           "3350101edb": "Copier le chemin",
           "copyWorktreeName": "Copier le nom du worktree",
           "f4475537d8": "Supprimer",
-          "f5ac91531d": "Retirer le projet d'Orca",
           "b42391d8bf": "Suppression…",
           "0918b35e4f": "Fermez tous les panneaux actifs de cet espace de travail pour libérer de la mémoire et du CPU.",
           "7d190f7d2b": "Fermez tous les panneaux actifs des espaces de travail sélectionnés pour libérer de la mémoire et du CPU.",
@@ -6337,7 +6330,6 @@
           "f9dc6cc5d3": "Renommer le groupe de projets",
           "370c6a55dd": "Réinitialiser les filtres",
           "b7acbf038b": "Aucun espace de travail trouvé",
-          "c83968f87f": "Retirer le projet",
           "64e55f7f01": "Retirer du groupe",
           "4a08fb55f2": "Déplacer vers un groupe",
           "cbfd565f83": "Nouveau groupe à partir du projet",

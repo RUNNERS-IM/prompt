@@ -5458,13 +5458,8 @@
           "confirm": "Sleep"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "移除",
           "d36883e046": "取消",
-          "b79b39d865": "删除项目",
-          "removeDescriptionSsh": "此操作仅将 {{name}} 从 Orca 中移除。文件仍保留在 {{host}} 上 — 重新添加该 SSH 主机即可恢复。",
-          "removeDescriptionLocal": "此操作仅将 {{name}} 从 Orca 中移除。文件仍保留在您的磁盘上。",
-          "removeDescriptionVmRecipe": "这会从 Orca 中删除 {{name}}。其VM配方决定是否永久删除环境及其文件。",
-          "openTerminalWarning_other": "此项目中打开的 {{count}} 个终端将被关闭。"
+          "b79b39d865": "删除项目"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "显示活动工作区"
@@ -5807,7 +5802,6 @@
           "3350101edb": "复制路径",
           "copyWorktreeName": "复制工作树名称",
           "f4475537d8": "删除",
-          "f5ac91531d": "从 Orca 中删除项目",
           "b42391d8bf": "正在删除...",
           "0918b35e4f": "关闭此工作区中的所有活动面板以释放内存和 CPU。",
           "7d190f7d2b": "关闭选定工作区中的所有活动面板以释放内存和 CPU。",
@@ -5834,7 +5828,6 @@
           "f9dc6cc5d3": "重命名项目组",
           "370c6a55dd": "清除筛选条件",
           "b7acbf038b": "未找到工作区",
-          "c83968f87f": "删除项目",
           "64e55f7f01": "从组中删除",
           "4a08fb55f2": "移至群组",
           "cbfd565f83": "来自项目的新组",

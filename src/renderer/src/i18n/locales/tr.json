@@ -6073,14 +6073,8 @@
           "confirm": "Uyut"
         },
         "RemoveFolderDialog": {
-          "4dc5b5065b": "Kaldır",
           "d36883e046": "İptal",
-          "b79b39d865": "Projeyi Kaldır",
-          "removeDescriptionSsh": "Bu işlem yalnızca {{name}} öğesini Orca'dan kaldırır. Dosyaları {{host}} üzerinde kalır, geri almak için o SSH sunucusunu yeniden ekleyin.",
-          "removeDescriptionLocal": "Bu işlem yalnızca {{name}} öğesini Orca'dan kaldırır. Hâlâ diskinizde bulunur.",
-          "removeDescriptionVmRecipe": "Bu işlem {{name}} öğesini Orca'dan kaldırır. Ortamın ve dosyalarının kalıcı olarak silinip silinmeyeceğini VM tarifi belirler.",
-          "openTerminalWarning_one": "Bu projedeki {{count}} açık terminal kapatılacak.",
-          "openTerminalWarning_other": "Bu projedeki {{count}} açık terminal kapatılacak."
+          "b79b39d865": "Projeyi Kaldır"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "Etkin çalışma alanını göster"
@@ -6434,7 +6428,6 @@
           "3350101edb": "Yolu Kopyala",
           "copyWorktreeName": "Worktree Adını Kopyala",
           "f4475537d8": "Sil",
-          "f5ac91531d": "Projeyi Orca'dan Kaldır",
           "b42391d8bf": "Siliniyor…",
           "0918b35e4f": "Bellek ve CPU'yu boşaltmak için bu çalışma alanındaki tüm etkin panelleri kapatın.",
           "7d190f7d2b": "Bellek ve CPU'yu boşaltmak için seçili çalışma alanlarındaki tüm etkin panelleri kapatın.",
@@ -6464,7 +6457,6 @@
           "f9dc6cc5d3": "Proje Grubunu Yeniden Adlandır",
           "370c6a55dd": "Filtreleri Temizle",
           "b7acbf038b": "Çalışma alanı bulunamadı",
-          "c83968f87f": "Projeyi Kaldır",
           "64e55f7f01": "Gruptan kaldır",
           "4a08fb55f2": "Gruba taşı",
           "cbfd565f83": "Projeden yeni grup",
