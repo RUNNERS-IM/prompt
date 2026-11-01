@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, MoreHorizontal, PanelLeft } from 'lucide-react'
+import { AppWindow, ArrowLeft, ArrowRight, MoreHorizontal, PanelLeft } from 'lucide-react'
 import logo from '../../../../resources/logo.svg'
 import { translate } from '@/i18n/i18n'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -13,7 +13,9 @@ import {
   canGoBackWorktreeHistory,
   canGoForwardWorktreeHistory
 } from '@/store/slices/worktree-nav-history'
-import { useShortcutLabel } from '../hooks/useShortcutLabel'
+import { getShortcutPlatform, useShortcutLabel } from '../hooks/useShortcutLabel'
+import { openPromptNewWindow } from '../lib/prompt-windows'
+import { formatKeybindingList } from '../../../shared/keybindings'
 import { useAppStore } from '../store'
 import { hasCustomTitleBar, hasMacTrafficLights } from './app-window-chrome'
 import type { AppChromeLayout } from './use-app-chrome-layout'
@@ -99,6 +101,24 @@ export function TitlebarLeftControls({ layout }: { layout: AppChromeLayout }): R
               {translate('auto.App.ce37cf5279', 'Toggle sidebar ({{value0}})', {
                 value0: leftSidebarShortcutLabel
               })}
+            </TooltipContent>
+          </Tooltip>
+        )}
+        {layout.showSidebar && (
+          // Same as Window › New Window, whose menu accelerator is CmdOrCtrl+N ([PROMPT] decision 2A).
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                className="sidebar-toggle"
+                onClick={openPromptNewWindow}
+                aria-label={translate('prompt.windows.newWindow', 'New Window')}
+              >
+                <AppWindow size={16} />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={6}>
+              {translate('prompt.windows.newWindow', 'New Window')}{' '}
+              {formatKeybindingList(['Mod+N'], getShortcutPlatform())}
             </TooltipContent>
           </Tooltip>
         )}
