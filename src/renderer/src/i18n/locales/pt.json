@@ -10,6 +10,7 @@
       "tabColor": "Cor da aba",
       "close": "Fechar sessão",
       "closeNamed": "Fechar {{name}}",
+      "renameNamed": "Renomear {{name}}",
       "copyToNewWindow": "Copiar para nova janela",
       "duplicate": "Duplicar"
     }

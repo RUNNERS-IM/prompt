@@ -25,11 +25,8 @@ import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-window
 import type { DashboardAgentRow } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { promptNewSessionLabel, promptSessionTabName } from './prompt-session-row-name'
-import {
-  closePromptSession,
-  renamePromptSession,
-  setPromptSessionColor
-} from './prompt-sidebar-session-actions'
+import { closePromptSession, setPromptSessionColor } from './prompt-sidebar-session-actions'
+import { PromptSessionRowRename } from './prompt-session-row-rename'
 
 /** Hover group shared by a session row's time and its × (they swap places, decision 2A). */
 export const PROMPT_SESSION_ROW_GROUP_CLASS = 'group/prompt-session-row'
@@ -83,6 +80,7 @@ export function PromptSessionCloseButton({
 
 /**
  * Right-click menu of one sidebar session row (decision 2A): rename, tab color, close session.
+ * Rename edits the name in place on the row ([PROMPT] 사이드바 1A).
  * A Claude row with a known session id also offers a copy in a new window ([PROMPT] 창 복사 1A).
  * A live Claude row keeps "Model ▸" on top, as the workspace menu offered it before. The scope
  * attribute tells the workspace menu around the row to leave this right-click alone.
@@ -105,6 +103,7 @@ export function PromptSessionRowMenu({
   useUiLanguageRevision()
   const { id: tabId, worktreeId } = tab
   const [open, setOpen] = useState(false)
+  const [renaming, setRenaming] = useState(false)
   const [point, setPoint] = useState({ x: 0, y: 0 })
   const color = useAppStore((s) =>
     open
@@ -143,6 +142,14 @@ export function PromptSessionRowMenu({
       onContextMenu={handleContextMenu}
     >
       {children}
+      {renaming ? (
+        <PromptSessionRowRename
+          tabId={tabId}
+          worktreeId={worktreeId}
+          rowName={name}
+          onDone={() => setRenaming(false)}
+        />
+      ) : null}
       <PromptSessionCloseButton tab={tab} name={name} />
       <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
         <DropdownMenuTrigger asChild>
@@ -160,9 +167,15 @@ export function PromptSessionRowMenu({
           onClick={(event) => event.stopPropagation()}
           onPointerDown={(event) => event.stopPropagation()}
           onMouseDown={(event) => event.stopPropagation()}
+          // Why: handing focus back to the hidden trigger would blur the rename box just opened.
+          onCloseAutoFocus={(event) => {
+            if (renaming) {
+              event.preventDefault()
+            }
+          }}
         >
           {open ? <PromptClaudeModelSubmenu paneKey={paneKey} /> : null}
-          <DropdownMenuItem onSelect={() => renamePromptSession(worktreeId, tabId)}>
+          <DropdownMenuItem onSelect={() => setRenaming(true)}>
             <Pencil className="size-3.5" />
             {translate('prompt.sidebarSessions.rename', 'Rename…')}
             {renameShortcut ? <DropdownMenuShortcut>{renameShortcut}</DropdownMenuShortcut> : null}

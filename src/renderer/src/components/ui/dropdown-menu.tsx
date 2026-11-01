@@ -185,6 +185,8 @@ function DropdownMenuSubTrigger({
   inset,
   children,
   hideChevron,
+  onPointerMove,
+  onPointerLeave,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
   inset?: boolean
@@ -199,6 +201,10 @@ function DropdownMenuSubTrigger({
         "flex cursor-default items-center gap-2 rounded-md px-2.5 py-1 text-[13px] leading-4 font-normal outline-hidden select-none focus:bg-black/8 dark:focus:bg-white/14 focus:text-accent-foreground data-[inset]:pl-8 data-[state=open]:bg-black/8 dark:data-[state=open]:bg-white/14 data-[state=open]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5 [&_svg:not([class*='text-'])]:text-muted-foreground",
         className
       )}
+      // Why: a menu that drops a row as it closes can slide a submenu row under the pointer; it
+      // must not pull focus from what the chosen item just opened, the same as a plain item.
+      onPointerMove={keepFocusWhileMenuCloses(onPointerMove)}
+      onPointerLeave={keepFocusWhileMenuCloses(onPointerLeave)}
       {...props}
     >
       {children}

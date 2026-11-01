@@ -10,6 +10,7 @@
       "tabColor": "分頁顏色",
       "close": "關閉工作階段",
       "closeNamed": "關閉「{{name}}」",
+      "renameNamed": "重新命名「{{name}}」",
       "copyToNewWindow": "複製到新視窗",
       "duplicate": "建立副本"
     }

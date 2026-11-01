@@ -17,9 +17,10 @@ import {
   sidebarRow
 } from './helpers/prompt-sidebar-rename-probe'
 
-// Renaming a session from the sidebar row's right-click menu ("Rename… ⌘R"). The field it opens is
-// the tab strip's inline rename, so each scene types like a person would (into whatever has focus)
-// and records whether the field appeared and where focus went, with screenshots along the way.
+// Renaming a session from the sidebar row's right-click menu ("Rename… ⌘R"). The field opens on the
+// row itself ([PROMPT] 사이드바 1A); the tab strip's Change Title keeps its own field. Each scene
+// types like a person would (into whatever has focus) and records whether the field appeared and
+// where focus went, with screenshots along the way.
 // @headful: focus and blur only behave like the real app when the window owns OS focus.
 
 const CLAUDE_SESSION_ID = '5d2f3b8e-4a61-4f0b-8c7e-2b9d0e6a1c34'
@@ -29,6 +30,10 @@ type Scene = {
   worktreeId: string
   tabId: string
   newName: string
+  /** What the name should read after typing newName; defaults to newName. */
+  savedName?: string
+  /** The field should open on the sidebar row rather than in the tab strip. */
+  onRow?: boolean
   openRename: (page: Page) => Promise<void>
 }
 
@@ -50,6 +55,7 @@ async function openFromTabStrip(page: Page, tabId: string): Promise<void> {
 
 async function renameLikeAPerson(page: Page, testInfo: TestInfo, scene: Scene): Promise<void> {
   const { label, worktreeId, tabId, newName } = scene
+  const savedName = scene.savedName ?? newName
   await attachScreenshot(page, testInfo, `${label}-0-before`)
   await installRenameProbe(page)
   await scene.openRename(page)
@@ -63,6 +69,9 @@ async function renameLikeAPerson(page: Page, testInfo: TestInfo, scene: Scene): 
   // ast-grep-ignore: test-no-real-time-wait -- a person pauses before typing; focus thieves (menu close restore, terminal focus) run in this gap
   await page.waitForTimeout(800)
   const beforeTyping = await readRenameProbe(page)
+  const fieldOnRow = await sidebarRow(page, tabId)
+    .locator('[data-prompt-session-rename]')
+    .isVisible()
   await attachScreenshot(page, testInfo, `${label}-1-after-menu`)
 
   await page.keyboard.type(newName)
@@ -71,7 +80,7 @@ async function renameLikeAPerson(page: Page, testInfo: TestInfo, scene: Scene): 
 
   const saved = await settlesTo(
     () => readTabNames(page, worktreeId, tabId).then((names) => names.customTitle),
-    newName,
+    savedName,
     3_000
   )
   const afterEnter = await readRenameProbe(page)
@@ -82,6 +91,7 @@ async function renameLikeAPerson(page: Page, testInfo: TestInfo, scene: Scene): 
     tabId,
     newName,
     inputAppeared,
+    fieldOnRow,
     inputMountedBeforeTyping: beforeTyping.inputMountedNow,
     activeElementBeforeTyping: beforeTyping.activeElement,
     documentHasFocus: beforeTyping.documentHasFocus,
@@ -93,10 +103,11 @@ async function renameLikeAPerson(page: Page, testInfo: TestInfo, scene: Scene): 
   await attachJson(testInfo, `${label}-diagnostics`, summary)
   console.log(`[sidebar-rename] ${JSON.stringify(summary)}`)
 
-  expect(inputAppeared, 'the tab strip rename field never appeared').toBe(true)
-  expect(names.customTitle, 'the tab did not get the typed name').toBe(newName)
-  expect(names.stripTitle, 'the tab strip does not show the typed name').toBe(newName)
-  expect(names.sidebarRowText, 'the sidebar row does not show the typed name').toContain(newName)
+  expect(inputAppeared, 'the rename field never appeared').toBe(true)
+  expect(fieldOnRow, 'the rename field is not on the sidebar row').toBe(scene.onRow ?? false)
+  expect(names.customTitle, 'the tab did not get the typed name').toBe(savedName)
+  expect(names.stripTitle, 'the tab strip does not show the typed name').toBe(savedName)
+  expect(names.sidebarRowText, 'the sidebar row does not show the typed name').toContain(savedName)
 }
 
 test.describe('renaming a session from its sidebar row @headful', () => {
@@ -124,6 +135,7 @@ test.describe('renaming a session from its sidebar row @headful', () => {
       worktreeId: ws.a.id,
       tabId,
       newName: 'Shell Renamed',
+      onRow: true,
       openRename: (page) => openFromSidebarRow(page, tabId)
     })
   })
@@ -141,6 +153,27 @@ test.describe('renaming a session from its sidebar row @headful', () => {
       worktreeId: ws.a.id,
       tabId,
       newName: 'Hidden Shell Renamed',
+      onRow: true,
+      openRename: (page) => openFromSidebarRow(page, tabId)
+    })
+  })
+
+  test('@headful a named row keeps its "[PROJECT] " prefix and replaces only the topic', async ({
+    orcaPage: page
+  }, testInfo) => {
+    await waitForSessionReady(page)
+    const ws = await createMoveWorkspaces(page, 'rename-topic')
+    const { tabId } = await openShellTab(page, ws.a.id)
+    await page.evaluate((tabId) => {
+      window.__store?.getState().setTabCustomTitle(tabId, '[E2E] 처음')
+    }, tabId)
+    await renameLikeAPerson(page, testInfo, {
+      label: '4-topic-only',
+      worktreeId: ws.a.id,
+      tabId,
+      newName: 'Topic',
+      savedName: '[E2E] Topic',
+      onRow: true,
       openRename: (page) => openFromSidebarRow(page, tabId)
     })
   })
@@ -179,6 +212,7 @@ test.describe('renaming a session from its sidebar row @headful', () => {
       worktreeId: ws.a.id,
       tabId,
       newName: 'Claude Renamed',
+      onRow: true,
       openRename: (page) => openFromSidebarRow(page, tabId)
     })
     await execInTerminal(page, ptyId, '\x03')

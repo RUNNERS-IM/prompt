@@ -4,10 +4,8 @@ import type { Worktree } from '../../../../shared/worktree/types'
 const mocks = vi.hoisted(() => ({
   state: {} as Record<string, unknown>,
   activate: vi.fn(),
-  activateTab: vi.fn(),
   dispatch: vi.fn(),
   closeTerminalTab: vi.fn(),
-  rename: vi.fn(),
   resolveShortcut: vi.fn(),
   launch: vi.fn(),
   webActive: vi.fn(),
@@ -19,9 +17,6 @@ const mocks = vi.hoisted(() => ({
 vi.mock('@/store', () => ({ useAppStore: { getState: () => mocks.state } }))
 vi.mock('@/lib/worktree-activation', () => ({
   activateAndRevealWorktree: mocks.activate
-}))
-vi.mock('@/lib/activate-tab-and-focus-pane', () => ({
-  activateTabAndFocusPane: mocks.activateTab
 }))
 vi.mock('@/lib/workspace-tab-commands', () => ({
   dispatchWorkspaceTabCommand: mocks.dispatch
@@ -42,9 +37,6 @@ vi.mock('@/runtime/web-runtime-session-environment', () => ({
 vi.mock('@/components/terminal/terminal-tab-actions', () => ({
   closeTerminalTab: mocks.closeTerminalTab
 }))
-vi.mock('@/components/tab-bar/terminal-tab-rename-request', () => ({
-  requestTerminalTabRename: mocks.rename
-}))
 vi.mock('@/components/terminal-agent-tab-shortcut', () => ({
   resolveTerminalAgentTabShortcut: mocks.resolveShortcut
 }))
@@ -58,7 +50,6 @@ vi.mock('@/components/terminal-workspace-model', () => ({
 import {
   closePromptSession,
   promptHeaderTargetWorktree,
-  renamePromptSession,
   setPromptSessionColor,
   startPromptClaudeSession,
   startPromptTerminal
@@ -162,15 +153,6 @@ describe('prompt sidebar session actions', () => {
       { userAct: true }
     )
     expect(mocks.state.openNewTerminalTabInActiveWorkspace).not.toHaveBeenCalled()
-  })
-
-  it('renames by showing the tab and opening its inline rename', () => {
-    vi.stubGlobal('requestAnimationFrame', (cb: () => void) => cb())
-    renamePromptSession('wt-1', 'term-1')
-    expect(mocks.activate).toHaveBeenCalledWith('wt-1')
-    expect(mocks.activateTab).toHaveBeenCalledWith('term-1', 'leaf-1')
-    expect(mocks.rename).toHaveBeenCalledWith('term-1')
-    vi.unstubAllGlobals()
   })
 
   it('sets the tab color through the store', () => {
