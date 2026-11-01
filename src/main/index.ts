@@ -43,6 +43,7 @@ import { registerOrcaProtocolClient } from './startup/orca-protocol-registration
 import { clearWindowsStdHandleInheritance } from './startup/windows-std-handle-inheritance'
 import { installWindowsIsolatedSpawner } from './startup/windows-isolated-spawner'
 import { dropE2eSpawnLogOutsideE2e } from './startup/e2e-spawn-log-env'
+import { scheduleLegacyUserDataRemoval } from './startup/prompt-legacy-user-data-removal'
 
 // Before anything spawns, so no daemon, PTY or agent inherits it outside e2e.
 dropE2eSpawnLogOutsideE2e()
@@ -171,6 +172,7 @@ if (preflightReady) {
         openMainWindow,
         handleMacAppActivation
       })
+      scheduleLegacyUserDataRemoval(app.getPath('userData'))
     } catch (error) {
       const detail = error instanceof Error ? error.message : String(error)
       const message =
