@@ -10,6 +10,7 @@
       "tabColor": "标签页颜色",
       "close": "关闭会话",
       "closeNamed": "关闭“{{name}}”",
+      "renameNamed": "重命名“{{name}}”",
       "duplicate": "创建副本"
     },
     "claudeStart": {

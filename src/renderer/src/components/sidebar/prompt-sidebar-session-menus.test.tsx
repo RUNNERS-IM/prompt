@@ -8,7 +8,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 const mocks = vi.hoisted(() => ({
   state: {} as Record<string, unknown>,
   close: vi.fn(),
-  rename: vi.fn(),
   color: vi.fn(),
   startClaude: vi.fn(),
   startTerminal: vi.fn(),
@@ -78,7 +77,6 @@ vi.mock('@/lib/prompt-windows', () => ({
 }))
 vi.mock('./prompt-sidebar-session-actions', () => ({
   closePromptSession: mocks.close,
-  renamePromptSession: mocks.rename,
   setPromptSessionColor: mocks.color,
   startPromptClaudeSession: mocks.startClaude,
   startPromptTerminal: mocks.startTerminal,
@@ -146,7 +144,10 @@ describe('PromptSessionRowMenu', () => {
       </PromptSessionRowMenu>
     )
     click(container, 'Rename')
-    expect(mocks.rename).toHaveBeenCalledWith('wt-1', 'term-1')
+    // Rename opens a box on the row itself ([PROMPT] 사이드바 1A), not the tab's.
+    expect(
+      container.querySelector<HTMLInputElement>('[data-prompt-session-rename]')?.value
+    ).toBe('[PROMPT] 개발')
     click(container, 'Green')
     expect(mocks.color).toHaveBeenCalledWith('term-1', '#22c55e')
     click(container, 'None')

@@ -23130,6 +23130,7 @@
       "tabColor": "Tab Color",
       "close": "Close Session",
       "closeNamed": "Close {{name}}",
+      "renameNamed": "Rename {{name}}",
       "duplicate": "Duplicate"
     },
     "projectRemoval": {
