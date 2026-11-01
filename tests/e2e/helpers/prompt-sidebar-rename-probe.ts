@@ -42,6 +42,9 @@ export async function installRenameProbe(page: Page): Promise<void> {
           parts.push(`${name}=${value.slice(0, 60)}`)
         }
       }
+      if (node.getAttribute('role')?.startsWith('menuitem')) {
+        parts.push(`text=${(node.textContent ?? '').trim().slice(0, 30)}`)
+      }
       const className = node.getAttribute('class')
       if (className) {
         parts.push(`class=${className.slice(0, 60)}`)
@@ -77,6 +80,13 @@ export async function installRenameProbe(page: Page): Promise<void> {
       log('focusout', event.target, event.relatedTarget)
     const onKeyDown = (event: KeyboardEvent): void =>
       log(`keydown ${event.key}`, document.activeElement)
+    // Only pointer crossings inside a menu: a closing menu that reacts to them can grab focus.
+    const onPointerCross = (event: PointerEvent): void => {
+      const menu = event.target instanceof Element ? event.target.closest('[role="menu"]') : null
+      if (menu) {
+        log(`${event.type} (menu ${menu.getAttribute('data-state')})`, event.target)
+      }
+    }
     const onRename = (event: Event): void =>
       log(`rename-request ${JSON.stringify((event as CustomEvent).detail)}`)
     const onFocusPane = (event: Event): void =>
@@ -113,6 +123,8 @@ export async function installRenameProbe(page: Page): Promise<void> {
     document.addEventListener('focusin', onFocusIn, true)
     document.addEventListener('focusout', onFocusOut, true)
     document.addEventListener('keydown', onKeyDown, true)
+    document.addEventListener('pointerover', onPointerCross, true)
+    document.addEventListener('pointerout', onPointerCross, true)
     window.addEventListener('orca-rename-terminal-tab', onRename)
     window.addEventListener('orca-focus-terminal-pane', onFocusPane)
     probe.dispose = () => {
@@ -120,6 +132,8 @@ export async function installRenameProbe(page: Page): Promise<void> {
       document.removeEventListener('focusin', onFocusIn, true)
       document.removeEventListener('focusout', onFocusOut, true)
       document.removeEventListener('keydown', onKeyDown, true)
+      document.removeEventListener('pointerover', onPointerCross, true)
+      document.removeEventListener('pointerout', onPointerCross, true)
       window.removeEventListener('orca-rename-terminal-tab', onRename)
       window.removeEventListener('orca-focus-terminal-pane', onFocusPane)
     }
