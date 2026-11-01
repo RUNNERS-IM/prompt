@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Copy, Layers, Pencil, X } from 'lucide-react'
 import {
   DropdownMenu,
@@ -26,7 +26,11 @@ import type { DashboardAgentRow } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { promptNewSessionLabel, promptSessionTabName } from './prompt-session-row-name'
 import { closePromptSession, setPromptSessionColor } from './prompt-sidebar-session-actions'
-import { PromptSessionRowRename } from './prompt-session-row-rename'
+import {
+  PROMPT_RENAME_SESSION_ROW_EVENT,
+  PromptSessionRowRenameContext,
+  type PromptRenameSessionRowDetail
+} from './prompt-session-row-rename'
 
 /** Hover group shared by a session row's time and its × (they swap places, decision 2A). */
 export const PROMPT_SESSION_ROW_GROUP_CLASS = 'group/prompt-session-row'
@@ -105,6 +109,7 @@ export function PromptSessionRowMenu({
   const [open, setOpen] = useState(false)
   const [renaming, setRenaming] = useState(false)
   const [point, setPoint] = useState({ x: 0, y: 0 })
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const color = useAppStore((s) =>
     open
       ? ((s.tabsByWorktree?.[worktreeId] ?? []).find((t) => t.id === tabId)?.color ?? null)
@@ -122,6 +127,37 @@ export function PromptSessionRowMenu({
     return () => window.removeEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, close)
   }, [open])
 
+  useEffect(() => {
+    const take = (event: Event): void => {
+      const detail = (event as CustomEvent<PromptRenameSessionRowDetail>).detail
+      // A tab with split Claude panes has a row per pane; the first one on screen takes it.
+      const shown = (wrapperRef.current?.getClientRects().length ?? 0) > 0
+      if (detail?.tabId !== tabId || event.defaultPrevented || !shown) {
+        return
+      }
+      event.preventDefault()
+      wrapperRef.current?.scrollIntoView({ block: 'nearest' })
+      setRenaming(true)
+    }
+    window.addEventListener(PROMPT_RENAME_SESSION_ROW_EVENT, take)
+    return () => window.removeEventListener(PROMPT_RENAME_SESSION_ROW_EVENT, take)
+  }, [tabId])
+
+  const renameTarget = useMemo(
+    () =>
+      renaming ? { tabId, worktreeId, rowName: name, onDone: () => setRenaming(false) } : null,
+    [name, renaming, tabId, worktreeId]
+  )
+
+  const handleDoubleClick = useCallback((event: React.MouseEvent) => {
+    // Buttons on the row (×, helper count) keep their own double-click.
+    if ((event.target as HTMLElement).closest('button')) {
+      return
+    }
+    event.stopPropagation()
+    setRenaming(true)
+  }, [])
+
   const handleContextMenu = useCallback((event: React.MouseEvent) => {
     event.preventDefault()
     event.stopPropagation()
@@ -136,21 +172,18 @@ export function PromptSessionRowMenu({
 
   return (
     <div
+      ref={wrapperRef}
       className={cn('relative min-w-0', PROMPT_SESSION_ROW_GROUP_CLASS)}
       {...{ [WORKTREE_CONTEXT_MENU_SCOPE_ATTR]: 'prompt-session' }}
       data-prompt-session-menu={tabId}
       onContextMenu={handleContextMenu}
+      onDoubleClick={handleDoubleClick}
     >
-      {children}
-      {renaming ? (
-        <PromptSessionRowRename
-          tabId={tabId}
-          worktreeId={worktreeId}
-          rowName={name}
-          onDone={() => setRenaming(false)}
-        />
-      ) : null}
-      <PromptSessionCloseButton tab={tab} name={name} />
+      <PromptSessionRowRenameContext.Provider value={renameTarget}>
+        {children}
+      </PromptSessionRowRenameContext.Provider>
+      {/* The × sits over the row's right end, where the rename box now reaches. */}
+      {renaming ? null : <PromptSessionCloseButton tab={tab} name={name} />}
       <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
         <DropdownMenuTrigger asChild>
           <button

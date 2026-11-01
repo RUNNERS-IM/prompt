@@ -30,6 +30,7 @@ import { promptChildRowWithoutRoleTail } from './prompt-child-row'
 import { promptSessionStatusLine } from './prompt-session-status-line'
 import { PromptHelperPill } from './prompt-helper-pill'
 import { PromptSessionStateIcon } from './PromptSessionStateIcon'
+import { PromptSessionRowRename, usePromptSessionRowRename } from './prompt-session-row-rename'
 import { usePromptVisibleModelLabel } from '@/components/prompt-session-card/prompt-default-model'
 
 function getCompactAgentPrimary(
@@ -210,6 +211,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         highlighted ? 'text-foreground/70' : 'text-muted-foreground/60',
         promptLayout && PROMPT_SESSION_TIME_HOVER_CLASS
       )}
+      data-prompt-session-time=""
     >
       {shortTime}
     </span>
@@ -308,6 +310,8 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     </>
   )
 
+  // Only a Prompt session row sits under a menu that sets this (withPromptSessionRowMenu).
+  const rename = usePromptSessionRowRename()
   const usePromptLayout = promptLayout && !agent.childRow
   const asked = Boolean(conversationName ?? getAgentRowPrimaryText(agent.entry))
   const promptName = usePromptLayout ? promptSessionRowName(agent, leadingText, asked) : ''
@@ -331,14 +335,19 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
             <AgentTypeIcon agentType={agent.agentType} size={13} />
           </span>
         )}
-        <span
-          className={cn('min-w-0 flex-1 truncate', leadClassName)}
-          title={sendTargetDisabledReason ? undefined : promptName}
-          data-prompt-session-name=""
-        >
-          {promptName}
-        </span>
-        {model && (
+        {rename ? (
+          <PromptSessionRowRename {...rename} />
+        ) : (
+          <span
+            className={cn('min-w-0 flex-1 truncate', leadClassName)}
+            title={sendTargetDisabledReason ? undefined : promptName}
+            data-prompt-session-name=""
+          >
+            {promptName}
+          </span>
+        )}
+        {/* While renaming, the box takes the rest of the line; the status icon and second line stay. */}
+        {model && !rename && (
           <span
             className={cn('min-w-0 max-w-24 truncate font-mono text-[10px]', dimText)}
             title={model}
@@ -346,7 +355,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
             {model}
           </span>
         )}
-        {trailingLabel ? (
+        {trailingLabel && !rename ? (
           <span
             className="min-w-0 max-w-20 shrink-[2] truncate text-[10px] text-muted-foreground/50"
             title={trailingLabel}
@@ -354,15 +363,17 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
             {trailingLabel}
           </span>
         ) : null}
-        {hasChildDisclosure ? (
+        {hasChildDisclosure && !rename ? (
           <PromptHelperPill
             count={childAgentCount ?? 0}
             expanded={childAgentsExpanded}
             onToggle={onToggleChildAgents ?? (() => {})}
           />
         ) : null}
-        {cacheTimer && <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />}
-        {timestamp}
+        {cacheTimer && !rename && (
+          <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />
+        )}
+        {rename ? null : timestamp}
       </div>
       {promptStatus ? (
         <div

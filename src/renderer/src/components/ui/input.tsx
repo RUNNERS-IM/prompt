@@ -17,7 +17,9 @@ const inputVariants = cva('', {
     },
     density: {
       default: '',
-      compact: 'h-7 border-border bg-input/50 px-2 text-xs shadow-none md:text-xs'
+      compact: 'h-7 border-border bg-input/50 px-2 text-xs shadow-none md:text-xs',
+      // A name edited in place on a sidebar row: as tall and small as the row's own text.
+      row: 'h-[18px] rounded-sm px-1 py-0 text-[11px] shadow-none focus-visible:ring-1 md:text-[11px]'
     }
   },
   defaultVariants: { variant: 'default', density: 'default' }

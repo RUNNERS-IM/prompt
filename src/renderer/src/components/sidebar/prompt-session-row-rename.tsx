@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { createContext, useCallback, useContext, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { useAppStore } from '@/store'
 import { translate } from '@/i18n/i18n'
@@ -7,6 +7,43 @@ import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
 import { promptNewSessionLabel } from './prompt-session-row-name'
 
 const PROJECT_PREFIX = /^\[[^\]\n]+\]\s*/
+
+/** Asks the sidebar row of a tab to open its rename box; the row that takes it cancels the event. */
+export const PROMPT_RENAME_SESSION_ROW_EVENT = 'prompt-rename-session-row'
+
+export type PromptRenameSessionRowDetail = { tabId: string }
+
+/**
+ * ⌘R lands on the session's sidebar row when that row is on screen ([PROMPT] 사이드바 이름 바꾸기
+ * 2A). Returns false when no row took it, so the caller can fall back to the tab strip's box.
+ */
+export function requestPromptSessionRowRename(tabId: string): boolean {
+  if (typeof window === 'undefined') {
+    return false
+  }
+  const event = new CustomEvent<PromptRenameSessionRowDetail>(PROMPT_RENAME_SESSION_ROW_EVENT, {
+    detail: { tabId },
+    cancelable: true
+  })
+  window.dispatchEvent(event)
+  return event.defaultPrevented
+}
+
+type PromptSessionRowRenameTarget = {
+  tabId: string
+  worktreeId: string
+  rowName: string
+  onDone: () => void
+}
+
+/** Set by a session row's menu while its rename box is open; the row draws the box in its name's place. */
+export const PromptSessionRowRenameContext = createContext<PromptSessionRowRenameTarget | null>(
+  null
+)
+
+export function usePromptSessionRowRename(): PromptSessionRowRenameTarget | null {
+  return useContext(PromptSessionRowRenameContext)
+}
 
 /**
  * What a session rename box selects when it opens: the topic after a leading "[PROJECT] ", so
@@ -33,9 +70,9 @@ export function promptRenameOpenValue(
 }
 
 /**
- * Rename box laid over a sidebar session row's first line ([PROMPT] 사이드바 1A), so the name is
- * edited where it was right-clicked instead of in the narrow tab up top. Enter or clicking away
- * saves, Escape cancels; leaving an unnamed row's text untouched saves nothing, as on the tab.
+ * Rename box drawn in place of a sidebar session row's name ([PROMPT] 사이드바 이름 바꾸기 1B), so
+ * the status icon and the second line stay put and nothing shows through it. Enter or clicking
+ * away saves, Escape cancels; leaving an unnamed row's text untouched saves nothing, as on the tab.
  */
 export function PromptSessionRowRename({
   tabId,
@@ -60,18 +97,19 @@ export function PromptSessionRowRename({
   const focusFrameRef = useRef<number | null>(null)
 
   const finish = useCallback(
-    (save: boolean) => {
+    (save: boolean, typed: string) => {
       if (resolvedRef.current) {
         return
       }
       resolvedRef.current = true
-      const trimmed = value.trim()
+      // Why: read the field itself, so a Hangul syllable committed by the blur is not lost.
+      const trimmed = typed.trim()
       if (save && (opened.isSetName ? trimmed !== opened.value : trimmed !== opened.value.trim())) {
         useAppStore.getState().setTabCustomTitle(tabId, trimmed.length > 0 ? trimmed : null)
       }
       onDone()
     },
-    [onDone, opened, tabId, value]
+    [onDone, opened, tabId]
   )
 
   const setInputElement = useCallback((input: HTMLInputElement | null) => {
@@ -101,9 +139,12 @@ export function PromptSessionRowRename({
       aria-label={translate('prompt.sidebarSessions.renameNamed', 'Rename {{name}}', {
         name: rowName
       })}
-      className="absolute inset-x-0 top-0 z-10 h-6 rounded-sm bg-background px-1 text-[11px] md:text-[11px]"
+      // Why: the background surface also sets the dark background; the default one is 30% see-through.
+      surface="background"
+      density="row"
+      className="min-w-0 flex-1"
       onChange={(event) => setValue(event.target.value)}
-      onBlur={() => finish(true)}
+      onBlur={(event) => finish(true, event.currentTarget.value)}
       onKeyDown={(event) => {
         if (isImeCompositionKeyDown(event)) {
           return
@@ -111,7 +152,7 @@ export function PromptSessionRowRename({
         if (event.key === 'Enter' || event.key === 'Escape') {
           event.preventDefault()
           event.stopPropagation()
-          finish(event.key === 'Enter')
+          finish(event.key === 'Enter', event.currentTarget.value)
         }
       }}
       // Why: keep typing and clicks in the box from activating, dragging or right-clicking the row.

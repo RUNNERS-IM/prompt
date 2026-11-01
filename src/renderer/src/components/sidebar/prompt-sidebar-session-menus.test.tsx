@@ -86,6 +86,11 @@ vi.mock('./prompt-sidebar-session-actions', () => ({
 
 import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import { PromptSessionCloseButton, PromptSessionRowMenu } from './prompt-session-row-menu'
+import {
+  PromptSessionRowRename,
+  requestPromptSessionRowRename,
+  usePromptSessionRowRename
+} from './prompt-session-row-rename'
 import { PromptNewSessionMenuButton, PromptRepoHeaderNewButton } from './prompt-sidebar-new-menu'
 import type { Repo } from '../../../../shared/repo-types'
 
@@ -122,6 +127,12 @@ afterEach(() => {
   document.body.replaceChildren()
 })
 
+/** Stands in for a session row: its name, or the rename box the menu asks for. */
+function RowWithRename(): ReactNode {
+  const rename = usePromptSessionRowRename()
+  return rename ? <PromptSessionRowRename {...rename} /> : <span data-row-name="">row</span>
+}
+
 describe('PromptSessionRowMenu', () => {
   it('offers rename, tab color and a red close with ⌘W, as in the 2A drawing', () => {
     const container = render(
@@ -140,20 +151,61 @@ describe('PromptSessionRowMenu', () => {
   it('runs each item on this session', () => {
     const container = render(
       <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
-        <div>row</div>
+        <RowWithRename />
       </PromptSessionRowMenu>
     )
     click(container, 'Rename')
-    // Rename opens a box on the row itself ([PROMPT] 사이드바 1A), not the tab's.
-    expect(
-      container.querySelector<HTMLInputElement>('[data-prompt-session-rename]')?.value
-    ).toBe('[PROMPT] 개발')
+    // Rename opens a box in the row's name place (1B), not the tab's.
+    expect(container.querySelector<HTMLInputElement>('[data-prompt-session-rename]')?.value).toBe(
+      '[PROMPT] 개발'
+    )
     click(container, 'Green')
     expect(mocks.color).toHaveBeenCalledWith('term-1', '#22c55e')
     click(container, 'None')
     expect(mocks.color).toHaveBeenCalledWith('term-1', null)
     click(container, 'Close Session')
     expect(mocks.close).toHaveBeenCalledWith('wt-1', 'term-1')
+  })
+
+  it('opens the rename box when the row is double-clicked, but not from its buttons', () => {
+    const container = render(
+      <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
+        <RowWithRename />
+      </PromptSessionRowMenu>
+    )
+    const close = container.querySelector<HTMLElement>('[data-prompt-session-close]')!
+    act(() => close.dispatchEvent(new MouseEvent('dblclick', { bubbles: true })))
+    expect(container.querySelector('[data-prompt-session-rename]')).toBeNull()
+    const name = container.querySelector<HTMLElement>('[data-row-name]')!
+    act(() => name.dispatchEvent(new MouseEvent('dblclick', { bubbles: true })))
+    expect(container.querySelector('[data-prompt-session-rename]')).not.toBeNull()
+    // The × steps away while the box reaches the row's right end.
+    expect(container.querySelector('[data-prompt-session-close]')).toBeNull()
+  })
+
+  it('takes ⌘R for its own tab only while the row is on screen', () => {
+    const container = render(
+      <PromptSessionRowMenu tab={{ id: 'term-1', worktreeId: 'wt-1' }} name="[PROMPT] 개발">
+        <RowWithRename />
+      </PromptSessionRowMenu>
+    )
+    const wrapper = container.querySelector<HTMLElement>('[data-prompt-session-menu]')!
+    wrapper.scrollIntoView = vi.fn()
+    const rects = vi.spyOn(wrapper, 'getClientRects')
+    const request = (tabId: string): boolean => {
+      let taken = false
+      act(() => {
+        taken = requestPromptSessionRowRename(tabId)
+      })
+      return taken
+    }
+    rects.mockReturnValue([] as unknown as DOMRectList)
+    expect(request('term-1')).toBe(false)
+    rects.mockReturnValue([new DOMRect(0, 0, 10, 10)] as unknown as DOMRectList)
+    expect(request('term-2')).toBe(false)
+    expect(container.querySelector('[data-prompt-session-rename]')).toBeNull()
+    expect(request('term-1')).toBe(true)
+    expect(container.querySelector('[data-prompt-session-rename]')).not.toBeNull()
   })
 
   it('offers Duplicate below the source tab only when it has the copy command', () => {
