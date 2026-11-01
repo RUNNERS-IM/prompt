@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "Nova sessão do Claude",
+      "tabTitle": "Claude",
       "model": "Modelo",
       "thinking": "Raciocínio",
       "default": "Padrão",

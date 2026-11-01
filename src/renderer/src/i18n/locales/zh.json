@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "新建 Claude 会话",
+      "tabTitle": "Claude",
       "model": "模型",
       "thinking": "思考",
       "default": "默认",

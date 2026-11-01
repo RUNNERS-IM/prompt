@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { SquareTerminal } from 'lucide-react'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from '@/store'
+import { AgentIcon } from '@/lib/agent-catalog'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
 import { activateAndRevealWorktree } from '@/lib/worktree-activation'
@@ -29,6 +30,7 @@ import {
   type PromptSessionDragPane,
   type PromptSessionDragSection
 } from './prompt-session-row-drag'
+import { usePromptClaudeStartTab } from '../prompt-claude-start/prompt-claude-start-tabs'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
 const EMPTY_GROUPS: readonly TabGroup[] = []
@@ -47,10 +49,15 @@ function PromptTerminalRow({
   const focused = useAppStore(
     (s) => s.activeWorktreeId === worktreeId && s.activeTabIdByWorktree?.[worktreeId] === tab.id
   )
+  // A tab still showing the new-Claude start box is a Claude session that has not started yet.
+  const showsClaudeStartBox = usePromptClaudeStartTab(tab.id)
   // A tab launched as an agent is a session: "New Session" until its first conversation names it.
-  const name = tab.launchAgent
-    ? promptSessionTabName(tab, tab.launchAgent) || promptNewSessionLabel()
-    : promptTerminalTabName(tab) || translate('prompt.sidebar.terminal', 'Terminal')
+  const name = showsClaudeStartBox
+    ? promptSessionTabName(tab, 'claude') ||
+      translate('prompt.sidebarSessions.newClaudeSession', 'New Claude Session')
+    : tab.launchAgent
+      ? promptSessionTabName(tab, tab.launchAgent) || promptNewSessionLabel()
+      : promptTerminalTabName(tab) || translate('prompt.sidebar.terminal', 'Terminal')
   const activate = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation()
@@ -71,7 +78,13 @@ function PromptTerminalRow({
         data-prompt-terminal-row=""
         data-prompt-row-current={focused ? 'true' : undefined}
       >
-        <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
+        {showsClaudeStartBox ? (
+          <span className="inline-flex size-3 shrink-0 items-center justify-center" aria-hidden>
+            <AgentIcon agent="claude" size={12} />
+          </span>
+        ) : (
+          <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
+        )}
         <span className="min-w-0 flex-1 truncate">{name}</span>
       </div>
     </PromptSessionRowMenu>

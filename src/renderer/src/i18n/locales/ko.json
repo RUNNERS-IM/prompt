@@ -22673,6 +22673,7 @@
     },
     "claudeStart": {
       "title": "새 Claude 세션",
+      "tabTitle": "Claude",
       "model": "모델",
       "thinking": "생각",
       "default": "기본",

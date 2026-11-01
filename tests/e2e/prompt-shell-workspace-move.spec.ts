@@ -18,6 +18,7 @@ import {
   processAlive,
   readShellIdentity,
   realFolder,
+  startFakeClaude,
   waitForSavedMove,
   waitForTabPtyIds,
   workspaceOfTab
@@ -279,12 +280,11 @@ test.describe('moving a shell tab to another workspace', () => {
     await waitForSessionReady(page)
     const ws = await createMoveWorkspaces(page, 'claude')
     const { tabId, ptyId } = await openShellTab(page, ws.a.id)
-    // A running foreground command keeps the pane from being read as an idle shell, which would
-    // hide its conversation id; the status below stands in for a real Claude hook report.
-    await execInTerminal(page, ptyId, 'sleep 300')
-    // ast-grep-ignore: test-no-real-time-wait -- the shell exposes no event for handing the terminal to sleep
-    await page.waitForTimeout(1_500)
     const paneKey = await paneKeyOf(page, tabId, ptyId)
+    // A process named claude in the foreground, as in a real session; a plain sleep left the pane
+    // marked as an idle shell, which hides its conversation id. The status below stands in for
+    // the session id a real Claude hook reports.
+    await startFakeClaude(page, testInfo, ptyId, paneKey)
     await page.evaluate(
       ({ paneKey, worktreeId, sessionId }) => {
         window.__store
@@ -331,9 +331,20 @@ test.describe('moving a shell tab to another workspace', () => {
     // The original keeps running where it was.
     expect(await workspaceOfTab(page, tabId)).toBe(ws.a.id)
     const copyPty = (await waitForTabPtyIds(page, copyTabId!, 1))[0]!
+    // The app may add its own flags (such as --plugin-dir) to the launch, so check the two that
+    // make it a copy; line breaks are dropped in case the long command wrapped.
     await expect
-      .poll(() => getTerminalContentForPtyId(page, copyPty, 20_000), { timeout: 20_000 })
-      .toContain(`claude --resume ${CLAUDE_SESSION_ID} --fork-session`)
+      .poll(
+        async () => {
+          const shown = (await getTerminalContentForPtyId(page, copyPty, 20_000)).replace(
+            /[\r\n]/g,
+            ''
+          )
+          return shown.includes(`--resume ${CLAUDE_SESSION_ID}`) && shown.includes('--fork-session')
+        },
+        { timeout: 20_000, message: 'the copy tab never ran claude --resume <id> --fork-session' }
+      )
+      .toBe(true)
     await attachScreenshot(page, testInfo, '8-claude-row-forked')
     await execInTerminal(page, ptyId, '\x03')
   })

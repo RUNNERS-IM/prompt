@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "Nouvelle session Claude",
+      "tabTitle": "Claude",
       "model": "Modèle",
       "thinking": "Réflexion",
       "default": "Par défaut",

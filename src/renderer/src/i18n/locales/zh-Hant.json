@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "新增 Claude 工作階段",
+      "tabTitle": "Claude",
       "model": "模型",
       "thinking": "思考",
       "default": "預設",

@@ -15,6 +15,7 @@ const agent = (paneKey: string, tabId: string, parentPaneKey?: string): FakeAgen
   entry: parentPaneKey ? { orchestration: { parentPaneKey } } : {}
 })
 const agentProps: Record<string, unknown>[] = []
+const startBoxTabIds = new Set<string>()
 
 vi.mock('@/store', () => ({
   useAppStore: Object.assign((selector: (s: unknown) => unknown) => selector(state), {
@@ -32,6 +33,9 @@ vi.mock('../tab-group/tab-group-layout-owner-commands', () => ({
 }))
 vi.mock('@/lib/activate-tab-and-focus-pane', () => ({
   activateTabAndFocusPane: vi.fn()
+}))
+vi.mock('../prompt-claude-start/prompt-claude-start-tabs', () => ({
+  usePromptClaudeStartTab: (tabId: string) => startBoxTabIds.has(tabId)
 }))
 vi.mock('./useWorktreeAgentRows', () => ({
   useWorktreeAgentRows: () => agents
@@ -88,6 +92,7 @@ describe('PromptWorktreeSessionRows', () => {
   beforeEach(() => {
     agents = []
     agentProps.length = 0
+    startBoxTabIds.clear()
     state = { worktreesByRepo: { 'repo-1': [{}] }, tabsByWorktree: {} }
   })
 
@@ -159,6 +164,30 @@ describe('PromptWorktreeSessionRows', () => {
     expect(markup).toContain('New Session')
     expect(markup).toContain('Terminal 3')
     expect(markup).not.toContain('Terminal 2')
+  })
+
+  it('calls a tab still on the start box "New Claude Session" with the Claude icon', async () => {
+    const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+    state.tabsByWorktree = {
+      'wt-1': [
+        { id: 'box', title: 'Terminal 2', defaultTitle: 'Terminal 2', launchAgent: 'claude' },
+        { id: 'claude', title: 'Terminal 3', defaultTitle: 'Terminal 3', launchAgent: 'claude' }
+      ]
+    }
+    startBoxTabIds.add('box')
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    expect(markup).toContain('data-row-menu="box" data-row-menu-name="New Claude Session"')
+    // Once started, the real Claude tab is an ordinary session row again.
+    expect(markup).toContain('data-row-menu="claude" data-row-menu-name="New Session"')
+    const boxRow = markup.slice(
+      markup.indexOf('data-row-menu="box"'),
+      markup.indexOf('data-row-menu="claude"')
+    )
+    expect(boxRow).toContain('<svg')
+    expect(boxRow).not.toContain('lucide-square-terminal')
+    expect(markup.slice(markup.indexOf('data-row-menu="claude"'))).toContain(
+      'lucide-square-terminal'
+    )
   })
 
   it('puts the "+" menu on a workspace line, aimed at that workspace', async () => {
