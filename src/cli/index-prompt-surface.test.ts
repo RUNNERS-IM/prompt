@@ -373,6 +373,66 @@ describe('prompt command surface', () => {
     expect(error.message).toContain('running-program')
   })
 
+  it('updates the running app through its updater and says it is restarting', async () => {
+    const updater = (status: Record<string, unknown>) => ({
+      appVersion: '1.4.0',
+      runtimeId: 'runtime-1',
+      support: { installMode: 'interactive', automatic: true, reason: 'available' },
+      status
+    })
+    routeCalls({
+      'updater.getStatus': updater({ state: 'downloaded', version: '1.5.0' }),
+      'updater.install': {
+        accepted: true,
+        fromVersion: '1.4.0',
+        targetVersion: '1.5.0',
+        runtimeId: 'runtime-1'
+      }
+    })
+
+    const human = await run(['app', 'update'], 'prompt')
+    expect(human.stdout.trim()).toBe('Installing Prompt 1.5.0 and restarting.')
+    expect(human.stderr).toBe('')
+
+    const json = await run(['app', 'update', '--json'], 'prompt')
+    expect(JSON.parse(json.stdout)).toEqual({
+      ok: true,
+      result: { status: 'installing', fromVersion: '1.4.0', version: '1.5.0' }
+    })
+    expect(callMock).toHaveBeenCalledWith('updater.install', undefined, { timeoutMs: 15_000 })
+  })
+
+  it('reports a failed update check as a coded error', async () => {
+    routeCalls({
+      'updater.getStatus': {
+        appVersion: '1.4.0',
+        runtimeId: 'runtime-1',
+        support: { installMode: 'interactive', automatic: true, reason: 'available' },
+        status: { state: 'error', message: 'HttpError: 404' }
+      },
+      'updater.check': {
+        appVersion: '1.4.0',
+        runtimeId: 'runtime-1',
+        support: { installMode: 'interactive', automatic: true, reason: 'available' },
+        status: { state: 'checking', userInitiated: true }
+      }
+    })
+    const { stdout } = await run(['app', 'update', '--json'], 'prompt')
+
+    const { error } = JSON.parse(stdout)
+    expect(error.code).toBe('update_check_failed')
+    expect(error.message).toBe('Could not check for updates: HttpError: 404')
+  })
+
+  it('lists app update in the app group help', async () => {
+    const group = await run(['app', '--help'], 'prompt')
+    expect(group.stdout).toMatch(/^\s+update\s+Download the newest Prompt release/m)
+
+    const command = await run(['app', 'update', '--help'], 'prompt')
+    expect(command.stdout).toContain('prompt app update [--json]')
+    expect(command.stdout).toContain('Installing Prompt <version> and restarting.')
+  })
+
   it('keeps root help short and lists every group', async () => {
     const { stdout } = await run(['--help'], 'prompt')
     const lines = stdout.trim().split('\n')

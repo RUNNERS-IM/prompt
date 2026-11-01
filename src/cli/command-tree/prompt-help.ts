@@ -2,7 +2,7 @@ import type { CommandSpec } from '../command-spec'
 
 /** Top-level groups of the `prompt` tree, in the order `prompt --help` lists them. */
 export const PROMPT_GROUPS: readonly (readonly [name: string, summary: string])[] = [
-  ['app', 'Open, serve, and inspect the Prompt app'],
+  ['app', 'Open, serve, update, and inspect the Prompt app'],
   ['project', 'Projects in the sidebar: git repositories and plain folders'],
   ['workspace', 'Workspaces (worktrees and folders) inside a project'],
   ['session', 'Agent conversations (Claude, Codex, ...) and their resume ids'],

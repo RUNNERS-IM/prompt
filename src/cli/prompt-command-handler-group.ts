@@ -5,6 +5,7 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
   name: 'prompt',
   keys: [
     'prompt app version',
+    'prompt app update',
     'prompt project list',
     'prompt project add',
     'prompt project show',
@@ -26,6 +27,7 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
   load: async () => ({
     ...(await import('./handlers/prompt-project.js')).PROMPT_PROJECT_HANDLERS,
     ...(await import('./handlers/prompt-lists.js')).PROMPT_LIST_HANDLERS,
-    ...(await import('./handlers/prompt-session.js')).PROMPT_SESSION_HANDLERS
+    ...(await import('./handlers/prompt-session.js')).PROMPT_SESSION_HANDLERS,
+    ...(await import('./handlers/prompt-app-update.js')).PROMPT_APP_UPDATE_HANDLERS
   })
 }
