@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "Yeni Claude oturumu",
+      "tabTitle": "Claude",
       "model": "Model",
       "thinking": "Düşünme",
       "default": "Varsayılan",

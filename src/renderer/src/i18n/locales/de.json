@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "Neue Claude-Sitzung",
+      "tabTitle": "Claude",
       "model": "Modell",
       "thinking": "Denken",
       "default": "Standard",

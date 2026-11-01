@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "新しい Claude セッション",
+      "tabTitle": "Claude",
       "model": "モデル",
       "thinking": "思考",
       "default": "デフォルト",

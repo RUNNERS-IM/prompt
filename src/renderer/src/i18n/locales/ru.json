@@ -15,6 +15,7 @@
     },
     "claudeStart": {
       "title": "Новый сеанс Claude",
+      "tabTitle": "Claude",
       "model": "Модель",
       "thinking": "Мышление",
       "default": "По умолчанию",

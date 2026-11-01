@@ -55,6 +55,13 @@ test.describe('new Claude session start box', () => {
         boxTabId!
       )
     ).toBe(0)
+    // The box tab reads as a Claude session, not a "Terminal N" shell, in the strip and sidebar.
+    await expect(
+      page.locator(`[data-testid="sortable-tab"][data-tab-id="${boxTabId}"]`)
+    ).toHaveAttribute('data-tab-title', 'Claude')
+    await expect(
+      page.locator('[data-prompt-terminal-row]', { hasText: 'New Claude Session' })
+    ).toBeVisible()
     await page.screenshot({ path: testInfo.outputPath('claude-start.png') })
     await attachScreenshot(page, testInfo, '1-claude-start-box')
 

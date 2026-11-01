@@ -23252,6 +23252,7 @@
     },
     "claudeStart": {
       "title": "New Claude Session",
+      "tabTitle": "Claude",
       "model": "Model",
       "thinking": "Thinking",
       "default": "Default",
