@@ -11,6 +11,7 @@ import {
   resolveChildWorkspacesToggleGroupKey
 } from '../components/sidebar/child-workspaces-toggle-target'
 import { requestTerminalTabRename } from '../components/tab-bar/terminal-tab-rename-request'
+import { requestPromptSessionRowRename } from '../components/sidebar/prompt-session-row-rename'
 import {
   deleteHoveredWorkspaceImmediately,
   resolveHoveredWorkspaceDeleteTarget
@@ -200,7 +201,12 @@ export function createAppCommandHandlers(
         if (!tabId) {
           return false
         }
-        return claim('tab.rename', () => requestTerminalTabRename(tabId))
+        // Prompt: the session's sidebar row takes it when shown; else the tab strip's box opens.
+        return claim('tab.rename', () => {
+          if (!requestPromptSessionRowRename(tabId)) {
+            requestTerminalTabRename(tabId)
+          }
+        })
       }
     ],
     [

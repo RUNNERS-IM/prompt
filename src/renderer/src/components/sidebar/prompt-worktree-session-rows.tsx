@@ -17,6 +17,7 @@ import {
   promptTerminalTabName
 } from './prompt-session-row-name'
 import { PromptSessionRowMenu } from './prompt-session-row-menu'
+import { PromptSessionRowRename, usePromptSessionRowRename } from './prompt-session-row-rename'
 import {
   PROMPT_WORKSPACE_ROW_GROUP_CLASS,
   PromptNewSessionMenuButton
@@ -85,9 +86,19 @@ function PromptTerminalRow({
         ) : (
           <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
         )}
-        <span className="min-w-0 flex-1 truncate">{name}</span>
+        <PromptTerminalRowName name={name} />
       </div>
     </PromptSessionRowMenu>
+  )
+}
+
+/** The row's name, or its rename box while one is open (the menu's context sits above this). */
+function PromptTerminalRowName({ name }: { name: string }): React.JSX.Element {
+  const rename = usePromptSessionRowRename()
+  return rename ? (
+    <PromptSessionRowRename {...rename} />
+  ) : (
+    <span className="min-w-0 flex-1 truncate">{name}</span>
   )
 }
 
