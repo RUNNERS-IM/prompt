@@ -15,7 +15,7 @@ import {
 import { shouldSendSyntheticTitleFrame } from '../synthetic-title-visibility'
 import { shouldCopySyntheticTitleFrameToPtyData } from '../synthetic-title-frame-routing'
 import { mainProcessState as state } from './main-process-state'
-import { promptPtyWebContents } from '../prompt-windows/prompt-window-registry'
+import { sendToPromptPtyViewers } from '../prompt-windows/prompt-window-registry'
 
 // Cursor redraws overwrite one-shot OSC titles; reassert at Pi's 80ms cadence and share the animation with OpenCode.
 const SPINNER_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
@@ -53,7 +53,7 @@ function sendSyntheticTitle(
   }
   // Only legacy renderer authority parses these bytes; main authority would mint phantom ACKs (synthetic-title-frame-routing.ts).
   if (shouldCopySyntheticTitleFrameToPtyData(state.store?.getSettings())) {
-    promptPtyWebContents(window.webContents, ptyId).send('pty:data', { id: ptyId, data })
+    sendToPromptPtyViewers(window.webContents, ptyId, 'pty:data', { id: ptyId, data })
   }
 }
 

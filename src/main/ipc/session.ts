@@ -27,7 +27,7 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
 
   // Optional hostId preserves local-partition behavior for older renderers.
   ipcMain.handle('session:get', (event, hostId?: string | null) => {
-    return promptWindowSessionView(event.sender, store.getWorkspaceSession(hostId))
+    return promptWindowSessionView(event.sender, store.getWorkspaceSession(hostId), hostId)
   })
 
   // Repo catalogs omit folder-only SSH hosts; enumerate session partitions directly (#12723).
@@ -57,7 +57,8 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
         event.sender,
         sent,
         store.getWorkspaceSession(hostId),
-        true
+        true,
+        hostId
       )
       store.setWorkspaceSession(
         ORCA_LAYOUT_OWNER_IS_MAIN
@@ -74,7 +75,8 @@ export function registerSessionHandlers(store: Store, runtime: OrcaRuntimeServic
         event.sender,
         sent,
         store.getWorkspaceSession(hostId),
-        false
+        false,
+        hostId
       )
       store.patchWorkspaceSession(
         ORCA_LAYOUT_OWNER_IS_MAIN

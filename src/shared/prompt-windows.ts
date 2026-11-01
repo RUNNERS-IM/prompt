@@ -70,9 +70,22 @@ export function promptRepoIdOfWorktreeId(worktreeId: string): string | null {
   return index > 0 ? worktreeId.slice(0, index) : null
 }
 
+/** Prompt window settings, part of GlobalSettings. Unset means on for both. */
+export type PromptWindowSettings = {
+  /** Reopen the windows open at quit, with their tabs. */
+  promptRestoreWindows?: boolean
+  /** Every window shows every terminal tab; false goes back to one window per tab. Read at launch. */
+  promptSharedTabs?: boolean
+}
+
 /** "Remember Open Windows" is on unless the user turned it off. */
 export function isPromptRestoreWindowsOn(
-  settings: { promptRestoreWindows?: boolean } | null | undefined
+  settings: PromptWindowSettings | null | undefined
 ): boolean {
   return settings?.promptRestoreWindows !== false
+}
+
+/** Every window shows every terminal tab unless the hidden setting turned it off. */
+export function isPromptSharedTabsOn(settings: PromptWindowSettings | null | undefined): boolean {
+  return settings?.promptSharedTabs !== false
 }

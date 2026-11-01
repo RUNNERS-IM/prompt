@@ -1,5 +1,13 @@
 import { AsyncLocalStorage } from 'node:async_hooks'
 import { PROMPT_MAIN_WINDOW_KEY as MAIN } from '../../shared/prompt-windows'
+import {
+  addPromptPtyViewer,
+  forgetPromptPtyViewers,
+  isPromptSharedTabs as sharedTabsOn,
+  promptPtySizeOwnerId,
+  promptPtyViewerIds,
+  resetPromptPtyViewersForTests
+} from './prompt-pty-viewers'
 
 /**
  * Prompt windows, the state the rest of main reads (see shared/prompt-windows.ts). Kept free of
@@ -10,6 +18,8 @@ import { PROMPT_MAIN_WINDOW_KEY as MAIN } from '../../shared/prompt-windows'
  * - Tabs moved into a window that has not saved them yet ("pending"): that window's saves must
  *   not drop them before it has loaded them.
  * - Terminal owners: the window that opened or attached a pty gets its output.
+ * - Shared tabs (the default): a pty has viewers and a size owner instead (prompt-pty-viewers.ts);
+ *   the single owner above is then unused.
  */
 
 type WebContentsLike = { id: number; isDestroyed: () => boolean; send: (...args: never[]) => void }
@@ -162,6 +172,12 @@ export function recordPromptPtyOwner(
   if (typeof ptyId !== 'string' || !ptyId) {
     return
   }
+  if (sharedTabsOn()) {
+    if (sender) {
+      addPromptPtyViewer(ptyId, sender.id)
+    }
+    return
+  }
   if (sender && extraWindowWebContents(sender.id)) {
     ownerIdByPtyId.set(ptyId, sender.id)
   } else {
@@ -171,19 +187,80 @@ export function recordPromptPtyOwner(
 
 /** Runs a spawn so that a terminal id minted during it is owned by the requesting window. */
 export function runPromptSpawnFor<T>(sender: { id: number } | null | undefined, spawn: () => T): T {
-  return sender && extraWindowWebContents(sender.id) ? spawnOwner.run(sender.id, spawn) : spawn()
+  return sender && (sharedTabsOn() || extraWindowWebContents(sender.id))
+    ? spawnOwner.run(sender.id, spawn)
+    : spawn()
 }
 
 /** Called where terminal ids are minted, before the first output byte can be produced. */
 export function notePromptMintedPtyId(ptyId: string): void {
   const owner = spawnOwner.getStore()
-  if (owner !== undefined) {
+  if (owner === undefined) {
+    return
+  }
+  if (sharedTabsOn()) {
+    addPromptPtyViewer(ptyId, owner)
+  } else {
     ownerIdByPtyId.set(ptyId, owner)
   }
 }
 
 export function forgetPromptPtyOwner(ptyId: string): void {
   ownerIdByPtyId.delete(ptyId)
+  forgetPromptPtyViewers(ptyId)
+}
+
+function viewerContents<T extends { id: number }>(main: T, webContentsId: number): T | null {
+  if (webContentsId === main.id) {
+    return main
+  }
+  return extraWindowWebContents(webContentsId) as unknown as T | null
+}
+
+/**
+ * Every window a pty's renderer events go to. With `mainReady` given (terminal data), only windows
+ * whose data dispatcher is listening. Without shared tabs this is the one owner.
+ */
+export function promptPtyTargets<T extends { id: number }>(
+  main: T,
+  ptyId: string,
+  mainReady?: boolean
+): T[] {
+  if (!sharedTabsOn()) {
+    return [promptPtyWebContents(main, ptyId)]
+  }
+  const ids = promptPtyViewerIds(ptyId)
+  if (ids.length === 0) {
+    return mainReady === false ? [] : [main]
+  }
+  const targets: T[] = []
+  for (const id of ids) {
+    const contents = viewerContents(main, id)
+    if (!contents) {
+      continue
+    }
+    if (
+      mainReady !== undefined &&
+      !(id === main.id ? mainReady : dispatcherReadyWebContentsIds.has(id))
+    ) {
+      continue
+    }
+    targets.push(contents)
+  }
+  return targets
+}
+
+/** Sends one renderer event to every window showing the pty (see `promptPtyTargets`). */
+export function sendToPromptPtyViewers<T extends { id: number; send: (...args: never[]) => void }>(
+  main: T,
+  ptyId: string,
+  channel: string,
+  payload: unknown,
+  mainReady?: boolean
+): void {
+  for (const target of promptPtyTargets(main, ptyId, mainReady)) {
+    ;(target.send as (channel: string, payload: unknown) => void)(channel, payload)
+  }
 }
 
 /** The extra window that shows a pty, or null (main window). */
@@ -214,6 +291,14 @@ export function promptRecordedPtyOwnerId(ptyId: string): number | null {
 
 /** Where a pty's renderer events go: the extra window that shows it, else `fallback` (main). */
 export function promptPtyWebContents<T>(fallback: T, ptyId: string): T {
+  if (sharedTabsOn()) {
+    const sizeOwner = promptPtySizeOwnerId(ptyId)
+    const main = fallback as unknown as { id?: number }
+    if (sizeOwner === null || sizeOwner === main?.id) {
+      return fallback
+    }
+    return (extraWindowWebContents(sizeOwner) as unknown as T | null) ?? fallback
+  }
   return (ownerOfPty(ptyId) as unknown as T | null) ?? fallback
 }
 
@@ -232,6 +317,16 @@ export function promptAllPtyWebContents<T>(main: T): T[] {
  * shows; an extra window's ptys wait for that window's own dispatcher handshake.
  */
 export function promptPtyDispatcherReady(mainReady: boolean, ptyId: string): boolean {
+  if (sharedTabsOn()) {
+    const ids = promptPtyViewerIds(ptyId)
+    if (ids.length === 0) {
+      return mainReady
+    }
+    // The main window's id is not known here: an id that is no extra window is the main window.
+    return ids.some((id) =>
+      keyByWebContentsId.has(id) ? dispatcherReadyWebContentsIds.has(id) : mainReady
+    )
+  }
   const owner = ownerOfPty(ptyId)
   return owner ? dispatcherReadyWebContentsIds.has(owner.id) : mainReady
 }
@@ -258,6 +353,10 @@ export function promptPtyControlAllowed(
 ): boolean {
   if (typeof ptyId !== 'string' || !sender) {
     return true
+  }
+  if (sharedTabsOn()) {
+    const sizeOwner = promptPtySizeOwnerId(ptyId)
+    return sizeOwner === null || sizeOwner === sender.id
   }
   const owner = ownerOfPty(ptyId)
   return owner ? owner.id === sender.id : !extraWindowWebContents(sender.id)
@@ -291,6 +390,7 @@ export function resetPromptWindowRegistryForTests(): void {
   ownerIdByPtyId.clear()
   dispatcherReadyWebContentsIds.clear()
   viewByKey.clear()
+  resetPromptPtyViewersForTests()
   onStateChanged = () => {}
   quitting = false
 }

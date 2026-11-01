@@ -9,6 +9,12 @@
  * - when an extra window reloads or goes away, only its ptys' in-flight bytes are written off;
  * - when the main window reloads, the extra windows' ptys keep their delivery state;
  * - resync probes go to every window and every window's answer is applied.
+ *
+ * With shared tabs a pty can have several viewers (see prompt-window-registry.ts). Main counts the
+ * bytes it sent a pty once; each renderer counts what it processed from 0 since it loaded. So the
+ * count main had sent when a window started viewing is that window's offset, added to its
+ * acknowledgements. A window that reloads or closes stops viewing; queued bytes stay for the
+ * other viewers.
  */
 
 import type { PtyIpcSession, RendererPtyDeliveryAccounting } from '../ipc/pty/session'
@@ -26,15 +32,92 @@ import {
   promptRecordedPtyOwnerId,
   setPromptExtraWindowDispatcherReady
 } from './prompt-window-registry'
+import {
+  addPromptPtyViewersListener,
+  isPromptSharedTabs,
+  promptPtyViewerIds,
+  removePromptPtyViewerWindow
+} from './prompt-pty-viewers'
 
 let boundSession: PtyIpcSession | null = null
+/** Shared tabs: per pty, each viewer's acknowledgement offset (see above). */
+const ackOffsets = new Map<string, Map<number, number>>()
+
+function onViewersChanged(ptyId: string, added: number | null): void {
+  const viewers = new Set(promptPtyViewerIds(ptyId))
+  const offsets = ackOffsets.get(ptyId) ?? new Map<number, number>()
+  for (const id of offsets.keys()) {
+    if (!viewers.has(id)) {
+      offsets.delete(id)
+    }
+  }
+  if (added !== null && !offsets.has(added)) {
+    offsets.set(added, boundSession?.rendererDeliveryAccountingByPty.get(ptyId)?.sentChars ?? 0)
+  }
+  if (offsets.size > 0) {
+    ackOffsets.set(ptyId, offsets)
+  } else {
+    ackOffsets.delete(ptyId)
+  }
+}
+
+/** Called with the pty IPC session before any window can attach (prompt-pty-ipc-guards.ts). */
+export function bindPromptPtyDeliverySession(session: PtyIpcSession): void {
+  boundSession = session
+  addPromptPtyViewersListener(onViewersChanged)
+}
+
+/** A window's processed-character total in main's count of what was sent (see above). */
+export function promptAckInMainCount(
+  sender: { id: number } | null | undefined,
+  ptyId: string,
+  processedChars: number
+): number {
+  if (!isPromptSharedTabs() || !sender) {
+    return processedChars
+  }
+  return processedChars + (ackOffsets.get(ptyId)?.get(sender.id) ?? 0)
+}
 
 function ptyIdsOf(session: PtyIpcSession): Set<string> {
   return new Set([...session.rendererDeliveryAccountingByPty.keys(), ...session.pendingData.keys()])
 }
 
+/**
+ * Shared tabs: a window stopped viewing. Credit what it still owed so other viewers are not held
+ * back by it; keep queued bytes when another window still shows the pty.
+ */
+function writeOffSharedViewer(session: PtyIpcSession, webContentsId: number): void {
+  let creditedAny = false
+  for (const id of removePromptPtyViewerWindow(webContentsId)) {
+    const accounting = session.rendererDeliveryAccountingByPty.get(id)
+    if (accounting) {
+      const acknowledged = applyCumulativeAck(session, id, accounting.sentChars)
+      if (acknowledged > 0) {
+        creditedAny = true
+        tryGetProviderForPty(id)?.acknowledgeDataEvent(id, acknowledged)
+      }
+    }
+    if (promptPtyViewerIds(id).length > 0) {
+      continue
+    }
+    if (session.pendingData.get(id)) {
+      session.deletePendingPtyData(id)
+      session.pendingOverflowMarkedPtys.delete(id)
+      session.updateProducerFlowControl(id)
+    }
+    activeRendererPtys.delete(id)
+    visibleRendererPtys.delete(id)
+  }
+  session.schedulePendingDataAfterCreditReport(creditedAny)
+}
+
 /** Forget what was sent to an extra window that can no longer acknowledge it. */
 function writeOffExtraWindowDelivery(session: PtyIpcSession, webContentsId: number): void {
+  if (isPromptSharedTabs()) {
+    writeOffSharedViewer(session, webContentsId)
+    return
+  }
   let creditedAny = false
   for (const id of ptyIdsOf(session)) {
     if (promptRecordedPtyOwnerId(id) !== webContentsId) {
@@ -77,7 +160,8 @@ export function promptExtraWindowDispatcherReady(
     writeOffExtraWindowDelivery(session, sender.id)
   }
   // Another window may have hidden these ptys before the tab moved; this window decides now.
-  for (const id of getHiddenRendererPtyIds()) {
+  // (Shared tabs combine every viewer's hidden report instead, see prompt-pty-ipc-guards.ts.)
+  for (const id of isPromptSharedTabs() ? [] : getHiddenRendererPtyIds()) {
     if (promptPtyOwnerWebContentsId(id) === sender.id && !isRuntimeOwnedHiddenRendererPty(id)) {
       session.transitionSpawnHiddenRendererPtyDeliveryState(id, false)
     }
@@ -93,6 +177,8 @@ export function resetPromptExtraWindowDelivery(webContentsId: number): void {
   setPromptExtraWindowDispatcherReady(webContentsId, false)
   if (boundSession) {
     writeOffExtraWindowDelivery(boundSession, webContentsId)
+  } else if (isPromptSharedTabs()) {
+    removePromptPtyViewerWindow(webContentsId)
   }
 }
 
@@ -113,7 +199,11 @@ export function promptExtraWindowResyncResponse(
     if (typeof processedChars !== 'number' || !Number.isFinite(processedChars)) {
       continue
     }
-    const acknowledged = applyCumulativeAck(session, id, Math.max(0, processedChars))
+    const acknowledged = applyCumulativeAck(
+      session,
+      id,
+      promptAckInMainCount(sender, id, Math.max(0, processedChars))
+    )
     if (acknowledged > 0) {
       creditedAny = true
       tryGetProviderForPty(id)?.acknowledgeDataEvent(id, acknowledged)
@@ -142,9 +232,20 @@ export function keepPromptExtraWindowDelivery(): () => void {
   if (!session) {
     return () => {}
   }
+  // Shared tabs: the reloaded main window views nothing until it attaches again; ptys another
+  // window still shows keep their delivery state.
+  const shared = isPromptSharedTabs()
+  if (shared) {
+    const mainId = session.mainWindow?.webContents.id
+    if (typeof mainId === 'number') {
+      removePromptPtyViewerWindow(mainId)
+    }
+  }
+  const shownElsewhere = (id: string): boolean =>
+    shared ? promptPtyViewerIds(id).length > 0 : promptPtyOwnerWebContentsId(id) !== null
   const kept = new Map<string, KeptPtyDelivery>()
   for (const id of ptyIdsOf(session)) {
-    if (promptPtyOwnerWebContentsId(id) === null) {
+    if (!shownElsewhere(id)) {
       continue
     }
     const accounting = session.rendererDeliveryAccountingByPty.get(id)
@@ -158,7 +259,7 @@ export function keepPromptExtraWindowDelivery(): () => void {
     })
   }
   for (const id of [...activeRendererPtys, ...visibleRendererPtys]) {
-    if (!kept.has(id) && promptPtyOwnerWebContentsId(id) !== null) {
+    if (!kept.has(id) && shownElsewhere(id)) {
       kept.set(id, {
         overflowMarked: false,
         restoreNeeded: false,
@@ -202,4 +303,5 @@ export function keepPromptExtraWindowDelivery(): () => void {
 /** Test seam. */
 export function resetPromptPtyWindowDeliveryForTests(): void {
   boundSession = null
+  ackOffsets.clear()
 }

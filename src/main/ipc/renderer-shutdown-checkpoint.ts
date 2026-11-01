@@ -113,7 +113,8 @@ export function registerRendererShutdownCheckpointHandler(
             event.sender,
             sent,
             store.getWorkspaceSession(hostId),
-            true
+            true,
+            hostId
           )
           store.stageWorkspaceSessionBeforeUnload(
             ORCA_LAYOUT_OWNER_IS_MAIN

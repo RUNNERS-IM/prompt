@@ -16,7 +16,7 @@ import { interactiveOutputCharsByPty, lastInputAtByPty } from '../delivery/visib
 import { isSettledWrite, type WriteSettlement } from '../../../../shared/pty-write-settlement'
 import {
   isPromptExtraWindowSender,
-  promptPtyWebContents
+  sendToPromptPtyViewers
 } from '../../../prompt-windows/prompt-window-registry'
 
 export function isMainWindowPtyIpcEvent(
@@ -65,7 +65,7 @@ export function createPtyWriteInput(deps: {
     ) {
       return
     }
-    promptPtyWebContents(mainWindow.webContents, id).send('pty:writeUnavailable', { id })
+    sendToPromptPtyViewers(mainWindow.webContents, id, 'pty:writeUnavailable', { id })
   }
 
   const reportUnavailablePtyWrite = (id: string, error: unknown): void => {

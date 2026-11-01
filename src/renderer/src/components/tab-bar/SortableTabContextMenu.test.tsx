@@ -399,9 +399,15 @@ describe('SortableTabContextMenu', () => {
   })
 
   it('moves the terminal tab to a new window from the window submenu', () => {
+    storeMock.state = { ...storeMock.state, settings: { promptSharedTabs: false } }
     const { container } = renderMenu()
     expect(container.textContent).toContain('Move Tab to Window')
     act(() => getButton(container, 'New Window').click())
     expect(windowsMock.movePromptTabToWindow).toHaveBeenCalledWith('term-1', 'new')
+  })
+
+  it('has no window submenu when every window shows every terminal tab', () => {
+    storeMock.state = { ...storeMock.state, settings: {} }
+    expect(renderMenu().container.textContent).not.toContain('Move Tab to Window')
   })
 })

@@ -10,7 +10,9 @@ import {
 import { translate } from '@/i18n/i18n'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { listPromptWindows, movePromptTabToWindow } from '@/lib/prompt-windows'
+import { useAppStore } from '@/store'
 import {
+  isPromptSharedTabsOn,
   PROMPT_MAIN_WINDOW_KEY,
   PROMPT_NEW_WINDOW_TARGET,
   type PromptWindowSummary
@@ -30,11 +32,17 @@ function windowLabel(summary: PromptWindowSummary): string {
 
 /**
  * "Move Tab to Window ▸" in a tab's context menu: lists the other Prompt windows and "New
- * Window". The tab's terminal keeps running; the chosen window attaches it.
+ * Window". The tab's terminal keeps running; the chosen window attaches it. Hidden with shared
+ * tabs, where every window already shows every terminal tab.
  */
-export function PromptMoveTabToWindowSubmenu({ tabId }: { tabId: string }): React.JSX.Element {
+export function PromptMoveTabToWindowSubmenu({
+  tabId
+}: {
+  tabId: string
+}): React.JSX.Element | null {
   useUiLanguageRevision()
   const [windows, setWindows] = useState<PromptWindowSummary[]>([])
+  const shared = useAppStore((s) => isPromptSharedTabsOn(s.settings))
 
   const refresh = (open: boolean): void => {
     if (open) {
@@ -42,6 +50,9 @@ export function PromptMoveTabToWindowSubmenu({ tabId }: { tabId: string }): Reac
     }
   }
 
+  if (shared) {
+    return null
+  }
   return (
     <DropdownMenuSub onOpenChange={refresh}>
       <DropdownMenuSubTrigger>

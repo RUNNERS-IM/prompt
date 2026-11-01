@@ -12,9 +12,9 @@ import {
 } from '../../../shared/prompt-windows'
 
 /**
- * Prompt windows in the renderer (see shared/prompt-windows.ts). Main hands each window only its
- * own tabs when it reads the session, so nothing here filters tabs; this file opens windows,
- * moves tabs and applies a window's first selection.
+ * Prompt windows in the renderer (see shared/prompt-windows.ts). Main decides which tabs a window
+ * reads from the session (every terminal tab with shared tabs, else only its own), so nothing here
+ * filters tabs; this file opens windows, moves tabs and applies a window's first selection.
  */
 
 function queryValue(name: string): string | null {

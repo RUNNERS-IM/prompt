@@ -1,4 +1,6 @@
 import type { BrowserWindow } from 'electron'
+import { isPromptSharedTabs } from '../../prompt-windows/prompt-pty-viewers'
+import { promptExtraWindowList } from '../../prompt-windows/prompt-window-registry'
 import type {
   InactiveAccountUsage,
   ProviderRateLimits,
@@ -180,5 +182,13 @@ export abstract class RateLimitServiceState {
       return
     }
     this.mainWindow.webContents.send('rateLimits:update', state)
+    // Prompt shared tabs: extra windows show the same usage line.
+    if (isPromptSharedTabs()) {
+      for (const win of promptExtraWindowList<BrowserWindow>()) {
+        if (!win.webContents.isDestroyed()) {
+          win.webContents.send('rateLimits:update', state)
+        }
+      }
+    }
   }
 }
