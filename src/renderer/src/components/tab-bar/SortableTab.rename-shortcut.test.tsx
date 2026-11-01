@@ -449,4 +449,30 @@ describe('SortableTab rename shortcut signal', () => {
     expect(await tabTitle('Terminal 1')).toBe('Runtime terminal title')
     expect(await tabTitle('my tab')).toBe('my tab')
   })
+
+  it('names nothing when an unnamed tab rename is committed unchanged', async () => {
+    const onSetCustomTitle = vi.fn()
+    await renderSortableTab({ onSetCustomTitle })
+    requestTerminalTabRename('terminal-tab-1')
+    const rerender = expandNode(await renderSortableTab({ onSetCustomTitle }))
+    const input = findElementsByType(rerender, 'input')[0]
+
+    ;(input.props.onBlur as () => void)()
+
+    expect(onSetCustomTitle).not.toHaveBeenCalled()
+  })
+
+  it('still saves an unchanged rename of a tab that has a set name', async () => {
+    const onSetCustomTitle = vi.fn()
+    await renderSortableTab({ onSetCustomTitle, customTitle: 'my tab' })
+    requestTerminalTabRename('terminal-tab-1')
+    const rerender = expandNode(
+      await renderSortableTab({ onSetCustomTitle, customTitle: 'my tab' })
+    )
+    const input = findElementsByType(rerender, 'input')[0]
+
+    pressInputKey(input, 'Enter')
+
+    expect(onSetCustomTitle).toHaveBeenCalledWith('terminal-tab-1', 'my tab')
+  })
 })
