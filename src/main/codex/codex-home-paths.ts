@@ -13,6 +13,10 @@ import {
 import { homedir } from 'node:os'
 import { dirname, join } from 'node:path'
 import {
+  redirectLegacyUserDataPath,
+  resolveDefaultPromptUserDataPath
+} from '../../shared/prompt-user-data-location'
+import {
   clearCopiedResourceMarker,
   markCopiedResource,
   targetIsOwnedFallbackCopy
@@ -73,9 +77,14 @@ export function getCodexSessionBackfillStateDirPath(): string {
 
 export function getOrcaUserDataPath(): string {
   if (process.env.ORCA_USER_DATA_PATH) {
-    return process.env.ORCA_USER_DATA_PATH
+    // Terminals opened before the data folder moved still export the old folder.
+    return redirectLegacyUserDataPath(process.env.ORCA_USER_DATA_PATH)
   }
-  // Offline CLI hooks run outside Electron and must resolve the same userData path.
+  // Offline CLI hooks run outside Electron and must resolve the same userData path as the app.
+  const defaultPath = resolveDefaultPromptUserDataPath()
+  if (defaultPath) {
+    return defaultPath
+  }
   if (process.platform === 'darwin') {
     return join(homedir(), 'Library', 'Application Support', 'orca')
   }
