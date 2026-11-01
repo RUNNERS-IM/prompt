@@ -10,7 +10,6 @@
       "tabColor": "Tab-Farbe",
       "close": "Sitzung schließen",
       "closeNamed": "{{name}} schließen",
-      "copyToNewWindow": "In neuem Fenster kopieren",
       "duplicate": "Duplizieren"
     }
   },

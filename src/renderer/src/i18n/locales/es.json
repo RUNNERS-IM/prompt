@@ -10,7 +10,6 @@
       "tabColor": "Color de pestaña",
       "close": "Cerrar sesión",
       "closeNamed": "Cerrar {{name}}",
-      "copyToNewWindow": "Copiar en una ventana nueva",
       "duplicate": "Duplicar"
     }
   },
