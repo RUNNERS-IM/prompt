@@ -91,15 +91,43 @@ function ClaudeModelRadioItems({
   reportedModel: string | undefined
 }): React.JSX.Element {
   return (
-    <DropdownMenuRadioGroup
+    <ClaudeModelRadioGroup
       value={currentClaudeModelId(reportedModel)}
+      onModelChange={(model) => void switchClaudePaneModel(paneKey, model)}
+    />
+  )
+}
+
+/**
+ * The Claude model list as menu radio rows, shared by the live-pane menus and the new-session
+ * start box. `defaultLabel` adds a first row (value '') for "no model flag".
+ */
+export function ClaudeModelRadioGroup({
+  value,
+  onModelChange,
+  defaultLabel,
+  onDefault
+}: {
+  value: string
+  onModelChange: (model: CatalogModel) => void
+  defaultLabel?: string
+  onDefault?: () => void
+}): React.JSX.Element {
+  return (
+    <DropdownMenuRadioGroup
+      value={value}
       onValueChange={(id) => {
+        if (id === '' && onDefault) {
+          onDefault()
+          return
+        }
         const model = CLAUDE_MODELS.find((candidate) => candidate.id === id)
         if (model) {
-          void switchClaudePaneModel(paneKey, model)
+          onModelChange(model)
         }
       }}
     >
+      {defaultLabel ? <DropdownMenuRadioItem value="">{defaultLabel}</DropdownMenuRadioItem> : null}
       {CLAUDE_MODELS.map((model) => (
         <DropdownMenuRadioItem key={model.id} value={model.id} title={model.description}>
           {model.label}
