@@ -49,6 +49,7 @@ function macTerminalHostPaths(appPath) {
     infoPlist: join(contents, 'Info.plist'),
     executable: join(contents, 'MacOS', MAC_TERMINAL_HOST_EXECUTABLE),
     icon: join(contents, 'Resources', 'icon.icns'),
+    assetCatalog: join(contents, 'Resources', 'Assets.car'),
     daemon,
     entry: join(daemon, 'out', 'main', 'daemon-entry.js'),
     outPackageJson: join(daemon, 'out', 'package.json'),
@@ -200,6 +201,7 @@ function buildMacTerminalHostInfo({ appInfo, usageDescriptions, minimumOs }) {
     CFBundlePackageType: 'APPL',
     CFBundleInfoDictionaryVersion: '6.0',
     CFBundleIconFile: 'icon.icns',
+    ...(appInfo.CFBundleIconName ? { CFBundleIconName: appInfo.CFBundleIconName } : {}),
     // Lower than the app's so LaunchServices ranks the helper below Orca.app among duplicates.
     CFBundleVersion: '0',
     CFBundleShortVersionString: appInfo.CFBundleShortVersionString,
@@ -272,6 +274,11 @@ function assembleMacTerminalHost({ appPath, nodeExecutable, iconPath, info }) {
   cpSync(nodeExecutable, paths.executable)
   chmodSync(paths.executable, 0o755)
   cpSync(iconPath, paths.icon)
+  // The app's Icon Composer icon, so the helper is drawn the same size as the app on macOS 26.
+  const appAssetCatalog = join(resourcesDir, 'Assets.car')
+  if (info.CFBundleIconName && existsSync(appAssetCatalog)) {
+    cpSync(appAssetCatalog, paths.assetCatalog)
+  }
   cpSync(join(daemonOut, 'main'), join(paths.daemon, 'out', 'main'), { recursive: true })
   // Pins out/ to CommonJS so a stray parent package.json cannot change the loader.
   cpSync(join(daemonOut, 'package.json'), paths.outPackageJson)

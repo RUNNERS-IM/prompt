@@ -613,7 +613,9 @@ module.exports = {
       '/Contents/Resources/agent-browser-darwin-[^/]+$',
       ...macTerminalHostSignIgnore
     ],
-    extendInfo: macUsageDescriptions,
+    // Icon Composer icon compiled from resources/icon-source/icon.icon (actool 26) so macOS 26 draws
+    // it full size; icon.icns stays as the fallback for older macOS.
+    extendInfo: { ...macUsageDescriptions, CFBundleIconName: 'icon' },
     // Local macOS builds need no release credentials; hardening/notarization stay on explicit release paths.
     hardenedRuntime: isMacRelease,
     // Dev notarization preserves TCC identifier/team identity across cdhash changes; unticketed hourly updates otherwise lose folder grants with EPERM and no prompt.
@@ -623,6 +625,7 @@ module.exports = {
       macChromiumLicensesResource,
       ...createPackagedRuntimeNodeModuleResources('darwin'),
       macSpeechNativeResource,
+      { from: 'resources/build/Assets.car', to: 'Assets.car' },
       {
         from: 'resources/darwin/bin/orca',
         to: 'bin/orca'
