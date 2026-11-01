@@ -11,8 +11,9 @@ import {
   registerPromptExtraWindow,
   resetPromptWindowRegistryForTests
 } from './prompt-window-registry'
-import { setPromptSharedTabs } from './prompt-pty-viewers'
+import { promptPtyViewerIds, setPromptSharedTabs } from './prompt-pty-viewers'
 import {
+  keepPromptExtraWindowDelivery,
   resetPromptExtraWindowDelivery,
   resetPromptPtyWindowDeliveryForTests
 } from './prompt-pty-window-delivery'
@@ -29,6 +30,7 @@ function fakeSession() {
     pendingData: { get: () => undefined, size: 0, reactivateBlocked: () => false },
     pendingOverflowMarkedPtys: new Set<string>(),
     rendererInFlightTotalChars: 0,
+    mainWindow: null as unknown,
     schedulePendingDataAfterCreditReport: vi.fn(),
     deletePendingPtyData: vi.fn(),
     updateProducerFlowControl: vi.fn()
@@ -137,5 +139,21 @@ describe('pty IPC guards with shared tabs', () => {
       { id: 'p1', processedChars: 600 },
       { id: 'p1', processedChars: 600 }
     ])
+  })
+
+  it('drops the destroyed main window as a viewer on quit without reading it', () => {
+    session.pendingData = { ...session.pendingData, keys: () => [][Symbol.iterator]() } as never
+    session.mainWindow = { isDestroyed: () => false, webContents: main }
+    recordPromptPtyOwner('p1', w1)
+    keepPromptExtraWindowDelivery()()
+    recordPromptPtyOwner('p1', main)
+    session.mainWindow = {
+      isDestroyed: () => true,
+      get webContents(): never {
+        throw new TypeError('Object has been destroyed')
+      }
+    }
+    expect(() => keepPromptExtraWindowDelivery()()).not.toThrow()
+    expect(promptPtyViewerIds('p1')).toEqual([2])
   })
 })
