@@ -11,6 +11,7 @@ import type { KeybindingOverrides } from '../../shared/keybindings'
 import {
   isPromptClaudeSessionCopyCommand,
   isPromptRestoreWindowsOn,
+  isPromptSharedTabsOn,
   PROMPT_MAIN_WINDOW_KEY as MAIN,
   PROMPT_NEW_WINDOW_TARGET,
   PROMPT_WINDOWS_CHANNELS as CH,
@@ -33,8 +34,14 @@ import {
   setPromptWindowView,
   unregisterPromptExtraWindow
 } from './prompt-window-registry'
+import { setPromptSharedTabs } from './prompt-pty-viewers'
 import { resetPromptExtraWindowDelivery } from './prompt-pty-window-delivery'
 import { forgetPromptWindowGraph } from './prompt-window-graph'
+import {
+  forgetPromptWindowFocus,
+  lastFocusedPromptWindow,
+  notePromptWindowFocused
+} from './prompt-window-focus-order'
 import {
   createPromptBrowserWindow,
   loadPromptWindow,
@@ -69,8 +76,6 @@ type Bounds = PromptWindowBounds
 
 const windowsByKey = new Map<string, BrowserWindow>()
 const focusRequests = new Map<string, PromptWindowFocusRequest>()
-/** Window keys, most recently focused last. */
-const focusOrder: string[] = []
 let mainWindow: BrowserWindow | null = null
 let store: Store | null = null
 let getKeybindings: () => KeybindingOverrides | undefined = () => undefined
@@ -103,14 +108,6 @@ function scheduleSave(): void {
   saveTimer.unref?.()
 }
 
-function noteFocused(key: string): void {
-  const index = focusOrder.indexOf(key)
-  if (index !== -1) {
-    focusOrder.splice(index, 1)
-  }
-  focusOrder.push(key)
-}
-
 function windowOfKey(key: string): BrowserWindow | null {
   const win = key === MAIN ? mainWindow : windowsByKey.get(key)
   return win && !win.isDestroyed() ? win : null
@@ -121,13 +118,10 @@ function handoverTarget(closingKey: string): string {
   if (mainWindow && !mainWindow.isDestroyed() && mainWindow.isVisible()) {
     return MAIN
   }
-  for (let i = focusOrder.length - 1; i >= 0; i--) {
-    const key = focusOrder[i]!
-    if (key !== closingKey && key !== MAIN && windowOfKey(key)) {
-      return key
-    }
-  }
-  return MAIN
+  const last = lastFocusedPromptWindow(
+    (key) => key !== closingKey && key !== MAIN && windowOfKey(key) !== null
+  )
+  return last ?? MAIN
 }
 
 function reloadWindow(key: string): void {
@@ -218,7 +212,7 @@ export function openPromptWindow(
     }
   })
   contents.on('render-process-gone', resetDelivery)
-  win.on('focus', () => noteFocused(key))
+  win.on('focus', () => notePromptWindowFocused(key))
   win.once('ready-to-show', () => {
     showWindowWithoutStealingFocus(win)
     if (!isBackgroundLaunch()) {
@@ -232,10 +226,7 @@ export function openPromptWindow(
     unregisterPromptExtraWindow(key, webContentsId)
     forgetPromptWindowGraph(key)
     focusRequests.delete(key)
-    const index = focusOrder.indexOf(key)
-    if (index !== -1) {
-      focusOrder.splice(index, 1)
-    }
+    forgetPromptWindowFocus(key)
     if (isPromptQuitting()) {
       return
     }
@@ -319,12 +310,14 @@ export function attachPromptWindows(
   mainWindow = window
   store = appStore
   setPromptWindowLabelStore(appStore)
-  window.on('focus', () => noteFocused(MAIN))
+  window.on('focus', () => notePromptWindowFocused(MAIN))
   if (keybindings) {
     getKeybindings = keybindings
   }
   if (!installed) {
     installed = true
+    // Before any window loads: which windows get a terminal's output depends on it.
+    setPromptSharedTabs(isPromptSharedTabsOn(appStore?.getSettings()))
     installIpc()
     setPromptWindowStateListener(scheduleSave)
   }
