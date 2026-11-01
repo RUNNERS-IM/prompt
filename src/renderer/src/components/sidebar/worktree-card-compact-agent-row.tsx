@@ -311,7 +311,9 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   const usePromptLayout = promptLayout && !agent.childRow
   const asked = Boolean(conversationName ?? getAgentRowPrimaryText(agent.entry))
   const promptName = usePromptLayout ? promptSessionRowName(agent, leadingText, asked) : ''
-  const promptStatus = usePromptLayout ? promptSessionStatusLine(agent, dotState, secondary) : ''
+  const promptStatus = usePromptLayout
+    ? promptSessionStatusLine(agent, dotState, secondary, now)
+    : ''
   const dimText = highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'
 
   const promptRowBody = usePromptLayout ? (
@@ -364,7 +366,11 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
       </div>
       {promptStatus ? (
         <div
-          className={cn('min-w-0 truncate pl-[17px] text-[10px] leading-4', dimText)}
+          className={cn(
+            'min-w-0 truncate pl-[17px] text-[10px] leading-4',
+            // A session silent past the stale threshold may be stuck; set it apart from routine status.
+            agent.state === 'unverifiable' ? 'text-status-warning-text' : dimText
+          )}
           title={sendTargetDisabledReason ? undefined : promptStatus}
           data-prompt-session-status=""
         >
