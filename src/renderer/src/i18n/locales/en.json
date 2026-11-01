@@ -23207,6 +23207,9 @@
       "helpers": "Helpers {{count}}",
       "monitoring": "Watching background tasks",
       "done": "Done · waiting for you",
+      "noUpdateMinutes": "No update for {{count}} min · may be stuck",
+      "noUpdateHours": "No update for {{count}} h · may be stuck",
+      "noUpdateDays": "No update for {{count}} d · may be stuck",
       "tool": {
         "command": "Running a command",
         "read": "Reading a file",

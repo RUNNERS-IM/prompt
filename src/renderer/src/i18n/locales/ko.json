@@ -22650,6 +22650,9 @@
       "helpers": "도우미 {{count}}",
       "monitoring": "백그라운드 작업 지켜보는 중",
       "done": "끝남 · 답을 기다림",
+      "noUpdateMinutes": "{{count}}분째 소식 없음 · 멈췄을 수 있음",
+      "noUpdateHours": "{{count}}시간째 소식 없음 · 멈췄을 수 있음",
+      "noUpdateDays": "{{count}}일째 소식 없음 · 멈췄을 수 있음",
       "tool": {
         "command": "명령 실행 중",
         "read": "파일 읽는 중",

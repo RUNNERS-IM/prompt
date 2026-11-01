@@ -239,6 +239,34 @@ describe('promptSessionStatusLine', () => {
     )
   })
 
+  it('says how long a quiet working session has been silent and that it may be stuck', () => {
+    const agent = {
+      ...makeAgent({ state: 'working' }),
+      state: 'unverifiable'
+    } as DashboardAgentRowData
+    const minute = 60_000
+    expect(
+      promptSessionStatusLine(agent, 'unverifiable', 'No update in 34m', 1000 + 34 * minute)
+    ).toBe('No update for 34 min · may be stuck')
+    expect(promptSessionStatusLine(agent, 'unverifiable', '', 1000 + 125 * minute)).toBe(
+      'No update for 2 h · may be stuck'
+    )
+    expect(promptSessionStatusLine(agent, 'unverifiable', '', 1000 + 50 * 60 * minute)).toBe(
+      'No update for 2 d · may be stuck'
+    )
+  })
+
+  it('shows the quiet line in the row, set apart from routine status', () => {
+    const agent = {
+      ...makeAgent({ state: 'working' }),
+      state: 'unverifiable'
+    } as DashboardAgentRowData
+    const container = renderRow(agent, { now: 1000 + 40 * 60_000 })
+    const status = container.querySelector<HTMLElement>('[data-prompt-session-status]')
+    expect(status?.textContent).toBe('No update for 40 min · may be stuck')
+    expect(status?.className).toContain('text-status-warning-text')
+  })
+
   it('keeps attention and other specific lines as they are', () => {
     const agent = makeAgent({ state: 'waiting' })
     expect(promptSessionStatusLine(agent, 'permission', 'Approve Bash?')).toBe('Approve Bash?')

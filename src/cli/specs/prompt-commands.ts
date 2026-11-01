@@ -47,6 +47,19 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     allowedFlags: [...LOCAL_COMMAND_FLAGS]
   }),
   promptSpec({
+    path: ['app', 'update'],
+    summary: 'Download the newest Prompt release, install it, and restart the app',
+    usage: 'prompt app update [--json]',
+    allowedFlags: [...GLOBAL_FLAGS],
+    notes: [
+      'Asks the running Prompt app to check for a new release. When there is one, it downloads it (waiting up to 10 minutes), then quits and restarts on the new version the same way the Install button does. Open terminals and sessions are handled as that button handles them.',
+      'Prints `Prompt is already up to date (<version>).` when there is nothing to install, or `Installing Prompt <version> and restarting.` just before the app quits.',
+      '--json prints result.status (up-to-date or installing) and result.version; installing also has result.fromVersion.',
+      'A failed check or download fails the command with code `update_check_failed` or `update_download_failed`.'
+    ],
+    examples: ['prompt app update', 'ssh office-mac prompt app update --json']
+  }),
+  promptSpec({
     path: ['project', 'list'],
     summary: 'List projects and the hosts each is set up on',
     usage: 'prompt project list [--json]',
