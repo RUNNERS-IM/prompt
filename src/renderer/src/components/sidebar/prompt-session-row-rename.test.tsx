@@ -24,7 +24,10 @@ import {
 
 let root: Root | undefined
 
-function renderBox(rowName: string, customTitle?: string): {
+function renderBox(
+  rowName: string,
+  customTitle?: string
+): {
   input: HTMLInputElement
   done: ReturnType<typeof vi.fn>
 } {
@@ -128,6 +131,46 @@ describe('PromptSessionRowRename', () => {
     act(() => input.blur())
     expect(mocks.setTitle).not.toHaveBeenCalled()
     expect(done).toHaveBeenCalledTimes(1)
+  })
+
+  it('saves and closes on a click elsewhere, even when the box never got focus', () => {
+    const outside = document.createElement('button')
+    document.body.appendChild(outside)
+    const { input, done } = renderBox('[PROMPT] 사이드바', '[PROMPT] 사이드바')
+    type(input, '[PROMPT] 개발')
+    act(() => outside.focus())
+    act(() => {
+      outside.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    })
+    expect(mocks.setTitle).toHaveBeenCalledWith('term-1', '[PROMPT] 개발')
+    expect(done).toHaveBeenCalledTimes(1)
+  })
+
+  it('keeps open on a click inside the box', () => {
+    const { input, done } = renderBox('[PROMPT] 사이드바', '[PROMPT] 사이드바')
+    act(() => {
+      input.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    })
+    expect(done).not.toHaveBeenCalled()
+  })
+
+  it('asks for focus again when the closing menu keeps it on the first frame', () => {
+    const frames: (() => void)[] = []
+    vi.stubGlobal('requestAnimationFrame', (cb: () => void) => frames.push(cb))
+    const { input } = renderBox('[PROMPT] 사이드바', '[PROMPT] 사이드바')
+    const focus = input.focus.bind(input)
+    let refusals = 1
+    input.focus = () => {
+      if (refusals-- <= 0) {
+        focus()
+      }
+    }
+    act(() => frames.shift()!())
+    expect(document.activeElement).not.toBe(input)
+    act(() => frames.shift()!())
+    expect(document.activeElement).toBe(input)
+    expect([input.selectionStart, input.selectionEnd]).toEqual([9, 13])
+    expect(frames).toHaveLength(0)
   })
 
   it('clears the set name when the box is emptied', () => {

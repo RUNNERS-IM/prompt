@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { useAppStore } from '@/store'
 import { translate } from '@/i18n/i18n'
@@ -7,6 +7,8 @@ import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
 import { promptNewSessionLabel } from './prompt-session-row-name'
 
 const PROJECT_PREFIX = /^\[[^\]\n]+\]\s*/
+/** Frames to keep asking for focus while the closing menu may still take it back. */
+const FOCUS_ATTEMPT_FRAMES = 10
 
 /**
  * What a session rename box selects when it opens: the topic after a leading "[PROJECT] ", so
@@ -74,7 +76,12 @@ export function PromptSessionRowRename({
     [onDone, opened, tabId, value]
   )
 
+  const finishRef = useRef(finish)
+  finishRef.current = finish
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
   const setInputElement = useCallback((input: HTMLInputElement | null) => {
+    inputRef.current = input
     if (focusFrameRef.current !== null) {
       cancelAnimationFrame(focusFrameRef.current)
       focusFrameRef.current = null
@@ -82,12 +89,39 @@ export function PromptSessionRowRename({
     if (!input) {
       return
     }
-    // Why: defer past the closing menu's own focus handling, as the tab's rename box does.
-    focusFrameRef.current = requestAnimationFrame(() => {
+    // Why: defer past the closing menu's own focus handling, as the tab's rename box does, and
+    // ask again while that menu still takes focus back. A box that never held focus never blurs,
+    // so it would stay drawn over the row's name.
+    let attemptsLeft = FOCUS_ATTEMPT_FRAMES
+    let selected = false
+    const attempt = (): void => {
       focusFrameRef.current = null
-      input.focus()
-      input.setSelectionRange(...promptRenameTopicRange(input.value))
-    })
+      if (document.activeElement !== input) {
+        input.focus()
+      }
+      if (!selected && document.activeElement === input) {
+        selected = true
+        input.setSelectionRange(...promptRenameTopicRange(input.value))
+      }
+      attemptsLeft -= 1
+      if (attemptsLeft > 0 && (!selected || document.activeElement !== input)) {
+        focusFrameRef.current = requestAnimationFrame(attempt)
+      }
+    }
+    focusFrameRef.current = requestAnimationFrame(attempt)
+  }, [])
+
+  // Clicking anywhere else saves and closes, even when the box never received focus.
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent): void => {
+      const input = inputRef.current
+      if (input && event.target instanceof Node && input.contains(event.target)) {
+        return
+      }
+      finishRef.current(true)
+    }
+    document.addEventListener('pointerdown', onPointerDown, true)
+    return () => document.removeEventListener('pointerdown', onPointerDown, true)
   }, [])
 
   const stop = (event: React.SyntheticEvent): void => event.stopPropagation()
