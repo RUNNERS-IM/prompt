@@ -23,7 +23,8 @@ export type RendererDropLifetime = { signal: AbortSignal; dispose: () => void }
 export type DroppedPathPreparationDeps = {
   platform: NodeJS.Platform
   getCopyEnvironment: () => Promise<DragTempCopyEnvironment>
-  watchRenderer: () => RendererDropLifetime
+  /** Binds one preparation to the window that asked for it; `owner` is that window's sender. */
+  watchRenderer: (owner?: unknown) => RendererDropLifetime
   localChatAttachmentStore?: () => Promise<Pick<
     AgentSessionAttachmentStore,
     'storeFile' | 'importFreshFile'
@@ -41,15 +42,18 @@ export const windowDragTempCopyLane = createDragTempCopyLane()
 export function createDroppedPathPreparationQueue(
   deps: DroppedPathPreparationDeps,
   lane = createDragTempCopyLane()
-): (request: PrepareDroppedPathsRequest) => PreparedDroppedPaths | Promise<PreparedDroppedPaths> {
-  return (request) => {
+): (
+  request: PrepareDroppedPathsRequest,
+  owner?: unknown
+) => PreparedDroppedPaths | Promise<PreparedDroppedPaths> {
+  return (request, owner) => {
     if (!request.paths.some((path) => mayNeedDragTempCopy(path, deps.platform))) {
       return { paths: [...request.paths], failures: [] }
     }
     if (lane.pending >= MAX_PENDING_DRAG_TEMP_COPIES) {
       return failDroppedPathPreparation(request.paths, deps.platform, 'busy')
     }
-    const lifetime = deps.watchRenderer()
+    const lifetime = deps.watchRenderer(owner)
     lane.pending += 1
     const prepared = lane.tail.then(() => {
       lifetime.signal.throwIfAborted()

@@ -7,7 +7,8 @@ import type {
   PrepareDroppedPathsRequest,
   PreparedDroppedPaths
 } from '../../shared/native-file-drop-preparation'
-import { abortWhenRendererGone } from '../ipc/renderer-lifetime-abort'
+import { abortWhenRendererGone, type RendererLifetimeSender } from '../ipc/renderer-lifetime-abort'
+import { isPromptExtraWindowSender } from '../prompt-windows/prompt-window-registry'
 import { getDragTempCopyRoot } from './dragged-temp-file-copy'
 import {
   createDroppedPathPreparationQueue,
@@ -33,7 +34,9 @@ export function registerDroppedPathPreparation(
         sourceTempRoot: await getDarwinUserTempDir(),
         copyRoot: getDragTempCopyRoot(app.getPath('temp'))
       }),
-      watchRenderer: () => abortWhenRendererGone(mainWebContents)
+      // Prompt: an extra window's drop is cancelled when that window goes away, not the main one.
+      watchRenderer: (owner) =>
+        abortWhenRendererGone((owner as RendererLifetimeSender | undefined) ?? mainWebContents)
     },
     windowDragTempCopyLane
   )
@@ -41,7 +44,9 @@ export function registerDroppedPathPreparation(
     event: Electron.IpcMainInvokeEvent,
     args: unknown
   ): Promise<PreparedDroppedPaths> => {
-    if (isWindowGone() || event.sender !== mainWebContents) {
+    // Prompt: extra windows (prompt-windows.ts) share this one handler, so their drops count too.
+    const fromExtraWindow = isPromptExtraWindowSender(event.sender) && !event.sender.isDestroyed()
+    if (!fromExtraWindow && (isWindowGone() || event.sender !== mainWebContents)) {
       throw new Error('Dropped paths must come from the owning window')
     }
     if (!isPrepareDroppedPathsRequest(args)) {
@@ -54,7 +59,7 @@ export function registerDroppedPathPreparation(
         failures: [createRejectedNativeFileDropPayload(validation)]
       })
     }
-    return Promise.resolve(prepare(args))
+    return Promise.resolve(prepare(args, fromExtraWindow ? event.sender : mainWebContents))
   }
   ipcMain.handle(prepareChannel, prepareHandler)
   activePrepareHandler = prepareHandler
