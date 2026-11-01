@@ -2,8 +2,9 @@ import type { Tab } from './tab-types'
 import type { TerminalTab } from './terminal-tab-types'
 import { isMeaningfulOpenCodeTerminalTitle } from './opencode-terminal-title'
 
-// The numbered name a new terminal tab starts with ("Terminal 3"), also as translated UIs show it.
-const DEFAULT_TERMINAL_TAB_NAME_RE = /^(?:terminal|터미널|терминал|ターミナル|終端機|终端) \d+$/i
+// The numbered name a new terminal tab starts with ("Terminal 3"), also as translated UIs show it
+// (ko, ru, ja, zh-TW, zh-CN). Escaped because the orcad server bundle must stay ASCII.
+const DEFAULT_TERMINAL_TAB_NAME_RE = /^(?:terminal|\ud130\ubbf8\ub110|\u0442\u0435\u0440\u043c\u0438\u043d\u0430\u043b|\u30bf\u30fc\u30df\u30ca\u30eb|\u7d42\u7aef\u6a5f|\u7ec8\u7aef) \d+$/i
 
 /** True when a name is only the numbered "Terminal N" a new terminal tab starts with. */
 export function isDefaultTerminalTabName(name: string | null | undefined): boolean {
