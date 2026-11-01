@@ -22,6 +22,7 @@ import { configureLazyArabicShapingJoiner } from './terminal-arabic-shaping-join
 import { TerminalLigaturesAddon } from './terminal-ligatures-addon'
 import { attachInlineImages, detachInlineImages } from './pane-inline-images'
 import { installTerminalImeCandidateAnchor } from './terminal-ime-candidate-anchor'
+import { installTerminalImeSyncOutputHold } from './terminal-ime-sync-output-hold'
 import { cancelPendingTerminalViewportPresents } from './pane-viewport-present'
 import { releaseReplayGuardsForDisposedTerminal } from '@/components/terminal-pane/replay-guard'
 
@@ -85,6 +86,7 @@ export function openTerminal(
   )
 
   pane.compositionHandler = installTerminalImeCandidateAnchor(terminal)
+  pane.imeSyncOutputHoldCleanup = installTerminalImeSyncOutputHold(terminal)
 
   pane.focusClassSyncCleanup = attachDomRendererFocusClassSync(terminal.element)
   pane.domBlockFillCleanup = attachDomBlockFill(terminal)
@@ -174,6 +176,8 @@ export function disposePane(
   pane.paneDragCleanup = null
   pane.focusClassSyncCleanup?.()
   pane.focusClassSyncCleanup = null
+  pane.imeSyncOutputHoldCleanup?.()
+  pane.imeSyncOutputHoldCleanup = null
   pane.domBlockFillCleanup?.()
   pane.domBlockFillCleanup = null
   pane.terminalScrollIntentDisposable?.dispose()
