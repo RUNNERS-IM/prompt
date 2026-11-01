@@ -8,6 +8,8 @@ import TerminalPane from './TerminalPane'
 import type { HiddenTerminalPrewarm } from './terminal-pane-types'
 import { closeTerminalTab } from '../terminal/terminal-tab-actions'
 import { shouldDeferParkedPtyExitTabClose } from './terminal-parked-tab-watchers'
+import { usePromptClaudeStartTab } from '../prompt-claude-start/prompt-claude-start-tabs'
+import { PromptClaudeStartBox } from '../prompt-claude-start/PromptClaudeStartBox'
 
 type TerminalOverlaySlotProps = {
   terminalTabId: string
@@ -56,6 +58,8 @@ export const TerminalOverlaySlot = memo(function TerminalOverlaySlot({
     }
   }, [isVisible, shouldMeasureHiddenStartup])
 
+  // Prompt: a new Claude tab shows its start box and spawns nothing until Start replaces it.
+  const showsClaudeStartBox = usePromptClaudeStartTab(terminalTabId)
   // Drop with the reveal in one render, or a later lease release re-runs resume and steals focus.
   const prewarm = isVisible || activityTerminalPortal !== null ? null : hiddenPrewarm
   const terminalPane = (
@@ -96,6 +100,25 @@ export const TerminalOverlaySlot = memo(function TerminalOverlaySlot({
       }}
     />
   )
+
+  if (showsClaudeStartBox) {
+    return (
+      <RetainedPaneHost
+        groupId={groupId}
+        isVisible={isVisible}
+        dimmed={dimmed}
+        data-terminal-overlay-tab-id={terminalTabId}
+        onFocusOwningGroup={onFocusOwningGroup}
+      >
+        <PromptClaudeStartBox
+          tabId={terminalTabId}
+          worktreeId={worktreeId}
+          worktreePath={startupCwd ?? worktreePath}
+          isActive={isActive && isVisible}
+        />
+      </RetainedPaneHost>
+    )
+  }
 
   if (activityTerminalPortal) {
     return createPortal(

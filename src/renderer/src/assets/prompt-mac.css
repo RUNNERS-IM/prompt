@@ -526,3 +526,8 @@ html.prompt-mac-vibrancy
 html.prompt-mac-vibrancy [data-settings-section] [data-slot='switch'][data-state='checked'] {
   background: var(--prompt-accent);
 }
+
+/* New Claude session start box: its switches use the accent blue like macOS. */
+[data-prompt-claude-start] [data-slot='switch'][data-state='checked'] {
+  background: var(--prompt-accent);
+}

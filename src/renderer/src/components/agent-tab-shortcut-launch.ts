@@ -11,12 +11,20 @@ import {
   type AgentTabLaunchContext
 } from './agent-tab-launch-context'
 import type { TerminalAgentTabShortcut } from './terminal-agent-tab-shortcut'
+import { opensPromptClaudeStartBox } from './prompt-claude-start/prompt-claude-start-route'
+import { openPromptClaudeStartTab } from './prompt-claude-start/prompt-claude-start-tabs'
 
 function launchAgentTab(
   worktreeId: string,
   agent: TuiAgent,
   { groupId, focusIntent }: AgentTabLaunchContext
 ): void {
+  // Prompt: a new Claude session asks for its options first (decision 1A); Start launches it.
+  if (opensPromptClaudeStartBox(worktreeId, agent)) {
+    focusIntent.cancel()
+    openPromptClaudeStartTab(worktreeId, groupId)
+    return
+  }
   const result = launchAgentInNewTab({
     requestId: newAgentLaunchRequestId(),
     focusIntent,

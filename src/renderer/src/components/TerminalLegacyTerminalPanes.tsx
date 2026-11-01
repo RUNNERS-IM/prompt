@@ -4,6 +4,8 @@ import { TerminalRestoringPlaceholder } from './terminal-pane/TerminalRestoringP
 import { findActivityTerminalPortal } from './activity/activity-terminal-portal'
 import { shouldMountBackgroundWorktreeTab } from './terminal/background-terminal-worktree-mount'
 import type { TerminalController } from './use-terminal-controller'
+import { isPromptClaudeStartTab } from './prompt-claude-start/prompt-claude-start-tabs'
+import { PromptClaudeStartBox } from './prompt-claude-start/PromptClaudeStartBox'
 
 export function TerminalLegacyTerminalPanes({
   controller
@@ -71,6 +73,19 @@ export function TerminalLegacyTerminalPanes({
                 ) {
                   // Only startup-held tabs remain visibly deferred; reveal admits other visible tabs in this render.
                   return isActiveTerminalTab ? <TerminalRestoringPlaceholder key={tab.id} /> : null
+                }
+                // Prompt: a new Claude tab shows its start box and spawns nothing until Start.
+                if (isPromptClaudeStartTab(tab.id)) {
+                  return isActiveTerminalTab ? (
+                    <div key={tab.id} className="absolute inset-0">
+                      <PromptClaudeStartBox
+                        tabId={tab.id}
+                        worktreeId={workspace.id}
+                        worktreePath={tab.startupCwd ?? workspace.path}
+                        isActive
+                      />
+                    </div>
+                  ) : null
                 }
                 const activityTerminalPortal = findActivityTerminalPortal(activityTerminalPortals, {
                   worktreeId: workspace.id,
