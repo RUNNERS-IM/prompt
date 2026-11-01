@@ -10,7 +10,7 @@ import { makePtyDataPayload, sendPtyDataToRenderer } from './payload'
 import { getRendererInFlightCharsForPty } from './accounting'
 import { clearFlushTimerIfIdle } from './flush'
 import type { PtyIpcSession } from '../session'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
+import { sendToPromptPtyViewers } from '../../../prompt-windows/prompt-window-registry'
 
 export function rememberSyntheticKillExit(
   session: PtyIpcSession,
@@ -151,7 +151,7 @@ function finalizePtyExitForRenderer(
   }
   const intentionalStops =
     session.runtime?.intentionalPtyStops?.claimExit(payload.id, payload.incarnationId) ?? []
-  promptPtyWebContents(session.mainWindow.webContents, payload.id).send('pty:exit', {
+  sendToPromptPtyViewers(session.mainWindow.webContents, payload.id, 'pty:exit', {
     ...payload,
     hostId: resolvePtyExecutionHost(payload.id),
     ...(intentionalStops.includes('reversible') ? { preserveRendererBinding: true } : {}),
@@ -177,7 +177,7 @@ export function sendPtyExitToRenderer(
 
 export function sendPtySpawnedToRenderer(session: PtyIpcSession, id: string): void {
   if (session.mainWindow && !session.mainWindow.isDestroyed()) {
-    promptPtyWebContents(session.mainWindow.webContents, id).send('pty:spawned', {
+    sendToPromptPtyViewers(session.mainWindow.webContents, id, 'pty:spawned', {
       id,
       incarnationId: ptyIncarnationById.get(id),
       hostId: resolvePtyExecutionHost(id)

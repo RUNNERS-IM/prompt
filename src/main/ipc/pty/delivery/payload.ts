@@ -3,7 +3,7 @@ import type { PtyModelRestoreReason } from '../../../../shared/pty-model-restore
 import { mainDeliveryBreadcrumbs } from './debug'
 import { recordPtyRendererDeliveryPressure } from './accounting'
 import type { PtyDataPayload, PtyIpcSession } from '../session'
-import { promptPtyWebContents } from '../../../prompt-windows/prompt-window-registry'
+import { sendToPromptPtyViewers } from '../../../prompt-windows/prompt-window-registry'
 
 export function makePtyDataPayload(
   id: string,
@@ -48,7 +48,7 @@ export function sendModelRestoreNeededMarker(
     return false
   }
   try {
-    promptPtyWebContents(session.mainWindow.webContents, id).send('pty:modelRestoreNeeded', {
+    sendToPromptPtyViewers(session.mainWindow.webContents, id, 'pty:modelRestoreNeeded', {
       id,
       reason,
       ...(typeof markerSeq === 'number' ? { markerSeq } : {}),
@@ -87,7 +87,13 @@ export function sendPtyDataToRenderer(
   session.rendererInFlightTotalChars += charCount
   recordPtyRendererDeliveryPressure(session, id)
   try {
-    promptPtyWebContents(session.mainWindow.webContents, id).send('pty:data', payload)
+    sendToPromptPtyViewers(
+      session.mainWindow.webContents,
+      id,
+      'pty:data',
+      payload,
+      session.rendererPtyDispatcherReady
+    )
   } catch (error) {
     const current = session.rendererDeliveryAccountingByPty.get(id)
     if (current) {
