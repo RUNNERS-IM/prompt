@@ -12,6 +12,33 @@
       "closeNamed": "Закрыть {{name}}",
       "copyToNewWindow": "Копировать в новое окно",
       "duplicate": "Дублировать"
+    },
+    "claudeStart": {
+      "title": "Новый сеанс Claude",
+      "model": "Модель",
+      "thinking": "Мышление",
+      "default": "По умолчанию",
+      "effortLevel": {
+        "low": "Низкий",
+        "medium": "Средний",
+        "high": "Высокий",
+        "xhigh": "Очень высокий",
+        "max": "Максимум"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Использовать Chrome",
+          "description": "Claude сам управляет браузером"
+        },
+        "skipPermissions": {
+          "label": "Запуск без подтверждений",
+          "description": "Не спрашивать перед каждой командой"
+        }
+      },
+      "start": "Начать заново",
+      "resume": "Продолжить",
+      "showAll": "Показать все…",
+      "launchFailed": "Не удалось запустить Claude с этими параметрами."
     }
   },
   "agentLaunch": {

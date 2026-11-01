@@ -12,6 +12,33 @@
       "closeNamed": "「{{name}}」を閉じる",
       "copyToNewWindow": "新しいウインドウにコピー",
       "duplicate": "複製"
+    },
+    "claudeStart": {
+      "title": "新しい Claude セッション",
+      "model": "モデル",
+      "thinking": "思考",
+      "default": "デフォルト",
+      "effortLevel": {
+        "low": "低",
+        "medium": "中",
+        "high": "高",
+        "xhigh": "より高",
+        "max": "最大"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Chrome を使う",
+          "description": "ブラウザを直接操作します"
+        },
+        "skipPermissions": {
+          "label": "確認なしで実行",
+          "description": "コマンドごとに確認しません"
+        }
+      },
+      "start": "新しく開始",
+      "resume": "続きを開く",
+      "showAll": "すべて表示…",
+      "launchFailed": "この設定で Claude を開始できませんでした。"
     }
   },
   "agentLaunch": {

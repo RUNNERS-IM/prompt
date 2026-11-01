@@ -12,6 +12,33 @@
       "closeNamed": "關閉「{{name}}」",
       "copyToNewWindow": "複製到新視窗",
       "duplicate": "建立副本"
+    },
+    "claudeStart": {
+      "title": "新增 Claude 工作階段",
+      "model": "模型",
+      "thinking": "思考",
+      "default": "預設",
+      "effortLevel": {
+        "low": "低",
+        "medium": "中",
+        "high": "高",
+        "xhigh": "更高",
+        "max": "最高"
+      },
+      "switch": {
+        "chrome": {
+          "label": "使用 Chrome",
+          "description": "直接操作瀏覽器"
+        },
+        "skipPermissions": {
+          "label": "無需確認執行",
+          "description": "不再逐條確認指令"
+        }
+      },
+      "start": "重新開始",
+      "resume": "繼續工作階段",
+      "showAll": "檢視全部…",
+      "launchFailed": "無法使用這些選項啟動 Claude。"
     }
   },
   "agentLaunch": {

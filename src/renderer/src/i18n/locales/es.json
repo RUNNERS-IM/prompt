@@ -12,6 +12,33 @@
       "closeNamed": "Cerrar {{name}}",
       "copyToNewWindow": "Copiar en una ventana nueva",
       "duplicate": "Duplicar"
+    },
+    "claudeStart": {
+      "title": "Nueva sesión de Claude",
+      "model": "Modelo",
+      "thinking": "Razonamiento",
+      "default": "Predeterminado",
+      "effortLevel": {
+        "low": "Bajo",
+        "medium": "Medio",
+        "high": "Alto",
+        "xhigh": "Muy alto",
+        "max": "Máximo"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Usar Chrome",
+          "description": "Claude controla el navegador"
+        },
+        "skipPermissions": {
+          "label": "Ejecutar sin preguntar",
+          "description": "Sin confirmar cada comando"
+        }
+      },
+      "start": "Empezar de nuevo",
+      "resume": "Reanudar",
+      "showAll": "Ver todo…",
+      "launchFailed": "No se pudo iniciar Claude con estas opciones."
     }
   },
   "agentLaunch": {

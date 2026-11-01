@@ -22670,6 +22670,33 @@
       "mainWindowSuffix": "(메인)",
       "rememberTitle": "열어 둔 창 기억하기",
       "rememberDescription": "Prompt 를 켤 때 끌 때 열려 있던 창을 탭·크기·위치까지 그대로 다시 엽니다."
+    },
+    "claudeStart": {
+      "title": "새 Claude 세션",
+      "model": "모델",
+      "thinking": "생각",
+      "default": "기본",
+      "effortLevel": {
+        "low": "낮게",
+        "medium": "보통",
+        "high": "깊게",
+        "xhigh": "더 깊게",
+        "max": "최대"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Chrome 쓰기",
+          "description": "브라우저를 직접 다룹니다"
+        },
+        "skipPermissions": {
+          "label": "확인 없이 실행",
+          "description": "명령마다 묻지 않습니다"
+        }
+      },
+      "start": "새로 시작",
+      "resume": "이어 열기",
+      "showAll": "모두 보기…",
+      "launchFailed": "이 옵션으로 Claude 를 시작하지 못했습니다."
     }
   }
 }

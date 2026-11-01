@@ -23249,6 +23249,33 @@
       "mainWindowSuffix": "(main)",
       "rememberTitle": "Remember Open Windows",
       "rememberDescription": "Reopen every window with its tabs, size and position when Prompt starts."
+    },
+    "claudeStart": {
+      "title": "New Claude Session",
+      "model": "Model",
+      "thinking": "Thinking",
+      "default": "Default",
+      "effortLevel": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "xhigh": "Extra high",
+        "max": "Max"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Use Chrome",
+          "description": "Lets Claude drive the browser"
+        },
+        "skipPermissions": {
+          "label": "Skip permissions",
+          "description": "Don't ask before each command"
+        }
+      },
+      "start": "Start New",
+      "resume": "Resume",
+      "showAll": "Show all…",
+      "launchFailed": "Could not start Claude with these options."
     }
   }
 }

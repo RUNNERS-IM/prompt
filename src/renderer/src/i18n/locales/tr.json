@@ -12,6 +12,33 @@
       "closeNamed": "{{name}} kapat",
       "copyToNewWindow": "Yeni pencereye kopyala",
       "duplicate": "Çoğalt"
+    },
+    "claudeStart": {
+      "title": "Yeni Claude oturumu",
+      "model": "Model",
+      "thinking": "Düşünme",
+      "default": "Varsayılan",
+      "effortLevel": {
+        "low": "Düşük",
+        "medium": "Orta",
+        "high": "Yüksek",
+        "xhigh": "Çok yüksek",
+        "max": "Maksimum"
+      },
+      "switch": {
+        "chrome": {
+          "label": "Chrome'u kullan",
+          "description": "Tarayıcıyı doğrudan yönetir"
+        },
+        "skipPermissions": {
+          "label": "Sormadan çalıştır",
+          "description": "Her komut için onay istemez"
+        }
+      },
+      "start": "Yeni başlat",
+      "resume": "Devam et",
+      "showAll": "Tümünü göster…",
+      "launchFailed": "Claude bu seçeneklerle başlatılamadı."
     }
   },
   "agentLaunch": {

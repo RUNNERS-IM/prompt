@@ -12,6 +12,33 @@
       "closeNamed": "关闭“{{name}}”",
       "copyToNewWindow": "复制到新窗口",
       "duplicate": "创建副本"
+    },
+    "claudeStart": {
+      "title": "新建 Claude 会话",
+      "model": "模型",
+      "thinking": "思考",
+      "default": "默认",
+      "effortLevel": {
+        "low": "低",
+        "medium": "中",
+        "high": "高",
+        "xhigh": "更高",
+        "max": "最高"
+      },
+      "switch": {
+        "chrome": {
+          "label": "使用 Chrome",
+          "description": "直接操作浏览器"
+        },
+        "skipPermissions": {
+          "label": "无需确认运行",
+          "description": "不再逐条确认命令"
+        }
+      },
+      "start": "新建开始",
+      "resume": "继续会话",
+      "showAll": "查看全部…",
+      "launchFailed": "无法使用这些选项启动 Claude。"
     }
   },
   "agentLaunch": {
