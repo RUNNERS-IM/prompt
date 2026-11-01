@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TEST_FILES_JSON: '["tests/e2e/prompt-shell-workspace-move.spec.ts","tests/e2e/prompt-claude-start.spec.ts","tests/e2e/prompt-sidebar-rename.spec.ts","tests/e2e/tab-rename.spec.ts"]'
+  TEST_FILES_JSON: '["tests/e2e/prompt-shell-workspace-move.spec.ts","tests/e2e/prompt-claude-start.spec.ts","tests/e2e/prompt-sidebar-rename.spec.ts","tests/e2e/tab-rename.spec.ts","tests/e2e/golden-quit-relaunch-session.spec.ts","tests/e2e/daemon-live-session-preservation.spec.ts","tests/e2e/golden-tab-bar-agent-launch.spec.ts"]'
 
 jobs:
   build:
