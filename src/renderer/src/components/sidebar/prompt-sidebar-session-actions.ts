@@ -1,6 +1,5 @@
 import { useAppStore } from '@/store'
 import { activateAndRevealWorktree } from '@/lib/worktree-activation'
-import { activateTabAndFocusPane } from '@/lib/activate-tab-and-focus-pane'
 import { dispatchWorkspaceTabCommand } from '@/lib/workspace-tab-commands'
 import { focusTerminalTabSurface } from '@/lib/focus-terminal-tab-surface'
 import { createBrowserUuid } from '@/lib/browser-uuid'
@@ -9,7 +8,6 @@ import { createWebRuntimeSessionTerminal } from '@/runtime/web-runtime-terminal-
 import { isWebRuntimeSessionActive } from '@/runtime/web-runtime-session-environment'
 import { resolveGroupTabFromVisibleId } from '@/components/tab-group/tab-group-visible-id'
 import { closeTerminalTab } from '@/components/terminal/terminal-tab-actions'
-import { requestTerminalTabRename } from '@/components/tab-bar/terminal-tab-rename-request'
 import { resolveTerminalAgentTabShortcut } from '@/components/terminal-agent-tab-shortcut'
 import { launchAgentTabShortcut } from '@/components/agent-tab-shortcut-launch'
 import { getActiveWorktreeRuntimeEnvironmentId } from '@/components/terminal-workspace-model'
@@ -90,15 +88,6 @@ export function closePromptSession(worktreeId: string, terminalTabId: string): v
   }
   // Same fallback as the tab strip: a just-launched tab may not have its unified entry yet.
   closeTerminalTab(terminalTabId)
-}
-
-/** Show the session's tab and open its inline rename, as the tab menu's rename does. */
-export function renamePromptSession(worktreeId: string, terminalTabId: string): void {
-  activateAndRevealWorktree(worktreeId)
-  const leafId = useAppStore.getState().terminalLayoutsByTabId?.[terminalTabId]?.activeLeafId
-  activateTabAndFocusPane(terminalTabId, leafId ?? null)
-  // The tab mounts its rename field on the next frame when it was not on screen yet.
-  requestAnimationFrame(() => requestTerminalTabRename(terminalTabId))
 }
 
 export function setPromptSessionColor(terminalTabId: string, color: string | null): void {

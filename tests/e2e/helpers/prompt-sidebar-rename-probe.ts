@@ -24,6 +24,8 @@ export async function installRenameProbe(page: Page): Promise<void> {
     }
     const holder = window as unknown as { __sidebarRenameProbe?: Probe }
     holder.__sidebarRenameProbe?.dispose()
+    // The tab strip's rename field, or the one laid over a sidebar session row.
+    const RENAME_FIELDS = '[data-tab-rename-input="true"], [data-prompt-session-rename]'
     const describe = (node: EventTarget | null): string => {
       if (!(node instanceof Element)) {
         return node === null ? 'null' : String((node as Node).nodeName ?? node)
@@ -33,6 +35,7 @@ export async function installRenameProbe(page: Page): Promise<void> {
         'data-testid',
         'data-slot',
         'data-tab-rename-input',
+        'data-prompt-session-rename',
         'role',
         'aria-label',
         'aria-hidden'
@@ -93,8 +96,7 @@ export async function installRenameProbe(page: Page): Promise<void> {
       log(`focus-terminal-pane ${JSON.stringify((event as CustomEvent).detail)}`)
     const isRenameInput = (node: Node): boolean =>
       node instanceof Element &&
-      (node.matches('[data-tab-rename-input="true"]') ||
-        node.querySelector('[data-tab-rename-input="true"]') !== null)
+      (node.matches(RENAME_FIELDS) || node.querySelector(RENAME_FIELDS) !== null)
     const isMenu = (node: Node): boolean =>
       node instanceof Element &&
       (node.matches('[role="menu"]') || node.querySelector('[role="menu"]') !== null)
@@ -173,7 +175,9 @@ export function readRenameProbe(page: Page): Promise<RenameProbeReport> {
     return {
       events: [...(probe?.events ?? [])],
       inputEverMounted: probe?.inputEverMounted ?? false,
-      inputMountedNow: document.querySelector('[data-tab-rename-input="true"]') !== null,
+      inputMountedNow: document.querySelector(
+        '[data-tab-rename-input="true"], [data-prompt-session-rename]'
+      ) !== null,
       activeElement: describeActive(),
       documentHasFocus: document.hasFocus()
     }

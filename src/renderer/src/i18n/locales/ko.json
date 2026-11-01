@@ -22574,6 +22574,7 @@
       "tabColor": "탭 색",
       "close": "세션 닫기",
       "closeNamed": "'{{name}}' 닫기",
+      "renameNamed": "'{{name}}' 이름 바꾸기",
       "copyToNewWindow": "복사해서 새 창에서 열기",
       "duplicate": "복제"
     },
