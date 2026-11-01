@@ -1,3 +1,5 @@
+import { realpathSync } from 'node:fs'
+import { normalizeRuntimePathForComparison } from '../../../shared/cross-platform-path'
 import { detectProjectLaunchContext } from '../../preflight/workspace-agent-detection'
 import { OrcaRuntimeWithResolveBrowserNetworkExecutionHostForWorktree } from '../terminal/launch/terminal-workspace-scope'
 import type { ResolvedWorktree } from '../runtime-worktree-path-identity'
@@ -56,6 +58,24 @@ export abstract class RuntimeWorkspaceSelectors extends OrcaRuntimeWithResolveBr
     return this.matchWorktreeSelector(selector, worktrees, explicitWorktreeId)
   }
 
+  /** A path typed through a symlink (or a stored one that was) names the same local checkout. */
+  private localWorktreesAtSameRealPath(
+    worktrees: ResolvedWorktree[],
+    path: string
+  ): ResolvedWorktree[] {
+    const target = realpathKeySync(path)
+    if (!target) {
+      return []
+    }
+    return worktrees.filter((worktree) => {
+      const repo = this.store?.getRepo(worktree.repoId)
+      if (repo && getRepoRoutingConnectionId(repo)) {
+        return false
+      }
+      return realpathKeySync(worktree.path) === target
+    })
+  }
+
   protected matchWorktreeSelector(
     selector: string,
     worktrees: ResolvedWorktree[],
@@ -94,6 +114,9 @@ export abstract class RuntimeWorkspaceSelectors extends OrcaRuntimeWithResolveBr
       candidates = worktrees.filter((worktree) =>
         runtimePathsEqual(worktree.path, selector.slice(5))
       )
+      if (candidates.length === 0) {
+        candidates = this.localWorktreesAtSameRealPath(worktrees, selector.slice(5))
+      }
       if (candidates.length > 1) {
         const hostIds = new Set(
           candidates.map((worktree) => {
@@ -257,5 +280,13 @@ export abstract class RuntimeWorkspaceSelectors extends OrcaRuntimeWithResolveBr
       displayName: merged.displayName,
       comment: merged.comment
     }
+  }
+}
+
+function realpathKeySync(path: string): string | null {
+  try {
+    return normalizeRuntimePathForComparison(realpathSync(path))
+  } catch {
+    return null
   }
 }
