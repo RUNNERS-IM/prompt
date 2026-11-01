@@ -42,6 +42,8 @@ import {
 let boundSession: PtyIpcSession | null = null
 /** Shared tabs: per pty, each viewer's acknowledgement offset (see above). */
 const ackOffsets = new Map<string, Map<number, number>>()
+/** The main window's webContents id, kept for the reset that runs once it is destroyed. */
+let mainWebContentsId: number | null = null
 
 function onViewersChanged(ptyId: string, added: number | null): void {
   const viewers = new Set(promptPtyViewerIds(ptyId))
@@ -236,9 +238,13 @@ export function keepPromptExtraWindowDelivery(): () => void {
   // window still shows keep their delivery state.
   const shared = isPromptSharedTabs()
   if (shared) {
-    const mainId = session.mainWindow?.webContents.id
-    if (typeof mainId === 'number') {
-      removePromptPtyViewerWindow(mainId)
+    // On quit this runs from the main webContents' 'destroyed' event, when reading the window throws.
+    const main = session.mainWindow
+    if (main && !main.isDestroyed() && !main.webContents.isDestroyed()) {
+      mainWebContentsId = main.webContents.id
+    }
+    if (mainWebContentsId !== null) {
+      removePromptPtyViewerWindow(mainWebContentsId)
     }
   }
   const shownElsewhere = (id: string): boolean =>
@@ -304,4 +310,5 @@ export function keepPromptExtraWindowDelivery(): () => void {
 export function resetPromptPtyWindowDeliveryForTests(): void {
   boundSession = null
   ackOffsets.clear()
+  mainWebContentsId = null
 }
