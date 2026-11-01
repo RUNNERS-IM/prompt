@@ -3,8 +3,13 @@ import { formatAgentTypeLabel } from '@/lib/agent-status'
 import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { translate } from '@/i18n/i18n'
+import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
 
-/** The name its terminal tab shows: a set title (create --title, rename), the agent session's title, or the live title without the agent glyph. */
+/**
+ * The name its terminal tab shows: a set title (create --title, rename), the agent session's title,
+ * or the live title without the agent glyph. A set title that is only the starting "Terminal N"
+ * counts as none, as on the tab strip.
+ */
 export function promptTerminalTabName(
   tab: Pick<TerminalTab, 'title' | 'customTitle' | 'aiVaultTitle'> | undefined
 ): string {
@@ -12,7 +17,7 @@ export function promptTerminalTabName(
     return ''
   }
   return (
-    tab.customTitle?.trim() ||
+    terminalTabSetName(tab) ||
     tab.aiVaultTitle?.title.trim() ||
     stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
   )
@@ -28,14 +33,14 @@ const NUMBERED_TERMINAL_TITLE = /^terminal \d+$/i
 /**
  * True when a session's tab name is only a stand-in: empty, the numbered "Terminal N" a new tab
  * starts with, or the bare program name ("Claude Code") the agent shows before any conversation.
- * A name the person set is never a stand-in.
+ * A name the person set is never a stand-in, unless it is only the starting "Terminal N".
  */
 export function isPromptPlaceholderSessionName(
   name: string,
   tab: Pick<TerminalTab, 'customTitle' | 'defaultTitle'>,
   agentType: string | undefined
 ): boolean {
-  if (tab.customTitle?.trim()) {
+  if (terminalTabSetName(tab)) {
     return false
   }
   const value = name.trim().toLowerCase()

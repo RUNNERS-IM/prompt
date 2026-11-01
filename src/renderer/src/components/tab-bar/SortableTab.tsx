@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { X, Minimize2, Pin } from 'lucide-react'
 import { stripLeadingAgentTitleDecoration } from '../../../../shared/agent-title-decoration'
+import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
 import { getAgentLabel } from '@/lib/agent-catalog'
 import { basename } from '@/lib/path'
 import { Input } from '@/components/ui/input'
@@ -131,9 +132,11 @@ export default function SortableTab({
   // Why: shellOverride is stamped at create time, so changing the default shell later won't repaint existing tabs.
   const shellForIcon = tab.shellOverride
 
+  // A set name that is only the starting "Terminal N" counts as none, so a later name shows.
+  const setName = terminalTabSetName(tab) || null
   // Why: with a provider icon shown, strip the agent's own leading glyph so the tab doesn't show two icons for one agent.
   const displayTitle =
-    tab.customTitle ?? (tabAgent ? stripLeadingAgentTitleDecoration(tab.title) : tab.title)
+    setName ?? (tabAgent ? stripLeadingAgentTitleDecoration(tab.title) : tab.title)
 
   const { attributes, listeners, setNodeRef } = useSortable({
     id: tab.id,
@@ -160,7 +163,7 @@ export default function SortableTab({
   } = useSortableTabRename({
     tabId: tab.id,
     title: tab.title,
-    customTitle: tab.customTitle,
+    customTitle: setName,
     onSetCustomTitle
   })
   const { renameOwnerRef, onRenameKeyDown } = useTabRenameReturnFocus({
@@ -189,7 +192,7 @@ export default function SortableTab({
     disabled: isEditing
   })
   const slotProps = useTabStripSlotProps(tab.id, isActive)
-  const tabTitle = tab.customTitle ?? tab.title
+  const tabTitle = setName ?? tab.title
   const tabRoot = (
     <div
       ref={setNodeRef}

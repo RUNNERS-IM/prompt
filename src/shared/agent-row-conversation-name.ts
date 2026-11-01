@@ -6,6 +6,7 @@ import { formatAgentTypeLabel } from './agent-type-label'
 import { isJcodeIdentityTerminalTitle } from './jcode-terminal-title'
 import { isMeaningfulOpenCodeTerminalTitle } from './opencode-terminal-title'
 import { SYNTHETIC_AGENT_TITLE_PROFILES } from './synthetic-agent-title'
+import { terminalTabSetName } from './tab-title-resolution'
 import type { TerminalTab } from './terminal-tab-types'
 
 export type ConversationNameTab = Pick<
@@ -109,7 +110,7 @@ export function getAgentRowConversationName(
   paneLiveTitle?: string | null,
   providerSessionId?: string
 ): string | null {
-  const customTitle = tab.customTitle?.trim()
+  const customTitle = terminalTabSetName(tab)
   if (customTitle) {
     return customTitle
   }

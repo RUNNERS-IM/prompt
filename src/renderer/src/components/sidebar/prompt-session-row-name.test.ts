@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest'
 import {
   isPromptPlaceholderSessionName,
   promptNewSessionLabel,
-  promptSessionTabName
+  promptSessionTabName,
+  promptTerminalTabName
 } from './prompt-session-row-name'
 
 const tab = (fields: Record<string, unknown>) => ({
@@ -28,10 +29,30 @@ describe('promptSessionTabName', () => {
     )
   })
 
-  it('always keeps a name the person set, even one that looks like a stand-in', () => {
-    expect(promptSessionTabName(tab({ title: 'x', customTitle: 'Terminal 3' }), 'claude')).toBe(
-      'Terminal 3'
+  it('keeps a name the person set', () => {
+    expect(promptSessionTabName(tab({ title: 'x', customTitle: 'my tab' }), 'claude')).toBe(
+      'my tab'
     )
+  })
+
+  it('shows the /rename title when the set name is only the starting name', () => {
+    const renamed = { sessionId: 's', agent: 'claude', title: '[SENSE] AI 홈' }
+    const restored = tab({
+      title: '[SENSE] AI 홈',
+      customTitle: 'Terminal 1',
+      defaultTitle: 'Terminal 1',
+      aiVaultTitle: renamed
+    })
+    expect(promptTerminalTabName(restored)).toBe('[SENSE] AI 홈')
+    expect(promptSessionTabName(restored, 'claude')).toBe('[SENSE] AI 홈')
+    // A starting name of another number, or as a translated UI shows it, is no set name either.
+    expect(promptTerminalTabName(tab({ title: 'Fix it', customTitle: 'Terminal 7' }))).toBe(
+      'Fix it'
+    )
+    expect(promptTerminalTabName(tab({ title: 'Fix it', customTitle: '터미널 2' }))).toBe('Fix it')
+    expect(
+      promptSessionTabName(tab({ title: 'Terminal 3', customTitle: 'Terminal 3' }), 'claude')
+    ).toBe('')
   })
 
   it('does not treat a program name as a stand-in when the agent is unknown', () => {
