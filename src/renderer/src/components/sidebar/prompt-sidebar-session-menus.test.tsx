@@ -12,7 +12,7 @@ const mocks = vi.hoisted(() => ({
   color: vi.fn(),
   startClaude: vi.fn(),
   startTerminal: vi.fn(),
-  openCopy: vi.fn()
+  duplicate: vi.fn()
 }))
 
 vi.mock('@/store', () => ({
@@ -74,7 +74,7 @@ vi.mock('@/components/ui/dropdown-menu', () => ({
   DropdownMenuTrigger: ({ children }: { children?: ReactNode }) => children
 }))
 vi.mock('@/lib/prompt-windows', () => ({
-  openPromptSessionCopyWindow: mocks.openCopy
+  duplicatePromptSession: mocks.duplicate
 }))
 vi.mock('./prompt-sidebar-session-actions', () => ({
   closePromptSession: mocks.close,
@@ -155,7 +155,7 @@ describe('PromptSessionRowMenu', () => {
     expect(mocks.close).toHaveBeenCalledWith('wt-1', 'term-1')
   })
 
-  it('offers a copy in a new window only when it has the copy command', () => {
+  it('offers Duplicate below the source tab only when it has the copy command', () => {
     const command = 'claude --resume fb734d47-9c9f-462d-a948-faab45a52682 --fork-session'
     const container = render(
       <PromptSessionRowMenu
@@ -166,9 +166,9 @@ describe('PromptSessionRowMenu', () => {
         <div>row</div>
       </PromptSessionRowMenu>
     )
-    expect(items(container).at(-2)).toBe('Copy to New Window')
-    click(container, 'Copy to New Window')
-    expect(mocks.openCopy).toHaveBeenCalledWith('wt-1', command)
+    expect(items(container).at(-2)).toBe('Duplicate')
+    click(container, 'Duplicate')
+    expect(mocks.duplicate).toHaveBeenCalledWith('wt-1', 'term-1', command)
     act(() => root?.unmount())
     root = undefined
     const plain = render(
@@ -176,7 +176,7 @@ describe('PromptSessionRowMenu', () => {
         <div>row</div>
       </PromptSessionRowMenu>
     )
-    expect(items(plain)).not.toContain('Copy to New Window')
+    expect(items(plain)).not.toContain('Duplicate')
   })
 
   it('puts the hover × over the time spot, labeled by the row name', () => {
@@ -225,16 +225,14 @@ describe('PromptSessionRowMenu', () => {
     // The row sits 400px down the window; the pointer lands 12px right and 9px down inside it.
     wrapper.getBoundingClientRect = () => new DOMRect(20, 400, 240, 36)
     act(() => {
-      container
-        .querySelector('[data-row]')!
-        .dispatchEvent(
-          new MouseEvent('contextmenu', {
-            bubbles: true,
-            cancelable: true,
-            clientX: 32,
-            clientY: 409
-          })
-        )
+      container.querySelector('[data-row]')!.dispatchEvent(
+        new MouseEvent('contextmenu', {
+          bubbles: true,
+          cancelable: true,
+          clientX: 32,
+          clientY: 409
+        })
+      )
     })
     const trigger = wrapper.querySelector<HTMLElement>('button[aria-hidden]')!
     expect(trigger.className).toContain('absolute')

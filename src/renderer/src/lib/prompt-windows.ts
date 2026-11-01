@@ -47,9 +47,16 @@ export function movePromptTabToWindow(tabId: string, target: string): void {
   void window.api?.promptWindows?.moveTab(tabId, target)
 }
 
-/** Copy of a Claude session in a new window (`command` from promptClaudeSessionCopyCommand). */
-export function openPromptSessionCopyWindow(worktreeId: string, command: string): void {
-  void window.api?.promptWindows?.openSessionCopy(worktreeId, command)
+/** Puts `tabId` right after `afterTabId` in the workspace's tab order (and so its sidebar rows). */
+function placeTabAfter(worktreeId: string, tabId: string, afterTabId: string): void {
+  const store = useAppStore.getState()
+  const order = (store.tabBarOrderByWorktree[worktreeId] ?? []).filter((id) => id !== tabId)
+  const index = order.indexOf(afterTabId)
+  if (index === -1) {
+    return
+  }
+  order.splice(index + 1, 0, tabId)
+  store.setTabBarOrder(worktreeId, order)
 }
 
 /** A new terminal tab in this window that runs `command` once its shell is ready. */
@@ -101,6 +108,25 @@ export function openPromptSessionCopyInWorkspace(
     return null
   }
   const tabId = startTabWithCommand(worktreeId, command)
+  showTab(worktreeId, tabId)
+  return tabId
+}
+
+/**
+ * "Duplicate" on a session row (decision 1A): the copy starts in a new tab of the same workspace,
+ * placed right after the source tab so its row sits right below the original. Null when `command`
+ * is not one promptClaudeSessionCopyCommand built.
+ */
+export function duplicatePromptSession(
+  worktreeId: string,
+  sourceTabId: string,
+  command: string
+): string | null {
+  if (!isPromptClaudeSessionCopyCommand(command)) {
+    return null
+  }
+  const tabId = startTabWithCommand(worktreeId, command)
+  placeTabAfter(worktreeId, tabId, sourceTabId)
   showTab(worktreeId, tabId)
   return tabId
 }

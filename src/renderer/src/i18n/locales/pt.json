@@ -10,7 +10,6 @@
       "tabColor": "Cor da aba",
       "close": "Fechar sessão",
       "closeNamed": "Fechar {{name}}",
-      "copyToNewWindow": "Copiar para nova janela",
       "duplicate": "Duplicar"
     },
     "claudeStart": {

@@ -20,7 +20,7 @@ import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import { TAB_COLORS } from '@/components/tab-bar/tab-colors'
 import { PromptClaudeModelSubmenu } from '@/components/prompt-claude-model-menu'
 import { WORKTREE_CONTEXT_MENU_SCOPE_ATTR } from './worktree-context-menu-policy'
-import { openPromptSessionCopyWindow } from '@/lib/prompt-windows'
+import { duplicatePromptSession } from '@/lib/prompt-windows'
 import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-windows'
 import type { DashboardAgentRow } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
@@ -198,10 +198,10 @@ export function PromptSessionRowMenu({
           {copyCommand ? (
             <>
               <DropdownMenuItem
-                onSelect={() => openPromptSessionCopyWindow(worktreeId, copyCommand)}
+                onSelect={() => duplicatePromptSession(worktreeId, tabId, copyCommand)}
               >
                 <Copy className="size-3.5" />
-                {translate('prompt.sidebarSessions.copyToNewWindow', 'Copy to New Window')}
+                {translate('prompt.sidebarSessions.duplicate', 'Duplicate')}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
             </>

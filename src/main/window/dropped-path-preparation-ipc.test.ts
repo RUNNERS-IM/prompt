@@ -38,6 +38,10 @@ vi.mock('./darwin-user-temp-dir', () => ({
 }))
 
 import { registerDroppedPathPreparation } from './dropped-path-preparation-ipc'
+import {
+  registerPromptExtraWindow,
+  unregisterPromptExtraWindow
+} from '../prompt-windows/prompt-window-registry'
 
 const DRAG_TEMP = join('/', 'var', 'T', 'TemporaryItems', 'NSIRD_screencaptureui_1', 'Shot.png')
 const COPY = join('/', 'var', 'T', 'orca-drops-501', 'orca-drop-abc123', 'Shot.png')
@@ -129,6 +133,30 @@ describe('registerDroppedPathPreparation', () => {
     close()
     expect(ipcHandlers.has('fs:prepareDroppedPaths')).toBe(false)
     expect(() => handler({ sender: webContents }, request)).toThrow('owning window')
+  })
+
+  it('prepares drops from a Prompt extra window and still refuses unknown senders', async () => {
+    const { window } = createWindow()
+    registerDroppedPathPreparation(window)
+    const handler = ipcHandlers.get('fs:prepareDroppedPaths')!
+    const extra = { id: 9001, isDestroyed: () => false, send: vi.fn() }
+    registerPromptExtraWindow('w2', extra)
+    try {
+      await expect(
+        handler({ sender: extra }, { paths: [FINDER], consumer: 'agent' })
+      ).resolves.toEqual({ paths: [FINDER], failures: [] })
+      expect(() =>
+        handler({ sender: { id: 9002, isDestroyed: () => false } }, {
+          paths: [FINDER],
+          consumer: 'agent'
+        })
+      ).toThrow('owning window')
+    } finally {
+      unregisterPromptExtraWindow('w2', extra.id)
+    }
+    expect(() => handler({ sender: extra }, { paths: [FINDER], consumer: 'agent' })).toThrow(
+      'owning window'
+    )
   })
 
   it('enforces both request caps before preparing any paths', async () => {
