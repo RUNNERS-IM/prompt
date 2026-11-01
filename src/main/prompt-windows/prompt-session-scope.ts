@@ -8,6 +8,9 @@
  * - session save: the window's own tabs replace their stored copies; other windows' tabs stay
  *   (see `promptScopeSessionWrite`). A tab the window did not have yet is new and becomes its own.
  *
+ * With shared tabs (the default) terminal tabs are in every window instead and their records are
+ * merged per save (prompt-session-shared.ts); editor and browser tabs still work as above.
+ *
  * Which window owns a tab comes from the tab owner table (prompt-window-registry.ts). Records are
  * matched to tabs by their key: per-workspace lists by each entry's entity id (terminal tab id,
  * editor file path, browser workspace id), per-tab maps by tab id, per-pane maps by the tab id
@@ -40,6 +43,8 @@ import {
   type Session
 } from './prompt-session-fields'
 import { promptFixSharedGroups, promptSessionView } from './prompt-session-view'
+import { isPromptSharedTabs } from './prompt-pty-viewers'
+import { promptSharedScopeWrite, promptSharedSessionView } from './prompt-session-shared'
 
 export { PROMPT_WINDOW_VIEW_FIELDS } from './prompt-session-fields'
 export type { PromptSessionOwnership, PromptWindowView } from './prompt-session-fields'
@@ -213,9 +218,14 @@ function ownershipFor(sender: { id: number } | null | undefined): PromptSessionO
 /** `session:get`: the stored session as the asking window sees it. */
 export function promptWindowSessionView<T extends object>(
   sender: { id: number } | null | undefined,
-  stored: T
+  stored: T,
+  hostId?: string | null
 ): T {
   const windowKey = promptWindowKeyOfSender(sender)
+  if (isPromptSharedTabs()) {
+    const view = promptWindowView(windowKey)
+    return promptSharedSessionView(stored, windowKey, hostId, promptTabOwnerKey, view)
+  }
   if (windowKey === MAIN && promptExtraWindowCount() === 0 && promptTabsOwnedByAny() === 0) {
     return stored
   }
@@ -231,13 +241,24 @@ export function scopePromptWindowSessionWrite<T extends object>(
   sender: { id: number } | null | undefined,
   incoming: T,
   stored: object | undefined,
-  full: boolean
+  full: boolean,
+  hostId?: string | null
 ): T {
   const ctx = ownershipFor(sender)
-  if (ctx.windowKey === MAIN && promptExtraWindowCount() === 0 && promptTabsOwnedByAny() === 0) {
+  const shared = isPromptSharedTabs()
+  if (
+    !shared &&
+    ctx.windowKey === MAIN &&
+    promptExtraWindowCount() === 0 &&
+    promptTabsOwnedByAny() === 0
+  ) {
     return incoming
   }
-  const { session, view } = promptScopeSessionWrite(incoming, stored, ctx, full)
+  const { session, view } = shared
+    ? promptSharedScopeWrite(incoming, stored, ctx, full, hostId, (inc, scopedCtx) =>
+        promptScopeSessionWrite(inc, stored, scopedCtx, full)
+      )
+    : promptScopeSessionWrite(incoming, stored, ctx, full)
   if (view) {
     setPromptWindowView(ctx.windowKey, {
       ...(full ? {} : promptWindowView(ctx.windowKey)),
