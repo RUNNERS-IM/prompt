@@ -5,6 +5,20 @@ import { getDashboardPopoutWindow } from '../window/dashboard-popout-window'
 import { stopSyntheticTitleSpinnerTimer } from './synthetic-title-runtime'
 import { mainProcessState as state } from './main-process-state'
 import { pickHostTurnEnd } from '../../shared/agent-status-types'
+import { isPromptSharedTabs } from '../prompt-windows/prompt-pty-viewers'
+import { promptExtraWindowList } from '../prompt-windows/prompt-window-registry'
+
+/** Prompt shared tabs: every window shows every terminal, so each gets its agents' status too. */
+function sendToExtraWindows(channel: string, payload: unknown): void {
+  if (!isPromptSharedTabs()) {
+    return
+  }
+  for (const win of promptExtraWindowList<BrowserWindow>()) {
+    if (!win.webContents.isDestroyed()) {
+      win.webContents.send(channel, payload)
+    }
+  }
+}
 
 export type MainWindowAgentStatusOptions = {
   window: BrowserWindow
@@ -47,7 +61,7 @@ export function installMainWindowAgentStatusListeners(options: MainWindowAgentSt
       }
       if (providerSessionOnly) {
         // Idle Pi session_start only refreshes resume identity; skip titles, telemetry and status UI.
-        state.mainWindow?.webContents.send('agentStatus:set', {
+        const sessionOnly = {
           ...payload,
           paneKey,
           ...(launchToken ? { launchToken } : {}),
@@ -60,7 +74,9 @@ export function installMainWindowAgentStatusListeners(options: MainWindowAgentSt
           ...(providerSession ? { providerSession } : {}),
           ...(observation ? { observation } : {}),
           providerSessionOnly: true
-        })
+        }
+        state.mainWindow?.webContents.send('agentStatus:set', sessionOnly)
+        sendToExtraWindows('agentStatus:set', sessionOnly)
         return
       }
       const runtime = state.runtime
@@ -95,6 +111,7 @@ export function installMainWindowAgentStatusListeners(options: MainWindowAgentSt
       }
       state.mainWindow?.webContents.send('agentStatus:set', statusEvent)
       getDashboardPopoutWindow()?.webContents.send('agentStatus:set', statusEvent)
+      sendToExtraWindows('agentStatus:set', statusEvent)
       // A facet-only republish (progress tick) is not a state the agent entered.
       if (programStatusOnly !== true) {
         options.onRecordAgentState(payload.agentType ?? 'unknown', payload.state)
@@ -107,6 +124,7 @@ export function installMainWindowAgentStatusListeners(options: MainWindowAgentSt
     }
     state.mainWindow?.webContents.send('agentStatus:clear', clear)
     getDashboardPopoutWindow()?.webContents.send('agentStatus:clear', clear)
+    sendToExtraWindows('agentStatus:clear', clear)
   })
   setMigrationUnsupportedPtyListener((event) => {
     if (state.mainWindow?.isDestroyed()) {
@@ -114,10 +132,11 @@ export function installMainWindowAgentStatusListeners(options: MainWindowAgentSt
     }
     if (event.type === 'set') {
       state.mainWindow?.webContents.send('agentStatus:migrationUnsupported', event.entry)
+      sendToExtraWindows('agentStatus:migrationUnsupported', event.entry)
     } else {
-      state.mainWindow?.webContents.send('agentStatus:migrationUnsupportedClear', {
-        ptyId: event.ptyId
-      })
+      const cleared = { ptyId: event.ptyId }
+      state.mainWindow?.webContents.send('agentStatus:migrationUnsupportedClear', cleared)
+      sendToExtraWindows('agentStatus:migrationUnsupportedClear', cleared)
     }
   })
 }
