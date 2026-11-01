@@ -42,6 +42,7 @@ import {
   lastFocusedPromptWindow,
   notePromptWindowFocused
 } from './prompt-window-focus-order'
+import { forgetPromptSharedReloadWindow, installPromptSharedReload } from './prompt-shared-reload'
 import {
   createPromptBrowserWindow,
   loadPromptWindow,
@@ -209,6 +210,7 @@ export function openPromptWindow(
   contents.on('did-start-navigation', (_event, _url, isSameDocument, isMainFrame) => {
     if (isMainFrame && !isSameDocument) {
       resetDelivery()
+      forgetPromptSharedReloadWindow(key, false)
     }
   })
   contents.on('render-process-gone', resetDelivery)
@@ -227,6 +229,7 @@ export function openPromptWindow(
     forgetPromptWindowGraph(key)
     focusRequests.delete(key)
     forgetPromptWindowFocus(key)
+    forgetPromptSharedReloadWindow(key)
     if (isPromptQuitting()) {
       return
     }
@@ -320,6 +323,7 @@ export function attachPromptWindows(
     setPromptSharedTabs(isPromptSharedTabsOn(appStore?.getSettings()))
     installIpc()
     setPromptWindowStateListener(scheduleSave)
+    installPromptSharedReload({ keys: () => [MAIN, ...windowsByKey.keys()], windowOf: windowOfKey })
   }
   if (restored) {
     return

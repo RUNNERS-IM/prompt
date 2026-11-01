@@ -1,5 +1,8 @@
 /** Prompt window keys, most recently focused last (prompt-windows.ts picks a hand-over target). */
 const focusOrder: string[] = []
+/** When each renderer (by web contents id) last typed into a terminal. */
+const typedAt = new Map<number, number>()
+const BUSY_MS = 3000
 
 export function forgetPromptWindowFocus(key: string): void {
   const index = focusOrder.indexOf(key)
@@ -21,4 +24,18 @@ export function lastFocusedPromptWindow(accept: (key: string) => boolean): strin
     }
   }
   return null
+}
+
+export function notePromptWindowTyped(webContentsId: number): void {
+  typedAt.set(webContentsId, Date.now())
+}
+
+/** Someone is using the window: it is focused and was typed into a moment ago. */
+export function isPromptWindowBusy(
+  win: { isFocused: () => boolean; webContents: { id: number } } | null
+): boolean {
+  if (!win || !win.isFocused()) {
+    return false
+  }
+  return Date.now() - (typedAt.get(win.webContents.id) ?? 0) < BUSY_MS
 }

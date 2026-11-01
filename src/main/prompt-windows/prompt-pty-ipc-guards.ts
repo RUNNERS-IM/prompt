@@ -28,6 +28,7 @@ import {
   promptPtySizeOwnerId,
   promptPtyViewerIds
 } from './prompt-pty-viewers'
+import { notePromptWindowTyped } from './prompt-window-focus-order'
 import {
   bindPromptPtyDeliverySession,
   promptAckInMainCount,
@@ -120,8 +121,12 @@ function noteDriver(ptyId: unknown, sender: Sender): void {
 
 /** Shared tabs: a window typed into a pty (write.ts, which is not behind these guards). */
 export function notePromptPtyWriter(event: unknown, ptyId: unknown): void {
+  const sender = senderOf(event)
+  if (sender) {
+    notePromptWindowTyped(sender.id)
+  }
   if (isPromptSharedTabs()) {
-    noteDriver(ptyId, senderOf(event))
+    noteDriver(ptyId, sender)
   }
 }
 
