@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TEST_FILES_JSON: '["tests/e2e/prompt-shell-workspace-move.spec.ts"]'
+  TEST_FILES_JSON: '["tests/e2e/prompt-shell-workspace-move.spec.ts","tests/e2e/prompt-claude-start.spec.ts"]'
 
 jobs:
   build:
@@ -115,8 +115,10 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report-attempt-${{ github.run_attempt }}
+          # Playwright writes testInfo.outputPath files (claude-start.png) under tests/test-results.
           path: |
             playwright-report/
             test-results/
+            tests/test-results/
           retention-days: 14
           if-no-files-found: warn
