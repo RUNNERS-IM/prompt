@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import type { RuntimeClientError } from '../runtime/types'
-import { matchSelector } from './prompt-selectors'
+import {
+  absoluteCallerPath,
+  matchSelector,
+  resolvePromptWorkspaceSelector
+} from './prompt-selectors'
 
 const CANDIDATES = [
   { id: 'term_abcdef0123456789', name: 'build' },
@@ -47,5 +51,27 @@ describe('matchSelector', () => {
 
   it('returns null when nothing matches', () => {
     expect(matchSelector('nope', CANDIDATES, 'terminal')).toBeNull()
+  })
+})
+
+describe('absoluteCallerPath', () => {
+  it('expands "~" and resolves relative paths from the cwd', () => {
+    expect(absoluteCallerPath('~', '/work', '/Users/me')).toBe('/Users/me')
+    expect(absoluteCallerPath('~/git/x', '/work', '/Users/me')).toBe('/Users/me/git/x')
+    expect(absoluteCallerPath('.', '/Users/me/git/x', '/Users/me')).toBe('/Users/me/git/x')
+    expect(absoluteCallerPath('./sub', '/Users/me/git', '/Users/me')).toBe('/Users/me/git/sub')
+    expect(absoluteCallerPath('/abs/x', '/work', '/Users/me')).toBe('/abs/x')
+  })
+})
+
+describe('resolvePromptWorkspaceSelector', () => {
+  it('sends a typed path as an absolute path selector without listing workspaces', async () => {
+    const client = { call: () => Promise.reject(new Error('should not list')) }
+    await expect(resolvePromptWorkspaceSelector(client as never, '/Users/me/git/x')).resolves.toBe(
+      'path:/Users/me/git/x'
+    )
+    await expect(resolvePromptWorkspaceSelector(client as never, '.')).resolves.toBe(
+      `path:${process.cwd()}`
+    )
   })
 })

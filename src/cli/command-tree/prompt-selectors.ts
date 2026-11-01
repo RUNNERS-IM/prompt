@@ -1,3 +1,5 @@
+import { homedir } from 'node:os'
+import { resolve as resolvePath } from 'node:path'
 import type { Project } from '../../shared/project-types'
 import type { Repo } from '../../shared/repo-types'
 import type {
@@ -89,6 +91,14 @@ export function matchSelector<T extends SelectorCandidate>(
     throw ambiguousError(kind, trimmed, matches)
   }
   return matches[0] ?? null
+}
+
+/** The caller's path as an absolute one: "~" expanded, relative paths taken from the cwd. */
+export function absoluteCallerPath(value: string, cwd = process.cwd(), home = homedir()): string {
+  if (value === '~' || value.startsWith('~/') || value.startsWith('~\\')) {
+    return resolvePath(home, value.slice(2))
+  }
+  return resolvePath(cwd, value)
 }
 
 function looksLikePath(value: string): boolean {
@@ -234,10 +244,13 @@ export async function resolvePromptWorkspaceSelector(
 ): Promise<string> {
   if (
     WORKSPACE_KEYWORDS.has(value) ||
-    WORKSPACE_SELECTOR_PREFIXES.some((prefix) => value.startsWith(prefix)) ||
-    looksLikePath(value)
+    WORKSPACE_SELECTOR_PREFIXES.some((prefix) => value.startsWith(prefix))
   ) {
     return value
+  }
+  if (looksLikePath(value)) {
+    // Why: the app compares stored absolute paths, so ".", "./x" and a quoted "~/x" never matched.
+    return `path:${absoluteCallerPath(value)}`
   }
   const worktrees = (
     await client.call<RuntimeWorktreeListResult>('worktree.list', { limit: 10_000 })
