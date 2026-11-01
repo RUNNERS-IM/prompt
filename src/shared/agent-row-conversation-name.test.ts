@@ -19,6 +19,15 @@ describe('getAgentRowConversationName', () => {
     expect(getAgentRowConversationName(tab, 'claude', true)).toBe('Patient sync spike')
   })
 
+  it('skips a manual name that is only the tab starting name', () => {
+    const tab = makeTab({
+      customTitle: 'Terminal 1',
+      defaultTitle: 'Terminal 1',
+      title: '✳ Investigate replay bug'
+    })
+    expect(getAgentRowConversationName(tab, 'claude', true)).toBe('Investigate replay bug')
+  })
+
   it('falls back to the quick-command label before titles', () => {
     const tab = makeTab({ quickCommandLabel: 'Run tests', title: '✳ Investigate replay bug' })
     expect(getAgentRowConversationName(tab, 'claude', true)).toBe('Run tests')

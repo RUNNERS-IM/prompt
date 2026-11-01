@@ -254,11 +254,11 @@ type ReactElementLike = {
   props: Record<string, unknown>
 }
 
-function makeTerminalTab() {
+function makeTerminalTab(customTitle: string | null = null) {
   return {
     id: 'terminal-tab-1',
     title: 'Runtime terminal title',
-    customTitle: null,
+    customTitle,
     type: 'terminal',
     worktreeId: 'wt-1',
     createdAt: 0
@@ -266,14 +266,16 @@ function makeTerminalTab() {
 }
 
 async function renderSortableTab({
-  onSetCustomTitle = vi.fn()
+  onSetCustomTitle = vi.fn(),
+  customTitle = null
 }: {
   onSetCustomTitle?: (tabId: string, title: string | null) => void
+  customTitle?: string | null
 } = {}): Promise<unknown> {
   reactHookRuntime.index = 0
   const module = await import('./SortableTab')
   return module.default({
-    tab: makeTerminalTab() as never,
+    tab: makeTerminalTab(customTitle) as never,
     agent: null,
     unifiedTabId: 'terminal-tab-1',
     groupId: 'group-1',
@@ -435,5 +437,42 @@ describe('SortableTab rename shortcut signal', () => {
     pressInputKey(input, 'Enter')
 
     expect(onSetCustomTitle).toHaveBeenCalledWith('terminal-tab-1', '日本語 terminal')
+  })
+
+  it('shows the live title over a set name that is only the starting "Terminal N"', async () => {
+    const tabTitle = async (customTitle: string | null): Promise<unknown> => {
+      const tree = expandNode(await renderSortableTab({ customTitle }))
+      return findElementsByType(tree, 'div').find(
+        (el) => el.props['data-testid'] === 'sortable-tab'
+      )?.props['data-tab-title']
+    }
+    expect(await tabTitle('Terminal 1')).toBe('Runtime terminal title')
+    expect(await tabTitle('my tab')).toBe('my tab')
+  })
+
+  it('names nothing when an unnamed tab rename is committed unchanged', async () => {
+    const onSetCustomTitle = vi.fn()
+    await renderSortableTab({ onSetCustomTitle })
+    requestTerminalTabRename('terminal-tab-1')
+    const rerender = expandNode(await renderSortableTab({ onSetCustomTitle }))
+    const input = findElementsByType(rerender, 'input')[0]
+
+    ;(input.props.onBlur as () => void)()
+
+    expect(onSetCustomTitle).not.toHaveBeenCalled()
+  })
+
+  it('still saves an unchanged rename of a tab that has a set name', async () => {
+    const onSetCustomTitle = vi.fn()
+    await renderSortableTab({ onSetCustomTitle, customTitle: 'my tab' })
+    requestTerminalTabRename('terminal-tab-1')
+    const rerender = expandNode(
+      await renderSortableTab({ onSetCustomTitle, customTitle: 'my tab' })
+    )
+    const input = findElementsByType(rerender, 'input')[0]
+
+    pressInputKey(input, 'Enter')
+
+    expect(onSetCustomTitle).toHaveBeenCalledWith('terminal-tab-1', 'my tab')
   })
 })
