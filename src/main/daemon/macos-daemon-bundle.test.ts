@@ -41,7 +41,7 @@ beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), 'orca-mac-runtime-')))
   // Model an update that moved the running bundle and replaced its original path.
   source = join(root, 'com.stablyai.orca.ShipIt.old', 'Orca.app')
-  helper = join(source, 'Contents', 'Helpers', 'Prompt Terminal Host.app')
+  helper = join(source, 'Contents', 'Helpers', 'Prompt.app')
   copies = join(root, 'profile', 'daemon-host', 'macos')
   await mkdir(join(source, 'Contents', 'MacOS'), { recursive: true })
   await mkdir(join(helper, 'Contents', 'MacOS'), { recursive: true })
@@ -104,14 +104,7 @@ it('publishes one verified copy per helper build, from the running app rather th
   await rm(source, { recursive: true })
   expect(copy.directory).toBe(join(copies, `terminal-host-${cdhash}`))
   expect(copy.execPath).toBe(
-    join(
-      copy.directory,
-      'app.noindex',
-      'Prompt Terminal Host.app',
-      'Contents',
-      'MacOS',
-      'prompt-terminal-host'
-    )
+    join(copy.directory, 'app.noindex', 'Prompt.app', 'Contents', 'MacOS', 'prompt-terminal-host')
   )
   expect(await readFile(copy.execPath, 'utf8')).toBe('signed-node')
   expect(await readFile(copy.entryPath, 'utf8')).toBe('daemon-code')
@@ -149,12 +142,7 @@ it("rejects a copy that does not satisfy the running app's requirement and publi
 it('keeps the winning copy when a concurrent publisher renames first', async () => {
   onCopy = async () => {
     onCopy = null
-    const winner = join(
-      copies,
-      `terminal-host-${cdhash}`,
-      'app.noindex',
-      'Prompt Terminal Host.app'
-    )
+    const winner = join(copies, `terminal-host-${cdhash}`, 'app.noindex', 'Prompt.app')
     await cp(helper, winner, { recursive: true })
     await writeFile(join(winner, 'Contents', 'MacOS', 'prompt-terminal-host'), 'winner')
   }
@@ -166,9 +154,7 @@ it('keeps the winning copy when a concurrent publisher renames first', async () 
 it('replaces a partial clone with a regular copy', async () => {
   cloneLeavesPartialTree = true
   const copy = await materializeMacDaemonBundle(copies, signal())
-  expect(await readdir(join(copy.directory, 'app.noindex', 'Prompt Terminal Host.app'))).toEqual([
-    'Contents'
-  ])
+  expect(await readdir(join(copy.directory, 'app.noindex', 'Prompt.app'))).toEqual(['Contents'])
   expect(await readFile(copy.entryPath, 'utf8')).toBe('daemon-code')
 })
 
@@ -182,7 +168,7 @@ it('stops at the shared deadline and removes the staging copy', async () => {
     return controller.signal.aborted ? { ...ok, code: null } : (signed?.(spec) ?? ok)
   })
   await expect(materializeMacDaemonBundle(copies, controller.signal)).rejects.toThrow(
-    'Could not copy Prompt Terminal Host.app'
+    'Could not copy Prompt.app'
   )
   expect(await readdir(copies)).toEqual([])
 })

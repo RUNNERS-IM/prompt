@@ -8,10 +8,13 @@ import { ensurePrivateDir } from './daemon-private-file-modes'
 import { inspectMacProcessCodeIdentity } from './daemon-mac-code-identity'
 
 /** Plain Node helper packaged by config/scripts/macos-terminal-host-bundle.cjs. */
-export const MAC_TERMINAL_HOST_BUNDLE = 'Prompt Terminal Host.app'
+export const MAC_TERMINAL_HOST_BUNDLE = 'Prompt.app'
 export const MAC_TERMINAL_HOST_EXECUTABLE = 'prompt-terminal-host'
-/** Copies made before the Prompt rename; daemons launched from them keep running until they exit. */
-export const LEGACY_MAC_TERMINAL_HOST_BUNDLE = 'Orca Terminal Host.app'
+/** Names copies had before; daemons launched from them keep running until they exit. */
+export const LEGACY_MAC_TERMINAL_HOST_BUNDLES = [
+  'Prompt Terminal Host.app',
+  'Orca Terminal Host.app'
+]
 export const MAC_DAEMON_COPY_PREFIX = 'terminal-host-'
 
 export type MacDaemonBundle = {
@@ -30,11 +33,11 @@ export function macDaemonCopyBundlePath(directory: string): string {
   return join(directory, 'app.noindex', MAC_TERMINAL_HOST_BUNDLE)
 }
 
-/** Every bundle a copy directory may hold: the current name, then the pre-rename one. */
+/** Every bundle a copy directory may hold: the current name, then the earlier ones. */
 export function macDaemonCopyBundlePaths(directory: string): string[] {
   return [
     macDaemonCopyBundlePath(directory),
-    join(directory, 'app.noindex', LEGACY_MAC_TERMINAL_HOST_BUNDLE)
+    ...LEGACY_MAC_TERMINAL_HOST_BUNDLES.map((name) => join(directory, 'app.noindex', name))
   ]
 }
 

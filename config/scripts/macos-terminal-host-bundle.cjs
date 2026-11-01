@@ -15,7 +15,8 @@ const { builtinModules } = require('node:module')
 const { basename, dirname, join, relative, resolve, sep } = require('node:path')
 const { pathToFileURL } = require('node:url')
 
-const MAC_TERMINAL_HOST_NAME = 'Prompt Terminal Host'
+// Named like the app so the macOS privacy lists show "Prompt" for terminals it runs.
+const MAC_TERMINAL_HOST_NAME = 'Prompt'
 const MAC_TERMINAL_HOST_EXECUTABLE = 'prompt-terminal-host'
 const macTerminalHostSignIgnore = [`/Contents/Helpers/${MAC_TERMINAL_HOST_NAME}\\.app(/|$)`]
 const NODE_PTY_FILES = [

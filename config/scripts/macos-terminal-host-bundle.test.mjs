@@ -126,12 +126,10 @@ describe('terminal host packaging config', () => {
     expect(electronBuilderConfig.mac.signIgnore).toEqual(
       expect.arrayContaining(macTerminalHostSignIgnore)
     )
-    const helper = '/out/mac-arm64/Orca.app/Contents/Helpers/Prompt Terminal Host.app'
+    const helper = '/out/mac-arm64/Orca.app/Contents/Helpers/Prompt.app'
     expect(pattern.test(helper)).toBe(true)
     expect(pattern.test(`${helper}/Contents/MacOS/prompt-terminal-host`)).toBe(true)
-    expect(
-      pattern.test('/out/mac-arm64/Orca.app/Contents/Helpers/Prompt Terminal Host.bundle')
-    ).toBe(false)
+    expect(pattern.test('/out/mac-arm64/Orca.app/Contents/Helpers/Prompt.bundle')).toBe(false)
     expect(pattern.test('/out/mac-arm64/Orca.app/Contents/Frameworks/Orca Helper.app')).toBe(false)
   })
 
@@ -182,7 +180,7 @@ describe.skipIf(process.platform !== 'darwin')('terminal host assembly', () => {
       info
     })
     expect(paths).toEqual(macTerminalHostPaths(appPath))
-    expect(paths.bundle).toBe(join(appPath, 'Contents', 'Helpers', 'Prompt Terminal Host.app'))
+    expect(paths.bundle).toBe(join(appPath, 'Contents', 'Helpers', 'Prompt.app'))
     expect(readFileSync(paths.executable, 'utf8')).toBe('pinned-node')
     expect(statSync(paths.executable).mode & 0o777).toBe(0o755)
     expect(statSync(paths.spawnHelper).mode & 0o777).toBe(0o755)
