@@ -10,6 +10,7 @@ import type { PushUnregisterOutbox } from '../push/push-unregister-outbox'
 import { encodePairingOffer, PAIRING_OFFER_VERSION } from '../../../shared/pairing'
 import type { RuntimePairingReach } from '../../../shared/runtime-pairing-reach'
 import { resolveAdvertisedPairingEndpoint } from '../pairing-endpoint'
+import { replacePendingDeviceNamed } from '../../prompt-computers/tailnet/replace-pending-device'
 import { RuntimeRpcNetworkExposure } from './runtime-rpc-network-exposure'
 import { MobileDesktopRelay } from '../mobile-desktop-relay/mobile-desktop-relay'
 import type { MobileDesktopRelayHosts } from '../mobile-desktop-relay/mobile-desktop-relay-hosts'
@@ -185,7 +186,7 @@ export class RuntimeRpcPairing extends RuntimeRpcNetworkExposure {
       const reach = args.reach ?? 'network'
       const grants = args.grants ?? []
       device = args.replacePendingNamed
-        ? this.deviceRegistry.replacePendingDeviceNamed(deviceName, scope, reach)
+        ? replacePendingDeviceNamed(this.deviceRegistry, deviceName, scope, reach)
         : args.rotate
           ? this.deviceRegistry.rotatePendingDevice(deviceName, scope, reach, grants)
           : this.deviceRegistry.getOrCreatePendingDevice(deviceName, scope, reach, grants)

@@ -1,4 +1,4 @@
-import { execFile } from 'node:child_process'
+import { runProcess } from '@orca/process-host'
 import { existsSync } from 'node:fs'
 
 /**
@@ -51,19 +51,19 @@ export type TailscaleCli = {
 
 type RunTailscale = (binary: string, args: string[]) => Promise<string>
 
-const runTailscaleCommand: RunTailscale = (binary, args) =>
-  new Promise((resolve, reject) => {
-    execFile(
-      binary,
-      args,
-      {
-        timeout: TAILSCALE_COMMAND_TIMEOUT_MS,
-        maxBuffer: TAILSCALE_OUTPUT_MAX_BYTES,
-        windowsHide: true
-      },
-      (error, stdout) => (error ? reject(error) : resolve(stdout))
-    )
+const runTailscaleCommand: RunTailscale = async (binary, args) => {
+  const result = await runProcess({
+    program: binary,
+    args,
+    timeoutMs: TAILSCALE_COMMAND_TIMEOUT_MS,
+    maxOutputBytes: TAILSCALE_OUTPUT_MAX_BYTES,
+    killOnOutputLimit: true
   })
+  if (result.code !== 0 || result.timedOut || result.outputTruncated) {
+    throw new Error(`tailscale ${args[0]} failed`)
+  }
+  return result.stdout
+}
 
 export function findTailscaleBinary(
   platform: NodeJS.Platform = process.platform,

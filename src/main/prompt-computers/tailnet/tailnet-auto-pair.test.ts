@@ -256,3 +256,21 @@ describe('TailnetAutoPair', () => {
     expect(ensureNetworkExposure).not.toHaveBeenCalled()
   })
 })
+
+describe('replacePendingDeviceNamed', () => {
+  it("replaces only that caller's unused link", async () => {
+    const { DeviceRegistry } = await import('../../runtime/device-registry')
+    const { replacePendingDeviceNamed } = await import('./replace-pending-device')
+    const registry = new DeviceRegistry(mkdtempSync(join(tmpdir(), 'tailnet-registry-')))
+    const shared = registry.getOrCreatePendingDevice('Share dialog', 'runtime', 'network')
+    const first = replacePendingDeviceNamed(registry, 'Tailscale m2-pro-1', 'runtime', 'network')
+    const second = replacePendingDeviceNamed(registry, 'Tailscale m2-pro-1', 'runtime', 'network')
+    const other = replacePendingDeviceNamed(registry, 'Tailscale m3-pro-1', 'runtime', 'network')
+    const ids = registry.listDevices().map((d) => d.deviceId)
+    expect(ids).toContain(shared.deviceId)
+    expect(ids).not.toContain(first.deviceId)
+    expect(ids).toContain(second.deviceId)
+    expect(ids).toContain(other.deviceId)
+    expect(second.token).not.toBe(first.token)
+  })
+})

@@ -115,17 +115,6 @@ export class DeviceRegistry {
   }
 
   /** Explicit QR regeneration revokes leaked unused offers; ordinary re-advertisement reuses them. */
-  /** Prompt: one unused link per name; a new request for the same name replaces the old unused one. */
-  replacePendingDeviceNamed(
-    name: string,
-    scope: DeviceScope,
-    pairingReach: RuntimePairingReach = 'network'
-  ): TokenDeviceEntry {
-    this.adoptExternalEdits()
-    const retainedDevices = this.devices.filter((d) => !isPendingTokenRow(d) || d.name !== name)
-    return this.createAndPersistDevice(retainedDevices, name, scope, pairingReach, [])
-  }
-
   rotatePendingDevice(
     name: string,
     scope: DeviceScope = 'mobile',
