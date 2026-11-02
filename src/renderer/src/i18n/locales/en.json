@@ -23285,6 +23285,22 @@
       "resume": "Resume",
       "showAll": "Show all…",
       "launchFailed": "Could not start Claude with these options."
+    },
+    "sessionMove": {
+      "waiting": "This session is working. It will move to '{{name}}' when it finishes.",
+      "stillWorking": "The session kept working, so it was not moved.",
+      "noSession": "This session has no Claude conversation to move.",
+      "copyFailed": "The session could not be moved.",
+      "notStarted": "The conversation did not open in '{{name}}', so the original tab was kept.",
+      "copiedPinned": "Opened in '{{name}}'. The original tab is pinned, so it was kept.",
+      "moved": "Moved to '{{name}}'",
+      "undo": "Undo",
+      "cancelRemote": "Sessions can only move between projects on this computer.",
+      "cancelNoSession": "This session has no Claude conversation to move yet.",
+      "cancelSeveral": "This tab has more than one Claude conversation, so it is unclear which to move.",
+      "hintCopy": "Copy here",
+      "hintMove": "Move here · ⌥ copies",
+      "hintMoveShell": "Move here"
     }
   }
 }

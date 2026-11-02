@@ -32,6 +32,7 @@ import {
   type PromptSessionDragSection
 } from './prompt-session-row-drag'
 import { usePromptClaudeStartTab } from '../prompt-claude-start/prompt-claude-start-tabs'
+import { PROMPT_SESSION_DROP_TARGET_CLASS } from './prompt-session-row-drop'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
 const EMPTY_GROUPS: readonly TabGroup[] = []
@@ -163,9 +164,9 @@ export function PromptWorktreeSessionRows({
   return (
     <div
       className={cn(
-        'flex min-w-0 flex-col gap-0.5 rounded-sm',
-        // Lit while a session row dragged from another workspace would be copied here.
-        'data-[prompt-session-drop-target=true]:bg-worktree-sidebar-accent/60 data-[prompt-session-drop-target=true]:ring-1 data-[prompt-session-drop-target=true]:ring-inset data-[prompt-session-drop-target=true]:ring-worktree-sidebar-ring/60'
+        'relative flex min-w-0 flex-col gap-0.5 rounded-sm',
+        // Lit while a session row dragged from another workspace would land here.
+        PROMPT_SESSION_DROP_TARGET_CLASS
       )}
       data-prompt-session-rows=""
       // Read by the drop lookup (PROMPT_SESSION_DROP_WORKTREE_ATTR).

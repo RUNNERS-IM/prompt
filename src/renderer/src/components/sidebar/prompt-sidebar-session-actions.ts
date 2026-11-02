@@ -76,18 +76,28 @@ export function startPromptTerminal(worktreeId: string): void {
  * Close one session from the sidebar. Same command as ⌘W and the tab ×, so a session with a
  * running program asks first and an idle one closes at once (decision 3A).
  */
-export function closePromptSession(worktreeId: string, terminalTabId: string): void {
+export function closePromptSession(
+  worktreeId: string,
+  terminalTabId: string,
+  /** skipRunningConfirm: close without the "a program is running" prompt (a finished move). */
+  options?: { skipRunningConfirm?: boolean }
+): void {
   const groupTabs = useAppStore.getState().unifiedTabsByWorktree?.[worktreeId] ?? []
   const item = resolveGroupTabFromVisibleId(groupTabs, terminalTabId)
   if (item) {
     dispatchWorkspaceTabCommand({
       type: 'close',
-      target: { kind: 'tab', worktreeId, tabId: item.id }
+      target: { kind: 'tab', worktreeId, tabId: item.id },
+      ...(options?.skipRunningConfirm ? { bulk: true } : {})
     })
     return
   }
   // Same fallback as the tab strip: a just-launched tab may not have its unified entry yet.
-  closeTerminalTab(terminalTabId)
+  if (options?.skipRunningConfirm) {
+    closeTerminalTab(terminalTabId, { skipRunningProcessConfirm: true })
+  } else {
+    closeTerminalTab(terminalTabId)
+  }
 }
 
 export function setPromptSessionColor(terminalTabId: string, color: string | null): void {

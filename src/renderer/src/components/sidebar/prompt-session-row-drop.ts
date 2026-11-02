@@ -15,6 +15,13 @@ export const PROMPT_SESSION_DROP_WORKTREE_ATTR = 'data-prompt-session-drop-workt
 /** Set on the target workspace's rows while a drop there would start a copy. */
 export const PROMPT_SESSION_DROP_TARGET_ATTR = 'data-prompt-session-drop-target'
 
+/** Look of a lit drop target (workspace rows or a project header) while a drop there would land. */
+export const PROMPT_SESSION_DROP_TARGET_CLASS =
+  'data-[prompt-session-drop-target=true]:bg-worktree-sidebar-accent/60 data-[prompt-session-drop-target=true]:ring-1 data-[prompt-session-drop-target=true]:ring-inset data-[prompt-session-drop-target=true]:ring-worktree-sidebar-ring/60'
+
+/** Text shown on the lit target saying what a drop does now ("Move here · ⌥ copies"). */
+export const PROMPT_SESSION_DROP_HINT_ATTR = 'data-prompt-session-drop-hint'
+
 export type PromptSessionDropCancelReason =
   | 'no-target'
   | 'remote'
@@ -76,13 +83,37 @@ export function planPromptSessionDrop(args: {
   return { kind: 'fork', targetWorktreeId, command: [...commands][0]! }
 }
 
-/** The workspace whose session rows contain `element` (the element under the pointer), or null. */
+/**
+ * DOM attribute on a project header naming its project. A row dropped on the header (collapsed,
+ * empty or not) lands in that project's main workspace, so a drop never needs visible rows.
+ */
+export const PROMPT_SESSION_DROP_REPO_ATTR = 'data-prompt-session-drop-repo'
+
+/** The drop target under `element`: a workspace's session rows or a project header, or null. */
 export function promptSessionDropElementOf(element: Element | null): HTMLElement | null {
-  return element?.closest<HTMLElement>(`[${PROMPT_SESSION_DROP_WORKTREE_ATTR}]`) ?? null
+  return (
+    element?.closest<HTMLElement>(
+      `[${PROMPT_SESSION_DROP_WORKTREE_ATTR}], [${PROMPT_SESSION_DROP_REPO_ATTR}]`
+    ) ?? null
+  )
 }
 
-export function promptSessionDropWorktreeIdOf(element: Element | null): string | null {
-  return (
-    promptSessionDropElementOf(element)?.getAttribute(PROMPT_SESSION_DROP_WORKTREE_ATTR) || null
-  )
+/**
+ * The workspace a drop on `element` lands in. A project header names a project; `mainWorktreeOf`
+ * turns it into that project's main workspace.
+ */
+export function promptSessionDropWorktreeIdOf(
+  element: Element | null,
+  mainWorktreeOf: (repoId: string) => string | null = () => null
+): string | null {
+  const target = promptSessionDropElementOf(element)
+  if (!target) {
+    return null
+  }
+  const worktreeId = target.getAttribute(PROMPT_SESSION_DROP_WORKTREE_ATTR)
+  if (worktreeId) {
+    return worktreeId
+  }
+  const repoId = target.getAttribute(PROMPT_SESSION_DROP_REPO_ATTR)
+  return repoId ? mainWorktreeOf(repoId) : null
 }

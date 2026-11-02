@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { planPromptSessionDrop, promptSessionDropWorktreeIdOf } from './prompt-session-row-drop'
+import {
+  PROMPT_SESSION_DROP_REPO_ATTR,
+  planPromptSessionDrop,
+  promptSessionDropWorktreeIdOf
+} from './prompt-session-row-drop'
 
 const SESSION = '0f8e2a7c-1b2d-4c3e-9f40-5a6b7c8d9e0f'
 const OTHER_SESSION = '11111111-2222-4333-8444-555555555555'
@@ -105,5 +109,16 @@ describe('promptSessionDropWorktreeIdOf', () => {
     const outside = { closest: () => null } as unknown as Element
     expect(promptSessionDropWorktreeIdOf(outside)).toBeNull()
     expect(promptSessionDropWorktreeIdOf(null)).toBeNull()
+  })
+
+  it("lands a drop on a project header in that project's main workspace", () => {
+    const header = {
+      getAttribute: (name: string) => (name === PROMPT_SESSION_DROP_REPO_ATTR ? 'repo-3' : null)
+    }
+    const element = { closest: () => header } as unknown as Element
+    const mainOf = (repoId: string) => (repoId === 'repo-3' ? 'repo-3::/main' : null)
+    expect(promptSessionDropWorktreeIdOf(element, mainOf)).toBe('repo-3::/main')
+    // A project with no workspace yet is no target.
+    expect(promptSessionDropWorktreeIdOf(element, () => null)).toBeNull()
   })
 })

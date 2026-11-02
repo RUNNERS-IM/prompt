@@ -16,7 +16,15 @@ vi.mock('@/store', () => ({
     return mocks.store
   }
 }))
-vi.mock('sonner', () => ({ toast: { info: vi.fn(), success: vi.fn(), error: vi.fn() } }))
+vi.mock('sonner', () => ({
+  toast: {
+    info: vi.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
+    loading: vi.fn(() => 'toast-1'),
+    dismiss: vi.fn()
+  }
+}))
 vi.mock('@/lib/agent-status', async (importOriginal) => {
   const actual = await importOriginal<typeof AgentStatusModule>()
   return { ...actual, detectAgentStatusFromTitle: vi.fn().mockReturnValue(null) }
@@ -82,9 +90,16 @@ function seededStore() {
 }
 
 const CLAUDE_PANES = [{ paneKey: PANE, agentType: 'claude' }]
+const COPY_SESSION = '7a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d'
+
+async function flush(): Promise<void> {
+  for (let i = 0; i < 5; i++) {
+    await Promise.resolve()
+  }
+}
 
 describe('dropping a session row on another workspace', () => {
-  it('opens a copy of the Claude session in a new tab there and shows it', async () => {
+  it('with ⌥ held, opens a copy of the Claude session in a new tab there and shows it', async () => {
     const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
     for (const target of [SIBLING, OTHER]) {
       const store = seededStore()
@@ -92,7 +107,8 @@ describe('dropping a session row on another workspace', () => {
         tabId: 't1',
         sourceWorktreeId: SOURCE,
         targetWorktreeId: target,
-        panes: CLAUDE_PANES
+        panes: CLAUDE_PANES,
+        copy: true
       })
       expect(plan.kind).toBe('fork')
       const state = store.getState()
@@ -106,6 +122,136 @@ describe('dropping a session row on another workspace', () => {
       // The original tab keeps running where it was.
       expect(state.tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
     }
+  })
+
+  it('without ⌥, moves it: the original closes only after the copy reports its own id', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const { toast } = await import('sonner')
+    const store = seededStore()
+    const plan = commitPromptSessionCrossWorkspaceDrop({
+      tabId: 't1',
+      sourceWorktreeId: SOURCE,
+      targetWorktreeId: OTHER,
+      panes: CLAUDE_PANES
+    })
+    expect(plan.kind).toBe('fork')
+    await flush()
+    const created = store.getState().tabsByWorktree[OTHER] ?? []
+    expect(created).toHaveLength(1)
+    expect(store.getState().pendingStartupByTabId[created[0]!.id]?.command).toBe(
+      `claude --resume ${SESSION} --fork-session`
+    )
+    // The copy has not started yet: the original keeps running.
+    expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
+
+    const copyPane = `${created[0]!.id}:leaf-2`
+    store.setState({
+      agentStatusByPaneKey: {
+        ...store.getState().agentStatusByPaneKey,
+        [copyPane]: {
+          ...claudeEntry(),
+          paneKey: copyPane,
+          providerSession: { key: 'session_id', id: COPY_SESSION }
+        }
+      }
+    })
+    await flush()
+    expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t2'])
+    expect(toast.success).toHaveBeenCalled()
+  })
+
+  it('closes the original once a copy with no id of its own stays loaded', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const store = seededStore()
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    try {
+      commitPromptSessionCrossWorkspaceDrop({
+        tabId: 't1',
+        sourceWorktreeId: SOURCE,
+        targetWorktreeId: OTHER,
+        panes: CLAUDE_PANES
+      })
+      await flush()
+      const created = store.getState().tabsByWorktree[OTHER] ?? []
+      const copyPane = `${created[0]!.id}:leaf-2`
+      // The resumed copy reports no conversation id until the next message.
+      store.setState({
+        agentStatusByPaneKey: {
+          ...store.getState().agentStatusByPaneKey,
+          [copyPane]: { ...claudeEntry(), paneKey: copyPane, providerSession: undefined }
+        }
+      })
+      await flush()
+      expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
+      await vi.advanceTimersByTimeAsync(3_000)
+      await flush()
+      expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t2'])
+      // Until its next message the copy holds the source conversation, so it can move again.
+      expect(
+        commitPromptSessionCrossWorkspaceDrop({
+          tabId: created[0]!.id,
+          sourceWorktreeId: OTHER,
+          targetWorktreeId: SIBLING,
+          panes: [{ paneKey: copyPane, agentType: 'claude' }],
+          copy: true
+        })
+      ).toEqual({
+        kind: 'fork',
+        targetWorktreeId: SIBLING,
+        command: `claude --resume ${SESSION} --fork-session`
+      })
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('keeps the original while the copy waits at a question such as folder trust', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const store = seededStore()
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    try {
+      commitPromptSessionCrossWorkspaceDrop({
+        tabId: 't1',
+        sourceWorktreeId: SOURCE,
+        targetWorktreeId: OTHER,
+        panes: CLAUDE_PANES
+      })
+      await flush()
+      const created = store.getState().tabsByWorktree[OTHER] ?? []
+      const copyPane = `${created[0]!.id}:leaf-2`
+      store.setState({
+        agentStatusByPaneKey: {
+          ...store.getState().agentStatusByPaneKey,
+          [copyPane]: {
+            ...claudeEntry(),
+            state: 'blocked',
+            paneKey: copyPane,
+            providerSession: undefined
+          }
+        }
+      })
+      await vi.advanceTimersByTimeAsync(5_000)
+      expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('waits for a working session to finish its turn before moving it', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const store = seededStore()
+    store.setState({ agentStatusByPaneKey: { [PANE]: { ...claudeEntry(), state: 'working' } } })
+    commitPromptSessionCrossWorkspaceDrop({
+      tabId: 't1',
+      sourceWorktreeId: SOURCE,
+      targetWorktreeId: OTHER,
+      panes: CLAUDE_PANES
+    })
+    await flush()
+    expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(0)
+    store.setState({ agentStatusByPaneKey: { [PANE]: claudeEntry() } })
+    await flush()
+    expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(1)
   })
 
   it('cancels a drop on a remote workspace, or a pane whose agent left', async () => {

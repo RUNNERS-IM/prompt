@@ -2917,7 +2917,7 @@ html.native-shell .app-layout {
   background: color-mix(in srgb, var(--foreground) 5%, var(--editor-surface));
   color: color-mix(in srgb, var(--foreground) 78%, var(--muted-foreground));
   cursor: pointer;
-  z-index: 5;
+  z-index: 20;
   opacity: 1;
   box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 12%, transparent);
   transition:
@@ -3408,4 +3408,21 @@ html.native-shell .app-layout {
   .browser-agent-cursor-layer[data-agent-active]::before {
     animation: none;
   }
+}
+
+/* Sidebar session drag: the lit drop target says what a drop does now ("Move here · ⌥ copies"). */
+[data-prompt-session-drop-target='true'][data-prompt-session-drop-hint]::after {
+  content: attr(data-prompt-session-drop-hint);
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  z-index: 20;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 11px;
+  line-height: 18px;
+  white-space: nowrap;
+  pointer-events: none;
 }

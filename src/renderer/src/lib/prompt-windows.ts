@@ -10,6 +10,7 @@ import {
   PROMPT_WINDOW_QUERY,
   type PromptWindowSummary
 } from '../../../shared/prompt-windows'
+import { rememberPromptSessionCopyOrigin } from '@/lib/prompt-session-copy-origin'
 
 /**
  * Prompt windows in the renderer (see shared/prompt-windows.ts). Main decides which tabs a window
@@ -70,7 +71,7 @@ function startTabWithCommand(worktreeId: string, command: string): string {
   return tab.id
 }
 
-function mainWorktreeIdOf(repoId: string): string | null {
+export function mainWorktreeIdOf(repoId: string): string | null {
   const worktrees = useAppStore.getState().worktreesByRepo?.[repoId] ?? []
   return (worktrees.find((w) => w.isMainWorktree) ?? worktrees[0])?.id ?? null
 }
@@ -108,8 +109,17 @@ export function openPromptSessionCopyInWorkspace(
     return null
   }
   const tabId = startTabWithCommand(worktreeId, command)
+  rememberCopyOrigin(tabId, command)
   showTab(worktreeId, tabId)
   return tabId
+}
+
+/** The copy holds the source conversation until its next message; remember which one. */
+function rememberCopyOrigin(tabId: string, command: string): void {
+  const sessionId = /^claude --resume (\S+) --fork-session$/.exec(command)?.[1]
+  if (sessionId) {
+    rememberPromptSessionCopyOrigin(tabId, sessionId)
+  }
 }
 
 /**
@@ -126,6 +136,7 @@ export function duplicatePromptSession(
     return null
   }
   const tabId = startTabWithCommand(worktreeId, command)
+  rememberCopyOrigin(tabId, command)
   placeTabAfter(worktreeId, tabId, sourceTabId)
   showTab(worktreeId, tabId)
   return tabId

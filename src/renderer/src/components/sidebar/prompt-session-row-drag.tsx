@@ -17,9 +17,13 @@ import { mirrorWebRuntimeTabMove } from '../tab-bar/web-runtime-tab-move-mirror'
 import { dropTabThroughLayoutOwner } from '../tab-group/tab-group-layout-owner-commands'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
 import { isPromptLocalWorktree } from '@/lib/prompt-local-worktree'
-import { openPromptSessionCopyInWorkspace } from '@/lib/prompt-windows'
+import { mainWorktreeIdOf, openPromptSessionCopyInWorkspace } from '@/lib/prompt-windows'
+import { movePromptClaudeSession } from '@/lib/prompt-session-move'
+import { translate } from '@/i18n/i18n'
+import { toast } from 'sonner'
+import { promptClaudeSessionCopyCommand } from '../../../../shared/prompt-windows'
 import { moveShellTabToWorkspace } from '@/lib/shell-tab-workspace-move'
-import { resolvePaneAgentSessionId } from '../terminal-pane/pane-agent-session-id'
+import { resolvePromptMovableSessionId } from '@/lib/prompt-session-copy-origin'
 import {
   buildPromptSessionTabSlots,
   isPointInsideRect,
@@ -27,10 +31,12 @@ import {
   planPromptSessionReorder
 } from './prompt-session-row-order'
 import {
+  PROMPT_SESSION_DROP_HINT_ATTR,
   PROMPT_SESSION_DROP_TARGET_ATTR,
   planPromptSessionDrop,
   promptSessionDropElementOf,
   promptSessionDropWorktreeIdOf,
+  type PromptSessionDropCancelReason,
   type PromptSessionDropPlan
 } from './prompt-session-row-drop'
 
@@ -131,7 +137,7 @@ export function planPromptSessionDropFromStore(args: {
     panes:
       args.panes?.map((pane) => ({
         agentType: pane.agentType,
-        sessionId: resolvePaneAgentSessionId(state, pane.paneKey)
+        sessionId: resolvePromptMovableSessionId(state, pane.paneKey)
       })) ?? null
   })
 }
@@ -146,10 +152,24 @@ export function commitPromptSessionCrossWorkspaceDrop(args: {
   sourceWorktreeId: string
   targetWorktreeId: string | null
   panes: readonly PromptSessionDragPane[] | null
+  /** ⌥ was held on release: keep the original and open a copy (Finder's copy-drag). */
+  copy?: boolean
 }): PromptSessionDropPlan {
   const plan = planPromptSessionDropFromStore(args)
   if (plan.kind === 'fork') {
-    openPromptSessionCopyInWorkspace(plan.targetWorktreeId, plan.command)
+    const paneKey = claudePaneKeyOf(args.panes, plan.command)
+    if (args.copy || !paneKey) {
+      openPromptSessionCopyInWorkspace(plan.targetWorktreeId, plan.command)
+    } else {
+      void movePromptClaudeSession({
+        sourceWorktreeId: args.sourceWorktreeId,
+        sourceTabId: args.tabId,
+        paneKey,
+        targetWorktreeId: plan.targetWorktreeId
+      })
+    }
+  } else if (plan.kind === 'cancel') {
+    noticePromptSessionDropCancel(plan.reason)
   } else if (plan.kind === 'move-shell') {
     void moveShellTabToWorkspace({
       tabId: args.tabId,
@@ -158,6 +178,48 @@ export function commitPromptSessionCrossWorkspaceDrop(args: {
     })
   }
   return plan
+}
+
+/** The dragged tab's pane whose live conversation the copy command resumes. */
+function claudePaneKeyOf(
+  panes: readonly PromptSessionDragPane[] | null,
+  command: string
+): string | null {
+  const state = useAppStore.getState()
+  for (const pane of panes ?? []) {
+    if (pane.agentType !== 'claude') {
+      continue
+    }
+    const sessionId = resolvePromptMovableSessionId(state, pane.paneKey)
+    if (sessionId && command === promptClaudeSessionCopyCommand(sessionId)) {
+      return pane.paneKey
+    }
+  }
+  return null
+}
+
+/** Say why a drop on another place did nothing; a release over empty space stays silent. */
+function noticePromptSessionDropCancel(reason: PromptSessionDropCancelReason): void {
+  const message =
+    reason === 'remote'
+      ? translate(
+          'prompt.sessionMove.cancelRemote',
+          'Sessions can only move between projects on this computer.'
+        )
+      : reason === 'no-claude-session'
+        ? translate(
+            'prompt.sessionMove.cancelNoSession',
+            'This session has no Claude conversation to move yet.'
+          )
+        : reason === 'several-claude-sessions'
+          ? translate(
+              'prompt.sessionMove.cancelSeveral',
+              'This tab has more than one Claude conversation, so it is unclear which to move.'
+            )
+          : null
+  if (message) {
+    toast.info(message)
+  }
 }
 
 /** Topmost workspace rows under the point, skipping the dragged row that follows the pointer. */
@@ -195,19 +257,62 @@ export function PromptSessionDragList({
   // dnd-kit pins the dragged row to vertical moves; the real pointer decides the target workspace.
   const pointerRef = useRef<{ x: number; y: number } | null>(null)
   const highlightedRef = useRef<HTMLElement | null>(null)
+  // ⌥ held right now: a Claude row dropped elsewhere is copied instead of moved.
+  const copyKeyRef = useRef(false)
+  const highlightedKindRef = useRef<PromptSessionDropPlan['kind'] | null>(null)
+  const stopCopyKeyWatchRef = useRef<(() => void) | null>(null)
   const sensors = useSensors(useSensor(PointerSensor, POINTER_SENSOR_OPTIONS))
-  const setHighlight = useCallback((element: HTMLElement | null) => {
-    if (highlightedRef.current === element) {
-      return
+  const hintFor = useCallback((kind: PromptSessionDropPlan['kind'] | null): string | null => {
+    if (kind === 'fork') {
+      return copyKeyRef.current
+        ? translate('prompt.sessionMove.hintCopy', 'Copy here')
+        : translate('prompt.sessionMove.hintMove', 'Move here · ⌥ copies')
     }
-    highlightedRef.current?.removeAttribute(PROMPT_SESSION_DROP_TARGET_ATTR)
-    element?.setAttribute(PROMPT_SESSION_DROP_TARGET_ATTR, 'true')
-    highlightedRef.current = element
+    return kind === 'move-shell' ? translate('prompt.sessionMove.hintMoveShell', 'Move here') : null
   }, [])
+  const setHighlight = useCallback(
+    (element: HTMLElement | null, kind: PromptSessionDropPlan['kind'] | null = null) => {
+      highlightedKindRef.current = element ? kind : null
+      if (highlightedRef.current !== element) {
+        highlightedRef.current?.removeAttribute(PROMPT_SESSION_DROP_TARGET_ATTR)
+        highlightedRef.current?.removeAttribute(PROMPT_SESSION_DROP_HINT_ATTR)
+        element?.setAttribute(PROMPT_SESSION_DROP_TARGET_ATTR, 'true')
+        highlightedRef.current = element
+      }
+      const hint = element ? hintFor(kind) : null
+      if (element && hint) {
+        element.setAttribute(PROMPT_SESSION_DROP_HINT_ATTR, hint)
+      } else {
+        element?.removeAttribute(PROMPT_SESSION_DROP_HINT_ATTR)
+      }
+    },
+    [hintFor]
+  )
+  const watchCopyKey = useCallback(() => {
+    stopCopyKeyWatchRef.current?.()
+    copyKeyRef.current = false
+    const onKey = (event: KeyboardEvent | PointerEvent): void => {
+      if (copyKeyRef.current === event.altKey) {
+        return
+      }
+      copyKeyRef.current = event.altKey
+      // Refresh the hint on the lit target so it says copy or move as the key changes.
+      setHighlight(highlightedRef.current, highlightedKindRef.current)
+    }
+    window.addEventListener('keydown', onKey, true)
+    window.addEventListener('keyup', onKey, true)
+    window.addEventListener('pointermove', onKey, true)
+    stopCopyKeyWatchRef.current = () => {
+      window.removeEventListener('keydown', onKey, true)
+      window.removeEventListener('keyup', onKey, true)
+      window.removeEventListener('pointermove', onKey, true)
+      stopCopyKeyWatchRef.current = null
+    }
+  }, [setHighlight])
   const crossWorkspaceTarget = useCallback(
     (tabId: string): { element: HTMLElement | null; plan: PromptSessionDropPlan } => {
       const element = dropElementAt(pointerRef.current)
-      const targetWorktreeId = promptSessionDropWorktreeIdOf(element)
+      const targetWorktreeId = promptSessionDropWorktreeIdOf(element, mainWorktreeIdOf)
       const plan = planPromptSessionDropFromStore({
         sourceWorktreeId: worktreeId,
         targetWorktreeId,
@@ -240,6 +345,7 @@ export function PromptSessionDragList({
       modifiers={modifiers}
       onDragStart={() => {
         pointerRef.current = null
+        watchCopyKey()
       }}
       onDragMove={(event) => {
         if (event.over) {
@@ -248,13 +354,17 @@ export function PromptSessionDragList({
         }
         // Light up another workspace only when a drop there would copy or move the session.
         const { element, plan } = crossWorkspaceTarget(String(event.active.id))
-        setHighlight(plan.kind === 'fork' || plan.kind === 'move-shell' ? element : null)
+        const lit = plan.kind === 'fork' || plan.kind === 'move-shell'
+        setHighlight(lit ? element : null, lit ? plan.kind : null)
       }}
       onDragCancel={() => {
         setHighlight(null)
+        stopCopyKeyWatchRef.current?.()
       }}
       onDragEnd={(event) => {
         setHighlight(null)
+        const copy = copyKeyRef.current
+        stopCopyKeyWatchRef.current?.()
         if (event.over) {
           handlePromptSessionDragEnd(worktreeId, orderedTabIds, event)
           return
@@ -262,8 +372,12 @@ export function PromptSessionDragList({
         commitPromptSessionCrossWorkspaceDrop({
           tabId: String(event.active.id),
           sourceWorktreeId: worktreeId,
-          targetWorktreeId: promptSessionDropWorktreeIdOf(dropElementAt(pointerRef.current)),
-          panes: panesOfTab(String(event.active.id))
+          targetWorktreeId: promptSessionDropWorktreeIdOf(
+            dropElementAt(pointerRef.current),
+            mainWorktreeIdOf
+          ),
+          panes: panesOfTab(String(event.active.id)),
+          copy
         })
       }}
     >

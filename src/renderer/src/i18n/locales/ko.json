@@ -22706,6 +22706,22 @@
       "resume": "이어 열기",
       "showAll": "모두 보기…",
       "launchFailed": "이 옵션으로 Claude 를 시작하지 못했습니다."
+    },
+    "sessionMove": {
+      "waiting": "세션이 일하는 중이에요. 끝나면 '{{name}}'(으)로 옮길게요.",
+      "stillWorking": "세션이 계속 일하고 있어서 옮기지 않았어요.",
+      "noSession": "이 세션에는 옮길 Claude 대화가 없어요.",
+      "copyFailed": "세션을 옮기지 못했어요.",
+      "notStarted": "'{{name}}'에서 대화가 열리지 않아 원래 탭을 남겨 두었어요.",
+      "copiedPinned": "'{{name}}'에 열었어요. 원래 탭은 고정돼 있어 남겨 두었어요.",
+      "moved": "'{{name}}'(으)로 옮겼어요",
+      "undo": "되돌리기",
+      "cancelRemote": "세션은 이 컴퓨터의 프로젝트끼리만 옮길 수 있어요.",
+      "cancelNoSession": "이 세션에는 아직 옮길 Claude 대화가 없어요.",
+      "cancelSeveral": "이 탭에 Claude 대화가 둘 이상이라 어느 것을 옮길지 알 수 없어요.",
+      "hintCopy": "여기에 복사",
+      "hintMove": "여기로 옮기기 · ⌥ 복사",
+      "hintMoveShell": "여기로 옮기기"
     }
   }
 }
