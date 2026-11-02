@@ -548,6 +548,34 @@ describe('the main agent verdict across a child-induced wait', () => {
     expect(ownWait).toMatchObject({ state: 'waiting', mainAgent: { state: 'waiting' } })
   })
 
+  it.each([
+    ['authentication_failed', 'sign-in'],
+    ['oauth_org_not_allowed', 'sign-in'],
+    ['rate_limit', 'usage-limit'],
+    ['overloaded', 'overloaded']
+  ] as const)('names a StopFailure %s as a %s failure', (error, failureKind) => {
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
+    expect(claude({ hook_event_name: 'StopFailure', error })?.mainAgent).toEqual({
+      state: 'done',
+      outcome: 'failure',
+      failureKind,
+      stateStartedAt: expect.any(Number)
+    })
+  })
+
+  it('leaves other StopFailure errors as a plain failure, and clears the kind on the next turn', () => {
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
+    expect(
+      claude({ hook_event_name: 'StopFailure', error: 'invalid_request' })?.mainAgent
+    ).not.toHaveProperty('failureKind')
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'again' })
+    claude({ hook_event_name: 'StopFailure', error: 'rate_limit' })
+    expect(claude({ hook_event_name: 'UserPromptSubmit', prompt: 'retry' })?.mainAgent).toEqual({
+      state: 'working',
+      stateStartedAt: expect.any(Number)
+    })
+  })
+
   it('clears the verdict when a new turn starts', () => {
     claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
     claude({ hook_event_name: 'StopFailure', error: 'invalid_request' })

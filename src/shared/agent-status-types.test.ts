@@ -162,7 +162,9 @@ Fix dispatch fallback preview for normalized status prompts`
     expect(result).not.toBeNull()
     expect(result!.prompt.length).toBeLessThanOrEqual(AGENT_STATUS_MAX_FIELD_LENGTH)
     expect(result!.prompt.includes('\n')).toBe(false)
-    expect(result!.prompt.startsWith('You are working inside Prompt, a multi-agent IDE.')).toBe(true)
+    expect(result!.prompt.startsWith('You are working inside Prompt, a multi-agent IDE.')).toBe(
+      true
+    )
     expect(result!.prompt).toContain('Your task ID is: task_compact_1')
     expect(result!.prompt).toContain('=== TASK ===')
     expect(result!.prompt).toContain('Fix dispatch fallback preview')
@@ -744,6 +746,25 @@ describe('the main agent field on a status payload', () => {
         '{"state":"done","mainAgent":{"state":"done","outcome":"maybe","stateStartedAt":5}}'
       )?.mainAgent
     ).toEqual({ state: 'done', stateStartedAt: 5 })
+  })
+
+  it('keeps a known failure kind only on a done failure', () => {
+    const parse = (mainAgent: string) =>
+      parseAgentStatusPayload(`{"state":"done","mainAgent":${mainAgent}}`)?.mainAgent
+    expect(
+      parse('{"state":"done","outcome":"failure","failureKind":"sign-in","stateStartedAt":5}')
+    ).toEqual({ state: 'done', outcome: 'failure', failureKind: 'sign-in', stateStartedAt: 5 })
+    expect(
+      parse('{"state":"done","outcome":"failure","failureKind":"bogus","stateStartedAt":5}')
+    ).toEqual({ state: 'done', outcome: 'failure', stateStartedAt: 5 })
+    expect(
+      parse('{"state":"done","outcome":"success","failureKind":"sign-in","stateStartedAt":5}')
+    ).toEqual({ state: 'done', outcome: 'success', stateStartedAt: 5 })
+    expect(
+      parse(
+        '{"state":"working","outcome":"failure","failureKind":"usage-limit","stateStartedAt":5}'
+      )
+    ).toEqual({ state: 'working', stateStartedAt: 5 })
   })
 
   it('admits the host-observed verdicts, and reads an arm it cannot name as no verdict', () => {

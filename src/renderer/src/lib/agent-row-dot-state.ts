@@ -1,6 +1,9 @@
 import type { AgentDotState } from '@/components/AgentStateDot'
 import type { AgentChildRowModel } from '../../../shared/agent-child-row-model'
-import { agentVerdictDisplayMark } from '../../../shared/agent-main-agent-verdict'
+import {
+  agentRetryableFailureKind,
+  agentVerdictDisplayMark
+} from '../../../shared/agent-main-agent-verdict'
 import type { AgentStatusEntry, AgentWorkingMode } from '../../../shared/agent-status-types'
 import type { AgentRowState } from '../../../shared/agent-row-decay-state'
 
@@ -30,6 +33,10 @@ export function agentRowDisplayDotState(agent: {
 }): AgentDotState {
   if (agent.childRow) {
     return agent.childRow.displayState
+  }
+  // Why: sign-in, usage-limit and busy-server failures need the user, not a bug report.
+  if (agentRetryableFailureKind(agent.entry)) {
+    return 'permission'
   }
   return (
     agentVerdictDisplayMark(agent.entry) ?? agentRowDotState(agent.state, agent.entry.workingMode)

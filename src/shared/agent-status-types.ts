@@ -2,7 +2,7 @@
 
 import type { ProgramStatusFacet } from './program-status/facet'
 import type { AgentProviderSessionMetadata } from './agent-session-resume'
-import type { AgentMainAgentStatus } from './main-agent-status'
+import { isAgentFailureKind, type AgentMainAgentStatus } from './main-agent-status'
 import type { AgentStateHistoryEntry } from './agent-state-history'
 import { isAgentTurnOutcome } from './agent-turn-outcome'
 import type { OrchestrationFleetAttention } from './orchestration-fleet-attention'
@@ -289,6 +289,9 @@ export function normalizeMainAgentStatusField(value: unknown): AgentMainAgentSta
     state,
     // Why: a verdict belongs to a finished turn; anything riding on a live state is stale.
     ...(state === 'done' && isAgentTurnOutcome(obj.outcome) ? { outcome: obj.outcome } : {}),
+    ...(state === 'done' && obj.outcome === 'failure' && isAgentFailureKind(obj.failureKind)
+      ? { failureKind: obj.failureKind }
+      : {}),
     ...(state === 'working' && obj.stopping === true ? { stopping: true as const } : {}),
     stateStartedAt: obj.stateStartedAt
   }

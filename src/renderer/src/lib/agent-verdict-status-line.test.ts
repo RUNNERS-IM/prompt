@@ -55,4 +55,18 @@ describe('agentVerdictStatusLine', () => {
   it('reads a cancellation as interrupted by user', () => {
     expect(agentVerdictStatusLine({ state: 'done', interrupted: true })).toBe('Interrupted by user')
   })
+
+  it.each([
+    ['sign-in', 'Sign-in needed'],
+    ['usage-limit', 'Usage limit reached'],
+    ['overloaded', 'Server busy']
+  ] as const)('names a %s failure the user can clear', (failureKind, line) => {
+    expect(
+      agentVerdictStatusLine({
+        state: 'done',
+        agentType: 'claude',
+        mainAgent: { state: 'done', outcome: 'failure', failureKind }
+      })
+    ).toBe(line)
+  })
 })

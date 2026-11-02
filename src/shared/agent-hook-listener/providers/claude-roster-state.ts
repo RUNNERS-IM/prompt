@@ -116,10 +116,14 @@ export function setClaudeMainAgentTurnState(
   now = Date.now()
 ): ClaudeLeadTurnState {
   const previous = state.claudeLeadStateByPaneKey.get(paneKey)
-  const { state: nextState, outcome, stateStartedAt, ...rest } = next
+  const { state: nextState, outcome, failureKind, stateStartedAt, ...rest } = next
   const record: ClaudeLeadTurnState = {
     ...rest,
-    ...continueMainAgentStatus(previous, { state: nextState, outcome, stateStartedAt }, now)
+    ...continueMainAgentStatus(
+      previous,
+      { state: nextState, outcome, failureKind, stateStartedAt },
+      now
+    )
   }
   state.claudeLeadStateByPaneKey.set(paneKey, record)
   return record
@@ -136,6 +140,9 @@ export function claudeMainAgentStatusForPayload(
   return {
     state: own.state,
     ...(own.state === 'done' && own.outcome ? { outcome: own.outcome } : {}),
+    ...(own.state === 'done' && own.outcome === 'failure' && own.failureKind
+      ? { failureKind: own.failureKind }
+      : {}),
     stateStartedAt: own.stateStartedAt
   }
 }
@@ -208,6 +215,7 @@ export function seedClaudeLeadTurnFromPersistedStatus(
     setClaudeMainAgentTurnState(state, paneKey, {
       state: 'done',
       ...(mainAgent.outcome ? { outcome: mainAgent.outcome } : {}),
+      ...(mainAgent.failureKind ? { failureKind: mainAgent.failureKind } : {}),
       stateStartedAt: mainAgent.stateStartedAt,
       ...(status.payload.turnCompletedAt !== undefined
         ? { turnCompletedAt: status.payload.turnCompletedAt }

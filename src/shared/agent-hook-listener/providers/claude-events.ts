@@ -30,6 +30,7 @@ import {
   claudeRowHasUnlistedLiveWork
 } from './claude-pane-hold-evidence'
 import { buildClaudeStatusPayload } from './claude-status-build'
+import { claudeStopFailureKind } from './claude-stop-failure-kind'
 import { trackClaudeTaskNotificationDelivery } from './claude-task-notification-delivery'
 import { recordClaudeTeammateSpawn } from './claude-teammate-spawn'
 
@@ -88,6 +89,8 @@ export function normalizeClaudeEvent(
       : eventName === 'StopFailure'
         ? ('failure' as const)
         : undefined
+  const failureKind =
+    outcome === 'failure' ? claudeStopFailureKind(hookPayload['error']) : undefined
   const backgroundTasks = readClaudeBackgroundAgentTasks(hookPayload)
   const isTaskWakeup =
     eventAgentId === undefined &&
@@ -249,6 +252,7 @@ export function normalizeClaudeEvent(
               state: previousLead.state,
               // Child waits must retain the lead's verdict and clock.
               ...(previousLead.outcome ? { outcome: previousLead.outcome } : {}),
+              ...(previousLead.failureKind ? { failureKind: previousLead.failureKind } : {}),
               stateStartedAt: previousLead.stateStartedAt,
               ...(previousLead.taskWakeupTurn ? { taskWakeupTurn: true as const } : {}),
               // Keep the displaced lead end time so later child drain belongs to the same turn.
@@ -299,6 +303,7 @@ export function normalizeClaudeEvent(
     state: reportedStateName,
     ...(taskWakeupTurn ? { taskWakeupTurn: true as const } : {}),
     ...(outcome ? { outcome } : {}),
+    ...(failureKind ? { failureKind } : {}),
     ...(isWaitingInducing && eventAgentId ? { waitingAgentId: eventAgentId } : {}),
     ...(isAskUserQuestionWait && waitingToolUseId !== undefined ? { waitingToolUseId } : {}),
     ...(stateBeforeWait ? { stateBeforeWait } : {}),

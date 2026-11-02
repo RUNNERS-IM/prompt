@@ -35,7 +35,14 @@ const { buildMobileSessionTabSnapshots } =
 
 type MainAgentStatus = AppState['agentStatusByPaneKey'][string]['mainAgent']
 function mainAgentKey(mainAgent: MainAgentStatus) {
-  return mainAgent ? [mainAgent.state, mainAgent.outcome ?? null, mainAgent.stateStartedAt] : null
+  return mainAgent
+    ? [
+        mainAgent.state,
+        mainAgent.outcome ?? null,
+        mainAgent.failureKind ?? null,
+        mainAgent.stateStartedAt
+      ]
+    : null
 }
 
 function referenceOpenFilesProjection(openFiles: AppState['openFiles']): string {

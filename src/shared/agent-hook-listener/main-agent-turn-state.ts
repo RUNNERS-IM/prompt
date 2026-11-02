@@ -1,5 +1,6 @@
 import type { AgentStatusState } from '../agent-status-types'
 import type { AgentTurnOutcome } from '../agent-turn-outcome'
+import type { AgentFailureKind } from '../main-agent-status'
 
 /** The Claude main agent's own turn record, published on every row as `mainAgent`. */
 export type ClaudeLeadTurnState = {
@@ -8,6 +9,8 @@ export type ClaudeLeadTurnState = {
   taskWakeupTurn?: true
   /** Done-turn verdict from provider, inferred cancellation or persisted seed; the fold reads cancellation as interrupted. */
   outcome?: AgentTurnOutcome
+  /** StopFailure's named cause when the user can clear it (sign-in, usage limit, busy server). */
+  failureKind?: AgentFailureKind
   /** When `state` first appeared; the main agent's own clock, distinct from the gated row's. */
   stateStartedAt: number
   /** Only the waiting child's next activity may clear its card; sibling churn cannot. */
@@ -19,7 +22,7 @@ export type ClaudeLeadTurnState = {
   /** Restore the lead state displaced by a child wait; inventing working cannot later fold back to done. */
   stateBeforeWait?: Pick<
     ClaudeLeadTurnState,
-    'state' | 'outcome' | 'stateStartedAt' | 'turnCompletedAt' | 'taskWakeupTurn'
+    'state' | 'outcome' | 'failureKind' | 'stateStartedAt' | 'turnCompletedAt' | 'taskWakeupTurn'
   >
 }
 

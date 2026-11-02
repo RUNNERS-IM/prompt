@@ -23210,6 +23210,11 @@
       "noUpdateMinutes": "No update for {{count}} min · may be stuck",
       "noUpdateHours": "No update for {{count}} h · may be stuck",
       "noUpdateDays": "No update for {{count}} d · may be stuck",
+      "failure": {
+        "signIn": "Sign-in needed",
+        "usageLimit": "Usage limit reached",
+        "overloaded": "Server busy"
+      },
       "tool": {
         "command": "Running a command",
         "read": "Reading a file",

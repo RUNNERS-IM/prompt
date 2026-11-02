@@ -223,6 +223,38 @@ describe('Prompt session row layout', () => {
   })
 })
 
+describe('Prompt session row after a failed turn', () => {
+  const failedRow = (failureKind?: string): DashboardAgentRowData => {
+    const agent = makeAgent({ state: 'done' })
+    return {
+      ...agent,
+      entry: {
+        ...agent.entry,
+        mainAgent: {
+          state: 'done',
+          outcome: 'failure',
+          stateStartedAt: 1000,
+          ...(failureKind ? { failureKind } : {})
+        }
+      }
+    } as DashboardAgentRowData
+  }
+
+  it('shows the blue "!" and "Sign-in needed" when the turn needs a new sign-in', () => {
+    const container = renderRow(failedRow('sign-in'))
+    expect(container.querySelector('[data-prompt-session-icon="attention"]')).not.toBeNull()
+    expect(container.querySelector('[data-prompt-session-status]')?.textContent).toBe(
+      'Sign-in needed'
+    )
+  })
+
+  it('keeps the red × and "Failed" for any other failure', () => {
+    const container = renderRow(failedRow())
+    expect(container.querySelector('[data-prompt-session-icon="failed"]')).not.toBeNull()
+    expect(container.querySelector('[data-prompt-session-status]')?.textContent).toBe('Failed')
+  })
+})
+
 describe('promptSessionStatusLine', () => {
   it('says a finished turn is waiting for the person', () => {
     const agent = makeAgent({

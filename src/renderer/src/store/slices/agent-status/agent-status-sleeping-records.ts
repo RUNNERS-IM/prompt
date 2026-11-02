@@ -65,7 +65,7 @@ export function manualSleepCaptureEntry(
   if (!entry.mainAgent) {
     return { ...entry, updatedAt: capturedAt, interrupted: false }
   }
-  const { outcome: _outcome, ...mainAgent } = entry.mainAgent
+  const { outcome: _outcome, failureKind: _failureKind, ...mainAgent } = entry.mainAgent
   return { ...entry, updatedAt: capturedAt, interrupted: false, mainAgent }
 }
 

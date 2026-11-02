@@ -22653,6 +22653,11 @@
       "noUpdateMinutes": "{{count}}분째 소식 없음 · 멈췄을 수 있음",
       "noUpdateHours": "{{count}}시간째 소식 없음 · 멈췄을 수 있음",
       "noUpdateDays": "{{count}}일째 소식 없음 · 멈췄을 수 있음",
+      "failure": {
+        "signIn": "로그인 필요",
+        "usageLimit": "사용 한도 도달",
+        "overloaded": "서버 혼잡"
+      },
       "tool": {
         "command": "명령 실행 중",
         "read": "파일 읽는 중",

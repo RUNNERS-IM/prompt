@@ -1,11 +1,19 @@
 import { isAgentTurnOutcome, type AgentTurnOutcome } from './agent-turn-outcome'
 import type { AgentStatusState } from './agent-status-types'
-import type { AgentMainAgentStatus } from './main-agent-status'
+import {
+  isAgentFailureKind,
+  type AgentFailureKind,
+  type AgentMainAgentStatus
+} from './main-agent-status'
 
 export type AgentMainAgentVerdictSource = {
   state: AgentStatusState
   interrupted?: boolean
-  mainAgent?: { state: AgentStatusState; outcome?: AgentTurnOutcome }
+  mainAgent?: {
+    state: AgentStatusState
+    outcome?: AgentTurnOutcome
+    failureKind?: AgentFailureKind
+  }
 }
 
 /** Copy both verdict forms through agentVerdictFields so history, sleep and worktree ps records cannot lose one. */
@@ -54,6 +62,17 @@ export function agentVerdictDisplayMark(
     case null:
       return null
   }
+}
+
+/** A failed turn the user can clear themselves (sign in, wait out a limit, retry); rows show attention instead of the red failure. */
+export function agentRetryableFailureKind(
+  row: AgentMainAgentVerdictSource
+): AgentFailureKind | null {
+  if (agentMainAgentVerdict(row) !== 'failure') {
+    return null
+  }
+  const kind = row.mainAgent?.failureKind
+  return isAgentFailureKind(kind) ? kind : null
 }
 
 /** Clean-finish gates treat stopped, replaced, failed, cut-off and unconfirmed turns alike. */

@@ -17,7 +17,14 @@ type AgentStatusProjectionCache = {
 let cachedAgentStatusProjection: AgentStatusProjectionCache | null = null
 
 function mainAgentKey(mainAgent: AgentMainAgentStatus | undefined) {
-  return mainAgent ? [mainAgent.state, mainAgent.outcome ?? null, mainAgent.stateStartedAt] : null
+  return mainAgent
+    ? [
+        mainAgent.state,
+        mainAgent.outcome ?? null,
+        mainAgent.failureKind ?? null,
+        mainAgent.stateStartedAt
+      ]
+    : null
 }
 
 function serializeAgentStatusEntry(
