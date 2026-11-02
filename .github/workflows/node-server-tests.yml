@@ -87,7 +87,14 @@ jobs:
           PUSH_BASE: ${{ github.event.before }}
           EVENT_NAME: ${{ github.event_name }}
           ALLOW_TEST_ONLY_NATIVE_SKIP: ${{ github.event_name == 'pull_request' && !inputs.build_template && inputs.ref == '' }}
+          BUILD_TEMPLATE: ${{ inputs.build_template }}
         run: |
+          # A release ships the template whatever the push touched, and desktop_template needs
+          # every qualification lane to succeed: a renderer-only push must not skip them.
+          if [ "$BUILD_TEMPLATE" = true ]; then
+            echo 'should_run=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if [ "$EVENT_NAME" = push ]; then
             # Compare the entire push, including multi-commit pushes and removed files.
             if git fetch --no-tags --depth=1 origin "$PUSH_BASE" &&
