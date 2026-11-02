@@ -30,13 +30,12 @@ import {
   mobileOnboardingDestination
 } from '../src/onboarding/mobile-onboarding-plan'
 import { pairScanStyles as styles } from '../src/pair-scan-styles'
-import { PairScanDirectOnlyHint } from '../src/pair-scan-direct-only-hint'
+import { PromptPairScanSteps } from '../src/prompt-pair-scan-steps'
 import {
   PAIRING_SUCCESS_HOLD_MS,
   PairingProgress,
   SCAN_DECODE_BEAT_MS,
   ScanReticle,
-  Step,
   waitForBeat
 } from '../src/pairing/pairing-visuals'
 import { triggerSuccess } from '../src/platform/haptics'
@@ -327,15 +326,7 @@ export default function PairScanScreen() {
         <ChevronLeft size={22} color={colors.textSecondary} />
       </Pressable>
 
-      <View style={styles.steps}>
-        <Step number={1} text={t('app.pairScan.openDesktopStep', 'Open Prompt on your computer')} />
-        <Step
-          number={2}
-          text={t('app.pairScan.openMobileSettingsStep', 'Go to Settings → Mobile')}
-        />
-        <Step number={3} text={t('app.pairScan.scanCodeStep', 'Scan the QR code')} />
-        <PairScanDirectOnlyHint />
-      </View>
+      <PromptPairScanSteps />
 
       {status === 'scanning' && (
         <>

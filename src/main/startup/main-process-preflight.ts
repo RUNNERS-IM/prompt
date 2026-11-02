@@ -78,11 +78,7 @@ import { configureSessionParseCachePersistence } from '../ai-vault/session-parse
 import { initOrcaProfilePaths } from '../orca-profiles/profile-index-store'
 import { getProfileUserDataPath } from '../orca-profiles/profile-storage-paths'
 import { recoverPendingProfileProjectMoves } from '../orca-profiles/profile-project-move-intent'
-import { initStatsPath } from '../stats/collector'
-import { initClaudeUsagePath } from '../claude-usage/store'
-import { initCodexUsagePath } from '../codex-usage/store'
-import { initOpenCodeUsagePath } from '../opencode-usage/store'
-import { initMuseUsagePath } from '../muse-usage/store'
+import { initUsageStorePaths } from './usage-store-paths'
 import { registerDocPreviewSchemePrivileges } from '../browser/doc-preview-protocol'
 import { PRIVILEGED_CUSTOM_SCHEMES } from './privileged-custom-schemes'
 import { startCrashpadCapture } from '../crash-reporting/crashpad-capture'
@@ -305,11 +301,7 @@ function initializeMainProcessPreflight(options: MainProcessPreflightOptions): b
     getActiveProfileStateLocation(profileUserDataPath)?.profileId
   )
   // Capture stats/usage paths before app naming can shift userData.
-  initStatsPath()
-  initClaudeUsagePath()
-  initCodexUsagePath()
-  initOpenCodeUsagePath()
-  initMuseUsagePath()
+  initUsageStorePaths()
   // Register preview privileges before ready freezes the table or webviews lose fetch/secure-origin access.
   registerDocPreviewSchemePrivileges(PRIVILEGED_CUSTOM_SCHEMES)
   // Install Crashpad before first renderer; earlier CHECK failures have exit-code evidence only.

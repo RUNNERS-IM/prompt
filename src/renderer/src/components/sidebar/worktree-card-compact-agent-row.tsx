@@ -24,13 +24,10 @@ import {
   type ProgramStatusPresentation
 } from '../../../../shared/program-status/presentation'
 import { resolveRowProgramStatus } from '@/lib/program-status/agent-row-presentation'
-import { promptSessionRowName, promptSessionRowText } from './prompt-session-row-name'
+import { promptSessionRowText } from './prompt-session-row-name'
 import { PROMPT_SESSION_TIME_HOVER_CLASS } from './prompt-session-row-menu'
 import { promptChildRowWithoutRoleTail } from './prompt-child-row'
-import { promptSessionStatusLine } from './prompt-session-status-line'
-import { PromptHelperPill } from './prompt-helper-pill'
-import { PromptSessionStateIcon } from './PromptSessionStateIcon'
-import { PromptSessionRowRename, usePromptSessionRowRename } from './prompt-session-row-rename'
+import { PromptCompactAgentRowBody } from './prompt-compact-agent-row-body'
 import { usePromptVisibleModelLabel } from '@/components/prompt-session-card/prompt-default-model'
 
 function getCompactAgentPrimary(
@@ -318,85 +315,28 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     </>
   )
 
-  // Only a Prompt session row sits under a menu that sets this (withPromptSessionRowMenu).
-  const rename = usePromptSessionRowRename()
   const usePromptLayout = promptLayout && !agent.childRow
-  const asked = Boolean(conversationName ?? getAgentRowPrimaryText(agent.entry))
-  const promptName = usePromptLayout ? promptSessionRowName(agent, leadingText, asked) : ''
-  const promptStatus = usePromptLayout
-    ? promptSessionStatusLine(agent, dotState, secondary, now)
-    : ''
-  const dimText = highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'
-
   const promptRowBody = usePromptLayout ? (
-    <>
-      <div className="flex h-5 min-w-0 items-center gap-1">
-        {/* Show the actionable disabled reason over every hit area. */}
-        <PromptSessionStateIcon
-          state={dotState}
-          title={sendTargetDisabledReason ? null : undefined}
-          animationKey={agent.paneKey}
-        />
-        {/* Prompt: every row is Claude by default, so only other agents get an identity mark. */}
-        {!hideIcon && agent.agentType !== 'claude' && (
-          <span className="inline-flex shrink-0" title={formatAgentTypeLabel(agent.agentType)}>
-            <AgentTypeIcon agentType={agent.agentType} size={13} />
-          </span>
-        )}
-        {rename ? (
-          <PromptSessionRowRename {...rename} />
-        ) : (
-          <span
-            className={cn('min-w-0 flex-1 truncate', leadClassName)}
-            title={sendTargetDisabledReason ? undefined : promptName}
-            data-prompt-session-name=""
-          >
-            {promptName}
-          </span>
-        )}
-        {/* While renaming, the box takes the rest of the line; the status icon and second line stay. */}
-        {model && !rename && (
-          <span
-            className={cn('min-w-0 max-w-24 truncate font-mono text-[10px]', dimText)}
-            title={model}
-          >
-            {model}
-          </span>
-        )}
-        {trailingLabel && !rename ? (
-          <span
-            className="min-w-0 max-w-20 shrink-[2] truncate text-[10px] text-muted-foreground/50"
-            title={trailingLabel}
-          >
-            {trailingLabel}
-          </span>
-        ) : null}
-        {hasChildDisclosure && !rename ? (
-          <PromptHelperPill
-            count={childAgentCount ?? 0}
-            expanded={childAgentsExpanded}
-            onToggle={onToggleChildAgents ?? (() => {})}
-          />
-        ) : null}
-        {cacheTimer && !rename && (
-          <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />
-        )}
-        {rename ? null : timestamp}
-      </div>
-      {promptStatus ? (
-        <div
-          className={cn(
-            'min-w-0 truncate pl-[17px] text-[10px] leading-4',
-            // A session silent past the stale threshold may be stuck; set it apart from routine status.
-            agent.state === 'unverifiable' ? 'text-status-warning-text' : dimText
-          )}
-          title={sendTargetDisabledReason ? undefined : promptStatus}
-          data-prompt-session-status=""
-        >
-          {promptStatus}
-        </div>
-      ) : null}
-    </>
+    <PromptCompactAgentRowBody
+      agent={agent}
+      now={now}
+      dotState={dotState}
+      leadingText={leadingText}
+      asked={Boolean(conversationName ?? getAgentRowPrimaryText(agent.entry))}
+      secondary={secondary}
+      highlighted={highlighted}
+      hideIcon={hideIcon}
+      leadClassName={leadClassName}
+      model={model}
+      trailingLabel={trailingLabel}
+      sendTargetDisabledReason={sendTargetDisabledReason}
+      hasChildDisclosure={hasChildDisclosure}
+      childAgentCount={childAgentCount}
+      childAgentsExpanded={childAgentsExpanded}
+      onToggleChildAgents={onToggleChildAgents}
+      cacheTimer={cacheTimer}
+      timestamp={timestamp}
+    />
   ) : null
 
   return (

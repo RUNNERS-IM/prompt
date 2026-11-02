@@ -19,6 +19,10 @@ import { AgentHookServerStatusHookLifecycle } from './server-status-hook-lifecyc
 import { OPENCODE_STARTUP_PROMPT_CLAIM_PATH } from '../../../shared/opencode-startup-prompt'
 import { CLAUDE_AGENT_VIEW_PATH } from '../../../shared/claude-agent-view'
 import { respondAfterAgentToolPluginHooks } from '../agent-tool-plugin-hooks'
+import {
+  respondToFailedStartupPromptClaim,
+  respondToStartupPromptClaim
+} from './server-startup-prompt-claim-response'
 
 type HookServerStartOptions = {
   env?: string
@@ -91,14 +95,7 @@ export abstract class AgentHookServerLifecycle extends AgentHookServerStatusHook
           return
         }
         if (pathname === OPENCODE_STARTUP_PROMPT_CLAIM_PATH) {
-          res.writeHead(200, { 'content-type': 'application/json' })
-          const claim = this.onStartupPromptClaim?.(body)
-          res.end(
-            JSON.stringify({
-              allowed: claim === true,
-              ...(claim === 'pending' ? { pending: true } : {})
-            })
-          )
+          respondToStartupPromptClaim(res, () => this.onStartupPromptClaim?.(body))
           return
         }
         if (!isStatusCurrent()) {
@@ -195,13 +192,8 @@ export abstract class AgentHookServerLifecycle extends AgentHookServerStatusHook
         await respondAfterAgentToolPluginHooks(res, source, aliasedBody, req.headers, toolCallOwner)
       } catch (error) {
         if (pathname === OPENCODE_STARTUP_PROMPT_CLAIM_PATH) {
-          if (isHookRequestTruncatedError(error) && !destroyedBySlowlorisCap) {
-            res.writeHead(503)
-            res.end()
-            return
-          }
-          res.writeHead(200, { 'content-type': 'application/json' })
-          res.end('{"allowed":false}')
+          const retryable = isHookRequestTruncatedError(error) && !destroyedBySlowlorisCap
+          respondToFailedStartupPromptClaim(res, retryable)
           return
         }
         // Authenticated body truncation can interrupt all hook status; record it despite fail-open handling (#11217).

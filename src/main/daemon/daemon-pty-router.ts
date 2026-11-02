@@ -18,8 +18,7 @@ import type { DaemonPtyRouterDataEvent, DaemonPtyRouterExitEvent } from './daemo
 import { DaemonSessionOwnerResolver } from './daemon-session-owner-resolution'
 import type { DaemonIdleRetirementResult } from './daemon-pty-runtime-state'
 import { DaemonRouterRetirement } from './daemon-router-retirement'
-import { routeSpawnOrHold } from './daemon-router-newer-daemon-hold'
-import { findLegacySessionOwner } from './daemon-router-legacy-owner'
+import { spawnRoutedDaemonSession } from './daemon-router-spawn'
 import { retireExitedLegacyAdapter, type ExitedLegacyVerdict } from './daemon-router-exited-legacy'
 import type { WriteSettlement } from '../../shared/pty-write-settlement'
 import type { TerminalOscColorQueryReplyColors } from '../../shared/terminal-osc-color-reply'
@@ -78,22 +77,9 @@ export class DaemonPtyRouter implements IPtyProvider {
     // Retirement census must account for spawns that have not published their sessions yet.
     this.retirement.spawnInFlight++
     try {
-      if (opts.attachOnly && opts.sessionId) {
-        const sessionId = opts.sessionId
-        const attached = await this.ownerResolver.spawnAttachOnly({ ...opts, sessionId })
-        previousFolderSessionTrace.noteAttach(this.sessionAdapters, sessionId, 'attach-only')
-        return attached
-      }
-      const adapter =
-        (opts.sessionId ? this.sessionAdapters.get(opts.sessionId) : undefined) ??
-        (await findLegacySessionOwner(opts, this.current, this.legacy, this.legacyExitProof))
-      const target = await routeSpawnOrHold(opts, adapter, this.current, this.ownerResolver)
-      const result = await target.spawn(opts)
-      if (!result.exitedBeforeSpawnReply) {
-        this.ownerResolver.recordRoute(result.id, target, result.incarnationId)
-        previousFolderSessionTrace.noteAttach(this.sessionAdapters, result.id, 'spawn')
-      }
-      return result
+      const { current, legacy, legacyExitProof, sessionAdapters, ownerResolver } = this
+      const routes = { current, legacy, legacyExitProof, sessionAdapters, ownerResolver }
+      return await spawnRoutedDaemonSession(opts, routes)
     } finally {
       this.retirement.spawnInFlight--
     }

@@ -8,7 +8,6 @@ import { RepoIconGlyph } from '@/components/repo/repo-icon'
 import { withPromptProjectHeaderMenu } from '../../prompt-project-header-context-menu'
 import { RepoForkIndicator } from '@/components/repo/repo-fork-indicator'
 import type { FolderWorkspacePathStatus } from '../../../../../../shared/folder-workspace-path-status'
-import { isConfirmedStaleFolderPathStatus } from '../../../../../../shared/folder-workspace-path-status'
 import type { ProjectGroup } from '../../../../../../shared/project-group-types'
 import type { ExecutionHostId } from '../../../../../../shared/execution-host'
 import { getProjectGroupHostId } from '@/store/slices/project-group-owner-routing'
@@ -33,6 +32,7 @@ import {
   WORKTREE_SECTION_HEADER_PADDING_LEFT
 } from './indentation'
 import { FolderPathStatusIndicator } from './FolderPathStatusIndicator'
+import { isFolderWorkspaceCreateDisabled } from './folder-workspace-create-availability'
 import { PromptRepoHeaderEnd } from '../../prompt-workspace-identity'
 import {
   ProjectGroupCreateWorkspaceButton,
@@ -74,14 +74,6 @@ export type SectionHeaderRowContext = {
   onWorkspacePinDragOver: (event: React.DragEvent) => void
   onWorkspacePinDragLeave: (event: React.DragEvent) => void
   onWorkspaceStatusDrop: (event: React.DragEvent, status: WorkspaceStatus) => void
-}
-
-// The folder-scan project group whose parent path is gone can't create new workspaces.
-function isFolderWorkspaceCreateDisabled(status: FolderWorkspacePathStatus | null): boolean {
-  return (
-    status?.exists === false &&
-    (isConfirmedStaleFolderPathStatus(status) || status.reason === 'ambiguous-connection')
-  )
 }
 
 export function renderWorktreeSectionHeaderRow(args: {
