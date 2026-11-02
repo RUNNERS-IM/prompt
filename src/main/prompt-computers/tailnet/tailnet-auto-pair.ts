@@ -7,6 +7,7 @@ import type {
   PromptTailnetComputer,
   PromptTailnetConnectResult
 } from '../../../shared/prompt-computers'
+import { wsFallbackPortLadder } from '../../runtime/rpc/ws-fallback-port-store'
 import type { TailnetPeer, TailscaleCli } from './tailscale-cli'
 import {
   TAILNET_PAIR_PATH,
@@ -27,8 +28,8 @@ const FIRST_POLL_DELAY_MS = 5_000
 const REQUEST_TIMEOUT_MS = 3_000
 // A computer without Prompt running fails every poll; ask it again only after a while.
 const RETRY_AFTER_FAILURE_MS = 10 * 60_000
-// Packaged Prompt listens on 6768, a dev build on 6769.
-const PROMPT_WS_PORTS = [6768, 6769] as const
+// Packaged Prompt listens on 6768 (a dev build on 6769) and moves up the fallback ladder when taken.
+const PROMPT_WS_PORTS = [6768, 6769, ...wsFallbackPortLadder(6768)]
 // Phones only connect out; they never run a Prompt server to ask.
 const CLIENT_ONLY_OS = new Set(['android', 'ios'])
 const STATE_FILE = 'prompt-tailnet-auto-pair.json'
@@ -259,15 +260,15 @@ export class TailnetAutoPair {
     if (!address) {
       return null
     }
-    for (const port of PROMPT_WS_PORTS) {
-      let pairing: TailnetPairResponse | null = null
-      try {
-        pairing = await this.deps.fetchPairing(
-          `http://${formatHost(address)}:${port}${TAILNET_PAIR_PATH}`
-        )
-      } catch {
-        pairing = null
-      }
+    // Ask every port at once; a closed port answers immediately, so this costs one round trip.
+    const answers = await Promise.all(
+      PROMPT_WS_PORTS.map((port) =>
+        this.deps
+          .fetchPairing(`http://${formatHost(address)}:${port}${TAILNET_PAIR_PATH}`)
+          .catch(() => null)
+      )
+    )
+    for (const pairing of answers) {
       if (!pairing) {
         continue
       }

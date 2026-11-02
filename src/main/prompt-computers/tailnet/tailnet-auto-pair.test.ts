@@ -226,13 +226,13 @@ describe('TailnetAutoPair', () => {
       now: () => now
     })
     await service.pollOnce()
-    expect(fetchPairing).toHaveBeenCalledTimes(2)
+    expect(fetchPairing).toHaveBeenCalledTimes(32)
     now = 60_000
     await service.pollOnce()
-    expect(fetchPairing).toHaveBeenCalledTimes(2)
+    expect(fetchPairing).toHaveBeenCalledTimes(32)
     now = 11 * 60_000
     await service.pollOnce()
-    expect(fetchPairing).toHaveBeenCalledTimes(4)
+    expect(fetchPairing).toHaveBeenCalledTimes(64)
   })
 
   it('does nothing while Tailscale is off', async () => {
