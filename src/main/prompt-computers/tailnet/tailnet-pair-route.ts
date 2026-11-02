@@ -4,11 +4,9 @@ import type { OrcaRuntimeRpcServer } from '../../runtime/runtime-rpc'
 import type { TailscaleCli } from './tailscale-cli'
 
 /**
- * Prompt: `GET /prompt/tailnet-pair` hands a pairing link to another device signed in to the
- * same Tailscale account (decision 2026-11-02: every device type on the account, phones included).
- * The caller is identified by asking the local Tailscale daemon who owns the calling address,
- * so no link has to be copied by hand.
- * Kept in a Prompt-only file so the daily upstream merge does not conflict.
+ * Prompt: `GET /prompt/tailnet-pair` hands a pairing link to any device of this tailnet: person
+ * accounts, tagged devices and phones alike; only devices shared in from another tailnet are
+ * refused (decisions 2026-11-02). Prompt-only file to keep the upstream merge conflict-free.
  */
 
 export const TAILNET_PAIR_PATH = '/prompt/tailnet-pair'
@@ -30,7 +28,7 @@ export type TailnetPairRouteDeps = {
   ensureNetworkExposure: () => Promise<void>
 }
 
-// Each answer spawns two `tailscale` commands; a misbehaving peer must not turn that into a flood.
+// Each answer runs `tailscale status`; a misbehaving peer must not turn that into a flood.
 const MIN_INTERVAL_PER_CALLER_MS = 5_000
 
 /** IPv4-mapped IPv6 (`::ffff:100.x.y.z`) is how Node reports IPv4 callers on a dual-stack socket. */
@@ -64,19 +62,20 @@ export async function decideTailnetPair(
   if (!callerAddress || !isTailnetAddress(callerAddress)) {
     return { ok: false, status: 403, reason: 'not_tailnet' }
   }
-  const [status, caller] = await Promise.all([tailscale.status(), tailscale.whois(callerAddress)])
+  const status = await tailscale.status()
   const self = status?.self
   if (!status?.running || !self) {
     return { ok: false, status: 503, reason: 'tailscale_unavailable' }
   }
+  if (self.addresses.includes(callerAddress)) {
+    return { ok: false, status: 403, reason: 'self' }
+  }
+  const caller = status.peers.find((peer) => peer.addresses.includes(callerAddress))
   if (!caller) {
     return { ok: false, status: 403, reason: 'unknown_caller' }
   }
-  if (caller.userId !== self.userId) {
-    return { ok: false, status: 403, reason: 'other_account' }
-  }
-  if (self.addresses.includes(callerAddress)) {
-    return { ok: false, status: 403, reason: 'self' }
+  if (caller.sharedIn) {
+    return { ok: false, status: 403, reason: 'shared_from_other_tailnet' }
   }
   const advertiseAddress = self.addresses.find(isTailnetIPv4Address) ?? self.addresses[0]
   if (!advertiseAddress) {

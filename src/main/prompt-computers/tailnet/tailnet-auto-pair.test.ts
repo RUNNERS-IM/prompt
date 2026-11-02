@@ -6,7 +6,6 @@ import type { KnownRuntimeEnvironment } from '../../../shared/runtime-environmen
 import {
   findTailscaleBinary,
   parseTailscaleStatus,
-  parseTailscaleWhois,
   type TailnetPeer,
   type TailscaleCli
 } from './tailscale-cli'
@@ -18,16 +17,14 @@ import {
   uniqueComputerName
 } from './tailnet-auto-pair'
 
-const ME = 7
-
 function peer(over: Partial<TailnetPeer> = {}): TailnetPeer {
   return {
     stableId: 'n-m2pro1',
     hostName: 'm2-pro-1',
     dnsName: 'm2-pro-1.tail.ts.net',
     os: 'macOS',
-    userId: ME,
     online: true,
+    sharedIn: false,
     addresses: ['100.120.207.29', 'fd7a:115c:a1e0::1'],
     ...over
   }
@@ -53,7 +50,6 @@ function saved(endpoint: string, name = 'Saved'): KnownRuntimeEnvironment {
 function cli(over: Partial<TailscaleCli> = {}): TailscaleCli {
   return {
     status: async () => ({ running: true, self, peers: [peer()] }),
-    whois: async () => ({ userId: ME, hostName: 'm2-pro-1', os: 'macOS' }),
     ...over
   }
 }
@@ -79,6 +75,7 @@ describe('tailscale-cli parsing', () => {
             OS: 'android',
             UserID: 1,
             Online: false,
+            ShareeNode: true,
             TailscaleIPs: ['100.64.0.2']
           }
         }
@@ -88,22 +85,11 @@ describe('tailscale-cli parsing', () => {
     expect(status?.self?.dnsName).toBe('me.ts.net')
     expect(status?.peers).toHaveLength(1)
     expect(status?.peers[0]?.os).toBe('android')
+    expect(status?.peers[0]?.sharedIn).toBe(true)
   })
 
   it('returns null for output it does not understand', () => {
     expect(parseTailscaleStatus('not json')).toBeNull()
-    expect(parseTailscaleWhois('{}')).toBeNull()
-  })
-
-  it('reads the owner and device of a whois answer', () => {
-    expect(
-      parseTailscaleWhois(
-        JSON.stringify({
-          Node: { User: 3, Hostinfo: { Hostname: 'pc', OS: 'windows' } },
-          UserProfile: { ID: 3 }
-        })
-      )
-    ).toEqual({ userId: 3, hostName: 'pc', os: 'windows' })
   })
 
   it('finds the binary only where it exists', () => {
@@ -115,45 +101,51 @@ describe('tailscale-cli parsing', () => {
 })
 
 describe('decideTailnetPair', () => {
-  it('accepts a computer on the same account and advertises our IPv4', async () => {
-    const decision = await decideTailnetPair('100.120.207.29', null, cli())
-    expect(decision).toEqual({
+  const phone = peer({
+    stableId: 'n-s24',
+    hostName: 's24',
+    os: 'android',
+    addresses: ['100.89.183.122']
+  })
+  const taggedMac = peer({ stableId: 'n-tag', hostName: 'm3-pro-1', addresses: ['100.74.246.110'] })
+  const shared = peer({
+    stableId: 'n-shared',
+    hostName: 'guest',
+    addresses: ['100.101.1.1'],
+    sharedIn: true
+  })
+  const tailnet = cli({
+    status: async () => ({ running: true, self, peers: [peer(), phone, taggedMac, shared] })
+  })
+
+  it('accepts any device of this tailnet and advertises our IPv4', async () => {
+    expect(await decideTailnetPair('100.120.207.29', null, tailnet)).toEqual({
       ok: true,
       callerName: 'm2-pro-1',
       scope: 'runtime',
       advertiseAddress: '100.77.74.104'
     })
-  })
-
-  it('accepts a phone on the same account with a mobile link (decision 2026-11-02, choice 2)', async () => {
-    const tailscale = cli({ whois: async () => ({ userId: ME, hostName: 's24', os: 'android' }) })
-    const decision = await decideTailnetPair('100.89.183.122', 'mobile', tailscale)
-    expect(decision).toMatchObject({ ok: true, scope: 'mobile' })
-  })
-
-  it('refuses callers outside the tailnet range', async () => {
-    expect(await decideTailnetPair('192.168.0.10', null, cli())).toMatchObject({
-      ok: false,
-      reason: 'not_tailnet'
-    })
-    expect(await decideTailnetPair(null, null, cli())).toMatchObject({ ok: false })
-  })
-
-  it('refuses another Tailscale account', async () => {
-    const tailscale = cli({ whois: async () => ({ userId: 99, hostName: 'x', os: 'macOS' }) })
-    expect(await decideTailnetPair('100.120.207.29', null, tailscale)).toMatchObject({
-      ok: false,
-      reason: 'other_account'
+    expect(await decideTailnetPair('100.74.246.110', null, tailnet)).toMatchObject({ ok: true })
+    expect(await decideTailnetPair('100.89.183.122', 'mobile', tailnet)).toMatchObject({
+      ok: true,
+      scope: 'mobile'
     })
   })
 
-  it('refuses when Tailscale is not running or cannot name the caller', async () => {
+  it('refuses devices shared in from another tailnet, strangers, ourselves and non-tailnet callers', async () => {
+    const reason = async (address: string | null) =>
+      ((await decideTailnetPair(address, null, tailnet)) as { reason?: string }).reason
+    expect(await reason('100.101.1.1')).toBe('shared_from_other_tailnet')
+    expect(await reason('100.99.9.9')).toBe('unknown_caller')
+    expect(await reason('100.77.74.104')).toBe('self')
+    expect(await reason('192.168.0.10')).toBe('not_tailnet')
+    expect(await reason(null)).toBe('not_tailnet')
+  })
+
+  it('refuses while Tailscale is not running', async () => {
     expect(
       await decideTailnetPair('100.120.207.29', null, cli({ status: async () => null }))
     ).toMatchObject({ ok: false, reason: 'tailscale_unavailable' })
-    expect(
-      await decideTailnetPair('100.120.207.29', null, cli({ whois: async () => null }))
-    ).toMatchObject({ ok: false, reason: 'unknown_caller' })
   })
 
   it('unwraps IPv4-mapped addresses', () => {
@@ -162,18 +154,16 @@ describe('decideTailnetPair', () => {
 })
 
 describe('peer selection', () => {
-  it('skips other accounts, offline peers, phones, added and saved computers', () => {
+  it('skips shared-in, offline, phones, already added and saved computers', () => {
     const peers = [
       peer(),
-      peer({ stableId: 'other', userId: 99 }),
+      peer({ stableId: 'other', sharedIn: true }),
       peer({ stableId: 'off', online: false }),
       peer({ stableId: 'phone', os: 'android' }),
       peer({ stableId: 'done' }),
       peer({ stableId: 'saved', hostName: 'm2-pro-2', addresses: ['100.79.89.7'], dnsName: '' })
     ]
-    const picked = selectPeersToAsk(self, peers, new Set(['done']), [
-      saved('ws://100.79.89.7:6768')
-    ])
+    const picked = selectPeersToAsk(peers, new Set(['done']), [saved('ws://100.79.89.7:6768')])
     expect(picked.map((p) => p.stableId)).toEqual(['n-m2pro1'])
   })
 

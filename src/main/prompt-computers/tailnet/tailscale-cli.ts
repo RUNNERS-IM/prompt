@@ -3,8 +3,8 @@ import { existsSync } from 'node:fs'
 
 /**
  * Prompt: reads this computer's Tailscale state through the `tailscale` command line.
- * Prompt uses it to find the other computers signed in to the same Tailscale account
- * and to check who is calling before it hands out a pairing link.
+ * Prompt uses it to find the other computers of this tailnet
+ * and to check that a caller belongs to this tailnet before it hands out a pairing link.
  * Kept in a Prompt-only file so the daily upstream merge does not conflict.
  */
 
@@ -27,8 +27,9 @@ export type TailnetPeer = {
   hostName: string
   dnsName: string
   os: string
-  userId: number
   online: boolean
+  /** Shared in from another tailnet; not one of ours. */
+  sharedIn: boolean
   addresses: string[]
 }
 
@@ -38,15 +39,8 @@ export type TailnetStatus = {
   peers: TailnetPeer[]
 }
 
-export type TailnetWhois = {
-  userId: number
-  hostName: string
-  os: string
-}
-
 export type TailscaleCli = {
   status(): Promise<TailnetStatus | null>
-  whois(address: string): Promise<TailnetWhois | null>
 }
 
 type RunTailscale = (binary: string, args: string[]) => Promise<string>
@@ -80,19 +74,17 @@ function asRecord(value: unknown): Record<string, unknown> | null {
 
 function parsePeer(raw: unknown): TailnetPeer | null {
   const node = asRecord(raw)
-  if (!node || typeof node.UserID !== 'number') {
+  if (!node || !Array.isArray(node.TailscaleIPs)) {
     return null
   }
-  const addresses = Array.isArray(node.TailscaleIPs)
-    ? node.TailscaleIPs.filter((ip): ip is string => typeof ip === 'string')
-    : []
+  const addresses = node.TailscaleIPs.filter((ip): ip is string => typeof ip === 'string')
   return {
     stableId: typeof node.ID === 'string' ? node.ID : '',
     hostName: typeof node.HostName === 'string' ? node.HostName : '',
     dnsName: typeof node.DNSName === 'string' ? node.DNSName.replace(/\.$/, '') : '',
     os: typeof node.OS === 'string' ? node.OS : '',
-    userId: node.UserID,
     online: node.Online === true,
+    sharedIn: node.ShareeNode === true,
     addresses
   }
 }
@@ -117,31 +109,6 @@ export function parseTailscaleStatus(json: string): TailnetStatus | null {
   return { running: root.BackendState === 'Running', self, peers }
 }
 
-/** Parses `tailscale whois --json <ip>`. */
-export function parseTailscaleWhois(json: string): TailnetWhois | null {
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(json)
-  } catch {
-    return null
-  }
-  const root = asRecord(parsed)
-  const node = asRecord(root?.Node)
-  const profile = asRecord(root?.UserProfile)
-  const hostinfo = asRecord(node?.Hostinfo)
-  const userId = typeof profile?.ID === 'number' ? profile.ID : node?.User
-  if (typeof userId !== 'number') {
-    return null
-  }
-  return {
-    userId,
-    hostName:
-      (typeof hostinfo?.Hostname === 'string' && hostinfo.Hostname) ||
-      (typeof node?.ComputedName === 'string' ? node.ComputedName : ''),
-    os: typeof hostinfo?.OS === 'string' ? hostinfo.OS : ''
-  }
-}
-
 export function createTailscaleCli(
   options: { binary?: string | null; run?: RunTailscale } = {}
 ): TailscaleCli {
@@ -156,17 +123,6 @@ export function createTailscaleCli(
       }
       try {
         return parseTailscaleStatus(await run(path, ['status', '--json']))
-      } catch {
-        return null
-      }
-    },
-    async whois(address) {
-      const path = binary()
-      if (!path) {
-        return null
-      }
-      try {
-        return parseTailscaleWhois(await run(path, ['whois', '--json', address]))
       } catch {
         return null
       }

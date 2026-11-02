@@ -11,7 +11,7 @@ import {
 } from './tailnet-pair-route'
 
 /**
- * Prompt: fills the computer picker with the other computers on the same Tailscale account.
+ * Prompt: fills the computer picker with the other computers of this tailnet.
  * Every minute it reads `tailscale status`, asks each new computer's Prompt for a pairing link
  * (tailnet-pair-route.ts) and saves it the way "Add computer…" does.
  * A computer is added automatically once; if the user removes it, it stays removed.
@@ -75,16 +75,15 @@ export function isPeerSaved(peer: TailnetPeer, saved: readonly KnownRuntimeEnvir
   )
 }
 
-/** Peers worth asking: same account, online, able to run a Prompt server, not added before. */
+/** Peers worth asking: our tailnet, online, able to run a Prompt server, not added before. */
 export function selectPeersToAsk(
-  self: TailnetPeer,
   peers: readonly TailnetPeer[],
   alreadyAdded: ReadonlySet<string>,
   saved: readonly KnownRuntimeEnvironment[]
 ): TailnetPeer[] {
   return peers.filter(
     (peer) =>
-      peer.userId === self.userId &&
+      !peer.sharedIn &&
       peer.online &&
       peer.stableId !== '' &&
       !CLIENT_ONLY_OS.has(peer.os.toLowerCase()) &&
@@ -190,12 +189,7 @@ export class TailnetAutoPair {
     const state = readState(this.deps.userDataPath)
     const added = new Set(state.added)
     const now = this.deps.now()
-    const candidates = selectPeersToAsk(
-      status.self,
-      status.peers,
-      added,
-      this.deps.listSaved()
-    ).filter(
+    const candidates = selectPeersToAsk(status.peers, added, this.deps.listSaved()).filter(
       (peer) => now - (this.failedAt.get(peer.stableId) ?? -Infinity) >= RETRY_AFTER_FAILURE_MS
     )
 
