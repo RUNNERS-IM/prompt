@@ -120,7 +120,11 @@ function installRuntimeRpc(
   })
   state.runtimeRpc = runtimeRpc
   runtimeRpc.setMobileDesktopRelayHosts(createRuntimeEnvironmentMobileRelayHosts())
-  registerPromptComputerHandlers(runtimeRpc)
+  registerPromptComputerHandlers(runtimeRpc, {
+    userDataPath: getCanonicalUserDataPath(),
+    readMachineName: () => runtime.readMachineName(),
+    tailnetAutoPair: !isE2E && !isOrcadSidecarLaunch()
+  })
   registerMobileHandlers(runtimeRpc, {
     getRelayStatus: getDesktopRelayStatus,
     consumePendingUnpairedDeviceAuthFailure: (webContentsId) => {

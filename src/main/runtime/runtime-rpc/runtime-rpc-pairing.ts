@@ -144,6 +144,8 @@ export class RuntimeRpcPairing extends RuntimeRpcNetworkExposure {
     reach?: RuntimePairingReach
     // Grant administrative permissions only at pairing, never as later device upgrades.
     grants?: readonly RuntimeDeviceGrant[]
+    // Prompt: Tailscale auto-pairing gives each caller its own link instead of the shared pending one.
+    replacePendingNamed?: boolean
   }):
     | PairingOfferUnavailable
     | {
@@ -182,9 +184,11 @@ export class RuntimeRpcPairing extends RuntimeRpcNetworkExposure {
     try {
       const reach = args.reach ?? 'network'
       const grants = args.grants ?? []
-      device = args.rotate
-        ? this.deviceRegistry.rotatePendingDevice(deviceName, scope, reach, grants)
-        : this.deviceRegistry.getOrCreatePendingDevice(deviceName, scope, reach, grants)
+      device = args.replacePendingNamed
+        ? this.deviceRegistry.replacePendingDeviceNamed(deviceName, scope, reach)
+        : args.rotate
+          ? this.deviceRegistry.rotatePendingDevice(deviceName, scope, reach, grants)
+          : this.deviceRegistry.getOrCreatePendingDevice(deviceName, scope, reach, grants)
     } catch (error) {
       console.error('[runtime] Failed to persist pairing credential:', error)
       return pairingUnavailable('device_registry_unavailable', DEVICE_REGISTRY_UNAVAILABLE_GUIDANCE)

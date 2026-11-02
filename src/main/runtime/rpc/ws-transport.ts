@@ -12,6 +12,7 @@ import {
   type WebSocketMessageHandler
 } from './node-websocket-lifecycle'
 import { RemoteRuntimeServerHeartbeat } from './remote-runtime-server-heartbeat'
+import { handlePromptHttpRoute } from '../../prompt-computers/prompt-http-routes'
 import { assertPortNotShadowingListener } from './shadowed-port-probe'
 import { REMOTE_RUNTIME_MAX_INBOUND_FRAME_BYTES } from '../../../shared/remote-runtime/remote-runtime-memory-limits'
 
@@ -194,9 +195,15 @@ export class WebSocketTransport implements RpcTransport {
   private async tryListen(port: number): Promise<void> {
     await assertPortNotShadowingListener(this.host, port)
     // Without an HTTP request listener, plain HTTP hangs instead of receiving 404 (#30100).
-    const httpServer = createHttpServer(
-      this.staticRoot ? createStaticWebClientHandler(this.staticRoot) : answerWithoutWebClient
-    )
+    const answerHttp = this.staticRoot
+      ? createStaticWebClientHandler(this.staticRoot)
+      : answerWithoutWebClient
+    // Prompt: Tailscale auto-pairing answers on this port before the web client (prompt-http-routes.ts).
+    const httpServer = createHttpServer((req, res) => {
+      if (!handlePromptHttpRoute(req, res)) {
+        answerHttp(req, res)
+      }
+    })
 
     await new Promise<void>((resolve, reject) => {
       httpServer.once('error', reject)
