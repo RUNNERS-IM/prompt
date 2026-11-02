@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain, nativeTheme, shell } from 'electron'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { mainI18n, translateMain } from '../i18n/main-i18n'
-import type { Store } from '../persistence'
+import type { Store } from '../persistence/loading-store/store'
 import { installPrivilegedWindowNavigationPolicy } from './privileged-window-navigation'
 import { installMacAccentColor } from './prompt-mac-accent-color'
 import {

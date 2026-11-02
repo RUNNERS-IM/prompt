@@ -1,4 +1,4 @@
-import type { Store } from '../persistence'
+import type { Store } from '../persistence/loading-store/store'
 import {
   PROMPT_MAIN_WINDOW_KEY as MAIN,
   promptRepoIdOfWorktreeId,

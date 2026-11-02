@@ -22,6 +22,7 @@ import { NativeChatResumeStatusSegment } from './NativeChatResumeStatusSegment'
 import { CaffeinateStatusSegment } from './CaffeinateStatusSegment'
 import { PluginsStatusSegment } from './PluginsStatusSegment'
 import { promptShowsStatusSegment } from './prompt-status-bar'
+import { PluginStatusBarItems } from './PluginStatusBarItems'
 import { RemoteServerUpdateStatusSegment } from './RemoteServerUpdateStatusSegment'
 import { TOGGLE_FLOATING_TERMINAL_EVENT } from '@/lib/floating-terminal'
 import { FloatingTerminalIconContextMenu } from '@/components/floating-terminal/FloatingTerminalIconContextMenu'
@@ -114,6 +115,7 @@ export function StatusBarSurface({
   return (
     <div
       ref={barRef}
+      data-orca-status-bar=""
       // Why: one line at any width — density steps down first. overflow-clip (not hidden) so focus can't scroll the bar; the clip margin spares focus rings and badge dots.
       className="prompt-status-bar flex items-center h-6 min-h-[24px] px-3 gap-4 overflow-clip [overflow-clip-margin:3px] whitespace-nowrap border-t border-border bg-[var(--bg-titlebar,var(--card))] text-xs select-none shrink-0 relative"
       onContextMenuCapture={(event) => {
@@ -294,7 +296,12 @@ export function StatusBarSurface({
         <div ref={segmentsRef} className="flex w-max items-center gap-3">
           {!isPairedWebClientWindow() ? (
             <>
-              {promptShowsStatusSegment('plugins') ? <PluginsStatusSegment /> : null}
+              {promptShowsStatusSegment('plugins') ? (
+                <>
+                  <PluginsStatusSegment />
+                  <PluginStatusBarItems iconOnly={segmentsIconOnly} />
+                </>
+              ) : null}
               <CaffeinateStatusSegment iconOnly={segmentsIconOnly} />
             </>
           ) : null}

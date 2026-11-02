@@ -18,6 +18,7 @@ import type {
 } from '../../../../../../shared/worktree/types'
 import {
   getHeaderDragRepo,
+  isSingleHostProjectHeader,
   type GroupHeaderRow,
   type WorktreeGroupBy
 } from '../../../../../../shared/sidebar-list/row-types'
@@ -406,7 +407,7 @@ export function renderWorktreeSectionHeaderRow(args: {
                   key={`${row.repo.executionHostId ?? 'local'}:${row.repo.connectionId ?? ''}`}
                   repo={row.repo}
                   label={label}
-                  pinHost={row.hostId !== undefined}
+                  pinHost={isSingleHostProjectHeader(row)}
                   onCreateForRepo={ctx.projectActions.onCreateForRepo}
                 />
               ) : null}

@@ -1,10 +1,11 @@
 import type { CommandHandler } from './dispatch'
-import { BROWSER_HANDLER_GROUPS } from './browser-handler-groups'
+import { BROWSER_HANDLER_GROUPS } from './browser/browser-handler-groups'
 import { JIRA_HANDLER_GROUP } from './jira-handler-group'
 import { LINEAR_HANDLER_GROUP } from './linear-handler-group'
 import { PROMPT_COMMAND_HANDLER_GROUP } from './prompt-command-handler-group'
 import { PROMPT_ENVIRONMENT_HANDLER_GROUP } from './prompt-environment-handler-group'
 import { REFERENCE_HANDLER_GROUP } from './reference-handler-group'
+import { PLUGIN_HANDLER_GROUPS } from './plugin-handler-groups'
 
 export type HandlerGroup = {
   name: string
@@ -147,6 +148,7 @@ export const HANDLER_GROUPS: readonly HandlerGroup[] = [
       'orchestration worker-stop',
       'orchestration worker-abandon',
       'orchestration worker-release',
+      'orchestration worker-keep-open',
       'orchestration worker-retain',
       'orchestration worker-list',
       'orchestration dispatch',
@@ -282,6 +284,7 @@ export const HANDLER_GROUPS: readonly HandlerGroup[] = [
     keys: ['skills installed', 'skills share'],
     load: async () => (await import('./handlers/skill-sharing.js')).SKILL_SHARING_HANDLERS
   },
+  ...PLUGIN_HANDLER_GROUPS,
   {
     name: 'skills',
     keys: ['skills list', 'skills get', 'skills install', 'skills update'],

@@ -14,6 +14,7 @@ import { USAGE_PERCENTAGE_DISPLAY_SETTING_ID } from './appearance-usage-percenta
 import {
   getAppIconEntries,
   getAppearancePaneSearchEntries,
+  getCodeEditorThemeEntries,
   getLanguageEntries,
   getLayoutEntries,
   getMenuBarIconEntries,
@@ -25,9 +26,10 @@ import {
   getTypographyEntries,
   getZoomEntries
 } from './appearance-search'
+import { getReduceVisualEffectsEntries } from './appearance-reduce-visual-effects-search'
 import { getTerminalAppearanceSearchEntries } from './terminal-search'
 import { TerminalAppearanceSection } from './TerminalAppearanceSection'
-import type { UseGhosttyImportReturn } from './useGhosttyImport'
+import type { UseTerminalConfigImportReturn } from './useTerminalConfigImport'
 import type { UseWarpThemeImportReturn } from './useWarpThemeImport'
 import { AppIconSelector } from './AppIconSelector'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
@@ -51,7 +53,7 @@ type AppearancePaneProps = {
   terminalFontSuggestions: string[]
   onRequestFontSuggestions?: () => void
   systemPrefersDark: boolean
-  ghostty: UseGhosttyImportReturn
+  terminalConfigImport: UseTerminalConfigImportReturn
   warpThemes: UseWarpThemeImportReturn
 }
 
@@ -71,7 +73,7 @@ export function AppearancePane({
   terminalFontSuggestions,
   onRequestFontSuggestions,
   systemPrefersDark,
-  ghostty,
+  terminalConfigImport,
   warpThemes
 }: AppearancePaneProps): React.JSX.Element {
   const searchQuery = useAppStore((state) => state.settingsSearchQuery)
@@ -134,10 +136,12 @@ export function AppearancePane({
   const interfaceSearchEntries = [
     { title: interfaceTitle },
     ...getThemeEntries(),
+    ...getCodeEditorThemeEntries(),
     ...getZoomEntries(),
     ...getTypographyEntries(),
     ...(SHOW_UI_LANGUAGE_SETTING ? getLanguageEntries() : []),
     ...getTitlebarEntries(),
+    ...getReduceVisualEffectsEntries(),
     ...getSystemTrayEntries({ showSystemTray: isDesktopWindows }),
     ...getMenuBarIconEntries({ showMenuBarIcon: isDesktopMac })
   ]
@@ -241,7 +245,7 @@ export function AppearancePane({
             systemPrefersDark={systemPrefersDark}
             terminalFontSuggestions={terminalFontSuggestions}
             onRequestFontSuggestions={onRequestFontSuggestions}
-            ghostty={ghostty}
+            terminalConfigImport={terminalConfigImport}
             warpThemes={warpThemes}
             forceVisiblePrimary={terminalLabelMatches}
           />

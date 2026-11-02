@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url'
 // docs/readme holds the translated READMEs; docs/upstream keeps Orca's original READMEs for reference.
 const README_DIRS = ['docs/readme', 'docs/upstream', 'docs/upstream/readme']
 const EXTERNAL_TARGET = /^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i
-const HTML_ATTRIBUTE = /\b(src|srcset|href)\s*=\s*(?:"([^"]*)"|'([^']*)')/g
+const HTML_ATTRIBUTE = /\b(src|srcset|href)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi
 const MARKDOWN_LINK = /!?\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g
 
 function readmeFiles(root) {
@@ -34,14 +34,47 @@ function trackedFiles(root, candidates) {
   return new Set(stdout.split('\0').filter(Boolean))
 }
 
+function* srcsetTargets(value) {
+  let position = 0
+  while (position < value.length) {
+    while (position < value.length && /[\t\n\f\r ,]/.test(value[position])) {
+      position++
+    }
+    if (position === value.length) {
+      return
+    }
+    const start = position
+    while (position < value.length && !/[\t\n\f\r ]/.test(value[position])) {
+      position++
+    }
+    let end = position
+    while (value[end - 1] === ',') {
+      end--
+    }
+    // HTML URL tokens can contain commas; trailing commas end a URL-only candidate.
+    yield value.slice(start, end)
+    if (end < position) {
+      continue
+    }
+    let inParentheses = false
+    while (position < value.length) {
+      const character = value[position++]
+      if (character === '(') {
+        inParentheses = true
+      } else if (character === ')') {
+        inParentheses = false
+      } else if (character === ',' && !inParentheses) {
+        break
+      }
+    }
+  }
+}
+
 function* localTargets(markdown) {
   for (const [, attribute, doubleQuoted, singleQuoted] of markdown.matchAll(HTML_ATTRIBUTE)) {
     const value = doubleQuoted ?? singleQuoted
     // Only srcset lists candidates; each begins with its URL. src/href hold one whole URL.
-    const targets =
-      attribute === 'srcset'
-        ? value.split(',').map((candidate) => candidate.trim().split(/\s+/)[0])
-        : [value.trim()]
+    const targets = attribute.toLowerCase() === 'srcset' ? srcsetTargets(value) : [value.trim()]
     for (const target of targets) {
       if (target) {
         yield target

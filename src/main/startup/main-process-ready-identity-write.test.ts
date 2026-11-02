@@ -70,7 +70,7 @@ vi.mock('electron', () => ({
   }
 }))
 vi.mock('./main-process-state', () => ({ mainProcessState: mocks.state }))
-vi.mock('../persistence', () => ({
+vi.mock('../persistence/loading-store/store', () => ({
   Store: class {
     getSettings() {
       return {}
@@ -83,8 +83,7 @@ vi.mock('../persistence', () => ({
     getSshTargets() {
       return []
     }
-  },
-  getCanonicalUserDataPath: () => mocks.userDataPath
+  }
 }))
 vi.mock('../persistence/profile-state/profile-state-startup-authority', () => ({
   createProfileStateStoreForStartup: () => ({

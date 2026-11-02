@@ -1,7 +1,9 @@
 import { app, ipcMain } from 'electron'
-import { sanitizeOnboardingUpdate, type Store } from '../persistence'
+import { sanitizeOnboardingUpdate } from '../persistence/applying-settings/onboarding-normalization'
+import type { Store } from '../persistence/loading-store/store'
 import type { OnboardingState } from '../../shared/onboarding-state-types'
-import type { NativeChatUpgradeTipVariant } from '../../shared/native-chat/native-chat-upgrade-tip-audience'
+import type { ChatUiLaunchTipVariant } from '../../shared/native-chat/chat-ui-launch-tip-audience'
+import { isChatUiLaunchTipDeferredForConsent } from '../telemetry/chat-ui-launch-tip-cohort'
 import {
   applyPromptFirstRunYoloDefault,
   notePromptOnboardingUpdate,
@@ -11,7 +13,7 @@ import {
 export function registerOnboardingHandlers(store: Store): void {
   ipcMain.removeHandler('onboarding:get')
   ipcMain.removeHandler('onboarding:update')
-  ipcMain.removeHandler('onboarding:getNativeChatUpgradeTipVariant')
+  ipcMain.removeHandler('onboarding:getChatUiLaunchTipVariant')
   // Prompt: before the first onboarding read, so its Yolo switch starts off on a new profile.
   applyPromptFirstRunYoloDefault(store, app.getPath('userData'))
 
@@ -25,7 +27,8 @@ export function registerOnboardingHandlers(store: Store): void {
     notePromptOnboardingUpdate(sanitized)
     return withPromptFirstRun(store.updateOnboarding(sanitized), app.getPath('userData'))
   })
-  ipcMain.handle('onboarding:getNativeChatUpgradeTipVariant', (): NativeChatUpgradeTipVariant =>
-    store.getNativeChatUpgradeTipVariant()
+  // 'none' skips the tip this launch without marking it seen, so it returns once consent resolves.
+  ipcMain.handle('onboarding:getChatUiLaunchTipVariant', (): ChatUiLaunchTipVariant =>
+    isChatUiLaunchTipDeferredForConsent() ? 'none' : store.getChatUiLaunchTipVariant()
   )
 }

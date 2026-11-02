@@ -4,7 +4,7 @@ import { placeUnshownLiveTerminalsBestEffort } from '../runtime/terminal/adoptio
 import {
   getCanonicalUserDataPath,
   migrateMobilePairingDataToCanonicalUserDataPath
-} from '../persistence'
+} from '../persistence/loading-store/user-data-path'
 import { OrcaRuntimeRpcServer } from '../runtime/runtime-rpc'
 import { WS_BIND_HOST_LOOPBACK } from '../runtime/runtime-rpc/runtime-rpc-pairing-types'
 import { isOrcadSidecarLaunch } from '../window/foreground-activation-policy'
@@ -13,7 +13,7 @@ import { registerPromptComputerHandlers } from '../prompt-computers/prompt-compu
 import { createRuntimeEnvironmentMobileRelayHosts } from '../ipc/runtime-environments/runtime-environment-mobile-relay-hosts'
 import { getLocalPtyProvider } from '../ipc/pty/provider/registry'
 import { registerHeadlessPtyRuntime } from '../ipc/pty/register-headless-runtime'
-import { LocalPtyProvider } from '../providers/local-pty-provider'
+import { LocalPtyProvider } from '../providers/local-pty/local-pty-provider'
 import { publishHeadlessRuntimeGraph } from '../runtime/headless-runtime-graph'
 import { OffscreenBrowserBackend } from '../browser/offscreen-browser-backend'
 import { browserManager } from '../browser/browser-manager'

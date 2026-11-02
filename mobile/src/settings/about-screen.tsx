@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { View, Text, StyleSheet, Pressable } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { ChevronLeft } from 'lucide-react-native'
+import { View, Text } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { OrcaLogo } from '../components/OrcaLogo'
+import { LIST_LEADING_INSET, ListRow } from '../components/list/ListGroup'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { PROMPT_APP_NAME } from '../../../src/shared/prompt-brand'
 import { PROMPT_REPO_SLUG, PROMPT_REPO_URL } from '../../../src/shared/prompt-upstream'
+import { SettingsScreen, SettingsSection } from './settings-screen-frame'
 
 function GithubIcon({ size = 16, color = colors.textSecondary }) {
   useMobileColorScheme()
@@ -36,22 +36,9 @@ export default function AboutScreen({
     setError(false)
     void openExternal(url).catch(() => setError(true))
   }
-  const insets = useSafeAreaInsets()
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top + spacing.sm }]}>
-      <View style={styles.topRow}>
-        <Pressable
-          style={styles.backButton}
-          accessibilityRole="button"
-          accessibilityLabel={t('common.back', 'Back')}
-          onPress={onBack}
-        >
-          <ChevronLeft size={22} color={colors.textSecondary} />
-        </Pressable>
-        <Text style={styles.heading}>{t('settings.aboutScreen.title', 'About')}</Text>
-      </View>
-
+    <SettingsScreen title={t('settings.aboutScreen.title', 'About')} onBack={onBack}>
       <View style={styles.brand}>
         <OrcaLogo size={28} />
         <Text style={styles.brandName}>{PROMPT_APP_NAME}</Text>
@@ -60,18 +47,16 @@ export default function AboutScreen({
         </Text>
       </View>
 
-      <View style={styles.section}>
-        {/* Prompt: only Prompt's repository; Orca's website and X account are not ours. */}
-        <Pressable
-          style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
-          accessibilityRole="button"
+      {/* Prompt: only Prompt's repository; Orca's website and X account are not ours. */}
+      <SettingsSection first separatorInset={LIST_LEADING_INSET}>
+        <ListRow
+          key="source"
+          title={PROMPT_REPO_SLUG}
+          leading={<GithubIcon size={18} />}
           accessibilityLabel={t('settings.aboutScreen.sourceCode', 'Prompt source code')}
           onPress={() => openLink(PROMPT_REPO_URL)}
-        >
-          <GithubIcon />
-          <Text style={styles.rowValue}>{PROMPT_REPO_SLUG}</Text>
-        </Pressable>
-      </View>
+        />
+      </SettingsSection>
 
       <Text style={styles.versionText}>{versionLabel}</Text>
       {error && (
@@ -79,38 +64,14 @@ export default function AboutScreen({
           {t('settings.aboutScreen.openLinkFailed', 'Could not open the link. Try again.')}
         </Text>
       )}
-    </View>
+    </SettingsScreen>
   )
 }
 
 const styles = themedStyleSheet(() => ({
-  container: {
-    flex: 1,
-    backgroundColor: colors.bgBase,
-    padding: spacing.lg
-  },
-  topRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: spacing.xl
-  },
-  backButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: spacing.sm
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: colors.textPrimary
-  },
   brand: {
     alignItems: 'center',
-    paddingVertical: spacing.xl,
-    marginBottom: spacing.lg
+    paddingVertical: spacing.xl
   },
   brandName: {
     fontSize: 22,
@@ -122,38 +83,6 @@ const styles = themedStyleSheet(() => ({
     fontSize: 13,
     color: colors.textMuted,
     marginTop: spacing.xs
-  },
-  section: {
-    backgroundColor: colors.bgPanel,
-    borderRadius: 12,
-    overflow: 'hidden'
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm + 2,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.md + 2
-  },
-  rowPressed: {
-    backgroundColor: colors.bgRaised
-  },
-  rowLabel: {
-    flex: 1,
-    fontSize: typography.bodySize,
-    fontWeight: '500',
-    color: colors.textPrimary
-  },
-  rowValue: {
-    flex: 1,
-    textAlign: 'right',
-    fontSize: typography.bodySize,
-    color: colors.textSecondary
-  },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: colors.borderSubtle,
-    marginHorizontal: spacing.md
   },
   versionText: {
     marginTop: spacing.lg,

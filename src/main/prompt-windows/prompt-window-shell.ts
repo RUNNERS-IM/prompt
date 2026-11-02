@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { getAppIconPath } from '../app-icon'
 import { getBrowserClientHostId } from '../browser/browser-client-host-id'
 import { formatBrowserClientHostIdArgument } from '../../shared/browser-client-host-id-argument'
-import type { Store } from '../persistence'
+import type { Store } from '../persistence/loading-store/store'
 import {
   installMacosVisibilityRepaint,
   MIN_HEIGHT,

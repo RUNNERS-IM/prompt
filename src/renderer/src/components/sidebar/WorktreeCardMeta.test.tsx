@@ -103,11 +103,11 @@ describe('WorktreeCardDetailsHover', () => {
       'Prompt will hide PR #456 details for this workspace. The PR and branch on GitHub won’t be changed.'
     )
     expect(markup).not.toContain('Copy link')
-    expect(markup).not.toContain('Open in Orca browser')
+    expect(markup).not.toContain('Open in Prompt browser')
     expect(markup).not.toContain('View on GitHub')
   })
 
-  it('puts issue copy menu before edit and open actions and keeps GitHub last', () => {
+  it('groups issue actions into one row menu ordered from open to copy', () => {
     const markup = renderToStaticMarkup(
       <WorktreeCardDetailsHover
         issue={{
@@ -129,21 +129,13 @@ describe('WorktreeCardDetailsHover', () => {
       </WorktreeCardDetailsHover>
     )
 
-    const moreActionsIndex = markup.indexOf('aria-label="More issue actions"')
-    const copyLinkIndex = markup.indexOf('Copy link')
-    const editIssueIndex = markup.indexOf('aria-label="Edit issue"')
-    const openInOrcaIndex = markup.indexOf('aria-label="Open in Prompt"')
-    const viewOnGitHubIndex = markup.indexOf('aria-label="View on GitHub"')
-
-    expect(moreActionsIndex).toBeGreaterThan(-1)
-    expect(copyLinkIndex).toBeGreaterThan(-1)
-    expect(markup).toContain('Open in Prompt browser')
-    expect(markup.indexOf('Open in Orca browser')).toBeLessThan(copyLinkIndex)
-    expect(editIssueIndex).toBeGreaterThan(-1)
-    expect(moreActionsIndex).toBeLessThan(editIssueIndex)
-    expect(copyLinkIndex).toBeLessThan(editIssueIndex)
-    expect(editIssueIndex).toBeLessThan(openInOrcaIndex)
-    expect(openInOrcaIndex).toBeLessThan(viewOnGitHubIndex)
+    const order = ['Open in Prompt', 'Open in Prompt browser', 'Edit issue', 'Copy link'].map(
+      (label) => markup.indexOf(`${label}</div>`)
+    )
+    expect(markup).toContain('aria-label="More issue actions"')
+    expect(markup).toContain('aria-label="State: Closed"')
+    expect(order.every((index) => index > -1)).toBe(true)
+    expect(order).toEqual([...order].sort((a, b) => a - b))
   })
 
   it('labels GitLab unlink actions with MR terminology', () => {
@@ -175,7 +167,7 @@ describe('WorktreeCardDetailsHover', () => {
       'Prompt will hide MR !77 details for this workspace. The MR and branch on GitLab won’t be changed.'
     )
     expect(markup).toContain('href="https://gitlab.com/acme/orca/-/merge_requests/77"')
-    expect(markup).not.toContain('Open in Orca browser')
+    expect(markup).not.toContain('Open in Prompt browser')
   })
 
   it('hides the embedded-browser action when a linked review has no URL', () => {
@@ -196,7 +188,7 @@ describe('WorktreeCardDetailsHover', () => {
       </WorktreeCardDetailsHover>
     )
 
-    expect(markup).not.toContain('Open in Orca browser')
+    expect(markup).not.toContain('Open in Prompt browser')
   })
 
   it('keeps the title link for unsupported review URLs', () => {
@@ -248,8 +240,8 @@ describe('WorktreeCardDetailsHover', () => {
     expect(markup).toContain('ENG-123')
     expect(markup).toContain('Add Linear ticket display feature')
     expect(markup).toContain('https://linear.app/acme/issue/ENG-123')
-    expect(markup).toContain('View on Linear')
-    expect(markup).toContain('In Progress')
+    expect(markup).toContain('aria-label="More Linear actions"')
+    expect(markup).toContain('aria-label="State: In Progress"')
   })
 
   it('shows the Jira icon badge and linked issue details', () => {
@@ -282,7 +274,7 @@ describe('WorktreeCardDetailsHover', () => {
     expect(badgeMarkup).toContain('<svg')
     expect(badgeMarkup).toContain('Linked Jira KAN-1')
     expect(hoverMarkup).toContain('Test Jira card icon')
-    expect(hoverMarkup).toContain('View on Jira')
+    expect(hoverMarkup).toContain('aria-label="More Jira actions"')
     expect(hoverMarkup).toContain('https://company.atlassian.net/browse/KAN-1')
   })
 
@@ -329,6 +321,5 @@ describe('WorktreeCardDetailsHover', () => {
     expect(markup).toContain('ENG-123')
     expect(markup).toContain('Loading Linear issue...')
     expect(markup).toContain('https://linear.app/acme/issue/ENG-123')
-    expect(markup).toContain('View on Linear')
   })
 })

@@ -1,3 +1,4 @@
+import { formatTerminalStartFailure } from '../../../../shared/terminal-start-failure'
 import { getPtyIpc } from '../pty-host-bindings'
 import { runPtyIpcSpawn } from './spawn-run'
 import type { PtySpawnIpcArgs, PtySpawnIpcDeps } from './spawn-types'
@@ -14,21 +15,29 @@ export function installPtySpawnIpcHandler(deps: PtySpawnIpcDeps): void {
 
   ipcMain.handle('pty:spawn', async (_event, args: PtySpawnIpcArgs) => {
     recordPromptPtyOwner(args.sessionId, _event?.sender)
-    const startupPromise = getLocalPtyStartupPromise(
-      getConnectionExecutionHostId(args.connectionId)
-    )
-    if (startupPromise) {
-      await startupPromise
-    }
-    const spawn = (): ReturnType<typeof runPtyIpcSpawn> =>
-      runPromptSpawnFor(_event?.sender, () => runPtyIpcSpawn(deps, args))
-    if (attachOnlyViewOf(args) && args.sessionId && args.initiallyHidden !== true) {
-      return attachViewAfterHiddenStart(
-        args.sessionId,
-        deps.transitionSpawnHiddenRendererPtyDeliveryState,
-        spawn
+    try {
+      const startupPromise = getLocalPtyStartupPromise(
+        getConnectionExecutionHostId(args.connectionId)
       )
+      if (startupPromise) {
+        await startupPromise
+      }
+      const spawn = (): ReturnType<typeof runPtyIpcSpawn> =>
+        runPromptSpawnFor(_event?.sender, () => runPtyIpcSpawn(deps, args))
+      if (attachOnlyViewOf(args) && args.sessionId && args.initiallyHidden !== true) {
+        return await attachViewAfterHiddenStart(
+          args.sessionId,
+          deps.transitionSpawnHiddenRendererPtyDeliveryState,
+          spawn
+        )
+      }
+      return await spawn()
+    } catch (error) {
+      const message = formatTerminalStartFailure(error)
+      if (message) {
+        throw new Error(message)
+      }
+      throw error
     }
-    return spawn()
   })
 }

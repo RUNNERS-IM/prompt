@@ -10,7 +10,7 @@ import {
   resolveAgentPermission
 } from '../../../../shared/tui-agent-permission-choice'
 import { translate } from '@/i18n/i18n'
-import { CLAUDE_SESSION_OPTION_CATALOG } from '../../../../shared/agent-session-option-catalog-claude-codex'
+import { CLAUDE_SESSION_OPTION_CATALOG } from '../../../../shared/agent-session/options/agent-session-option-catalog-claude-codex'
 
 // Prompt "new Claude session" start box (decision 1A): what the box offers and how its picks
 // become the launch's flags. The launch itself still goes through launchAgentInNewTab, so the

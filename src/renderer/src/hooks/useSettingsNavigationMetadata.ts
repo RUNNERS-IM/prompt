@@ -44,7 +44,6 @@ export function buildSettingsNavigationMetadata({
   isLocalWindowsHost = isWindows,
   isWindowsTerminalHost = isWindows,
   isWebClient,
-  nativeChatEnabled = false,
   hostQueuesMessages = false,
   typedChatPermissions = false,
   managedBrowserCreationEnabled = !isWebClient,
@@ -59,7 +58,6 @@ export function buildSettingsNavigationMetadata({
   isLocalWindowsHost?: boolean
   isWindowsTerminalHost?: boolean
   isWebClient: boolean
-  nativeChatEnabled?: boolean
   hostQueuesMessages?: boolean
   typedChatPermissions?: boolean
   managedBrowserCreationEnabled?: boolean
@@ -89,7 +87,6 @@ export function buildSettingsNavigationMetadata({
     isLocalWindowsHost,
     isWindowsTerminalHost,
     isWebClient,
-    nativeChatEnabled,
     hostQueuesMessages,
     typedChatPermissions,
     managedBrowserCreationEnabled,
@@ -125,7 +122,6 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
       ] as const
     })
   )
-  const nativeChatEnabled = settings?.experimentalNativeChat === true
   const typedChatPermissions = useChatSettingsOwnPermissions()
   const hostQueuesMessages = useStructuredAgentSessionHostQueuesMessages({ kind: 'local' })
   const isMac = isMacUserAgent()
@@ -168,7 +164,6 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
         isLocalWindowsHost,
         isWindowsTerminalHost,
         isWebClient,
-        nativeChatEnabled,
         hostQueuesMessages,
         typedChatPermissions,
         managedBrowserCreationEnabled,
@@ -188,7 +183,6 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
       isLocalWindowsHost,
       isWindowsTerminalHost,
       isWebClient,
-      nativeChatEnabled,
       hostQueuesMessages,
       typedChatPermissions,
       managedBrowserCreationEnabled,

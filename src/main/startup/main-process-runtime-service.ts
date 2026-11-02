@@ -49,6 +49,7 @@ import { recordDurableCrashBreadcrumb } from '../crash-reporting/durable-crash-b
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { getRuntimeEnvironmentRegistryRoot } from '../ipc/runtime-environments/runtime-environment-registry-root'
 import { promptPtyWebContents } from '../prompt-windows/prompt-window-registry'
+import { openOffscreenBrowserPageLink } from '../runtime/browser/offscreen-browser-page-link'
 
 export function getDesktopWindowStatus(): RuntimeDesktopWindowStatus {
   const activation = state.desktopActivationGate
@@ -181,6 +182,12 @@ export function initializeMainProcessRuntime(): OrcaRuntimeService {
   browserManager.setBrowserGuestStateChangedListener((worktreeId) => {
     runtime.notifyMobileSessionTabsChanged(worktreeId)
   })
+  browserManager.setOffscreenTabOpener((request) =>
+    openOffscreenBrowserPageLink(
+      (params, caller) => runtime.browserTabCreate(params, caller),
+      request
+    )
+  )
   browserSessionRegistry.onProfilesChanged = () => runtime.notifyBrowserProfilesChanged()
   return runtime
 }

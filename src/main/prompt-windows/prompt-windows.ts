@@ -1,6 +1,6 @@
 import { app, ipcMain, type BrowserWindow } from 'electron'
 import { randomUUID } from 'node:crypto'
-import type { Store } from '../persistence'
+import type { Store } from '../persistence/loading-store/store'
 import { installMainWindowFocusLifecycle } from '../window/main-window-focus-lifecycle'
 import { installMainWindowShortcutRouting } from '../window/main-window-shortcut-routing'
 import {

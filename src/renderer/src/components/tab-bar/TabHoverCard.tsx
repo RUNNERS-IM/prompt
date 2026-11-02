@@ -36,7 +36,7 @@ export function TabHoverCard({
   closeOnMenuOpen?: boolean
 }): React.JSX.Element {
   const [open, setOpen] = useState(false)
-  const triggerRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLElement>(null)
   useEffect(() => {
     if (!closeOnMenuOpen || !open) {
       return
@@ -45,21 +45,47 @@ export function TabHoverCard({
     window.addEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, close)
     return () => window.removeEventListener(CLOSE_ALL_CONTEXT_MENUS_EVENT, close)
   }, [closeOnMenuOpen, open])
+  // Remove the portal before navigation can start rendering a slower destination.
+  const dismiss = () => flushSync(() => setOpen(false))
+  const interactive = alert !== undefined && alert !== null
+  // Prompt: a card with session details says more than the title, so it opens even untruncated.
+  const hasDetails = details !== undefined && details !== null
+  const canOpen = (): boolean => {
+    const label = triggerRef.current?.querySelector<HTMLElement>('.tab-label')
+    return interactive || hasDetails || !!(label && label.scrollWidth > label.clientWidth)
+  }
   const handleOpenChange = (next: boolean): void => {
     // Why: rows stop pointerdown, so Radix cannot close the card itself, and its dwell timer
     // may still fire after the menu has opened.
     if (next && closeOnMenuOpen && hasOpenMenuInside(triggerRef.current)) {
       return
     }
-    setOpen(next)
+    setOpen(next && canOpen())
   }
-  // Remove the portal before navigation can start rendering a slower destination.
-  const dismiss = () => flushSync(() => setOpen(false))
-  const interactive = alert !== undefined && alert !== null
+
+  useEffect(() => {
+    if (!open || interactive || hasDetails) {
+      return
+    }
+    const label = triggerRef.current?.querySelector<HTMLElement>('.tab-label')
+    if (!label) {
+      return
+    }
+    const observer = new ResizeObserver(() => {
+      if (label.scrollWidth <= label.clientWidth) {
+        setOpen(false)
+      }
+    })
+    observer.observe(label)
+    return () => observer.disconnect()
+  }, [open, interactive, hasDetails, title])
+
   return (
     <Tooltip open={open} onOpenChange={handleOpenChange} disableHoverableContent={!interactive}>
       <TooltipTrigger
-        ref={triggerRef}
+        ref={(node) => {
+          triggerRef.current = node
+        }}
         asChild
         onFocus={(event) => {
           // Nested controls own their focus hints.
@@ -95,7 +121,7 @@ export function TabHoverCard({
             className="flex items-center gap-2 text-muted-foreground"
             data-tab-hover-card-program
           >
-            <span className="flex size-4 shrink-0 items-center justify-center" aria-hidden>
+            <span className="flex h-4 min-w-4 shrink-0 items-center justify-center" aria-hidden>
               {icon}
             </span>
             <span className="min-w-0 break-all">{programName}</span>

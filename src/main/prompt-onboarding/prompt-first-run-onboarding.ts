@@ -6,7 +6,7 @@ import {
   type PromptUserDataMarker
 } from '../../shared/prompt-user-data-location'
 import { applyAllAgentsPermission } from '../../shared/tui-agent-permission-choice'
-import type { Store } from '../persistence'
+import type { Store } from '../persistence/loading-store/store'
 
 // Help → Show onboarding writes closedAt: null; honour it for the rest of this launch.
 let reopenedThisLaunch = false

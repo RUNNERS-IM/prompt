@@ -8,7 +8,7 @@ import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import type { Translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import type { CompatVerdict } from '../transport/protocol-compat'
-import type { MobileWebBundleCompatVerdict } from '../transport/mobile-web-bundle-compat'
+import type { MobileWebBundleCompatVerdict } from '../transport/web-bundle/mobile-web-bundle-compat'
 import type { PageRouteRefusalVerdict } from '../mobile-web-shell/page-route-policy'
 import { PROMPT_RELEASES_URL, promptOr } from '../../../src/shared/prompt-upstream'
 
@@ -190,7 +190,7 @@ const styles = themedStyleSheet(() => ({
   },
   card: {
     backgroundColor: colors.bgPanel,
-    borderRadius: radii.card,
+    borderRadius: radii.surface,
     padding: spacing.lg,
     borderWidth: 1,
     borderColor: colors.borderSubtle
@@ -210,7 +210,7 @@ const styles = themedStyleSheet(() => ({
   primaryButton: {
     backgroundColor: colors.textPrimary,
     paddingVertical: spacing.sm + 2,
-    borderRadius: radii.button,
+    borderRadius: radii.control,
     alignItems: 'center',
     marginBottom: spacing.sm
   },
@@ -222,7 +222,7 @@ const styles = themedStyleSheet(() => ({
   secondaryButton: {
     backgroundColor: colors.bgRaised,
     paddingVertical: spacing.sm + 2,
-    borderRadius: radii.button,
+    borderRadius: radii.control,
     alignItems: 'center'
   },
   secondaryButtonText: {
