@@ -3,6 +3,10 @@ import { readFileSync, writeFileSync, renameSync } from 'node:fs'
 import { listEnvironments } from '../../../shared/runtime-environment-store'
 import type { KnownRuntimeEnvironment } from '../../../shared/runtime-environments'
 import { verifyAndAddRuntimeEnvironmentFromPairingCode } from '../../ipc/runtime-environments/runtime-environment-pairing-verification'
+import type {
+  PromptTailnetComputer,
+  PromptTailnetConnectResult
+} from '../../../shared/prompt-computers'
 import type { TailnetPeer, TailscaleCli } from './tailscale-cli'
 import {
   TAILNET_PAIR_PATH,
@@ -208,6 +212,46 @@ export class TailnetAutoPair {
       writeState(this.deps.userDataPath, { added: [...added] })
     }
     return addedNames
+  }
+
+  /** Tailnet computers not in the picker yet, for the picker's "connect" rows. */
+  async listUnsavedComputers(): Promise<PromptTailnetComputer[]> {
+    const status = await this.deps.tailscale.status()
+    if (!status?.running) {
+      return []
+    }
+    const saved = this.deps.listSaved()
+    return status.peers
+      .filter(
+        (peer) =>
+          !peer.sharedIn &&
+          peer.stableId !== '' &&
+          !CLIENT_ONLY_OS.has(peer.os.toLowerCase()) &&
+          !isPeerSaved(peer, saved)
+      )
+      .map((peer) => ({ id: peer.stableId, name: peer.hostName, online: peer.online }))
+      .sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name))
+  }
+
+  /** Connects one tailnet computer now, also one the user removed before. */
+  async connect(stableId: string): Promise<PromptTailnetConnectResult> {
+    const status = await this.deps.tailscale.status()
+    const peer = status?.peers.find((p) => p.stableId === stableId && !p.sharedIn)
+    if (!status?.running || !peer) {
+      return { ok: false, reason: 'not_found' }
+    }
+    if (!peer.online) {
+      return { ok: false, reason: 'offline' }
+    }
+    await this.deps.ensureNetworkExposure()
+    const name = await this.tryPeer(peer)
+    if (!name) {
+      return { ok: false, reason: 'no_prompt' }
+    }
+    const state = readState(this.deps.userDataPath)
+    writeState(this.deps.userDataPath, { added: [...new Set([...state.added, stableId])] })
+    this.failedAt.delete(stableId)
+    return { ok: true, name }
   }
 
   private async tryPeer(peer: TailnetPeer): Promise<string | null> {

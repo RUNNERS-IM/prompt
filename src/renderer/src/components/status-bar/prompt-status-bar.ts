@@ -19,8 +19,10 @@ export function promptShowsStatusSegment(segment: PromptStatusSegment): boolean 
 }
 
 // Prompt sessions run Claude only, so the other AI usage meters, their status bar menu rows and
-// the "connect an AI provider account" nudge stay hidden. Unit tests keep upstream behavior.
+// the "connect an AI provider account" nudge stay hidden. Memory/CPU usage belongs to the Monitor
+// app (user decision 2026-11-02). Unit tests keep upstream behavior.
 const PROMPT_HIDDEN_STATUS_BAR_ITEMS: ReadonlySet<StatusBarItem> = new Set([
+  'resource-usage',
   'codex',
   'gemini',
   'antigravity',

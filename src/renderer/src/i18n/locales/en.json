@@ -23175,7 +23175,10 @@
       "offline": "Offline",
       "add": "Add computer…",
       "share": "Share this computer…",
-      "shareTitle": "Share this computer"
+      "shareTitle": "Share this computer",
+      "tailnetHeading": "On your Tailscale network",
+      "connect": "Connect",
+      "noPrompt": "Prompt is not running there"
     },
     "defaultModel": {
       "title": "Default model",

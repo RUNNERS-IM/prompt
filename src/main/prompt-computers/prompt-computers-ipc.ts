@@ -1,5 +1,10 @@
 import { ipcMain } from 'electron'
-import { PROMPT_LOCAL_HOST_NAME_CHANNEL } from '../../shared/prompt-computers'
+import {
+  PROMPT_LOCAL_HOST_NAME_CHANNEL,
+  PROMPT_TAILNET_COMPUTERS_CHANNEL,
+  PROMPT_TAILNET_CONNECT_CHANNEL,
+  type PromptTailnetConnectResult
+} from '../../shared/prompt-computers'
 import { readPromptLocalHostName } from './prompt-local-host-name'
 import { setPromptRuntimeShareServer, type PromptRuntimeShareServer } from './prompt-runtime-share'
 import { setPromptHttpRoutes } from './prompt-http-routes'
@@ -24,6 +29,18 @@ export function registerPromptComputerHandlers(
   setPromptRuntimeShareServer(runtimeRpc)
   ipcMain.removeHandler(PROMPT_LOCAL_HOST_NAME_CHANNEL)
   ipcMain.handle(PROMPT_LOCAL_HOST_NAME_CHANNEL, () => readPromptLocalHostName())
+  ipcMain.removeHandler(PROMPT_TAILNET_COMPUTERS_CHANNEL)
+  ipcMain.handle(PROMPT_TAILNET_COMPUTERS_CHANNEL, () =>
+    tailnetAutoPair ? tailnetAutoPair.listUnsavedComputers() : []
+  )
+  ipcMain.removeHandler(PROMPT_TAILNET_CONNECT_CHANNEL)
+  ipcMain.handle(
+    PROMPT_TAILNET_CONNECT_CHANNEL,
+    (_event, id: unknown): Promise<PromptTailnetConnectResult> | PromptTailnetConnectResult =>
+      tailnetAutoPair && typeof id === 'string'
+        ? tailnetAutoPair.connect(id)
+        : { ok: false, reason: 'unavailable' }
+  )
 
   tailnetAutoPair?.stop()
   tailnetAutoPair = null

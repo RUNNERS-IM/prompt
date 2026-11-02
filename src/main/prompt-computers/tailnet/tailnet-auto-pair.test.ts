@@ -264,3 +264,53 @@ describe('replacePendingDeviceNamed', () => {
     expect(second.token).not.toBe(first.token)
   })
 })
+
+describe('picker rows for tailnet computers', () => {
+  it('lists unsaved computers, online first, without phones or shared-in devices', async () => {
+    const service = new TailnetAutoPair({
+      userDataPath: mkdtempSync(join(tmpdir(), 'tailnet-auto-pair-')),
+      tailscale: cli({
+        status: async () => ({
+          running: true,
+          self,
+          peers: [
+            peer({ stableId: 'b-off', hostName: 'b', online: false }),
+            peer({ stableId: 'a-on', hostName: 'z' }),
+            peer({ stableId: 'phone', os: 'android' }),
+            peer({ stableId: 'guest', sharedIn: true }),
+            peer({
+              stableId: 'saved',
+              hostName: 'm2-pro-2',
+              addresses: ['100.79.89.7'],
+              dnsName: ''
+            })
+          ]
+        })
+      }),
+      ensureNetworkExposure: async () => {},
+      listSaved: () => [saved('ws://100.79.89.7:6768')]
+    })
+    expect(await service.listUnsavedComputers()).toEqual([
+      { id: 'a-on', name: 'z', online: true },
+      { id: 'b-off', name: 'b', online: false }
+    ])
+  })
+
+  it('connects on request even after a failed or removed attempt, and says why it could not', async () => {
+    const userDataPath = mkdtempSync(join(tmpdir(), 'tailnet-auto-pair-'))
+    let answer: string | null = null
+    const service = new TailnetAutoPair({
+      userDataPath,
+      tailscale: cli(),
+      ensureNetworkExposure: async () => {},
+      fetchPairing: async () =>
+        answer ? { v: 1 as const, pairingCode: answer, machineName: 'Mac' } : null,
+      addEnvironment: async () => true,
+      listSaved: () => []
+    })
+    expect(await service.connect('n-m2pro1')).toEqual({ ok: false, reason: 'no_prompt' })
+    expect(await service.connect('missing')).toEqual({ ok: false, reason: 'not_found' })
+    answer = 'prompt://pair?code=y'
+    expect(await service.connect('n-m2pro1')).toEqual({ ok: true, name: 'Mac' })
+  })
+})

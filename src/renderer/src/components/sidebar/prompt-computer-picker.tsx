@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Check, ChevronDown, Laptop, Plus, Share2 } from 'lucide-react'
+import { Check, ChevronDown, Laptop, Loader2, Plus, Share2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -8,10 +8,15 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
+import type {
+  PromptTailnetComputer,
+  PromptTailnetConnectResult
+} from '../../../../shared/prompt-computers'
 import { usePublishedMachineName } from '../settings/use-published-machine-name'
 import { AddRemoteHostDialog, type AddRemoteHostMode } from './AddRemoteHostDialog'
 import { PromptShareComputerDialog } from './prompt-share-computer-dialog'
@@ -53,6 +58,14 @@ function statusLabel(status: PromptComputerStatus): string {
   }
 }
 
+function tailnetFailureLabel(
+  reason: Extract<PromptTailnetConnectResult, { ok: false }>['reason']
+): string {
+  return reason === 'no_prompt'
+    ? translate('prompt.computerPicker.noPrompt', 'Prompt is not running there')
+    : translate('prompt.computerPicker.offline', 'Offline')
+}
+
 function rowLabel(row: PromptComputerRow): string {
   return row.isLocal
     ? `${row.label} ${translate('prompt.computerPicker.thisMac', '(this Mac)')}`
@@ -74,6 +87,10 @@ export function PromptComputerPicker(): React.JSX.Element {
   const publishedMachineName = usePublishedMachineName(machineName)
   const [addMode, setAddMode] = useState<AddRemoteHostMode | null>(null)
   const [shareOpen, setShareOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [tailnetComputers, setTailnetComputers] = useState<PromptTailnetComputer[]>([])
+  const [connectingId, setConnectingId] = useState<string | null>(null)
+  const [tailnetFailures, setTailnetFailures] = useState<Record<string, string>>({})
   const environmentIdsBeforeAdd = useRef<ReadonlySet<string> | null>(null)
 
   const localLabel =
@@ -115,6 +132,49 @@ export function PromptComputerPicker(): React.JSX.Element {
     }
   }, [runtimeEnvironments, select])
 
+  // Tailnet computers not paired yet are listed each time the menu opens; Prompt knows them
+  // from Tailscale alone, no other app is involved.
+  useEffect(() => {
+    if (!menuOpen) {
+      return
+    }
+    let cancelled = false
+    void window.api.promptComputers
+      .tailnetComputers()
+      .then((computers) => {
+        if (!cancelled) {
+          setTailnetComputers(computers)
+        }
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [menuOpen, runtimeEnvironments])
+
+  const connectTailnetComputer = async (computer: PromptTailnetComputer): Promise<void> => {
+    if (connectingId) {
+      return
+    }
+    environmentIdsBeforeAdd.current = new Set(runtimeEnvironments.map((env) => env.id))
+    setConnectingId(computer.id)
+    setTailnetFailures(({ [computer.id]: _previous, ...rest }) => rest)
+    try {
+      const result = await window.api.promptComputers.connectTailnetComputer(computer.id)
+      if (result.ok) {
+        setMenuOpen(false)
+      } else {
+        environmentIdsBeforeAdd.current = null
+        setTailnetFailures((failures) => ({
+          ...failures,
+          [computer.id]: tailnetFailureLabel(result.reason)
+        }))
+      }
+    } finally {
+      setConnectingId(null)
+    }
+  }
+
   const openAddComputer = (): void => {
     environmentIdsBeforeAdd.current = new Set(runtimeEnvironments.map((env) => env.id))
     setAddMode('server')
@@ -126,7 +186,7 @@ export function PromptComputerPicker(): React.JSX.Element {
 
   return (
     <div className="px-2 pt-2" data-prompt-computer-picker="">
-      <DropdownMenu>
+      <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
         <DropdownMenuTrigger asChild>
           <button
             type="button"
@@ -177,6 +237,44 @@ export function PromptComputerPicker(): React.JSX.Element {
               )
             })}
           </div>
+          {tailnetComputers.length > 0 ? (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
+                {translate('prompt.computerPicker.tailnetHeading', 'On your Tailscale network')}
+              </DropdownMenuLabel>
+              <div className="max-h-60 overflow-y-auto scrollbar-sleek">
+                {tailnetComputers.map((computer) => {
+                  const connecting = connectingId === computer.id
+                  const note = connecting
+                    ? translate('prompt.computerPicker.connecting', 'Connecting')
+                    : (tailnetFailures[computer.id] ??
+                      (computer.online
+                        ? translate('prompt.computerPicker.connect', 'Connect')
+                        : translate('prompt.computerPicker.offline', 'Offline')))
+                  return (
+                    <DropdownMenuItem
+                      key={computer.id}
+                      disabled={!computer.online || connectingId !== null}
+                      onSelect={(event) => {
+                        event.preventDefault()
+                        void connectTailnetComputer(computer)
+                      }}
+                      data-prompt-tailnet-computer={computer.id}
+                    >
+                      {connecting ? (
+                        <Loader2 className="size-3.5 animate-spin" strokeWidth={1.5} />
+                      ) : (
+                        <StatusDot status={computer.online ? 'connecting' : 'offline'} />
+                      )}
+                      <span className="min-w-0 flex-1 truncate">{computer.name}</span>
+                      <span className="shrink-0 text-xs text-muted-foreground">{note}</span>
+                    </DropdownMenuItem>
+                  )
+                })}
+              </div>
+            </>
+          ) : null}
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={openAddComputer} data-prompt-computer-action="add">
             <Plus strokeWidth={1.5} />

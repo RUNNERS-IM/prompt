@@ -22618,7 +22618,10 @@
       "offline": "꺼져 있음",
       "add": "컴퓨터 추가…",
       "share": "이 컴퓨터 공유…",
-      "shareTitle": "이 컴퓨터 공유"
+      "shareTitle": "이 컴퓨터 공유",
+      "tailnetHeading": "같은 Tailscale의 컴퓨터",
+      "connect": "연결",
+      "noPrompt": "Prompt가 꺼져 있음"
     },
     "defaultModel": {
       "title": "기본 모델",
