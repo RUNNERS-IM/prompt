@@ -182,7 +182,8 @@ describe('checks panel concrete content', () => {
       'rate limited',
       { status: 'error', errorType: 'rate_limited' },
       'GitHub refresh paused',
-      'Orca will retry at',
+      // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+      'Prompt will retry at',
       true
     ],
     [

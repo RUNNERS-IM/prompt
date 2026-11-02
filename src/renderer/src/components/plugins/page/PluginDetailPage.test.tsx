@@ -466,7 +466,8 @@ describe('PluginDetailPage', () => {
         expect(banner(container) !== null).toBe(shown)
         if (shown) {
           expect(banner(container)?.textContent).toBe(
-            'Not an official plugin: Make sure you trust stablyai before installing. This plugin runs the publisher’s code inside Orca.'
+            // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+            'Not an official plugin: Make sure you trust stablyai before installing. This plugin runs the publisher’s code inside Prompt.'
           )
           expect(banner(container)?.querySelector('button')).toBeNull()
         }
@@ -482,7 +483,7 @@ describe('PluginDetailPage', () => {
       const container = await render(pluginListEntryFromListing(page), () => new Promise(() => {}))
       expect(banner(container)?.getAttribute('data-plugin-not-official')).toBe('translations')
       expect(banner(container)?.textContent).toBe(
-        'Not an official plugin: Translations can change any text in Orca. Make sure you trust stablyai.'
+        'Not an official plugin: Translations can change any text in Prompt. Make sure you trust stablyai.'
       )
     })
 

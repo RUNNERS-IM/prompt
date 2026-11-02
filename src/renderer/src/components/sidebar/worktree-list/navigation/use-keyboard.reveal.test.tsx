@@ -476,7 +476,8 @@ it('retires an old header, rejects stale preprocessing, and gives a same-key req
   drain()
   expect(store.getState().pendingRevealWorktree).toBeNull()
   expectVisible(child, 1020)
-  expect(list.scrollTop).toBe(866)
+  // Prompt: the project header row is 34px (upstream 28), so sticky clearance is 6px larger.
+  expect(list.scrollTop).toBe(860)
   expect(toastError).not.toHaveBeenCalled()
 })
 

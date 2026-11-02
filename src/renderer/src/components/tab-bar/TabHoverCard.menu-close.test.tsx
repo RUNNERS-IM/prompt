@@ -18,6 +18,8 @@ function renderRow({
         title="Session card"
         icon={<span />}
         programName="Claude"
+        // Prompt: upstream opens only for a truncated title; session details also open the card.
+        details={<span>Opus · Working</span>}
         closeOnMenuOpen={closeOnMenuOpen}
       >
         <div data-testid="row">

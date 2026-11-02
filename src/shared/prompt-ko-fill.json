@@ -53,7 +53,6 @@
   "auto.components.sidebar.AutoRenameFailedDialog.dismissing": "닫는 중…",
   "auto.components.sidebar.ForgetSshWorkspaceDialog.removeTitle": "Orca에서 “{{name}}”을(를) 제거할까요?",
   "auto.components.sidebar.ForgetSshWorkspaceDialog.savedHostBody": "이 워크스페이스의 프로젝트는 {{host}}의 Orca 서버가 관리하지 않으므로 Orca가 그곳에서 삭제할 수 없습니다. Orca에서 제거할 수는 있으며, {{host}}의 파일, Git 워크트리, 브랜치는 그대로 남습니다.",
-  "auto.components.sidebar.AddWslHostFormPanel.wsl1Hint": "WSL 1 배포판은 호스트로 쓸 수 없습니다. Windows 터미널에서 다음 명령으로 변환하세요: wsl --set-version {{value0}} 2",
   "auto.components.sidebar.wslHostRowStatus.paused": "이 빌드에서는 WSL 호스트가 일시 중지되어 있습니다. 저장된 호스트와 그 프로젝트는 계속 동작하지만, 호스트 추가와 프로젝트 이동은 일시 중지됩니다.",
   "auto.components.sidebar.wslHostRowStatus.pausedShort": "이 빌드에서는 WSL 배포판 추가가 일시 중지되어 있습니다.",
   "auto.components.settings.ComputerUsePane.794807aa21": "macOS 개인정보 보호 및 보안 요청을 대기열에 넣었습니다. 더 새로운 요청이나 재설정으로 대체될 수 있습니다",

@@ -229,7 +229,8 @@ it.each([
       expect(mocks.toast).toHaveBeenCalledExactlyOnceWith(
         feedback === 'retry'
           ? 'The structured agent session is not available yet. Retry in a moment.'
-          : "This chat can't be reopened until Orca is updated."
+          : // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+            "This chat can't be reopened until Prompt is updated."
       )
     } else {
       expect(mocks.toast).not.toHaveBeenCalled()
@@ -317,7 +318,7 @@ it('gives crew terminal and dispatch opens the sender remedies, named for the ro
           : [
               outcome === 'transient'
                 ? 'The structured agent session is not available yet. Retry in a moment.'
-                : "This chat can't be reopened until Orca is updated."
+                : "This chat can't be reopened until Prompt is updated."
             ]
       )
       expect(mocks.info).toHaveBeenCalledTimes(outcome === 'gone' ? 1 : 0)

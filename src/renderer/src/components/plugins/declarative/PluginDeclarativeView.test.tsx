@@ -216,7 +216,8 @@ describe('PluginDeclarativeView', () => {
         node('IconButton', { icon: 'skull', label: 'Odd', onPress: cb('c0') })
       ])
     )
-    expect(screen.getByText('Carousel is not available in this version of Orca')).toBeTruthy()
+    // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+    expect(screen.getByText('Carousel is not available in this version of Prompt')).toBeTruthy()
     expect(screen.getByRole('button', { name: 'Odd' }).querySelector('svg')).not.toBeNull()
   })
 

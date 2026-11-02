@@ -34,6 +34,7 @@ const SUBGROUP_SUMMARIES: Readonly<Record<string, string>> = {
   'app terminal-daemon': 'Inspect or restart the terminal daemon',
   'app profile-state': 'Export or roll back profile state',
   'app agent-hooks': 'Agent status hooks',
+  'app plugin': 'Author, test, and run plugins',
   'project setup': 'Per-host project setups',
   'browser tab': 'Browser tabs and profiles',
   'browser identity': 'Browser identity',

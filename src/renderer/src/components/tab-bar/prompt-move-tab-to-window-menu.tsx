@@ -7,6 +7,13 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger
 } from '@/components/ui/dropdown-menu'
+import {
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger
+} from '@/components/ui/context-menu'
 import { translate } from '@/i18n/i18n'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { listPromptWindows, movePromptTabToWindow } from '@/lib/prompt-windows'
@@ -36,9 +43,12 @@ function windowLabel(summary: PromptWindowSummary): string {
  * tabs, where every window already shows every terminal tab.
  */
 export function PromptMoveTabToWindowSubmenu({
-  tabId
+  tabId,
+  menuKind = 'dropdown'
 }: {
   tabId: string
+  /** Radix sub-parts must match the menu they sit in; the tab right-click menu is a ContextMenu. */
+  menuKind?: 'dropdown' | 'context'
 }): React.JSX.Element | null {
   useUiLanguageRevision()
   const [windows, setWindows] = useState<PromptWindowSummary[]>([])
@@ -53,26 +63,29 @@ export function PromptMoveTabToWindowSubmenu({
   if (shared) {
     return null
   }
+  const context = menuKind === 'context'
+  const Sub = context ? ContextMenuSub : DropdownMenuSub
+  const SubTrigger = context ? ContextMenuSubTrigger : DropdownMenuSubTrigger
+  const SubContent = context ? ContextMenuSubContent : DropdownMenuSubContent
+  const Item = context ? ContextMenuItem : DropdownMenuItem
+  const Separator = context ? ContextMenuSeparator : DropdownMenuSeparator
   return (
-    <DropdownMenuSub onOpenChange={refresh}>
-      <DropdownMenuSubTrigger>
+    <Sub onOpenChange={refresh}>
+      <SubTrigger>
         <AppWindow className="size-3.5 shrink-0" />
         {translate('prompt.windows.moveTabToWindow', 'Move Tab to Window')}
-      </DropdownMenuSubTrigger>
-      <DropdownMenuSubContent>
+      </SubTrigger>
+      <SubContent>
         {windows.map((summary) => (
-          <DropdownMenuItem
-            key={summary.key}
-            onSelect={() => movePromptTabToWindow(tabId, summary.key)}
-          >
+          <Item key={summary.key} onSelect={() => movePromptTabToWindow(tabId, summary.key)}>
             {windowLabel(summary)}
-          </DropdownMenuItem>
+          </Item>
         ))}
-        {windows.length > 0 ? <DropdownMenuSeparator /> : null}
-        <DropdownMenuItem onSelect={() => movePromptTabToWindow(tabId, PROMPT_NEW_WINDOW_TARGET)}>
+        {windows.length > 0 ? <Separator /> : null}
+        <Item onSelect={() => movePromptTabToWindow(tabId, PROMPT_NEW_WINDOW_TARGET)}>
           {translate('prompt.windows.newWindow', 'New Window')}
-        </DropdownMenuItem>
-      </DropdownMenuSubContent>
-    </DropdownMenuSub>
+        </Item>
+      </SubContent>
+    </Sub>
   )
 }

@@ -157,7 +157,8 @@ async function renderPane() {
 it('renders usage-limit notice rows only when their own schedule changes', async () => {
   const step = await renderPane()
   await step({ type: 'snapshot', sessions: [limited('scheduled'), summary('other')] })
-  expect(screen.getByText(/Orca will continue this chat at/)).toBeInTheDocument()
+  // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+  expect(screen.getByText(/Prompt will continue this chat at/)).toBeInTheDocument()
   expect(screen.getByRole('button', { name: 'Hand Off to Another Agent' })).toBeInTheDocument()
 
   await step({ type: 'status', session: summary('other', { status: 'working', updatedAt: 2 }) })
@@ -177,7 +178,7 @@ it('renders usage-limit notice rows only when their own schedule changes', async
 
   await step({ type: 'status', session: limited('cancelled', { updatedAt: 4 }) })
   expect(renders.rows).toBeGreaterThan(0)
-  expect(screen.getByText("Orca won't continue this chat automatically.")).toBeInTheDocument()
+  expect(screen.getByText("Prompt won't continue this chat automatically.")).toBeInTheDocument()
 })
 
 it('re-renders notice rows on the shared minute clock only when the cut ages out', async () => {
@@ -190,7 +191,7 @@ it('re-renders notice rows on the shared minute clock only when the cut ages out
   vi.setSystemTime(reset + NATIVE_CHAT_USAGE_LIMIT_MAX_OVERDUE_MS - 1_000)
   await step('minute')
   expect(renders.rows).toBeGreaterThan(0)
-  expect(screen.queryByText(/Orca will continue this chat at/)).toBeNull()
+  expect(screen.queryByText(/Prompt will continue this chat at/)).toBeNull()
   expect(screen.getByRole('button', { name: 'Hand Off to Another Agent' })).toBeInTheDocument()
   // Nothing left to expire, so the clock no longer renders the pane.
   await step('minute')

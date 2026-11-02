@@ -11,6 +11,14 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import {
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger
+} from '@/components/ui/context-menu'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 import { getPtyIdForPaneKey } from '@/hooks/pane-key-pty-id'
@@ -83,15 +91,21 @@ const MENU_EVENT_GUARDS = {
   onContextMenu: stopMenuEvent
 }
 
+/** Radix sub-parts must match the menu they sit in: a DropdownMenu or a ContextMenu (tab right-click). */
+export type PromptMenuKind = 'dropdown' | 'context'
+
 function ClaudeModelRadioItems({
   paneKey,
-  reportedModel
+  reportedModel,
+  menuKind = 'dropdown'
 }: {
   paneKey: string
   reportedModel: string | undefined
+  menuKind?: PromptMenuKind
 }): React.JSX.Element {
   return (
     <ClaudeModelRadioGroup
+      menuKind={menuKind}
       value={currentClaudeModelId(reportedModel)}
       onModelChange={(model) => void switchClaudePaneModel(paneKey, model)}
     />
@@ -106,15 +120,19 @@ export function ClaudeModelRadioGroup({
   value,
   onModelChange,
   defaultLabel,
-  onDefault
+  onDefault,
+  menuKind = 'dropdown'
 }: {
   value: string
   onModelChange: (model: CatalogModel) => void
   defaultLabel?: string
   onDefault?: () => void
+  menuKind?: PromptMenuKind
 }): React.JSX.Element {
+  const RadioGroup = menuKind === 'context' ? ContextMenuRadioGroup : DropdownMenuRadioGroup
+  const RadioItem = menuKind === 'context' ? ContextMenuRadioItem : DropdownMenuRadioItem
   return (
-    <DropdownMenuRadioGroup
+    <RadioGroup
       value={value}
       onValueChange={(id) => {
         if (id === '' && onDefault) {
@@ -127,13 +145,13 @@ export function ClaudeModelRadioGroup({
         }
       }}
     >
-      {defaultLabel ? <DropdownMenuRadioItem value="">{defaultLabel}</DropdownMenuRadioItem> : null}
+      {defaultLabel ? <RadioItem value="">{defaultLabel}</RadioItem> : null}
       {CLAUDE_MODELS.map((model) => (
-        <DropdownMenuRadioItem key={model.id} value={model.id} title={model.description}>
+        <RadioItem key={model.id} value={model.id} title={model.description}>
           {model.label}
-        </DropdownMenuRadioItem>
+        </RadioItem>
       ))}
-    </DropdownMenuRadioGroup>
+    </RadioGroup>
   )
 }
 
@@ -172,37 +190,52 @@ export function claudeModelPaneKeyFromTarget(target: EventTarget | null): string
 
 /** "Model ▸" submenu plus a separator, placed first in an existing context menu. Renders nothing when the pane is not a Claude session. */
 export function PromptClaudeModelSubmenu({
-  paneKey
+  paneKey,
+  menuKind = 'dropdown'
 }: {
   paneKey: string | null
+  menuKind?: PromptMenuKind
 }): React.JSX.Element | null {
   useUiLanguageRevision()
   const entry = useAppStore((s) => (paneKey ? s.agentStatusByPaneKey?.[paneKey] : undefined))
   if (!paneKey || entry?.agentType !== 'claude') {
     return null
   }
+  const context = menuKind === 'context'
+  const Sub = context ? ContextMenuSub : DropdownMenuSub
+  const SubTrigger = context ? ContextMenuSubTrigger : DropdownMenuSubTrigger
+  const SubContent = context ? ContextMenuSubContent : DropdownMenuSubContent
+  const Separator = context ? ContextMenuSeparator : DropdownMenuSeparator
   return (
     <>
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          {translate('prompt.claudeModel.submenu', 'Model')}
-        </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent>
-          <ClaudeModelRadioItems paneKey={paneKey} reportedModel={entry.model?.trim()} />
-        </DropdownMenuSubContent>
-      </DropdownMenuSub>
-      <DropdownMenuSeparator />
+      <Sub>
+        <SubTrigger>{translate('prompt.claudeModel.submenu', 'Model')}</SubTrigger>
+        <SubContent>
+          <ClaudeModelRadioItems
+            paneKey={paneKey}
+            reportedModel={entry.model?.trim()}
+            menuKind={menuKind}
+          />
+        </SubContent>
+      </Sub>
+      <Separator />
     </>
   )
 }
 
 /** Tab variant: the submenu targets the tab's focused pane. */
-export function PromptClaudeTabModelSubmenu({ tabId }: { tabId: string }): React.JSX.Element {
+export function PromptClaudeTabModelSubmenu({
+  tabId,
+  menuKind = 'dropdown'
+}: {
+  tabId: string
+  menuKind?: PromptMenuKind
+}): React.JSX.Element {
   const paneKey = useAppStore((s) => {
     const leafId = s.terminalLayoutsByTabId?.[tabId]?.activeLeafId
     return leafId && isTerminalLeafId(leafId) ? makePaneKey(tabId, leafId) : null
   })
-  return <PromptClaudeModelSubmenu paneKey={paneKey} />
+  return <PromptClaudeModelSubmenu paneKey={paneKey} menuKind={menuKind} />
 }
 
 /** Marks live Claude rows so right-click keeps the workspace menu and adds "Model ▸" first. */

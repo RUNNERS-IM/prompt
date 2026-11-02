@@ -137,7 +137,9 @@ function clickCreate(row: GroupHeaderRow): void {
       })}
     </TooltipProvider>
   )
-  fireEvent.click(view.getByRole('button', { name: /Create new worktree for/ }))
+  // Prompt: the header "+" (PromptRepoHeaderNewButton) opens a menu; New Workspace… is the old create.
+  fireEvent.keyDown(view.getByRole('button', { name: /^New in / }), { key: 'Enter' })
+  fireEvent.click(view.getByRole('menuitem', { name: /New Workspace/ }))
 }
 
 it("opens Create on a same-id twin's own host in a view that shows only that host", () => {

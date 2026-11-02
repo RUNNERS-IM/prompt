@@ -13,7 +13,8 @@ vi.mock('@/lib/client-environment-info', () => ({
 import { TerminalErrorToast, humanizeTerminalError } from './TerminalErrorToast'
 
 const STOPPED_SENTENCE =
-  "The WSL distro Ubuntu is stopped, so Orca didn't start this terminal. Start the distro, then try again."
+  // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+  "The WSL distro Ubuntu is stopped, so Prompt didn't start this terminal. Start the distro, then try again."
 
 beforeEach(() => {
   environmentMocks.resolveFooter.mockReset()
@@ -41,7 +42,7 @@ describe('a held WSL terminal in the error banner', () => {
 
   it('reads an unchecked distro as unverifiable, not stopped', () => {
     expect(humanizeTerminalError('terminal_held_wsl_distro_unverifiable:Debian')).toBe(
-      "Orca couldn't check whether the WSL distro Debian is running, so it didn't start this terminal. Start the distro, then try again."
+      "Prompt couldn't check whether the WSL distro Debian is running, so it didn't start this terminal. Start the distro, then try again."
     )
   })
 

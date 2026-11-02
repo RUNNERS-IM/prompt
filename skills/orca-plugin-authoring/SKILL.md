@@ -37,7 +37,7 @@ to another executable, which could silently target a different Orca build.
 ## Load the version-matched guide before running Orca commands
 
 ```text
-ORCA skills get orca-plugin-authoring
+PROMPT skill get orca-plugin-authoring
 ```
 
 Prefer `--json`. Use the selected executable's `--help` for commands or flags the guide does

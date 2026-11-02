@@ -242,8 +242,9 @@ it('uses the real Dashboard constructor, OSC primer/provider and genuine claim; 
   )
   pointer(screen, 'mousemove')
   pointer(screen, 'contextmenu', { button: 2, buttons: 0 })
-  await waitFor(() => expect(view.getByRole('button', { name: /Orca Browser/ })).toBeTruthy())
-  fireEvent.click(view.getByRole('button', { name: /Orca Browser/ }))
+  // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+  await waitFor(() => expect(view.getByRole('button', { name: /Prompt Browser/ })).toBeTruthy())
+  fireEvent.click(view.getByRole('button', { name: /Prompt Browser/ }))
   await waitFor(() => expect(foreground).toHaveBeenCalledOnce())
   expect(store.getState().browserPagesByWorkspace).not.toEqual({})
   view.unmount()
@@ -340,7 +341,7 @@ it.each([false, true])(
     pointer(screen, 'mousedown')
     pointer(screen, 'mouseup')
     const system = await view.findByRole('button', { name: /System Browser/ })
-    expect(view.queryByRole('button', { name: /Orca Browser|Open in this group/ })).toBeNull()
+    expect(view.queryByRole('button', { name: /Prompt Browser|Open in this group/ })).toBeNull()
     fireEvent.click(view.getByRole('button', { name: 'Copy link' }))
     await waitFor(() => expect(window.api.ui.writeClipboardText).toHaveBeenCalledWith(URL_TO_OPEN))
     fireEvent.click(system)
@@ -386,7 +387,7 @@ it('gives one useful refusal when a real saved chooser action loses runtime brow
   const screen = screenFor(view.container)
   pointer(screen, 'mousedown')
   pointer(screen, 'mouseup')
-  const savedAction = await view.findByRole('button', { name: /Orca Browser/ })
+  const savedAction = await view.findByRole('button', { name: /Prompt Browser/ })
   // Actual failed-status refresh shape, after the real request has captured its action.
   store.setState({ runtimeStatusByEnvironmentId: new Map([['e', { status: null, checkedAt: 2 }]]) })
   fireEvent.click(savedAction)
@@ -671,7 +672,7 @@ it('honors primary/alternate and Open on real literal URLs, keeps background con
   pointer(screenFor(view.container), 'contextmenu', { button: 2 })
   // This real-shaped remote card has no eligible managed-browser route in the local-only workspace.
   await waitFor(() => expect(view.getByRole('button', { name: /System Browser/ })).toBeTruthy())
-  expect(view.queryByRole('button', { name: /Orca Browser/ })).toBeNull()
+  expect(view.queryByRole('button', { name: /Prompt Browser/ })).toBeNull()
 })
 
 it('refuses real selected/drag/nonlink reports and retains the real in-window Board chooser and Settings handoff', async () => {

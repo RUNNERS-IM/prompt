@@ -85,12 +85,13 @@ describe('terminal colour overrides per theme slot (#10561)', () => {
   })
 
   it('keeps the theme colour for a field cleared in memory', () => {
+    // Prompt: the default dark theme is Prompt Dark (#292929), not Ghostty Default Style Dark.
     expect(
       resolveConfiguredTerminalColors(
         { ...base, terminalColorOverrides: { background: undefined } },
         true
       )
-    ).toEqual({ foreground: '#ffffff', background: '#282c34' })
+    ).toEqual({ foreground: '#ffffff', background: '#292929' })
   })
 })
 
@@ -160,7 +161,8 @@ describe('deleting an imported terminal theme (#32138)', () => {
     const { updates, undo } = terminalCustomThemeRemoval(settings, 'warp:dusk')
     expect(updates).toEqual({
       terminalCustomThemes: [kept],
-      terminalThemeDark: 'Ghostty Default Style Dark',
+      // Prompt: deleting falls back to Prompt's default dark theme.
+      terminalThemeDark: 'Prompt Dark',
       terminalColorOverrides: undefined,
       terminalThemeLight: 'Builtin Tango Light',
       terminalColorOverridesLight: undefined

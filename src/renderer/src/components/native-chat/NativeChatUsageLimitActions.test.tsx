@@ -377,6 +377,7 @@ it('withdraws the source schedule after hand-off starts without waiting for canc
     ['chat', { usageLimitContinue: { turnItemId: 'cut', resetsAt, state: 'cancelled' } }]
   ])
   view.rerender(<ScheduledRow />)
-  expect(screen.getByText("Orca won't continue this chat automatically.")).toBeInTheDocument()
+  // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+  expect(screen.getByText("Prompt won't continue this chat automatically.")).toBeInTheDocument()
   finish()
 })

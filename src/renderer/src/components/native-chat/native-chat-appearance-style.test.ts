@@ -48,6 +48,8 @@ describe('nativeChatAppearanceStyle terminal interface', () => {
     const id = 'plugin:samples.dawn/dawn'
     const settings = makeSettings({
       theme: 'dark',
+      // Prompt: the plugin system defaults off, so turn it on for the plugin palette to paint.
+      pluginSystemEnabled: true,
       terminalThemeDark: id,
       terminalPluginPalettes: [
         { id, colors: { background: '#fdf6e3', foreground: '#586e75', blue: '#268bd2' } }

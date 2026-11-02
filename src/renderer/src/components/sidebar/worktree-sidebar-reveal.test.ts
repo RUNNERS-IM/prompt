@@ -97,6 +97,7 @@ it('preserves sticky upward clearance and reduced-motion scroll notification', (
   vi.spyOn(window, 'matchMedia').mockReturnValue(media)
   const issued = vi.fn()
   expect(revealElementInScrollContainer(container, target, 'smooth', issued)).toBe(true)
-  expect(scrollTo).toHaveBeenCalledWith({ top: 376, behavior: 'auto' })
-  expect(issued).toHaveBeenCalledWith(376)
+  // Prompt: the project header row is 34px (upstream 28), so sticky clearance is 6px larger.
+  expect(scrollTo).toHaveBeenCalledWith({ top: 370, behavior: 'auto' })
+  expect(issued).toHaveBeenCalledWith(370)
 })

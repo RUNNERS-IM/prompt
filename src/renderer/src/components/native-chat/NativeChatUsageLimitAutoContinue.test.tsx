@@ -92,7 +92,8 @@ it('shows the setting link, scheduled cancel action, and cancellation in the usa
   ).toBeInTheDocument()
   setState('scheduled')
   view.rerender(<Row />)
-  expect(screen.getByText(/Orca will continue this chat at/)).toBeInTheDocument()
+  // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+  expect(screen.getByText(/Prompt will continue this chat at/)).toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: "Don't continue" }))
   await waitFor(() =>
     expect(mocks.call).toHaveBeenCalledWith(
@@ -103,20 +104,20 @@ it('shows the setting link, scheduled cancel action, and cancellation in the usa
   )
   setState('cancelled')
   view.rerender(<Row />)
-  expect(screen.getByText("Orca won't continue this chat automatically.")).toBeInTheDocument()
+  expect(screen.getByText("Prompt won't continue this chat automatically.")).toBeInTheDocument()
   setState('failed')
   view.rerender(<Row />)
-  expect(screen.getByText("Orca won't continue this chat automatically.")).toBeInTheDocument()
+  expect(screen.getByText("Prompt won't continue this chat automatically.")).toBeInTheDocument()
 })
 
 it('hides new controls on old hosts, missing resets, stale summaries, and remote off states', () => {
   setState('scheduled')
   mocks.capability = 'unsupported'
   const view = render(<Row />)
-  expect(screen.queryByText(/Orca will continue/)).toBeNull()
+  expect(screen.queryByText(/Prompt will continue/)).toBeNull()
   mocks.capability = 'supported'
   view.rerender(<Row known={false} />)
-  expect(screen.queryByText(/Orca will continue/)).toBeNull()
+  expect(screen.queryByText(/Prompt will continue/)).toBeNull()
   setState('off')
   view.rerender(<Row target={{ kind: 'environment', environmentId: 'server' }} />)
   expect(
@@ -138,7 +139,7 @@ it('shows only the manual actions once a cut is more than a day past its reset, 
     expect(
       screen.queryByRole('button', { name: 'Continue automatically when limits reset' })
     ).toBeNull()
-    expect(screen.queryByText(/Orca will continue/)).toBeNull()
+    expect(screen.queryByText(/Prompt will continue/)).toBeNull()
     expect(screen.queryByRole('button', { name: "Don't continue" })).toBeNull()
     expect(screen.getByRole('button', { name: 'Continue Now' })).toBeInTheDocument()
     view.unmount()

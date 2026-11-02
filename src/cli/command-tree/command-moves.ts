@@ -49,6 +49,8 @@ const GROUP_MOVES: readonly (readonly [legacyPrefix: string, promptPrefix: strin
   ['terminal-daemon', 'app terminal-daemon'],
   ['profile state', 'app profile-state'],
   ['agent hooks', 'app agent-hooks'],
+  // Plugins are hidden in Prompt's UI, so their authoring/runtime commands stay out of the root groups.
+  ['plugin', 'app plugin'],
   ['repo', 'project'],
   ['worktree', 'workspace'],
   ['terminal', 'terminal'],

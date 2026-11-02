@@ -47,7 +47,8 @@ function settings(): GlobalSettings {
   return current
 }
 function load(updates: Partial<GlobalSettings> = {}): void {
-  saved = { ...getDefaultSettings('/tmp'), theme: 'dark', ...updates }
+  // Prompt: the plugin system defaults off, so turn it on for plugin palettes to paint.
+  saved = { ...getDefaultSettings('/tmp'), theme: 'dark', pluginSystemEnabled: true, ...updates }
   useAppStore.setState({ settings: saved })
 }
 function changeSystem(dark: boolean): void {

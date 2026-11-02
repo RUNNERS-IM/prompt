@@ -469,7 +469,8 @@ describe('TerminalErrorToast environment footer', () => {
     expect(text).not.toContain('agent_session_exited_during_start')
     expect(view.getAllByRole('link')).toHaveLength(1)
     expect(view.getByRole('link', { name: 'file an issue' }).getAttribute('href')).toBe(
-      'https://github.com/stablyai/orca/issues'
+      // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+      'https://github.com/RUNNERS-IM/prompt/issues'
     )
     expect(environmentMocks.resolveFooter).toHaveBeenCalledOnce()
     expect(onDismiss).not.toHaveBeenCalled()

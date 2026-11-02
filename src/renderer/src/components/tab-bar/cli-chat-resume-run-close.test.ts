@@ -148,7 +148,8 @@ describe('close terminal then continue on capable hosts', () => {
     await runCliChatResume(SOURCE)
     await vi.waitFor(() =>
       expect(chatFailure()?.causeText).toBe(
-        "Orca closed Claude's terminal but couldn't confirm Claude stopped. Make sure it has stopped, then try again."
+        // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+        "Prompt closed Claude's terminal but couldn't confirm Claude stopped. Make sure it has stopped, then try again."
       )
     )
     expect(creates()).toEqual([])

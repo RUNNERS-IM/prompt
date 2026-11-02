@@ -92,7 +92,10 @@ describe('AddWslHostFormPanel', () => {
     const html = render()
     expect(html).toMatch(/<li data-value="Legacy" data-disabled="true">/)
     expect(html).toMatch(/<li data-value="Ubuntu" data-disabled="false">/)
-    expect(html).toContain('WSL 1 can’t run an Orca host; convert with wsl --set-version Legacy 2')
+    // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+    expect(html).toContain(
+      'WSL 1 can’t run an Prompt host; convert with wsl --set-version Legacy 2'
+    )
     expect(canAddWslDistro(legacy)).toBe(false)
     expect(wsl1DistroReason('Legacy')).toContain('wsl --set-version Legacy 2')
   })

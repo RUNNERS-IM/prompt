@@ -95,7 +95,7 @@ export function SortableTabContextMenu({
       className="min-w-[13rem] max-w-[calc(100vw-1rem)] whitespace-nowrap"
     >
       {/* Live Claude tab: "Model ▸" first, then the usual tab menu (decision 3A). */}
-      {open ? <PromptClaudeTabModelSubmenu tabId={tab.id} /> : null}
+      {open ? <PromptClaudeTabModelSubmenu tabId={tab.id} menuKind="context" /> : null}
       <TerminalTabSplitMenuSection
         unifiedTabId={unifiedTabId}
         groupId={groupId}
@@ -146,7 +146,7 @@ export function SortableTabContextMenu({
         </ContextMenuItem>
       ) : null}
       <CopyTabIdMenuItem menuKind="context" unifiedTabId={unifiedTabId} />
-      <PromptMoveTabToWindowSubmenu tabId={tab.id} />
+      <PromptMoveTabToWindowSubmenu tabId={tab.id} menuKind="context" />
       <ContextMenuSeparator />
       <ContextMenuItem onSelect={() => !isPinned && onClose(tab.id)} disabled={isPinned}>
         <X className="size-3.5" />

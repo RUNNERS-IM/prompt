@@ -604,7 +604,8 @@ describe('resolvePrimaryAction Create PR intent', () => {
       kind: 'create_pr',
       label: 'Create MR',
       title:
-        'Create MR failed: Orca could not confirm whether this branch already has a merge request. Retry once the GitLab lookup succeeds.',
+        // Prompt: user-facing copy renders with the Prompt brand (shared/prompt-brand.ts).
+        'Create MR failed: Prompt could not confirm whether this branch already has a merge request. Retry once the GitLab lookup succeeds.',
       disabled: true
     })
   })
