@@ -46,7 +46,8 @@ html.prompt-mac-vibrancy body {
 html.prompt-mac-vibrancy body,
 html.prompt-mac-vibrancy .app-layout,
 html.prompt-mac-vibrancy .prompt-shell-row,
-html.prompt-mac-vibrancy .app-layout > :not(:first-child) {
+/* Fixed overlays (zoom badge) sit in the layout too; painting them covers the whole window. */
+html.prompt-mac-vibrancy .app-layout > :not(:first-child):not(.fixed) {
   background: var(--prompt-window);
   border-top-color: transparent;
 }
@@ -362,8 +363,7 @@ html.prompt-mac-vibrancy
   margin-block: 8px;
 }
 
-html.prompt-mac-vibrancy
-  :is([data-slot='dropdown-menu-label'], [data-slot='context-menu-label']) {
+html.prompt-mac-vibrancy :is([data-slot='dropdown-menu-label'], [data-slot='context-menu-label']) {
   padding-bottom: 8px;
 }
 
@@ -509,7 +509,11 @@ html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ :last-c
 }
 
 /* A row's own 13 comes from the box; rows that share one piece keep 13 between them. */
-html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ * [data-prompt-settings-row] {
+html.prompt-mac-vibrancy
+  [data-prompt-cards]
+  [data-prompt-group-title]
+  ~ *
+  [data-prompt-settings-row] {
   padding-block: 0;
 }
 
