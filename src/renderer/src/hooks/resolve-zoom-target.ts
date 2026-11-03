@@ -1,6 +1,3 @@
-import type { TopLevelView } from '../../../shared/ui-chrome-types'
-import type { WorkspaceVisibleTabType } from '../../../shared/tab-types'
-
 function closestFocusedElement(element: unknown, selector: string): unknown {
   if (
     typeof element === 'object' &&
@@ -34,55 +31,4 @@ export function focusedBrowserPageId(activeElement: unknown): string | null {
     }
   }
   return null
-}
-
-/** Zoom belongs to the focused surface within the current workspace. */
-export function resolveZoomTarget(args: {
-  activeView: TopLevelView
-  activeTabType: WorkspaceVisibleTabType
-  activeElement: unknown
-}): 'terminal' | 'editor' | 'simulator' | 'chat' | 'browser' | 'ui' {
-  const { activeView, activeTabType, activeElement } = args
-  const terminalInputFocused =
-    typeof activeElement === 'object' &&
-    activeElement !== null &&
-    'classList' in activeElement &&
-    typeof (activeElement as { classList?: { contains?: unknown } }).classList?.contains ===
-      'function' &&
-    (activeElement as { classList: { contains: (token: string) => boolean } }).classList.contains(
-      'xterm-helper-textarea'
-    )
-  const chatFocused = Boolean(closestFocusedElement(activeElement, '[data-native-chat-root]'))
-  const editorFocused = Boolean(
-    closestFocusedElement(
-      activeElement,
-      '.monaco-editor, .diff-editor, .markdown-preview, .rich-markdown-editor, .rich-markdown-editor-shell'
-    )
-  )
-
-  // Address-bar/toolbar focus zooms its page; floating browsers can own focus over Tasks/Settings.
-  if (focusedBrowserPageId(activeElement)) {
-    return 'browser'
-  }
-  if (activeView !== 'terminal') {
-    return 'ui'
-  }
-  if (activeTabType === 'simulator') {
-    return 'simulator'
-  }
-  // Why: with focus outside the pane, the chord belongs to Orca's own zoom.
-  if (activeTabType === 'browser') {
-    return 'ui'
-  }
-  if (chatFocused) {
-    return 'chat'
-  }
-  if (activeTabType === 'editor' || editorFocused) {
-    return 'editor'
-  }
-  // After focus moves to app chrome, app zoom owns the chord even if a terminal remains visible.
-  if (terminalInputFocused) {
-    return 'terminal'
-  }
-  return 'ui'
 }

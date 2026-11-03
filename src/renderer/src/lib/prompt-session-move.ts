@@ -108,9 +108,13 @@ function sourceTabExists(state: AppState, tabId: string): boolean {
   return locateTerminalTab(state.tabsByWorktree, tabId) !== null
 }
 
+/** The project name as the sidebar shows it; a main worktree's own name is its branch. */
 function workspaceLabel(state: AppState, worktreeId: string): string {
   const worktree = state.getKnownWorktreeById?.(worktreeId)
-  return worktree?.displayName || worktree?.path?.split('/').pop() || worktreeId
+  const repo = worktree?.repoId ? state.repos?.find((r) => r.id === worktree.repoId) : undefined
+  return (
+    repo?.displayName || worktree?.displayName || worktree?.path?.split('/').pop() || worktreeId
+  )
 }
 
 /**

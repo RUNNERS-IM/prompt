@@ -72,7 +72,9 @@ function seededStore() {
         makeWorktree({ id: SOURCE, repoId: 'repo-1', path: '/src/app' }),
         makeWorktree({ id: SIBLING, repoId: 'repo-1', path: '/src/app-feature' })
       ],
-      'repo-2': [makeWorktree({ id: OTHER, repoId: 'repo-2', path: '/src/other' })],
+      'repo-2': [
+        makeWorktree({ id: OTHER, repoId: 'repo-2', path: '/src/other', displayName: 'main' })
+      ],
       'repo-3': [makeWorktree({ id: REMOTE, repoId: 'repo-3', path: '/home/me/remote' })]
     },
     activeWorktreeId: SOURCE,
@@ -157,7 +159,8 @@ describe('dropping a session row on another workspace', () => {
     })
     await flush()
     expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t2'])
-    expect(toast.success).toHaveBeenCalled()
+    // Named after the project, not the branch its main worktree has checked out.
+    expect(vi.mocked(toast.success).mock.calls.at(-1)?.[0]).toContain("'repo-2'")
   })
 
   it('closes the original once a copy with no id of its own stays loaded', async () => {
