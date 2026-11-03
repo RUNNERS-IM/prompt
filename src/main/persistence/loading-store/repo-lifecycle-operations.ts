@@ -194,6 +194,15 @@ export class RepoLifecycleOperations {
   ): Repo | null {
     return getRepoUpdateOperations(this).updateRepo(target, updates)
   }
+
+  /** Callers must prove `newPath` is the same checkout first; worktree ids are migrated separately. */
+  relocateRepoPath(
+    target: RepoHostTarget,
+    newPath: string,
+    mapPath: (path: string) => string
+  ): Repo | null {
+    return getRepoUpdateOperations(this).relocateRepoPath(target, newPath, mapPath)
+  }
 }
 
 function dropRepoRestoreHints(owner: RepoLifecycleOperations, repoId: string): void {

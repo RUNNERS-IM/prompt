@@ -79,7 +79,8 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     positionalArgs: ['path'],
     notes: [
       '--kind folder registers a folder that is not a git repository; without --kind, Prompt detects it.',
-      '--name sets the name shown in the sidebar; it defaults to the folder name.'
+      '--name sets the name shown in the sidebar; it defaults to the folder name.',
+      'When the folder is already a project under another path (for example through a symlink), that project is returned unchanged with a notice; --json adds result.alreadyRegistered { path, requestedPath }. Change its path with `prompt project move`.'
     ],
     examples: [
       'prompt project add ~/src/app',
@@ -120,6 +121,21 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
       'prompt project set app --icon ~/Pictures/app.png',
       'prompt project set 3f2a9c --name "App" --color #22c55e --json'
     ]
+  }),
+  promptSpec({
+    path: ['project', 'move'],
+    summary: 'Point a project at another path to the same checkout, keeping its settings',
+    usage: 'prompt project move <project> <path> [--json]',
+    allowedFlags: [...GLOBAL_FLAGS, 'project', 'path'],
+    positionalArgs: ['project', 'path'],
+    notes: [
+      SELECTOR_NOTE,
+      PROJECT_ID_NOTE,
+      '<path> must lead to the same git checkout as the current path, for example ~/git/app when the project was added as ~/Desktop/git/app through a symlink. Prompt stores the checkout top level, as `prompt project add` does. A different clone or a linked worktree is refused, as is a path another project already uses.',
+      'The project keeps its id, name, color, icon, base ref, and hooks. Worktrees under the old path and their session tabs move with it.',
+      '--json prints result.project, result.previousPath, result.moved, result.worktreeCount, and result.sessionTabCount.'
+    ],
+    examples: ['prompt project move app ~/git/app', 'prompt project move 3f2a9c ~/git/app --json']
   }),
   promptSpec({
     path: ['project', 'remove'],

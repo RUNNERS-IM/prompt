@@ -8,6 +8,8 @@ export type RuntimeStore = {
   getRepo: Store['getRepo']
   addRepo: Store['addRepo']
   updateRepo: Store['updateRepo']
+  relocateRepoPath?: Store['relocateRepoPath']
+  migrateWorktreeIdentity?: Store['migrateWorktreeIdentity']
   addRetiredWorktreeName?: Store['addRetiredWorktreeName']
   mergeRetiredWorktreeNames?: Store['mergeRetiredWorktreeNames']
   getRetiredWorktreeNameRegistry?: Store['getRetiredWorktreeNameRegistry']

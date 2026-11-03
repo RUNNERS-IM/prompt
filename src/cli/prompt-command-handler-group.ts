@@ -13,6 +13,7 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
     'prompt project remove',
     'prompt project clone',
     'prompt project create',
+    'prompt project move',
     'prompt workspace list',
     'prompt terminal list',
     'prompt session list',
@@ -26,6 +27,7 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
   ],
   load: async () => ({
     ...(await import('./handlers/prompt-project.js')).PROMPT_PROJECT_HANDLERS,
+    ...(await import('./handlers/prompt-project-move.js')).PROMPT_PROJECT_MOVE_HANDLERS,
     ...(await import('./handlers/prompt-lists.js')).PROMPT_LIST_HANDLERS,
     ...(await import('./handlers/prompt-session.js')).PROMPT_SESSION_HANDLERS,
     ...(await import('./handlers/prompt-app-update.js')).PROMPT_APP_UPDATE_HANDLERS

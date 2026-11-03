@@ -167,6 +167,35 @@ describe('RuntimeRepositoryRegistrationController.add stores the checkout git li
     expect(added.displayName).toBe('repo')
   })
 
+  it('names the stored path when the checkout is already registered under a symlink alias', async () => {
+    const repoPath = join(root, 'repo')
+    await mkdir(repoPath)
+    gitInit(repoPath)
+    const aliasPath = join(root, 'repo-link')
+    await symlink(repoPath, aliasPath, dirLinkType)
+    const { controller, repos } = createController()
+    repos.push({
+      id: 'alias-row',
+      path: aliasPath,
+      displayName: 'repo',
+      badgeColor: 'blue',
+      addedAt: 1,
+      kind: 'git'
+    })
+
+    const outcome = await controller.addWithOutcome(repoPath, 'git')
+
+    expect(outcome.repo.id).toBe('alias-row')
+    expect(outcome.repo.path).toBe(aliasPath)
+    expect(outcome.existingPath).toBe(aliasPath)
+    expect(normalizeRuntimePathForComparison(outcome.requestedPath ?? '')).toBe(
+      normalizeRuntimePathForComparison(repoPath)
+    )
+    expect(repos).toHaveLength(1)
+    // Adding the stored spelling itself is not news.
+    expect((await controller.addWithOutcome(aliasPath, 'git')).existingPath).toBeUndefined()
+  })
+
   it('stores the toplevel when a subdirectory of a git checkout is added', async () => {
     const repoPath = join(root, 'mono')
     await mkdir(join(repoPath, 'pkg', 'web'), { recursive: true })

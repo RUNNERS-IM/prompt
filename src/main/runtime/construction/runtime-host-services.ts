@@ -48,6 +48,7 @@ import { countRepoTerminalsNotKnownExited } from '../project-removal-impact'
 export abstract class OrcaRuntimeWithPreservedBranchCleanup extends OrcaRuntimeWithTerminalDrivers {
   declare addRepo: RuntimeRepositoryCommandSurface['addRepo']
   declare cloneRepo: RuntimeRepositoryCommandSurface['cloneRepo']
+  abstract notifyWorktreeFolderRenamed(repoId: string, oldId: string, newId: string): void
   protected abstract tryGetWorkspaceSessionHostIdForWorktree(
     worktreeId: string
   ): ExecutionHostId | null
@@ -337,7 +338,8 @@ export abstract class OrcaRuntimeWithPreservedBranchCleanup extends OrcaRuntimeW
     resolveRepo: (selector) => this.resolveRepoSelector(selector),
     forgetTerminalTopology: (repoId) => this.terminalTopologyRevisionByRepoId.delete(repoId),
     stopProjectTerminals: (repo, options) => this.stopTerminalsForProject(repo, options),
-    notifyWorktreesChanged: (repoId, options) => this.notifyWorktreesChanged(repoId, options)
+    notifyWorktreesChanged: (repoId, options) => this.notifyWorktreesChanged(repoId, options),
+    notifyWorktreeRenamed: (...ids) => this.notifyWorktreeFolderRenamed(...ids)
   })
 
   protected readonly repositorySparsePresets = new RuntimeRepositorySparsePresets({

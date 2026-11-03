@@ -14,6 +14,12 @@ export const RepoPath = z.object({
   displayName: OptionalString
 })
 
+/** `repo.relocate`: point a project at another path to the same checkout. */
+export const RepoRelocate = z.object({
+  repo: requiredString('Missing repo selector'),
+  path: requiredString('Missing repo path')
+})
+
 export const RepoCreate = z.object({
   parentPath: requiredString('Missing parent path'),
   name: requiredString('Missing repo name'),

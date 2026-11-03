@@ -11,6 +11,7 @@ import { shortenHomePath, shortId } from '../command-tree/prompt-output'
 import { resolvePromptProjectSelector } from '../command-tree/prompt-selectors'
 import { formatProjectList, listProjectItems } from './prompt-project-list'
 import { parseProjectIconFlag } from './prompt-project-icon'
+import { formatAlreadyRegisteredNotice } from './prompt-project-move'
 
 export type ProjectItem = {
   id: string
@@ -86,15 +87,23 @@ export const PROMPT_PROJECT_HANDLERS: Record<string, CommandHandler> = {
     )
     const kind = getKindFlag(flags)
     const name = getOptionalStringFlag(flags, 'name')?.trim()
-    const response = await client.call<{ repo: Repo }>('repo.add', {
+    const response = await client.call<{
+      repo: Repo
+      alreadyRegistered?: { path: string; requestedPath?: string }
+    }>('repo.add', {
       path,
       ...(kind ? { kind } : {}),
       ...(name ? { displayName: name } : {})
     })
+    const { alreadyRegistered } = response.result
+    const project = projectItem(response.result.repo)
     printResult(
-      { ...response, result: { project: projectItem(response.result.repo) } },
+      { ...response, result: { project, ...(alreadyRegistered ? { alreadyRegistered } : {}) } },
       json,
-      formatProject
+      (value) =>
+        alreadyRegistered
+          ? `${formatProject(value)}\n${formatAlreadyRegisteredNotice(project, alreadyRegistered)}`
+          : formatProject(value)
     )
   },
   'prompt project show': async ({ flags, client, json }) => {

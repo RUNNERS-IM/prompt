@@ -33,6 +33,9 @@ type RuntimeRepositoryRegistrationDependencies = {
   notifyReposChanged: () => void
 }
 
+/** `existingPath` is set when an existing project at another path to the same folder was returned. */
+export type RepoAddOutcome = { repo: Repo; existingPath?: string; requestedPath?: string }
+
 export class RuntimeRepositoryRegistrationController {
   constructor(private readonly deps: RuntimeRepositoryRegistrationDependencies) {}
 
@@ -42,6 +45,15 @@ export class RuntimeRepositoryRegistrationController {
     executionHostId?: ExecutionHostId | null,
     displayName?: string
   ): Promise<Repo> {
+    return (await this.addWithOutcome(path, kind, executionHostId, displayName)).repo
+  }
+
+  async addWithOutcome(
+    path: string,
+    kind: 'git' | 'folder' = 'git',
+    executionHostId?: ExecutionHostId | null,
+    displayName?: string
+  ): Promise<RepoAddOutcome> {
     const store = this.requireStore()
     if (!isAbsolute(path)) {
       throw new Error('Project path must be an absolute path')
@@ -67,7 +79,11 @@ export class RuntimeRepositoryRegistrationController {
       )
     const existing = findAtPath() ?? (await findProjectAtSameRealPath(sameHostRepos(), repoPath))
     if (existing) {
-      return this.reuseExisting(store, existing, executionHostId)
+      const repo = this.reuseExisting(store, existing, executionHostId)
+      // Tell the caller the stored spelling differs; `prompt project move` changes it.
+      return runtimePathsEqual(existing.path, repoPath) || runtimePathsEqual(existing.path, path)
+        ? { repo }
+        : { repo, existingPath: existing.path, requestedPath: repoPath }
     }
     // This controller validated/read the path locally; runtime: is the paired-client address, not another machine.
     const detected = await detectRepoIconAndUpstream({
@@ -78,7 +94,7 @@ export class RuntimeRepositoryRegistrationController {
     // A concurrent add of the same folder can finish while the awaits above are pending.
     const raceWinner = findAtPath()
     if (raceWinner) {
-      return this.reuseExisting(store, raceWinner, executionHostId)
+      return { repo: this.reuseExisting(store, raceWinner, executionHostId) }
     }
     const repo: Repo = {
       id: randomUUID(),
@@ -94,7 +110,7 @@ export class RuntimeRepositoryRegistrationController {
     store.addRepo(repo)
     await prepareLocalWorktreeRootForRepo(store, repo)
     this.invalidate(repo.id)
-    return store.getRepo(repo.id) ?? repo
+    return { repo: store.getRepo(repo.id) ?? repo }
   }
 
   private reuseExisting(

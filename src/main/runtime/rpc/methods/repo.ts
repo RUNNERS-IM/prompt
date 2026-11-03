@@ -1,6 +1,7 @@
 import { defineMethod } from '../core'
 import { PROJECT_RUNTIME_METHODS } from './project-runtime-rpc-methods'
 import { FOLDER_WORKSPACE_METHODS } from './folder-workspace'
+import { REPO_REGISTRATION_METHODS } from './repo-registration-methods'
 import {
   includesQualifiedSearchRefs,
   projectRepoSearchRefsForClient
@@ -26,7 +27,6 @@ import {
   RepoCreate,
   RepoHooksCheck,
   RepoIssueCommandWrite,
-  RepoPath,
   RepoReorder,
   RepoSearchRefs,
   RepoSetBaseRef,
@@ -127,17 +127,7 @@ export const REPO_METHODS = [
       })
     })
   }),
-  defineMethod({
-    name: 'repo.add',
-    permission: 'workspace',
-    params: RepoPath,
-    handler: async (params, context) => ({
-      repo: projectRepoVisibilityForClient(
-        await context.runtime.addRepo(params.path, params.kind, undefined, params.displayName),
-        context
-      )
-    })
-  }),
+  ...REPO_REGISTRATION_METHODS,
   // Use a new ssh.target-management.v1 method: old repo.add would strip the target and register the path locally.
   defineMethod({
     name: 'repo.addRemote',

@@ -8,6 +8,7 @@ import { prepareLocalWorktreeRootForRepo } from '../worktree-root-preparation'
 import type { RuntimeStore } from './runtime-store-contract'
 import { assertWslMoveRepoWritable } from '../persistence/moving-wsl-projects/wsl-move-scope-guard'
 import { teardownStops } from './owned-session-teardown-policy'
+import { relocateRepository, type RepoRelocationResult } from './runtime-repository-relocation'
 
 const PROJECT_TERMINAL_STOP_BUDGET_MS = 10_000
 
@@ -24,6 +25,7 @@ type RuntimeRepositorySettingsDependencies = {
   invalidateWorktreeScan: (repoId: string) => void
   notifyReposChanged: () => void
   notifyWorktreesChanged: (repoId: string, options: { invalidateGitScans: false }) => void
+  notifyWorktreeRenamed?: (repoId: string, oldWorktreeId: string, newWorktreeId: string) => void
 }
 
 type RepositoryUpdates = Partial<
@@ -137,6 +139,11 @@ export class RuntimeRepositorySettingsController {
       this.deps.notifyWorktreesChanged(repo.id, { invalidateGitScans: false })
     }
     return updated
+  }
+
+  /** `repo.relocate`: same checkout, new path; settings and worktree state stay with the project. */
+  async relocate(repoSelector: string, path: string): Promise<RepoRelocationResult> {
+    return await relocateRepository(this.deps, repoSelector, path)
   }
 
   /** `repo.rm` names a selector; this desktop's own removal names the exact host row. */

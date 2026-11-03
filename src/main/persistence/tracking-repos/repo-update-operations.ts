@@ -11,6 +11,7 @@ import { invalidateGhAccountTokenCache } from '../../github/gh-account-token'
 import { sanitizeRepoUpdatesForPersistence } from './repo-sanitization'
 import { isFolderRepo } from '../../../shared/repo-kind'
 import { findExtraFolderWorkspaceIds } from '../../folder-workspace-meta-presence'
+import { relocateRepoPathInState } from './repo-path-relocation'
 
 export type RepoUpdateMutationOperations = {
   state: Pick<PersistedState, 'repos' | 'projectGroups' | 'worktreeMeta'>
@@ -81,6 +82,14 @@ export class RepoUpdatePersistenceOperations {
 
   private hydrateRepo(repo: Repo): Repo {
     return this.operations.hydrateRepo(repo)
+  }
+
+  relocateRepoPath(
+    target: RepoHostTarget,
+    newPath: string,
+    mapPath: (path: string) => string
+  ): Repo | null {
+    return relocateRepoPathInState(this.operations, target, newPath, mapPath)
   }
 
   updateRepo(

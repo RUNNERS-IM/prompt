@@ -106,7 +106,7 @@ describe('repo RPC methods', () => {
     // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: repo.add, visibility projection and response envelope use only these supplied runtime methods, including raw settings.
     const runtime = {
       getRuntimeId: () => 'test-runtime',
-      addRepo: vi.fn().mockResolvedValue(repo),
+      addRepoWithOutcome: vi.fn().mockResolvedValue({ repo }),
       requireStore: () => ({
         getSettings: () => ({ worktreeVisibilityDefaults: { external: 'show' } })
       })
@@ -150,8 +150,12 @@ describe('repo RPC methods', () => {
       kind: 'git' as const
     }
     const addSshRepo = vi.fn<OrcaRuntimeService['addSshRepo']>().mockResolvedValue(repo)
-    const addRepo = vi.fn<OrcaRuntimeService['addRepo']>()
-    const dispatcher = repoDispatcher({ getRuntimeId: () => 'test-runtime', addSshRepo, addRepo })
+    const addRepoWithOutcome = vi.fn<OrcaRuntimeService['addRepoWithOutcome']>()
+    const dispatcher = repoDispatcher({
+      getRuntimeId: () => 'test-runtime',
+      addSshRepo,
+      addRepoWithOutcome
+    })
 
     const response = await dispatcher.dispatch(
       makeRequest('repo.addRemote', { connectionId: 'ssh-p8', remotePath: '/srv/project' }),
@@ -159,7 +163,7 @@ describe('repo RPC methods', () => {
     )
 
     expect(addSshRepo).toHaveBeenCalledWith({ connectionId: 'ssh-p8', remotePath: '/srv/project' })
-    expect(addRepo).not.toHaveBeenCalled()
+    expect(addRepoWithOutcome).not.toHaveBeenCalled()
     expect(response).toMatchObject({ ok: true, result: { repo: { connectionId: 'ssh-p8' } } })
   })
 

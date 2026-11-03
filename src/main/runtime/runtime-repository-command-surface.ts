@@ -62,12 +62,14 @@ export type RuntimeRepositoryCommandSurface = {
   listSparsePresets: RuntimeRepositorySparsePresets['list']
   saveSparsePreset: RuntimeRepositorySparsePresets['save']
   addRepo: RuntimeRepositoryRegistrationController['add']
+  addRepoWithOutcome: RuntimeRepositoryRegistrationController['addWithOutcome']
   createRepo: RuntimeRepositoryRegistrationController['create']
   cloneRepo: RuntimeRepositoryCloneController['clone']
   showRepo: RuntimeRepositorySettingsController['show']
   setRepoBaseRef: RuntimeRepositorySettingsController['setBaseRef']
   updateRepo: RuntimeRepositorySettingsController['update']
   removeProject: RuntimeRepositorySettingsController['remove']
+  relocateRepo: RuntimeRepositorySettingsController['relocate']
   reorderRepos: RuntimeRepositorySettingsController['reorder']
   getRepoBaseRefDefault: RuntimeRepositoryRefQueries['getDefault']
   getRepoHooks: RuntimeRepositoryHooksCommands['getRepoHooks']
@@ -140,12 +142,14 @@ export function installRuntimeRepositoryCommandSurface(
     listSparsePresets: sparse.list.bind(sparse),
     saveSparsePreset: sparse.save.bind(sparse),
     addRepo: registrations.add.bind(registrations),
+    addRepoWithOutcome: registrations.addWithOutcome.bind(registrations),
     createRepo: registrations.create.bind(registrations),
     cloneRepo: clones.clone.bind(clones),
     showRepo: settings.show.bind(settings),
     setRepoBaseRef: settings.setBaseRef.bind(settings),
     updateRepo: settings.update.bind(settings),
     removeProject: settings.remove.bind(settings),
+    relocateRepo: settings.relocate.bind(settings),
     reorderRepos: settings.reorder.bind(settings),
     getRepoBaseRefDefault: refs.getDefault.bind(refs),
     getRepoSlug: reviews.getRepoSlug.bind(reviews),
