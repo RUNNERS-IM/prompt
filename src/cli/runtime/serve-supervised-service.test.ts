@@ -5,6 +5,8 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import {
   getServeSuperviseValidationError,
   superviseServeService,
+  SERVE_EXECUTABLE_MISSING_EXIT_MS,
+  SERVE_INSTALL_HOLD_EXIT_MS,
   SERVE_INSTALL_HOLD_POLL_MS,
   type SupervisedServeOptions
 } from './serve-supervised-service'
@@ -197,6 +199,33 @@ describe('superviseServeService', () => {
     })
     await expect(superviseServeService(h.options)).resolves.toBe(1)
     expect(runs).toBe(0)
+  })
+
+  it.each(['installer-running', 'installer-unknown', 'install-park'] as const)(
+    'hands the restart to the service manager when a %s hold never clears',
+    async (reason) => {
+      let runs = 0
+      const h = harness({
+        userDataPath,
+        readInstallEvidence: async () => ({ kind: 'hold', reason }),
+        runOnce: async () => (runs++, 0)
+      })
+      await expect(superviseServeService(h.options)).resolves.toBe(1)
+      expect(runs).toBe(0)
+      expect(h.sleeps.reduce((total, ms) => total + ms, 0)).toBe(SERVE_INSTALL_HOLD_EXIT_MS)
+      expect(h.logs.at(-1)).toContain('Still waiting after 10 minutes')
+      expect(h.logs.at(-1)).toContain('exiting so the service manager starts Orca serve again')
+    }
+  )
+
+  it('keeps the shorter exit for a missing executable', async () => {
+    const h = harness({
+      userDataPath,
+      readInstallEvidence: async () => ({ kind: 'hold', reason: 'bundle-missing' })
+    })
+    await expect(superviseServeService(h.options)).resolves.toBe(1)
+    expect(h.sleeps.reduce((total, ms) => total + ms, 0)).toBe(SERVE_EXECUTABLE_MISSING_EXIT_MS)
+    expect(h.logs.at(-1)).toContain('The Orca executable this service started from is gone')
   })
 
   it('waits for a live peer without counting it as a failure', async () => {

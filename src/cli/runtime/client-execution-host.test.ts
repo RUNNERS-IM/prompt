@@ -83,7 +83,8 @@ it("stays on its own server with an agent's empty selectors, and explicit flags 
     undefined,
     60_000,
     expect.anything(),
-    undefined
+    undefined,
+    120_000
   )
   expect(await requestServer(new RuntimeClient(root, undefined, null, 'other-server'))).toBe(
     'remote'

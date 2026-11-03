@@ -291,7 +291,7 @@ describe('CLI error recovery', () => {
     const message = 'Could not connect to the running Orca app.'
 
     expect(formatCliError(new RuntimeClientError('runtime_unavailable', message))).toBe(
-      `${message}\nOrca is not running. Run 'orca open' first.`
+      `${message}\nPrompt is not running. Run 'prompt open' first.`
     )
   })
 
@@ -307,7 +307,9 @@ describe('CLI error recovery', () => {
       _meta: { runtimeId: 'runtime_local' }
     })
 
-    expect(formatCliError(error)).toBe(`${message}\nOrca is not running. Run 'orca open' first.`)
+    expect(formatCliError(error)).toBe(
+      `${message}\nPrompt is not running. Run 'prompt open' first.`
+    )
   })
 
   it('preserves the local request-id protection for an RPC runtime-unavailable error', () => {

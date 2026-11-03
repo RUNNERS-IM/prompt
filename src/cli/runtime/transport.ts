@@ -9,6 +9,7 @@ import { isKeepaliveFrame, RuntimeRpcEnvelopeSchema } from './envelope-schema'
 import { RuntimeClientError, type RuntimeRpcResponse } from './types'
 import { MAX_TIMER_DELAY_MS, isSafeTimerDelayMs } from '../../shared/timer-delay'
 import { runtimeAccessDeniedError } from './runtime-access-denied'
+import { defaultRuntimeRequestDeadlineMs } from './runtime-request-timeout'
 
 export async function sendRequest<TResult>(
   metadata: RuntimeMetadata,
@@ -17,9 +18,11 @@ export async function sendRequest<TResult>(
   timeoutMs: number,
   envelope?: RuntimeOrchestrationEnvelope,
   // Federation forwards envelopes; the runtime fence must stay local.
-  expectedRuntimeSource?: ExpectedRuntimeSource
+  expectedRuntimeSource?: ExpectedRuntimeSource,
+  // Null leaves only the idle timer, for waits the server keeps open without a bound.
+  deadlineMs: number | null = defaultRuntimeRequestDeadlineMs(timeoutMs)
 ): Promise<RuntimeRpcResponse<TResult>> {
-  if (!isSafeTimerDelayMs(timeoutMs)) {
+  if (!isSafeTimerDelayMs(timeoutMs) || (deadlineMs !== null && !isSafeTimerDelayMs(deadlineMs))) {
     throw new RuntimeClientError(
       'invalid_argument',
       `Runtime request timeout must be an integer between 0 and ${MAX_TIMER_DELAY_MS}ms.`
@@ -41,12 +44,35 @@ export async function sendRequest<TResult>(
     let settled = false
     const requestId = randomUUID()
 
+    // Armed before the idle timer so it wins a tie and reports the clearer message.
+    const deadline =
+      deadlineMs === null
+        ? null
+        : setTimeout(() => {
+            if (settled) {
+              return
+            }
+            settled = true
+            lineSegments = []
+            clearTimeout(timeout)
+            socket.destroy()
+            reject(
+              new RuntimeClientError(
+                'runtime_timeout',
+                `Prompt did not answer within ${Math.ceil(deadlineMs / 1000)} seconds. It may be updating or stuck. Try again shortly, or run 'prompt open'.`
+              )
+            )
+          }, deadlineMs)
+
     const timeout = setTimeout(() => {
       if (settled) {
         return
       }
       settled = true
       lineSegments = []
+      if (deadline) {
+        clearTimeout(deadline)
+      }
       socket.destroy()
       reject(
         new RuntimeClientError(
@@ -65,6 +91,9 @@ export async function sendRequest<TResult>(
       settled = true
       lineSegments = []
       clearTimeout(timeout)
+      if (deadline) {
+        clearTimeout(deadline)
+      }
       socket.end()
       if (result.ok === false) {
         reject(result.error)
@@ -130,7 +159,7 @@ export async function sendRequest<TResult>(
           return
         }
 
-        // Keepalives refresh the idle timeout without a full envelope validation.
+        // Keepalives refresh the idle timeout, never the deadline, without a full envelope validation.
         if (isKeepaliveFrame(raw)) {
           timeout.refresh()
           continue

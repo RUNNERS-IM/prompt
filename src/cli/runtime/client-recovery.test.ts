@@ -9,6 +9,7 @@ import { MAX_TIMER_DELAY_MS } from '../../shared/timer-delay'
 import { orchestrationMutationRecoveryError } from '../orchestration-mutation-recovery'
 import { reportCliError } from '../format'
 import { RuntimeClient, RuntimeClientError, RuntimeRpcFailureError } from '../runtime-client'
+import { resolveRequestDeadlineMs } from './runtime-request-timeout'
 
 const servers = new Set<Server>()
 
@@ -55,6 +56,43 @@ function expectPromptRetryBlockedJson(error: unknown, requestId: string): void {
   expect(JSON.stringify(output)).not.toContain(requestId)
   expect(output.error.data).not.toHaveProperty('orchestrationRequestId')
 }
+
+describe('RuntimeClient request deadlines', () => {
+  it('waits out the server default for a waiting check without --timeout-ms', () => {
+    const client = new RuntimeClient(undefined, 60_000, null, null, 'orca')
+    const resolve = (
+      client as unknown as {
+        resolveMethodTimeoutMs: (method: string, params?: unknown) => number
+      }
+    ).resolveMethodTimeoutMs.bind(client)
+    expect(resolve('orchestration.check', { wait: true })).toBe(130_000)
+    expect(resolve('orchestration.check', { wait: true, timeoutMs: 600_000 })).toBe(610_000)
+    expect(resolve('terminal.wait', { for: 'exit' })).toBe(60_000)
+  })
+
+  it('caps default requests at twice their timeout', () => {
+    expect(resolveRequestDeadlineMs('status.get', undefined, 60_000)).toBe(120_000)
+    expect(resolveRequestDeadlineMs('orchestration.check', { wait: true }, 130_000)).toBe(260_000)
+    expect(resolveRequestDeadlineMs('terminal.wait', { for: 'tui-idle' }, 300_000)).toBe(600_000)
+    expect(resolveRequestDeadlineMs('status.get', undefined, MAX_TIMER_DELAY_MS)).toBe(
+      MAX_TIMER_DELAY_MS
+    )
+  })
+
+  it('lets an explicit --timeout-ms set the deadline through its sized transport timeout', () => {
+    expect(
+      resolveRequestDeadlineMs('terminal.wait', { for: 'exit', timeoutMs: 900_000 }, 905_000)
+    ).toBe(905_000)
+    expect(resolveRequestDeadlineMs('orchestration.ask', { timeoutMs: 1_800_000 }, 1_805_000)).toBe(
+      1_805_000
+    )
+  })
+
+  it('leaves room for launches and unbounded exit waits', () => {
+    expect(resolveRequestDeadlineMs('agent.launch', { prompt: 'hi' }, 60_000)).toBe(300_000)
+    expect(resolveRequestDeadlineMs('terminal.wait', { for: 'exit' }, 300_000)).toBeNull()
+  })
+})
 
 describe('RuntimeClient orchestration recovery identity', () => {
   it('rejects a worker-start timeout whose client grace would overflow timers', () => {

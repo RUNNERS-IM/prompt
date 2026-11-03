@@ -114,7 +114,7 @@ describe('runtime access denied', () => {
     mockKill('ESRCH')
     const human = formatCliError(await deniedRequest('EPERM'))
 
-    expect(human).toContain("Orca is not running. Run 'orca open' first.")
+    expect(human).toContain("Prompt is not running. Run 'prompt open' first.")
     expect(human).not.toContain('Do not restart')
     const pending = getCliStatus('/test')
     failConnect('EPERM')

@@ -124,7 +124,7 @@ function formatRuntimeUnavailableError(message: string, data: unknown): string {
   if (nextSteps.length > 0) {
     return formatMessageWithNextSteps(message, nextSteps)
   }
-  return `${message}\nOrca is not running. Run 'orca open' first.`
+  return `${message}\nPrompt is not running. Run 'prompt open' first.`
 }
 
 export function reportCliError(error: unknown, json: boolean, context: CliErrorContext = {}): void {

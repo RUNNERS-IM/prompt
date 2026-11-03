@@ -29,7 +29,11 @@ import {
 } from '../../shared/protocol-version'
 import { RemoteRuntimeCompatGate } from './remote-runtime-compat-gate'
 import { createOrchestrationCompatibilityEnvelope } from './orchestration-compatibility-envelope'
-import { getTimeoutMsParam, isWaitingCheck } from './runtime-request-timeout'
+import {
+  getTimeoutMsParam,
+  resolveLongPollWaitMs,
+  resolveRequestDeadlineMs
+} from './runtime-request-timeout'
 import {
   isWorkerStartTimeoutWithinTimerLimit,
   resolveWorkerStartClientTimeoutMs,
@@ -173,7 +177,8 @@ export class RuntimeClient {
         params,
         effectiveTimeoutMs,
         envelope,
-        expectedRuntimeSource
+        expectedRuntimeSource,
+        resolveRequestDeadlineMs(method, params, effectiveTimeoutMs)
       )
     } catch (error) {
       throw recover(error, metadata.runtimeId ?? null)
@@ -198,14 +203,9 @@ export class RuntimeClient {
       const readiness = resolveWorkerStartReadinessTimeoutMs(requested)
       return Math.max(resolveWorkerStartClientTimeoutMs(readiness), this.requestTimeoutMs)
     }
-    if (
-      (method === 'orchestration.check' && isWaitingCheck(params)) ||
-      method === 'terminal.wait'
-    ) {
-      const inner = Number(getTimeoutMsParam(params))
-      if (Number.isFinite(inner) && inner > 0) {
-        return Math.max(inner + LONG_POLL_CLIENT_GRACE_MS, this.requestTimeoutMs)
-      }
+    const inner = resolveLongPollWaitMs(method, params)
+    if (inner > 0) {
+      return Math.max(inner + LONG_POLL_CLIENT_GRACE_MS, this.requestTimeoutMs)
     }
     return this.requestTimeoutMs
   }

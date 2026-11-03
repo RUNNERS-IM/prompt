@@ -26,10 +26,15 @@ import { createSupervisedParkWatch } from './serve-supervised-park-watch'
 import type { AppImageBuildState } from './serve-appimage-update'
 
 export const SERVE_INSTALL_HOLD_POLL_MS = 2_000
-/** A hold this long is reported as stuck; it still never times out into a spawn. */
-export const SERVE_INSTALL_HOLD_STUCK_MS = 30 * 60_000
+/** An install hold this long is stuck; exit so the service manager starts serve afresh. */
+export const SERVE_INSTALL_HOLD_EXIT_MS = 10 * 60_000
 /** After this delay, exit so the service manager can find the updated launcher. */
 export const SERVE_EXECUTABLE_MISSING_EXIT_MS = 2 * 60_000
+
+// A hold never times out into a spawn; it only ends in an exit the service manager restarts.
+function holdExitMs(reason: Extract<ServeInstallEvidence, { kind: 'hold' }>['reason']): number {
+  return reason === 'bundle-missing' ? SERVE_EXECUTABLE_MISSING_EXIT_MS : SERVE_INSTALL_HOLD_EXIT_MS
+}
 
 type StopListener = () => void
 
@@ -186,10 +191,7 @@ export async function superviseServeService(options: SupervisedServeOptions): Pr
       if (evidence.kind === 'clear') {
         return !stopped
       }
-      if (
-        evidence.reason === 'bundle-missing' &&
-        now() - since >= SERVE_EXECUTABLE_MISSING_EXIT_MS
-      ) {
+      if (now() - since >= holdExitMs(evidence.reason)) {
         return false
       }
       await sleep(SERVE_INSTALL_HOLD_POLL_MS)
@@ -201,9 +203,7 @@ export async function superviseServeService(options: SupervisedServeOptions): Pr
   let appImageUpdate = options.appImageUpdate ?? null
   try {
     let standbyAttempt = 0
-    const hold: { current: { reason: string; since: number; reportedStuck: boolean } | null } = {
-      current: null
-    }
+    const hold: { current: { reason: string; since: number } | null } = { current: null }
     while (!stopped) {
       const evidence: ServeInstallEvidence = parkWatch?.idle()
         ? { kind: 'hold', reason: 'install-park' }
@@ -214,24 +214,18 @@ export async function superviseServeService(options: SupervisedServeOptions): Pr
       if (evidence.kind === 'hold') {
         const held = hold.current
         if (held?.reason !== evidence.reason) {
-          hold.current = { reason: evidence.reason, since: now(), reportedStuck: false }
+          hold.current = { reason: evidence.reason, since: now() }
           log(
             `[serve] Waiting before starting Orca serve: ${SERVE_INSTALL_HOLD_REASON_TEXT[evidence.reason]}.`
           )
-        } else if (
-          evidence.reason === 'bundle-missing' &&
-          now() - held.since >= SERVE_EXECUTABLE_MISSING_EXIT_MS
-        ) {
+        } else if (now() - held.since >= holdExitMs(evidence.reason)) {
           // Let the service manager find the updated app through its stable launcher.
           log(
-            '[serve] The Orca executable this service started from is gone; exiting so the service manager starts the installed Orca.'
+            evidence.reason === 'bundle-missing'
+              ? '[serve] The Orca executable this service started from is gone; exiting so the service manager starts the installed Orca.'
+              : `[serve] Still waiting after ${SERVE_INSTALL_HOLD_EXIT_MS / 60_000} minutes: ${SERVE_INSTALL_HOLD_REASON_TEXT[evidence.reason]}; exiting so the service manager starts Orca serve again.`
           )
           return 1
-        } else if (!held.reportedStuck && now() - held.since >= SERVE_INSTALL_HOLD_STUCK_MS) {
-          held.reportedStuck = true
-          log(
-            `[serve] Still waiting after ${SERVE_INSTALL_HOLD_STUCK_MS / 60_000} minutes: ${SERVE_INSTALL_HOLD_REASON_TEXT[evidence.reason]}. Stop the service and start it again once the install is done.`
-          )
         }
         await sleep(SERVE_INSTALL_HOLD_POLL_MS)
         continue

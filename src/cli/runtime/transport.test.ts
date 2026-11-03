@@ -39,6 +39,39 @@ afterEach(async () => {
   }
 })
 
+async function listenForRequest(): Promise<{
+  metadata: RuntimeMetadata
+  received: Promise<{ id: string; peer: Socket }>
+}> {
+  const userDataPath = mkdtempSync(join(tmpdir(), 'orca-runtime-transport-'))
+  roots.push(userDataPath)
+  const endpoint = join(userDataPath, 'runtime.sock')
+  let acceptRequest!: (request: { id: string; peer: Socket }) => void
+  const received = new Promise<{ id: string; peer: Socket }>((resolve) => {
+    acceptRequest = resolve
+  })
+  const server = createServer((socket) => {
+    sockets.add(socket)
+    socket.once('close', () => sockets.delete(socket))
+    socket.once('data', (data) => {
+      const request: { id: string } = JSON.parse(String(data).trim())
+      acceptRequest({ id: request.id, peer: socket })
+    })
+  })
+  servers.add(server)
+  await new Promise<void>((resolve) => server.listen(endpoint, resolve))
+  return {
+    metadata: {
+      runtimeId: 'runtime-1',
+      pid: 123,
+      transports: [{ kind: 'unix', endpoint }],
+      authToken: 'token',
+      startedAt: 1
+    },
+    received
+  }
+}
+
 function requestSocket(): Socket {
   const created = vi.mocked(createConnection).mock.results.at(-1)
   if (created?.type !== 'return') {
@@ -120,6 +153,58 @@ describe.skipIf(process.platform === 'win32')('runtime transport', () => {
     expect(await response).toMatchObject({
       response: { ok: true, result: { satisfied: true } }
     })
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('fails at the absolute deadline even while keepalives keep arriving', async () => {
+    const { metadata, received } = await listenForRequest()
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    const response = sendRequest(metadata, 'terminal.wait', undefined, 200).catch(
+      (error: unknown) => error
+    )
+    const client = requestSocket()
+    const { peer } = await received
+    for (let elapsed = 0; elapsed < 300; elapsed += 150) {
+      await vi.advanceTimersByTimeAsync(150)
+      const keepalive = once(client, 'data')
+      peer.write('{"_keepalive":true}\n')
+      await keepalive
+    }
+    await vi.advanceTimersByTimeAsync(100)
+
+    expect(await response).toMatchObject({
+      code: 'runtime_timeout',
+      message:
+        "Prompt did not answer within 1 seconds. It may be updating or stuck. Try again shortly, or run 'prompt open'."
+    })
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('lets keepalives hold an unbounded wait open when no deadline is set', async () => {
+    const { metadata, received } = await listenForRequest()
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    const response = sendRequest<{ satisfied: boolean }>(
+      metadata,
+      'terminal.wait',
+      undefined,
+      200,
+      undefined,
+      undefined,
+      null
+    )
+    const client = requestSocket()
+    const { id, peer } = await received
+    for (let elapsed = 0; elapsed < 900; elapsed += 150) {
+      await vi.advanceTimersByTimeAsync(150)
+      const keepalive = once(client, 'data')
+      peer.write('{"_keepalive":true}\n')
+      await keepalive
+    }
+    peer.write(
+      `${JSON.stringify({ id, ok: true, result: { satisfied: true }, _meta: { runtimeId: 'runtime-1' } })}\n`
+    )
+
+    expect(await response).toMatchObject({ ok: true, result: { satisfied: true } })
     expect(vi.getTimerCount()).toBe(0)
   })
 
