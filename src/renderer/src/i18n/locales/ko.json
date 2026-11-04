@@ -20828,6 +20828,9 @@
         "restartCount_other": "세션 {{count}}개 다시 시작",
         "reviewBody_other": "다른 Claude 세션 {{count}}개가 {{next}}(으)로 이동되지 않았습니다.",
         "body_other": "Claude 세션 {{count}}개가 아직 {{previous}}에서 실행 중입니다. 다시 시작하면 각 대화가 {{next}}에서 계속됩니다. 작업 중인 세션은 유휴 상태가 된 후 다시 시작됩니다."
+      },
+      "loginSync": {
+        "previousLogin": "이전 로그인"
       }
     },
     "hostSignIn": {

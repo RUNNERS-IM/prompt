@@ -40,6 +40,7 @@ import {
 import { getWslAccountTarget } from './account-wsl-location'
 import { addDataAccount, listDataAccounts, mutateDataAccount } from './data-account-commands'
 import { formatAccountsBlock, formatDataAccounts } from './account-list-format'
+import { selectClaudeAccount } from './account-claude-select'
 
 type AccountsListSnapshot = {
   opencode?: ManagedDataAccountsState
@@ -293,7 +294,9 @@ export const ACCOUNT_HANDLERS: Record<string, CommandHandler> = {
   },
   'account select': async (ctx) => {
     rejectAccountRemoteSelectionFlags(ctx, 'orca account select')
-    await mutateDataAccount(ctx, 'select')
+    await (ctx.flags.get('agent') === 'claude'
+      ? selectClaudeAccount(ctx)
+      : mutateDataAccount(ctx, 'select'))
   },
   'account rm': async (ctx) => {
     rejectAccountRemoteSelectionFlags(ctx, 'orca account rm')
