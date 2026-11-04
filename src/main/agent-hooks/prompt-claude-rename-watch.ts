@@ -1,9 +1,10 @@
 import { open, stat } from 'node:fs/promises'
+import type { PromptClaudeLoginEvent } from '../../shared/prompt-claude-login-sync'
 import type { PromptClaudeSessionTitleEvent } from '../../shared/prompt-claude-session-title'
 import { asRecord } from '../ai-vault/session-scanner-record-value'
 import { normalizeTitleText } from '../ai-vault/session-scanner-text-normalization'
 
-/** A live Claude pane whose transcript is read for `/rename`. */
+/** A live Claude pane whose transcript is read for `/rename` and `/login`. */
 export type PromptClaudeRenameTarget = {
   paneKey: string
   sessionId: string
@@ -23,6 +24,8 @@ type WatchEntry = {
 export type PromptClaudeRenameWatchDeps = {
   listTargets: () => PromptClaudeRenameTarget[]
   onTitle: (event: PromptClaudeSessionTitleEvent) => void
+  /** A `/login` in that pane finished signing in. */
+  onLogin?: (event: PromptClaudeLoginEvent) => void
   statSize?: (path: string) => Promise<number | null>
   readRange?: (path: string, start: number, length: number) => Promise<Buffer>
   intervalMs?: number
@@ -72,6 +75,35 @@ export function latestClaudeCustomTitle(text: string, sessionId: string): string
     }
   }
   return latest
+}
+
+const LOGIN_SUCCEEDED = '<local-command-stdout>Login successful'
+
+/** Whether these transcript lines hold the output Claude records when `/login` signs in. */
+export function hasClaudeLoginSucceeded(text: string, sessionId: string): boolean {
+  for (const line of text.split('\n')) {
+    if (!line.includes(LOGIN_SUCCEEDED)) {
+      continue
+    }
+    let record: Record<string, unknown> | null
+    try {
+      record = asRecord(JSON.parse(line))
+    } catch {
+      continue
+    }
+    const message = record ? asRecord(record.message) : null
+    if (
+      record?.type !== 'user' ||
+      typeof message?.content !== 'string' ||
+      !message.content.trimStart().startsWith(LOGIN_SUCCEEDED)
+    ) {
+      continue
+    }
+    if (typeof record.sessionId !== 'string' || record.sessionId === sessionId) {
+      return true
+    }
+  }
+  return false
 }
 
 async function defaultStatSize(path: string): Promise<number | null> {
@@ -209,6 +241,9 @@ export function createPromptClaudeRenameWatch(
       const text = await readAppended(entry)
       if (!text || entries.get(paneKey) !== entry) {
         return
+      }
+      if (deps.onLogin && hasClaudeLoginSucceeded(text, entry.target.sessionId)) {
+        deps.onLogin({ paneKey, sessionId: entry.target.sessionId })
       }
       const title = latestClaudeCustomTitle(text, entry.target.sessionId)
       if (!title || title === entry.lastTitle) {

@@ -3,6 +3,7 @@ import { lazyWithRetry as lazy } from '@/lib/lazy-with-retry'
 import { AgentHibernationGate } from '../components/AgentHibernationGate'
 import { AiVaultTabTitleSyncGate } from '../components/AiVaultTabTitleSyncGate'
 import { PromptClaudeLiveRenameGate } from '../lib/prompt-claude-live-rename'
+import { PromptClaudeLoginSyncGate } from '../lib/prompt-claude-login-sync'
 import RetainedAgentsSyncGate from '../components/dashboard/RetainedAgentsSyncGate'
 import { WorkspacePortScanner } from '../components/ports/WorkspacePortScanner'
 import { SavedHostScopeWidenGate } from '../components/sidebar/SavedHostScopeWidenGate'
@@ -31,6 +32,7 @@ export function AppBackgroundServices(): React.JSX.Element {
       <RetainedAgentsSyncGate />
       <AiVaultTabTitleSyncGate />
       <PromptClaudeLiveRenameGate />
+      <PromptClaudeLoginSyncGate />
       <SavedHostScopeWidenGate />
       {dashboardPopoutEnabled ? (
         <Suspense fallback={null}>

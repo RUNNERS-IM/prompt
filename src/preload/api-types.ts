@@ -74,6 +74,7 @@ import type { LinkPreviewApi } from './api/link-preview-api'
 import type { WorkspaceSessionApi } from './api/workspace-session-api'
 import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/worktree-api'
 import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
+import type { PromptClaudeLoginSyncApi } from '../shared/prompt-claude-login-sync'
 import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
@@ -180,6 +181,8 @@ export type PreloadApi = {
   mobile: MobileApi
   speech: SpeechApi
   promptClaudeSessionTitle: PromptClaudeSessionTitleApi
+  /** Optional: the web client has no main process to read transcripts. */
+  promptClaudeLoginSync?: PromptClaudeLoginSyncApi
   /** Optional: only the desktop preload has it; the web client has no bundled notices file. */
   promptThirdPartyNotices?: PromptThirdPartyNoticesApi
 }

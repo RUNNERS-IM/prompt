@@ -84,14 +84,14 @@ export function claudeLaunchAccountId(
   return account?.runsOnSystemDefault ? null : accountId
 }
 
-type LocalClaudePane = ClaudeSessionMoveCandidate & {
+export type LocalClaudePane = ClaudeSessionMoveCandidate & {
   tab: TerminalTab
   laneKey: string
   inLane: boolean
   transcriptPath: string | undefined
 }
 
-function* localClaudePanes(
+export function* localClaudePanes(
   state: AppState,
   owner: RuntimeClientTarget,
   target: CodexAccountSelectionTarget

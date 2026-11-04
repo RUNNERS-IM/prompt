@@ -16,6 +16,7 @@ import {
   ListAccountsParams,
   RemoveAccountParams,
   SelectAccountParams,
+  SelectClaudeAccountParams,
   SelectCodexAccountForTargetParams,
   HostAccountSignInStartParams,
   HostAccountSignInWaitParams,
@@ -23,6 +24,7 @@ import {
   HostAccountSignInCodeParams
 } from '../../../../shared/rpc-contract/accounts-params'
 import { HostAccountLaunchEnvParams } from '../../../../shared/host-account-launch-env'
+import { emitClaudeAccountSwitchedByCommand } from '../../../claude-accounts/claude-account-switch-events'
 
 // Use a per-process counter: same-millisecond subscriptions must not evict each other's cleanup.
 let accountsSubscriptionSeq = 0
@@ -142,8 +144,15 @@ const ACCOUNT_METHOD_DEFINITIONS = [
   defineMethod({
     name: 'accounts.selectClaude',
     permission: 'accounts-admin',
-    params: SelectAccountParams,
-    handler: async (params, { runtime }) => runtime.selectClaudeAccount(params.accountId)
+    params: SelectClaudeAccountParams,
+    handler: async (params, { runtime }) => {
+      const before = params.followRunningSessions ? runtime.getAccountsSnapshot().claude : null
+      const after = await runtime.selectClaudeAccount(params.accountId)
+      if (before) {
+        emitClaudeAccountSwitchedByCommand({ before, after })
+      }
+      return after
+    }
   }),
   defineMethod({
     name: 'accounts.selectCodex',

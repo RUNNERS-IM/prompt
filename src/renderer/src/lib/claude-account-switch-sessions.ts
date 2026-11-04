@@ -6,6 +6,7 @@ import type { ClaudeAccountSwitchRunningSessions } from '../../../shared/claude-
 import type { RuntimeClientTarget } from '../../../shared/runtime-client-target'
 import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
 import { getClaudeAccountLabel } from './claude-account-label'
+import { findClaudeLoginFollowers } from './claude-login-followers'
 import type { ClaudeHostFolders } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
@@ -188,6 +189,53 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     return 'handled'
   }
   setPrompt({ id: generation, sessions, ...labels })
+  return 'handled'
+}
+
+/** After `/login` in one pane, ask/restart/retain the other running sessions on that pane's folder. */
+export async function handleRunningClaudeSessionsAfterLogin(args: {
+  paneKey: string
+  host?: ClaudeHostFolders
+}): Promise<'handled' | 'nothing'> {
+  if (readPolicy() === 'keep') {
+    return 'nothing'
+  }
+  const generation = ++switchGeneration
+  setPrompt(null)
+  const found = await findClaudeLoginFollowers({
+    loginPaneKey: args.paneKey,
+    host: args.host
+  }).catch((error: unknown) => {
+    console.warn('[claude-login-sync] session scan failed:', error)
+    return null
+  })
+  const policy = readPolicy()
+  if (
+    generation !== switchGeneration ||
+    !found ||
+    found.sessions.length === 0 ||
+    policy === 'keep'
+  ) {
+    return 'nothing'
+  }
+  const nextAccountLabel =
+    found.accountId === null && args.host?.systemDefaultEmail
+      ? args.host.systemDefaultEmail
+      : getClaudeAccountLabel(args.host ?? { accounts: [] }, found.accountId)
+  if (policy === 'restart') {
+    queueClaudeRestarts(found.sessions.map((session) => session.ptyId))
+    announceRestart(found.sessions.length, nextAccountLabel, 0, () => {})
+    return 'handled'
+  }
+  setPrompt({
+    id: generation,
+    sessions: { onAccount: found.sessions, elsewhere: [], cantMove: [] },
+    previousAccountLabel: translate(
+      'accounts.claude.loginSync.previousLogin',
+      'the previous login'
+    ),
+    nextAccountLabel
+  })
   return 'handled'
 }
 

@@ -31,9 +31,13 @@ export const ACCOUNT_COMMAND_SPECS: CommandSpec[] = [
   },
   {
     path: ['account', 'select'],
-    summary: 'Select an OpenCode or Devin profile for new agent launches',
-    usage: 'orca account select --agent opencode|devin --account <id|system> [--json]',
-    allowedFlags: [...LOCAL_COMMAND_FLAGS, 'agent', 'account']
+    summary: 'Select a Claude, OpenCode or Devin account for new agent launches',
+    usage: 'orca account select --agent claude|opencode|devin --account <id|system> [--json]',
+    allowedFlags: [...LOCAL_COMMAND_FLAGS, 'agent', 'account'],
+    notes: [
+      'For Claude, --account also takes the account email. Running Claude sessions on the account you leave follow the Accounts setting for running sessions (ask, always restart, or never restart).'
+    ],
+    examples: ['orca account select --agent claude --account dev@example.com']
   },
   {
     path: ['account', 'rm'],
