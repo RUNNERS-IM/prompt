@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import type * as AgentStatusModule from '@/lib/agent-status'
 import type { AgentStatusEntry } from '../../../../shared/agent-status-types'
 import {
@@ -101,6 +101,13 @@ async function flush(): Promise<void> {
 }
 
 describe('dropping a session row on another workspace', () => {
+  afterEach(async () => {
+    // A move left waiting by one test must not block the next one on the same tab.
+    const { promptPendingSessionMoveOf } = await import('@/lib/prompt-session-move-pending')
+    promptPendingSessionMoveOf('t1')?.cancel()
+    await flush()
+  })
+
   it('with ⌥ held, opens a copy of the Claude session in a new tab there and shows it', async () => {
     const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
     for (const target of [SIBLING, OTHER]) {
@@ -255,6 +262,47 @@ describe('dropping a session row on another workspace', () => {
     store.setState({ agentStatusByPaneKey: { [PANE]: claudeEntry() } })
     await flush()
     expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(1)
+  })
+
+  it('cancels a move still waiting for the turn to finish, keeping the original', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const { promptPendingSessionMoveOf } = await import('@/lib/prompt-session-move-pending')
+    const store = seededStore()
+    store.setState({ agentStatusByPaneKey: { [PANE]: { ...claudeEntry(), state: 'working' } } })
+    commitPromptSessionCrossWorkspaceDrop({
+      tabId: 't1',
+      sourceWorktreeId: SOURCE,
+      targetWorktreeId: OTHER,
+      panes: CLAUDE_PANES
+    })
+    await flush()
+    expect(promptPendingSessionMoveOf('t1')?.targetLabel).toBe('repo-2')
+    promptPendingSessionMoveOf('t1')?.cancel()
+    await flush()
+    expect(promptPendingSessionMoveOf('t1')).toBeNull()
+    // The turn ends after the cancel: nothing moves.
+    store.setState({ agentStatusByPaneKey: { [PANE]: claudeEntry() } })
+    await flush()
+    expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(0)
+    expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
+  })
+
+  it('cancels a move while the copy is opening: the copy closes, the original stays', async () => {
+    const { commitPromptSessionCrossWorkspaceDrop } = await import('./prompt-session-row-drag')
+    const { promptPendingSessionMoveOf } = await import('@/lib/prompt-session-move-pending')
+    const store = seededStore()
+    commitPromptSessionCrossWorkspaceDrop({
+      tabId: 't1',
+      sourceWorktreeId: SOURCE,
+      targetWorktreeId: OTHER,
+      panes: CLAUDE_PANES
+    })
+    await flush()
+    expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(1)
+    promptPendingSessionMoveOf('t1')?.cancel()
+    await flush()
+    expect(store.getState().tabsByWorktree[OTHER] ?? []).toHaveLength(0)
+    expect(store.getState().tabsByWorktree[SOURCE]?.map((tab) => tab.id)).toEqual(['t1', 't2'])
   })
 
   it('cancels a drop on a remote workspace, or a pane whose agent left', async () => {

@@ -8,6 +8,10 @@ import { resolvePromptMovableSessionId } from '@/lib/prompt-session-copy-origin'
 import { closePromptSession } from '@/components/sidebar/prompt-sidebar-session-actions'
 import { locateTerminalTab } from '@/store/terminals/terminal-tab-location'
 import { promptClaudeSessionCopyCommand } from '../../../shared/prompt-windows'
+import {
+  promptPendingSessionMoveOf,
+  registerPromptPendingSessionMove
+} from '@/lib/prompt-session-move-pending'
 
 /** How long a working conversation may take to finish its turn before the move gives up. */
 export const PROMPT_SESSION_MOVE_IDLE_TIMEOUT_MS = 30 * 60_000
@@ -26,7 +30,14 @@ export type PromptSessionMoveOutcome =
   | { moved: true; tabId: string }
   | {
       moved: false
-      reason: 'source-gone' | 'no-session' | 'still-working' | 'copy-failed' | 'not-started'
+      reason:
+        | 'source-gone'
+        | 'no-session'
+        | 'still-working'
+        | 'copy-failed'
+        | 'not-started'
+        | 'cancelled'
+        | 'already-moving'
     }
 
 /** Tabs of one terminal tab's panes are keyed "<tabId>:<leafId>". */
@@ -80,25 +91,32 @@ export function isPromptCopyLoaded(
   })
 }
 
-/** Resolve once `done(state)` is true, or with false when `timeoutMs` passes first. */
+/** Resolve once `done(state)` is true, or with false when `timeoutMs` passes or `signal` aborts first. */
 export function waitForAppState(
   done: (state: AppState) => boolean,
-  timeoutMs: number
+  timeoutMs: number,
+  signal?: AbortSignal
 ): Promise<boolean> {
+  if (signal?.aborted) {
+    return Promise.resolve(false)
+  }
   if (done(useAppStore.getState())) {
     return Promise.resolve(true)
   }
   return new Promise((resolve) => {
     let unsubscribe: () => void = () => {}
-    const timer = setTimeout(() => {
+    const finish = (result: boolean): void => {
+      clearTimeout(timer)
       unsubscribe()
-      resolve(false)
-    }, timeoutMs)
+      signal?.removeEventListener('abort', onAbort)
+      resolve(result)
+    }
+    const onAbort = (): void => finish(false)
+    const timer = setTimeout(() => finish(false), timeoutMs)
+    signal?.addEventListener('abort', onAbort)
     unsubscribe = useAppStore.subscribe((state) => {
       if (done(state)) {
-        clearTimeout(timer)
-        unsubscribe()
-        resolve(true)
+        finish(true)
       }
     })
   })
@@ -120,18 +138,65 @@ function workspaceLabel(state: AppState, worktreeId: string): string {
 /**
  * Move a Claude conversation to another workspace (a sidebar row dropped there without ⌥).
  * Order matters so nothing is lost: wait until the conversation finishes its turn, start a copy
- * of it in the target (claude --resume <id> --fork-session), wait until that copy reports its own
- * conversation id, and only then close the original tab. Any step that fails leaves the original
- * running and says why.
+ * of it in the target (claude --resume <id> --fork-session), wait until that copy has loaded, and
+ * only then close the original tab. Any step that fails leaves the original running and says why.
+ * Until the original closes, the toast and the sidebar row offer Cancel.
  */
 export async function movePromptClaudeSession(
   request: PromptSessionMoveRequest
 ): Promise<PromptSessionMoveOutcome> {
-  const { sourceWorktreeId, sourceTabId, paneKey, targetWorktreeId } = request
+  const { sourceTabId, targetWorktreeId } = request
+  if (promptPendingSessionMoveOf(sourceTabId)) {
+    toast.info(
+      translate('prompt.sessionMove.alreadyMoving', 'This session is already being moved.')
+    )
+    return { moved: false, reason: 'already-moving' }
+  }
   const label = workspaceLabel(useAppStore.getState(), targetWorktreeId)
+  const abort = new AbortController()
+  const progressToastId = `prompt-session-move:${sourceTabId}`
+  const unregister = registerPromptPendingSessionMove(sourceTabId, {
+    targetLabel: label,
+    cancel: () => abort.abort()
+  })
+  try {
+    return await runMove(request, label, abort.signal, (message) =>
+      toast.loading(message, {
+        id: progressToastId,
+        duration: Number.POSITIVE_INFINITY,
+        action: {
+          label: translate('prompt.sessionMove.cancel', 'Cancel'),
+          onClick: () => abort.abort()
+        }
+      })
+    )
+  } finally {
+    unregister()
+    toast.dismiss(progressToastId)
+  }
+}
+
+function noticeCancelled(label: string): PromptSessionMoveOutcome {
+  toast.info(
+    translate(
+      'prompt.sessionMove.cancelled',
+      "Move to '{{name}}' cancelled. The session stays where it was.",
+      { name: label }
+    )
+  )
+  return { moved: false, reason: 'cancelled' }
+}
+
+async function runMove(
+  request: PromptSessionMoveRequest,
+  label: string,
+  signal: AbortSignal,
+  showProgress: (message: string) => void
+): Promise<PromptSessionMoveOutcome> {
+  const { sourceWorktreeId, sourceTabId, paneKey, targetWorktreeId } = request
 
   if (isPromptPaneWorking(useAppStore.getState(), paneKey)) {
-    const waiting = toast.loading(
+    showProgress(
       translate(
         'prompt.sessionMove.waiting',
         "This session is working. It will move to '{{name}}' when it finishes.",
@@ -140,9 +205,12 @@ export async function movePromptClaudeSession(
     )
     const idle = await waitForAppState(
       (state) => !sourceTabExists(state, sourceTabId) || !isPromptPaneWorking(state, paneKey),
-      PROMPT_SESSION_MOVE_IDLE_TIMEOUT_MS
+      PROMPT_SESSION_MOVE_IDLE_TIMEOUT_MS,
+      signal
     )
-    toast.dismiss(waiting)
+    if (signal.aborted) {
+      return noticeCancelled(label)
+    }
     if (!idle) {
       toast.error(
         translate(
@@ -167,6 +235,9 @@ export async function movePromptClaudeSession(
     return { moved: false, reason: 'no-session' }
   }
 
+  showProgress(
+    translate('prompt.sessionMove.opening', "Opening the session in '{{name}}'…", { name: label })
+  )
   const tabId = openPromptSessionCopyInWorkspace(targetWorktreeId, command)
   if (!tabId) {
     toast.error(translate('prompt.sessionMove.copyFailed', 'The session could not be moved.'))
@@ -175,11 +246,16 @@ export async function movePromptClaudeSession(
 
   const loaded = (current: AppState): boolean =>
     startedSessionIdOfTab(current, tabId, sessionId) !== null || isPromptCopyLoaded(current, tabId)
-  let started = await waitForAppState(loaded, PROMPT_SESSION_MOVE_START_TIMEOUT_MS)
+  let started = await waitForAppState(loaded, PROMPT_SESSION_MOVE_START_TIMEOUT_MS, signal)
   if (started && startedSessionIdOfTab(useAppStore.getState(), tabId, sessionId) === null) {
     // No id of its own yet: make sure the copy stays loaded rather than exiting right away.
-    await new Promise((resolve) => setTimeout(resolve, PROMPT_SESSION_MOVE_SETTLE_MS))
+    await waitForAppState(() => false, PROMPT_SESSION_MOVE_SETTLE_MS, signal)
     started = isPromptCopyLoaded(useAppStore.getState(), tabId)
+  }
+  if (signal.aborted) {
+    // The copy never replaced the original; close it so only the original remains.
+    closePromptSession(targetWorktreeId, tabId, { skipRunningConfirm: true })
+    return noticeCancelled(label)
   }
   if (!started) {
     toast.error(
