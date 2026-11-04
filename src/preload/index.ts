@@ -93,6 +93,7 @@ import { mobileApi } from './api/mobile-bridge'
 import { agentStatusApi } from './api/agent-status-bridge'
 import { speechApi } from './api/speech-bridge'
 import { promptClaudeSessionTitleApi } from './api/prompt-claude-session-title-bridge'
+import { promptClaudeLoginSyncApi } from './api/prompt-claude-login-sync-bridge'
 import { promptThirdPartyNoticesApi } from './api/prompt-third-party-notices-bridge'
 
 installBrowserFindListener()
@@ -201,6 +202,7 @@ const api = {
   agentStatus: agentStatusApi,
   speech: speechApi,
   promptClaudeSessionTitle: promptClaudeSessionTitleApi,
+  promptClaudeLoginSync: promptClaudeLoginSyncApi,
   promptThirdPartyNotices: promptThirdPartyNoticesApi
 } satisfies PreloadApi
 

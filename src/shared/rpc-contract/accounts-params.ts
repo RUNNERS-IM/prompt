@@ -37,6 +37,11 @@ export const SelectAccountParams = z.object({
     .transform((v) => (v === null ? null : v))
 })
 
+export const SelectClaudeAccountParams = SelectAccountParams.extend({
+  /** Run the window's running-session policy, as a switch in the Accounts pane does. */
+  followRunningSessions: z.boolean().optional()
+})
+
 export const SelectCodexAccountForTargetParams = SelectAccountParams.extend({
   target: CodexSelectionTarget
 })

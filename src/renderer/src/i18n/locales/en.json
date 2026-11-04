@@ -21483,6 +21483,9 @@
         "body_one": "{{count}} Claude session is still running on {{previous}}. Restarting continues the conversation on {{next}}. Busy sessions wait for idle before restarting.",
         "body_other": "{{count}} Claude sessions are still running on {{previous}}. Restarting continues each conversation on {{next}}. Busy sessions wait for idle before restarting.",
         "restartCount_one": "Restart {{count}} session"
+      },
+      "loginSync": {
+        "previousLogin": "the previous login"
       }
     },
     "managedData": {
