@@ -33,6 +33,7 @@ import {
 } from './prompt-session-row-drag'
 import { usePromptClaudeStartTab } from '../prompt-claude-start/prompt-claude-start-tabs'
 import { PROMPT_SESSION_DROP_TARGET_CLASS } from './prompt-session-row-drop'
+import { PromptSessionRowPendingMove } from './prompt-session-row-pending-move'
 
 const EMPTY_TABS: readonly TerminalTab[] = []
 const EMPTY_GROUPS: readonly TabGroup[] = []
@@ -215,6 +216,7 @@ export function PromptWorktreeSessionRows({
                 ) : item.terminal ? (
                   <PromptTerminalRow worktreeId={worktree.id} tab={item.terminal} />
                 ) : null}
+                <PromptSessionRowPendingMove tabId={tabId} />
               </PromptSessionDragItem>
             )
           })

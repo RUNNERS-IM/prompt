@@ -23300,7 +23300,12 @@
       "cancelSeveral": "This tab has more than one Claude conversation, so it is unclear which to move.",
       "hintCopy": "Copy here",
       "hintMove": "Move here · ⌥ copies",
-      "hintMoveShell": "Move here"
+      "hintMoveShell": "Move here",
+      "opening": "Opening the session in '{{name}}'…",
+      "cancel": "Cancel",
+      "cancelled": "Move to '{{name}}' cancelled. The session stays where it was.",
+      "movingTo": "Moving to '{{name}}'",
+      "alreadyMoving": "This session is already being moved."
     }
   }
 }
