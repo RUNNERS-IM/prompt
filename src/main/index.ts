@@ -15,6 +15,7 @@ import { runAgentHooksUninstallPreflight } from './startup/agent-hooks-uninstall
 import { enableLinearRegexpFallback } from './startup/linear-regexp-fallback'
 import { registerMainProcessIpcHandlers } from './startup/main-process-ipc-bootstrap'
 import { initializeMainProcessReady } from './startup/main-process-ready'
+import { applyOpenAtLoginDefault } from './startup/open-at-login'
 import { installMainProcessQuitHandlers } from './startup/main-process-quit'
 import { shouldActivateDesktopForSecondInstance } from './startup/single-instance-lock'
 import { resolveOsOpenedDocuments } from './startup/os-opened-documents'
@@ -167,6 +168,9 @@ if (preflightReady) {
   registerMainProcessIpcHandlers()
   installMainProcessQuitHandlers()
   void app.whenReady().then(async () => {
+    if (!state.isServeMode && !isBackgroundLaunch() && !isOrcadSidecarLaunch()) {
+      applyOpenAtLoginDefault()
+    }
     try {
       await initializeMainProcessReady({
         openMainWindow,

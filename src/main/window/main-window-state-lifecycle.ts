@@ -3,6 +3,7 @@ import type { Store } from '../persistence'
 import { uiZoomFactorFromLevel } from '../../shared/ui-zoom-level'
 import { isWindowlessLaunch, showWindowWithoutStealingFocus } from './foreground-activation-policy'
 import { MIN_HEIGHT, MIN_WIDTH, syncTrafficLightPosition } from './main-window-visual-lifecycle'
+import { wasOpenedAtLogin } from '../startup/open-at-login'
 
 export type MainWindowStateLifecycle = {
   clearInitialRevealFallbackTimer: () => void
@@ -60,6 +61,19 @@ export function installMainWindowStateLifecycle(args: {
 
     // Keep headless E2E off screen; Playwright uses CDP.
     if (isWindowlessLaunch()) {
+      return
+    }
+    // Opened by macOS at login: stay in the menu bar and Dock. The activation handler only reopens a missing
+    // window, so the first Dock click (or opening Prompt again) shows this one.
+    if (wasOpenedAtLogin()) {
+      app.once('activate', () => {
+        if (!mainWindow.isDestroyed() && !mainWindow.isVisible()) {
+          if (savedMaximized) {
+            mainWindow.maximize()
+          }
+          mainWindow.show()
+        }
+      })
       return
     }
     if (savedMaximized) {
