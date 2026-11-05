@@ -1,3 +1,4 @@
+import { lastLiveClaudeSessionIdForPane } from '../../../claude/live-claude-sessions'
 import { isRemoteRuntimePtyId } from '../../../../shared/remote-runtime/remote-runtime-pty-id'
 import { OrcaRuntimeWithRefreshFloatingWorkspacePtyLiveness } from '../../terminal/lifecycle/floating-session-liveness'
 import { writeOrchestrationPointerWithSettlement } from '../mailbox-pointer-pty-write'
@@ -112,8 +113,10 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
       return {}
     }
     // The hook's conversation id belongs to the published agent only; another agent's id would resume the wrong chat.
+    // Claude's own pid record wins: it follows forks and hand-started resumes no hook reported.
     const agentSessionId =
-      hookAgent === agentIdentity ? hookRow?.providerSession?.id?.trim() : undefined
+      (agentIdentity === 'claude' && paneKey ? lastLiveClaudeSessionIdForPane(paneKey) : null) ??
+      (hookAgent === agentIdentity ? hookRow?.providerSession?.id?.trim() : undefined)
     return agentSessionId ? { agentIdentity, agentSessionId } : { agentIdentity }
   }
 

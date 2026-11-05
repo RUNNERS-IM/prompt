@@ -1,3 +1,4 @@
+import { refreshLiveClaudeSessions } from '../../../../claude/live-claude-sessions'
 import { defineMethod } from '../../core'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../../shared/layout-owner-switch'
 import { remoteFileContentBudget } from '../files-remote-content-budget'
@@ -26,6 +27,8 @@ export const TERMINAL_QUERY_METHODS = [
       if (ORCA_LAYOUT_OWNER_IS_MAIN && params.placeUnshownLiveTerminals && params.worktree) {
         await runtime.placeUnshownLiveTerminalsOf(params.worktree)
       }
+      // Resume ids of panes no hook named come from the running Claude processes.
+      await refreshLiveClaudeSessions()
       return runtime.listTerminals(params.worktree, params.limit, {
         handles: params.handles,
         requireFreshPtyLiveness: params.requireFreshPtyLiveness,
