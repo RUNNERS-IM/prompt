@@ -1,0 +1,27 @@
+// The RUNNERS account in Prompt's desktop window (runners-wiki 「2026-11-05 네 앱 계정 · 연결 통일」 2A): signed
+// out, one Log In button at the tab strip's end opens the shared sign-in sheet; signed in, the email's first letter
+// badge opens the account menu. Only main talks to the system server and keeps the tokens.
+
+export const PROMPT_RUNNERS_ACCOUNT_GET_CHANNEL = 'prompt:runnersAccountGet'
+export const PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL = 'prompt:runnersAccountSignIn'
+export const PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL = 'prompt:runnersAccountSignOut'
+
+export type PromptRunnersSignMode = 'login' | 'signup'
+
+/** What the shared sheet reads from a failed sign-in: a wrong email or password, a taken email, or no server. */
+export type PromptRunnersSignInProblem = 'bad' | 'exists' | 'network'
+
+export type PromptRunnersSignInResult =
+  | { ok: true; email: string }
+  | { ok: false; problem: PromptRunnersSignInProblem }
+
+export type PromptRunnersAccountApi = {
+  /** The signed-in email, or null. */
+  get: () => Promise<string | null>
+  signIn: (
+    mode: PromptRunnersSignMode,
+    email: string,
+    password: string
+  ) => Promise<PromptRunnersSignInResult>
+  signOut: () => Promise<void>
+}

@@ -168,6 +168,10 @@ vi.mock('../onboarding', () => ({
   registerOnboardingHandlers: registerOnboardingHandlersMock
 }))
 
+vi.mock('../../prompt-runners-account/prompt-runners-account-ipc', () => ({
+  registerPromptRunnersAccountHandlers: vi.fn()
+}))
+
 vi.mock('../dashboard-popout', () => ({
   registerDashboardPopoutHandlers: registerDashboardPopoutHandlersMock
 }))
