@@ -307,6 +307,7 @@ export const electronViteConfig: UserConfig = {
           popout: resolve('src/renderer/popout.html'),
           space: resolve('src/renderer/space.html'),
           'prompt-about': resolve('src/renderer/prompt-about.html'),
+          'prompt-menu-panel': resolve('src/renderer/prompt-menu-panel.html'),
           web: resolve('src/renderer/web-index.html')
         }
       }

@@ -30,6 +30,7 @@ import { getWorkspaceSpaceWindow } from '../window/workspace-space-window'
 import { markUserQuitWindowClose } from '../window/user-quit-window-close'
 import { loadMainWindow } from '../window/createMainWindow'
 import { showPromptAboutWindow } from '../window/prompt-about-window'
+import { promptTrayMenuExtras, syncPromptMenuPanel } from '../tray/prompt-tray-menu-options'
 import {
   describeInstallDirAclPoison,
   isBlockingInstallDirAclRepairInFlight
@@ -238,6 +239,7 @@ export function getSystemTrayOptions(): SystemTrayOptions | null {
     getRunningTerminalCount: () => ptyOwnership.size,
     getWorkingAgentCount: () => state.agentAwakeService?.getWorkingAgentCount() ?? 0,
     onQuit: quitFromSystemTray,
+    ...promptTrayMenuExtras(store),
     ...(state.isServeMode
       ? {}
       : { onQuitAndStopAllSessions: quitAndStopAllSessionsFromUserCommand })
@@ -255,7 +257,9 @@ export function syncMacMenuBarIcon(showMenuBarIcon: boolean): Tray | null {
     return null
   }
   const options = getSystemTrayOptions()
-  return options ? setMacMenuBarIconVisible(showMenuBarIcon, options) : null
+  const tray = options ? setMacMenuBarIconVisible(showMenuBarIcon, options) : null
+  syncPromptMenuPanel(tray)
+  return tray
 }
 
 export function createSystemTrayDeferred(

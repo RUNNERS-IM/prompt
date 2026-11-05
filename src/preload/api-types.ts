@@ -76,6 +76,7 @@ import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/w
 import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
 import type { PromptClaudeLoginSyncApi } from '../shared/prompt-claude-login-sync'
 import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
+import type { PromptMenuPanelApi } from '../shared/prompt-menu-panel'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
 type Merged<T> = { [K in keyof T]: T[K] }
@@ -185,6 +186,8 @@ export type PreloadApi = {
   promptClaudeLoginSync?: PromptClaudeLoginSyncApi
   /** Optional: only the desktop preload has it; the web client has no bundled notices file. */
   promptThirdPartyNotices?: PromptThirdPartyNoticesApi
+  /** Optional: only the desktop preload has it; the macOS menu bar panel uses it. */
+  promptMenuPanel?: PromptMenuPanelApi
 }
 
 export type {

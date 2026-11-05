@@ -1041,7 +1041,9 @@
     "checkForUpdates": "Check for Updates…",
     "settings": "Settings…",
     "helpFeedback": "Help & Feedback",
-    "quitApp": "Quit Prompt"
+    "quitApp": "Quit Prompt",
+    "openAtLogin": "Open at Login",
+    "autoCheckUpdates": "Check for Updates Automatically"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Go to {{value0}}",

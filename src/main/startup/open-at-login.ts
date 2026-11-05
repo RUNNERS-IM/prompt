@@ -69,3 +69,22 @@ export function applyOpenAtLoginDefault(): void {
 export function wasOpenedAtLogin(): boolean {
   return openedAtLogin
 }
+
+/** 메뉴의 「로그인할 때 열기」 줄: 지금 로그인 항목에 들어 있는지. 읽지 못하면 꺼짐으로 본다. */
+export function isOpenAtLoginOn(): boolean {
+  try {
+    return app.getLoginItemSettings().openAtLogin === true
+  } catch (error) {
+    console.warn('[open-at-login] Could not read the login item:', error)
+    return false
+  }
+}
+
+/** 메뉴의 「로그인할 때 열기」 줄을 누름: 켜져 있으면 끄고, 꺼져 있으면 켠다. */
+export function toggleOpenAtLogin(): void {
+  try {
+    app.setLoginItemSettings({ openAtLogin: !isOpenAtLoginOn() })
+  } catch (error) {
+    console.warn('[open-at-login] Could not change the login item:', error)
+  }
+}

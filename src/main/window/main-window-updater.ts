@@ -8,6 +8,7 @@ import { logStartupMilestone } from '../startup/startup-diagnostics'
 import { applyProxyToElectronUpdaterSession } from '../updater/electron-updater-proxy-session'
 import { updaterErrorMessage } from '../updater/updater-coded-error'
 import { updaterCodedMessage } from '../../shared/updater-failure-copy'
+import { isAutomaticUpdateCheckOn } from '../../shared/automatic-update-check'
 import {
   checkForUpdatesFromMenu,
   dismissAvailableUpdate,
@@ -42,6 +43,7 @@ type UpdaterSetupHooks = {
 function buildUpdaterSetupOptions(store: Store, options?: UpdaterSetupHooks): UpdaterSetupOptions {
   return {
     getLastUpdateCheckAt: () => store.getUI().lastUpdateCheckAt,
+    isAutomaticCheckOn: () => isAutomaticUpdateCheckOn(store.getSettings()),
     onBeforeQuit: async () => {
       try {
         await options?.onBeforeUpdateQuit?.()

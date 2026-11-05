@@ -147,6 +147,8 @@ export type GlobalSettings = GlobalSettingsBase & {
   minimizeToTrayOnClose?: boolean
   /** macOS: toggles the additive menu-bar entry (Orca survives last-window close); doesn't change Dock behavior. */
   showMenuBarIcon?: boolean
+  /** 메뉴 막대 메뉴의 「업데이트 자동 확인」. 기본 켬. 끄면 자동 확인만 건너뛰고, 직접 누르는 「업데이트 확인…」은 된다. */
+  autoCheckUpdates?: boolean
   /** Windows convention: right-click pastes; macOS/Linux keep the context menu. */
   terminalRightClickToPaste: boolean
   /** One-shot guard distinguishing the old global true default from a per-platform choice. */

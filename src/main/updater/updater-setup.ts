@@ -26,6 +26,8 @@ import type { PreQuitCleanupFailureMode, UpdateInstallMode } from './updater-sta
 
 export type UpdaterSetupOptions = {
   getLastUpdateCheckAt?: () => number | null
+  /** 「업데이트 자동 확인」 설정. false 를 돌려주면 자동 확인을 건너뛴다(직접 누르는 확인은 된다). */
+  isAutomaticCheckOn?: () => boolean
   onBeforeQuit?: () => void | Promise<void>
   setLastUpdateCheckAt?: (timestamp: number) => void
   getPendingUpdateNudgeId?: () => string | null
@@ -119,6 +121,7 @@ export class UpdaterSetup extends UpdaterDownloadInstall {
     this.onBeforeQuitFailure = opts?.onBeforeQuitFailure ?? 'continue'
     this.persistLastUpdateCheckAt = opts?.setLastUpdateCheckAt ?? null
     this._getLastUpdateCheckAt = opts?.getLastUpdateCheckAt ?? null
+    this._isAutomaticCheckOn = opts?.isAutomaticCheckOn ?? null
     this._getPendingUpdateNudgeId = opts?.getPendingUpdateNudgeId ?? null
     this._getDismissedUpdateNudgeId = opts?.getDismissedUpdateNudgeId ?? null
     this._setPendingUpdateNudgeId = opts?.setPendingUpdateNudgeId ?? null

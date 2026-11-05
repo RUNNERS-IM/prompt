@@ -590,7 +590,9 @@
       "body": "Orca はシステムトレイで実行中です"
     },
     "activityWaiting": "Orca - アクティビティ待機中",
-    "activityWaitingSuffix": "件のアクティビティが待機中"
+    "activityWaitingSuffix": "件のアクティビティが待機中",
+    "openAtLogin": "ログイン時に開く",
+    "autoCheckUpdates": "アップデートを自動的に確認"
   },
   "worktreeJumpPalette": {
     "matchLabel": {

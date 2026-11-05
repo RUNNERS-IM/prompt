@@ -1,5 +1,6 @@
 import { translateMain } from '../i18n/main-i18n'
 import { quitAndStopAllSessionsMenuText } from '../menu/app-menu-quit-item'
+import type { PromptMenuCommandId, PromptMenuRow } from '../../shared/prompt-menu-panel'
 import type { SystemTrayOptions } from './system-tray'
 import { trayMenuIcon } from './tray-menu-icons'
 
@@ -10,88 +11,200 @@ export type TrayMenuState = {
   devLabel: string | null
   /** Live terminal count for the status line; null hides the line. */
   terminalCount: number | null
+}
+
+export type TrayMenuTemplateState = TrayMenuState & {
   /** Wraps click handlers so a throwing action cannot crash main. */
   wrap: (action: () => void) => () => void
 }
 
-// Order and icons follow _docs/작업 가이드/공통.md 「메뉴바 메뉴와 아이콘」:
-// status line / open / about, updates, settings, help / quit, quit completely.
+// 줄 순서와 아이콘: _docs/작업 가이드/공통.md 「메뉴바 메뉴와 아이콘」 + 2026-11-05 결정(켬/끔 두 줄을 정보 묶음 바로 위에).
+// 상태 줄 / 열기 / 로그인할 때 열기 · 업데이트 자동 확인 / 정보 · 업데이트 확인 · 설정 · 도움말 / 종료 · 완전히 종료.
+// 맥 패널과 기본 메뉴(오른쪽 클릭 · 윈도우)가 이 목록 하나를 함께 쓴다.
+export function buildTrayMenuRows(
+  opts: SystemTrayOptions,
+  { devLabel, terminalCount }: TrayMenuState
+): PromptMenuRow[] {
+  const isMac = process.platform === 'darwin'
+  const rows: PromptMenuRow[] = []
+  if (devLabel) {
+    // Label dev trays by worktree/branch to distinguish concurrent instances.
+    rows.push({ kind: 'info', label: devLabel }, { kind: 'separator' })
+  }
+  if (terminalCount !== null) {
+    rows.push(
+      {
+        kind: 'info',
+        dot: 'green',
+        label: translateMain('tray.runningTerminals', '{{count}} terminals running', {
+          count: terminalCount,
+          defaultValue_one: '{{count}} terminal running'
+        })
+      },
+      { kind: 'separator' }
+    )
+  }
+  rows.push(
+    {
+      kind: 'command',
+      id: 'open',
+      icon: 'app-window',
+      label: translateMain('tray.openApp', 'Open Prompt')
+    },
+    { kind: 'separator' }
+  )
+
+  const toggles: PromptMenuRow[] = []
+  if (opts.getOpenAtLogin && opts.onToggleOpenAtLogin) {
+    toggles.push({
+      kind: 'toggle',
+      id: 'openAtLogin',
+      icon: 'power',
+      label: translateMain('tray.openAtLogin', 'Open at Login'),
+      checked: readFlag(opts.getOpenAtLogin)
+    })
+  }
+  if (opts.getAutoCheckUpdates && opts.onToggleAutoCheckUpdates) {
+    toggles.push({
+      kind: 'toggle',
+      id: 'autoCheckUpdates',
+      icon: 'refresh-cw',
+      label: translateMain('tray.autoCheckUpdates', 'Check for Updates Automatically'),
+      checked: readFlag(opts.getAutoCheckUpdates)
+    })
+  }
+  if (toggles.length > 0) {
+    rows.push(...toggles, { kind: 'separator' })
+  }
+
+  rows.push({
+    kind: 'command',
+    id: 'about',
+    icon: 'info',
+    label: translateMain('tray.about', 'About Prompt')
+  })
+  // Windows keeps its old tray: no update/settings entries there.
+  if (isMac) {
+    rows.push(
+      {
+        kind: 'command',
+        id: 'checkForUpdates',
+        icon: 'refresh-cw',
+        label: translateMain('tray.checkForUpdates', 'Check for Updates…')
+      },
+      {
+        kind: 'command',
+        id: 'settings',
+        icon: 'settings',
+        label: translateMain('tray.settings', 'Settings…'),
+        // Shown as a hint only; the app menu owns the real ⌘, shortcut.
+        accelerator: 'CmdOrCtrl+,'
+      }
+    )
+  }
+  rows.push(
+    {
+      kind: 'command',
+      id: 'help',
+      icon: 'circle-help',
+      label: translateMain('tray.helpFeedback', 'Help & Feedback')
+    },
+    { kind: 'separator' },
+    {
+      kind: 'command',
+      id: 'quit',
+      icon: 'square-x',
+      label: translateMain('tray.quitApp', 'Quit Prompt'),
+      ...(isMac ? { accelerator: 'CmdOrCtrl+Q' as const } : {})
+    }
+  )
+  // Prompt alone keeps "Quit Completely…" under Quit (공통.md); it also stops every terminal session.
+  if (opts.onQuitAndStopAllSessions) {
+    const text = quitAndStopAllSessionsMenuText()
+    rows.push({
+      kind: 'command',
+      id: 'quitCompletely',
+      icon: 'circle-x',
+      label: String(text.label ?? ''),
+      ...(text.toolTip ? { toolTip: text.toolTip } : {})
+    })
+  }
+  return rows
+}
+
+function readFlag(read: () => boolean): boolean {
+  try {
+    return read()
+  } catch (error) {
+    console.warn('[system-tray] menu state unavailable', error)
+    return false
+  }
+}
+
+/** 줄 하나를 눌렀을 때 할 일. 없는 명령(예: 서버 모드의 완전히 종료)은 아무것도 하지 않는다. */
+export function runTrayMenuCommand(opts: SystemTrayOptions, id: PromptMenuCommandId): void {
+  switch (id) {
+    case 'open':
+      opts.onOpen()
+      return
+    case 'openAtLogin':
+      opts.onToggleOpenAtLogin?.()
+      return
+    case 'autoCheckUpdates':
+      opts.onToggleAutoCheckUpdates?.()
+      return
+    case 'about':
+      opts.onShowAbout()
+      return
+    case 'checkForUpdates':
+      opts.onCheckForUpdates()
+      return
+    case 'settings':
+      opts.onOpenSettings()
+      return
+    case 'help':
+      opts.onOpenHelp()
+      return
+    case 'quit':
+      opts.onQuit()
+      return
+    case 'quitCompletely':
+      opts.onQuitAndStopAllSessions?.()
+  }
+}
+
+// 기본 메뉴(오른쪽 클릭 · 윈도우)는 같은 줄 목록을 Electron 메뉴로 옮긴다. 켬/끔 줄은 체크(✓) 항목이고,
+// 체크 표시가 아이콘 자리를 쓰므로 아이콘이 없다(2026-11-02 「켬 끔 줄은 아이콘 + 토글, 기본 메뉴는 체크 표시」).
 export function buildTrayMenuTemplate(
   opts: SystemTrayOptions,
-  { devLabel, terminalCount, wrap }: TrayMenuState
+  { devLabel, terminalCount, wrap }: TrayMenuTemplateState,
+  onRun: (id: PromptMenuCommandId) => void = (id) => runTrayMenuCommand(opts, id)
 ): MenuItemOptions[] {
-  const isMac = process.platform === 'darwin'
-  return [
-    ...(devLabel
-      ? ([
-          // Label dev trays by worktree/branch to distinguish concurrent instances.
-          { label: devLabel, enabled: false },
-          { type: 'separator' }
-        ] satisfies MenuItemOptions[])
-      : []),
-    ...(terminalCount === null
-      ? []
-      : ([
-          {
-            label: translateMain('tray.runningTerminals', '{{count}} terminals running', {
-              count: terminalCount,
-              defaultValue_one: '{{count}} terminal running'
-            }),
-            icon: trayMenuIcon('status-dot-green'),
-            enabled: false
-          },
-          { type: 'separator' }
-        ] satisfies MenuItemOptions[])),
-    {
-      label: translateMain('tray.openApp', 'Open Prompt'),
-      icon: trayMenuIcon('app-window'),
-      click: wrap(() => opts.onOpen())
-    },
-    { type: 'separator' },
-    {
-      label: translateMain('tray.about', 'About Prompt'),
-      icon: trayMenuIcon('info'),
-      click: wrap(() => opts.onShowAbout())
-    },
-    // Windows keeps its old tray: no update/settings entries there.
-    ...(isMac
-      ? ([
-          {
-            label: translateMain('tray.checkForUpdates', 'Check for Updates…'),
-            icon: trayMenuIcon('refresh-cw'),
-            click: wrap(() => opts.onCheckForUpdates())
-          },
-          {
-            label: translateMain('tray.settings', 'Settings…'),
-            icon: trayMenuIcon('settings'),
-            // Shown as a hint only; the app menu owns the real ⌘, shortcut.
-            accelerator: 'CmdOrCtrl+,',
-            registerAccelerator: false,
-            click: wrap(() => opts.onOpenSettings())
-          }
-        ] satisfies MenuItemOptions[])
-      : []),
-    {
-      label: translateMain('tray.helpFeedback', 'Help & Feedback'),
-      icon: trayMenuIcon('circle-help'),
-      click: wrap(() => opts.onOpenHelp())
-    },
-    { type: 'separator' },
-    {
-      label: translateMain('tray.quitApp', 'Quit Prompt'),
-      icon: trayMenuIcon('square-x'),
-      ...(isMac ? { accelerator: 'CmdOrCtrl+Q', registerAccelerator: false } : {}),
-      click: wrap(() => opts.onQuit())
-    },
-    // Prompt alone keeps "Quit Completely…" under Quit (공통.md); it also stops every terminal session.
-    ...(opts.onQuitAndStopAllSessions
-      ? ([
-          {
-            ...quitAndStopAllSessionsMenuText(),
-            icon: trayMenuIcon('circle-x'),
-            click: wrap(opts.onQuitAndStopAllSessions)
-          }
-        ] satisfies MenuItemOptions[])
-      : [])
-  ]
+  return buildTrayMenuRows(opts, { devLabel, terminalCount }).map((row): MenuItemOptions => {
+    switch (row.kind) {
+      case 'separator':
+        return { type: 'separator' }
+      case 'info':
+        return {
+          label: row.label,
+          ...(row.dot ? { icon: trayMenuIcon('status-dot-green') } : {}),
+          enabled: false
+        }
+      case 'toggle':
+        return {
+          label: row.label,
+          type: 'checkbox',
+          checked: row.checked,
+          click: wrap(() => onRun(row.id))
+        }
+      case 'command':
+        return {
+          label: row.label,
+          icon: row.icon === 'power' ? undefined : trayMenuIcon(row.icon),
+          ...(row.accelerator ? { accelerator: row.accelerator, registerAccelerator: false } : {}),
+          ...(row.toolTip ? { toolTip: row.toolTip } : {}),
+          click: wrap(() => onRun(row.id))
+        }
+    }
+  })
 }
