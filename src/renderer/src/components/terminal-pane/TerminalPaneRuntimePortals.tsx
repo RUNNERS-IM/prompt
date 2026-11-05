@@ -7,6 +7,7 @@ import { ClaudeDiffPanelNoticeBanner } from './ClaudeDiffPanelNoticeBanner'
 import { NewerDaemonHoldBanner } from './NewerDaemonHoldBanner'
 import { WslDistroStoppedHoldCard } from './WslDistroStoppedHoldCard'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { TerminalSshReconnectOverlay } from './TerminalSshReconnectOverlay'
 import { TerminalProcessExitOverlay } from './TerminalProcessExitOverlay'
 import { MobileDriverOverlay } from './MobileDriverOverlay'
@@ -62,16 +63,19 @@ export function TerminalPaneCodexRestartPortals({
         }
         return createPortal(
           <>
-            <CodexRestartChip
-              key={`codex-restart-${pane.id}-${ptyId}`}
-              isVisible={isVisible}
-              ptyId={ptyId}
-              onReturnFocus={() => {
-                managerRef.current?.setActivePane(pane.id, { focus: false })
-                focusTerminalTabSurface(tabId, pane.leafId)
-              }}
-              shouldFocus={isActive && isVisible && activePane?.id === pane.id}
-            />
+            {/* Prompt: Codex notices stay hidden; Prompt sessions run Claude. */}
+            {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+              <CodexRestartChip
+                key={`codex-restart-${pane.id}-${ptyId}`}
+                isVisible={isVisible}
+                ptyId={ptyId}
+                onReturnFocus={() => {
+                  managerRef.current?.setActivePane(pane.id, { focus: false })
+                  focusTerminalTabSurface(tabId, pane.leafId)
+                }}
+                shouldFocus={isActive && isVisible && activePane?.id === pane.id}
+              />
+            )}
             <CodexSharedServerBanner
               key={`codex-shared-server-${pane.id}-${ptyId}`}
               ptyId={ptyId}

@@ -10,6 +10,7 @@ import { Sparkles, Bell } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AgentQuestionIcon } from '@/components/AgentQuestionIcon'
 import { useAgentBucketCounts } from '@/components/dashboard/useAgentBucketCounts'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 type SidebarHeaderProps = {
   onWorkspaceBoardMenuOpenChange: (open: boolean) => void
@@ -42,7 +43,9 @@ const SidebarHeader = React.memo(function SidebarHeader({
   const introTitleId = useId()
   const introDescriptionId = useId()
   // Existing users who opted into the former Experimental Agents view get one explanation.
-  const introOpen = migratedFromExperimental && !agentsSidebarIntroShown
+  // Prompt never had Orca's experimental Agents view, so the migration bubble stays hidden.
+  const introOpen =
+    !PROMPT_BLOCK_UPSTREAM_SERVICES && migratedFromExperimental && !agentsSidebarIntroShown
   const acknowledgeIntro = React.useCallback(() => {
     void updateSettings?.({ agentsSidebarIntroShown: true })
   }, [updateSettings])

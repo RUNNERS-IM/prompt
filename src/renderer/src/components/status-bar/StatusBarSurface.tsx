@@ -316,7 +316,7 @@ export function StatusBarSurface({
             ) : null}
             {showSsh ? <SshStatusSegment compact={compact} iconOnly={segmentsIconOnly} /> : null}
           </React.Suspense>
-          {showFloatingTerminalToggle && (
+          {showFloatingTerminalToggle && promptShowsStatusSegment('floating-terminal') && (
             <FloatingTerminalIconContextMenu currentLocation="status-bar" className="relative">
               <Tooltip>
                 <TooltipTrigger asChild>

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useAppStore } from '@/store'
 import { isLocalWindowsDesktopClient } from '@/lib/desktop-window-chrome'
 import { whenCodexTerminalAppears } from './codex-terminal-presence'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 /** Whether to show the one-time "Codex now uses ~/.codex" card this session, and its dismiss. */
 export function useCodexSharedSettingsNotice(): { visible: boolean; dismiss: () => void } {
@@ -11,7 +12,8 @@ export function useCodexSharedSettingsNotice(): { visible: boolean; dismiss: () 
 
   useEffect(() => {
     // Why skip paired web clients: the change is on the host, whose own window shows this.
-    if (seen || !isLocalWindowsDesktopClient()) {
+    // Prompt: Codex notices stay hidden; Prompt sessions run Claude.
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES || seen || !isLocalWindowsDesktopClient()) {
       return
     }
     return whenCodexTerminalAppears(() => {

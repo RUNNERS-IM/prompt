@@ -19,6 +19,7 @@ import { translate } from '@/i18n/i18n'
 import { resolveLeftSidebarStyleVariables } from '@/lib/left-sidebar-appearance'
 import { useSystemPrefersDark } from '../terminal-pane/use-system-prefers-dark'
 import { useAppStore } from '@/store'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 type NavSection = {
   id: string
@@ -168,7 +169,9 @@ export function SettingsSidebar({
   const setupActive = activeSectionId === 'setup-guide'
   // Hiding the app-sidebar prompt must not remove Settings’ stable checklist entry.
   const showSetupGuideTopRow =
-    setupGuideProgress.ready && setupGuideProgress.doneCount < setupGuideProgress.total
+    !PROMPT_BLOCK_UPSTREAM_SERVICES &&
+    setupGuideProgress.ready &&
+    setupGuideProgress.doneCount < setupGuideProgress.total
   const navItemClassName = (isActive: boolean): string =>
     cn(
       'flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-left text-[13px] outline-none transition-colors duration-150 focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50',

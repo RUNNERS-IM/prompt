@@ -7,6 +7,7 @@ import { isPairedWebClientWindow } from '@/lib/desktop-window-chrome'
 import { CODEX_TERMINAL_SERVER_ISOLATION_SETTINGS_TARGET_ID } from '@/lib/settings-navigation-types'
 import { isCodexTerminalServerIsolationEnabled } from '../../../../shared/codex-terminal-server-isolation'
 import { whenCodexTerminalAppears } from './codex-terminal-presence'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 // Why no hydration check: the seen flag defaults to true until the persisted value arrives.
 function isNoticeDue(state: AppState): boolean {
@@ -66,7 +67,8 @@ export function useCodexTerminalServerIsolationNotice(): void {
 
   useEffect(() => {
     // Why: a paired web client's terminals follow the host's setting, not this window's.
-    if (!due || isPairedWebClientWindow()) {
+    // Prompt: Codex notices stay hidden; Prompt sessions run Claude.
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES || !due || isPairedWebClientWindow()) {
       return
     }
     return whenCodexTerminalAppears(showCodexTerminalServerIsolationNotice)

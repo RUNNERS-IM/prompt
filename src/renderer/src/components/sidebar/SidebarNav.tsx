@@ -10,6 +10,7 @@ import { ContextMenu, ContextMenuTrigger } from '@/components/ui/context-menu'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { SetupGuideSidebarEntry } from './SetupGuideSidebarEntry'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { SidebarTaskNavButton } from './SidebarTaskNavButton'
 import { HideSidebarMenu } from './sidebar-nav-controls'
 import { translate } from '@/i18n/i18n'
@@ -116,7 +117,8 @@ const SidebarNav = React.memo(function SidebarNav() {
           ))}
         </span>
       </button>
-      <SetupGuideSidebarEntry />
+      {/* Prompt: the onboarding checklist walks through Orca features. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : <SetupGuideSidebarEntry />}
       <SidebarTaskNavButton />
       {showArtifactsButton ? (
         <ContextMenu>

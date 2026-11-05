@@ -19,6 +19,9 @@ export const PROMPT_HIDDEN_SETTINGS_SECTION_IDS: ReadonlySet<string> = new Set([
   'plugins',
   'automations',
   'tasks',
+  // Orca's onboarding checklist (browser, skills, integrations) and the Linear guide.
+  'setup-guide',
+  'linear',
   // Telemetry is off in Prompt builds (main/telemetry/client.ts TELEMETRY_ENABLED = false), so the
   // opt-out switch would control nothing.
   'privacy'
