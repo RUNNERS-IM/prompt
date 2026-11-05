@@ -87,6 +87,9 @@ export abstract class OrcaRuntimeWithRuntimeId extends RuntimeConstructionServic
 
   protected graphStatus: RuntimeGraphStatus = 'unavailable'
 
+  /** Set the first time a window or the headless fallback hands main a whole graph; never cleared. */
+  protected graphReadyOnce = false
+
   protected authoritativeWindowId: number | null = null
 
   protected headlessGraphFallbackAvailable = false

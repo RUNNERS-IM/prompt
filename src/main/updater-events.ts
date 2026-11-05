@@ -1,5 +1,6 @@
 import { app } from 'electron'
 import {
+  armMacSquirrelStagingWatchdog,
   isMacInstallerReady,
   registerMacUpdaterEvents,
   resetMacInstallState
@@ -59,7 +60,8 @@ export function registerAutoUpdaterHandlers({
   suppressMissingManifestPrereleaseFallbackPromiseFailure,
   setAvailableReleaseUrl,
   setAvailableVersion,
-  setUserInitiatedCheck
+  setUserInitiatedCheck,
+  retryMacStagingDownload
 }: UpdaterHandlerContext): void {
   registerMacUpdaterEvents({
     getCurrentStatus,
@@ -254,6 +256,11 @@ export function registerAutoUpdaterHandlers({
     if (process.platform === 'darwin' && !macInstallerReady && !isMacStagingDeferredToInstall()) {
       recordUpdaterLifecycle('macos_waiting_for_squirrel', { version: info.version })
       sendStatus({ state: 'downloading', percent: 100, version: info.version })
+      armMacSquirrelStagingWatchdog({
+        version: info.version,
+        retryDownload: retryMacStagingDownload,
+        sendStatus
+      })
       return
     }
     sendStatus({ state: 'downloaded', version: info.version, releaseUrl: getKnownReleaseUrl() })

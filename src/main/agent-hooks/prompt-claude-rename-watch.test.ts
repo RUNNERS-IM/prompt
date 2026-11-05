@@ -64,12 +64,14 @@ describe('createPromptClaudeRenameWatch', () => {
     rmSync(dir, { recursive: true, force: true })
   })
 
-  it('reports a rename appended after it starts watching, once per new title', async () => {
+  it('reports the title the session already has on its first look, then each new one once', async () => {
     const watch = createWatch()
     watch.reconcile()
     expect(timerRunning).toBe(true)
     await watch.poll()
-    expect(events).toEqual([])
+    // A launch or resume shows the name at once instead of after Claude next re-appends it.
+    expect(events).toEqual([{ paneKey: 'tab-1:leaf-1', sessionId: SESSION, title: 'old name' }])
+    events = []
 
     appendFileSync(transcriptPath, customTitleLine('new name'))
     await watch.poll()
@@ -89,6 +91,7 @@ describe('createPromptClaudeRenameWatch', () => {
     const watch = createWatch()
     watch.reconcile()
     await watch.poll()
+    events = []
 
     const line = customTitleLine('이름 바꿈')
     const bytes = Buffer.from(line)
@@ -105,6 +108,7 @@ describe('createPromptClaudeRenameWatch', () => {
     const watch = createWatch()
     watch.reconcile()
     await watch.poll()
+    events = []
 
     targets = []
     watch.reconcile()
@@ -121,6 +125,33 @@ describe('createPromptClaudeRenameWatch', () => {
     await watch.poll()
     appendFileSync(nextPath, customTitleLine('renamed', 'session-2'))
     await watch.poll()
-    expect(events).toEqual([{ paneKey: 'tab-1:leaf-1', sessionId: 'session-2', title: 'renamed' }])
+    expect(events).toEqual([
+      { paneKey: 'tab-1:leaf-1', sessionId: 'session-2', title: 'history' },
+      { paneKey: 'tab-1:leaf-1', sessionId: 'session-2', title: 'renamed' }
+    ])
+  })
+
+  it('does not replay a past /login from the tail it reads on its first look', async () => {
+    const logins: unknown[] = []
+    const loginLine = `${JSON.stringify({
+      type: 'user',
+      sessionId: SESSION,
+      message: { content: '<local-command-stdout>Login successful</local-command-stdout>' }
+    })}\n`
+    appendFileSync(transcriptPath, loginLine)
+    const watch = createPromptClaudeRenameWatch({
+      listTargets: () => targets,
+      onTitle: (event) => events.push(event),
+      onLogin: (event) => logins.push(event),
+      every: () => () => {}
+    })
+    watch.reconcile()
+    await watch.poll()
+    expect(logins).toEqual([])
+    expect(events.map((event) => event.title)).toEqual(['old name'])
+
+    appendFileSync(transcriptPath, loginLine)
+    await watch.poll()
+    expect(logins).toEqual([{ paneKey: 'tab-1:leaf-1', sessionId: SESSION }])
   })
 })

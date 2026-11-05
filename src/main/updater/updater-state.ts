@@ -107,6 +107,8 @@ export abstract class UpdaterState {
   protected _setDismissedUpdateNudgeId: ((id: string | null) => void) | null = null
   // Guard duplicate download calls before status changes to downloading.
   protected downloadInFlight = false
+  /** Armed while the window prepares an install that `prompt app update` asked for. */
+  protected rendererInstallRequestTimer: ReturnType<typeof setTimeout> | null = null
   /** Guards the macOS `activate` handler from reopening the old version while ShipIt replaces the .app bundle. */
   protected quittingForUpdate = false
   protected autoUpdater: ElectronAutoUpdater | null = null

@@ -106,6 +106,11 @@ export type RuntimeTerminalListResult = {
   truncated: boolean
   /** Absent from hosts that predate the field; treat that scope as unverifiable. */
   hostScope?: RuntimeTerminalListHostScope
+  /**
+   * False while the window has not yet sent its tabs after a launch: the list then holds only the
+   * terminals main already knows, often none. Absent from hosts that predate the field.
+   */
+  graphReady?: boolean
 }
 
 export type RuntimeTerminalOrphanAdoptionClaim = {

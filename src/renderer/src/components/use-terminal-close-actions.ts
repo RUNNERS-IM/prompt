@@ -2,6 +2,10 @@ import { useCallback } from 'react'
 import { useAppStore } from '../store'
 import { isProvenProcessExit } from '../../../shared/terminal-exit-cause'
 import { closeTerminalTab } from './terminal/terminal-tab-actions'
+import {
+  findTerminalTabWorktreeId,
+  recordTerminalProcessExitClose
+} from '../store/terminals/terminal-process-exit-tombstone'
 import { shouldDeferParkedPtyExitTabClose } from './terminal-pane/terminal-parked-tab-watchers'
 import { dispatchWorkspaceTabCommand } from '@/lib/workspace-tab-commands'
 import type { TerminalCreateController } from './use-terminal-create-actions'
@@ -33,7 +37,18 @@ export function useTerminalCloseActions(controller: TerminalCreateController) {
       if (shouldDeferParkedPtyExitTabClose(tabId, ptyId)) {
         return
       }
+      const worktreeId = findTerminalTabWorktreeId(useAppStore.getState(), tabId)
       closeTerminalTab(tabId, { reason: 'pty-exit', lifecyclePtyId: ptyId })
+      // Only a clean exit (Claude or the shell quit on its own) ends the tab for good. A signal
+      // (reboot, logout, kill) also proves death but must stay resumable after the restart.
+      // Only once the close went through; a tab still open (a pane survived) is not closed.
+      if (
+        exitCode === 0 &&
+        worktreeId &&
+        !findTerminalTabWorktreeId(useAppStore.getState(), tabId)
+      ) {
+        useAppStore.setState((state) => recordTerminalProcessExitClose(state, tabId, worktreeId))
+      }
     },
     [consumeSuppressedPtyExit]
   )

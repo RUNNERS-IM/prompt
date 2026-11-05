@@ -141,6 +141,38 @@ describe('prompt shared tabs session', () => {
     expect(tabIds(stored)).toEqual(['t1'])
   })
 
+  it('keeps a closed tab closed even when a window that still holds it changed it', () => {
+    stored = initial()
+    stored.tabsByWorktree = { [WT]: [terminal('t1'), terminal('t2')] }
+    stored.terminalLayoutsByTabId = {
+      t1: layout(['l1'], { l1: 'p1' }),
+      t2: layout(['l1'], { l1: 'p2' })
+    }
+    const mainView = read('main')
+    const extraView = read('w1')
+    // The main window closes t2 and records the close.
+    save('main', {
+      ...mainView,
+      tabsByWorktree: { [WT]: [terminal('t1')] },
+      terminalLayoutsByTabId: { t1: layout(['l1'], { l1: 'p1' }) },
+      closedTerminalTabTombstonesByTabId: {
+        t2: { closedAt: 1, worktreeId: WT, reason: 'user' }
+      }
+    })
+    // The extra window has not caught up and its t2 title changed meanwhile (Claude set it).
+    save('w1', {
+      ...extraView,
+      tabsByWorktree: { [WT]: [terminal('t1'), terminal('t2', { title: 'claude' })] },
+      terminalLayoutsByTabId: {
+        t1: layout(['l1'], { l1: 'p1' }),
+        t2: layout(['l1'], { l1: 'p2' })
+      }
+    })
+    expect(tabIds(stored)).toEqual(['t1'])
+    expect(Object.keys(stored.terminalLayoutsByTabId as object)).toEqual(['t1'])
+    expect(Object.keys(stored.closedTerminalTabTombstonesByTabId as object)).toEqual(['t2'])
+  })
+
   it('lets a window close a tab it had', () => {
     stored = initial()
     stored.tabsByWorktree = { [WT]: [terminal('t1'), terminal('t2')] }

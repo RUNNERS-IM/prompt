@@ -137,6 +137,9 @@ export abstract class OrcaRuntimeWithStopRequestedPtyIds extends OrcaRuntimeWith
 
   protected readonly terminalList = new RuntimeTerminalList({
     getGraphEpoch: () => (this.graphStatus === 'ready' ? this.rendererGraphEpoch : null),
+    // Right after launch, and while a window reloads, the window has not sent its tabs yet.
+    isGraphPending: () =>
+      this.graphStatus === 'reloading' || (this.graphStatus !== 'ready' && !this.graphReadyOnce),
     assertGraphEpoch: (epoch) => this.assertStableReadyGraph(epoch),
     getExplicitWorktreeId: (selector) => this.getExplicitSessionWorktreeIdSelector(selector),
     getResolvedCache: () => this.resolvedWorktrees.peek(),

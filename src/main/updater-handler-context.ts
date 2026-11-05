@@ -28,6 +28,8 @@ export type UpdaterHandlerContext = {
   commitStagedMacInstall: () => void
   failMacStaging: (error: unknown) => void
   isAwaitingMacStaging: () => boolean
+  /** Start the same download again after Squirrel never staged the finished one. */
+  retryMacStagingDownload: () => void
   isMacStagingDeferredToInstall: () => boolean
   shouldDeferMacQuitForInstall: () => boolean
   recordCompletedUpdateCheck: () => void

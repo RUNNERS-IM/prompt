@@ -58,7 +58,16 @@ export function registerAgentStatusStartupSnapshot(): {
   }
 }
 
-export async function awaitAgentStatusStartupSnapshot(timeoutMs = 5_000): Promise<void> {
+/**
+ * How long a restoring pane waits for the agent rows before it reattaches without them, and so
+ * without resuming the conversation. A busy Mac (many sessions starting at once after an update)
+ * took longer than the earlier 5 seconds and restored plain shells.
+ */
+export const AGENT_STATUS_STARTUP_SNAPSHOT_WAIT_MS = 20_000
+
+export async function awaitAgentStatusStartupSnapshot(
+  timeoutMs = AGENT_STATUS_STARTUP_SNAPSHOT_WAIT_MS
+): Promise<void> {
   const deadline = Date.now() + timeoutMs
   while (!current.ready) {
     const remaining = deadline - Date.now()

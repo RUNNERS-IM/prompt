@@ -27,7 +27,7 @@ function appRestartState(eventTarget: EventTarget): AppRestartState {
 export function registerRendererRestartIpcRelays(
   ipcRenderer: Pick<IpcRenderer, 'on'>,
   eventTarget: EventTarget,
-  relay: Pick<UpdaterQuitAbortRelay, 'handleStatus' | 'abort'>
+  relay: Pick<UpdaterQuitAbortRelay, 'handleStatus' | 'abort'> & { requestInstall?: () => void }
 ): void {
   ipcRenderer.on('updater:status', (_event, status: UpdateStatus) => {
     relay.handleStatus(status)
@@ -35,6 +35,10 @@ export function registerRendererRestartIpcRelays(
   // Main can abandon an install without emitting an error status.
   ipcRenderer.on('updater:quitAndInstallAborted', () => {
     relay.abort()
+  })
+  ipcRenderer.on('updater:installRequested', () => {
+    // `prompt app update` asks here so the install backs up editors exactly as the Install button does.
+    relay.requestInstall?.()
   })
   ipcRenderer.on('app:restart-committed', () => {
     appRestartState(eventTarget).committed = true

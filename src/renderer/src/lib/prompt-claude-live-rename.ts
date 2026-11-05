@@ -13,10 +13,10 @@ import { collectAgentPaneConversations } from './ai-vault-tab-title-requests'
  * and mobile already read. Only the conversation the vault sync tracks for that tab is written, so
  * its next scan agrees instead of clearing it.
  *
- * The watch reports only records appended while it reads, so a new title here is a `/rename` made
- * now, after any name set on the tab (`terminal create --title`, the tab menu). That set name is
- * cleared so the `/rename` shows and stays after a restart; a tab rename made later sets it again
- * and wins. A title equal to the stored one (Claude re-appends its record) leaves the set name alone.
+ * The watch also reports the title a transcript already has when it first looks (launch, resume),
+ * so a title here is not proof of a new `/rename`. A name set on the tab (the tab menu,
+ * `prompt session rename`, `terminal create --title`) is therefore left alone: only the user
+ * clears it, and it keeps winning over the conversation title until they do.
  */
 export function applyPromptClaudeSessionTitle(
   state: AppState,
@@ -32,14 +32,6 @@ export function applyPromptClaudeSessionTitle(
     conversation.providerSession.id !== event.sessionId
   ) {
     return false
-  }
-  const tab = Object.values(state.tabsByWorktree)
-    .flat()
-    .find((candidate) => candidate.id === conversation.tabId)
-  const stored = tab?.aiVaultTitle
-  const isNewRename = stored?.sessionId !== event.sessionId || stored.title.trim() !== title
-  if (isNewRename && tab?.customTitle?.trim()) {
-    state.setTabCustomTitle(conversation.tabId, null, { recordInteraction: false })
   }
   state.setAiVaultTabTitle(conversation.tabId, {
     agent: 'claude',

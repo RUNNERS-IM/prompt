@@ -20,12 +20,18 @@ function restartIpc(eventTarget: EventTarget) {
     sendSync: vi.fn(),
     sendToHost: vi.fn()
   })
-  const relay = { handleStatus: vi.fn(), abort: vi.fn() }
+  const relay = { handleStatus: vi.fn(), abort: vi.fn(), requestInstall: vi.fn() }
   registerRendererRestartIpcRelays(ipcRenderer, eventTarget, relay)
   return { ipcRenderer, ...relay }
 }
 
 describe('renderer restart wiring', () => {
+  it('runs the Install path when main relays an install from `prompt app update`', () => {
+    const { ipcRenderer, requestInstall } = restartIpc(new EventTarget())
+    ipcRenderer.emit('updater:installRequested')
+    expect(requestInstall).toHaveBeenCalledOnce()
+  })
+
   it.each(['no-op', 'failure'] as const)(
     'keeps a committed restart prepared after a later %s',
     async (outcome) => {

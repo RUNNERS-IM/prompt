@@ -91,7 +91,7 @@ export abstract class UpdaterRemoteStatus extends UpdaterNudge {
       targetVersion,
       runtimeId
     }
-    this.quitAndInstall()
+    this.requestRendererPreparedInstall()
     return result
   }
 
@@ -104,4 +104,5 @@ export abstract class UpdaterRemoteStatus extends UpdaterNudge {
 
   protected abstract downloadUpdate(): void
   protected abstract quitAndInstall(): void
+  protected abstract requestRendererPreparedInstall(): void
 }

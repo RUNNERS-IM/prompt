@@ -10,6 +10,7 @@ import { updaterErrorMessage } from '../updater/updater-coded-error'
 import { updaterCodedMessage } from '../../shared/updater-failure-copy'
 import {
   checkForUpdatesFromMenu,
+  declineRendererInstallRequest,
   dismissAvailableUpdate,
   dismissNudge,
   downloadUpdate,
@@ -157,6 +158,8 @@ export function registerUpdaterHandlers(_store: Store): void {
   })
   ipcMain.handle('updater:download', () => downloadUpdate())
   ipcMain.handle('updater:quitAndInstall', () => quitAndInstall())
+  ipcMain.removeAllListeners('updater:installRequestDeclined')
+  ipcMain.on('updater:installRequestDeclined', () => declineRendererInstallRequest())
   ipcMain.handle('updater:dismissNudge', () => dismissNudge())
   ipcMain.handle('updater:dismissAvailableUpdate', () => dismissAvailableUpdate())
   // Package paths/native reveal belong only to the current trusted main renderer; refuse guests, popouts and stale/utility windows.

@@ -8,11 +8,15 @@ import { recordUpdaterLifecycle } from '../updater-lifecycle-diagnostics'
 import { isExternallyManagedLinuxInstall } from '../linux-update-package-type'
 import { updaterCodedMessage } from '../../shared/updater-failure-copy'
 import { QUIT_AND_INSTALL_DELAY_MS } from './updater-state'
+
+/** How long the window gets to back up editors and call Install before main installs anyway. */
+export const RENDERER_INSTALL_REQUEST_TIMEOUT_MS = 30_000
 import { UpdaterRemoteStatus } from './updater-remote-status'
 import { prepareThisProcessShipItStaging } from './shipit-leftover-recovery'
 
 export abstract class UpdaterDownloadInstall extends UpdaterRemoteStatus {
   protected quitAndInstall(): void {
+    this.clearRendererInstallRequest()
     if (
       this.localBuildSelectionInProgress ||
       this.pinnedBuildSelectionInProgress ||
@@ -118,6 +122,58 @@ export abstract class UpdaterDownloadInstall extends UpdaterRemoteStatus {
       void preparingStaging.then(startDownload)
     } else {
       startDownload()
+    }
+  }
+
+  /**
+   * An install asked for from outside the window (`prompt app update`) goes through the window's
+   * own Install path, so unsaved editors get their hot-exit backup and the shutdown checkpoint
+   * runs before the quit. Without a window, or when the window never answers, install directly.
+   */
+  protected requestRendererPreparedInstall(): void {
+    const win = this.mainWindowRef
+    const windowCanPrepare =
+      this.updateInstallMode === 'interactive' &&
+      !!win &&
+      !win.isDestroyed() &&
+      !win.webContents.isDestroyed() &&
+      !win.webContents.isCrashed()
+    if (!windowCanPrepare) {
+      this.quitAndInstall()
+      return
+    }
+    this.clearRendererInstallRequest()
+    this.rendererInstallRequestTimer = setTimeout(() => {
+      this.rendererInstallRequestTimer = null
+      if (
+        this.pendingQuitAndInstallTimer ||
+        this.quitAndInstallInProgress ||
+        isMacInstallRequested()
+      ) {
+        return
+      }
+      recordUpdaterLifecycle('renderer_install_request_unanswered', {
+        timeoutMs: RENDERER_INSTALL_REQUEST_TIMEOUT_MS
+      })
+      this.quitAndInstall()
+    }, RENDERER_INSTALL_REQUEST_TIMEOUT_MS)
+    recordUpdaterLifecycle('renderer_install_requested')
+    this.sendToMainWindow('updater:installRequested')
+  }
+
+  /** The window tried and refused (its checkpoint failed); leave the app running, as its button does. */
+  protected declineRendererInstallRequest(): void {
+    if (!this.rendererInstallRequestTimer) {
+      return
+    }
+    this.clearRendererInstallRequest()
+    recordUpdaterLifecycle('renderer_install_request_declined')
+  }
+
+  protected clearRendererInstallRequest(): void {
+    if (this.rendererInstallRequestTimer) {
+      clearTimeout(this.rendererInstallRequestTimer)
+      this.rendererInstallRequestTimer = null
     }
   }
 

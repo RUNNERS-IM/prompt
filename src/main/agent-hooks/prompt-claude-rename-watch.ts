@@ -13,8 +13,13 @@ export type PromptClaudeRenameTarget = {
 
 type WatchEntry = {
   target: PromptClaudeRenameTarget
-  /** Bytes already read; null until the first stat, which starts at the end so history is not replayed. */
+  /**
+   * Bytes already read; null until the first stat. The first read takes only the transcript's
+   * tail, for the title the session already has; earlier history is not replayed.
+   */
   offset: number | null
+  /** The next read is that first tail: it restores a title but must not replay a past `/login`. */
+  initialRead: boolean
   /** The read began mid-line; drop bytes up to the first newline. */
   skipPartialLine: boolean
   lastTitle: string | null
@@ -178,6 +183,7 @@ export function createPromptClaudeRenameWatch(
       entries.set(paneKey, {
         target,
         offset: null,
+        initialRead: true,
         skipPartialLine: false,
         lastTitle: null,
         busy: false
@@ -191,10 +197,16 @@ export function createPromptClaudeRenameWatch(
     if (size === null) {
       return null
     }
-    if (entry.offset === null || size < entry.offset) {
-      // First look, or the file was replaced: start from its current end.
+    if (entry.offset === null) {
+      // First look (launch, resume, a new pane): read the tail so a title set before this launch
+      // shows at once instead of after Claude next re-appends its record.
+      entry.offset = Math.max(0, size - MAX_READ_BYTES)
+      entry.skipPartialLine = entry.offset > 0
+    } else if (size < entry.offset) {
+      // The file was replaced: start from its current end.
       entry.offset = size
       entry.skipPartialLine = false
+      entry.initialRead = false
       return null
     }
     if (size === entry.offset) {
@@ -238,11 +250,15 @@ export function createPromptClaudeRenameWatch(
     }
     entry.busy = true
     try {
+      const initialRead = entry.initialRead
       const text = await readAppended(entry)
+      if (entry.offset !== null) {
+        entry.initialRead = false
+      }
       if (!text || entries.get(paneKey) !== entry) {
         return
       }
-      if (deps.onLogin && hasClaudeLoginSucceeded(text, entry.target.sessionId)) {
+      if (!initialRead && deps.onLogin && hasClaudeLoginSucceeded(text, entry.target.sessionId)) {
         deps.onLogin({ paneKey, sessionId: entry.target.sessionId })
       }
       const title = latestClaudeCustomTitle(text, entry.target.sessionId)

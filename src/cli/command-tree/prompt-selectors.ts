@@ -286,14 +286,40 @@ export function terminalCandidates(
   }))
 }
 
+/** How long a list waits for a just-launched app's window to send its tabs. */
+export const TERMINAL_LIST_READY_WAIT_MS = 30_000
+const TERMINAL_LIST_READY_POLL_MS = 1_000
+
+/**
+ * Right after a launch or update the app lists nothing until its window sends its tabs. Waiting
+ * here keeps "not ready yet" from reading as "every session is gone"; past the wait it fails.
+ */
 export async function listTerminals(
   client: RuntimeClient,
-  worktree?: string
+  worktree?: string,
+  wait: { timeoutMs?: number; pollMs?: number; sleep?: (ms: number) => Promise<void> } = {}
 ): Promise<RuntimeRpcSuccess<RuntimeTerminalListResult>> {
-  return await client.call<RuntimeTerminalListResult>('terminal.list', {
-    ...(worktree ? { worktree } : {}),
-    includeVisualLayouts: false
-  })
+  const timeoutMs = wait.timeoutMs ?? TERMINAL_LIST_READY_WAIT_MS
+  const pollMs = wait.pollMs ?? TERMINAL_LIST_READY_POLL_MS
+  const sleep = wait.sleep ?? ((ms: number) => new Promise((done) => setTimeout(done, ms)))
+  const deadline = Date.now() + timeoutMs
+  for (;;) {
+    const response = await client.call<RuntimeTerminalListResult>('terminal.list', {
+      ...(worktree ? { worktree } : {}),
+      includeVisualLayouts: false
+    })
+    if (response.result.graphReady !== false) {
+      return response
+    }
+    if (Date.now() >= deadline) {
+      throw new RuntimeClientError(
+        'not_ready',
+        'Prompt is still restoring its sessions after launch; the list would be incomplete.',
+        { nextSteps: ['Retry in a few seconds.'] }
+      )
+    }
+    await sleep(pollMs)
+  }
 }
 
 const FULL_TERMINAL_HANDLE = /^term_[A-Za-z0-9-]{16,}$/

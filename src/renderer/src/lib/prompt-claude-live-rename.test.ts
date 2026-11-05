@@ -77,21 +77,23 @@ describe('applyPromptClaudeSessionTitle', () => {
     expect(promptTerminalTabName(tab())).toBe('new name')
   })
 
-  it('lets a /rename made after the tab was named replace that name, also after a restart', () => {
-    // `terminal create --title X` stores X as the tab's set name.
+  it('keeps a name set on the tab over a later conversation title, also after a restart', () => {
+    // `terminal create --title X` or `prompt session rename` stores X as the tab's set name.
     const { state, tab } = makeState('X')
+    // A /rename, or the title the watch reads back from the transcript on launch.
     applyPromptClaudeSessionTitle(state, {
       paneKey: 'tab-1:leaf-1',
       sessionId: 'claude-session',
       title: 'Y'
     })
-    expect(resolveTerminalTabTitle(tab(), false)).toBe('Y')
-    expect(promptTerminalTabName(tab())).toBe('Y')
-    // A restart restores the saved tab; the set name is gone, so Y is still shown.
+    expect(resolveTerminalTabTitle(tab(), false)).toBe('X')
+    expect(promptTerminalTabName(tab())).toBe('X')
     const restored: TerminalTab = JSON.parse(JSON.stringify(tab()))
-    expect(restored.customTitle).toBeNull()
-    expect(resolveTerminalTabTitle(restored, false)).toBe('Y')
-    expect(promptTerminalTabName(restored)).toBe('Y')
+    expect(restored.customTitle).toBe('X')
+    expect(restored.aiVaultTitle?.title).toBe('Y')
+    // Clearing the set name (tab menu, empty rename) shows the conversation title.
+    state.setTabCustomTitle('tab-1', null)
+    expect(resolveTerminalTabTitle(tab(), false)).toBe('Y')
   })
 
   it('keeps a tab name set after the /rename when Claude repeats the same title', () => {

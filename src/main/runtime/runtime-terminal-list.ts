@@ -16,6 +16,8 @@ import {
 
 type RuntimeTerminalListDependencies = {
   getGraphEpoch(): number | null
+  /** True until a window first sends its tabs, and while one reloads; absent means never pending. */
+  isGraphPending?(): boolean
   assertGraphEpoch(epoch: number): void
   getExplicitWorktreeId(selector: string): string | null
   getResolvedCache(): (ResolvedWorktreeSnapshot & { expiresAt: number }) | null
@@ -186,7 +188,8 @@ export class RuntimeTerminalList {
         ])
       ),
       totalCount: matching.length,
-      truncated: matching.length > limit
+      truncated: matching.length > limit,
+      graphReady: graphEpoch !== null || !this.deps.isGraphPending?.()
     }
   }
 }

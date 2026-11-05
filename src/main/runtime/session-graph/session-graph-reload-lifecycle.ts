@@ -144,6 +144,7 @@ export abstract class OrcaRuntimeWithHasTerminalsForWorktree extends OrcaRuntime
       const restoresPublishedInventory =
         this.sessionTabsInventoryPublicationEpoch === this.rendererGraphEpoch - 1
       this.graphStatus = 'ready'
+      this.graphReadyOnce = true
       this.setTerminalSideEffectConsumerAvailable(true)
       for (const leaf of this.leaves.values()) {
         this.adoptPreAllocatedHandle(leaf)
@@ -169,6 +170,7 @@ export abstract class OrcaRuntimeWithHasTerminalsForWorktree extends OrcaRuntime
       this.pendingHeadlessPromotionWindowId = null
     }
     this.graphStatus = 'ready'
+    this.graphReadyOnce = true
     this.setTerminalSideEffectConsumerAvailable(windowId !== HEADLESS_RUNTIME_WINDOW_ID)
     this.refreshWritableFlags()
   }

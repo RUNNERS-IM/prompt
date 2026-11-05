@@ -3,6 +3,8 @@ import type { UpdateStatus } from '../shared/update-status-types'
 import { recordUpdaterLifecycle } from './updater-lifecycle-diagnostics'
 
 const MAC_INSTALL_READY_TIMEOUT_MS = 15000
+/** How long a finished download may wait for Squirrel to stage it before the app gives up on it. */
+export const MAC_SQUIRREL_STAGING_TIMEOUT_MS = 120_000
 
 export function registerMacUpdaterEvents({
   getCurrentStatus,
@@ -109,7 +111,70 @@ export function resetMacInstallState(): void {
 
 export function beginMacUpdateDownload(): void {
   resetMacInstallState()
+  clearMacSquirrelStagingWatchdog()
   squirrelReady = false
+}
+
+let squirrelStagingWatchdog: ReturnType<typeof setTimeout> | null = null
+// One fresh download per version; a second stall is reported instead of looping.
+let squirrelStagingRetriedVersion: string | null = null
+
+function clearMacSquirrelStagingWatchdog(): void {
+  if (squirrelStagingWatchdog) {
+    clearTimeout(squirrelStagingWatchdog)
+    squirrelStagingWatchdog = null
+  }
+}
+
+/**
+ * A finished download sits at "downloading 100%" until Squirrel reports it staged, and nothing
+ * bounds that wait. When Squirrel stays silent, download once more (it re-feeds Squirrel); if
+ * that stalls too, report an error the card and `prompt app update` can show and retry.
+ */
+export function armMacSquirrelStagingWatchdog({
+  version,
+  retryDownload,
+  sendStatus,
+  timeoutMs = MAC_SQUIRREL_STAGING_TIMEOUT_MS
+}: {
+  version: string
+  retryDownload: () => void
+  sendStatus: (status: UpdateStatus) => void
+  timeoutMs?: number
+}): void {
+  if (process.platform !== 'darwin') {
+    return
+  }
+  clearMacSquirrelStagingWatchdog()
+  squirrelStagingWatchdog = setTimeout(() => {
+    squirrelStagingWatchdog = null
+    if (squirrelReady || quitAndInstallInFlight) {
+      return
+    }
+    const retry = squirrelStagingRetriedVersion !== version
+    recordUpdaterLifecycle(
+      'macos_squirrel_staging_timeout',
+      { version, timeoutMs, retry },
+      {
+        level: 'warn',
+        message: `macOS installer did not stage ${version} within ${timeoutMs}ms`
+      }
+    )
+    requestedActionAfterSquirrelReady = null
+    clearPendingInstallTimeout()
+    // An error status with the version lets downloadUpdate start again for the same target.
+    sendStatus({
+      state: 'error',
+      message: retry
+        ? 'The update finished downloading but macOS did not prepare it. Downloading again.'
+        : 'The update finished downloading but macOS did not prepare it for install. Retry the download, or quit and reopen Prompt.',
+      version
+    })
+    if (retry) {
+      squirrelStagingRetriedVersion = version
+      retryDownload()
+    }
+  }, timeoutMs)
 }
 
 export function markMacQuitAndInstallInFlight(): void {
@@ -200,6 +265,8 @@ export function handleMacInstallerReady(
 ): void {
   squirrelReady = true
   clearPendingInstallTimeout()
+  clearMacSquirrelStagingWatchdog()
+  squirrelStagingRetriedVersion = null
   recordUpdaterLifecycle('macos_installer_ready', {
     deferredInstallRequested: requestedActionAfterSquirrelReady === 'install',
     deferredQuitRequested: requestedActionAfterSquirrelReady === 'quit',

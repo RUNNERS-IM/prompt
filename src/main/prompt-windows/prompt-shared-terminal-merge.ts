@@ -181,4 +181,61 @@ export function promptMergeSharedTerminals(
       out[field] = Object.fromEntries(merged.map(({ key, record }) => [key, record]))
     }
   }
+  dropClosedTerminalTabs(out, incoming, stored)
+}
+
+function tombstonedTabIds(...sessions: Session[]): Set<string> {
+  const ids = new Set<string>()
+  for (const session of sessions) {
+    const byTab = session.closedTerminalTabTombstonesByTabId
+    if (isRecord(byTab)) {
+      Object.keys(byTab).forEach((id) => ids.add(id))
+    }
+  }
+  return ids
+}
+
+/**
+ * A closed tab stays closed: once any window recorded its close, a window that still holds it
+ * (it has not reloaded yet, or it changed the tab's title or output time meanwhile, which the
+ * merge above counts as its own change) cannot save it back. Tab ids never come back, so the
+ * close record alone decides.
+ */
+function dropClosedTerminalTabs(out: Session, incoming: Session, stored: Session): void {
+  const closed = tombstonedTabIds(out, incoming, stored)
+  if (closed.size === 0) {
+    return
+  }
+  for (const field of ['tabsByWorktree', 'unifiedTabs']) {
+    if (!isRecord(out[field])) {
+      continue
+    }
+    out[field] = Object.fromEntries(
+      Object.entries(lists(out[field])).map(([worktreeId, list]) => [
+        worktreeId,
+        list.filter((entry) => {
+          if (!isRecord(entry)) {
+            return true
+          }
+          const id = field === 'tabsByWorktree' ? entry.id : (entry.entityId ?? entry.id)
+          const isTerminal = field === 'tabsByWorktree' || entry.contentType === 'terminal'
+          return !(isTerminal && typeof id === 'string' && closed.has(id))
+        })
+      ])
+    )
+  }
+  for (const field of SHARED_KEYED_FIELDS) {
+    // Close records themselves (tab and pane) are what keeps the tab closed; keep them all.
+    if (/Tombstones/.test(field) || !isRecord(out[field])) {
+      continue
+    }
+    const byKey = out[field] as Record<string, unknown>
+    const kept = Object.entries(byKey).filter(([key]) => {
+      const tabId = PANE_KEYED_FIELDS.has(field) ? key.split(':')[0] : key
+      return !closed.has(tabId)
+    })
+    if (kept.length !== Object.keys(byKey).length) {
+      out[field] = Object.fromEntries(kept)
+    }
+  }
 }

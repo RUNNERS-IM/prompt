@@ -1,7 +1,6 @@
 import { antigravityHookService } from '../antigravity/hook-service'
 import { getRelocatedDaemonHost } from '../daemon/daemon-host-relocation'
 import { app, ipcMain, powerMonitor, session } from 'electron'
-import os from 'node:os'
 import { join } from 'node:path'
 import { maybeRedirectCliLaunch } from './cli-launch-redirect'
 import { runProfileStateRecoveryPreflight } from './profile-state-recovery-preflight'
@@ -36,7 +35,6 @@ import { getDevInstanceIdentity, shouldApplyPreReadyAppName } from './dev-instan
 import { enableRendererHeapHeadroom } from './renderer-heap-headroom'
 import { configureLinuxDevShmUsage } from './linux-dev-shm-policy'
 import { isStartupDiagnosticsEnabled, logStartupDiagnostic } from './startup-diagnostics'
-import { startEventLoopStallProbe } from './event-loop-stall-probe'
 import { startEventLoopDelayProbe } from '../diagnostics/event-loop-delay-probe'
 import {
   isMainThreadDiagnosticsEnabled,
@@ -52,9 +50,11 @@ import {
   shouldSkipSingleInstanceLock,
   acquireSingleInstanceLock,
   logSingleInstanceLockBypass,
+  logBeforeSingleInstanceLock,
   logSingleInstanceLockFailure,
   SINGLE_INSTANCE_ALREADY_RUNNING_EXIT_CODE
 } from './single-instance-lock'
+import { exitIfLaunchYieldsToShipIt } from './macos-shipit-launch-yield'
 import { setAppEnvironment } from '../../shared/app-environment'
 import { ElectronAppEnvironment } from '../host/electron-app-environment'
 import { installMainProcessTreeKillGate } from '../own-chromium-tree-kill-guard'
@@ -217,15 +217,7 @@ function initializeMainProcessPreflight(options: MainProcessPreflightOptions): b
   }
   state.startupDiagnosticsEnabled = isStartupDiagnosticsEnabled()
   if (state.startupDiagnosticsEnabled) {
-    logStartupDiagnostic('before-single-instance-lock', {
-      version: app.getVersion(),
-      packaged: app.isPackaged,
-      platform: process.platform,
-      osRelease: os.release(),
-      userData: app.getPath('userData'),
-      e2eUserData: Boolean(process.env.ORCA_E2E_USER_DATA_DIR)
-    })
-    startEventLoopStallProbe()
+    logBeforeSingleInstanceLock(app)
   }
   // Session-long main-thread diagnostics (#7576) distinguish cold cache from unstable filesystem stamps via hit/miss/unprovable counts.
   if (isMainThreadDiagnosticsEnabled()) {
@@ -233,6 +225,9 @@ function initializeMainProcessPreflight(options: MainProcessPreflightOptions): b
     setSpawnObserver(recordSubprocessSpawn)
   }
   startMainThreadChurnProbe({ extraStats: () => ({ diffCache: settledDiffCache.stats() }) })
+  if (exitIfLaunchYieldsToShipIt(app, state.isServeMode)) {
+    return false
+  }
   // Lock after userData override so dev/packaged namespaces differ; concurrent dev copies also need separate profiles to avoid store corruption (#1326, #1312).
   const bypass = shouldBypassSingleInstanceLock({ isDev, isServeMode: state.isServeMode })
   const skip = shouldSkipSingleInstanceLock({ isDev, isServeMode: state.isServeMode })

@@ -72,6 +72,7 @@ export abstract class OrcaRuntimeWithTransitionGraphReloadToTerminalState extend
     this.rendererGraphEpoch += 1
     this.authoritativeWindowId = HEADLESS_RUNTIME_WINDOW_ID
     this.graphStatus = 'ready'
+    this.graphReadyOnce = true
     this.rendererGeneration = null
     this.setTerminalSideEffectConsumerAvailable(false)
     this.tabs.clear()

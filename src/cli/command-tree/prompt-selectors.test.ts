@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import type { RuntimeClientError } from '../runtime/types'
+import type { RuntimeClient } from '../runtime-client'
 import {
   absoluteCallerPath,
+  listTerminals,
   matchSelector,
   resolvePromptWorkspaceSelector
 } from './prompt-selectors'
@@ -73,5 +75,53 @@ describe('resolvePromptWorkspaceSelector', () => {
     await expect(resolvePromptWorkspaceSelector(client as never, '.')).resolves.toBe(
       `path:${process.cwd()}`
     )
+  })
+})
+
+describe('listTerminals', () => {
+  function clientReturning(results: { graphReady?: boolean; count: number }[]) {
+    let calls = 0
+    const client = {
+      call: async () => {
+        const next = results[Math.min(calls, results.length - 1)]
+        calls += 1
+        return {
+          id: 'r',
+          ok: true,
+          result: {
+            terminals: Array.from({ length: next.count }, (_, i) => ({ handle: `term_${i}` })),
+            totalCount: next.count,
+            truncated: false,
+            ...(next.graphReady === undefined ? {} : { graphReady: next.graphReady })
+          }
+        }
+      }
+    } as unknown as RuntimeClient
+    return { client, calls: () => calls }
+  }
+  const noSleep = async () => {}
+
+  it('waits while the app has not restored its tabs, then returns the full list', async () => {
+    const { client, calls } = clientReturning([
+      { graphReady: false, count: 0 },
+      { graphReady: false, count: 0 },
+      { graphReady: true, count: 6 }
+    ])
+    const response = await listTerminals(client, undefined, { sleep: noSleep })
+    expect(response.result.terminals).toHaveLength(6)
+    expect(calls()).toBe(3)
+  })
+
+  it('returns at once from hosts that predate the ready field', async () => {
+    const { client, calls } = clientReturning([{ count: 0 }])
+    expect((await listTerminals(client, undefined, { sleep: noSleep })).result.totalCount).toBe(0)
+    expect(calls()).toBe(1)
+  })
+
+  it('fails as not_ready instead of returning an empty list past the wait', async () => {
+    const { client } = clientReturning([{ graphReady: false, count: 0 }])
+    await expect(
+      listTerminals(client, undefined, { timeoutMs: 0, sleep: noSleep })
+    ).rejects.toMatchObject({ code: 'not_ready' })
   })
 })

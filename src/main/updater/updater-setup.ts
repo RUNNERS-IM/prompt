@@ -85,6 +85,10 @@ export class UpdaterSetup extends UpdaterDownloadInstall {
     return super.installRemoteServerUpdate(runtimeId)
   }
 
+  declineRendererInstallRequest(): void {
+    super.declineRendererInstallRequest()
+  }
+
   resolveUpdateInstallMode(isServeMode: boolean): UpdateInstallMode {
     return super.resolveUpdateInstallMode(isServeMode)
   }
@@ -203,6 +207,7 @@ export class UpdaterSetup extends UpdaterDownloadInstall {
       commitStagedMacInstall: () => this.commitStagedMacInstall(),
       failMacStaging: (error) => this.failMacStaging(error),
       isAwaitingMacStaging: () => this.isAwaitingMacStaging(),
+      retryMacStagingDownload: () => this.downloadUpdate(),
       isMacStagingDeferredToInstall: () => this.isMacStagingDeferredToInstall(),
       shouldDeferMacQuitForInstall: () => this.updateInstallMode === 'interactive',
       recordCompletedUpdateCheck: () => this.recordCompletedUpdateCheck(),

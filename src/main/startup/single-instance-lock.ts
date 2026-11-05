@@ -1,6 +1,12 @@
+import os from 'node:os'
 import type { App } from 'electron'
 import { argvRequestsServeMode } from './serve-mode-argv'
-import { writeStartupDiagnosticLine, type StartupDiagnosticSink } from './startup-diagnostics'
+import { startEventLoopStallProbe } from './event-loop-stall-probe'
+import {
+  logStartupDiagnostic,
+  writeStartupDiagnosticLine,
+  type StartupDiagnosticSink
+} from './startup-diagnostics'
 
 export const SINGLE_INSTANCE_LOCK_FAILURE_MESSAGE =
   '[single-instance] Another Orca instance is already running for this userData profile; exiting this launch after requesting the existing window. If no Orca process is running, this may be an Electron/macOS single-instance lock failure.'
@@ -77,4 +83,16 @@ export function logSingleInstanceLockFailure(
 
 export function logSingleInstanceLockBypass(write?: StartupDiagnosticSink): void {
   writeStartupDiagnosticLine(SINGLE_INSTANCE_LOCK_BYPASS_MESSAGE, write)
+}
+
+export function logBeforeSingleInstanceLock(app: App): void {
+  logStartupDiagnostic('before-single-instance-lock', {
+    version: app.getVersion(),
+    packaged: app.isPackaged,
+    platform: process.platform,
+    osRelease: os.release(),
+    userData: app.getPath('userData'),
+    e2eUserData: Boolean(process.env.ORCA_E2E_USER_DATA_DIR)
+  })
+  startEventLoopStallProbe()
 }
