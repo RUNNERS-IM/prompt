@@ -6,7 +6,6 @@ import appIconUrl from '../../../../../resources/icon.png?url'
 import { PromptRunnersApps } from './PromptRunnersApps'
 import { loadPromptRunnersAppGroups, openRunnersAppUrl } from './prompt-runners-apps-source'
 import { isSafeRunnersAppUrl, pickRunnersAppsLocale } from './runners-apps-model'
-import { formatPromptDisplayVersion } from '../../../../shared/prompt-display-version'
 
 const COPYRIGHT = '© 2026 RUNNERS. All rights reserved.'
 
@@ -29,7 +28,7 @@ export function PromptAboutPage(): React.JSX.Element {
       .getVersion()
       .then((value) => {
         if (!cancelled) {
-          setVersion(formatPromptDisplayVersion(value))
+          setVersion(value)
         }
       })
       .catch(() => undefined)
