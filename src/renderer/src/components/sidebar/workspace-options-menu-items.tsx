@@ -36,6 +36,7 @@ import {
 import { translate } from '@/i18n/i18n'
 import { SidebarGroupByToggle } from './SidebarGroupByToggle'
 import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
+import { promptWorkspaceViewSections } from './prompt-workspace-options'
 
 export function useWorkspaceOptionsFilterBadge(): {
   hasAnyFilter: boolean
@@ -272,16 +273,21 @@ export function WorkspaceOptionsMenuItems({
   const newCardStyle = useAppStore((s) => s.settings?.experimentalNewWorktreeCardStyle === true)
   const runtimeEnvironmentCount = useAppStore((s) => s.runtimeEnvironments.length)
   const runtimeEnvironmentCatalogHydrated = useAppStore((s) => s.runtimeEnvironmentCatalogHydrated)
+  const hideAutomationGeneratedWorkspaces = useAppStore((s) => s.hideAutomationGeneratedWorkspaces)
+  const hideCliCreatedWorkspaces = useAppStore((s) => s.hideCliCreatedWorkspaces)
   const { hostOptions } = useSidebarHostScopeOptions()
-  const sections = getShownWorkspaceViewSections({
-    groupBy,
-    hideSleepingWorkspaces: !showSleepingWorkspaces,
-    hideWorkspacesFromOtherDevices,
-    newCardStyle,
-    hasRemoteHosts: shouldShowHostScopeControls(hostOptions),
-    projectCount: repoCount,
-    mayHaveServerHosts: !runtimeEnvironmentCatalogHydrated || runtimeEnvironmentCount > 0
-  })
+  const sections = promptWorkspaceViewSections(
+    getShownWorkspaceViewSections({
+      groupBy,
+      hideSleepingWorkspaces: !showSleepingWorkspaces,
+      hideWorkspacesFromOtherDevices,
+      newCardStyle,
+      hasRemoteHosts: shouldShowHostScopeControls(hostOptions),
+      projectCount: repoCount,
+      mayHaveServerHosts: !runtimeEnvironmentCatalogHydrated || runtimeEnvironmentCount > 0
+    }),
+    { groupBy, hideAutomationGeneratedWorkspaces, hideCliCreatedWorkspaces }
+  )
 
   return (
     <>

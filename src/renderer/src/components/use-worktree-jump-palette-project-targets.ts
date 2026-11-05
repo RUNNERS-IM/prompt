@@ -10,6 +10,10 @@ import {
 } from '@/components/cmd-j/palette-results'
 import { getCmdJQuickActions } from '@/components/cmd-j/quick-actions'
 import {
+  PROMPT_PALETTE_HIDES_BROWSER_AND_PLUGIN_ACTIONS,
+  promptPaletteQuickActions
+} from '@/components/cmd-j/prompt-palette-actions'
+import {
   buildPluginNewFileQuickActions,
   buildPluginQuickActions
 } from '@/components/cmd-j/plugin-quick-actions'
@@ -49,11 +53,17 @@ export function useWorktreeJumpPaletteProjectTargets({
   )
   const actionResults = useMemo(
     () =>
-      buildCmdJActionResults([
-        ...getCmdJQuickActions(),
-        ...buildPluginNewFileQuickActions(pluginNewFiles),
-        ...buildPluginQuickActions(pluginCommands)
-      ]),
+      buildCmdJActionResults(
+        promptPaletteQuickActions([
+          ...getCmdJQuickActions(),
+          ...(PROMPT_PALETTE_HIDES_BROWSER_AND_PLUGIN_ACTIONS
+            ? []
+            : [
+                ...buildPluginNewFileQuickActions(pluginNewFiles),
+                ...buildPluginQuickActions(pluginCommands)
+              ])
+        ])
+      ),
     [pluginCommands, pluginNewFiles]
   )
   const renderableProjectRepoIds = useMemo(() => {

@@ -12,6 +12,7 @@ import type { WorktreeJumpPaletteStoreState } from './use-worktree-jump-palette-
 import type { WorktreeJumpPaletteLocalState } from './use-worktree-jump-palette-local-state'
 import type { WorktreeJumpPaletteFilter } from './use-worktree-jump-palette-filter'
 import { getRepoExecutionHostId } from '../../../shared/execution-host'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 const TASK_SEARCH_DEBOUNCE_MS = 600
 
 type Input = Pick<WorktreeJumpPaletteStoreState, 'visible' | 'repos' | 'settings'> &
@@ -59,7 +60,8 @@ export function useWorktreeJumpPaletteTaskSearch({
       )
     ]
   }
-  const searchEnabled = visible && isCmdJTaskSearchQuery(query)
+  // Prompt hides the Tasks feature (GitHub · Linear · Jira boards), so Cmd+J does not search them.
+  const searchEnabled = !PROMPT_BLOCK_UPSTREAM_SERVICES && visible && isCmdJTaskSearchQuery(query)
   const requestKey = JSON.stringify([
     query.trim(),
     effectiveFilter,

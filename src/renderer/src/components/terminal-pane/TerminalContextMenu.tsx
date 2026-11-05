@@ -38,6 +38,7 @@ import { AgentSessionContextCopyMenuItem } from './AgentSessionContextCopyMenuIt
 import { ClearPaneTitleMenuItem } from './ClearPaneTitleMenuItem'
 import type { TerminalQuickCommandMenuHost } from '@/hooks/use-terminal-quick-command-hosts'
 import { TerminalQuickCommandsSubmenu } from './TerminalQuickCommandsSubmenu'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 type TerminalContextMenuProps = {
   open: boolean
@@ -321,17 +322,25 @@ function TerminalContextMenuItems({
           )}
         </DropdownMenuItem>
       ) : null}
-      <DropdownMenuItem onSelect={onCopyTerminalId}>
-        <Copy />
-        {translate(
-          'auto.components.terminal.pane.TerminalContextMenu.copyTerminalId',
-          'Copy Terminal ID'
-        )}
-      </DropdownMenuItem>
-      <DropdownMenuItem onSelect={onCopyPaneId}>
-        <Copy />
-        {translate('auto.components.terminal.pane.TerminalContextMenu.2cf85a6a55', 'Copy Pane ID')}
-      </DropdownMenuItem>
+      {/* Prompt: terminal and pane IDs are for Orca's CLI orchestration, which Prompt hides. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+        <>
+          <DropdownMenuItem onSelect={onCopyTerminalId}>
+            <Copy />
+            {translate(
+              'auto.components.terminal.pane.TerminalContextMenu.copyTerminalId',
+              'Copy Terminal ID'
+            )}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={onCopyPaneId}>
+            <Copy />
+            {translate(
+              'auto.components.terminal.pane.TerminalContextMenu.2cf85a6a55',
+              'Copy Pane ID'
+            )}
+          </DropdownMenuItem>
+        </>
+      )}
       {canClosePane && (
         <>
           <DropdownMenuSeparator />
