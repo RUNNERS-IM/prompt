@@ -33,7 +33,8 @@ export function TabBarStaticCreateMenu({
   newSimulatorShortcut,
   newFileShortcut,
   openMarkdownShortcut,
-  queueNewActiveTerminalFocusAfterNewTabMenuClose
+  queueNewActiveTerminalFocusAfterNewTabMenuClose,
+  terminalItemOnly = false
 }: {
   props: TabBarProps
   groupId: string
@@ -54,6 +55,7 @@ export function TabBarStaticCreateMenu({
   newFileShortcut: string
   openMarkdownShortcut: string | null
   queueNewActiveTerminalFocusAfterNewTabMenuClose: () => void
+  terminalItemOnly?: boolean
 }): React.ReactNode {
   const {
     newTabMenuOrder = 'default',
@@ -203,6 +205,9 @@ export function TabBarStaticCreateMenu({
       <MobileEmulatorTabIntroCallout />
     ) : null
 
+  if (terminalItemOnly) {
+    return defaultTerminalMenuItems
+  }
   return newTabMenuOrder === 'markdown-first' ? (
     <>
       {newMarkdownMenuItem}
