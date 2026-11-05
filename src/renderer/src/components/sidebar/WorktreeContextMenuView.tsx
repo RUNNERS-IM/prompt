@@ -6,27 +6,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import {
-  Copy,
-  Bell,
-  BellOff,
-  CircleX,
-  Pencil,
-  Pin,
-  PinOff,
-  Trash2,
-  Unlink,
-  Workflow,
-  FolderInput,
-  FolderPlus,
-  FolderTree
-} from 'lucide-react'
+import { Copy, Pencil, Pin, PinOff, Trash2, Unlink } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { WorktreeRowOpenInSubMenu } from './WorktreeRowOpenInSubMenu'
 import { WorktreeDeveloperMenu } from './WorktreeDeveloperMenu'
@@ -37,11 +20,10 @@ import { useOptionalShortcutLabel } from '@/hooks/useShortcutLabel'
 import type { WorktreeContextMenuModel } from './use-worktree-context-menu-model'
 import { WorktreeStatusMenuItems } from './WorktreeStatusMenuItems'
 import { WorktreeContextMenuOverlays } from './WorktreeContextMenuOverlays'
+import { WorktreeContextMenuOrganizeItems } from './WorktreeContextMenuOrganizeItems'
 import {
   WORKTREE_CONTEXT_MENU_SCOPE_ATTR,
-  getWorktreeParentPickerLabel,
   isSessionRowContextMenuTarget,
-  isWorktreeParentPickerDisabled,
   shouldIgnoreNestedWorktreeContextMenuScope,
   shouldRevealWorktreeDeveloperMenu,
   shouldUseNativeContextMenu
@@ -50,6 +32,7 @@ import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import {
   EMPTY_PROMPT_CONTEXT_MENU_TARGET,
   PromptContextMenuLeadItems,
+  PROMPT_PROJECT_MENU_BASICS_ONLY,
   promptContextMenuTargetFromEvent
 } from './prompt-context-menu-lead'
 
@@ -65,7 +48,6 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
     deletingContext,
     deletingSubtree,
     developerMenuRevealed,
-    eligibleParentCount,
     effectiveSelectedWorktrees,
     folderWorkspaceId,
     handleAssignWorkspaceStatus,
@@ -73,26 +55,18 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
     handleCloseTerminals,
     handleCopyName,
     handleCopyPath,
-    handleCreateGroupFromRepo,
     handleDelete,
-    handleMoveProjectToGroup,
-    handleOpenParent,
-    handleOpenParentPicker,
     handleRemoveParentLink,
-    handleRemoveProjectFromGroup,
     handleRename,
     handleSleepSubtree,
     handleTogglePin,
-    handleToggleRead,
     hasAnyContextLineage,
-    hasParentLink,
     isDeleting,
     isMultiContext,
     lineageDescendantCount,
     menuOpen,
     menuPoint,
     onContextMenuSelect,
-    projectGroups,
     removesProject,
     repo,
     scopeRef,
@@ -104,7 +78,6 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
     sleepableWorktrees,
     subtreeSleepableWorktrees,
     suppressOpeningPointerEvent,
-    validParentWorktreeId,
     worktree,
     workspaceStatuses
   } = model
@@ -137,7 +110,10 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
         setOpenedOnSessionRow(isSessionRowContextMenuTarget(event.target))
         setContextWorktrees(onContextMenuSelect?.(event) ?? effectiveSelectedWorktrees)
         const bounds = event.currentTarget.getBoundingClientRect()
-        setMenuPoint({ x: event.clientX - bounds.left, y: event.clientY - bounds.top })
+        setMenuPoint({
+          x: event.clientX - bounds.left,
+          y: event.clientY - bounds.top
+        })
         setMenuOpenState(true)
       }}
       onClickCapture={(event) => {
@@ -169,22 +145,29 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
           onCloseAutoFocus={handleCloseAutoFocus}
         >
           <PromptContextMenuLeadItems target={promptMenuTarget} />
-          <DropdownMenuLabel>
-            {translate('auto.components.sidebar.WorktreeContextMenu.workspaceSection', 'Workspace')}
-          </DropdownMenuLabel>
+          {PROMPT_PROJECT_MENU_BASICS_ONLY ? null : (
+            <DropdownMenuLabel>
+              {translate(
+                'auto.components.sidebar.WorktreeContextMenu.workspaceSection',
+                'Workspace'
+              )}
+            </DropdownMenuLabel>
+          )}
           {!isMultiContext && (
             <DropdownMenuItem onSelect={handleRename} disabled={isDeleting}>
               <Pencil className="size-3.5" />
               {translate('auto.components.sidebar.WorktreeContextMenu.439fa94d53', 'Update')}
             </DropdownMenuItem>
           )}
-          <WorktreeStatusMenuItems
-            contextWorkspaceStatus={contextWorkspaceStatus}
-            deletingContext={deletingContext}
-            isMultiContext={isMultiContext}
-            onAssignWorkspaceStatus={handleAssignWorkspaceStatus}
-            workspaceStatuses={workspaceStatuses}
-          />
+          {PROMPT_PROJECT_MENU_BASICS_ONLY ? null : (
+            <WorktreeStatusMenuItems
+              contextWorkspaceStatus={contextWorkspaceStatus}
+              deletingContext={deletingContext}
+              isMultiContext={isMultiContext}
+              onAssignWorkspaceStatus={handleAssignWorkspaceStatus}
+              workspaceStatuses={workspaceStatuses}
+            />
+          )}
           <DropdownMenuSeparator />
           {!isMultiContext && (
             <>
@@ -197,13 +180,15 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
                 <Copy className="size-3.5" />
                 {translate('auto.components.sidebar.WorktreeContextMenu.3350101edb', 'Copy Path')}
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={handleCopyName} disabled={isDeleting}>
-                <Copy className="size-3.5" />
-                {translate(
-                  'auto.components.sidebar.WorktreeContextMenu.copyWorktreeName',
-                  'Copy Worktree Name'
-                )}
-              </DropdownMenuItem>
+              {PROMPT_PROJECT_MENU_BASICS_ONLY ? null : (
+                <DropdownMenuItem onSelect={handleCopyName} disabled={isDeleting}>
+                  <Copy className="size-3.5" />
+                  {translate(
+                    'auto.components.sidebar.WorktreeContextMenu.copyWorktreeName',
+                    'Copy Worktree Name'
+                  )}
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={handleTogglePin} disabled={isDeleting}>
                 {worktree.isPinned ? <PinOff className="size-3.5" /> : <Pin className="size-3.5" />}
@@ -211,92 +196,10 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
                   ? translate('auto.components.sidebar.WorktreeContextMenu.697d0f6e1b', 'Unpin')
                   : translate('auto.components.sidebar.WorktreeContextMenu.3baa7d6507', 'Pin')}
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={handleToggleRead} disabled={isDeleting}>
-                {worktree.isUnread ? (
-                  <BellOff className="size-3.5" />
-                ) : (
-                  <Bell className="size-3.5" />
-                )}
-                {worktree.isUnread
-                  ? translate('auto.components.sidebar.WorktreeContextMenu.8dacff1fe0', 'Mark Read')
-                  : translate(
-                      'auto.components.sidebar.WorktreeContextMenu.f50603c6b2',
-                      'Mark Unread'
-                    )}
-              </DropdownMenuItem>
-              {repo ? (
-                <>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onSelect={handleCreateGroupFromRepo} disabled={isDeleting}>
-                    <FolderPlus className="size-3.5" />
-                    {translate(
-                      'auto.components.sidebar.WorktreeContextMenu.503ec0f8e6',
-                      'New group from project'
-                    )}
-                  </DropdownMenuItem>
-                  {projectGroups.length > 0 ? (
-                    <DropdownMenuSub>
-                      <DropdownMenuSubTrigger disabled={isDeleting}>
-                        <FolderInput className="size-3.5" />
-                        {translate(
-                          'auto.components.sidebar.WorktreeContextMenu.76865d827f',
-                          'Move to group'
-                        )}
-                      </DropdownMenuSubTrigger>
-                      <DropdownMenuSubContent>
-                        {projectGroups.map((group) => (
-                          <DropdownMenuItem
-                            key={group.id}
-                            disabled={repo.projectGroupId === group.id}
-                            onSelect={() => handleMoveProjectToGroup(group.id)}
-                          >
-                            <span className="max-w-48 truncate">{group.name}</span>
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuSubContent>
-                    </DropdownMenuSub>
-                  ) : null}
-                  {repo.projectGroupId ? (
-                    <DropdownMenuItem onSelect={handleRemoveProjectFromGroup} disabled={isDeleting}>
-                      <CircleX className="size-3.5" />
-                      {translate(
-                        'auto.components.sidebar.WorktreeContextMenu.d35dfeae58',
-                        'Remove from group'
-                      )}
-                    </DropdownMenuItem>
-                  ) : null}
-                </>
-              ) : null}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onSelect={handleOpenParentPicker}
-                disabled={isWorktreeParentPickerDisabled({ isDeleting, eligibleParentCount })}
-              >
-                <FolderTree className="size-3.5" />
-                {getWorktreeParentPickerLabel(validParentWorktreeId)}
-              </DropdownMenuItem>
-              {(validParentWorktreeId || hasParentLink) && (
-                <>
-                  {validParentWorktreeId && (
-                    <DropdownMenuItem onSelect={handleOpenParent} disabled={isDeleting}>
-                      <Workflow className="size-3.5" />
-                      {translate(
-                        'auto.components.sidebar.WorktreeContextMenu.8d9cd19d09',
-                        'Open Parent Worktree'
-                      )}
-                    </DropdownMenuItem>
-                  )}
-                  {hasParentLink && (
-                    <DropdownMenuItem onSelect={handleRemoveParentLink} disabled={isDeleting}>
-                      <Unlink className="size-3.5" />
-                      {translate(
-                        'auto.components.sidebar.WorktreeContextMenu.579b1a8e61',
-                        'Remove from Parent'
-                      )}
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuSeparator />
-                </>
+              {PROMPT_PROJECT_MENU_BASICS_ONLY ? (
+                <DropdownMenuSeparator />
+              ) : (
+                <WorktreeContextMenuOrganizeItems model={model} />
               )}
             </>
           )}
@@ -313,23 +216,29 @@ export default function WorktreeContextMenuView({ model }: { model: WorktreeCont
             </>
           ) : null}
 
-          {shouldRevealWorktreeDeveloperMenu({ developerMenuRevealed, isMultiContext }) ? (
+          {!PROMPT_PROJECT_MENU_BASICS_ONLY &&
+          shouldRevealWorktreeDeveloperMenu({
+            developerMenuRevealed,
+            isMultiContext
+          }) ? (
             <>
               <WorktreeDeveloperMenu worktreeId={worktree.id} disabled={isDeleting} />
               <DropdownMenuSeparator />
             </>
           ) : null}
-          <WorkspaceSleepMenuItems
-            isMultiContext={isMultiContext}
-            sleepLabel={sleepLabel}
-            sleepDisabled={deletingContext || sleepableWorktrees.length === 0}
-            descendantCount={lineageDescendantCount}
-            subtreeSleepDisabled={deletingSubtree || subtreeSleepableWorktrees.length === 0}
-            onSleep={handleCloseTerminals}
-            onSleepSubtree={handleSleepSubtree}
-          />
+          {PROMPT_PROJECT_MENU_BASICS_ONLY ? null : (
+            <WorkspaceSleepMenuItems
+              isMultiContext={isMultiContext}
+              sleepLabel={sleepLabel}
+              sleepDisabled={deletingContext || sleepableWorktrees.length === 0}
+              descendantCount={lineageDescendantCount}
+              subtreeSleepDisabled={deletingSubtree || subtreeSleepableWorktrees.length === 0}
+              onSleep={handleCloseTerminals}
+              onSleepSubtree={handleSleepSubtree}
+            />
+          )}
           {/* Git cannot remove primary checkouts; keep disabled Delete beside the enabled Remove Project action. */}
-          {!isMultiContext && offersProjectRemoval ? (
+          {!PROMPT_PROJECT_MENU_BASICS_ONLY && !isMultiContext && offersProjectRemoval ? (
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>

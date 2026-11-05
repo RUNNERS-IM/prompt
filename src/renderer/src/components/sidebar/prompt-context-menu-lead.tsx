@@ -3,15 +3,22 @@ import { AppWindow } from 'lucide-react'
 import { DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { translate } from '@/i18n/i18n'
 import { openPromptProjectWindow } from '@/lib/prompt-windows'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import {
   PromptClaudeModelSubmenu,
   claudeModelPaneKeyFromTarget
 } from '@/components/prompt-claude-model-menu'
 
+/** Prompt 프로젝트 메뉴는 새 창 · 이름 · 메모 · 다음에서 열기 · 경로 복사 · 고정 · 목록에서 빼기만 보인다. */
+export const PROMPT_PROJECT_MENU_BASICS_ONLY = PROMPT_BLOCK_UPSTREAM_SERVICES
+
 /** Set on a project header so its right-click menu offers "Open in New Window". */
 export const PROMPT_PROJECT_WINDOW_REPO_ATTR = 'data-prompt-project-window-repo'
 
-export type PromptContextMenuTarget = { claudePaneKey: string | null; repoId: string | null }
+export type PromptContextMenuTarget = {
+  claudePaneKey: string | null
+  repoId: string | null
+}
 
 export const EMPTY_PROMPT_CONTEXT_MENU_TARGET: PromptContextMenuTarget = {
   claudePaneKey: null,
