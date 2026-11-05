@@ -6,7 +6,7 @@ vi.mock('./tray-menu-icons', () => ({
   trayMenuIcon: (name: string) => (process.platform === 'darwin' ? `icon:${name}` : undefined)
 }))
 
-const { buildTrayMenuRows, buildTrayMenuTemplate, runTrayMenuCommand } =
+const { buildTrayMenuRows, buildTrayMenuTemplate, buildTrayPanelRows, runTrayMenuCommand } =
   await import('./tray-menu-template')
 
 const originalPlatform = process.platform
@@ -44,6 +44,8 @@ function describeRow(row: PromptMenuRow): string {
   switch (row.kind) {
     case 'separator':
       return '---'
+    case 'head':
+      return row.sub ? `# ${row.name} / ${row.sub}` : `# ${row.name}`
     case 'info':
       return row.dot ? `● ${row.label}` : `(${row.label})`
     case 'toggle':
@@ -138,6 +140,20 @@ describe('tray menu rows', () => {
     expect(rows.find((row) => row.kind === 'toggle' && row.id === 'openAtLogin')).toMatchObject({
       checked: false
     })
+  })
+})
+
+describe('tray panel rows', () => {
+  it('folds the dev label and terminal count into one head line', () => {
+    setPlatform('darwin')
+    const rows = buildTrayPanelRows(options(), { devLabel: 'Prompt DEV (x)', terminalCount: 3 })
+
+    expect(rows.slice(0, 4).map(describeRow)).toEqual([
+      '# Prompt DEV / 3 terminals running',
+      '---',
+      'Open Prompt',
+      '---'
+    ])
   })
 })
 

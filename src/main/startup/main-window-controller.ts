@@ -18,6 +18,7 @@ import { logStartupMilestone } from './startup-diagnostics'
 import { notifyMainWindowBecameVisible } from '../window/main-window-visibility'
 import { setTrayAttention } from '../tray/system-tray'
 import { createSystemTrayDeferred, showRendererRecoveryPrompt } from './main-window-actions'
+import { getMainE2EConfig } from '../e2e-config'
 import { attachMainWindowCoreServices } from './main-window-core-services'
 import {
   clearMainWindowAgentStatusListeners,
@@ -170,7 +171,10 @@ export function openMainWindow(options: { revealOnDidFinishLoad?: boolean } = {}
   })
   recordCrashBreadcrumb('main_window_created')
   logStartupMilestone('window-created')
-  const createTray = createSystemTrayDeferred(window, () => logStartupMilestone('tray-created'))
+  // Hidden e2e apps must not put a DEV icon on the user's menu bar.
+  const createTray = getMainE2EConfig().headless
+    ? () => {}
+    : createSystemTrayDeferred(window, () => logStartupMilestone('tray-created'))
   window.once('ready-to-show', () => {
     logStartupMilestone('ready-to-show')
     setImmediate(createTray)

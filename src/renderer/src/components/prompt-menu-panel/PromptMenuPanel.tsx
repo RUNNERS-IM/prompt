@@ -18,9 +18,10 @@ import {
   type PromptMenuPanelApi,
   type PromptMenuRow
 } from '../../../../shared/prompt-menu-panel'
+import { MenuHead, MenuItem, MenuSeparator, MenuSwitch } from '../runners-account/runners-menu'
 
 // 맥 메뉴 막대 패널의 화면. 줄 목록은 main 이 번역까지 마쳐 보내고, 여기서는 그리기만 한다.
-// 마크업은 Monitor(src/App.tsx 의 Commands)의 line · toggle 과 같다. 아이콘은 lucide, 굵기 1.5, 크기 16.
+// 줄 모양은 네 앱 공용 부품(runners-account/runners-menu.tsx)이 그린다. 아이콘은 lucide, 굵기 1.5, 크기 16.
 
 const ICON_SIZE = 16
 const ICON_STROKE = 1.5
@@ -105,7 +106,9 @@ export function PromptMenuPanel({ api }: { api: PromptMenuPanelApi }): React.JSX
       {rows.map((row, index) => {
         switch (row.kind) {
           case 'separator':
-            return <div key={`separator-${index}`} className="rm-separator" />
+            return <MenuSeparator key={`separator-${index}`} />
+          case 'head':
+            return <MenuHead key="head" name={row.name} sub={row.sub} />
           case 'info':
             return (
               <div key={`info-${index}`} className="rm-item prompt-menu-info">
@@ -115,28 +118,23 @@ export function PromptMenuPanel({ api }: { api: PromptMenuPanelApi }): React.JSX
             )
           case 'toggle':
             return (
-              <label key={row.id} className="rm-item prompt-menu-switch">
-                <Icon name={row.icon} />
-                <span className="rm-label">{row.label}</span>
-                <input type="checkbox" checked={row.checked} onChange={() => run(row.id)} />
-                <span className="prompt-menu-knob" aria-hidden />
-              </label>
+              <MenuSwitch
+                key={row.id}
+                icon={<Icon name={row.icon} />}
+                label={row.label}
+                checked={row.checked}
+                onChange={() => run(row.id)}
+              />
             )
           case 'command':
             return (
-              <button
+              <MenuItem
                 key={row.id}
-                type="button"
-                className="rm-item"
-                title={row.toolTip}
-                onClick={() => run(row.id)}
-              >
-                <Icon name={row.icon} />
-                <span className="rm-label">{row.label}</span>
-                {row.accelerator ? (
-                  <span className="rm-trailing">{promptMenuAcceleratorText(row.accelerator)}</span>
-                ) : null}
-              </button>
+                icon={<Icon name={row.icon} />}
+                label={<span title={row.toolTip}>{row.label}</span>}
+                trailing={row.accelerator ? promptMenuAcceleratorText(row.accelerator) : undefined}
+                onSelect={() => run(row.id)}
+              />
             )
         }
       })}

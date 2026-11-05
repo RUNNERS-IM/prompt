@@ -132,6 +132,22 @@ export function buildTrayMenuRows(
   return rows
 }
 
+/** 맥 패널 줄 목록: 맨 위 회색 줄(개발판 이름표 · 터미널 수)을 Monitor 처럼 머리 줄 하나로 합친다. */
+export function buildTrayPanelRows(opts: SystemTrayOptions, state: TrayMenuState): PromptMenuRow[] {
+  const rows = buildTrayMenuRows(opts, state)
+  const firstCommand = rows.findIndex((row) => row.kind !== 'info' && row.kind !== 'separator')
+  const running = rows.slice(0, firstCommand).find((row) => row.kind === 'info' && row.dot)
+  return [
+    {
+      kind: 'head',
+      name: state.devLabel ? 'Prompt DEV' : 'Prompt',
+      ...(running?.kind === 'info' ? { sub: running.label } : {})
+    },
+    { kind: 'separator' },
+    ...rows.slice(firstCommand)
+  ]
+}
+
 function readFlag(read: () => boolean): boolean {
   try {
     return read()
@@ -184,6 +200,8 @@ export function buildTrayMenuTemplate(
     switch (row.kind) {
       case 'separator':
         return { type: 'separator' }
+      case 'head':
+        return { label: row.sub ? `${row.name}  ${row.sub}` : row.name, enabled: false }
       case 'info':
         return {
           label: row.label,
