@@ -11,7 +11,7 @@ import { createAppMenuSelectionItem, resolveNativeEditTarget } from './app-menu-
 import { createAppMenuQuitItems, type AppMenuQuitHandlers } from './app-menu-quit-item'
 import { createAppMenuReloadAndDevToolsItems } from './app-menu-reload-devtools-items'
 import { createPromptWindowMenu } from './prompt-window-menu'
-import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_NEW_ISSUE_URL } from '../../shared/prompt-upstream'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES, PROMPT_ISSUES_URL } from '../../shared/prompt-upstream'
 import { createPromptAboutItem } from './prompt-app-menu-about-item'
 
 export type AppearanceMenuState = {
@@ -31,6 +31,8 @@ export function getNextDefaultOnAppearanceSettingValue(current: boolean | undefi
 type RegisterAppMenuOptions = AppMenuQuitHandlers & {
   onOpenSettings: () => void
   onOpenSetupGuide: (window?: Electron.BaseWindow | null) => void
+  // Prompt: lets View > Open Worktree Palette do what its shortcut hint says.
+  onToggleWorktreePalette?: (window?: Electron.BaseWindow | null) => void
   onOpenFeatureTour: (window?: Electron.BaseWindow | null) => void
   onOpenCrashReport: (window?: Electron.BaseWindow | null) => void
   onCheckForUpdates: (options: UpdateCheckOptions) => void
@@ -53,6 +55,7 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
   const {
     onOpenSettings,
     onOpenSetupGuide,
+    onToggleWorktreePalette,
     onOpenFeatureTour,
     onOpenCrashReport,
     onCheckForUpdates,
@@ -129,11 +132,10 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
     click: (_menuItem, window) => onOpenCrashReport(window)
   }
 
-  // Prompt: feedback opens a new issue in Prompt's GitHub repository (same place as the sidebar dialog).
-  // Same wording as the menu bar menu ("Help & Feedback").
+  // Prompt: same wording and same page (the issue list) as the menu bar menu's "Help & Feedback".
   const sendFeedbackItem: Electron.MenuItemConstructorOptions = {
     label: translateMain('tray.helpFeedback', 'Help & Feedback'),
-    click: () => void shell.openExternal(`${PROMPT_NEW_ISSUE_URL}?labels=feedback`)
+    click: () => void shell.openExternal(PROMPT_ISSUES_URL)
   }
 
   const macAppMenu: Electron.MenuItemConstructorOptions = {
@@ -224,22 +226,22 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
         click: () => onToggleAppearance('statusBarVisible')
       },
       { type: 'separator' },
-      {
-        label: translateMain('menu.showTasksButton', 'Show Tasks Button'),
-        type: 'checkbox',
-        checked: appearance.showTasksButton,
-        click: () => onToggleAppearance('showTasksButton')
-      },
-      {
-        label: translateMain('menu.showAutomationsButton', 'Show Automations Button'),
-        type: 'checkbox',
-        checked: appearance.showAutomationsButton,
-        click: () => onToggleAppearance('showAutomationsButton')
-      },
-      // Prompt: the mobile button is hidden by default and its menu toggle is not offered.
+      // Prompt: tasks, automations and mobile are hidden features, so their button toggles are not offered.
       ...(PROMPT_BLOCK_UPSTREAM_SERVICES
         ? []
         : ([
+            {
+              label: translateMain('menu.showTasksButton', 'Show Tasks Button'),
+              type: 'checkbox',
+              checked: appearance.showTasksButton,
+              click: () => onToggleAppearance('showTasksButton')
+            },
+            {
+              label: translateMain('menu.showAutomationsButton', 'Show Automations Button'),
+              type: 'checkbox',
+              checked: appearance.showAutomationsButton,
+              click: () => onToggleAppearance('showAutomationsButton')
+            },
             {
               label: translateMain('menu.showMobileButton', 'Show Orca Mobile Button'),
               type: 'checkbox',
@@ -280,7 +282,8 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
       { type: 'separator' },
       {
         // Native accelerators would bypass the renderer's overlay mutual-exclusion handling.
-        label: `${translateMain('menu.openWorktreePalette', 'Open Worktree Palette')}\t${shortcutLabel('worktree.palette')}`
+        label: `${translateMain('menu.openWorktreePalette', 'Open Worktree Palette')}\t${shortcutLabel('worktree.palette')}`,
+        click: (_menuItem, window) => onToggleWorktreePalette?.(window)
       },
       { type: 'separator' },
       { role: 'togglefullscreen' },
@@ -298,8 +301,8 @@ function buildAndApplyMenu(options: RegisterAppMenuOptions): void {
       crashReportItem,
       { type: 'separator' },
       // Prompt: the feature tour plays Orca's screen recordings, so it stays out of the menu.
-      ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : [featureTourItem]),
-      setupGuideItem,
+      // Prompt: the feature tour and the onboarding checklist both walk through Orca features.
+      ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : [featureTourItem, setupGuideItem]),
       ...(isMac
         ? []
         : ([

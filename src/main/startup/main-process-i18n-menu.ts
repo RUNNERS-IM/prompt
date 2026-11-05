@@ -53,6 +53,10 @@ export async function initializeMainProcessI18nAndMenu(): Promise<void> {
       recordCrashBreadcrumb('setup_guide_opened')
       sendOpenSetupGuide(targetWindow instanceof BrowserWindow ? targetWindow : null)
     },
+    // Same IPC as the Cmd+J shortcut, so the renderer keeps its overlay mutual exclusion.
+    onToggleWorktreePalette: () => {
+      promptMenuTargetWindow(state.mainWindow)?.webContents.send('ui:toggleWorktreePalette')
+    },
     onOpenCrashReport: (targetWindow) => {
       recordCrashBreadcrumb('crash_report_opened')
       sendOpenCrashReport(targetWindow instanceof BrowserWindow ? targetWindow : null)

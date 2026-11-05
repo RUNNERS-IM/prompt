@@ -68,7 +68,7 @@ describe('tray menu rows', () => {
       '---',
       'About Prompt',
       'Check for Updates…',
-      'Settings… CmdOrCtrl+,',
+      'Settings…',
       'Help & Feedback',
       '---',
       'Quit Prompt CmdOrCtrl+Q',
@@ -98,7 +98,7 @@ describe('tray menu rows', () => {
       '---',
       'About Prompt',
       'Check for Updates…',
-      'Settings… CmdOrCtrl+,',
+      'Settings…',
       'Help & Feedback',
       '---',
       'Quit Prompt CmdOrCtrl+Q'

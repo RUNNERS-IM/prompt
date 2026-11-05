@@ -31,6 +31,7 @@ import { markUserQuitWindowClose } from '../window/user-quit-window-close'
 import { loadMainWindow } from '../window/createMainWindow'
 import { showPromptAboutWindow } from '../window/prompt-about-window'
 import { promptTrayMenuExtras, syncPromptMenuPanel } from '../tray/prompt-tray-menu-options'
+import { PROMPT_ISSUES_URL } from '../../shared/prompt-upstream'
 import {
   describeInstallDirAclPoison,
   isBlockingInstallDirAclRepairInFlight
@@ -210,9 +211,6 @@ export function runUserInitiatedUpdateCheck(options?: UpdateCheckOptions): void 
   checkForUpdatesFromMenu(options)
 }
 
-// 공통.md: 도움말 · 피드백은 github.com/RUNNERS-IM/<앱>/issues
-const PROMPT_HELP_FEEDBACK_URL = 'https://github.com/RUNNERS-IM/prompt/issues'
-
 // Prompt: its own About window (app cards + original MIT credit) replaces the native About panel.
 export function showAboutFromSystemMenu(): void {
   showPromptAboutWindow(state.store)
@@ -234,7 +232,7 @@ export function getSystemTrayOptions(): SystemTrayOptions | null {
       runUserInitiatedUpdateCheck()
     },
     onShowAbout: showAboutFromSystemMenu,
-    onOpenHelp: () => void shell.openExternal(PROMPT_HELP_FEEDBACK_URL),
+    onOpenHelp: () => void shell.openExternal(PROMPT_ISSUES_URL),
     // Every live terminal the app routes (local daemon and SSH) has one ownership entry.
     getRunningTerminalCount: () => ptyOwnership.size,
     getWorkingAgentCount: () => state.agentAwakeService?.getWorkingAgentCount() ?? 0,

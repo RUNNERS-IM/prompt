@@ -96,9 +96,8 @@ export function buildTrayMenuRows(
         kind: 'command',
         id: 'settings',
         icon: 'settings',
-        label: translateMain('tray.settings', 'Settings…'),
-        // Shown as a hint only; the app menu owns the real ⌘, shortcut.
-        accelerator: 'CmdOrCtrl+,'
+        // No shortcut hint: app.settings has no default binding (⌘, stays with terminal apps).
+        label: translateMain('tray.settings', 'Settings…')
       }
     )
   }

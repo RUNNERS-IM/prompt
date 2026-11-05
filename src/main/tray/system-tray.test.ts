@@ -300,7 +300,7 @@ describe('createSystemTray', () => {
       ['Quit Completely...', 'icon:circle-x']
     ])
     expect(rows[0].enabled).toBe(false)
-    expect(rows.find((item) => item.label === 'Settings…')?.accelerator).toBe('CmdOrCtrl+,')
+    expect(rows.find((item) => item.label === 'Settings…')?.accelerator).toBeUndefined()
     expect(rows.find((item) => item.label === 'Quit Prompt')?.accelerator).toBe('CmdOrCtrl+Q')
   })
 
