@@ -78,7 +78,15 @@ export type UpdateStatus = (
       externallyManaged?: boolean
     }
   | { state: 'not-available'; userInitiated?: boolean }
-  | { state: 'downloading'; percent: number; version: string; activeNudgeId?: string }
+  | {
+      state: 'downloading'
+      percent: number
+      version: string
+      activeNudgeId?: string
+      /** Optional so older paired clients keep showing the percent alone. */
+      transferredBytes?: number
+      totalBytes?: number
+    }
   | {
       state: 'downloaded'
       version: string

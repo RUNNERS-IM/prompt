@@ -34,7 +34,8 @@ export function statusesEqual(left: UpdateStatus, right: UpdateStatus): boolean 
         right.state === 'downloading' &&
         left.version === right.version &&
         left.activeNudgeId === right.activeNudgeId &&
-        left.percent === right.percent
+        left.percent === right.percent &&
+        left.transferredBytes === right.transferredBytes
       )
     case 'downloaded':
       return (
