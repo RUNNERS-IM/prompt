@@ -24,6 +24,10 @@ import type { TabBarItemProjection } from './use-tab-bar-item-projection'
 import type { TabBarItemActions } from './use-tab-bar-item-actions'
 import { renderTabBarItems } from './tab-bar-item-surface'
 import { TabBarStaticCreateMenu } from './tab-bar-static-create-menu'
+import {
+  PROMPT_TAB_CREATE_MENU_CLAUDE_AND_TERMINAL,
+  promptTabCreateAgentMenuModel
+} from './prompt-tab-create-menu'
 import ClientHostedBrowserTabRows from './ClientHostedBrowserTabRows'
 import type { ClientHostedBrowserRow } from '../../../../shared/client-hosted-browser-rows'
 
@@ -252,6 +256,18 @@ export function renderTabBarSurface({
               {showStaticCreateMenuItems ? <DropdownMenuSeparator /> : null}
             </>
           ) : null}
+          {PROMPT_TAB_CREATE_MENU_CLAUDE_AND_TERMINAL &&
+          showStaticCreateMenuItems &&
+          showAgentLaunchItems ? (
+            <>
+              <ProjectedAgentMenuItems
+                model={promptTabCreateAgentMenuModel(agentMenu)}
+                runLaunch={launchAgentRow}
+                showAgentSettings={false}
+              />
+              <DropdownMenuSeparator />
+            </>
+          ) : null}
           {showStaticCreateMenuItems ? (
             <TabBarStaticCreateMenu
               props={props}
@@ -273,9 +289,12 @@ export function renderTabBarSurface({
               queueNewActiveTerminalFocusAfterNewTabMenuClose={
                 queueNewActiveTerminalFocusAfterNewTabMenuClose
               }
+              terminalItemOnly={PROMPT_TAB_CREATE_MENU_CLAUDE_AND_TERMINAL}
             />
           ) : null}
-          {showStaticCreateMenuItems && showAgentLaunchItems ? (
+          {!PROMPT_TAB_CREATE_MENU_CLAUDE_AND_TERMINAL &&
+          showStaticCreateMenuItems &&
+          showAgentLaunchItems ? (
             <>
               <DropdownMenuSeparator />
               <ProjectedAgentMenuItems model={agentMenu} runLaunch={launchAgentRow} />

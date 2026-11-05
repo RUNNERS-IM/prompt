@@ -107,7 +107,9 @@ export function useTabAgentMenuLaunch({
         return
       }
       if (onPromptHandedOff && result.promptDeliveryResult) {
-        const outcome = newAgentPromptOutcome({ delivery: result.promptDeliveryResult })
+        const outcome = newAgentPromptOutcome({
+          delivery: result.promptDeliveryResult
+        })
         onPromptHandedOff(outcome)
         // The notes keep the text, so they say once why it did not go, as a send to a chat does.
         void outcome.then(({ failure }) => {
@@ -165,11 +167,13 @@ function QuickLaunchAgentMenuItemsInner(props: QuickLaunchAgentMenuItemsProps): 
 export function ProjectedAgentMenuItems({
   disabled = false,
   model,
-  runLaunch
+  runLaunch,
+  showAgentSettings = true
 }: {
   disabled?: boolean
   model: NewTabAgentMenuModel
   runLaunch: (row: NewTabAgentMenuRow) => void
+  showAgentSettings?: boolean
 }): React.JSX.Element {
   const desktopDefaultAgent = useAppStore((s) => s.settings?.defaultTuiAgent)
   const openSettingsPage = useAppStore((s) => s.openSettingsPage)
@@ -198,7 +202,7 @@ export function ProjectedAgentMenuItems({
             </span>
           </DropdownMenuItem>
         ))}
-        <AgentSettingsMenuItem onSelect={openAgentSettings} />
+        {showAgentSettings ? <AgentSettingsMenuItem onSelect={openAgentSettings} /> : null}
       </>
     )
   }
@@ -289,7 +293,7 @@ export function ProjectedAgentMenuItems({
           </React.Fragment>
         )
       })}
-      <AgentSettingsMenuItem onSelect={openAgentSettings} />
+      {showAgentSettings ? <AgentSettingsMenuItem onSelect={openAgentSettings} /> : null}
     </>
   )
 }
@@ -323,7 +327,10 @@ function SurfaceChoiceRow({
   children: React.ReactNode
 }): React.JSX.Element {
   const otherButton = useRef<HTMLButtonElement>(null)
-  const releaseTarget = useRef<{ event: PointerEvent; target: EventTarget } | null>(null)
+  const releaseTarget = useRef<{
+    event: PointerEvent
+    target: EventTarget
+  } | null>(null)
   const title = rowTitle(row, label)
   return (
     <DropdownMenuItem
