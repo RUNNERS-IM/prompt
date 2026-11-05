@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Prompt terminals reach this before the real claude: a second process resuming a running
+# conversation interleaves its transcript, so such a resume moves to the running terminal instead.
+set -u
+
+self_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+
+real_claude() {
+	local IFS=: dir
+	for dir in $PATH; do
+		[ -n "$dir" ] || continue
+		[ "$(cd "$dir" 2>/dev/null && pwd -P)" = "$self_dir" ] && continue
+		if [ -x "$dir/claude" ] && [ ! -d "$dir/claude" ]; then
+			printf '%s\n' "$dir/claude"
+			return 0
+		fi
+	done
+	return 1
+}
+
+real=$(real_claude) || {
+	echo "claude: command not found" >&2
+	exit 127
+}
+
+resume_id=""
+forked=0
+args=("$@")
+for ((i = 0; i < ${#args[@]}; i++)); do
+	case "${args[i]}" in
+	--fork-session) forked=1 ;;
+	--resume | -r) resume_id="${args[i + 1]:-}" ;;
+	--resume=*) resume_id="${args[i]#--resume=}" ;;
+	esac
+done
+
+# Only an exact id can be checked; a picker or a fork writes a new conversation.
+if [ "$forked" = 1 ] || ! [[ "$resume_id" =~ ^[A-Za-z0-9][A-Za-z0-9._:-]*$ ]]; then
+	exec "$real" "$@"
+fi
+
+# Claude writes <config>/sessions/<pid>.json naming the conversation each running process writes.
+sessions_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/sessions"
+holder_pid=""
+holder_name=""
+while IFS= read -r record; do
+	pid=$(basename "$record" .json)
+	[[ "$pid" =~ ^[0-9]+$ ]] || continue
+	# A stale record of an exited or reused pid proves nothing.
+	kill -0 "$pid" 2>/dev/null || continue
+	case "$(ps -o command= -p "$pid" 2>/dev/null)" in
+	*claude*) ;;
+	*) continue ;;
+	esac
+	holder_pid=$pid
+	holder_name=$(grep -o '"name":"[^"]*"' "$record" | head -n 1 | sed 's/^"name":"//; s/"$//')
+	break
+done < <(grep -lF "\"sessionId\":\"$resume_id\"" "$sessions_dir"/*.json 2>/dev/null)
+
+if [ -z "$holder_pid" ]; then
+	exec "$real" "$@"
+fi
+
+holder_env=$(ps eww -o command= -p "$holder_pid" 2>/dev/null)
+holder_handle=$(printf '%s\n' "$holder_env" | grep -o 'ORCA_TERMINAL_HANDLE=[^ ]*' | head -n 1 | cut -d= -f2)
+label=${holder_name:-$holder_pid}
+
+moved=0
+if [ -n "$holder_handle" ] && [ -n "${ORCA_CLI_COMMAND:-}" ] && [ -x "$ORCA_CLI_COMMAND" ]; then
+	"$ORCA_CLI_COMMAND" terminal focus --terminal "$holder_handle" >/dev/null 2>&1 && moved=1
+fi
+
+case "${LC_ALL:-${LC_MESSAGES:-${LANG:-}}}" in
+ko*)
+	echo "이 대화는 「${label}」에서 이미 실행 중이라 여기서는 열지 않았습니다." >&2
+	[ "$moved" = 1 ] && echo "그 탭으로 옮겼습니다." >&2
+	echo "복사본이 필요하면 --fork-session 을 붙이세요." >&2
+	;;
+*)
+	echo "This conversation is already running in \"${label}\", so it was not opened here." >&2
+	[ "$moved" = 1 ] && echo "Moved to its tab." >&2
+	echo "Add --fork-session to open a copy." >&2
+	;;
+esac
+exit 1

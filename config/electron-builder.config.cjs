@@ -631,6 +631,10 @@ module.exports = {
         to: 'bin/orca'
       },
       {
+        from: 'resources/darwin/bin/claude',
+        to: 'bin/claude'
+      },
+      {
         from: 'resources/darwin/bin/prompt',
         to: 'bin/prompt'
       },
