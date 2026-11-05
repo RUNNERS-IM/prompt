@@ -86,6 +86,9 @@ function createPanel(): BrowserWindow {
     useContentSize: true,
     show: false,
     frame: false,
+    // NSPanel: 클릭과 키를 받으면서도 Prompt 를 맨 앞 앱으로 만들지 않는다. 그래서 패널을 열어도
+    // Prompt 본 창이 다른 앱 앞으로 올라오지 않는다(Split 패널에서 2026-11-05 Electron 43 으로 확인).
+    type: 'panel',
     resizable: false,
     movable: false,
     minimizable: false,
@@ -204,7 +207,6 @@ export function togglePromptMenuPanel(tray: Tray): void {
   window.webContents.send(PROMPT_MENU_PANEL_SHOWN_CHANNEL, rows())
   window.show()
   window.focus()
-  app.focus({ steal: true })
 }
 
 /** 열린 패널의 줄을 지금 상태로 다시 그린다(언어 바꿈 등). */
