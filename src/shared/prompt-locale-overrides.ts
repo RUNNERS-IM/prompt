@@ -24,8 +24,12 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.status.bar.SkillUpdateStatusSegment.successLabel': '스킬 업데이트됨',
   'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중',
   'auto.components.crash.report.CrashReportDialog.50b00dc327': '세부 정보 복사',
-  // Update card and status bar show the version as 2.6.1030.2, without "v".
-  'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}}을(를) 받는 중입니다.',
+  // Update card and status bar show the real version (2.6.110501), without "v".
+  'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}} 받는 중입니다.',
+  'auto.components.UpdateCard.558842597d': '업데이트 받는 중',
+  'auto.components.UpdateCard.downloadingPercent': '받는 중… {{percent}}%',
+  'updates.installBlock.preparingSummary':
+    '다시 시작하기 전에 실행 중인 다른 Prompt 를 확인하는 중입니다.',
   'auto.components.status.bar.UpdateStatusSegment.248ee5d8ef':
     'Prompt {{value0}} 받는 중… {{value1}}%',
   'auto.components.status.bar.UpdateStatusSegment.9d13213a56': 'Prompt {{value0}} 설치 준비됨',
@@ -67,11 +71,13 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.crashReport.cancel': '취소',
   'prompt.crashReport.open': 'GitHub에서 열기',
   'prompt.crashReport.opened': 'GitHub 이슈 화면을 열었습니다. 거기서 등록해야 접수됩니다.',
-  'prompt.update.title': '새 버전이 있습니다',
-  'prompt.update.bodyWithCurrent':
-    'Prompt {{version}}을(를) 설치할 수 있습니다. 지금은 {{current}}입니다. 설치하면 Prompt가 다시 시작됩니다.',
-  'prompt.update.body':
-    'Prompt {{version}}을(를) 설치할 수 있습니다. 설치하면 Prompt가 다시 시작됩니다.',
+  'prompt.update.titleVersion': '새 버전 {{version}}',
+  'prompt.update.subtitleWithCurrent': '지금 {{current}} · 설치하면 Prompt가 다시 시작됩니다',
+  'prompt.update.subtitle': '설치하면 Prompt가 다시 시작됩니다',
+  'prompt.update.releaseNotes': '바뀐 점 보기',
+  'prompt.update.dismiss': '닫기',
+  'prompt.update.downloadingTitle': '새 버전 {{version}} 받는 중',
+  'prompt.update.downloadingSubtitle': '다 받으면 Prompt가 다시 시작됩니다',
   'prompt.update.later': '나중에',
   'prompt.update.install': '설치',
   'prompt.update.restartFailed':
