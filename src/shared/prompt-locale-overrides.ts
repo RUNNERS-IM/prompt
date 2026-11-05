@@ -83,7 +83,31 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.update.restartFailed':
     '업데이트를 설치하려고 다시 시작하지 못했습니다. Prompt를 종료했다가 다시 연 뒤 시도하세요.',
   'prompt.update.installerFailed':
-    '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.'
+    '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.',
+  // Terminal link hover hints (terminal-link-open-hints.ts); {{mod}} is ⌘ or Ctrl.
+  'prompt.terminalLinkHint.actionsPrefix': '클릭: 동작 메뉴 · ',
+  'prompt.terminalLinkHint.actionsOrPrefix': '클릭: 동작 메뉴 · ',
+  'prompt.terminalLinkHint.fileOpen': '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: 기본 앱으로 열기',
+  'prompt.terminalLinkHint.orcaFileOpen': '{{mod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.urlInvertsToOrca':
+    '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.urlSystemBrowser':
+    '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.systemBrowserOnly': '{{shiftMod}}+클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.orcaBrowserOnly': '{{shiftMod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.switchWorkspace': '{{mod}}+클릭: 이 워크스페이스로 이동',
+  'prompt.terminalLinkHint.switchWorkspaceFinder':
+    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: Finder 에서 열기',
+  'prompt.terminalLinkHint.switchWorkspaceFolder':
+    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: 폴더 열기',
+  // Notices written into a terminal (prompt-terminal-notice-copy.ts).
+  'prompt.terminalNotice.hiddenBacklog':
+    '출력이 너무 많이 쌓여서, 화면에 안 보이던 동안의 터미널 출력 일부를 건너뛰었습니다.',
+  'prompt.terminalNotice.foregroundBurst':
+    '출력이 한꺼번에 너무 많이 들어와서 터미널 출력 일부를 건너뛰었습니다.',
+  'prompt.terminalNotice.restoreUnavailable':
+    '화면에 안 보이던 동안의 터미널 출력을 되살릴 수 없어 건너뛰었습니다.',
+  'prompt.terminalNotice.noHostImage': '이 터미널의 지난 출력을 호스트에서 되살리지 못했습니다.'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

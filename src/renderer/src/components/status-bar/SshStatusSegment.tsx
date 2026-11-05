@@ -41,6 +41,7 @@ import {
   runtimeHostConnectionStateForEntry
 } from '@/runtime/runtime-host-connection-state'
 import { RuntimeRepairDialog } from '../settings/RuntimeRepairDialog'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 export function SshStatusSegment({
   compact,
@@ -282,7 +283,11 @@ export function SshStatusSegment({
         <DropdownMenuItem
           onSelect={() => {
             recordFeatureInteraction('ssh')
-            openSettingsTarget({ pane: 'servers', repoId: null })
+            // Prompt hides the 'servers' page; its SSH host list lives on the 'ssh' page.
+            openSettingsTarget({
+              pane: PROMPT_BLOCK_UPSTREAM_SERVICES ? 'ssh' : 'servers',
+              repoId: null
+            })
             setActiveView('settings')
           }}
         >

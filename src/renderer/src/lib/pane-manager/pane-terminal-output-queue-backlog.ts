@@ -1,4 +1,5 @@
 import { recordRendererCrashBreadcrumb } from '@/lib/crash-breadcrumb-recorder'
+import { promptTerminalNoticeText } from './prompt-terminal-notice-copy'
 import {
   recordTerminalOutputQueueDebugPressure as recordQueueDebugPressure,
   terminalOutputSchedulerDebugEnabled as debugEnabled,
@@ -60,10 +61,11 @@ export function replaceBacklogWithWarning(
   }
   clearForegroundHoldSafety(entry)
   fireQueuedAckCredits(entry)
+  const warningText = promptTerminalNoticeText(warning)
   entry.chunks = [
     {
-      data: warning,
-      retainedChars: warning.length,
+      data: warningText,
+      retainedChars: warningText.length,
       foreground: false,
       forceForegroundRefresh: false,
       followupForegroundRefresh: false,
