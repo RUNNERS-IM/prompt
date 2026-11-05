@@ -52,6 +52,12 @@ html.prompt-mac-vibrancy .app-layout > :not(:first-child):not(.fixed) {
   border-top-color: transparent;
 }
 
+/* 떠 있는 알림 카드는 세 칸 밖에 있어 반투명 --card 를 받으면 뒤 글자 · 칸 선이 비친다. */
+html.prompt-mac-vibrancy [data-notification-card-stack] {
+  --card: var(--prompt-card);
+  --border: var(--prompt-hairline);
+}
+
 html.prompt-mac-vibrancy .prompt-sidebar-column,
 html.prompt-mac-vibrancy .prompt-shell-row > .prompt-sidebar,
 html.prompt-mac-vibrancy .prompt-main-column,
