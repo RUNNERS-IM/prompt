@@ -68,13 +68,19 @@ export function PromptWorkspaceIdentity({
 
 const NO_WORKTREES: readonly Worktree[] = []
 
-/** Project header end: the identity of the project's only workspace; nothing when it has several. */
+/**
+ * Project header end: the identity of the project's main workspace, whose sessions sit right under
+ * the header. Without a listed main workspace, only a project's single workspace shows here.
+ */
 export function PromptProjectHeaderIdentity({ repo }: { repo: Repo }): React.JSX.Element | null {
   const worktrees = useAppStore(useShallow((s) => s.worktreesByRepo?.[repo.id] ?? NO_WORKTREES))
-  if (worktrees.length !== 1) {
+  const target =
+    worktrees.find((worktree) => worktree.isMainWorktree) ??
+    (worktrees.length === 1 ? worktrees[0] : undefined)
+  if (!target) {
     return null
   }
-  return <PromptWorkspaceIdentity worktree={worktrees[0]} repo={repo} className="ml-auto" />
+  return <PromptWorkspaceIdentity worktree={target} repo={repo} className="ml-auto" />
 }
 
 /** End of a repo header line: the upstream scan warning, then (two-level sidebar) the workspace marks. */

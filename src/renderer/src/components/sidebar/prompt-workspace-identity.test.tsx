@@ -28,9 +28,25 @@ describe('PromptProjectHeaderIdentity', () => {
     expect(markup).toMatch(/font-mono[^>]*>sense</)
   })
 
-  it('shows nothing on the header when the project has several workspaces', async () => {
+  it('keeps the main workspace on the header when the project has other workspaces', async () => {
     const { PromptProjectHeaderIdentity } = await import('./prompt-workspace-identity')
-    state = { worktreesByRepo: { 'repo-1': [main, { ...main, id: 'wt-2' }] } }
+    const linked = {
+      ...main,
+      id: 'wt-2',
+      branch: 'refs/heads/login-fix',
+      path: '/src/login-fix',
+      isMainWorktree: false
+    }
+    state = { worktreesByRepo: { 'repo-1': [linked, main] } }
+    const markup = renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)
+    expect(markup).toMatch(/font-mono[^>]*>sense</)
+    expect(markup).not.toContain('login-fix')
+  })
+
+  it('shows nothing on the header when several workspaces have no main one', async () => {
+    const { PromptProjectHeaderIdentity } = await import('./prompt-workspace-identity')
+    const linked = { ...main, isMainWorktree: false }
+    state = { worktreesByRepo: { 'repo-1': [linked, { ...linked, id: 'wt-2' }] } }
     expect(renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)).toBe('')
   })
 

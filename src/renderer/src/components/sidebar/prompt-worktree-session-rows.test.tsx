@@ -74,14 +74,14 @@ vi.mock('./WorktreeCardAgents', () => ({
   }
 }))
 
-function card(): WorktreeCardController {
+function card(isMainWorktree = true): WorktreeCardController {
   return {
     worktree: {
       id: 'wt-1',
       displayName: 'feature-x',
       branch: 'refs/heads/feature/x',
       path: '/src/app',
-      isMainWorktree: true
+      isMainWorktree
     },
     repo: { id: 'repo-1', kind: 'git' },
     branchIdentityDisplay: 'feature/x'
@@ -120,17 +120,27 @@ describe('PromptWorktreeSessionRows', () => {
     expect(markup).not.toContain('feature/x')
   })
 
-  it('with several workspaces, shows one workspace line with its branch, dot and Default chip', async () => {
+  it('with several workspaces, shows a line for each other workspace with its branch and dot', async () => {
     const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
     state.worktreesByRepo = { 'repo-1': [{}, {}] }
     state.tabsByWorktree = { 'wt-1': [{ id: 't1', title: 'zsh' }] }
     agents = [agent('t1:1', 't1')]
-    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card(false)} />)
     expect(markup).toContain('data-prompt-workspace-row')
     expect(markup).toMatch(
-      /data-prompt-workspace-row[^>]*>.*feature-x.*data-status-dot.*primary.*feature\/x/s
+      /data-prompt-workspace-row[^>]*>.*feature-x.*data-status-dot.*feature\/x/s
     )
+    expect(markup).not.toContain('data-prompt-default-chip')
     expect(agentProps[0].trailingLabel).toBeUndefined()
+  })
+
+  it('keeps the main workspace sessions under the header even with other workspaces', async () => {
+    const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
+    state.worktreesByRepo = { 'repo-1': [{}, {}] }
+    state.tabsByWorktree = { 'wt-1': [{ id: 't1', title: 'zsh', customTitle: 'Build server' }] }
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    expect(markup).not.toContain('data-prompt-workspace-row')
+    expect(markup).toContain('Build server')
   })
 
   it('offers a way in when the workspace has no sessions', async () => {
@@ -193,7 +203,7 @@ describe('PromptWorktreeSessionRows', () => {
   it('puts the "+" menu on a workspace line, aimed at that workspace', async () => {
     const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
     state.worktreesByRepo = { 'repo-1': [{}, {}] }
-    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card()} />)
+    const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card(false)} />)
     expect(markup).toMatch(/data-prompt-workspace-row[^>]*>.*data-new-menu-for="wt-1"/s)
     expect(markup).toContain('group/prompt-workspace-row')
   })
