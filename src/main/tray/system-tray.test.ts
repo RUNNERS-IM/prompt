@@ -777,7 +777,7 @@ describe('language changes', () => {
         '도움말 · 피드백',
         undefined,
         'Prompt 종료',
-        '완전히 종료...'
+        '완전히 종료…'
       ])
       builtMenuItems()[2].click?.()
       builtMenuItems().at(-1)?.click?.()

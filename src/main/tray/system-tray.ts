@@ -7,7 +7,7 @@ import { createAppIconImage } from '../app-icon'
 import { translateMain } from '../i18n/main-i18n'
 import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
 import { createMacMenuBarImage, stampMacDevBadge } from './tray-mac-images'
-import { buildTrayMenuRows, buildTrayMenuTemplate, runTrayMenuCommand } from './tray-menu-template'
+import { buildTrayMenuTemplate, buildTrayPanelRows, runTrayMenuCommand } from './tray-menu-template'
 import {
   isMenuBarCursorVisible,
   startMenuBarCursorBlink,
@@ -306,7 +306,7 @@ export function getTrayMenuRows(): PromptMenuRow[] | null {
   if (!tray || tray.isDestroyed() || !trayOptions) {
     return null
   }
-  return buildTrayMenuRows(trayOptions, {
+  return buildTrayPanelRows(trayOptions, {
     devLabel: devIndicator ? baseTooltip() : null,
     terminalCount: readTerminalCount(trayOptions)
   })

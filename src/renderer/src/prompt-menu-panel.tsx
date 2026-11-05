@@ -1,7 +1,7 @@
-import './components/prompt-menu-panel/runners-menu.css'
-import './components/prompt-menu-panel/prompt-menu-panel.css'
 import { StrictMode } from 'react'
 import { PromptMenuPanel } from './components/prompt-menu-panel/PromptMenuPanel'
+// 패널 다음에 불러야 --rm-accent 덮어쓰기가 runners-menu.css 뒤에 온다.
+import './components/prompt-menu-panel/prompt-menu-panel.css'
 import { getOrCreateRendererRoot } from './lib/react-renderer-root'
 
 // 맥 메뉴 막대 패널(src/renderer/prompt-menu-panel.html)의 React 뿌리. 글은 main 이 번역해 보내므로 i18n 을 싣지 않는다.

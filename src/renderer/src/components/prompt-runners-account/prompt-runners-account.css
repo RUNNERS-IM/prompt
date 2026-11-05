@@ -1,0 +1,20 @@
+/* The shared runners-account.css follows only the OS theme; in Prompt the theme setting (the `dark` class on
+   <html>) decides, so the sheet, menu and R tile take Prompt's own tokens. `html:root` outranks its `:root`. */
+html:root {
+  --ra-text: var(--foreground);
+  --ra-sub: var(--muted-foreground);
+  --ra-line: var(--border);
+  --ra-surface: var(--popover);
+  --ra-field: var(--background);
+  --ra-track: var(--accent);
+  --ra-accent: var(--prompt-accent);
+  --ra-bad: var(--destructive);
+  --ra-mark-bg: var(--foreground);
+  --ra-mark-fg: var(--background);
+}
+
+/* Electron drag hit-testing ignores z-index, so the sheet and menu over the title bar must opt out of dragging. */
+.ra-cover,
+.ra-menu {
+  -webkit-app-region: no-drag;
+}

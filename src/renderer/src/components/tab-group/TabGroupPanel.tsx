@@ -6,6 +6,7 @@ import TabBar from '../tab-bar/TabBar'
 
 import { TabBarQuickCommandsButton } from '../tab-bar/TabBarQuickCommandsButton'
 import { TabGroupPaneActionsMenu } from './TabGroupPaneActionsMenu'
+import { PromptRunnersAccountButton } from '../prompt-runners-account/PromptRunnersAccountButton'
 import { useTabGroupWorkspaceModel } from './useTabGroupWorkspaceModel'
 import { closeTerminalTab } from '../terminal/terminal-tab-actions'
 import { resolveGroupTabFromVisibleId } from './tab-group-visible-id'
@@ -302,6 +303,8 @@ export default function TabGroupPanel({
                 <TabGroupPaneActionsMenu isFocused={isFocused} onCloseGroup={commands.closeGroup} />
               ) : null}
             </div>
+            {/* The window's top-right strip ends with the RUNNERS account; it stays undimmed in an unfocused split. */}
+            {reserveClosedExplorerToggleSpace ? <PromptRunnersAccountButton /> : null}
             {/* Why: Electron drag hit-test respects no-drag only on DOM descendants, not z-index siblings, so this no-drag spacer keeps the floating right-sidebar toggle + window controls clickable. */}
             {reserveClosedExplorerToggleSpace && !rightSidebarOpen ? (
               <div
