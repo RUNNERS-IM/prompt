@@ -59,26 +59,29 @@ them. You can also check by hand from the menu bar icon or the app menu ("Check 
 
 ## 3. CLI
 
-Prompt includes a command line tool. **It is still called `orca`** (the name it has in Orca), and
-it is being redesigned, so command names may change.
+Prompt includes a command line tool called `prompt`.
 
-- Terminals opened inside Prompt can already run `orca`.
+- Terminals opened inside Prompt can already run `prompt`.
 - To use it in other terminals, turn it on in Settings > General, in the CLI section. On macOS this
-  registers `orca` in `/usr/local/bin`.
-- `orca --help` lists every command. Today they include, for example, `orca status`,
-  `orca worktree list` and `orca terminal list`.
+  registers `prompt` in `/usr/local/bin`.
+- `prompt --help` lists every command. Today they include, for example, `prompt project list` and
+  `prompt session list`.
+- The old `orca` name still works for existing scripts, runs the earlier command set and prints a
+  notice that it was renamed.
 
 ## 4. How Prompt differs from Orca
 
 Prompt is based on [Orca](https://github.com/stablyai/orca). Most of the engine (terminals,
-worktrees, editor) comes from Orca and is merged from upstream regularly. Prompt changes:
+worktrees, editor) comes from Orca. Since 2026-11-02 Prompt no longer merges Orca's changes; fixes
+from Orca are picked by hand when needed. Prompt changes:
 
 - **Name and identity:** app name Prompt, bundle id `im.runners.prompt`, and links that start with
   `prompt://`.
 - **No Orca services:** Prompt does not talk to Orca's servers. Orca sign-in, relay, push, plugin
   catalogs and update feeds are turned off, and no usage data (telemetry) is sent.
 - **Its own data folder:** settings and sessions live in a `Prompt` folder. On first launch, an
-  existing Orca folder is copied into it; the Orca folder itself is only read, never changed.
+  existing Orca folder is copied into it. Since 2.6.110201, on macOS the old folder is deleted once
+  nothing runs from it any more and Orca.app itself is not installed.
 - **Claude-focused interface:** the two-level sidebar, per-session model menu, multi-window
   support and menu bar icon above are Prompt additions. Usage meters for other AI providers are
   hidden.
