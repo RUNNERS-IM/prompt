@@ -9,8 +9,10 @@ import {
   type AgentProviderSessionMetadata,
   type SleepingAgentSessionRecord
 } from '../../../../../shared/agent-session-resume'
-import { parsePaneKey } from '../../../../../shared/stable-pane-id'
-import { stablePaneHasLivePty } from '@/lib/sleeping-agent-pane-ownership'
+import {
+  findLivePaneForProviderSession,
+  runningElsewhereNotice
+} from '@/lib/running-elsewhere-pane'
 import {
   clearPaneSpawnDeferral,
   getPaneSpawnDeferral,
@@ -32,9 +34,6 @@ import type {
   FreshSpawnOptions,
   PendingStartupCommand
 } from './fresh-spawn-types'
-
-const SESSION_RUNNING_ELSEWHERE_NOTICE =
-  '\r\n\x1b[2mThis agent session is already running in another tab.\x1b[0m\r\n'
 
 type DeferredSpawn = {
   reason: SpawnDeferralReason
@@ -84,24 +83,6 @@ function deferredResumeRecord(
     origin: 'quit',
     restoreOnTabOpenOnly: true
   }
-}
-
-function providerSessionLiveInAnotherPane(resume: SleepingAgentSessionRecord): boolean {
-  const state = useAppStore.getState()
-  return Object.values(state.agentStatusByPaneKey).some((entry) => {
-    const pane = entry.paneKey === resume.paneKey ? null : parsePaneKey(entry.paneKey)
-    return (
-      pane !== null &&
-      entry.agentType === resume.agent &&
-      agentProviderSessionsEqual(resume.agent, entry.providerSession, resume.providerSession) &&
-      stablePaneHasLivePty(
-        pane.tabId,
-        pane.leafId,
-        state.ptyIdsByTabId,
-        state.terminalLayoutsByTabId[pane.tabId]
-      )
-    )
-  })
 }
 
 function providerSessionQueuedInAnotherTab(
@@ -206,14 +187,13 @@ export function installSpawnDeferredSleep(session: ConnectPanePtySession): void 
     session.deferredSpawn = null
     cancelDeferredRestoreRetry(session.cacheKey)
     const resume = deferredResumeRecord(session, deferred.startupOverride)
-    if (
-      resume &&
-      (providerSessionLiveInAnotherPane(resume) ||
-        providerSessionQueuedInAnotherTab(resume, session.deps.tabId))
-    ) {
+    const holder = resume
+      ? findLivePaneForProviderSession(resume.agent, resume.providerSession, resume.paneKey)
+      : null
+    if (resume && (holder || providerSessionQueuedInAnotherTab(resume, session.deps.tabId))) {
       clearPaneSpawnDeferral(session.cacheKey)
       // Why no spawn: the session runs or is starting elsewhere, and a second `--resume` forks it.
-      writeTerminalOutput(session.pane.terminal, SESSION_RUNNING_ELSEWHERE_NOTICE, {
+      writeTerminalOutput(session.pane.terminal, runningElsewhereNotice(holder ?? undefined), {
         foreground: session.deps.isVisibleRef.current === true
       })
       return Promise.resolve(null)

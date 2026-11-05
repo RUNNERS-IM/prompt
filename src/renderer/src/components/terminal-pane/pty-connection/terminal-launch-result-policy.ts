@@ -3,6 +3,8 @@ import {
   type TerminalLaunchResult
 } from '../../../../../shared/agent-session-resume'
 import { useAppStore } from '@/store'
+import { writeTerminalOutput } from '@/lib/pane-manager/pane-terminal-output-scheduler'
+import { revealRunningElsewherePane, runningElsewhereNotice } from '@/lib/running-elsewhere-pane'
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
 import type { ReattachPayloadSession } from './reattach-payload-session'
 import type { ColdRestoreAgentResumeStartup } from './fresh-spawn-types'
@@ -89,7 +91,17 @@ export function applyTerminalLaunchResult(
     console.warn('Terminal launch result bookkeeping failed', error)
   }
   if (rejected && !superseded) {
-    session.showSessionRestoredBanner('resume-unavailable')
+    if (result.agentResumeRefused === 'running-elsewhere') {
+      writeTerminalOutput(session.pane.terminal, runningElsewhereNotice(result.runningElsewhere), {
+        foreground: session.deps.isVisibleRef.current === true
+      })
+      // An automatic restore must not pull focus; a resume the user asked for goes to its tab.
+      if (startup && startup.resumeOrigin !== 'saved') {
+        revealRunningElsewherePane(result.runningElsewhere)
+      }
+    } else {
+      session.showSessionRestoredBanner('resume-unavailable')
+    }
   }
   return rejected
 }

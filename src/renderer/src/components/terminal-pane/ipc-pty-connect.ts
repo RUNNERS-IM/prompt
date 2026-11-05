@@ -142,7 +142,8 @@ export async function connectIpcPty(
         ...(spawnResult.agentResumeUnavailable ? { agentResumeUnavailable: true as const } : {}),
         ...(spawnResult.agentResumeRefused
           ? { agentResumeRefused: spawnResult.agentResumeRefused }
-          : {})
+          : {}),
+        ...(spawnResult.runningElsewhere ? { runningElsewhere: spawnResult.runningElsewhere } : {})
       }
     }
     if (context.isDestroyed()) {

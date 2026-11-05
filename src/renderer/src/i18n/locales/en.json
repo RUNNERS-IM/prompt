@@ -1522,6 +1522,13 @@
               }
             }
           }
+        },
+        "ai": {
+          "vault": {
+            "session": {
+              "runningElsewhere": "This conversation is already open, so Prompt moved to its tab."
+            }
+          }
         }
       },
       "local": {
@@ -4208,6 +4215,10 @@
           },
           "WslHostUnavailableBanner": {
             "turnOn": "Turn on"
+          },
+          "runningElsewhere": {
+            "named": "This conversation is already running in “{{name}}”, so it was not opened here.",
+            "unnamed": "This conversation is already running in another terminal, so it was not opened here."
           }
         }
       },

@@ -18,6 +18,7 @@ import {
 import { agentHookServer } from '../../../agent-hooks/server'
 import { LOCAL_EXECUTION_HOST_ID, type ExecutionHostId } from '../../../../shared/execution-host'
 import type { WorkspaceSessionState } from '../../../../shared/workspace-session-state-types'
+import type { RunningElsewhereHolder } from '../../../../shared/agent-resume-refusal'
 import {
   keysMayMatch,
   terminalConversationKey
@@ -45,11 +46,13 @@ type AdmissionRuntime = {
 }
 
 /** `chat-home`: an automatic restore of a conversation an open chat continues; `chat-writing`:
- *  any start of one a chat may be writing; `unverifiable`: an automatic restore with no records. */
+ *  any start of one a chat may be writing; `unverifiable`: an automatic restore with no records;
+ *  `running-elsewhere`: any start of a conversation another live terminal process writes. */
 export type ResumeSpawnRefusal = {
   sourceRecord?: SleepingAgentSessionRecord
-  verdict: 'chat-home' | 'chat-writing' | 'unverifiable'
+  verdict: 'chat-home' | 'chat-writing' | 'unverifiable' | 'running-elsewhere'
   refused: RefusedPaneResume
+  holder?: RunningElsewhereHolder
 }
 
 export type ResumeSpawnAdmission =
@@ -223,20 +226,6 @@ export function savedResumeRecord(
     : undefined
 }
 
-/** Runs only in the fresh branch, after stable/claimed owner adoption has settled. */
-export async function chooseSavedResumeFreshLaunch(
-  runtime: AdmissionRuntime | undefined,
-  args: ResumeSpawnArgs,
-  wslDistro: string | null,
-  options: ResumeSpawnArgs & { startupCommandDelivery?: unknown; startupIngress?: unknown }
-): Promise<ResumeSpawnAdmission | null> {
-  const admission = await admitResumeSpawn(runtime, args, wslDistro)
-  if (resumeSpawnRefusal(admission)) {
-    suppressSavedResumeLaunch(args, options)
-  }
-  return admission
-}
-
 /** A claim joiner uses the same suppression without reclassifying the settled request. */
 export function suppressSavedResumeLaunch(
   args: ResumeSpawnArgs,
@@ -260,7 +249,8 @@ export function savedResumeResult(admission: ResumeSpawnAdmission | null) {
       ? {
           agentResumeRefused: admission.verdict,
           agentResumeUnavailable: true as const,
-          refusedResume: admission.refused
+          refusedResume: admission.refused,
+          ...(admission.holder ? { runningElsewhere: admission.holder } : {})
         }
       : {})
   }

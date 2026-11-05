@@ -47,7 +47,8 @@ export function projectIpcPtyConnectResult(
       ...(spawnResult.agentResumeUnavailable ? { agentResumeUnavailable: true as const } : {}),
       ...(spawnResult.agentResumeRefused
         ? { agentResumeRefused: spawnResult.agentResumeRefused }
-        : {})
+        : {}),
+      ...(spawnResult.runningElsewhere ? { runningElsewhere: spawnResult.runningElsewhere } : {})
     }
   }
   if (
@@ -71,7 +72,8 @@ export function projectIpcPtyConnectResult(
       ...(spawnResult.agentResumeUnavailable ? { agentResumeUnavailable: true as const } : {}),
       ...(spawnResult.agentResumeRefused
         ? { agentResumeRefused: spawnResult.agentResumeRefused }
-        : {})
+        : {}),
+      ...(spawnResult.runningElsewhere ? { runningElsewhere: spawnResult.runningElsewhere } : {})
     }
   }
   return spawnResult.id

@@ -102,7 +102,8 @@ export type PtyApi = {
     coldRestore?: { scrollback: string; cwd: string; cols?: number; rows?: number }
     startupCwdFallback?: { kind: 'worktree'; cwd: string }
     agentResumeUnavailable?: true
-    agentResumeRefused?: 'chat-home' | 'chat-writing' | 'unverifiable'
+    agentResumeRefused?: TerminalLaunchResult['agentResumeRefused']
+    runningElsewhere?: TerminalLaunchResult['runningElsewhere']
     savedResumeDecision?: SavedResumeDecision
     refusedResume?: TerminalLaunchResult['refusedResume']
     launchToken?: string

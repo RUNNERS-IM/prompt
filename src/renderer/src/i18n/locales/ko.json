@@ -1022,6 +1022,13 @@
               }
             }
           }
+        },
+        "ai": {
+          "vault": {
+            "session": {
+              "runningElsewhere": "이 대화는 이미 열려 있어 그 탭으로 옮겼습니다."
+            }
+          }
         }
       },
       "local": {
@@ -3623,6 +3630,10 @@
           },
           "WslHostUnavailableBanner": {
             "turnOn": "켜기"
+          },
+          "runningElsewhere": {
+            "named": "이 대화는 「{{name}}」에서 이미 실행 중이라 여기서는 열지 않았습니다.",
+            "unnamed": "이 대화는 다른 터미널에서 이미 실행 중이라 여기서는 열지 않았습니다."
           }
         }
       },

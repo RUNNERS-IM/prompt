@@ -1,11 +1,11 @@
 import type { PtySpawnOperationState, PtySpawnExecutionFacts } from './spawn-operation-state'
 import {
   captureSavedResumeCleanup,
-  chooseSavedResumeFreshLaunch,
   resumeSpawnRefusal,
   type ResumeSpawnAdmission,
   type ResumeSpawnRefusal
 } from './host-env/saved-resume-admission'
+import { chooseSavedResumeFreshLaunch } from './host-env/fresh-resume-launch-admission'
 
 /** Capture the acquired pane's source once; only the physical-fresh branch judges its launch. */
 export async function prepareSavedPtyResume(
@@ -36,7 +36,8 @@ export async function prepareSavedPtyResume(
         ctx.deps.runtime,
         args,
         ctx.expectedWslDistro,
-        ctx.spawnOptions
+        ctx.spawnOptions,
+        facts.paneKey ?? facts.savedResumePaneKey ?? null
       ))
     if (captured && ctx.resumeAdmission) {
       ctx.resumeAdmission = {

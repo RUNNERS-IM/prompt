@@ -4,6 +4,7 @@ import type { AgentStatusCacheIdentity, RefusedPaneResume } from './agent-status
 import type { AgentStatusState } from './agent-status-types'
 import type { AgentMainAgentStatus } from './main-agent-status'
 import type { TuiAgent } from './tui-agent'
+import type { AgentResumeRefusal, RunningElsewhereHolder } from './agent-resume-refusal'
 
 export const RESUMABLE_TUI_AGENTS = [
   'claude',
@@ -310,15 +311,16 @@ export { getAgentForkArgv, getAgentResumeArgv } from './agent-resume-argv'
 export type SavedResumeDecision = {
   agent: string
   providerSession: AgentProviderSessionMetadata
-  verdict: 'admitted' | 'chat-home' | 'chat-writing' | 'unverifiable'
+  verdict: 'admitted' | AgentResumeRefusal
 }
 
 /** Effective facts of a terminal launch; a refused shell carries no rejected agent metadata. */
 export type TerminalLaunchResult = {
   savedResumeDecision?: SavedResumeDecision
   agentResumeUnavailable?: true
-  agentResumeRefused?: 'chat-home' | 'chat-writing' | 'unverifiable'
+  agentResumeRefused?: AgentResumeRefusal
   refusedResume?: RefusedPaneResume
+  runningElsewhere?: RunningElsewhereHolder
   launchConfig?: SleepingAgentLaunchConfig
   launchAgent?: TuiAgent
   launchToken?: string

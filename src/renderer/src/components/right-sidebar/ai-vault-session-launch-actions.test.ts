@@ -102,7 +102,11 @@ function renderActions(agentCmdOverrides?: { opencode?: string }) {
 describe('Switch to Terminal launch', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    mocks.getState.mockReturnValue({ activeWorktreeId: 'worktree-1', settings: {} })
+    mocks.getState.mockReturnValue({
+      activeWorktreeId: 'worktree-1',
+      settings: {},
+      agentStatusByPaneKey: {}
+    })
     mocks.prepareAiVaultSessionForFork.mockImplementation(async (session) => ({
       session,
       copied: false
@@ -124,6 +128,7 @@ describe('Switch to Terminal launch', () => {
       const agentCmdOverrides =
         location === 'command' ? { [cli]: `${cli} --server http://synthetic-server` } : {}
       mocks.getState.mockReturnValue({
+        agentStatusByPaneKey: {},
         activeWorktreeId: 'worktree-1',
         settings: {
           agentCmdOverrides,

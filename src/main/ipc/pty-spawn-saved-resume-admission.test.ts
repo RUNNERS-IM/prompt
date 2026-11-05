@@ -1,9 +1,10 @@
-import { describe, expect, vi } from 'vitest'
+import { beforeEach, describe, expect, vi } from 'vitest'
 import { forgetRefusedPaneResumeMock, spawnMock } from './pty/pty-ipc-mock-registry'
 import { posixOnlyIt } from './pty/pty-ipc-test-constants'
 import { setupPtyIpcSuite } from './pty/pty-ipc-test-harness'
 import { POSIX_SHELL_STARTUP_COMMAND_ENV } from '../pty/posix-shell-startup-command'
 import { registerPtyHandlers } from './pty/register-handlers'
+import { resetLiveClaudeSessionsForTests } from '../claude/live-claude-sessions'
 import { OrcaRuntimeService } from '../runtime/orca-runtime'
 import { agentSessionConversationView } from '../../shared/agent-session-conversation-view'
 import { AgentSessionRecordStore } from '../runtime/agent-session-record-store'
@@ -59,6 +60,8 @@ vi.mock('../codex/codex-state-db-backfill-recovery', () =>
 // #26417: a pane that saved a chat's conversation must not resume it while the chat is its home.
 describe('a pane restore of a conversation a native chat continues', () => {
   const { handlers, mainWindow, createMockProc } = setupPtyIpcSuite()
+  // Each case's panes are new; an earlier case's starting resume is not running anymore.
+  beforeEach(() => resetLiveClaudeSessionsForTests())
   const chat = agentSessionRecordFixture(
     agentSessionLeaseFixture({
       claimStatus: 'released',

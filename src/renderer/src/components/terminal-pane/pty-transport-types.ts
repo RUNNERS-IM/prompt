@@ -11,6 +11,10 @@ import type {
   SleepingAgentLaunchConfig
 } from '../../../../shared/agent-session-resume'
 import type {
+  AgentResumeRefusal,
+  RunningElsewhereHolder
+} from '../../../../shared/agent-resume-refusal'
+import type {
   AgentLaunchPreferences,
   AgentPromptDelivery
 } from '../../../../shared/agent-session-host-authority'
@@ -119,8 +123,10 @@ export type PtyConnectResult = TerminalLaunchResult & {
   /** Main declined an unverifiable provider-session resume and launched fresh. */
   agentResumeUnavailable?: true
   /** Main refused the resume and started the plain shell: a native chat is the conversation's home
-   *  or may be writing it, or no record could be checked (the saved session is kept to retry). */
-  agentResumeRefused?: 'chat-home' | 'chat-writing' | 'unverifiable'
+   *  or may be writing it, no record could be checked (the saved session is kept to retry), or
+   *  another live terminal already runs the conversation. */
+  agentResumeRefused?: AgentResumeRefusal
+  runningElsewhere?: RunningElsewhereHolder
   /** Write daemon’s trailing partial escape after reset so racing live bytes can complete it (#7329). */
   pendingEscapeTailAnsi?: string
 }
