@@ -139,6 +139,8 @@ export type PersistedUIState = {
   _zcodeStatusBarDefaultAdded?: boolean
   statusBarItems: StatusBarItem[]
   statusBarVisible: boolean
+  /** Prompt: the status bar was hidden once on load (prompt-status-bar-retirement.ts). */
+  _promptStatusBarRetired?: boolean
   /** Why: this is client-side presentation, not a provider/account or execution-host setting. */
   usagePercentageDisplay?: UsagePercentageDisplay
   /** Client-side footer presentation; verbose preserves the pre-roster all-window default. */

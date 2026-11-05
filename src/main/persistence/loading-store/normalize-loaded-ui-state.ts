@@ -22,6 +22,7 @@ import {
 } from '../applying-settings/onboarding-normalization'
 import type { PersistedState } from '../../../shared/persisted-state-types'
 import type { OnboardingState } from '../../../shared/onboarding-state-types'
+import { promptStatusBarRetirementFields } from '../../../shared/prompt-status-bar-retirement'
 
 export function normalizeLoadedUiState(
   parsed: PersistedState,
@@ -198,6 +199,10 @@ export function normalizeLoadedUiState(
   ) {
     markNeedsSave()
   }
+  const promptStatusBarRetirement = promptStatusBarRetirementFields(parsed.ui)
+  if (promptStatusBarRetirement) {
+    markNeedsSave()
+  }
   return {
     ...defaults.ui,
     worktreeCardProperties: getWorktreeCardModeProperties(
@@ -220,6 +225,7 @@ export function normalizeLoadedUiState(
     // Persist pending notices before windows exist so a crash cannot discard them.
     osc52ClipboardDefaultOnNoticePending: osc52ClipboardNoticePending,
     sortBy: migrate ? ('smart' as const) : sort,
+    ...promptStatusBarRetirement,
     _explorerDisplayRootMigrated: true,
     explorerDisplayRootByWorktree,
     showDotfilesByWorktree: normalizeShowDotfilesByWorktree(parsed.ui?.showDotfilesByWorktree),

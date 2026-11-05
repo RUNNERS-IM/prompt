@@ -228,7 +228,9 @@ export function getDefaultUIState(): PersistedUIState {
     _workspaceStatusesDefaultWorkflowMigrated: true,
     _workspaceStatusesDefaultVisualsMigrated: true,
     statusBarItems: [...DEFAULT_STATUS_BAR_ITEMS],
-    statusBarVisible: true,
+    // Prompt: no bottom status bar unless View > Status Bar turns it on.
+    statusBarVisible: !PROMPT_BLOCK_UPSTREAM_SERVICES,
+    _promptStatusBarRetired: PROMPT_BLOCK_UPSTREAM_SERVICES,
     usagePercentageDisplay: DEFAULT_USAGE_PERCENTAGE_DISPLAY,
     statusBarUsageMode: DEFAULT_STATUS_BAR_USAGE_MODE,
     dismissedUpdateVersion: null,
