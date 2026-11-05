@@ -22,6 +22,8 @@ type MainOwnedUIState =
   | 'starNagAgentValueMomentAppVersion'
   // Desktop-local replay queue: a paired client must not overwrite it.
   | 'pendingRuntimeRepoRemovals'
+  // Prompt: set once by main on load (prompt-status-bar-retirement.ts).
+  | '_promptStatusBarRetired'
 const _uiUpdateParity: AssertNoMissingKeys<
   Omit<PersistedUIState, MainOwnedUIState>,
   z.infer<UiUpdateFieldsSchema>
