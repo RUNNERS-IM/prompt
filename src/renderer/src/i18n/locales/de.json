@@ -1032,7 +1032,9 @@
       "body": "Orca läuft weiterhin im Infobereich"
     },
     "activityWaiting": "Orca - Ausstehende Aktivität",
-    "activityWaitingSuffix": "ausstehende Aktivität"
+    "activityWaitingSuffix": "ausstehende Aktivität",
+    "openAtLogin": "Bei der Anmeldung öffnen",
+    "autoCheckUpdates": "Automatisch nach Updates suchen"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} aufrufen",

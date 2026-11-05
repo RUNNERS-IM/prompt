@@ -1010,7 +1010,9 @@
       "body": "Orca sistem tepsisinde çalışmaya devam ediyor"
     },
     "activityWaiting": "Orca - etkinlik bekleniyor",
-    "activityWaitingSuffix": "etkinlik bekleniyor"
+    "activityWaitingSuffix": "etkinlik bekleniyor",
+    "openAtLogin": "Oturum açılınca başlat",
+    "autoCheckUpdates": "Güncellemeleri otomatik olarak denetle"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} adresine git",

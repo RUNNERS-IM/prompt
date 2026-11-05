@@ -395,6 +395,7 @@ describe('completed deferred updater setup ownership', () => {
     const options = capturedSetupOptions()
     expect(Object.keys(options)).toEqual([
       'getLastUpdateCheckAt',
+      'isAutomaticCheckOn',
       'onBeforeQuit',
       'setLastUpdateCheckAt',
       'getPendingUpdateNudgeId',
@@ -409,6 +410,10 @@ describe('completed deferred updater setup ownership', () => {
     expect(options.getPendingUpdateNudgeId?.()).toBe('pending')
     expect(options.getDismissedUpdateNudgeId?.()).toBe('dismissed')
     expect(options.getReleaseChannelOverride?.()).toBe('rc')
+    // 「업데이트 자동 확인」은 값이 없으면 켜짐이고, 저장소의 지금 값을 읽는다.
+    expect(options.isAutomaticCheckOn?.()).toBe(true)
+    owner.store.getSettings.mockReturnValue({ autoCheckUpdates: false })
+    expect(options.isAutomaticCheckOn?.()).toBe(false)
     owner.store.getUI.mockReturnValue({ ...owner.store.getUI(), lastUpdateCheckAt: 456 })
     expect(options.getLastUpdateCheckAt?.()).toBe(456)
     options.setLastUpdateCheckAt?.(789)

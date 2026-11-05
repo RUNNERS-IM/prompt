@@ -1072,7 +1072,9 @@
       "body": "Orca продолжает работать в системном трее"
     },
     "activityWaiting": "Orca — ожидает вашего ответа",
-    "activityWaitingSuffix": "ожидает вашего ответа"
+    "activityWaitingSuffix": "ожидает вашего ответа",
+    "openAtLogin": "Открывать при входе",
+    "autoCheckUpdates": "Автоматически проверять обновления"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Перейти на {{value0}}",

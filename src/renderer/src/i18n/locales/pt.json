@@ -634,7 +634,9 @@
       "body": "O Orca continua em execução na bandeja do sistema"
     },
     "activityWaiting": "Orca - atividade em espera",
-    "activityWaitingSuffix": "atividade em espera"
+    "activityWaitingSuffix": "atividade em espera",
+    "openAtLogin": "Abrir ao iniciar sessão",
+    "autoCheckUpdates": "Verificar atualizações automaticamente"
   },
   "dashboard": {
     "sidebar": {

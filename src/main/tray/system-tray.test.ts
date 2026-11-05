@@ -73,6 +73,7 @@ class FakeTray {
   setToolTip = vi.fn()
   setTitle = vi.fn()
   setContextMenu = vi.fn()
+  popUpContextMenu = vi.fn()
   setImage = vi.fn()
   on = vi.fn()
   destroy = vi.fn()
@@ -827,5 +828,86 @@ describe('language changes', () => {
     menuFromTemplateMock.mockClear()
     flushTraySceneMutation()
     expect(menuFromTemplateMock).not.toHaveBeenCalled()
+  })
+})
+
+// 맥 패널 모드: 왼쪽 클릭은 패널, 오른쪽 클릭은 그때 새로 만든 기본 메뉴(2026-11-05 결정 2A).
+describe('macOS menu panel', () => {
+  function panelOptions(state: { login: boolean; auto: boolean }) {
+    return {
+      ...createOptions(),
+      getRunningTerminalCount: () => 1,
+      onTogglePanel: vi.fn(),
+      onMenuRowsChanged: vi.fn(),
+      getOpenAtLogin: () => state.login,
+      onToggleOpenAtLogin: vi.fn(() => {
+        state.login = !state.login
+      }),
+      getAutoCheckUpdates: () => state.auto,
+      onToggleAutoCheckUpdates: vi.fn(() => {
+        state.auto = !state.auto
+      })
+    }
+  }
+
+  it('opens the panel on left click and a fresh native menu on right click', async () => {
+    setPlatform('darwin')
+    const { createSystemTray } = await loadModule()
+    const state = { login: true, auto: true }
+    const options = panelOptions(state)
+    createSystemTray(options)
+
+    const fake = trayInstances[0]
+    expect(fake.setContextMenu).not.toHaveBeenCalled()
+    const handler = (event: string) =>
+      fake.on.mock.calls.find((call) => call[0] === event)?.[1] as () => void
+
+    handler('click')()
+    expect(options.onTogglePanel).toHaveBeenCalledWith(fake)
+
+    state.login = false
+    handler('right-click')()
+    expect(fake.popUpContextMenu).toHaveBeenCalledOnce()
+    const checks = builtMenuItems().filter((item) => item.type === 'checkbox') as (MenuItem & {
+      checked?: boolean
+    })[]
+    expect(checks.map((item) => [item.label, item.checked])).toEqual([
+      ['Open at Login', false],
+      ['Check for Updates Automatically', true]
+    ])
+  })
+
+  it('gives the panel the same rows and runs its commands', async () => {
+    setPlatform('darwin')
+    const { createSystemTray, getTrayMenuRows, runTrayMenuCommandFromPanel } = await loadModule()
+    const state = { login: false, auto: true }
+    const options = panelOptions(state)
+    expect(getTrayMenuRows()).toBeNull()
+    createSystemTray(options)
+
+    expect(getTrayMenuRows()?.find((row) => row.kind === 'toggle')).toMatchObject({
+      id: 'openAtLogin',
+      checked: false
+    })
+    runTrayMenuCommandFromPanel('openAtLogin')
+    expect(options.onToggleOpenAtLogin).toHaveBeenCalledOnce()
+    expect(getTrayMenuRows()?.find((row) => row.kind === 'toggle')).toMatchObject({
+      checked: true
+    })
+    runTrayMenuCommandFromPanel('about')
+    expect(options.onShowAbout).toHaveBeenCalledOnce()
+  })
+
+  it('redraws the open panel instead of attaching a menu on language changes', async () => {
+    setPlatform('darwin')
+    const { createSystemTray, rebuildSystemTrayMenu } = await loadModule()
+    const options = panelOptions({ login: true, auto: true })
+    createSystemTray(options)
+
+    rebuildSystemTrayMenu()
+    flushTraySceneMutation()
+
+    expect(options.onMenuRowsChanged).toHaveBeenCalledOnce()
+    expect(trayInstances[0].setContextMenu).not.toHaveBeenCalled()
   })
 })

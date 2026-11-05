@@ -814,7 +814,9 @@
       "body": "Orca continue de tourner dans la zone de notification"
     },
     "activityWaiting": "Orca - activité en attente",
-    "activityWaitingSuffix": "activité en attente"
+    "activityWaitingSuffix": "activité en attente",
+    "openAtLogin": "Ouvrir à la connexion",
+    "autoCheckUpdates": "Rechercher les mises à jour automatiquement"
   },
   "worktreeJumpPalette": {
     "matchLabel": {
