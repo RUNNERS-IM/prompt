@@ -34,7 +34,7 @@ import { buildRemoteSettingsSections } from './settings-navigation-remote-sectio
 import { buildWorkflowSettingsSections } from './settings-navigation-workflow-sections'
 import { useWindowsTerminalCapabilityOwnerKey } from './useWindowsTerminalCapabilityOwnerKey'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
-import { isPromptVisibleSettingsSection } from '@/lib/prompt-hidden-settings'
+import { arrangePromptSettingsSections } from '@/lib/prompt-hidden-settings'
 
 export { isWebClientLocation } from '@/lib/web-client-location'
 
@@ -127,7 +127,9 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
   )
   const nativeChatEnabled = settings?.experimentalNativeChat === true
   const typedChatPermissions = useChatSettingsOwnPermissions()
-  const hostQueuesMessages = useStructuredAgentSessionHostQueuesMessages({ kind: 'local' })
+  const hostQueuesMessages = useStructuredAgentSessionHostQueuesMessages({
+    kind: 'local'
+  })
   const isMac = isMacUserAgent()
   const isWindows = isWindowsUserAgent()
   const isWebClient = isWebClientLocation()
@@ -162,25 +164,27 @@ export function useSettingsNavigationMetadata(): SettingsNavSection[] {
 
   return useMemo(
     () =>
-      buildSettingsNavigationMetadata({
-        isMac,
-        isWindows,
-        isLocalWindowsHost,
-        isWindowsTerminalHost,
-        isWebClient,
-        nativeChatEnabled,
-        hostQueuesMessages,
-        typedChatPermissions,
-        managedBrowserCreationEnabled,
-        mobileEmulatorCreationEnabled,
-        isDev: import.meta.env.DEV,
-        isLinearConnected,
-        repos,
-        projectGrouping: {
-          projects: projectHostSetupProjection.projects,
-          projectHostSetups: projectHostSetupProjection.setups
-        }
-      }).filter(isPromptVisibleSettingsSection),
+      arrangePromptSettingsSections(
+        buildSettingsNavigationMetadata({
+          isMac,
+          isWindows,
+          isLocalWindowsHost,
+          isWindowsTerminalHost,
+          isWebClient,
+          nativeChatEnabled,
+          hostQueuesMessages,
+          typedChatPermissions,
+          managedBrowserCreationEnabled,
+          mobileEmulatorCreationEnabled,
+          isDev: import.meta.env.DEV,
+          isLinearConnected,
+          repos,
+          projectGrouping: {
+            projects: projectHostSetupProjection.projects,
+            projectHostSetups: projectHostSetupProjection.setups
+          }
+        })
+      ),
     // oxlint-disable-next-line react-hooks/exhaustive-deps -- translate() inside buildSettingsNavigationMetadata reads the UI language and catalogs implicitly.
     [
       isMac,
