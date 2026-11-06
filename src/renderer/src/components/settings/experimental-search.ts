@@ -1,6 +1,7 @@
 import type { SettingsSearchEntry } from './settings-search'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { getNewWorktreeCardStyleSearchEntry } from './new-worktree-card-style-search-entry'
 import { getNativeChatExperimentalSearchEntry } from './native-chat-experimental-search-entry'
@@ -8,192 +9,199 @@ import { getEphemeralVmsSearchEntry } from './ephemeral-vms-search'
 import { getBrowserExtensionsExperimentalSearchEntry } from './browser-extensions-experimental-search'
 import { getWslHostsExperimentalSearchEntry } from './wsl-hosts-experimental-search'
 
+const getAllExperimentalSearchEntries = createLocalizedCatalog((): SettingsSearchEntry[] => [
+  {
+    title: translate('auto.components.settings.experimental.search.87d99e634b', 'Pet'),
+    description: translate(
+      'auto.components.settings.experimental.search.6b5a56ac35',
+      'Floating animated pet in the bottom-right corner.'
+    ),
+    keywords: [
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.0d24759f14',
+        'experimental'
+      ),
+      ...translateSearchKeyword('auto.components.settings.experimental.search.051203d37c', 'pet'),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.b54cea709b',
+        'sidekick'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.2a33975d72',
+        'mascot'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.9f5609bfb8',
+        'overlay'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.65df471ab2',
+        'animated'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.791fefc0b0',
+        'corner'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.9af7a518db',
+        'character'
+      )
+    ]
+  },
+  getNativeChatExperimentalSearchEntry(),
+  {
+    title: translate(
+      'auto.components.settings.experimental.search.agentDashboard.title',
+      'Agent Dashboard'
+    ),
+    description: translate(
+      'auto.components.settings.experimental.search.agentDashboard.description',
+      'Kanban board for monitoring agents across worktrees, in-window or as a pop-out.'
+    ),
+    keywords: [
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.0d24759f14',
+        'experimental'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.agent',
+        'agent'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.dashboard',
+        'dashboard'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.kanban',
+        'kanban'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.popout',
+        'pop-out'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.board',
+        'board'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.inWindow',
+        'in-window'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentDashboard.worktrees',
+        'worktrees'
+      )
+    ]
+  },
+  {
+    title: translate(
+      'auto.components.settings.experimental.search.9e4ddf776d',
+      'Terminal attention'
+    ),
+    description: translate(
+      'auto.components.settings.experimental.search.11877246fc',
+      'Persistent pane highlight for terminal bell and agent-completion events.'
+    ),
+    keywords: [
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.0d24759f14',
+        'experimental'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.9bb3bd5098',
+        'terminal'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.01567f19ca',
+        'attention'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.268e99d957',
+        'highlight'
+      ),
+      ...translateSearchKeyword('auto.components.settings.experimental.search.edc49480a1', 'pane'),
+      ...translateSearchKeyword('auto.components.settings.experimental.search.8facf10138', 'bell'),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.7695fd30e9',
+        'notification'
+      ),
+      ...translateSearchKeyword('auto.components.settings.experimental.search.5f067ba0f9', 'agent'),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.f10d307468',
+        'completion'
+      ),
+      ...translateSearchKeyword('auto.components.settings.experimental.search.7b79081695', 'unread')
+    ]
+  },
+  {
+    title: translate(
+      'auto.components.settings.experimental.search.agentHibernation.title',
+      'Agent sleep'
+    ),
+    description: translate(
+      'auto.components.settings.experimental.search.agentHibernation.description',
+      'Stops idle background agent terminals after the configured idle window and resumes supported sessions when opened again. Agent sleep preserves launch options for agents started by Orca; manually started agents may resume with current Orca defaults.'
+    ),
+    keywords: [
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.0d24759f14',
+        'experimental'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentHibernation.agent',
+        'agent'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentHibernation.agents',
+        'agents'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentHibernation.sleep',
+        'sleep'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentHibernation.minutes',
+        'minutes'
+      ),
+      ...translateSearchKeyword(
+        'auto.components.settings.experimental.search.agentHibernation.terminal',
+        'terminal'
+      )
+    ]
+  },
+  getNewWorktreeCardStyleSearchEntry(),
+  getEphemeralVmsSearchEntry(),
+  getBrowserExtensionsExperimentalSearchEntry(),
+  // Index WSL toggles only on Windows desktops that expose them.
+  ...(typeof window !== 'undefined' && window.api?.runtimeEnvironments?.wslHosts
+    ? [getWslHostsExperimentalSearchEntry()]
+    : [])
+])
+
+// Prompt hides the pet, cloud VMs (Orca's hosted service) and browser extensions (the browser is
+// a side feature there), so search must not land on them.
+function getPromptHiddenExperimentalTitles(): Set<string> {
+  return new Set([
+    translate('auto.components.settings.experimental.search.87d99e634b', 'Pet'),
+    getEphemeralVmsSearchEntry().title,
+    getBrowserExtensionsExperimentalSearchEntry().title
+  ])
+}
+
 export const getExperimentalPaneSearchEntries = createLocalizedCatalog(
-  (): SettingsSearchEntry[] => [
-    {
-      title: translate('auto.components.settings.experimental.search.87d99e634b', 'Pet'),
-      description: translate(
-        'auto.components.settings.experimental.search.6b5a56ac35',
-        'Floating animated pet in the bottom-right corner.'
-      ),
-      keywords: [
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.0d24759f14',
-          'experimental'
-        ),
-        ...translateSearchKeyword('auto.components.settings.experimental.search.051203d37c', 'pet'),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.b54cea709b',
-          'sidekick'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.2a33975d72',
-          'mascot'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.9f5609bfb8',
-          'overlay'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.65df471ab2',
-          'animated'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.791fefc0b0',
-          'corner'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.9af7a518db',
-          'character'
-        )
-      ]
-    },
-    getNativeChatExperimentalSearchEntry(),
-    {
-      title: translate(
-        'auto.components.settings.experimental.search.agentDashboard.title',
-        'Agent Dashboard'
-      ),
-      description: translate(
-        'auto.components.settings.experimental.search.agentDashboard.description',
-        'Kanban board for monitoring agents across worktrees, in-window or as a pop-out.'
-      ),
-      keywords: [
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.0d24759f14',
-          'experimental'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.agent',
-          'agent'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.dashboard',
-          'dashboard'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.kanban',
-          'kanban'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.popout',
-          'pop-out'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.board',
-          'board'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.inWindow',
-          'in-window'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentDashboard.worktrees',
-          'worktrees'
-        )
-      ]
-    },
-    {
-      title: translate(
-        'auto.components.settings.experimental.search.9e4ddf776d',
-        'Terminal attention'
-      ),
-      description: translate(
-        'auto.components.settings.experimental.search.11877246fc',
-        'Persistent pane highlight for terminal bell and agent-completion events.'
-      ),
-      keywords: [
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.0d24759f14',
-          'experimental'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.9bb3bd5098',
-          'terminal'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.01567f19ca',
-          'attention'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.268e99d957',
-          'highlight'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.edc49480a1',
-          'pane'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.8facf10138',
-          'bell'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.7695fd30e9',
-          'notification'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.5f067ba0f9',
-          'agent'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.f10d307468',
-          'completion'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.7b79081695',
-          'unread'
-        )
-      ]
-    },
-    {
-      title: translate(
-        'auto.components.settings.experimental.search.agentHibernation.title',
-        'Agent sleep'
-      ),
-      description: translate(
-        'auto.components.settings.experimental.search.agentHibernation.description',
-        'Stops idle background agent terminals after the configured idle window and resumes supported sessions when opened again. Agent sleep preserves launch options for agents started by Orca; manually started agents may resume with current Orca defaults.'
-      ),
-      keywords: [
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.0d24759f14',
-          'experimental'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentHibernation.agent',
-          'agent'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentHibernation.agents',
-          'agents'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentHibernation.sleep',
-          'sleep'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentHibernation.minutes',
-          'minutes'
-        ),
-        ...translateSearchKeyword(
-          'auto.components.settings.experimental.search.agentHibernation.terminal',
-          'terminal'
-        )
-      ]
-    },
-    getNewWorktreeCardStyleSearchEntry(),
-    getEphemeralVmsSearchEntry(),
-    getBrowserExtensionsExperimentalSearchEntry(),
-    // Index WSL toggles only on Windows desktops that expose them.
-    ...(typeof window !== 'undefined' && window.api?.runtimeEnvironments?.wslHosts
-      ? [getWslHostsExperimentalSearchEntry()]
-      : [])
-  ]
+  (): SettingsSearchEntry[] => {
+    const entries = getAllExperimentalSearchEntries()
+    if (!PROMPT_SIMPLE_SETTINGS) {
+      return entries
+    }
+    const hiddenTitles = getPromptHiddenExperimentalTitles()
+    return entries.filter((entry) => !hiddenTitles.has(entry.title))
+  }
 )
 
 // Resolve by title and fail loudly on renames so changing catalog shape cannot silently retarget numeric indexes.
 function findEntry(title: string): SettingsSearchEntry {
-  const entry = getExperimentalPaneSearchEntries().find((e) => e.title === title)
+  const entry = getAllExperimentalSearchEntries().find((e) => e.title === title)
   if (!entry) {
     throw new Error(`Missing experimental-pane search entry: "${title}"`)
   }

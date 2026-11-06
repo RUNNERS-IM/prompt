@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { SettingsSwitch } from './SettingsFormControls'
 import type { EditingTarget } from './ssh-target-draft'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 // Match composer disclosure styling while reusing the Settings SSH labels and help.
 export function SshHostAdvancedFields({
@@ -172,36 +173,39 @@ export function SshHostAdvancedFields({
               />
             </div>
           ) : null}
-          <div className="flex items-start justify-between gap-4 py-1 text-xs">
-            <div className="min-w-0 flex-1 space-y-0.5">
-              <Label className="text-xs font-medium">
-                {translate(
+          {/* Prompt hides browser tabs and orchestration, so this host's CLI has nothing to drive. */}
+          {PROMPT_SIMPLE_SETTINGS ? null : (
+            <div className="flex items-start justify-between gap-4 py-1 text-xs">
+              <div className="min-w-0 flex-1 space-y-0.5">
+                <Label className="text-xs font-medium">
+                  {translate(
+                    'auto.components.settings.SshTargetForm.allowRemoteCliControl',
+                    "Allow this host's CLI to control Orca"
+                  )}
+                </Label>
+                <p className="text-muted-foreground">
+                  {translate(
+                    'auto.components.settings.SshTargetForm.allowRemoteCliControlHelp',
+                    "On by default for new hosts. Lets CLI commands run on this host open and drive Orca browser tabs on this desktop, only in this host's workspaces and only while it is connected, and lets terminals started by an older Orca on this host run orchestration commands (check, inbox, send, ask, reply) for their own supervised work. They cannot read your files, clipboard or cookies. When off, they reach only this host's own Orca server."
+                  )}
+                </p>
+              </div>
+              <SettingsSwitch
+                checked={form.allowRemoteCliControl}
+                disabled={disabled}
+                onChange={() =>
+                  onFormChange((f) => ({
+                    ...f,
+                    allowRemoteCliControl: !f.allowRemoteCliControl
+                  }))
+                }
+                ariaLabel={translate(
                   'auto.components.settings.SshTargetForm.allowRemoteCliControl',
                   "Allow this host's CLI to control Orca"
                 )}
-              </Label>
-              <p className="text-muted-foreground">
-                {translate(
-                  'auto.components.settings.SshTargetForm.allowRemoteCliControlHelp',
-                  "On by default for new hosts. Lets CLI commands run on this host open and drive Orca browser tabs on this desktop, only in this host's workspaces and only while it is connected, and lets terminals started by an older Orca on this host run orchestration commands (check, inbox, send, ask, reply) for their own supervised work. They cannot read your files, clipboard or cookies. When off, they reach only this host's own Orca server."
-                )}
-              </p>
+              />
             </div>
-            <SettingsSwitch
-              checked={form.allowRemoteCliControl}
-              disabled={disabled}
-              onChange={() =>
-                onFormChange((f) => ({
-                  ...f,
-                  allowRemoteCliControl: !f.allowRemoteCliControl
-                }))
-              }
-              ariaLabel={translate(
-                'auto.components.settings.SshTargetForm.allowRemoteCliControl',
-                "Allow this host's CLI to control Orca"
-              )}
-            />
-          </div>
+          )}
         </div>
       </CollapsibleContent>
     </Collapsible>

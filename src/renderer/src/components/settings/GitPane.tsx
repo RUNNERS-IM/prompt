@@ -29,7 +29,12 @@ import {
 } from './keep-local-main-up-to-date-setting'
 import { Trans } from 'react-i18next'
 import { i18n, translate } from '@/i18n/i18n'
-import { SettingsRow, SettingsSegmentedControl } from './SettingsFormControls'
+import {
+  SettingsRow,
+  SettingsSegmentedControl,
+  SettingsSubsectionHeader
+} from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export { getGitPaneSearchEntries }
 
@@ -236,6 +241,8 @@ export function GitPane({
         {isBranchPrefixInputMode && <BranchPrefixFeedback rawPrefix={branchPrefixInputValue} />}
       </SearchableSetting>
     ) : null,
+    // Prompt hides the Jira integration, so Jira issue key casing has nothing to act on.
+    !PROMPT_SIMPLE_SETTINGS &&
     matchesSettingsSearch(searchQuery, {
       title: getJiraIssueKeyCasingTitle(),
       description: getJiraIssueKeyCasingDescription(),
@@ -326,5 +333,14 @@ export function GitPane({
     ) : null
   ].filter(Boolean)
 
-  return <div className="space-y-4">{visibleSections}</div>
+  return (
+    <div className="space-y-4">
+      {PROMPT_SIMPLE_SETTINGS && visibleSections.length > 0 ? (
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.git.branchesGroup', 'Branches and workspaces')}
+        />
+      ) : null}
+      {visibleSections}
+    </div>
+  )
 }

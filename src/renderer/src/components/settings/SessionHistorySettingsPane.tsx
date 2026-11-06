@@ -14,7 +14,8 @@ import { Label } from '@/components/ui/label'
 import { isWebClientLocation } from '@/lib/web-client-location'
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
-import { SettingsRow } from './SettingsFormControls'
+import { SettingsRow, SettingsSubsectionHeader } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SessionSearchAdvancedSection } from './SessionSearchAdvancedSection'
 import { SessionHistoryComputerRow } from './SessionHistoryComputerRow'
 import { SessionHistoryServerRow } from './SessionHistoryServerRow'
@@ -67,7 +68,10 @@ export function SessionHistorySettingsPane({
   const servers = isWebClient ? [] : environments
   const localEntry: SessionSearchComputerEntry = {
     id: LOCAL_EXECUTION_HOST_ID,
-    name: getLocalExecutionHostLabel(),
+    // Prompt: "Local Mac" is fixed English; the localized subhead reads the same.
+    name: PROMPT_SIMPLE_SETTINGS
+      ? translate('sessionHistory.settings.thisComputer', 'This computer')
+      : getLocalExecutionHostLabel(),
     state: policy.enabled ? 'on' : 'off'
   }
   const serverEntries = servers.map((environment) => ({
@@ -172,25 +176,34 @@ export function SessionHistorySettingsPane({
         : sessionSearchCheckingMessage()
   }
 
+  const consentCopy = isWebClient
+    ? translate(
+        'sessionHistory.settings.webUnsupported',
+        'Turn on session search from the Orca desktop app on that computer.'
+      )
+    : translate(
+        'sessionHistory.settings.computersConsent',
+        'Each computer keeps a searchable copy of its own agent conversations and tool output. Nothing leaves that computer.'
+      )
+
   return (
     <div>
-      <div className="space-y-1 py-3">
-        <Label className="select-text">
-          {translate('sessionHistory.settings.indexComputers', 'Search inside sessions')}
-        </Label>
-        <p className="select-text text-xs text-muted-foreground">
-          {isWebClient
-            ? translate(
-                'sessionHistory.settings.webUnsupported',
-                'Turn on session search from the Orca desktop app on that computer.'
-              )
-            : translate(
-                'sessionHistory.settings.computersConsent',
-                'Each computer keeps a searchable copy of its own agent conversations and tool output. Nothing leaves that computer.'
-              )}
-        </p>
-      </div>
-      {enableableServers.length === 0 ? null : (
+      {/* Prompt: this page sits under Advanced, so it opens with its own box title. */}
+      {PROMPT_SIMPLE_SETTINGS ? (
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.advanced.sessionSearchGroup', 'Agent session search')}
+          description={consentCopy}
+        />
+      ) : (
+        <div className="space-y-1 py-3">
+          <Label className="select-text">
+            {translate('sessionHistory.settings.indexComputers', 'Search inside sessions')}
+          </Label>
+          <p className="select-text text-xs text-muted-foreground">{consentCopy}</p>
+        </div>
+      )}
+      {/* Prompt has no remote servers to fan out to, so one switch per computer is enough. */}
+      {PROMPT_SIMPLE_SETTINGS || enableableServers.length === 0 ? null : (
         <div className="flex items-center justify-end pt-2">
           <Button
             type="button"
@@ -231,7 +244,7 @@ export function SessionHistorySettingsPane({
       />
       {isWebClient ? null : (
         <SettingsRow
-          className="border-t border-border"
+          className={PROMPT_SIMPLE_SETTINGS ? undefined : 'border-t border-border'}
           label={translate('sessionHistory.settings.openInSidebar', 'Open in the sidebar')}
           description={translate(
             'sessionHistory.settings.openInSidebarCopy',

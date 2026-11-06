@@ -29,7 +29,10 @@ import { SourceControlAiActionRecipeDefaults } from './SourceControlAiActionReci
 import { matchesSettingsSearch } from './settings-search'
 import { getSettingOwnershipSummary } from './setting-ownership'
 import { translate } from '@/i18n/i18n'
+import { cn } from '@/lib/utils'
 import { HostedReviewCreationDefaults } from './HostedReviewCreationDefaults'
+import { SettingsSubsectionHeader } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type CommitMessageAiPaneProps = {
   settings: GlobalSettings
@@ -315,17 +318,15 @@ export function CommitMessageAiPane({
     <div
       id="source-control-ai-settings"
       data-settings-section="source-control-ai-settings"
-      className="space-y-4 border-t border-border/40 pt-4"
+      className={cn('space-y-4', !PROMPT_SIMPLE_SETTINGS && 'border-t border-border/40 pt-4')}
     >
-      <div className="space-y-0.5">
-        <h3 className="text-sm font-semibold">
-          {translate(
-            'auto.components.settings.CommitMessageAiPane.ad66ff886d',
-            'Source Control AI defaults'
-          )}
-        </h3>
-        <p className="text-xs text-muted-foreground">{ownership.description}</p>
-      </div>
+      <SettingsSubsectionHeader
+        title={translate(
+          'auto.components.settings.CommitMessageAiPane.ad66ff886d',
+          'Source Control AI defaults'
+        )}
+        description={ownership.description}
+      />
       {sections}
     </div>
   )

@@ -26,6 +26,7 @@ import { RepoSettingsDraftInput } from './RepositorySettingsDraftInput'
 import { RepositoryForkSyncSection } from './identity/RepositoryForkSyncSection'
 import { RepositoryGitHubAccountSection } from './RepositoryGitHubAccountSection'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { RepositoryWindowsRuntimeSection } from './execution/RepositoryWindowsRuntimeSection'
 import { matchesRepositoryIdentitySearch } from './identity/repository-identity-search'
 import { RepositoryWorktreeDefaultsSection } from './execution/RepositoryWorktreeDefaultsSection'
@@ -220,7 +221,7 @@ export function RepositoryPane({
   const visibleSections = [
     forceFullPaneForRepoMatch || matchesSettingsSearch(searchQuery, identityEntries) ? (
       <section key="identity" className="relative space-y-8">
-        <div className="flex items-start justify-between gap-4">
+        <div data-prompt-group-title="" className="flex items-start justify-between gap-4">
           <div className="space-y-1 pr-12">
             <h3 className="text-sm font-semibold">
               {translate('auto.components.settings.RepositoryPane.499a437335', 'Identity')}
@@ -297,12 +298,15 @@ export function RepositoryPane({
           <RepositoryIconPicker repo={repo} updateRepo={updateSelectedRepo} />
         </SearchableSetting>
 
-        <RepositoryJiraProjectSection
-          key={`${selectedHostId}:${repo.id}`}
-          repo={repo}
-          updateRepo={updateSelectedRepo}
-          forceVisible={forceFullPaneForRepoMatch}
-        />
+        {/* Prompt hides the Jira integration, so a default Jira project has nothing to pick from. */}
+        {PROMPT_SIMPLE_SETTINGS ? null : (
+          <RepositoryJiraProjectSection
+            key={`${selectedHostId}:${repo.id}`}
+            repo={repo}
+            updateRepo={updateSelectedRepo}
+            forceVisible={forceFullPaneForRepoMatch}
+          />
+        )}
 
         {!isFolder ? (
           <>
@@ -387,7 +391,8 @@ export function RepositoryPane({
     <div ref={setRepositoryPaneRootRef} className="space-y-8">
       {visibleSections.map((section, index) => (
         <div key={index} className="space-y-8">
-          {index > 0 ? <Separator /> : null}
+          {/* Prompt: each section is its own box, so no rule between them. */}
+          {index > 0 && !PROMPT_SIMPLE_SETTINGS ? <Separator /> : null}
           {section}
         </div>
       ))}

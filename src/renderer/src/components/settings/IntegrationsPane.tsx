@@ -8,10 +8,36 @@ import {
 import { JiraIntegrationCard, LinearIntegrationCard } from './task-tracker-integration-cards'
 import { useIntegrationProviderStatusRefresh } from './use-integration-provider-status-refresh'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { IntegrationCardPresentationProvider } from './integration-card-presentation'
+import { SettingsSubsectionHeader } from './SettingsFormControls'
 export { getIntegrationsPaneSearchEntries } from './integrations-search'
 
 export function IntegrationsPane(): React.JSX.Element {
   useIntegrationProviderStatusRefresh()
+
+  // Prompt: the review hosts are one flat box under the Git page, and the Linear · Jira task
+  // trackers are hidden because their task views are hidden.
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <IntegrationCardPresentationProvider value="setup-guide">
+        <div>
+          <SettingsSubsectionHeader
+            title={translate('prompt.settings.git.integrationsGroup', 'Integrations')}
+            description={translate(
+              'auto.components.settings.IntegrationsPane.1683acbac4',
+              'Connect the source hosts Orca can use for pull requests, merge requests, checks, and review status.'
+            )}
+          />
+          <GitHubIntegrationCard />
+          <GitLabIntegrationCard />
+          <BitbucketIntegrationCard />
+          <AzureDevOpsIntegrationCard />
+          <GiteaIntegrationCard />
+        </div>
+      </IntegrationCardPresentationProvider>
+    )
+  }
 
   return (
     <div className="space-y-5">

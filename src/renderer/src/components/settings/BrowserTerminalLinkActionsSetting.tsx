@@ -1,5 +1,7 @@
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { Label } from '../ui/label'
 import { BROWSER_TERMINAL_LINK_ACTIONS_SETTINGS_TARGET_ID } from '@/lib/settings-navigation-types'
 import { SearchableSetting } from './SearchableSetting'
 import {
@@ -83,8 +85,22 @@ export function BrowserTerminalLinkActionsSetting({
       keywords={getTerminalLinkActionSearchKeywords({ isMac })}
     >
       <section className="space-y-3">
-        <SettingsSubsectionHeader title={title} description={description} />
-        <div className="rounded-lg border border-border/60 bg-muted/10 px-4">
+        {/* Prompt: this row already sits in a settings box, so no second title or card inside it. */}
+        {PROMPT_SIMPLE_SETTINGS ? (
+          <div className="space-y-0.5">
+            <Label>{title}</Label>
+            <p className="text-xs text-muted-foreground">{description}</p>
+          </div>
+        ) : (
+          <SettingsSubsectionHeader title={title} description={description} />
+        )}
+        <div
+          className={
+            PROMPT_SIMPLE_SETTINGS
+              ? undefined
+              : 'rounded-lg border border-border/60 bg-muted/10 px-4'
+          }
+        >
           <div className="divide-y divide-border/40">
             <SettingsRow
               label={plainClickLabel}

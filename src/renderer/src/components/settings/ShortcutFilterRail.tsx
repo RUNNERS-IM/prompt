@@ -8,6 +8,7 @@ import { Input } from '../ui/input'
 import type { ShortcutTerminalStatus } from './shortcut-terminal-status'
 import { matchesSettingsSearch, type SettingsSearchEntry } from './settings-search'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export type ShortcutFilter = 'all' | 'modified' | 'unassigned' | 'conflicts'
 
@@ -130,7 +131,13 @@ export function ShortcutFilterRail({
   }))
 
   return (
-    <aside className="flex min-h-0 flex-col gap-5 xl:h-full">
+    <aside
+      className={cn(
+        'flex min-h-0 flex-col',
+        // Prompt: the rail sits above the list in the narrow settings column, status chips in one row.
+        PROMPT_SIMPLE_SETTINGS ? 'shrink-0 gap-3' : 'gap-5 xl:h-full'
+      )}
+    >
       <div className="shrink-0 space-y-2">
         <div className="flex items-center justify-between gap-3">
           <label htmlFor="shortcut-filter-search" className="text-xs font-medium">
@@ -180,7 +187,7 @@ export function ShortcutFilterRail({
         <p className="text-[11px] font-semibold tracking-[0.05em] text-muted-foreground uppercase">
           {translate('auto.components.settings.ShortcutFilterRail.28b63545bf', 'Status')}
         </p>
-        <div className="grid gap-1">
+        <div className={cn('grid gap-1', PROMPT_SIMPLE_SETTINGS && 'grid-cols-4')}>
           {filters.map((option) => (
             <button
               key={option.id}

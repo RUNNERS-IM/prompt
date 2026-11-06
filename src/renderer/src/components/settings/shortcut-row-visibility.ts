@@ -5,6 +5,8 @@ import {
   type TerminalShortcutPolicy
 } from '../../../../shared/keybindings'
 import { hasOwnBindingOverride } from './keybinding-override-edits'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { isPromptHiddenShortcut } from './prompt-hidden-shortcuts'
 import type { ShortcutGroup } from './shortcut-groups'
 import { getShortcutTerminalStatus } from './shortcut-terminal-status'
 import {
@@ -34,37 +36,40 @@ export function buildShortcutRowVisibility(options: {
   visibleShortcutCount: number
   visibleShortcutGroups: ShortcutRowsByGroup[]
 } {
-  const shortcutGroups = options.groups.map((group) => ({
-    title: group.title,
-    rows: group.items
-      .filter(
-        (item) =>
-          (options.managedBrowserCreationEnabled ||
-            (item.id !== 'tab.newBrowser' && item.id !== 'tab.newBrowserSplitRight')) &&
-          (options.mobileEmulatorCreationEnabled || item.id !== 'tab.newSimulator') &&
-          // Binding an experimental action while disabled would silently do nothing.
-          (options.agentDashboardEnabled || item.id !== 'dashboard.toggle')
-      )
-      .map((item) => {
-        const effective = getEffectiveKeybindingsForDefinition(
-          item,
-          options.platform,
-          options.keybindings
+  const shortcutGroups = options.groups
+    .map((group) => ({
+      title: group.title,
+      rows: group.items
+        .filter(
+          (item) =>
+            (options.managedBrowserCreationEnabled ||
+              (item.id !== 'tab.newBrowser' && item.id !== 'tab.newBrowserSplitRight')) &&
+            (options.mobileEmulatorCreationEnabled || item.id !== 'tab.newSimulator') &&
+            // Binding an experimental action while disabled would silently do nothing.
+            (options.agentDashboardEnabled || item.id !== 'dashboard.toggle') &&
+            !isPromptHiddenShortcut(item.id)
         )
-        return {
-          item,
-          groupTitle: group.title,
-          effective,
-          modified: hasOwnBindingOverride(options.keybindings, item.id),
-          warnings: options.conflictByAction.get(item.id) ?? [],
-          terminalStatus: getShortcutTerminalStatus(
+        .map((item) => {
+          const effective = getEffectiveKeybindingsForDefinition(
             item,
-            options.terminalShortcutPolicy,
-            effective.length > 0
+            options.platform,
+            options.keybindings
           )
-        }
-      })
-  }))
+          return {
+            item,
+            groupTitle: group.title,
+            effective,
+            modified: hasOwnBindingOverride(options.keybindings, item.id),
+            warnings: options.conflictByAction.get(item.id) ?? [],
+            terminalStatus: getShortcutTerminalStatus(
+              item,
+              options.terminalShortcutPolicy,
+              effective.length > 0
+            )
+          }
+        })
+    }))
+    .filter((group) => !PROMPT_SIMPLE_SETTINGS || group.rows.length > 0)
   const shortcutRows = shortcutGroups.flatMap((group) => group.rows)
   const localQuery = normalizeShortcutLocalSearchQuery(options.shortcutQuery)
   const matchesGlobalSearch = buildShortcutGlobalSearchMatcher(

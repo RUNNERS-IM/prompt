@@ -4,6 +4,8 @@ import { matchesSettingsSearch } from './settings-search'
 import { GitHubRateLimitPanel } from '../github/github-rate-limit-display'
 import { GitLabRateLimitPanel } from '../gitlab/gitlab-rate-limit-display'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { SettingsSubsectionHeader } from './SettingsFormControls'
 import type { RuntimeClientTarget } from '../../../../shared/runtime-client-target'
 
 type GitProviderApiBudgetPaneProps = {
@@ -80,5 +82,15 @@ export function GitProviderApiBudgetPane({
   }
 
   // Put diagnostic budgets after everyday Git/AI controls.
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <div className="space-y-4">
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.git.apiBudgetGroup', 'API usage limits')}
+        />
+        {visibleSections}
+      </div>
+    )
+  }
   return <div className="space-y-4 border-t border-border/40 pt-4">{visibleSections}</div>
 }

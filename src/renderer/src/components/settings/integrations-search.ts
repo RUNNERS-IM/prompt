@@ -1,6 +1,7 @@
 import { translate } from '@/i18n/i18n'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getIntegrationsPaneSearchEntries = createLocalizedCatalog(() => [
   {
@@ -156,70 +157,81 @@ export const getIntegrationsPaneSearchEntries = createLocalizedCatalog(() => [
       )
     ]
   },
-  {
-    title: translate('auto.components.settings.integrations.search.617603509b', 'Jira Integration'),
-    description: translate(
-      'auto.components.settings.integrations.search.76f6af7c57',
-      'Connect Jira Cloud or update Jira API token credentials.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.integrations.search.e1263dd748', 'jira'),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.7345b7c3e6',
-        'atlassian'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.c450244ad7',
-        'integration'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.2ec2bd328c',
-        'api token'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.20540996ef',
-        'credentials'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.3c3d3d8ffa',
-        'connect'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.a626990bd2',
-        'disconnect'
-      )
-    ]
-  },
-  {
-    title: translate(
-      'auto.components.settings.integrations.search.b027b4b318',
-      'Linear Integration'
-    ),
-    description: translate(
-      'auto.components.settings.integrations.search.16a486a49d',
-      'Connect Linear to browse and link issues.'
-    ),
-    keywords: [
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.7319e3015b',
-        'linear'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.c450244ad7',
-        'integration'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.faa0b5a0d9',
-        'api key'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.3c3d3d8ffa',
-        'connect'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.integrations.search.a626990bd2',
-        'disconnect'
-      )
-    ]
-  }
+  // Prompt hides the Jira and Linear task trackers.
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.integrations.search.617603509b',
+            'Jira Integration'
+          ),
+          description: translate(
+            'auto.components.settings.integrations.search.76f6af7c57',
+            'Connect Jira Cloud or update Jira API token credentials.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.e1263dd748',
+              'jira'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.7345b7c3e6',
+              'atlassian'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.c450244ad7',
+              'integration'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.2ec2bd328c',
+              'api token'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.20540996ef',
+              'credentials'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.3c3d3d8ffa',
+              'connect'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.a626990bd2',
+              'disconnect'
+            )
+          ]
+        },
+        {
+          title: translate(
+            'auto.components.settings.integrations.search.b027b4b318',
+            'Linear Integration'
+          ),
+          description: translate(
+            'auto.components.settings.integrations.search.16a486a49d',
+            'Connect Linear to browse and link issues.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.7319e3015b',
+              'linear'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.c450244ad7',
+              'integration'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.faa0b5a0d9',
+              'api key'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.3c3d3d8ffa',
+              'connect'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.integrations.search.a626990bd2',
+              'disconnect'
+            )
+          ]
+        }
+      ])
 ])
