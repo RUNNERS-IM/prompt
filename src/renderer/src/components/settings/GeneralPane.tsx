@@ -1,6 +1,7 @@
 import type React from 'react'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { useAppStore } from '../../store'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { CliSection } from './CliSection'
 import { GeneralEditorSettingsSection } from './GeneralEditorSettingsSection'
 import { GeneralSupportSection } from './GeneralSupportSection'
@@ -251,6 +252,7 @@ export function GeneralPane({
         />
       </section>
     ) : null,
+    !PROMPT_SIMPLE_SETTINGS &&
     matchesSettingsSearch(searchQuery, getGeneralEditorSearchEntries()) ? (
       <GeneralEditorSettingsSection
         key="editor"

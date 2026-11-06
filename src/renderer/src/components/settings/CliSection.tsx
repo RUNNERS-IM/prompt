@@ -21,6 +21,7 @@ import { WslCliRegistration } from './WslCliRegistration'
 import { useCliRegistrationActions } from './use-cli-registration-actions'
 import { useLocalCliSkillFreshnessName } from './use-local-cli-skill-freshness-name'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type CliSectionProps = {
   currentPlatform: string
@@ -177,7 +178,13 @@ export function CliSection({
                     'auto.components.settings.CliSection.d363e5929b',
                     'Checking CLI registration…'
                   )
-                : (status?.detail ?? getInstallDescription(currentPlatform))}
+                : PROMPT_SIMPLE_SETTINGS && status?.state === 'not_installed'
+                  ? translate(
+                      'prompt.settings.cli.notInstalled',
+                      'Register {{path}} to use Prompt from other terminals.',
+                      { path: status.commandPath }
+                    )
+                  : (status?.detail ?? getInstallDescription(currentPlatform))}
             </p>
           </div>
           <div className="flex items-center gap-2">

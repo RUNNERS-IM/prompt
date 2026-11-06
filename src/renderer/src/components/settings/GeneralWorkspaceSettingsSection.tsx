@@ -40,43 +40,46 @@ export function GeneralWorkspaceSettingsSection({
 
       <WorkspaceDirectorySetting settings={settings} updateSettings={updateSettings} />
 
-      <div
-        id={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
-        data-settings-section={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
-        className="scroll-mt-6"
-      >
-        <SearchableSetting
-          title={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktrees',
-            'External worktrees'
-          )}
-          description={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktreesDescription',
-            'Choose which worktrees created outside Orca appear by default on this host.'
-          )}
-          keywords={[
-            'external',
-            'non-Orca',
-            'worktree',
-            'visibility',
-            'sidebar',
-            'show',
-            'hide',
-            'source',
-            'location',
-            'root',
-            'Claude',
-            'GSD'
-          ]}
+      {/* Prompt: 다른 도구가 만든 작업 폴더를 보일지 정하는 칸은 숨긴다. */}
+      {PROMPT_SIMPLE_SETTINGS ? null : (
+        <div
+          id={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
+          data-settings-section={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
+          className="scroll-mt-6"
         >
-          <GlobalWorktreeVisibilitySourcesSetting
-            settings={settings}
-            defaultsSupported={defaultsSupported}
-            sourceDefaultsSupported={sourceDefaultsSupported}
-            updateSettings={updateSettingsOrThrow}
-          />
-        </SearchableSetting>
-      </div>
+          <SearchableSetting
+            title={translate(
+              'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktrees',
+              'External worktrees'
+            )}
+            description={translate(
+              'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktreesDescription',
+              'Choose which worktrees created outside Orca appear by default on this host.'
+            )}
+            keywords={[
+              'external',
+              'non-Orca',
+              'worktree',
+              'visibility',
+              'sidebar',
+              'show',
+              'hide',
+              'source',
+              'location',
+              'root',
+              'Claude',
+              'GSD'
+            ]}
+          >
+            <GlobalWorktreeVisibilitySourcesSetting
+              settings={settings}
+              defaultsSupported={defaultsSupported}
+              sourceDefaultsSupported={sourceDefaultsSupported}
+              updateSettings={updateSettingsOrThrow}
+            />
+          </SearchableSetting>
+        </div>
+      )}
 
       <SearchableSetting
         title={translate(

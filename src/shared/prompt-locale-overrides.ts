@@ -59,6 +59,9 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
   'prompt.settings.group.more': '더 보기',
+  'prompt.settings.appearance.title': '모양',
+  'prompt.settings.appearance.description': '테마, 언어, 화면 크기, 글꼴, 터미널 색을 정합니다.',
+  'prompt.settings.cli.notInstalled': '다른 터미널에서도 쓰려면 {{path}} 를 등록합니다.',
   'prompt.settings.claude.title': 'Claude',
   'prompt.settings.claude.description': 'Claude 계정, 새 세션을 시작하는 방식, 사용량을 정합니다.',
   'prompt.settings.git.title': 'Git',
@@ -131,7 +134,6 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
     '`prompt` 와 `orca` 를 /usr/local/bin 에 등록합니다.',
   'prompt.settings.appearance.menuBarGroup': '메뉴 막대',
   'prompt.settings.appearance.trayGroup': '시스템 트레이',
-  'prompt.settings.appearance.fontDetailsGroup': '글자 세부',
   'prompt.settings.appearance.terminalWindowGroup': '터미널 창',
   'prompt.settings.terminal.scrollbackKeysGroup': '스크롤 · 키 입력',
   'prompt.settings.terminal.shellArgsGroup': '셸 시작 인수',

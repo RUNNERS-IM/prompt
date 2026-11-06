@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { formatOptionalPrimaryShortcutLabel } from '@/hooks/useShortcutLabel'
 import { translate } from '@/i18n/i18n'
 import { openWorkspaceCreationComposerWithTourHandoff } from '../contextual-tours/workspace-creation-tour-handoff'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import SidebarWorkspaceOptionsMenu from './SidebarWorkspaceOptionsMenu'
 
 function AddProjectButton({
@@ -87,14 +88,17 @@ export function SidebarHeaderActions({
 }): React.JSX.Element {
   return (
     <div className="flex shrink-0 items-center gap-1" data-sidebar-header-actions="">
-      <div ref={activityOptionsTarget} className="flex size-6 shrink-0 items-center">
-        {agentsViewActive ? null : (
-          <SidebarWorkspaceOptionsMenu
-            preserveWorkspaceBoardOpen
-            onMenuOpenChange={onWorkspaceBoardMenuOpenChange}
-          />
-        )}
-      </div>
+      {/* Prompt: 거르기 메뉴는 「프로젝트」 글자 오른쪽 클릭으로 연다. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+        <div ref={activityOptionsTarget} className="flex size-6 shrink-0 items-center">
+          {agentsViewActive ? null : (
+            <SidebarWorkspaceOptionsMenu
+              preserveWorkspaceBoardOpen
+              onMenuOpenChange={onWorkspaceBoardMenuOpenChange}
+            />
+          )}
+        </div>
+      )}
       <AddProjectButton preserveWorkspaceBoardOpen />
       <NewWorkspaceButton preserveWorkspaceBoardOpen />
     </div>

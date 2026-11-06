@@ -84,6 +84,14 @@ export function promptSettingsSectionCopy(
     return null
   }
   switch (sectionId) {
+    case 'appearance':
+      return {
+        title: translate('prompt.settings.appearance.title', 'Appearance'),
+        description: translate(
+          'prompt.settings.appearance.description',
+          'Theme, language, zoom, fonts, and terminal colors.'
+        )
+      }
     case 'accounts':
       return {
         title: translate('prompt.settings.claude.title', 'Claude'),

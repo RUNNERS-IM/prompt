@@ -161,7 +161,9 @@ export function AppearancePane({
 
   const interfaceMatches = matchesSettingsSearch(searchQuery, interfaceSearchEntries)
   const terminalMatches = matchesSettingsSearch(searchQuery, terminalSearchEntries)
-  const windowMatches = matchesSettingsSearch(searchQuery, windowSearchEntries)
+  // Prompt: 사이드바 · 상태 표시줄 · 파일 탐색기 묶음은 숨긴다.
+  const windowMatches =
+    !PROMPT_BLOCK_UPSTREAM_SERVICES && matchesSettingsSearch(searchQuery, windowSearchEntries)
   const interfaceLabelMatches = matchesSettingsSearch(searchQuery, { title: interfaceTitle })
   const terminalLabelMatches = matchesSettingsSearch(searchQuery, { title: terminalTitle })
   const windowLabelMatches = matchesSettingsSearch(searchQuery, {

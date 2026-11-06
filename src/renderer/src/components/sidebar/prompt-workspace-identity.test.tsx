@@ -20,11 +20,11 @@ describe('PromptProjectHeaderIdentity', () => {
     state = { worktreesByRepo: { 'repo-1': [main] } }
   })
 
-  it('puts the only workspace on the header line: dot, Default chip, branch in mono grey', async () => {
+  it('puts the only workspace on the header line: dot and branch in mono grey, no Default chip', async () => {
     const { PromptProjectHeaderIdentity } = await import('./prompt-workspace-identity')
     const markup = renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)
     expect(markup).toContain('data-status-dot="active"')
-    expect(markup).toContain('data-prompt-default-chip')
+    expect(markup).not.toContain('data-prompt-default-chip')
     expect(markup).toMatch(/font-mono[^>]*>sense</)
   })
 

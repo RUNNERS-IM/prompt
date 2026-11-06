@@ -74,7 +74,9 @@ export function TitlebarMainStrip({ layout }: { layout: AppChromeLayout }): Reac
         </Tooltip>
       )}
       {/* Workspace pages draw the account at the end of their own top-right tab strip instead. */}
-      {layout.workspaceChromeActive ? null : <PromptRunnersAccountButton />}
+      {layout.workspaceChromeActive || layout.activeView === 'settings' ? null : (
+        <PromptRunnersAccountButton />
+      )}
       {/* The open sidebar already renders its close button. */}
       {layout.showRightSidebarControls && !layout.rightSidebarOpen ? <RightSidebarToggle /> : null}
       {/* Reserve the custom window-controls overlay’s width. */}

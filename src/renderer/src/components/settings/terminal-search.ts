@@ -1,4 +1,5 @@
 import type { SettingsSearchEntry } from './settings-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import {
   getTerminalAdvancedSearchEntries,
   getTerminalGhosttyImportSearchEntries,
@@ -69,13 +70,16 @@ type TerminalAppearanceSearchOptions = {
 
 const getTerminalAppearanceSearchEntriesWithoutImports = createLocalizedCatalog(
   (): SettingsSearchEntry[] => [
-    ...getTerminalTypographySearchEntries(),
-    ...getTerminalCursorSearchEntries(),
-    ...getTerminalPaneAppearanceSearchEntries(),
+    // Prompt: 글자 크기 · 글꼴과 테마만 모양 칸에 남는다(TerminalAppearanceSection).
+    ...(PROMPT_SIMPLE_SETTINGS
+      ? getTerminalTypographySearchEntries().slice(0, 2)
+      : getTerminalTypographySearchEntries()),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getTerminalCursorSearchEntries()),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getTerminalPaneAppearanceSearchEntries()),
     ...getTerminalThemeTargetSearchEntries(),
     ...getTerminalDarkThemeSearchEntries(),
     ...getTerminalLightThemeSearchEntries(),
-    ...getTerminalWindowSearchEntries()
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getTerminalWindowSearchEntries())
   ]
 )
 

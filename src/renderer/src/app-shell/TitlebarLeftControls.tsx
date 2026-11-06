@@ -17,6 +17,7 @@ import { getShortcutPlatform, useShortcutLabel } from '../hooks/useShortcutLabel
 import { openPromptNewWindow } from '../lib/prompt-windows'
 import { formatKeybindingList } from '../../../shared/keybindings'
 import { useAppStore } from '../store'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 import { hasCustomTitleBar, hasMacTrafficLights } from './app-window-chrome'
 import type { AppChromeLayout } from './use-app-chrome-layout'
 
@@ -29,6 +30,25 @@ export function TitlebarLeftControls({ layout }: { layout: AppChromeLayout }): R
   const leftSidebarShortcutLabel = useShortcutLabel('sidebar.left.toggle')
   const historyBackShortcutLabel = useShortcutLabel('worktree.history.back')
   const historyForwardShortcutLabel = useShortcutLabel('worktree.history.forward')
+
+  const sidebarToggle = layout.showSidebar ? (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          className="sidebar-toggle"
+          onClick={toggleSidebar}
+          aria-label={translate('auto.App.e4b9e7dff7', 'Toggle sidebar')}
+        >
+          <PanelLeft size={16} />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom" sideOffset={6}>
+        {translate('auto.App.ce37cf5279', 'Toggle sidebar ({{value0}})', {
+          value0: leftSidebarShortcutLabel
+        })}
+      </TooltipContent>
+    </Tooltip>
+  ) : null
 
   return (
     // Measure the whole row for tab-strip spacing. w-max prevents the collapsed w-0 wrapper shrinking Windows text to one glyph.
@@ -86,24 +106,7 @@ export function TitlebarLeftControls({ layout }: { layout: AppChromeLayout }): R
             </ContextMenuContent>
           </ContextMenu>
         )}
-        {layout.showSidebar && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                className="sidebar-toggle"
-                onClick={toggleSidebar}
-                aria-label={translate('auto.App.e4b9e7dff7', 'Toggle sidebar')}
-              >
-                <PanelLeft size={16} />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom" sideOffset={6}>
-              {translate('auto.App.ce37cf5279', 'Toggle sidebar ({{value0}})', {
-                value0: leftSidebarShortcutLabel
-              })}
-            </TooltipContent>
-          </Tooltip>
-        )}
+        {!PROMPT_BLOCK_UPSTREAM_SERVICES && sidebarToggle}
         {layout.showSidebar && (
           // Same as Window › New Window, whose menu accelerator is CmdOrCtrl+N ([PROMPT] decision 2A).
           <Tooltip>
@@ -123,8 +126,12 @@ export function TitlebarLeftControls({ layout }: { layout: AppChromeLayout }): R
           </Tooltip>
         )}
       </div>
+      {/* Prompt: 뒤로 · 앞으로 화살표 대신 그 자리에 사이드바 접기를 둔다. 단축키는 그대로다. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES && sidebarToggle ? (
+        <div className="ml-auto mr-1.5 flex items-center pl-2">{sidebarToggle}</div>
+      ) : null}
       {/* Show shared workspace/page history wherever its shortcut is available. */}
-      {shouldShowWorktreeHistoryControls(layout.activeView) && (
+      {!PROMPT_BLOCK_UPSTREAM_SERVICES && shouldShowWorktreeHistoryControls(layout.activeView) && (
         // Collapsed headers shrink-wrap, so ml-auto alone cannot leave a history-button gutter.
         <div className="ml-auto mr-3 flex items-center pl-2">
           <Tooltip>

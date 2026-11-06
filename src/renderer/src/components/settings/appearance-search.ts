@@ -263,16 +263,20 @@ const getAppearanceSectionEntries = createLocalizedCatalog((): SettingsSearchEnt
   {
     title: translate('auto.components.settings.AppearancePane.terminalTitle', 'Terminal')
   },
-  {
-    title: translate(
-      'auto.components.settings.AppearancePane.windowSidebarTitle',
-      'Window & Sidebar'
-    ),
-    description: translate(
-      'auto.components.settings.AppearancePane.windowSidebarSummary',
-      'Sidebar, status bar, and file explorer'
-    )
-  }
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.AppearancePane.windowSidebarTitle',
+            'Window & Sidebar'
+          ),
+          description: translate(
+            'auto.components.settings.AppearancePane.windowSidebarSummary',
+            'Sidebar, status bar, and file explorer'
+          )
+        }
+      ])
 ])
 
 type AppearancePaneSearchOptions = {
@@ -291,10 +295,10 @@ export function getAppearancePaneSearchEntries(
     ...getTypographyEntries(),
     ...getZoomEntries(),
     ...getTerminalAppearanceSearchEntries(options),
-    ...getLayoutEntries(),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getLayoutEntries()),
     ...getTitlebarEntries(),
-    ...getStatusBarEntries(),
-    ...getSidebarEntries(),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getStatusBarEntries()),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getSidebarEntries()),
     // Prompt: the App Icon picker is not shown (AppearancePane).
     ...(PROMPT_SIMPLE_SETTINGS ? [] : getAppIconEntries()),
     ...getSystemTrayEntries(options),

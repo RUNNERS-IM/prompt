@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import {
   matchesSettingsSearch,
@@ -102,13 +102,17 @@ export function TerminalAppearanceSection({
   const preferredThemeTarget = getPreferredThemeTarget(darkThemeTargetScore, lightThemeTargetScore)
 
   // Filter each advanced group independently so search cannot leave empty headers.
-  const typographyMatches = matchesSettingsSearch(
-    searchQuery,
-    getTerminalAdvancedTypographySearchEntries()
-  )
-  const cursorMatches = matchesSettingsSearch(searchQuery, getTerminalCursorSearchEntries())
-  const paneMatches = matchesSettingsSearch(searchQuery, getTerminalPaneAppearanceSearchEntries())
-  const windowMatches = matchesSettingsSearch(searchQuery, getTerminalWindowSearchEntries())
+  // Prompt: 글자 세부 · 커서 · 패널 · 창 묶음은 숨겨 지금 값 그대로 쓴다.
+  const typographyMatches =
+    !PROMPT_SIMPLE_SETTINGS &&
+    matchesSettingsSearch(searchQuery, getTerminalAdvancedTypographySearchEntries())
+  const cursorMatches =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, getTerminalCursorSearchEntries())
+  const paneMatches =
+    !PROMPT_SIMPLE_SETTINGS &&
+    matchesSettingsSearch(searchQuery, getTerminalPaneAppearanceSearchEntries())
+  const windowMatches =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, getTerminalWindowSearchEntries())
   const themeCatalogMatches = matchesSettingsSearch(searchQuery, themeCatalogSearchEntries)
   const previewAdvancedMatches = cursorMatches || paneMatches || windowMatches
   const showThemeCatalog = !isSearching || themeCatalogMatches || previewAdvancedMatches
@@ -272,17 +276,6 @@ export function TerminalAppearanceSection({
             {fontFamilyRow}
           </section>
         ) : null}
-        {showTypographyAdvancedDisclosure ? (
-          <section>
-            <SettingsSubsectionHeader
-              title={translate('prompt.settings.appearance.fontDetailsGroup', 'Font Details')}
-            />
-            <TerminalAdvancedTypographyControls
-              settings={settings}
-              updateSettings={updateSettings}
-            />
-          </section>
-        ) : null}
         {showThemeCatalog ? (
           <TerminalThemeCatalogSection
             key={`theme-catalog-${preferredThemeTarget ?? 'manual'}`}
@@ -298,9 +291,6 @@ export function TerminalAppearanceSection({
             preferredTarget={preferredThemeTarget}
           />
         ) : null}
-        {advancedGroups.map((group) => (
-          <Fragment key={group.key}>{group.node}</Fragment>
-        ))}
         {importModals}
       </>
     )
