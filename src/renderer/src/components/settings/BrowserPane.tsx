@@ -20,7 +20,8 @@ import { BrowserSshWorkspaceRoutingSetting } from './BrowserSshWorkspaceRoutingS
 import { BrowserProfileScopeSetting } from './BrowserProfileScopeSetting'
 import { BrowserUserAgentSetting } from './BrowserUserAgentSetting'
 import { BrowserSitePermissionsSetting } from './BrowserSitePermissionsSetting'
-import { SettingsSubsectionHeader } from './SettingsFormControls'
+import { SettingsSubsectionHeader, SettingsUntitledGroupStart } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { BrowserSessionCookiesSection } from './BrowserSessionCookiesSection'
 import { BrowserNewProfileDialog } from './BrowserNewProfileDialog'
 import { BrowserExtensionsSection } from './BrowserExtensionsSection'
@@ -119,9 +120,13 @@ export function BrowserPane({
   const showTerminalLinkActions = matchesSettingsSearch(searchQuery, [browserSearchEntries[5]])
   const showLocalhostLabels = matchesSettingsSearch(searchQuery, [browserSearchEntries[6]])
   const showCookies = matchesSettingsSearch(searchQuery, [browserSearchEntries[7]])
-  const showClientHostedRemote = matchesSettingsSearch(searchQuery, [browserSearchEntries[8]])
+  // Prompt has no remote server workspaces, so where their pages render has nothing to set.
+  const showClientHostedRemote =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, [browserSearchEntries[8]])
   const showSshWorkspaceRouting = matchesSettingsSearch(searchQuery, [browserSearchEntries[9]])
-  const showUserAgent = matchesSettingsSearch(searchQuery, [browserSearchEntries[10]])
+  // Prompt: the browser identity override is a niche web-compat switch.
+  const showUserAgent =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, [browserSearchEntries[10]])
   const showSitePermissions = matchesSettingsSearch(searchQuery, [browserSearchEntries[11]])
   const showProfileScope = matchesSettingsSearch(searchQuery, [browserSearchEntries[12]])
   const showLinkRoutingBackground = matchesSettingsSearch(searchQuery, [browserSearchEntries[13]])
@@ -230,9 +235,12 @@ export function BrowserPane({
       {showBrowserUse ? (
         <BrowserUseSetup
           onConfigureMoreBrowsers={scrollToSessionCookies}
-          onOpenComputerUse={onOpenComputerUse}
+          onOpenComputerUse={PROMPT_SIMPLE_SETTINGS ? undefined : onOpenComputerUse}
         />
       ) : null}
+
+      {/* Prompt: everyday browser rows form one box under the browser-use card. */}
+      <SettingsUntitledGroupStart />
 
       {showHomePage ? (
         <BrowserHomePageSetting
@@ -324,6 +332,7 @@ export function BrowserPane({
         <BrowserSshWorkspaceRoutingSetting settings={settings} updateSettings={updateSettings} />
       ) : null}
 
+      {showCookies ? <SettingsUntitledGroupStart /> : null}
       {showCookies ? (
         <BrowserSessionCookiesSection
           defaultProfile={defaultProfile}
@@ -341,7 +350,9 @@ export function BrowserPane({
       ) : null}
 
       {/* Why local only: release 1 runs extensions in this computer's browser profiles. */}
-      {settings.experimentalBrowserExtensions === true &&
+      {/* Prompt hides the browser-extensions experiment, so its toggle cannot be turned back off. */}
+      {!PROMPT_SIMPLE_SETTINGS &&
+      settings.experimentalBrowserExtensions === true &&
       selectedBrowserSessionHostId === LOCAL_EXECUTION_HOST_ID ? (
         <BrowserExtensionsSection
           profileId={activeBrowserSessionProfileId}

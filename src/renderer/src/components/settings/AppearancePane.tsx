@@ -137,7 +137,7 @@ export function AppearancePane({
     ...getZoomEntries(),
     ...getTypographyEntries(),
     ...(SHOW_UI_LANGUAGE_SETTING ? getLanguageEntries() : []),
-    ...getTitlebarEntries(),
+    ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : getTitlebarEntries()),
     ...getSystemTrayEntries({ showSystemTray: isDesktopWindows }),
     ...getMenuBarIconEntries({ showMenuBarIcon: isDesktopMac })
   ]
@@ -156,7 +156,7 @@ export function AppearancePane({
     ...getSidebarEntries(),
     ...getLayoutEntries(),
     getLeftSidebarAppearanceEntry(),
-    getWorkspaceCardLayoutEntry()
+    ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : [getWorkspaceCardLayoutEntry()])
   ]
 
   const interfaceMatches = matchesSettingsSearch(searchQuery, interfaceSearchEntries)
@@ -201,7 +201,7 @@ export function AppearancePane({
   } · ${settings.terminalFontSize}px`
 
   return (
-    <div className="space-y-2.5">
+    <div className={PROMPT_BLOCK_UPSTREAM_SERVICES ? 'space-y-6' : 'space-y-2.5'}>
       {interfaceMatches ? (
         <AppearanceSection
           id="interface"

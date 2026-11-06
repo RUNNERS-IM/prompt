@@ -8,6 +8,8 @@ import { SearchableSetting } from './SearchableSetting'
 import { BrowserProfileRow, type BrowserProfileRowProps } from './BrowserProfileRow'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
 import { translate } from '@/i18n/i18n'
+import { cn } from '@/lib/utils'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 
 type BrowserSessionHostOption = {
@@ -96,7 +98,13 @@ export function BrowserSessionCookiesSection({
       </div>
 
       {hostOptions.length > 1 ? (
-        <div className="flex items-center justify-between gap-3 rounded-md border border-border/70 px-3 py-2">
+        <div
+          className={cn(
+            'flex items-center justify-between gap-3',
+            // Prompt: a plain row inside the settings box, not a card inside it.
+            !PROMPT_SIMPLE_SETTINGS && 'rounded-md border border-border/70 px-3 py-2'
+          )}
+        >
           <div className="min-w-0 space-y-0.5">
             <Label className="text-xs">
               {translate('auto.components.settings.BrowserPane.5e19a692f7', 'Host')}

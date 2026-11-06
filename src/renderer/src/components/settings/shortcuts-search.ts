@@ -4,6 +4,7 @@ import { translate } from '@/i18n/i18n'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 import { localizeKeybindingDefinition } from './keybinding-title-copy'
+import { isPromptHiddenShortcut } from './prompt-hidden-shortcuts'
 
 export const getTerminalShortcutPolicySearchEntry = createLocalizedCatalog(
   (): SettingsSearchEntry => ({
@@ -62,7 +63,8 @@ export function getShortcutsPaneSearchEntries(options?: {
         ({ actionId }) =>
           (includeManagedBrowser ||
             (actionId !== 'tab.newBrowser' && actionId !== 'tab.newBrowserSplitRight')) &&
-          (includeMobileEmulator || actionId !== 'tab.newSimulator')
+          (includeMobileEmulator || actionId !== 'tab.newSimulator') &&
+          !isPromptHiddenShortcut(actionId)
       )
       .map(({ searchEntry }) => searchEntry),
     getTerminalShortcutPolicySearchEntry()

@@ -2,6 +2,8 @@ import type { SourceControlAiSettings } from '../../../../shared/source-control-
 import { Label } from '../ui/label'
 import { SearchableSetting } from './SearchableSetting'
 import { translate } from '@/i18n/i18n'
+import { cn } from '@/lib/utils'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type HostedReviewDefaultKey = keyof NonNullable<SourceControlAiSettings['prCreationDefaults']>
 
@@ -108,7 +110,11 @@ export function HostedReviewCreationDefaults({
         {getHostedReviewDefaultRows().map((row) => (
           <label
             key={row.key}
-            className="flex items-start justify-between gap-4 rounded-md border border-border px-3 py-2"
+            // Prompt: plain rows inside the settings box instead of cards inside a card.
+            className={cn(
+              'flex items-start justify-between gap-4',
+              !PROMPT_SIMPLE_SETTINGS && 'rounded-md border border-border px-3 py-2'
+            )}
           >
             <span className="space-y-0.5">
               <span className="block text-xs font-medium text-foreground">{row.label}</span>

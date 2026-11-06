@@ -1,6 +1,7 @@
 import type React from 'react'
 import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type AppearanceSectionProps = {
   id: string
@@ -24,6 +25,10 @@ export function AppearanceSection({
   toggleDisabled = false,
   children
 }: AppearanceSectionProps): React.JSX.Element {
+  // Prompt: no accordion; the groups inside are always shown as titled boxes.
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return <>{children}</>
+  }
   const contentId = `appearance-section-${id}`
   return (
     <div

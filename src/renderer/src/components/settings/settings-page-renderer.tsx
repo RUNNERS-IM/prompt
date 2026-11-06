@@ -115,6 +115,7 @@ export function renderSettingsPage(context: SettingsRenderContext): React.JSX.El
           )}
         >
           <div
+            data-prompt-settings-body=""
             className={cn(
               'mx-auto flex w-full flex-col gap-10 px-8 pt-10',
               view.isFocusedShortcutsPane ? 'h-full pb-6' : 'pb-24',

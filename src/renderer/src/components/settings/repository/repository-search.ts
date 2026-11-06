@@ -6,6 +6,7 @@ import {
 } from '../../../../../shared/execution-host'
 import type { SettingsSearchEntry } from '../settings-search'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from '../settings-search-keywords'
 import { getRepositoryGitAuthorSearchEntries } from './repository-git-author-search-entries'
 import { getRepositoryGitHooksSearchEntries } from './execution/repository-git-hooks-search-entries'
@@ -26,25 +27,36 @@ export function getRepositoryPaneSearchEntries(
     (Boolean(options.windowsRuntimeSupported) &&
       getRepoExecutionHostId(repo) === LOCAL_EXECUTION_HOST_ID)
   return [
-    {
-      title: translate('components.RepositoryJiraProjectSection.title', 'Default Jira project'),
-      description: translate(
-        'components.RepositoryJiraProjectSection.description',
-        'Default the Jira issue picker and Tasks list to this project. You can change it for each worktree.'
-      ),
-      keywords: [
-        repo.displayName,
-        ...translateSearchKeyword('components.RepositoryJiraProjectSection.keywordJira', 'jira'),
-        ...translateSearchKeyword(
-          'components.RepositoryJiraProjectSection.keywordDefaultProject',
-          'default project'
-        ),
-        ...translateSearchKeyword(
-          'components.RepositoryJiraProjectSection.keywordIssuePicker',
-          'issue picker'
-        )
-      ]
-    },
+    // Prompt hides the Jira integration.
+    ...(PROMPT_SIMPLE_SETTINGS
+      ? []
+      : [
+          {
+            title: translate(
+              'components.RepositoryJiraProjectSection.title',
+              'Default Jira project'
+            ),
+            description: translate(
+              'components.RepositoryJiraProjectSection.description',
+              'Default the Jira issue picker and Tasks list to this project. You can change it for each worktree.'
+            ),
+            keywords: [
+              repo.displayName,
+              ...translateSearchKeyword(
+                'components.RepositoryJiraProjectSection.keywordJira',
+                'jira'
+              ),
+              ...translateSearchKeyword(
+                'components.RepositoryJiraProjectSection.keywordDefaultProject',
+                'default project'
+              ),
+              ...translateSearchKeyword(
+                'components.RepositoryJiraProjectSection.keywordIssuePicker',
+                'issue picker'
+              )
+            ]
+          }
+        ]),
     {
       title: translate('auto.components.settings.repository.search.7e1e456a95', 'Display Name'),
       description: translate(

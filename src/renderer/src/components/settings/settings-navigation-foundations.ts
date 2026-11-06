@@ -6,6 +6,7 @@ import { normalizeSourceControlAiSettings } from '../../../../shared/source-cont
 import { getDefaultVoiceSettings } from '../../../../shared/constants'
 import type { SettingsNavSection, SettingsNavTarget } from '@/lib/settings-navigation-types'
 import type { SettingsDeepLinkTargetWatch } from './settings-deep-link-target-watcher'
+import { promptSettingsHostSectionId } from '@/lib/prompt-hidden-settings'
 
 export const SETTINGS_NAV_GROUPS = [
   {
@@ -65,7 +66,7 @@ export function getSettingsSectionId(
     // Each project has one pane; map every host’s repo ID to its representative.
     return `repo-${repoIdToRepresentative.get(repoId) ?? repoId}`
   }
-  return pane
+  return promptSettingsHostSectionId(pane)
 }
 
 export function getFallbackVisibleSection(

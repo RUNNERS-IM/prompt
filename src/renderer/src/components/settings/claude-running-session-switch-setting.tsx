@@ -34,8 +34,8 @@ export function ClaudeRunningSessionSwitchSetting({
       className="flex items-center justify-between gap-4 py-2"
     >
       <div className="min-w-0 flex-1 space-y-0.5">
-        <Label>{title}</Label>
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <Label className="text-[13px] leading-4">{title}</Label>
+        <p className="text-2xs leading-[14px] text-muted-foreground">{description}</p>
       </div>
       <Select
         value={settings.claudeAccountSwitchRunningSessions ?? 'ask'}

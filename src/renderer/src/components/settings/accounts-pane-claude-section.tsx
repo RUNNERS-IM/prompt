@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { ButtonGroup } from '../ui/button-group'
 import { Label } from '../ui/label'
 import { ClaudeIcon } from '../status-bar/icons'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SearchableSetting } from './SearchableSetting'
 import { ClaudeRunningSessionSwitchSetting } from './claude-running-session-switch-setting'
 import {
@@ -76,10 +77,17 @@ export function renderClaudeAccountsSection(model: AccountsPaneSectionModel): Re
     )
   return (
     <section key="claude-accounts" id="accounts-claude" className="space-y-4 scroll-mt-6">
-      <div className="space-y-1">
+      <div className="space-y-1" data-prompt-group-title="">
         <h3 className="flex items-center gap-2 text-sm font-semibold">
-          <ClaudeIcon size={16} />
-          {translate('auto.components.settings.AccountsPane.26ef4b55be', 'Claude')}
+          {/* Prompt: the page is already titled Claude, so this box is titled for its accounts. */}
+          {PROMPT_SIMPLE_SETTINGS ? (
+            translate('prompt.settings.claude.accountsGroup', 'Accounts')
+          ) : (
+            <>
+              <ClaudeIcon size={16} />
+              {translate('auto.components.settings.AccountsPane.26ef4b55be', 'Claude')}
+            </>
+          )}
         </h3>
         <p className="text-xs text-muted-foreground">
           {translate(
@@ -100,10 +108,10 @@ export function renderClaudeAccountsSection(model: AccountsPaneSectionModel): Re
       >
         <div className="flex items-center justify-between gap-3">
           <div className="space-y-0.5">
-            <Label>
+            <Label className="text-[13px] leading-4">
               {translate('auto.components.settings.AccountsPane.94d351af4a', 'Accounts')}
             </Label>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-2xs leading-[14px] text-muted-foreground">
               {isRemoteAccountScope
                 ? translate(
                     'accounts.remoteScopeAccountsAddHere',

@@ -18,10 +18,12 @@ import {
 } from './SettingsFormControls'
 import { SCROLLBACK_PRESETS_ROWS } from './SettingsConstants'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { matchesSettingsSearch } from './settings-search'
 import { getTerminalWindowsPowershellImplementationSearchEntry } from './terminal-windows-search'
 import { TerminalMacKeyboardSection } from './TerminalMacKeyboardSection'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { openAppHttpLinkFromAnchor } from '@/lib/app-http-link-open'
 
 type TerminalAdvancedSectionProps = {
@@ -101,14 +103,18 @@ export function TerminalAdvancedSection({
   return (
     <section key="advanced" className="space-y-3">
       <SettingsSubsectionHeader
-        title={translate('auto.components.settings.TerminalPane.5e5f06c82c', 'Advanced')}
+        title={
+          PROMPT_SIMPLE_SETTINGS
+            ? translate('prompt.settings.terminal.scrollbackKeysGroup', 'Scrollback & Keys')
+            : translate('auto.components.settings.TerminalPane.5e5f06c82c', 'Advanced')
+        }
         description={translate(
           'auto.components.settings.TerminalPane.267d020745',
           'Scrollback, word boundaries, and platform-specific terminal behaviors.'
         )}
       />
 
-      <div className="divide-y divide-border/40">
+      <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
           title={translate('auto.components.settings.TerminalPane.9df53f7c14', 'Scrollback Rows')}
           description={translate(
@@ -348,7 +354,7 @@ export function TerminalAdvancedSection({
         {isMac ? (
           <TerminalMacKeyboardSection settings={settings} updateSettings={updateSettings} />
         ) : null}
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

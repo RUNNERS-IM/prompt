@@ -20,6 +20,7 @@ import { NodeDistMirrorSettingField } from './NodeDistMirrorSettingField'
 import { SearchableSetting } from './SearchableSetting'
 import { matchesSettingsSearch, normalizeSettingsSearchQuery } from './settings-search'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export function shouldOpenNetworkProxyConfig(searchQuery: string): boolean {
   return (
@@ -281,7 +282,13 @@ export function AdvancedNetworkSettingsSection({
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="mt-2 space-y-4 rounded-md border border-border/60 bg-muted/20 px-3 py-3">
+          <div
+            className={cn(
+              'mt-2 space-y-4',
+              // Prompt: proxy fields stay inside the settings box instead of a card inside it.
+              !PROMPT_SIMPLE_SETTINGS && 'rounded-md border border-border/60 bg-muted/20 px-3 py-3'
+            )}
+          >
             <div className="space-y-2">
               <Label htmlFor="settings-http-proxy-url">
                 {translate(

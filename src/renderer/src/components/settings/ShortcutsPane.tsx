@@ -42,6 +42,8 @@ import { buildShortcutRowVisibility } from './shortcut-row-visibility'
 import { useMacCapturedDigitChords } from './use-mac-captured-digit-chords'
 import { keybindingValidationErrorText } from './keybinding-diagnostic-text'
 import { KeybindingFileDiagnostics } from './KeybindingFileDiagnostics'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { SHORTCUT_LISTS_CLASS, ShortcutsPromptLayout } from './ShortcutsPromptLayout'
 
 const isMac = navigator.userAgent.includes('Mac')
 const platform: NodeJS.Platform = isMac
@@ -298,110 +300,125 @@ export function ShortcutsPane(): React.JSX.Element {
 
   const showPolicy = matchesSettingsSearch(searchQuery, getTerminalShortcutPolicySearchEntry())
 
+  const policyRow = showPolicy ? (
+    <ShortcutTerminalPolicyControl
+      terminalShortcutPolicy={terminalShortcutPolicy}
+      keywords={getTerminalShortcutPolicySearchEntry().keywords}
+      updateSettings={updateSettings}
+    />
+  ) : null
+  const fileHeader = (
+    <SettingsSubsectionHeader
+      title={translate('auto.components.settings.ShortcutsPane.47f8f7aef9', 'Keyboard Shortcuts')}
+      description={
+        <>
+          {translate(
+            'auto.components.settings.ShortcutsPane.38e86e206a',
+            'Customize shortcuts visually or edit'
+          )}{' '}
+          <span className="font-mono text-[11px]">
+            {keybindingSnapshot?.path ??
+              translate(
+                'auto.components.settings.ShortcutsPane.d8c988dab4',
+                '~/.orca/keybindings.json'
+              )}
+          </span>{' '}
+          {translate('auto.components.settings.ShortcutsPane.4b7ae34062', 'directly.')}
+        </>
+      }
+      action={<KeybindingsFileActions />}
+    />
+  )
+  const shortcutLists = (
+    <div className={SHORTCUT_LISTS_CLASS}>
+      <ShortcutFilterRail
+        query={shortcutQuery}
+        onQueryChange={setShortcutQuery}
+        filter={shortcutFilter}
+        onFilterChange={setShortcutFilter}
+        filterCounts={filterCounts}
+        visibleCount={visibleShortcutCount}
+        totalCount={shortcutRows.length}
+      />
+
+      <ShortcutRowsList
+        // Hide overflow-x to avoid a phantom horizontal scrollbar from overflow-y-auto.
+        className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto pr-1 scrollbar-sleek"
+        groups={visibleShortcutGroups}
+        platform={platform}
+        errors={errors}
+        disableMemory={disableMemory}
+        recordingActionId={recordingActionId}
+        recordingBindingIndex={recordingBindingIndex}
+        onStartRecordingAt={(actionId, index) => {
+          setRecordingActionId(actionId)
+          setRecordingBindingIndex(index)
+          clearError(actionId)
+        }}
+        onAppendBinding={(actionId) => {
+          const current = effectiveBindingsForAction(actionId)
+          setRecordingActionId(actionId)
+          setRecordingBindingIndex(current.length)
+          clearError(actionId)
+        }}
+        onCancelRecording={() => {
+          setRecordingActionId(null)
+          setRecordingBindingIndex(null)
+        }}
+        onCapture={(actionId, input) => void captureBinding(actionId, input)}
+        onClearError={clearError}
+        onRemoveBindingAt={(actionId, index) => {
+          // Adjust pending capture after removal shifts slots, or clear it if its row was removed.
+          if (recordingActionId === actionId) {
+            const nextIndex = adjustRecordingIndexAfterRemove(recordingBindingIndex, index)
+            setRecordingBindingIndex(nextIndex)
+            if (nextIndex === null) {
+              setRecordingActionId(null)
+            }
+          }
+          void removeBinding(actionId, index)
+        }}
+        onResetAction={(actionId) => {
+          clearRecordingForAction(actionId)
+          void resetBinding(actionId)
+        }}
+        onDisableAction={(actionId) => {
+          const current = effectiveBindingsForAction(actionId)
+          setDisableMemory((memory) => ({ ...memory, [actionId]: current }))
+          clearRecordingForAction(actionId)
+          void disableBinding(actionId)
+        }}
+        onEnableAction={(actionId) => {
+          const remembered = disableMemory[actionId]
+          if (remembered && remembered.length > 0) {
+            void saveBindings(actionId, remembered)
+          }
+        }}
+      />
+    </div>
+  )
+
+  if (PROMPT_SIMPLE_SETTINGS) {
+    const controls = (
+      <>
+        {fileHeader}
+        {policyRow}
+        <KeybindingFileDiagnostics diagnostics={keybindingSnapshot?.diagnostics ?? []} />
+      </>
+    )
+    return <ShortcutsPromptLayout controls={controls} lists={shortcutLists} />
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col gap-6 overflow-hidden">
       <section className="flex min-h-0 flex-1 flex-col space-y-3">
-        {showPolicy ? (
-          <ShortcutTerminalPolicyControl
-            terminalShortcutPolicy={terminalShortcutPolicy}
-            keywords={getTerminalShortcutPolicySearchEntry().keywords}
-            updateSettings={updateSettings}
-          />
-        ) : null}
+        {policyRow}
 
-        <SettingsSubsectionHeader
-          title={translate(
-            'auto.components.settings.ShortcutsPane.47f8f7aef9',
-            'Keyboard Shortcuts'
-          )}
-          description={
-            <>
-              {translate(
-                'auto.components.settings.ShortcutsPane.38e86e206a',
-                'Customize shortcuts visually or edit'
-              )}{' '}
-              <span className="font-mono text-[11px]">
-                {keybindingSnapshot?.path ??
-                  translate(
-                    'auto.components.settings.ShortcutsPane.d8c988dab4',
-                    '~/.orca/keybindings.json'
-                  )}
-              </span>{' '}
-              {translate('auto.components.settings.ShortcutsPane.4b7ae34062', 'directly.')}
-            </>
-          }
-          action={<KeybindingsFileActions />}
-        />
+        {fileHeader}
 
         <KeybindingFileDiagnostics diagnostics={keybindingSnapshot?.diagnostics ?? []} />
 
-        {/* Below xl, give the rail only content height and the list the remaining space; equal auto rows can overlap. */}
-        <div className="grid min-h-0 flex-1 gap-6 max-xl:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)]">
-          <ShortcutFilterRail
-            query={shortcutQuery}
-            onQueryChange={setShortcutQuery}
-            filter={shortcutFilter}
-            onFilterChange={setShortcutFilter}
-            filterCounts={filterCounts}
-            visibleCount={visibleShortcutCount}
-            totalCount={shortcutRows.length}
-          />
-
-          <ShortcutRowsList
-            // Hide overflow-x to avoid a phantom horizontal scrollbar from overflow-y-auto.
-            className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto pr-1 scrollbar-sleek"
-            groups={visibleShortcutGroups}
-            platform={platform}
-            errors={errors}
-            disableMemory={disableMemory}
-            recordingActionId={recordingActionId}
-            recordingBindingIndex={recordingBindingIndex}
-            onStartRecordingAt={(actionId, index) => {
-              setRecordingActionId(actionId)
-              setRecordingBindingIndex(index)
-              clearError(actionId)
-            }}
-            onAppendBinding={(actionId) => {
-              const current = effectiveBindingsForAction(actionId)
-              setRecordingActionId(actionId)
-              setRecordingBindingIndex(current.length)
-              clearError(actionId)
-            }}
-            onCancelRecording={() => {
-              setRecordingActionId(null)
-              setRecordingBindingIndex(null)
-            }}
-            onCapture={(actionId, input) => void captureBinding(actionId, input)}
-            onClearError={clearError}
-            onRemoveBindingAt={(actionId, index) => {
-              // Adjust pending capture after removal shifts slots, or clear it if its row was removed.
-              if (recordingActionId === actionId) {
-                const nextIndex = adjustRecordingIndexAfterRemove(recordingBindingIndex, index)
-                setRecordingBindingIndex(nextIndex)
-                if (nextIndex === null) {
-                  setRecordingActionId(null)
-                }
-              }
-              void removeBinding(actionId, index)
-            }}
-            onResetAction={(actionId) => {
-              clearRecordingForAction(actionId)
-              void resetBinding(actionId)
-            }}
-            onDisableAction={(actionId) => {
-              const current = effectiveBindingsForAction(actionId)
-              setDisableMemory((memory) => ({ ...memory, [actionId]: current }))
-              clearRecordingForAction(actionId)
-              void disableBinding(actionId)
-            }}
-            onEnableAction={(actionId) => {
-              const remembered = disableMemory[actionId]
-              if (remembered && remembered.length > 0) {
-                void saveBindings(actionId, remembered)
-              }
-            }}
-          />
-        </div>
+        {shortcutLists}
       </section>
     </div>
   )

@@ -7,6 +7,7 @@ import type {
 } from '../../../../../../shared/orca-yaml-hook-types'
 import { Trans } from 'react-i18next'
 import { i18n, translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { matchesSettingsSearch } from '../../settings-search'
 import { SettingsSwitch } from '../../SettingsFormControls'
 import { RepositoryHooksYamlStatus } from './RepositoryHooksYamlStatus'
@@ -122,7 +123,13 @@ export function RepositorySetupPolicySetting({
 }): React.JSX.Element {
   const options = getSetupRunPolicyOptions()
   return (
-    <div className="space-y-4 rounded-2xl border border-border/50 bg-background/80 p-4 shadow-sm">
+    <div
+      className={
+        PROMPT_SIMPLE_SETTINGS
+          ? 'space-y-4'
+          : 'space-y-4 rounded-2xl border border-border/50 bg-background/80 p-4 shadow-sm'
+      }
+    >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
           <h5 className="text-sm font-semibold">

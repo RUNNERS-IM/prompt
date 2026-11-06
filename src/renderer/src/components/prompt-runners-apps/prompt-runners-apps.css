@@ -125,3 +125,8 @@ span.runners-apps-icon {
   outline: 2px solid var(--runners-apps-accent);
   outline-offset: 1px;
 }
+
+/* Inside Settings the cards take the settings boxes' corner (--radius, 10) so both read as one set. */
+[data-settings-section] .runners-apps-card {
+  border-radius: var(--radius, 12px);
+}

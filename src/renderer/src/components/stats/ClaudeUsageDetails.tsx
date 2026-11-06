@@ -8,6 +8,7 @@ import { ClaudeUsageDailyChart } from './ClaudeUsageDailyChart'
 import { UsageBreakdownSection } from './UsageBreakdownSection'
 import { UsageRecentSessionsTable } from './UsageRecentSessionsTable'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type ClaudeUsageDetailsProps = {
   daily: ClaudeUsageDailyPoint[]
@@ -28,7 +29,7 @@ export function ClaudeUsageDetails({
     <>
       <ClaudeUsageDailyChart daily={daily} />
 
-      <div className="grid gap-4 xl:grid-cols-2">
+      <PromptBreakdownGrid>
         <UsageBreakdownSection
           title={translate('auto.components.stats.ClaudeUsagePane.0f394c24e3', 'By model')}
           topLabel={translate('auto.components.stats.ClaudeUsagePane.c3fdbc5474', 'Top model:')}
@@ -55,7 +56,7 @@ export function ClaudeUsageDetails({
           }))}
           eventsOrTurns="turns"
         />
-      </div>
+      </PromptBreakdownGrid>
 
       <UsageRecentSessionsTable
         title={translate('auto.components.stats.ClaudeUsagePane.7e76c84153', 'Recent sessions')}
@@ -82,5 +83,14 @@ export function ClaudeUsageDetails({
         getTrailingTokens={(row) => row.cacheReadTokens + row.cacheWriteTokens}
       />
     </>
+  )
+}
+
+// Prompt 설정 창에서는 나눔 표 둘이 각각 칸 한 조각이 되도록 격자로 묶지 않는다.
+function PromptBreakdownGrid({ children }: { children: React.ReactNode }): React.JSX.Element {
+  return PROMPT_SIMPLE_SETTINGS ? (
+    <>{children}</>
+  ) : (
+    <div className="grid gap-4 xl:grid-cols-2">{children}</div>
   )
 }

@@ -4,7 +4,12 @@ import { cn } from '@/lib/utils'
 import { useAppStore } from '../../store'
 import type { SettingsSearchEntry } from './settings-search'
 import { matchesSettingsSearch } from './settings-search'
-import { PROMPT_CARD_SECTION_IDS } from './prompt-settings-cards'
+import { isPromptCardSection } from './prompt-settings-cards'
+import {
+  promptAbsorbedSettingsSectionOrder,
+  promptSettingsHostSectionId,
+  promptSettingsSectionCopy
+} from '@/lib/prompt-hidden-settings'
 
 // Share active section through context to avoid threading it through every section call.
 const ActiveSettingsSectionContext = createContext<string | null>(null)
@@ -51,9 +56,14 @@ export function SettingsSection({
 }: SettingsSectionProps): React.JSX.Element | null {
   const query = useAppStore((state) => state.settingsSearchQuery)
   const activeFromContext = useContext(ActiveSettingsSectionContext)
-  const sectionIsActive = isActive ?? activeFromContext === id
+  // Prompt: a section folded into another page shows below that page, without its own title.
+  const absorbedOrder = promptAbsorbedSettingsSectionOrder(id)
+  const absorbed = absorbedOrder !== undefined
+  const sectionIsActive = isActive ?? activeFromContext === promptSettingsHostSectionId(id)
   const hasQuery = query.trim() !== ''
-  const matchesQuery = !searchEntries || matchesSettingsSearch(query, searchEntries)
+  // A folded section has no sidebar entry of its own; its rows filter themselves.
+  const matchesQuery = absorbed || !searchEntries || matchesSettingsSearch(query, searchEntries)
+  const promptCopy = promptSettingsSectionCopy(id)
   if (!forceVisible) {
     if (hasQuery) {
       if (!sectionIsActive || !matchesQuery) {
@@ -65,9 +75,16 @@ export function SettingsSection({
   }
 
   return (
-    <section id={id} data-settings-section={id} className={cn('scroll-mt-8 space-y-6', className)}>
+    <section
+      id={id}
+      data-settings-section={id}
+      data-prompt-absorbed-section={absorbed ? '' : undefined}
+      style={absorbed ? { order: absorbedOrder } : undefined}
+      className={cn('scroll-mt-8 space-y-6', className)}
+    >
       <div
-        hidden={hideHeader}
+        hidden={hideHeader || absorbed}
+        data-prompt-section-header=""
         className="flex items-start justify-between gap-4 border-b border-border/60 pb-5"
       >
         <div className="min-w-0 flex-1 space-y-2">
@@ -75,21 +92,23 @@ export function SettingsSection({
             className="flex flex-wrap items-center gap-2 text-2xl font-semibold leading-tight text-foreground"
             onClick={onTitleClick}
           >
-            {title}
-            {badge ? (
+            {promptCopy?.title ?? title}
+            {badge && !promptCopy ? (
               <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.05em] text-muted-foreground">
                 {badge}
               </span>
             ) : null}
             {badgeAccessory}
           </h2>
-          <p className="max-w-3xl text-sm leading-6 text-muted-foreground">{description}</p>
+          <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+            {promptCopy?.description ?? description}
+          </p>
         </div>
         {headerAction ? <div className="shrink-0">{headerAction}</div> : null}
       </div>
       {/* Contain row groups in a distinct band so they cannot read as sidebar continuations. */}
       <div
-        data-prompt-cards={PROMPT_CARD_SECTION_IDS.has(id) ? '' : undefined}
+        data-prompt-cards={isPromptCardSection(id) ? '' : undefined}
         className={cn(
           'rounded-xl border border-border/50 bg-card/50 px-7 py-6 shadow-xs',
           bodyClassName

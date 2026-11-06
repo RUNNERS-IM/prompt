@@ -198,14 +198,6 @@ html.prompt-mac-vibrancy .prompt-status-bar .text-xs {
   font-size: 11px;
 }
 
-/* P8: settings group headers as section heads: 11 semibold, normal case, no letter-spacing. */
-html.prompt-mac-vibrancy [data-prompt-settings-sidebar] p.uppercase {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
 /* P9: one selection style in the sidebars, the macOS accent fill with white text (as Finder).
    The top navigation rows already use it above; workspace / project cards and settings rows
    follow. Text colour tokens are reset inside the selected card so muted labels stay legible. */
@@ -419,34 +411,52 @@ html.prompt-mac-vibrancy [data-slot='dialog-title'][data-size='default'] {
 }
 
 /* ===== Settings 7A: the page body at the shared window values (monitor src/runners-window.css):
-   edge 28, title 16 bold, text 13 / 11, boxes corner 12 with a 0.5 line and the card fill,
-   rows 13 / 16. Rows themselves (13 / 16, title-description 2) are set in SettingsFormControls.tsx. ===== */
-html.prompt-mac-vibrancy .settings-view-shell .px-8.pt-10 {
+   edge 28, title 16 bold, text 13 / 11, boxes at the card corner 10 with a 0.5 line and the card
+   fill, rows 13 / 16. Rows themselves (13 / 16, title-description 2) are set in
+   SettingsFormControls.tsx. The page column is about as narrow as System Settings. ===== */
+html.prompt-mac-vibrancy [data-prompt-settings-body] {
+  max-width: 680px;
   padding: 28px;
 }
 
-html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child {
+/* Settings layout like the workspace: the list is its own card beside the page, which sits on
+   the window background as in System Settings, 8 apart. */
+html.prompt-mac-vibrancy .prompt-main-column:has(.settings-view-shell) {
+  background: transparent;
+  outline: 0;
+}
+
+html.prompt-mac-vibrancy .settings-view-shell {
+  gap: var(--prompt-gap);
+  background: transparent;
+}
+
+html.prompt-mac-vibrancy [data-prompt-settings-sidebar] {
+  border-radius: var(--radius);
+  overflow: hidden;
+  outline: 0.5px solid var(--prompt-hairline);
+  outline-offset: -0.5px;
+}
+
+html.prompt-mac-vibrancy [data-prompt-section-header] {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child h2 {
+html.prompt-mac-vibrancy [data-prompt-section-header] h2 {
   font-size: 16px;
   font-weight: 700;
 }
 
-html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > div:first-child h2 + p {
+html.prompt-mac-vibrancy [data-prompt-section-header] h2 + p {
   font-size: 13px;
   line-height: 18px;
 }
 
-/* Pages still drawn as one card per page. */
-html.prompt-mac-vibrancy .scroll-mt-8[data-settings-section] > .rounded-xl.border {
-  padding: 4px 16px;
-  border: 0.5px solid var(--border);
-  border-radius: 12px;
-  background: var(--card);
-  box-shadow: none;
+/* A page folded into another one (prompt-hidden-settings.ts) follows it one box gap (24) below,
+   not the 40 between pages. */
+html.prompt-mac-vibrancy [data-prompt-absorbed-section] {
+  margin-top: -16px;
 }
 
 /* Section titles 1A ([SPLIT] 설정 칸 제목 통일): on the pages in prompt-settings-cards.ts every
@@ -470,7 +480,8 @@ html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] {
   padding: 0 2px;
 }
 
-html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] [data-prompt-group-title] {
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] [data-prompt-group-title],
+html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title]:empty {
   margin: 0;
   padding: 0;
 }
@@ -504,14 +515,43 @@ html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ * + * {
 html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] + * {
   border-top-width: 0.5px;
   border-top-style: solid;
-  border-radius: 12px 12px 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 html.prompt-mac-vibrancy [data-prompt-cards] [data-prompt-group-title] ~ :last-child {
   border-bottom-width: 0.5px;
   border-bottom-style: solid;
-  border-end-start-radius: 12px;
-  border-end-end-radius: 12px;
+  border-end-start-radius: var(--radius);
+  border-end-end-radius: var(--radius);
+}
+
+/* A hidden separator right after the title or at the end must not take the box's rounded ends. */
+html.prompt-mac-vibrancy
+  [data-prompt-cards]
+  [data-prompt-group-title]
+  + [data-slot='separator']
+  + * {
+  border-top-width: 0.5px;
+  border-top-style: solid;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background-image: none;
+}
+
+html.prompt-mac-vibrancy
+  [data-prompt-cards]
+  [data-prompt-group-title]
+  ~ :has(+ [data-slot='separator']:last-child) {
+  border-bottom-width: 0.5px;
+  border-bottom-style: solid;
+  border-end-start-radius: var(--radius);
+  border-end-end-radius: var(--radius);
+}
+
+/* A title whose rows were all filtered out by search has no box under it; hide it too. */
+html.prompt-mac-vibrancy
+  [data-prompt-cards]
+  [data-prompt-group-title]:last-child:not([data-prompt-group-title] [data-prompt-group-title]) {
+  display: none;
 }
 
 /* A row's own 13 comes from the box; rows that share one piece keep 13 between them. */

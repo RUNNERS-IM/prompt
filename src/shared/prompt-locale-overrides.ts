@@ -1,4 +1,5 @@
 import promptKoFill from './prompt-ko-fill.json'
+import promptKoSettingsWording from './prompt-ko-settings-wording.json'
 
 // Prompt keeps the upstream catalogs (src/renderer/src/i18n/locales/*.json) untouched so the
 // daily merge from Orca does not conflict. Wording Prompt wants different, and keys the
@@ -11,6 +12,8 @@ import promptKoFill from './prompt-ko-fill.json'
 
 /** Korean wording Prompt changes on purpose (the upstream Korean exists but reads wrong). */
 export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
+  // Settings window wording (kept in JSON so this file stays readable).
+  ...promptKoSettingsWording,
   // Workspace right-click: "Update" opens the rename / comment dialog, not an app update.
   'auto.components.sidebar.WorktreeContextMenu.439fa94d53': '이름 · 메모 바꾸기',
   // Settings sidebar group "Set Up" (general + integrations); "설정 시작" read as a verb.
@@ -49,11 +52,19 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'quitAndStopAllSessions.message': '모든 터미널 세션을 멈추고 Orca를 종료할까요?',
   'quitAndStopAllSessions.detail':
     '실행 중인 에이전트를 포함해 모든 터미널 세션이 멈추고, 닫힌 탭은 다음에 다시 열리지 않습니다. 그냥 종료하면 세션은 계속 돌아갑니다.'
+  // Settings redesign: Prompt instead of Orca, Korean where the catalog left English.
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
+  'prompt.settings.group.more': '더 보기',
+  'prompt.settings.claude.title': 'Claude',
+  'prompt.settings.claude.description': 'Claude 계정, 새 세션을 시작하는 방식, 사용량을 정합니다.',
+  'prompt.settings.git.title': 'Git',
+  'prompt.settings.git.description': '브랜치, 소스 제어 작업, GitHub · GitLab 연결을 정합니다.',
+  'prompt.settings.advanced.title': '고급',
+  'prompt.settings.advanced.description': '네트워크, macOS 권한, 세션 검색, 실험 기능을 정합니다.',
   'prompt.about.menuLabel': '{{name}} 정보',
   'prompt.about.versionLine': '버전 {{version}} · 무료',
   'prompt.about.website': '웹사이트',
@@ -107,7 +118,32 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
     '출력이 한꺼번에 너무 많이 들어와서 터미널 출력 일부를 건너뛰었습니다.',
   'prompt.terminalNotice.restoreUnavailable':
     '화면에 안 보이던 동안의 터미널 출력을 되살릴 수 없어 건너뛰었습니다.',
-  'prompt.terminalNotice.noHostImage': '이 터미널의 지난 출력을 호스트에서 되살리지 못했습니다.'
+  'prompt.terminalNotice.noHostImage': '이 터미널의 지난 출력을 호스트에서 되살리지 못했습니다.',
+  // Settings redesign: group titles and copy of the merged pages.
+  'prompt.settings.claude.accountsGroup': '계정',
+  'prompt.settings.claude.launchGroup': '새 세션',
+  'prompt.settings.claude.permissionDescription': 'Claude 가 묻지 않고 할 수 있는 일입니다.',
+  'prompt.settings.claude.sessionGroup': 'Claude 세션',
+  'prompt.settings.claude.usageGroup': '사용량',
+  'prompt.settings.claude.usageSearchDescription':
+    '에이전트 횟수와 Claude 토큰 · 모델 · 세션 사용량.',
+  'prompt.settings.cli.installDescriptionMac':
+    '`prompt` 와 `orca` 를 /usr/local/bin 에 등록합니다.',
+  'prompt.settings.appearance.menuBarGroup': '메뉴 막대',
+  'prompt.settings.appearance.trayGroup': '시스템 트레이',
+  'prompt.settings.appearance.fontDetailsGroup': '글자 세부',
+  'prompt.settings.appearance.terminalWindowGroup': '터미널 창',
+  'prompt.settings.terminal.scrollbackKeysGroup': '스크롤 · 키 입력',
+  'prompt.settings.terminal.shellArgsGroup': '셸 시작 인수',
+  'prompt.settings.notifications.alertsGroup': '알림',
+  'prompt.settings.notifications.soundGroup': '소리',
+  'prompt.settings.notifications.visibleScreenGroup': '보이는 화면',
+  'prompt.settings.git.branchesGroup': '브랜치와 작업 공간',
+  'prompt.settings.git.apiBudgetGroup': 'API 사용 한도',
+  'prompt.settings.git.integrationsGroup': '연동',
+  'prompt.settings.advanced.permissionsGroup': 'macOS 권한',
+  'prompt.settings.advanced.sessionSearchGroup': '에이전트 세션 검색',
+  'prompt.settings.advanced.experimentalGroup': '실험 기능'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

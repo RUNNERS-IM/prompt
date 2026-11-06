@@ -15,6 +15,7 @@ import { FileAudio, Upload, Volume2 } from 'lucide-react'
 import { getNotificationSoundOptions } from '@/components/notification-sound-options'
 import { useMountedRef } from '@/hooks/useMountedRef'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 const CHOOSE_CUSTOM_SOUND_VALUE = 'choose-custom-file'
 
@@ -100,14 +101,20 @@ export function NotificationSoundSection({
       <div className="space-y-0.5">
         <div className="flex items-center gap-2">
           <FileAudio className="size-4" />
-          <Label>
+          <Label className={PROMPT_SIMPLE_SETTINGS ? 'text-[13px] leading-4' : undefined}>
             {translate(
               'auto.components.settings.NotificationsPane.88686e6ca8',
               'Notification Sound'
             )}
           </Label>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p
+          className={
+            PROMPT_SIMPLE_SETTINGS
+              ? 'text-[11px] leading-[14px] text-muted-foreground'
+              : 'text-xs text-muted-foreground'
+          }
+        >
           {translate(
             'auto.components.settings.NotificationsPane.2a2033c388',
             'Choose the alert Orca plays when a desktop notification is delivered.'

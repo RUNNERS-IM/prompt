@@ -6,6 +6,7 @@ import type {
 } from '../../../../shared/developer-permissions-types'
 import { getIntlLocale, translate } from '@/i18n/i18n'
 import { cn } from '@/lib/utils'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { Button } from '../ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
 import { Input } from '../ui/input'
@@ -98,7 +99,12 @@ export function LocalNetworkConnectionTest(): React.JSX.Element {
   }
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen} className="mr-4 mb-3 ml-11">
+    <Collapsible
+      open={open}
+      onOpenChange={setOpen}
+      // Prompt: the settings box pads the row, so only the icon column is indented.
+      className={PROMPT_SIMPLE_SETTINGS ? 'mt-2 ml-7' : 'mr-4 mb-3 ml-11'}
+    >
       <CollapsibleTrigger asChild>
         <Button
           type="button"
@@ -140,7 +146,13 @@ export function LocalNetworkConnectionTest(): React.JSX.Element {
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="collapsible-height-content">
-        <div className="mt-2 rounded-lg border border-border/60 bg-muted/25 px-4 py-3 shadow-xs">
+        <div
+          className={cn(
+            'mt-2',
+            !PROMPT_SIMPLE_SETTINGS &&
+              'rounded-lg border border-border/60 bg-muted/25 px-4 py-3 shadow-xs'
+          )}
+        >
           <p className="text-xs text-muted-foreground">
             {translate(
               'auto.components.settings.DeveloperPermissionsPane.connectionTestDescription',

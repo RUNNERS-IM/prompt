@@ -2,6 +2,7 @@ import { Laptop, Server } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SettingsSwitch } from './SettingsFormControls'
 
 const NO_DETAILS: readonly string[] = []
@@ -36,7 +37,12 @@ export function SessionHistoryComputerRow({
   const Icon = kind === 'local' ? Laptop : Server
   return (
     <div
-      className={cn('flex items-center gap-3 border-t border-border py-3', dimmed && 'opacity-60')}
+      className={cn(
+        'flex items-center gap-3',
+        // Prompt: this computer opens its settings box, which already pads and separates rows.
+        PROMPT_SIMPLE_SETTINGS && kind === 'local' ? null : 'border-t border-border py-3',
+        dimmed && 'opacity-60'
+      )}
     >
       <Icon className="size-4 shrink-0 text-muted-foreground" />
       <div className="min-w-0 flex-1 space-y-1">

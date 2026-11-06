@@ -1,4 +1,5 @@
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 
@@ -18,19 +19,38 @@ export const getTerminalDarkThemeSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.terminal.search.7718d70356', 'preview')
     ]
   },
-  {
-    title: translate('auto.components.settings.terminal.search.8987db7ff2', 'Dark Divider Color'),
-    description: translate(
-      'auto.components.settings.terminal.search.9c32726f47',
-      'Controls the split divider line between panes in dark mode.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.terminal.search.f66a7cf715', 'terminal'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.781f49d942', 'divider'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.f785374072', 'dark'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.674b7c8436', 'color')
-    ]
-  }
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.terminal.search.8987db7ff2',
+            'Dark Divider Color'
+          ),
+          description: translate(
+            'auto.components.settings.terminal.search.9c32726f47',
+            'Controls the split divider line between panes in dark mode.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.f66a7cf715',
+              'terminal'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.781f49d942',
+              'divider'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.f785374072',
+              'dark'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.674b7c8436',
+              'color'
+            )
+          ]
+        }
+      ])
 ])
 
 export const getTerminalThemeTargetSearchEntries = createLocalizedCatalog(() => [
@@ -97,19 +117,38 @@ export const getTerminalLightThemeSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.terminal.search.7718d70356', 'preview')
     ]
   },
-  {
-    title: translate('auto.components.settings.terminal.search.595b97b446', 'Light Divider Color'),
-    description: translate(
-      'auto.components.settings.terminal.search.77d9f9cd55',
-      'Controls the split divider line between panes in light mode.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.terminal.search.f66a7cf715', 'terminal'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.781f49d942', 'divider'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.411229c636', 'light'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.674b7c8436', 'color')
-    ]
-  }
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.terminal.search.595b97b446',
+            'Light Divider Color'
+          ),
+          description: translate(
+            'auto.components.settings.terminal.search.77d9f9cd55',
+            'Controls the split divider line between panes in light mode.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.f66a7cf715',
+              'terminal'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.781f49d942',
+              'divider'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.411229c636',
+              'light'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.674b7c8436',
+              'color'
+            )
+          ]
+        }
+      ])
 ])
 
 export const getTerminalYamlImportSearchEntries = createLocalizedCatalog(() => [

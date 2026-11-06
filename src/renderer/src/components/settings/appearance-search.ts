@@ -1,4 +1,5 @@
 import type { SettingsSearchEntry } from './settings-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { getTerminalAppearanceSearchEntries } from './terminal-search'
 import { getLeftSidebarAppearanceEntry, getSidebarEntries } from './appearance-sidebar-search'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
@@ -177,25 +178,44 @@ export const getLayoutEntries = createLocalizedCatalog((): SettingsSearchEntry[]
   getFollowSymlinkedDirectoriesEntry()
 ])
 
-export const getTitlebarEntries = createLocalizedCatalog((): SettingsSearchEntry[] => [
-  {
-    title: translate('auto.components.settings.appearance.search.fdd31b00d0', 'Titlebar App Name'),
-    description: translate(
-      'auto.components.settings.appearance.search.18b4c4c30b',
-      'Show Orca in the titlebar.'
-    ),
-    keywords: [
-      ...translateSearchKeyword(
-        'auto.components.settings.appearance.search.bed343b03e',
-        'titlebar'
-      ),
-      ...translateSearchKeyword('auto.components.settings.appearance.search.1f2880a9d5', 'orca'),
-      ...translateSearchKeyword('auto.components.settings.appearance.search.36e006efc1', 'app'),
-      ...translateSearchKeyword('auto.components.settings.appearance.search.51f957ce39', 'name'),
-      ...translateSearchKeyword('auto.components.settings.appearance.search.a895d0f938', 'brand')
-    ]
-  }
-])
+export const getTitlebarEntries = createLocalizedCatalog((): SettingsSearchEntry[] =>
+  PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.appearance.search.fdd31b00d0',
+            'Titlebar App Name'
+          ),
+          description: translate(
+            'auto.components.settings.appearance.search.18b4c4c30b',
+            'Show Orca in the titlebar.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.appearance.search.bed343b03e',
+              'titlebar'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.appearance.search.1f2880a9d5',
+              'orca'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.appearance.search.36e006efc1',
+              'app'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.appearance.search.51f957ce39',
+              'name'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.appearance.search.a895d0f938',
+              'brand'
+            )
+          ]
+        }
+      ]
+)
 
 export const getStatusBarEntries = createLocalizedCatalog((): SettingsSearchEntry[] => [
   getUsagePercentageDisplayEntry(),
@@ -275,7 +295,8 @@ export function getAppearancePaneSearchEntries(
     ...getTitlebarEntries(),
     ...getStatusBarEntries(),
     ...getSidebarEntries(),
-    ...getAppIconEntries(),
+    // Prompt: the App Icon picker is not shown (AppearancePane).
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getAppIconEntries()),
     ...getSystemTrayEntries(options),
     ...getMenuBarIconEntries(options)
   ]

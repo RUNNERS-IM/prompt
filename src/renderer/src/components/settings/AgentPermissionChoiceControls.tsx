@@ -17,6 +17,8 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { nativeChatPermissionModeLabel } from '../native-chat/native-chat-permission-mode-labels'
 import { AgentPermissionChoiceItems, AgentPermissionChoiceName } from './AgentPermissionChoiceItems'
+import { SettingsRow } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 /** Use chat-mode wording; own names the agent when available. */
 export function agentPermissionChoiceLabel(
@@ -48,43 +50,61 @@ export function AllAgentsPermissionSetting({
   onChangeWithoutAuto: (choice: AgentPermissionChoice) => void
 }): React.JSX.Element {
   const title = translate('settings.agents.permissionsTitle', 'Permissions')
-  const ownLabel = translate('settings.agents.permissionEachOwn', "Each agent's own settings")
+  // Prompt starts Claude only, so "own settings" means Claude's own.
+  const ownLabel = PROMPT_SIMPLE_SETTINGS
+    ? agentPermissionChoiceLabel('own', 'Claude')
+    : translate('settings.agents.permissionEachOwn', "Each agent's own settings")
   const withoutAutoTitle = translate(
     'settings.agents.otherAgentsPermissionsLabel',
     'Permissions for other agents'
   )
+  const menu = (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild disabled={choice === null}>
+        <Button
+          type="button"
+          variant="outline"
+          size="xs"
+          aria-label={title}
+          className="w-48 max-w-full justify-between"
+        >
+          {choice === null ? (
+            <span className="h-4" />
+          ) : (
+            <AgentPermissionChoiceName choice={choice} ownLabel={ownLabel} truncate />
+          )}
+          <ChevronDown className="size-3 shrink-0" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" collisionPadding={8} className="w-72">
+        <DropdownMenuRadioGroup aria-label={title} value={choice ?? ''}>
+          <AgentPermissionChoiceItems
+            choices={['ask', 'auto', 'full-access', 'own']}
+            ownLabel={ownLabel}
+            chatOwnSupported={chatOwnSupported}
+            onSelect={onChange}
+          />
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <SettingsRow
+        label={title}
+        description={translate(
+          'prompt.settings.claude.permissionDescription',
+          'What Claude may do without asking you.'
+        )}
+        control={menu}
+      />
+    )
+  }
   return (
     <section className="space-y-1">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <h3 className="text-sm font-semibold">{title}</h3>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild disabled={choice === null}>
-            <Button
-              type="button"
-              variant="outline"
-              size="xs"
-              aria-label={title}
-              className="w-48 max-w-full justify-between"
-            >
-              {choice === null ? (
-                <span className="h-4" />
-              ) : (
-                <AgentPermissionChoiceName choice={choice} ownLabel={ownLabel} truncate />
-              )}
-              <ChevronDown className="size-3 shrink-0" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" collisionPadding={8} className="w-72">
-            <DropdownMenuRadioGroup aria-label={title} value={choice ?? ''}>
-              <AgentPermissionChoiceItems
-                choices={['ask', 'auto', 'full-access', 'own']}
-                ownLabel={ownLabel}
-                chatOwnSupported={chatOwnSupported}
-                onSelect={onChange}
-              />
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {menu}
       </div>
       <p className="text-xs text-muted-foreground">
         {translate(

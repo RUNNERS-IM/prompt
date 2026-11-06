@@ -1,4 +1,5 @@
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 
@@ -87,29 +88,48 @@ export const getTerminalMacOptionSearchEntries = createLocalizedCatalog(() => [
   }
 ])
 
-export const getTerminalMacYenSearchEntries = createLocalizedCatalog(() => [
-  {
-    title: translate(
-      'auto.components.settings.terminal.search.694b8764ac',
-      'JIS Yen (¥) to Backslash (\\)'
-    ),
-    description: translate(
-      'auto.components.settings.terminal.search.063914c486',
-      'Controls whether pressing the JIS Yen (¥) key sends a backslash (\\) instead.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.terminal.search.f66a7cf715', 'terminal'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.9c35f56625', 'yen'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.98059d0944', 'backslash'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.24f7977756', 'japanese'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.abaa24752d', 'keyboard'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.1ab57a0fbd', 'mac'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.d8d6f7a3c5', 'macos'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.b495dc6a9f', 'jis'),
-      ...translateSearchKeyword('auto.components.settings.terminal.search.4cec42dbf7', 'intl')
-    ]
-  }
-])
+export const getTerminalMacYenSearchEntries = createLocalizedCatalog(() =>
+  PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.terminal.search.694b8764ac',
+            'JIS Yen (¥) to Backslash (\\)'
+          ),
+          description: translate(
+            'auto.components.settings.terminal.search.063914c486',
+            'Controls whether pressing the JIS Yen (¥) key sends a backslash (\\) instead.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.f66a7cf715',
+              'terminal'
+            ),
+            ...translateSearchKeyword('auto.components.settings.terminal.search.9c35f56625', 'yen'),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.98059d0944',
+              'backslash'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.24f7977756',
+              'japanese'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.abaa24752d',
+              'keyboard'
+            ),
+            ...translateSearchKeyword('auto.components.settings.terminal.search.1ab57a0fbd', 'mac'),
+            ...translateSearchKeyword(
+              'auto.components.settings.terminal.search.d8d6f7a3c5',
+              'macos'
+            ),
+            ...translateSearchKeyword('auto.components.settings.terminal.search.b495dc6a9f', 'jis'),
+            ...translateSearchKeyword('auto.components.settings.terminal.search.4cec42dbf7', 'intl')
+          ]
+        }
+      ]
+)
 
 export const getTerminalGhosttyImportSearchEntries = createLocalizedCatalog(() => [
   {

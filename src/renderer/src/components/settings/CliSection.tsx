@@ -42,7 +42,10 @@ function getRevealLabel(platform: string): string {
 
 function getInstallDescription(platform: string): string {
   if (platform === 'darwin') {
-    return 'Register `prompt` and `orca` in /usr/local/bin.'
+    return translate(
+      'prompt.settings.cli.installDescriptionMac',
+      'Register `prompt` and `orca` in /usr/local/bin.'
+    )
   }
   if (platform === 'linux') {
     return 'Register `orca-ide` in ~/.local/bin.'

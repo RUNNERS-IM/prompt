@@ -6,7 +6,8 @@ import { SearchableSetting } from './SearchableSetting'
 import { matchesSettingsSearch } from './settings-search'
 import { getExperimentalPaneSearchEntries, getExperimentalSearchEntry } from './experimental-search'
 import { HiddenExperimentalGroup } from './HiddenExperimentalGroup'
-import { NumberField, SettingsSwitch } from './SettingsFormControls'
+import { NumberField, SettingsSubsectionHeader, SettingsSwitch } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translate } from '@/i18n/i18n'
 import { NativeChatExperimentalSetting } from './NativeChatExperimentalSetting'
 import { AgentDashboardExperimentalSetting } from './AgentDashboardExperimentalSetting'
@@ -37,7 +38,10 @@ export function ExperimentalPane({
   hiddenExperimentalUnlocked = false
 }: ExperimentalPaneProps): React.JSX.Element {
   const searchQuery = useAppStore((s) => s.settingsSearchQuery)
-  const showPet = matchesSettingsSearch(searchQuery, [getExperimentalSearchEntry().pet])
+  // Prompt hides the pet, Orca's hosted cloud VMs and browser extensions.
+  const showPet =
+    !PROMPT_SIMPLE_SETTINGS &&
+    matchesSettingsSearch(searchQuery, [getExperimentalSearchEntry().pet])
   const showNativeChat = matchesSettingsSearch(searchQuery, [
     getExperimentalSearchEntry().nativeChat
   ])
@@ -62,6 +66,12 @@ export function ExperimentalPane({
 
   return (
     <div className="space-y-4">
+      {/* Prompt: this page sits under Advanced, so it opens with its own box title. */}
+      {PROMPT_SIMPLE_SETTINGS ? (
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.advanced.experimentalGroup', 'Experimental features')}
+        />
+      ) : null}
       {showAgentDashboard ? (
         <AgentDashboardExperimentalSetting settings={settings} updateSettings={updateSettings} />
       ) : null}
@@ -266,9 +276,13 @@ export function ExperimentalPane({
         </SearchableSetting>
       ) : null}
 
-      <EphemeralVmsExperimentalSetting settings={settings} updateSettings={updateSettings} />
+      {PROMPT_SIMPLE_SETTINGS ? null : (
+        <EphemeralVmsExperimentalSetting settings={settings} updateSettings={updateSettings} />
+      )}
 
-      <BrowserExtensionsExperimentalSetting settings={settings} updateSettings={updateSettings} />
+      {PROMPT_SIMPLE_SETTINGS ? null : (
+        <BrowserExtensionsExperimentalSetting settings={settings} updateSettings={updateSettings} />
+      )}
 
       {wslHostsAvailable() ? (
         <WslHostsExperimentalSetting settings={settings} updateSettings={updateSettings} />

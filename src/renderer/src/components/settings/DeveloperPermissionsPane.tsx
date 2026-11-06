@@ -19,6 +19,8 @@ import type {
 } from '../../../../shared/developer-permissions-types'
 import { Button } from '../ui/button'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import * as promptLayout from './DeveloperPermissionsPromptLayout'
 import { DeveloperPermissionActions } from './DeveloperPermissionActions'
 import { LocalNetworkConnectionTest } from './LocalNetworkConnectionTest'
 import {
@@ -314,30 +316,33 @@ export function DeveloperPermissionsPane({
   return (
     <div className="space-y-5">
       <TerminalTccAttributionNotice />
-      <div className="flex items-start justify-between gap-4 rounded-lg border border-border/60 bg-muted/25 px-4 py-3">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-sm font-medium">
-            <ShieldCheck className="size-4" />
-            {translate(
-              'auto.components.settings.DeveloperPermissionsPane.6f011b9bf6',
-              "Terminal tools inherit Orca's macOS privacy envelope."
-            )}
+      {PROMPT_SIMPLE_SETTINGS ? null : (
+        <div className="flex items-start justify-between gap-4 rounded-lg border border-border/60 bg-muted/25 px-4 py-3">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <ShieldCheck className="size-4" />
+              {translate(
+                'auto.components.settings.DeveloperPermissionsPane.6f011b9bf6',
+                "Terminal tools inherit Orca's macOS privacy envelope."
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {translate(
+                'auto.components.settings.DeveloperPermissionsPane.6326a4c5cc',
+                'Use these controls when a CLI, local app, or automation tool needs macOS privacy access. Orca does not ask at startup.'
+              )}
+            </p>
           </div>
-          <p className="text-xs text-muted-foreground">
-            {translate(
-              'auto.components.settings.DeveloperPermissionsPane.6326a4c5cc',
-              'Use these controls when a CLI, local app, or automation tool needs macOS privacy access. Orca does not ask at startup.'
-            )}
-          </p>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh()}>
+            <RefreshCw className={`size-3.5 ${loading ? 'animate-spin' : ''}`} />
+            {translate('auto.components.settings.DeveloperPermissionsPane.4c17304beb', 'Refresh')}
+          </Button>
         </div>
-        <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh()}>
-          <RefreshCw className={`size-3.5 ${loading ? 'animate-spin' : ''}`} />
-          {translate('auto.components.settings.DeveloperPermissionsPane.4c17304beb', 'Refresh')}
-        </Button>
-      </div>
+      )}
 
-      <div className="divide-y divide-border/60 rounded-lg border border-border/60">
-        {PERMISSIONS.map((permission) => {
+      <div className={promptLayout.DEVELOPER_PERMISSION_LIST_CLASS}>
+        <promptLayout.PermissionsHeader loading={loading} onRefresh={() => void refresh()} />
+        {promptLayout.promptVisibleDeveloperPermissions(PERMISSIONS).map((permission) => {
           const state = stateById.get(permission.id)
           const status = state?.status
           const pending = pendingId === permission.id
@@ -348,7 +353,7 @@ export function DeveloperPermissionsPane({
               <div
                 data-settings-section={settingId}
                 data-highlighted={highlightedSettingId === settingId ? 'true' : undefined}
-                className="flex items-center justify-between gap-4 px-4 py-3 transition-[background-color,box-shadow] duration-500 data-[highlighted=true]:bg-accent data-[highlighted=true]:ring-2 data-[highlighted=true]:ring-inset data-[highlighted=true]:ring-ring/50 motion-reduce:transition-none"
+                className={`flex items-center justify-between gap-4 ${promptLayout.DEVELOPER_PERMISSION_ROW_PADDING_CLASS} transition-[background-color,box-shadow] duration-500 data-[highlighted=true]:bg-accent data-[highlighted=true]:ring-2 data-[highlighted=true]:ring-inset data-[highlighted=true]:ring-ring/50 motion-reduce:transition-none`}
               >
                 <div className="flex min-w-0 items-start gap-3">
                   <div className="mt-0.5 text-muted-foreground">{permission.icon}</div>
