@@ -28,7 +28,12 @@ import {
 import { SKILLS_PAGE_COLUMN } from './skills-page-column'
 import { scannedSkillSourceCount, summarizeSkillSources } from './skill-source-inventory'
 import { useSkillDiscoveryHostLabel } from './use-skill-discovery-host-label'
-import { countSkillsBySource, filterSkills, type SkillsFilterState } from './skills-filter'
+import {
+  countClaudeCommands,
+  countSkillsBySource,
+  filterSkills,
+  type SkillsFilterState
+} from './skills-filter'
 import { skillAgentByRootPath, skillAgentOptions } from './skill-agent-filter'
 import { SkillSharedLinksView } from './SkillSharedLinksView'
 import { useOwnedSkillShares } from './use-owned-skill-shares'
@@ -54,6 +59,7 @@ import { skillDeleteActionLabel } from './skill-delete-copy'
 import { shareSelectionActionLabel } from './skill-display-labels'
 import { SkillDeleteResultBand } from './SkillDeleteResultBand'
 import { useSkillDeleteFlow } from './use-skill-delete-flow'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 const EMPTY_SKILLS: DiscoveredSkill[] = []
 const NO_FILTERS: SkillsFilterState = {
@@ -113,7 +119,11 @@ export default function SkillsPage(): React.JSX.Element {
       try {
         const nextResult = await discoverSkillsForRuntimeTarget(
           runtimeTarget,
-          refresh ? { refresh: true } : undefined
+          PROMPT_BLOCK_UPSTREAM_SERVICES
+            ? { includeClaudeCommands: true, ...(refresh ? { refresh: true } : {}) }
+            : refresh
+              ? { refresh: true }
+              : undefined
         )
         const local = runtimeTarget.kind === 'local'
         if (isCurrentScan()) {
@@ -210,6 +220,7 @@ export default function SkillsPage(): React.JSX.Element {
     [agentByRootPath, filters, skills]
   )
   const sourceCounts = useMemo(() => countSkillsBySource(skills), [skills])
+  const commandCount = useMemo(() => countClaudeCommands(skills), [skills])
   const sourceEntries = useMemo(() => summarizeSkillSources(result), [result])
   const eligibleCount =
     selectionMode === 'delete'
@@ -274,7 +285,8 @@ export default function SkillsPage(): React.JSX.Element {
         />
       ) : (
         <SkillsPageHeader
-          skillCount={skills.length}
+          skillCount={skills.length - commandCount}
+          commandCount={commandCount}
           sourceEntries={sourceEntries}
           scannedSourceCount={scannedSkillSourceCount(sourceEntries)}
           hostLabel={hostLabel}
@@ -299,6 +311,7 @@ export default function SkillsPage(): React.JSX.Element {
         filters={filters}
         agentOptions={agentOptions}
         sourceCounts={sourceCounts}
+        commandCount={commandCount}
         totalCount={skills.length}
         resultCount={visibleSkills.length}
         linkCount={ownedShares.shares.length}

@@ -1,11 +1,14 @@
-import type { SkillSourceKind } from '../../../../shared/skills'
+import type { DiscoveredSkill, SkillSourceKind } from '../../../../shared/skills'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { translate } from '@/i18n/i18n'
 
 // Repo-scoped roots also include folder workspaces; call them Workspace consistently with eligibility copy.
 export function sourceKindLabel(kind: SkillSourceKind): string {
   switch (kind) {
     case 'home':
-      return translate('auto.components.skills.sourceKind.home', 'Home')
+      return PROMPT_BLOCK_UPSTREAM_SERVICES
+        ? translate('prompt.skills.mySkills', 'My skills')
+        : translate('auto.components.skills.sourceKind.home', 'Home')
     case 'repo':
       return translate('auto.components.skills.sourceKind.workspace', 'Workspace')
     case 'bundled':
@@ -13,6 +16,14 @@ export function sourceKindLabel(kind: SkillSourceKind): string {
     case 'plugin':
       return translate('auto.components.skills.sourceKind.plugin', 'Plugin')
   }
+}
+
+export function commandSourceLabel(): string {
+  return translate('prompt.skills.commands', 'Commands')
+}
+
+export function skillSourceKindLabel(skill: DiscoveredSkill): string {
+  return skill.claudeCommand ? commandSourceLabel() : sourceKindLabel(skill.sourceKind)
 }
 
 export function skillCountLabel(count: number): string {

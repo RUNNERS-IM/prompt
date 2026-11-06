@@ -13,11 +13,17 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
 import type { SkillSourceKind } from '../../../../shared/skills'
-import { resultCountLabel, shareLinkCountLabel, sourceKindLabel } from './skill-display-labels'
+import {
+  commandSourceLabel,
+  resultCountLabel,
+  shareLinkCountLabel,
+  sourceKindLabel
+} from './skill-display-labels'
 import { SKILLS_PAGE_COLUMN } from './skills-page-column'
 import type { SkillsFilterState } from './skills-filter'
 import type { SkillsPageView } from './skills-page-view'
 import type { SkillAgentOption } from './skill-agent-filter'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 const SOURCE_KINDS: SkillSourceKind[] = ['home', 'repo', 'bundled', 'plugin']
 
@@ -26,6 +32,7 @@ export function SkillsFilterToolbar({
   filters,
   agentOptions,
   sourceCounts,
+  commandCount,
   totalCount,
   resultCount,
   linkCount,
@@ -38,6 +45,7 @@ export function SkillsFilterToolbar({
   filters: SkillsFilterState
   agentOptions: readonly SkillAgentOption[]
   sourceCounts: Record<SkillSourceKind, number>
+  commandCount: number
   totalCount: number
   resultCount: number
   linkCount: number
@@ -71,7 +79,7 @@ export function SkillsFilterToolbar({
               className="h-8 pl-8 text-sm"
             />
           </div>
-          {sharedView ? null : (
+          {sharedView || PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
             <Select
               value={filters.agent}
               onValueChange={(value) => onFiltersChange({ ...filters, agent: value })}
@@ -118,25 +126,29 @@ export function SkillsFilterToolbar({
         </div>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {/* Match chip pill shapes; the divider separates view selection from filters. */}
-          <ToggleGroup
-            type="single"
-            variant="outline"
-            size="sm"
-            spacing={1}
-            value={view}
-            onValueChange={(value) => onViewChange((value || 'skills') as SkillsPageView)}
-            aria-label={translate('auto.components.skills.SkillsPage.viewSwitch', 'Show')}
-          >
-            <ToggleGroupItem value="skills" className="rounded-full px-2.5 text-xs">
-              {translate('auto.components.skills.SkillsPage.f43ad6edf3', 'Skills')}
-            </ToggleGroupItem>
-            <ToggleGroupItem value="shared" className="rounded-full px-2.5 text-xs">
-              {translate('auto.components.skills.SkillsPage.sharedLinks', 'Shared links')}
-            </ToggleGroupItem>
-          </ToggleGroup>
+          {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+            <ToggleGroup
+              type="single"
+              variant="outline"
+              size="sm"
+              spacing={1}
+              value={view}
+              onValueChange={(value) => onViewChange((value || 'skills') as SkillsPageView)}
+              aria-label={translate('auto.components.skills.SkillsPage.viewSwitch', 'Show')}
+            >
+              <ToggleGroupItem value="skills" className="rounded-full px-2.5 text-xs">
+                {translate('auto.components.skills.SkillsPage.f43ad6edf3', 'Skills')}
+              </ToggleGroupItem>
+              <ToggleGroupItem value="shared" className="rounded-full px-2.5 text-xs">
+                {translate('auto.components.skills.SkillsPage.sharedLinks', 'Shared links')}
+              </ToggleGroupItem>
+            </ToggleGroup>
+          )}
           {sharedView ? null : (
             <>
-              <div className="h-4 w-px shrink-0 bg-border" aria-hidden />
+              {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+                <div className="h-4 w-px shrink-0 bg-border" aria-hidden />
+              )}
               <ToggleGroup
                 type="single"
                 variant="outline"
@@ -159,7 +171,9 @@ export function SkillsFilterToolbar({
                   {translate('auto.components.skills.SkillsPage.allSources', 'All')}
                   <span className="tabular-nums text-muted-foreground">{totalCount}</span>
                 </ToggleGroupItem>
-                {SOURCE_KINDS.map((sourceKind) => (
+                {SOURCE_KINDS.filter(
+                  (kind) => !PROMPT_BLOCK_UPSTREAM_SERVICES || sourceCounts[kind] > 0
+                ).map((sourceKind) => (
                   <ToggleGroupItem
                     key={sourceKind}
                     value={sourceKind}
@@ -171,6 +185,12 @@ export function SkillsFilterToolbar({
                     </span>
                   </ToggleGroupItem>
                 ))}
+                {commandCount > 0 ? (
+                  <ToggleGroupItem value="command" className="gap-1.5 rounded-full px-2.5 text-xs">
+                    {commandSourceLabel()}
+                    <span className="tabular-nums text-muted-foreground">{commandCount}</span>
+                  </ToggleGroupItem>
+                ) : null}
               </ToggleGroup>
               <div className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
                 <span role="status" aria-live="polite">

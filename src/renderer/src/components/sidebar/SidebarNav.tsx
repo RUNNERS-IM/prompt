@@ -68,7 +68,9 @@ const SidebarNav = React.memo(function SidebarNav() {
   const automationsActive = activeView === 'automations'
   const mobileActive = activeView === 'mobile'
   const artifactsActive = activeView === 'artifacts'
-  const skillsActive = activeView === 'skills'
+  const skillsActive = useAppStore(
+    (s) => s.activeView === 'skills' || s.activeModal === 'prompt-skills'
+  )
   const mobileOnboardingBadge = useMobileSidebarOnboardingBadge(showMobileButton)
   const hideAutomationsButton = React.useCallback(() => {
     void updateSettings({ showAutomationsButton: false })
@@ -175,7 +177,8 @@ const SidebarNav = React.memo(function SidebarNav() {
               </span>
             </button>
           </ContextMenuTrigger>
-          <HideSidebarMenu onHide={hideSkillsButton} />
+          {/* Prompt has no setting to bring the row back once hidden. */}
+          {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : <HideSidebarMenu onHide={hideSkillsButton} />}
         </ContextMenu>
       ) : null}
       {showAutomationsButton ? (

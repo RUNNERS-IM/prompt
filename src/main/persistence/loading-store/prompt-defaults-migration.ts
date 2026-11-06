@@ -1,7 +1,7 @@
 import type { PersistedState } from '../../../shared/persisted-state-types'
 
 /** Bump when PROMPT_FORCED_DEFAULTS changes so every Mac applies the new list once more. */
-export const PROMPT_DEFAULTS_VERSION = 1
+export const PROMPT_DEFAULTS_VERSION = 2
 
 type PromptSettings = PersistedState['settings'] & {
   promptDefaultsVersion?: number
@@ -16,7 +16,7 @@ export const PROMPT_FORCED_DEFAULTS = {
   showTasksButton: false,
   showAutomationsButton: false,
   showArtifactsButton: false,
-  showSkillsButton: false,
+  showSkillsButton: true,
   floatingTerminalEnabled: false,
   experimentalMobile: false,
   experimentalPet: false,

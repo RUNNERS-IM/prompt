@@ -16,13 +16,14 @@ import { translate } from '@/i18n/i18n'
 import { formatClipboardFilePath } from '@/lib/clipboard-file-path'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
 import type { DiscoveredSkill, SkillProvider } from '../../../../shared/skills'
-import { sourceKindLabel } from './skill-display-labels'
+import { skillSourceKindLabel } from './skill-display-labels'
 import {
   SkillRowContextActions,
   SkillRowDropdownActions,
   type SkillRowAction
 } from './SkillRowActions'
 import { uiDateTimeFormat } from '@/i18n/ui-intl-formatters'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 const providerLabels: Record<SkillProvider, string> = {
   codex: 'Codex',
@@ -132,7 +133,11 @@ export function SkillRow({
       ...(deleteDisabledReason ? { disabledReason: deleteDisabledReason } : {}),
       onSelect: onDelete
     }
-  ]
+  ].filter(
+    (action) =>
+      !(PROMPT_BLOCK_UPSTREAM_SERVICES && action.key === 'share') &&
+      !(skill.claudeCommand && action.key === 'delete')
+  )
 
   const activate = (): void => {
     if (selectionMode) {
@@ -215,7 +220,7 @@ export function SkillRow({
               ) : null}
             </div>
             <span className="flex shrink-0 items-center gap-2 text-[11px] text-muted-foreground">
-              <span>{sourceKindLabel(skill.sourceKind)}</span>
+              <span>{skillSourceKindLabel(skill)}</span>
               <span className="hidden sm:inline" aria-hidden>
                 ·
               </span>

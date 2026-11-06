@@ -1,3 +1,4 @@
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import type { SkillCloudOwnedShare } from '../../../../shared/skill-cloud-contract'
@@ -32,6 +33,10 @@ export function useOwnedSkillShares(): OwnedSkillShares {
   const generation = useRef(0)
 
   const load = useCallback(async (): Promise<void> => {
+    if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+      setLoading(false)
+      return
+    }
     const current = ++generation.current
     setLoading(true)
     setError(null)

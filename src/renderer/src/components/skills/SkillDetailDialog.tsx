@@ -1,4 +1,5 @@
 import { ClipboardCopy, FolderOpen, Share2, Trash2 } from 'lucide-react'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -15,7 +16,7 @@ import { translate } from '@/i18n/i18n'
 import { formatClipboardFilePath } from '@/lib/clipboard-file-path'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
 import type { DiscoveredSkill } from '../../../../shared/skills'
-import { sourceKindLabel } from './skill-display-labels'
+import { skillSourceKindLabel } from './skill-display-labels'
 import { skillAgentLabel } from './skill-agent-filter'
 import { uiDateTimeFormat } from '@/i18n/ui-intl-formatters'
 
@@ -105,7 +106,7 @@ export function SkillDetailDialog({
             ) : null}
           </div>
           <DialogDescription className="text-xs">
-            {sourceKindLabel(skill.sourceKind)}
+            {skillSourceKindLabel(skill)}
             {' · '}
             {skill.sourceLabel}
           </DialogDescription>
@@ -155,32 +156,36 @@ export function SkillDetailDialog({
             <FolderOpen className="size-3.5" />
             {translate('auto.components.skills.SkillsPage.dc4c3328ee', 'Reveal file')}
           </Button>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="pointer-events-auto mr-auto inline-flex">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  disabled={!deletable}
-                  onClick={onDelete}
-                >
-                  <Trash2 className="size-3.5" />
-                  {translate('auto.components.skills.SkillRow.deleteSkill', 'Delete…')}
-                </Button>
-              </span>
-            </TooltipTrigger>
-            {deleteDisabledReason && !deletable ? (
-              <TooltipContent side="top" sideOffset={4}>
-                {deleteDisabledReason}
-              </TooltipContent>
-            ) : null}
-          </Tooltip>
-          <Button type="button" size="sm" disabled={!shareable} onClick={onShare}>
-            <Share2 className="size-3.5" />
-            {translate('auto.components.skills.SkillCard.d25a1b8ae6', 'Share skill')}
-          </Button>
+          {skill.claudeCommand ? null : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="pointer-events-auto mr-auto inline-flex">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="text-destructive hover:text-destructive"
+                    disabled={!deletable}
+                    onClick={onDelete}
+                  >
+                    <Trash2 className="size-3.5" />
+                    {translate('auto.components.skills.SkillRow.deleteSkill', 'Delete…')}
+                  </Button>
+                </span>
+              </TooltipTrigger>
+              {deleteDisabledReason && !deletable ? (
+                <TooltipContent side="top" sideOffset={4}>
+                  {deleteDisabledReason}
+                </TooltipContent>
+              ) : null}
+            </Tooltip>
+          )}
+          {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+            <Button type="button" size="sm" disabled={!shareable} onClick={onShare}>
+              <Share2 className="size-3.5" />
+              {translate('auto.components.skills.SkillCard.d25a1b8ae6', 'Share skill')}
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

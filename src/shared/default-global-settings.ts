@@ -162,7 +162,7 @@ export function buildDefaultSettings(args: {
     orchestrationHeartbeatsEnabled: true,
     orchestrationHeartbeatIntervalMinutes: 5,
     showArtifactsButton: false,
-    showSkillsButton: false,
+    showSkillsButton: true,
     showMobileButton: false,
     showPinnedWorktreesInGroups: false,
     ctrlTabOrderMode: 'mru',
