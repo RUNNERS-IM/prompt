@@ -17,6 +17,8 @@ import {
 } from '../ui/dropdown-menu'
 import { AgentIcon } from '@/lib/agent-catalog'
 import { getIntlLocale, translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 export { getStatsPaneSearchEntries } from './stats-search'
 
 function formatDuration(ms: number): string {
@@ -101,6 +103,10 @@ function UsageAnalyticsOptionIcon({ tab }: { tab: UsageTab }): React.JSX.Element
   return <AgentIcon agent={tab} size={14} />
 }
 
+function StatValue({ value }: { value: string }): React.JSX.Element {
+  return <span className="text-[13px] leading-4 tabular-nums text-muted-foreground">{value}</span>
+}
+
 export function StatsPane(): React.JSX.Element {
   const summary = useAppStore((s) => s.statsSummary)
   const fetchStatsSummary = useAppStore((s) => s.fetchStatsSummary)
@@ -114,6 +120,54 @@ export function StatsPane(): React.JSX.Element {
     recordFeatureInteraction('usage-tracking')
     void fetchStatsSummary()
   }, [fetchStatsSummary, recordFeatureInteraction])
+
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <div className="space-y-8">
+        {summary ? (
+          <section className="space-y-4">
+            <SettingsSubsectionHeader
+              title={translate('prompt.settings.claude.usageGroup', 'Usage')}
+              description={formatTrackingSince(summary.firstEventAt) || undefined}
+            />
+            {summary.totalAgentsSpawned === 0 && summary.totalPRsCreated === 0 ? (
+              <p className="text-[13px] leading-4 text-muted-foreground">
+                {translate(
+                  'auto.components.stats.StatsPane.73ed07859c',
+                  'Start your first agent to begin tracking'
+                )}
+              </p>
+            ) : (
+              <div>
+                <SettingsRow
+                  label={translate('auto.components.stats.StatsPane.9dbec9e675', 'Agents spawned')}
+                  control={
+                    <StatValue value={summary.totalAgentsSpawned.toLocaleString(getIntlLocale())} />
+                  }
+                />
+                <SettingsRow
+                  label={translate(
+                    'auto.components.stats.StatsPane.1c96f433e2',
+                    'Time agents worked'
+                  )}
+                  control={<StatValue value={formatDuration(summary.totalAgentTimeMs)} />}
+                />
+                <SettingsRow
+                  label={translate('auto.components.stats.StatsPane.a58aba506f', 'PRs created')}
+                  control={
+                    <StatValue value={summary.totalPRsCreated.toLocaleString(getIntlLocale())} />
+                  }
+                />
+              </div>
+            )}
+          </section>
+        ) : null}
+        <section className="space-y-4">
+          <ClaudeUsagePane />
+        </section>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-5">

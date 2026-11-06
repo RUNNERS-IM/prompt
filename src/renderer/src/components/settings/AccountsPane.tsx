@@ -15,6 +15,7 @@ import {
   watchProviderAccounts
 } from '@/runtime/runtime-provider-accounts-client'
 import { getAccountsClaudeSearchEntries } from './accounts-claude-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import {
   getAccountsCodexSearchEntries,
   getAccountsGeminiSearchEntries,
@@ -322,7 +323,7 @@ export function AccountsPane({
     runCodexAccountAction,
     recordOpenCodeSettingEdit
   }
-  const visibleSections = [
+  const upstreamSections = [
     !searchQuery || /opencode|devin|account/i.test(searchQuery) ? (
       <div key={accountOwnerKey} className="space-y-8">
         <ManagedDataAccountsSection provider="opencode" target={accountOwner} />
@@ -379,6 +380,14 @@ export function AccountsPane({
       />
     ) : null
   ]
+  // Prompt runs Claude only: the other providers' account and usage groups are not shown.
+  const visibleSections = PROMPT_SIMPLE_SETTINGS
+    ? [
+        matchesSettingsSearch(searchQuery, getAccountsClaudeSearchEntries())
+          ? renderClaudeAccountsSection(model)
+          : null
+      ]
+    : upstreamSections
 
   return (
     <div className="space-y-8">

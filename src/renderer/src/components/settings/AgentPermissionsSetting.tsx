@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 import { AgentPermissionModeMenu } from './AgentPermissionModeMenu'
 import { agentPermissionModeLabel } from './agent-permission-mode-label'
+import { SettingsRow } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type PresetMode = Exclude<AgentPermissionMode, 'mixed'>
 
@@ -86,6 +88,27 @@ export function AgentPermissionsSetting(props: AgentPermissionsSettingProps): Re
     'auto.components.settings.AgentsPane.agentPermissions',
     'Agent Permissions'
   )
+  if (PROMPT_SIMPLE_SETTINGS) {
+    // Prompt starts Claude only: one row, no separate choice for agents without Auto.
+    return (
+      <SettingsRow
+        label={translate('settings.agents.permissionsTitle', 'Permissions')}
+        description={translate(
+          'prompt.settings.claude.permissionDescription',
+          'What Claude may do without asking you.'
+        )}
+        control={
+          <AgentPermissionModeMenu
+            mode={mode}
+            onChange={onChange}
+            label={title}
+            autoAvailable
+            autoDisabled={!autoSupported}
+          />
+        }
+      />
+    )
+  }
   const showOthers = mode === 'auto' && onChangeNonAuto !== undefined
   return (
     <section className="flex items-start justify-between gap-3">
