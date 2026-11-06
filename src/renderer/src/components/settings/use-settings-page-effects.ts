@@ -192,7 +192,10 @@ export function useSettingsPageEffects(
       setSettingsHostChoice(settingsNavigationTarget.hostScope)
     }
     pendingNavSectionRef.current = paneSectionId
-    pendingScrollTargetRef.current = settingsNavigationTarget.sectionId ?? paneSectionId
+    // A pane folded into another page (Prompt) scrolls to its own part of that page.
+    pendingScrollTargetRef.current =
+      settingsNavigationTarget.sectionId ??
+      (settingsNavigationTarget.pane === 'repo' ? paneSectionId : settingsNavigationTarget.pane)
     setHighlightedSettingsTargetId(
       settingsNavigationTarget.pane === 'developer-permissions'
         ? (settingsNavigationTarget.sectionId ?? null)

@@ -10,7 +10,6 @@ import { ShortcutKeyCombo } from '../ShortcutKeyCombo'
 import { cn } from '@/lib/utils'
 import { RepoIconGlyph } from '../repo/repo-icon'
 import { RepoForkIndicator } from '../repo/repo-fork-indicator'
-import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { SetupGuideProgressRing } from '../setup-guide/SetupGuideProgressRing'
 import { useSettingsSetupGuideProgress } from './settings-setup-guide-progress'
@@ -19,6 +18,7 @@ import { translate } from '@/i18n/i18n'
 import { resolveLeftSidebarStyleVariables } from '@/lib/left-sidebar-appearance'
 import { useSystemPrefersDark } from '../terminal-pane/use-system-prefers-dark'
 import { useAppStore } from '@/store'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type NavSection = {
   id: string
@@ -62,9 +62,9 @@ function SettingsSearchField({
   const searchShortcutCombos = useShortcutKeyComboDetails('settings.search')
 
   return (
-    <div className="border-b border-worktree-sidebar-border px-3 py-3">
+    <div className="px-2.5 pb-2">
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-worktree-sidebar-foreground/50" />
         <Input
           ref={searchInputRef}
           autoFocus={searchAutoFocus}
@@ -74,7 +74,8 @@ function SettingsSearchField({
             'auto.components.settings.SettingsSidebar.dbceaa8840',
             'Search settings'
           )}
-          className="bg-background/60 pl-9 pr-14 text-[13px]"
+          // Same borderless pill as the search row at the top of the app sidebar.
+          className="h-9 rounded-full border-0 bg-worktree-sidebar-foreground/9 pl-9 pr-14 text-[13px] shadow-none md:text-[13px] placeholder:text-worktree-sidebar-foreground/50 dark:bg-worktree-sidebar-foreground/9"
         />
         {searchQuery === '' ? (
           <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
@@ -167,14 +168,18 @@ export function SettingsSidebar({
   ) as CSSProperties | undefined
   const setupActive = activeSectionId === 'setup-guide'
   // Hiding the app-sidebar prompt must not remove Settings’ stable checklist entry.
+  // Prompt: no onboarding checklist; its steps repeat other pages.
   const showSetupGuideTopRow =
-    setupGuideProgress.ready && setupGuideProgress.doneCount < setupGuideProgress.total
+    !PROMPT_SIMPLE_SETTINGS &&
+    setupGuideProgress.ready &&
+    setupGuideProgress.doneCount < setupGuideProgress.total
   const navItemClassName = (isActive: boolean): string =>
     cn(
-      'flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-left text-[13px] outline-none transition-colors duration-150 focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50',
+      // Rows as the app sidebar's top rows: 36 high, corner 6, 13 medium, text 88%, icons 70%.
+      'flex min-h-9 w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-[13px] font-medium outline-none transition-colors duration-150 focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50 [&>svg]:text-worktree-sidebar-foreground/70',
       isActive
-        ? 'bg-worktree-sidebar-accent font-medium text-worktree-sidebar-accent-foreground ring-1 ring-worktree-sidebar-ring/25'
-        : 'text-worktree-sidebar-foreground/60 hover:bg-worktree-sidebar-accent/60 hover:text-worktree-sidebar-foreground'
+        ? 'bg-worktree-sidebar-accent text-worktree-sidebar-accent-foreground'
+        : 'text-worktree-sidebar-foreground/88 hover:bg-worktree-sidebar-accent/60 hover:text-worktree-sidebar-foreground'
     )
   const installStatusLabel = (status: VisibleInstallStatus): string => {
     switch (status) {
@@ -195,23 +200,18 @@ export function SettingsSidebar({
 
   return (
     <aside
-      className="flex w-[280px] shrink-0 flex-col border-r border-worktree-sidebar-border bg-worktree-sidebar"
+      className="flex w-[280px] shrink-0 flex-col bg-worktree-sidebar"
       style={leftSidebarStyle}
       data-prompt-settings-sidebar=""
     >
-      <div className="border-b border-worktree-sidebar-border px-3 py-3">
-        <h1 className="px-3 pb-2 text-base font-bold text-foreground">
+      <div className="space-y-2 px-2.5 pb-2 pt-3">
+        <h1 className="px-2.5 text-base font-bold text-foreground">
           {translate('prompt.settings.sidebarTitle', 'Prompt Settings')}
         </h1>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onBack}
-          className="w-full justify-start gap-2 text-[13px] text-muted-foreground"
-        >
-          <ArrowLeft className="size-4" />
+        <button type="button" onClick={onBack} className={navItemClassName(false)}>
+          <ArrowLeft className="size-4 shrink-0" />
           {translate('auto.components.settings.SettingsSidebar.60f8a673a7', 'Back to app')}
-        </Button>
+        </button>
       </div>
 
       <SettingsSearchField searchInputRef={searchInputRef} searchAutoFocus={searchAutoFocus} />
@@ -226,14 +226,12 @@ export function SettingsSidebar({
         </div>
       ) : null}
 
-      <div className="min-h-0 flex-1 overflow-y-auto scrollbar-sleek px-3 py-4">
-        <div className="space-y-5">
+      <div className="min-h-0 flex-1 overflow-y-auto scrollbar-sleek px-2.5 pb-4 pt-2">
+        <div className="space-y-4">
           {generalGroups.map((group) => (
-            <div key={group.id} className="space-y-2">
-              <p className="px-3 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                {group.title}
-              </p>
-              <div className="space-y-1">
+            <div key={group.id} className="space-y-1">
+              <p className="px-2.5 text-2xs font-semibold text-muted-foreground">{group.title}</p>
+              <div className="space-y-0.5">
                 {group.sections
                   .filter((section) => section.id !== 'setup-guide')
                   .map((section) => {
@@ -255,7 +253,7 @@ export function SettingsSidebar({
                             {installStatusLabel(section.installStatus)}
                           </span>
                         ) : section.badge ? (
-                          <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wider text-muted-foreground">
+                          <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-3xs font-medium text-muted-foreground">
                             {section.badge}
                           </span>
                         ) : null}
@@ -266,13 +264,13 @@ export function SettingsSidebar({
             </div>
           ))}
 
-          <div className="space-y-2">
-            <p className="px-3 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <div className="space-y-1">
+            <p className="px-2.5 text-2xs font-semibold text-muted-foreground">
               {translate('auto.components.settings.SettingsSidebar.5c9669ff9c', 'Projects')}
             </p>
 
             {repoSections.length > 0 ? (
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {repoSections.map((section) => {
                   const isActive = activeSectionId === section.id
 
@@ -303,7 +301,7 @@ export function SettingsSidebar({
                 })}
               </div>
             ) : (
-              <p className="px-3 text-xs text-muted-foreground">
+              <p className="px-2.5 text-2xs text-muted-foreground">
                 {hasRepos
                   ? translate(
                       'auto.components.settings.SettingsSidebar.3e483e256b',
