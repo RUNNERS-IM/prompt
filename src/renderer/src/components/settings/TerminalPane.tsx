@@ -32,6 +32,7 @@ import { TerminalWindowsAdministratorSection } from './TerminalWindowsAdministra
 import { TerminalCustomShellInput } from './TerminalCustomShellInput'
 import { SettingsSegmentedControl, SettingsSubsectionHeader } from './SettingsFormControls'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 
 type TerminalPaneProps = {
@@ -212,14 +213,26 @@ export function TerminalPane({
                     className="inline-flex h-7 items-center gap-1.5 px-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                     aria-controls="default-shell-args-content"
                   >
-                    {translate('auto.components.settings.TerminalPane.5e5f06c82c', 'Advanced')}
+                    {PROMPT_SIMPLE_SETTINGS
+                      ? translate(
+                          'prompt.settings.terminal.shellArgsGroup',
+                          'Shell Start Arguments'
+                        )
+                      : translate('auto.components.settings.TerminalPane.5e5f06c82c', 'Advanced')}
                     <ChevronDown
                       className={cn('size-3.5 transition-transform', shellArgsOpen && 'rotate-180')}
                     />
                   </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent id="default-shell-args-content">
-                  <div className="mt-1.5 space-y-2 rounded-md border border-border/60 bg-muted/20 px-3 py-3">
+                  <div
+                    className={cn(
+                      'mt-1.5 space-y-2',
+                      // Prompt: already inside the shell box, so no second box around it.
+                      !PROMPT_SIMPLE_SETTINGS &&
+                        'rounded-md border border-border/60 bg-muted/20 px-3 py-3'
+                    )}
+                  >
                     <div className="space-y-1">
                       <label htmlFor="default-shell-args" className="text-xs font-medium">
                         {translate(

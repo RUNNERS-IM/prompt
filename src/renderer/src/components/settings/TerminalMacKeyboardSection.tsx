@@ -1,6 +1,7 @@
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { useDetectedOptionAsAlt } from '@/lib/keyboard-layout/use-effective-mac-option-as-alt'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SearchableSetting } from './SearchableSetting'
 import { SettingsRow, SettingsSegmentedControl, SettingsSwitchRow } from './SettingsFormControls'
 
@@ -123,44 +124,47 @@ export function TerminalMacKeyboardSection({
         />
       </SearchableSetting>
 
-      <SearchableSetting
-        title={translate(
-          'auto.components.settings.TerminalPane.19f4935159',
-          'JIS Yen (¥) to Backslash (\\\\)'
-        )}
-        description={translate(
-          'auto.components.settings.TerminalPane.1c337bef4a',
-          'Controls whether pressing the JIS Yen (¥) key sends a backslash (\\\\) instead.'
-        )}
-        keywords={[
-          'terminal',
-          'yen',
-          'backslash',
-          'japanese',
-          'keyboard',
-          'mac',
-          'macos',
-          'jis',
-          'intl'
-        ]}
-      >
-        <SettingsSwitchRow
-          label={translate(
+      {/* Prompt: the JIS Yen key remap is left at its default. */}
+      {!PROMPT_SIMPLE_SETTINGS ? (
+        <SearchableSetting
+          title={translate(
             'auto.components.settings.TerminalPane.19f4935159',
             'JIS Yen (¥) to Backslash (\\\\)'
           )}
           description={translate(
-            'auto.components.settings.TerminalPane.4263e940e0',
-            'Pressing the JIS Yen (¥) key sends a backslash (\\\\) instead.'
+            'auto.components.settings.TerminalPane.1c337bef4a',
+            'Controls whether pressing the JIS Yen (¥) key sends a backslash (\\\\) instead.'
           )}
-          checked={settings.terminalJISYenToBackslash ?? false}
-          onChange={() =>
-            updateSettings({
-              terminalJISYenToBackslash: !settings.terminalJISYenToBackslash
-            })
-          }
-        />
-      </SearchableSetting>
+          keywords={[
+            'terminal',
+            'yen',
+            'backslash',
+            'japanese',
+            'keyboard',
+            'mac',
+            'macos',
+            'jis',
+            'intl'
+          ]}
+        >
+          <SettingsSwitchRow
+            label={translate(
+              'auto.components.settings.TerminalPane.19f4935159',
+              'JIS Yen (¥) to Backslash (\\\\)'
+            )}
+            description={translate(
+              'auto.components.settings.TerminalPane.4263e940e0',
+              'Pressing the JIS Yen (¥) key sends a backslash (\\\\) instead.'
+            )}
+            checked={settings.terminalJISYenToBackslash ?? false}
+            onChange={() =>
+              updateSettings({
+                terminalJISYenToBackslash: !settings.terminalJISYenToBackslash
+              })
+            }
+          />
+        </SearchableSetting>
+      ) : null}
     </>
   )
 }

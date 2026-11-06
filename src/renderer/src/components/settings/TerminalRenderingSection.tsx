@@ -6,6 +6,7 @@ import {
   SettingsSwitchRow
 } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { TerminalContrastSetting } from './TerminalContrastSetting'
 import { translate } from '@/i18n/i18n'
 import { resolveTerminalInlineImagesEnabled } from '../../../../shared/terminal-inline-images-settings'
@@ -29,7 +30,7 @@ export function TerminalRenderingSection({
         )}
       />
 
-      <div className="divide-y divide-border/40">
+      <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
           title={translate('auto.components.settings.TerminalPane.c1fc9e9444', 'GPU Acceleration')}
           description={translate(
@@ -139,7 +140,7 @@ export function TerminalRenderingSection({
             }
           />
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

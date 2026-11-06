@@ -2,6 +2,7 @@ import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { DEFAULT_TERMINAL_INACTIVE_PANE_OPACITY } from '../../../../shared/constants'
 import { NumberField, SettingsSubsectionHeader } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { clampNumber, resolvePaneStyleOptions } from '@/lib/terminal-theme'
 import { translate } from '@/i18n/i18n'
 
@@ -25,7 +26,7 @@ export function TerminalPaneAppearanceSection({
         )}
       />
 
-      <div className="ml-4 divide-y divide-border/40">
+      <SettingsGroupRows className="ml-4 divide-y divide-border/40">
         <SearchableSetting
           title={translate(
             'auto.components.settings.TerminalAppearanceSection.a6fdd6a3b1',
@@ -89,7 +90,7 @@ export function TerminalPaneAppearanceSection({
             }
           />
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

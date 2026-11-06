@@ -1,4 +1,5 @@
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 
@@ -114,42 +115,68 @@ export const getGeneralEditorSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.general.search.19baae651b', 'sidebar')
     ]
   },
-  {
-    title: translate('auto.components.settings.general.search.6f584fcb48', 'Minimap'),
-    description: translate(
-      'auto.components.settings.general.search.716a4dfb1f',
-      'Show the minimap overview when editing a file.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.general.search.9c72990db8', 'minimap'),
-      ...translateSearchKeyword('auto.components.settings.general.search.e3919429c0', 'overview'),
-      ...translateSearchKeyword('auto.components.settings.general.search.3ca5ab78a5', 'code'),
-      ...translateSearchKeyword('auto.components.settings.general.search.a0014961ae', 'scroll')
-    ]
-  },
-  {
-    title: translate(
-      'auto.components.settings.general.search.d2d2d929c0',
-      'Rich Markdown Spellcheck'
-    ),
-    description: translate(
-      'auto.components.settings.general.search.4497e2e2bb',
-      'Show browser spelling underlines and suggestions while editing rich Markdown.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.general.search.f96cdaf37d', 'spellcheck'),
-      ...translateSearchKeyword(
-        'auto.components.settings.general.search.a51d23f4a1',
-        'spell check'
-      ),
-      ...translateSearchKeyword('auto.components.settings.general.search.641358460a', 'spelling'),
-      ...translateSearchKeyword('auto.components.settings.general.search.d05f629d2c', 'markdown'),
-      ...translateSearchKeyword(
-        'auto.components.settings.general.search.d755962089',
-        'red underline'
-      )
-    ]
-  },
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate('auto.components.settings.general.search.6f584fcb48', 'Minimap'),
+          description: translate(
+            'auto.components.settings.general.search.716a4dfb1f',
+            'Show the minimap overview when editing a file.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.9c72990db8',
+              'minimap'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.e3919429c0',
+              'overview'
+            ),
+            ...translateSearchKeyword('auto.components.settings.general.search.3ca5ab78a5', 'code'),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.a0014961ae',
+              'scroll'
+            )
+          ]
+        }
+      ]),
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.general.search.d2d2d929c0',
+            'Rich Markdown Spellcheck'
+          ),
+          description: translate(
+            'auto.components.settings.general.search.4497e2e2bb',
+            'Show browser spelling underlines and suggestions while editing rich Markdown.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.f96cdaf37d',
+              'spellcheck'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.a51d23f4a1',
+              'spell check'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.641358460a',
+              'spelling'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.d05f629d2c',
+              'markdown'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.d755962089',
+              'red underline'
+            )
+          ]
+        }
+      ]),
   {
     title: translate('auto.components.settings.general.search.128bc09325', 'Markdown Review Notes'),
     description: translate(

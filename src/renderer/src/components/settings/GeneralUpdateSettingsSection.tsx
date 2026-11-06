@@ -8,6 +8,7 @@ import { Button } from '../ui/button'
 import { SearchableSetting } from './SearchableSetting'
 import { SettingsSubsectionHeader } from './SettingsFormControls'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { updaterMessageText } from '@/lib/updater-message-copy'
 import { getUpdateCheckClickOptions, getUpdateCheckHint } from '@/lib/update-check-click-options'
 import { GeneralRemoteServerUpdates } from './GeneralRemoteServerUpdates'
@@ -52,6 +53,16 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
     void window.api.updater.quitAndInstall().catch(console.error)
   }
 
+  // Prompt: one blue action per row, as on the update card: the install step once there is one.
+  const hasInstallAction =
+    (updateStatus.state === 'available' && !updateStatus.externallyManaged) ||
+    (updateStatus.state === 'error' &&
+      updateStatus.retryAction === 'install' &&
+      updateStatus.retryable !== false) ||
+    updateStatus.state === 'downloaded'
+  const accentButton = (accent: boolean): { 'data-prompt-accent-button'?: '' } =>
+    PROMPT_SIMPLE_SETTINGS && accent ? { 'data-prompt-accent-button': '' } : {}
+
   return (
     <section key="updates" className="space-y-4">
       <div
@@ -91,6 +102,7 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
           <Button
             variant="outline"
             size="sm"
+            {...accentButton(!hasInstallAction)}
             // Modifier clicks are one-off update actions, not saved toggles.
             onClick={(event) => window.api.updater.check(getUpdateCheckClickOptions(event))}
             title={updateCheckHint}
@@ -112,6 +124,7 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
             <Button
               variant="default"
               size="sm"
+              {...accentButton(true)}
               onClick={() => {
                 void window.api.updater.download().catch((error) => {
                   toast.error(
@@ -137,7 +150,13 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
           ) : updateStatus.state === 'error' &&
             updateStatus.retryAction === 'install' &&
             updateStatus.retryable !== false ? (
-            <Button variant="default" size="sm" onClick={handleRestartToUpdate} className="gap-2">
+            <Button
+              variant="default"
+              size="sm"
+              {...accentButton(true)}
+              onClick={handleRestartToUpdate}
+              className="gap-2"
+            >
               <RefreshCw className="size-3.5" />
               {translate('auto.components.UpdateCard.2c2d3e03ca', 'Try Again')}
             </Button>
@@ -145,6 +164,7 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
             <Button
               variant="default"
               size="sm"
+              {...accentButton(true)}
               onClick={handleRestartToUpdate}
               disabled={updateStatus.installing}
               className="gap-2"
@@ -262,8 +282,9 @@ export function GeneralUpdateSettingsSection(): React.JSX.Element {
                     ))}
         </p>
       </SearchableSetting>
-      {channelSwitcherRevealed ? <ReleaseChannelSection /> : null}
-      <GeneralRemoteServerUpdates />
+      {/* Prompt: one release feed and no remote Orca servers to update. */}
+      {channelSwitcherRevealed && !PROMPT_SIMPLE_SETTINGS ? <ReleaseChannelSection /> : null}
+      {!PROMPT_SIMPLE_SETTINGS ? <GeneralRemoteServerUpdates /> : null}
     </section>
   )
 }

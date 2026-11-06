@@ -7,6 +7,7 @@ import {
   SettingsSwitchRow
 } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { clampNumber } from '@/lib/terminal-theme'
 import { translate } from '@/i18n/i18n'
 
@@ -28,7 +29,7 @@ export function TerminalCursorAppearanceSection({
         )}
       />
 
-      <div className="ml-4 divide-y divide-border/40">
+      <SettingsGroupRows className="ml-4 divide-y divide-border/40">
         <SearchableSetting
           title={translate(
             'auto.components.settings.TerminalAppearanceSection.db270cc9a9',
@@ -132,7 +133,7 @@ export function TerminalCursorAppearanceSection({
             }
           />
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

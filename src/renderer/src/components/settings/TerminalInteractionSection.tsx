@@ -5,6 +5,7 @@ import { Label } from '../ui/label'
 import { ScrollSpeedSlider } from './TerminalScrollSpeedSlider'
 import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { matchesSettingsSearch } from './settings-search'
 import { getTerminalRightClickToPasteSearchEntry } from './terminal-windows-search'
 import { OSC52_CLIPBOARD_SETTING_ID } from '../terminal-pane/osc52-clipboard-setting-anchor'
@@ -65,7 +66,7 @@ export function TerminalInteractionSection({
         )}
       />
 
-      <div className="divide-y divide-border/40">
+      <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
           title={translate(
             'auto.components.settings.TerminalPane.scrollSpeed.title',
@@ -356,7 +357,7 @@ export function TerminalInteractionSection({
             }
           />
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

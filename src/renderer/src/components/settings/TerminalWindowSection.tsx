@@ -6,6 +6,8 @@ import { Label } from '../ui/label'
 import { Switch } from '../ui/switch'
 import { ColorField, NumberField } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { clampNumber } from '@/lib/terminal-theme'
 import { useMountedRef } from '@/hooks/useMountedRef'
 import { translate } from '@/i18n/i18n'
@@ -46,7 +48,9 @@ export function TerminalWindowSection({
     <section className="space-y-4">
       <div className="space-y-1" data-prompt-group-title="">
         <h3 className="text-sm font-semibold">
-          {translate('auto.components.settings.TerminalWindowSection.b96ba13ed1', 'Window')}
+          {PROMPT_SIMPLE_SETTINGS
+            ? translate('prompt.settings.appearance.terminalWindowGroup', 'Terminal Window')
+            : translate('auto.components.settings.TerminalWindowSection.b96ba13ed1', 'Window')}
         </h3>
         <p className="text-xs text-muted-foreground">
           {translate(
@@ -56,7 +60,7 @@ export function TerminalWindowSection({
         </p>
       </div>
 
-      <div className="ml-4 space-y-4">
+      <SettingsGroupRows className="ml-4 space-y-4">
         <SearchableSetting
           title={translate(
             'auto.components.settings.TerminalWindowSection.ea7b1a158e',
@@ -321,7 +325,7 @@ export function TerminalWindowSection({
             </div>
           </div>
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }
