@@ -10,13 +10,17 @@ import { findTerminalHttpLinkAtBufferPosition } from '../../../../shared/termina
 import { isTerminalLinkifierHoverActive } from '@/lib/pane-manager/terminal-linkifier-hover-reset'
 import {
   buildHttpLinkActions,
+  httpLinkDestinationLabel,
   httpLinkDirectClickDestination,
   openRoutedHttpLink,
   type HttpLinkActionDestinations,
   type HttpLinkDestination,
   type HttpLinkRoutingPreferenceRequester
 } from '@/lib/http-link-destinations'
-import { isTerminalOwnedLinkGesture } from './terminal-link-activation'
+import {
+  isTerminalLinkActionActivation,
+  isTerminalOwnedLinkGesture
+} from './terminal-link-activation'
 import {
   requestTerminalLinkAction,
   type TerminalLinkActionContext
@@ -82,20 +86,39 @@ export function handleTerminalHttpLink(
     return true
   }
 
-  return requestTerminalLinkAction(event, deps.linkActionContext, {
-    destination: deps.actionDestination ?? url,
-    kind: 'url',
-    ...buildHttpLinkActions(
-      deps.actionDestinations,
-      (destination) =>
-        openRoutedHttpLink(url, { ...deps, modifierHeld: false, forceDestination: destination }),
+  const actions = buildHttpLinkActions(
+    deps.actionDestinations,
+    (destination) =>
+      openRoutedHttpLink(url, { ...deps, modifierHeld: false, forceDestination: destination }),
+    {
+      ...deps,
+      url,
+      openInSourceGroup: () =>
+        openRoutedHttpLink(url, { ...deps, forceDestination: 'orca', openInSourceGroup: true })
+    }
+  )
+  const context = deps.linkActionContext
+  // Prompt: a plain click on a web link opens the system browser at once, with no destination popover or first-click prompt.
+  if (context && context.plainClickBehavior !== 'none' && isTerminalLinkActionActivation(event)) {
+    return requestTerminalLinkAction(
+      event,
+      { ...context, plainClickBehavior: 'open' },
       {
-        ...deps,
-        url,
-        openInSourceGroup: () =>
-          openRoutedHttpLink(url, { ...deps, forceDestination: 'orca', openInSourceGroup: true })
+        destination: deps.actionDestination ?? url,
+        kind: 'url',
+        primary: {
+          external: true,
+          label: httpLinkDestinationLabel('system'),
+          run: () =>
+            openRoutedHttpLink(url, { ...deps, modifierHeld: false, forceDestination: 'system' })
+        }
       }
     )
+  }
+  return requestTerminalLinkAction(event, context, {
+    destination: deps.actionDestination ?? url,
+    kind: 'url',
+    ...actions
   })
 }
 

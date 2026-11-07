@@ -123,7 +123,8 @@ async function openLegacyDisabledLinkSettings(orcaPage: Page): Promise<void> {
 
 test.describe('terminal link click ownership', () => {
   test('selecting Actions reenables a legacy-disabled popover and survives renderer reload', async ({
-    orcaPage
+    orcaPage,
+    electronApp
   }, testInfo) => {
     const { mouseLogPath, ptyId, target } = await startMouseAwareLinkFixture(orcaPage, testInfo)
     await openLegacyDisabledLinkSettings(orcaPage)
@@ -153,9 +154,13 @@ test.describe('terminal link click ownership', () => {
     await orcaPage.screenshot({ path: testInfo.outputPath('actions-selected-after.png') })
     await orcaPage.evaluate(() => window.__store?.getState().closeSettingsPage())
     await waitForActiveTerminalManager(orcaPage)
+    await startPanelNavigationObserver(electronApp, orcaPage.url())
     await orcaPage.mouse.click(target.x, target.y)
-    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toBeVisible()
-    await expect(orcaPage.locator('[data-terminal-link-destination]')).toHaveText(LINK)
+    // Prompt: a plain web-link click opens the system browser at once, with no destination popover.
+    await expect
+      .poll(async () => (await readPanelNavigationObserver(electronApp)).externalUrls)
+      .toEqual([LINK])
+    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toHaveCount(0)
     await expectOrcaOwnedMouseOutcome(mouseLogPath)
     await orcaPage.screenshot({ path: testInfo.outputPath('actions-after.png') })
     await sendToTerminal(orcaPage, ptyId, 'q')
@@ -209,13 +214,18 @@ test.describe('terminal link click ownership', () => {
   })
 
   test('an Orca-owned plain link click emits no child PTY mouse frames', async ({
-    orcaPage
+    orcaPage,
+    electronApp
   }, testInfo) => {
     const { mouseLogPath, ptyId, target } = await startMouseAwareLinkFixture(orcaPage, testInfo)
+    await startPanelNavigationObserver(electronApp, orcaPage.url())
     await orcaPage.mouse.click(target.x, target.y)
 
-    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toBeVisible()
-    await expect(orcaPage.locator('[data-terminal-link-destination]')).toHaveText(LINK)
+    // Prompt: a plain web-link click opens the system browser at once, with no destination popover.
+    await expect
+      .poll(async () => (await readPanelNavigationObserver(electronApp)).externalUrls)
+      .toEqual([LINK])
+    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toHaveCount(0)
 
     await expectOrcaOwnedMouseOutcome(mouseLogPath)
 
@@ -223,19 +233,24 @@ test.describe('terminal link click ownership', () => {
   })
 
   test('an Orca-owned OSC link click emits no child PTY mouse frames', async ({
-    orcaPage
+    orcaPage,
+    electronApp
   }, testInfo) => {
     const { mouseLogPath, ptyId, target } = await startMouseAwareLinkFixture(
       orcaPage,
       testInfo,
       'osc'
     )
+    await startPanelNavigationObserver(electronApp, orcaPage.url())
     await orcaPage.mouse.move(target.x, target.y)
     await expect(orcaPage.locator('.xterm-hover')).toHaveCount(1)
     await orcaPage.mouse.click(target.x, target.y)
 
-    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toBeVisible()
-    await expect(orcaPage.locator('[data-terminal-link-destination]')).toHaveText(LINK)
+    // Prompt: a plain web-link click opens the system browser at once, with no destination popover.
+    await expect
+      .poll(async () => (await readPanelNavigationObserver(electronApp)).externalUrls)
+      .toEqual([LINK])
+    await expect(orcaPage.locator('[data-terminal-link-action-popover]')).toHaveCount(0)
     await expectOrcaOwnedMouseOutcome(mouseLogPath)
 
     await sendToTerminal(orcaPage, ptyId, 'q')

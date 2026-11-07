@@ -36,6 +36,11 @@ function middleEvent(): MouseEvent {
   return event
 }
 
+// Plain web-link clicks open the system browser at once, so the destination popover is reached by middle click.
+function popoverContext(request = vi.fn()): TerminalLinkActionContext {
+  return { ...actionContext(request), middleClickBehavior: 'actions' }
+}
+
 function actionContext(request = vi.fn()): TerminalLinkActionContext {
   return {
     paneId: 7,
@@ -186,14 +191,29 @@ describe('terminal link action routing', () => {
     expect(context.request).not.toHaveBeenCalled()
   })
 
+  it('opens a plain web-link click in the system browser without a popover, even when Prompt Browser is the default', () => {
+    const request = vi.fn()
+
+    expect(
+      handleTerminalHttpLink('https://example.com/path', plainEvent(), {
+        worktreeId: 'wt-1',
+        linkActionContext: actionContext(request),
+        actionDestinations: { primary: 'orca', alternate: 'system' }
+      })
+    ).toBe(true)
+    expect(request).not.toHaveBeenCalled()
+    expect(openUrl).toHaveBeenCalledWith('https://example.com/path')
+    expect(openRuntimeBrowserTab).not.toHaveBeenCalled()
+  })
+
   it('offers system browser first and Orca second when system browser is the default', () => {
     const request = vi.fn()
-    const event = plainEvent()
+    const event = middleEvent()
 
     expect(
       handleTerminalHttpLink('https://example.com/path', event, {
         worktreeId: 'wt-1',
-        linkActionContext: actionContext(request),
+        linkActionContext: popoverContext(request),
         actionDestinations: { primary: 'system', alternate: 'orca' }
       })
     ).toBe(true)
@@ -227,9 +247,9 @@ describe('terminal link action routing', () => {
   it('offers Orca first and system browser second when Orca is the default', () => {
     const request = vi.fn()
 
-    handleTerminalHttpLink('https://example.com/path', plainEvent(), {
+    handleTerminalHttpLink('https://example.com/path', middleEvent(), {
       worktreeId: 'wt-1',
-      linkActionContext: actionContext(request),
+      linkActionContext: popoverContext(request),
       actionDestinations: { primary: 'orca', alternate: 'system' }
     })
 
@@ -253,10 +273,10 @@ describe('terminal link action routing', () => {
   it('offers only the system browser for a remote link', () => {
     const request = vi.fn()
 
-    handleTerminalHttpLink('https://example.com/path', plainEvent(), {
+    handleTerminalHttpLink('https://example.com/path', middleEvent(), {
       worktreeId: 'wt-1',
       sourceOwner: { kind: 'ssh', connectionId: 'ssh-1' },
-      linkActionContext: actionContext(request),
+      linkActionContext: popoverContext(request),
       actionDestinations: { primary: 'system' }
     })
 
@@ -268,10 +288,10 @@ describe('terminal link action routing', () => {
   it('routes an explicit Orca Browser action to the owning runtime', () => {
     const request = vi.fn()
 
-    handleTerminalHttpLink('https://example.com/path', plainEvent(), {
+    handleTerminalHttpLink('https://example.com/path', middleEvent(), {
       worktreeId: 'wt-1',
       sourceOwner: { kind: 'runtime', runtimeEnvironmentId: 'env-1' },
-      linkActionContext: actionContext(request),
+      linkActionContext: popoverContext(request),
       actionDestinations: { primary: 'system', alternate: 'orca' }
     })
 
@@ -292,10 +312,10 @@ describe('terminal link action routing', () => {
     const request = vi.fn()
     const url = 'http://0.0.0.0:8000/'
 
-    handleTerminalHttpLink(url, plainEvent(), {
+    handleTerminalHttpLink(url, middleEvent(), {
       worktreeId: 'wt-1',
       sourceOwner: { kind: 'ssh', connectionId: 'ssh-1' },
-      linkActionContext: actionContext(request),
+      linkActionContext: popoverContext(request),
       actionDestinations: { primary: 'system', alternate: 'orca' }
     })
 
@@ -341,7 +361,7 @@ describe('terminal link action routing', () => {
     expect(openRuntimeBrowserTab).not.toHaveBeenCalled()
   })
 
-  it('exposes the actual hidden OSC 8 destination', () => {
+  it('opens the actual hidden OSC 8 destination in the system browser', () => {
     const request = vi.fn()
     const destination = 'https://example.com'
 
@@ -353,7 +373,8 @@ describe('terminal link action routing', () => {
         linkActionContext: actionContext(request)
       })
     ).toBe(true)
-    expect(request.mock.calls[0][0].destination).toBe(destination)
+    expect(request).not.toHaveBeenCalled()
+    expect(openUrl).toHaveBeenCalledWith('https://example.com/')
   })
 
   it('shows the raw OSC 8 file URI but copies its resolved path', () => {

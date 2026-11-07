@@ -23401,6 +23401,7 @@
       "urlInvertsToOrca": "{{mod}}+napsautus avaa, {{shiftMod}}+napsautus avaa Orcassa",
       "urlSystemBrowser": "{{mod}}+napsautus avaa, {{shiftMod}}+napsautus avaa järjestelmän selaimessa",
       "systemBrowserOnly": "{{shiftMod}}+napsautus avaa järjestelmän selaimessa",
+      "clickSystemBrowser": "Napsautus avaa järjestelmän selaimessa",
       "orcaBrowserOnly": "{{shiftMod}}+napsautus avaa Orcassa",
       "switchWorkspace": "{{mod}}+napsautus vaihtaa työtilaa",
       "switchWorkspaceFinder": "{{mod}}+napsautus vaihtaa työtilaa, {{shiftMod}}+napsautus avaa Finderissa",
