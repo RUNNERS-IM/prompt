@@ -12,15 +12,24 @@ const LAZY_LOCALE_LOADERS: Record<
   Exclude<SupportedUiLocale, 'en'>,
   () => Promise<{ default: Record<string, unknown> }>
 > = {
+  ar: () => import('../../renderer/src/i18n/locales/ar.json'),
   de: () => import('../../renderer/src/i18n/locales/de.json'),
   es: () => import('../../renderer/src/i18n/locales/es.json'),
+  fi: () => import('../../renderer/src/i18n/locales/fi.json'),
   fr: () => import('../../renderer/src/i18n/locales/fr.json'),
+  hi: () => import('../../renderer/src/i18n/locales/hi.json'),
+  id: () => import('../../renderer/src/i18n/locales/id.json'),
+  it: () => import('../../renderer/src/i18n/locales/it.json'),
   ja: () => import('../../renderer/src/i18n/locales/ja.json'),
   ko: () => import('../../renderer/src/i18n/locales/ko.json'),
+  nl: () => import('../../renderer/src/i18n/locales/nl.json'),
+  pl: () => import('../../renderer/src/i18n/locales/pl.json'),
   pt: () => import('../../renderer/src/i18n/locales/pt.json'),
   ru: () => import('../../renderer/src/i18n/locales/ru.json'),
+  th: () => import('../../renderer/src/i18n/locales/th.json'),
   tr: () => import('../../renderer/src/i18n/locales/tr.json'),
-  zh: () => import('../../renderer/src/i18n/locales/zh.json'),
+  vi: () => import('../../renderer/src/i18n/locales/vi.json'),
+  'zh-Hans': () => import('../../renderer/src/i18n/locales/zh-Hans.json'),
   'zh-Hant': () => import('../../renderer/src/i18n/locales/zh-Hant.json')
 }
 const LAZY_LOCALE_LOADER_MAP = new Map<string, () => Promise<{ default: Record<string, unknown> }>>(

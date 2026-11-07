@@ -23,7 +23,7 @@ describe('localized startup failure surfaces', () => {
       unknown: "Couldn't confirm Codex started. Check its terminal before trying again."
     },
     {
-      language: 'zh',
+      language: 'zh-Hans',
       exit: 'Codex 在启动时退出了。 请在此文件夹的终端中运行它以查看原因，然后重试。',
       workspace:
         '无法启动 Codex，因为其工作区已不可用。 请恢复工作区文件夹或打开可用的工作区，然后重试。',

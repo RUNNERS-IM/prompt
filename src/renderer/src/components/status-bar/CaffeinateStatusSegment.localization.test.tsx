@@ -82,7 +82,7 @@ afterAll(async () => {
 
 describe('keep-awake copy under non-English UI languages', () => {
   it('renders the localized Chinese trigger and complete menu', async () => {
-    await i18n.changeLanguage('zh')
+    await i18n.changeLanguage('zh-Hans')
     storeMocks.settings = {
       computerAwakeMode: 'auto',
       keepComputerAwakeWhileAgentsRun: true

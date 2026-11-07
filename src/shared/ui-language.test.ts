@@ -20,7 +20,7 @@ describe('normalizeUiLanguage', () => {
   it('accepts supported language settings', () => {
     expect(normalizeUiLanguage(UI_LANGUAGE_SYSTEM)).toBe('system')
     expect(normalizeUiLanguage(UI_LANGUAGE_ENGLISH)).toBe('en')
-    expect(normalizeUiLanguage(UI_LANGUAGE_CHINESE)).toBe('zh')
+    expect(normalizeUiLanguage(UI_LANGUAGE_CHINESE)).toBe('zh-Hans')
     expect(normalizeUiLanguage(UI_LANGUAGE_CHINESE_TRADITIONAL)).toBe('zh-Hant')
     expect(normalizeUiLanguage(UI_LANGUAGE_KOREAN)).toBe('ko')
     expect(normalizeUiLanguage(UI_LANGUAGE_JAPANESE)).toBe('ja')
@@ -33,7 +33,7 @@ describe('normalizeUiLanguage', () => {
   })
 
   it('falls back unknown values to system', () => {
-    expect(normalizeUiLanguage('it')).toBe('system')
+    expect(normalizeUiLanguage('sv')).toBe('system')
     expect(normalizeUiLanguage(null)).toBe('system')
   })
 })

@@ -611,7 +611,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "Show Claude token and cost usage for the active workspace.",
@@ -23148,7 +23157,8 @@
       "filesSsh": "Its folder and files stay on {{host}}. Add that SSH host again to bring it back.",
       "filesVmRecipe": "Its VM recipe determines whether the environment and its files are permanently deleted.",
       "closeOneSession": "To close just one session, use the × on its row.",
-      "confirm": "Remove Project"
+      "confirm": "Remove Project",
+      "runningSessions": "All {{count}} running sessions in it will be stopped."
     },
     "onboarding": {
       "beforeYouStart": {
@@ -23251,7 +23261,14 @@
       "later": "Later",
       "install": "Install",
       "restartFailed": "Could not restart to install the update. Quit and reopen Prompt, then try again.",
-      "installerFailed": "Could not start the update installer. Prompt remains open."
+      "installerFailed": "Could not start the update installer. Prompt remains open.",
+      "titleVersion": "New version {{version}}",
+      "subtitleWithCurrent": "You have {{current}} · Installing restarts Prompt",
+      "subtitle": "Installing restarts Prompt",
+      "dismiss": "Close",
+      "releaseNotes": "What changed",
+      "downloadingTitle": "Downloading version {{version}}",
+      "downloadingSubtitle": "Prompt restarts when the download finishes"
     },
     "windows": {
       "newWindow": "New Window",
@@ -23311,6 +23328,89 @@
       "cancelled": "Move to '{{name}}' cancelled. The session stays where it was.",
       "movingTo": "Moving to '{{name}}'",
       "alreadyMoving": "This session is already being moved."
+    },
+    "about": {
+      "menuLabel": "About {{name}}",
+      "notices": "Open Source Notices",
+      "versionLine": "Version {{version}} · Free",
+      "website": "Website",
+      "noticesMissing": "The notices file could not be read.",
+      "chromiumLicenses": "Open Chromium licenses",
+      "close": "Close"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "New sessions",
+        "permissionDescription": "What Claude may do without asking you.",
+        "sessionGroup": "Claude sessions",
+        "accountsGroup": "Accounts",
+        "usageGroup": "Usage",
+        "usageSearchDescription": "Agent counts plus Claude token, model, and session usage.",
+        "title": "Claude",
+        "description": "Claude accounts, how new sessions start, and usage."
+      },
+      "appearance": {
+        "menuBarGroup": "Menu Bar",
+        "trayGroup": "System Tray",
+        "terminalWindowGroup": "Terminal Window",
+        "title": "Appearance",
+        "description": "Theme, language, zoom, fonts, and terminal colors."
+      },
+      "cli": {
+        "installDescriptionMac": "Register `prompt` and `orca` in /usr/local/bin.",
+        "notInstalled": "Register {{path}} to use Prompt from other terminals."
+      },
+      "advanced": {
+        "permissionsGroup": "macOS permissions",
+        "experimentalGroup": "Experimental features",
+        "sessionSearchGroup": "Agent session search",
+        "title": "Advanced",
+        "description": "Network, macOS permissions, session search, and experimental features."
+      },
+      "git": {
+        "branchesGroup": "Branches and workspaces",
+        "apiBudgetGroup": "API usage limits",
+        "integrationsGroup": "Integrations",
+        "title": "Git",
+        "description": "Branches, source control actions, and GitHub · GitLab connections."
+      },
+      "notifications": {
+        "alertsGroup": "Notifications",
+        "soundGroup": "Sound",
+        "visibleScreenGroup": "Visible Screen"
+      },
+      "sidebarTitle": "Prompt Settings",
+      "terminal": {
+        "scrollbackKeysGroup": "Scrollback & Keys",
+        "shellArgsGroup": "Shell Start Arguments"
+      },
+      "group": {
+        "more": "More"
+      }
+    },
+    "skills": {
+      "commandCount": "{{count}} commands",
+      "mySkills": "My skills",
+      "commands": "Commands"
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "Click for actions, ",
+      "fileOpen": "{{mod}}+click to open, or {{shiftMod}}+click for default app",
+      "actionsOrPrefix": "Click for actions or ",
+      "orcaFileOpen": "{{mod}}+click to open in Orca",
+      "urlInvertsToOrca": "{{mod}}+click to open, or {{shiftMod}}+click to open in Orca",
+      "urlSystemBrowser": "{{mod}}+click to open, or {{shiftMod}}+click for system browser",
+      "systemBrowserOnly": "{{shiftMod}}+click for system browser",
+      "orcaBrowserOnly": "{{shiftMod}}+click to open in Orca",
+      "switchWorkspace": "{{mod}}+click to switch workspace",
+      "switchWorkspaceFinder": "{{mod}}+click to switch workspace, or {{shiftMod}}+click to open in Finder",
+      "switchWorkspaceFolder": "{{mod}}+click to switch workspace, or {{shiftMod}}+click to open folder"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "Orca skipped hidden terminal output because the backlog grew too large.",
+      "foregroundBurst": "Orca skipped a burst of terminal output because the backlog grew too large.",
+      "restoreUnavailable": "Orca skipped hidden terminal output because main recovery was unavailable.",
+      "noHostImage": "Orca could not restore this terminal's history from its host."
     }
   }
 }

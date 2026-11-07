@@ -40,6 +40,237 @@
       "resume": "繼續工作階段",
       "showAll": "檢視全部…",
       "launchFailed": "無法使用這些選項啟動 Claude。"
+    },
+    "about": {
+      "menuLabel": "關於 {{name}}",
+      "notices": "開放原始碼聲明",
+      "versionLine": "版本 {{version}} · 免費",
+      "website": "網站",
+      "noticesMissing": "無法讀取聲明檔案。",
+      "chromiumLicenses": "開啟 Chromium 授權條款",
+      "close": "關閉"
+    },
+    "windows": {
+      "newWindow": "新增視窗",
+      "rememberTitle": "記住開啟的視窗",
+      "rememberDescription": "Prompt 啟動時，重新開啟每個視窗及其分頁、大小與位置。",
+      "openInNewWindow": "在新視窗中開啟",
+      "windowLabelNamed": "視窗 {{index}} — {{name}}",
+      "windowLabel": "視窗 {{index}}",
+      "mainWindowSuffix": "（主要）",
+      "moveTabToWindow": "將分頁移至視窗"
+    },
+    "crashReport": {
+      "title": "回報當機問題",
+      "description": "會開啟新的 GitHub issue，並自動填入您的備註與版本。需要 GitHub 帳號。",
+      "cancel": "取消",
+      "open": "在 GitHub 中開啟",
+      "opened": "已開啟 GitHub issue 頁面。在該頁面送出後，回報才會建立。"
+    },
+    "update": {
+      "titleVersion": "新版本 {{version}}",
+      "subtitleWithCurrent": "您目前使用 {{current}} · 安裝時會重新啟動 Prompt",
+      "subtitle": "安裝時會重新啟動 Prompt",
+      "dismiss": "關閉",
+      "releaseNotes": "更新內容",
+      "later": "稍後",
+      "install": "安裝",
+      "downloadingTitle": "正在下載版本 {{version}}",
+      "downloadingSubtitle": "下載完成後 Prompt 會重新啟動",
+      "restartFailed": "無法重新啟動以安裝更新。請結束並重新開啟 Prompt，然後再試一次。",
+      "installerFailed": "無法啟動更新安裝程式。Prompt 仍保持開啟。"
+    },
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "開始之前",
+        "subtitle": "Prompt 使用 Claude。請選擇 Claude 是否可在不詢問的情況下執行動作。",
+        "tooltip": "Yolo 模式"
+      },
+      "close": "關閉"
+    },
+    "claudeModel": {
+      "rejected": "Claude 已保留先前的模型。",
+      "submenu": "模型",
+      "badgeTitle": "模型：{{model}}（點選以變更）"
+    },
+    "defaultModel": {
+      "title": "預設模型",
+      "description": "只有在工作階段使用不同模型時，分頁與側邊欄列才會顯示模型名稱。將游標停在分頁或列上即可查看其模型。"
+    },
+    "sessionCard": {
+      "model": "模型",
+      "status": "狀態",
+      "task": "任務",
+      "folder": "資料夾",
+      "subagents": "子代理程式",
+      "subagentsRunning": "{{count}} 個執行中",
+      "minutes": "{{m}} 分",
+      "hours": "{{h}} 小時",
+      "hoursMinutes": "{{h}} 小時 {{m}} 分",
+      "justNow": "{{status}} · 剛剛",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · {{duration}}前"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "新工作階段",
+        "permissionDescription": "Claude 可在不詢問您的情況下執行的動作。",
+        "sessionGroup": "Claude 工作階段",
+        "accountsGroup": "帳號",
+        "usageGroup": "用量",
+        "usageSearchDescription": "代理程式數量，以及 Claude 的 token、模型與工作階段用量。",
+        "title": "Claude",
+        "description": "Claude 帳號、新工作階段的啟動方式與用量。"
+      },
+      "appearance": {
+        "menuBarGroup": "選單列",
+        "trayGroup": "系統匣",
+        "terminalWindowGroup": "終端機視窗",
+        "title": "外觀",
+        "description": "佈景主題、語言、縮放、字型與終端機色彩。"
+      },
+      "cli": {
+        "installDescriptionMac": "在 /usr/local/bin 中註冊 `prompt` 與 `orca`。",
+        "notInstalled": "註冊 {{path}}，以便從其他終端機使用 Prompt。"
+      },
+      "advanced": {
+        "permissionsGroup": "macOS 權限",
+        "experimentalGroup": "實驗性功能",
+        "sessionSearchGroup": "代理程式工作階段搜尋",
+        "title": "進階",
+        "description": "網路、macOS 權限、工作階段搜尋與實驗性功能。"
+      },
+      "git": {
+        "branchesGroup": "分支與工作區",
+        "apiBudgetGroup": "API 使用限制",
+        "integrationsGroup": "整合",
+        "title": "Git",
+        "description": "分支、原始碼控制動作，以及 GitHub · GitLab 連線。"
+      },
+      "notifications": {
+        "alertsGroup": "通知",
+        "soundGroup": "聲音",
+        "visibleScreenGroup": "可見畫面"
+      },
+      "sidebarTitle": "Prompt 設定",
+      "terminal": {
+        "scrollbackKeysGroup": "捲動緩衝區與按鍵",
+        "shellArgsGroup": "Shell 啟動引數"
+      },
+      "group": {
+        "more": "更多"
+      }
+    },
+    "mobile": {
+      "directOnly": "Prompt 中的中繼已關閉。您的手機只能在與這部電腦相同的 Wi-Fi 下，或透過 Tailscale 連線。"
+    },
+    "projectRemoval": {
+      "wholeProject": "這會移除整個專案，而不只是單一工作階段。",
+      "runningSessions": "其中所有 {{count}} 個執行中的工作階段都會停止。",
+      "filesVmRecipe": "其 VM 配方會決定環境及其檔案是否被永久刪除。",
+      "filesSsh": "其資料夾與檔案會保留在 {{host}} 上。再次新增該 SSH 主機即可恢復。",
+      "filesLocal": "其資料夾與檔案會保留在原處。",
+      "closeOneSession": "若只要關閉單一工作階段，請使用該列上的 ×。",
+      "title": "要從清單中移除「{{name}}」專案嗎？",
+      "confirm": "移除專案",
+      "menuItem": "從清單移除專案…"
+    },
+    "computerPicker": {
+      "connected": "已連線",
+      "connecting": "連線中",
+      "offline": "離線",
+      "thisMac": "（這部 Mac）",
+      "thisComputer": "這部電腦",
+      "label": "電腦",
+      "add": "新增電腦…",
+      "share": "分享這部電腦…",
+      "shareTitle": "分享這部電腦"
+    },
+    "sessionRow": {
+      "helpers": "協助程式 {{count}}",
+      "tool": {
+        "command": "正在執行指令",
+        "read": "正在讀取檔案",
+        "edit": "正在編輯檔案",
+        "search": "正在搜尋檔案",
+        "web": "正在上網查詢",
+        "helper": "正在交辦工作給協助程式",
+        "plan": "正在更新計畫",
+        "other": "正在使用 {{tool}}"
+      },
+      "noUpdateMinutes": "已 {{count}} 分鐘沒有更新 · 可能已卡住",
+      "noUpdateHours": "已 {{count}} 小時沒有更新 · 可能已卡住",
+      "noUpdateDays": "已 {{count}} 天沒有更新 · 可能已卡住",
+      "monitoring": "正在監看背景工作",
+      "done": "完成 · 等待您回應",
+      "failure": {
+        "signIn": "需要登入",
+        "usageLimit": "已達用量上限",
+        "overloaded": "伺服器忙碌中"
+      }
+    },
+    "sessionMove": {
+      "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",
+      "cancelNoSession": "此工作階段尚無可移動的 Claude 對話。",
+      "cancelSeveral": "此分頁有多個 Claude 對話，無法確定要移動哪一個。",
+      "hintCopy": "複製到這裡",
+      "hintMove": "移到這裡 · ⌥ 為複製",
+      "hintMoveShell": "移到這裡",
+      "cancel": "取消",
+      "movingTo": "正在移至「{{name}}」",
+      "alreadyMoving": "此工作階段已在移動中。",
+      "cancelled": "已取消移至「{{name}}」。工作階段會留在原處。",
+      "waiting": "此工作階段正在運作。完成後會移至「{{name}}」。",
+      "stillWorking": "工作階段持續運作，因此未移動。",
+      "noSession": "此工作階段沒有可移動的 Claude 對話。",
+      "opening": "正在「{{name}}」中開啟工作階段…",
+      "copyFailed": "無法移動工作階段。",
+      "notStarted": "對話未在「{{name}}」中開啟，因此保留了原本的分頁。",
+      "copiedPinned": "已在「{{name}}」中開啟。原本的分頁已固定，因此予以保留。",
+      "moved": "已移至「{{name}}」",
+      "undo": "復原"
+    },
+    "sidebar": {
+      "terminal": "終端機",
+      "openWorkspace": "開啟終端機"
+    },
+    "skills": {
+      "commandCount": "{{count}} 個指令",
+      "mySkills": "我的技能",
+      "commands": "指令"
+    },
+    "closeSession": {
+      "titleNamed": "要關閉「{{name}}」嗎？",
+      "titleUnnamed": "要關閉此工作階段嗎？",
+      "commandDescription": "其中執行的指令將會停止。",
+      "agentDescription": "其工作將會停止。對話會保留，您之後可以繼續。",
+      "dontAskAgain": "不再詢問",
+      "confirm": "關閉"
+    },
+    "timeAgo": {
+      "now": "現在",
+      "minutes": "{{value}} 分",
+      "hours": "{{value}} 小時",
+      "days": "{{value}} 天"
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "點選以顯示動作，",
+      "fileOpen": "按住 {{mod}} 並點選以開啟，或按住 {{shiftMod}} 並點選以使用預設應用程式",
+      "actionsOrPrefix": "點選以顯示動作，或",
+      "orcaFileOpen": "按住 {{mod}} 並點選以在 Orca 中開啟",
+      "urlInvertsToOrca": "按住 {{mod}} 並點選以開啟，或按住 {{shiftMod}} 並點選以在 Orca 中開啟",
+      "urlSystemBrowser": "按住 {{mod}} 並點選以開啟，或按住 {{shiftMod}} 並點選以使用系統瀏覽器",
+      "systemBrowserOnly": "按住 {{shiftMod}} 並點選以使用系統瀏覽器",
+      "orcaBrowserOnly": "按住 {{shiftMod}} 並點選以在 Orca 中開啟",
+      "switchWorkspace": "按住 {{mod}} 並點選以切換工作區",
+      "switchWorkspaceFinder": "按住 {{mod}} 並點選以切換工作區，或按住 {{shiftMod}} 並點選以在 Finder 中開啟",
+      "switchWorkspaceFolder": "按住 {{mod}} 並點選以切換工作區，或按住 {{shiftMod}} 並點選以開啟資料夾"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "Orca 因積壓量過大，已略過隱藏的終端機輸出。",
+      "foregroundBurst": "Orca 因積壓量過大，已略過一波終端機輸出。",
+      "restoreUnavailable": "Orca 因主要復原機制無法使用，已略過隱藏的終端機輸出。",
+      "noHostImage": "Orca 無法從主機還原此終端機的歷史記錄。"
     }
   },
   "agentLaunch": {
@@ -579,7 +810,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "顯示目前工作區的 Claude token 用量與費用。",

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { PRCheckRunDetails } from '../../../../shared/github/check-types'
-import zh from '../../i18n/locales/zh.json'
+import zh from '../../i18n/locales/zh-Hans.json'
 import { recordRuntimeSubscription } from '@/runtime/runtime-environment-bridge-fixture'
 import { createCompatibleRuntimeStatusResponse } from '@/runtime/runtime-compatibility-test-fixture'
 import {
@@ -30,7 +30,7 @@ import {
 } from '@/lib/check-run-details-log-normalization-test-fixture'
 
 vi.mock('@/i18n/i18n', async () => {
-  const { default: catalog } = await import('../../i18n/locales/zh.json')
+  const { default: catalog } = await import('../../i18n/locales/zh-Hans.json')
   const messages: Record<string, string> = {
     'auto.runtime.githubCheckDetailsTimeout.timedOut':
       catalog.auto.runtime.githubCheckDetailsTimeout.timedOut,

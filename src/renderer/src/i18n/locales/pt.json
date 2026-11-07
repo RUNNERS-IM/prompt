@@ -40,6 +40,237 @@
       "resume": "Retomar",
       "showAll": "Ver tudo…",
       "launchFailed": "Não foi possível iniciar o Claude com estas opções."
+    },
+    "about": {
+      "menuLabel": "Sobre o {{name}}",
+      "notices": "Abrir avisos de código aberto",
+      "versionLine": "Versão {{version}} · Gratuito",
+      "website": "Site",
+      "noticesMissing": "Não foi possível ler o arquivo de avisos.",
+      "chromiumLicenses": "Abrir licenças do Chromium",
+      "close": "Fechar"
+    },
+    "windows": {
+      "newWindow": "Nova janela",
+      "rememberTitle": "Lembrar janelas abertas",
+      "rememberDescription": "Reabre cada janela com suas abas, tamanho e posição quando o Prompt iniciar.",
+      "openInNewWindow": "Abrir em nova janela",
+      "windowLabelNamed": "Janela {{index}} — {{name}}",
+      "windowLabel": "Janela {{index}}",
+      "mainWindowSuffix": "(Principal)",
+      "moveTabToWindow": "Mover aba para a janela"
+    },
+    "crashReport": {
+      "title": "Relatar uma falha",
+      "description": "Abre uma nova issue no GitHub com suas anotações e a versão já preenchidas. É necessário ter uma conta do GitHub.",
+      "cancel": "Cancelar",
+      "open": "Abrir no GitHub",
+      "opened": "A página da issue do GitHub foi aberta. O relatório só é registrado depois que você o enviar lá."
+    },
+    "update": {
+      "titleVersion": "Nova versão {{version}}",
+      "subtitleWithCurrent": "Você tem {{current}} · A instalação reinicia o Prompt",
+      "subtitle": "A instalação reinicia o Prompt",
+      "dismiss": "Fechar",
+      "releaseNotes": "O que mudou",
+      "later": "Depois",
+      "install": "Instalar",
+      "downloadingTitle": "Baixando a versão {{version}}",
+      "downloadingSubtitle": "O Prompt reinicia quando o download terminar",
+      "restartFailed": "Não foi possível reiniciar para instalar a atualização. Saia do Prompt e abra-o novamente, depois tente de novo.",
+      "installerFailed": "Não foi possível iniciar o instalador da atualização. O Prompt continua aberto."
+    },
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "Antes de começar",
+        "subtitle": "O Prompt usa o Claude. Escolha se o Claude pode agir sem pedir permissão.",
+        "tooltip": "Modo Yolo"
+      },
+      "close": "Fechar"
+    },
+    "claudeModel": {
+      "rejected": "O Claude manteve o modelo anterior.",
+      "submenu": "Modelo",
+      "badgeTitle": "Modelo: {{model}} (clique para alterar)"
+    },
+    "defaultModel": {
+      "title": "Modelo padrão",
+      "description": "As abas e as linhas da barra lateral mostram o nome do modelo somente quando uma sessão executa um modelo diferente. Passe o mouse sobre uma aba ou linha para ver o modelo."
+    },
+    "sessionCard": {
+      "model": "Modelo",
+      "status": "Status",
+      "task": "Tarefa",
+      "folder": "Pasta",
+      "subagents": "Subagentes",
+      "subagentsRunning": "{{count}} em execução",
+      "minutes": "{{m}}min",
+      "hours": "{{h}}h",
+      "hoursMinutes": "{{h}}h {{m}}min",
+      "justNow": "{{status}} · agora mesmo",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · há {{duration}}"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "Novas sessões",
+        "permissionDescription": "O que o Claude pode fazer sem perguntar a você.",
+        "sessionGroup": "Sessões do Claude",
+        "accountsGroup": "Contas",
+        "usageGroup": "Uso",
+        "usageSearchDescription": "Contagem de agentes e uso de tokens, modelos e sessões do Claude.",
+        "title": "Claude",
+        "description": "Contas do Claude, como as novas sessões começam e uso."
+      },
+      "appearance": {
+        "menuBarGroup": "Barra de menus",
+        "trayGroup": "Bandeja do sistema",
+        "terminalWindowGroup": "Janela do terminal",
+        "title": "Aparência",
+        "description": "Tema, idioma, zoom, fontes e cores do terminal."
+      },
+      "cli": {
+        "installDescriptionMac": "Registre `prompt` e `orca` em /usr/local/bin.",
+        "notInstalled": "Registre {{path}} para usar o Prompt em outros terminais."
+      },
+      "advanced": {
+        "permissionsGroup": "Permissões do macOS",
+        "experimentalGroup": "Recursos experimentais",
+        "sessionSearchGroup": "Busca de sessões de agentes",
+        "title": "Avançado",
+        "description": "Rede, permissões do macOS, busca de sessões e recursos experimentais."
+      },
+      "git": {
+        "branchesGroup": "Branches e espaços de trabalho",
+        "apiBudgetGroup": "Limites de uso da API",
+        "integrationsGroup": "Integrações",
+        "title": "Git",
+        "description": "Branches, ações de controle de versão e conexões com GitHub · GitLab."
+      },
+      "notifications": {
+        "alertsGroup": "Notificações",
+        "soundGroup": "Som",
+        "visibleScreenGroup": "Tela visível"
+      },
+      "sidebarTitle": "Configurações do Prompt",
+      "terminal": {
+        "scrollbackKeysGroup": "Rolagem e teclas",
+        "shellArgsGroup": "Argumentos de inicialização do shell"
+      },
+      "group": {
+        "more": "Mais"
+      }
+    },
+    "mobile": {
+      "directOnly": "O Relay está desativado no Prompt. Seu celular se conecta somente na mesma rede Wi-Fi deste computador ou pelo Tailscale."
+    },
+    "projectRemoval": {
+      "wholeProject": "Isso remove o projeto inteiro, não apenas uma sessão.",
+      "runningSessions": "Todas as {{count}} sessões em execução nele serão interrompidas.",
+      "filesVmRecipe": "A receita da VM determina se o ambiente e seus arquivos serão excluídos permanentemente.",
+      "filesSsh": "A pasta e os arquivos permanecem em {{host}}. Adicione esse host SSH novamente para trazê-lo de volta.",
+      "filesLocal": "A pasta e os arquivos permanecem onde estão.",
+      "closeOneSession": "Para fechar apenas uma sessão, use o × na linha dela.",
+      "title": "Remover o projeto '{{name}}' da lista?",
+      "confirm": "Remover projeto",
+      "menuItem": "Remover projeto da lista…"
+    },
+    "computerPicker": {
+      "connected": "Conectado",
+      "connecting": "Conectando",
+      "offline": "Offline",
+      "thisMac": "(este Mac)",
+      "thisComputer": "Este computador",
+      "label": "Computador",
+      "add": "Adicionar computador…",
+      "share": "Compartilhar este computador…",
+      "shareTitle": "Compartilhar este computador"
+    },
+    "sessionRow": {
+      "helpers": "Auxiliares {{count}}",
+      "tool": {
+        "command": "Executando um comando",
+        "read": "Lendo um arquivo",
+        "edit": "Editando um arquivo",
+        "search": "Pesquisando arquivos",
+        "web": "Pesquisando na web",
+        "helper": "Passando o trabalho a um auxiliar",
+        "plan": "Atualizando seu plano",
+        "other": "Usando {{tool}}"
+      },
+      "noUpdateMinutes": "Sem atualização há {{count}} min · pode estar travada",
+      "noUpdateHours": "Sem atualização há {{count}} h · pode estar travada",
+      "noUpdateDays": "Sem atualização há {{count}} d · pode estar travada",
+      "monitoring": "Monitorando tarefas em segundo plano",
+      "done": "Concluído · aguardando você",
+      "failure": {
+        "signIn": "Login necessário",
+        "usageLimit": "Limite de uso atingido",
+        "overloaded": "Servidor ocupado"
+      }
+    },
+    "sessionMove": {
+      "cancelRemote": "As sessões só podem ser movidas entre projetos neste computador.",
+      "cancelNoSession": "Esta sessão ainda não tem uma conversa do Claude para mover.",
+      "cancelSeveral": "Esta aba tem mais de uma conversa do Claude, então não está claro qual mover.",
+      "hintCopy": "Copiar para cá",
+      "hintMove": "Mover para cá · ⌥ copia",
+      "hintMoveShell": "Mover para cá",
+      "cancel": "Cancelar",
+      "movingTo": "Movendo para '{{name}}'",
+      "alreadyMoving": "Esta sessão já está sendo movida.",
+      "cancelled": "Movimentação para '{{name}}' cancelada. A sessão permanece onde estava.",
+      "waiting": "Esta sessão está em andamento. Ela será movida para '{{name}}' quando terminar.",
+      "stillWorking": "A sessão continuou em andamento, então não foi movida.",
+      "noSession": "Esta sessão não tem uma conversa do Claude para mover.",
+      "opening": "Abrindo a sessão em '{{name}}'…",
+      "copyFailed": "Não foi possível mover a sessão.",
+      "notStarted": "A conversa não abriu em '{{name}}', então a aba original foi mantida.",
+      "copiedPinned": "Aberta em '{{name}}'. A aba original está fixada, então foi mantida.",
+      "moved": "Movida para '{{name}}'",
+      "undo": "Desfazer"
+    },
+    "sidebar": {
+      "terminal": "Terminal",
+      "openWorkspace": "Abrir um terminal"
+    },
+    "skills": {
+      "commandCount": "{{count}} comandos",
+      "mySkills": "Minhas skills",
+      "commands": "Comandos"
+    },
+    "closeSession": {
+      "titleNamed": "Fechar '{{name}}'?",
+      "titleUnnamed": "Fechar esta sessão?",
+      "commandDescription": "O comando em execução nela será interrompido.",
+      "agentDescription": "O trabalho dela será interrompido. A conversa é mantida, então você pode retomá-la depois.",
+      "dontAskAgain": "Não perguntar novamente",
+      "confirm": "Fechar"
+    },
+    "timeAgo": {
+      "now": "agora",
+      "minutes": "{{value}}min",
+      "hours": "{{value}}h",
+      "days": "{{value}}d"
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "Clique para ver ações, ",
+      "fileOpen": "{{mod}}+clique para abrir, ou {{shiftMod}}+clique para o app padrão",
+      "actionsOrPrefix": "Clique para ver ações ou ",
+      "orcaFileOpen": "{{mod}}+clique para abrir no Orca",
+      "urlInvertsToOrca": "{{mod}}+clique para abrir, ou {{shiftMod}}+clique para abrir no Orca",
+      "urlSystemBrowser": "{{mod}}+clique para abrir, ou {{shiftMod}}+clique para o navegador do sistema",
+      "systemBrowserOnly": "{{shiftMod}}+clique para o navegador do sistema",
+      "orcaBrowserOnly": "{{shiftMod}}+clique para abrir no Orca",
+      "switchWorkspace": "{{mod}}+clique para trocar de espaço de trabalho",
+      "switchWorkspaceFinder": "{{mod}}+clique para trocar de espaço de trabalho, ou {{shiftMod}}+clique para abrir no Finder",
+      "switchWorkspaceFolder": "{{mod}}+clique para trocar de espaço de trabalho, ou {{shiftMod}}+clique para abrir a pasta"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "O Orca ignorou a saída oculta do terminal porque a fila acumulada ficou grande demais.",
+      "foregroundBurst": "O Orca ignorou uma rajada de saída do terminal porque a fila acumulada ficou grande demais.",
+      "restoreUnavailable": "O Orca ignorou a saída oculta do terminal porque a recuperação principal não estava disponível.",
+      "noHostImage": "O Orca não conseguiu restaurar o histórico deste terminal a partir do host."
     }
   },
   "agentLaunch": {
@@ -1272,7 +1503,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "Mostra o uso de tokens e custo do Claude para o espaço de trabalho ativo.",
@@ -11983,8 +12223,7 @@
         },
         "RemoveFolderDialog": {
           "d36883e046": "Cancelar",
-          "b79b39d865": "Remover Projeto",
-          "openTerminalWarning_many": "{{count}} terminais abertos neste projeto serão fechados."
+          "b79b39d865": "Remover Projeto"
         },
         "WorktreeCardMetadataStatusBadges": {
           "fe188062a1": "Estado: Aberto",

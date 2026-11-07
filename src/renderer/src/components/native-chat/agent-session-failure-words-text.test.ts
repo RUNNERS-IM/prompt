@@ -28,7 +28,7 @@ describe('desktop words for a failure fact', () => {
     ['fr', 'Puis envoyez à nouveau votre message.'],
     ['ja', 'その後、メッセージをもう一度送信してください。'],
     ['ko', '그런 다음 메시지를 다시 보내세요.'],
-    ['zh', '然后再次发送消息。']
+    ['zh-Hans', '然后再次发送消息。']
   ])('keeps %s copy while separating an unpunctuated provider detail', async (locale, retry) => {
     await i18n.changeLanguage(locale)
     const fact = {

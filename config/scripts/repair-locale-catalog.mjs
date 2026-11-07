@@ -57,7 +57,7 @@ export async function repairLocale(root, locale) {
 }
 
 export async function main(root = process.cwd(), locale = parseLocaleArg(process.argv)) {
-  const locales = locale ? [locale] : ['ko', 'zh', 'ja', 'es']
+  const locales = locale ? [locale] : ['ko', 'zh-Hans', 'ja', 'es']
   const unsupported = locales.filter((code) => !LOCALE_CACHE_FILES[code])
   if (unsupported.length > 0) {
     console.error(`Unsupported locale(s): ${unsupported.join(', ')}`)

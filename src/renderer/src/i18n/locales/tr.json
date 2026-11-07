@@ -40,6 +40,237 @@
       "resume": "Devam et",
       "showAll": "Tümünü göster…",
       "launchFailed": "Claude bu seçeneklerle başlatılamadı."
+    },
+    "about": {
+      "menuLabel": "{{name}} Hakkında",
+      "notices": "Açık Kaynak Bildirimleri",
+      "versionLine": "Sürüm {{version}} · Ücretsiz",
+      "website": "Web sitesi",
+      "noticesMissing": "Bildirimler dosyası okunamadı.",
+      "chromiumLicenses": "Chromium lisanslarını aç",
+      "close": "Kapat"
+    },
+    "windows": {
+      "newWindow": "Yeni Pencere",
+      "rememberTitle": "Açık Pencereleri Hatırla",
+      "rememberDescription": "Prompt başladığında her pencereyi sekmeleri, boyutu ve konumuyla yeniden aç.",
+      "openInNewWindow": "Yeni Pencerede Aç",
+      "windowLabelNamed": "Pencere {{index}} — {{name}}",
+      "windowLabel": "Pencere {{index}}",
+      "mainWindowSuffix": "(Ana)",
+      "moveTabToWindow": "Sekmeyi Pencereye Taşı"
+    },
+    "crashReport": {
+      "title": "Çökme bildir",
+      "description": "Notlarınız ve sürüm bilgisi doldurulmuş yeni bir GitHub sorunu açar. GitHub hesabı gerekir.",
+      "cancel": "İptal",
+      "open": "GitHub'da aç",
+      "opened": "GitHub sorun sayfası açıldı. Bildirim, orada gönderdiğinizde oluşturulur."
+    },
+    "update": {
+      "titleVersion": "Yeni sürüm {{version}}",
+      "subtitleWithCurrent": "Mevcut sürüm: {{current}} · Yükleme Prompt'u yeniden başlatır",
+      "subtitle": "Yükleme Prompt'u yeniden başlatır",
+      "dismiss": "Kapat",
+      "releaseNotes": "Neler değişti",
+      "later": "Sonra",
+      "install": "Yükle",
+      "downloadingTitle": "{{version}} sürümü indiriliyor",
+      "downloadingSubtitle": "İndirme bittiğinde Prompt yeniden başlar",
+      "restartFailed": "Güncellemeyi yüklemek için yeniden başlatılamadı. Prompt'u kapatıp yeniden açın, sonra tekrar deneyin.",
+      "installerFailed": "Güncelleme yükleyicisi başlatılamadı. Prompt açık kalıyor."
+    },
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "Başlamadan önce",
+        "subtitle": "Prompt, Claude'u kullanır. Claude'un sormadan işlem yapıp yapamayacağını seçin.",
+        "tooltip": "Yolo modu"
+      },
+      "close": "Kapat"
+    },
+    "claudeModel": {
+      "rejected": "Claude önceki modeli korudu.",
+      "submenu": "Model",
+      "badgeTitle": "Model: {{model}} (değiştirmek için tıklayın)"
+    },
+    "defaultModel": {
+      "title": "Varsayılan model",
+      "description": "Sekmeler ve kenar çubuğu satırları, model adını yalnızca bir oturum farklı bir model çalıştırdığında gösterir. Modelini görmek için bir sekmenin veya satırın üzerine gelin."
+    },
+    "sessionCard": {
+      "model": "Model",
+      "status": "Durum",
+      "task": "Görev",
+      "folder": "Klasör",
+      "subagents": "Alt ajanlar",
+      "subagentsRunning": "{{count}} çalışıyor",
+      "minutes": "{{m}} dk",
+      "hours": "{{h}} sa",
+      "hoursMinutes": "{{h}} sa {{m}} dk",
+      "justNow": "{{status}} · az önce",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · {{duration}} önce"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "Yeni oturumlar",
+        "permissionDescription": "Claude'un size sormadan yapabilecekleri.",
+        "sessionGroup": "Claude oturumları",
+        "accountsGroup": "Hesaplar",
+        "usageGroup": "Kullanım",
+        "usageSearchDescription": "Ajan sayıları ile Claude token, model ve oturum kullanımı.",
+        "title": "Claude",
+        "description": "Claude hesapları, yeni oturumların nasıl başlayacağı ve kullanım."
+      },
+      "appearance": {
+        "menuBarGroup": "Menü Çubuğu",
+        "trayGroup": "Sistem Tepsisi",
+        "terminalWindowGroup": "Terminal Penceresi",
+        "title": "Görünüm",
+        "description": "Tema, dil, yakınlaştırma, yazı tipleri ve terminal renkleri."
+      },
+      "cli": {
+        "installDescriptionMac": "`prompt` ve `orca` komutlarını /usr/local/bin içine kaydedin.",
+        "notInstalled": "Prompt'u diğer terminallerden kullanmak için {{path}} yolunu kaydedin."
+      },
+      "advanced": {
+        "permissionsGroup": "macOS izinleri",
+        "experimentalGroup": "Deneysel özellikler",
+        "sessionSearchGroup": "Ajan oturumu arama",
+        "title": "Gelişmiş",
+        "description": "Ağ, macOS izinleri, oturum arama ve deneysel özellikler."
+      },
+      "git": {
+        "branchesGroup": "Branch'ler ve çalışma alanları",
+        "apiBudgetGroup": "API kullanım sınırları",
+        "integrationsGroup": "Entegrasyonlar",
+        "title": "Git",
+        "description": "Branch'ler, kaynak denetimi eylemleri ve GitHub · GitLab bağlantıları."
+      },
+      "notifications": {
+        "alertsGroup": "Bildirimler",
+        "soundGroup": "Ses",
+        "visibleScreenGroup": "Görünen Ekran"
+      },
+      "sidebarTitle": "Prompt Ayarları",
+      "terminal": {
+        "scrollbackKeysGroup": "Geri Kaydırma ve Tuşlar",
+        "shellArgsGroup": "Kabuk Başlatma Argümanları"
+      },
+      "group": {
+        "more": "Daha fazla"
+      }
+    },
+    "mobile": {
+      "directOnly": "Prompt'ta Relay kapalı. Telefonunuz yalnızca bu bilgisayarla aynı Wi-Fi ağındayken veya Tailscale üzerinden bağlanır."
+    },
+    "projectRemoval": {
+      "wholeProject": "Bu işlem yalnızca bir oturumu değil, projenin tamamını kaldırır.",
+      "runningSessions": "İçindeki {{count}} çalışan oturumun tümü durdurulacak.",
+      "filesVmRecipe": "VM tarifi, ortamın ve dosyalarının kalıcı olarak silinip silinmeyeceğini belirler.",
+      "filesSsh": "Klasörü ve dosyaları {{host}} üzerinde kalır. Geri getirmek için bu SSH sunucusunu yeniden ekleyin.",
+      "filesLocal": "Klasörü ve dosyaları olduğu yerde kalır.",
+      "closeOneSession": "Yalnızca tek bir oturumu kapatmak için satırındaki × simgesini kullanın.",
+      "title": "'{{name}}' projesi listeden kaldırılsın mı?",
+      "confirm": "Projeyi Kaldır",
+      "menuItem": "Projeyi listeden kaldır…"
+    },
+    "computerPicker": {
+      "connected": "Bağlı",
+      "connecting": "Bağlanıyor",
+      "offline": "Çevrimdışı",
+      "thisMac": "(bu Mac)",
+      "thisComputer": "Bu bilgisayar",
+      "label": "Bilgisayar",
+      "add": "Bilgisayar ekle…",
+      "share": "Bu bilgisayarı paylaş…",
+      "shareTitle": "Bu bilgisayarı paylaş"
+    },
+    "sessionRow": {
+      "helpers": "Yardımcılar {{count}}",
+      "tool": {
+        "command": "Komut çalıştırıyor",
+        "read": "Dosya okuyor",
+        "edit": "Dosya düzenliyor",
+        "search": "Dosyalarda arıyor",
+        "web": "Web'de arıyor",
+        "helper": "İşi bir yardımcıya veriyor",
+        "plan": "Planını güncelliyor",
+        "other": "{{tool}} kullanıyor"
+      },
+      "noUpdateMinutes": "{{count}} dk'dır güncelleme yok · takılmış olabilir",
+      "noUpdateHours": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
+      "noUpdateDays": "{{count}} gündür güncelleme yok · takılmış olabilir",
+      "monitoring": "Arka plan görevlerini izliyor",
+      "done": "Bitti · sizi bekliyor",
+      "failure": {
+        "signIn": "Oturum açmak gerekli",
+        "usageLimit": "Kullanım sınırına ulaşıldı",
+        "overloaded": "Sunucu meşgul"
+      }
+    },
+    "sessionMove": {
+      "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
+      "cancelNoSession": "Bu oturumda henüz taşınacak bir Claude sohbeti yok.",
+      "cancelSeveral": "Bu sekmede birden fazla Claude sohbeti var, hangisinin taşınacağı belirsiz.",
+      "hintCopy": "Buraya kopyala",
+      "hintMove": "Buraya taşı · ⌥ kopyalar",
+      "hintMoveShell": "Buraya taşı",
+      "cancel": "İptal",
+      "movingTo": "'{{name}}' projesine taşınıyor",
+      "alreadyMoving": "Bu oturum zaten taşınıyor.",
+      "cancelled": "'{{name}}' projesine taşıma iptal edildi. Oturum olduğu yerde kalır.",
+      "waiting": "Bu oturum çalışıyor. Bitince '{{name}}' projesine taşınacak.",
+      "stillWorking": "Oturum çalışmaya devam ettiği için taşınmadı.",
+      "noSession": "Bu oturumda taşınacak bir Claude sohbeti yok.",
+      "opening": "Oturum '{{name}}' projesinde açılıyor…",
+      "copyFailed": "Oturum taşınamadı.",
+      "notStarted": "Sohbet '{{name}}' projesinde açılmadı, bu yüzden özgün sekme korundu.",
+      "copiedPinned": "'{{name}}' projesinde açıldı. Özgün sekme sabitlendiği için korundu.",
+      "moved": "'{{name}}' projesine taşındı",
+      "undo": "Geri al"
+    },
+    "sidebar": {
+      "terminal": "Terminal",
+      "openWorkspace": "Terminal aç"
+    },
+    "skills": {
+      "commandCount": "{{count}} komut",
+      "mySkills": "Becerilerim",
+      "commands": "Komutlar"
+    },
+    "closeSession": {
+      "titleNamed": "'{{name}}' kapatılsın mı?",
+      "titleUnnamed": "Bu oturum kapatılsın mı?",
+      "commandDescription": "İçinde çalışan komut durdurulacak.",
+      "agentDescription": "Çalışması durdurulacak. Sohbet korunur, daha sonra kaldığınız yerden devam edebilirsiniz.",
+      "dontAskAgain": "Bir daha sorma",
+      "confirm": "Kapat"
+    },
+    "timeAgo": {
+      "now": "şimdi",
+      "minutes": "{{value}} dk",
+      "hours": "{{value}} sa",
+      "days": "{{value}} g"
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "Eylemler için tıklayın, ",
+      "fileOpen": "açmak için {{mod}}+tıklayın veya varsayılan uygulama için {{shiftMod}}+tıklayın",
+      "actionsOrPrefix": "Eylemler için tıklayın veya ",
+      "orcaFileOpen": "Orca'da açmak için {{mod}}+tıklayın",
+      "urlInvertsToOrca": "açmak için {{mod}}+tıklayın veya Orca'da açmak için {{shiftMod}}+tıklayın",
+      "urlSystemBrowser": "açmak için {{mod}}+tıklayın veya sistem tarayıcısı için {{shiftMod}}+tıklayın",
+      "systemBrowserOnly": "Sistem tarayıcısı için {{shiftMod}}+tıklayın",
+      "orcaBrowserOnly": "Orca'da açmak için {{shiftMod}}+tıklayın",
+      "switchWorkspace": "Çalışma alanını değiştirmek için {{mod}}+tıklayın",
+      "switchWorkspaceFinder": "Çalışma alanını değiştirmek için {{mod}}+tıklayın veya Finder'da açmak için {{shiftMod}}+tıklayın",
+      "switchWorkspaceFolder": "Çalışma alanını değiştirmek için {{mod}}+tıklayın veya klasörü açmak için {{shiftMod}}+tıklayın"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "Bekleyen veriler çok biriktiği için Orca gizli terminal çıktısını atladı.",
+      "foregroundBurst": "Bekleyen veriler çok biriktiği için Orca bir terminal çıktısı yığınını atladı.",
+      "restoreUnavailable": "Ana kurtarma kullanılamadığı için Orca gizli terminal çıktısını atladı.",
+      "noHostImage": "Orca bu terminalin geçmişini sunucudan geri yükleyemedi."
     }
   },
   "agentLaunch": {
@@ -606,7 +837,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "Etkin çalışma alanı için Claude token ve maliyet kullanımını göster.",

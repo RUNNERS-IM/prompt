@@ -65,7 +65,7 @@ describe('renderer i18n lazy locale loading', () => {
   })
 
   it('falls back from Traditional Chinese to English, never Simplified', async () => {
-    i18n.addResourceBundle('zh', 'translation', { zhOnlyKey: '简体' }, true, true)
+    i18n.addResourceBundle('zh-Hans', 'translation', { zhOnlyKey: '简体' }, true, true)
     await i18n.changeLanguage(await loadRendererUiLanguage(UI_LANGUAGE_CHINESE_TRADITIONAL))
     expect(i18n.language).toBe('zh-Hant')
     expect(i18n.t('menu.file', { defaultValue: 'File' })).not.toBe('File')

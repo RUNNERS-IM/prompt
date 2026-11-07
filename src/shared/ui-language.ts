@@ -1,6 +1,6 @@
 export const UI_LANGUAGE_SYSTEM = 'system'
 export const UI_LANGUAGE_ENGLISH = 'en'
-export const UI_LANGUAGE_CHINESE = 'zh'
+export const UI_LANGUAGE_CHINESE = 'zh-Hans'
 // Why: a script subtag, not a region — zh-Hant also serves zh-TW/zh-HK/zh-MO users.
 export const UI_LANGUAGE_CHINESE_TRADITIONAL = 'zh-Hant'
 export const UI_LANGUAGE_KOREAN = 'ko'
@@ -11,6 +11,15 @@ export const UI_LANGUAGE_PORTUGUESE = 'pt'
 export const UI_LANGUAGE_RUSSIAN = 'ru'
 export const UI_LANGUAGE_TURKISH = 'tr'
 export const UI_LANGUAGE_GERMAN = 'de'
+export const UI_LANGUAGE_ARABIC = 'ar'
+export const UI_LANGUAGE_FINNISH = 'fi'
+export const UI_LANGUAGE_HINDI = 'hi'
+export const UI_LANGUAGE_INDONESIAN = 'id'
+export const UI_LANGUAGE_ITALIAN = 'it'
+export const UI_LANGUAGE_DUTCH = 'nl'
+export const UI_LANGUAGE_POLISH = 'pl'
+export const UI_LANGUAGE_THAI = 'th'
+export const UI_LANGUAGE_VIETNAMESE = 'vi'
 
 export type BuiltInUiLanguage =
   | typeof UI_LANGUAGE_SYSTEM
@@ -25,6 +34,15 @@ export type BuiltInUiLanguage =
   | typeof UI_LANGUAGE_RUSSIAN
   | typeof UI_LANGUAGE_TURKISH
   | typeof UI_LANGUAGE_GERMAN
+  | typeof UI_LANGUAGE_ARABIC
+  | typeof UI_LANGUAGE_FINNISH
+  | typeof UI_LANGUAGE_HINDI
+  | typeof UI_LANGUAGE_INDONESIAN
+  | typeof UI_LANGUAGE_ITALIAN
+  | typeof UI_LANGUAGE_DUTCH
+  | typeof UI_LANGUAGE_POLISH
+  | typeof UI_LANGUAGE_THAI
+  | typeof UI_LANGUAGE_VIETNAMESE
 
 export type PluginUiLanguage = `plugin:${string}`
 export type UiLanguage = BuiltInUiLanguage | PluginUiLanguage
@@ -42,7 +60,16 @@ export const UI_LANGUAGE_NATIVE_NAMES: Record<BuiltInUiLanguage, string> = {
   [UI_LANGUAGE_PORTUGUESE]: 'Português (Brasil)',
   [UI_LANGUAGE_RUSSIAN]: 'Русский',
   [UI_LANGUAGE_TURKISH]: 'Türkçe',
-  [UI_LANGUAGE_GERMAN]: 'Deutsch'
+  [UI_LANGUAGE_GERMAN]: 'Deutsch',
+  [UI_LANGUAGE_ARABIC]: 'العربية',
+  [UI_LANGUAGE_FINNISH]: 'Suomi',
+  [UI_LANGUAGE_HINDI]: 'हिन्दी',
+  [UI_LANGUAGE_INDONESIAN]: 'Bahasa Indonesia',
+  [UI_LANGUAGE_ITALIAN]: 'Italiano',
+  [UI_LANGUAGE_DUTCH]: 'Nederlands',
+  [UI_LANGUAGE_POLISH]: 'Polski',
+  [UI_LANGUAGE_THAI]: 'ไทย',
+  [UI_LANGUAGE_VIETNAMESE]: 'Tiếng Việt'
 }
 
 const UI_LANGUAGE_VALUES = new Set<BuiltInUiLanguage>([
@@ -57,7 +84,16 @@ const UI_LANGUAGE_VALUES = new Set<BuiltInUiLanguage>([
   UI_LANGUAGE_PORTUGUESE,
   UI_LANGUAGE_RUSSIAN,
   UI_LANGUAGE_TURKISH,
-  UI_LANGUAGE_GERMAN
+  UI_LANGUAGE_GERMAN,
+  UI_LANGUAGE_ARABIC,
+  UI_LANGUAGE_FINNISH,
+  UI_LANGUAGE_HINDI,
+  UI_LANGUAGE_INDONESIAN,
+  UI_LANGUAGE_ITALIAN,
+  UI_LANGUAGE_DUTCH,
+  UI_LANGUAGE_POLISH,
+  UI_LANGUAGE_THAI,
+  UI_LANGUAGE_VIETNAMESE
 ])
 
 const PLUGIN_UI_LANGUAGE_RE =
@@ -70,6 +106,10 @@ export function isPluginUiLanguage(value: unknown): value is PluginUiLanguage {
 export function normalizeUiLanguage(value: unknown): UiLanguage {
   if (isPluginUiLanguage(value)) {
     return value
+  }
+  // Prompt: Simplified Chinese was stored as 'zh' before the 20-language set used script codes.
+  if (value === 'zh') {
+    return UI_LANGUAGE_CHINESE
   }
   return UI_LANGUAGE_VALUES.has(value as BuiltInUiLanguage)
     ? (value as BuiltInUiLanguage)

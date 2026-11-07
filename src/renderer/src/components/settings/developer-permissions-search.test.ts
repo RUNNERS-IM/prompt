@@ -10,7 +10,7 @@ const MACOS_LOCAL_NETWORK_LABEL = {
   es: 'red local',
   ja: 'ローカルネットワーク',
   ko: '로컬 네트워크',
-  zh: '本地网络'
+  'zh-Hans': '本地网络'
 } as const
 
 function getLanEntry() {
@@ -49,7 +49,7 @@ describe('developer permissions LAN search', () => {
   })
 
   it('keeps the localized LAN wording findable', async () => {
-    expect(await searchInLocale('zh', '局域网')).toBe(true)
+    expect(await searchInLocale('zh-Hans', '局域网')).toBe(true)
     expect(await searchInLocale('ja', 'LAN')).toBe(true)
     expect(await searchInLocale('ko', 'LAN')).toBe(true)
     expect(await searchInLocale('es', 'LAN')).toBe(true)

@@ -26,7 +26,7 @@ describe('locale-translation-policy zh status bar usage labels', () => {
           key,
           enValue: `${brand} Usage`,
           localeValue: `${brand} 使用量`,
-          locale: 'zh'
+          locale: 'zh-Hans'
         }),
         brand
       ).toBe(`${brand} 使用情况`)
@@ -39,7 +39,7 @@ describe('locale-translation-policy zh status bar usage labels', () => {
         key: 'auto.components.settings.appearance.search.3a6c028ea8',
         enValue: 'Kimi Usage',
         localeValue: '基米用法',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('Kimi 使用情况')
     expect(
@@ -47,7 +47,7 @@ describe('locale-translation-policy zh status bar usage labels', () => {
         key: 'auto.components.settings.appearance.search.40e5c3c285',
         enValue: 'kimi',
         localeValue: '基米',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('kimi')
   })
@@ -56,7 +56,12 @@ describe('locale-translation-policy zh status bar usage labels', () => {
   it('keeps the moonshot keyword repair scoped to zh', () => {
     const key = 'auto.components.settings.appearance.search.35565867cb'
     expect(
-      repairTranslatedValue({ key, enValue: 'moonshot', localeValue: '登月计划', locale: 'zh' })
+      repairTranslatedValue({
+        key,
+        enValue: 'moonshot',
+        localeValue: '登月计划',
+        locale: 'zh-Hans'
+      })
     ).toBe('moonshot')
     expect(
       repairTranslatedValue({
@@ -75,7 +80,7 @@ describe('locale-translation-policy zh status bar usage labels', () => {
         key: 'auto.components.settings.appearance.search.00a028f25f',
         enValue: 'usage',
         localeValue: '用法',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('用量')
   })
