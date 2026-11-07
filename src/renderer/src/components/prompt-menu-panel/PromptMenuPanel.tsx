@@ -5,6 +5,7 @@ import {
   CircleHelp,
   CircleX,
   Plus,
+  RotateCw,
   Settings,
   SquareX,
   type LucideIcon
@@ -31,6 +32,7 @@ const ICONS: Record<PromptMenuIconName, LucideIcon> = {
   plus: Plus,
   settings: Settings,
   'circle-help': CircleHelp,
+  'rotate-cw': RotateCw,
   'square-x': SquareX,
   'circle-x': CircleX
 }

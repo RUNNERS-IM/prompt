@@ -7,6 +7,8 @@ import circleXPath from '../../../resources/tray/menu/circle-xTemplate.png?asset
 import circleXRetinaPath from '../../../resources/tray/menu/circle-xTemplate@2x.png?asset&asarUnpack'
 import plusPath from '../../../resources/tray/menu/plusTemplate.png?asset&asarUnpack'
 import plusRetinaPath from '../../../resources/tray/menu/plusTemplate@2x.png?asset&asarUnpack'
+import rotateCwPath from '../../../resources/tray/menu/rotate-cwTemplate.png?asset&asarUnpack'
+import rotateCwRetinaPath from '../../../resources/tray/menu/rotate-cwTemplate@2x.png?asset&asarUnpack'
 import settingsPath from '../../../resources/tray/menu/settingsTemplate.png?asset&asarUnpack'
 import settingsRetinaPath from '../../../resources/tray/menu/settingsTemplate@2x.png?asset&asarUnpack'
 import squareXPath from '../../../resources/tray/menu/square-xTemplate.png?asset&asarUnpack'
@@ -22,6 +24,7 @@ export type TrayMenuIconName =
   | 'plus'
   | 'settings'
   | 'circle-help'
+  | 'rotate-cw'
   | 'square-x'
   | 'circle-x'
 
@@ -39,6 +42,7 @@ const ICON_PATHS: Record<
   plus: { path: plusPath, retinaPath: plusRetinaPath, template: true },
   settings: { path: settingsPath, retinaPath: settingsRetinaPath, template: true },
   'circle-help': { path: circleHelpPath, retinaPath: circleHelpRetinaPath, template: true },
+  'rotate-cw': { path: rotateCwPath, retinaPath: rotateCwRetinaPath, template: true },
   'square-x': { path: squareXPath, retinaPath: squareXRetinaPath, template: true },
   'circle-x': { path: circleXPath, retinaPath: circleXRetinaPath, template: true }
 }

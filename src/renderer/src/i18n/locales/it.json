@@ -1084,7 +1084,8 @@
     "autoCheckUpdates": "Verifica aggiornamenti automaticamente",
     "runningTerminals_one": "{{count}} terminale in esecuzione",
     "runningTerminals_many": "{{count}} terminali in esecuzione",
-    "runningTerminals_other": "{{count}} terminali in esecuzione"
+    "runningTerminals_other": "{{count}} terminali in esecuzione",
+    "restartApp": "Riavvia Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Vai a {{value0}}",
@@ -23788,6 +23789,10 @@
       "about": {
         "title": "Informazioni",
         "description": "Versione, app RUNNERS e note open source."
+      },
+      "account": {
+        "title": "Account",
+        "description": "L’unico account RUNNERS condiviso da tutte le app RUNNERS."
       }
     },
     "skills": {

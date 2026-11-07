@@ -168,6 +168,10 @@
       "about": {
         "title": "情報",
         "description": "バージョン、RUNNERS のアプリ、オープンソースの表示。"
+      },
+      "account": {
+        "title": "アカウント",
+        "description": "すべての RUNNERS アプリで共通の RUNNERS アカウントです。"
       }
     },
     "mobile": {
@@ -842,7 +846,8 @@
     "activityWaiting": "Orca - アクティビティ待機中",
     "activityWaitingSuffix": "件のアクティビティが待機中",
     "openAtLogin": "ログイン時に開く",
-    "autoCheckUpdates": "アップデートを自動的に確認"
+    "autoCheckUpdates": "アップデートを自動的に確認",
+    "restartApp": "Prompt を再起動"
   },
   "worktreeJumpPalette": {
     "matchLabel": {

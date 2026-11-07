@@ -3,7 +3,8 @@ import { translate } from '@/i18n/i18n'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { TOGGLE_TERMINAL_PANE_EXPAND_EVENT } from '@/constants/terminal'
 import { ActivityTitlebarControls } from '../components/activity/ActivityTitlebarControls'
-import { PromptRunnersAccountButton } from '../components/prompt-runners-account/PromptRunnersAccountButton'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
+import { PromptSettingsButton } from '../components/prompt-settings-button/PromptSettingsButton'
 import { useShortcutLabel } from '../hooks/useShortcutLabel'
 import { useAppStore } from '../store'
 import { selectActiveTerminalChromeState } from '../store/active-terminal-chrome-selector'
@@ -73,9 +74,11 @@ export function TitlebarMainStrip({ layout }: { layout: AppChromeLayout }): Reac
           </TooltipContent>
         </Tooltip>
       )}
-      {/* Workspace pages draw the account at the end of their own top-right tab strip instead. */}
-      {layout.workspaceChromeActive || layout.activeView === 'settings' ? null : (
-        <PromptRunnersAccountButton />
+      {/* Workspace pages draw the gear at the end of their own top-right tab strip instead. */}
+      {!PROMPT_BLOCK_UPSTREAM_SERVICES ||
+      layout.workspaceChromeActive ||
+      layout.activeView === 'settings' ? null : (
+        <PromptSettingsButton />
       )}
       {/* The open sidebar already renders its close button. */}
       {layout.showRightSidebarControls && !layout.rightSidebarOpen ? <RightSidebarToggle /> : null}

@@ -168,6 +168,10 @@
       "about": {
         "title": "關於",
         "description": "版本、RUNNERS App 與開放原始碼聲明。"
+      },
+      "account": {
+        "title": "帳號",
+        "description": "所有 RUNNERS App 共用的一個 RUNNERS 帳號。"
       }
     },
     "mobile": {
@@ -1235,7 +1239,8 @@
     "activityWaiting": "Orca - 活動等待中",
     "activityWaitingSuffix": "活動等待中",
     "openAtLogin": "登入時打開",
-    "autoCheckUpdates": "自動檢查更新項目"
+    "autoCheckUpdates": "自動檢查更新項目",
+    "restartApp": "重新啟動 Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "前往 {{value0}}",

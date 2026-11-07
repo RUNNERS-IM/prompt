@@ -168,6 +168,10 @@
       "about": {
         "title": "О программе",
         "description": "Версия, приложения RUNNERS и сведения об открытом ПО."
+      },
+      "account": {
+        "title": "Аккаунт",
+        "description": "Единый аккаунт RUNNERS для всех приложений RUNNERS."
       }
     },
     "mobile": {
@@ -1324,7 +1328,8 @@
     "activityWaiting": "Orca — ожидает вашего ответа",
     "activityWaitingSuffix": "ожидает вашего ответа",
     "openAtLogin": "Открывать при входе",
-    "autoCheckUpdates": "Автоматически проверять обновления"
+    "autoCheckUpdates": "Автоматически проверять обновления",
+    "restartApp": "Перезапустить Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Перейти на {{value0}}",

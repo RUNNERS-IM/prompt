@@ -1052,7 +1052,8 @@
     "openAtLogin": "Avaa kirjautumisen yhteydessä",
     "autoCheckUpdates": "Tarkista päivitykset automaattisesti",
     "runningTerminals_one": "{{count}} pääte käynnissä",
-    "runningTerminals_other": "{{count}} päätettä käynnissä"
+    "runningTerminals_other": "{{count}} päätettä käynnissä",
+    "restartApp": "Käynnistä Prompt uudelleen"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Siirry kohteeseen {{value0}}",
@@ -23404,6 +23405,10 @@
       "about": {
         "title": "Tietoja",
         "description": "Versio, RUNNERS-sovellukset ja avoimen lähdekoodin ilmoitukset."
+      },
+      "account": {
+        "title": "Tili",
+        "description": "Yksi RUNNERS-tili, jota kaikki RUNNERS-sovellukset käyttävät."
       }
     },
     "skills": {

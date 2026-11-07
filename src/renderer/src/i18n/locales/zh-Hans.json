@@ -168,6 +168,10 @@
       "about": {
         "title": "关于",
         "description": "版本、RUNNERS 应用和开源声明。"
+      },
+      "account": {
+        "title": "账户",
+        "description": "所有 RUNNERS 应用共用的一个 RUNNERS 账户。"
       }
     },
     "mobile": {
@@ -842,7 +846,8 @@
     "activityWaiting": "Orca - 活动等待中",
     "activityWaitingSuffix": "等待活动",
     "openAtLogin": "登录时打开",
-    "autoCheckUpdates": "自动检查更新"
+    "autoCheckUpdates": "自动检查更新",
+    "restartApp": "重新启动 Prompt"
   },
   "worktreeJumpPalette": {
     "matchLabel": {

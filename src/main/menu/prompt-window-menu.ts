@@ -8,6 +8,16 @@ export function setPromptNewWindowHandler(handler: () => void): void {
   onNewWindow = handler
 }
 
+export function hasPromptNewWindowHandler(): boolean {
+  return onNewWindow !== null
+}
+
+/** Runs Window > New Window if Prompt set one; false leaves the key to the page. */
+export function runPromptNewWindow(): boolean {
+  onNewWindow?.()
+  return onNewWindow !== null
+}
+
 // Prompt: Window > New Window (Cmd+N) opens another full Prompt window (prompt-windows.ts).
 // Without a handler the menu stays as Orca builds it.
 export function createPromptWindowMenu(isMac: boolean): Electron.MenuItemConstructorOptions {

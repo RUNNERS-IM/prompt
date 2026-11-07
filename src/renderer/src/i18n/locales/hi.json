@@ -1052,7 +1052,8 @@
     "openAtLogin": "लॉगिन पर खोलें",
     "autoCheckUpdates": "अपडेट अपने-आप जाँचें",
     "runningTerminals_one": "{{count}} टर्मिनल चल रहा है",
-    "runningTerminals_other": "{{count}} टर्मिनल चल रहे हैं"
+    "runningTerminals_other": "{{count}} टर्मिनल चल रहे हैं",
+    "restartApp": "Prompt फिर से शुरू करें"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} पर जाएँ",
@@ -23404,6 +23405,10 @@
       "about": {
         "title": "जानकारी",
         "description": "संस्करण, RUNNERS ऐप और ओपन सोर्स सूचनाएँ।"
+      },
+      "account": {
+        "title": "खाता",
+        "description": "एक RUNNERS खाता जिसे सभी RUNNERS ऐप साझा करते हैं।"
       }
     },
     "skills": {

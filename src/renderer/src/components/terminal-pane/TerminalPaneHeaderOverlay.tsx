@@ -10,7 +10,7 @@ import { isImeCompositionKeyDown } from '@/lib/ime-composition-keyboard-event'
 import type { PtyTransport } from './pty-transport-types'
 import { TerminalPaneHeaderDropSurface } from './TerminalPaneHeaderDropSurface'
 import { TerminalPaneResumeInChatButton } from './TerminalPaneResumeInChatButton'
-import { promptShowsPaneHeaderAction } from './prompt-pane-header-actions'
+import { SHOWS_PANE_HEADER_ACTIONS } from './prompt-pane-header-actions'
 import { makePaneKey } from '../../../../shared/stable-pane-id'
 
 export type PaneTitleOverlayRect = {
@@ -126,7 +126,7 @@ export default function TerminalPaneHeaderOverlay({
         // Titled split panes use X to clear titles; titled single panes still need a close control.
         const showCloseButton =
           showAlwaysOnHeaders &&
-          promptShowsPaneHeaderAction('close', paneCount) &&
+          SHOWS_PANE_HEADER_ACTIONS &&
           (paneCount > 1
             ? !title
             : canCloseTerminalPane({ paneCount, showSplitButton, isTabPinned }))
@@ -212,7 +212,7 @@ export default function TerminalPaneHeaderOverlay({
                 <div className="pane-title-actions ml-auto flex shrink-0 items-center gap-0">
                   {canContinueAgentSessionInNewSession &&
                   isActivePane &&
-                  promptShowsPaneHeaderAction('hand-off', paneCount) ? (
+                  SHOWS_PANE_HEADER_ACTIONS ? (
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button
@@ -262,18 +262,14 @@ export default function TerminalPaneHeaderOverlay({
                         {translate('components.native-chat.toggle.showTerminal', 'Show terminal')}
                       </TooltipContent>
                     </Tooltip>
-                  ) : canResumeInNewNativeChat &&
-                    isActivePane &&
-                    promptShowsPaneHeaderAction('resume-in-chat', paneCount) ? (
+                  ) : canResumeInNewNativeChat && isActivePane && SHOWS_PANE_HEADER_ACTIONS ? (
                     <TerminalPaneResumeInChatButton
                       tabId={tabId}
                       worktreeId={worktreeId}
                       paneKey={makePaneKey(tabId, pane.leafId)}
                     />
                   ) : null}
-                  {showAlwaysOnHeaders &&
-                  showSplitButton &&
-                  promptShowsPaneHeaderAction('split', paneCount) ? (
+                  {showAlwaysOnHeaders && showSplitButton && SHOWS_PANE_HEADER_ACTIONS ? (
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button

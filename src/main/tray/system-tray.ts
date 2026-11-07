@@ -29,6 +29,8 @@ export type SystemTrayOptions = {
   onNewWindow?: () => void
   /** Open the Help & Feedback page (GitHub issues). */
   onOpenHelp: () => void
+  /** Restart the app (Prompt adds the row under Help & Feedback); omitted hides the row. */
+  onRestart?: () => void
   /** Live terminal count for the status line; omitted hides the line. */
   getRunningTerminalCount?: () => number
   /** Agents seen working right now; the menu bar cursor blinks only while this is above zero. */

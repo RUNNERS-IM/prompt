@@ -50,6 +50,18 @@ type RegisterAppHandlersOptions = {
   onBeforeRelaunchExit?: () => void | Promise<void>
 }
 
+let restartBeforeRelaunch: (() => void | Promise<void>) | undefined
+
+/** Quits normally (flushing daemon checkpoints and telemetry) and starts Prompt again.
+ *  Shared by the renderer's app:restart and the menu bar panel's Restart Prompt row. */
+export async function restartApp(): Promise<void> {
+  await runBeforeRelaunchCleanup(restartBeforeRelaunch)
+  setTimeout(() => {
+    relaunchApp('admin-restart')
+    quitProcess()
+  }, 150)
+}
+
 async function pickFloatingMarkdownDocument(
   event: IpcMainInvokeEvent
 ): Promise<MarkdownDocument | null> {
@@ -204,14 +216,8 @@ export function registerAppHandlers(store: Store, options: RegisterAppHandlersOp
     }, 150)
   })
 
-  ipcMain.handle('app:restart', async () => {
-    // Normal quit flushes daemon checkpoints and telemetry.
-    await runBeforeRelaunchCleanup(options.onBeforeRelaunch)
-    setTimeout(() => {
-      relaunchApp('admin-restart')
-      quitProcess()
-    }, 150)
-  })
+  restartBeforeRelaunch = options.onBeforeRelaunch
+  ipcMain.handle('app:restart', () => restartApp())
 
   ipcMain.handle('app:restartAsAdministrator', async () => {
     const relaunchOptions = prepareWindowsAdministratorRestart()

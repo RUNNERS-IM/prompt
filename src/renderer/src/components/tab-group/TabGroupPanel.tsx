@@ -6,7 +6,8 @@ import TabBar from '../tab-bar/TabBar'
 
 import { TabBarQuickCommandsButton } from '../tab-bar/TabBarQuickCommandsButton'
 import { TabGroupPaneActionsMenu } from './TabGroupPaneActionsMenu'
-import { PromptRunnersAccountButton } from '../prompt-runners-account/PromptRunnersAccountButton'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
+import { PromptSettingsButton } from '../prompt-settings-button/PromptSettingsButton'
 import { useTabGroupWorkspaceModel } from './useTabGroupWorkspaceModel'
 import { closeTerminalTab } from '../terminal/terminal-tab-actions'
 import { resolveGroupTabFromVisibleId } from './tab-group-visible-id'
@@ -294,17 +295,22 @@ export default function TabGroupPanel({
               className={actionChromeClassName}
               style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
             >
-              <TabBarQuickCommandsButton
-                worktreeId={worktreeId}
-                groupId={groupId}
-                isFocused={isFocused}
-              />
+              {/* Prompt drops the quick-command button; its gear takes that spot once per window. */}
+              {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+                <TabBarQuickCommandsButton
+                  worktreeId={worktreeId}
+                  groupId={groupId}
+                  isFocused={isFocused}
+                />
+              )}
               {hasSplitGroups ? (
                 <TabGroupPaneActionsMenu isFocused={isFocused} onCloseGroup={commands.closeGroup} />
               ) : null}
             </div>
-            {/* The window's top-right strip ends with the RUNNERS account; it stays undimmed in an unfocused split. */}
-            {reserveClosedExplorerToggleSpace ? <PromptRunnersAccountButton /> : null}
+            {/* Only the window's top-right strip gets the gear; it stays undimmed in an unfocused split. */}
+            {PROMPT_BLOCK_UPSTREAM_SERVICES && reserveClosedExplorerToggleSpace ? (
+              <PromptSettingsButton />
+            ) : null}
             {/* Why: Electron drag hit-test respects no-drag only on DOM descendants, not z-index siblings, so this no-drag spacer keeps the floating right-sidebar toggle + window controls clickable. */}
             {reserveClosedExplorerToggleSpace && !rightSidebarOpen ? (
               <div

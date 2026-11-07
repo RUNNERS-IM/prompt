@@ -19,6 +19,7 @@ const ICONS = {
   plus: 'plus',
   settings: 'settings',
   'circle-help': 'circle-question-mark',
+  'rotate-cw': 'rotate-cw',
   'square-x': 'square-x',
   'circle-x': 'circle-x'
 }

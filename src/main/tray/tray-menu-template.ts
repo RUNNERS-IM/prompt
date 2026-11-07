@@ -19,7 +19,7 @@ export type TrayMenuTemplateState = TrayMenuState & {
 }
 
 // 줄 순서와 아이콘: _docs/작업 가이드/공통.md 「메뉴바 메뉴와 아이콘」 + runners-wiki 「2026-11-08 Prompt 패널은 열기 · 새 창」.
-// 상태 줄 / 열기 · 새 창 / 설정 · 도움말 / 종료 · 완전히 종료. 켬/끔 스위치와 정보는 설정(일반 · 정보 탭)에 있다.
+// 상태 줄 / 열기 · 새 창 / 설정 · 도움말 · 재시작 / 종료 · 완전히 종료. 켬/끔 스위치와 정보는 설정(일반 · 정보 탭)에 있다.
 // 맥 패널과 윈도우 기본 메뉴가 이 목록 하나를 함께 쓴다.
 export function buildTrayMenuRows(
   opts: SystemTrayOptions,
@@ -70,13 +70,21 @@ export function buildTrayMenuRows(
       label: translateMain('tray.settings', 'Settings…')
     })
   }
-  rows.push(
-    {
+  rows.push({
+    kind: 'command',
+    id: 'help',
+    icon: 'circle-help',
+    label: translateMain('tray.helpFeedback', 'Help & Feedback')
+  })
+  if (opts.onRestart) {
+    rows.push({
       kind: 'command',
-      id: 'help',
-      icon: 'circle-help',
-      label: translateMain('tray.helpFeedback', 'Help & Feedback')
-    },
+      id: 'restart',
+      icon: 'rotate-cw',
+      label: translateMain('tray.restartApp', 'Restart Prompt')
+    })
+  }
+  rows.push(
     { kind: 'separator' },
     {
       kind: 'command',
@@ -130,6 +138,9 @@ export function runTrayMenuCommand(opts: SystemTrayOptions, id: PromptMenuComman
       return
     case 'help':
       opts.onOpenHelp()
+      return
+    case 'restart':
+      opts.onRestart?.()
       return
     case 'quit':
       opts.onQuit()

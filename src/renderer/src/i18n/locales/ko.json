@@ -565,7 +565,8 @@
     "helpFeedback": "도움말 · 피드백",
     "quitApp": "Prompt 종료",
     "openAtLogin": "로그인할 때 열기",
-    "autoCheckUpdates": "업데이트 자동 확인"
+    "autoCheckUpdates": "업데이트 자동 확인",
+    "restartApp": "Prompt 재시작"
   },
   "worktreeJumpPalette": {
     "matchLabel": {

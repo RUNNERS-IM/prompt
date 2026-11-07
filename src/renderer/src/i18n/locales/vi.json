@@ -1020,7 +1020,8 @@
     "quitApp": "Thoát Prompt",
     "openAtLogin": "Mở khi đăng nhập",
     "autoCheckUpdates": "Tự động kiểm tra cập nhật",
-    "runningTerminals_other": "{{count}} terminal đang chạy"
+    "runningTerminals_other": "{{count}} terminal đang chạy",
+    "restartApp": "Khởi động lại Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Đi tới {{value0}}",
@@ -23020,6 +23021,10 @@
       "about": {
         "title": "Giới thiệu",
         "description": "Phiên bản, ứng dụng RUNNERS và thông báo mã nguồn mở."
+      },
+      "account": {
+        "title": "Tài khoản",
+        "description": "Một tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS."
       }
     },
     "skills": {

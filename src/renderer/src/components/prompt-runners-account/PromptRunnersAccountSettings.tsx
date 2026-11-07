@@ -10,7 +10,8 @@ import type {
   PromptRunnersSignInResult,
   PromptRunnersSignMode
 } from '../../../../shared/prompt-runners-account'
-import { AccountButton, SignInSheet, accountText } from '../runners-account/runners-account'
+import { SignInSheet, accountText } from '../runners-account/runners-account'
+import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 import {
   getRunnersAccountEmail,
   loadRunnersAccountEmail,
@@ -19,9 +20,9 @@ import {
 } from './prompt-runners-account-email'
 import './prompt-runners-account.css'
 
-/** The RUNNERS account at the window's top right: Log In while signed out, the email's first-letter badge after.
+/** Settings › Account: the RUNNERS account row, Log In while signed out and the email with Log Out after.
  *  Desktop windows on this computer only: the web client and a window driving a remote runtime draw nothing. */
-export function PromptRunnersAccountButton(): React.JSX.Element | null {
+export function PromptRunnersAccountSettings(): React.JSX.Element | null {
   const api = window.api.promptRunnersAccount
   const { i18n } = useTranslation()
   const remoteRuntime = useAppStore((s) => Boolean(s.settings?.activeRuntimeEnvironmentId?.trim()))
@@ -76,28 +77,32 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
     return null
   }
   return (
-    <div className="ml-1.5 flex shrink-0 items-center [-webkit-app-region:no-drag]">
-      {email ? (
-        <AccountButton
-          lang={lang}
-          account={email}
-          onSignOut={() => {
-            setRunnersAccountEmail(null)
-            void api.signOut()
-          }}
-        />
-      ) : (
-        <Button
-          type="button"
-          variant="outline"
-          size="xs"
-          className="h-7"
-          onClick={() => setSigningIn(true)}
-        >
-          {accountText(lang, 'signIn')}
-        </Button>
-      )}
-      {/* Why a portal: an unfocused split's opacity makes a stacking context that would trap the full-window sheet. */}
+    <section className="space-y-4">
+      <SettingsSubsectionHeader title="RUNNERS" />
+      <SettingsRow
+        label={accountText(lang, 'title')}
+        description={email ?? accountText(lang, 'sheetIntro')}
+        control={
+          email ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setRunnersAccountEmail(null)
+                void api.signOut()
+              }}
+            >
+              {accountText(lang, 'signOut')}
+            </Button>
+          ) : (
+            <Button type="button" variant="outline" size="sm" onClick={() => setSigningIn(true)}>
+              {accountText(lang, 'signIn')}
+            </Button>
+          )
+        }
+      />
+      {/* Why a portal: the sheet covers the whole window, not just the scrolling settings pane. */}
       {signingIn
         ? createPortal(
             <SignInSheet
@@ -110,6 +115,6 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
             document.body
           )
         : null}
-    </div>
+    </section>
   )
 }

@@ -1180,7 +1180,8 @@
     "runningTerminals_two": "{{count}} طرفيتان قيد التشغيل",
     "runningTerminals_few": "{{count}} طرفيات قيد التشغيل",
     "runningTerminals_many": "{{count}} طرفية قيد التشغيل",
-    "runningTerminals_other": "{{count}} طرفية قيد التشغيل"
+    "runningTerminals_other": "{{count}} طرفية قيد التشغيل",
+    "restartApp": "إعادة تشغيل Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "الانتقال إلى {{value0}}",
@@ -24940,6 +24941,10 @@
       "about": {
         "title": "حول",
         "description": "الإصدار وتطبيقات RUNNERS وإشعارات المصادر المفتوحة."
+      },
+      "account": {
+        "title": "الحساب",
+        "description": "حساب RUNNERS الواحد الذي تشترك فيه كل تطبيقات RUNNERS."
       }
     },
     "skills": {

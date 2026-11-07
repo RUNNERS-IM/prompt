@@ -11,6 +11,7 @@ import { SettingsSection } from './SettingsSection'
 import { translate } from '@/i18n/i18n'
 import type { SettingsRenderContext } from './settings-render-context'
 import { PromptAboutPage } from '../prompt-runners-apps/PromptAboutPage'
+import { PromptRunnersAccountSettings } from '../prompt-runners-account/PromptRunnersAccountSettings'
 
 export function renderOrcaAccountSettingsSection(
   context: SettingsRenderContext
@@ -74,6 +75,25 @@ export function renderGeneralSettingsSection(context: SettingsRenderContext): Re
           wslCapabilitiesLoading={terminal.localWindowsRuntimeCapabilities.isLoading}
         />
       ) : null}
+    </SettingsSection>
+  )
+}
+
+export function renderPromptAccountSettingsSection(
+  context: SettingsRenderContext
+): React.JSX.Element {
+  const { navigation, view } = context
+  return (
+    <SettingsSection
+      id="prompt-account"
+      title={translate('prompt.settings.account.title', 'Account')}
+      description={translate(
+        'prompt.settings.account.description',
+        'The one RUNNERS account every RUNNERS app shares.'
+      )}
+      searchEntries={navigation.getSectionSearchEntries('prompt-account')}
+    >
+      {view.isSectionMounted('prompt-account') ? <PromptRunnersAccountSettings /> : null}
     </SettingsSection>
   )
 }

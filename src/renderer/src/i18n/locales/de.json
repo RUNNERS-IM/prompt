@@ -168,6 +168,10 @@
       "about": {
         "title": "Über",
         "description": "Version, RUNNERS-Apps und Open-Source-Hinweise."
+      },
+      "account": {
+        "title": "Konto",
+        "description": "Das eine RUNNERS-Konto, das alle RUNNERS-Apps teilen."
       }
     },
     "mobile": {
@@ -1284,7 +1288,8 @@
     "activityWaiting": "Orca - Ausstehende Aktivität",
     "activityWaitingSuffix": "ausstehende Aktivität",
     "openAtLogin": "Bei der Anmeldung öffnen",
-    "autoCheckUpdates": "Automatisch nach Updates suchen"
+    "autoCheckUpdates": "Automatisch nach Updates suchen",
+    "restartApp": "Prompt neu starten"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} aufrufen",

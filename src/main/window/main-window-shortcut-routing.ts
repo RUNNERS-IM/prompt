@@ -21,6 +21,8 @@ import type { CreateMainWindowOptions } from './main-window-contracts'
 import type { MainWindowFocusLifecycle } from './main-window-focus-lifecycle'
 import { sendResolvedWindowShortcutAction } from './main-window-shortcut-actions'
 import { isMacAppPasteInput } from './mac-app-paste-input'
+import { isMacNewWindowInput } from './mac-new-window-input'
+import { hasPromptNewWindowHandler, runPromptNewWindow } from '../menu/prompt-window-menu'
 
 export function installMainWindowShortcutRouting(args: {
   focus: MainWindowFocusLifecycle
@@ -129,6 +131,15 @@ export function installMainWindowShortcutRouting(args: {
       // Chat/terminal panes are not native editable controls; route Cmd+V through Orca paste ownership.
       event.preventDefault()
       mainWindow.webContents.send('ui:appMenuPaste')
+      return
+    }
+
+    // A held Cmd+N opens one window; its repeats are swallowed instead of reaching the terminal.
+    if (
+      isMacNewWindowInput(input) &&
+      (input.isAutoRepeat ? hasPromptNewWindowHandler() : runPromptNewWindow())
+    ) {
+      event.preventDefault()
       return
     }
 

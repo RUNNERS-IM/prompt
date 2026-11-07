@@ -168,6 +168,10 @@
       "about": {
         "title": "Hakkında",
         "description": "Sürüm, RUNNERS uygulamaları ve açık kaynak bildirimleri."
+      },
+      "account": {
+        "title": "Hesap",
+        "description": "Tüm RUNNERS uygulamalarının paylaştığı tek RUNNERS hesabı."
       }
     },
     "mobile": {
@@ -1262,7 +1266,8 @@
     "activityWaiting": "Orca - etkinlik bekleniyor",
     "activityWaitingSuffix": "etkinlik bekleniyor",
     "openAtLogin": "Oturum açılınca başlat",
-    "autoCheckUpdates": "Güncellemeleri otomatik olarak denetle"
+    "autoCheckUpdates": "Güncellemeleri otomatik olarak denetle",
+    "restartApp": "Prompt’u yeniden başlat"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} adresine git",

@@ -1,6 +1,7 @@
 // 메뉴 막대 아이콘을 누르면 열리는 패널(맥 전용)과 기본 메뉴(윈도우)가 함께 쓰는 줄 목록.
 // 줄 목록은 main 이 번역까지 마친 글로 만들고, 패널 화면은 받은 그대로 그리기만 한다. 그래서 두 메뉴의 글과 순서가 늘 같다.
-// 결정: runners-wiki 앱-배포 「2026-11-05 네 앱 메뉴 패널 통일」 2A, 「2026-11-08 Prompt 패널은 열기 · 새 창」.
+// 결정: runners-wiki 앱-배포 「2026-11-05 네 앱 메뉴 패널 통일」 2A, 「2026-11-08 Prompt 패널은 열기 · 새 창」,
+// 「2026-11-07 Prompt 왼쪽 아래 물음표 · 과녁 빼고 맥 메뉴로」(Prompt 재시작 줄).
 
 export const PROMPT_MENU_PANEL_ROWS_CHANNEL = 'promptMenuPanel:rows'
 export const PROMPT_MENU_PANEL_RUN_CHANNEL = 'promptMenuPanel:run'
@@ -14,6 +15,7 @@ export type PromptMenuIconName =
   | 'plus'
   | 'settings'
   | 'circle-help'
+  | 'rotate-cw'
   | 'square-x'
   | 'circle-x'
 
@@ -22,6 +24,7 @@ export type PromptMenuCommandId =
   | 'newWindow'
   | 'settings'
   | 'help'
+  | 'restart'
   | 'quit'
   | 'quitCompletely'
 
@@ -30,6 +33,7 @@ export const PROMPT_MENU_COMMAND_IDS: readonly PromptMenuCommandId[] = [
   'newWindow',
   'settings',
   'help',
+  'restart',
   'quit',
   'quitCompletely'
 ]

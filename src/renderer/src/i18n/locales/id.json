@@ -1020,7 +1020,8 @@
     "quitApp": "Keluar dari Prompt",
     "openAtLogin": "Buka saat masuk",
     "autoCheckUpdates": "Periksa pembaruan otomatis",
-    "runningTerminals_other": "{{count}} terminal berjalan"
+    "runningTerminals_other": "{{count}} terminal berjalan",
+    "restartApp": "Mulai ulang Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Buka {{value0}}",
@@ -23020,6 +23021,10 @@
       "about": {
         "title": "Tentang",
         "description": "Versi, aplikasi RUNNERS, dan pemberitahuan sumber terbuka."
+      },
+      "account": {
+        "title": "Akun",
+        "description": "Satu akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS."
       }
     },
     "skills": {

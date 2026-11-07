@@ -22,6 +22,7 @@ import {
   renderMobileSettingsSection,
   renderOrcaAccountSettingsSection,
   renderPromptAboutSettingsSection,
+  renderPromptAccountSettingsSection,
   renderSetupGuideSettingsSection,
   renderShareSkillsSettingsSection
 } from './settings-setup-workflow-section-renderers'
@@ -143,6 +144,9 @@ export function renderSettingsPage(context: SettingsRenderContext): React.JSX.El
                   {renderOrcaAccountSettingsSection(context)}
                   {renderSetupGuideSettingsSection(context)}
                   {renderGeneralSettingsSection(context)}
+                  {PROMPT_BLOCK_UPSTREAM_SERVICES
+                    ? renderPromptAccountSettingsSection(context)
+                    : null}
                   {PROMPT_BLOCK_UPSTREAM_SERVICES
                     ? renderPromptAboutSettingsSection(context)
                     : null}

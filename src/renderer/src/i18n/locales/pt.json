@@ -168,6 +168,10 @@
       "about": {
         "title": "Sobre",
         "description": "Versão, apps RUNNERS e avisos de código aberto."
+      },
+      "account": {
+        "title": "Conta",
+        "description": "A conta RUNNERS única partilhada por todas as apps RUNNERS."
       }
     },
     "mobile": {
@@ -877,7 +881,8 @@
     "activityWaiting": "Orca - atividade em espera",
     "activityWaitingSuffix": "atividade em espera",
     "openAtLogin": "Abrir ao iniciar sessão",
-    "autoCheckUpdates": "Verificar atualizações automaticamente"
+    "autoCheckUpdates": "Verificar atualizações automaticamente",
+    "restartApp": "Reiniciar o Prompt"
   },
   "dashboard": {
     "sidebar": {

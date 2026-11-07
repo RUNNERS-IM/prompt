@@ -141,6 +141,8 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
     '맥에 로그인하면 Prompt 를 메뉴 막대에 띄워 둡니다.',
   'prompt.settings.general.autoCheckUpdatesDescription': '새 판이 나오면 알려 줍니다.',
   'prompt.settings.general.menuBarIconDescription': '메뉴 막대에 Prompt 아이콘을 보입니다.',
+  'prompt.settings.account.title': '계정',
+  'prompt.settings.account.description': 'RUNNERS 앱들이 함께 쓰는 RUNNERS 계정 하나입니다.',
   'prompt.settings.about.title': '정보',
   'prompt.settings.about.description': '버전, RUNNERS 앱, 오픈소스 고지.',
   'prompt.settings.appearance.trayGroup': '시스템 트레이',

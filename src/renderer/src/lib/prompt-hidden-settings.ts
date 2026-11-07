@@ -1,4 +1,4 @@
-import { Bot, Info } from 'lucide-react'
+import { Bot, CircleUserRound, Info } from 'lucide-react'
 import type { SettingsNavSection } from '@/lib/settings-navigation-types'
 import { translate } from '@/i18n/i18n'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
@@ -129,9 +129,11 @@ export function promptSettingsGroupTitle(groupId: string, upstreamTitle: string)
   return upstreamTitle
 }
 
-// 「기본」 묶음: 제일 중요한 Claude 가 맨 앞, 앱 고유 칸, 일반, 정보 순(runners-wiki 2026-11-08 Prompt 창 통일 2A).
+// 「기본」 묶음: 제일 중요한 Claude 가 맨 앞, 앱 고유 칸, 일반, 계정, 정보 순
+// (runners-wiki 2026-11-07 다섯 앱 창 통일 1A, 2026-11-08 Prompt 창 통일 2A).
 // 나머지 칸은 「더 보기」 묶음에 이 순서로 둔다.
 const PROMPT_ABOUT_SETTINGS_SECTION_ID = 'prompt-about'
+const PROMPT_ACCOUNT_SETTINGS_SECTION_ID = 'prompt-account'
 const PROMPT_MAIN_SETTINGS_SECTION_IDS: readonly string[] = [
   'accounts',
   'terminal',
@@ -140,6 +142,7 @@ const PROMPT_MAIN_SETTINGS_SECTION_IDS: readonly string[] = [
   'shortcuts',
   'quick-commands',
   'general',
+  PROMPT_ACCOUNT_SETTINGS_SECTION_ID,
   PROMPT_ABOUT_SETTINGS_SECTION_ID
 ]
 
@@ -159,6 +162,22 @@ function promptAboutSettingsSection(): SettingsNavSection {
     description,
     icon: Info,
     searchEntries: [{ title, description, keywords: ['version', 'about', 'license', 'RUNNERS'] }],
+    group: 'setup'
+  }
+}
+/** Settings › Account: the RUNNERS account the five RUNNERS apps share (moved off the tab strip). */
+function promptAccountSettingsSection(): SettingsNavSection {
+  const title = translate('prompt.settings.account.title', 'Account')
+  const description = translate(
+    'prompt.settings.account.description',
+    'The one RUNNERS account every RUNNERS app shares.'
+  )
+  return {
+    id: PROMPT_ACCOUNT_SETTINGS_SECTION_ID,
+    title,
+    description,
+    icon: CircleUserRound,
+    searchEntries: [{ title, description, keywords: ['RUNNERS', 'login', 'sign in', 'email'] }],
     group: 'setup'
   }
 }
@@ -198,6 +217,7 @@ export function arrangePromptSettingsSections(
   }
   const shown = [
     ...visible.filter((section) => promptSettingsHostSectionId(section.id) === section.id),
+    promptAccountSettingsSection(),
     promptAboutSettingsSection()
   ]
   const main = PROMPT_MAIN_SETTINGS_SECTION_IDS.flatMap((id) => {

@@ -1116,7 +1116,8 @@
     "runningTerminals_one": "{{count}} uruchomiony terminal",
     "runningTerminals_few": "{{count}} uruchomione terminale",
     "runningTerminals_many": "{{count}} uruchomionych terminali",
-    "runningTerminals_other": "{{count}} uruchomionego terminala"
+    "runningTerminals_other": "{{count}} uruchomionego terminala",
+    "restartApp": "Uruchom ponownie Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Przejdź do {{value0}}",
@@ -24172,6 +24173,10 @@
       "about": {
         "title": "Informacje",
         "description": "Wersja, aplikacje RUNNERS i informacje o open source."
+      },
+      "account": {
+        "title": "Konto",
+        "description": "Jedno konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS."
       }
     },
     "skills": {

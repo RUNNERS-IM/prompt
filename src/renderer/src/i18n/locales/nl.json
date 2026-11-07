@@ -1052,7 +1052,8 @@
     "openAtLogin": "Openen bij inloggen",
     "autoCheckUpdates": "Automatisch op updates controleren",
     "runningTerminals_one": "{{count}} terminal actief",
-    "runningTerminals_other": "{{count}} terminals actief"
+    "runningTerminals_other": "{{count}} terminals actief",
+    "restartApp": "Prompt opnieuw starten"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Naar {{value0}} gaan",
@@ -23404,6 +23405,10 @@
       "about": {
         "title": "Over",
         "description": "Versie, RUNNERS-apps en opensourcevermeldingen."
+      },
+      "account": {
+        "title": "Account",
+        "description": "Het ene RUNNERS-account dat alle RUNNERS-apps delen."
       }
     },
     "skills": {

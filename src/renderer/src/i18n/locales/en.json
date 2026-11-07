@@ -1052,7 +1052,8 @@
     "helpFeedback": "Help & Feedback",
     "quitApp": "Quit Prompt",
     "openAtLogin": "Open at Login",
-    "autoCheckUpdates": "Check for Updates Automatically"
+    "autoCheckUpdates": "Check for Updates Automatically",
+    "restartApp": "Restart Prompt"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Go to {{value0}}",
@@ -23404,6 +23405,10 @@
       "about": {
         "title": "About",
         "description": "Version, RUNNERS apps, and open source notices."
+      },
+      "account": {
+        "title": "Account",
+        "description": "The one RUNNERS account every RUNNERS app shares."
       }
     },
     "skills": {

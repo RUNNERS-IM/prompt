@@ -1020,7 +1020,8 @@
     "quitApp": "ออกจาก Prompt",
     "openAtLogin": "เปิดเมื่อเข้าสู่ระบบ",
     "autoCheckUpdates": "ตรวจหาอัปเดตอัตโนมัติ",
-    "runningTerminals_other": "terminal กำลังทำงาน {{count}} รายการ"
+    "runningTerminals_other": "terminal กำลังทำงาน {{count}} รายการ",
+    "restartApp": "เริ่ม Prompt ใหม่"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "ไปที่ {{value0}}",
@@ -23020,6 +23021,10 @@
       "about": {
         "title": "เกี่ยวกับ",
         "description": "เวอร์ชัน แอป RUNNERS และประกาศโอเพนซอร์ส"
+      },
+      "account": {
+        "title": "บัญชี",
+        "description": "บัญชี RUNNERS เดียวที่แอป RUNNERS ทุกตัวใช้ร่วมกัน"
       }
     },
     "skills": {
