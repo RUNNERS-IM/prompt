@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { isWebClientLocation } from '@/lib/web-client-location'
 import { useAppStore } from '../../store'
-import type { PromptRunnersSignMode } from '../../../../shared/prompt-runners-account'
+import type {
+  PromptRunnersCodePurpose,
+  PromptRunnersSignInResult,
+  PromptRunnersSignMode
+} from '../../../../shared/prompt-runners-account'
 import { AccountButton, SignInSheet, accountText } from '../runners-account/runners-account'
 import {
   getRunnersAccountEmail,
@@ -31,25 +35,46 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
     }
   }, [api])
 
-  // The shared sheet reads the failure's short code (bad, exists) from the error's message.
+  const lang = i18n.language
+
+  // The shared sheet reads the failure's short code (bad, none, code, …) from the error's message.
+  const signedIn = useCallback((result: PromptRunnersSignInResult) => {
+    if (!result.ok) {
+      throw new Error(result.problem)
+    }
+    setRunnersAccountEmail(result.email)
+  }, [])
   const signIn = useCallback(
-    async (mode: PromptRunnersSignMode, address: string, password: string) => {
+    async (mode: PromptRunnersSignMode, address: string, password: string, code?: string) => {
       if (!api) {
         throw new Error('network')
       }
-      const result = await api.signIn(mode, address, password)
-      if (!result.ok) {
-        throw new Error(result.problem)
-      }
-      setRunnersAccountEmail(result.email)
+      signedIn(await api.signIn(mode, address, password, code))
     },
-    [api]
+    [api, signedIn]
+  )
+  const sendCode = useCallback(
+    async (purpose: PromptRunnersCodePurpose, address: string) => {
+      const result = api ? await api.sendCode(purpose, address, lang) : null
+      if (!result?.ok) {
+        throw new Error(result?.problem ?? 'network')
+      }
+    },
+    [api, lang]
+  )
+  const resetPassword = useCallback(
+    async (address: string, code: string, password: string) => {
+      if (!api) {
+        throw new Error('network')
+      }
+      signedIn(await api.resetPassword(address, code, password))
+    },
+    [api, signedIn]
   )
 
   if (!api || remoteRuntime || isWebClientLocation() || email === undefined) {
     return null
   }
-  const lang = i18n.language
   return (
     <div className="ml-1.5 flex shrink-0 items-center [-webkit-app-region:no-drag]">
       {email ? (
@@ -75,7 +100,13 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
       {/* Why a portal: an unfocused split's opacity makes a stacking context that would trap the full-window sheet. */}
       {signingIn
         ? createPortal(
-            <SignInSheet lang={lang} signIn={signIn} onClose={closeSignIn} />,
+            <SignInSheet
+              lang={lang}
+              signIn={signIn}
+              sendCode={sendCode}
+              resetPassword={resetPassword}
+              onClose={closeSignIn}
+            />,
             document.body
           )
         : null}

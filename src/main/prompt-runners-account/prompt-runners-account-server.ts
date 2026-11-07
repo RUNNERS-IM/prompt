@@ -1,6 +1,8 @@
 import { app, safeStorage } from 'electron'
 import { join } from 'node:path'
 import type {
+  PromptRunnersCodePurpose,
+  PromptRunnersSendCodeResult,
   PromptRunnersSignInProblem,
   PromptRunnersSignInResult,
   PromptRunnersSignMode
@@ -42,6 +44,16 @@ class ServerProblem extends Error {
   }
 }
 
+// Same codes as runners-app-kit main/account.ts accountProblem, so the four apps show the same reasons.
+const PROBLEM_BY_STATUS: Record<number, PromptRunnersSignInProblem> = {
+  400: 'format',
+  401: 'bad',
+  404: 'none',
+  409: 'exists',
+  422: 'code',
+  429: 'many'
+}
+
 async function post(path: string, body: unknown): Promise<unknown> {
   let res: Response
   try {
@@ -54,16 +66,21 @@ async function post(path: string, body: unknown): Promise<unknown> {
   } catch {
     throw new ServerProblem('network')
   }
-  if (res.status === 400 || res.status === 401 || res.status === 404) {
-    throw new ServerProblem('bad')
-  }
-  if (res.status === 409) {
-    throw new ServerProblem('exists')
-  }
+  const text = await res.text().catch(() => '')
   if (!res.ok) {
-    throw new ServerProblem('network')
+    // Why: the server answers an unknown email at login as 401 'User not found', not 404.
+    const problem =
+      res.status === 401 && text.includes('User not found')
+        ? 'none'
+        : (PROBLEM_BY_STATUS[res.status] ?? 'network')
+    throw new ServerProblem(problem)
   }
-  const answer: unknown = await res.json().catch(() => null)
+  let answer: unknown = null
+  try {
+    answer = text ? JSON.parse(text) : null
+  } catch {
+    answer = null
+  }
   // Why: the system server wraps a success as {code, data}; a local test server may answer bare.
   return answer && typeof answer === 'object' && 'code' in answer && 'data' in answer
     ? answer.data
@@ -92,25 +109,65 @@ export function runnersAccountEmail(): string | null {
   return file().load()?.email ?? null
 }
 
-/** Signs in, or makes the account first. The password goes as typed over HTTPS, as runners-app-kit sends it. */
-export async function signInRunnersAccount(
-  mode: PromptRunnersSignMode,
-  address: string,
-  password: string
+function problemOf(error: unknown): PromptRunnersSignInProblem {
+  return error instanceof ServerProblem ? error.problem : 'network'
+}
+
+async function signInWith(
+  path: string,
+  email: string,
+  body: Record<string, unknown>
 ): Promise<PromptRunnersSignInResult> {
-  const email = address.trim()
   try {
-    const tokens = readTokens(
-      await post(`/api/mobile/auth/${mode}`, { email, password, projectName: PROJECT })
-    )
+    const tokens = readTokens(await post(path, { email, projectName: PROJECT, ...body }))
     if (!tokens) {
       return { ok: false, problem: 'network' }
     }
     file().save({ email, tokens })
     return { ok: true, email }
   } catch (error) {
-    return { ok: false, problem: error instanceof ServerProblem ? error.problem : 'network' }
+    return { ok: false, problem: problemOf(error) }
   }
+}
+
+/** Signs in, or makes the account first with the mailed code. The password goes as typed over HTTPS, as
+ *  runners-app-kit sends it. */
+export function signInRunnersAccount(
+  mode: PromptRunnersSignMode,
+  address: string,
+  password: string,
+  code?: string
+): Promise<PromptRunnersSignInResult> {
+  return signInWith(`/api/mobile/auth/${mode}`, address.trim(), {
+    password,
+    ...(code ? { code } : {})
+  })
+}
+
+/** Mails the six-digit code: for a new account (a taken email is 'exists') or a new password (no account is 'none'). */
+export async function sendRunnersAccountCode(
+  purpose: PromptRunnersCodePurpose,
+  address: string,
+  locale: string
+): Promise<PromptRunnersSendCodeResult> {
+  try {
+    await post(
+      purpose === 'signup' ? '/api/mobile/auth/email-code' : '/api/mobile/auth/password-reset',
+      { email: address.trim(), projectName: PROJECT, locale }
+    )
+    return { ok: true }
+  } catch (error) {
+    return { ok: false, problem: problemOf(error) }
+  }
+}
+
+/** Sets a new password with the mailed code and signs in; the four apps share the one password. */
+export function resetRunnersAccountPassword(
+  address: string,
+  code: string,
+  password: string
+): Promise<PromptRunnersSignInResult> {
+  return signInWith('/api/mobile/auth/password-reset/confirm', address.trim(), { code, password })
 }
 
 /** Forgets the account here at once; telling the server is best effort so an offline Mac can still sign out. */
