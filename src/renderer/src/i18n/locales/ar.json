@@ -6376,6 +6376,15 @@
           "removedPreserved_few": "تمت إزالة {{removed}} · تم الاحتفاظ بـ {{count}} skills معدّلة.",
           "removedPreserved_many": "تمت إزالة {{removed}} · تم الاحتفاظ بـ {{count}} skill معدّل.",
           "removedPreserved_other": "تمت إزالة {{removed}} · تم الاحتفاظ بـ {{count}} skill معدّل."
+        },
+        "SkillQuickActions": {
+          "command": "الأمر",
+          "path": "المسار",
+          "copyCommand": "نسخ الأمر",
+          "commandCopied": "تم نسخ {{command}}",
+          "copiedForChat": "تم نسخ {{command}}. الصقه في مربع الدردشة.",
+          "copiedNoTerminal": "لا توجد طرفية مفتوحة، لذا تم نسخ {{command}}.",
+          "insert": "اكتب {{command}} في الطرفية"
         }
       },
       "sidebar": {

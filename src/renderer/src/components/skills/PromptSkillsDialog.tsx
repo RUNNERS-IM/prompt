@@ -13,7 +13,7 @@ export default function PromptSkillsDialog(): React.JSX.Element {
     <Dialog open={visible} onOpenChange={(open) => !open && closeModal()}>
       <DialogContent
         aria-describedby={undefined}
-        className="flex h-[min(720px,calc(100vh-4rem))] flex-col gap-0 overflow-hidden p-0 sm:max-w-3xl"
+        className="flex h-[min(720px,calc(100vh-4rem))] flex-col gap-0 overflow-hidden p-0 sm:max-w-4xl"
         onOpenAutoFocus={captureReturnFocus}
         onCloseAutoFocus={(event) => event.preventDefault()}
       >

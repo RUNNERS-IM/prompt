@@ -5195,6 +5195,15 @@
         "managedRemoval": {
           "removed": "{{removed}}개 제거됨.",
           "removedPreserved_other": "{{removed}}개 제거됨 · 수정된 스킬 {{count}}개 보존됨."
+        },
+        "SkillQuickActions": {
+          "command": "명령",
+          "path": "경로",
+          "copyCommand": "명령 복사",
+          "commandCopied": "{{command}} 복사함",
+          "copiedForChat": "{{command}} 복사함. 채팅 입력칸에 붙여 넣으세요.",
+          "copiedNoTerminal": "열린 터미널이 없어 {{command}} 를 복사했어요.",
+          "insert": "터미널에 {{command}} 입력"
         }
       },
       "sidebar": {
@@ -22661,7 +22670,7 @@
       "confirm": "닫기"
     },
     "sessionRow": {
-      "helpers": "도우미 {{count}}",
+      "helpers": "보조 {{count}}",
       "monitoring": "백그라운드 작업 지켜보는 중",
       "done": "끝남 · 답을 기다림",
       "noUpdateMinutes": "{{count}}분째 소식 없음 · 멈췄을 수 있음",

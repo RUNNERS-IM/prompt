@@ -5852,6 +5852,15 @@
           "removed": "{{removed}} हटाया गया।",
           "removedPreserved_one": "{{removed}} हटाई गईं · बदली हुई {{count}} skill सुरक्षित रखी गई।",
           "removedPreserved_other": "{{removed}} हटाई गईं · बदली हुई {{count}} skill सुरक्षित रखी गईं।"
+        },
+        "SkillQuickActions": {
+          "command": "कमांड",
+          "path": "पथ",
+          "copyCommand": "कमांड कॉपी करें",
+          "commandCopied": "{{command}} कॉपी किया गया",
+          "copiedForChat": "{{command}} कॉपी किया गया। इसे चैट बॉक्स में पेस्ट करें।",
+          "copiedNoTerminal": "कोई टर्मिनल खुला नहीं है, इसलिए {{command}} कॉपी किया गया।",
+          "insert": "टर्मिनल में {{command}} लिखें"
         }
       },
       "sidebar": {

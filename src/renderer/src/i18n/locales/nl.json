@@ -5852,6 +5852,15 @@
           "removed": "{{removed}} verwijderd.",
           "removedPreserved_one": "{{removed}} verwijderd · {{count}} aangepaste skill behouden.",
           "removedPreserved_other": "{{removed}} verwijderd · {{count}} aangepaste skills behouden."
+        },
+        "SkillQuickActions": {
+          "command": "Opdracht",
+          "path": "Pad",
+          "copyCommand": "Opdracht kopiëren",
+          "commandCopied": "{{command}} gekopieerd",
+          "copiedForChat": "{{command}} gekopieerd. Plak het in het chatvak.",
+          "copiedNoTerminal": "Geen terminal geopend, dus {{command}} is gekopieerd.",
+          "insert": "{{command}} typen in terminal"
         }
       },
       "sidebar": {

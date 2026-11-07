@@ -14022,6 +14022,15 @@
           "removedPreserved_one": "Removidas: {{removed}} · {{count}} skill modificada preservada.",
           "removedPreserved_other": "Removidas: {{removed}} · {{count}} skills modificadas preservadas.",
           "removedPreserved_many": "Removidas: {{removed}} · {{count}} skills modificadas preservadas."
+        },
+        "SkillQuickActions": {
+          "command": "Comando",
+          "path": "Caminho",
+          "copyCommand": "Copiar comando",
+          "commandCopied": "{{command}} copiado",
+          "copiedForChat": "{{command}} copiado. Cole na caixa de chat.",
+          "copiedNoTerminal": "Nenhum terminal aberto, então {{command}} foi copiado.",
+          "insert": "Digitar {{command}} no terminal"
         }
       },
       "automations": {

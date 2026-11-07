@@ -5905,6 +5905,15 @@
         "managedRemoval": {
           "removed": "已移除 {{removed}} 個。",
           "removedPreserved_other": "已移除 {{removed}} 個 · 已保留 {{count}} 個已修改的技能。"
+        },
+        "SkillQuickActions": {
+          "command": "指令",
+          "path": "路徑",
+          "copyCommand": "複製指令",
+          "commandCopied": "已複製 {{command}}",
+          "copiedForChat": "已複製 {{command}}。請貼到聊天輸入框。",
+          "copiedNoTerminal": "沒有開啟的終端機，已複製 {{command}}。",
+          "insert": "在終端機輸入 {{command}}"
         }
       },
       "sidebar": {

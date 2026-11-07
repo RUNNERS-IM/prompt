@@ -5721,6 +5721,15 @@
         "managedRemoval": {
           "removed": "Đã gỡ {{removed}}.",
           "removedPreserved_other": "Đã gỡ {{removed}} · giữ lại {{count}} skill đã sửa đổi."
+        },
+        "SkillQuickActions": {
+          "command": "Lệnh",
+          "path": "Đường dẫn",
+          "copyCommand": "Sao chép lệnh",
+          "commandCopied": "Đã sao chép {{command}}",
+          "copiedForChat": "Đã sao chép {{command}}. Hãy dán vào ô trò chuyện.",
+          "copiedNoTerminal": "Không có terminal nào đang mở nên đã sao chép {{command}}.",
+          "insert": "Gõ {{command}} vào terminal"
         }
       },
       "sidebar": {

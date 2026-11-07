@@ -195,10 +195,9 @@ describe('SkillsPage', () => {
 
     await renderPage()
     await flushMicrotasks()
-    await act(async () => fireEvent.click(skillRow('long-path')))
 
-    const dialog = document.querySelector('[role="dialog"]')
-    const path = [...(dialog?.querySelectorAll('*') ?? [])].find(
+    const pane = document.querySelector('[data-skill-detail-pane]')
+    const path = [...(pane?.querySelectorAll('*') ?? [])].find(
       (element) => element.textContent === longPath && element.children.length === 0
     )
     expect(path?.classList.contains('break-all')).toBe(true)
