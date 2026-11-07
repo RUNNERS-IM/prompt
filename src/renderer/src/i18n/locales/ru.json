@@ -6293,6 +6293,15 @@
           "removedPreserved_few": "Удалено: {{removed}} · {{count}} изменённых навыка сохранено.",
           "removedPreserved_many": "Удалено: {{removed}} · {{count}} изменённых навыков сохранено.",
           "removedPreserved_other": "Удалено: {{removed}} · {{count}} изменённого навыка сохранено."
+        },
+        "SkillQuickActions": {
+          "command": "Команда",
+          "path": "Путь",
+          "copyCommand": "Копировать команду",
+          "commandCopied": "Скопировано: {{command}}",
+          "copiedForChat": "Скопировано: {{command}}. Вставьте в поле чата.",
+          "copiedNoTerminal": "Нет открытого терминала, поэтому {{command}} скопирована.",
+          "insert": "Ввести {{command}} в терминале"
         }
       },
       "sidebar": {

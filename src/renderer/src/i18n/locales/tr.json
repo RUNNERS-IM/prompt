@@ -6033,6 +6033,15 @@
           "removed": "{{removed}} kaldırıldı.",
           "removedPreserved_other": "{{removed}} kaldırıldı · değiştirilmiş {{count}} beceri korundu.",
           "removedPreserved_one": "{{removed}} kaldırıldı · değiştirilmiş {{count}} beceri korundu."
+        },
+        "SkillQuickActions": {
+          "command": "Komut",
+          "path": "Yol",
+          "copyCommand": "Komutu kopyala",
+          "commandCopied": "{{command}} kopyalandı",
+          "copiedForChat": "{{command}} kopyalandı. Sohbet kutusuna yapıştırın.",
+          "copiedNoTerminal": "Açık terminal yok, bu yüzden {{command}} kopyalandı.",
+          "insert": "Terminale {{command}} yaz"
         }
       },
       "sidebar": {

@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
+import { useAppStore } from '@/store'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
 import type { DiscoveredSkill } from '../../../../shared/skills'
 import { SkillRow } from './SkillRow'
 import { SkillDetailDialog } from './SkillDetailDialog'
+import { SkillDetailPane, typeSkillIntoTerminal } from './skill-quick-actions'
 import {
   isSkillShareEligible,
   selectedShareSkillNameKeys,
@@ -60,6 +62,16 @@ export function SkillsList({
   const anchorIdRef = useRef<string | null>(null)
   const [detailSkill, setDetailSkill] = useState<DiscoveredSkill | null>(null)
   const [focusedId, setFocusedId] = useState<string | null>(null)
+  const [previewId, setPreviewId] = useState<string | null>(null)
+  const previewSkill = skills.find((skill) => skill.id === previewId) ?? skills[0] ?? null
+  const runSkill = (skill: DiscoveredSkill): void => {
+    void typeSkillIntoTerminal(skill, () => {
+      const { activeModal, closeModal } = useAppStore.getState()
+      if (activeModal === 'prompt-skills') {
+        closeModal()
+      }
+    })
+  }
 
   const revealSkill = async (skill: DiscoveredSkill): Promise<void> => {
     const result = await window.api.shell.openInFileManager(skill.skillFilePath, ownerHostId)
@@ -145,54 +157,68 @@ export function SkillsList({
           }
         }}
       />
-      <div
-        ref={listRef}
-        role="listbox"
-        aria-multiselectable={selectionMode !== null || undefined}
-        aria-label={translate('auto.components.skills.SkillsList.listLabel', 'Skills')}
-        aria-orientation="vertical"
-      >
-        {skills.map((skill, index) => {
-          const duplicateNameSelected =
-            !selectedIds.has(skill.id) && selectedNames.has(skill.name.toLocaleLowerCase('en-US'))
-          const shareEligible = isSkillShareEligible(skill, local)
-          const deleteEligible = isSkillDeleteEligible(skill)
-          const deleting = selectionMode === 'delete'
-          return (
-            <SkillRow
-              key={skill.id}
-              skill={skill}
-              selectionMode={selectionMode !== null}
-              selected={selectedIds.has(skill.id)}
-              selectable={deleting ? deleteEligible : shareEligible && !duplicateNameSelected}
-              shareable={shareEligible}
-              deletable={deleteSupported && deleteEligible}
-              deleteDisabledReason={deleteReasonFor(skill)}
-              disabledLabel={
-                deleting
-                  ? translate('auto.components.skills.SkillRow.notDeletable', 'Not deletable')
-                  : translate('auto.components.skills.SkillRow.notShareable', 'Not shareable')
-              }
-              // Remote sharing has one page-level cause; valid remote deletion keeps row-specific reasons.
-              disabledReason={
-                deleting
-                  ? skillDeleteEligibilityReason(skill)
-                  : local
-                    ? skillShareEligibilityReason(skill, local, duplicateNameSelected)
-                    : null
-              }
-              focusable={focusTargetId === skill.id}
-              onFocus={() => setFocusedId(skill.id)}
-              onOpenDetail={() => setDetailSkill(skill)}
-              onSelectionChange={(selected, range) => handleSelection(index, selected, range)}
-              onShare={() => onShare(skill)}
-              onDelete={() => onDelete(skill)}
-              onReveal={() => void revealSkill(skill)}
-              ownerHostId={ownerHostId}
-              onKeyDown={onListKeyDown}
-            />
-          )
-        })}
+      <div className="flex items-start gap-4">
+        <div
+          ref={listRef}
+          role="listbox"
+          className="min-w-0 flex-1"
+          aria-multiselectable={selectionMode !== null || undefined}
+          aria-label={translate('auto.components.skills.SkillsList.listLabel', 'Skills')}
+          aria-orientation="vertical"
+        >
+          {skills.map((skill, index) => {
+            const duplicateNameSelected =
+              !selectedIds.has(skill.id) && selectedNames.has(skill.name.toLocaleLowerCase('en-US'))
+            const shareEligible = isSkillShareEligible(skill, local)
+            const deleteEligible = isSkillDeleteEligible(skill)
+            const deleting = selectionMode === 'delete'
+            return (
+              <SkillRow
+                key={skill.id}
+                skill={skill}
+                selectionMode={selectionMode !== null}
+                selected={selectedIds.has(skill.id)}
+                selectable={deleting ? deleteEligible : shareEligible && !duplicateNameSelected}
+                shareable={shareEligible}
+                deletable={deleteSupported && deleteEligible}
+                deleteDisabledReason={deleteReasonFor(skill)}
+                disabledLabel={
+                  deleting
+                    ? translate('auto.components.skills.SkillRow.notDeletable', 'Not deletable')
+                    : translate('auto.components.skills.SkillRow.notShareable', 'Not shareable')
+                }
+                // Remote sharing has one page-level cause; valid remote deletion keeps row-specific reasons.
+                disabledReason={
+                  deleting
+                    ? skillDeleteEligibilityReason(skill)
+                    : local
+                      ? skillShareEligibilityReason(skill, local, duplicateNameSelected)
+                      : null
+                }
+                focusable={focusTargetId === skill.id}
+                onFocus={() => setFocusedId(skill.id)}
+                onOpenDetail={() => setDetailSkill(skill)}
+                onUse={() => runSkill(skill)}
+                onPreview={() => setPreviewId(skill.id)}
+                previewed={previewSkill?.id === skill.id}
+                onSelectionChange={(selected, range) => handleSelection(index, selected, range)}
+                onShare={() => onShare(skill)}
+                onDelete={() => onDelete(skill)}
+                onReveal={() => void revealSkill(skill)}
+                ownerHostId={ownerHostId}
+                onKeyDown={onListKeyDown}
+              />
+            )
+          })}
+        </div>
+        {selectionMode ? null : (
+          <SkillDetailPane
+            skill={previewSkill}
+            ownerHostId={ownerHostId}
+            onUse={runSkill}
+            onReveal={(skill) => void revealSkill(skill)}
+          />
+        )}
       </div>
     </>
   )

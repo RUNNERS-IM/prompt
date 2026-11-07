@@ -5463,6 +5463,15 @@
         "managedRemoval": {
           "removed": "已移除 {{removed}} 个。",
           "removedPreserved_other": "已移除 {{removed}} 个 · 已保留 {{count}} 个已修改的技能。"
+        },
+        "SkillQuickActions": {
+          "command": "命令",
+          "path": "路径",
+          "copyCommand": "复制命令",
+          "commandCopied": "已复制 {{command}}",
+          "copiedForChat": "已复制 {{command}}。请粘贴到聊天输入框。",
+          "copiedNoTerminal": "没有打开的终端，已复制 {{command}}。",
+          "insert": "在终端中输入 {{command}}"
         }
       },
       "sidebar": {

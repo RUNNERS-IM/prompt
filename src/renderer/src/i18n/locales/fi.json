@@ -5852,6 +5852,15 @@
           "removed": "{{removed}} poistettu.",
           "removedPreserved_one": "{{removed}} poistettu · {{count}} muokattu skill säilytetty.",
           "removedPreserved_other": "{{removed}} poistettu · {{count}} muokattua skilliä säilytetty."
+        },
+        "SkillQuickActions": {
+          "command": "Komento",
+          "path": "Polku",
+          "copyCommand": "Kopioi komento",
+          "commandCopied": "{{command}} kopioitu",
+          "copiedForChat": "{{command}} kopioitu. Liitä se keskusteluruutuun.",
+          "copiedNoTerminal": "Avointa päätettä ei ole, joten {{command}} kopioitiin.",
+          "insert": "Kirjoita {{command}} päätteeseen"
         }
       },
       "sidebar": {

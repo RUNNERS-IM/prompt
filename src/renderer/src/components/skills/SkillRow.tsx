@@ -24,6 +24,7 @@ import {
 } from './SkillRowActions'
 import { uiDateTimeFormat } from '@/i18n/ui-intl-formatters'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
+import { SkillRowQuickActions } from './skill-quick-actions'
 
 const providerLabels: Record<SkillProvider, string> = {
   codex: 'Codex',
@@ -60,8 +61,14 @@ export function SkillRow({
   onReveal,
   ownerHostId,
   onFocus,
-  onKeyDown
+  onKeyDown,
+  onUse,
+  onPreview,
+  previewed
 }: {
+  onUse: () => void
+  onPreview: () => void
+  previewed: boolean
   skill: DiscoveredSkill
   selectionMode: boolean
   selected: boolean
@@ -146,7 +153,7 @@ export function SkillRow({
       }
       return
     }
-    onOpenDetail()
+    onUse()
   }
 
   return (
@@ -158,7 +165,11 @@ export function SkillRow({
           aria-describedby={showReason ? reasonId : undefined}
           tabIndex={focusable ? 0 : -1}
           data-skill-row={skill.id}
-          onFocus={onFocus}
+          onFocus={() => {
+            onFocus()
+            onPreview()
+          }}
+          onPointerEnter={onPreview}
           onPointerDownCapture={(event) => {
             rangeRef.current = event.shiftKey
           }}
@@ -174,6 +185,7 @@ export function SkillRow({
           className={cn(
             'group flex w-full cursor-pointer items-start gap-3 border-b border-border/50 px-2 py-2.5 text-left transition-colors last:border-b-0 hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
             selected && 'bg-accent',
+            previewed && !selectionMode && 'bg-accent/50',
             selectionBlocked && 'opacity-60'
           )}
         >
@@ -241,9 +253,12 @@ export function SkillRow({
             ) : null}
           </div>
           <div
-            className="shrink-0 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100 group-focus-visible:opacity-100 has-[[data-state=open]]:opacity-100"
+            className="flex shrink-0 items-center gap-1 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100 group-focus-visible:opacity-100 has-[[data-state=open]]:opacity-100"
             onClick={(event) => event.stopPropagation()}
           >
+            {selectionMode ? null : (
+              <SkillRowQuickActions skill={skill} ownerHostId={ownerHostId} />
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button

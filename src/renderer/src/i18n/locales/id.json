@@ -5721,6 +5721,15 @@
         "managedRemoval": {
           "removed": "{{removed}} dihapus.",
           "removedPreserved_other": "{{removed}} dihapus · {{count}} skill yang dimodifikasi dipertahankan."
+        },
+        "SkillQuickActions": {
+          "command": "Perintah",
+          "path": "Jalur",
+          "copyCommand": "Salin perintah",
+          "commandCopied": "{{command}} disalin",
+          "copiedForChat": "{{command}} disalin. Tempel di kotak obrolan.",
+          "copiedNoTerminal": "Tidak ada terminal terbuka, jadi {{command}} disalin.",
+          "insert": "Ketik {{command}} di terminal"
         }
       },
       "sidebar": {

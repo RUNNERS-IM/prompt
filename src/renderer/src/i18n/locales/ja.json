@@ -5463,6 +5463,15 @@
         "managedRemoval": {
           "removed": "{{removed}} 件を削除しました。",
           "removedPreserved_other": "{{removed}} 件を削除 · 変更済みのスキル {{count}} 件を保持しました。"
+        },
+        "SkillQuickActions": {
+          "command": "コマンド",
+          "path": "パス",
+          "copyCommand": "コマンドをコピー",
+          "commandCopied": "{{command}} をコピーしました",
+          "copiedForChat": "{{command}} をコピーしました。チャット欄に貼り付けてください。",
+          "copiedNoTerminal": "開いているターミナルがないため、{{command}} をコピーしました。",
+          "insert": "ターミナルに {{command}} を入力"
         }
       },
       "sidebar": {

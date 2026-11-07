@@ -5721,6 +5721,15 @@
         "managedRemoval": {
           "removed": "นำออก {{removed}} แล้ว",
           "removedPreserved_other": "นำออกแล้ว {{removed}} รายการ · เก็บ skill ที่ถูกแก้ไข {{count}} รายการไว้"
+        },
+        "SkillQuickActions": {
+          "command": "คำสั่ง",
+          "path": "พาธ",
+          "copyCommand": "คัดลอกคำสั่ง",
+          "commandCopied": "คัดลอก {{command}} แล้ว",
+          "copiedForChat": "คัดลอก {{command}} แล้ว วางลงในช่องแชท",
+          "copiedNoTerminal": "ไม่มีเทอร์มินัลที่เปิดอยู่ จึงคัดลอก {{command}} แล้ว",
+          "insert": "พิมพ์ {{command}} ในเทอร์มินัล"
         }
       },
       "sidebar": {

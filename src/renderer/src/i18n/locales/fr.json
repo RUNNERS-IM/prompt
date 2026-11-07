@@ -5880,6 +5880,15 @@
           "removedPreserved_one": "Supprimés : {{removed}} · {{count}} skill modifié conservé.",
           "removedPreserved_other": "Supprimés : {{removed}} · {{count}} skills modifiés conservés.",
           "removedPreserved_many": "Supprimés : {{removed}} · {{count}} skills modifiés conservés."
+        },
+        "SkillQuickActions": {
+          "command": "Commande",
+          "path": "Chemin",
+          "copyCommand": "Copier la commande",
+          "commandCopied": "{{command}} copié",
+          "copiedForChat": "{{command}} copié. Collez-le dans la zone de discussion.",
+          "copiedNoTerminal": "Aucun terminal ouvert, {{command}} a donc été copié.",
+          "insert": "Saisir {{command}} dans le terminal"
         }
       },
       "sidebar": {

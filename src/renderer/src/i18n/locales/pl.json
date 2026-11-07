@@ -6114,6 +6114,15 @@
           "removedPreserved_few": "Usunięto: {{removed}} · zachowano {{count}} zmodyfikowane skille.",
           "removedPreserved_many": "Usunięto: {{removed}} · zachowano {{count}} zmodyfikowanych skilli.",
           "removedPreserved_other": "Usunięto: {{removed}} · zachowano {{count}} zmodyfikowanego skilla."
+        },
+        "SkillQuickActions": {
+          "command": "Polecenie",
+          "path": "Ścieżka",
+          "copyCommand": "Kopiuj polecenie",
+          "commandCopied": "Skopiowano {{command}}",
+          "copiedForChat": "Skopiowano {{command}}. Wklej je w pole czatu.",
+          "copiedNoTerminal": "Brak otwartego terminala, więc skopiowano {{command}}.",
+          "insert": "Wpisz {{command}} w terminalu"
         }
       },
       "sidebar": {
