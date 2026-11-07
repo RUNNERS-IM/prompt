@@ -139,7 +139,9 @@ export function AppearancePane({
     ...(SHOW_UI_LANGUAGE_SETTING ? getLanguageEntries() : []),
     ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? [] : getTitlebarEntries()),
     ...getSystemTrayEntries({ showSystemTray: isDesktopWindows }),
-    ...getMenuBarIconEntries({ showMenuBarIcon: isDesktopMac })
+    ...(PROMPT_BLOCK_UPSTREAM_SERVICES
+      ? []
+      : getMenuBarIconEntries({ showMenuBarIcon: isDesktopMac }))
   ]
   const terminalSearchEntries = [
     { title: terminalTitle },

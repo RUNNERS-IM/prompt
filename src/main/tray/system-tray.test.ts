@@ -146,8 +146,6 @@ function createOptions(
     devInstanceLabel: overrides.devInstanceLabel ?? null,
     onOpen: vi.fn(),
     onOpenSettings: vi.fn(),
-    onCheckForUpdates: vi.fn(),
-    onShowAbout: vi.fn(),
     onOpenHelp: vi.fn(),
     onQuit: vi.fn()
   }
@@ -219,7 +217,6 @@ describe('createSystemTray', () => {
     expect(builtMenuItems().map((item) => item.label)).toEqual([
       'Open Prompt',
       undefined,
-      'About Prompt',
       'Help & Feedback',
       undefined,
       'Quit Prompt'
@@ -253,8 +250,6 @@ describe('createSystemTray', () => {
     expect(builtMenuItems().map((item) => item.label)).toEqual([
       'Open Prompt',
       undefined,
-      'About Prompt',
-      'Check for Updates…',
       'Settings…',
       'Help & Feedback',
       undefined,
@@ -265,8 +260,6 @@ describe('createSystemTray', () => {
 
     for (const [label, callback] of [
       ['Open Prompt', options.onOpen],
-      ['About Prompt', options.onShowAbout],
-      ['Check for Updates…', options.onCheckForUpdates],
       ['Settings…', options.onOpenSettings],
       ['Help & Feedback', options.onOpenHelp],
       ['Quit Prompt', options.onQuit]
@@ -292,8 +285,6 @@ describe('createSystemTray', () => {
     expect(rows.map((item) => [item.label, item.icon])).toEqual([
       ['3 terminals running', 'icon:status-dot-green'],
       ['Open Prompt', 'icon:app-window'],
-      ['About Prompt', 'icon:info'],
-      ['Check for Updates…', 'icon:refresh-cw'],
       ['Settings…', 'icon:settings'],
       ['Help & Feedback', 'icon:circle-help'],
       ['Quit Prompt', 'icon:square-x'],
@@ -772,8 +763,7 @@ describe('language changes', () => {
         undefined,
         'Prompt 열기',
         undefined,
-        'Prompt 정보',
-        ...(platform === 'darwin' ? ['업데이트 확인…', '설정…'] : []),
+        ...(platform === 'darwin' ? ['설정…'] : []),
         '도움말 · 피드백',
         undefined,
         'Prompt 종료',
@@ -831,30 +821,22 @@ describe('language changes', () => {
   })
 })
 
-// 맥 패널 모드: 왼쪽 클릭은 패널, 오른쪽 클릭은 그때 새로 만든 기본 메뉴(2026-11-05 결정 2A).
+// 맥 패널 모드: 왼쪽 · 오른쪽 클릭 모두 같은 패널을 연다(runners-wiki 2026-11-07 다섯 앱 창 통일).
 describe('macOS menu panel', () => {
-  function panelOptions(state: { login: boolean; auto: boolean }) {
+  function panelOptions() {
     return {
       ...createOptions(),
       getRunningTerminalCount: () => 1,
+      onNewWindow: vi.fn(),
       onTogglePanel: vi.fn(),
-      onMenuRowsChanged: vi.fn(),
-      getOpenAtLogin: () => state.login,
-      onToggleOpenAtLogin: vi.fn(() => {
-        state.login = !state.login
-      }),
-      getAutoCheckUpdates: () => state.auto,
-      onToggleAutoCheckUpdates: vi.fn(() => {
-        state.auto = !state.auto
-      })
+      onMenuRowsChanged: vi.fn()
     }
   }
 
-  it('opens the panel on left click and a fresh native menu on right click', async () => {
+  it('opens the panel on both left and right click without a native menu', async () => {
     setPlatform('darwin')
     const { createSystemTray } = await loadModule()
-    const state = { login: true, auto: true }
-    const options = panelOptions(state)
+    const options = panelOptions()
     createSystemTray(options)
 
     const fake = trayInstances[0]
@@ -863,45 +845,29 @@ describe('macOS menu panel', () => {
       fake.on.mock.calls.find((call) => call[0] === event)?.[1] as () => void
 
     handler('click')()
-    expect(options.onTogglePanel).toHaveBeenCalledWith(fake)
-
-    state.login = false
     handler('right-click')()
-    expect(fake.popUpContextMenu).toHaveBeenCalledOnce()
-    const checks = builtMenuItems().filter((item) => item.type === 'checkbox') as (MenuItem & {
-      checked?: boolean
-    })[]
-    expect(checks.map((item) => [item.label, item.checked])).toEqual([
-      ['Open at Login', false],
-      ['Check for Updates Automatically', true]
-    ])
+    expect(options.onTogglePanel.mock.calls).toEqual([[fake], [fake]])
+    expect(fake.popUpContextMenu).not.toHaveBeenCalled()
   })
 
   it('gives the panel the same rows and runs its commands', async () => {
     setPlatform('darwin')
     const { createSystemTray, getTrayMenuRows, runTrayMenuCommandFromPanel } = await loadModule()
-    const state = { login: false, auto: true }
-    const options = panelOptions(state)
+    const options = panelOptions()
     expect(getTrayMenuRows()).toBeNull()
     createSystemTray(options)
 
-    expect(getTrayMenuRows()?.find((row) => row.kind === 'toggle')).toMatchObject({
-      id: 'openAtLogin',
-      checked: false
-    })
-    runTrayMenuCommandFromPanel('openAtLogin')
-    expect(options.onToggleOpenAtLogin).toHaveBeenCalledOnce()
-    expect(getTrayMenuRows()?.find((row) => row.kind === 'toggle')).toMatchObject({
-      checked: true
-    })
-    runTrayMenuCommandFromPanel('about')
-    expect(options.onShowAbout).toHaveBeenCalledOnce()
+    expect(
+      getTrayMenuRows()?.find((row) => row.kind === 'command' && row.id === 'newWindow')
+    ).toBeTruthy()
+    runTrayMenuCommandFromPanel('newWindow')
+    expect(options.onNewWindow).toHaveBeenCalledOnce()
   })
 
   it('redraws the open panel instead of attaching a menu on language changes', async () => {
     setPlatform('darwin')
     const { createSystemTray, rebuildSystemTrayMenu } = await loadModule()
-    const options = panelOptions({ login: true, auto: true })
+    const options = panelOptions()
     createSystemTray(options)
 
     rebuildSystemTrayMenu()

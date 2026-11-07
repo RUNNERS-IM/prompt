@@ -302,6 +302,7 @@ export function getAppearancePaneSearchEntries(
     // Prompt: the App Icon picker is not shown (AppearancePane).
     ...(PROMPT_SIMPLE_SETTINGS ? [] : getAppIconEntries()),
     ...getSystemTrayEntries(options),
-    ...getMenuBarIconEntries(options)
+    // Prompt: the menu bar icon switch lives in Settings › General › App.
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getMenuBarIconEntries(options))
   ]
 }

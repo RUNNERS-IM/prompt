@@ -22975,7 +22975,6 @@
         "description": "Akun Claude, cara sesi baru dimulai, dan penggunaan."
       },
       "appearance": {
-        "menuBarGroup": "Bilah menu",
         "trayGroup": "System tray",
         "terminalWindowGroup": "Jendela terminal",
         "title": "Tampilan",
@@ -23011,6 +23010,16 @@
       },
       "group": {
         "more": "Lebih banyak"
+      },
+      "general": {
+        "appGroup": "Aplikasi",
+        "openAtLoginDescription": "Simpan Prompt di bilah menu saat Anda masuk ke Mac.",
+        "autoCheckUpdatesDescription": "Memberi tahu saat versi baru keluar.",
+        "menuBarIconDescription": "Tampilkan ikon Prompt di bilah menu."
+      },
+      "about": {
+        "title": "Tentang",
+        "description": "Versi, aplikasi RUNNERS, dan pemberitahuan sumber terbuka."
       }
     },
     "skills": {

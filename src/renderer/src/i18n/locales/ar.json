@@ -24895,7 +24895,6 @@
         "description": "حسابات Claude وطريقة بدء الجلسات الجديدة والاستخدام."
       },
       "appearance": {
-        "menuBarGroup": "شريط القوائم",
         "trayGroup": "علبة النظام",
         "terminalWindowGroup": "نافذة الطرفية",
         "title": "المظهر",
@@ -24931,6 +24930,16 @@
       },
       "group": {
         "more": "أكثر"
+      },
+      "general": {
+        "appGroup": "التطبيق",
+        "openAtLoginDescription": "إبقاء Prompt في شريط القوائم عند تسجيل الدخول إلى جهاز Mac.",
+        "autoCheckUpdatesDescription": "إعلامك عند صدور إصدار جديد.",
+        "menuBarIconDescription": "إظهار أيقونة Prompt في شريط القوائم."
+      },
+      "about": {
+        "title": "حول",
+        "description": "الإصدار وتطبيقات RUNNERS وإشعارات المصادر المفتوحة."
       }
     },
     "skills": {

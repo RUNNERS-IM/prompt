@@ -23743,7 +23743,6 @@
         "description": "Account di Claude, avvio delle nuove sessioni e utilizzo"
       },
       "appearance": {
-        "menuBarGroup": "Barra dei menu",
         "trayGroup": "Area di notifica",
         "terminalWindowGroup": "Finestra del terminale",
         "title": "Aspetto",
@@ -23779,6 +23778,16 @@
       },
       "group": {
         "more": "Altro"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Tieni Prompt nella barra dei menu quando accedi al Mac.",
+        "autoCheckUpdatesDescription": "Ti avvisa quando esce una nuova versione.",
+        "menuBarIconDescription": "Mostra l’icona di Prompt nella barra dei menu."
+      },
+      "about": {
+        "title": "Informazioni",
+        "description": "Versione, app RUNNERS e note open source."
       }
     },
     "skills": {

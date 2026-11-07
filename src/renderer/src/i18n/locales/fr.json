@@ -123,7 +123,6 @@
         "description": "Comptes Claude, démarrage des nouvelles sessions et utilisation."
       },
       "appearance": {
-        "menuBarGroup": "Barre des menus",
         "trayGroup": "Zone de notification",
         "terminalWindowGroup": "Fenêtre du terminal",
         "title": "Apparence",
@@ -159,6 +158,16 @@
       },
       "group": {
         "more": "Plus"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Garder Prompt dans la barre des menus à l’ouverture de session sur votre Mac.",
+        "autoCheckUpdatesDescription": "Vous prévient lorsqu’une nouvelle version sort.",
+        "menuBarIconDescription": "Afficher l’icône Prompt dans la barre des menus."
+      },
+      "about": {
+        "title": "À propos",
+        "description": "Version, apps RUNNERS et mentions open source."
       }
     },
     "mobile": {

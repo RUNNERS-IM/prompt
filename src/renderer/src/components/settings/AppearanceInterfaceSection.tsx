@@ -349,11 +349,10 @@ export function AppearanceInterfaceSection({
   if (PROMPT_SIMPLE_SETTINGS) {
     return (
       <AppearanceInterfacePromptGroups
-        isDesktopMac={isDesktopMac}
         isDesktopWindows={isDesktopWindows}
         forceVisiblePrimary={forceVisiblePrimary}
         primaryRows={[themeRow, languageRow, zoomRow, fontRow]}
-        windowRows={[trayRow, menuBarRow]}
+        windowRows={[trayRow]}
       />
     )
   }

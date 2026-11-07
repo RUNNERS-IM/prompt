@@ -22975,7 +22975,6 @@
         "description": "Tài khoản Claude, cách khởi động phiên mới và mức sử dụng."
       },
       "appearance": {
-        "menuBarGroup": "Thanh menu",
         "trayGroup": "Khay hệ thống",
         "terminalWindowGroup": "Cửa sổ terminal",
         "title": "Giao diện",
@@ -23011,6 +23010,16 @@
       },
       "group": {
         "more": "Nhiều hơn"
+      },
+      "general": {
+        "appGroup": "Ứng dụng",
+        "openAtLoginDescription": "Giữ Prompt trên thanh menu khi bạn đăng nhập vào Mac.",
+        "autoCheckUpdatesDescription": "Báo cho bạn khi có phiên bản mới.",
+        "menuBarIconDescription": "Hiện biểu tượng Prompt trên thanh menu."
+      },
+      "about": {
+        "title": "Giới thiệu",
+        "description": "Phiên bản, ứng dụng RUNNERS và thông báo mã nguồn mở."
       }
     },
     "skills": {

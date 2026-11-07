@@ -23359,7 +23359,6 @@
         "description": "Claude accounts, how new sessions start, and usage."
       },
       "appearance": {
-        "menuBarGroup": "Menu Bar",
         "trayGroup": "System Tray",
         "terminalWindowGroup": "Terminal Window",
         "title": "Appearance",
@@ -23395,6 +23394,16 @@
       },
       "group": {
         "more": "More"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Keep Prompt in the menu bar when you log in to your Mac.",
+        "autoCheckUpdatesDescription": "Let you know when a new version is out.",
+        "menuBarIconDescription": "Show the Prompt icon in the menu bar."
+      },
+      "about": {
+        "title": "About",
+        "description": "Version, RUNNERS apps, and open source notices."
       }
     },
     "skills": {

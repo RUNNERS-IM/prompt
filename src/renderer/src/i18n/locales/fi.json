@@ -23359,7 +23359,6 @@
         "description": "Claude-tilit, uusien sessioiden käynnistys ja käyttö."
       },
       "appearance": {
-        "menuBarGroup": "Valikkopalkki",
         "trayGroup": "Ilmaisinalue",
         "terminalWindowGroup": "Pääteikkuna",
         "title": "Ulkoasu",
@@ -23395,6 +23394,16 @@
       },
       "group": {
         "more": "Enemmän"
+      },
+      "general": {
+        "appGroup": "Sovellus",
+        "openAtLoginDescription": "Pidä Prompt valikkopalkissa, kun kirjaudut Maciin.",
+        "autoCheckUpdatesDescription": "Ilmoittaa, kun uusi versio julkaistaan.",
+        "menuBarIconDescription": "Näytä Prompt-kuvake valikkopalkissa."
+      },
+      "about": {
+        "title": "Tietoja",
+        "description": "Versio, RUNNERS-sovellukset ja avoimen lähdekoodin ilmoitukset."
       }
     },
     "skills": {

@@ -1,4 +1,4 @@
-import { Bot } from 'lucide-react'
+import { Bot, Info } from 'lucide-react'
 import type { SettingsNavSection } from '@/lib/settings-navigation-types'
 import { translate } from '@/i18n/i18n'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
@@ -129,16 +129,39 @@ export function promptSettingsGroupTitle(groupId: string, upstreamTitle: string)
   return upstreamTitle
 }
 
-// 자주 바꾸는 7칸은 「기본」 묶음 맨 위에, 나머지 칸은 「더 보기」 묶음에 이 순서로 둔다.
+// 「기본」 묶음: 제일 중요한 Claude 가 맨 앞, 앱 고유 칸, 일반, 정보 순(runners-wiki 2026-11-08 Prompt 창 통일 2A).
+// 나머지 칸은 「더 보기」 묶음에 이 순서로 둔다.
+const PROMPT_ABOUT_SETTINGS_SECTION_ID = 'prompt-about'
 const PROMPT_MAIN_SETTINGS_SECTION_IDS: readonly string[] = [
-  'general',
   'accounts',
-  'appearance',
   'terminal',
+  'appearance',
   'notifications',
   'shortcuts',
-  'quick-commands'
+  'quick-commands',
+  'general',
+  PROMPT_ABOUT_SETTINGS_SECTION_ID
 ]
+
+/** The pane Settings opens on when nothing asked for a specific one. */
+export const DEFAULT_SETTINGS_SECTION_ID = PROMPT_BLOCK_UPSTREAM_SERVICES ? 'accounts' : 'general'
+
+/** Settings › About: version, RUNNERS apps and open source notices (replaces the About window). */
+function promptAboutSettingsSection(): SettingsNavSection {
+  const title = translate('prompt.settings.about.title', 'About')
+  const description = translate(
+    'prompt.settings.about.description',
+    'Version, RUNNERS apps, and open source notices.'
+  )
+  return {
+    id: PROMPT_ABOUT_SETTINGS_SECTION_ID,
+    title,
+    description,
+    icon: Info,
+    searchEntries: [{ title, description, keywords: ['version', 'about', 'license', 'RUNNERS'] }],
+    group: 'setup'
+  }
+}
 const PROMPT_MORE_SETTINGS_SECTION_IDS: readonly string[] = ['git', 'browser', 'ssh', 'advanced']
 
 function withPromptCopy(
@@ -173,7 +196,10 @@ export function arrangePromptSettingsSections(
   if (!PROMPT_BLOCK_UPSTREAM_SERVICES) {
     return visible
   }
-  const shown = visible.filter((section) => promptSettingsHostSectionId(section.id) === section.id)
+  const shown = [
+    ...visible.filter((section) => promptSettingsHostSectionId(section.id) === section.id),
+    promptAboutSettingsSection()
+  ]
   const main = PROMPT_MAIN_SETTINGS_SECTION_IDS.flatMap((id) => {
     const section = shown.find((entry) => entry.id === id)
     return section ? [{ ...withPromptCopy(section, visible), group: 'setup' }] : []

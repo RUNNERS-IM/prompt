@@ -18,9 +18,9 @@ export type TrayMenuTemplateState = TrayMenuState & {
   wrap: (action: () => void) => () => void
 }
 
-// 줄 순서와 아이콘: _docs/작업 가이드/공통.md 「메뉴바 메뉴와 아이콘」 + 2026-11-05 결정(켬/끔 두 줄을 정보 묶음 바로 위에).
-// 상태 줄 / 열기 / 로그인할 때 열기 · 업데이트 자동 확인 / 정보 · 업데이트 확인 · 설정 · 도움말 / 종료 · 완전히 종료.
-// 맥 패널과 기본 메뉴(오른쪽 클릭 · 윈도우)가 이 목록 하나를 함께 쓴다.
+// 줄 순서와 아이콘: _docs/작업 가이드/공통.md 「메뉴바 메뉴와 아이콘」 + runners-wiki 「2026-11-08 Prompt 패널은 열기 · 새 창」.
+// 상태 줄 / 열기 · 새 창 / 설정 · 도움말 / 종료 · 완전히 종료. 켬/끔 스위치와 정보는 설정(일반 · 정보 탭)에 있다.
+// 맥 패널과 윈도우 기본 메뉴가 이 목록 하나를 함께 쓴다.
 export function buildTrayMenuRows(
   opts: SystemTrayOptions,
   { devLabel, terminalCount }: TrayMenuState
@@ -44,62 +44,31 @@ export function buildTrayMenuRows(
       { kind: 'separator' }
     )
   }
-  rows.push(
-    {
-      kind: 'command',
-      id: 'open',
-      icon: 'app-window',
-      label: translateMain('tray.openApp', 'Open Prompt')
-    },
-    { kind: 'separator' }
-  )
-
-  const toggles: PromptMenuRow[] = []
-  if (opts.getOpenAtLogin && opts.onToggleOpenAtLogin) {
-    toggles.push({
-      kind: 'toggle',
-      id: 'openAtLogin',
-      icon: 'power',
-      label: translateMain('tray.openAtLogin', 'Open at Login'),
-      checked: readFlag(opts.getOpenAtLogin)
-    })
-  }
-  if (opts.getAutoCheckUpdates && opts.onToggleAutoCheckUpdates) {
-    toggles.push({
-      kind: 'toggle',
-      id: 'autoCheckUpdates',
-      icon: 'download',
-      label: translateMain('tray.autoCheckUpdates', 'Check for Updates Automatically'),
-      checked: readFlag(opts.getAutoCheckUpdates)
-    })
-  }
-  if (toggles.length > 0) {
-    rows.push(...toggles, { kind: 'separator' })
-  }
-
   rows.push({
     kind: 'command',
-    id: 'about',
-    icon: 'info',
-    label: translateMain('tray.about', 'About Prompt')
+    id: 'open',
+    icon: 'app-window',
+    label: translateMain('tray.openApp', 'Open Prompt')
   })
-  // Windows keeps its old tray: no update/settings entries there.
+  if (opts.onNewWindow) {
+    rows.push({
+      kind: 'command',
+      id: 'newWindow',
+      icon: 'plus',
+      label: translateMain('prompt.windows.newWindow', 'New Window'),
+      ...(isMac ? { accelerator: 'CmdOrCtrl+N' as const } : {})
+    })
+  }
+  rows.push({ kind: 'separator' })
+  // Windows keeps its old tray: no settings entry there.
   if (isMac) {
-    rows.push(
-      {
-        kind: 'command',
-        id: 'checkForUpdates',
-        icon: 'refresh-cw',
-        label: translateMain('tray.checkForUpdates', 'Check for Updates…')
-      },
-      {
-        kind: 'command',
-        id: 'settings',
-        icon: 'settings',
-        // No shortcut hint: app.settings has no default binding (⌘, stays with terminal apps).
-        label: translateMain('tray.settings', 'Settings…')
-      }
-    )
+    rows.push({
+      kind: 'command',
+      id: 'settings',
+      icon: 'settings',
+      // No shortcut hint: app.settings has no default binding (⌘, stays with terminal apps).
+      label: translateMain('tray.settings', 'Settings…')
+    })
   }
   rows.push(
     {
@@ -147,32 +116,14 @@ export function buildTrayPanelRows(opts: SystemTrayOptions, state: TrayMenuState
   ]
 }
 
-function readFlag(read: () => boolean): boolean {
-  try {
-    return read()
-  } catch (error) {
-    console.warn('[system-tray] menu state unavailable', error)
-    return false
-  }
-}
-
 /** 줄 하나를 눌렀을 때 할 일. 없는 명령(예: 서버 모드의 완전히 종료)은 아무것도 하지 않는다. */
 export function runTrayMenuCommand(opts: SystemTrayOptions, id: PromptMenuCommandId): void {
   switch (id) {
     case 'open':
       opts.onOpen()
       return
-    case 'openAtLogin':
-      opts.onToggleOpenAtLogin?.()
-      return
-    case 'autoCheckUpdates':
-      opts.onToggleAutoCheckUpdates?.()
-      return
-    case 'about':
-      opts.onShowAbout()
-      return
-    case 'checkForUpdates':
-      opts.onCheckForUpdates()
+    case 'newWindow':
+      opts.onNewWindow?.()
       return
     case 'settings':
       opts.onOpenSettings()
@@ -188,12 +139,10 @@ export function runTrayMenuCommand(opts: SystemTrayOptions, id: PromptMenuComman
   }
 }
 
-// 기본 메뉴(오른쪽 클릭 · 윈도우)는 같은 줄 목록을 Electron 메뉴로 옮긴다. 켬/끔 줄은 체크(✓) 항목에 아이콘도 단다.
-// 맥은 체크를 아이콘 왼쪽 칸에 따로 그려 모든 줄의 글자가 같은 자리에서 시작한다(Remote 45ce711 과 같음).
+// 윈도우 기본 메뉴는 같은 줄 목록을 Electron 메뉴로 옮긴다.
 export function buildTrayMenuTemplate(
   opts: SystemTrayOptions,
-  { devLabel, terminalCount, wrap }: TrayMenuTemplateState,
-  onRun: (id: PromptMenuCommandId) => void = (id) => runTrayMenuCommand(opts, id)
+  { devLabel, terminalCount, wrap }: TrayMenuTemplateState
 ): MenuItemOptions[] {
   return buildTrayMenuRows(opts, { devLabel, terminalCount }).map((row): MenuItemOptions => {
     switch (row.kind) {
@@ -207,21 +156,13 @@ export function buildTrayMenuTemplate(
           ...(row.dot ? { icon: trayMenuIcon('status-dot-green') } : {}),
           enabled: false
         }
-      case 'toggle':
-        return {
-          label: row.label,
-          icon: trayMenuIcon(row.icon),
-          type: 'checkbox',
-          checked: row.checked,
-          click: wrap(() => onRun(row.id))
-        }
       case 'command':
         return {
           label: row.label,
           icon: trayMenuIcon(row.icon),
           ...(row.accelerator ? { accelerator: row.accelerator, registerAccelerator: false } : {}),
           ...(row.toolTip ? { toolTip: row.toolTip } : {}),
-          click: wrap(() => onRun(row.id))
+          click: wrap(() => runTrayMenuCommand(opts, row.id))
         }
     }
   })

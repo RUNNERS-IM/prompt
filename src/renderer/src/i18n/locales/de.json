@@ -123,7 +123,6 @@
         "description": "Claude-Konten, Start neuer Sitzungen und Nutzung."
       },
       "appearance": {
-        "menuBarGroup": "Menüleiste",
         "trayGroup": "Infobereich",
         "terminalWindowGroup": "Terminalfenster",
         "title": "Darstellung",
@@ -159,6 +158,16 @@
       },
       "group": {
         "more": "Mehr"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Prompt beim Anmelden am Mac in der Menüleiste bereithalten.",
+        "autoCheckUpdatesDescription": "Benachrichtigen, wenn eine neue Version erscheint.",
+        "menuBarIconDescription": "Prompt-Symbol in der Menüleiste anzeigen."
+      },
+      "about": {
+        "title": "Über",
+        "description": "Version, RUNNERS-Apps und Open-Source-Hinweise."
       }
     },
     "mobile": {

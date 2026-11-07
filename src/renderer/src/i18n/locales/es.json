@@ -123,7 +123,6 @@
         "description": "Cuentas de Claude, cómo se inician las sesiones nuevas y uso."
       },
       "appearance": {
-        "menuBarGroup": "Barra de menús",
         "trayGroup": "Bandeja del sistema",
         "terminalWindowGroup": "Ventana de terminal",
         "title": "Apariencia",
@@ -159,6 +158,16 @@
       },
       "group": {
         "more": "Más"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Mantén Prompt en la barra de menús al iniciar sesión en tu Mac.",
+        "autoCheckUpdatesDescription": "Te avisa cuando sale una nueva versión.",
+        "menuBarIconDescription": "Muestra el icono de Prompt en la barra de menús."
+      },
+      "about": {
+        "title": "Acerca de",
+        "description": "Versión, apps de RUNNERS y avisos de código abierto."
       }
     },
     "mobile": {

@@ -23359,7 +23359,6 @@
         "description": "Claude-accounts, hoe nieuwe sessies starten en gebruik."
       },
       "appearance": {
-        "menuBarGroup": "Menubalk",
         "trayGroup": "Systeemvak",
         "terminalWindowGroup": "Terminalvenster",
         "title": "Weergave",
@@ -23395,6 +23394,16 @@
       },
       "group": {
         "more": "Meer"
+      },
+      "general": {
+        "appGroup": "App",
+        "openAtLoginDescription": "Houd Prompt in de menubalk wanneer je inlogt op je Mac.",
+        "autoCheckUpdatesDescription": "Laat je weten wanneer er een nieuwe versie is.",
+        "menuBarIconDescription": "Toon het Prompt-symbool in de menubalk."
+      },
+      "about": {
+        "title": "Over",
+        "description": "Versie, RUNNERS-apps en opensourcevermeldingen."
       }
     },
     "skills": {

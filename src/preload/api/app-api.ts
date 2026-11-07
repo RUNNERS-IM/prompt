@@ -23,6 +23,10 @@ export type AppApi = {
   getIdentity: () => Promise<AppIdentity>
   /** Local Windows desktop elevation; null when unavailable. Does not describe remote hosts. */
   getWindowsAdministratorStatus: () => Promise<boolean | null>
+  /** Prompt (macOS): Settings › General "Open at Login". Absent on web clients. */
+  getOpenAtLogin?: () => Promise<boolean>
+  /** Turns the login item on or off and resolves with the state macOS reports afterwards. */
+  setOpenAtLogin?: (on: boolean) => Promise<boolean>
   /** Restarts the installed Windows desktop with administrator approval and replaces its local terminal host. */
   restartAsAdministrator: () => Promise<void>
   /** Append filenames to this base: Vite /@fs in dev, file:// resources when packaged. */

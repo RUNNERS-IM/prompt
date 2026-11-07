@@ -24127,7 +24127,6 @@
         "description": "Konta Claude, sposób uruchamiania nowych sesji i użycie."
       },
       "appearance": {
-        "menuBarGroup": "Pasek menu",
         "trayGroup": "Zasobnik systemowy",
         "terminalWindowGroup": "Okno terminala",
         "title": "Wygląd",
@@ -24163,6 +24162,16 @@
       },
       "group": {
         "more": "Więcej"
+      },
+      "general": {
+        "appGroup": "Aplikacja",
+        "openAtLoginDescription": "Trzymaj Prompt na pasku menu po zalogowaniu się na Macu.",
+        "autoCheckUpdatesDescription": "Powiadamia, gdy pojawi się nowa wersja.",
+        "menuBarIconDescription": "Pokazuj ikonę Prompt na pasku menu."
+      },
+      "about": {
+        "title": "Informacje",
+        "description": "Wersja, aplikacje RUNNERS i informacje o open source."
       }
     },
     "skills": {

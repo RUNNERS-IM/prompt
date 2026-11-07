@@ -123,7 +123,6 @@
         "description": "Claude hesapları, yeni oturumların nasıl başlayacağı ve kullanım."
       },
       "appearance": {
-        "menuBarGroup": "Menü Çubuğu",
         "trayGroup": "Sistem Tepsisi",
         "terminalWindowGroup": "Terminal Penceresi",
         "title": "Görünüm",
@@ -159,6 +158,16 @@
       },
       "group": {
         "more": "Daha fazla"
+      },
+      "general": {
+        "appGroup": "Uygulama",
+        "openAtLoginDescription": "Mac’inizde oturum açtığınızda Prompt’u menü çubuğunda tutar.",
+        "autoCheckUpdatesDescription": "Yeni sürüm çıktığında haber verir.",
+        "menuBarIconDescription": "Prompt simgesini menü çubuğunda gösterir."
+      },
+      "about": {
+        "title": "Hakkında",
+        "description": "Sürüm, RUNNERS uygulamaları ve açık kaynak bildirimleri."
       }
     },
     "mobile": {

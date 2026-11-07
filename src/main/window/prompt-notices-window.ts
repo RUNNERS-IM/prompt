@@ -16,34 +16,18 @@ import {
   type LicenseFileContext
 } from './prompt-license-file-paths'
 
-// Prompt's own About window and its "Open source notices" window, both from
-// src/renderer/prompt-about.html (the notices one with ?view=notices). The native About panel
-// cannot hold the "More apps from RUNNERS" cards, so both the app menu and the menu bar menu
-// open the About window.
+// Prompt's "Open source notices" window (src/renderer/prompt-about.html?view=notices), opened from
+// the footer of Settings › About. Same size as Split's notices sheet; on macOS the title bar and its
+// buttons are hidden so it reads like that sheet, and the page's Close button, Return and Escape
+// close it.
 
-type InfoWindowKind = 'about' | 'notices'
-
-type InfoWindowSpec = {
-  title: () => string
-  options: Electron.BrowserWindowConstructorOptions
+const NOTICES_WINDOW_OPTIONS: Electron.BrowserWindowConstructorOptions = {
+  width: 480,
+  height: 420,
+  resizable: false
 }
 
-const INFO_WINDOWS: Record<InfoWindowKind, InfoWindowSpec> = {
-  about: {
-    title: () => translateMain('tray.about', 'About Prompt'),
-    // Sized for the Split-style layout: the longest English card line (Monitor, about 360px at
-    // 11px) stays on one line, and the header, both cards and the footer fit without scrolling.
-    options: { width: 570, height: 616, resizable: false }
-  },
-  // Same size as Split's notices sheet. On macOS the title bar and its buttons are hidden so it
-  // reads like that sheet; the page's Close button, Return and Escape close it.
-  notices: {
-    title: () => translateMain('prompt.about.notices', 'Open Source Notices'),
-    options: { width: 480, height: 420, resizable: false }
-  }
-}
-
-const openWindows: Partial<Record<InfoWindowKind, BrowserWindow>> = {}
+let noticesWindow: BrowserWindow | null = null
 let lastStore: Pick<Store, 'getSettings'> | null = null
 let noticesHandlersRegistered = false
 
@@ -57,13 +41,15 @@ function licenseFileContext(): LicenseFileContext {
   }
 }
 
-function registerThirdPartyNoticesHandlers(): void {
+/** Call once at startup: Settings › About in any Prompt window opens and reads the notices. */
+export function registerPromptThirdPartyNoticesHandlers(store: Pick<Store, 'getSettings'>): void {
+  lastStore = store
   if (noticesHandlersRegistered) {
     return
   }
   noticesHandlersRegistered = true
   ipcMain.handle(PROMPT_OPEN_THIRD_PARTY_NOTICES_CHANNEL, () => {
-    showInfoWindow('notices', lastStore)
+    showNoticesWindow(lastStore)
   })
   ipcMain.handle(PROMPT_READ_THIRD_PARTY_NOTICES_CHANNEL, async () => {
     try {
@@ -86,8 +72,8 @@ function prefersDark(store: Pick<Store, 'getSettings'> | null): boolean {
   return theme === 'dark' || (theme === 'system' && nativeTheme.shouldUseDarkColors)
 }
 
-function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> | null): void {
-  const existing = openWindows[kind]
+function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
+  const existing = noticesWindow
   if (existing && !existing.isDestroyed()) {
     if (existing.isMinimized()) {
       existing.restore()
@@ -97,20 +83,18 @@ function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> 
     return
   }
 
-  const spec = INFO_WINDOWS[kind]
+  const title = (): string => translateMain('prompt.about.notices', 'Open Source Notices')
   const isMac = process.platform === 'darwin'
   const window = new BrowserWindow({
-    ...spec.options,
+    ...NOTICES_WINDOW_OPTIONS,
     useContentSize: true,
     minimizable: false,
     maximizable: false,
     fullscreenable: false,
-    title: spec.title(),
+    title: title(),
     show: false,
     autoHideMenuBar: true,
-    ...(isMac
-      ? { titleBarStyle: kind === 'about' ? ('hiddenInset' as const) : ('hidden' as const) }
-      : {}),
+    ...(isMac ? { titleBarStyle: 'hidden' as const } : {}),
     backgroundColor: prefersDark(store) ? '#1e1e1e' : '#ececec',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -119,7 +103,7 @@ function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> 
       webviewTag: false
     }
   })
-  openWindows[kind] = window
+  noticesWindow = window
   // Links leave through the default browser; the window itself never navigates away.
   installPrivilegedWindowNavigationPolicy(window.webContents)
   window.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) =>
@@ -128,38 +112,28 @@ function showInfoWindow(kind: InfoWindowKind, store: Pick<Store, 'getSettings'> 
   window.webContents.session.setPermissionCheckHandler(() => false)
   if (isMac) {
     installMacAccentColor(window)
-    if (kind === 'notices') {
-      window.setWindowButtonVisibility(false)
-    }
+    window.setWindowButtonVisibility(false)
   }
   window.once('ready-to-show', () => window.show())
   window.on('page-title-updated', (event) => event.preventDefault())
   const updateTitle = (): void => {
     if (!window.isDestroyed()) {
-      window.setTitle(spec.title())
+      window.setTitle(title())
     }
   }
   mainI18n.on('languageChanged', updateTitle)
   window.on('closed', () => {
     mainI18n.off('languageChanged', updateTitle)
-    if (openWindows[kind] === window) {
-      delete openWindows[kind]
+    if (noticesWindow === window) {
+      noticesWindow = null
     }
   })
 
-  const query = kind === 'about' ? '' : `?view=${kind}`
   if (!app.isPackaged && process.env.ELECTRON_RENDERER_URL) {
-    void window.loadURL(`${process.env.ELECTRON_RENDERER_URL}/prompt-about.html${query}`)
+    void window.loadURL(`${process.env.ELECTRON_RENDERER_URL}/prompt-about.html?view=notices`)
   } else {
-    void window.loadFile(
-      join(__dirname, '../renderer/prompt-about.html'),
-      kind === 'about' ? {} : { query: { view: kind } }
-    )
+    void window.loadFile(join(__dirname, '../renderer/prompt-about.html'), {
+      query: { view: 'notices' }
+    })
   }
-}
-
-export function showPromptAboutWindow(store: Pick<Store, 'getSettings'> | null): void {
-  lastStore = store
-  registerThirdPartyNoticesHandlers()
-  showInfoWindow('about', store)
 }

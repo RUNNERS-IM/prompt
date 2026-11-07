@@ -73,6 +73,9 @@ export function registerMainProcessIpcHandlers(): void {
   ipcMain.handle('ui:consumePendingOpenSettings', (event) =>
     state.pendingOpenSettings.matches(event.sender.id, { consume: true })
   )
+  ipcMain.handle('ui:consumePendingOpenAboutSettings', (event) =>
+    state.pendingOpenAboutSettings.matches(event.sender.id, { consume: true })
+  )
   ipcMain.handle('ui:consumePendingQuitAndStopAllSessions', (event) =>
     consumeQuitAndStopAllSessionsRequest(event.sender.id)
   )

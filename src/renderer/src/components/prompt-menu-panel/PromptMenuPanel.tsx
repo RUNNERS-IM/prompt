@@ -4,10 +4,7 @@ import {
   AppWindow,
   CircleHelp,
   CircleX,
-  Download,
-  Info,
-  Power,
-  RefreshCw,
+  Plus,
   Settings,
   SquareX,
   type LucideIcon
@@ -19,7 +16,7 @@ import {
   type PromptMenuPanelApi,
   type PromptMenuRow
 } from '../../../../shared/prompt-menu-panel'
-import { MenuHead, MenuItem, MenuSeparator, MenuSwitch } from '../runners-account/runners-menu'
+import { MenuHead, MenuItem, MenuSeparator } from '../runners-account/runners-menu'
 
 // 맥 메뉴 막대 패널의 화면. 줄 목록은 main 이 번역까지 마쳐 보내고, 여기서는 그리기만 한다.
 // 줄 모양은 네 앱 공용 부품(runners-account/runners-menu.tsx)이 그린다. 아이콘은 lucide, 굵기 1.5, 크기 16.
@@ -31,10 +28,7 @@ const REFRESH_MS = 2000
 
 const ICONS: Record<PromptMenuIconName, LucideIcon> = {
   'app-window': AppWindow,
-  power: Power,
-  download: Download,
-  info: Info,
-  'refresh-cw': RefreshCw,
+  plus: Plus,
   settings: Settings,
   'circle-help': CircleHelp,
   'square-x': SquareX,
@@ -93,14 +87,7 @@ export function PromptMenuPanel({ api }: { api: PromptMenuPanelApi }): React.JSX
   }, [api])
 
   const run = (id: PromptMenuCommandId): void => {
-    void api
-      .run(id)
-      .then((next) => {
-        if (next) {
-          setRows(next)
-        }
-      })
-      .catch(() => undefined)
+    void api.run(id).catch(() => undefined)
   }
 
   return (
@@ -117,16 +104,6 @@ export function PromptMenuPanel({ api }: { api: PromptMenuPanelApi }): React.JSX
                 {row.dot ? <span className="prompt-menu-dot" aria-hidden /> : null}
                 <span className="rm-label">{row.label}</span>
               </div>
-            )
-          case 'toggle':
-            return (
-              <MenuSwitch
-                key={row.id}
-                icon={<Icon name={row.icon} />}
-                label={row.label}
-                checked={row.checked}
-                onChange={() => run(row.id)}
-              />
             )
           case 'command':
             return (

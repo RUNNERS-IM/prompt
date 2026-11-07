@@ -3,6 +3,7 @@ import { SettingsContentScrollElementProvider } from './settings-content-scroll-
 import { SettingsSidebar } from './SettingsSidebar'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import type { SettingsInteractionController } from './use-settings-interaction-controller'
 import type { SettingsRenderContext } from './settings-render-context'
 import {
@@ -20,6 +21,7 @@ import {
   renderIntegrationsSettingsSection,
   renderMobileSettingsSection,
   renderOrcaAccountSettingsSection,
+  renderPromptAboutSettingsSection,
   renderSetupGuideSettingsSection,
   renderShareSkillsSettingsSection
 } from './settings-setup-workflow-section-renderers'
@@ -141,6 +143,9 @@ export function renderSettingsPage(context: SettingsRenderContext): React.JSX.El
                   {renderOrcaAccountSettingsSection(context)}
                   {renderSetupGuideSettingsSection(context)}
                   {renderGeneralSettingsSection(context)}
+                  {PROMPT_BLOCK_UPSTREAM_SERVICES
+                    ? renderPromptAboutSettingsSection(context)
+                    : null}
                   {renderIntegrationsSettingsSection(context)}
                   {renderMobileSettingsSection(context)}
                   {renderAutomationsSettingsSection(context)}

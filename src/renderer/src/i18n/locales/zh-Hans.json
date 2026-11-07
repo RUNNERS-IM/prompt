@@ -123,7 +123,6 @@
         "description": "Claude 账号、新会话的启动方式和用量。"
       },
       "appearance": {
-        "menuBarGroup": "菜单栏",
         "trayGroup": "系统托盘",
         "terminalWindowGroup": "终端窗口",
         "title": "外观",
@@ -159,6 +158,16 @@
       },
       "group": {
         "more": "更多"
+      },
+      "general": {
+        "appGroup": "应用",
+        "openAtLoginDescription": "登录 Mac 时将 Prompt 保留在菜单栏中。",
+        "autoCheckUpdatesDescription": "有新版本时通知你。",
+        "menuBarIconDescription": "在菜单栏中显示 Prompt 图标。"
+      },
+      "about": {
+        "title": "关于",
+        "description": "版本、RUNNERS 应用和开源声明。"
       }
     },
     "mobile": {

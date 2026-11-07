@@ -50,21 +50,14 @@ function registerHandlers(): void {
   )
   ipcMain.handle(PROMPT_MENU_PANEL_RUN_CHANNEL, (event, id: unknown) => {
     if (!isPanelSender(event.sender) || !isPromptMenuCommandId(id)) {
-      return null
+      return
     }
-    const row = rows().find((item) => item.kind !== 'separator' && 'id' in item && item.id === id)
-    if (!row) {
-      return null
+    if (!rows().some((item) => item.kind === 'command' && item.id === id)) {
+      return
     }
-    if (row.kind === 'toggle') {
-      // 켬/끔 줄은 패널을 닫지 않고 상태만 바꾼다.
-      runTrayMenuCommandFromPanel(id)
-      return rows()
-    }
-    // 명령 줄은 패널을 먼저 닫고 실행한다.
+    // 패널을 먼저 닫고 실행한다.
     hidePromptMenuPanel()
     runTrayMenuCommandFromPanel(id)
-    return null
   })
   ipcMain.on(PROMPT_MENU_PANEL_FIT_HEIGHT_CHANNEL, (event, height: unknown) => {
     if (!isPanelSender(event.sender) || !panel) {

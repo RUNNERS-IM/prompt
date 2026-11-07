@@ -10,6 +10,7 @@ import { ShareSkillsSettingsPane } from './ShareSkillsSettingsPane'
 import { SettingsSection } from './SettingsSection'
 import { translate } from '@/i18n/i18n'
 import type { SettingsRenderContext } from './settings-render-context'
+import { PromptAboutPage } from '../prompt-runners-apps/PromptAboutPage'
 
 export function renderOrcaAccountSettingsSection(
   context: SettingsRenderContext
@@ -73,6 +74,25 @@ export function renderGeneralSettingsSection(context: SettingsRenderContext): Re
           wslCapabilitiesLoading={terminal.localWindowsRuntimeCapabilities.isLoading}
         />
       ) : null}
+    </SettingsSection>
+  )
+}
+
+export function renderPromptAboutSettingsSection(
+  context: SettingsRenderContext
+): React.JSX.Element {
+  const { navigation, view } = context
+  return (
+    <SettingsSection
+      id="prompt-about"
+      title={translate('prompt.settings.about.title', 'About')}
+      description={translate(
+        'prompt.settings.about.description',
+        'Version, RUNNERS apps, and open source notices.'
+      )}
+      searchEntries={navigation.getSectionSearchEntries('prompt-about')}
+    >
+      {view.isSectionMounted('prompt-about') ? <PromptAboutPage /> : null}
     </SettingsSection>
   )
 }

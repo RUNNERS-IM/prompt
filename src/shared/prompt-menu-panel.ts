@@ -1,6 +1,6 @@
-// 메뉴 막대 아이콘을 왼쪽 클릭하면 열리는 패널(맥 전용)과 기본 메뉴(오른쪽 클릭 · 윈도우)가 함께 쓰는 줄 목록.
+// 메뉴 막대 아이콘을 누르면 열리는 패널(맥 전용)과 기본 메뉴(윈도우)가 함께 쓰는 줄 목록.
 // 줄 목록은 main 이 번역까지 마친 글로 만들고, 패널 화면은 받은 그대로 그리기만 한다. 그래서 두 메뉴의 글과 순서가 늘 같다.
-// 결정: runners-wiki 앱-배포 「2026-11-05 네 앱 메뉴 패널 통일」 2A.
+// 결정: runners-wiki 앱-배포 「2026-11-05 네 앱 메뉴 패널 통일」 2A, 「2026-11-08 Prompt 패널은 열기 · 새 창」.
 
 export const PROMPT_MENU_PANEL_ROWS_CHANNEL = 'promptMenuPanel:rows'
 export const PROMPT_MENU_PANEL_RUN_CHANNEL = 'promptMenuPanel:run'
@@ -8,13 +8,10 @@ export const PROMPT_MENU_PANEL_FIT_HEIGHT_CHANNEL = 'promptMenuPanel:fitHeight'
 /** 패널을 열 때마다 main 이 새 줄 목록을 실어 보낸다(다른 창에서 바꾼 설정도 맞게 보이도록). */
 export const PROMPT_MENU_PANEL_SHOWN_CHANNEL = 'promptMenuPanel:shown'
 
-/** 줄 아이콘 이름(lucide). power · download 는 켬/끔 줄에 쓴다. */
+/** 줄 아이콘 이름(lucide). */
 export type PromptMenuIconName =
   | 'app-window'
-  | 'power'
-  | 'download'
-  | 'info'
-  | 'refresh-cw'
+  | 'plus'
   | 'settings'
   | 'circle-help'
   | 'square-x'
@@ -22,10 +19,7 @@ export type PromptMenuIconName =
 
 export type PromptMenuCommandId =
   | 'open'
-  | 'openAtLogin'
-  | 'autoCheckUpdates'
-  | 'about'
-  | 'checkForUpdates'
+  | 'newWindow'
   | 'settings'
   | 'help'
   | 'quit'
@@ -33,10 +27,7 @@ export type PromptMenuCommandId =
 
 export const PROMPT_MENU_COMMAND_IDS: readonly PromptMenuCommandId[] = [
   'open',
-  'openAtLogin',
-  'autoCheckUpdates',
-  'about',
-  'checkForUpdates',
+  'newWindow',
   'settings',
   'help',
   'quit',
@@ -48,7 +39,7 @@ export function isPromptMenuCommandId(value: unknown): value is PromptMenuComman
 }
 
 /** 오른쪽에 회색으로 보이는 단축키 안내. 진짜 단축키는 앱 메뉴가 가진다. */
-export type PromptMenuAccelerator = 'CmdOrCtrl+,' | 'CmdOrCtrl+Q'
+export type PromptMenuAccelerator = 'CmdOrCtrl+N' | 'CmdOrCtrl+Q'
 
 export type PromptMenuRow =
   | { kind: 'separator' }
@@ -64,19 +55,12 @@ export type PromptMenuRow =
       accelerator?: PromptMenuAccelerator
       toolTip?: string
     }
-  | {
-      kind: 'toggle'
-      id: Extract<PromptMenuCommandId, 'openAtLogin' | 'autoCheckUpdates'>
-      icon: PromptMenuIconName
-      label: string
-      checked: boolean
-    }
 
 export type PromptMenuPanelApi = {
   /** 지금 상태로 새로 만든 줄 목록. */
   rows: () => Promise<PromptMenuRow[]>
-  /** 줄을 누름. 켬/끔 줄은 패널을 닫지 않고 바뀐 줄 목록을 돌려주고, 명령 줄은 패널을 닫고 null 을 돌려준다. */
-  run: (id: PromptMenuCommandId) => Promise<PromptMenuRow[] | null>
+  /** 줄을 누름. 패널을 닫고 그 명령을 실행한다. */
+  run: (id: PromptMenuCommandId) => Promise<void>
   /** 창 높이를 내용 높이에 맞춘다. */
   fitHeight: (height: number) => void
   /** 패널이 열릴 때마다 새 줄 목록을 받는다. 구독을 푸는 함수를 돌려준다. */
@@ -85,5 +69,5 @@ export type PromptMenuPanelApi = {
 
 /** 맥 단축키 안내 글. */
 export function promptMenuAcceleratorText(accelerator: PromptMenuAccelerator): string {
-  return accelerator === 'CmdOrCtrl+,' ? '⌘,' : '⌘Q'
+  return accelerator === 'CmdOrCtrl+N' ? '⌘N' : '⌘Q'
 }

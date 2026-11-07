@@ -5,7 +5,6 @@ import { useAppStore } from '../../store'
 import { SettingsSubsectionHeader } from './SettingsFormControls'
 import {
   getLanguageEntries,
-  getMenuBarIconEntries,
   getSystemTrayEntries,
   getThemeEntries,
   getTypographyEntries,
@@ -16,7 +15,6 @@ import { translate } from '@/i18n/i18n'
 import { matchesSettingsSearch, normalizeSettingsSearchQuery } from './settings-search'
 
 type AppearanceInterfacePromptGroupsProps = {
-  isDesktopMac: boolean
   isDesktopWindows: boolean
   forceVisiblePrimary: boolean
   primaryRows: React.ReactNode[]
@@ -25,7 +23,6 @@ type AppearanceInterfacePromptGroupsProps = {
 
 // Prompt: the Interface rows as two titled boxes, without plugin theme rows or the Orca titlebar name.
 export function AppearanceInterfacePromptGroups({
-  isDesktopMac,
   isDesktopWindows,
   forceVisiblePrimary,
   primaryRows,
@@ -43,12 +40,9 @@ export function AppearanceInterfacePromptGroups({
       ...getTypographyEntries()
     ])
   const showWindowGroup =
-    (isDesktopMac || isDesktopWindows) &&
+    isDesktopWindows &&
     (!isSearching ||
-      matchesSettingsSearch(searchQuery, [
-        ...getSystemTrayEntries({ showSystemTray: isDesktopWindows }),
-        ...getMenuBarIconEntries({ showMenuBarIcon: isDesktopMac })
-      ]))
+      matchesSettingsSearch(searchQuery, getSystemTrayEntries({ showSystemTray: true })))
 
   return (
     <>
@@ -65,11 +59,7 @@ export function AppearanceInterfacePromptGroups({
       {showWindowGroup ? (
         <section>
           <SettingsSubsectionHeader
-            title={
-              isDesktopMac
-                ? translate('prompt.settings.appearance.menuBarGroup', 'Menu Bar')
-                : translate('prompt.settings.appearance.trayGroup', 'System Tray')
-            }
+            title={translate('prompt.settings.appearance.trayGroup', 'System Tray')}
           />
           {windowRows.map((row, index) => (
             <Fragment key={index}>{row}</Fragment>

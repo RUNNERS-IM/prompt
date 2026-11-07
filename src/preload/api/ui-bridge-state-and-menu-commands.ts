@@ -29,6 +29,13 @@ export const uiStateAndMenuCommandsApi = {
   },
   consumePendingOpenSettings: (): Promise<boolean> =>
     ipcRenderer.invoke('ui:consumePendingOpenSettings'),
+  onOpenAboutSettings: (callback: () => void): (() => void) => {
+    const listener = (_event: Electron.IpcRendererEvent) => callback()
+    ipcRenderer.on('ui:openAboutSettings', listener)
+    return () => ipcRenderer.removeListener('ui:openAboutSettings', listener)
+  },
+  consumePendingOpenAboutSettings: (): Promise<boolean> =>
+    ipcRenderer.invoke('ui:consumePendingOpenAboutSettings'),
   onQuitAndStopAllSessions: (callback: () => void): (() => void) => {
     const listener = (_event: Electron.IpcRendererEvent) => callback()
     ipcRenderer.on('ui:quitAndStopAllSessions', listener)

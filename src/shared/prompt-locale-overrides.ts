@@ -136,7 +136,13 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
     '에이전트 횟수와 Claude 토큰 · 모델 · 세션 사용량.',
   'prompt.settings.cli.installDescriptionMac':
     '`prompt` 와 `orca` 를 /usr/local/bin 에 등록합니다.',
-  'prompt.settings.appearance.menuBarGroup': '메뉴 막대',
+  'prompt.settings.general.appGroup': '앱',
+  'prompt.settings.general.openAtLoginDescription':
+    '맥에 로그인하면 Prompt 를 메뉴 막대에 띄워 둡니다.',
+  'prompt.settings.general.autoCheckUpdatesDescription': '새 판이 나오면 알려 줍니다.',
+  'prompt.settings.general.menuBarIconDescription': '메뉴 막대에 Prompt 아이콘을 보입니다.',
+  'prompt.settings.about.title': '정보',
+  'prompt.settings.about.description': '버전, RUNNERS 앱, 오픈소스 고지.',
   'prompt.settings.appearance.trayGroup': '시스템 트레이',
   'prompt.settings.appearance.terminalWindowGroup': '터미널 창',
   'prompt.settings.terminal.scrollbackKeysGroup': '스크롤 · 키 입력',

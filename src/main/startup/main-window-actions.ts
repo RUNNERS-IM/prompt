@@ -29,7 +29,7 @@ import { getDashboardPopoutWindow } from '../window/dashboard-popout-window'
 import { getWorkspaceSpaceWindow } from '../window/workspace-space-window'
 import { markUserQuitWindowClose } from '../window/user-quit-window-close'
 import { loadMainWindow } from '../window/createMainWindow'
-import { showPromptAboutWindow } from '../window/prompt-about-window'
+import { openPromptNewWindowFromMenu } from '../prompt-windows/prompt-windows'
 import { promptTrayMenuExtras, syncPromptMenuPanel } from '../tray/prompt-tray-menu-options'
 import { PROMPT_ISSUES_URL } from '../../shared/prompt-upstream'
 import {
@@ -211,9 +211,13 @@ export function runUserInitiatedUpdateCheck(options?: UpdateCheckOptions): void 
   checkForUpdatesFromMenu(options)
 }
 
-// Prompt: its own About window (app cards + original MIT credit) replaces the native About panel.
+// Prompt: About is the last Settings tab (version, RUNNERS apps, notices) instead of its own window.
 export function showAboutFromSystemMenu(): void {
-  showPromptAboutWindow(state.store)
+  sendOneShotToMainWindow(
+    'ui:openAboutSettings',
+    state.pendingOpenAboutSettings,
+    Number.POSITIVE_INFINITY
+  )
 }
 
 export function getSystemTrayOptions(): SystemTrayOptions | null {
@@ -227,17 +231,13 @@ export function getSystemTrayOptions(): SystemTrayOptions | null {
     devInstanceLabel: state.devInstanceIdentity?.devLabel ?? null,
     onOpen: showMainWindowFromTray,
     onOpenSettings: openSettingsFromSystemMenu,
-    onCheckForUpdates: () => {
-      showMainWindowFromTray()
-      runUserInitiatedUpdateCheck()
-    },
-    onShowAbout: showAboutFromSystemMenu,
+    onNewWindow: openPromptNewWindowFromMenu,
     onOpenHelp: () => void shell.openExternal(PROMPT_ISSUES_URL),
     // Every live terminal the app routes (local daemon and SSH) has one ownership entry.
     getRunningTerminalCount: () => ptyOwnership.size,
     getWorkingAgentCount: () => state.agentAwakeService?.getWorkingAgentCount() ?? 0,
     onQuit: quitFromSystemTray,
-    ...promptTrayMenuExtras(store),
+    ...promptTrayMenuExtras(),
     ...(state.isServeMode
       ? {}
       : { onQuitAndStopAllSessions: quitAndStopAllSessionsFromUserCommand })

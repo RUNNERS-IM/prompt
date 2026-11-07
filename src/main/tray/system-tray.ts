@@ -25,10 +25,8 @@ export type SystemTrayOptions = {
   onOpen: () => void
   /** Restore the main window and open its Settings surface. */
   onOpenSettings: () => void
-  /** Run the existing user-initiated update check. */
-  onCheckForUpdates: () => void
-  /** Show the About window (name, version, RUNNERS, original MIT credit). */
-  onShowAbout: () => void
+  /** Open one more Prompt window (the app menu's Window › New Window); omitted hides the row. */
+  onNewWindow?: () => void
   /** Open the Help & Feedback page (GitHub issues). */
   onOpenHelp: () => void
   /** Live terminal count for the status line; omitted hides the line. */
@@ -39,13 +37,7 @@ export type SystemTrayOptions = {
   onQuit: () => void
   /** Confirm, then quit with every terminal session stopped; omitted where the item must not show (serve mode). */
   onQuitAndStopAllSessions?: () => void
-  /** 「로그인할 때 열기」 켬/끔 줄. 둘 다 있어야 줄이 보인다. */
-  getOpenAtLogin?: () => boolean
-  onToggleOpenAtLogin?: () => void
-  /** 「업데이트 자동 확인」 켬/끔 줄. 둘 다 있어야 줄이 보인다. */
-  getAutoCheckUpdates?: () => boolean
-  onToggleAutoCheckUpdates?: () => void
-  /** 맥: 있으면 왼쪽 클릭은 앱이 그린 패널을 열고 닫고, 오른쪽 클릭은 기본 메뉴를 띄운다. 없으면 예전처럼 기본 메뉴만. */
+  /** 맥: 있으면 왼쪽 · 오른쪽 클릭 모두 앱이 그린 패널을 열고 닫는다. 없으면 예전처럼 기본 메뉴만. */
   onTogglePanel?: (tray: Tray) => void
   /** 맥 패널 모드에서 줄 글이 바뀌었을 때(언어 바꿈 등) 열린 패널을 새로 그리게 한다. */
   onMenuRowsChanged?: () => void
@@ -55,7 +47,7 @@ export type SystemTrayOptions = {
 let tray: Tray | null = null
 let trayOptions: SystemTrayOptions | null = null
 
-// 맥 패널 모드: 메뉴를 아이콘에 붙여 두지 않고, 오른쪽 클릭 때마다 새로 만들어 띄운다.
+// 맥 패널 모드: 메뉴를 아이콘에 붙여 두지 않고, 어느 쪽 클릭이든 패널을 연다.
 function usesMacPanel(opts: SystemTrayOptions | null): boolean {
   return process.platform === 'darwin' && typeof opts?.onTogglePanel === 'function'
 }
@@ -250,18 +242,10 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
   trayOptions = opts
   if (usesMacPanel(opts)) {
     const created = tray
-    created.on(
-      'click',
-      safeMenuAction(() => opts.onTogglePanel?.(created))
-    )
-    created.on(
-      'right-click',
-      safeMenuAction(() => {
-        if (!created.isDestroyed()) {
-          created.popUpContextMenu(buildTrayMenu(opts))
-        }
-      })
-    )
+    const togglePanel = safeMenuAction(() => opts.onTogglePanel?.(created))
+    // 결정 2026-11-07 다섯 앱 2A: 오른쪽 클릭도 같은 패널.
+    created.on('click', togglePanel)
+    created.on('right-click', togglePanel)
   } else {
     tray.setContextMenu(buildTrayMenu(opts))
   }
@@ -287,18 +271,8 @@ function buildTrayMenu(opts: SystemTrayOptions): Menu {
   shownTerminalCount = terminalCount
   const devLabel = devIndicator ? baseTooltip() : null
   return Menu.buildFromTemplate(
-    buildTrayMenuTemplate(opts, { devLabel, terminalCount, wrap: safeMenuAction }, (id) =>
-      runCommand(opts, id)
-    )
+    buildTrayMenuTemplate(opts, { devLabel, terminalCount, wrap: safeMenuAction })
   )
-}
-
-function runCommand(opts: SystemTrayOptions, id: PromptMenuCommandId): void {
-  runTrayMenuCommand(opts, id)
-  if ((id === 'openAtLogin' || id === 'autoCheckUpdates') && !usesMacPanel(opts)) {
-    // 붙여 둔 메뉴는 체크 표시를 스스로 바꾸지 않으므로 새로 만든다.
-    rebuildSystemTrayMenu()
-  }
 }
 
 /** 지금 상태로 새로 만든 줄 목록(맥 패널이 쓴다). 아이콘이 없으면 null. */
@@ -318,7 +292,7 @@ export function runTrayMenuCommandFromPanel(id: PromptMenuCommandId): void {
   if (!opts) {
     return
   }
-  safeMenuAction(() => runCommand(opts, id))()
+  safeMenuAction(() => runTrayMenuCommand(opts, id))()
 }
 
 /** Refreshes translated labels without recreating the tray or its actions. */

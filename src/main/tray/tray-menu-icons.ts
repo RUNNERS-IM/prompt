@@ -5,14 +5,8 @@ import circleHelpPath from '../../../resources/tray/menu/circle-helpTemplate.png
 import circleHelpRetinaPath from '../../../resources/tray/menu/circle-helpTemplate@2x.png?asset&asarUnpack'
 import circleXPath from '../../../resources/tray/menu/circle-xTemplate.png?asset&asarUnpack'
 import circleXRetinaPath from '../../../resources/tray/menu/circle-xTemplate@2x.png?asset&asarUnpack'
-import downloadPath from '../../../resources/tray/menu/downloadTemplate.png?asset&asarUnpack'
-import downloadRetinaPath from '../../../resources/tray/menu/downloadTemplate@2x.png?asset&asarUnpack'
-import infoPath from '../../../resources/tray/menu/infoTemplate.png?asset&asarUnpack'
-import infoRetinaPath from '../../../resources/tray/menu/infoTemplate@2x.png?asset&asarUnpack'
-import powerPath from '../../../resources/tray/menu/powerTemplate.png?asset&asarUnpack'
-import powerRetinaPath from '../../../resources/tray/menu/powerTemplate@2x.png?asset&asarUnpack'
-import refreshCwPath from '../../../resources/tray/menu/refresh-cwTemplate.png?asset&asarUnpack'
-import refreshCwRetinaPath from '../../../resources/tray/menu/refresh-cwTemplate@2x.png?asset&asarUnpack'
+import plusPath from '../../../resources/tray/menu/plusTemplate.png?asset&asarUnpack'
+import plusRetinaPath from '../../../resources/tray/menu/plusTemplate@2x.png?asset&asarUnpack'
 import settingsPath from '../../../resources/tray/menu/settingsTemplate.png?asset&asarUnpack'
 import settingsRetinaPath from '../../../resources/tray/menu/settingsTemplate@2x.png?asset&asarUnpack'
 import squareXPath from '../../../resources/tray/menu/square-xTemplate.png?asset&asarUnpack'
@@ -25,10 +19,7 @@ import statusDotGreenRetinaPath from '../../../resources/tray/menu/status-dot-gr
 export type TrayMenuIconName =
   | 'status-dot-green'
   | 'app-window'
-  | 'power'
-  | 'download'
-  | 'info'
-  | 'refresh-cw'
+  | 'plus'
   | 'settings'
   | 'circle-help'
   | 'square-x'
@@ -45,10 +36,7 @@ const ICON_PATHS: Record<
     template: false
   },
   'app-window': { path: appWindowPath, retinaPath: appWindowRetinaPath, template: true },
-  power: { path: powerPath, retinaPath: powerRetinaPath, template: true },
-  download: { path: downloadPath, retinaPath: downloadRetinaPath, template: true },
-  info: { path: infoPath, retinaPath: infoRetinaPath, template: true },
-  'refresh-cw': { path: refreshCwPath, retinaPath: refreshCwRetinaPath, template: true },
+  plus: { path: plusPath, retinaPath: plusRetinaPath, template: true },
   settings: { path: settingsPath, retinaPath: settingsRetinaPath, template: true },
   'circle-help': { path: circleHelpPath, retinaPath: circleHelpRetinaPath, template: true },
   'square-x': { path: squareXPath, retinaPath: squareXRetinaPath, template: true },

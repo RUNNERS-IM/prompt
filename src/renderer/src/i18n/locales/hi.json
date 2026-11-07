@@ -23359,7 +23359,6 @@
         "description": "Claude खाते, नए सत्र कैसे शुरू हों और उपयोग।"
       },
       "appearance": {
-        "menuBarGroup": "मेन्यू बार",
         "trayGroup": "सिस्टम ट्रे",
         "terminalWindowGroup": "टर्मिनल विंडो",
         "title": "दिखावट",
@@ -23395,6 +23394,16 @@
       },
       "group": {
         "more": "अधिक"
+      },
+      "general": {
+        "appGroup": "ऐप",
+        "openAtLoginDescription": "Mac में लॉग इन करने पर Prompt को मेन्यू बार में रखें।",
+        "autoCheckUpdatesDescription": "नया संस्करण आने पर आपको बताता है।",
+        "menuBarIconDescription": "मेन्यू बार में Prompt आइकन दिखाएँ।"
+      },
+      "about": {
+        "title": "जानकारी",
+        "description": "संस्करण, RUNNERS ऐप और ओपन सोर्स सूचनाएँ।"
       }
     },
     "skills": {

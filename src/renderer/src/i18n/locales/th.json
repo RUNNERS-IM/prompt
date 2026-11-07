@@ -22975,7 +22975,6 @@
         "description": "บัญชี Claude วิธีเริ่ม session ใหม่ และการใช้งาน"
       },
       "appearance": {
-        "menuBarGroup": "แถบเมนู",
         "trayGroup": "ถาดระบบ",
         "terminalWindowGroup": "หน้าต่าง terminal",
         "title": "รูปลักษณ์",
@@ -23011,6 +23010,16 @@
       },
       "group": {
         "more": "มากขึ้น"
+      },
+      "general": {
+        "appGroup": "แอป",
+        "openAtLoginDescription": "แสดง Prompt ไว้ในแถบเมนูเมื่อเข้าสู่ระบบ Mac",
+        "autoCheckUpdatesDescription": "แจ้งให้ทราบเมื่อมีเวอร์ชันใหม่",
+        "menuBarIconDescription": "แสดงไอคอน Prompt ในแถบเมนู"
+      },
+      "about": {
+        "title": "เกี่ยวกับ",
+        "description": "เวอร์ชัน แอป RUNNERS และประกาศโอเพนซอร์ส"
       }
     },
     "skills": {
