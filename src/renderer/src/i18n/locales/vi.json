@@ -23017,6 +23017,7 @@
       "urlInvertsToOrca": "{{mod}}+nhấp để mở, hoặc {{shiftMod}}+nhấp để mở trong Orca",
       "urlSystemBrowser": "{{mod}}+nhấp để mở, hoặc {{shiftMod}}+nhấp để mở bằng trình duyệt hệ thống",
       "systemBrowserOnly": "{{shiftMod}}+nhấp để mở bằng trình duyệt hệ thống",
+      "clickSystemBrowser": "Nhấp để mở bằng trình duyệt hệ thống",
       "orcaBrowserOnly": "{{shiftMod}}+nhấp để mở trong Orca",
       "switchWorkspace": "{{mod}}+nhấp để chuyển không gian làm việc",
       "switchWorkspaceFinder": "{{mod}}+nhấp để chuyển không gian làm việc, hoặc {{shiftMod}}+nhấp để mở trong Finder",

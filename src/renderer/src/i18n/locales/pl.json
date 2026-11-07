@@ -24169,6 +24169,7 @@
       "urlInvertsToOrca": "{{mod}}+kliknięcie otwiera, a {{shiftMod}}+kliknięcie otwiera w Orca",
       "urlSystemBrowser": "{{mod}}+kliknięcie otwiera, a {{shiftMod}}+kliknięcie otwiera w przeglądarce systemowej",
       "systemBrowserOnly": "{{shiftMod}}+kliknięcie otwiera w przeglądarce systemowej",
+      "clickSystemBrowser": "Kliknięcie otwiera w przeglądarce systemowej",
       "orcaBrowserOnly": "{{shiftMod}}+kliknięcie otwiera w Orca",
       "switchWorkspace": "{{mod}}+kliknięcie przełącza obszar roboczy",
       "switchWorkspaceFinder": "{{mod}}+kliknięcie przełącza obszar roboczy, a {{shiftMod}}+kliknięcie otwiera w Finderze",

@@ -111,6 +111,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.terminalLinkHint.urlSystemBrowser':
     '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: 기본 브라우저로 열기',
   'prompt.terminalLinkHint.systemBrowserOnly': '{{shiftMod}}+클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.clickSystemBrowser': '클릭: 기본 브라우저로 열기',
   'prompt.terminalLinkHint.orcaBrowserOnly': '{{shiftMod}}+클릭: Prompt 에서 열기',
   'prompt.terminalLinkHint.switchWorkspace': '{{mod}}+클릭: 이 워크스페이스로 이동',
   'prompt.terminalLinkHint.switchWorkspaceFinder':

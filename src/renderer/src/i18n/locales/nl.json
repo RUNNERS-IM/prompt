@@ -23401,6 +23401,7 @@
       "urlInvertsToOrca": "{{mod}}+klik om te openen, of {{shiftMod}}+klik om te openen in Orca",
       "urlSystemBrowser": "{{mod}}+klik om te openen, of {{shiftMod}}+klik voor de systeembrowser",
       "systemBrowserOnly": "{{shiftMod}}+klik voor de systeembrowser",
+      "clickSystemBrowser": "Klik om te openen in de systeembrowser",
       "orcaBrowserOnly": "{{shiftMod}}+klik om te openen in Orca",
       "switchWorkspace": "{{mod}}+klik om naar de werkruimte te schakelen",
       "switchWorkspaceFinder": "{{mod}}+klik om naar de werkruimte te schakelen, of {{shiftMod}}+klik om te openen in Finder",

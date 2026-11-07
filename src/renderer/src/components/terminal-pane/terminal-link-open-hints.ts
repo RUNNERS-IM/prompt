@@ -80,6 +80,10 @@ export function terminalUrlOpenHintOptionsFor(
 
 // With inversion, Shift means the other destination; name the resolved one instead of always promising the system browser.
 export function getTerminalUrlOpenHint(options: TerminalUrlOpenHintOptions = {}): string {
+  // Prompt: a plain web-link click opens the system browser at once (terminal-url-link-hit-testing.ts).
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES && options.showActions !== false) {
+    return linkHint('clickSystemBrowser', 'Click to open in system browser')
+  }
   const invertsToOrca = options.modifierInverts === true && options.openLinksInApp !== true
   const prefix = terminalLinkActionHintPrefix(options.showActions !== false)
   if (invertsToOrca) {

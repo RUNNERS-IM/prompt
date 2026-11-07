@@ -261,6 +261,7 @@
       "urlInvertsToOrca": "{{mod}}+клик — открыть, {{shiftMod}}+клик — открыть в Orca",
       "urlSystemBrowser": "{{mod}}+клик — открыть, {{shiftMod}}+клик — открыть в системном браузере",
       "systemBrowserOnly": "{{shiftMod}}+клик — открыть в системном браузере",
+      "clickSystemBrowser": "Нажмите, чтобы открыть в системном браузере",
       "orcaBrowserOnly": "{{shiftMod}}+клик — открыть в Orca",
       "switchWorkspace": "{{mod}}+клик — переключить рабочее пространство",
       "switchWorkspaceFinder": "{{mod}}+клик — переключить рабочее пространство, {{shiftMod}}+клик — открыть в Finder",

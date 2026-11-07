@@ -24937,6 +24937,7 @@
       "urlInvertsToOrca": "{{mod}}+نقرة للفتح، أو {{shiftMod}}+نقرة للفتح في Orca",
       "urlSystemBrowser": "{{mod}}+نقرة للفتح، أو {{shiftMod}}+نقرة للفتح في متصفح النظام",
       "systemBrowserOnly": "{{shiftMod}}+نقرة للفتح في متصفح النظام",
+      "clickSystemBrowser": "انقر للفتح في متصفح النظام",
       "orcaBrowserOnly": "{{shiftMod}}+نقرة للفتح في Orca",
       "switchWorkspace": "{{mod}}+نقرة للتبديل إلى مساحة عمل أخرى",
       "switchWorkspaceFinder": "{{mod}}+نقرة للتبديل إلى مساحة عمل أخرى، أو {{shiftMod}}+نقرة للفتح في Finder",

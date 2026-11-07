@@ -261,6 +261,7 @@
       "urlInvertsToOrca": "{{mod}}+点击打开，或 {{shiftMod}}+点击在 Orca 中打开",
       "urlSystemBrowser": "{{mod}}+点击打开，或 {{shiftMod}}+点击使用系统浏览器打开",
       "systemBrowserOnly": "{{shiftMod}}+点击使用系统浏览器打开",
+      "clickSystemBrowser": "点击使用系统浏览器打开",
       "orcaBrowserOnly": "{{shiftMod}}+点击在 Orca 中打开",
       "switchWorkspace": "{{mod}}+点击切换工作区",
       "switchWorkspaceFinder": "{{mod}}+点击切换工作区，或 {{shiftMod}}+点击在 Finder 中打开",
