@@ -5,14 +5,31 @@
 export const PROMPT_RUNNERS_ACCOUNT_GET_CHANNEL = 'prompt:runnersAccountGet'
 export const PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL = 'prompt:runnersAccountSignIn'
 export const PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL = 'prompt:runnersAccountSignOut'
+export const PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL = 'prompt:runnersAccountSendCode'
+export const PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL = 'prompt:runnersAccountResetPassword'
 
 export type PromptRunnersSignMode = 'login' | 'signup'
 
-/** What the shared sheet reads from a failed sign-in: a wrong email or password, a taken email, or no server. */
-export type PromptRunnersSignInProblem = 'bad' | 'exists' | 'network'
+/** Why the mailed six-digit code is sent: to make an account, or to set a new password. */
+export type PromptRunnersCodePurpose = 'signup' | 'reset'
+
+/** The shared sheet's failure codes (runners-account.tsx SignInProblem): wrong password, no such account, password
+ *  shape, taken email, wrong code, too many tries; anything else shows as no server. */
+export type PromptRunnersSignInProblem =
+  | 'bad'
+  | 'none'
+  | 'format'
+  | 'exists'
+  | 'code'
+  | 'many'
+  | 'network'
 
 export type PromptRunnersSignInResult =
   | { ok: true; email: string }
+  | { ok: false; problem: PromptRunnersSignInProblem }
+
+export type PromptRunnersSendCodeResult =
+  | { ok: true }
   | { ok: false; problem: PromptRunnersSignInProblem }
 
 export type PromptRunnersAccountApi = {
@@ -21,6 +38,18 @@ export type PromptRunnersAccountApi = {
   signIn: (
     mode: PromptRunnersSignMode,
     email: string,
+    password: string,
+    code?: string
+  ) => Promise<PromptRunnersSignInResult>
+  sendCode: (
+    purpose: PromptRunnersCodePurpose,
+    email: string,
+    locale: string
+  ) => Promise<PromptRunnersSendCodeResult>
+  /** Sets a new password with the mailed code and signs in with it. */
+  resetPassword: (
+    email: string,
+    code: string,
     password: string
   ) => Promise<PromptRunnersSignInResult>
   signOut: () => Promise<void>
