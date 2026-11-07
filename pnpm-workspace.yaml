@@ -128,3 +128,7 @@ patchedDependencies:
   '@tiptap/extension-list@3.31.3': config/patches/@tiptap__extension-list@3.31.3.patch
   '@tiptap/markdown@3.31.3': config/patches/@tiptap__markdown@3.31.3.patch
   vitest@5.0.5: config/patches/vitest@5.0.5.patch
+  glob@13.0.6: config/patches/glob@13.0.6.patch
+  minimatch@9.0.9: config/patches/minimatch@9.0.9.patch
+  minimatch@10.2.5: config/patches/minimatch@10.2.5.patch
+  minimatch@10.2.6: config/patches/minimatch@10.2.6.patch
