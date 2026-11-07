@@ -3437,8 +3437,9 @@ html.native-shell .app-layout {
   ) {
   unicode-bidi: plaintext;
 }
+/* Buttons keep their own centering. */
 :where(:root:lang(ar))
-  :where(p, span, div, label, h1, h2, h3, h4, button, a, li, td, th, input, textarea):where(
+  :where(p, span, div, label, h1, h2, h3, h4, a, li, td, th, input, textarea):where(
     :not(
       .xterm,
       .xterm *,

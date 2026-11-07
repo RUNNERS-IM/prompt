@@ -297,6 +297,8 @@ export const electronViteConfig: UserConfig = {
       modulePreload: { polyfill: true },
       minify: 'oxc',
       target: 'es2020',
+      // Prompt: CSS keeps logical insets; an es2020 CSS target rewrites them into :lang() rules that flip in Arabic.
+      cssTarget: 'chrome140',
       // Give pop-out dashboard its own HTML/React root with shared preload API; retain index or overriding input drops electron-vite’s default entry.
       rollupOptions: {
         // Shared chunks must not import HTML entries that mount another React root.
