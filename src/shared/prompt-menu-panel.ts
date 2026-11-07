@@ -8,10 +8,11 @@ export const PROMPT_MENU_PANEL_FIT_HEIGHT_CHANNEL = 'promptMenuPanel:fitHeight'
 /** 패널을 열 때마다 main 이 새 줄 목록을 실어 보낸다(다른 창에서 바꾼 설정도 맞게 보이도록). */
 export const PROMPT_MENU_PANEL_SHOWN_CHANNEL = 'promptMenuPanel:shown'
 
-/** 줄 아이콘 이름(lucide). power 는 패널의 켬/끔 줄에만 쓴다(기본 메뉴의 체크 줄은 아이콘이 없다). */
+/** 줄 아이콘 이름(lucide). power · download 는 켬/끔 줄에 쓴다. */
 export type PromptMenuIconName =
   | 'app-window'
   | 'power'
+  | 'download'
   | 'info'
   | 'refresh-cw'
   | 'settings'

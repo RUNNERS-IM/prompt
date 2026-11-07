@@ -68,7 +68,7 @@ export function buildTrayMenuRows(
     toggles.push({
       kind: 'toggle',
       id: 'autoCheckUpdates',
-      icon: 'refresh-cw',
+      icon: 'download',
       label: translateMain('tray.autoCheckUpdates', 'Check for Updates Automatically'),
       checked: readFlag(opts.getAutoCheckUpdates)
     })
@@ -188,8 +188,8 @@ export function runTrayMenuCommand(opts: SystemTrayOptions, id: PromptMenuComman
   }
 }
 
-// 기본 메뉴(오른쪽 클릭 · 윈도우)는 같은 줄 목록을 Electron 메뉴로 옮긴다. 켬/끔 줄은 체크(✓) 항목이고,
-// 체크 표시가 아이콘 자리를 쓰므로 아이콘이 없다(2026-11-02 「켬 끔 줄은 아이콘 + 토글, 기본 메뉴는 체크 표시」).
+// 기본 메뉴(오른쪽 클릭 · 윈도우)는 같은 줄 목록을 Electron 메뉴로 옮긴다. 켬/끔 줄은 체크(✓) 항목에 아이콘도 단다.
+// 맥은 체크를 아이콘 왼쪽 칸에 따로 그려 모든 줄의 글자가 같은 자리에서 시작한다(Remote 45ce711 과 같음).
 export function buildTrayMenuTemplate(
   opts: SystemTrayOptions,
   { devLabel, terminalCount, wrap }: TrayMenuTemplateState,
@@ -210,6 +210,7 @@ export function buildTrayMenuTemplate(
       case 'toggle':
         return {
           label: row.label,
+          icon: trayMenuIcon(row.icon),
           type: 'checkbox',
           checked: row.checked,
           click: wrap(() => onRun(row.id))
@@ -217,7 +218,7 @@ export function buildTrayMenuTemplate(
       case 'command':
         return {
           label: row.label,
-          icon: row.icon === 'power' ? undefined : trayMenuIcon(row.icon),
+          icon: trayMenuIcon(row.icon),
           ...(row.accelerator ? { accelerator: row.accelerator, registerAccelerator: false } : {}),
           ...(row.toolTip ? { toolTip: row.toolTip } : {}),
           click: wrap(() => onRun(row.id))

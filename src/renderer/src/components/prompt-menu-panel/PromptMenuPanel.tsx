@@ -4,6 +4,7 @@ import {
   AppWindow,
   CircleHelp,
   CircleX,
+  Download,
   Info,
   Power,
   RefreshCw,
@@ -31,6 +32,7 @@ const REFRESH_MS = 2000
 const ICONS: Record<PromptMenuIconName, LucideIcon> = {
   'app-window': AppWindow,
   power: Power,
+  download: Download,
   info: Info,
   'refresh-cw': RefreshCw,
   settings: Settings,

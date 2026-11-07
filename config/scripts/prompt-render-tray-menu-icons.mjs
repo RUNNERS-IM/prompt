@@ -16,6 +16,8 @@ const iconDir = join(root, 'node_modules/lucide-react/dist/esm/icons')
 // 파일 이름 -> Lucide 이름. circle-help 는 lucide-react 안에서 circle-question-mark 의 다른 이름이다.
 const ICONS = {
   'app-window': 'app-window',
+  power: 'power',
+  download: 'download',
   info: 'info',
   'refresh-cw': 'refresh-cw',
   settings: 'settings',

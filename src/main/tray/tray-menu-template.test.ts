@@ -78,7 +78,7 @@ describe('tray menu rows', () => {
     ])
     expect(rows.filter((row) => row.kind === 'toggle').map((row) => row.icon)).toEqual([
       'power',
-      'refresh-cw'
+      'download'
     ])
   })
 
@@ -158,7 +158,7 @@ describe('tray panel rows', () => {
 })
 
 describe('tray menu template', () => {
-  it('turns the on/off rows into native check items without icons', () => {
+  it('turns the on/off rows into native check items that keep their icons', () => {
     setPlatform('darwin')
     const template = buildTrayMenuTemplate(options(), {
       devLabel: null,
@@ -168,8 +168,8 @@ describe('tray menu template', () => {
 
     const checks = template.filter((item) => item.type === 'checkbox')
     expect(checks.map((item) => [item.label, item.checked, item.icon])).toEqual([
-      ['Open at Login', true, undefined],
-      ['Check for Updates Automatically', false, undefined]
+      ['Open at Login', true, 'icon:power'],
+      ['Check for Updates Automatically', false, 'icon:download']
     ])
   })
 
