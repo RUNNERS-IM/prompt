@@ -5283,7 +5283,7 @@
         "SkillsPage": {
           "cb142070b4": "รีเฟรช",
           "a68dee6a32": "ค้นหา skill",
-          "f43ad6edf3": "Skills",
+          "f43ad6edf3": "สกิล",
           "ea72d6185b": "สแกน skill ไม่สำเร็จ",
           "dc4c3328ee": "แสดงไฟล์",
           "9963dff6d3": "ไม่พบคำอธิบาย",
@@ -5496,7 +5496,7 @@
           "notDeletable": "ลบไม่ได้"
         },
         "SkillsList": {
-          "listLabel": "Skills"
+          "listLabel": "สกิล"
         },
         "sourceStatus": {
           "missing": "ไม่พบโฟลเดอร์",
@@ -6124,7 +6124,7 @@
           "fee535205b": "งาน",
           "d599269755": "ซ่อนจากแถบด้านข้าง",
           "artifacts": "Artifacts",
-          "skills": "Skills"
+          "skills": "สกิล"
         },
         "SidebarRepositoryFilterSection": {
           "d3a9c4cea1": "ล้าง",
@@ -19061,7 +19061,7 @@
         "noCommandsOrSkills": "ไม่พบคำสั่งหรือ skill ที่ตรงกัน",
         "noCommands": "ไม่พบคำสั่งที่ตรงกัน",
         "commands": "คำสั่ง",
-        "skills": "Skills",
+        "skills": "สกิล",
         "loadingSkills": "กำลังโหลด skill…",
         "skillsLoaded": "โหลด skill แล้ว",
         "clearDescription": "ล้างบริบทของบทสนทนา",

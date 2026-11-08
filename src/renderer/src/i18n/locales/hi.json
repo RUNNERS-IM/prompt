@@ -5388,7 +5388,7 @@
         "SkillsPage": {
           "cb142070b4": "रीफ़्रेश करें",
           "a68dee6a32": "skill खोजें",
-          "f43ad6edf3": "Skills",
+          "f43ad6edf3": "स्किल्स",
           "ea72d6185b": "skill स्कैन नहीं हो सके",
           "dc4c3328ee": "फ़ाइल दिखाएँ",
           "9963dff6d3": "कोई विवरण नहीं मिला।",
@@ -5609,7 +5609,7 @@
           "notDeletable": "हटाई नहीं जा सकती"
         },
         "SkillsList": {
-          "listLabel": "Skills"
+          "listLabel": "स्किल्स"
         },
         "sourceStatus": {
           "missing": "फ़ोल्डर नहीं मिला",
@@ -6274,7 +6274,7 @@
           "fee535205b": "कार्य",
           "d599269755": "साइड बार से छिपाएँ",
           "artifacts": "Artifacts",
-          "skills": "Skills"
+          "skills": "स्किल्स"
         },
         "SidebarRepositoryFilterSection": {
           "d3a9c4cea1": "साफ़ करें",
@@ -19360,7 +19360,7 @@
         "noCommandsOrSkills": "कोई मेल खाता कमांड या skill नहीं",
         "noCommands": "कोई मेल खाता कमांड नहीं",
         "commands": "कमांड",
-        "skills": "Skills",
+        "skills": "स्किल्स",
         "loadingSkills": "skill लोड हो रहे हैं…",
         "skillsLoaded": "skill लोड हो गए",
         "clearDescription": "बातचीत का संदर्भ साफ़ करें",

@@ -1,7 +1,3 @@
-import {
-  resolveTerminalTabTitle,
-  resolveUnifiedTabLabel
-} from '../../../shared/tab-title-resolution'
 import type { Tab } from '../../../shared/tab-types'
 import { getEditorDisplayLabel } from '@/components/editor/editor-labels'
 import { buildPaletteTabDocument } from '../../../shared/palette-match/tab-document'
@@ -11,6 +7,7 @@ import {
   resolvePaletteRepoForWorktree
 } from './palette-repo-resolution'
 import { resolveOpenTabOccupantAgent } from './open-tab-occupant-agent'
+import { resolveTerminalPaletteTitle } from './workspace-tab-palette-terminal-title'
 import {
   resolveWorktreeBranchLabel,
   resolveWorktreeDisplayName
@@ -215,19 +212,7 @@ export function buildSearchableWorkspaceTabEntries({
         if (terminalTab === null) {
           continue
         }
-        const terminalTitle = terminalTab
-          ? resolveTerminalTabTitle(terminalTab, generatedTitlesEnabled, 'Terminal')
-          : 'Terminal'
-        const title = resolveUnifiedTabLabel(
-          {
-            ...tab,
-            customLabel: tab.customLabel ?? terminalTab?.customTitle ?? null,
-            quickCommandLabel: tab.quickCommandLabel ?? terminalTab?.quickCommandLabel,
-            generatedLabel: tab.generatedLabel ?? terminalTab?.generatedTitle
-          },
-          generatedTitlesEnabled,
-          terminalTitle
-        )
+        const title = resolveTerminalPaletteTitle(tab, terminalTab, generatedTitlesEnabled)
         seenTabIdentities.add(tabIdentity)
         entries.push({
           ...baseEntry,
