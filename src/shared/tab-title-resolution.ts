@@ -4,7 +4,8 @@ import { isMeaningfulOpenCodeTerminalTitle } from './opencode-terminal-title'
 
 // The numbered name a new terminal tab starts with ("Terminal 3"), also as translated UIs show it
 // (ko, ru, ja, zh-TW, zh-CN). Escaped because the orcad server bundle must stay ASCII.
-const DEFAULT_TERMINAL_TAB_NAME_RE = /^(?:terminal|\ud130\ubbf8\ub110|\u0442\u0435\u0440\u043c\u0438\u043d\u0430\u043b|\u30bf\u30fc\u30df\u30ca\u30eb|\u7d42\u7aef\u6a5f|\u7ec8\u7aef) \d+$/i
+const DEFAULT_TERMINAL_TAB_NAME_RE =
+  /^(?:terminal|\ud130\ubbf8\ub110|\u0442\u0435\u0440\u043c\u0438\u043d\u0430\u043b|\u30bf\u30fc\u30df\u30ca\u30eb|\u7d42\u7aef\u6a5f|\u7ec8\u7aef) \d+$/i
 
 /** True when a name is only the numbered "Terminal N" a new terminal tab starts with. */
 export function isDefaultTerminalTabName(name: string | null | undefined): boolean {
@@ -20,6 +21,14 @@ export function isDefaultTerminalTabName(name: string | null | undefined): boole
 export function terminalTabSetName(tab: { customTitle?: string | null }): string {
   const name = tab.customTitle?.trim() ?? ''
   return isDefaultTerminalTabName(name) ? '' : name
+}
+
+/** The name someone chose for the tab, or the agent's own title (`/rename`); '' when neither exists. */
+export function terminalTabChosenName(tab: {
+  customTitle?: string | null
+  aiVaultTitle?: { title: string } | null
+}): string {
+  return terminalTabSetName(tab) || tab.aiVaultTitle?.title.trim() || ''
 }
 
 export function resolveTerminalTabTitle(

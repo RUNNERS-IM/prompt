@@ -31,6 +31,8 @@ export type RuntimeTerminalSummary = {
   title: string | null
   /** A user's name for this pane from the host's saved layout; absent when unset or the host predates it. */
   paneTitle?: string
+  /** The tab's chosen name or the agent's own title, as the sidebar shows it; absent when unset or the host predates it. */
+  tabName?: string
   connected: boolean
   writable: boolean
   lastOutputAt: number | null

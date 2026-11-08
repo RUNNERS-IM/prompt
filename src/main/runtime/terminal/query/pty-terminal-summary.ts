@@ -57,6 +57,8 @@ export abstract class OrcaRuntimeWithBuildPtyTerminalSummary extends OrcaRuntime
       orphaned || !recorded.tabId || !pane
         ? null
         : this.getSavedPaneTitle(pty.worktreeId, recorded.tabId, pane.leafId)
+    const tabName =
+      orphaned || !recorded.tabId ? null : this.getSavedTabName(pty.worktreeId, recorded.tabId)
     // A live process awaiting its pane binding is not evidence of an orphan.
     if (
       orphaned &&
@@ -81,6 +83,7 @@ export abstract class OrcaRuntimeWithBuildPtyTerminalSummary extends OrcaRuntime
       leafId: orphaned ? `pty:${pty.ptyId}` : pane!.leafId,
       title,
       ...(paneTitle ? { paneTitle } : {}),
+      ...(tabName ? { tabName } : {}),
       connected: pty.connected,
       writable: pty.connected,
       lastOutputAt: pty.lastOutputAt,

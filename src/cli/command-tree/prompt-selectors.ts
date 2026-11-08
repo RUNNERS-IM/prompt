@@ -1,5 +1,6 @@
 import { homedir } from 'node:os'
 import { resolve as resolvePath } from 'node:path'
+import { stripLeadingAgentTitleDecoration } from '../../shared/agent-title-decoration'
 import type { Project } from '../../shared/project-types'
 import type { Repo } from '../../shared/repo-types'
 import type {
@@ -269,7 +270,13 @@ export async function resolvePromptWorkspaceSelector(
 }
 
 export function terminalName(terminal: RuntimeTerminalSummary): string {
-  return terminal.paneTitle?.trim() || terminal.title?.trim() || terminal.agentIdentity || '-'
+  return (
+    terminal.paneTitle?.trim() ||
+    terminal.tabName?.trim() ||
+    stripLeadingAgentTitleDecoration(terminal.title ?? '').trim() ||
+    terminal.agentIdentity ||
+    '-'
+  )
 }
 
 export type TerminalCandidate = SelectorCandidate & { terminal: RuntimeTerminalSummary }

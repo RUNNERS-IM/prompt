@@ -6,17 +6,13 @@ import { getOptionalWorktreeSelector, getTerminalHandle } from '../selectors'
 import { RuntimeClientError } from '../runtime/types'
 import { columnHeaders, emptyListText, formatTable, shortId } from '../command-tree/prompt-output'
 import {
-  listRepos,
   listTerminals,
   resolvePromptProjectSelector,
   resolvePromptTerminalSelector
 } from '../command-tree/prompt-selectors'
-import { terminalItem, terminalRow, type TerminalItem } from './prompt-lists'
-
-export type SessionItem = TerminalItem & {
-  agent: string
-  resumeId: string | null
-}
+import { terminalRow } from './prompt-lists'
+import { assertNoAttachWithoutHost, sendToHost } from './prompt-session-hosts'
+import { listAllHosts, listLocalSessions, type SessionItem } from './prompt-session-listing'
 
 function formatSessionItems(result: { items: SessionItem[] }): string {
   if (result.items.length === 0) {
@@ -95,23 +91,18 @@ function resumeCommand(agent: string, resumeId: string): string {
 }
 
 export const PROMPT_SESSION_HANDLERS: Record<string, CommandHandler> = {
-  'prompt session list': async ({ flags, client, cwd, json }) => {
+  'prompt session list': async (ctx) => {
+    if (ctx.flags.get('all-hosts') === true) {
+      await listAllHosts(ctx)
+      return
+    }
+    const { flags, client, cwd, json } = ctx
     const projectFlag = getOptionalStringFlag(flags, 'project')
     const project = projectFlag ? await resolvePromptProjectSelector(client, projectFlag) : null
     const worktree = await getOptionalWorktreeSelector(flags, 'workspace', cwd, client)
-    const [response, repos] = await Promise.all([
-      listTerminals(client, worktree),
-      listRepos(client)
-    ])
+    const { response, items: sessions } = await listLocalSessions(client, worktree)
     const projectId = project?.startsWith('id:') ? project.slice(3) : null
-    const items = response.result.terminals
-      .filter((terminal) => terminal.agentIdentity !== undefined)
-      .map((terminal): SessionItem => ({
-        ...terminalItem(terminal, repos),
-        agent: terminal.agentIdentity!,
-        resumeId: terminal.agentSessionId ?? null
-      }))
-      .filter((item) => !projectFlag || item.project?.id === projectId)
+    const items = sessions.filter((item) => !projectFlag || item.project?.id === projectId)
     printResult(
       {
         ...response,
@@ -210,6 +201,13 @@ export const PROMPT_SESSION_HANDLERS: Record<string, CommandHandler> = {
     }
   }),
   'prompt session read': onSessionTerminal('read'),
-  'prompt session send': onSessionTerminal('send'),
+  'prompt session send': async (ctx) => {
+    if (ctx.flags.has('ssh-host')) {
+      process.stdout.write(await sendToHost(ctx.flags, ctx.cwd))
+      return
+    }
+    assertNoAttachWithoutHost(ctx.flags)
+    await onSessionTerminal('send')(ctx)
+  },
   'prompt session wait': onSessionTerminal('wait')
 }

@@ -3,7 +3,7 @@ import { formatAgentTypeLabel } from '@/lib/agent-status'
 import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { translate } from '@/i18n/i18n'
-import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
+import { terminalTabChosenName, terminalTabSetName } from '../../../../shared/tab-title-resolution'
 
 /**
  * The name its terminal tab shows: a set title (create --title, rename), the agent session's title,
@@ -16,11 +16,7 @@ export function promptTerminalTabName(
   if (!tab) {
     return ''
   }
-  return (
-    terminalTabSetName(tab) ||
-    tab.aiVaultTitle?.title.trim() ||
-    stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
-  )
+  return terminalTabChosenName(tab) || stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
 }
 
 /** What a fresh session row is called until its first conversation names it (decision 4A). */

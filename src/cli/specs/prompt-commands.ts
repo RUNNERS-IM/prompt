@@ -31,7 +31,8 @@ function sessionSpec(
     positionalArgs: ['session'],
     notes: [SESSION_SELECTOR_NOTE, ...(extra.notes ?? [])],
     ...(extra.examples ? { examples: extra.examples } : {}),
-    ...(extra.destructive ? { destructive: true } : {})
+    ...(extra.destructive ? { destructive: true } : {}),
+    ...(extra.flagAliases ? { flagAliases: extra.flagAliases } : {})
   })
 }
 
@@ -170,9 +171,11 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
   promptSpec({
     path: ['session', 'list'],
     summary: 'List agent sessions and their resume ids',
-    usage: 'prompt session list [--project <project>] [--workspace <workspace>] [--json]',
-    allowedFlags: [...GLOBAL_FLAGS, 'project', 'workspace'],
+    usage:
+      'prompt session list [--project <project>] [--workspace <workspace>] [--all-hosts] [--json]',
+    allowedFlags: [...GLOBAL_FLAGS, 'project', 'workspace', 'all-hosts'],
     notes: [
+      '--all-hosts adds a Mac column and lists every online Mac on your Tailscale network, reading each over SSH from macOS; a Mac it cannot read is shown as skipped. It cannot be combined with --project or --workspace.',
       'Lists terminals running an agent. resumeId is the id `prompt session resume` takes; it is empty until the agent reports it.',
       '--json lists sessions under result.items, each with id, name, agent, project, workspace, state, resumeId, and lastOutputAt.',
       'Use `prompt session read <session>` for the conversation output.'
@@ -228,11 +231,19 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
   sessionSpec(
     'send',
     'Send a message or keys to a session',
-    'prompt session send [<session>] [--text <text>] [--enter] [--interrupt] [--wait-submit <seconds>] [--retry-request <id>] [--json]',
-    SEND_FLAGS,
+    'prompt session send [<session>] [--text <text>] [--enter] [--interrupt] [--wait-submit <seconds>] [--retry-request <id>] [--host <mac>] [--attach <file>] [--json]',
+    [...SEND_FLAGS, 'ssh-host', 'attach'],
     {
-      notes: ['Takes the same flags as `prompt terminal send`.'],
-      examples: ['prompt session send app --text "Run the tests" --enter']
+      flagAliases: { host: 'ssh-host' },
+      notes: [
+        'Takes the same flags as `prompt terminal send`.',
+        '--host runs the send on another Mac over SSH, by its Tailscale name; <session> is then looked up on that Mac. macOS only.',
+        '--attach (needs --host) copies a file to ~/prompt-inbox/ on that Mac and adds its path to the end of the text.'
+      ],
+      examples: [
+        'prompt session send app --text "Run the tests" --enter',
+        'prompt session send --host m2-pro-1 app --text "Check this" --attach screen.png --enter'
+      ]
     }
   ),
   sessionSpec(
