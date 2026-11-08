@@ -75,10 +75,10 @@ function SettingsSearchField({
             'Search settings'
           )}
           // Same borderless pill as the search row at the top of the app sidebar.
-          className="h-9 rounded-full border-0 bg-worktree-sidebar-foreground/9 ps-9 pe-14 text-[13px] shadow-none md:text-[13px] placeholder:text-worktree-sidebar-foreground/50 dark:bg-worktree-sidebar-foreground/9"
+          className="h-9 rounded-full border-0 bg-worktree-sidebar-foreground/9 ps-9 pe-14 max-[860px]:pe-3 text-[13px] shadow-none md:text-[13px] placeholder:text-worktree-sidebar-foreground/50 dark:bg-worktree-sidebar-foreground/9"
         />
         {searchQuery === '' ? (
-          <span className="pointer-events-none absolute end-2 top-1/2 flex -translate-y-1/2 items-center">
+          <span className="pointer-events-none absolute end-2 top-1/2 flex max-[860px]:hidden -translate-y-1/2 items-center">
             {searchShortcutCombos.map((combo) => (
               <ShortcutKeyCombo
                 key={combo.keys.join('-')}
@@ -200,7 +200,7 @@ export function SettingsSidebar({
 
   return (
     <aside
-      className="flex w-[280px] shrink-0 flex-col bg-worktree-sidebar"
+      className="flex w-[clamp(200px,28vw,280px)] shrink-0 flex-col bg-worktree-sidebar"
       style={leftSidebarStyle}
       data-prompt-settings-sidebar=""
     >

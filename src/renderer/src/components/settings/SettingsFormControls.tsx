@@ -60,13 +60,14 @@ export function SettingsRow({
     <div
       data-prompt-settings-row=""
       className={cn(
-        'flex gap-3',
+        // Why wrap: in a narrow window a wide control drops below its label instead of overflowing.
+        'flex flex-wrap gap-x-3 gap-y-2',
         'py-[13px]',
         alignTop ? 'items-start' : 'items-center justify-between',
         className
       )}
     >
-      <div className="min-w-0 flex-1 space-y-0.5">
+      <div className="min-w-[min(100%,160px)] flex-1 space-y-0.5">
         <Label id={labelId} className="select-text text-[13px] leading-4">
           {label}
         </Label>
@@ -76,7 +77,7 @@ export function SettingsRow({
           </p>
         ) : null}
       </div>
-      <div className="shrink-0">{control}</div>
+      <div className="max-w-full shrink-0">{control}</div>
     </div>
   )
 }
