@@ -61,7 +61,7 @@ function shortenHome(path: string): string {
 }
 
 const PILL_CLASS =
-  'inline-flex h-6 items-center gap-1 rounded-md bg-foreground/[0.08] px-2 text-xs text-foreground outline-none hover:bg-foreground/[0.12] focus-visible:ring-2 focus-visible:ring-ring/50'
+  'shrink-0 whitespace-nowrap inline-flex h-6 items-center gap-1 rounded-md bg-foreground/[0.08] px-2 text-xs text-foreground outline-none hover:bg-foreground/[0.12] focus-visible:ring-2 focus-visible:ring-ring/50'
 
 /** The start box shown in a new Claude tab until Start (decision 1A). */
 export function PromptClaudeStartBox({
