@@ -2,7 +2,7 @@ import { join } from 'node:path'
 import { app } from 'electron'
 import type { PromptUsageConsent } from '../../shared/prompt-runners-account'
 import { getMainE2EConfig } from '../e2e-config'
-import { createUsageStats, type UsageStats } from '../runners-usage-stats/usage-stats'
+import { createUsageStats, type UsageStats } from '../runners-app-kit/usage-stats'
 import { runnersAccountAccessToken } from './prompt-runners-account-server'
 
 const FLUSH_EVERY_MS = 24 * 60 * 60 * 1000
@@ -14,6 +14,7 @@ function usageStats(): UsageStats {
     version: app.getVersion(),
     filePath: join(app.getPath('userData'), 'usage-stats.json'),
     token: runnersAccountAccessToken,
+    userAgent: `Prompt/${app.getVersion()}`,
     // Why: development and test runs must not add to the customers' usage numbers.
     endpoint: app.isPackaged ? undefined : null
   })
