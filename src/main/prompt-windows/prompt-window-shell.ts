@@ -13,7 +13,6 @@ import {
   TRAFFIC_LIGHT_X
 } from '../window/main-window-visual-lifecycle'
 import { installMainWindowWebviewSecurity } from '../window/main-window-webview-security'
-import { installMacAccentColor } from '../window/prompt-mac-accent-color'
 import { rectHasVisibleAreaOnAnyDisplay } from '../window/window-bounds-validation'
 import { wslHostsWindowArguments } from '../wsl/wsl-host-gate'
 import { PROMPT_OPEN_REPO_QUERY, PROMPT_WINDOW_QUERY } from '../../shared/prompt-windows'
@@ -97,7 +96,6 @@ export function createPromptBrowserWindow(
   installMainWindowWebviewSecurity(win)
   if (process.platform === 'darwin') {
     installMacosVisibilityRepaint(win)
-    installMacAccentColor(win)
   }
   return win
 }

@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './assets/prompt-design-tokens.css'
 import { StrictMode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Toaster } from '@/components/ui/sonner'

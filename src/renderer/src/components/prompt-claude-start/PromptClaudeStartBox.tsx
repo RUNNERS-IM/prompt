@@ -257,10 +257,10 @@ export function PromptClaudeStartBox({
           onClick={() => start()}
           data-claude-start-own-enter=""
           data-prompt-claude-start-new=""
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--prompt-accent)] py-2 text-[13px] font-semibold text-white outline-none hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--rw-primary)] py-2 text-[13px] font-semibold text-[var(--rw-on-primary)] outline-none hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {translate('prompt.claudeStart.start', 'Start New')}
-          <kbd className="inline-flex items-center rounded bg-white/20 px-1 py-px">
+          <kbd className="inline-flex items-center rounded bg-current/20 px-1 py-px">
             <CornerDownLeft className="size-3" strokeWidth={1.5} />
           </kbd>
         </button>

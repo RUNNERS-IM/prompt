@@ -2,6 +2,7 @@
 import './lib/react-devtools-commit-hook-shim'
 import './lib/react-commit-cascade-observer'
 import './assets/main.css'
+import './assets/prompt-design-tokens.css'
 
 import { StrictMode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,0 +1,21 @@
+/* RUNNERS 디자인 시스템 값(runners-window.css). 그 파일을 그대로 부르면 뿌리 글자 크기가 13px 로 바뀌어 rem 크기가 모두 줄고,
+   운영체제 테마만 따라가므로 Prompt 의 테마 설정(<html> 의 dark)에 맞춰 값만 둔다. */
+@import '../components/runners-account/runners-font.css';
+
+html:root {
+  --rw-font-family:
+    'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --rw-window-bg: #ffffff;
+  --rw-box-bg: #f5f5f5;
+  --rw-primary: #0a0a0a;
+  --rw-on-primary: #ffffff;
+  --rw-danger: #e11d1d;
+}
+
+html:root.dark {
+  --rw-window-bg: #0a0a0a;
+  --rw-box-bg: #171717;
+  --rw-primary: #ffffff;
+  --rw-on-primary: #0a0a0a;
+  --rw-danger: #fa2929;
+}

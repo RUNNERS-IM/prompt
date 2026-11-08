@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { PromptMenuPanel } from './components/prompt-menu-panel/PromptMenuPanel'
-// 패널 다음에 불러야 --rm-accent 덮어쓰기가 runners-menu.css 뒤에 온다.
 import './components/prompt-menu-panel/prompt-menu-panel.css'
 import { getOrCreateRendererRoot } from './lib/react-renderer-root'
 

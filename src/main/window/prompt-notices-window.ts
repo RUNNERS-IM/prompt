@@ -4,7 +4,6 @@ import { join } from 'node:path'
 import { mainI18n, translateMain } from '../i18n/main-i18n'
 import type { Store } from '../persistence'
 import { installPrivilegedWindowNavigationPolicy } from './privileged-window-navigation'
-import { installMacAccentColor } from './prompt-mac-accent-color'
 import {
   PROMPT_OPEN_CHROMIUM_LICENSES_CHANNEL,
   PROMPT_OPEN_THIRD_PARTY_NOTICES_CHANNEL,
@@ -111,7 +110,6 @@ function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
   )
   window.webContents.session.setPermissionCheckHandler(() => false)
   if (isMac) {
-    installMacAccentColor(window)
     window.setWindowButtonVisibility(false)
   }
   window.once('ready-to-show', () => window.show())

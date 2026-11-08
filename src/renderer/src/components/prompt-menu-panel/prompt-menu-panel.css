@@ -1,10 +1,5 @@
 /* Prompt 메뉴 막대 패널의 화면. 공용 메뉴 모양(runners-account/runners-menu.css) 위에 패널 여백 · 초록 점만 더한다. */
 
-:root {
-  /* 시스템 강조색은 main 이 --prompt-accent 로 넣는다(prompt-mac-accent-color.ts). */
-  --rm-accent: var(--prompt-accent, #007aff);
-}
-
 .prompt-menu-panel {
   box-sizing: border-box;
   padding: var(--rm-pad-y) 0;

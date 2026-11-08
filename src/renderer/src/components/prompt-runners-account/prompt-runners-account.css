@@ -7,7 +7,8 @@ html:root {
   --ra-surface: var(--popover);
   --ra-field: var(--background);
   --ra-track: var(--accent);
-  --ra-accent: var(--prompt-accent);
+  --ra-accent: var(--rw-primary);
+  --ra-on-accent: var(--rw-on-primary);
   --ra-bad: var(--destructive);
   --ra-mark-bg: var(--foreground);
   --ra-mark-fg: var(--background);

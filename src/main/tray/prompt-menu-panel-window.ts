@@ -9,7 +9,6 @@ import {
   type PromptMenuRow
 } from '../../shared/prompt-menu-panel'
 import { installPrivilegedWindowNavigationPolicy } from '../window/privileged-window-navigation'
-import { installMacAccentColor } from '../window/prompt-mac-accent-color'
 import { getTrayMenuRows, runTrayMenuCommandFromPanel } from './system-tray'
 
 // 맥 메뉴 막대 아이콘을 왼쪽 클릭하면 열리는 패널: 테두리 없는 창, 메뉴와 같은 흐림(vibrancy "menu"), 포커스를 잃으면 닫힌다.
@@ -116,8 +115,6 @@ function createPanel(): BrowserWindow {
     callback(false)
   )
   window.webContents.session.setPermissionCheckHandler(() => false)
-  // 시스템 강조색을 --prompt-accent 로 넣는다. 패널 화면은 그것을 --rm-accent 로 쓴다.
-  installMacAccentColor(window)
   window.on('page-title-updated', (event) => event.preventDefault())
   window.on('blur', () => {
     if (Date.now() - shownAt < BLUR_GRACE_MS) {

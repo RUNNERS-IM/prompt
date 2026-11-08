@@ -55,7 +55,7 @@ export function OnboardingFooter({
         )}
         {showPrimary && (
           <button
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-[var(--prompt-accent)] px-5 py-2 text-sm font-medium text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-[var(--rw-primary)] px-5 py-2 text-sm font-medium text-[var(--rw-on-primary)] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             aria-busy={primaryBusy}
             disabled={Boolean(busyLabel)}
             onClick={onPrimary}

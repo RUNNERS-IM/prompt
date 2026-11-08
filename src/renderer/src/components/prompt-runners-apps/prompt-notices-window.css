@@ -1,11 +1,10 @@
-/* Prompt's "Open source notices" window (src/renderer/prompt-about.html?view=notices). Window
-   background matches Prompt's window colour: #ececec light, #1e1e1e dark. */
+/* Prompt's "Open source notices" window (src/renderer/prompt-about.html?view=notices). */
 html,
 body {
   margin: 0;
-  background: #ececec;
+  background: var(--rw-window-bg);
   color: rgb(0 0 0 / 0.85);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--rw-font-family);
   font-size: 13px;
   -webkit-user-select: none;
   user-select: none;
@@ -13,7 +12,7 @@ body {
 
 html.dark,
 html.dark body {
-  background: #1e1e1e;
+  background: var(--rw-window-bg);
   color: rgb(255 255 255 / 0.9);
 }
 
@@ -76,7 +75,7 @@ html.dark body {
   padding: 0;
   border: 0;
   background: none;
-  color: var(--prompt-accent, #007aff);
+  color: var(--rw-primary);
   font: inherit;
   font-size: 11px;
   cursor: default;
@@ -93,8 +92,8 @@ html.dark body {
   padding: 0 14px;
   border: 0;
   border-radius: 6px;
-  background: var(--prompt-accent, #007aff);
-  color: #fff;
+  background: var(--rw-primary);
+  color: var(--rw-on-primary);
   font: inherit;
   font-size: 13px;
   line-height: 22px;
@@ -107,7 +106,7 @@ html.dark body {
 
 .prompt-notices-chromium:focus-visible,
 .prompt-notices-close:focus-visible {
-  outline: 2px solid var(--prompt-accent, #007aff);
+  outline: 2px solid var(--rw-primary);
   outline-offset: 1px;
 }
 

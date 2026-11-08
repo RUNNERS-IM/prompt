@@ -1,3 +1,4 @@
+import './assets/prompt-design-tokens.css'
 import './components/prompt-runners-apps/prompt-notices-window.css'
 import { StrictMode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'

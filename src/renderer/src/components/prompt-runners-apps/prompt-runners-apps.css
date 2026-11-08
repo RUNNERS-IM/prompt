@@ -9,11 +9,11 @@
   --runners-apps-secondary: rgb(0 0 0 / 0.5);
   --runners-apps-button: rgb(0 0 0 / 0.06);
   --runners-apps-button-hover: rgb(0 0 0 / 0.1);
-  --runners-apps-accent: var(--prompt-accent, #007aff);
+  --runners-apps-accent: var(--rw-primary);
   display: flex;
   flex-direction: column;
   gap: 24px;
-  font-family: var(--app-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-family: var(--rw-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
   text-align: start;
 }
 

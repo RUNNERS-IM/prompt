@@ -1,5 +1,8 @@
 import { DEFAULT_APP_FONT_FAMILY } from '../../../shared/constants'
 
+// Design system font; a setting still on the upstream default counts as untouched.
+const PROMPT_DEFAULT_APP_FONT_FAMILY = 'Pretendard'
+
 const APP_FONT_FALLBACKS = [
   DEFAULT_APP_FONT_FAMILY,
   '-apple-system',
@@ -26,7 +29,9 @@ function quoteFontFamily(fontFamily: string): string {
 }
 
 export function buildAppFontFamily(fontFamily: string | null | undefined): string {
-  const trimmed = fontFamily?.trim() || DEFAULT_APP_FONT_FAMILY
+  const saved = fontFamily?.trim()
+  const trimmed =
+    !saved || saved === DEFAULT_APP_FONT_FAMILY ? PROMPT_DEFAULT_APP_FONT_FAMILY : saved
   const lowerTrimmed = trimmed.toLowerCase()
   const parts = [
     trimmed,
