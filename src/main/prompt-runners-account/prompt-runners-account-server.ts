@@ -109,6 +109,10 @@ export function runnersAccountEmail(): string | null {
   return file().load()?.email ?? null
 }
 
+export function runnersAccountAccessToken(): string | null {
+  return file().load()?.tokens.accessToken ?? null
+}
+
 function problemOf(error: unknown): PromptRunnersSignInProblem {
   return error instanceof ServerProblem ? error.problem : 'network'
 }

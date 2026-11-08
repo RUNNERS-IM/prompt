@@ -5,6 +5,8 @@ import {
   PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL,
+  PROMPT_USAGE_CONSENT_GET_CHANNEL,
+  PROMPT_USAGE_CONSENT_SET_CHANNEL,
   type PromptRunnersSendCodeResult,
   type PromptRunnersSignInResult
 } from '../../shared/prompt-runners-account'
@@ -15,6 +17,7 @@ import {
   signInRunnersAccount,
   signOutRunnersAccount
 } from './prompt-runners-account-server'
+import { promptUsageConsent, setPromptUsageConsent } from './prompt-usage-stats'
 
 // Why: only app windows hold the account; browser-pane guests (webviews) must not read or change it.
 function fromAppWindow(event: IpcMainInvokeEvent): boolean {
@@ -28,6 +31,16 @@ export function registerPromptRunnersAccountHandlers(): void {
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL)
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL)
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL)
+  ipcMain.removeHandler(PROMPT_USAGE_CONSENT_GET_CHANNEL)
+  ipcMain.removeHandler(PROMPT_USAGE_CONSENT_SET_CHANNEL)
+  ipcMain.handle(PROMPT_USAGE_CONSENT_GET_CHANNEL, (event) =>
+    fromAppWindow(event) ? promptUsageConsent() : 'denied'
+  )
+  ipcMain.handle(PROMPT_USAGE_CONSENT_SET_CHANNEL, (event, granted: unknown) => {
+    if (fromAppWindow(event) && typeof granted === 'boolean') {
+      setPromptUsageConsent(granted)
+    }
+  })
   ipcMain.handle(PROMPT_RUNNERS_ACCOUNT_GET_CHANNEL, (event) =>
     fromAppWindow(event) ? runnersAccountEmail() : null
   )
