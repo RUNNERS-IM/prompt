@@ -31,7 +31,11 @@ import {
   WslHostDeploymentStoreInvalidError,
   type WslHostDeploymentRecord
 } from './wsl-host-deployment-store'
-import { noteWslHostsServeOnly, WSL_HOSTS_INTERNAL_GATE_ENV } from './wsl-host-internal-gate'
+import {
+  noteWslHostsServeOnly,
+  WSL_HOSTS_GATE_STATE_ENV,
+  WSL_HOSTS_INTERNAL_GATE_ENV
+} from './wsl-host-internal-gate'
 
 const pairing = {
   v: 2 as const,
@@ -64,6 +68,8 @@ describe('WSL host deployment store', () => {
   beforeEach(() => {
     userDataPath = mkdtempSync(join(tmpdir(), 'orca-wsl-host-deployments-'))
     vi.spyOn(console, 'warn').mockImplementation(() => {})
+    // Running inside a Prompt terminal inherits the app's published gate state.
+    vi.stubEnv(WSL_HOSTS_GATE_STATE_ENV, undefined)
   })
   afterEach(() => {
     vi.restoreAllMocks()

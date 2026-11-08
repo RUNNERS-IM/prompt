@@ -95,7 +95,7 @@ describe('parseApprovalFromStatus translated labels', () => {
         sayNativeChatApprovalTranslated
       )
     ).toEqual({
-      title: 'Bash을(를) 허용하시겠습니까?',
+      title: 'Bash을(를) 허용할까요?',
       detail: 'rm -rf build',
       options: [
         { label: '허용', send: '\r' },

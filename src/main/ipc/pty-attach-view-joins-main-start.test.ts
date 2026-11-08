@@ -23,6 +23,11 @@ import { forgetRefusedPaneResumeMock } from './pty/pty-ipc-mock-registry'
 import { agentSessionOwners } from './pty/pane/agent-session-owners'
 import type { TerminalCreateOptions } from '../runtime/runtime-terminal-contracts'
 
+// A real login shell takes over a second on a developer machine, outrunning vi.waitFor's budget.
+vi.mock('../startup/login-shell-environment', async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  resolveLoginShellEnvironment: async () => process.env
+}))
 vi.mock('../../shared/layout-owner-switch', () => ({ ORCA_LAYOUT_OWNER_IS_MAIN: true }))
 vi.mock('electron', () => import('./pty/pty-ipc-mock-registry').then((m) => m.electronModuleMock()))
 vi.mock('fs', () => import('./pty/pty-ipc-mock-registry').then((m) => m.fsModuleMock()))

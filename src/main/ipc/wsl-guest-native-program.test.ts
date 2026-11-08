@@ -11,6 +11,11 @@ import {
   resolveGuestNativeProgram
 } from './wsl-guest-windows-drive-path'
 
+// Homebrew or /usr/local copies on the machine running the tests must not answer these lookups.
+vi.mock('../../shared/system-cli-install-dirs', () => ({
+  getSystemCliInstallDirectories: () => []
+}))
+
 let root: string
 let native: string
 let drive: string

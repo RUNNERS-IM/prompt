@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { expect, it } from 'vitest'
@@ -7,7 +7,8 @@ import { runProcess } from '@orca/process-host'
 import { electronViteConfig } from '../../electron.vite.config'
 
 it('keeps main code and asset paths working after a CLI build replaces its public entry', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'orca-main-entry-facade-'))
+  // __dirname in the built output is the resolved path; macOS temp roots are symlinks.
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'orca-main-entry-facade-')))
   try {
     await writeFile(join(root, 'package.json'), '{"type":"commonjs"}')
     await writeFile(join(root, 'tracker.ts'), 'export const createTracker = () => ({ count: 0 })')

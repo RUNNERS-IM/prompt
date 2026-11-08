@@ -143,7 +143,7 @@ describe.each(['compact', 'full'] as const)('%s row disclosure actions', (mode) 
       expect(onActivate).not.toHaveBeenCalled()
       expect(onSendTargetClick).not.toHaveBeenCalled()
       expect(onDismiss).not.toHaveBeenCalled()
-      fireEvent.click(screen.getByText('Review the change'))
+      fireEvent.click(screen.getByText(mode === 'compact' ? 'Agent' : 'Review the change'))
       if (sendTargetStatus) {
         expect(onSendTargetClick).toHaveBeenCalledWith(agent.paneKey)
         expect(onActivate).not.toHaveBeenCalled()

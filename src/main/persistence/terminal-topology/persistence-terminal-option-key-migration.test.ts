@@ -6,6 +6,7 @@ import {
   writeDataFile,
   readDataFile
 } from '../persistence-test-harness'
+import { PROMPT_DEFAULTS_VERSION } from '../loading-store/prompt-defaults-migration'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { rmSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
@@ -261,7 +262,7 @@ describe('Store', () => {
       schemaVersion: 1,
       repos: [],
       worktreeMeta: {},
-      settings: { experimentalSidekick: true },
+      settings: { experimentalSidekick: true, promptDefaultsVersion: PROMPT_DEFAULTS_VERSION },
       ui: {},
       githubCache: { pr: {}, issue: {} },
       workspaceSession: {}

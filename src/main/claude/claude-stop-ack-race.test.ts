@@ -20,6 +20,8 @@ import { CLAUDE_STRUCTURED_BASE_OPTIONS } from './claude-structured-launch-resol
 import type { ClaudeSession } from './structured/claude-structured-session-state'
 
 const FAKE_CLI = join(__dirname, '__fixtures__', 'claude-agent-sdk-scripted-cli.mjs')
+// Under Bun the SDK would run the script CLI through a bare `bun`, often absent from PATH.
+const NODE_SCRIPT_RUNTIME = { executable: 'node' as const }
 const SESSION_ID = '5348c19f-6a54-4c2e-9c68-9c2b1a3d4e5f'
 const parent = makeStructuredAgentStatusSubject(
   { executionHostId: 'local', wslDistro: null, workspaceId: 'ws-1', workspaceKind: 'folder' },
@@ -93,7 +95,7 @@ async function stoppedAsItCompleted(ahead: number) {
   const connection = await openClaudeStreamJsonConnection(
     {
       pathToClaudeCodeExecutable: FAKE_CLI,
-      options: { ...CLAUDE_STRUCTURED_BASE_OPTIONS, sessionId: SESSION_ID },
+      options: { ...CLAUDE_STRUCTURED_BASE_OPTIONS, ...NODE_SCRIPT_RUNTIME, sessionId: SESSION_ID },
       cwd: dir,
       env: {
         PATH: process.env.PATH ?? '',

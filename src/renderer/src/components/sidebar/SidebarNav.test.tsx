@@ -115,8 +115,18 @@ function folderRepo(): Repo {
   }
 }
 
+// Prompt ships these rows off; the row behavior below still applies once a person turns them on.
+function settingsWithNavRowsShown(): GlobalSettings {
+  return {
+    ...getDefaultSettings('/tmp'),
+    showTasksButton: true,
+    showAutomationsButton: true,
+    showMobileButton: true
+  }
+}
+
 function setSidebarState({
-  settings = getDefaultSettings('/tmp'),
+  settings = settingsWithNavRowsShown(),
   repos = [gitRepo()]
 }: {
   settings?: GlobalSettings

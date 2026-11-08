@@ -89,7 +89,9 @@ describe('MobilePairingConnectionOptions', () => {
     const signIn = screen.getByRole('button', { name: 'Sign in for Relay' })
     expect(signInPanel).toBeVisible()
     expect(
-      screen.getByText(/Signs this desktop in to Prompt and routes the phone through Prompt’s servers/)
+      screen.getByText(
+        /Signs this desktop in to Prompt and routes the phone through Prompt’s servers/
+      )
     ).toBeVisible()
     expect(
       relay.compareDocumentPosition(signInPanel) & Node.DOCUMENT_POSITION_FOLLOWING
@@ -132,7 +134,7 @@ describe('MobilePairingConnectionOptions', () => {
     expect(screen.queryByRole('button', { name: /Sign in/i })).toBeNull()
   })
 
-  it('shows Unavailable instead of a dead Sign in on unconfigured builds', () => {
+  it('hides the Relay row instead of a dead Sign in on unconfigured builds', () => {
     mocks.state = {
       ...mocks.state,
       orcaProfileAuthStatus: {
@@ -146,12 +148,10 @@ describe('MobilePairingConnectionOptions', () => {
 
     expect(screen.queryByTestId('anywhere-sign-in-panel')).toBeNull()
     expect(screen.queryByRole('button', { name: /Sign in/i })).toBeNull()
-    const relay = screen.getByRole('radio', { name: /Prompt Relay/i })
-    expect(relay).toHaveTextContent('Unavailable')
-    expect(relay).toHaveTextContent(/isn’t available in this build/i)
+    expect(screen.queryByRole('radio', { name: /Prompt Relay/i })).toBeNull()
   })
 
-  it('keeps Relay unavailable and unselectable while LAN is selected', async () => {
+  it('keeps Relay hidden and unreachable while LAN is selected', async () => {
     mocks.state = {
       ...mocks.state,
       orcaProfileAuthStatus: {
@@ -166,13 +166,7 @@ describe('MobilePairingConnectionOptions', () => {
     render(<MobilePairingConnectionOptions value="local-only" onChange={onChange} />)
 
     // Availability follows the build, not the selected path.
-    const relay = screen.getByRole('radio', { name: /Prompt Relay/i })
-    expect(relay).toHaveTextContent('Unavailable')
-    expect(relay).toHaveTextContent(/isn’t available in this build/i)
-    expect(relay).toHaveAttribute('aria-disabled', 'true')
-
-    await user.click(relay)
-    expect(onChange).not.toHaveBeenCalled()
+    expect(screen.queryByRole('radio', { name: /Prompt Relay/i })).toBeNull()
 
     screen.getByRole('radio', { name: /^LAN\b/i }).focus()
     await user.keyboard('{ArrowUp}')

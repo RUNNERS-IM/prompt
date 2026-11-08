@@ -5,7 +5,8 @@ import {
   rmSync,
   statSync,
   writeFileSync,
-  mkdtempSync
+  mkdtempSync,
+  realpathSync
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -24,7 +25,8 @@ function makeProjectWithCli(
   content,
   { mode = 0o755, rootPackageType, writeOutPackageJson = true } = {}
 ) {
-  const projectDir = mkdtempSync(path.join(tmpdir(), 'orca-cli-bin-'))
+  // The child's cwd is the resolved path; macOS temp roots are symlinks.
+  const projectDir = realpathSync(mkdtempSync(path.join(tmpdir(), 'orca-cli-bin-')))
   roots.push(projectDir)
   const cliPath = path.join(projectDir, 'out', 'cli', 'index.js')
   const outPackageJsonPath = path.join(projectDir, 'out', 'package.json')

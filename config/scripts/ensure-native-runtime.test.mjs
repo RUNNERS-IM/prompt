@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   writeFileSync
 } from 'node:fs'
@@ -24,6 +25,7 @@ import {
   nodeGypRebuildTimeoutMs
 } from './windows-process-tree-gyp-rebuild.mjs'
 
+const JS_CLI = /\.[cm]?js$/i
 const sourceScriptPath = fileURLToPath(new URL('./ensure-native-runtime.mjs', import.meta.url))
 // Fixture import walk misses createRequire CJS edges; name siblings explicitly or temp project cannot load.
 const REQUIRED_CJS_SIBLINGS = [
@@ -217,8 +219,13 @@ describe('ensure-native-runtime', () => {
   )
   it('finds the installed node-gyp entry from an addon without build tools on PATH', () => {
     const { command, prefixArgs } = resolvePnpmCliInvocation()
-    const program = isAbsolute(command) ? command : resolveCliCommand(parse(command).name)
-    expect(isAbsolute(program), 'pnpm must be installed for the native rebuild contract').toBe(true)
+    const resolved = isAbsolute(command) ? command : resolveCliCommand(parse(command).name)
+    expect(isAbsolute(resolved), 'pnpm must be installed for the native rebuild contract').toBe(
+      true
+    )
+    // A version-manager pnpm is a `#!/usr/bin/env node` script, which the empty PATH below cannot start.
+    const script = JS_CLI.test(realpathSync(resolved)) ? realpathSync(resolved) : null
+    const program = script ? (process.env.ORCA_TEST_NODE_EXECUTABLE ?? process.execPath) : resolved
     const projectDir = mkTempProject()
     try {
       writeFakeNativeModules(projectDir)
@@ -232,6 +239,7 @@ describe('ensure-native-runtime', () => {
       const oldInvocation = runProcessSync({
         program,
         args: [
+          ...(script ? [script] : []),
           ...prefixArgs,
           '--config.verify-deps-before-run=false',
           'exec',

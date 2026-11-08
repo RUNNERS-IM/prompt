@@ -91,10 +91,14 @@ it('still builds and uploads cross-compiled Windows template addons on the x64 l
         runner: { arch },
         hashFiles: () => (hasSecurityBuilder ? 'fixture-builder-hash' : '')
       }
-      for (const fragment of ['process-table addons', 'CLI launchers', 'security addons']) {
-        const upload = steps.find((step) => step.name?.includes(`Keep the Windows ${fragment}`))
+      for (const fragment of [
+        'Windows process-table addons',
+        'Windows CLI launchers',
+        'Prompt native modules'
+      ]) {
+        const upload = steps.find((step) => step.name?.includes(`Keep the ${fragment}`))
         expect(runInNewContext(upload.if, ctx), `${os} ${fragment}`).toBe(
-          expectedUpload && (fragment !== 'security addons' || hasSecurityBuilder)
+          expectedUpload && (fragment !== 'Prompt native modules' || hasSecurityBuilder)
         )
       }
       expect(runInNewContext(launcher.with.arches.slice(3, -2), ctx)).toBe(expectedArches)

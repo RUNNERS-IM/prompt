@@ -9,6 +9,11 @@ import { join } from 'node:path'
 // Wrapper roots are content-addressed.
 import { getShellReadyWrapperRoot } from '../../providers/local-pty-shell-ready-wrapper-root'
 
+// A real login shell takes over a second on a developer machine, outrunning vi.waitFor's budget.
+vi.mock('../../startup/login-shell-environment', async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  resolveLoginShellEnvironment: async () => process.env
+}))
 vi.mock('electron', () => import('./pty-ipc-mock-registry').then((m) => m.electronModuleMock()))
 vi.mock('fs', () => import('./pty-ipc-mock-registry').then((m) => m.fsModuleMock()))
 vi.mock('node-pty', () => import('./pty-ipc-mock-registry').then((m) => m.nodePtyModuleMock()))

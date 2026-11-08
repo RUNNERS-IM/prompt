@@ -19,6 +19,8 @@ const FAKE_CLI = join(
   '__fixtures__',
   'claude-agent-sdk-scripted-cli.mjs'
 )
+// Under Bun the SDK would run the script CLI through a bare `bun`, often absent from PATH.
+const NODE_SCRIPT_RUNTIME = { executable: 'node' as const }
 const scratchDirs: string[] = []
 
 afterEach(() => {
@@ -55,6 +57,7 @@ async function startRefusing(stderr: string) {
       pathToClaudeCodeExecutable: FAKE_CLI,
       options: {
         ...CLAUDE_STRUCTURED_BASE_OPTIONS,
+        ...NODE_SCRIPT_RUNTIME,
         extraArgs: { ...CLAUDE_STRUCTURED_BASE_OPTIONS.extraArgs, ...flag }
       },
       cwd: dir,

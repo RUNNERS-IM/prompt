@@ -41,6 +41,6 @@ it('reads naturally where no agent name is known', () => {
       sayAgentSessionFailureEnglish
     )
   ).toBe(
-    "The agent's Command in Settings → Agents must start with a program Orca can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
+    "The agent's Command in Settings → Agents must start with a program Prompt can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
   )
 })

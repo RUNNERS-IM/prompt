@@ -94,7 +94,11 @@ it('does not let a failed actual Git agent selection roll back a queued Chat sel
         rejectGit = reject
       })
   )
-  render(<GitPersistenceHarness model={settingsModel()} />)
+  render(
+    <TooltipProvider>
+      <GitPersistenceHarness model={settingsModel()} />
+    </TooltipProvider>
+  )
   const naming = document.getElementById('chat-names')
   if (!naming) {
     throw new Error('Chat naming section is missing')

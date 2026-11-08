@@ -6,6 +6,11 @@ import { createGlobalSettingsFixture } from '../../shared/global-settings-test-f
 import { setupPtyIpcSuite } from './pty/pty-ipc-test-harness'
 import { createDaemonActiveProviderFixtures } from './pty/pty-ipc-daemon-provider-fixtures'
 
+// A real login shell takes over a second on a developer machine, outrunning vi.waitFor's budget.
+vi.mock('../startup/login-shell-environment', async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  resolveLoginShellEnvironment: async () => process.env
+}))
 vi.mock('electron', () => import('./pty/pty-ipc-mock-registry').then((m) => m.electronModuleMock()))
 vi.mock('fs', () => import('./pty/pty-ipc-mock-registry').then((m) => m.fsModuleMock()))
 vi.mock('node-pty', () => import('./pty/pty-ipc-mock-registry').then((m) => m.nodePtyModuleMock()))

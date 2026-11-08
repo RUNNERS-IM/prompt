@@ -6,6 +6,7 @@ import {
   writeDataFile,
   readDataFile
 } from './persistence-test-harness'
+import { PROMPT_DEFAULTS_VERSION } from './loading-store/prompt-defaults-migration'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { rmSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
@@ -62,19 +63,19 @@ describe('Store', () => {
     await closeTestStores()
     rmSync(testState.dir, { recursive: true, force: true })
   })
-  it('migrates the legacy floating terminal disabled default to enabled', async () => {
+  it('stamps a legacy profile and keeps the Prompt floating terminal hidden', async () => {
     writeDataFile({
       schemaVersion: 1,
       repos: [],
       worktreeMeta: {},
-      settings: { floatingTerminalEnabled: false },
+      settings: { floatingTerminalEnabled: false, promptDefaultsVersion: PROMPT_DEFAULTS_VERSION },
       ui: {},
       githubCache: { pr: {}, issue: {} },
       workspaceSession: {}
     })
 
     const store = await createStore()
-    expect(store.getSettings().floatingTerminalEnabled).toBe(true)
+    expect(store.getSettings().floatingTerminalEnabled).toBe(false)
     expect(store.getSettings().floatingTerminalDefaultedForAllUsers).toBe(true)
   })
 

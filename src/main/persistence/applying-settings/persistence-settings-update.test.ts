@@ -657,13 +657,13 @@ describe('Store', () => {
 
   it('keeps legacy rightSidebarOpenByDefault writable for backward compatibility', async () => {
     const store = await createStore()
-    expect(store.getSettings().rightSidebarOpenByDefault).toBe(true)
-
-    store.updateSettings({ rightSidebarOpenByDefault: false })
     expect(store.getSettings().rightSidebarOpenByDefault).toBe(false)
 
     store.updateSettings({ rightSidebarOpenByDefault: true })
     expect(store.getSettings().rightSidebarOpenByDefault).toBe(true)
+
+    store.updateSettings({ rightSidebarOpenByDefault: false })
+    expect(store.getSettings().rightSidebarOpenByDefault).toBe(false)
   })
 
   it('updateSettings persists sourceControlViewMode as a user setting', async () => {

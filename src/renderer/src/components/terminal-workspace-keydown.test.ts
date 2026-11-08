@@ -35,7 +35,8 @@ const mocks = vi.hoisted(() => ({
   resolveAgentShortcut: vi.fn<(args: { activeWorktreeId: string }) => TerminalAgentTabShortcut>(
     () => ({ actionId: null, agent: null })
   ),
-  launchAgentInNewTab: vi.fn()
+  launchAgentInNewTab: vi.fn(),
+  openPromptClaudeStartTab: vi.fn()
 }))
 
 vi.mock('@/lib/agent-session/structured-agent-session-busy', async () => ({
@@ -67,6 +68,9 @@ vi.mock('./terminal-agent-tab-shortcut', () => ({
   resolveTerminalAgentTabShortcut: mocks.resolveAgentShortcut
 }))
 vi.mock('@/lib/launch-agent-in-new-tab', () => ({ launchAgentInNewTab: mocks.launchAgentInNewTab }))
+vi.mock('./prompt-claude-start/prompt-claude-start-tabs', () => ({
+  openPromptClaudeStartTab: mocks.openPromptClaudeStartTab
+}))
 
 vi.mock('./terminal/terminal-tab-actions', () => ({ closeTerminalTab: mocks.closeTerminalTab }))
 vi.mock('@/runtime/structured-agent-session-close', () => ({
@@ -524,12 +528,14 @@ describe('agent tab shortcuts', () => {
     )
   }
 
-  it('opens the agent in the active worktree when the floating panel is not focused', () => {
+  it('opens the Claude start box in the active worktree when the floating panel is not focused', () => {
     pressAgentShortcut()
 
-    expect(mocks.launchAgentInNewTab).toHaveBeenCalledExactlyOnceWith(
-      expect.objectContaining({ agent: 'claude', worktreeId: controller.activeWorktreeId })
+    expect(mocks.openPromptClaudeStartTab).toHaveBeenCalledExactlyOnceWith(
+      controller.activeWorktreeId,
+      undefined
     )
+    expect(mocks.launchAgentInNewTab).not.toHaveBeenCalled()
   })
 
   it('opens the agent in the floating workspace when its panel owns focus', () => {

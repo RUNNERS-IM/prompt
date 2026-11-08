@@ -6,8 +6,13 @@ import { runProcessSync } from '@orca/process-host'
 import { main as verifyTogether } from './verify-localization-catalogs.mjs'
 import { main as verifyCatalog } from './verify-localization-catalog.mjs'
 import { main as verifyRuntimeCatalog } from './generate-runtime-required-english-catalog.mjs'
+import { resolvePinnedBunExecutable } from './pinned-bun-executable.mjs'
 
 const directories = []
+const bun =
+  resolvePinnedBunExecutable(resolve(import.meta.dirname, '../..'), runProcessSync) ?? 'bun'
+// This file runs under Bun, where process.execPath is Bun; the launcher records the real Node.
+const node = process.env.ORCA_TEST_NODE_EXECUTABLE ?? process.execPath
 const renderer = 'src/renderer/src'
 const englishPath = `${renderer}/i18n/locales/en.json`
 const runtimePath = `${renderer}/i18n/en-runtime-required.json`
@@ -44,7 +49,7 @@ describe('combined localization verification', () => {
         await writeFile(join(root, file), contents)
       }
       const results = []
-      for (const program of [process.execPath, 'bun']) {
+      for (const program of [node, bun]) {
         const result = runProcessSync({
           program,
           args: [resolve(import.meta.dirname, 'verify-localization-catalogs.mjs')],

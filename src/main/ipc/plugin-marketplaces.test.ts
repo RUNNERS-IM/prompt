@@ -125,7 +125,7 @@ describe('plugin marketplace IPC authority', () => {
     registerPluginMarketplaceHandlers(
       createPluginService(),
       services,
-      () => getDefaultSettings('/tmp'),
+      () => ({ ...getDefaultSettings('/tmp'), pluginSystemEnabled: true }),
       vi.fn()
     )
     const source = {

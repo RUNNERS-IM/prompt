@@ -84,7 +84,7 @@ it('releases both obsolete catalogs and cached indexes while host dialogs stay m
   }
 
   view.rerender(dialogs('one'))
-  expect(screen.getByRole('dialog')).toHaveTextContent('Its 3 workspaces stay in Orca')
+  expect(screen.getByRole('dialog')).toHaveTextContent('Its 3 workspaces stay in Prompt')
 })
 
 it('keeps workspace details through the closing animation', () => {
@@ -108,13 +108,13 @@ it('keeps workspace details through the closing animation', () => {
   const dialog = screen.getByRole('dialog')
   const removeButton = screen.getByRole('button', { name: 'Remove host' })
   expect(removeButton).toBeEnabled()
-  expect(dialog).toHaveTextContent('Its 2 workspaces stay in Orca')
+  expect(dialog).toHaveTextContent('Its 2 workspaces stay in Prompt')
 
   view.rerender(dialogs(null))
   expect(dialog).toBeInTheDocument()
   expect(dialog).toHaveAttribute('data-state', 'closed')
   expect(removeButton).toBeDisabled()
-  expect(dialog).toHaveTextContent('Its 2 workspaces stay in Orca')
+  expect(dialog).toHaveTextContent('Its 2 workspaces stay in Prompt')
 
   const event = new Event('animationend', { bubbles: true })
   Object.defineProperty(event, 'animationName', { value: 'exit' })

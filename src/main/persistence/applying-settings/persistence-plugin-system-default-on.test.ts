@@ -1,4 +1,5 @@
 import { closeTestStores, testState, createStore, writeDataFile } from '../persistence-test-harness'
+import { PROMPT_DEFAULTS_VERSION } from '../loading-store/prompt-defaults-migration'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { rmSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
@@ -39,14 +40,14 @@ describe('plugin system default-on migration', () => {
     rmSync(testState.dir, { recursive: true, force: true })
   })
 
-  it('turns plugins on for new profiles', async () => {
+  it('keeps plugins off for new Prompt profiles', async () => {
     const store = await createStore()
-    expect(store.getSettings().pluginSystemEnabled).toBe(true)
+    expect(store.getSettings().pluginSystemEnabled).toBe(false)
     expect(store.getSettings().pluginSystemDefaultedOn).toBe(true)
   })
 
   it('flips a saved pre-rollout false on once', async () => {
-    writeSettings({ pluginSystemEnabled: false })
+    writeSettings({ pluginSystemEnabled: false, promptDefaultsVersion: PROMPT_DEFAULTS_VERSION })
     const store = await createStore()
     expect(store.getSettings().pluginSystemEnabled).toBe(true)
     expect(store.getSettings().pluginSystemDefaultedOn).toBe(true)

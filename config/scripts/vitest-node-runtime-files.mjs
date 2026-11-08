@@ -15,6 +15,8 @@ const NODE_RUNTIME_INCLUDE = [
   'src/packages/process-host/src/run-process.test.ts',
   'tests/e2e/cursor-quota-transport.unit.test.ts',
   'tests/e2e/helpers/electron-process-shutdown.unit.test.ts',
+  // Bun on macOS uses the system SQLite, which cannot open a closed WAL database read-only.
+  'tests/e2e/helpers/persisted-profile-state.unit.test.ts',
   'src/main/ai-vault-search/session-search-index-writer.test.ts',
   'src/main/ai-vault/session-scanner-unlimited-dedup.test.ts',
   // The parse cache persists through node:sqlite.

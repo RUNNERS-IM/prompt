@@ -15,6 +15,11 @@ import * as reservations from './pty/pane/spawn-reservation'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/layout-owner-switch'
 import { makePaneKey } from '../../shared/stable-pane-id'
 
+// A real login shell takes over a second on a developer machine, outrunning vi.waitFor's budget.
+vi.mock('../startup/login-shell-environment', async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  resolveLoginShellEnvironment: async () => process.env
+}))
 vi.mock('electron', () => import('./pty/pty-ipc-mock-registry').then((m) => m.electronModuleMock()))
 vi.mock('fs', () => import('./pty/pty-ipc-mock-registry').then((m) => m.fsModuleMock()))
 vi.mock('node:fs/promises', async (importOriginal) =>

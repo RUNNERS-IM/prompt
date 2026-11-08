@@ -10,6 +10,11 @@ import { registerPtyHandlers } from './register-handlers'
 import { getPtyIdForPaneKey } from './pane/key-state'
 import { setLocalPtyProvider } from './provider/registry'
 
+// A real login shell takes over a second on a developer machine, outrunning vi.waitFor's budget.
+vi.mock('../../startup/login-shell-environment', async (importOriginal) => ({
+  ...(await importOriginal<Record<string, unknown>>()),
+  resolveLoginShellEnvironment: async () => process.env
+}))
 vi.mock('electron', () => import('./pty-ipc-mock-registry').then((m) => m.electronModuleMock()))
 vi.mock('fs', () => import('./pty-ipc-mock-registry').then((m) => m.fsModuleMock()))
 vi.mock('node-pty', () => import('./pty-ipc-mock-registry').then((m) => m.nodePtyModuleMock()))

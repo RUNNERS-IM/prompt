@@ -174,8 +174,8 @@ describe('live screencast image allocation', () => {
           if (!frame) {
             throw new Error('Pooled frame was not encoded')
           }
-          expect(frame.metadata.imageWidth).toBe(22)
-          expect(frame.metadata.imageHeight).toBe(14)
+          expect(frame.metadata.imageWidth).toBe(bytes.readUInt32BE(16))
+          expect(frame.metadata.imageHeight).toBe(bytes.readUInt32BE(20))
           expect(digest(frame.image)).toBe(expectedDigest)
           expect(wire.buffer).not.toBe(decoded.buffer)
         }

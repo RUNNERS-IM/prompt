@@ -121,7 +121,7 @@ describe('structuredAgentSessionStartFailure', () => {
     )
     expect(structuredAgentSessionStartFailure({ error: failed }, { agentName: 'Claude' })).toEqual({
       reason:
-        "Orca couldn't prepare Claude to start on the computer running this chat. Send your message to try again.",
+        "Prompt couldn't prepare Claude to start on the computer running this chat. Send your message to try again.",
       rejection: {
         kind: 'launchPreparationFailed',
         detail: { text: 'selector_not_found', audience: 'log' }
@@ -266,7 +266,7 @@ describe('structuredAgentSessionStartFailure', () => {
     ],
     [
       'agentCommandNotRunnable',
-      "Claude's Command in Settings → Agents must start with a program Orca can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
+      "Claude's Command in Settings → Agents must start with a program Prompt can find. Variables, pipes and other shell syntax aren't supported; use the Environment setting for variables. Change it or reset it."
     ]
   ] as const)('words a start refused for %s by that situation', (reason, sentence) => {
     const code = 'agent_session_operation_invalid'

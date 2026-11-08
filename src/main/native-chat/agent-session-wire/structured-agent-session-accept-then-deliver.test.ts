@@ -462,7 +462,7 @@ describe('a start the chat needed and did not get', () => {
           )
         ),
       {
-        text: "Orca couldn't prepare Codex to start on the computer running this chat. Send your message to try again.",
+        text: "Prompt couldn't prepare Codex to start on the computer running this chat. Send your message to try again.",
         failure: {
           kind: 'launchPreparationFailed',
           detail: { text: 'selector_not_found', audience: 'log' }
@@ -499,7 +499,7 @@ describe('a start the chat needed and did not get', () => {
     await eventually(async () => expect((await submission(id))?.dispatchState).toBe('rejected'))
     expect(await submission(id)).toMatchObject({
       reason:
-        "Orca couldn't prepare Codex to start on the computer running this chat. Send your message to try again.",
+        "Prompt couldn't prepare Codex to start on the computer running this chat. Send your message to try again.",
       rejection: {
         kind: 'launchPreparationFailed',
         detail: { text: "ENOENT: no such file or directory, stat '/srv/app'", audience: 'log' }

@@ -6,6 +6,7 @@ import { parse } from 'yaml'
 import { runProcess } from '@orca/process-host'
 import { managedSshShards, MANAGED_SSH_E2E_SPEC_PREFIX } from './ci-e2e-job-selection.mjs'
 import { compileAggregateExpression } from './pr-aggregate-gate-context.mjs'
+import { findModernBash } from './modern-bash-executable.mjs'
 import { selectPrE2eSpecs } from './pr-e2e-source-routing.mjs'
 
 const workflow = parse(readFileSync('.github/workflows/e2e.yml', 'utf8'))
@@ -17,6 +18,7 @@ const command = lane.steps.find(
 const selector = readFileSync('config/scripts/ci-e2e-job-selection.mjs', 'utf8')
 const small = ['tests/e2e/ssh-orcad-open-in-owner.spec.ts', 'tests/e2e/ssh-orcad-idle-exit.spec.ts']
 const directories = []
+const bash = findModernBash()
 afterEach(() => {
   for (const directory of directories.splice(0)) {
     rmSync(directory, { recursive: true, force: true })
@@ -108,7 +110,7 @@ require('node:fs').writeFileSync(process.env.ARGV_CAPTURE, JSON.stringify(proces
     { mode: 0o755 }
   )
   const result = await runProcess({
-    program: 'bash',
+    program: bash ?? 'bash',
     args: ['-e', '-o', 'pipefail', '-c', command],
     cwd: directory,
     env: {
@@ -129,8 +131,8 @@ require('node:fs').writeFileSync(process.env.ARGV_CAPTURE, JSON.stringify(proces
   }
 }
 
-// The production lane runs Bash on Linux; the stubs never start Docker, Electron, or Xvfb.
-describe.skipIf(process.platform === 'win32')('managed SSH workflow command', () => {
+// The production lane runs Bash 4+ on Linux; the stubs never start Docker, Electron, or Xvfb.
+describe.skipIf(process.platform === 'win32' || !bash)('managed SSH workflow command', () => {
   it('passes only the selected SSH files to Playwright, with literal file matching', async () => {
     const { result, args } = await execute(
       JSON.stringify([...small, 'tests/e2e/other.spec.ts', small[0]])

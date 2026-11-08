@@ -45,7 +45,7 @@ describe('what a rejection with a typed fact shows the reader', () => {
   it('words the fact itself, never the sentence the host wrote beside it', () => {
     expect(
       notice('Claude never finished starting, so Orca stopped it.', { kind: 'hostStopped' })
-    ).toBe('The agent never finished starting, so Orca stopped it.')
+    ).toBe('The agent never finished starting, so Prompt stopped it.')
   })
 
   it('says only that the message was not sent for a fact it cannot place', () => {

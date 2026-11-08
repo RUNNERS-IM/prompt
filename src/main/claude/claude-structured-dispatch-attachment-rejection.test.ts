@@ -143,7 +143,7 @@ describe('Claude structured dispatch attachment rejections', () => {
       })
     ).resolves.toEqual({
       state: 'rejected',
-      reason: "Orca ran into a problem, so this didn't go through. Try again.",
+      reason: "Prompt ran into a problem, so this didn't go through. Try again.",
       rejection: { kind: 'hostFault' }
     })
     expect(session.connection.send).not.toHaveBeenCalled()

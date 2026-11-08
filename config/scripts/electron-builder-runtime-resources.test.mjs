@@ -364,6 +364,7 @@ describe('packaged runtime resources', () => {
         )
         await seedBundledRipgrep(resourcesDir)
         await seedPackagedServePayload(resourcesDir)
+        await seedLicenseNotices(resourcesDir)
 
         const unpackedMainDir = join(resourcesDir, 'app.asar.unpacked', 'out', 'main')
         await mkdir(unpackedMainDir, { recursive: true })
@@ -431,6 +432,7 @@ describe('packaged runtime resources', () => {
         )
         await seedBundledRipgrep(resourcesDir)
         await seedPackagedServePayload(resourcesDir)
+        await seedLicenseNotices(resourcesDir)
         // Layout fixtures use a cross-arch slice; native PTY probes need real packaged binaries.
         const target =
           process.arch === 'x64'
@@ -505,6 +507,13 @@ async function stubObjdump(root) {
   await mkdir(directory)
   await writeFile(join(directory, 'objdump'), '#!/bin/sh\nexit 0\n', { mode: 0o755 })
   process.env.PATH = `${directory}${delimiter}${process.env.PATH ?? ''}`
+}
+
+async function seedLicenseNotices(resourcesDir) {
+  const { licenseNoticeResources } = require('./prompt-license-notice-resources.cjs')
+  await Promise.all(
+    licenseNoticeResources.map((resource) => writeFile(join(resourcesDir, resource.to), ''))
+  )
 }
 
 async function seedPackagedServePayload(resourcesDir) {
