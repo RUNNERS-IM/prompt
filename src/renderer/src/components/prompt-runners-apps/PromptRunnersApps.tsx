@@ -12,11 +12,10 @@ import {
 // Monitor. Self-contained on purpose: plain props, its own CSS file, no app store or i18n
 // library, so another app can copy this folder and pass its own groups and open handler.
 
-const GET_LABEL: Record<RunnersAppsLocale, string> = { ko: '받기', en: 'Get', ar: 'احصل عليه' }
-
 export type PromptRunnersAppsProps = {
   groups: RunnersAppGroup[]
   locale: RunnersAppsLocale
+  getLabel: string
   /** Called with an https url when "Get" is pressed; the app opens it in the default browser. */
   onOpen: (url: string) => void
 }
@@ -24,6 +23,7 @@ export type PromptRunnersAppsProps = {
 export function PromptRunnersApps({
   groups,
   locale,
+  getLabel,
   onOpen
 }: PromptRunnersAppsProps): React.JSX.Element | null {
   if (groups.length === 0) {
@@ -60,14 +60,14 @@ export function PromptRunnersApps({
                   <button
                     type="button"
                     className="runners-apps-get"
-                    aria-label={`${GET_LABEL[locale]} ${localizeRunnersAppName(item, locale)}`}
+                    aria-label={`${getLabel} ${localizeRunnersAppName(item, locale)}`}
                     onClick={() => {
                       if (isSafeRunnersAppUrl(item.url)) {
                         onOpen(item.url)
                       }
                     }}
                   >
-                    {GET_LABEL[locale]}
+                    {getLabel}
                   </button>
                 </li>
               ))}

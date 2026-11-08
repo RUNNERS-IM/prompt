@@ -48,7 +48,8 @@
       "website": "Web sitesi",
       "noticesMissing": "Bildirimler dosyası okunamadı.",
       "chromiumLicenses": "Chromium lisanslarını aç",
-      "close": "Kapat"
+      "close": "Kapat",
+      "get": "Edin"
     },
     "windows": {
       "newWindow": "Yeni Pencere",

@@ -23349,7 +23349,8 @@
       "website": "Website",
       "noticesMissing": "The notices file could not be read.",
       "chromiumLicenses": "Open Chromium licenses",
-      "close": "Close"
+      "close": "Close",
+      "get": "Get"
     },
     "settings": {
       "claude": {

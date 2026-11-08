@@ -48,7 +48,8 @@
       "website": "Web サイト",
       "noticesMissing": "ライセンス情報ファイルを読み込めませんでした。",
       "chromiumLicenses": "Chromium のライセンスを開く",
-      "close": "閉じる"
+      "close": "閉じる",
+      "get": "入手"
     },
     "windows": {
       "newWindow": "新規ウィンドウ",

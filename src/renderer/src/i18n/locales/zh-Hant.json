@@ -48,7 +48,8 @@
       "website": "網站",
       "noticesMissing": "無法讀取聲明檔案。",
       "chromiumLicenses": "開啟 Chromium 授權條款",
-      "close": "關閉"
+      "close": "關閉",
+      "get": "取得"
     },
     "windows": {
       "newWindow": "新增視窗",

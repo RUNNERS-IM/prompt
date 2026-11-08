@@ -22958,7 +22958,8 @@
       "website": "เว็บไซต์",
       "noticesMissing": "ไม่สามารถอ่านไฟล์ประกาศได้",
       "chromiumLicenses": "เปิดสัญญาอนุญาตของ Chromium",
-      "close": "ปิด"
+      "close": "ปิด",
+      "get": "รับ"
     },
     "settings": {
       "claude": {

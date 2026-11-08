@@ -22750,6 +22750,9 @@
     },
     "skills": {
       "commandCount_other": "명령어 {{count}}개"
+    },
+    "about": {
+      "get": "받기"
     }
   }
 }

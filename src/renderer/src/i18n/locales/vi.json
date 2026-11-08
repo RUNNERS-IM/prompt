@@ -22958,7 +22958,8 @@
       "website": "Trang web",
       "noticesMissing": "Không thể đọc tệp thông báo.",
       "chromiumLicenses": "Mở giấy phép Chromium",
-      "close": "Đóng"
+      "close": "Đóng",
+      "get": "Tải về"
     },
     "settings": {
       "claude": {

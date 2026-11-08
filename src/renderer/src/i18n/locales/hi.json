@@ -23349,7 +23349,8 @@
       "website": "वेबसाइट",
       "noticesMissing": "नोटिस फ़ाइल पढ़ी नहीं जा सकी।",
       "chromiumLicenses": "Chromium लाइसेंस खोलें",
-      "close": "बंद करें"
+      "close": "बंद करें",
+      "get": "पाएँ"
     },
     "settings": {
       "claude": {

@@ -48,7 +48,8 @@
       "website": "Website",
       "noticesMissing": "Die Hinweisdatei konnte nicht gelesen werden.",
       "chromiumLicenses": "Chromium-Lizenzen öffnen",
-      "close": "Schließen"
+      "close": "Schließen",
+      "get": "Laden"
     },
     "windows": {
       "newWindow": "Neues Fenster",

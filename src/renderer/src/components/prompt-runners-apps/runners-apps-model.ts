@@ -2,9 +2,32 @@
 // so Split and Monitor can copy this file as is. The source list is runners-apps.json, copied from
 // ~/git/runners/_docs/작업 가이드/runners-apps.json into each app.
 
-export type RunnersAppsLocale = 'ko' | 'en' | 'ar'
+const RUNNERS_APPS_LOCALES = [
+  'ar',
+  'de',
+  'en',
+  'es',
+  'fi',
+  'fr',
+  'hi',
+  'id',
+  'it',
+  'ja',
+  'ko',
+  'nl',
+  'pl',
+  'pt',
+  'ru',
+  'th',
+  'tr',
+  'vi',
+  'zh-Hans',
+  'zh-Hant'
+] as const
 
-export type RunnersLocalizedText = Partial<Record<RunnersAppsLocale, string>> & { en?: string }
+export type RunnersAppsLocale = (typeof RUNNERS_APPS_LOCALES)[number]
+
+export type RunnersLocalizedText = Partial<Record<RunnersAppsLocale, string>>
 
 export type RunnersAppItem = {
   id: string
@@ -39,14 +62,11 @@ function readText(value: unknown): RunnersLocalizedText {
     return {}
   }
   const text: RunnersLocalizedText = {}
-  if (typeof value.ko === 'string') {
-    text.ko = value.ko
-  }
-  if (typeof value.en === 'string') {
-    text.en = value.en
-  }
-  if (typeof value.ar === 'string') {
-    text.ar = value.ar
+  for (const locale of RUNNERS_APPS_LOCALES) {
+    const localized = value[locale]
+    if (typeof localized === 'string') {
+      text[locale] = localized
+    }
   }
   return text
 }
@@ -104,10 +124,15 @@ export function buildRunnersAppGroups(
   return groups
 }
 
-/** Korean UI shows Korean text; every other UI language falls back to English. */
+/** Matches the UI language to a list language, then its base language; anything else reads English. */
 export function pickRunnersAppsLocale(language: string | null | undefined): RunnersAppsLocale {
   const lowered = language?.toLowerCase()
-  return lowered?.startsWith('ko') ? 'ko' : lowered?.startsWith('ar') ? 'ar' : 'en'
+  const base = lowered?.split('-')[0]
+  return (
+    RUNNERS_APPS_LOCALES.find((locale) => locale.toLowerCase() === lowered) ??
+    RUNNERS_APPS_LOCALES.find((locale) => locale === base) ??
+    'en'
+  )
 }
 
 export function localizeRunnersAppName(

@@ -24131,7 +24131,8 @@
       "website": "Witryna",
       "noticesMissing": "Nie można odczytać pliku z informacjami prawnymi.",
       "chromiumLicenses": "Otwórz licencje Chromium",
-      "close": "Zamknij"
+      "close": "Zamknij",
+      "get": "Pobierz"
     },
     "settings": {
       "claude": {

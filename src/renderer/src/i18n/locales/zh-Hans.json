@@ -48,7 +48,8 @@
       "website": "网站",
       "noticesMissing": "无法读取声明文件。",
       "chromiumLicenses": "打开 Chromium 许可证",
-      "close": "关闭"
+      "close": "关闭",
+      "get": "获取"
     },
     "windows": {
       "newWindow": "新建窗口",

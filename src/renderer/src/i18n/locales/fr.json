@@ -48,7 +48,8 @@
       "website": "Site web",
       "noticesMissing": "Impossible de lire le fichier des mentions.",
       "chromiumLicenses": "Ouvrir les licences de Chromium",
-      "close": "Fermer"
+      "close": "Fermer",
+      "get": "Obtenir"
     },
     "windows": {
       "newWindow": "Nouvelle fenêtre",

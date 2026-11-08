@@ -14,7 +14,7 @@ describe('buildRunnersAppGroups', () => {
   it('drops the app itself and keeps the json order', () => {
     const groups = buildRunnersAppGroups(bundled, { selfId: 'prompt', resolveIcon })
     expect(groups.map((g) => g.id)).toEqual(['apps', 'services'])
-    expect(groups[0].items.map((i) => i.id)).toEqual(['split', 'monitor'])
+    expect(groups[0].items.map((i) => i.id)).toEqual(['split', 'monitor', 'remote', 'draw'])
     expect(groups[1].items.map((i) => i.id)).toEqual(['sense', 'pudding'])
     expect(groups[0].items[0].iconUrl).toBe('icons/split.png')
   })
@@ -54,11 +54,13 @@ describe('buildRunnersAppGroups', () => {
 })
 
 describe('locale helpers', () => {
-  it('uses Korean only for a Korean UI and falls back to English', () => {
+  it('matches every list language and falls back to English', () => {
     expect(pickRunnersAppsLocale('ko')).toBe('ko')
     expect(pickRunnersAppsLocale('ko-KR')).toBe('ko')
     expect(pickRunnersAppsLocale('ar-SA')).toBe('ar')
-    expect(pickRunnersAppsLocale('ja')).toBe('en')
+    expect(pickRunnersAppsLocale('ja')).toBe('ja')
+    expect(pickRunnersAppsLocale('zh-hant')).toBe('zh-Hant')
+    expect(pickRunnersAppsLocale('sv')).toBe('en')
     expect(pickRunnersAppsLocale(undefined)).toBe('en')
     expect(localizeRunnersText({ ko: '받기', en: 'Get' }, 'ko')).toBe('받기')
     expect(localizeRunnersText({ en: 'Get' }, 'ko')).toBe('Get')
@@ -76,7 +78,14 @@ describe('loadPromptRunnersAppGroups', () => {
   it('finds a bundled icon for every row of the bundled list', () => {
     const groups = loadPromptRunnersAppGroups()
     const rows = groups.flatMap((g) => g.items)
-    expect(rows.map((r) => r.id)).toEqual(['split', 'monitor', 'sense', 'pudding'])
+    expect(rows.map((r) => r.id)).toEqual([
+      'split',
+      'monitor',
+      'remote',
+      'draw',
+      'sense',
+      'pudding'
+    ])
     for (const row of rows) {
       expect(row.iconUrl).not.toBe('')
     }

@@ -65,7 +65,12 @@ export function PromptAboutPage(): React.JSX.Element {
           </button>
         </div>
       </header>
-      <PromptRunnersApps groups={groups} locale={locale} onOpen={openRunnersAppUrl} />
+      <PromptRunnersApps
+        groups={groups}
+        locale={locale}
+        getLabel={translate('prompt.about.get', 'Get')}
+        onOpen={openRunnersAppUrl}
+      />
       <footer className="prompt-about-footer">
         <span dir="ltr">{COPYRIGHT}</span>
         {noticesApi ? (

@@ -23740,7 +23740,8 @@
       "website": "Sito web",
       "noticesMissing": "Impossibile leggere il file delle note legali.",
       "chromiumLicenses": "Apri le licenze di Chromium",
-      "close": "Chiudi"
+      "close": "Chiudi",
+      "get": "Ottieni"
     },
     "settings": {
       "claude": {

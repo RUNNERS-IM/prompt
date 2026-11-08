@@ -23349,7 +23349,8 @@
       "website": "Website",
       "noticesMissing": "Het bestand met kennisgevingen kon niet worden gelezen.",
       "chromiumLicenses": "Chromium-licenties openen",
-      "close": "Sluiten"
+      "close": "Sluiten",
+      "get": "Downloaden"
     },
     "settings": {
       "claude": {

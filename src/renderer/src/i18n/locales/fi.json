@@ -23349,7 +23349,8 @@
       "website": "Verkkosivusto",
       "noticesMissing": "Ilmoitustiedostoa ei voitu lukea.",
       "chromiumLicenses": "Avaa Chromiumin lisenssit",
-      "close": "Sulje"
+      "close": "Sulje",
+      "get": "Hanki"
     },
     "settings": {
       "claude": {

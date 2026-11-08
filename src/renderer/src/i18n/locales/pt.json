@@ -48,7 +48,8 @@
       "website": "Site",
       "noticesMissing": "Não foi possível ler o arquivo de avisos.",
       "chromiumLicenses": "Abrir licenças do Chromium",
-      "close": "Fechar"
+      "close": "Fechar",
+      "get": "Obter"
     },
     "windows": {
       "newWindow": "Nova janela",
