@@ -3,7 +3,7 @@ import { formatAgentTypeLabel } from '@/lib/agent-status'
 import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/dashboard/useDashboardData'
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { translate } from '@/i18n/i18n'
-import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
+import { terminalTabChosenName, terminalTabSetName } from '../../../../shared/tab-title-resolution'
 import { localizedTerminalTitle } from '@/lib/terminal-default-title-label'
 
 /** The tab's saved name, still "Terminal N" for a new tab, so stand-in checks can recognise it. */
@@ -13,11 +13,7 @@ function savedTerminalTabName(
   if (!tab) {
     return ''
   }
-  return (
-    terminalTabSetName(tab) ||
-    tab.aiVaultTitle?.title.trim() ||
-    stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
-  )
+  return terminalTabChosenName(tab) || stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
 }
 
 /**

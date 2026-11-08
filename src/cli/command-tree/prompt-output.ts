@@ -102,6 +102,7 @@ type ColumnKey =
   | 'name'
   | 'kind'
   | 'host'
+  | 'mac'
   | 'path'
   | 'project'
   | 'branch'
@@ -116,6 +117,7 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     name: 'NAME',
     kind: 'KIND',
     host: 'HOST',
+    mac: 'MAC',
     path: 'PATH',
     project: 'PROJECT',
     branch: 'BRANCH',
@@ -129,6 +131,7 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     name: '이름',
     kind: '종류',
     host: '호스트',
+    mac: '맥',
     path: '경로',
     project: '프로젝트',
     branch: '브랜치',

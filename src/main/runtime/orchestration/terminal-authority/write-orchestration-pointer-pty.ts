@@ -24,6 +24,7 @@ import { ptyMailboxLeaf } from '../pty-mailbox-leaf'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
 import { startedMainTerminalSurfaces } from '../../terminal/surface/main-terminal-surfaces'
 import { mainPaneVerdict } from '../../terminal/surface/main-pane-verdict'
+import { terminalTabChosenName } from '../../../../shared/tab-title-resolution'
 
 export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRuntimeWithRefreshFloatingWorkspacePtyLiveness {
   protected abstract issueHandle(leaf: RuntimeLeafRecord): string
@@ -123,6 +124,18 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
     return layout?.titlesByLeafId?.[leafId]?.trim() || null
   }
 
+  /** The saved tab's chosen name; an agent's title names the whole tab, so a split tab skips it. */
+  protected getSavedTabName(worktreeId: string, tabId: string): string | null {
+    const session = this.getWorkspaceSessionForWorktree(worktreeId)
+    const tab = session?.tabsByWorktree?.[worktreeId]?.find((candidate) => candidate.id === tabId)
+    if (!tab) {
+      return null
+    }
+    const leaves = session?.terminalLayoutsByTabId?.[tabId]?.ptyIdsByLeafId ?? {}
+    const named = Object.keys(leaves).length > 1 ? { customTitle: tab.customTitle } : tab
+    return terminalTabChosenName(named) || null
+  }
+
   protected buildTerminalSummary(
     leaf: RuntimeLeafRecord,
     worktreesById: Map<string, ResolvedWorktree>,
@@ -134,6 +147,7 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
     const pty = leaf.ptyId ? this.ptysById.get(leaf.ptyId) : undefined
     const title = getLatestLeafTitle(this.getLeafDisplayRecord(leaf), tab?.title ?? null)
     const paneTitle = this.getSavedPaneTitle(leaf.worktreeId, leaf.tabId, leaf.leafId)
+    const tabName = this.getSavedTabName(leaf.worktreeId, leaf.tabId)
     // Demote only controller-proven local absence; remote inventory gaps are unknown, and hasPty rescues spawn/list races.
     const provenAbsent =
       provenLivePtyIds !== null &&
@@ -157,6 +171,7 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
       leafId: leaf.leafId,
       title,
       ...(paneTitle ? { paneTitle } : {}),
+      ...(tabName ? { tabName } : {}),
       connected: provenAbsent ? false : leaf.connected,
       writable: provenAbsent ? false : leaf.writable,
       // A pane with a status is never connected; its verdict says what the host knows.

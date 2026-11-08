@@ -6,6 +6,7 @@ import {
   parseCliAgent,
   readCliAgentLaunch
 } from '../agent-launch-request'
+import { nameLaunchedSession, readAgentLaunchName } from '../agent-launch-name'
 import { getRequiredStringFlag } from '../flags'
 import { printResult } from '../format'
 import { RuntimeClientError } from '../runtime-client'
@@ -14,9 +15,13 @@ import { resolveCurrentAgentWorkspaceSelector } from '../agent-workspace-selecto
 
 export const AGENT_LAUNCH_HANDLERS: Record<string, CommandHandler> = {
   'agent launch': async ({ flags, client, cwd, json, rawArgs }) => {
-    const launch = readCliAgentLaunch(flags, parseCliAgent(getRequiredStringFlag(flags, 'agent')), {
-      createsWorktree: false
-    })
+    const name = readAgentLaunchName(flags)
+    const launchFlags = name ? new Map(flags).set('surface', 'terminal') : flags
+    const launch = readCliAgentLaunch(
+      launchFlags,
+      parseCliAgent(getRequiredStringFlag(flags, 'agent')),
+      { createsWorktree: false }
+    )
     if (client.isRemote && !flags.has('worktree')) {
       throw new RuntimeClientError(
         'invalid_argument',
@@ -51,6 +56,10 @@ export const AGENT_LAUNCH_HANDLERS: Record<string, CommandHandler> = {
       capabilities,
       rawArgs
     )
-    printResult(result, json, formatAgentLaunch)
+    printResult(
+      name ? await nameLaunchedSession(client, result, launch.agent, name) : result,
+      json,
+      formatAgentLaunch
+    )
   }
 }
