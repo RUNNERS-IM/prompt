@@ -2,13 +2,15 @@
 // so Split and Monitor can copy this file as is. The source list is runners-apps.json, copied from
 // ~/git/runners/_docs/작업 가이드/runners-apps.json into each app.
 
-export type RunnersAppsLocale = 'ko' | 'en'
+export type RunnersAppsLocale = 'ko' | 'en' | 'ar'
 
 export type RunnersLocalizedText = Partial<Record<RunnersAppsLocale, string>> & { en?: string }
 
 export type RunnersAppItem = {
   id: string
   name: string
+  /** English name of a service named in Korean; used outside Korean screens. */
+  nameEn?: string
   /** Resolved image URL (the json only holds the file name). Empty when no file is bundled. */
   iconUrl: string
   desc: RunnersLocalizedText
@@ -42,6 +44,9 @@ function readText(value: unknown): RunnersLocalizedText {
   }
   if (typeof value.en === 'string') {
     text.en = value.en
+  }
+  if (typeof value.ar === 'string') {
+    text.ar = value.ar
   }
   return text
 }
@@ -86,6 +91,7 @@ export function buildRunnersAppGroups(
       items.push({
         id: item.id,
         name: item.name,
+        ...(typeof item.nameEn === 'string' ? { nameEn: item.nameEn } : {}),
         iconUrl: (iconFile && resolveIcon(iconFile)) || '',
         desc: readText(item.desc),
         url
@@ -100,7 +106,15 @@ export function buildRunnersAppGroups(
 
 /** Korean UI shows Korean text; every other UI language falls back to English. */
 export function pickRunnersAppsLocale(language: string | null | undefined): RunnersAppsLocale {
-  return language?.toLowerCase().startsWith('ko') ? 'ko' : 'en'
+  const lowered = language?.toLowerCase()
+  return lowered?.startsWith('ko') ? 'ko' : lowered?.startsWith('ar') ? 'ar' : 'en'
+}
+
+export function localizeRunnersAppName(
+  item: Pick<RunnersAppItem, 'name' | 'nameEn'>,
+  locale: RunnersAppsLocale
+): string {
+  return locale === 'ko' ? item.name : (item.nameEn ?? item.name)
 }
 
 export function localizeRunnersText(text: RunnersLocalizedText, locale: RunnersAppsLocale): string {

@@ -2,6 +2,7 @@ import type React from 'react'
 import './prompt-runners-apps.css'
 import {
   isSafeRunnersAppUrl,
+  localizeRunnersAppName,
   localizeRunnersText,
   type RunnersAppGroup,
   type RunnersAppsLocale
@@ -11,7 +12,7 @@ import {
 // Monitor. Self-contained on purpose: plain props, its own CSS file, no app store or i18n
 // library, so another app can copy this folder and pass its own groups and open handler.
 
-const GET_LABEL: Record<RunnersAppsLocale, string> = { ko: '받기', en: 'Get' }
+const GET_LABEL: Record<RunnersAppsLocale, string> = { ko: '받기', en: 'Get', ar: 'احصل عليه' }
 
 export type PromptRunnersAppsProps = {
   groups: RunnersAppGroup[]
@@ -51,7 +52,7 @@ export function PromptRunnersApps({
                     <span className="runners-apps-icon" aria-hidden="true" />
                   )}
                   <div className="runners-apps-text">
-                    <div className="runners-apps-name">{item.name}</div>
+                    <div className="runners-apps-name">{localizeRunnersAppName(item, locale)}</div>
                     <div className="runners-apps-desc">
                       {localizeRunnersText(item.desc, locale)}
                     </div>
@@ -59,7 +60,7 @@ export function PromptRunnersApps({
                   <button
                     type="button"
                     className="runners-apps-get"
-                    aria-label={`${GET_LABEL[locale]} ${item.name}`}
+                    aria-label={`${GET_LABEL[locale]} ${localizeRunnersAppName(item, locale)}`}
                     onClick={() => {
                       if (isSafeRunnersAppUrl(item.url)) {
                         onOpen(item.url)

@@ -57,6 +57,7 @@ describe('locale helpers', () => {
   it('uses Korean only for a Korean UI and falls back to English', () => {
     expect(pickRunnersAppsLocale('ko')).toBe('ko')
     expect(pickRunnersAppsLocale('ko-KR')).toBe('ko')
+    expect(pickRunnersAppsLocale('ar-SA')).toBe('ar')
     expect(pickRunnersAppsLocale('ja')).toBe('en')
     expect(pickRunnersAppsLocale(undefined)).toBe('en')
     expect(localizeRunnersText({ ko: '받기', en: 'Get' }, 'ko')).toBe('받기')
