@@ -48,7 +48,7 @@ export type PromptMenuAccelerator = 'CmdOrCtrl+N' | 'CmdOrCtrl+Q'
 export type PromptMenuRow =
   | { kind: 'separator' }
   /** 패널 맨 위 줄: 굵은 앱 이름과 그 옆 회색 글(실행 중 터미널 수). 패널에만 있다. */
-  | { kind: 'head'; name: string; sub?: string }
+  | { kind: 'head'; name: string; sub?: string; dir?: 'rtl' }
   /** 누를 수 없는 회색 줄. dot 이 있으면 앞에 초록 점(실행 중 터미널 수), 없으면 개발판 이름표. */
   | { kind: 'info'; label: string; dot?: 'green' }
   | {

@@ -3427,14 +3427,21 @@ html.native-shell .app-layout {
   pointer-events: none;
 }
 
-/* Prompt: Arabic keeps the left-to-right layout; each text run picks its own direction so
-   sentence-end punctuation stays at the end. Plaintext would also right-align each Arabic
-   paragraph, so text stays left unless a centered or right-aligned area says otherwise.
-   Zero specificity so explicit classes win. Terminals keep their own rendering. */
+/* Prompt: Arabic keeps the left-to-right layout outside dir="rtl" text windows; each text run
+   picks its own direction so sentence-end punctuation stays at the end. Plaintext would also
+   right-align each Arabic paragraph, so text stays left unless a centered or right-aligned area
+   says otherwise. Zero specificity so explicit classes win. Terminals keep their own rendering. */
 :where(:root:lang(ar))
   :where(p, span, div, label, h1, h2, h3, h4, button, a, li, td, th, input, textarea):where(
-    :not(.xterm, .xterm *)
+    :not(.xterm, .xterm *, [dir='rtl'], [dir='rtl'] *)
   ) {
+  unicode-bidi: plaintext;
+}
+:where(:root:lang(ar)) :where([dir='rtl']) {
+  text-align: start;
+}
+/* Paths and commands inside dir="rtl" windows still read left to right. */
+:where(:root:lang(ar)) :where([dir='rtl']) :where(input, textarea, code, kbd, pre, .font-mono) {
   unicode-bidi: plaintext;
 }
 /* Buttons keep their own centering. */
@@ -3448,7 +3455,9 @@ html.native-shell .app-layout {
       .text-right,
       .text-right *,
       .text-end,
-      .text-end *
+      .text-end *,
+      [dir='rtl'],
+      [dir='rtl'] *
     )
   ) {
   text-align: left;

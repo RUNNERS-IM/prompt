@@ -11,6 +11,7 @@ import type {
   PromptRunnersSignMode
 } from '../../../../shared/prompt-runners-account'
 import { SignInSheet, accountText } from '../runners-account/runners-account'
+import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
 import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 import {
   getRunnersAccountEmail,
@@ -105,13 +106,15 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
       {/* Why a portal: the sheet covers the whole window, not just the scrolling settings pane. */}
       {signingIn
         ? createPortal(
-            <SignInSheet
-              lang={lang}
-              signIn={signIn}
-              sendCode={sendCode}
-              resetPassword={resetPassword}
-              onClose={closeSignIn}
-            />,
+            <UiTextDirectionScope>
+              <SignInSheet
+                lang={lang}
+                signIn={signIn}
+                sendCode={sendCode}
+                resetPassword={resetPassword}
+                onClose={closeSignIn}
+              />
+            </UiTextDirectionScope>,
             document.body
           )
         : null}

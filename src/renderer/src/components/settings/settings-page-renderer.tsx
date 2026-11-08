@@ -1,3 +1,4 @@
+import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
 import { ActiveSettingsSectionProvider } from './SettingsSection'
 import { SettingsContentScrollElementProvider } from './settings-content-scroll-element'
 import { SettingsSidebar } from './SettingsSidebar'
@@ -67,123 +68,127 @@ export function renderSettingsLoading(
   interactions: SettingsInteractionController
 ): React.JSX.Element {
   return (
-    <div
-      ref={interactions.setSettingsRootNode}
-      className="settings-view-shell flex min-h-0 flex-1 overflow-hidden bg-background"
-    >
-      <div className="flex flex-1 items-center justify-center text-muted-foreground">
-        {translate('auto.components.settings.Settings.c7ad095d96', 'Loading settings...')}
+    <UiTextDirectionScope>
+      <div
+        ref={interactions.setSettingsRootNode}
+        className="settings-view-shell flex min-h-0 flex-1 overflow-hidden bg-background"
+      >
+        <div className="flex flex-1 items-center justify-center text-muted-foreground">
+          {translate('auto.components.settings.Settings.c7ad095d96', 'Loading settings...')}
+        </div>
       </div>
-    </div>
+    </UiTextDirectionScope>
   )
 }
 
 export function renderSettingsPage(context: SettingsRenderContext): React.JSX.Element {
   const { model, interactions, navigation, actions, view } = context
   return (
-    <div
-      ref={interactions.setSettingsRootNode}
-      className="settings-view-shell flex min-h-0 flex-1 overflow-hidden bg-background"
-    >
-      <SettingsSidebar
-        settings={model.settings}
-        activeSectionId={model.activeSectionId}
-        generalGroups={view.generalNavGroups}
-        repoSections={view.repoNavSections}
-        hasRepos={model.repos.length > 0}
-        searchInputRef={interactions.searchInputRef}
-        // Deep-linked panes/modals own focus; plain entry focuses search.
-        searchAutoFocus={model.settingsNavigationTarget == null}
-        onBack={interactions.closeSettingsPageWithPromptGuard}
-        onSelectSection={actions.scrollToSection}
-      />
+    <UiTextDirectionScope>
+      <div
+        ref={interactions.setSettingsRootNode}
+        className="settings-view-shell flex min-h-0 flex-1 overflow-hidden bg-background"
+      >
+        <SettingsSidebar
+          settings={model.settings}
+          activeSectionId={model.activeSectionId}
+          generalGroups={view.generalNavGroups}
+          repoSections={view.repoNavSections}
+          hasRepos={model.repos.length > 0}
+          searchInputRef={interactions.searchInputRef}
+          // Deep-linked panes/modals own focus; plain entry focuses search.
+          searchAutoFocus={model.settingsNavigationTarget == null}
+          onBack={interactions.closeSettingsPageWithPromptGuard}
+          onSelectSection={actions.scrollToSection}
+        />
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        {!model.isWebClient &&
-        shouldShowSettingsHostScopePicker(model.settingsHostScope, model.runtimeEnvironments) ? (
-          <SettingsHostScopePicker
-            scope={model.settingsHostScope}
-            environments={model.runtimeEnvironments}
-            onChoose={model.setSettingsHostChoice}
-          />
-        ) : null}
-        <div
-          ref={interactions.setContentScrollNode}
-          className={cn(
-            'min-h-0 flex-1',
-            // Why a stable gutter: pages that start or stop scrolling must not shift sideways.
-            view.isFocusedShortcutsPane
-              ? 'overflow-hidden'
-              : 'overflow-y-auto scrollbar-sleek [scrollbar-gutter:stable]'
-          )}
-        >
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          {!model.isWebClient &&
+          shouldShowSettingsHostScopePicker(model.settingsHostScope, model.runtimeEnvironments) ? (
+            <SettingsHostScopePicker
+              scope={model.settingsHostScope}
+              environments={model.runtimeEnvironments}
+              onChoose={model.setSettingsHostChoice}
+            />
+          ) : null}
           <div
-            data-prompt-settings-body=""
+            ref={interactions.setContentScrollNode}
             className={cn(
-              'mx-auto flex w-full flex-col gap-10 px-8 pt-10',
-              view.isFocusedShortcutsPane ? 'h-full pb-6' : 'pb-24',
-              view.isFocusedSetupGuidePane || view.isWidePluginsPane ? 'max-w-6xl' : 'max-w-4xl'
+              'min-h-0 flex-1',
+              // Why a stable gutter: pages that start or stop scrolling must not shift sideways.
+              view.isFocusedShortcutsPane
+                ? 'overflow-hidden'
+                : 'overflow-y-auto scrollbar-sleek [scrollbar-gutter:stable]'
             )}
           >
-            {navigation.visibleNavSections.length === 0 ? (
-              <div className="flex min-h-[24rem] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-card/30 text-sm text-muted-foreground">
-                {translate(
-                  'auto.components.settings.Settings.noSettingsFoundForQuery',
-                  'No settings found for "{{value0}}"',
-                  { value0: model.settingsSearchQuery.trim() }
-                )}
-              </div>
-            ) : (
-              <SettingsContentScrollElementProvider value={interactions.contentScrollElement}>
-                <ActiveSettingsSectionProvider value={model.activeSectionId}>
-                  {renderAgentsSettingsSection(context)}
-                  {renderAccountsSettingsSection(context)}
-                  {renderOrchestrationSettingsSection(context)}
-                  {renderLinearSettingsSection(context)}
-                  {renderDesktopCapabilitySettingsSections(context)}
-                  {renderOrcaAccountSettingsSection(context)}
-                  {renderSetupGuideSettingsSection(context)}
-                  {renderGeneralSettingsSection(context)}
-                  {PROMPT_BLOCK_UPSTREAM_SERVICES
-                    ? renderPromptAccountSettingsSection(context)
-                    : null}
-                  {PROMPT_BLOCK_UPSTREAM_SERVICES
-                    ? renderPromptAboutSettingsSection(context)
-                    : null}
-                  {renderIntegrationsSettingsSection(context)}
-                  {renderMobileSettingsSection(context)}
-                  {renderAutomationsSettingsSection(context)}
-                  {renderArtifactsSettingsSection(context)}
-                  {renderShareSkillsSettingsSection(context)}
-                  {renderSessionHistorySettingsSection(context)}
-                  {renderGitSettingsSection(context)}
-                  {renderTasksSettingsSection(context)}
-                  {renderTerminalSettingsSection(context)}
-                  {renderQuickCommandsSettingsSection(context)}
-                  {renderBrowserSettingsSection(context)}
-                  {renderMobileEmulatorSettingsSection(context)}
-                  {renderFloatingWorkspaceSettingsSection(context)}
-                  {renderAppearanceSettingsSection(context)}
-                  {renderChatSettingsSection(context)}
-                  {renderInputSettingsSection(context)}
-                  {renderNotificationsSettingsSection(context)}
-                  {renderShortcutsSettingsSection(context)}
-                  {renderStatsSettingsSection(context)}
-                  {renderServersSettingsSection(context)}
-                  {renderSshSettingsSection(context)}
-                  {renderDeveloperPermissionsSettingsSection(context)}
-                  {renderPrivacySettingsSection(context)}
-                  {renderAdvancedSettingsSection(context)}
-                  {renderDevSettingsSection(context)}
-                  {renderExperimentalSettingsSection(context)}
-                  {renderPluginsSettingsSection(context)}
-                  {renderProjectSettingsSections(context)}
-                </ActiveSettingsSectionProvider>
-              </SettingsContentScrollElementProvider>
-            )}
+            <div
+              data-prompt-settings-body=""
+              className={cn(
+                'mx-auto flex w-full flex-col gap-10 px-8 pt-10',
+                view.isFocusedShortcutsPane ? 'h-full pb-6' : 'pb-24',
+                view.isFocusedSetupGuidePane || view.isWidePluginsPane ? 'max-w-6xl' : 'max-w-4xl'
+              )}
+            >
+              {navigation.visibleNavSections.length === 0 ? (
+                <div className="flex min-h-[24rem] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-card/30 text-sm text-muted-foreground">
+                  {translate(
+                    'auto.components.settings.Settings.noSettingsFoundForQuery',
+                    'No settings found for "{{value0}}"',
+                    { value0: model.settingsSearchQuery.trim() }
+                  )}
+                </div>
+              ) : (
+                <SettingsContentScrollElementProvider value={interactions.contentScrollElement}>
+                  <ActiveSettingsSectionProvider value={model.activeSectionId}>
+                    {renderAgentsSettingsSection(context)}
+                    {renderAccountsSettingsSection(context)}
+                    {renderOrchestrationSettingsSection(context)}
+                    {renderLinearSettingsSection(context)}
+                    {renderDesktopCapabilitySettingsSections(context)}
+                    {renderOrcaAccountSettingsSection(context)}
+                    {renderSetupGuideSettingsSection(context)}
+                    {renderGeneralSettingsSection(context)}
+                    {PROMPT_BLOCK_UPSTREAM_SERVICES
+                      ? renderPromptAccountSettingsSection(context)
+                      : null}
+                    {PROMPT_BLOCK_UPSTREAM_SERVICES
+                      ? renderPromptAboutSettingsSection(context)
+                      : null}
+                    {renderIntegrationsSettingsSection(context)}
+                    {renderMobileSettingsSection(context)}
+                    {renderAutomationsSettingsSection(context)}
+                    {renderArtifactsSettingsSection(context)}
+                    {renderShareSkillsSettingsSection(context)}
+                    {renderSessionHistorySettingsSection(context)}
+                    {renderGitSettingsSection(context)}
+                    {renderTasksSettingsSection(context)}
+                    {renderTerminalSettingsSection(context)}
+                    {renderQuickCommandsSettingsSection(context)}
+                    {renderBrowserSettingsSection(context)}
+                    {renderMobileEmulatorSettingsSection(context)}
+                    {renderFloatingWorkspaceSettingsSection(context)}
+                    {renderAppearanceSettingsSection(context)}
+                    {renderChatSettingsSection(context)}
+                    {renderInputSettingsSection(context)}
+                    {renderNotificationsSettingsSection(context)}
+                    {renderShortcutsSettingsSection(context)}
+                    {renderStatsSettingsSection(context)}
+                    {renderServersSettingsSection(context)}
+                    {renderSshSettingsSection(context)}
+                    {renderDeveloperPermissionsSettingsSection(context)}
+                    {renderPrivacySettingsSection(context)}
+                    {renderAdvancedSettingsSection(context)}
+                    {renderDevSettingsSection(context)}
+                    {renderExperimentalSettingsSection(context)}
+                    {renderPluginsSettingsSection(context)}
+                    {renderProjectSettingsSections(context)}
+                  </ActiveSettingsSectionProvider>
+                </SettingsContentScrollElementProvider>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </UiTextDirectionScope>
   )
 }

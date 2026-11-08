@@ -1,4 +1,5 @@
-import { translateMain } from '../i18n/main-i18n'
+import { mainI18n, translateMain } from '../i18n/main-i18n'
+import { uiTextDirection } from '../../shared/ui-text-direction'
 import { quitAndStopAllSessionsMenuText } from '../menu/app-menu-quit-item'
 import type { PromptMenuCommandId, PromptMenuRow } from '../../shared/prompt-menu-panel'
 import type { SystemTrayOptions } from './system-tray'
@@ -117,7 +118,8 @@ export function buildTrayPanelRows(opts: SystemTrayOptions, state: TrayMenuState
     {
       kind: 'head',
       name: state.devLabel ? 'Prompt DEV' : 'Prompt',
-      ...(running?.kind === 'info' ? { sub: running.label } : {})
+      ...(running?.kind === 'info' ? { sub: running.label } : {}),
+      ...(uiTextDirection(mainI18n.language) === 'rtl' ? { dir: 'rtl' as const } : {})
     },
     { kind: 'separator' },
     ...rows.slice(firstCommand)

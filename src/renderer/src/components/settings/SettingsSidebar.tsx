@@ -64,7 +64,7 @@ function SettingsSearchField({
   return (
     <div className="px-2.5 pb-2">
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-worktree-sidebar-foreground/50" />
+        <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-worktree-sidebar-foreground/50" />
         <Input
           ref={searchInputRef}
           autoFocus={searchAutoFocus}
@@ -75,10 +75,10 @@ function SettingsSearchField({
             'Search settings'
           )}
           // Same borderless pill as the search row at the top of the app sidebar.
-          className="h-9 rounded-full border-0 bg-worktree-sidebar-foreground/9 pl-9 pr-14 text-[13px] shadow-none md:text-[13px] placeholder:text-worktree-sidebar-foreground/50 dark:bg-worktree-sidebar-foreground/9"
+          className="h-9 rounded-full border-0 bg-worktree-sidebar-foreground/9 ps-9 pe-14 text-[13px] shadow-none md:text-[13px] placeholder:text-worktree-sidebar-foreground/50 dark:bg-worktree-sidebar-foreground/9"
         />
         {searchQuery === '' ? (
-          <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
+          <span className="pointer-events-none absolute end-2 top-1/2 flex -translate-y-1/2 items-center">
             {searchShortcutCombos.map((combo) => (
               <ShortcutKeyCombo
                 key={combo.keys.join('-')}
@@ -128,7 +128,7 @@ function SettingsSetupGuideNavRow({
       )}
       onClick={() => onSelect()}
       className={cn(
-        'flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50',
+        'flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-start outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50',
         setupActive
           ? 'bg-worktree-sidebar-accent font-medium text-worktree-sidebar-accent-foreground'
           : 'text-worktree-sidebar-foreground/60 hover:bg-worktree-sidebar-foreground/8 hover:text-worktree-sidebar-foreground'
@@ -176,7 +176,7 @@ export function SettingsSidebar({
   const navItemClassName = (isActive: boolean): string =>
     cn(
       // Rows as the app sidebar's top rows: 36 high, corner 6, 13 medium, text 88%, icons 70%.
-      'flex min-h-9 w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left text-[13px] font-medium outline-none transition-colors duration-150 focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50 [&>svg]:text-worktree-sidebar-foreground/70',
+      'flex min-h-9 w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-start text-[13px] font-medium outline-none transition-colors duration-150 focus-visible:ring-[3px] focus-visible:ring-worktree-sidebar-ring/50 [&>svg]:text-worktree-sidebar-foreground/70',
       isActive
         ? 'bg-worktree-sidebar-accent text-worktree-sidebar-accent-foreground'
         : 'text-worktree-sidebar-foreground/88 hover:bg-worktree-sidebar-accent/60 hover:text-worktree-sidebar-foreground'
@@ -196,7 +196,7 @@ export function SettingsSidebar({
     }
   }
   const installStatusClassName =
-    'ml-auto shrink-0 rounded-full border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-amber-700 dark:text-amber-300'
+    'ms-auto shrink-0 rounded-full border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-amber-700 dark:text-amber-300'
 
   return (
     <aside
@@ -209,7 +209,7 @@ export function SettingsSidebar({
           {translate('prompt.settings.sidebarTitle', 'Prompt Settings')}
         </h1>
         <button type="button" onClick={onBack} className={navItemClassName(false)}>
-          <ArrowLeft className="size-4 shrink-0" />
+          <ArrowLeft className="size-4 shrink-0 rtl:rotate-180" />
           {translate('auto.components.settings.SettingsSidebar.60f8a673a7', 'Back to app')}
         </button>
       </div>
@@ -253,7 +253,7 @@ export function SettingsSidebar({
                             {installStatusLabel(section.installStatus)}
                           </span>
                         ) : section.badge ? (
-                          <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-3xs font-medium text-muted-foreground">
+                          <span className="ms-auto rounded-full bg-muted px-1.5 py-0.5 text-3xs font-medium text-muted-foreground">
                             {section.badge}
                           </span>
                         ) : null}
@@ -291,7 +291,7 @@ export function SettingsSidebar({
                       <span className="truncate">{section.title}</span>
                       <RepoForkIndicator upstream={section.upstream} />
                       {section.isRemote && (
-                        <span className="ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground">
+                        <span className="ms-auto inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground">
                           <Server className="size-3" />
                           {translate('auto.components.settings.SettingsSidebar.e0900f83e7', 'SSH')}
                         </span>

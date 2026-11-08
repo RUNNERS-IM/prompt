@@ -1,6 +1,7 @@
 import type React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { translate } from '@/i18n/i18n'
+import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
 import { formatNotices } from './prompt-notices-format'
 
 /** Content of the "Open Source Notices" window, laid out like Split's notices sheet: a title,
@@ -47,52 +48,54 @@ export function PromptNoticesPage(): React.JSX.Element {
   }, [api])
 
   return (
-    <main className="prompt-notices">
-      <h1 className="prompt-notices-title">
-        {translate('prompt.about.notices', 'Open Source Notices')}
-      </h1>
-      <div className="prompt-notices-text">
-        {text === null ? (
-          <p>{translate('prompt.about.noticesMissing', 'The notices file could not be read.')}</p>
-        ) : (
-          blocks.map((block, index) =>
-            block.kind === 'heading' ? (
-              <h2 key={index} className="prompt-notices-heading">
-                {block.text}
-              </h2>
-            ) : (
-              <p key={index}>
-                {block.lines.map((line, lineIndex) => (
-                  <span key={lineIndex} className="prompt-notices-line">
-                    {line}
-                  </span>
-                ))}
-              </p>
+    <UiTextDirectionScope>
+      <main className="prompt-notices">
+        <h1 className="prompt-notices-title">
+          {translate('prompt.about.notices', 'Open Source Notices')}
+        </h1>
+        <div className="prompt-notices-text" dir={text === null ? undefined : 'ltr'}>
+          {text === null ? (
+            <p>{translate('prompt.about.noticesMissing', 'The notices file could not be read.')}</p>
+          ) : (
+            blocks.map((block, index) =>
+              block.kind === 'heading' ? (
+                <h2 key={index} className="prompt-notices-heading">
+                  {block.text}
+                </h2>
+              ) : (
+                <p key={index}>
+                  {block.lines.map((line, lineIndex) => (
+                    <span key={lineIndex} className="prompt-notices-line">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+              )
             )
-          )
-        )}
-      </div>
-      <footer className="prompt-notices-footer">
-        {api ? (
+          )}
+        </div>
+        <footer className="prompt-notices-footer">
+          {api ? (
+            <button
+              type="button"
+              className="prompt-notices-chromium"
+              onClick={() => void api.openChromiumLicenses()}
+            >
+              {translate('prompt.about.chromiumLicenses', 'Open Chromium licenses')}
+            </button>
+          ) : (
+            <span />
+          )}
           <button
             type="button"
-            className="prompt-notices-chromium"
-            onClick={() => void api.openChromiumLicenses()}
+            className="prompt-notices-close"
+            autoFocus
+            onClick={() => window.close()}
           >
-            {translate('prompt.about.chromiumLicenses', 'Open Chromium licenses')}
+            {translate('prompt.about.close', 'Close')}
           </button>
-        ) : (
-          <span />
-        )}
-        <button
-          type="button"
-          className="prompt-notices-close"
-          autoFocus
-          onClick={() => window.close()}
-        >
-          {translate('prompt.about.close', 'Close')}
-        </button>
-      </footer>
-    </main>
+        </footer>
+      </main>
+    </UiTextDirectionScope>
   )
 }

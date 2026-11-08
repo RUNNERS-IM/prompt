@@ -93,7 +93,11 @@ export function PromptMenuPanel({ api }: { api: PromptMenuPanelApi }): React.JSX
   }
 
   return (
-    <main ref={panelRef} className="prompt-menu-panel">
+    <main
+      ref={panelRef}
+      className="prompt-menu-panel"
+      dir={rows.some((row) => row.kind === 'head' && row.dir === 'rtl') ? 'rtl' : undefined}
+    >
       {rows.map((row, index) => {
         switch (row.kind) {
           case 'separator':
