@@ -186,7 +186,9 @@
       "closeOneSession": "Um nur eine Sitzung zu schließen, verwende das × in ihrer Zeile.",
       "title": "Projekt „{{name}}“ aus der Liste entfernen?",
       "confirm": "Projekt entfernen",
-      "menuItem": "Projekt aus Liste entfernen…"
+      "menuItem": "Projekt aus Liste entfernen…",
+      "runningSessions_one": "Die darin laufende Sitzung wird beendet.",
+      "runningSessions_other": "Alle {{count}} darin laufenden Sitzungen werden beendet."
     },
     "computerPicker": {
       "connected": "Verbunden",
@@ -212,15 +214,17 @@
         "other": "Verwendet {{tool}}"
       },
       "noUpdateMinutes": "Seit {{count}} Min. keine Aktualisierung · hängt möglicherweise",
-      "noUpdateHours": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
-      "noUpdateDays": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
       "monitoring": "Überwacht Hintergrundaufgaben",
       "done": "Fertig · wartet auf dich",
       "failure": {
         "signIn": "Anmeldung erforderlich",
         "usageLimit": "Nutzungslimit erreicht",
         "overloaded": "Server ausgelastet"
-      }
+      },
+      "noUpdateHours_one": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
+      "noUpdateHours_other": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
+      "noUpdateDays_one": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
+      "noUpdateDays_other": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",
@@ -248,9 +252,10 @@
       "openWorkspace": "Terminal öffnen"
     },
     "skills": {
-      "commandCount": "{{count}} Befehle",
       "mySkills": "Meine Skills",
-      "commands": "Befehle"
+      "commands": "Befehle",
+      "commandCount_one": "{{count}} Befehl",
+      "commandCount_other": "{{count}} Befehle"
     },
     "closeSession": {
       "titleNamed": "„{{name}}“ schließen?",
@@ -1289,7 +1294,9 @@
     "activityWaitingSuffix": "ausstehende Aktivität",
     "openAtLogin": "Bei der Anmeldung öffnen",
     "autoCheckUpdates": "Automatisch nach Updates suchen",
-    "restartApp": "Prompt neu starten"
+    "restartApp": "Prompt neu starten",
+    "runningTerminals_one": "{{count}} Terminal läuft",
+    "runningTerminals_other": "{{count}} Terminals laufen"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} aufrufen",
@@ -9314,11 +9321,11 @@
           "0e5aa04161": "Host oder Alias aus der SSH-Konfiguration erforderlich",
           "f1fc50dad2": "SSH-Ziele konnten nicht geladen werden",
           "0cda732f43": "Verbindungstest fehlgeschlagen",
-          "syncedServerSingular": "{{count}} Server synchronisiert",
-          "syncedServerPlural": "{{count}} Server synchronisiert",
           "noFilterMatch": "Keine passenden Hosts.",
           "addHost": "Host hinzufügen",
-          "alreadyInSync": "~/.ssh/config ist bereits synchronisiert"
+          "alreadyInSync": "~/.ssh/config ist bereits synchronisiert",
+          "syncedServer_one": "{{count}} Server synchronisiert",
+          "syncedServer_other": "{{count}} Server synchronisiert"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Abbrechen",
@@ -9356,13 +9363,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Dadurch wird das Ziel entfernt und alle aktiven entfernten Terminals werden beendet.",
           "4808966c41": "SSH-Ziel entfernen",
-          "bulkTitleSingular": "{{count}} SSH-Host entfernen?",
-          "bulkTitlePlural": "{{count}} SSH-Hosts entfernen?",
           "bulkDescription": "Entfernte Hosts verschwinden aus der Host-Auswahl in Arbeitsbereichen, Automatisierungen und der Seitenleiste. ~/.ssh/config bleibt unverändert und spätere Synchronisierungen fügen sie nicht wieder hinzu.",
           "bulkAction": "{{count}} entfernen",
           "bulkProgress": "Entfernen: {{done}} von {{count}}…",
-          "bulkConnectedSingular": "{{count}} Host ist verbunden. Seine entfernten Terminals werden geschlossen.",
-          "bulkConnectedPlural": "{{count}} Hosts sind verbunden. Ihre entfernten Terminals werden geschlossen."
+          "bulkTitle_one": "{{count}} SSH-Host entfernen?",
+          "bulkTitle_other": "{{count}} SSH-Hosts entfernen?",
+          "bulkConnected_one": "{{count}} Host ist verbunden. Seine entfernten Terminals werden geschlossen.",
+          "bulkConnected_other": "{{count}} Hosts sind verbunden. Ihre entfernten Terminals werden geschlossen."
         },
         "SshTargetForm": {
           "fea9cb402e": "Abbrechen",
@@ -13081,14 +13088,15 @@
           "clear": "Auswahl aufheben",
           "removeSelected": "{{count}} entfernen",
           "restoreRemovedCount": "Entfernte Hosts wiederherstellen ({{count}})…",
-          "hostCount": "{{count}} Hosts",
           "selectMatching": "Alle {{count}} Treffer auswählen",
           "testSelected": "Testen",
           "clearFilter": "Filter zurücksetzen",
           "restoreRemovedLoading": "Entfernte Hosts wiederherstellen",
           "restoreRemovedNone": "Keine entfernten Hosts zum Wiederherstellen",
-          "hiddenDeselectedSingular": "{{count}} ausgeblendeter Host abgewählt",
-          "hiddenDeselectedPlural": "{{count}} ausgeblendete Hosts abgewählt"
+          "hiddenDeselected_one": "{{count}} ausgeblendeter Host abgewählt",
+          "hiddenDeselected_other": "{{count}} ausgeblendete Hosts abgewählt",
+          "hostCount_one": "{{count}} Host",
+          "hostCount_other": "{{count}} Hosts"
         },
         "SshRestoreRemovedHosts": {
           "title": "Entfernte Hosts wiederherstellen?",

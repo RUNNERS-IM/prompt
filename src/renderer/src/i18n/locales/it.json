@@ -9300,11 +9300,12 @@
           "0e5aa04161": "Host o alias della configurazione SSH obbligatorio",
           "f1fc50dad2": "Caricamento dei target SSH non riuscito",
           "0cda732f43": "Test di connessione non riuscito",
-          "syncedServerSingular": "Sincronizzato {{count}} server",
-          "syncedServerPlural": "Sincronizzati {{count}} server",
           "noFilterMatch": "Nessun host corrispondente",
           "addHost": "Aggiungi host",
-          "alreadyInSync": "~/.ssh/config già sincronizzato"
+          "alreadyInSync": "~/.ssh/config già sincronizzato",
+          "syncedServer_one": "Sincronizzato {{count}} server",
+          "syncedServer_many": "Sincronizzati {{count}} server",
+          "syncedServer_other": "Sincronizzati {{count}} server"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Annulla",
@@ -9342,13 +9343,15 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Il target verrà rimosso e tutti i terminali remoti attivi verranno chiusi.",
           "4808966c41": "Rimuovi target SSH",
-          "bulkTitleSingular": "Rimuovere {{count}} host SSH?",
-          "bulkTitlePlural": "Rimuovere {{count}} host SSH?",
           "bulkDescription": "Gli host rimossi scompaiono dai selettori di host in workspace, automazioni e barra laterale. Il tuo ~/.ssh/config non viene modificato e le sincronizzazioni successive non li riporteranno.",
           "bulkAction": "Rimuovi {{count}}",
           "bulkProgress": "Rimozione di {{done}} su {{count}}…",
-          "bulkConnectedSingular": "{{count}} host è connesso. I suoi terminali remoti verranno chiusi.",
-          "bulkConnectedPlural": "{{count}} host sono connessi. I loro terminali remoti verranno chiusi."
+          "bulkTitle_one": "Rimuovere {{count}} host SSH?",
+          "bulkTitle_many": "Rimuovere {{count}} host SSH?",
+          "bulkTitle_other": "Rimuovere {{count}} host SSH?",
+          "bulkConnected_one": "{{count}} host è connesso. I suoi terminali remoti verranno chiusi.",
+          "bulkConnected_many": "{{count}} host sono connessi. I loro terminali remoti verranno chiusi.",
+          "bulkConnected_other": "{{count}} host sono connessi. I loro terminali remoti verranno chiusi."
         },
         "SshTargetForm": {
           "fea9cb402e": "Annulla",
@@ -13087,14 +13090,17 @@
           "clear": "Cancella",
           "removeSelected": "Rimuovi {{count}}",
           "restoreRemovedCount": "Ripristina host rimossi ({{count}})…",
-          "hostCount": "{{count}} host",
           "selectMatching": "Seleziona tutti i {{count}} corrispondenti",
           "testSelected": "Prova",
           "clearFilter": "Cancella filtro",
           "restoreRemovedLoading": "Ripristina host rimossi",
           "restoreRemovedNone": "Nessun host rimosso da ripristinare",
-          "hiddenDeselectedSingular": "{{count}} host nascosto deselezionato",
-          "hiddenDeselectedPlural": "{{count}} host nascosti deselezionati"
+          "hiddenDeselected_one": "{{count}} host nascosto deselezionato",
+          "hiddenDeselected_many": "{{count}} host nascosti deselezionati",
+          "hiddenDeselected_other": "{{count}} host nascosti deselezionati",
+          "hostCount_one": "{{count}} host",
+          "hostCount_many": "{{count}} host",
+          "hostCount_other": "{{count}} host"
         },
         "SshRestoreRemovedHosts": {
           "title": "Ripristinare gli host rimossi?",
@@ -23617,8 +23623,6 @@
       "monitoring": "Monitoraggio delle attività in background",
       "done": "Fatto · in attesa di te",
       "noUpdateMinutes": "Nessun aggiornamento da {{count}} min · potrebbe essere bloccato",
-      "noUpdateHours": "Nessun aggiornamento da {{count}} h · potrebbe essere bloccato",
-      "noUpdateDays": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
       "failure": {
         "signIn": "Accesso necessario",
         "usageLimit": "Limite di utilizzo raggiunto",
@@ -23633,7 +23637,13 @@
         "helper": "Lavoro affidato a un helper",
         "plan": "Aggiornamento del piano",
         "other": "Uso di {{tool}}"
-      }
+      },
+      "noUpdateHours_one": "Nessun aggiornamento da {{count}} h · potrebbe essere bloccato",
+      "noUpdateHours_many": "Nessun aggiornamento da {{count}} h · potrebbe essere bloccato",
+      "noUpdateHours_other": "Nessun aggiornamento da {{count}} h · potrebbe essere bloccato",
+      "noUpdateDays_one": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
+      "noUpdateDays_many": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
+      "noUpdateDays_other": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato"
     },
     "timeAgo": {
       "now": "ora",
@@ -23796,9 +23806,11 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} comandi",
       "mySkills": "Le mie skill",
-      "commands": "Comandi"
+      "commands": "Comandi",
+      "commandCount_one": "{{count}} comando",
+      "commandCount_many": "{{count}} comandi",
+      "commandCount_other": "{{count}} comandi"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Clicca per le azioni, ",

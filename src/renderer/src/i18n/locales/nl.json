@@ -9116,11 +9116,11 @@
           "0e5aa04161": "Host of SSH-configalias is vereist",
           "f1fc50dad2": "SSH-doelen laden mislukt",
           "0cda732f43": "Verbindingstest mislukt",
-          "syncedServerSingular": "{{count}} server gesynchroniseerd",
-          "syncedServerPlural": "{{count}} servers gesynchroniseerd",
           "noFilterMatch": "Geen hosts gevonden.",
           "addHost": "Host toevoegen",
-          "alreadyInSync": "~/.ssh/config is al gesynchroniseerd"
+          "alreadyInSync": "~/.ssh/config is al gesynchroniseerd",
+          "syncedServer_one": "{{count}} server gesynchroniseerd",
+          "syncedServer_other": "{{count}} servers gesynchroniseerd"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Annuleren",
@@ -9158,13 +9158,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Hiermee wordt het doel verwijderd en worden alle actieve externe terminals beëindigd.",
           "4808966c41": "SSH-doel verwijderen",
-          "bulkTitleSingular": "{{count}} SSH-host verwijderen?",
-          "bulkTitlePlural": "{{count}} SSH-hosts verwijderen?",
           "bulkDescription": "Verwijderde hosts verdwijnen uit de hostkiezers in werkruimten, automatiseringen en de zijbalk. Uw ~/.ssh/config wordt niet gewijzigd en latere synchronisaties brengen ze niet terug.",
           "bulkAction": "{{count}} verwijderen",
           "bulkProgress": "Verwijderen: {{done}} van {{count}}…",
-          "bulkConnectedSingular": "{{count}} host is verbonden. De externe terminals worden gesloten.",
-          "bulkConnectedPlural": "{{count}} hosts zijn verbonden. Hun externe terminals worden gesloten."
+          "bulkTitle_one": "{{count}} SSH-host verwijderen?",
+          "bulkTitle_other": "{{count}} SSH-hosts verwijderen?",
+          "bulkConnected_one": "{{count}} host is verbonden. De externe terminals worden gesloten.",
+          "bulkConnected_other": "{{count}} hosts zijn verbonden. Hun externe terminals worden gesloten."
         },
         "SshTargetForm": {
           "fea9cb402e": "Annuleren",
@@ -12899,14 +12899,15 @@
           "clear": "Wissen",
           "removeSelected": "{{count}} verwijderen",
           "restoreRemovedCount": "Verwijderde hosts herstellen ({{count}})…",
-          "hostCount": "{{count}} hosts",
           "selectMatching": "Alle {{count}} overeenkomsten selecteren",
           "testSelected": "Testen",
           "clearFilter": "Filter wissen",
           "restoreRemovedLoading": "Verwijderde hosts herstellen",
           "restoreRemovedNone": "Geen verwijderde hosts om te herstellen",
-          "hiddenDeselectedSingular": "{{count}} verborgen host gedeselecteerd",
-          "hiddenDeselectedPlural": "{{count}} verborgen hosts gedeselecteerd"
+          "hiddenDeselected_one": "{{count}} verborgen host gedeselecteerd",
+          "hiddenDeselected_other": "{{count}} verborgen hosts gedeselecteerd",
+          "hostCount_one": "{{count}} host",
+          "hostCount_other": "{{count}} hosts"
         },
         "SshRestoreRemovedHosts": {
           "title": "Verwijderde hosts herstellen?",
@@ -23233,8 +23234,6 @@
       "monitoring": "Achtergrondtaken bewaken",
       "done": "Klaar · wacht op invoer",
       "noUpdateMinutes": "Al {{count}} min geen update · mogelijk vastgelopen",
-      "noUpdateHours": "Al {{count}} u geen update · mogelijk vastgelopen",
-      "noUpdateDays": "Al {{count}} d geen update · mogelijk vastgelopen",
       "failure": {
         "signIn": "Inloggen vereist",
         "usageLimit": "Gebruikslimiet bereikt",
@@ -23249,7 +23248,11 @@
         "helper": "Werk overdragen aan een helper",
         "plan": "Plan bijwerken",
         "other": "{{tool}} gebruiken"
-      }
+      },
+      "noUpdateHours_one": "Al {{count}} u geen update · mogelijk vastgelopen",
+      "noUpdateHours_other": "Al {{count}} u geen update · mogelijk vastgelopen",
+      "noUpdateDays_one": "Al {{count}} d geen update · mogelijk vastgelopen",
+      "noUpdateDays_other": "Al {{count}} d geen update · mogelijk vastgelopen"
     },
     "timeAgo": {
       "now": "nu",
@@ -23412,9 +23415,10 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} opdrachten",
       "mySkills": "Mijn skills",
-      "commands": "Opdrachten"
+      "commands": "Opdrachten",
+      "commandCount_one": "{{count}} opdracht",
+      "commandCount_other": "{{count}} opdrachten"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Klik voor acties, ",

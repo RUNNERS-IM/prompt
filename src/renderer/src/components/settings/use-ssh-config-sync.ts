@@ -31,13 +31,10 @@ export function useSshConfigSync(onSynced: () => Promise<void>): {
           )
         } else {
           toast.success(
-            translate(
-              result.targets.length === 1
-                ? 'auto.components.settings.SshPane.syncedServerSingular'
-                : 'auto.components.settings.SshPane.syncedServerPlural',
-              result.targets.length === 1 ? 'Synced {{count}} server' : 'Synced {{count}} servers',
-              { count: result.targets.length }
-            )
+            translate('auto.components.settings.SshPane.syncedServer', 'Synced {{count}} servers', {
+              count: result.targets.length,
+              defaultValue_one: 'Synced {{count}} server'
+            })
           )
         }
       }

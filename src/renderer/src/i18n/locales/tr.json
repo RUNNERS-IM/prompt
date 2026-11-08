@@ -186,7 +186,9 @@
       "closeOneSession": "Yalnızca tek bir oturumu kapatmak için satırındaki × simgesini kullanın.",
       "title": "'{{name}}' projesi listeden kaldırılsın mı?",
       "confirm": "Projeyi Kaldır",
-      "menuItem": "Projeyi listeden kaldır…"
+      "menuItem": "Projeyi listeden kaldır…",
+      "runningSessions_one": "İçindeki çalışan oturum durdurulacak.",
+      "runningSessions_other": "İçindeki {{count}} çalışan oturumun tümü durdurulacak."
     },
     "computerPicker": {
       "connected": "Bağlı",
@@ -212,15 +214,17 @@
         "other": "{{tool}} kullanıyor"
       },
       "noUpdateMinutes": "{{count}} dk'dır güncelleme yok · takılmış olabilir",
-      "noUpdateHours": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
-      "noUpdateDays": "{{count}} gündür güncelleme yok · takılmış olabilir",
       "monitoring": "Arka plan görevlerini izliyor",
       "done": "Bitti · sizi bekliyor",
       "failure": {
         "signIn": "Oturum açmak gerekli",
         "usageLimit": "Kullanım sınırına ulaşıldı",
         "overloaded": "Sunucu meşgul"
-      }
+      },
+      "noUpdateHours_one": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
+      "noUpdateHours_other": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
+      "noUpdateDays_one": "{{count}} gündür güncelleme yok · takılmış olabilir",
+      "noUpdateDays_other": "{{count}} gündür güncelleme yok · takılmış olabilir"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
@@ -248,9 +252,10 @@
       "openWorkspace": "Terminal aç"
     },
     "skills": {
-      "commandCount": "{{count}} komut",
       "mySkills": "Becerilerim",
-      "commands": "Komutlar"
+      "commands": "Komutlar",
+      "commandCount_one": "{{count}} komut",
+      "commandCount_other": "{{count}} komut"
     },
     "closeSession": {
       "titleNamed": "'{{name}}' kapatılsın mı?",
@@ -1267,7 +1272,9 @@
     "activityWaitingSuffix": "etkinlik bekleniyor",
     "openAtLogin": "Oturum açılınca başlat",
     "autoCheckUpdates": "Güncellemeleri otomatik olarak denetle",
-    "restartApp": "Prompt’u yeniden başlat"
+    "restartApp": "Prompt’u yeniden başlat",
+    "runningTerminals_one": "{{count}} terminal çalışıyor",
+    "runningTerminals_other": "{{count}} terminal çalışıyor"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "{{value0}} adresine git",
@@ -9300,11 +9307,11 @@
           "0e5aa04161": "Sunucu veya SSH yapılandırma takma adı gereklidir",
           "f1fc50dad2": "SSH hedefleri yüklenemedi",
           "0cda732f43": "Bağlantı testi başarısız oldu",
-          "syncedServerSingular": "{{count}} sunucu eşitlendi",
-          "syncedServerPlural": "{{count}} sunucu eşitlendi",
           "noFilterMatch": "Eşleşen sunucu yok.",
           "addHost": "Sunucu ekle",
-          "alreadyInSync": "~/.ssh/config zaten eşitlenmiş"
+          "alreadyInSync": "~/.ssh/config zaten eşitlenmiş",
+          "syncedServer_one": "{{count}} sunucu eşitlendi",
+          "syncedServer_other": "{{count}} sunucu eşitlendi"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "İptal",
@@ -9342,13 +9349,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Bu işlem, hedefi kaldırır ve etkin uzak terminalleri sonlandırır.",
           "4808966c41": "SSH Hedefini Kaldır",
-          "bulkTitleSingular": "{{count}} SSH sunucusu kaldırılsın mı?",
-          "bulkTitlePlural": "{{count}} SSH sunucusu kaldırılsın mı?",
           "bulkDescription": "Kaldırılan sunucular çalışma alanları, otomasyonlar ve kenar çubuğundaki sunucu seçicilerinden kaybolur. ~/.ssh/config dosyanız değiştirilmez ve sonraki eşitlemeler bu sunucuları geri getirmez.",
           "bulkAction": "{{count}} öğeyi kaldır",
           "bulkProgress": "{{count}} öğeden {{done}} tanesi kaldırılıyor…",
-          "bulkConnectedSingular": "{{count}} sunucu bağlı. Uzak terminalleri kapatılacak.",
-          "bulkConnectedPlural": "{{count}} sunucu bağlı. Uzak terminalleri kapatılacak."
+          "bulkTitle_one": "{{count}} SSH sunucusu kaldırılsın mı?",
+          "bulkTitle_other": "{{count}} SSH sunucusu kaldırılsın mı?",
+          "bulkConnected_one": "{{count}} sunucu bağlı. Uzak terminalleri kapatılacak.",
+          "bulkConnected_other": "{{count}} sunucu bağlı. Uzak terminalleri kapatılacak."
         },
         "SshTargetForm": {
           "fea9cb402e": "İptal",
@@ -13067,14 +13074,15 @@
           "clear": "Temizle",
           "removeSelected": "{{count}} öğeyi kaldır",
           "restoreRemovedCount": "Kaldırılan ana makineleri geri getir ({{count}})…",
-          "hostCount": "{{count}} ana makine",
           "selectMatching": "Eşleşen {{count}} öğenin tümünü seç",
           "testSelected": "Test et",
           "clearFilter": "Filtreyi temizle",
           "restoreRemovedLoading": "Kaldırılan ana makineleri geri getir",
           "restoreRemovedNone": "Geri getirilecek kaldırılmış ana makine yok",
-          "hiddenDeselectedSingular": "{{count}} gizli ana makinenin seçimi kaldırıldı",
-          "hiddenDeselectedPlural": "{{count}} gizli ana makinenin seçimi kaldırıldı"
+          "hiddenDeselected_one": "{{count}} gizli ana makinenin seçimi kaldırıldı",
+          "hiddenDeselected_other": "{{count}} gizli ana makinenin seçimi kaldırıldı",
+          "hostCount_one": "{{count}} ana makine",
+          "hostCount_other": "{{count}} ana makine"
         },
         "SshRestoreRemovedHosts": {
           "title": "Kaldırılan ana makineler geri getirilsin mi?",

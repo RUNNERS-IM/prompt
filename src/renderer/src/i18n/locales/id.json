@@ -8932,11 +8932,10 @@
           "0e5aa04161": "Host atau alias konfigurasi SSH wajib diisi",
           "f1fc50dad2": "Gagal memuat target SSH",
           "0cda732f43": "Pengujian koneksi gagal",
-          "syncedServerSingular": "{{count}} server disinkronkan",
-          "syncedServerPlural": "{{count}} server disinkronkan",
           "noFilterMatch": "Tidak ada host yang cocok.",
           "addHost": "Tambah host",
-          "alreadyInSync": "~/.ssh/config sudah sinkron"
+          "alreadyInSync": "~/.ssh/config sudah sinkron",
+          "syncedServer_other": "{{count}} server disinkronkan"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Batal",
@@ -8974,13 +8973,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Tindakan ini akan menghapus target dan mengakhiri semua terminal remote yang aktif.",
           "4808966c41": "Hapus target SSH",
-          "bulkTitleSingular": "Hapus {{count}} host SSH?",
-          "bulkTitlePlural": "Hapus {{count}} host SSH?",
           "bulkDescription": "Host yang dihapus akan hilang dari pemilih host di workspace, otomatisasi, dan sidebar. ~/.ssh/config tidak diubah, dan sinkronisasi berikutnya tidak akan mengembalikannya.",
           "bulkAction": "Hapus {{count}}",
           "bulkProgress": "Menghapus {{done}} dari {{count}}…",
-          "bulkConnectedSingular": "{{count}} host terhubung. Terminal remote-nya akan ditutup.",
-          "bulkConnectedPlural": "{{count}} host terhubung. Terminal remote-nya akan ditutup."
+          "bulkTitle_other": "Hapus {{count}} host SSH?",
+          "bulkConnected_other": "{{count}} host terhubung. Terminal remote-nya akan ditutup."
         },
         "SshTargetForm": {
           "fea9cb402e": "Batal",
@@ -12711,14 +12708,13 @@
           "clear": "Hapus",
           "removeSelected": "Hapus {{count}}",
           "restoreRemovedCount": "Pulihkan host yang dihapus ({{count}})…",
-          "hostCount": "{{count}} host",
           "selectMatching": "Pilih semua {{count}} yang cocok",
           "testSelected": "Uji",
           "clearFilter": "Hapus filter",
           "restoreRemovedLoading": "Pulihkan host yang dihapus",
           "restoreRemovedNone": "Tidak ada host terhapus yang dapat dipulihkan",
-          "hiddenDeselectedSingular": "{{count}} host tersembunyi batal dipilih",
-          "hiddenDeselectedPlural": "{{count}} host tersembunyi batal dipilih"
+          "hiddenDeselected_other": "{{count}} host tersembunyi batal dipilih",
+          "hostCount_other": "{{count}} host"
         },
         "SshRestoreRemovedHosts": {
           "title": "Pulihkan host yang dihapus?",
@@ -22849,8 +22845,6 @@
       "monitoring": "Memantau tugas latar belakang",
       "done": "Selesai · menunggu Anda",
       "noUpdateMinutes": "Tidak ada pembaruan selama {{count}} mnt · mungkin macet",
-      "noUpdateHours": "Tidak ada pembaruan selama {{count}} jam · mungkin macet",
-      "noUpdateDays": "Tidak ada pembaruan selama {{count}} hari · mungkin macet",
       "failure": {
         "signIn": "Perlu masuk",
         "usageLimit": "Batas penggunaan tercapai",
@@ -22865,7 +22859,9 @@
         "helper": "Menyerahkan tugas ke helper",
         "plan": "Memperbarui rencana",
         "other": "Menggunakan {{tool}}"
-      }
+      },
+      "noUpdateHours_other": "Tidak ada pembaruan selama {{count}} jam · mungkin macet",
+      "noUpdateDays_other": "Tidak ada pembaruan selama {{count}} hari · mungkin macet"
     },
     "timeAgo": {
       "now": "sekarang",
@@ -23028,9 +23024,9 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} perintah",
       "mySkills": "Skill saya",
-      "commands": "Perintah"
+      "commands": "Perintah",
+      "commandCount_other": "{{count}} perintah"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Klik untuk melihat tindakan, ",

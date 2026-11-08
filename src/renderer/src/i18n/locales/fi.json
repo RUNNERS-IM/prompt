@@ -9116,11 +9116,11 @@
           "0e5aa04161": "Host tai SSH config -alias vaaditaan",
           "f1fc50dad2": "SSH-kohteiden lataus epäonnistui",
           "0cda732f43": "Yhteystesti epäonnistui",
-          "syncedServerSingular": "Synkronoitu {{count}} palvelin",
-          "syncedServerPlural": "Synkronoitu {{count}} palvelinta",
           "noFilterMatch": "Ei vastaavia palvelimia.",
           "addHost": "Lisää host",
-          "alreadyInSync": "~/.ssh/config on jo synkronoitu"
+          "alreadyInSync": "~/.ssh/config on jo synkronoitu",
+          "syncedServer_one": "Synkronoitu {{count}} palvelin",
+          "syncedServer_other": "Synkronoitu {{count}} palvelinta"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Peruuta",
@@ -9158,13 +9158,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Tämä poistaa kohteen ja päättää kaikki aktiiviset etäpäätteet.",
           "4808966c41": "Poista SSH-kohde",
-          "bulkTitleSingular": "Poistetaanko {{count}} SSH-host?",
-          "bulkTitlePlural": "Poistetaanko {{count}} SSH-hostia?",
           "bulkDescription": "Poistetut hostit katoavat työtilojen, automaatioiden ja sivupalkin host-valitsimista. ~/.ssh/config ei muutu, eivätkä myöhemmät synkronoinnit palauta niitä.",
           "bulkAction": "Poista {{count}}",
           "bulkProgress": "Poistetaan {{done}}/{{count}}…",
-          "bulkConnectedSingular": "{{count}} host on yhdistetty. Sen etäpäätteet suljetaan.",
-          "bulkConnectedPlural": "{{count}} hostia on yhdistetty. Niiden etäpäätteet suljetaan."
+          "bulkTitle_one": "Poistetaanko {{count}} SSH-host?",
+          "bulkTitle_other": "Poistetaanko {{count}} SSH-hostia?",
+          "bulkConnected_one": "{{count}} host on yhdistetty. Sen etäpäätteet suljetaan.",
+          "bulkConnected_other": "{{count}} hostia on yhdistetty. Niiden etäpäätteet suljetaan."
         },
         "SshTargetForm": {
           "fea9cb402e": "Peruuta",
@@ -12899,14 +12899,15 @@
           "clear": "Tyhjennä",
           "removeSelected": "Poista {{count}}",
           "restoreRemovedCount": "Palauta poistetut hostit ({{count}})…",
-          "hostCount": "{{count}} hostia",
           "selectMatching": "Valitse kaikki {{count}} osumaa",
           "testSelected": "Testaa",
           "clearFilter": "Tyhjennä suodatin",
           "restoreRemovedLoading": "Palauta poistetut hostit",
           "restoreRemovedNone": "Ei palautettavia poistettuja hosteja",
-          "hiddenDeselectedSingular": "{{count}} piilotetun hostin valinta poistettu",
-          "hiddenDeselectedPlural": "{{count}} piilotetun hostin valinta poistettu"
+          "hiddenDeselected_one": "{{count}} piilotetun hostin valinta poistettu",
+          "hiddenDeselected_other": "{{count}} piilotetun hostin valinta poistettu",
+          "hostCount_one": "{{count}} host",
+          "hostCount_other": "{{count}} hostia"
         },
         "SshRestoreRemovedHosts": {
           "title": "Palautetaanko poistetut hostit?",
@@ -23233,8 +23234,6 @@
       "monitoring": "Seurataan taustatehtäviä",
       "done": "Valmis · odottaa sinua",
       "noUpdateMinutes": "Ei päivitystä {{count}} min · saattaa olla jumissa",
-      "noUpdateHours": "Ei päivityksiä {{count}} tuntiin · voi olla jumissa",
-      "noUpdateDays": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
       "failure": {
         "signIn": "Kirjautuminen vaaditaan",
         "usageLimit": "Käyttöraja ylitetty",
@@ -23249,7 +23248,11 @@
         "helper": "Antaa työn apulaiselle",
         "plan": "Päivittää suunnitelmaansa",
         "other": "Käytetään työkalua {{tool}}"
-      }
+      },
+      "noUpdateHours_one": "Ei päivityksiä {{count}} tuntiin · voi olla jumissa",
+      "noUpdateHours_other": "Ei päivityksiä {{count}} tuntiin · voi olla jumissa",
+      "noUpdateDays_one": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
+      "noUpdateDays_other": "Ei päivityksiä {{count}} päivään · voi olla jumissa"
     },
     "timeAgo": {
       "now": "nyt",
@@ -23412,9 +23415,10 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} komentoa",
       "mySkills": "Omat skillit",
-      "commands": "Komennot"
+      "commands": "Komennot",
+      "commandCount_one": "{{count}} komento",
+      "commandCount_other": "{{count}} komentoa"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Napsauta nähdäksesi toiminnot, ",

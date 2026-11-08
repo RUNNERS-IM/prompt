@@ -212,15 +212,21 @@
         "other": "Использует {{tool}}"
       },
       "noUpdateMinutes": "Нет обновлений {{count}} мин · возможно, завис",
-      "noUpdateHours": "Нет обновлений {{count}} ч · возможно, завис",
-      "noUpdateDays": "Нет обновлений {{count}} дн. · возможно, завис",
       "monitoring": "Следит за фоновыми задачами",
       "done": "Готово · ждёт вас",
       "failure": {
         "signIn": "Требуется вход",
         "usageLimit": "Достигнут лимит использования",
         "overloaded": "Сервер перегружен"
-      }
+      },
+      "noUpdateHours_one": "Нет обновлений {{count}} ч · возможно, завис",
+      "noUpdateHours_few": "Нет обновлений {{count}} ч · возможно, завис",
+      "noUpdateHours_many": "Нет обновлений {{count}} ч · возможно, завис",
+      "noUpdateHours_other": "Нет обновлений {{count}} ч · возможно, завис",
+      "noUpdateDays_one": "Нет обновлений {{count}} дн. · возможно, завис",
+      "noUpdateDays_few": "Нет обновлений {{count}} дн. · возможно, завис",
+      "noUpdateDays_many": "Нет обновлений {{count}} дн. · возможно, завис",
+      "noUpdateDays_other": "Нет обновлений {{count}} дн. · возможно, завис"
     },
     "sessionMove": {
       "cancelRemote": "Сессии можно переносить только между проектами на этом компьютере.",
@@ -248,9 +254,12 @@
       "openWorkspace": "Открыть терминал"
     },
     "skills": {
-      "commandCount": "Команд: {{count}}",
       "mySkills": "Мои навыки",
-      "commands": "Команды"
+      "commands": "Команды",
+      "commandCount_one": "Команд: {{count}}",
+      "commandCount_few": "Команд: {{count}}",
+      "commandCount_many": "Команд: {{count}}",
+      "commandCount_other": "Команд: {{count}}"
     },
     "closeSession": {
       "titleNamed": "Закрыть «{{name}}»?",
@@ -1329,7 +1338,11 @@
     "activityWaitingSuffix": "ожидает вашего ответа",
     "openAtLogin": "Открывать при входе",
     "autoCheckUpdates": "Автоматически проверять обновления",
-    "restartApp": "Перезапустить Prompt"
+    "restartApp": "Перезапустить Prompt",
+    "runningTerminals_one": "Запущен {{count}} терминал",
+    "runningTerminals_few": "Запущено {{count}} терминала",
+    "runningTerminals_many": "Запущено {{count}} терминалов",
+    "runningTerminals_other": "Запущено {{count}} терминала"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Перейти на {{value0}}",
@@ -9666,11 +9679,13 @@
           "0e5aa04161": "Требуется сервер или псевдоним из конфигурации SSH",
           "f1fc50dad2": "Не удалось загрузить SSH-подключения",
           "0cda732f43": "Проверка подключения не удалась",
-          "syncedServerSingular": "Синхронизировано серверов: {{count}}",
-          "syncedServerPlural": "Синхронизировано серверов: {{count}}",
           "noFilterMatch": "Подходящие серверы не найдены.",
           "addHost": "Добавить сервер",
-          "alreadyInSync": "~/.ssh/config уже синхронизирован"
+          "alreadyInSync": "~/.ssh/config уже синхронизирован",
+          "syncedServer_one": "Синхронизировано серверов: {{count}}",
+          "syncedServer_few": "Синхронизировано серверов: {{count}}",
+          "syncedServer_many": "Синхронизировано серверов: {{count}}",
+          "syncedServer_other": "Синхронизировано серверов: {{count}}"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Отмена",
@@ -9708,13 +9723,17 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Подключение будет удалено, а все активные удалённые терминалы — закрыты.",
           "4808966c41": "Удалить SSH-подключение",
-          "bulkTitleSingular": "Удалить SSH-серверы: {{count}}?",
-          "bulkTitlePlural": "Удалить SSH-серверы: {{count}}?",
           "bulkDescription": "Удалённые серверы исчезнут из списков выбора в рабочих пространствах, автоматизациях и боковой панели. Файл ~/.ssh/config не изменится, и будущие синхронизации не вернут эти серверы.",
           "bulkAction": "Удалить: {{count}}",
           "bulkProgress": "Удаление: {{done}} из {{count}}…",
-          "bulkConnectedSingular": "Подключён {{count}} сервер. Его удалённые терминалы будут закрыты.",
-          "bulkConnectedPlural": "Подключено серверов: {{count}}. Их удалённые терминалы будут закрыты."
+          "bulkTitle_one": "Удалить SSH-серверы: {{count}}?",
+          "bulkTitle_few": "Удалить SSH-серверы: {{count}}?",
+          "bulkTitle_many": "Удалить SSH-серверы: {{count}}?",
+          "bulkTitle_other": "Удалить SSH-серверы: {{count}}?",
+          "bulkConnected_one": "Подключён {{count}} сервер. Его удалённые терминалы будут закрыты.",
+          "bulkConnected_few": "Подключено серверов: {{count}}. Их удалённые терминалы будут закрыты.",
+          "bulkConnected_many": "Подключено серверов: {{count}}. Их удалённые терминалы будут закрыты.",
+          "bulkConnected_other": "Подключено серверов: {{count}}. Их удалённые терминалы будут закрыты."
         },
         "SshTargetForm": {
           "fea9cb402e": "Отмена",
@@ -13441,14 +13460,19 @@
           "clear": "Очистить",
           "removeSelected": "Удалить: {{count}}",
           "restoreRemovedCount": "Восстановить удалённые серверы ({{count}})…",
-          "hostCount": "Серверов: {{count}}",
           "selectMatching": "Выбрать все подходящие: {{count}}",
           "testSelected": "Проверить",
           "clearFilter": "Сбросить фильтр",
           "restoreRemovedLoading": "Восстановить удалённые серверы",
           "restoreRemovedNone": "Нет удалённых серверов для восстановления",
-          "hiddenDeselectedSingular": "Снято выделение скрытых серверов: {{count}}",
-          "hiddenDeselectedPlural": "Снято выделение скрытых серверов: {{count}}"
+          "hiddenDeselected_one": "Снято выделение скрытых серверов: {{count}}",
+          "hiddenDeselected_few": "Снято выделение скрытых серверов: {{count}}",
+          "hiddenDeselected_many": "Снято выделение скрытых серверов: {{count}}",
+          "hiddenDeselected_other": "Снято выделение скрытых серверов: {{count}}",
+          "hostCount_one": "Серверов: {{count}}",
+          "hostCount_few": "Серверов: {{count}}",
+          "hostCount_many": "Серверов: {{count}}",
+          "hostCount_other": "Серверов: {{count}}"
         },
         "SshRestoreRemovedHosts": {
           "title": "Восстановить удалённые серверы?",

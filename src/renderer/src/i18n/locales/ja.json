@@ -212,15 +212,15 @@
         "other": "{{tool}} を使用中"
       },
       "noUpdateMinutes": "{{count}} 分間更新なし · 停止している可能性があります",
-      "noUpdateHours": "{{count}} 時間更新なし · 停止している可能性があります",
-      "noUpdateDays": "{{count}} 日間更新なし · 停止している可能性があります",
       "monitoring": "バックグラウンドタスクを監視中",
       "done": "完了 · 入力待ち",
       "failure": {
         "signIn": "サインインが必要です",
         "usageLimit": "使用制限に達しました",
         "overloaded": "サーバー混雑中"
-      }
+      },
+      "noUpdateHours_other": "{{count}} 時間更新なし · 停止している可能性があります",
+      "noUpdateDays_other": "{{count}} 日間更新なし · 停止している可能性があります"
     },
     "sessionMove": {
       "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",
@@ -248,9 +248,9 @@
       "openWorkspace": "ターミナルを開く"
     },
     "skills": {
-      "commandCount": "{{count}} 件のコマンド",
       "mySkills": "マイスキル",
-      "commands": "コマンド"
+      "commands": "コマンド",
+      "commandCount_other": "{{count}} 件のコマンド"
     },
     "closeSession": {
       "titleNamed": "「{{name}}」を閉じますか？",
@@ -847,7 +847,8 @@
     "activityWaitingSuffix": "件のアクティビティが待機中",
     "openAtLogin": "ログイン時に開く",
     "autoCheckUpdates": "アップデートを自動的に確認",
-    "restartApp": "Prompt を再起動"
+    "restartApp": "Prompt を再起動",
+    "runningTerminals_other": "{{count}} 個のターミナルを実行中"
   },
   "worktreeJumpPalette": {
     "matchLabel": {
@@ -8677,11 +8678,10 @@
           "0e5aa04161": "ホストまたは SSH 構成エイリアスが必要です",
           "f1fc50dad2": "SSH ターゲットのロードに失敗しました",
           "0cda732f43": "接続テストに失敗しました",
-          "syncedServerSingular": "{{count}} 台のサーバーを同期しました",
-          "syncedServerPlural": "{{count}} 台のサーバーを同期しました",
           "noFilterMatch": "一致するホストはありません。",
           "addHost": "ホストを追加",
-          "alreadyInSync": "~/.ssh/config はすでに同期済みです"
+          "alreadyInSync": "~/.ssh/config はすでに同期済みです",
+          "syncedServer_other": "{{count}} 台のサーバーを同期しました"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "キャンセル",
@@ -8719,13 +8719,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "これによりターゲットが削除され、アクティブなリモートターミナルがすべて終了します。",
           "4808966c41": "SSH ターゲットの削除",
-          "bulkTitleSingular": "SSH ホスト {{count}} 件を削除しますか？",
-          "bulkTitlePlural": "SSH ホスト {{count}} 件を削除しますか？",
           "bulkDescription": "削除したホストは、ワークスペース、オートメーション、サイドバーのホスト選択から消えます。~/.ssh/config は変更されず、今後の同期でも戻りません。",
           "bulkAction": "{{count}} 件を削除",
           "bulkProgress": "{{count}} 件中 {{done}} 件目を削除中…",
-          "bulkConnectedSingular": "{{count}} 件のホストが接続中です。リモートターミナルは閉じられます。",
-          "bulkConnectedPlural": "{{count}} 件のホストが接続中です。リモートターミナルは閉じられます。"
+          "bulkTitle_other": "SSH ホスト {{count}} 件を削除しますか？",
+          "bulkConnected_other": "{{count}} 件のホストが接続中です。リモートターミナルは閉じられます。"
         },
         "SshTargetForm": {
           "fea9cb402e": "キャンセル",
@@ -12528,14 +12526,13 @@
           "clear": "選択解除",
           "removeSelected": "{{count}} 件を削除",
           "restoreRemovedCount": "削除したホストを復元（{{count}}）…",
-          "hostCount": "{{count}} 件のホスト",
           "selectMatching": "一致する {{count}} 件をすべて選択",
           "testSelected": "テスト",
           "clearFilter": "フィルターをクリア",
           "restoreRemovedLoading": "削除したホストを復元",
           "restoreRemovedNone": "復元できる削除済みホストはありません",
-          "hiddenDeselectedSingular": "非表示のホスト {{count}} 件の選択を解除しました",
-          "hiddenDeselectedPlural": "非表示のホスト {{count}} 件の選択を解除しました"
+          "hiddenDeselected_other": "非表示のホスト {{count}} 件の選択を解除しました",
+          "hostCount_other": "{{count}} 件のホスト"
         },
         "SshRestoreRemovedHosts": {
           "title": "削除したホストを復元しますか？",

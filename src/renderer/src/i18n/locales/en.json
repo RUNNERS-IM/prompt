@@ -9116,11 +9116,11 @@
           "0e5aa04161": "Host or SSH config alias is required",
           "f1fc50dad2": "Failed to load SSH targets",
           "0cda732f43": "Connection test failed",
-          "syncedServerSingular": "Synced {{count}} server",
-          "syncedServerPlural": "Synced {{count}} servers",
           "noFilterMatch": "No hosts match.",
           "addHost": "Add host",
-          "alreadyInSync": "~/.ssh/config already in sync"
+          "alreadyInSync": "~/.ssh/config already in sync",
+          "syncedServer_one": "Synced {{count}} server",
+          "syncedServer_other": "Synced {{count}} servers"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Cancel",
@@ -9158,13 +9158,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "This will remove the target and end any active remote terminals.",
           "4808966c41": "Remove SSH Target",
-          "bulkTitleSingular": "Remove {{count}} SSH host?",
-          "bulkTitlePlural": "Remove {{count}} SSH hosts?",
           "bulkDescription": "Removed hosts disappear from host pickers in workspaces, automations and the sidebar. Your ~/.ssh/config is not changed, and later syncs won’t bring them back.",
           "bulkAction": "Remove {{count}}",
           "bulkProgress": "Removing {{done}} of {{count}}…",
-          "bulkConnectedSingular": "{{count}} host is connected. Its remote terminals will be closed.",
-          "bulkConnectedPlural": "{{count}} hosts are connected. Their remote terminals will be closed."
+          "bulkTitle_one": "Remove {{count}} SSH host?",
+          "bulkTitle_other": "Remove {{count}} SSH hosts?",
+          "bulkConnected_one": "{{count}} host is connected. Its remote terminals will be closed.",
+          "bulkConnected_other": "{{count}} hosts are connected. Their remote terminals will be closed."
         },
         "SshTargetForm": {
           "fea9cb402e": "Cancel",
@@ -12899,14 +12899,15 @@
           "clear": "Clear",
           "removeSelected": "Remove {{count}}",
           "restoreRemovedCount": "Restore removed hosts ({{count}})…",
-          "hostCount": "{{count}} hosts",
           "selectMatching": "Select all {{count}} matching",
           "testSelected": "Test",
           "clearFilter": "Clear filter",
           "restoreRemovedLoading": "Restore removed hosts",
           "restoreRemovedNone": "No removed hosts to restore",
-          "hiddenDeselectedSingular": "{{count}} hidden host deselected",
-          "hiddenDeselectedPlural": "{{count}} hidden hosts deselected"
+          "hiddenDeselected_one": "{{count}} hidden host deselected",
+          "hiddenDeselected_other": "{{count}} hidden hosts deselected",
+          "hostCount_one": "{{count}} host",
+          "hostCount_other": "{{count}} hosts"
         },
         "SshRestoreRemovedHosts": {
           "title": "Restore removed hosts?",
@@ -23233,8 +23234,6 @@
       "monitoring": "Watching background tasks",
       "done": "Done · waiting for you",
       "noUpdateMinutes": "No update for {{count}} min · may be stuck",
-      "noUpdateHours": "No update for {{count}} h · may be stuck",
-      "noUpdateDays": "No update for {{count}} d · may be stuck",
       "failure": {
         "signIn": "Sign-in needed",
         "usageLimit": "Usage limit reached",
@@ -23249,7 +23248,11 @@
         "helper": "Handing work to a helper",
         "plan": "Updating its plan",
         "other": "Using {{tool}}"
-      }
+      },
+      "noUpdateHours_one": "No update for {{count}} h · may be stuck",
+      "noUpdateHours_other": "No update for {{count}} h · may be stuck",
+      "noUpdateDays_one": "No update for {{count}} d · may be stuck",
+      "noUpdateDays_other": "No update for {{count}} d · may be stuck"
     },
     "timeAgo": {
       "now": "now",
@@ -23412,9 +23415,10 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} commands",
       "mySkills": "My skills",
-      "commands": "Commands"
+      "commands": "Commands",
+      "commandCount_one": "{{count}} command",
+      "commandCount_other": "{{count}} commands"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Click for actions, ",

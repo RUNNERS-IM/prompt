@@ -9484,11 +9484,13 @@
           "0e5aa04161": "Host lub alias z konfiguracji SSH jest wymagany",
           "f1fc50dad2": "Nie udało się załadować celów SSH",
           "0cda732f43": "Test połączenia nie powiódł się",
-          "syncedServerSingular": "Zsynchronizowano {{count}} serwer",
-          "syncedServerPlural": "Zsynchronizowano serwery: {{count}}",
           "noFilterMatch": "Brak pasujących hostów.",
           "addHost": "Dodaj host",
-          "alreadyInSync": "~/.ssh/config jest już zsynchronizowany"
+          "alreadyInSync": "~/.ssh/config jest już zsynchronizowany",
+          "syncedServer_one": "Zsynchronizowano {{count}} serwer",
+          "syncedServer_few": "Zsynchronizowano serwery: {{count}}",
+          "syncedServer_many": "Zsynchronizowano serwery: {{count}}",
+          "syncedServer_other": "Zsynchronizowano serwery: {{count}}"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Anuluj",
@@ -9526,13 +9528,17 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Cel zostanie usunięty, a wszystkie aktywne zdalne terminale zakończone.",
           "4808966c41": "Usuń cel SSH",
-          "bulkTitleSingular": "Usunąć {{count}} host SSH?",
-          "bulkTitlePlural": "Usunąć hosty SSH: {{count}}?",
           "bulkDescription": "Usunięte hosty znikną z list wyboru hostów w obszarach roboczych, automatyzacjach i na pasku bocznym. Plik ~/.ssh/config nie zostanie zmieniony, a kolejne synchronizacje ich nie przywrócą.",
           "bulkAction": "Usuń {{count}}",
           "bulkProgress": "Usuwanie {{done}} z {{count}}…",
-          "bulkConnectedSingular": "{{count}} host jest połączony. Jego zdalne terminale zostaną zamknięte.",
-          "bulkConnectedPlural": "Połączone hosty: {{count}}. Ich zdalne terminale zostaną zamknięte."
+          "bulkTitle_one": "Usunąć {{count}} host SSH?",
+          "bulkTitle_few": "Usunąć hosty SSH: {{count}}?",
+          "bulkTitle_many": "Usunąć hosty SSH: {{count}}?",
+          "bulkTitle_other": "Usunąć hosty SSH: {{count}}?",
+          "bulkConnected_one": "{{count}} host jest połączony. Jego zdalne terminale zostaną zamknięte.",
+          "bulkConnected_few": "Połączone hosty: {{count}}. Ich zdalne terminale zostaną zamknięte.",
+          "bulkConnected_many": "Połączone hosty: {{count}}. Ich zdalne terminale zostaną zamknięte.",
+          "bulkConnected_other": "Połączone hosty: {{count}}. Ich zdalne terminale zostaną zamknięte."
         },
         "SshTargetForm": {
           "fea9cb402e": "Anuluj",
@@ -13275,14 +13281,19 @@
           "clear": "Wyczyść",
           "removeSelected": "Usuń {{count}}",
           "restoreRemovedCount": "Przywróć usunięte hosty ({{count}})…",
-          "hostCount": "Hosty: {{count}}",
           "selectMatching": "Zaznacz wszystkie pasujące ({{count}})",
           "testSelected": "Testuj",
           "clearFilter": "Wyczyść filtr",
           "restoreRemovedLoading": "Przywróć usunięte hosty",
           "restoreRemovedNone": "Brak usuniętych hostów do przywrócenia",
-          "hiddenDeselectedSingular": "Odznaczono ukryte hosty: {{count}}",
-          "hiddenDeselectedPlural": "Odznaczono ukryte hosty: {{count}}"
+          "hiddenDeselected_one": "Odznaczono ukryte hosty: {{count}}",
+          "hiddenDeselected_few": "Odznaczono ukryte hosty: {{count}}",
+          "hiddenDeselected_many": "Odznaczono ukryte hosty: {{count}}",
+          "hiddenDeselected_other": "Odznaczono ukryte hosty: {{count}}",
+          "hostCount_one": "Hosty: {{count}}",
+          "hostCount_few": "Hosty: {{count}}",
+          "hostCount_many": "Hosty: {{count}}",
+          "hostCount_other": "Hosty: {{count}}"
         },
         "SshRestoreRemovedHosts": {
           "title": "Przywrócić usunięte hosty?",
@@ -24001,8 +24012,6 @@
       "monitoring": "Obserwowanie zadań w tle",
       "done": "Gotowe · czeka na Ciebie",
       "noUpdateMinutes": "Brak aktualizacji od {{count}} min · możliwe zawieszenie",
-      "noUpdateHours": "Brak aktualizacji od {{count}} godz. · możliwe zawieszenie",
-      "noUpdateDays": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
       "failure": {
         "signIn": "Wymagane logowanie",
         "usageLimit": "Osiągnięto limit użycia",
@@ -24017,7 +24026,15 @@
         "helper": "Przekazywanie pracy pomocnikowi",
         "plan": "Aktualizowanie planu",
         "other": "Używanie narzędzia {{tool}}"
-      }
+      },
+      "noUpdateHours_one": "Brak aktualizacji od {{count}} godz. · możliwe zawieszenie",
+      "noUpdateHours_few": "Brak aktualizacji od {{count}} godz. · możliwe zawieszenie",
+      "noUpdateHours_many": "Brak aktualizacji od {{count}} godz. · możliwe zawieszenie",
+      "noUpdateHours_other": "Brak aktualizacji od {{count}} godz. · możliwe zawieszenie",
+      "noUpdateDays_one": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
+      "noUpdateDays_few": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
+      "noUpdateDays_many": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
+      "noUpdateDays_other": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie"
     },
     "timeAgo": {
       "now": "teraz",
@@ -24180,9 +24197,12 @@
       }
     },
     "skills": {
-      "commandCount": "Polecenia: {{count}}",
       "mySkills": "Moje skille",
-      "commands": "Polecenia"
+      "commands": "Polecenia",
+      "commandCount_one": "Polecenia: {{count}}",
+      "commandCount_few": "Polecenia: {{count}}",
+      "commandCount_many": "Polecenia: {{count}}",
+      "commandCount_other": "Polecenia: {{count}}"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Kliknij, aby wyświetlić akcje, ",

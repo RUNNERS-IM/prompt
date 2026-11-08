@@ -9116,11 +9116,11 @@
           "0e5aa04161": "होस्ट या SSH config alias ज़रूरी है।",
           "f1fc50dad2": "SSH target लोड नहीं हो सके।",
           "0cda732f43": "कनेक्शन परीक्षण विफल रहा।",
-          "syncedServerSingular": "{{count}} सर्वर सिंक किया गया।",
-          "syncedServerPlural": "{{count}} सर्वर सिंक किए गए।",
           "noFilterMatch": "कोई होस्ट मेल नहीं खाता।",
           "addHost": "होस्ट जोड़ें",
-          "alreadyInSync": "~/.ssh/config पहले से सिंक है।"
+          "alreadyInSync": "~/.ssh/config पहले से सिंक है।",
+          "syncedServer_one": "{{count}} सर्वर सिंक किया गया।",
+          "syncedServer_other": "{{count}} सर्वर सिंक किए गए।"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "रद्द करें",
@@ -9158,13 +9158,13 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "इससे target हट जाएगा और सभी सक्रिय remote टर्मिनल बंद हो जाएँगे।",
           "4808966c41": "SSH target हटाएँ",
-          "bulkTitleSingular": "{{count}} SSH होस्ट हटाएँ?",
-          "bulkTitlePlural": "{{count}} SSH होस्ट हटाएँ?",
           "bulkDescription": "हटाए गए होस्ट वर्कस्पेस, ऑटोमेशन और साइड बार के होस्ट पिकर से गायब हो जाते हैं। आपकी ~/.ssh/config नहीं बदलती, और बाद में सिंक करने पर भी वे वापस नहीं आएँगे।",
           "bulkAction": "{{count}} हटाएँ",
           "bulkProgress": "{{count}} में से {{done}} हटाए जा रहे हैं…",
-          "bulkConnectedSingular": "{{count}} होस्ट कनेक्टेड है। इसके remote टर्मिनल बंद कर दिए जाएँगे।",
-          "bulkConnectedPlural": "{{count}} होस्ट कनेक्टेड हैं। इनके remote टर्मिनल बंद कर दिए जाएँगे।"
+          "bulkTitle_one": "{{count}} SSH होस्ट हटाएँ?",
+          "bulkTitle_other": "{{count}} SSH होस्ट हटाएँ?",
+          "bulkConnected_one": "{{count}} होस्ट कनेक्टेड है। इसके remote टर्मिनल बंद कर दिए जाएँगे।",
+          "bulkConnected_other": "{{count}} होस्ट कनेक्टेड हैं। इनके remote टर्मिनल बंद कर दिए जाएँगे।"
         },
         "SshTargetForm": {
           "fea9cb402e": "रद्द करें",
@@ -12899,14 +12899,15 @@
           "clear": "साफ़ करें",
           "removeSelected": "{{count}} हटाएँ",
           "restoreRemovedCount": "हटाए गए होस्ट वापस लाएँ ({{count}})…",
-          "hostCount": "{{count}} होस्ट",
           "selectMatching": "मेल खाने वाले सभी {{count}} चुनें",
           "testSelected": "जाँचें",
           "clearFilter": "फ़िल्टर हटाएँ",
           "restoreRemovedLoading": "हटाए गए होस्ट वापस लाएँ",
           "restoreRemovedNone": "वापस लाने के लिए कोई हटाया गया होस्ट नहीं है",
-          "hiddenDeselectedSingular": "{{count}} छिपा हुआ होस्ट अचयनित किया गया",
-          "hiddenDeselectedPlural": "{{count}} छिपे हुए होस्ट अचयनित किए गए"
+          "hiddenDeselected_one": "{{count}} छिपा हुआ होस्ट अचयनित किया गया",
+          "hiddenDeselected_other": "{{count}} छिपे हुए होस्ट अचयनित किए गए",
+          "hostCount_one": "{{count}} होस्ट",
+          "hostCount_other": "{{count}} होस्ट"
         },
         "SshRestoreRemovedHosts": {
           "title": "हटाए गए होस्ट वापस लाएँ?",
@@ -23233,8 +23234,6 @@
       "monitoring": "बैकग्राउंड कार्य देखे जा रहे हैं",
       "done": "पूरा हुआ · आपकी प्रतीक्षा में",
       "noUpdateMinutes": "{{count}} मिनट से कोई अपडेट नहीं · शायद अटका हुआ है",
-      "noUpdateHours": "{{count}} घंटे से कोई अपडेट नहीं · अटका हो सकता है",
-      "noUpdateDays": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
       "failure": {
         "signIn": "साइन इन ज़रूरी है",
         "usageLimit": "उपयोग सीमा पूरी हो गई",
@@ -23249,7 +23248,11 @@
         "helper": "सहायक को काम सौंप रहा है",
         "plan": "अपनी योजना अपडेट कर रहा है",
         "other": "{{tool}} का उपयोग हो रहा है"
-      }
+      },
+      "noUpdateHours_one": "{{count}} घंटे से कोई अपडेट नहीं · अटका हो सकता है",
+      "noUpdateHours_other": "{{count}} घंटे से कोई अपडेट नहीं · अटका हो सकता है",
+      "noUpdateDays_one": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
+      "noUpdateDays_other": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है"
     },
     "timeAgo": {
       "now": "अभी",
@@ -23412,9 +23415,10 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} कमांड",
       "mySkills": "मेरे skill",
-      "commands": "कमांड"
+      "commands": "कमांड",
+      "commandCount_one": "{{count}} कमांड",
+      "commandCount_other": "{{count}} कमांड"
     },
     "terminalLinkHint": {
       "actionsPrefix": "कार्रवाइयों के लिए क्लिक करें, ",

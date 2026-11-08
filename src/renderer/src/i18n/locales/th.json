@@ -8932,11 +8932,10 @@
           "0e5aa04161": "ต้องระบุโฮสต์หรือ SSH config alias",
           "f1fc50dad2": "โหลด SSH target ไม่สำเร็จ",
           "0cda732f43": "ทดสอบการเชื่อมต่อไม่สำเร็จ",
-          "syncedServerSingular": "ซิงก์ {{count}} เซิร์ฟเวอร์แล้ว",
-          "syncedServerPlural": "ซิงก์ {{count}} เซิร์ฟเวอร์แล้ว",
           "noFilterMatch": "ไม่พบโฮสต์ที่ตรงกัน",
           "addHost": "เพิ่มโฮสต์",
-          "alreadyInSync": "~/.ssh/config ซิงก์ล่าสุดแล้ว"
+          "alreadyInSync": "~/.ssh/config ซิงก์ล่าสุดแล้ว",
+          "syncedServer_other": "ซิงก์ {{count}} เซิร์ฟเวอร์แล้ว"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "ยกเลิก",
@@ -8974,13 +8973,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "การดำเนินการนี้จะนำ target ออกและปิด terminal ระยะไกลที่ทำงานอยู่ทั้งหมด",
           "4808966c41": "นำ SSH target ออก",
-          "bulkTitleSingular": "นำ SSH host ออก {{count}} รายการหรือไม่",
-          "bulkTitlePlural": "นำ SSH host ออก {{count}} รายการหรือไม่",
           "bulkDescription": "host ที่นำออกจะหายไปจากตัวเลือก host ใน workspace, automation และแถบด้านข้าง ไฟล์ ~/.ssh/config จะไม่เปลี่ยนแปลง และการซิงก์ครั้งถัดไปจะไม่นำ host เหล่านั้นกลับมา",
           "bulkAction": "นำออก {{count}} รายการ",
           "bulkProgress": "กำลังนำออก {{done}} จาก {{count}}…",
-          "bulkConnectedSingular": "{{count}} host เชื่อมต่ออยู่ terminal ระยะไกลของ host นั้นจะถูกปิด",
-          "bulkConnectedPlural": "{{count}} host เชื่อมต่ออยู่ terminal ระยะไกลของ host เหล่านั้นจะถูกปิด"
+          "bulkTitle_other": "นำ SSH host ออก {{count}} รายการหรือไม่",
+          "bulkConnected_other": "{{count}} host เชื่อมต่ออยู่ terminal ระยะไกลของ host เหล่านั้นจะถูกปิด"
         },
         "SshTargetForm": {
           "fea9cb402e": "ยกเลิก",
@@ -12711,14 +12708,13 @@
           "clear": "ล้าง",
           "removeSelected": "นำออก {{count}} รายการ",
           "restoreRemovedCount": "กู้คืนโฮสต์ที่นำออก ({{count}})…",
-          "hostCount": "{{count}} โฮสต์",
           "selectMatching": "เลือกทั้งหมด {{count}} รายการที่ตรงกัน",
           "testSelected": "ทดสอบ",
           "clearFilter": "ล้างตัวกรอง",
           "restoreRemovedLoading": "กู้คืนโฮสต์ที่นำออก",
           "restoreRemovedNone": "ไม่มีโฮสต์ที่นำออกให้กู้คืน",
-          "hiddenDeselectedSingular": "ยกเลิกการเลือกโฮสต์ที่ซ่อนอยู่ {{count}} รายการ",
-          "hiddenDeselectedPlural": "ยกเลิกการเลือกโฮสต์ที่ซ่อนอยู่ {{count}} รายการ"
+          "hiddenDeselected_other": "ยกเลิกการเลือกโฮสต์ที่ซ่อนอยู่ {{count}} รายการ",
+          "hostCount_other": "{{count}} โฮสต์"
         },
         "SshRestoreRemovedHosts": {
           "title": "กู้คืนโฮสต์ที่นำออกหรือไม่",
@@ -22849,8 +22845,6 @@
       "monitoring": "กำลังเฝ้าดูงานเบื้องหลัง",
       "done": "เสร็จแล้ว · รอคุณอยู่",
       "noUpdateMinutes": "ไม่มีการอัปเดตมา {{count}} นาที · อาจค้างอยู่",
-      "noUpdateHours": "ไม่มีอัปเดต {{count}} ชม. · อาจค้างอยู่",
-      "noUpdateDays": "ไม่มีอัปเดต {{count}} วัน · อาจค้างอยู่",
       "failure": {
         "signIn": "ต้องลงชื่อเข้าใช้",
         "usageLimit": "ถึงขีดจำกัดการใช้งานแล้ว",
@@ -22865,7 +22859,9 @@
         "helper": "กำลังส่งต่องานให้ตัวช่วย",
         "plan": "กำลังอัปเดตแผน",
         "other": "กำลังใช้ {{tool}}"
-      }
+      },
+      "noUpdateHours_other": "ไม่มีอัปเดต {{count}} ชม. · อาจค้างอยู่",
+      "noUpdateDays_other": "ไม่มีอัปเดต {{count}} วัน · อาจค้างอยู่"
     },
     "timeAgo": {
       "now": "ตอนนี้",
@@ -23028,9 +23024,9 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} คำสั่ง",
       "mySkills": "skill ของฉัน",
-      "commands": "คำสั่ง"
+      "commands": "คำสั่ง",
+      "commandCount_other": "{{count}} คำสั่ง"
     },
     "terminalLinkHint": {
       "actionsPrefix": "คลิกเพื่อดูการทำงาน ",

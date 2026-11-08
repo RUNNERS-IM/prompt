@@ -212,15 +212,15 @@
         "other": "正在使用 {{tool}}"
       },
       "noUpdateMinutes": "已 {{count}} 分鐘沒有更新 · 可能已卡住",
-      "noUpdateHours": "已 {{count}} 小時沒有更新 · 可能已卡住",
-      "noUpdateDays": "已 {{count}} 天沒有更新 · 可能已卡住",
       "monitoring": "正在監看背景工作",
       "done": "完成 · 等待您回應",
       "failure": {
         "signIn": "需要登入",
         "usageLimit": "已達用量上限",
         "overloaded": "伺服器忙碌中"
-      }
+      },
+      "noUpdateHours_other": "已 {{count}} 小時沒有更新 · 可能已卡住",
+      "noUpdateDays_other": "已 {{count}} 天沒有更新 · 可能已卡住"
     },
     "sessionMove": {
       "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",
@@ -248,9 +248,9 @@
       "openWorkspace": "開啟終端機"
     },
     "skills": {
-      "commandCount": "{{count}} 個指令",
       "mySkills": "我的技能",
-      "commands": "指令"
+      "commands": "指令",
+      "commandCount_other": "{{count}} 個指令"
     },
     "closeSession": {
       "titleNamed": "要關閉「{{name}}」嗎？",
@@ -1240,7 +1240,8 @@
     "activityWaitingSuffix": "活動等待中",
     "openAtLogin": "登入時打開",
     "autoCheckUpdates": "自動檢查更新項目",
-    "restartApp": "重新啟動 Prompt"
+    "restartApp": "重新啟動 Prompt",
+    "runningTerminals_other": "{{count}} 個終端機執行中"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "前往 {{value0}}",
@@ -9138,11 +9139,10 @@
           "0e5aa04161": "需要主機或 SSH 設定別名",
           "f1fc50dad2": "無法載入 SSH 目標",
           "0cda732f43": "連線測試失敗",
-          "syncedServerSingular": "已同步 {{count}} 臺伺服器",
-          "syncedServerPlural": "已同步 {{count}} 臺伺服器",
           "noFilterMatch": "沒有符合條件的主機。",
           "addHost": "新增主機",
-          "alreadyInSync": "~/.ssh/config 已同步"
+          "alreadyInSync": "~/.ssh/config 已同步",
+          "syncedServer_other": "已同步 {{count}} 臺伺服器"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "取消",
@@ -9180,13 +9180,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "這將移除目標並結束所有作用中的遠端終端機。",
           "4808966c41": "刪除 SSH 目標",
-          "bulkTitleSingular": "要移除 {{count}} 個 SSH 主機嗎？",
-          "bulkTitlePlural": "要移除 {{count}} 個 SSH 主機嗎？",
           "bulkDescription": "移除的主機將不再出現在工作區、自動化與側邊欄的主機選擇器中。~/.ssh/config 不會變更，之後同步也不會將這些主機加回來。",
           "bulkAction": "移除 {{count}} 個",
           "bulkProgress": "正在移除第 {{done}} 個，共 {{count}} 個…",
-          "bulkConnectedSingular": "{{count}} 個主機已連線，其遠端終端機將會關閉。",
-          "bulkConnectedPlural": "{{count}} 個主機已連線，其遠端終端機將會關閉。"
+          "bulkTitle_other": "要移除 {{count}} 個 SSH 主機嗎？",
+          "bulkConnected_other": "{{count}} 個主機已連線，其遠端終端機將會關閉。"
         },
         "SshTargetForm": {
           "fea9cb402e": "取消",
@@ -12905,14 +12903,13 @@
           "clear": "清除",
           "removeSelected": "移除 {{count}} 台",
           "restoreRemovedCount": "還原已移除的主機（{{count}}）…",
-          "hostCount": "{{count}} 台主機",
           "selectMatching": "全選 {{count}} 台符合條件的主機",
           "testSelected": "測試",
           "clearFilter": "清除篩選",
           "restoreRemovedLoading": "還原已移除的主機",
           "restoreRemovedNone": "沒有可還原的已移除主機",
-          "hiddenDeselectedSingular": "已取消選取 {{count}} 台隱藏的主機",
-          "hiddenDeselectedPlural": "已取消選取 {{count}} 台隱藏的主機"
+          "hiddenDeselected_other": "已取消選取 {{count}} 台隱藏的主機",
+          "hostCount_other": "{{count}} 台主機"
         },
         "SshRestoreRemovedHosts": {
           "title": "要還原已移除的主機嗎？",

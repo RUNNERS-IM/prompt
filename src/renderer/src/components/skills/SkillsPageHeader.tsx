@@ -84,7 +84,8 @@ export function SkillsPageHeader({
                 <span aria-hidden>·</span>
                 <span className="shrink-0">
                   {translate('prompt.skills.commandCount', '{{count}} commands', {
-                    count: commandCount
+                    count: commandCount,
+                    defaultValue_one: '{{count}} command'
                   })}
                 </span>
               </>

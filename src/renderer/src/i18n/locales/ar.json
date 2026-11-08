@@ -9852,11 +9852,15 @@
           "0e5aa04161": "المضيف أو الاسم المستعار في إعدادات SSH مطلوب",
           "f1fc50dad2": "تعذّر تحميل أهداف SSH",
           "0cda732f43": "فشل اختبار الاتصال",
-          "syncedServerSingular": "تمت مزامنة {{count}} خادم",
-          "syncedServerPlural": "تمت مزامنة {{count}} خوادم",
           "noFilterMatch": "لا توجد مضيفات مطابقة.",
           "addHost": "إضافة مضيف",
-          "alreadyInSync": "~/.ssh/config متزامن بالفعل"
+          "alreadyInSync": "~/.ssh/config متزامن بالفعل",
+          "syncedServer_zero": "تمت مزامنة {{count}} خادم",
+          "syncedServer_one": "تمت مزامنة {{count}} خادم",
+          "syncedServer_two": "تمت مزامنة {{count}} خادمين",
+          "syncedServer_few": "تمت مزامنة {{count}} خوادم",
+          "syncedServer_many": "تمت مزامنة {{count}} خادمًا",
+          "syncedServer_other": "تمت مزامنة {{count}} خادم"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "إلغاء",
@@ -9894,13 +9898,21 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "سيؤدي هذا إلى إزالة الهدف وإنهاء أي طرفيات بعيدة نشطة.",
           "4808966c41": "إزالة هدف SSH",
-          "bulkTitleSingular": "إزالة {{count}} مضيف SSH؟",
-          "bulkTitlePlural": "إزالة {{count}} من مضيفي SSH؟",
           "bulkDescription": "تختفي المضيفات المُزالة من قوائم اختيار المضيف في مساحات العمل والأتمتة والشريط الجانبي. لن يتغير الملف ~/.ssh/config، ولن تعيدها عمليات المزامنة اللاحقة.",
           "bulkAction": "إزالة {{count}}",
           "bulkProgress": "جارٍ إزالة {{done}} من {{count}}…",
-          "bulkConnectedSingular": "مضيف {{count}} متصل. ستُغلق طرفياته البعيدة.",
-          "bulkConnectedPlural": "{{count}} مضيفات متصلة. ستُغلق طرفياتها البعيدة."
+          "bulkTitle_zero": "إزالة {{count}} مضيف SSH؟",
+          "bulkTitle_one": "إزالة {{count}} مضيف SSH؟",
+          "bulkTitle_two": "إزالة {{count}} مضيفين SSH؟",
+          "bulkTitle_few": "إزالة {{count}} من مضيفي SSH؟",
+          "bulkTitle_many": "إزالة {{count}} مضيفًا SSH؟",
+          "bulkTitle_other": "إزالة {{count}} مضيف SSH؟",
+          "bulkConnected_zero": "{{count}} مضيف متصل. ستُغلق طرفياته البعيدة.",
+          "bulkConnected_one": "{{count}} مضيف متصل. ستُغلق طرفياته البعيدة.",
+          "bulkConnected_two": "{{count}} مضيفان متصلان. ستُغلق طرفياتهما البعيدة.",
+          "bulkConnected_few": "{{count}} مضيفون متصلون. ستُغلق طرفياتهم البعيدة.",
+          "bulkConnected_many": "{{count}} مضيفًا متصلًا. ستُغلق طرفياتهم البعيدة.",
+          "bulkConnected_other": "{{count}} مضيف متصل. ستُغلق طرفياته البعيدة."
         },
         "SshTargetForm": {
           "fea9cb402e": "إلغاء",
@@ -13651,14 +13663,23 @@
           "clear": "مسح",
           "removeSelected": "إزالة {{count}}",
           "restoreRemovedCount": "استعادة المضيفين المُزالين ({{count}})…",
-          "hostCount": "{{count}} مضيفين",
           "selectMatching": "تحديد كل المطابِقين ({{count}})",
           "testSelected": "اختبار",
           "clearFilter": "مسح التصفية",
           "restoreRemovedLoading": "استعادة المضيفين المُزالين",
           "restoreRemovedNone": "لا يوجد مضيفون مُزالون للاستعادة",
-          "hiddenDeselectedSingular": "أُلغي تحديد {{count}} مضيف مخفي",
-          "hiddenDeselectedPlural": "أُلغي تحديد {{count}} مضيفين مخفيين"
+          "hiddenDeselected_zero": "أُلغي تحديد {{count}} مضيف مخفي",
+          "hiddenDeselected_one": "أُلغي تحديد {{count}} مضيف مخفي",
+          "hiddenDeselected_two": "أُلغي تحديد {{count}} مضيفين مخفيين",
+          "hiddenDeselected_few": "أُلغي تحديد {{count}} مضيفين مخفيين",
+          "hiddenDeselected_many": "أُلغي تحديد {{count}} مضيفًا مخفيًا",
+          "hiddenDeselected_other": "أُلغي تحديد {{count}} مضيف مخفي",
+          "hostCount_zero": "{{count}} مضيف",
+          "hostCount_one": "{{count}} مضيف",
+          "hostCount_two": "{{count}} مضيفان",
+          "hostCount_few": "{{count}} مضيفين",
+          "hostCount_many": "{{count}} مضيفًا",
+          "hostCount_other": "{{count}} مضيف"
         },
         "SshRestoreRemovedHosts": {
           "title": "استعادة المضيفين المُزالين؟",
@@ -24769,8 +24790,6 @@
       "monitoring": "مراقبة المهام الخلفية",
       "done": "تم · في انتظارك",
       "noUpdateMinutes": "لا تحديث منذ {{count}} د · قد يكون متوقفًا",
-      "noUpdateHours": "لا تحديث منذ {{count}} ساعة · قد تكون عالقة",
-      "noUpdateDays": "لا تحديث منذ {{count}} يوم · قد تكون عالقة",
       "failure": {
         "signIn": "يلزم تسجيل الدخول",
         "usageLimit": "تم بلوغ حد الاستخدام",
@@ -24785,7 +24804,19 @@
         "helper": "تسليم العمل إلى مساعد",
         "plan": "تحديث خطته",
         "other": "استخدام {{tool}}"
-      }
+      },
+      "noUpdateHours_zero": "لا تحديث منذ {{count}} ساعة · قد تكون عالقة",
+      "noUpdateHours_one": "لا تحديث منذ {{count}} ساعة · قد تكون عالقة",
+      "noUpdateHours_two": "لا تحديث منذ {{count}} ساعتين · قد تكون عالقة",
+      "noUpdateHours_few": "لا تحديث منذ {{count}} ساعات · قد تكون عالقة",
+      "noUpdateHours_many": "لا تحديث منذ {{count}} ساعة · قد تكون عالقة",
+      "noUpdateHours_other": "لا تحديث منذ {{count}} ساعة · قد تكون عالقة",
+      "noUpdateDays_zero": "لا تحديث منذ {{count}} يوم · قد تكون عالقة",
+      "noUpdateDays_one": "لا تحديث منذ {{count}} يوم · قد تكون عالقة",
+      "noUpdateDays_two": "لا تحديث منذ {{count}} يومين · قد تكون عالقة",
+      "noUpdateDays_few": "لا تحديث منذ {{count}} أيام · قد تكون عالقة",
+      "noUpdateDays_many": "لا تحديث منذ {{count}} يومًا · قد تكون عالقة",
+      "noUpdateDays_other": "لا تحديث منذ {{count}} يوم · قد تكون عالقة"
     },
     "timeAgo": {
       "now": "الآن",
@@ -24948,9 +24979,14 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} من الأوامر",
       "mySkills": "مهاراتي",
-      "commands": "الأوامر"
+      "commands": "الأوامر",
+      "commandCount_zero": "{{count}} أمر",
+      "commandCount_one": "{{count}} أمر",
+      "commandCount_two": "{{count}} أمران",
+      "commandCount_few": "{{count}} أوامر",
+      "commandCount_many": "{{count}} أمرًا",
+      "commandCount_other": "{{count}} أمر"
     },
     "terminalLinkHint": {
       "actionsPrefix": "انقر لعرض الإجراءات، ",

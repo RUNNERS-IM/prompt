@@ -138,7 +138,8 @@ export function SshHostsListToolbar(props: SshHostsListToolbarProps): React.JSX.
         ) : (
           <span className="text-xs text-muted-foreground">
             {translate('auto.components.settings.SshPaneToolbar.hostCount', '{{count}} hosts', {
-              count: props.totalCount
+              count: props.totalCount,
+              defaultValue_one: '{{count}} host'
             })}
           </span>
         )}
@@ -199,17 +200,14 @@ export function SshHostsListToolbar(props: SshHostsListToolbarProps): React.JSX.
         </div>
       ) : props.hiddenDeselectedCount > 0 ? (
         <span className="ml-auto text-xs text-muted-foreground" aria-live="polite">
-          {props.hiddenDeselectedCount === 1
-            ? translate(
-                'auto.components.settings.SshPaneToolbar.hiddenDeselectedSingular',
-                '{{count}} hidden host deselected',
-                { count: 1 }
-              )
-            : translate(
-                'auto.components.settings.SshPaneToolbar.hiddenDeselectedPlural',
-                '{{count}} hidden hosts deselected',
-                { count: props.hiddenDeselectedCount }
-              )}
+          {translate(
+            'auto.components.settings.SshPaneToolbar.hiddenDeselected',
+            '{{count}} hidden hosts deselected',
+            {
+              count: props.hiddenDeselectedCount,
+              defaultValue_one: '{{count}} hidden host deselected'
+            }
+          )}
         </span>
       ) : null}
     </div>

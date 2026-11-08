@@ -67,6 +67,10 @@
         "approvalsRemaining_one": "{{count}} approval remaining",
         "approvalsRemaining_other": "{{count}} approvals remaining"
       },
+      "Landing": {
+        "520304a067": "Orca logo",
+        "6ca6ff404e": "ORCA"
+      },
       "NativeChatResumeOnRestartModal": {
         "activityMonitorCount_one": "Monitoring {{count}} background task",
         "activityMonitorCount_other": "Monitoring {{count}} background tasks",
@@ -344,6 +348,10 @@
         "AgentStep": {
           "showMoreAgents_one": "Show {{count}} more agent →",
           "showMoreAgents_other": "Show {{count}} more agents →"
+        },
+        "OnboardingFlow": {
+          "198b148b3c": "Pick your default agent",
+          "322fc50a18": "Orca works with every CLI agent. Choose the one you'll reach for most. Switch any time."
         }
       },
       "prCheckCounts": {
@@ -693,8 +701,20 @@
           "e1578cd4bc": "Workflows"
         },
         "SshPane": {
-          "syncedServerPlural": "Synced {{count}} servers",
-          "syncedServerSingular": "Synced {{count}} server"
+          "syncedServer_one": "Synced {{count}} server",
+          "syncedServer_other": "Synced {{count}} servers"
+        },
+        "SshPaneToolbar": {
+          "hiddenDeselected_one": "{{count}} hidden host deselected",
+          "hiddenDeselected_other": "{{count}} hidden hosts deselected",
+          "hostCount_one": "{{count}} host",
+          "hostCount_other": "{{count}} hosts"
+        },
+        "SshTargetDestructiveActions": {
+          "bulkConnected_one": "{{count}} host is connected. Its remote terminals will be closed.",
+          "bulkConnected_other": "{{count}} hosts are connected. Their remote terminals will be closed.",
+          "bulkTitle_one": "Remove {{count}} SSH host?",
+          "bulkTitle_other": "Remove {{count}} SSH hosts?"
         },
         "WarpThemeImportModal": {
           "found_theme_one": "Found {{value0}} theme",
@@ -1059,6 +1079,13 @@
           "sessionCount_one": "{{formatted}} session",
           "sessionCount_other": "{{formatted}} sessions"
         },
+        "share": {
+          "card": {
+            "utils": {
+              "19f4b4dc75": "github.com/stablyai/orca"
+            }
+          }
+        },
         "usage": {
           "overview": {
             "sections": {
@@ -1200,6 +1227,16 @@
       },
       "terminal": {
         "pane": {
+          "CloseTerminalDialog": {
+            "automatic_resume_warning": "This terminal will not resume automatically. Cancel and put the workspace to sleep to resume it later.",
+            "dont_ask_again": "Don't ask again for running terminals",
+            "stop_agent_confirm": "Stop Agent",
+            "stop_agent_description": "Closing this terminal will stop the agent's current work.",
+            "stop_chat_description": "Closing this chat will stop the agent's current work.",
+            "stop_command_confirm": "Stop and Close",
+            "stop_command_description": "Closing this terminal will stop the command running inside it.",
+            "stop_command_title": "Stop running command?"
+          },
           "TerminalErrorToast": {
             "hostTerminalCap": "The host is already running as many terminals as Orca allows. Close a terminal you no longer need, then try again.",
             "ptyAllocationLimit": "Your system cannot allocate any more pty devices. Close some terminals you are not using, in Orca or another program, then try again.",
@@ -1880,6 +1917,11 @@
       }
     },
     "onboarding": {
+      "flow": {
+        "stepTooltip": {
+          "agent": "Default Agent"
+        }
+      },
       "integrations": {
         "capabilities": {
           "browseIssues": "Browse GitHub issues and pull requests in the Tasks view without leaving Orca",
@@ -2019,6 +2061,11 @@
   "menu": {
     "quitApp": "Quit {{appName}}"
   },
+  "native": {
+    "about": {
+      "originalCredit": "Based on Orca by Stably AI (MIT License)"
+    }
+  },
   "pet": {
     "defaultLabels": {
       "bundle": "Pet bundle",
@@ -2057,6 +2104,56 @@
     "error": {
       "tooLargeCount_one": "This view has {{count}} item — too large to render in Orca. Narrow the view's filter on GitHub.",
       "tooLargeCount_other": "This view has {{count}} items — too large to render in Orca. Narrow the view's filter on GitHub."
+    }
+  },
+  "prompt": {
+    "claudeModel": {
+      "change": "Change model"
+    },
+    "projectRemoval": {
+      "runningSessions": "All {{count}} running sessions in it will be stopped.",
+      "runningSessions_one": "Its running session will be stopped.",
+      "runningSessions_other": "All {{count}} running sessions in it will be stopped."
+    },
+    "sessionRow": {
+      "noUpdateDays_one": "No update for {{count}} d · may be stuck",
+      "noUpdateDays_other": "No update for {{count}} d · may be stuck",
+      "noUpdateHours_one": "No update for {{count}} h · may be stuck",
+      "noUpdateHours_other": "No update for {{count}} h · may be stuck"
+    },
+    "skills": {
+      "commandCount_one": "{{count}} command",
+      "commandCount_other": "{{count}} commands"
+    },
+    "terminalLinkHint": {
+      "actionsOrPrefix": "Click for actions or ",
+      "actionsPrefix": "Click for actions, ",
+      "clickSystemBrowser": "Click to open in system browser",
+      "fileOpen": "{{mod}}+click to open, or {{shiftMod}}+click for default app",
+      "orcaBrowserOnly": "{{shiftMod}}+click to open in Orca",
+      "orcaFileOpen": "{{mod}}+click to open in Orca",
+      "switchWorkspace": "{{mod}}+click to switch workspace",
+      "switchWorkspaceFinder": "{{mod}}+click to switch workspace, or {{shiftMod}}+click to open in Finder",
+      "switchWorkspaceFolder": "{{mod}}+click to switch workspace, or {{shiftMod}}+click to open folder",
+      "systemBrowserOnly": "{{shiftMod}}+click for system browser",
+      "urlInvertsToOrca": "{{mod}}+click to open, or {{shiftMod}}+click to open in Orca",
+      "urlSystemBrowser": "{{mod}}+click to open, or {{shiftMod}}+click for system browser"
+    },
+    "terminalNotice": {
+      "foregroundBurst": "Orca skipped a burst of terminal output because the backlog grew too large.",
+      "hiddenBacklog": "Orca skipped hidden terminal output because the backlog grew too large.",
+      "noHostImage": "Orca could not restore this terminal's history from its host.",
+      "restoreUnavailable": "Orca skipped hidden terminal output because main recovery was unavailable."
+    },
+    "update": {
+      "body": "Prompt {{version}} is ready to install. Installing restarts Prompt.",
+      "bodyWithCurrent": "Prompt {{version}} is ready to install. You have {{current}}. Installing restarts Prompt.",
+      "installerFailed": "Could not start the update installer. Prompt remains open.",
+      "restartFailed": "Could not restart to install the update. Quit and reopen Prompt, then try again.",
+      "title": "New version available"
+    },
+    "windows": {
+      "mainWindowSuffix": "(main)"
     }
   },
   "resourceManager": {
@@ -2116,6 +2213,19 @@
       "permissionOverridesFollow_other": "{{count}} agents now follow {{mode}}",
       "permissionOverridesKept_one": "{{count}} agent still uses their own permission setting:",
       "permissionOverridesKept_other": "{{count}} agents still use their own permission setting:"
+    },
+    "appearance": {
+      "language": {
+        "arabic": "العربية",
+        "dutch": "Nederlands",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
+      }
     },
     "diagnostics": {
       "errors": {
@@ -2421,6 +2531,14 @@
       "count_one": "{{count}} running terminal",
       "count_other": "{{count}} running terminals"
     }
+  },
+  "tray": {
+    "about": "About Prompt",
+    "checkForUpdates": "Check for Updates…",
+    "openOrca": "Open Orca",
+    "quit": "Quit",
+    "runningTerminals_one": "{{count}} terminal running",
+    "runningTerminals_other": "{{count}} terminals running"
   },
   "updates": {
     "failure": {

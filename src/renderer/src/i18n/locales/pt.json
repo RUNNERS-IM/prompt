@@ -186,7 +186,10 @@
       "closeOneSession": "Para fechar apenas uma sessão, use o × na linha dela.",
       "title": "Remover o projeto '{{name}}' da lista?",
       "confirm": "Remover projeto",
-      "menuItem": "Remover projeto da lista…"
+      "menuItem": "Remover projeto da lista…",
+      "runningSessions_one": "A sessão em execução nele será interrompida.",
+      "runningSessions_many": "Todas as {{count}} sessões em execução nele serão interrompidas.",
+      "runningSessions_other": "Todas as {{count}} sessões em execução nele serão interrompidas."
     },
     "computerPicker": {
       "connected": "Conectado",
@@ -212,15 +215,19 @@
         "other": "Usando {{tool}}"
       },
       "noUpdateMinutes": "Sem atualização há {{count}} min · pode estar travada",
-      "noUpdateHours": "Sem atualização há {{count}} h · pode estar travada",
-      "noUpdateDays": "Sem atualização há {{count}} d · pode estar travada",
       "monitoring": "Monitorando tarefas em segundo plano",
       "done": "Concluído · aguardando você",
       "failure": {
         "signIn": "Login necessário",
         "usageLimit": "Limite de uso atingido",
         "overloaded": "Servidor ocupado"
-      }
+      },
+      "noUpdateHours_one": "Sem atualização há {{count}} h · pode estar travada",
+      "noUpdateHours_many": "Sem atualização há {{count}} h · pode estar travada",
+      "noUpdateHours_other": "Sem atualização há {{count}} h · pode estar travada",
+      "noUpdateDays_one": "Sem atualização há {{count}} d · pode estar travada",
+      "noUpdateDays_many": "Sem atualização há {{count}} d · pode estar travada",
+      "noUpdateDays_other": "Sem atualização há {{count}} d · pode estar travada"
     },
     "sessionMove": {
       "cancelRemote": "As sessões só podem ser movidas entre projetos neste computador.",
@@ -248,9 +255,11 @@
       "openWorkspace": "Abrir um terminal"
     },
     "skills": {
-      "commandCount": "{{count}} comandos",
       "mySkills": "Minhas skills",
-      "commands": "Comandos"
+      "commands": "Comandos",
+      "commandCount_one": "{{count}} comando",
+      "commandCount_many": "{{count}} comandos",
+      "commandCount_other": "{{count}} comandos"
     },
     "closeSession": {
       "titleNamed": "Fechar '{{name}}'?",
@@ -882,7 +891,10 @@
     "activityWaitingSuffix": "atividade em espera",
     "openAtLogin": "Abrir ao iniciar sessão",
     "autoCheckUpdates": "Verificar atualizações automaticamente",
-    "restartApp": "Reiniciar o Prompt"
+    "restartApp": "Reiniciar o Prompt",
+    "runningTerminals_one": "{{count}} terminal em execução",
+    "runningTerminals_many": "{{count}} terminais em execução",
+    "runningTerminals_other": "{{count}} terminais em execução"
   },
   "dashboard": {
     "sidebar": {
@@ -7207,11 +7219,12 @@
           "0e5aa04161": "O host ou alias de configuração SSH é obrigatório",
           "f1fc50dad2": "Falha ao carregar os destinos SSH",
           "0cda732f43": "Falha no teste de conexão",
-          "syncedServerSingular": "{{count}} servidor sincronizado",
-          "syncedServerPlural": "{{count}} servidores sincronizados",
           "noFilterMatch": "Nenhum host corresponde.",
           "addHost": "Adicionar host",
-          "alreadyInSync": "~/.ssh/config já está sincronizado"
+          "alreadyInSync": "~/.ssh/config já está sincronizado",
+          "syncedServer_one": "{{count}} servidor sincronizado",
+          "syncedServer_many": "{{count}} servidores sincronizados",
+          "syncedServer_other": "{{count}} servidores sincronizados"
         },
         "jira": {
           "integration": {
@@ -8639,13 +8652,15 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Isso vai remover o destino e encerrar quaisquer terminais remotos ativos.",
           "4808966c41": "Remover Destino SSH",
-          "bulkTitleSingular": "Remover {{count}} host SSH?",
-          "bulkTitlePlural": "Remover {{count}} hosts SSH?",
           "bulkDescription": "Os hosts removidos desaparecem dos seletores de host nos espaços de trabalho, nas automações e na barra lateral. Seu ~/.ssh/config não é alterado, e sincronizações futuras não os trarão de volta.",
           "bulkAction": "Remover {{count}}",
           "bulkProgress": "Removendo {{done}} de {{count}}…",
-          "bulkConnectedSingular": "{{count}} host está conectado. Os terminais remotos dele serão fechados.",
-          "bulkConnectedPlural": "{{count}} hosts estão conectados. Os terminais remotos deles serão fechados."
+          "bulkTitle_one": "Remover {{count}} host SSH?",
+          "bulkTitle_many": "Remover {{count}} hosts SSH?",
+          "bulkTitle_other": "Remover {{count}} hosts SSH?",
+          "bulkConnected_one": "{{count}} host está conectado. Os terminais remotos dele serão fechados.",
+          "bulkConnected_many": "{{count}} hosts estão conectados. Os terminais remotos deles serão fechados.",
+          "bulkConnected_other": "{{count}} hosts estão conectados. Os terminais remotos deles serão fechados."
         },
         "WorkspaceDirectorySetting": {
           "1a2b3c4d5e": "Padrão do cliente",
@@ -9329,14 +9344,17 @@
           "clear": "Limpar",
           "removeSelected": "Remover {{count}}",
           "restoreRemovedCount": "Restaurar hosts removidos ({{count}})…",
-          "hostCount": "{{count}} hosts",
           "selectMatching": "Selecionar todos os {{count}} correspondentes",
           "testSelected": "Testar",
           "clearFilter": "Limpar filtro",
           "restoreRemovedLoading": "Restaurar hosts removidos",
           "restoreRemovedNone": "Nenhum host removido para restaurar",
-          "hiddenDeselectedSingular": "{{count}} host oculto desmarcado",
-          "hiddenDeselectedPlural": "{{count}} hosts ocultos desmarcados"
+          "hiddenDeselected_one": "{{count}} host oculto desmarcado",
+          "hiddenDeselected_many": "{{count}} hosts ocultos desmarcados",
+          "hiddenDeselected_other": "{{count}} hosts ocultos desmarcados",
+          "hostCount_one": "{{count}} host",
+          "hostCount_many": "{{count}} hosts",
+          "hostCount_other": "{{count}} hosts"
         },
         "SshRestoreRemovedHosts": {
           "title": "Restaurar hosts removidos?",

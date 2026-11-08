@@ -8359,11 +8359,10 @@
           "0e5aa04161": "호스트 또는 SSH 구성 별칭이 필요합니다.",
           "f1fc50dad2": "SSH 대상을 로드하지 못했습니다.",
           "0cda732f43": "연결 테스트 실패",
-          "syncedServerSingular": "서버 {{count}}개를 동기화했습니다.",
-          "syncedServerPlural": "서버 {{count}}개를 동기화했습니다.",
           "noFilterMatch": "일치하는 호스트가 없습니다.",
           "addHost": "호스트 추가",
-          "alreadyInSync": "~/.ssh/config가 이미 동기화되어 있습니다."
+          "alreadyInSync": "~/.ssh/config가 이미 동기화되어 있습니다.",
+          "syncedServer_other": "서버 {{count}}개를 동기화했습니다."
         },
         "SshPassphraseDialog": {
           "d5a234456f": "취소",
@@ -8401,13 +8400,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "대상이 제거되고 실행 중인 원격 터미널이 종료됩니다.",
           "4808966c41": "SSH 대상 제거",
-          "bulkTitleSingular": "SSH 호스트 {{count}}개를 제거할까요?",
-          "bulkTitlePlural": "SSH 호스트 {{count}}개를 제거할까요?",
           "bulkDescription": "제거한 호스트는 워크스페이스, 자동화, 사이드바의 호스트 선택 목록에서 사라집니다. ~/.ssh/config는 변경되지 않으며, 이후 동기화해도 다시 추가되지 않습니다.",
           "bulkAction": "{{count}}개 제거",
           "bulkProgress": "{{count}}개 중 {{done}}번째 제거 중…",
-          "bulkConnectedSingular": "호스트 {{count}}개가 연결되어 있습니다. 원격 터미널이 닫힙니다.",
-          "bulkConnectedPlural": "호스트 {{count}}개가 연결되어 있습니다. 원격 터미널이 닫힙니다."
+          "bulkTitle_other": "SSH 호스트 {{count}}개를 제거할까요?",
+          "bulkConnected_other": "호스트 {{count}}개가 연결되어 있습니다. 원격 터미널이 닫힙니다."
         },
         "SshTargetForm": {
           "fea9cb402e": "취소",
@@ -12247,14 +12244,13 @@
           "clear": "선택 해제",
           "removeSelected": "{{count}}개 제거",
           "restoreRemovedCount": "제거한 호스트 복원({{count}})…",
-          "hostCount": "호스트 {{count}}개",
           "selectMatching": "일치하는 {{count}}개 모두 선택",
           "testSelected": "테스트",
           "clearFilter": "필터 지우기",
           "restoreRemovedLoading": "제거한 호스트 복원",
           "restoreRemovedNone": "복원할 제거된 호스트가 없습니다",
-          "hiddenDeselectedSingular": "숨겨진 호스트 {{count}}개 선택 해제됨",
-          "hiddenDeselectedPlural": "숨겨진 호스트 {{count}}개 선택 해제됨"
+          "hiddenDeselected_other": "숨겨진 호스트 {{count}}개 선택 해제됨",
+          "hostCount_other": "호스트 {{count}}개"
         },
         "SshRestoreRemovedHosts": {
           "title": "제거한 호스트를 복원할까요?",
@@ -22675,8 +22671,6 @@
       "monitoring": "백그라운드 작업 지켜보는 중",
       "done": "끝남 · 답을 기다림",
       "noUpdateMinutes": "{{count}}분째 소식 없음 · 멈췄을 수 있음",
-      "noUpdateHours": "{{count}}시간째 소식 없음 · 멈췄을 수 있음",
-      "noUpdateDays": "{{count}}일째 소식 없음 · 멈췄을 수 있음",
       "failure": {
         "signIn": "로그인 필요",
         "usageLimit": "사용 한도 도달",
@@ -22691,7 +22685,9 @@
         "helper": "도우미에게 맡기는 중",
         "plan": "할 일 정리하는 중",
         "other": "{{tool}} 쓰는 중"
-      }
+      },
+      "noUpdateHours_other": "{{count}}시간째 소식 없음 · 멈췄을 수 있음",
+      "noUpdateDays_other": "{{count}}일째 소식 없음 · 멈췄을 수 있음"
     },
     "windows": {
       "newWindow": "새 창",
@@ -22751,6 +22747,9 @@
       "cancelled": "'{{name}}'(으)로 옮기기를 취소했어요. 세션은 원래 자리에 그대로 있어요.",
       "movingTo": "'{{name}}'(으)로 옮기는 중",
       "alreadyMoving": "이 세션은 이미 옮기는 중이에요."
+    },
+    "skills": {
+      "commandCount_other": "명령어 {{count}}개"
     }
   }
 }

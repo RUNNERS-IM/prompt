@@ -180,19 +180,11 @@ export function SshTargetDestructiveActions({
 
       <SshDestructiveActionDialog
         open={!!pendingBulk}
-        title={
-          bulkCount === 1
-            ? translate(
-                'auto.components.settings.SshTargetDestructiveActions.bulkTitleSingular',
-                'Remove {{count}} SSH host?',
-                { count: bulkCount }
-              )
-            : translate(
-                'auto.components.settings.SshTargetDestructiveActions.bulkTitlePlural',
-                'Remove {{count}} SSH hosts?',
-                { count: bulkCount }
-              )
-        }
+        title={translate(
+          'auto.components.settings.SshTargetDestructiveActions.bulkTitle',
+          'Remove {{count}} SSH hosts?',
+          { count: bulkCount, defaultValue_one: 'Remove {{count}} SSH host?' }
+        )}
         description={translate(
           'auto.components.settings.SshTargetDestructiveActions.bulkDescription',
           'Removed hosts disappear from host pickers in workspaces, automations and the sidebar. Your ~/.ssh/config is not changed, and later syncs won’t bring them back.'
@@ -201,17 +193,15 @@ export function SshTargetDestructiveActions({
         notice={
           !pendingBulk || pendingBulk.connectedCount === 0
             ? undefined
-            : pendingBulk.connectedCount === 1
-              ? translate(
-                  'auto.components.settings.SshTargetDestructiveActions.bulkConnectedSingular',
-                  '{{count}} host is connected. Its remote terminals will be closed.',
-                  { count: 1 }
-                )
-              : translate(
-                  'auto.components.settings.SshTargetDestructiveActions.bulkConnectedPlural',
-                  '{{count}} hosts are connected. Their remote terminals will be closed.',
-                  { count: pendingBulk.connectedCount }
-                )
+            : translate(
+                'auto.components.settings.SshTargetDestructiveActions.bulkConnected',
+                '{{count}} hosts are connected. Their remote terminals will be closed.',
+                {
+                  count: pendingBulk.connectedCount,
+                  defaultValue_one:
+                    '{{count}} host is connected. Its remote terminals will be closed.'
+                }
+              )
         }
         actionLabel={translate(
           'auto.components.settings.SshTargetDestructiveActions.bulkAction',

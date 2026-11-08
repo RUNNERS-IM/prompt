@@ -62,12 +62,14 @@ export function promptNoUpdateLine(
       'prompt.sessionRow.noUpdateHours',
       'No update for {{count}} h · may be stuck',
       {
-        count: hours
+        count: hours,
+        defaultValue_one: 'No update for {{count}} h · may be stuck'
       }
     )
   }
   return translate('prompt.sessionRow.noUpdateDays', 'No update for {{count}} d · may be stuck', {
-    count: Math.floor(hours / 24)
+    count: Math.floor(hours / 24),
+    defaultValue_one: 'No update for {{count}} d · may be stuck'
   })
 }
 

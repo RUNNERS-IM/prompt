@@ -8932,11 +8932,10 @@
           "0e5aa04161": "Cần có host hoặc alias trong cấu hình SSH",
           "f1fc50dad2": "Không thể tải SSH target",
           "0cda732f43": "Kiểm tra kết nối thất bại",
-          "syncedServerSingular": "Đã đồng bộ {{count}} máy chủ",
-          "syncedServerPlural": "Đã đồng bộ {{count}} máy chủ",
           "noFilterMatch": "Không có máy chủ nào khớp.",
           "addHost": "Thêm máy chủ",
-          "alreadyInSync": "~/.ssh/config đã được đồng bộ"
+          "alreadyInSync": "~/.ssh/config đã được đồng bộ",
+          "syncedServer_other": "Đã đồng bộ {{count}} máy chủ"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "Hủy",
@@ -8974,13 +8973,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "Thao tác này sẽ gỡ target và kết thúc mọi terminal từ xa đang hoạt động.",
           "4808966c41": "Gỡ SSH target",
-          "bulkTitleSingular": "Gỡ {{count}} SSH host?",
-          "bulkTitlePlural": "Gỡ {{count}} SSH host?",
           "bulkDescription": "Các host đã gỡ sẽ biến mất khỏi danh sách chọn host trong workspace, tự động hóa và thanh bên. ~/.ssh/config không bị thay đổi và các lần đồng bộ sau sẽ không thêm lại chúng.",
           "bulkAction": "Gỡ {{count}}",
           "bulkProgress": "Đang gỡ {{done}}/{{count}}…",
-          "bulkConnectedSingular": "{{count}} host đang được kết nối. Các terminal từ xa của host này sẽ bị đóng.",
-          "bulkConnectedPlural": "{{count}} host đang được kết nối. Các terminal từ xa của các host này sẽ bị đóng."
+          "bulkTitle_other": "Gỡ {{count}} SSH host?",
+          "bulkConnected_other": "{{count}} host đang được kết nối. Các terminal từ xa của các host này sẽ bị đóng."
         },
         "SshTargetForm": {
           "fea9cb402e": "Hủy",
@@ -12711,14 +12708,13 @@
           "clear": "Xóa",
           "removeSelected": "Gỡ {{count}}",
           "restoreRemovedCount": "Khôi phục host đã gỡ ({{count}})…",
-          "hostCount": "{{count}} host",
           "selectMatching": "Chọn tất cả {{count}} mục khớp",
           "testSelected": "Kiểm tra",
           "clearFilter": "Xóa bộ lọc",
           "restoreRemovedLoading": "Khôi phục host đã gỡ",
           "restoreRemovedNone": "Không có host đã gỡ để khôi phục",
-          "hiddenDeselectedSingular": "Đã bỏ chọn {{count}} host bị ẩn",
-          "hiddenDeselectedPlural": "Đã bỏ chọn {{count}} host bị ẩn"
+          "hiddenDeselected_other": "Đã bỏ chọn {{count}} host bị ẩn",
+          "hostCount_other": "{{count}} host"
         },
         "SshRestoreRemovedHosts": {
           "title": "Khôi phục host đã gỡ?",
@@ -22849,8 +22845,6 @@
       "monitoring": "Đang theo dõi các tác vụ nền",
       "done": "Đã xong · đang chờ bạn",
       "noUpdateMinutes": "Không có cập nhật trong {{count}} phút · có thể bị kẹt",
-      "noUpdateHours": "Không có cập nhật trong {{count}} giờ · có thể bị treo",
-      "noUpdateDays": "Không có cập nhật trong {{count}} ngày · có thể bị treo",
       "failure": {
         "signIn": "Cần đăng nhập",
         "usageLimit": "Đã đạt giới hạn sử dụng",
@@ -22865,7 +22859,9 @@
         "helper": "Đang giao việc cho agent phụ",
         "plan": "Đang cập nhật kế hoạch",
         "other": "Đang dùng {{tool}}"
-      }
+      },
+      "noUpdateHours_other": "Không có cập nhật trong {{count}} giờ · có thể bị treo",
+      "noUpdateDays_other": "Không có cập nhật trong {{count}} ngày · có thể bị treo"
     },
     "timeAgo": {
       "now": "vừa xong",
@@ -23028,9 +23024,9 @@
       }
     },
     "skills": {
-      "commandCount": "{{count}} lệnh",
       "mySkills": "Skill của tôi",
-      "commands": "Lệnh"
+      "commands": "Lệnh",
+      "commandCount_other": "{{count}} lệnh"
     },
     "terminalLinkHint": {
       "actionsPrefix": "Nhấp để xem thao tác, ",

@@ -212,15 +212,15 @@
         "other": "正在使用 {{tool}}"
       },
       "noUpdateMinutes": "{{count}} 分钟无更新 · 可能已卡住",
-      "noUpdateHours": "{{count}} 小时无更新 · 可能已卡住",
-      "noUpdateDays": "{{count}} 天无更新 · 可能已卡住",
       "monitoring": "正在监视后台任务",
       "done": "已完成 · 等待您操作",
       "failure": {
         "signIn": "需要登录",
         "usageLimit": "已达到用量上限",
         "overloaded": "服务器繁忙"
-      }
+      },
+      "noUpdateHours_other": "{{count}} 小时无更新 · 可能已卡住",
+      "noUpdateDays_other": "{{count}} 天无更新 · 可能已卡住"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",
@@ -248,9 +248,9 @@
       "openWorkspace": "打开终端"
     },
     "skills": {
-      "commandCount": "{{count}} 条命令",
       "mySkills": "我的技能",
-      "commands": "命令"
+      "commands": "命令",
+      "commandCount_other": "{{count}} 条命令"
     },
     "closeSession": {
       "titleNamed": "关闭“{{name}}”？",
@@ -847,7 +847,8 @@
     "activityWaitingSuffix": "等待活动",
     "openAtLogin": "登录时打开",
     "autoCheckUpdates": "自动检查更新",
-    "restartApp": "重新启动 Prompt"
+    "restartApp": "重新启动 Prompt",
+    "runningTerminals_other": "{{count}} 个终端正在运行"
   },
   "worktreeJumpPalette": {
     "matchLabel": {
@@ -8640,11 +8641,10 @@
           "0e5aa04161": "需要主机或 SSH 配置别名",
           "f1fc50dad2": "无法加载 SSH 目标",
           "0cda732f43": "连接测试失败",
-          "syncedServerSingular": "已同步 {{count}} 台服务器",
-          "syncedServerPlural": "已同步 {{count}} 台服务器",
           "noFilterMatch": "没有匹配的主机。",
           "addHost": "添加主机",
-          "alreadyInSync": "~/.ssh/config 已是最新同步状态"
+          "alreadyInSync": "~/.ssh/config 已是最新同步状态",
+          "syncedServer_other": "已同步 {{count}} 台服务器"
         },
         "SshPassphraseDialog": {
           "d5a234456f": "取消",
@@ -8682,13 +8682,11 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "这将删除目标并结束任何活动的远程终端。",
           "4808966c41": "删除 SSH 目标",
-          "bulkTitleSingular": "移除 {{count}} 个 SSH 主机？",
-          "bulkTitlePlural": "移除 {{count}} 个 SSH 主机？",
           "bulkDescription": "移除的主机将从工作区、自动化和侧边栏的主机选择器中消失。你的 ~/.ssh/config 不会被修改，之后同步也不会把它们加回来。",
           "bulkAction": "移除 {{count}} 个",
           "bulkProgress": "正在移除第 {{done}} 个，共 {{count}} 个…",
-          "bulkConnectedSingular": "{{count}} 个主机已连接。其远程终端将被关闭。",
-          "bulkConnectedPlural": "{{count}} 个主机已连接。其远程终端将被关闭。"
+          "bulkTitle_other": "移除 {{count}} 个 SSH 主机？",
+          "bulkConnected_other": "{{count}} 个主机已连接。其远程终端将被关闭。"
         },
         "SshTargetForm": {
           "fea9cb402e": "取消",
@@ -12528,14 +12526,13 @@
           "clear": "清除",
           "removeSelected": "移除 {{count}} 个",
           "restoreRemovedCount": "恢复已移除的主机（{{count}}）…",
-          "hostCount": "{{count}} 个主机",
           "selectMatching": "全选 {{count}} 个匹配项",
           "testSelected": "测试",
           "clearFilter": "清除筛选",
           "restoreRemovedLoading": "恢复已移除的主机",
           "restoreRemovedNone": "没有可恢复的已移除主机",
-          "hiddenDeselectedSingular": "已取消选择 {{count}} 个隐藏的主机",
-          "hiddenDeselectedPlural": "已取消选择 {{count}} 个隐藏的主机"
+          "hiddenDeselected_other": "已取消选择 {{count}} 个隐藏的主机",
+          "hostCount_other": "{{count}} 个主机"
         },
         "SshRestoreRemovedHosts": {
           "title": "恢复已移除的主机？",
