@@ -1,3 +1,4 @@
+import { localizedTerminalTitle } from '@/lib/terminal-default-title-label'
 import type { CtrlTabOrderMode, Tab, TabContentType, TabGroup } from '../../../../shared/tab-types'
 import { resolveUnifiedTabLabel } from '../../../../shared/tab-title-resolution'
 import { readStructuredChatTabName } from '@/runtime/structured-chat-tab-name'
@@ -79,7 +80,7 @@ function getTabLabel(
 ): string {
   return tab?.contentType === 'agent-session'
     ? readStructuredChatTabName(tab, state)
-    : resolveUnifiedTabLabel(tab, generatedTitlesEnabled, fallback)
+    : localizedTerminalTitle(resolveUnifiedTabLabel(tab, generatedTitlesEnabled, fallback))
 }
 
 function toSwitcherItem(

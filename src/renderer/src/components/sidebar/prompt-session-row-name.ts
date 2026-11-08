@@ -4,13 +4,10 @@ import type { DashboardAgentRow as DashboardAgentRowData } from '@/components/da
 import type { TerminalTab } from '../../../../shared/terminal-tab-types'
 import { translate } from '@/i18n/i18n'
 import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
+import { localizedTerminalTitle } from '@/lib/terminal-default-title-label'
 
-/**
- * The name its terminal tab shows: a set title (create --title, rename), the agent session's title,
- * or the live title without the agent glyph. A set title that is only the starting "Terminal N"
- * counts as none, as on the tab strip.
- */
-export function promptTerminalTabName(
+/** The tab's saved name, still "Terminal N" for a new tab, so stand-in checks can recognise it. */
+function savedTerminalTabName(
   tab: Pick<TerminalTab, 'title' | 'customTitle' | 'aiVaultTitle'> | undefined
 ): string {
   if (!tab) {
@@ -21,6 +18,17 @@ export function promptTerminalTabName(
     tab.aiVaultTitle?.title.trim() ||
     stripLeadingAgentTitleDecoration(tab.title ?? '').trim()
   )
+}
+
+/**
+ * The name its terminal tab shows: a set title (create --title, rename), the agent session's title,
+ * or the live title without the agent glyph. A set title that is only the starting "Terminal N"
+ * counts as none, as on the tab strip.
+ */
+export function promptTerminalTabName(
+  tab: Pick<TerminalTab, 'title' | 'customTitle' | 'aiVaultTitle'> | undefined
+): string {
+  return localizedTerminalTitle(savedTerminalTabName(tab))
 }
 
 /** What a fresh session row is called until its first conversation names it (decision 4A). */
@@ -65,7 +73,7 @@ export function promptSessionTabName(
   if (!tab) {
     return ''
   }
-  const name = promptTerminalTabName(tab)
+  const name = savedTerminalTabName(tab)
   return isPromptPlaceholderSessionName(name, tab, agentType) ? '' : name
 }
 

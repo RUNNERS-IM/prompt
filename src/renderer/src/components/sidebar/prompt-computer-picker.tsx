@@ -59,6 +59,18 @@ function rowLabel(row: PromptComputerRow): string {
     : row.label
 }
 
+/** Each part isolated so an Arabic screen does not reorder the machine name and its bracket. */
+function RowLabelText({ row }: { row: PromptComputerRow }): React.JSX.Element {
+  if (!row.isLocal) {
+    return <bdi>{row.label}</bdi>
+  }
+  return (
+    <>
+      <bdi>{row.label}</bdi> <bdi>{translate('prompt.computerPicker.thisMac', '(this Mac)')}</bdi>
+    </>
+  )
+}
+
 /**
  * Prompt: one select box at the very top of the sidebar ("m2-pro-1 (this Mac) ▾"). Picking a
  * computer switches the whole sidebar to that computer's projects and sessions; one at a time.
@@ -122,7 +134,7 @@ export function PromptComputerPicker(): React.JSX.Element {
 
   const selectedRow = rows.find((row) => row.id === selectedId)
   // Before the paired-computer list loads, a saved remote choice has no row yet.
-  const triggerLabel = selectedRow ? rowLabel(selectedRow) : '…'
+  const triggerLabel = selectedRow ? <RowLabelText row={selectedRow} /> : '…'
 
   return (
     <div className="px-2 pt-2" data-prompt-computer-picker="">
@@ -167,7 +179,9 @@ export function PromptComputerPicker(): React.JSX.Element {
                   title={`${rowLabel(row)} · ${statusLabel(row.status)}`}
                 >
                   <StatusDot status={row.status} />
-                  <span className="min-w-0 flex-1 truncate">{rowLabel(row)}</span>
+                  <span className="min-w-0 flex-1 truncate">
+                    <RowLabelText row={row} />
+                  </span>
                   {selected ? (
                     <Check className="size-3.5 text-foreground" strokeWidth={1.5} />
                   ) : (

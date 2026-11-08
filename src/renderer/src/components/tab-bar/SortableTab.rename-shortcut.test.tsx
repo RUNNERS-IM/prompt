@@ -146,6 +146,10 @@ vi.mock('lucide-react', () => ({
   }
 }))
 
+vi.mock('@/i18n/use-ui-language-revision', () => ({
+  useUiLanguageRevision: () => 0
+}))
+
 vi.mock('@/hooks/useShortcutLabel', () => ({
   formatShortcutLabel: () => '⌘⇧\\',
   useOptionalShortcutLabel: () => '⌘W',

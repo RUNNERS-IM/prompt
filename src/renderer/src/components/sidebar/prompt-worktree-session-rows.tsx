@@ -1,3 +1,4 @@
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import React, { useCallback, useMemo } from 'react'
 import { SquareTerminal } from 'lucide-react'
 import { useShallow } from 'zustand/react/shallow'
@@ -49,6 +50,7 @@ function PromptTerminalRow({
   worktreeId: string
   tab: TerminalTab
 }): React.JSX.Element {
+  useUiLanguageRevision()
   const focused = useAppStore(
     (s) => s.activeWorktreeId === worktreeId && s.activeTabIdByWorktree?.[worktreeId] === tab.id
   )
