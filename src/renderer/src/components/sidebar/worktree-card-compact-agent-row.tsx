@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { DashboardAgentChildDisclosure } from '@/components/dashboard/DashboardAgentChildDisclosure'
 import { AgentStateDot, agentStateLabel } from '@/components/AgentStateDot'
 import { AgentChildRowContent } from '@/components/AgentChildRowContent'
@@ -13,9 +14,7 @@ import { getAgentRowPrimaryText } from '../../../../shared/agent-row-primary-tex
 import { formatAgentToolPreview } from '@/lib/agent-row-tool-preview'
 import { agentNoUpdateLabel } from '../../../../shared/agent-row-decay-state'
 import { useAgentRowConversationName } from '@/components/dashboard/use-agent-row-conversation-name'
-import { lastEnteredDoneAt } from '@/components/dashboard/agent-finished-timestamp'
 import CacheTimer, { usePromptCacheCountdownForPane } from './CacheTimer'
-import { formatShortTimeAgo } from '@/lib/short-time-ago'
 import { agentVerdictStatusLine } from '@/lib/agent-verdict-status-line'
 import { agentRowStoppingLabel } from '@/lib/agent-row-stopping-label'
 import { getCompactAgentLineOrder } from './worktree-card-compact-agent-line-order'
@@ -28,6 +27,7 @@ import { promptSessionRowName, promptSessionRowText } from './prompt-session-row
 import { PROMPT_SESSION_TIME_HOVER_CLASS } from './prompt-session-row-menu'
 import { promptChildRowWithoutRoleTail } from './prompt-child-row'
 import { promptSessionStatusLine } from './prompt-session-status-line'
+import { getCompactAgentTime } from './compact-agent-row-time'
 import { PromptHelperPill } from './prompt-helper-pill'
 import { PromptSessionStateIcon } from './PromptSessionStateIcon'
 import { PromptSessionRowRename, usePromptSessionRowRename } from './prompt-session-row-rename'
@@ -86,15 +86,6 @@ export function getCompactAgentSecondary(
   return formatAgentTypeLabel(agent.agentType)
 }
 
-function getCompactAgentTime(agent: DashboardAgentRowData, now: number): string | null {
-  const doneAt = lastEnteredDoneAt(agent)
-  if (doneAt !== null) {
-    return formatShortTimeAgo(doneAt, now)
-  }
-  const startedAt = agent.startedAt > 0 ? agent.startedAt : agent.entry.stateStartedAt
-  return startedAt > 0 ? formatShortTimeAgo(startedAt, now) : null
-}
-
 type CompactAgentRowProps = {
   agent: DashboardAgentRowData
   now: number
@@ -135,6 +126,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
   trailingLabel,
   promptLayout = false
 }: CompactAgentRowProps) {
+  useUiLanguageRevision()
   const view = useClaudeAgentRowView(agent)
   const highlighted = view ? view.current && view.focused : isFocusedPane
   const hasChildDisclosure =

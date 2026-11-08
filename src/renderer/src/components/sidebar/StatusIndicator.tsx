@@ -1,4 +1,5 @@
 import React from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { Activity } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AgentQuestionIcon } from '@/components/AgentQuestionIcon'
@@ -35,6 +36,7 @@ const StatusIndicator = React.memo(function StatusIndicator({
   tooltipSide,
   ...rest
 }: StatusIndicatorProps) {
+  useUiLanguageRevision()
   const tooltipLabel =
     showTooltip && AGENT_STATUS_TOOLTIP_STATUSES.has(status) ? getWorktreeStatusLabel(status) : null
   let indicator: React.JSX.Element

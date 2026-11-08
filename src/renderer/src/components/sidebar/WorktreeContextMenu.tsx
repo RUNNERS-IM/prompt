@@ -1,4 +1,5 @@
 import React from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import WorktreeContextMenuView from './WorktreeContextMenuView'
 import {
   useWorktreeContextMenuModel,
@@ -8,6 +9,7 @@ import {
 const WorktreeContextMenu = React.memo(function WorktreeContextMenu(
   props: WorktreeContextMenuProps
 ) {
+  useUiLanguageRevision()
   const model = useWorktreeContextMenuModel(props)
   return <WorktreeContextMenuView model={model} />
 })

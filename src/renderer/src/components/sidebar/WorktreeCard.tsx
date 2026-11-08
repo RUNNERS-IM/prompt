@@ -1,4 +1,5 @@
 import React from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 
 import { WorktreeCardSurface } from './worktree-card-surface'
 import type { WorktreeCardProps } from './worktree-card-model'
@@ -43,6 +44,7 @@ const WorktreeCard = React.memo(function WorktreeCard({
   affiliateListMode = false,
   statusPrDisplay = null
 }: WorktreeCardProps): React.JSX.Element {
+  useUiLanguageRevision()
   const card = useWorktreeCardController({
     worktree,
     repo,

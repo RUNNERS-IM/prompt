@@ -1,4 +1,5 @@
 import React from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import type { AgentChildRowModel } from '../../../shared/agent-child-row-model'
 import { AgentStateDot } from '@/components/AgentStateDot'
 import type { StateIndicatorTooltipSide } from '@/components/StateIndicatorTooltip'
@@ -29,6 +30,7 @@ export const AgentChildRowContent = React.memo(function AgentChildRowContent({
   tooltipSide,
   lineTitle = false
 }: AgentChildRowContentProps): React.JSX.Element {
+  useUiLanguageRevision()
   const { lead, trail } = agentChildRowText(row, now)
   return (
     <>

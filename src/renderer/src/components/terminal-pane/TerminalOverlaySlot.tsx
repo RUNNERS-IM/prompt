@@ -1,4 +1,5 @@
 import { memo, useLayoutEffect, useState } from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { createPortal } from 'react-dom'
 import { useAppStore } from '../../store'
 import { isProvenProcessExit } from '../../../../shared/terminal-exit-cause'
@@ -49,6 +50,7 @@ export const TerminalOverlaySlot = memo(function TerminalOverlaySlot({
   consumeSuppressedPtyExit,
   captureEmptiedReaction
 }: TerminalOverlaySlotProps): React.JSX.Element {
+  useUiLanguageRevision()
   const [shouldMeasureHiddenStartup, setShouldMeasureHiddenStartup] = useState(
     () => useAppStore.getState().pendingStartupByTabId[terminalTabId] !== undefined
   )

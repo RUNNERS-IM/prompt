@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { useAppStore } from '@/store'
 import { useRemoteRepo } from './AddRepoSteps'
 import { useCreateRepo } from './useCreateRepo'
@@ -24,6 +25,7 @@ import { useAddRepoDialogModalPaths } from './use-add-repo-dialog-modal-paths'
 import { useAddRepoWindowsDriveRefusal } from './use-add-repo-windows-drive-refusal'
 
 export default React.memo(function AddRepoDialog({ hosted }: AddRepoDialogProps) {
+  useUiLanguageRevision()
   const isOpen = useAppStore((s) => (hosted ? hosted.open : s.activeModal === 'add-repo'))
   const modalPaths = useAddRepoDialogModalPaths(Boolean(hosted))
   const addRepoPath = useAppStore((s) => s.addRepoPath)
