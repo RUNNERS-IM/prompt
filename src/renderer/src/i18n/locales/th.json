@@ -1211,7 +1211,7 @@
         "store": {
           "test": {
             "helpers": {
-              "b9a8117c33": "Terminal 1"
+              "b9a8117c33": "เทอร์มินัล 1"
             }
           }
         },
@@ -1956,7 +1956,7 @@
         "42ae40842f": "คำสั่ง terminal ที่บันทึกไว้ กำหนดขอบเขตแบบส่วนกลางหรือรายโปรเจกต์",
         "3fc3db144f": "คำสั่งด่วน",
         "c33bfd664c": "Shell, renderer, session และพฤติกรรมของ terminal",
-        "a9fb10afca": "Terminal",
+        "a9fb10afca": "เทอร์มินัล",
         "85f4fd7710": "แหล่งงาน",
         "ab4b21b58e": "การตั้งชื่อ branch, base ref และ Git AI Author",
         "09607cb0fe": "Git และ Source Control",
@@ -1997,7 +1997,7 @@
         "pluginsTitle": "Plugins",
         "pluginsDescription": "ติดตั้งและจัดการ plugin ของ Orca (Alpha)",
         "tasksDescription": "เชื่อมต่อผู้ให้บริการ ติดตั้ง Linear skill และเลือกสิ่งที่จะแสดงในงาน",
-        "artifactsTitle": "Artifacts",
+        "artifactsTitle": "อาร์ติแฟกต์",
         "artifactsDescription": "แชร์ไฟล์ HTML และ Markdown กับทีมและจัดการลิงก์สาธารณะ",
         "automationsTitle": "Automations",
         "automationsDescription": "ตั้งเวลางานของ agent และเลือกว่าจะแสดง Automations ในแถบด้านข้างหรือไม่",
@@ -2025,7 +2025,7 @@
         "description": "terminal ของ Orca ที่กำลังทำงานอยู่ถูกโฮสต์โดย daemon ที่เริ่มจาก Orca เวอร์ชันที่ติดตั้งก่อนหน้า macOS อาจไม่นำสิทธิ์ Accessibility, Automation หรือไฟล์ที่ได้รับการปกป้องของ Orca ไปใช้กับ terminal เหล่านั้น เริ่ม daemon ใหม่จาก จัดการ Sessions เพื่อคืนการเข้าถึง การดำเนินการนี้จะปิด terminal ของ Orca ที่กำลังทำงานทั้งหมด",
         "openManageSessions": "เปิดการจัดการ Sessions",
         "dismiss": "ปิด",
-        "folderAccessTitle": "Terminal อ่าน {{folder}} ของคุณไม่ได้",
+        "folderAccessTitle": "เทอร์มินัล อ่าน {{folder}} ของคุณไม่ได้",
         "folderAccessDescription": "macOS กำลังบล็อกบริการ terminal ของ Orca ไม่ให้เข้าถึงโฟลเดอร์นี้ คำสั่งที่รันที่นั่นอาจล้มเหลวจนกว่าจะแก้ไข",
         "folderAccessFix": "แก้ไข"
       },
@@ -3807,7 +3807,7 @@
             "TerminalQuickCommandActionToggle": {
               "b0d58e37ed": "Prompt ของ agent",
               "b5ea4d64f6": "คำสั่ง terminal",
-              "terminal_short": "Terminal",
+              "terminal_short": "เทอร์มินัล",
               "agent_short": "Agent"
             },
             "TerminalQuickCommandAppendEnterSwitch": {
@@ -3894,7 +3894,7 @@
             "b4cdd9314e": "ล้างหน้าจอ",
             "resetTerminal": "รีเซ็ต terminal",
             "8c17d6786d": "ปิดบานหน้าต่าง",
-            "copyTerminalId": "คัดลอก Terminal ID",
+            "copyTerminalId": "คัดลอก เทอร์มินัล ID",
             "2cf85a6a55": "คัดลอก Pane ID",
             "39809d152f": "ตั้งชื่อ…",
             "clearPaneTitle": "ล้างชื่อบานหน้าต่าง",
@@ -3991,7 +3991,7 @@
               "blocked": {
                 "toast": {
                   "97c98f1afe": "เปิดการตั้งค่า",
-                  "7cf51f74fd": "เปิดใช้งานการเขียนคลิปบอร์ดของ TUI ในการตั้งค่า Terminal เพื่อคัดลอกจาก SSH, Zellij, tmux, Neovim, fzf หรือ Grok",
+                  "7cf51f74fd": "เปิดใช้งานการเขียนคลิปบอร์ดของ TUI ในการตั้งค่า เทอร์มินัล เพื่อคัดลอกจาก SSH, Zellij, tmux, Neovim, fzf หรือ Grok",
                   "89eaa3e80b": "การเขียนคลิปบอร์ดจาก terminal ถูกบล็อก"
                 }
               },
@@ -3999,7 +3999,7 @@
                 "on": {
                   "notice": {
                     "title": "การเขียนคลิปบอร์ดของ TUI เปิดอยู่เป็นค่าเริ่มต้นแล้ว",
-                    "description": "ตอนนี้ Zellij, tmux, Neovim และโปรแกรม terminal อื่น ๆ คัดลอกไปยังคลิปบอร์ดของคุณได้แล้ว ปิดได้ในการตั้งค่า Terminal",
+                    "description": "ตอนนี้ Zellij, tmux, Neovim และโปรแกรม terminal อื่น ๆ คัดลอกไปยังคลิปบอร์ดของคุณได้แล้ว ปิดได้ในการตั้งค่า เทอร์มินัล",
                     "action": "เปิดการตั้งค่า"
                   }
                 }
@@ -4260,8 +4260,8 @@
             "aea43b5748": "เปิดแท็บ emulator ที่มีอยู่",
             "b426bb2615": "ไปที่ Mobile Emulator",
             "4833fb2cbe": "แท็บเบราว์เซอร์ใหม่",
-            "d364f3c8d4": "Terminal ใหม่",
-            "7c1313d237": "Terminal ใหม่:",
+            "d364f3c8d4": "เทอร์มินัล ใหม่",
+            "7c1313d237": "เทอร์มินัล ใหม่:",
             "d1afac112b": "WSL",
             "efb33546ff": "Git Bash",
             "1a8af49530": "CMD Prompt",
@@ -4632,7 +4632,7 @@
             "b9b4a3a25d": "Branch",
             "c432278ec7": "buffer ของ editor",
             "0bc756efaf": "การเปลี่ยนแปลงใน Git",
-            "e9528a89b3": "Terminal",
+            "e9528a89b3": "เทอร์มินัล",
             "a8d9e0de79": "Agents",
             "d384a4ce9f": "การตัดสินใจลบ",
             "7d7745bb8f": "ลบได้",
@@ -4899,7 +4899,7 @@
             "unattributed": "ไม่ระบุที่มา"
           },
           "resourceSessionLabels": {
-            "terminalNumber": "Terminal {{number}}",
+            "terminalNumber": "เทอร์มินัล {{number}}",
             "pid": "pid {{pid}}",
             "sessionPrefix": "session {{id}}",
             "unknownSession": "(session ที่ไม่รู้จัก)",
@@ -6123,7 +6123,7 @@
           "0ccba862b8": "เปิดงาน GitHub",
           "fee535205b": "งาน",
           "d599269755": "ซ่อนจากแถบด้านข้าง",
-          "artifacts": "Artifacts",
+          "artifacts": "อาร์ติแฟกต์",
           "skills": "สกิล"
         },
         "SidebarRepositoryFilterSection": {
@@ -7168,7 +7168,7 @@
           "restartConsequence": "terminal และ agent ที่เปิดอยู่จะรีสตาร์ท",
           "restarting": "กำลังเริ่มใหม่…",
           "restart": "เริ่มใหม่",
-          "restartFailed": "รีสตาร์ทไม่สำเร็จ ลองอีกครั้งจาก การตั้งค่า → Terminal → จัดการ Session",
+          "restartFailed": "รีสตาร์ทไม่สำเร็จ ลองอีกครั้งจาก การตั้งค่า → เทอร์มินัล → จัดการ Session",
           "title": "แก้ไขการเข้าถึง {{folder}} ของคุณ",
           "lead": "macOS บล็อกบริการ terminal ของ Orca ไม่ให้เข้าถึงโฟลเดอร์นี้",
           "done": "เสร็จสิ้น",
@@ -7475,7 +7475,7 @@
           "interfaceDefaultFont": "ฟอนต์เริ่มต้น",
           "terminalDefaultFont": "ฟอนต์เริ่มต้น",
           "interfaceTitle": "อินเทอร์เฟซ",
-          "terminalTitle": "Terminal",
+          "terminalTitle": "เทอร์มินัล",
           "windowSidebarTitle": "หน้าต่างและแถบด้านข้าง",
           "windowSidebarSummary": "แถบด้านข้าง แถบสถานะ และตัวสำรวจไฟล์",
           "gitIgnoredGlossary": "ไฟล์ที่ตรงกับ .gitignore",
@@ -7770,7 +7770,7 @@
           "connectionTestAction": "ทดสอบการเชื่อมต่อ",
           "appStatus": "แอป: ",
           "terminalHostStatus": "โฮสต์ terminal: ",
-          "terminalHostRecovery": "หาก terminal อ่านไฟล์ที่ได้รับการป้องกันไม่ได้ ให้บันทึกงานแล้วปิดใน Terminal → Manage Sessions หากส่งผลต่อ terminal ใหม่ด้วย ให้รีสตาร์ท daemon การรีสตาร์ทจะปิด terminal ที่เปิดอยู่ทั้งหมดของ daemon"
+          "terminalHostRecovery": "หาก terminal อ่านไฟล์ที่ได้รับการป้องกันไม่ได้ ให้บันทึกงานแล้วปิดใน เทอร์มินัล → Manage Sessions หากส่งผลต่อ terminal ใหม่ด้วย ให้รีสตาร์ท daemon การรีสตาร์ทจะปิด terminal ที่เปิดอยู่ทั้งหมดของ daemon"
         },
         "ExperimentalPane": {
           "a20d5ea365": "คงไฮไลต์ระดับบานหน้าต่างไว้หลัง terminal bell หรือ agent ทำงานเสร็จ จนกว่าคุณจะโต้ตอบกับบานหน้าต่างนั้น เป็นฟีเจอร์ทดลองระหว่างปรับสัญญาณ",
@@ -7961,9 +7961,9 @@
           "0e9fc0eadc": "โฟลเดอร์ workspace",
           "e2955d9ccb": "กำหนดตำแหน่งที่สร้าง workspace ใหม่",
           "7511097c5d": "Workspace",
-          "31e300af1c": "ถามก่อนลบ artifact",
-          "fb29a73a17": "แสดงกล่องโต้ตอบยืนยันก่อนลบ artifact ที่แชร์และทำให้ลิงก์สาธารณะใช้งานไม่ได้",
-          "bf46474e33": "แสดงการยืนยันก่อนลบ artifact ที่แชร์ ทุกคนที่มีลิงก์สาธารณะจะเข้าถึงไม่ได้อีก",
+          "31e300af1c": "ถามก่อนลบ อาร์ติแฟกต์",
+          "fb29a73a17": "แสดงกล่องโต้ตอบยืนยันก่อนลบ อาร์ติแฟกต์ ที่แชร์และทำให้ลิงก์สาธารณะใช้งานไม่ได้",
+          "bf46474e33": "แสดงการยืนยันก่อนลบ อาร์ติแฟกต์ ที่แชร์ ทุกคนที่มีลิงก์สาธารณะจะเข้าถึงไม่ได้อีก",
           "externalWorktrees": "worktree ภายนอก",
           "externalWorktreesDescription": "เลือก worktree ที่สร้างนอก Orca ที่จะแสดงโดยค่าเริ่มต้นบนโฮสต์นี้"
         },
@@ -8272,7 +8272,7 @@
           "e4064916aa": "เพิ่มแอป",
           "9d0413817d": "เลือกแอปที่ใช้ได้จากเมนู \"เปิดใน\" ของ workspace",
           "6ed52fe71e": "แอปสำหรับเปิดใน",
-          "eb55b87570": "คำสั่งที่คุณพิมพ์ใน Terminal เพื่อเปิดแอปนี้",
+          "eb55b87570": "คำสั่งที่คุณพิมพ์ใน เทอร์มินัล เพื่อเปิดแอปนี้",
           "ba1422ee07": "คำสั่ง terminal",
           "e1fc0085c6": "ป้ายชื่อเมนู",
           "a261931d29": "นำแอปออก",
@@ -8764,7 +8764,7 @@
           "6742c7932c": "คำสั่ง terminal ที่บันทึกไว้ กำหนดขอบเขตแบบส่วนกลางหรือรายโปรเจกต์",
           "13d4fe30ad": "คำสั่งด่วน",
           "b79b5b31e9": "Shell, renderer, session และพฤติกรรมของ terminal",
-          "3de4bbb841": "Terminal",
+          "3de4bbb841": "เทอร์มินัล",
           "11faa2f7dd": "แหล่งงาน",
           "cfa34f4465": "การตั้งชื่อ branch, base ref และ Git AI Author",
           "70100f94c7": "Git และ Source Control",
@@ -8848,7 +8848,7 @@
           "4ce3cd24d9": "ไม่มีปุ่มลัดที่ตรงกับตัวกรองเหล่านั้น"
         },
         "ShortcutTerminalPolicyControl": {
-          "0762983d13": "Terminal ก่อน",
+          "0762983d13": "เทอร์มินัล ก่อน",
           "63308571d8": "Orca ก่อน",
           "c43c7ff5f9": "เลือกว่าใครจะรับปุ่มลัดก่อน",
           "c3a554288e": "ปุ่มลัดใน terminal",
@@ -8859,13 +8859,13 @@
           "38e86e206a": "กำหนดปุ่มลัดด้วยภาพ หรือแก้ไข",
           "47f8f7aef9": "ปุ่มลัด",
           "f0b35b0b2e": "ปิดใช้งานขณะที่ terminal หรือ TUI อยู่ในโฟกัสของแป้นพิมพ์",
-          "5c65d5db9d": "Terminal ก่อน",
+          "5c65d5db9d": "เทอร์มินัล ก่อน",
           "dfa8ff612f": "ทำงานด้วยขณะที่ terminal หรือ TUI อยู่ในโฟกัสของแป้นพิมพ์",
           "2a0e8aeccf": "Orca ก่อน",
           "3c0fac059a": "ยังทำงานขณะที่ terminal อยู่ในโฟกัสของแป้นพิมพ์",
           "25b0004fbf": "terminal ใช้งานอยู่",
           "781cb74d22": "ทำงานจากบานหน้าต่าง terminal",
-          "cb02e00202": "Terminal",
+          "cb02e00202": "เทอร์มินัล",
           "d8c988dab4": "~/.orca/keybindings.json",
           "shortcutUnavailable": "ปุ่มลัดนี้ไม่พร้อมใช้งานอีกต่อไป"
         },
@@ -12112,30 +12112,30 @@
         },
         "artifacts": {
           "signIn": "ลงชื่อเข้าใช้ Orca",
-          "title": "Artifacts",
+          "title": "อาร์ติแฟกต์",
           "description": "แชร์ไฟล์ HTML และ Markdown กับทีมและจัดการลิงก์สาธารณะ",
-          "howToTitle": "วิธีใช้ Artifacts",
+          "howToTitle": "วิธีใช้ อาร์ติแฟกต์",
           "howToDescription": "เผยแพร่ไฟล์ HTML หรือ Markdown เป็นลิงก์สาธารณะ แล้วแชร์ให้ทีมของคุณ",
           "shareStepTitle": "เลือกไฟล์ที่จะแชร์",
-          "shareStepDescription": "เปิดไฟล์ HTML หรือ Markdown แล้วเลือก Share as artifact หรือให้ agent แชร์ให้",
+          "shareStepDescription": "เปิดไฟล์ HTML หรือ Markdown แล้วเลือก แชร์เป็น อาร์ติแฟกต์ หรือให้ agent แชร์ให้",
           "linkStepTitle": "คัดลอกลิงก์สาธารณะ",
           "linkStepDescription": "หลังเผยแพร่ ให้คัดลอกลิงก์แล้วส่งให้ทีม",
           "manageStepTitle": "จัดการใน Orca",
-          "manageStepDescription": "เปิด Artifacts จากแถบด้านข้างเพื่อดูตัวอย่างหรือนำลิงก์ออก",
-          "openArtifacts": "เปิด Artifacts",
-          "showButton": "แสดงปุ่ม Artifacts",
-          "showButtonDescription": "แสดงทางลัด Artifacts ในแถบด้านข้าง",
+          "manageStepDescription": "เปิด อาร์ติแฟกต์ จากแถบด้านข้างเพื่อดูตัวอย่างหรือนำลิงก์ออก",
+          "openArtifacts": "เปิด อาร์ติแฟกต์",
+          "showButton": "แสดงปุ่ม อาร์ติแฟกต์",
+          "showButtonDescription": "แสดงทางลัด อาร์ติแฟกต์ ในแถบด้านข้าง",
           "openArtifactsDescriptionV2": "ดูตัวอย่าง คัดลอก และจัดการลิงก์ที่แชร์ผ่านบัญชีของคุณ",
-          "signInTitle": "ลงชื่อเข้าใช้เพื่อแชร์ artifact",
-          "signInDescription": "ใช้บัญชี Orca ของคุณเพื่ออัปโหลด artifact และจัดการลิงก์สาธารณะ",
+          "signInTitle": "ลงชื่อเข้าใช้เพื่อแชร์ อาร์ติแฟกต์",
+          "signInDescription": "ใช้บัญชี Orca ของคุณเพื่ออัปโหลด อาร์ติแฟกต์ และจัดการลิงก์สาธารณะ",
           "signInAgain": "ลงชื่อเข้าใช้อีกครั้ง",
-          "enableStepTitle": "เปิดใช้งานการแชร์ artifact",
-          "enableStepWebDescription": "เปิดการตั้งค่า → Artifacts ในแอป Orca บนเดสก์ท็อปของอุปกรณ์โฮสต์ แล้วเปิดใช้งานการเผยแพร่",
-          "enableStepDescription": "เปิด \"Allow publishing public artifact links\" ด้านบน",
-          "allowPublishing": "อนุญาตให้เผยแพร่ลิงก์ artifact สาธารณะ",
-          "allowPublishingWebDescription": "ใช้ได้เฉพาะบนเดสก์ท็อป เปิดการตั้งค่า → Artifacts บนอุปกรณ์โฮสต์เพื่อเปลี่ยนการตั้งค่านี้",
-          "allowPublishingDescription": "เผยแพร่ไฟล์ HTML และ Markdown เป็นลิงก์ที่ทุกคนที่มี URL เปิดได้ ลิงก์ที่มีอยู่จะยังใช้ได้จนกว่าคุณจะลบออกจาก Artifacts",
-          "howToDescriptionDisabled": "เปิดใช้งานการแชร์ artifact ด้านบนเพื่อเผยแพร่ไฟล์ HTML หรือ Markdown เป็นลิงก์สาธารณะ",
+          "enableStepTitle": "เปิดใช้งานการแชร์ อาร์ติแฟกต์",
+          "enableStepWebDescription": "เปิดการตั้งค่า → อาร์ติแฟกต์ ในแอป Orca บนเดสก์ท็อปของอุปกรณ์โฮสต์ แล้วเปิดใช้งานการเผยแพร่",
+          "enableStepDescription": "เปิด \"อนุญาตให้เผยแพร่ลิงก์ อาร์ติแฟกต์ สาธารณะ\" ด้านบน",
+          "allowPublishing": "อนุญาตให้เผยแพร่ลิงก์ อาร์ติแฟกต์ สาธารณะ",
+          "allowPublishingWebDescription": "ใช้ได้เฉพาะบนเดสก์ท็อป เปิดการตั้งค่า → อาร์ติแฟกต์ บนอุปกรณ์โฮสต์เพื่อเปลี่ยนการตั้งค่านี้",
+          "allowPublishingDescription": "เผยแพร่ไฟล์ HTML และ Markdown เป็นลิงก์ที่ทุกคนที่มี URL เปิดได้ ลิงก์ที่มีอยู่จะยังใช้ได้จนกว่าคุณจะลบออกจาก อาร์ติแฟกต์",
+          "howToDescriptionDisabled": "เปิดใช้งานการแชร์ อาร์ติแฟกต์ ด้านบนเพื่อเผยแพร่ไฟล์ HTML หรือ Markdown เป็นลิงก์สาธารณะ",
           "allowPublishingSearchDescription": "อนุญาตให้ Orca เผยแพร่ไฟล์ HTML และ Markdown เป็นลิงก์สาธารณะ",
           "keywordArtifacts": "artifacts",
           "keywordShare": "แชร์",
@@ -12150,7 +12150,7 @@
           "connected": "เชื่อมต่อแล้ว",
           "reconnectRequired": "session ของคุณหมดอายุ ลงชื่อเข้าใช้อีกครั้งเพื่อใช้ฟีเจอร์คลาวด์",
           "unavailable": "การลงชื่อเข้าใช้ Orca ไม่พร้อมใช้งานใน build นี้",
-          "signedOut": "ลงชื่อเข้าใช้เพื่อขยายความสามารถของ Orca ด้วยฟีเจอร์คลาวด์ รวมถึง Artifacts และ Orca Relay",
+          "signedOut": "ลงชื่อเข้าใช้เพื่อขยายความสามารถของ Orca ด้วยฟีเจอร์คลาวด์ รวมถึง อาร์ติแฟกต์ และ Orca Relay",
           "checking": "กำลังตรวจสอบสถานะบัญชี…",
           "account": "บัญชี Orca",
           "signOut": "ออกจากระบบ",
@@ -12158,9 +12158,9 @@
           "signIn": "ลงชื่อเข้าใช้ Orca",
           "title": "บัญชี Orca",
           "description": "แชร์งานได้ทันที และเข้าถึงเดสก์ท็อปของคุณจาก Orca Mobile ได้ทุกที่",
-          "searchDescription": "ลงชื่อเข้าใช้หรือออกจากระบบของบัญชีที่ใช้กับ Artifacts และ Orca Relay",
+          "searchDescription": "ลงชื่อเข้าใช้หรือออกจากระบบของบัญชีที่ใช้กับ อาร์ติแฟกต์ และ Orca Relay",
           "benefitsTitle": "รวมอยู่ในบัญชีของคุณ",
-          "artifactsTitle": "การแชร์ artifact",
+          "artifactsTitle": "การแชร์ อาร์ติแฟกต์",
           "artifactsDescription": "เผยแพร่ไฟล์ HTML และ Markdown แล้วจัดการลิงก์ที่แชร์ทั้งหมดได้จาก Orca",
           "relayTitle": "Orca Relay",
           "relayDescription": "เชื่อมต่อ Orca Mobile กับเดสก์ท็อปเครื่องนี้ผ่านเครือข่ายมือถือหรือ Wi-Fi ใดก็ได้",
@@ -12512,7 +12512,7 @@
           "olderTerminalsUncounted": "มี terminal ที่เริ่มโดย Orca เวอร์ชันเก่ายังทำงานอยู่บนโฮสต์นี้ และจะไม่หยุดเอง ปิดใน Orca เวอร์ชันนั้นหรือสิ้นสุดบนโฮสต์ แล้วเชื่อมต่อใหม่",
           "olderTerminalsUnverifiable": "Orca ยืนยันไม่ได้ว่า terminal ที่เริ่มโดย Orca เวอร์ชันเก่าปิดแล้วหรือยัง เชื่อมต่อใหม่เพื่อลองอีกครั้ง",
           "linkedProjectsNoAutomations": "เซิร์ฟเวอร์ Orca ของโฮสต์นี้มี {{paths}} อยู่แล้ว เดสก์ท็อปนี้จึงใช้สำเนาของเซิร์ฟเวอร์แทน แท็บของเดสก์ท็อปนี้บนโฮสต์ดังกล่าวไม่ถูกย้าย และ worktree ที่สร้างจากเดสก์ท็อปนี้จะแสดงเป็น worktree ภายนอก",
-          "launchSessionEnded": "Terminal บน Mac เครื่องนี้อาจเข้าถึงเครือข่ายภายในไม่ได้แล้ว เพราะ SSH session ที่เริ่มเซิร์ฟเวอร์ Orca ของโฮสต์นี้สิ้นสุดลง รีสตาร์ตเซิร์ฟเวอร์ Orca เพื่อกู้คืน",
+          "launchSessionEnded": "เทอร์มินัล บน Mac เครื่องนี้อาจเข้าถึงเครือข่ายภายในไม่ได้แล้ว เพราะ SSH session ที่เริ่มเซิร์ฟเวอร์ Orca ของโฮสต์นี้สิ้นสุดลง รีสตาร์ตเซิร์ฟเวอร์ Orca เพื่อกู้คืน",
           "behindRolledBack": "ใช้เซิร์ฟเวอร์ Orca เวอร์ชันเก่ากว่าแอปนี้ เพราะการอัปเดตครั้งล่าสุดถูกย้อนกลับ ใช้ \"อัปเดตเซิร์ฟเวอร์\" เพื่อลองอีกครั้ง",
           "behindNoTemplate": "ใช้เซิร์ฟเวอร์ Orca เวอร์ชันที่แอปนี้อัปเดตให้ไม่ได้ เพราะบิลด์นี้ไม่มีเซิร์ฟเวอร์สำหรับโฮสต์นี้",
           "behindMigrating": "ใช้เซิร์ฟเวอร์ Orca ซึ่งจะอัปเดตหลังการย้ายโปรเจกต์เสร็จสิ้น",
@@ -12542,7 +12542,7 @@
           "close": "ปิด terminal สำหรับตั้งค่า",
           "loading": "กำลังโหลด terminal สำหรับลงชื่อเข้าใช้…",
           "terminalTitle": "ลงชื่อเข้าใช้ ZCode",
-          "terminalLabel": "Terminal สำหรับลงชื่อเข้าใช้ ZCode",
+          "terminalLabel": "เทอร์มินัล สำหรับลงชื่อเข้าใช้ ZCode",
           "apiKeyInstructions": "กด Enter เพื่อเริ่ม ZCode จากนั้นพิมพ์ /login และเลือกตัวเลือก API key สำหรับไซต์แผนของคุณ แล้วกรอกคีย์ในช่องแบบปิดบังของ ZCode",
           "oauthInstructions": "กด Enter เพื่อเรียกใช้คำสั่งลงชื่อเข้าใช้ จากนั้นเปิด URL สำหรับอนุญาตที่ ZCode แสดง การลงชื่อเข้าใช้จะถูกบันทึกบนโฮสต์ที่ terminal นี้ทำงานอยู่"
         },
@@ -14734,7 +14734,7 @@
             "477b28c948": "ฐานข้อมูล",
             "787490e9bd": "แพ็กเกจ",
             "07012dc113": "Agent",
-            "3eba7387ab": "Terminal",
+            "3eba7387ab": "เทอร์มินัล",
             "65b437c381": "โค้ด",
             "bed2674f9d": "โฟลเดอร์"
           }
@@ -14853,7 +14853,7 @@
           "16a9f0446a": "ไม่พบการตั้งค่า Ghostty ที่จะนำเข้า",
           "ad19e5c916": "กำลังนำเข้า…",
           "906c4373fe": "การตั้งค่า",
-          "moreTerminalOptions": "ตัวเลือก terminal เพิ่มเติม เช่น ฟอนต์ เคอร์เซอร์ และจานสี อยู่ใน <settings>การตั้งค่า → Terminal</settings>"
+          "moreTerminalOptions": "ตัวเลือก terminal เพิ่มเติม เช่น ฟอนต์ เคอร์เซอร์ และจานสี อยู่ใน <settings>การตั้งค่า → เทอร์มินัล</settings>"
         },
         "use": {
           "onboarding": {
@@ -15242,7 +15242,7 @@
             "8b07759314": "เบราว์เซอร์ใหม่",
             "88ffb502e5": "เปิดโน้ต Markdown",
             "629528690b": "โน้ต Markdown ใหม่",
-            "3215fc73e9": "Terminal ใหม่",
+            "3215fc73e9": "เทอร์มินัล ใหม่",
             "bbc177f98f": "เปิดใช้งาน",
             "adc281394d": "ปิด",
             "8cf80db43b": "ตั้งค่า Orca CLI และ skill ของ agent เพื่อให้ agent ประสานงานผ่าน Orca ได้",
@@ -15311,7 +15311,7 @@
             "d8856b604a": "div.pricing-grid > div.card.starter:nth-of-type(1) > a.cta",
             "7da6eed7bf": "localhost:3000",
             "0a2bd01c02": "แท็บเบราว์เซอร์ใหม่",
-            "04096318ab": "Terminal 1",
+            "04096318ab": "เทอร์มินัล 1",
             "eb88125c6f": "✓ ยืนยันแล้ว ปุ่ม Try free ยังใช้งานได้",
             "051c97d15a": ".pp-card[data-card=\"starter\"] .pp-cta",
             "4fa59ca545": "✓ อัปเดตแล้ว",
@@ -17755,7 +17755,7 @@
       "agent": {
         "AgentCombobox": {
           "19522e25ee": "จัดการ agent",
-          "986f946354": "Terminal เปล่า",
+          "986f946354": "เทอร์มินัล เปล่า",
           "579c768bde": "ไม่มี agent ที่ตรงกับการค้นหา",
           "48c6a5a9b4": "ค้นหา agent…",
           "9c6b59fe58": "ตั้งเป็นค่าเริ่มต้น",
@@ -18108,7 +18108,7 @@
           "signout": {
             "confirm": {
               "title": "ออกจากระบบ Orca หรือไม่",
-              "description": "artifact และ Orca Relay จะใช้งานไม่ได้จนกว่าคุณจะลงชื่อเข้าใช้อีกครั้ง โปรเจกต์และ worktree ในเครื่องจะไม่ได้รับผลกระทบ",
+              "description": "อาร์ติแฟกต์ และ Orca Relay จะใช้งานไม่ได้จนกว่าคุณจะลงชื่อเข้าใช้อีกครั้ง โปรเจกต์และ worktree ในเครื่องจะไม่ได้รับผลกระทบ",
               "cancel": "ยกเลิก",
               "action": "ออกจากระบบ"
             }
@@ -18241,43 +18241,43 @@
       },
       "artifacts": {
         "ArtifactsPage": {
-          "signInAgain": "ลงชื่อเข้าใช้ Orca อีกครั้งเพื่อโหลด artifact",
-          "loadFailed": "โหลด artifact ไม่สำเร็จ",
-          "deleteTitle": "ลบ artifact หรือไม่",
+          "signInAgain": "ลงชื่อเข้าใช้ Orca อีกครั้งเพื่อโหลด อาร์ติแฟกต์",
+          "loadFailed": "โหลด อาร์ติแฟกต์ ไม่สำเร็จ",
+          "deleteTitle": "ลบ อาร์ติแฟกต์ หรือไม่",
           "deleteDescription": "\"{{name}}\" จะไม่สามารถเข้าถึงได้ผ่านลิงก์สาธารณะอีกต่อไป",
           "delete": "ลบ",
-          "deleteFailed": "ลบ artifact ไม่สำเร็จ",
-          "title": "Artifacts",
+          "deleteFailed": "ลบ อาร์ติแฟกต์ ไม่สำเร็จ",
+          "title": "อาร์ติแฟกต์",
           "refresh": "รีเฟรช",
-          "shareSignInHeading": "ลงชื่อเข้าใช้เพื่อแชร์ artifact",
-          "shareSignInCopy": "ใช้บัญชี Orca ของคุณเพื่ออัปโหลด artifact และจัดการลิงก์สาธารณะ",
+          "shareSignInHeading": "ลงชื่อเข้าใช้เพื่อแชร์ อาร์ติแฟกต์",
+          "shareSignInCopy": "ใช้บัญชี Orca ของคุณเพื่ออัปโหลด อาร์ติแฟกต์ และจัดการลิงก์สาธารณะ",
           "signIn": "ลงชื่อเข้าใช้ Orca",
-          "empty": "ไม่มี artifact ที่แชร์",
-          "emptyCopy": "เปิดไฟล์ HTML หรือ Markdown แล้วเลือก แชร์เป็น artifact หรือขอให้ agent แชร์ให้",
-          "deleteArtifact": "ลบ artifact",
-          "moreAvailable": "มี artifact เพิ่มเติม",
+          "empty": "ไม่มี อาร์ติแฟกต์ ที่แชร์",
+          "emptyCopy": "เปิดไฟล์ HTML หรือ Markdown แล้วเลือก แชร์เป็น อาร์ติแฟกต์ หรือขอให้ agent แชร์ให้",
+          "deleteArtifact": "ลบ อาร์ติแฟกต์",
+          "moreAvailable": "มี อาร์ติแฟกต์ เพิ่มเติม",
           "moreAvailableCopy": "โหลดหน้าถัดไปเพื่อดูต่อ",
-          "loadMoreFailed": "โหลด artifact เพิ่มเติมไม่ได้",
+          "loadMoreFailed": "โหลด อาร์ติแฟกต์ เพิ่มเติมไม่ได้",
           "publishingOff": "การเผยแพร่ถูกปิดอยู่",
-          "publishingOffCopy": "ยังไม่มีสิ่งใดบนอุปกรณ์นี้ที่สร้างลิงก์ artifact สาธารณะได้ อนุญาตการเผยแพร่ใน การตั้งค่า → Artifacts แล้วแชร์จากไฟล์ HTML หรือ Markdown ที่เปิดอยู่ หรือสั่งให้ agent ทำให้",
-          "openArtifactsSettings": "เปิด การตั้งค่า → Artifacts",
+          "publishingOffCopy": "ยังไม่มีสิ่งใดบนอุปกรณ์นี้ที่สร้างลิงก์ อาร์ติแฟกต์ สาธารณะได้ อนุญาตการเผยแพร่ใน การตั้งค่า → อาร์ติแฟกต์ แล้วแชร์จากไฟล์ HTML หรือ Markdown ที่เปิดอยู่ หรือสั่งให้ agent ทำให้",
+          "openArtifactsSettings": "เปิด การตั้งค่า → อาร์ติแฟกต์",
           "retry": "ลองอีกครั้ง",
           "reconnectHeading": "ลงชื่อเข้าใช้ Orca อีกครั้ง",
-          "reconnectCopy": "ลงชื่อเข้าใช้อีกครั้งเพื่อดูและจัดการ artifact ที่แชร์ผ่านบัญชีของคุณ",
+          "reconnectCopy": "ลงชื่อเข้าใช้อีกครั้งเพื่อดูและจัดการ อาร์ติแฟกต์ ที่แชร์ผ่านบัญชีของคุณ",
           "signInAgainAction": "ลงชื่อเข้าใช้อีกครั้ง",
           "unconfiguredCopy": "ยังไม่ได้ตั้งค่าการลงชื่อเข้าใช้บัญชี Orca บนเครื่องนี้",
           "openAccountSettings": "เปิดการตั้งค่าบัญชี"
         },
-        "copySuccess": "คัดลอกลิงก์ artifact แล้ว",
-        "copyFailed": "คัดลอกลิงก์ artifact ไม่ได้",
+        "copySuccess": "คัดลอกลิงก์ อาร์ติแฟกต์ แล้ว",
+        "copyFailed": "คัดลอกลิงก์ อาร์ติแฟกต์ ไม่ได้",
         "copyLink": "คัดลอกลิงก์",
         "openInBrowser": "เปิดในเบราว์เซอร์",
-        "preview": "ตัวอย่าง artifact",
+        "preview": "ตัวอย่าง อาร์ติแฟกต์",
         "previewUnavailable": "ไม่มีตัวอย่างให้แสดง",
-        "previewUnavailableDescription": "เปิด artifact นี้ในเบราว์เซอร์เพื่อดู",
-        "actions": "การดำเนินการของ artifact",
+        "previewUnavailableDescription": "เปิด อาร์ติแฟกต์ นี้ในเบราว์เซอร์เพื่อดู",
+        "actions": "การดำเนินการของ อาร์ติแฟกต์",
         "ArtifactActions": {
-          "more": "การดำเนินการเพิ่มเติมของ artifact"
+          "more": "การดำเนินการเพิ่มเติมของ อาร์ติแฟกต์"
         },
         "ArtifactCollection": {
           "loadMore": "โหลดเพิ่มเติม",
@@ -18293,16 +18293,16 @@
         "expired": "ลิงก์หมดอายุแล้ว",
         "expires": "ลิงก์หมดอายุ{{when}}",
         "ArtifactPublishButton": {
-          "a4a49da6af": "แชร์เป็น artifact",
-          "confirmTitle": "แชร์เป็น artifact",
+          "a4a49da6af": "แชร์เป็น อาร์ติแฟกต์",
+          "confirmTitle": "แชร์เป็น อาร์ติแฟกต์",
           "confirmDescription": "การดำเนินการนี้จะเผยแพร่ไฟล์ปัจจุบันที่ลิงก์ ซึ่งทุกคนที่มี URL สามารถดูได้",
           "accountTitle": "บัญชี Orca",
           "accountDescription": "ลงชื่อเข้าใช้เพื่อสร้างและจัดการลิงก์นี้",
           "signInAgain": "ลงชื่อเข้าใช้อีกครั้ง",
           "signIn": "ลงชื่อเข้าใช้",
-          "publishingOffTitle": "การแชร์ artifact ปิดอยู่",
+          "publishingOffTitle": "การแชร์ อาร์ติแฟกต์ ปิดอยู่",
           "publishingOffDescription": "ดูข้อมูลเกี่ยวกับลิงก์สาธารณะและเปิดใช้งานการแชร์ในการตั้งค่า",
-          "openSettings": "เปิดการตั้งค่า Artifacts",
+          "openSettings": "เปิดการตั้งค่า อาร์ติแฟกต์",
           "sharing": "กำลังแชร์…",
           "sharePublicLink": "สร้างลิงก์",
           "publishedDescription": "ทุกคนที่มีลิงก์นี้สามารถดูไฟล์ที่แชร์ได้",
@@ -18311,17 +18311,17 @@
           "tryAgain": "ลองอีกครั้ง"
         },
         "artifact-publish-flow": {
-          "9a078a0c65": "ไม่สามารถแชร์ artifact ได้",
+          "9a078a0c65": "ไม่สามารถแชร์ อาร์ติแฟกต์ ได้",
           "bba20daa6d": "ลงชื่อเข้าใช้ Orca แล้วลองอีกครั้ง",
-          "54b1805328": "แชร์ artifact ไม่ได้",
-          "430019efd0": "แชร์ artifact แล้ว",
-          "2fc727c831": "อัปเดต artifact แล้ว",
+          "54b1805328": "แชร์ อาร์ติแฟกต์ ไม่ได้",
+          "430019efd0": "แชร์ อาร์ติแฟกต์ แล้ว",
+          "2fc727c831": "อัปเดต อาร์ติแฟกต์ แล้ว",
           "fbb5018602": "ไฟล์นี้ว่างเปล่า",
-          "6112db5a1c": "artifact นี้มีขนาดใหญ่เกินกว่าจะแชร์ได้",
+          "6112db5a1c": "อาร์ติแฟกต์ นี้มีขนาดใหญ่เกินกว่าจะแชร์ได้",
           "e2ed5acd8c": "Orca อ่านไฟล์นี้ไม่ได้ เปิดจาก workspace แล้วลองอีกครั้ง",
           "visualUnreadable": "อ่านภาพนี้เพื่อแชร์ไม่ได้",
-          "6d475e9b25": "แชร์เป็น artifact ได้เฉพาะไฟล์ HTML และ Markdown ในเครื่องเท่านั้น",
-          "29a406be09": "artifact ต้องมีข้อความ"
+          "6d475e9b25": "แชร์เป็น อาร์ติแฟกต์ ได้เฉพาะไฟล์ HTML และ Markdown ในเครื่องเท่านั้น",
+          "29a406be09": "อาร์ติแฟกต์ ต้องมีข้อความ"
         },
         "ArtifactPublishedLinkPanel": {
           "copyLink": "คัดลอกลิงก์",
@@ -18330,10 +18330,10 @@
           "update": "อัปเดตเนื้อหาที่แชร์"
         },
         "ArtifactDetailDrawer": {
-          "description": "แสดงตัวอย่างและจัดการ artifact ที่แชร์นี้"
+          "description": "แสดงตัวอย่างและจัดการ อาร์ติแฟกต์ ที่แชร์นี้"
         },
         "ArtifactListSearchField": {
-          "label": "ค้นหา artifact",
+          "label": "ค้นหา อาร์ติแฟกต์",
           "placeholder": "ค้นหา…",
           "clear": "ล้างการค้นหา"
         },
@@ -18346,7 +18346,7 @@
           "actions": "การดำเนินการ"
         },
         "ArtifactsPageSkeleton": {
-          "loading": "กำลังโหลด artifact"
+          "loading": "กำลังโหลด อาร์ติแฟกต์"
         },
         "expiredCompact": "หมดอายุแล้ว",
         "typeMarkdown": "Markdown",
@@ -18437,10 +18437,10 @@
       "UnexpectedSignoutCard": {
         "9f2c1a4b7d": "คุณออกจากระบบแล้ว",
         "3e8f5c2a91": "ปิด",
-        "7b4d9e1f2a": "ลงชื่อเข้าใช้อีกครั้งในชื่อ {{value0}} เพื่อกู้คืนการแชร์ Artifact, Orca Relay และการแชร์ skill",
-        "5a1c8d3e6f": "ลงชื่อเข้าใช้อีกครั้งเพื่อกู้คืนการแชร์ Artifact, Orca Relay และการแชร์ skill",
+        "7b4d9e1f2a": "ลงชื่อเข้าใช้อีกครั้งในชื่อ {{value0}} เพื่อกู้คืนการแชร์ อาร์ติแฟกต์, Orca Relay และการแชร์ skill",
+        "5a1c8d3e6f": "ลงชื่อเข้าใช้อีกครั้งเพื่อกู้คืนการแชร์ อาร์ติแฟกต์, Orca Relay และการแชร์ skill",
         "1f6b2c9d4e": "สิ่งที่คุณจะได้กลับมา",
-        "8d2e4f7a1b": "การแชร์ artifact",
+        "8d2e4f7a1b": "การแชร์ อาร์ติแฟกต์",
         "2c9a5b6e8d": "เผยแพร่ไฟล์ HTML และ Markdown และจัดการลิงก์ที่แชร์ทั้งหมดจาก Orca",
         "6e3f1a9c5b": "Orca Relay",
         "4b7d2e8f1a": "เชื่อมต่อ Orca Mobile กับเดสก์ท็อปเครื่องนี้ผ่านเครือข่ายมือถือหรือ Wi-Fi ใดก็ได้",
@@ -19597,7 +19597,7 @@
         "contextUsage": "แสดงการใช้บริบท",
         "contextEstimated": "แสดงการใช้บริบทโดยประมาณ",
         "modelAndEffort": "เลือกโมเดลและระดับ reasoning effort",
-        "modelTerminal": "เปิดตัวเลือกโมเดลใน Terminal",
+        "modelTerminal": "เปิดตัวเลือกโมเดลใน เทอร์มินัล",
         "model": "เลือกโมเดล",
         "effort": "เลือกระดับ reasoning effort",
         "ide": "รวมบริบทจาก IDE",
@@ -19617,9 +19617,9 @@
         "archive": "เก็บถาวร session นี้และออก",
         "delete": "ลบ session นี้และออก",
         "resumeSaved": "ทำแชตที่บันทึกไว้ต่อ",
-        "resumeSession": "ทำ session ต่อ หากไม่ระบุอาร์กิวเมนต์ ให้เลือกใน Terminal",
+        "resumeSession": "ทำ session ต่อ หากไม่ระบุอาร์กิวเมนต์ ให้เลือกใน เทอร์มินัล",
         "forkChat": "fork แชตปัจจุบัน",
-        "forkMessage": "fork จากข้อความก่อนหน้าใน Terminal",
+        "forkMessage": "fork จากข้อความก่อนหน้าใน เทอร์มินัล",
         "app": "ทำต่อใน Codex Desktop",
         "planSwitch": "สลับเป็นโหมด Plan",
         "planToggle": "สลับโหมดวางแผน",
@@ -19646,18 +19646,18 @@
         "ps": "แสดงรายการ terminal เบื้องหลัง",
         "stop": "หยุด terminal เบื้องหลังทั้งหมด",
         "personality": "เลือกรูปแบบการสื่อสาร",
-        "switch": "เปิดตัวเลือกโมเดลชั่วคราวใน Terminal",
-        "branch": "ย้อนกลับไปยังข้อความก่อนหน้าใน Terminal",
-        "tree": "เรียกดูโครงสร้าง session ใน Terminal",
+        "switch": "เปิดตัวเลือกโมเดลชั่วคราวใน เทอร์มินัล",
+        "branch": "ย้อนกลับไปยังข้อความก่อนหน้าใน เทอร์มินัล",
+        "tree": "เรียกดูโครงสร้าง session ใน เทอร์มินัล",
         "session": "แสดงข้อมูลและการควบคุมของ session",
         "fast": "สลับ priority service tier",
         "tools": "แสดงเครื่องมือที่ agent มองเห็น",
         "jobs": "แสดงงานเบื้องหลัง",
-        "git": "เปิดตัวดู Git ใน Terminal",
+        "git": "เปิดตัวดู Git ใน เทอร์มินัล",
         "export": "ส่งออก session เป็น HTML",
-        "settings": "เปิดการตั้งค่าใน Terminal",
-        "extensions": "เปิดแดชบอร์ดส่วนขยายใน Terminal",
-        "hotkeys": "แสดงปุ่มลัดใน Terminal"
+        "settings": "เปิดการตั้งค่าใน เทอร์มินัล",
+        "extensions": "เปิดแดชบอร์ดส่วนขยายใน เทอร์มินัล",
+        "hotkeys": "แสดงปุ่มลัดใน เทอร์มินัล"
       },
       "modelDescriptions": {
         "grok_4_7": "โมเดล frontier รุ่นล่าสุดของ xAI",
@@ -19718,7 +19718,7 @@
     "tab": {
       "bar": {
         "SortableTabContextMenu": {
-          "switchToTerminalView": "ทำต่อด้วย Terminal Agent",
+          "switchToTerminalView": "ทำต่อด้วย เทอร์มินัล Agent",
           "switchToChatView": "ทำต่อใน Chat UI"
         },
         "BrowserTab": {
@@ -21356,7 +21356,7 @@
       "addNotes": "เพิ่มบันทึก",
       "notesOptional": "ไม่บังคับ · Markdown",
       "saveHint": "การเปลี่ยนแปลงจะมีผลเมื่อคุณบันทึก",
-      "terminal": "Terminal",
+      "terminal": "เทอร์มินัล",
       "seenIn": "พบใน {{label}}",
       "unavailableTab": "แท็บไม่พร้อมใช้งาน",
       "sessions": "Session และ terminal",
@@ -21409,7 +21409,7 @@
   "tabHoverCard": {
     "browser": "เบราว์เซอร์",
     "editor": "Editor",
-    "terminal": "Terminal",
+    "terminal": "เทอร์มินัล",
     "namingFailure": {
       "regenerating": "กำลังสร้างใหม่…",
       "regenerate": "สร้างชื่อใหม่",
@@ -21658,7 +21658,7 @@
     "loading": "กำลังตรวจสอบโปรเจกต์ใน {{distro}}…",
     "runningTitle": "กำลังย้ายไปยังโฮสต์ {{distro}}",
     "preview": {
-      "counts": "โปรเจกต์: {{projects}} · Workspace: {{workspaces}} · Terminal: {{terminals}} · แชต: {{chats}}",
+      "counts": "โปรเจกต์: {{projects}} · Workspace: {{workspaces}} · เทอร์มินัล: {{terminals}} · แชต: {{chats}}",
       "whatHappens": "ไฟล์ของคุณยังอยู่ที่เดิม terminal จะเริ่มใหม่ในโฟลเดอร์เดิม โดยยังคงเอาต์พุต ประวัติ shell และบทสนทนาของ agent ไว้",
       "projects": "โปรเจกต์ใน {{distro}}",
       "folderBadge": "โฟลเดอร์",
@@ -21971,7 +21971,7 @@
       "sidebarPortsToggle": "แสดงพอร์ต",
       "sidebarSleepingWorkspacesToggle": "สลับการแสดง Workspace ที่พักอยู่",
       "sidebarFocusWorktreeList": "โฟกัสรายการ worktree",
-      "floatingTerminalToggle": "สลับ Terminal แบบลอย",
+      "floatingTerminalToggle": "สลับ เทอร์มินัล แบบลอย",
       "floatingWorkspaceMaximize": "ขยายแผง Workspace แบบลอยให้เต็ม",
       "floatingWorkspaceMinimize": "ย่อแผง Workspace แบบลอย",
       "zoomIn": "ขยาย",
@@ -22072,7 +22072,7 @@
       "keepRunningButton": "ใช้งานต่อ",
       "title": "รีสตาร์ท Orca ในโหมดกราฟิกปลอดภัยหรือไม่",
       "message": "กระบวนการกราฟิกของ Orca ขัดข้องซ้ำ ๆ",
-      "detail": "โหมดกราฟิกปลอดภัยจะปิดการเร่งด้วยฮาร์ดแวร์และ WebGL สำหรับ Orca เวอร์ชันนี้ Terminal และเนื้อหา 3D อาจแสดงผลช้าลง การเลือก \"ใช้งานต่อ\" จะไม่เปลี่ยนการตั้งค่ากราฟิก"
+      "detail": "โหมดกราฟิกปลอดภัยจะปิดการเร่งด้วยฮาร์ดแวร์และ WebGL สำหรับ Orca เวอร์ชันนี้ เทอร์มินัล และเนื้อหา 3D อาจแสดงผลช้าลง การเลือก \"ใช้งานต่อ\" จะไม่เปลี่ยนการตั้งค่ากราฟิก"
     }
   },
   "localBuild": {
@@ -22159,7 +22159,7 @@
       "legacyJsonPath": "เส้นทาง JSON แบบเดิม: {{path}}",
       "retainedBackups": "ข้อมูลสำรอง SQLite ที่เก็บไว้:",
       "retainedExports": "JSON ที่ส่งออกและเก็บไว้:",
-      "chooseRecoveryArtifact": "ออกจาก Orca แล้วเรียกใช้ `{{command}}` และเลือก artifact กู้คืนที่ใช้งานได้ดี",
+      "chooseRecoveryArtifact": "ออกจาก Orca แล้วเรียกใช้ `{{command}}` และเลือก อาร์ติแฟกต์ กู้คืนที่ใช้งานได้ดี",
       "restoreCommands": "กู้คืน SQLite ด้วย `{{backupCommand}}` หรือกู้คืน JSON ที่ส่งออกด้วย `{{revisionCommand}}`",
       "authorityAmbiguous": "Orca เลือกแหล่งข้อมูลหลักของสถานะโปรไฟล์อย่างปลอดภัยไม่ได้: {{detail}}",
       "authorityBothPreserved": "บิลด์เก่าอาจเปลี่ยนไฟล์ JSON ไว้ สำเนาทั้งสองชุดถูกเก็บรักษาไว้ และจะไม่เลือกชุดใดโดยอัตโนมัติ",
@@ -22573,7 +22573,7 @@
         "description": "ดูการใช้งานและ rate limit ของทุกบัญชีที่เชื่อมต่อ เพื่อให้รู้ว่าควรสลับบัญชีเมื่อไร"
       },
       "terminal": {
-        "name": "Terminal",
+        "name": "เทอร์มินัล",
         "description": "เห็น agent การทดสอบ และ dev log พร้อมกันทั้งหมด"
       },
       "editor": {
@@ -22604,7 +22604,7 @@
         "title": "orchestration ของ workspace แบบขนาน"
       },
       "tile02": {
-        "title": "Terminal ระดับ Ghostty"
+        "title": "เทอร์มินัล ระดับ Ghostty"
       },
       "tile03": {
         "title": "GitHub และ Linear แบบเนทีฟ"
@@ -22760,7 +22760,7 @@
     "sidebarSessions": {
       "newSession": "Session ใหม่",
       "newClaudeSession": "Claude session ใหม่",
-      "newTerminal": "Terminal ใหม่",
+      "newTerminal": "เทอร์มินัล ใหม่",
       "newWorkspace": "Workspace ใหม่…",
       "newIn": "ใหม่ใน {{name}}",
       "rename": "เปลี่ยนชื่อ…",
@@ -22797,8 +22797,8 @@
       "submenu": "โมเดล"
     },
     "sidebar": {
-      "terminal": "Terminal",
-      "openWorkspace": "เปิด terminal"
+      "terminal": "เทอร์มินัล",
+      "openWorkspace": "เปิด เทอร์มินัล"
     },
     "mobile": {
       "directOnly": "Relay ปิดอยู่ใน Prompt โทรศัพท์ของคุณจะเชื่อมต่อได้เฉพาะเมื่ออยู่บน Wi-Fi เดียวกับคอมพิวเตอร์เครื่องนี้หรือผ่าน Tailscale"
