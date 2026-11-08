@@ -133,6 +133,35 @@ function everyInterval(callback: () => void, ms: number): () => void {
   return () => clearInterval(handle)
 }
 
+/** The newest custom title already in a transcript, read from its end so a long one stays cheap. */
+async function readExistingCustomTitle(
+  target: PromptClaudeRenameTarget,
+  size: number,
+  readRange: (path: string, start: number, length: number) => Promise<Buffer>
+): Promise<string | null> {
+  let end = size
+  let lineRemainder: Buffer = Buffer.alloc(0)
+  while (end > 0) {
+    const start = Math.max(0, end - MAX_READ_BYTES)
+    const bytes = Buffer.concat([
+      await readRange(target.transcriptPath, start, end - start),
+      lineRemainder
+    ])
+    // Bytes before the first newline belong to a line that begins in the earlier chunk.
+    const firstLine = start > 0 ? bytes.indexOf(NEWLINE) + 1 : 0
+    const title = latestClaudeCustomTitle(
+      bytes.subarray(firstLine).toString('utf8'),
+      target.sessionId
+    )
+    if (title) {
+      return title
+    }
+    lineRemainder = start > 0 && firstLine === 0 ? bytes : bytes.subarray(0, firstLine)
+    end = start
+  }
+  return null
+}
+
 function sameTarget(left: PromptClaudeRenameTarget, right: PromptClaudeRenameTarget): boolean {
   return left.sessionId === right.sessionId && left.transcriptPath === right.transcriptPath
 }
@@ -195,6 +224,8 @@ export function createPromptClaudeRenameWatch(
       // First look, or the file was replaced: start from its current end.
       entry.offset = size
       entry.skipPartialLine = false
+      // Claude re-appends the name it already has; only a different name is a `/rename`.
+      entry.lastTitle = await readExistingCustomTitle(entry.target, size, readRange)
       return null
     }
     if (size === entry.offset) {

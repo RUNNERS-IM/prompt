@@ -113,6 +113,16 @@ describe('applyPromptClaudeSessionTitle', () => {
     expect(promptTerminalTabName(tab())).toBe('Z')
   })
 
+  it('keeps the set name when Claude reports that same name back', () => {
+    const { state, tab } = makeState('new name')
+    applyPromptClaudeSessionTitle(state, {
+      paneKey: 'tab-1:leaf-1',
+      sessionId: 'claude-session',
+      title: 'new name'
+    })
+    expect(tab().customTitle).toBe('new name')
+  })
+
   it('ignores a title from a session the tab no longer tracks', () => {
     const { state, tab } = makeState()
     const applied = applyPromptClaudeSessionTitle(state, {

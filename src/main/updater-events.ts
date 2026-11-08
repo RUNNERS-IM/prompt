@@ -291,6 +291,8 @@ export function registerAutoUpdaterHandlers({
       void sendCheckFailureStatus(message, wasUserInitiated || undefined, 'event', err)
       return
     }
+    // The update card is the only other place this text appears, and it goes when the card closes.
+    recordUpdaterLifecycle('error', { message: message.slice(0, 500) }, { level: 'warn' })
     sendErrorStatus(message, wasUserInitiated || undefined)
     if (isLocalBuildCheck() || isPinnedBuildCheck()) {
       restoreReleaseUpdateSource()

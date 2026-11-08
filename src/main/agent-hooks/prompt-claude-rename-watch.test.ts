@@ -64,6 +64,28 @@ describe('createPromptClaudeRenameWatch', () => {
     rmSync(dir, { recursive: true, force: true })
   })
 
+  it('does not report the name Claude already had when it re-appends that record', async () => {
+    const watch = createWatch()
+    watch.reconcile()
+    await watch.poll()
+    appendFileSync(transcriptPath, customTitleLine('old name'))
+    await watch.poll()
+    expect(events).toEqual([])
+    appendFileSync(transcriptPath, customTitleLine('new name'))
+    await watch.poll()
+    expect(events.map((event) => event.title)).toEqual(['new name'])
+  })
+
+  it('finds the name Claude already had far above the end of a long transcript', async () => {
+    appendFileSync(transcriptPath, `${'x'.repeat(9 * 1024 * 1024)}\n`)
+    const watch = createWatch()
+    watch.reconcile()
+    await watch.poll()
+    appendFileSync(transcriptPath, customTitleLine('old name'))
+    await watch.poll()
+    expect(events).toEqual([])
+  })
+
   it('reports a rename appended after it starts watching, once per new title', async () => {
     const watch = createWatch()
     watch.reconcile()

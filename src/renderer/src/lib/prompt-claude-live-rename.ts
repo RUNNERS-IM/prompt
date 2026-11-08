@@ -7,6 +7,7 @@ import type { AppState } from '@/store/types'
 import { useAppStore } from '@/store'
 import { isAiVaultTitleAgent } from '../../../shared/ai-vault-session-title'
 import { collectAgentPaneConversations } from './ai-vault-tab-title-requests'
+import { startPromptClaudeRenameRelayToStore } from './prompt-claude-rename-relay-store'
 
 /**
  * Store a `/rename` as the tab's AI vault title, the slot the tab strip, sidebar row, saved session
@@ -38,7 +39,8 @@ export function applyPromptClaudeSessionTitle(
     .find((candidate) => candidate.id === conversation.tabId)
   const stored = tab?.aiVaultTitle
   const isNewRename = stored?.sessionId !== event.sessionId || stored.title.trim() !== title
-  if (isNewRename && tab?.customTitle?.trim()) {
+  const setName = tab?.customTitle?.trim()
+  if (isNewRename && setName && setName !== title) {
     state.setTabCustomTitle(conversation.tabId, null, { recordInteraction: false })
   }
   state.setAiVaultTabTitle(conversation.tabId, {
@@ -61,13 +63,16 @@ export function startPromptClaudeLiveRename(deps: {
 }
 
 export function PromptClaudeLiveRenameGate(): null {
-  useEffect(
-    () =>
-      startPromptClaudeLiveRename({
-        api: window.api.promptClaudeSessionTitle,
-        getState: useAppStore.getState
-      }),
-    []
-  )
+  useEffect(() => {
+    const api = window.api.promptClaudeSessionTitle
+    const stopLiveRename = startPromptClaudeLiveRename({ api, getState: useAppStore.getState })
+    // Only the desktop app relays, so a web client watching the same session cannot type it twice.
+    const stopRelay =
+      typeof api?.onTitle === 'function' ? startPromptClaudeRenameRelayToStore() : () => {}
+    return () => {
+      stopLiveRename()
+      stopRelay()
+    }
+  }, [])
   return null
 }
