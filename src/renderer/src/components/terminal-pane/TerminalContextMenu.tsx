@@ -221,34 +221,18 @@ function TerminalContextMenuItems({
         onClose={() => onOpenChange(false)}
         onAdd={onAddQuickCommand}
       />
-      {canContinueAgentSessionInNewSession ? (
-        <AgentSessionContinuationMenuItem onSelect={onContinueAgentSessionInNewSession} />
-      ) : null}
-      <DropdownMenuItem onSelect={onForkAgentSession}>
-        <GitFork />
+      <DropdownMenuSeparator />
+      <DropdownMenuItem onSelect={onClearScreen}>
+        <Eraser />
+        {translate('auto.components.terminal.pane.TerminalContextMenu.b4cdd9314e', 'Clear Screen')}
+      </DropdownMenuItem>
+      <DropdownMenuItem onSelect={onResetTerminal}>
+        <RotateCcw />
         {translate(
-          'auto.components.terminal.pane.TerminalContextMenu.8a7ddb8b8a',
-          'Fork Agent Session…'
+          'auto.components.terminal.pane.TerminalContextMenu.resetTerminal',
+          'Reset Terminal'
         )}
       </DropdownMenuItem>
-      <AgentSessionContextCopyMenuItem onSelect={onCopyAgentSessionContext} />
-      {canToggleNativeChat ? (
-        <DropdownMenuItem onSelect={onToggleNativeChat}>
-          {isNativeChatView ? <SquareTerminal /> : <MessageSquare />}
-          {isNativeChatView
-            ? translate(
-                'components.tab.bar.SortableTabContextMenu.switchToTerminalView',
-                'Continue with Terminal Agent'
-              )
-            : translate(
-                'components.tab.bar.SortableTabContextMenu.switchToChatView',
-                'Continue in Chat UI'
-              )}
-          {shortcuts.nativeChat ? (
-            <DropdownMenuShortcut>{shortcuts.nativeChat}</DropdownMenuShortcut>
-          ) : null}
-        </DropdownMenuItem>
-      ) : null}
       <DropdownMenuSeparator />
       <DropdownMenuItem className="whitespace-nowrap" onSelect={onSplitRight}>
         <PanelRightClose />
@@ -293,6 +277,35 @@ function TerminalContextMenuItems({
           <DropdownMenuShortcut>{shortcuts.expand}</DropdownMenuShortcut>
         </DropdownMenuItem>
       )}
+      <DropdownMenuSeparator />
+      {canContinueAgentSessionInNewSession ? (
+        <AgentSessionContinuationMenuItem onSelect={onContinueAgentSessionInNewSession} />
+      ) : null}
+      <DropdownMenuItem onSelect={onForkAgentSession}>
+        <GitFork />
+        {translate(
+          'auto.components.terminal.pane.TerminalContextMenu.8a7ddb8b8a',
+          'Fork Agent Session…'
+        )}
+      </DropdownMenuItem>
+      <AgentSessionContextCopyMenuItem onSelect={onCopyAgentSessionContext} />
+      {canToggleNativeChat ? (
+        <DropdownMenuItem onSelect={onToggleNativeChat}>
+          {isNativeChatView ? <SquareTerminal /> : <MessageSquare />}
+          {isNativeChatView
+            ? translate(
+                'components.tab.bar.SortableTabContextMenu.switchToTerminalView',
+                'Continue with Terminal Agent'
+              )
+            : translate(
+                'components.tab.bar.SortableTabContextMenu.switchToChatView',
+                'Continue in Chat UI'
+              )}
+          {shortcuts.nativeChat ? (
+            <DropdownMenuShortcut>{shortcuts.nativeChat}</DropdownMenuShortcut>
+          ) : null}
+        </DropdownMenuItem>
+      ) : null}
       <DropdownMenuSeparator />
       <DropdownMenuItem
         onSelect={() => {
@@ -351,18 +364,6 @@ function TerminalContextMenuItems({
           </DropdownMenuItem>
         </>
       )}
-      <DropdownMenuSeparator />
-      <DropdownMenuItem onSelect={onClearScreen}>
-        <Eraser />
-        {translate('auto.components.terminal.pane.TerminalContextMenu.b4cdd9314e', 'Clear Screen')}
-      </DropdownMenuItem>
-      <DropdownMenuItem onSelect={onResetTerminal}>
-        <RotateCcw />
-        {translate(
-          'auto.components.terminal.pane.TerminalContextMenu.resetTerminal',
-          'Reset Terminal'
-        )}
-      </DropdownMenuItem>
     </>
   )
 }
