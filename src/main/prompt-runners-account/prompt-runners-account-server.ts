@@ -45,10 +45,6 @@ export function runnersAccountEmail(): string | null {
   return runnersAccount().current()
 }
 
-export function runnersAccountAccessToken(): string | null {
-  return runnersAccount().accessToken()
-}
-
 async function signInWith(
   run: (signIn: Account) => Promise<void>
 ): Promise<PromptRunnersSignInResult> {

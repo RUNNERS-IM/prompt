@@ -11,25 +11,14 @@ import type {
   PromptRunnersSignMode
 } from '../../../../shared/prompt-runners-account'
 import { SignInSheet, accountText } from '../runners-account/runners-account'
-import { usageText } from '../runners-account/runners-usage'
 import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
-import {
-  SettingsRow,
-  SettingsSubsectionHeader,
-  SettingsSwitchRow
-} from '../settings/SettingsFormControls'
+import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 import {
   getRunnersAccountEmail,
   loadRunnersAccountEmail,
   setRunnersAccountEmail,
   subscribeRunnersAccountEmail
 } from './prompt-runners-account-email'
-import {
-  choosePromptUsageConsent,
-  getPromptUsageConsent,
-  loadPromptUsageConsent,
-  subscribePromptUsageConsent
-} from './prompt-usage-consent'
 import './prompt-runners-account.css'
 
 /** Settings › Account: the RUNNERS account row, Log In while signed out and the email with Log Out after.
@@ -39,14 +28,12 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
   const { i18n } = useTranslation()
   const remoteRuntime = useAppStore((s) => Boolean(s.settings?.activeRuntimeEnvironmentId?.trim()))
   const email = useSyncExternalStore(subscribeRunnersAccountEmail, getRunnersAccountEmail)
-  const usageConsent = useSyncExternalStore(subscribePromptUsageConsent, getPromptUsageConsent)
   const [signingIn, setSigningIn] = useState(false)
   const closeSignIn = useCallback(() => setSigningIn(false), [])
 
   useEffect(() => {
     if (api) {
       loadRunnersAccountEmail(api)
-      loadPromptUsageConsent(api)
     }
   }, [api])
 
@@ -116,13 +103,6 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
           )
         }
       />
-      {usageConsent !== undefined ? (
-        <SettingsSwitchRow
-          label={usageText(lang, 'rowTitle')}
-          checked={usageConsent === 'granted'}
-          onChange={() => choosePromptUsageConsent(api, usageConsent !== 'granted')}
-        />
-      ) : null}
       {/* Why a portal: the sheet covers the whole window, not just the scrolling settings pane. */}
       {signingIn
         ? createPortal(

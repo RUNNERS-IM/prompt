@@ -7,12 +7,8 @@ export const PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL = 'prompt:runnersAccountSign
 export const PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL = 'prompt:runnersAccountSignOut'
 export const PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL = 'prompt:runnersAccountSendCode'
 export const PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL = 'prompt:runnersAccountResetPassword'
-export const PROMPT_USAGE_CONSENT_GET_CHANNEL = 'prompt:usageConsentGet'
-export const PROMPT_USAGE_CONSENT_SET_CHANNEL = 'prompt:usageConsentSet'
 
 export type PromptRunnersSignMode = 'login' | 'signup'
-
-export type PromptUsageConsent = 'unasked' | 'granted' | 'denied'
 
 /** Why the mailed six-digit code is sent: to make an account, or to set a new password. */
 export type PromptRunnersCodePurpose = 'signup' | 'reset'
@@ -37,8 +33,6 @@ export type PromptRunnersSendCodeResult =
   | { ok: false; problem: PromptRunnersSignInProblem }
 
 export type PromptRunnersAccountApi = {
-  usageConsent: () => Promise<PromptUsageConsent>
-  setUsageConsent: (granted: boolean) => Promise<void>
   /** The signed-in email, or null. */
   get: () => Promise<string | null>
   signIn: (

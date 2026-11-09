@@ -35,7 +35,6 @@ import { useDocumentAppearance } from './app-shell/use-document-appearance'
 import { useFloatingWorkspacePanel } from './app-shell/use-floating-workspace-panel'
 import { useGlobalKeybindings } from './app-shell/use-global-keybindings'
 import { useOnboardingAndFeatureTips } from './app-shell/use-onboarding-and-feature-tips'
-import { PromptUsageConsentSheet } from './components/prompt-runners-account/PromptUsageConsentSheet'
 import { usePersistedUIWriter } from './app-shell/use-persisted-ui-writer'
 import { useRuntimeGraphSync } from './app-shell/use-runtime-graph-sync'
 import { useWindowVisibilityEffects } from './app-shell/use-window-visibility-effects'
@@ -124,9 +123,6 @@ function App(): React.JSX.Element {
         )}
         <PlainSshTerminalPanels />
       </TooltipProvider>
-      {onboardingGate.onboarding && !onboardingGate.shouldRender ? (
-        <PromptUsageConsentSheet />
-      ) : null}
       <SkillFreshnessNudge />
       <WorktreeBaseFallbackDialog />
       <ClaudeAccountSwitchDialog />
