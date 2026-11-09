@@ -228,7 +228,9 @@
       "noUpdateHours_other": "Sin novedades desde hace {{count}} h · puede estar bloqueado",
       "noUpdateDays_one": "Sin novedades desde hace {{count}} d · puede estar bloqueado",
       "noUpdateDays_many": "Sin novedades desde hace {{count}} d · puede estar bloqueado",
-      "noUpdateDays_other": "Sin novedades desde hace {{count}} d · puede estar bloqueado"
+      "noUpdateDays_other": "Sin novedades desde hace {{count}} d · puede estar bloqueado",
+      "loginUnmoved": "No se pasó al nuevo inicio de sesión",
+      "restartSession": "Reiniciar"
     },
     "sessionMove": {
       "cancelRemote": "Las sesiones solo se pueden mover entre proyectos de este equipo.",

@@ -22861,7 +22861,9 @@
         "other": "Đang dùng {{tool}}"
       },
       "noUpdateHours_other": "Không có cập nhật trong {{count}} giờ · có thể bị treo",
-      "noUpdateDays_other": "Không có cập nhật trong {{count}} ngày · có thể bị treo"
+      "noUpdateDays_other": "Không có cập nhật trong {{count}} ngày · có thể bị treo",
+      "loginUnmoved": "Chưa chuyển sang đăng nhập mới",
+      "restartSession": "Khởi động lại"
     },
     "timeAgo": {
       "now": "vừa xong",

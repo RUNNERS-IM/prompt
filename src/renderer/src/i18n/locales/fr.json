@@ -228,7 +228,9 @@
       "noUpdateHours_other": "Aucune mise à jour depuis {{count}} h · peut-être bloqué",
       "noUpdateDays_one": "Aucune mise à jour depuis {{count}} j · peut-être bloqué",
       "noUpdateDays_many": "Aucune mise à jour depuis {{count}} j · peut-être bloqué",
-      "noUpdateDays_other": "Aucune mise à jour depuis {{count}} j · peut-être bloqué"
+      "noUpdateDays_other": "Aucune mise à jour depuis {{count}} j · peut-être bloqué",
+      "loginUnmoved": "Non transféré vers la nouvelle connexion",
+      "restartSession": "Redémarrer"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",

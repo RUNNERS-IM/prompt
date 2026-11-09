@@ -221,7 +221,9 @@
         "overloaded": "伺服器忙碌中"
       },
       "noUpdateHours_other": "已 {{count}} 小時沒有更新 · 可能已卡住",
-      "noUpdateDays_other": "已 {{count}} 天沒有更新 · 可能已卡住"
+      "noUpdateDays_other": "已 {{count}} 天沒有更新 · 可能已卡住",
+      "loginUnmoved": "未轉到新的登入",
+      "restartSession": "重新啟動"
     },
     "sessionMove": {
       "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",

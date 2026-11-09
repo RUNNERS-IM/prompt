@@ -7,6 +7,7 @@ import type { RuntimeClientTarget } from '../../../shared/runtime-client-target'
 import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
 import { getClaudeAccountLabel } from './claude-account-label'
 import { findClaudeLoginFollowers } from './claude-login-followers'
+import { setClaudeLoginUnmovedPanes } from './claude-login-unmoved-panes'
 import type { ClaudeHostFolders } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
@@ -126,6 +127,7 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     return 'show-confirmation'
   }
   let uncheckedCount = 0
+  let unmoved: ClaudeSessionMoveCandidate[] = []
   const found = await findClaudeSwitchSessions({
     owner: args.owner,
     target: args.target,
@@ -134,6 +136,7 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     host,
     onUnchecked: (sessions) => {
       uncheckedCount = sessions.length
+      unmoved = sessions
       console.warn(
         '[claude-account-switch] could not read the foreground of',
         sessions.map((session) => session.ptyId)
@@ -151,6 +154,7 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
   if (policy === 'keep') {
     return 'show-confirmation'
   }
+  setClaudeLoginUnmovedPanes(unmoved)
   if (uncheckedCount > 0) {
     warnUncheckedSessions(
       uncheckedCount,
@@ -202,14 +206,21 @@ export async function handleRunningClaudeSessionsAfterLogin(args: {
   }
   const generation = ++switchGeneration
   setPrompt(null)
+  let unmoved: ClaudeSessionMoveCandidate[] = []
   const found = await findClaudeLoginFollowers({
     loginPaneKey: args.paneKey,
-    host: args.host
+    host: args.host,
+    onUnchecked: (sessions) => {
+      unmoved = sessions
+    }
   }).catch((error: unknown) => {
     console.warn('[claude-login-sync] session scan failed:', error)
     return null
   })
   const policy = readPolicy()
+  if (generation === switchGeneration && policy !== 'keep') {
+    setClaudeLoginUnmovedPanes(unmoved)
+  }
   if (
     generation !== switchGeneration ||
     !found ||

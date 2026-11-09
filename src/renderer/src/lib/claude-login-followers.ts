@@ -16,6 +16,8 @@ const LOGIN_FOLLOW_ACCOUNT_ID = '\u0000prompt-login-follow'
 export async function findClaudeLoginFollowers(args: {
   loginPaneKey: string
   host?: ClaudeHostFolders
+  /** Followers left out because their foreground could not be read. */
+  onUnchecked?: (sessions: ClaudeSessionMoveCandidate[]) => void
 }): Promise<{ accountId: string | null; sessions: ClaudeSessionMoveCandidate[] } | null> {
   const owner: RuntimeClientTarget = { kind: 'local' }
   const target: CodexAccountSelectionTarget = { runtime: 'host' }
@@ -41,7 +43,13 @@ export async function findClaudeLoginFollowers(args: {
     target,
     fromAccountId: accountId,
     toAccountId: LOGIN_FOLLOW_ACCOUNT_ID,
-    host: args.host
+    host: args.host,
+    onUnchecked: (sessions) =>
+      args.onUnchecked?.(
+        sessions.filter(
+          (session) => makePaneKey(session.tabId, session.leafId) !== args.loginPaneKey
+        )
+      )
   })
   return {
     accountId,

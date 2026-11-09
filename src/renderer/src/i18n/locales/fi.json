@@ -23252,7 +23252,9 @@
       "noUpdateHours_one": "Ei päivityksiä {{count}} tuntiin · voi olla jumissa",
       "noUpdateHours_other": "Ei päivityksiä {{count}} tuntiin · voi olla jumissa",
       "noUpdateDays_one": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
-      "noUpdateDays_other": "Ei päivityksiä {{count}} päivään · voi olla jumissa"
+      "noUpdateDays_other": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
+      "loginUnmoved": "Ei siirtynyt uuteen kirjautumiseen",
+      "restartSession": "Käynnistä uudelleen"
     },
     "timeAgo": {
       "now": "nyt",

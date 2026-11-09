@@ -225,7 +225,9 @@
       "noUpdateHours_one": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
       "noUpdateHours_other": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
       "noUpdateDays_one": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
-      "noUpdateDays_other": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise"
+      "noUpdateDays_other": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
+      "loginUnmoved": "Nicht zur neuen Anmeldung gewechselt",
+      "restartSession": "Neu starten"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",

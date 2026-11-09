@@ -23252,7 +23252,9 @@
       "noUpdateHours_one": "{{count}} घंटे से कोई अपडेट नहीं · अटका हो सकता है",
       "noUpdateHours_other": "{{count}} घंटे से कोई अपडेट नहीं · अटका हो सकता है",
       "noUpdateDays_one": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
-      "noUpdateDays_other": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है"
+      "noUpdateDays_other": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
+      "loginUnmoved": "नए लॉगिन पर नहीं गया",
+      "restartSession": "फिर से शुरू करें"
     },
     "timeAgo": {
       "now": "अभी",

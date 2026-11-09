@@ -225,7 +225,9 @@
       "noUpdateHours_one": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
       "noUpdateHours_other": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
       "noUpdateDays_one": "{{count}} gündür güncelleme yok · takılmış olabilir",
-      "noUpdateDays_other": "{{count}} gündür güncelleme yok · takılmış olabilir"
+      "noUpdateDays_other": "{{count}} gündür güncelleme yok · takılmış olabilir",
+      "loginUnmoved": "Yeni oturuma taşınamadı",
+      "restartSession": "Yeniden başlat"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",

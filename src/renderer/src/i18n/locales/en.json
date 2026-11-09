@@ -23252,7 +23252,9 @@
       "noUpdateHours_one": "No update for {{count}} h · may be stuck",
       "noUpdateHours_other": "No update for {{count}} h · may be stuck",
       "noUpdateDays_one": "No update for {{count}} d · may be stuck",
-      "noUpdateDays_other": "No update for {{count}} d · may be stuck"
+      "noUpdateDays_other": "No update for {{count}} d · may be stuck",
+      "loginUnmoved": "Didn't move to the new login",
+      "restartSession": "Restart"
     },
     "timeAgo": {
       "now": "now",

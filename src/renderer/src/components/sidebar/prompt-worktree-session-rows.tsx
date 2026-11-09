@@ -1,3 +1,4 @@
+import { ClaudeLoginUnmovedLine } from './claude-login-unmoved-line'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import React, { useCallback, useMemo } from 'react'
 import { SquareTerminal } from 'lucide-react'
@@ -73,26 +74,29 @@ function PromptTerminalRow({
     [tab.id, worktreeId]
   )
   return (
-    <PromptSessionRowMenu tab={tab} name={name}>
-      <div
-        className={cn(ROW_CLASS, focused && 'bg-worktree-sidebar-accent text-foreground')}
-        onClick={activate}
-        onMouseDown={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-        title={name}
-        data-prompt-terminal-row=""
-        data-prompt-row-current={focused ? 'true' : undefined}
-      >
-        {showsClaudeStartBox ? (
-          <span className="inline-flex size-3 shrink-0 items-center justify-center" aria-hidden>
-            <AgentIcon agent="claude" size={12} />
-          </span>
-        ) : (
-          <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
-        )}
-        <PromptTerminalRowName name={name} />
-      </div>
-    </PromptSessionRowMenu>
+    <>
+      <PromptSessionRowMenu tab={tab} name={name}>
+        <div
+          className={cn(ROW_CLASS, focused && 'bg-worktree-sidebar-accent text-foreground')}
+          onClick={activate}
+          onMouseDown={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+          title={name}
+          data-prompt-terminal-row=""
+          data-prompt-row-current={focused ? 'true' : undefined}
+        >
+          {showsClaudeStartBox ? (
+            <span className="inline-flex size-3 shrink-0 items-center justify-center" aria-hidden>
+              <AgentIcon agent="claude" size={12} />
+            </span>
+          ) : (
+            <SquareTerminal className="size-3 shrink-0" strokeWidth={1.5} />
+          )}
+          <PromptTerminalRowName name={name} />
+        </div>
+      </PromptSessionRowMenu>
+      <ClaudeLoginUnmovedLine tabId={tab.id} />
+    </>
   )
 }
 
