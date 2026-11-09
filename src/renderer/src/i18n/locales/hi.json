@@ -23254,7 +23254,9 @@
       "noUpdateDays_one": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
       "noUpdateDays_other": "{{count}} दिन से कोई अपडेट नहीं · अटका हो सकता है",
       "loginUnmoved": "नए लॉगिन पर नहीं गया",
-      "restartSession": "फिर से शुरू करें"
+      "restartSession": "फिर से शुरू करें",
+      "resumeFailed": "यह सत्र फिर से नहीं खुल सका",
+      "retryResume": "फिर से कोशिश करें"
     },
     "timeAgo": {
       "now": "अभी",

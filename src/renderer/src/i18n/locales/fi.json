@@ -23254,7 +23254,9 @@
       "noUpdateDays_one": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
       "noUpdateDays_other": "Ei päivityksiä {{count}} päivään · voi olla jumissa",
       "loginUnmoved": "Ei siirtynyt uuteen kirjautumiseen",
-      "restartSession": "Käynnistä uudelleen"
+      "restartSession": "Käynnistä uudelleen",
+      "resumeFailed": "Istunnon avaaminen uudelleen epäonnistui",
+      "retryResume": "Yritä uudelleen"
     },
     "timeAgo": {
       "now": "nyt",

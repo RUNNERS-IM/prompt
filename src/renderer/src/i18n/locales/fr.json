@@ -230,7 +230,9 @@
       "noUpdateDays_many": "Aucune mise à jour depuis {{count}} j · peut-être bloqué",
       "noUpdateDays_other": "Aucune mise à jour depuis {{count}} j · peut-être bloqué",
       "loginUnmoved": "Non transféré vers la nouvelle connexion",
-      "restartSession": "Redémarrer"
+      "restartSession": "Redémarrer",
+      "resumeFailed": "Impossible de rouvrir cette session",
+      "retryResume": "Réessayer"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",

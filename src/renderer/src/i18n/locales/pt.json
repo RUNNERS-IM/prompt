@@ -230,7 +230,9 @@
       "noUpdateDays_many": "Sem atualização há {{count}} d · pode estar travada",
       "noUpdateDays_other": "Sem atualização há {{count}} d · pode estar travada",
       "loginUnmoved": "Não foi movida para o novo login",
-      "restartSession": "Reiniciar"
+      "restartSession": "Reiniciar",
+      "resumeFailed": "Não foi possível reabrir esta sessão",
+      "retryResume": "Tentar novamente"
     },
     "sessionMove": {
       "cancelRemote": "As sessões só podem ser movidas entre projetos neste computador.",

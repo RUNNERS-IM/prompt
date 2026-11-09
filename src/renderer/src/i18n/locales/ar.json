@@ -24818,7 +24818,9 @@
       "noUpdateDays_many": "لا تحديث منذ {{count}} يومًا · قد تكون عالقة",
       "noUpdateDays_other": "لا تحديث منذ {{count}} يوم · قد تكون عالقة",
       "loginUnmoved": "لم يُنقل إلى تسجيل الدخول الجديد",
-      "restartSession": "إعادة التشغيل"
+      "restartSession": "إعادة التشغيل",
+      "resumeFailed": "تعذّرت إعادة فتح هذه الجلسة",
+      "retryResume": "إعادة المحاولة"
     },
     "timeAgo": {
       "now": "الآن",

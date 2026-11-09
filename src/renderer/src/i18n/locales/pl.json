@@ -24036,7 +24036,9 @@
       "noUpdateDays_many": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
       "noUpdateDays_other": "Brak aktualizacji od {{count}} dn. · możliwe zawieszenie",
       "loginUnmoved": "Nie przeniesiono do nowego logowania",
-      "restartSession": "Uruchom ponownie"
+      "restartSession": "Uruchom ponownie",
+      "resumeFailed": "Nie udało się ponownie otworzyć tej sesji",
+      "retryResume": "Spróbuj ponownie"
     },
     "timeAgo": {
       "now": "teraz",

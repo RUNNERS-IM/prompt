@@ -23254,7 +23254,9 @@
       "noUpdateDays_one": "Al {{count}} d geen update · mogelijk vastgelopen",
       "noUpdateDays_other": "Al {{count}} d geen update · mogelijk vastgelopen",
       "loginUnmoved": "Niet overgezet naar de nieuwe aanmelding",
-      "restartSession": "Opnieuw starten"
+      "restartSession": "Opnieuw starten",
+      "resumeFailed": "Kan deze sessie niet opnieuw openen",
+      "retryResume": "Opnieuw proberen"
     },
     "timeAgo": {
       "now": "nu",

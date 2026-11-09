@@ -227,7 +227,9 @@
       "noUpdateDays_one": "{{count}} gündür güncelleme yok · takılmış olabilir",
       "noUpdateDays_other": "{{count}} gündür güncelleme yok · takılmış olabilir",
       "loginUnmoved": "Yeni oturuma taşınamadı",
-      "restartSession": "Yeniden başlat"
+      "restartSession": "Yeniden başlat",
+      "resumeFailed": "Bu oturum yeniden açılamadı",
+      "retryResume": "Yeniden dene"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",

@@ -23254,7 +23254,9 @@
       "noUpdateDays_one": "No update for {{count}} d · may be stuck",
       "noUpdateDays_other": "No update for {{count}} d · may be stuck",
       "loginUnmoved": "Didn't move to the new login",
-      "restartSession": "Restart"
+      "restartSession": "Restart",
+      "resumeFailed": "Couldn't reopen this session",
+      "retryResume": "Try again"
     },
     "timeAgo": {
       "now": "now",

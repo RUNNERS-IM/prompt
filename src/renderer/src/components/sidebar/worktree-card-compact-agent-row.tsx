@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import { ClaudeLoginUnmovedLine } from './claude-login-unmoved-line'
+import { ClaudeSessionRowNotices } from './claude-session-row-notices'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { DashboardAgentChildDisclosure } from '@/components/dashboard/DashboardAgentChildDisclosure'
 import { AgentStateDot, agentStateLabel } from '@/components/AgentStateDot'
@@ -371,7 +371,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         {rename ? null : timestamp}
       </div>
       {usePromptLayout ? (
-        <ClaudeLoginUnmovedLine tabId={agent.tab.id} paneKey={agent.paneKey} />
+        <ClaudeSessionRowNotices tabId={agent.tab.id} paneKey={agent.paneKey} />
       ) : null}
       {promptStatus ? (
         <div

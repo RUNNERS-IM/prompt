@@ -1,4 +1,4 @@
-import { ClaudeLoginUnmovedLine } from './claude-login-unmoved-line'
+import { ClaudeSessionRowNotices } from './claude-session-row-notices'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import React, { useCallback, useMemo } from 'react'
 import { SquareTerminal } from 'lucide-react'
@@ -95,7 +95,7 @@ function PromptTerminalRow({
           <PromptTerminalRowName name={name} />
         </div>
       </PromptSessionRowMenu>
-      <ClaudeLoginUnmovedLine tabId={tab.id} />
+      <ClaudeSessionRowNotices tabId={tab.id} />
     </>
   )
 }

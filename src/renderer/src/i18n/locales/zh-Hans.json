@@ -223,7 +223,9 @@
       "noUpdateHours_other": "{{count}} 小时无更新 · 可能已卡住",
       "noUpdateDays_other": "{{count}} 天无更新 · 可能已卡住",
       "loginUnmoved": "未转到新的登录",
-      "restartSession": "重新启动"
+      "restartSession": "重新启动",
+      "resumeFailed": "无法重新打开此会话",
+      "retryResume": "重试"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",

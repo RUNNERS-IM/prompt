@@ -227,7 +227,9 @@
       "noUpdateDays_one": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
       "noUpdateDays_other": "Seit {{count}} T. keine Aktualisierung · hängt möglicherweise",
       "loginUnmoved": "Nicht zur neuen Anmeldung gewechselt",
-      "restartSession": "Neu starten"
+      "restartSession": "Neu starten",
+      "resumeFailed": "Sitzung konnte nicht wieder geöffnet werden",
+      "retryResume": "Erneut versuchen"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",

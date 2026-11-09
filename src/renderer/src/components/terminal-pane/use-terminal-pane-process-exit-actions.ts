@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from '../../store'
 import { buildPaneAccountRestartStartup } from '@/lib/agent-account-restart-startup'
+import { takeClaudeResumeRetryStartup } from '@/lib/claude-resume-failure'
 import {
   isAccountRestartReady,
   selectReadyAccountRestartPtyIds
@@ -246,7 +247,9 @@ export function useTerminalPaneProcessExitActions(controller: TerminalPaneCloseC
         continue
       }
       const agent = consumePendingPaneAccountRestart(ptyId)
-      const startup = agent ? buildAccountRestartStartup(agent, pane.leafId) : null
+      const startup = agent
+        ? (takeClaudeResumeRetryStartup(ptyId) ?? buildAccountRestartStartup(agent, pane.leafId))
+        : null
       if (agent && startup) {
         // Why: one Claude switch restarts many panes at once; none was the one the user clicked.
         handleRestartPane(pane.id, startup, { focus: agent === 'codex' })

@@ -97,7 +97,9 @@ export function buildAgentResumeStartupPlan(args: {
           resumeCommand,
           cwd: agentCwd,
           platform: args.platform,
-          shell
+          shell,
+          // Why Claude only: its --resume finds the conversation from another folder of the repo.
+          continueIfCwdMissing: args.agent === 'claude'
         })
       : resumeCommand
   const applied = baseCommand.appliedSessionOptions

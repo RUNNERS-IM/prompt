@@ -64,10 +64,14 @@ export function buildAiVaultResumeShellCommand(args: {
   codexHome?: string | null
   /** Remove env on the agent itself: env cannot run builtin cd and a child cd would not move the agent. */
   clearEnvNames?: readonly string[]
+  /** Run the agent from the shell's own folder when cwd is gone instead of stopping at the failed cd. */
+  continueIfCwdMissing?: boolean
   // Queued lines run in the live shell; persisted shell-less commands retain the self-contained cmd /d /s /c wrapper.
   shell?: AgentStartupShell
 }): string {
   const { cwd, platform, codexHome, shell, clearEnvNames } = args
+  const cwdJoiner = (dialect: AgentStartupShell): string =>
+    args.continueIfCwdMissing ? commandSeparator(dialect) : ' && '
 
   // Choose grammar by live shell, including PowerShell on POSIX; shell-less persisted lines retain the legacy cmd wrapper.
   if (shell === 'powershell' || (platform === 'win32' && shell && shell !== 'cmd')) {
@@ -76,7 +80,8 @@ export function buildAiVaultResumeShellCommand(args: {
       cwd,
       codexHome: codexHome?.trim() || null,
       shell,
-      clearEnvNames
+      clearEnvNames,
+      continueIfCwdMissing: args.continueIfCwdMissing
     })
   }
 
@@ -97,18 +102,18 @@ export function buildAiVaultResumeShellCommand(args: {
       : ''
   if (platform === 'win32' && shell === 'cmd') {
     // Interactive cmd splits nested-wrapper doubled quotes; queued lines need direct cmd syntax.
-    return `${clearPrefix}${cwd ? `cd /d ${quoteCmdDoubleQuoted(cwd)} && ${resumeCommand}` : resumeCommand}`
+    return `${clearPrefix}${cwd ? `cd /d ${quoteCmdDoubleQuoted(cwd)}${cwdJoiner('cmd')}${resumeCommand}` : resumeCommand}`
   }
   if (!cwd) {
     return `${clearPrefix}${resumeCommand}`
   }
 
   if (platform === 'win32') {
-    const inner = `${clearPrefix}cd /d ${quoteCmdDoubleQuoted(cwd)} && ${resumeCommand}`
+    const inner = `${clearPrefix}cd /d ${quoteCmdDoubleQuoted(cwd)}${cwdJoiner('cmd')}${resumeCommand}`
     return `cmd /d /s /c ${quoteCmdDoubleQuoted(inner)}`
   }
 
-  return `cd ${quoteResumeArg(cwd, platform, shell)} && ${resumeCommand}`
+  return `cd ${quoteResumeArg(cwd, platform, shell)}${cwdJoiner(dialect)}${resumeCommand}`
 }
 
 function buildResumeShellCommandForShell(args: {
@@ -117,6 +122,7 @@ function buildResumeShellCommandForShell(args: {
   codexHome: string | null
   shell: Exclude<AgentStartupShell, 'cmd'>
   clearEnvNames?: readonly string[]
+  continueIfCwdMissing?: boolean
 }): string {
   const { cwd, codexHome, shell, clearEnvNames } = args
   if (isPosixStartupShell(shell)) {
@@ -131,7 +137,9 @@ function buildResumeShellCommandForShell(args: {
         ? withoutEnvCommand(clearNames, args.resumeCommand, shell)
         : args.resumeCommand
     }`
-    return cwd ? `cd ${quoteStartupArg(cwd, shell)} && ${command}` : command
+    return cwd
+      ? `cd ${quoteStartupArg(cwd, shell)}${args.continueIfCwdMissing ? commandSeparator(shell) : ' && '}${command}`
+      : command
   }
 
   const separator = commandSeparator(shell)
