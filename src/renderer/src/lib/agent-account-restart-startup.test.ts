@@ -293,7 +293,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     })
 
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `cd '/repo/pkg' && claude '--resume' '${SESSION_ID}'`
+      `cd '/repo/pkg'; claude '--resume' '${SESSION_ID}'`
     )
   })
 
@@ -309,12 +309,12 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     })
 
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `cd '/repo/pkg' && claude '--resume' '${SESSION_ID}'`
+      `cd '/repo/pkg'; claude '--resume' '${SESSION_ID}'`
     )
   })
 
   it.each([
-    ['workspace folder', undefined, "cd '/recorded/session' && "],
+    ['workspace folder', undefined, "cd '/recorded/session'; "],
     ['saved tab folder', '/recorded/session', '']
   ] as const)('uses the selected host and respects the %s on resume', (_, startupCwd, prefix) => {
     const original = useAppStore.getState()

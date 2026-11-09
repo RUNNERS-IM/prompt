@@ -59,6 +59,18 @@ describe('watchClaudeResumeStart', () => {
     expect(toastError).toHaveBeenCalledOnce()
   })
 
+  it('treats a verified empty foreground as the shell', async () => {
+    let polls = 0
+    inspect.mockImplementation(async () =>
+      polls++ === 0
+        ? { foregroundProcess: 'claude' }
+        : { foregroundProcess: null, foregroundProcessEvidence: { verdict: 'live' } }
+    )
+    watchClaudeResumeStart(pane)
+    await vi.advanceTimersByTimeAsync(4000)
+    expect(getClaudeResumeFailures()).toHaveLength(1)
+  })
+
   it('stays quiet once Claude keeps running', async () => {
     foregroundSequence(['zsh', 'claude'])
     watchClaudeResumeStart(pane)

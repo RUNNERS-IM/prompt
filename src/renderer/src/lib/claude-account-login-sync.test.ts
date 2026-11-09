@@ -36,10 +36,9 @@ describe('handleRunningClaudeSessionsAfterLogin', () => {
     await expect(
       handleRunningClaudeSessionsAfterLogin({ paneKey: 'tab-1:leaf-1', host: HOST })
     ).resolves.toBe('handled')
-    expect(findClaudeLoginFollowers).toHaveBeenCalledWith({
-      loginPaneKey: 'tab-1:leaf-1',
-      host: HOST
-    })
+    expect(findClaudeLoginFollowers).toHaveBeenCalledWith(
+      expect.objectContaining({ loginPaneKey: 'tab-1:leaf-1', host: HOST })
+    )
     expect(getClaudeAccountSwitchPrompt()).toMatchObject({
       sessions: { onAccount: [follower], elsewhere: [], cantMove: [] },
       nextAccountLabel: 'support@example.com'

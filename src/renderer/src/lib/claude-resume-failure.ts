@@ -1,7 +1,11 @@
 import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
 import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
-import { inspectRuntimeTerminalProcess } from '@/runtime/runtime-terminal-inspection'
+import {
+  inspectRuntimeTerminalProcess,
+  type RuntimeTerminalProcessInspection
+} from '@/runtime/runtime-terminal-inspection'
+import { localizedTerminalTitle } from '@/lib/terminal-default-title-label'
 import { useAppStore } from '@/store'
 import { isExpectedAgentProcess } from '../../../shared/agent-process-recognition'
 import { isShellProcess } from '../../../shared/shell-process-detection'
@@ -18,6 +22,8 @@ export type ClaudeResumeFailure = {
 
 const POLL_INTERVAL_MS = 1000
 const RUNNING_POLLS_TO_CONFIRM = 5
+// One empty read can span a process handoff.
+const SHELL_POLLS_TO_CONFIRM = 2
 const START_DEADLINE_MS = 45_000
 
 let failures: readonly ClaudeResumeFailure[] = []
@@ -58,37 +64,47 @@ async function readResumeOutcome(
 ): Promise<ResumeOutcome> {
   const deadline = Date.now() + START_DEADLINE_MS
   let runningPolls = 0
-  let lastForeground = ''
+  let shellPolls = 0
+  let atShell = false
   while (Date.now() < deadline) {
     await new Promise((resolve) => window.setTimeout(resolve, POLL_INTERVAL_MS))
     const bound = boundPtyId(pane)
     if (bound !== undefined && bound !== pane.ptyId) {
       return 'unknown'
     }
-    const foreground = await inspectRuntimeTerminalProcess(pane.ptyId)
-      .then((inspection) => inspection.foregroundProcess ?? '')
-      .catch(() => '')
-    if (!foreground) {
-      continue
-    }
-    lastForeground = foreground
-    if (isExpectedAgentProcess(foreground, TUI_AGENT_CONFIG.claude.expectedProcess)) {
+    const inspection = await inspectRuntimeTerminalProcess(pane.ptyId).catch(() => null)
+    atShell = inspection !== null && showsBareShell(inspection)
+    if (
+      inspection?.foregroundProcess &&
+      isExpectedAgentProcess(inspection.foregroundProcess, TUI_AGENT_CONFIG.claude.expectedProcess)
+    ) {
       runningPolls += 1
+      shellPolls = 0
       if (runningPolls >= RUNNING_POLLS_TO_CONFIRM) {
         return 'running'
       }
-    } else if (isShellProcess(foreground) && runningPolls > 0) {
+      continue
+    }
+    shellPolls = atShell ? shellPolls + 1 : 0
+    if (runningPolls > 0 && shellPolls >= SHELL_POLLS_TO_CONFIRM) {
       return 'failed'
     }
   }
-  return lastForeground && isShellProcess(lastForeground) ? 'failed' : 'unknown'
+  return atShell ? 'failed' : 'unknown'
+}
+
+/** Why evidence too: a host that verified its table reports a bare shell as no process at all. */
+function showsBareShell(inspection: RuntimeTerminalProcessInspection): boolean {
+  return inspection.foregroundProcess
+    ? isShellProcess(inspection.foregroundProcess)
+    : inspection.foregroundProcessEvidence?.verdict === 'live'
 }
 
 function tabTitle(tabId: string): string | undefined {
   for (const tabs of Object.values(useAppStore.getState().tabsByWorktree)) {
     const tab = tabs.find((candidate) => candidate.id === tabId)
     if (tab) {
-      return tab.customTitle ?? tab.title
+      return tab.customTitle ?? localizedTerminalTitle(tab.title)
     }
   }
   return undefined
