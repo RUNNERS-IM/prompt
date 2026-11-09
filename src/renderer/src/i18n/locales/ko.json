@@ -22666,6 +22666,25 @@
       "dontAskAgain": "다음부터 묻지 않기",
       "confirm": "닫기"
     },
+    "library": {
+      "folderTab": "폴더",
+      "promptsTab": "프롬프트",
+      "search": "프롬프트 찾기",
+      "add": "새 프롬프트",
+      "edit": "고치기",
+      "delete": "지우기",
+      "nameField": "이름",
+      "bodyField": "프롬프트 내용",
+      "save": "저장",
+      "cancel": "취소",
+      "emptyTitle": "저장한 프롬프트가 없습니다",
+      "emptyBody": "자주 쓰는 프롬프트를 저장해 두고, 누르면 입력줄에 들어갑니다.",
+      "noTerminal": "터미널 세션을 먼저 여세요",
+      "chatView": "프롬프트를 쓰려면 이 세션을 터미널 화면으로 바꾸세요",
+      "listView": "줄 목록으로 보기",
+      "gridView": "아이콘으로 보기",
+      "upFolder": "위 폴더로"
+    },
     "sessionRow": {
       "helpers": "보조 {{count}}",
       "monitoring": "백그라운드 작업 지켜보는 중",

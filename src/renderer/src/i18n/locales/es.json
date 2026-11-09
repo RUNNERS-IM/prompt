@@ -203,6 +203,25 @@
       "share": "Compartir este equipo…",
       "shareTitle": "Compartir este equipo"
     },
+    "library": {
+      "folderTab": "Carpeta",
+      "promptsTab": "Prompts",
+      "search": "Buscar prompts",
+      "add": "Nuevo prompt",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "nameField": "Nombre",
+      "bodyField": "Prompt",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "emptyTitle": "Aún no hay prompts guardados",
+      "emptyBody": "Guarda los prompts que más usas y haz clic para ponerlos en la línea de entrada.",
+      "noTerminal": "Abre primero una sesión de terminal",
+      "chatView": "Cambia esta sesión al terminal para usar un prompt",
+      "listView": "Vista de lista",
+      "gridView": "Vista de iconos",
+      "upFolder": "Subir una carpeta"
+    },
     "sessionRow": {
       "helpers": "Ayudantes {{count}}",
       "tool": {

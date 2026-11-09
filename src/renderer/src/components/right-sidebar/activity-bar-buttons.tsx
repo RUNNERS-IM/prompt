@@ -25,6 +25,10 @@ export type ActivityBarItem = {
   folderOnly?: boolean
   /** When true, shown only for workspaces on an SSH host. */
   sshOnly?: boolean
+  /** Off the tab bar until a shortcut or link opens this tab. */
+  onlyWhileActive?: boolean
+  /** Top bar shows the title as text instead of the icon. */
+  showsTitle?: boolean
   /** Host-owned health indicator; plugin content cannot style this chrome. */
   statusIndicator?: CheckStatus
 }
@@ -147,14 +151,14 @@ export function ActivityBarButton({
           className={cn(
             'relative flex shrink-0 items-center justify-center transition-colors',
             RIGHT_SIDEBAR_HEADER_NO_DRAG_CLASS_NAME,
-            isTop ? 'h-[36px] w-9' : 'w-10 h-10',
+            isTop ? (item.showsTitle ? 'h-[36px] px-2.5 text-xs' : 'h-[36px] w-9') : 'w-10 h-10',
             active ? 'text-foreground' : 'text-muted-foreground/60 hover:text-muted-foreground'
           )}
           onClick={onClick}
           data-workspace-board-dismiss=""
           aria-label={activityItemAriaLabel(item, effectiveStatus)}
         >
-          <Icon size={isTop ? 16 : 18} />
+          {isTop && item.showsTitle ? item.title : <Icon size={isTop ? 16 : 18} />}
 
           {effectiveStatus && effectiveStatus !== 'neutral' && (
             <div

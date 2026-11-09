@@ -24007,6 +24007,25 @@
       "dontAskAgain": "Nie pytaj ponownie",
       "confirm": "Zamknij"
     },
+    "library": {
+      "folderTab": "Folder",
+      "promptsTab": "Prompty",
+      "search": "Szukaj promptów",
+      "add": "Nowy prompt",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "nameField": "Nazwa",
+      "bodyField": "Prompt",
+      "save": "Zapisz",
+      "cancel": "Anuluj",
+      "emptyTitle": "Brak zapisanych promptów",
+      "emptyBody": "Zapisz często używane prompty, a kliknięcie wstawi je do wiersza wprowadzania.",
+      "noTerminal": "Najpierw otwórz sesję terminala",
+      "chatView": "Przełącz tę sesję na terminal, aby użyć promptu",
+      "listView": "Widok listy",
+      "gridView": "Widok ikon",
+      "upFolder": "Folder wyżej"
+    },
     "sessionRow": {
       "helpers": "Pomocnicy {{count}}",
       "monitoring": "Obserwowanie zadań w tle",

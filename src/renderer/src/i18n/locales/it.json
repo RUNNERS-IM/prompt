@@ -23618,6 +23618,25 @@
       "dontAskAgain": "Non chiedere più",
       "confirm": "Chiudi"
     },
+    "library": {
+      "folderTab": "Cartella",
+      "promptsTab": "Prompt",
+      "search": "Cerca prompt",
+      "add": "Nuovo prompt",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "nameField": "Nome",
+      "bodyField": "Prompt",
+      "save": "Salva",
+      "cancel": "Annulla",
+      "emptyTitle": "Nessun prompt salvato",
+      "emptyBody": "Salva i prompt che usi spesso e fai clic per inserirli nella riga di input.",
+      "noTerminal": "Apri prima una sessione del terminale",
+      "chatView": "Passa questa sessione al terminale per usare un prompt",
+      "listView": "Vista elenco",
+      "gridView": "Vista icone",
+      "upFolder": "Cartella superiore"
+    },
     "sessionRow": {
       "helpers": "Helper {{count}}",
       "monitoring": "Monitoraggio delle attività in background",

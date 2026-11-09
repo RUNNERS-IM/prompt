@@ -10,6 +10,10 @@ export type SkillTerminalInsertResult = 'inserted' | 'no-terminal' | 'chat-view'
 
 /** Types the skill command into the visible terminal's prompt without pressing Enter. */
 export function insertSkillCommandIntoActiveTerminal(command: string): SkillTerminalInsertResult {
+  return insertTextIntoActiveTerminal(`${command} `)
+}
+
+export function insertTextIntoActiveTerminal(text: string): SkillTerminalInsertResult {
   const { activeView, activeTabType, activeTabId } = useAppStore.getState()
   if (activeView !== 'terminal' || activeTabType !== 'terminal' || !activeTabId) {
     return 'no-terminal'
@@ -24,7 +28,7 @@ export function insertSkillCommandIntoActiveTerminal(command: string): SkillTerm
   }
   window.dispatchEvent(
     new CustomEvent<PasteTerminalTextDetail>(PASTE_TERMINAL_TEXT_EVENT, {
-      detail: { tabId: activeTabId, text: `${command} ` }
+      detail: { tabId: activeTabId, text }
     })
   )
   focusTerminalTabSurface(activeTabId)

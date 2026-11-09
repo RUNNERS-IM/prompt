@@ -22840,6 +22840,25 @@
       "dontAskAgain": "Không hỏi lại",
       "confirm": "Đóng"
     },
+    "library": {
+      "folderTab": "Thư mục",
+      "promptsTab": "Prompt",
+      "search": "Tìm prompt",
+      "add": "Prompt mới",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "nameField": "Tên",
+      "bodyField": "Prompt",
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "emptyTitle": "Chưa có prompt nào được lưu",
+      "emptyBody": "Lưu các prompt hay dùng, rồi bấm để đưa vào dòng nhập.",
+      "noTerminal": "Hãy mở phiên terminal trước",
+      "chatView": "Chuyển phiên này sang terminal để dùng prompt",
+      "listView": "Dạng danh sách",
+      "gridView": "Dạng biểu tượng",
+      "upFolder": "Lên một thư mục"
+    },
     "sessionRow": {
       "helpers": "Helper {{count}}",
       "monitoring": "Đang theo dõi các tác vụ nền",

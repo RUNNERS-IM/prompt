@@ -203,6 +203,25 @@
       "share": "Compartilhar este computador…",
       "shareTitle": "Compartilhar este computador"
     },
+    "library": {
+      "folderTab": "Pasta",
+      "promptsTab": "Prompts",
+      "search": "Pesquisar prompts",
+      "add": "Novo prompt",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "nameField": "Nome",
+      "bodyField": "Prompt",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "emptyTitle": "Nenhum prompt salvo",
+      "emptyBody": "Salve os prompts que usa com frequência e clique para colocá-los na linha de entrada.",
+      "noTerminal": "Abra primeiro uma sessão de terminal",
+      "chatView": "Mude esta sessão para o terminal para usar um prompt",
+      "listView": "Exibição em lista",
+      "gridView": "Exibição em ícones",
+      "upFolder": "Subir uma pasta"
+    },
     "sessionRow": {
       "helpers": "Auxiliares {{count}}",
       "tool": {

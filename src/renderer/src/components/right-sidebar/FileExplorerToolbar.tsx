@@ -1,5 +1,5 @@
 import React from 'react'
-import { Ellipsis, ListCollapse, Loader2, RefreshCw } from 'lucide-react'
+import { Ellipsis, LayoutGrid, List, ListCollapse, Loader2, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -12,6 +12,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { WorktreeOpenInMenuItems } from '@/components/sidebar/WorktreeOpenInMenu'
 import { translate } from '@/i18n/i18n'
 import { cn } from '@/lib/utils'
+import type { FileExplorerViewMode } from '../../../../shared/prompt-library-types'
 
 type FileExplorerToolbarProps = {
   repoName: string
@@ -33,6 +34,8 @@ type FileExplorerToolbarProps = {
   onToggleGitIgnoredFiles: () => void
   showDotfiles: boolean
   onToggleDotfiles: () => void
+  viewMode: FileExplorerViewMode
+  onToggleViewMode: () => void
 }
 
 function formatOpenInAppLabel(appName: string): string {
@@ -60,7 +63,9 @@ export function FileExplorerToolbar({
   showGitIgnoredFiles,
   onToggleGitIgnoredFiles,
   showDotfiles,
-  onToggleDotfiles
+  onToggleDotfiles,
+  viewMode,
+  onToggleViewMode
 }: FileExplorerToolbarProps): React.JSX.Element {
   return (
     <div className="flex h-8 min-h-8 items-center gap-2 border-b border-border px-2">
@@ -70,6 +75,20 @@ export function FileExplorerToolbar({
       >
         {repoName}
       </span>
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon-xs"
+        className="text-muted-foreground hover:text-foreground"
+        aria-label={
+          viewMode === 'grid'
+            ? translate('prompt.library.listView', 'List view')
+            : translate('prompt.library.gridView', 'Icon view')
+        }
+        onClick={onToggleViewMode}
+      >
+        {viewMode === 'grid' ? <List className="size-3" /> : <LayoutGrid className="size-3" />}
+      </Button>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button

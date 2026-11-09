@@ -202,6 +202,25 @@
       "share": "Diesen Computer teilen…",
       "shareTitle": "Diesen Computer teilen"
     },
+    "library": {
+      "folderTab": "Ordner",
+      "promptsTab": "Prompts",
+      "search": "Prompts suchen",
+      "add": "Neuer Prompt",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "nameField": "Name",
+      "bodyField": "Prompt",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "emptyTitle": "Noch keine Prompts gespeichert",
+      "emptyBody": "Speichere häufig genutzte Prompts und füge sie per Klick in die Eingabezeile ein.",
+      "noTerminal": "Öffne zuerst eine Terminalsitzung",
+      "chatView": "Wechsle diese Sitzung zum Terminal, um einen Prompt zu verwenden",
+      "listView": "Listenansicht",
+      "gridView": "Symbolansicht",
+      "upFolder": "Einen Ordner nach oben"
+    },
     "sessionRow": {
       "helpers": "Helfer {{count}}",
       "tool": {
