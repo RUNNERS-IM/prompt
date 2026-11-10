@@ -23143,6 +23143,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "आपका उत्तर कॉपी हो गया है। इसे सत्र में पेस्ट करें।",
+      "noWorkspace": "यह पेज देखने के लिए कोई प्रोजेक्ट खोलें",
+      "sendFailed": "{{session}} को नहीं भेजा जा सका",
+      "sendTo": "{{session}} को भेजें",
+      "sent": "{{session}} को भेजा गया",
+      "sentButton": "भेजा गया",
+      "title": "निर्णय",
+      "unconfirmed": "भेजा गया, लेकिन {{session}} ने प्राप्ति की पुष्टि नहीं की"
+    },
     "sidebarSessions": {
       "newSession": "नया सत्र",
       "newClaudeSession": "नया Claude सत्र",

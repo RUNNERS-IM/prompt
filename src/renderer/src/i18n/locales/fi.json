@@ -23143,6 +23143,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Vastauksesi on kopioitu. Liitä se istuntoon.",
+      "noWorkspace": "Avaa projekti nähdäksesi tämän sivun",
+      "sendFailed": "Lähetys istuntoon {{session}} epäonnistui",
+      "sendTo": "Lähetä istuntoon {{session}}",
+      "sent": "Lähetetty istuntoon {{session}}",
+      "sentButton": "Lähetetty",
+      "title": "Päätökset",
+      "unconfirmed": "Lähetetty, mutta {{session}} ei vahvistanut vastaanottoa"
+    },
     "sidebarSessions": {
       "newSession": "Uusi sessio",
       "newClaudeSession": "Uusi Claude-sessio",

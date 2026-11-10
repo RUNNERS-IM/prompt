@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Ваш ответ скопирован. Вставьте его в сеанс.",
+      "noWorkspace": "Откройте проект, чтобы посмотреть эту страницу",
+      "sendFailed": "Не удалось отправить в {{session}}",
+      "sendTo": "Отправить в {{session}}",
+      "sent": "Отправлено в {{session}}",
+      "sentButton": "Отправлено",
+      "title": "Решения",
+      "unconfirmed": "Отправлено, но {{session}} не подтвердил получение"
+    },
     "sidebarSessions": {
       "newSession": "Новый сеанс",
       "newClaudeSession": "Новый сеанс Claude",

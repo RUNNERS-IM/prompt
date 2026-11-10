@@ -24675,6 +24675,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "تم نسخ إجابتك. الصقها في الجلسة.",
+      "noWorkspace": "افتح مشروعًا لعرض هذه الصفحة",
+      "sendFailed": "تعذر الإرسال إلى {{session}}",
+      "sendTo": "إرسال إلى {{session}}",
+      "sent": "تم الإرسال إلى {{session}}",
+      "sentButton": "تم الإرسال",
+      "title": "القرارات",
+      "unconfirmed": "تم الإرسال، لكن {{session}} لم تؤكد وصولها"
+    },
     "sidebarSessions": {
       "newSession": "جلسة جديدة",
       "newClaudeSession": "جلسة Claude جديدة",

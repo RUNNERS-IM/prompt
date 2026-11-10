@@ -97,6 +97,7 @@ import { promptClaudeLoginSyncApi } from './api/prompt-claude-login-sync-bridge'
 import { promptThirdPartyNoticesApi } from './api/prompt-third-party-notices-bridge'
 import { promptMenuPanelApi } from './api/prompt-menu-panel-bridge'
 import { promptRunnersAccountApi } from './api/prompt-runners-account-bridge'
+import { promptDecisionInboxApi } from './api/prompt-decision-inbox-bridge'
 
 installBrowserFindListener()
 
@@ -207,7 +208,8 @@ const api = {
   promptClaudeLoginSync: promptClaudeLoginSyncApi,
   promptThirdPartyNotices: promptThirdPartyNoticesApi,
   promptMenuPanel: promptMenuPanelApi,
-  promptRunnersAccount: promptRunnersAccountApi
+  promptRunnersAccount: promptRunnersAccountApi,
+  promptDecisionInbox: promptDecisionInboxApi
 } satisfies PreloadApi
 
 if (process.contextIsolated) {

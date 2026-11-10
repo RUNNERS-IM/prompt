@@ -1,5 +1,6 @@
 import type { Repo } from '../../shared/repo-types'
 import type { RuntimeTerminalSummary, RuntimeWorktreeListResult } from '../../shared/runtime-types'
+import type { RuntimeTerminalAgentActivity } from '../../shared/runtime-terminal-contracts'
 import { splitWorktreeId } from '../../shared/worktree/id'
 import { readOrcaCliVersion } from '../cli-version'
 import type { CommandHandler } from '../dispatch'
@@ -43,6 +44,7 @@ export type TerminalItem = {
   workspace: { id: string; path: string; branch: string }
   agent: string | null
   state: 'running' | 'exited'
+  activity?: RuntimeTerminalAgentActivity
   lastOutputAt: number | null
 }
 
@@ -63,6 +65,7 @@ export function terminalItem(
     agent: terminal.agentIdentity ?? null,
     // A liveness verdict, when present, is the host's answer; `connected` alone can lag.
     state: terminal.connected && terminal.verdict !== 'exited' ? 'running' : 'exited',
+    ...(terminal.agentActivity ? { activity: terminal.agentActivity } : {}),
     lastOutputAt: terminal.lastOutputAt
   }
 }
@@ -72,7 +75,7 @@ export function terminalRow(item: TerminalItem, now: number): string[] {
     shortId(item.id),
     item.name,
     item.project?.name ?? shortenHomePath(item.workspace.path),
-    stateLabel(item.state),
+    stateLabel(item.state === 'running' ? (item.activity ?? item.state) : item.state),
     formatRelativeTime(item.lastOutputAt, now)
   ]
 }

@@ -23909,6 +23909,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Twoja odpowiedź została skopiowana. Wklej ją do sesji.",
+      "noWorkspace": "Otwórz projekt, aby zobaczyć tę stronę",
+      "sendFailed": "Nie udało się wysłać do {{session}}",
+      "sendTo": "Wyślij do {{session}}",
+      "sent": "Wysłano do {{session}}",
+      "sentButton": "Wysłano",
+      "title": "Decyzje",
+      "unconfirmed": "Wysłano, ale {{session}} nie potwierdziła odbioru"
+    },
     "sidebarSessions": {
       "newSession": "Nowa sesja",
       "newClaudeSession": "Nowa sesja Claude",

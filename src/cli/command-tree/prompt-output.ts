@@ -157,8 +157,24 @@ export function emptyListText(locale: CliLocale = resolveCliLocale()): string {
 
 // Present-tense state words; the JSON keeps the stable English values.
 const STATE_LABELS: Readonly<Record<CliLocale, Readonly<Record<string, string>>>> = {
-  en: { running: 'running', exited: 'exited' },
-  ko: { running: '실행 중', exited: '끝남' }
+  en: {
+    running: 'running',
+    exited: 'exited',
+    working: 'running',
+    blocked: 'waiting for you',
+    waiting: 'waiting for you',
+    done: 'done · waiting for you',
+    'no-update': 'no update'
+  },
+  ko: {
+    running: '실행 중',
+    exited: '끝남',
+    working: '실행 중',
+    blocked: '답 기다림',
+    waiting: '답 기다림',
+    done: '끝남 · 답을 기다림',
+    'no-update': '소식 없음'
+  }
 }
 
 export function stateLabel(state: string, locale: CliLocale = resolveCliLocale()): string {

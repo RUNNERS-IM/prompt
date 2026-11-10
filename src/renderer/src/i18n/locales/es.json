@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Tu respuesta se ha copiado. Pégala en la sesión.",
+      "noWorkspace": "Abre un proyecto para ver esta página",
+      "sendFailed": "No se pudo enviar a {{session}}",
+      "sendTo": "Enviar a {{session}}",
+      "sent": "Enviado a {{session}}",
+      "sentButton": "Enviado",
+      "title": "Decisiones",
+      "unconfirmed": "Enviado, pero {{session}} no confirmó la recepción"
+    },
     "sidebarSessions": {
       "newSession": "Nueva sesión",
       "newClaudeSession": "Nueva sesión de Claude",

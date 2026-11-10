@@ -40,6 +40,7 @@ import { registerNotificationHandlers } from '../notifications'
 import { registerNotebookHandlers } from '../notebook'
 import { registerOnboardingHandlers } from '../onboarding'
 import { registerPromptRunnersAccountHandlers } from '../../prompt-runners-account/prompt-runners-account-ipc'
+import { registerPromptDecisionInboxHandlers } from '../../prompt-decision-inbox/prompt-decision-inbox-ipc'
 import { registerDashboardPopoutHandlers } from '../dashboard-popout'
 import { registerWorkspaceSpaceWindowHandlers } from '../workspace-space-window'
 import { registerTerminalPreviewHandlers } from '../terminal-preview'
@@ -216,6 +217,7 @@ export function registerCoreHandlers(
   registerNotebookHandlers(store)
   registerOnboardingHandlers(store)
   registerPromptRunnersAccountHandlers()
+  registerPromptDecisionInboxHandlers()
   registerDashboardPopoutHandlers(store, keybindings)
   registerWorkspaceSpaceWindowHandlers(store)
   registerTerminalPreviewHandlers(runtime)

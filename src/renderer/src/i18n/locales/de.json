@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Deine Antwort wurde kopiert. Füge sie in die Sitzung ein.",
+      "noWorkspace": "Öffne ein Projekt, um diese Seite anzuzeigen",
+      "sendFailed": "Senden an {{session}} fehlgeschlagen",
+      "sendTo": "An {{session}} senden",
+      "sent": "An {{session}} gesendet",
+      "sentButton": "Gesendet",
+      "title": "Entscheidungen",
+      "unconfirmed": "Gesendet, aber {{session}} hat den Empfang nicht bestätigt"
+    },
     "sidebarSessions": {
       "newSession": "Neue Sitzung",
       "newClaudeSession": "Neue Claude-Sitzung",

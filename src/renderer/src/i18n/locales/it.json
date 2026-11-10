@@ -23526,6 +23526,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "La risposta è stata copiata. Incollala nella sessione.",
+      "noWorkspace": "Apri un progetto per vedere questa pagina",
+      "sendFailed": "Impossibile inviare a {{session}}",
+      "sendTo": "Invia a {{session}}",
+      "sent": "Inviato a {{session}}",
+      "sentButton": "Inviato",
+      "title": "Decisioni",
+      "unconfirmed": "Inviato, ma {{session}} non ha confermato la ricezione"
+    },
     "sidebarSessions": {
       "newSession": "Nuova sessione",
       "newClaudeSession": "Nuova sessione di Claude",

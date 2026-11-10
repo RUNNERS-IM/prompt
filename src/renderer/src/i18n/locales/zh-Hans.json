@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "答案已复制。请粘贴到会话中。",
+      "noWorkspace": "请打开一个项目以查看此页面",
+      "sendFailed": "无法发送到 {{session}}",
+      "sendTo": "发送到 {{session}}",
+      "sent": "已发送到 {{session}}",
+      "sentButton": "已发送",
+      "title": "待决定",
+      "unconfirmed": "已发送,但 {{session}} 未确认收到"
+    },
     "sidebarSessions": {
       "newSession": "新会话",
       "newClaudeSession": "新 Claude 会话",

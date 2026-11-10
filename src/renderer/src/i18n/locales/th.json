@@ -22760,6 +22760,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "คัดลอกคำตอบแล้ว วางลงในเซสชัน",
+      "noWorkspace": "เปิดโปรเจกต์เพื่อดูหน้านี้",
+      "sendFailed": "ส่งไปยัง {{session}} ไม่ได้",
+      "sendTo": "ส่งไปยัง {{session}}",
+      "sent": "ส่งไปยัง {{session}} แล้ว",
+      "sentButton": "ส่งแล้ว",
+      "title": "การตัดสินใจ",
+      "unconfirmed": "ส่งแล้ว แต่ {{session}} ไม่ได้ยืนยันการรับ"
+    },
     "sidebarSessions": {
       "newSession": "Session ใหม่",
       "newClaudeSession": "Claude session ใหม่",

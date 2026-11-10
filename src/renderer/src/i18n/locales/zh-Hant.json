@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "答案已複製。請貼到工作階段中。",
+      "noWorkspace": "請開啟專案以檢視此頁面",
+      "sendFailed": "無法傳送到 {{session}}",
+      "sendTo": "傳送到 {{session}}",
+      "sent": "已傳送到 {{session}}",
+      "sentButton": "已傳送",
+      "title": "待決定",
+      "unconfirmed": "已傳送,但 {{session}} 未確認收到"
+    },
     "sidebarSessions": {
       "newSession": "新工作階段",
       "newClaudeSession": "新 Claude 工作階段",

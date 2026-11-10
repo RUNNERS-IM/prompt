@@ -16,6 +16,9 @@ export type {
   RuntimeTerminalPromptDelivery
 } from './runtime-terminal-send-contract'
 
+/** The hook-reported turn state, or `no-update` when the agent has gone quiet. */
+export type RuntimeTerminalAgentActivity = 'working' | 'blocked' | 'waiting' | 'done' | 'no-update'
+
 export type RuntimeTerminalSummary = {
   handle: string
   ptyId: string | null
@@ -39,6 +42,8 @@ export type RuntimeTerminalSummary = {
   agentIdentity?: TerminalAgent
   /** The agent's own conversation id (what `--resume` takes), from its status hook; absent until reported. */
   agentSessionId?: string
+  /** Absent when the agent reports no status or the host predates the field. */
+  agentActivity?: RuntimeTerminalAgentActivity
   /** Absent while running or when the host predates the field; never infer a clean finish. */
   exitCause?: TerminalExitCause
   /** Absent when the host predates the field or could not name the execution host. */

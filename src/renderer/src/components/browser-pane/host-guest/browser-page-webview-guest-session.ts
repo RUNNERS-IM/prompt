@@ -21,6 +21,7 @@ import {
   replacePersistentWebview,
   webviewRegistry
 } from './webview-registry'
+import { attachPromptDecisionSendButton } from '@/components/prompt-decision-inbox/prompt-decision-send-button'
 import { browserPageExists } from '../describe-page/browser-page-load-error'
 import type {
   BrowserPageRecoveryNavigationValidation,
@@ -216,6 +217,7 @@ export function createBrowserPageWebviewGuestSession({
   }
 
   const handleDomReady = (): void => {
+    void attachPromptDecisionSendButton(webview)
     const validateRecoveryAfterNavigation =
       recoveryNavigationValidationRef.current?.committed === true
     if (validateRecoveryAfterNavigation) {

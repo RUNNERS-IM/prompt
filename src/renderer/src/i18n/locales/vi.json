@@ -22760,6 +22760,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Đã sao chép câu trả lời. Hãy dán vào phiên.",
+      "noWorkspace": "Mở một dự án để xem trang này",
+      "sendFailed": "Không thể gửi đến {{session}}",
+      "sendTo": "Gửi đến {{session}}",
+      "sent": "Đã gửi đến {{session}}",
+      "sentButton": "Đã gửi",
+      "title": "Quyết định",
+      "unconfirmed": "Đã gửi, nhưng {{session}} không xác nhận đã nhận"
+    },
     "sidebarSessions": {
       "newSession": "Phiên mới",
       "newClaudeSession": "Phiên Claude mới",

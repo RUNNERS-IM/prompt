@@ -23143,6 +23143,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Je antwoord is gekopieerd. Plak het in de sessie.",
+      "noWorkspace": "Open een project om deze pagina te bekijken",
+      "sendFailed": "Kan niet verzenden naar {{session}}",
+      "sendTo": "Verzenden naar {{session}}",
+      "sent": "Verzonden naar {{session}}",
+      "sentButton": "Verzonden",
+      "title": "Beslissingen",
+      "unconfirmed": "Verzonden, maar {{session}} heeft de ontvangst niet bevestigd"
+    },
     "sidebarSessions": {
       "newSession": "Nieuwe sessie",
       "newClaudeSession": "Nieuwe Claude-sessie",

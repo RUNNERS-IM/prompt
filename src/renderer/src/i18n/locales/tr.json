@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Yanıtınız kopyalandı. Oturuma yapıştırın.",
+      "noWorkspace": "Bu sayfayı görmek için bir proje açın",
+      "sendFailed": "{{session}} oturumuna gönderilemedi",
+      "sendTo": "{{session}} oturumuna gönder",
+      "sent": "{{session}} oturumuna gönderildi",
+      "sentButton": "Gönderildi",
+      "title": "Kararlar",
+      "unconfirmed": "Gönderildi ancak {{session}} alındığını doğrulamadı"
+    },
     "sidebarSessions": {
       "newSession": "Yeni Oturum",
       "newClaudeSession": "Yeni Claude Oturumu",

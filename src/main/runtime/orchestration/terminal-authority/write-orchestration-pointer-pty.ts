@@ -11,9 +11,11 @@ import { getPtyExecutionHost } from '../../../../shared/terminal-execution-host'
 import type { TuiAgent } from '../../../../shared/tui-agent'
 import type { TerminalAgent } from '../../../../shared/terminal-agent'
 import { selectRuntimeHookAgentRowForPane } from '../../runtime-mobile-agent-status-projection'
+import { selectRuntimeAgentActivityForPane } from '../../runtime-agent-activity-for-pane'
 import { isTuiAgent } from '../../../../shared/tui-agent-config'
 import { resolvePublishedPaneAgentIdentity } from '../../../../shared/published-pane-agent-identity'
 import type { RuntimeTerminalSummary } from '../../../../shared/runtime-types'
+import type { RuntimeTerminalAgentActivity } from '../../../../shared/runtime-terminal-contracts'
 import type { ResolvedWorktree } from '../../runtime-worktree-path-identity'
 import { getLatestLeafTitle } from '../../runtime-worktree-status-projection'
 import { parseAppSshPtyId } from '../../../../shared/ssh-pty-id'
@@ -96,10 +98,13 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
     foregroundAgent: TerminalAgent | null | undefined,
     title: string | null,
     paneKey: string | null
-  ): { agentIdentity?: TerminalAgent; agentSessionId?: string } {
-    const hookRow = paneKey
-      ? selectRuntimeHookAgentRowForPane(this.getAgentProviderSessionRowsForPaneFn?.(paneKey) ?? [])
-      : null
+  ): {
+    agentIdentity?: TerminalAgent
+    agentSessionId?: string
+    agentActivity?: RuntimeTerminalAgentActivity
+  } {
+    const rows = paneKey ? (this.getAgentProviderSessionRowsForPaneFn?.(paneKey) ?? []) : []
+    const hookRow = paneKey ? selectRuntimeHookAgentRowForPane(rows) : null
     const hookAgent = isTuiAgent(hookRow?.agentType) ? hookRow.agentType : null
     const agentIdentity = resolvePublishedPaneAgentIdentity({
       hookAgent,
@@ -114,7 +119,12 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
     // The hook's conversation id belongs to the published agent only; another agent's id would resume the wrong chat.
     const agentSessionId =
       hookAgent === agentIdentity ? hookRow?.providerSession?.id?.trim() : undefined
-    return agentSessionId ? { agentIdentity, agentSessionId } : { agentIdentity }
+    const agentActivity = selectRuntimeAgentActivityForPane(rows, hookRow?.live?.payload.state)
+    return {
+      agentIdentity,
+      ...(agentSessionId ? { agentSessionId } : {}),
+      ...(agentActivity ? { agentActivity } : {})
+    }
   }
 
   /** A user's pane name from the saved layout: every client's pane rename lands there. */

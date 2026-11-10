@@ -1,5 +1,15 @@
 {
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "回答をコピーしました。セッションに貼り付けてください。",
+      "noWorkspace": "このページを表示するにはプロジェクトを開いてください",
+      "sendFailed": "{{session}} に送信できませんでした",
+      "sendTo": "{{session}} に送信",
+      "sent": "{{session}} に送信しました",
+      "sentButton": "送信済み",
+      "title": "判断待ち",
+      "unconfirmed": "送信しましたが、{{session}} の受信を確認できませんでした"
+    },
     "sidebarSessions": {
       "newSession": "新しいセッション",
       "newClaudeSession": "新しい Claude セッション",

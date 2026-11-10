@@ -22587,6 +22587,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "답을 복사해 두었습니다. 세션 입력창에 붙여 넣어 주세요.",
+      "noWorkspace": "이 페이지를 보려면 프로젝트를 여세요",
+      "sendFailed": "{{session}}에 보내지 못했습니다",
+      "sendTo": "{{session}}에 보내기",
+      "sent": "{{session}}에 보냈습니다",
+      "sentButton": "보냄",
+      "title": "결정함",
+      "unconfirmed": "보냈지만 {{session}}이 받았는지 확인하지 못했습니다"
+    },
     "sidebarSessions": {
       "newSession": "새 세션",
       "newClaudeSession": "새 Claude 세션",

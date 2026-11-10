@@ -23143,6 +23143,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Your answer is copied. Paste it into the session.",
+      "noWorkspace": "Open a project to view this page",
+      "sendFailed": "Couldn't send to {{session}}",
+      "sendTo": "Send to {{session}}",
+      "sent": "Sent to {{session}}",
+      "sentButton": "Sent",
+      "title": "Decisions",
+      "unconfirmed": "Sent, but {{session}} didn't confirm it arrived"
+    },
     "sidebarSessions": {
       "newSession": "New Session",
       "newClaudeSession": "New Claude Session",

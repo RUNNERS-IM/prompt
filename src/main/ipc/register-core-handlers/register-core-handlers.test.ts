@@ -172,6 +172,10 @@ vi.mock('../../prompt-runners-account/prompt-runners-account-ipc', () => ({
   registerPromptRunnersAccountHandlers: vi.fn()
 }))
 
+vi.mock('../../prompt-decision-inbox/prompt-decision-inbox-ipc', () => ({
+  registerPromptDecisionInboxHandlers: vi.fn()
+}))
+
 vi.mock('../dashboard-popout', () => ({
   registerDashboardPopoutHandlers: registerDashboardPopoutHandlersMock
 }))

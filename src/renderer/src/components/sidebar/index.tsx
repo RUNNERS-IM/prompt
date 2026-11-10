@@ -10,6 +10,7 @@ import { setSidebarLiveWidth } from './sidebar-live-width'
 import SetupScriptPromptCard from './SetupScriptPromptCard'
 import WorktreeList from './WorktreeList'
 import WslMovedProjectsSection from './WslMovedProjectsSection'
+import PromptDecisionInboxSection from '@/components/prompt-decision-inbox/PromptDecisionInboxSection'
 import SidebarToolbar from './SidebarToolbar'
 import WorkspaceKanbanDrawer from './WorkspaceKanbanDrawer'
 import type { VirtualizedScrollAnchor } from '@/hooks/useVirtualizedScrollAnchor'
@@ -207,6 +208,8 @@ function Sidebar({
                 <WslMovedProjectsSection />
               </>
             )}
+
+            <PromptDecisionInboxSection />
 
             <div className="relative shrink-0">
               <SetupScriptPromptCard />

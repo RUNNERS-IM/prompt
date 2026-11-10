@@ -79,6 +79,7 @@ import type { PromptClaudeLoginSyncApi } from '../shared/prompt-claude-login-syn
 import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
 import type { PromptMenuPanelApi } from '../shared/prompt-menu-panel'
 import type { PromptRunnersAccountApi } from '../shared/prompt-runners-account'
+import type { PromptDecisionInboxApi } from '../shared/prompt-decision-inbox'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
 type Merged<T> = { [K in keyof T]: T[K] }
@@ -192,6 +193,8 @@ export type PreloadApi = {
   promptMenuPanel?: PromptMenuPanelApi
   /** Optional: only the desktop preload has it; the web client never signs in to a RUNNERS account. */
   promptRunnersAccount?: PromptRunnersAccountApi
+  /** Optional: only the desktop preload has it; the pages live in this computer's folders. */
+  promptDecisionInbox?: PromptDecisionInboxApi
 }
 
 export type {

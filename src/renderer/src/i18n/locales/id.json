@@ -22760,6 +22760,16 @@
     }
   },
   "prompt": {
+    "decisionInbox": {
+      "copiedInstead": "Jawaban Anda telah disalin. Tempelkan ke sesi.",
+      "noWorkspace": "Buka proyek untuk melihat halaman ini",
+      "sendFailed": "Tidak dapat mengirim ke {{session}}",
+      "sendTo": "Kirim ke {{session}}",
+      "sent": "Terkirim ke {{session}}",
+      "sentButton": "Terkirim",
+      "title": "Keputusan",
+      "unconfirmed": "Terkirim, tetapi {{session}} tidak mengonfirmasi penerimaan"
+    },
     "sidebarSessions": {
       "newSession": "Sesi baru",
       "newClaudeSession": "Sesi Claude baru",
