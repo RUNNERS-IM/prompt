@@ -1,5 +1,7 @@
 import { TERMINAL_HTTP_URL_MAX_LENGTH } from './terminal-http-link-limits'
-import { isProseUrlTerminator, PROSE_HTTP_URL_SOURCE } from './prose-url-boundary'
+import { PROSE_HTTP_URL_SOURCE, PROSE_URL_REMAINDER } from './prose-url-boundary'
+
+const HTTP_URL_AT_START = new RegExp(`^${PROSE_HTTP_URL_SOURCE}`, 'iu')
 
 type ParsedTerminalHttpLink = {
   url: string
@@ -43,10 +45,10 @@ function* iterateTerminalHttpUrlCandidates(
       continue
     }
 
-    const rawEndIndex = findHttpUrlCandidateEnd(lineText, startIndex)
-    const endIndex = trimHttpUrlTrailingPunctuation(lineText, startIndex, rawEndIndex)
-    searchStart = Math.max(rawEndIndex, startIndex + 1)
-    if (endIndex <= startIndex || rawEndIndex - startIndex > TERMINAL_HTTP_URL_MAX_LENGTH) {
+    const matchedLength = matchHttpUrlLength(lineText, startIndex)
+    const endIndex = startIndex + matchedLength
+    searchStart = Math.max(endIndex, startIndex + 1)
+    if (matchedLength === 0 || matchedLength > TERMINAL_HTTP_URL_MAX_LENGTH) {
       continue
     }
 
@@ -67,80 +69,21 @@ function hasHttpUrlWordBoundary(lineText: string, startIndex: number): boolean {
   return startIndex === 0 || !isAsciiWordCode(lineText.charCodeAt(startIndex - 1))
 }
 
-function findHttpUrlCandidateEnd(lineText: string, startIndex: number): number {
-  const scanEnd = Math.min(lineText.length, startIndex + TERMINAL_HTTP_URL_MAX_LENGTH + 1)
-  for (let index = startIndex; index < scanEnd; index += 1) {
-    if (isHttpUrlBodyTerminator(lineText.charCodeAt(index))) {
-      return index
-    }
+function matchHttpUrlLength(text: string, startIndex: number): number {
+  const candidate = text.slice(startIndex, startIndex + TERMINAL_HTTP_URL_MAX_LENGTH + 1)
+  return HTTP_URL_AT_START.exec(candidate)?.[0].length ?? 0
+}
+
+/** True when a program's explicit link target swallowed the prose after its url. */
+export function hasProseAfterHttpUrl(uri: string): boolean {
+  if (!/^https?:\/\//i.test(uri)) {
+    return false
   }
-  return scanEnd
-}
-
-function trimHttpUrlTrailingPunctuation(
-  lineText: string,
-  startIndex: number,
-  rawEndIndex: number
-): number {
-  let endIndex = rawEndIndex
-  while (endIndex > startIndex && isHttpUrlTrailingPunctuation(lineText.charCodeAt(endIndex - 1))) {
-    endIndex -= 1
-  }
-  return endIndex
-}
-
-function isHttpUrlBodyTerminator(code: number): boolean {
-  return (
-    (code > 0x7f && isProseUrlTerminator(String.fromCharCode(code))) ||
-    isAsciiWhitespace(code) ||
-    code === 0x22 ||
-    code === 0x27 ||
-    code === 0x21 ||
-    code === 0x2a ||
-    code === 0x28 ||
-    code === 0x29 ||
-    code === 0x7b ||
-    code === 0x7d ||
-    code === 0x7c ||
-    code === 0x5c ||
-    code === 0x5e ||
-    code === 0x3c ||
-    code === 0x3e ||
-    code === 0x60
-  )
-}
-
-function isHttpUrlTrailingPunctuation(code: number): boolean {
-  return (
-    isAsciiWhitespace(code) ||
-    code === 0x22 ||
-    code === 0x27 ||
-    code === 0x3a ||
-    code === 0x2c ||
-    code === 0x2e ||
-    code === 0x21 ||
-    code === 0x3f ||
-    code === 0x7b ||
-    code === 0x7d ||
-    code === 0x7c ||
-    code === 0x5c ||
-    code === 0x5e ||
-    code === 0x7e ||
-    code === 0x5b ||
-    code === 0x5d ||
-    code === 0x28 ||
-    code === 0x29 ||
-    code === 0x3c ||
-    code === 0x3e ||
-    code === 0x60
-  )
+  const remainder = uri.slice(matchHttpUrlLength(uri, 0))
+  return remainder !== '' && remainder !== uri && PROSE_URL_REMAINDER.test(remainder)
 }
 
 export const TERMINAL_HTTP_URL_REGEX = new RegExp(PROSE_HTTP_URL_SOURCE, 'iu')
-
-function isAsciiWhitespace(code: number): boolean {
-  return code === 9 || code === 10 || code === 11 || code === 12 || code === 13 || code === 32
-}
 
 function isAsciiWordCode(code: number): boolean {
   return (

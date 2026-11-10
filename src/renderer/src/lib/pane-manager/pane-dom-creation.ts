@@ -5,7 +5,10 @@ import { WebLinksAddon } from '@xterm/addon-web-links'
 import { Terminal } from '@xterm/xterm'
 import type { ILink, ITerminalOptions } from '@xterm/xterm'
 import { createWrappedTerminalHttpLinkProvider } from '../../components/terminal-pane/wrapped-terminal-http-link-provider'
-import { TERMINAL_HTTP_URL_REGEX } from '../../../../shared/terminal-http-url-extraction'
+import {
+  hasProseAfterHttpUrl,
+  TERMINAL_HTTP_URL_REGEX
+} from '../../../../shared/terminal-http-url-extraction'
 import type { TerminalLeafId } from '../../../../shared/stable-pane-id'
 import type { DragReorderCallbacks, DragReorderState } from './pane-drag-reorder'
 import { attachPaneDrag } from './pane-drag-pointer'
@@ -100,6 +103,10 @@ export function createPaneDOM(
   } satisfies Pick<ILink, 'activate' | 'hover' | 'leave'>
   if (options.onLinkClick) {
     terminal.registerLinkProvider(createWrappedTerminalHttpLinkProvider(terminal, linkHandlers))
+    // Why: agents can send `https://a.im)에` as an OSC 8 target; dropping it lets the text link regex end the url correctly.
+    terminal.parser.registerOscHandler(8, (data) =>
+      hasProseAfterHttpUrl(data.slice(data.indexOf(';') + 1))
+    )
   }
   const webLinksAddon = new WebLinksAddon(options.onLinkClick ? linkHandlers.activate : undefined, {
     ...linkHandlers,
