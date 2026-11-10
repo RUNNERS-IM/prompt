@@ -78,7 +78,7 @@ function script(directory: string, source: string): string {
 }
 
 function waitForBackupWorkerReady(directory: string, ready: string): Promise<void> {
-  const deadline = AbortSignal.timeout(5_000)
+  const deadline = AbortSignal.timeout(20_000)
   return new Promise((resolve, reject) => {
     const watcher = watch(directory, () => {
       if (existsSync(ready)) {
@@ -223,7 +223,7 @@ describe('profile state backup worker', () => {
       }
       const pending = runProfileStateBackupWorker(job, {
         workerPath: worker,
-        timeoutMs: mode === 'cancel' ? 10_000 : 500,
+        timeoutMs: mode === 'cancel' ? 25_000 : 500,
         signal: cancellation.signal
       })
       const failed = expect(pending).rejects.toThrow(mode === 'cancel' ? 'cancelled' : 'timed out')

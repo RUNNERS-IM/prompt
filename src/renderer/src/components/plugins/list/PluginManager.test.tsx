@@ -210,7 +210,7 @@ describe('PluginManager', () => {
     }
     const nord = container.querySelector('[data-plugin-key="stablyai.orca-nord-theme"]')
     expect(nord?.querySelector('[data-plugin-installed-badge]')).not.toBeNull()
-    expect(buttonNamed(container, 'Disable Orca Nord')?.getAttribute('role')).toBe('switch')
+    expect(buttonNamed(container, 'Disable Prompt Nord')?.getAttribute('role')).toBe('switch')
     expect(keys()).toContain('local.dev-theme')
     expect(container.textContent).toContain('not from a catalog')
 
