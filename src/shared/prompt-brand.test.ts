@@ -4,6 +4,7 @@ import { applyPromptBrand } from './prompt-brand'
 describe('applyPromptBrand', () => {
   it('swaps the brand word but keeps identifiers', () => {
     expect(applyPromptBrand('Restart Orca')).toBe('Restart Prompt')
+    expect(applyPromptBrand('from an Orca server')).toBe('from a Prompt server')
     expect(applyPromptBrand('ORCA_WORKSPACE_NAME and orca.yaml')).toBe(
       'ORCA_WORKSPACE_NAME and orca.yaml'
     )

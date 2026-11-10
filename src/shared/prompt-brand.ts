@@ -14,6 +14,8 @@ const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   [/\bcommand:orca-agent-view\b/g, 'command:prompt-agent-view'],
   // Pairing links: desktop and mobile both use the prompt:// scheme.
   [/\borca:\/\//g, 'prompt://'],
+  // "an Orca server" would otherwise read "an Prompt server".
+  [/\b([Aa])n Orca\b/g, `$1 ${PROMPT_APP_NAME}`],
   [/\bOrca\b/g, PROMPT_APP_NAME],
   // German genitive ("Orcas Terminaldienst") and plural "Orcas" use the same word with an s.
   [/\bOrcas\b/g, `${PROMPT_APP_NAME}s`],

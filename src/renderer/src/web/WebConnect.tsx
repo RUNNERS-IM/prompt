@@ -17,6 +17,7 @@ import type { RuntimeStatus } from '../../../shared/runtime-types'
 import { translate } from '@/i18n/i18n'
 import { readWebDeviceKeySupport } from './web-device-key-support'
 import { webSessionPairingGuidance } from './web-pairing-security-guidance'
+import { PROMPT_APP_NAME } from '../../../shared/prompt-brand'
 
 type WebConnectProps = {
   initialPairingInput: string | null
@@ -39,7 +40,7 @@ export default function WebConnect({
   const connect = async (): Promise<void> => {
     setError(null)
     if (!parsedOffer) {
-      setError('Enter a valid Orca pairing URL or pairing code.')
+      setError(`Enter a valid ${PROMPT_APP_NAME} pairing URL or pairing code.`)
       return
     }
     if (parsedOffer.scope === 'mobile') {
@@ -53,7 +54,7 @@ export default function WebConnect({
     }
     if (isMixedContentWebSocket(parsedOffer.endpoint)) {
       setError(
-        'This HTTPS page cannot connect to a plain ws:// Orca server. Open the web client over HTTP or pair with a wss:// endpoint.'
+        `This HTTPS page cannot connect to a plain ws:// ${PROMPT_APP_NAME} server. Open the web client over HTTP or pair with a wss:// endpoint.`
       )
       return
     }

@@ -206,7 +206,7 @@ export function ThemeStep({ theme, onThemeChange, settings, updateSettings }: Th
             <button
               key={id}
               className={cn(
-                'group overflow-hidden rounded-xl border p-3 text-left transition-colors',
+                'group flex flex-col overflow-hidden rounded-xl border p-3 text-left transition-colors',
                 selected ? 'border-foreground/60 bg-accent' : 'border-border hover:bg-accent/60'
               )}
               onClick={() => applyOnboardingThemeSelection(id, onThemeChange, updateSettings)}
