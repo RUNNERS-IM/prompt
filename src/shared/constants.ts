@@ -22,6 +22,7 @@ import {
   getDefaultPrimarySelectionMiddleClickPaste,
   getDefaultTerminalRightClickToPaste
 } from './terminal-platform-defaults'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from './prompt-upstream'
 
 export { DEFAULT_STATUS_BAR_ITEMS } from './status-bar-defaults'
 export {
@@ -174,7 +175,8 @@ export function getDefaultUIState(): PersistedUIState {
     lastActiveWorktreeId: null,
     activeView: 'terminal',
     sidebarWidth: 280,
-    rightSidebarOpen: true,
+    // Prompt: 가운데 터미널을 넓게 쓰도록 처음엔 닫아 둔다.
+    rightSidebarOpen: !PROMPT_BLOCK_UPSTREAM_SERVICES,
     rightSidebarTab: 'explorer',
     rightSidebarExplorerView: 'files',
     rightSidebarWidth: 350,
@@ -226,7 +228,9 @@ export function getDefaultUIState(): PersistedUIState {
     _workspaceStatusesDefaultWorkflowMigrated: true,
     _workspaceStatusesDefaultVisualsMigrated: true,
     statusBarItems: [...DEFAULT_STATUS_BAR_ITEMS],
-    statusBarVisible: true,
+    // Prompt: no bottom status bar unless View > Status Bar turns it on.
+    statusBarVisible: !PROMPT_BLOCK_UPSTREAM_SERVICES,
+    _promptStatusBarRetired: PROMPT_BLOCK_UPSTREAM_SERVICES,
     usagePercentageDisplay: DEFAULT_USAGE_PERCENTAGE_DISPLAY,
     statusBarUsageMode: DEFAULT_STATUS_BAR_USAGE_MODE,
     dismissedUpdateVersion: null,

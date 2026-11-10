@@ -14,6 +14,7 @@ import {
 } from '../../../../shared/terminal-ligatures'
 import { NumberField, SettingsRow, SettingsSegmentedControl } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { clampNumber } from '@/lib/terminal-theme'
 import { translate } from '@/i18n/i18n'
 import { getTerminalAdvancedTypographySearchEntries } from './terminal-typography-search'
@@ -31,7 +32,7 @@ export function TerminalAdvancedTypographyControls({
   const searchEntries = getTerminalAdvancedTypographySearchEntries()
 
   return (
-    <div className="divide-y divide-border/40">
+    <SettingsGroupRows className="divide-y divide-border/40">
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalAppearanceSection.4aae5db258',
@@ -211,6 +212,6 @@ export function TerminalAdvancedTypographyControls({
           .
         </p>
       </SearchableSetting>
-    </div>
+    </SettingsGroupRows>
   )
 }

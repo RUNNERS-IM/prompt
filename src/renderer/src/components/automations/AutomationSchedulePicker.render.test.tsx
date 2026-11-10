@@ -103,7 +103,7 @@ function renderedCronFieldChips(): { text: string; title: string }[] {
 
 describe('AutomationSchedulePicker rendered DOM (#14404)', () => {
   it.each([
-    ['zh', ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']],
+    ['zh-Hans', ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']],
     ['ja', ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日']],
     ['ko', ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']],
     ['es', ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']]
@@ -156,7 +156,7 @@ describe('AutomationSchedulePicker rendered DOM (#14404)', () => {
   })
 
   it('renders the weekly cron status row localized, with no English plural (#14404)', async () => {
-    await i18n.changeLanguage('zh')
+    await i18n.changeLanguage('zh-Hans')
     renderPicker({ preset: 'custom', customSchedule: '0 9 * * 5' })
 
     expect(container.textContent).toContain('每星期五')
@@ -165,14 +165,14 @@ describe('AutomationSchedulePicker rendered DOM (#14404)', () => {
   })
 
   it('renders the valid-custom-cron status row localized (#14404)', async () => {
-    await i18n.changeLanguage('zh')
+    await i18n.changeLanguage('zh-Hans')
     renderPicker({ preset: 'custom', customSchedule: '*/30 9-17 * * 1-5' })
 
     expect(container.textContent).toContain('有效的自定义 cron')
   })
 
   it.each([
-    ['zh', ['分钟', '小时', '日', '月', '星期']],
+    ['zh-Hans', ['分钟', '小时', '日', '月', '星期']],
     ['ja', ['分', '時間', '日', '月', '曜日']],
     ['ko', ['분', '시간', '일', '월', '요일']],
     ['es', ['Minuto', 'Hora', 'Día', 'Mes', 'Día de la semana']]

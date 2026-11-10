@@ -71,6 +71,8 @@ export abstract class UpdaterState {
   protected quitAndInstallNativeInvoked = false
   protected persistLastUpdateCheckAt: ((timestamp: number) => void) | null = null
   protected _getLastUpdateCheckAt: (() => number | null) | null = null
+  /** 「업데이트 자동 확인」이 꺼져 있으면 false. 없으면 켜짐으로 본다. */
+  protected _isAutomaticCheckOn: (() => boolean) | null = null
   protected backgroundCheckLaunchPending = false
   // Retain promotion on the launch because its error event can precede the promise catch.
   protected backgroundCheckPromotedToUserInitiated = false

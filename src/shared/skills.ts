@@ -20,6 +20,8 @@ export type DiscoveredSkill = {
   skillFilePath: string
   installed: boolean
   updatedAt: number | null
+  /** A Claude Code slash command file, listed beside skills but never deletable as a skill folder. */
+  claudeCommand?: true
 }
 
 export type SkillDiscoverySource = {
@@ -54,6 +56,8 @@ export type SkillDiscoveryTarget = {
   /** Optional inventory filter for callers that only need known installed skills. */
   names?: string[]
   sourceKinds?: SkillSourceKind[]
+  /** Also list the host's Claude Code commands; old hosts ignore this and return skills only. */
+  includeClaudeCommands?: boolean
 }
 
 const ResolvedProjectRuntimeSchema = z.object({
@@ -109,7 +113,8 @@ export const SkillDiscoveryTargetSchema: z.ZodType<SkillDiscoveryTarget> = z.obj
   sourceKinds: z
     .array(z.enum(['home', 'repo', 'bundled', 'plugin']))
     .max(4)
-    .optional()
+    .optional(),
+  includeClaudeCommands: z.boolean().optional()
 })
 
 export type SkillFrontmatterSummary = {

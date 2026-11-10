@@ -34,6 +34,7 @@ import {
 import { resolveSettingsHostScope } from './settings-host-scope'
 import type { RuntimeClientTarget } from '../../../../shared/runtime-client-target'
 import { defaultScopeHost } from '@/lib/default-creation-host'
+import { DEFAULT_SETTINGS_SECTION_ID } from '@/lib/prompt-hidden-settings'
 import {
   blockRemovalForUnsavedFiles,
   projectRemovalTargets
@@ -143,7 +144,7 @@ export function useSettingsStoreModel() {
     () => fontSuggestions.filter((font) => font !== DEFAULT_APP_FONT_FAMILY),
     [fontSuggestions]
   )
-  const [activeSectionId, setActiveSectionId] = useState('general')
+  const [activeSectionId, setActiveSectionId] = useState(DEFAULT_SETTINGS_SECTION_ID)
   const [mountedSectionIds, setMountedSectionIds] = useState<Set<string>>(
     getInitialMountedSectionIds
   )

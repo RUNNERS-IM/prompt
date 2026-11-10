@@ -1,0 +1,97 @@
+diff --git a/out/differentialDownloader/DifferentialDownloader.js b/out/differentialDownloader/DifferentialDownloader.js
+index c6e948a79d1bb85122b21d8ddd61a5a842ca2e8d..cad01f4e29101601ec63377be235837d670a90bc 100644
+--- a/out/differentialDownloader/DifferentialDownloader.js
++++ b/out/differentialDownloader/DifferentialDownloader.js
+@@ -4,6 +4,7 @@ exports.DifferentialDownloader = void 0;
+ const builder_util_runtime_1 = require("builder-util-runtime");
+ const fs_extra_1 = require("fs-extra");
+ const fs_1 = require("fs");
++const stream_1 = require("stream");
+ const DataSplitter_1 = require("./DataSplitter");
+ const url_1 = require("url");
+ const downloadPlanBuilder_1 = require("./downloadPlanBuilder");
+@@ -102,7 +103,8 @@ class DifferentialDownloader {
+             const streams = [];
+             // Create our download info transformer if we have one
+             let downloadInfoTransform = undefined;
+-            if (!this.options.isUseMultipleRangeRequest && this.options.onProgress) {
++            // Prompt: progress comes from WrittenBytesProgressTransform below, which also counts copied blocks.
++            if (false) {
+                 const expectedByteCounts = [];
+                 let grandTotalBytes = 0;
+                 for (const task of tasks) {
+@@ -122,6 +124,13 @@ class DifferentialDownloader {
+             // to simply debug, do manual validation to allow file to be fully written
+             digestTransform.isValidateOnEnd = false;
+             streams.push(digestTransform);
++            if (this.options.onProgress) {
++                let grandTotal = 0;
++                for (const task of tasks) {
++                    grandTotal += task.end - task.start;
++                }
++                streams.push(new WrittenBytesProgressTransform(grandTotal, this.options.onProgress));
++            }
+             // noinspection JSArrowFunctionCanBeReplacedWithShorthand
+             fileOut.on("finish", () => {
+                 ;
+@@ -265,4 +274,45 @@ function removeQuery(url) {
+     const index = url.indexOf("?");
+     return index < 0 ? url : url.substring(0, index);
+ }
+-//# sourceMappingURL=DifferentialDownloader.js.map
+\ No newline at end of file
++//# sourceMappingURL=DifferentialDownloader.js.map
++// Prompt: reports bytes written to the new file (downloaded and copied) at most once a second, and once at the end.
++class WrittenBytesProgressTransform extends stream_1.Transform {
++    constructor(grandTotal, onProgress) {
++        super();
++        this.grandTotal = grandTotal;
++        this.onProgress = onProgress;
++        this.start = Date.now();
++        this.nextUpdate = this.start + 1000;
++        this.transferred = 0;
++        this.delta = 0;
++    }
++    _transform(chunk, encoding, callback) {
++        this.transferred += chunk.length;
++        this.delta += chunk.length;
++        const now = Date.now();
++        if (now >= this.nextUpdate && this.grandTotal > 0) {
++            this.nextUpdate = now + 1000;
++            this.emitProgress(now);
++        }
++        callback(null, chunk);
++    }
++    _flush(callback) {
++        if (this.grandTotal > 0) {
++            this.transferred = Math.max(this.transferred, this.grandTotal);
++            this.emitProgress(Date.now());
++        }
++        callback(null);
++    }
++    emitProgress(now) {
++        const transferred = Math.min(this.transferred, this.grandTotal);
++        const seconds = Math.max((now - this.start) / 1000, 0.001);
++        this.onProgress({
++            total: this.grandTotal,
++            delta: this.delta,
++            transferred,
++            percent: (transferred / this.grandTotal) * 100,
++            bytesPerSecond: Math.round(transferred / seconds),
++        });
++        this.delta = 0;
++    }
++}
+diff --git a/out/differentialDownloader/multipleRangeDownloader.js b/out/differentialDownloader/multipleRangeDownloader.js
+index cf1a44c3ca5a438f05773146793408964e5bde18..12100d9c701a3edef02a670baf4740b6b13f024b 100644
+--- a/out/differentialDownloader/multipleRangeDownloader.js
++++ b/out/differentialDownloader/multipleRangeDownloader.js
+@@ -96,7 +96,7 @@ function doExecuteTasks(differentialDownloader, options, out, resolve, reject) {
+             }
+             resolve();
+         };
+-        const dicer = new DataSplitter_1.DataSplitter(out, options, partIndexToTaskIndex, m[1] || m[2], partIndexToLength, onBatchFinished, grandTotalBytes, differentialDownloader.options.onProgress);
++        const dicer = new DataSplitter_1.DataSplitter(out, options, partIndexToTaskIndex, m[1] || m[2], partIndexToLength, onBatchFinished, grandTotalBytes, undefined);
+         dicer.on("error", reject);
+         response.pipe(dicer);
+         response.on("end", () => {

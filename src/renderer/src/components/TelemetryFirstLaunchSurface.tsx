@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { useAppStore } from '../store'
 import { FirstLaunchBanner } from './FirstLaunchBanner'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 
 export function TelemetryFirstLaunchSurface(): React.JSX.Element | null {
   const settings = useAppStore((s) => s.settings)
@@ -11,7 +12,8 @@ export function TelemetryFirstLaunchSurface(): React.JSX.Element | null {
   const fetchSettings = useAppStore((s) => s.fetchSettings)
   const [dismissedThisSession, setDismissedThisSession] = useState(false)
 
-  if (!settings || dismissedThisSession) {
+  // Prompt: telemetry is off in Prompt builds, so there is nothing to consent to.
+  if (PROMPT_BLOCK_UPSTREAM_SERVICES || !settings || dismissedThisSession) {
     return null
   }
 

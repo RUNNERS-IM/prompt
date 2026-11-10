@@ -310,7 +310,7 @@ describe('SidebarNav', () => {
     expect(queryButtonByText(container, 'Prompt Mobile')).not.toBeNull()
 
     await act(async () => {
-      await i18n.changeLanguage('zh')
+      await i18n.changeLanguage('zh-Hans')
     })
 
     expect(queryButtonByText(container, '自动化')).not.toBeNull()

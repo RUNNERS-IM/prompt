@@ -494,7 +494,7 @@ describe('hard-wrapped terminal HTTP clicks', () => {
     disposable.dispose()
   })
 
-  it('owns a plain HTTP link click without opening until an action is chosen', () => {
+  it('owns a plain HTTP link click and opens it in the system browser without a popover', () => {
     const request = vi.fn()
     const { terminal, registrations } = makeTerminal()
     const disposable = installHttpLinkClickFallback(terminal, {
@@ -517,8 +517,8 @@ describe('hard-wrapped terminal HTTP clicks', () => {
     expect(terminal.options.mouseEventsRequireAlt).toBe(false)
     mouseUp!(event)
 
-    expect(request).toHaveBeenCalledWith(expect.objectContaining({ kind: 'url' }))
-    expect(openUrlMock).not.toHaveBeenCalled()
+    expect(request).not.toHaveBeenCalled()
+    expect(openUrlMock).toHaveBeenCalledOnce()
     disposable.dispose()
   })
 

@@ -6,6 +6,7 @@ import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormContr
 import { WorkspaceDirectorySetting } from './WorkspaceDirectorySetting'
 import { PromptWindowsSetting } from './prompt-windows-setting'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { GlobalWorktreeVisibilitySourcesSetting } from './GlobalWorktreeVisibilitySourcesSetting'
 import { GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID } from '@/lib/settings-navigation-types'
 
@@ -39,43 +40,46 @@ export function GeneralWorkspaceSettingsSection({
 
       <WorkspaceDirectorySetting settings={settings} updateSettings={updateSettings} />
 
-      <div
-        id={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
-        data-settings-section={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
-        className="scroll-mt-6"
-      >
-        <SearchableSetting
-          title={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktrees',
-            'External worktrees'
-          )}
-          description={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktreesDescription',
-            'Choose which worktrees created outside Orca appear by default on this host.'
-          )}
-          keywords={[
-            'external',
-            'non-Orca',
-            'worktree',
-            'visibility',
-            'sidebar',
-            'show',
-            'hide',
-            'source',
-            'location',
-            'root',
-            'Claude',
-            'GSD'
-          ]}
+      {/* Prompt: 다른 도구가 만든 작업 폴더를 보일지 정하는 칸은 숨긴다. */}
+      {PROMPT_SIMPLE_SETTINGS ? null : (
+        <div
+          id={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
+          data-settings-section={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}
+          className="scroll-mt-6"
         >
-          <GlobalWorktreeVisibilitySourcesSetting
-            settings={settings}
-            defaultsSupported={defaultsSupported}
-            sourceDefaultsSupported={sourceDefaultsSupported}
-            updateSettings={updateSettingsOrThrow}
-          />
-        </SearchableSetting>
-      </div>
+          <SearchableSetting
+            title={translate(
+              'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktrees',
+              'External worktrees'
+            )}
+            description={translate(
+              'auto.components.settings.GeneralWorkspaceSettingsSection.externalWorktreesDescription',
+              'Choose which worktrees created outside Orca appear by default on this host.'
+            )}
+            keywords={[
+              'external',
+              'non-Orca',
+              'worktree',
+              'visibility',
+              'sidebar',
+              'show',
+              'hide',
+              'source',
+              'location',
+              'root',
+              'Claude',
+              'GSD'
+            ]}
+          >
+            <GlobalWorktreeVisibilitySourcesSetting
+              settings={settings}
+              defaultsSupported={defaultsSupported}
+              sourceDefaultsSupported={sourceDefaultsSupported}
+              updateSettings={updateSettingsOrThrow}
+            />
+          </SearchableSetting>
+        </div>
+      )}
 
       <SearchableSetting
         title={translate(
@@ -135,67 +139,81 @@ export function GeneralWorkspaceSettingsSection({
         </SearchableSetting>
       </div>
 
-      <div id="general-skip-delete-automation-confirm" className="scroll-mt-6">
-        <SearchableSetting
-          title={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.ea98373cd8',
-            'Ask Before Deleting Automations'
-          )}
-          description={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.d2dd2ca2e3',
-            'Show a confirmation dialog before deleting an automation and its run history.'
-          )}
-          keywords={['delete', 'automation', 'confirm', 'dialog', 'skip', 'prompt']}
-        >
-          <SettingsSwitchRow
-            label={translate(
-              'auto.components.settings.GeneralWorkspaceSettingsSection.ea98373cd8',
-              'Ask Before Deleting Automations'
-            )}
-            description={translate(
-              'auto.components.settings.GeneralWorkspaceSettingsSection.824b98a0d9',
-              'Show a confirmation before deleting automations and their run history.'
-            )}
-            checked={!settings.skipDeleteAutomationConfirm}
-            onChange={() =>
-              updateSettings({
-                skipDeleteAutomationConfirm: !settings.skipDeleteAutomationConfirm
-              })
-            }
-          />
-        </SearchableSetting>
-      </div>
+      {/* Prompt: automations and artifacts are hidden, so their delete confirmations are too. */}
+      {!PROMPT_SIMPLE_SETTINGS ? (
+        <>
+          <div id="general-skip-delete-automation-confirm" className="scroll-mt-6">
+            <SearchableSetting
+              title={translate(
+                'auto.components.settings.GeneralWorkspaceSettingsSection.ea98373cd8',
+                'Ask Before Deleting Automations'
+              )}
+              description={translate(
+                'auto.components.settings.GeneralWorkspaceSettingsSection.d2dd2ca2e3',
+                'Show a confirmation dialog before deleting an automation and its run history.'
+              )}
+              keywords={['delete', 'automation', 'confirm', 'dialog', 'skip', 'prompt']}
+            >
+              <SettingsSwitchRow
+                label={translate(
+                  'auto.components.settings.GeneralWorkspaceSettingsSection.ea98373cd8',
+                  'Ask Before Deleting Automations'
+                )}
+                description={translate(
+                  'auto.components.settings.GeneralWorkspaceSettingsSection.824b98a0d9',
+                  'Show a confirmation before deleting automations and their run history.'
+                )}
+                checked={!settings.skipDeleteAutomationConfirm}
+                onChange={() =>
+                  updateSettings({
+                    skipDeleteAutomationConfirm: !settings.skipDeleteAutomationConfirm
+                  })
+                }
+              />
+            </SearchableSetting>
+          </div>
 
-      <div id="general-skip-delete-artifact-confirm" className="scroll-mt-6">
-        <SearchableSetting
-          title={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.31e300af1c',
-            'Ask Before Deleting Artifacts'
-          )}
-          description={translate(
-            'auto.components.settings.GeneralWorkspaceSettingsSection.fb29a73a17',
-            'Show a confirmation dialog before deleting a shared artifact and breaking its public link.'
-          )}
-          keywords={['delete', 'artifact', 'share', 'link', 'confirm', 'dialog', 'skip', 'prompt']}
-        >
-          <SettingsSwitchRow
-            label={translate(
-              'auto.components.settings.GeneralWorkspaceSettingsSection.31e300af1c',
-              'Ask Before Deleting Artifacts'
-            )}
-            description={translate(
-              'auto.components.settings.GeneralWorkspaceSettingsSection.bf46474e33',
-              'Show a confirmation before deleting a shared artifact. Anyone holding its public link loses access.'
-            )}
-            checked={!settings.skipDeleteArtifactConfirm}
-            onChange={() =>
-              updateSettings({
-                skipDeleteArtifactConfirm: !settings.skipDeleteArtifactConfirm
-              })
-            }
-          />
-        </SearchableSetting>
-      </div>
+          <div id="general-skip-delete-artifact-confirm" className="scroll-mt-6">
+            <SearchableSetting
+              title={translate(
+                'auto.components.settings.GeneralWorkspaceSettingsSection.31e300af1c',
+                'Ask Before Deleting Artifacts'
+              )}
+              description={translate(
+                'auto.components.settings.GeneralWorkspaceSettingsSection.fb29a73a17',
+                'Show a confirmation dialog before deleting a shared artifact and breaking its public link.'
+              )}
+              keywords={[
+                'delete',
+                'artifact',
+                'share',
+                'link',
+                'confirm',
+                'dialog',
+                'skip',
+                'prompt'
+              ]}
+            >
+              <SettingsSwitchRow
+                label={translate(
+                  'auto.components.settings.GeneralWorkspaceSettingsSection.31e300af1c',
+                  'Ask Before Deleting Artifacts'
+                )}
+                description={translate(
+                  'auto.components.settings.GeneralWorkspaceSettingsSection.bf46474e33',
+                  'Show a confirmation before deleting a shared artifact. Anyone holding its public link loses access.'
+                )}
+                checked={!settings.skipDeleteArtifactConfirm}
+                onChange={() =>
+                  updateSettings({
+                    skipDeleteArtifactConfirm: !settings.skipDeleteArtifactConfirm
+                  })
+                }
+              />
+            </SearchableSetting>
+          </div>
+        </>
+      ) : null}
 
       <div
         id="general-open-in-apps"

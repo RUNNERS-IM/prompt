@@ -116,8 +116,11 @@ export function SidebarSettingsHelpMenu(): React.JSX.Element {
   const mountedRef = useMountedRef()
   const updateCheckHint = getUpdateCheckHint()
 
+  // Prompt: the onboarding checklist walks through Orca features, so it is never offered.
   const showMilestones =
-    setupProgress.ready && setupProgress.coreDoneCount < setupProgress.coreTotal
+    !PROMPT_BLOCK_UPSTREAM_SERVICES &&
+    setupProgress.ready &&
+    setupProgress.coreDoneCount < setupProgress.coreTotal
 
   const handleMenuOpenChange = (open: boolean): void => {
     setMenuOpen(open)

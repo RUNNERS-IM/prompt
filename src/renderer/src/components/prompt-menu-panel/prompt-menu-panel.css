@@ -1,0 +1,40 @@
+/* Prompt 메뉴 막대 패널의 화면. 공용 메뉴 모양(runners-account/runners-menu.css) 위에 패널 여백 · 초록 점만 더한다. */
+
+:root {
+  /* 시스템 강조색은 main 이 --prompt-accent 로 넣는다(prompt-mac-accent-color.ts). */
+  --rm-accent: var(--prompt-accent, #007aff);
+}
+
+.prompt-menu-panel {
+  box-sizing: border-box;
+  padding: var(--rm-pad-y) 0;
+  user-select: none;
+  cursor: default;
+}
+
+.prompt-menu-panel .rm-item {
+  line-height: 1.2;
+}
+
+/* 누를 수 없는 회색 줄(실행 중 터미널 수 · 개발판 이름표). */
+.prompt-menu-panel .rm-item.prompt-menu-info {
+  color: var(--rm-text-secondary);
+}
+
+/* 아이콘 자리에 놓는 초록 점: 기본 메뉴의 status-dot-green 과 같은 색. */
+.prompt-menu-panel .prompt-menu-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--rm-icon);
+  height: var(--rm-icon);
+}
+
+.prompt-menu-panel .prompt-menu-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rm-ok);
+}

@@ -106,9 +106,9 @@ function PromptTerminalRowName({ name }: { name: string }): React.JSX.Element {
 
 /**
  * Prompt two-level sidebar: under a project header only session rows show — agent rows (named like
- * their tab) and plain terminals. A one-workspace project shows its branch, connection dot and
- * "Default" chip on the project header; with several workspaces each gets one line (name, then
- * those same marks) above its sessions.
+ * their tab) and plain terminals. The main workspace's branch, connection dot and "Default" chip sit
+ * on the project header and its sessions sit right under it; each other workspace gets one line
+ * (name, then those same marks) above its sessions (decision 2026-11-05, 3).
  */
 export function PromptWorktreeSessionRows({
   card
@@ -119,6 +119,8 @@ export function PromptWorktreeSessionRows({
   const hasSiblingWorktrees = useAppStore((s) =>
     repo ? (s.worktreesByRepo?.[repo.id]?.length ?? 0) > 1 : false
   )
+  // The main workspace never gets a line: the project header already carries its marks.
+  const showsWorkspaceRow = hasSiblingWorktrees && !worktree.isMainWorktree
   const agents = useWorktreeAgentRows(worktree.id, true)
   const tabs = useAppStore(useShallow((s) => s.tabsByWorktree?.[worktree.id] ?? EMPTY_TABS))
   const groups = useAppStore((s) => s.groupsByWorktree?.[worktree.id] ?? EMPTY_GROUPS)
@@ -173,7 +175,7 @@ export function PromptWorktreeSessionRows({
       // Read by the drop lookup (PROMPT_SESSION_DROP_WORKTREE_ATTR).
       data-prompt-session-drop-worktree={worktree.id}
     >
-      {hasSiblingWorktrees ? (
+      {showsWorkspaceRow ? (
         <div
           className={cn(
             // The workspace line is the card's drag handle (sessions below it stop that drag).

@@ -9,6 +9,7 @@ import { useAppStore } from '../../store'
 import { useShortcutKeyComboDetails } from '@/hooks/useShortcutLabel'
 import { ShortcutHintList } from './AppearanceShortcutHintList'
 import { FontAutocomplete, SettingsRow, SettingsSwitchRow } from './SettingsFormControls'
+import { AppearanceInterfacePromptGroups } from './AppearanceInterfacePromptGroups'
 import { DEFAULT_APP_FONT_FAMILY } from '../../../../shared/constants'
 import {
   getLanguageEntries,
@@ -25,6 +26,7 @@ import {
   UI_LANGUAGE_CHOICES
 } from '@/i18n/supported-languages'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import type { UiLanguage } from '../../../../shared/ui-language'
 import { matchesSettingsSearch, normalizeSettingsSearchQuery } from './settings-search'
 import { usePluginLanguagePacks } from '@/store/plugin-language-packs'
@@ -96,27 +98,28 @@ export function AppearanceInterfaceSection({
   const showAdvanced = !isSearching || matchesSettingsSearch(searchQuery, advancedEntries)
   const languageTitle = translate('settings.appearance.language.title', 'Language')
 
-  return (
-    <div className="divide-y divide-border/40">
-      <SearchableSetting
-        title={themeLabel}
-        description={themeEntry?.description}
-        keywords={themeEntry?.keywords ?? ['dark', 'light', 'system']}
-        forceVisible={forceVisiblePrimary}
-      >
-        <SettingsRow
-          label={themeLabel}
-          control={
-            <AppearanceThemeControl
-              label={themeLabel}
-              settings={settings}
-              updateSettings={updateSettings}
-              applyTheme={applyTheme}
-            />
-          }
-        />
-      </SearchableSetting>
-
+  const themeRow = (
+    <SearchableSetting
+      title={themeLabel}
+      description={themeEntry?.description}
+      keywords={themeEntry?.keywords ?? ['dark', 'light', 'system']}
+      forceVisible={forceVisiblePrimary}
+    >
+      <SettingsRow
+        label={themeLabel}
+        control={
+          <AppearanceThemeControl
+            label={themeLabel}
+            settings={settings}
+            updateSettings={updateSettings}
+            applyTheme={applyTheme}
+          />
+        }
+      />
+    </SearchableSetting>
+  )
+  const pluginThemeRows = (
+    <>
       {hasPluginThemes
         ? themeSlots.map((slot) => (
             <SearchableSetting
@@ -190,7 +193,10 @@ export function AppearanceInterfaceSection({
           />
         </SearchableSetting>
       ) : null}
-
+    </>
+  )
+  const languageRow = (
+    <>
       {SHOW_UI_LANGUAGE_SETTING ? (
         <SearchableSetting
           title={languageTitle}
@@ -225,122 +231,145 @@ export function AppearanceInterfaceSection({
           />
         </SearchableSetting>
       ) : null}
+    </>
+  )
+  const zoomRow = (
+    <SearchableSetting
+      title={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
+      description={zoomEntry?.description}
+      keywords={zoomEntry?.keywords ?? ['zoom', 'scale', 'shortcut']}
+      forceVisible={forceVisiblePrimary}
+    >
+      <SettingsRow
+        label={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
+        // Explain the shortcut and terminal exception; the zoom buttons already explain scaling.
+        description={
+          <>
+            <ShortcutHintList combos={zoomInKeyCombos} /> /{' '}
+            <ShortcutHintList combos={zoomOutKeyCombos} />{' '}
+            {translate(
+              'auto.components.settings.AppearancePane.ef89200c1f',
+              'when not in a terminal pane.'
+            )}
+          </>
+        }
+        control={<UIZoomControl />}
+      />
+    </SearchableSetting>
+  )
+  const fontRow = (
+    <SearchableSetting
+      title={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
+      description={typographyEntry?.description}
+      keywords={typographyEntry?.keywords ?? ['font', 'typeface', 'typography']}
+      forceVisible={forceVisiblePrimary}
+    >
+      <SettingsRow
+        label={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
+        control={
+          <FontAutocomplete
+            value={settings.appFontFamily}
+            suggestions={fontSuggestions}
+            placeholder={DEFAULT_APP_FONT_FAMILY}
+            onRequestSuggestions={onRequestFontSuggestions}
+            onChange={(value) =>
+              updateSettings({ appFontFamily: value.trim() || DEFAULT_APP_FONT_FAMILY })
+            }
+          />
+        }
+      />
+    </SearchableSetting>
+  )
+  const titlebarRow = (
+    <SearchableSetting
+      title={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar App Name')}
+      description={titlebarEntry?.description}
+      keywords={titlebarEntry?.keywords ?? ['titlebar', 'orca', 'app', 'name']}
+    >
+      <SettingsSwitchRow
+        label={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar App Name')}
+        checked={settings.showTitlebarAppName}
+        onChange={() => updateSettings({ showTitlebarAppName: !settings.showTitlebarAppName })}
+      />
+    </SearchableSetting>
+  )
+  const trayRow = (
+    <>
+      {isDesktopWindows ? (
+        <SearchableSetting
+          title={translate(
+            'auto.components.settings.AppearancePane.2edf606c46',
+            'Minimize to Tray on Close'
+          )}
+          description={systemTrayEntry?.description}
+          keywords={systemTrayEntry?.keywords ?? ['tray', 'minimize', 'close']}
+        >
+          <SettingsSwitchRow
+            label={translate(
+              'auto.components.settings.AppearancePane.2edf606c46',
+              'Minimize to Tray on Close'
+            )}
+            // Explain the non-obvious platform restriction and keep-running consequence.
+            description={translate(
+              'auto.components.settings.AppearancePane.b707773a0d',
+              'When enabled, closing the window keeps Orca running in the system tray instead of quitting.'
+            )}
+            checked={settings.minimizeToTrayOnClose === true}
+            onChange={() =>
+              updateSettings({ minimizeToTrayOnClose: !settings.minimizeToTrayOnClose })
+            }
+          />
+        </SearchableSetting>
+      ) : null}
+    </>
+  )
+  const menuBarRow = (
+    <>
+      {isDesktopMac ? (
+        <SearchableSetting
+          title={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
+          description={menuBarIconEntry?.description}
+          keywords={menuBarIconEntry?.keywords ?? ['menu bar', 'status item', 'activity']}
+        >
+          <SettingsSwitchRow
+            label={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
+            // Hiding the status item preserves Dock activation and close-keeps-running behavior.
+            description={translate(
+              'settings.appearance.menuBarIcon.description',
+              'Keep an Orca shortcut and activity indicator in the macOS menu bar.'
+            )}
+            checked={settings.showMenuBarIcon !== false}
+            onChange={() => updateSettings({ showMenuBarIcon: settings.showMenuBarIcon === false })}
+          />
+        </SearchableSetting>
+      ) : null}
+    </>
+  )
 
-      <SearchableSetting
-        title={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
-        description={zoomEntry?.description}
-        keywords={zoomEntry?.keywords ?? ['zoom', 'scale', 'shortcut']}
-        forceVisible={forceVisiblePrimary}
-      >
-        <SettingsRow
-          label={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
-          // Explain the shortcut and terminal exception; the zoom buttons already explain scaling.
-          description={
-            <>
-              <ShortcutHintList combos={zoomInKeyCombos} /> /{' '}
-              <ShortcutHintList combos={zoomOutKeyCombos} />{' '}
-              {translate(
-                'auto.components.settings.AppearancePane.ef89200c1f',
-                'when not in a terminal pane.'
-              )}
-            </>
-          }
-          control={<UIZoomControl />}
-        />
-      </SearchableSetting>
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <AppearanceInterfacePromptGroups
+        isDesktopWindows={isDesktopWindows}
+        forceVisiblePrimary={forceVisiblePrimary}
+        primaryRows={[themeRow, languageRow, zoomRow, fontRow]}
+        windowRows={[trayRow]}
+      />
+    )
+  }
 
-      <SearchableSetting
-        title={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
-        description={typographyEntry?.description}
-        keywords={typographyEntry?.keywords ?? ['font', 'typeface', 'typography']}
-        forceVisible={forceVisiblePrimary}
-      >
-        <SettingsRow
-          label={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
-          control={
-            <FontAutocomplete
-              value={settings.appFontFamily}
-              suggestions={fontSuggestions}
-              placeholder={DEFAULT_APP_FONT_FAMILY}
-              onRequestSuggestions={onRequestFontSuggestions}
-              onChange={(value) =>
-                updateSettings({ appFontFamily: value.trim() || DEFAULT_APP_FONT_FAMILY })
-              }
-            />
-          }
-        />
-      </SearchableSetting>
-
+  return (
+    <div className="divide-y divide-border/40">
+      {themeRow}
+      {pluginThemeRows}
+      {languageRow}
+      {zoomRow}
+      {fontRow}
       {showAdvanced ? (
         <AppearanceAdvancedDisclosure showTopBorder={false}>
           <div className="divide-y divide-border/40">
-            <SearchableSetting
-              title={translate(
-                'auto.components.settings.AppearancePane.9868f39007',
-                'Titlebar App Name'
-              )}
-              description={titlebarEntry?.description}
-              keywords={titlebarEntry?.keywords ?? ['titlebar', 'orca', 'app', 'name']}
-            >
-              <SettingsSwitchRow
-                label={translate(
-                  'auto.components.settings.AppearancePane.9868f39007',
-                  'Titlebar App Name'
-                )}
-                checked={settings.showTitlebarAppName}
-                onChange={() =>
-                  updateSettings({ showTitlebarAppName: !settings.showTitlebarAppName })
-                }
-              />
-            </SearchableSetting>
-
-            {isDesktopWindows ? (
-              <SearchableSetting
-                title={translate(
-                  'auto.components.settings.AppearancePane.2edf606c46',
-                  'Minimize to Tray on Close'
-                )}
-                description={systemTrayEntry?.description}
-                keywords={systemTrayEntry?.keywords ?? ['tray', 'minimize', 'close']}
-              >
-                <SettingsSwitchRow
-                  label={translate(
-                    'auto.components.settings.AppearancePane.2edf606c46',
-                    'Minimize to Tray on Close'
-                  )}
-                  // Explain the non-obvious platform restriction and keep-running consequence.
-                  description={translate(
-                    'auto.components.settings.AppearancePane.b707773a0d',
-                    'When enabled, closing the window keeps Orca running in the system tray instead of quitting.'
-                  )}
-                  checked={settings.minimizeToTrayOnClose === true}
-                  onChange={() =>
-                    updateSettings({ minimizeToTrayOnClose: !settings.minimizeToTrayOnClose })
-                  }
-                />
-              </SearchableSetting>
-            ) : null}
-
-            {isDesktopMac ? (
-              <SearchableSetting
-                title={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
-                description={menuBarIconEntry?.description}
-                keywords={menuBarIconEntry?.keywords ?? ['menu bar', 'status item', 'activity']}
-              >
-                <SettingsSwitchRow
-                  label={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
-                  // Hiding the status item preserves Dock activation and close-keeps-running behavior.
-                  description={translate(
-                    'settings.appearance.menuBarIcon.description',
-                    'Keep an Orca shortcut and activity indicator in the macOS menu bar.'
-                  )}
-                  checked={settings.showMenuBarIcon !== false}
-                  onChange={() =>
-                    updateSettings({ showMenuBarIcon: settings.showMenuBarIcon === false })
-                  }
-                />
-              </SearchableSetting>
-            ) : null}
+            {titlebarRow}
+            {trayRow}
+            {menuBarRow}
           </div>
         </AppearanceAdvancedDisclosure>
       ) : null}

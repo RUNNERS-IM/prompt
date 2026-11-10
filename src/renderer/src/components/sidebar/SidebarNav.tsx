@@ -10,6 +10,7 @@ import { ContextMenu, ContextMenuTrigger } from '@/components/ui/context-menu'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { SetupGuideSidebarEntry } from './SetupGuideSidebarEntry'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { SidebarTaskNavButton } from './SidebarTaskNavButton'
 import { HideSidebarMenu } from './sidebar-nav-controls'
 import { translate } from '@/i18n/i18n'
@@ -67,7 +68,9 @@ const SidebarNav = React.memo(function SidebarNav() {
   const automationsActive = activeView === 'automations'
   const mobileActive = activeView === 'mobile'
   const artifactsActive = activeView === 'artifacts'
-  const skillsActive = activeView === 'skills'
+  const skillsActive = useAppStore(
+    (s) => s.activeView === 'skills' || s.activeModal === 'prompt-skills'
+  )
   const mobileOnboardingBadge = useMobileSidebarOnboardingBadge(showMobileButton)
   const hideAutomationsButton = React.useCallback(() => {
     void updateSettings({ showAutomationsButton: false })
@@ -116,7 +119,8 @@ const SidebarNav = React.memo(function SidebarNav() {
           ))}
         </span>
       </button>
-      <SetupGuideSidebarEntry />
+      {/* Prompt: the onboarding checklist walks through Orca features. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : <SetupGuideSidebarEntry />}
       <SidebarTaskNavButton />
       {showArtifactsButton ? (
         <ContextMenu>
@@ -173,7 +177,8 @@ const SidebarNav = React.memo(function SidebarNav() {
               </span>
             </button>
           </ContextMenuTrigger>
-          <HideSidebarMenu onHide={hideSkillsButton} />
+          {/* Prompt has no setting to bring the row back once hidden. */}
+          {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : <HideSidebarMenu onHide={hideSkillsButton} />}
         </ContextMenu>
       ) : null}
       {showAutomationsButton ? (

@@ -40,6 +40,247 @@
       "resume": "Продолжить",
       "showAll": "Показать все…",
       "launchFailed": "Не удалось запустить Claude с этими параметрами."
+    },
+    "about": {
+      "menuLabel": "О приложении {{name}}",
+      "notices": "Уведомления об открытом ПО",
+      "versionLine": "Версия {{version}} · Бесплатно",
+      "website": "Веб-сайт",
+      "noticesMissing": "Не удалось прочитать файл уведомлений.",
+      "chromiumLicenses": "Открыть лицензии Chromium",
+      "close": "Закрыть"
+    },
+    "windows": {
+      "newWindow": "Новое окно",
+      "rememberTitle": "Запоминать открытые окна",
+      "rememberDescription": "При запуске Prompt открывать все окна с их вкладками, размером и положением.",
+      "openInNewWindow": "Открыть в новом окне",
+      "windowLabelNamed": "Окно {{index}} — {{name}}",
+      "windowLabel": "Окно {{index}}",
+      "mainWindowSuffix": "(Основное)",
+      "moveTabToWindow": "Переместить вкладку в окно"
+    },
+    "crashReport": {
+      "title": "Сообщить о сбое",
+      "description": "Открывает новую задачу на GitHub с вашими заметками и указанной версией. Требуется аккаунт GitHub.",
+      "cancel": "Отмена",
+      "open": "Открыть в GitHub",
+      "opened": "Страница задачи на GitHub открыта. Отчёт будет отправлен после того, как вы отправите его там."
+    },
+    "update": {
+      "titleVersion": "Новая версия {{version}}",
+      "subtitleWithCurrent": "У вас {{current}} · При установке Prompt перезапустится",
+      "subtitle": "При установке Prompt перезапустится",
+      "dismiss": "Закрыть",
+      "releaseNotes": "Что изменилось",
+      "later": "Позже",
+      "install": "Установить",
+      "downloadingTitle": "Загрузка версии {{version}}",
+      "downloadingSubtitle": "Prompt перезапустится после завершения загрузки",
+      "restartFailed": "Не удалось перезапустить для установки обновления. Закройте и снова откройте Prompt, затем повторите попытку.",
+      "installerFailed": "Не удалось запустить установщик обновления. Prompt остаётся открытым."
+    },
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "Перед началом",
+        "subtitle": "Prompt использует Claude. Выберите, может ли Claude действовать без запроса разрешения.",
+        "tooltip": "Режим Yolo"
+      },
+      "close": "Закрыть"
+    },
+    "claudeModel": {
+      "rejected": "Claude оставил прежнюю модель.",
+      "submenu": "Модель",
+      "badgeTitle": "Модель: {{model}} (нажмите, чтобы изменить)"
+    },
+    "defaultModel": {
+      "title": "Модель по умолчанию",
+      "description": "Вкладки и строки боковой панели показывают название модели, только если в сессии работает другая модель. Наведите курсор на вкладку или строку, чтобы увидеть её модель."
+    },
+    "sessionCard": {
+      "model": "Модель",
+      "status": "Статус",
+      "task": "Задача",
+      "folder": "Папка",
+      "subagents": "Субагенты",
+      "subagentsRunning": "Работает: {{count}}",
+      "minutes": "{{m}} мин",
+      "hours": "{{h}} ч",
+      "hoursMinutes": "{{h}} ч {{m}} мин",
+      "justNow": "{{status}} · только что",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · {{duration}} назад"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "Новые сессии",
+        "permissionDescription": "Что Claude может делать без вашего разрешения.",
+        "sessionGroup": "Сессии Claude",
+        "accountsGroup": "Аккаунты",
+        "usageGroup": "Использование",
+        "usageSearchDescription": "Количество агентов, а также токены, модели и сессии Claude.",
+        "title": "Claude",
+        "description": "Аккаунты Claude, запуск новых сессий и использование."
+      },
+      "appearance": {
+        "trayGroup": "Системный трей",
+        "terminalWindowGroup": "Окно терминала",
+        "title": "Оформление",
+        "description": "Тема, язык, масштаб, шрифты и цвета терминала."
+      },
+      "cli": {
+        "installDescriptionMac": "Зарегистрировать `prompt` и `orca` в /usr/local/bin.",
+        "notInstalled": "Зарегистрируйте {{path}}, чтобы использовать Prompt из других терминалов."
+      },
+      "advanced": {
+        "permissionsGroup": "Разрешения macOS",
+        "experimentalGroup": "Экспериментальные функции",
+        "sessionSearchGroup": "Поиск по сессиям агентов",
+        "title": "Дополнительно",
+        "description": "Сеть, разрешения macOS, поиск по сессиям и экспериментальные функции."
+      },
+      "git": {
+        "branchesGroup": "Ветки и рабочие пространства",
+        "apiBudgetGroup": "Лимиты использования API",
+        "integrationsGroup": "Интеграции",
+        "title": "Git",
+        "description": "Ветки, действия с системой контроля версий и подключения GitHub · GitLab."
+      },
+      "notifications": {
+        "alertsGroup": "Уведомления",
+        "soundGroup": "Звук",
+        "visibleScreenGroup": "Видимый экран"
+      },
+      "sidebarTitle": "Настройки Prompt",
+      "terminal": {
+        "scrollbackKeysGroup": "Прокрутка и клавиши",
+        "shellArgsGroup": "Аргументы запуска оболочки"
+      },
+      "group": {
+        "more": "Ещё"
+      },
+      "general": {
+        "appGroup": "Приложение",
+        "openAtLoginDescription": "Держать Prompt в строке меню после входа в систему на Mac.",
+        "autoCheckUpdatesDescription": "Сообщает о выходе новой версии.",
+        "menuBarIconDescription": "Показывать значок Prompt в строке меню."
+      },
+      "about": {
+        "title": "О программе",
+        "description": "Версия, приложения RUNNERS и сведения об открытом ПО."
+      }
+    },
+    "mobile": {
+      "directOnly": "Ретрансляция в Prompt отключена. Телефон подключается только через ту же сеть Wi-Fi, что и этот компьютер, или через Tailscale."
+    },
+    "projectRemoval": {
+      "wholeProject": "Будет удалён весь проект, а не только одна сессия.",
+      "runningSessions": "Все запущенные в нём сессии ({{count}}) будут остановлены.",
+      "filesVmRecipe": "Рецепт его виртуальной машины определяет, будут ли среда и её файлы удалены навсегда.",
+      "filesSsh": "Его папка и файлы останутся на {{host}}. Чтобы вернуть проект, снова добавьте этот SSH-хост.",
+      "filesLocal": "Его папка и файлы останутся на месте.",
+      "closeOneSession": "Чтобы закрыть только одну сессию, нажмите × в её строке.",
+      "title": "Удалить проект «{{name}}» из списка?",
+      "confirm": "Удалить проект",
+      "menuItem": "Удалить проект из списка…"
+    },
+    "computerPicker": {
+      "connected": "Подключено",
+      "connecting": "Подключение",
+      "offline": "Не в сети",
+      "thisMac": "(этот Mac)",
+      "thisComputer": "Этот компьютер",
+      "label": "Компьютер",
+      "add": "Добавить компьютер…",
+      "share": "Поделиться этим компьютером…",
+      "shareTitle": "Поделиться этим компьютером"
+    },
+    "sessionRow": {
+      "helpers": "Помощники: {{count}}",
+      "tool": {
+        "command": "Выполняет команду",
+        "read": "Читает файл",
+        "edit": "Редактирует файл",
+        "search": "Ищет файлы",
+        "web": "Ищет в интернете",
+        "helper": "Передаёт работу помощнику",
+        "plan": "Обновляет свой план",
+        "other": "Использует {{tool}}"
+      },
+      "noUpdateMinutes": "Нет обновлений {{count}} мин · возможно, завис",
+      "noUpdateHours": "Нет обновлений {{count}} ч · возможно, завис",
+      "noUpdateDays": "Нет обновлений {{count}} дн. · возможно, завис",
+      "monitoring": "Следит за фоновыми задачами",
+      "done": "Готово · ждёт вас",
+      "failure": {
+        "signIn": "Требуется вход",
+        "usageLimit": "Достигнут лимит использования",
+        "overloaded": "Сервер перегружен"
+      }
+    },
+    "sessionMove": {
+      "cancelRemote": "Сессии можно переносить только между проектами на этом компьютере.",
+      "cancelNoSession": "В этой сессии пока нет беседы с Claude, которую можно перенести.",
+      "cancelSeveral": "На этой вкладке несколько бесед с Claude, поэтому неясно, какую переносить.",
+      "hintCopy": "Копировать сюда",
+      "hintMove": "Переместить сюда · ⌥ — копировать",
+      "hintMoveShell": "Переместить сюда",
+      "cancel": "Отмена",
+      "movingTo": "Перенос в «{{name}}»",
+      "alreadyMoving": "Эта сессия уже переносится.",
+      "cancelled": "Перенос в «{{name}}» отменён. Сессия осталась на прежнем месте.",
+      "waiting": "Эта сессия работает. Она будет перенесена в «{{name}}» после завершения.",
+      "stillWorking": "Сессия продолжила работать, поэтому её не перенесли.",
+      "noSession": "В этой сессии нет беседы с Claude, которую можно перенести.",
+      "opening": "Открытие сессии в «{{name}}»…",
+      "copyFailed": "Не удалось перенести сессию.",
+      "notStarted": "Беседа не открылась в «{{name}}», поэтому исходная вкладка сохранена.",
+      "copiedPinned": "Открыто в «{{name}}». Исходная вкладка закреплена, поэтому она сохранена.",
+      "moved": "Перенесено в «{{name}}»",
+      "undo": "Отменить"
+    },
+    "sidebar": {
+      "terminal": "Терминал",
+      "openWorkspace": "Открыть терминал"
+    },
+    "skills": {
+      "commandCount": "Команд: {{count}}",
+      "mySkills": "Мои навыки",
+      "commands": "Команды"
+    },
+    "closeSession": {
+      "titleNamed": "Закрыть «{{name}}»?",
+      "titleUnnamed": "Закрыть эту сессию?",
+      "commandDescription": "Выполняющаяся в ней команда будет остановлена.",
+      "agentDescription": "Её работа будет остановлена. Беседа сохранится, поэтому вы сможете продолжить позже.",
+      "dontAskAgain": "Больше не спрашивать",
+      "confirm": "Закрыть"
+    },
+    "timeAgo": {
+      "now": "сейчас",
+      "minutes": "{{value}} мин",
+      "hours": "{{value}} ч",
+      "days": "{{value}} дн."
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "Нажмите для действий, ",
+      "fileOpen": "{{mod}}+клик — открыть, {{shiftMod}}+клик — открыть в приложении по умолчанию",
+      "actionsOrPrefix": "Нажмите для действий или ",
+      "orcaFileOpen": "{{mod}}+клик — открыть в Orca",
+      "urlInvertsToOrca": "{{mod}}+клик — открыть, {{shiftMod}}+клик — открыть в Orca",
+      "urlSystemBrowser": "{{mod}}+клик — открыть, {{shiftMod}}+клик — открыть в системном браузере",
+      "systemBrowserOnly": "{{shiftMod}}+клик — открыть в системном браузере",
+      "clickSystemBrowser": "Нажмите, чтобы открыть в системном браузере",
+      "orcaBrowserOnly": "{{shiftMod}}+клик — открыть в Orca",
+      "switchWorkspace": "{{mod}}+клик — переключить рабочее пространство",
+      "switchWorkspaceFinder": "{{mod}}+клик — переключить рабочее пространство, {{shiftMod}}+клик — открыть в Finder",
+      "switchWorkspaceFolder": "{{mod}}+клик — переключить рабочее пространство, {{shiftMod}}+клик — открыть папку"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "Orca пропустила скрытый вывод терминала, так как очередь стала слишком большой.",
+      "foregroundBurst": "Orca пропустила часть вывода терминала, так как очередь стала слишком большой.",
+      "restoreUnavailable": "Orca пропустила скрытый вывод терминала, так как основное восстановление было недоступно.",
+      "noHostImage": "Orca не удалось восстановить историю этого терминала с сервера."
     }
   },
   "agentLaunch": {
@@ -660,7 +901,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "Показывать расход токенов и стоимость Claude для активного рабочего пространства.",
@@ -1072,7 +1322,9 @@
       "body": "Orca продолжает работать в системном трее"
     },
     "activityWaiting": "Orca — ожидает вашего ответа",
-    "activityWaitingSuffix": "ожидает вашего ответа"
+    "activityWaitingSuffix": "ожидает вашего ответа",
+    "openAtLogin": "Открывать при входе",
+    "autoCheckUpdates": "Автоматически проверять обновления"
   },
   "worktreeJumpPalette": {
     "goToWebsite": "Перейти на {{value0}}",
@@ -6050,6 +6302,15 @@
           "removedPreserved_few": "Удалено: {{removed}} · {{count}} изменённых навыка сохранено.",
           "removedPreserved_many": "Удалено: {{removed}} · {{count}} изменённых навыков сохранено.",
           "removedPreserved_other": "Удалено: {{removed}} · {{count}} изменённого навыка сохранено."
+        },
+        "SkillQuickActions": {
+          "command": "Команда",
+          "path": "Путь",
+          "copyCommand": "Копировать команду",
+          "commandCopied": "Скопировано: {{command}}",
+          "copiedForChat": "Скопировано: {{command}}. Вставьте в поле чата.",
+          "copiedNoTerminal": "Нет открытого терминала, поэтому {{command}} скопирована.",
+          "insert": "Ввести {{command}} в терминале"
         }
       },
       "sidebar": {
@@ -6398,9 +6659,7 @@
         },
         "RemoveFolderDialog": {
           "d36883e046": "Отмена",
-          "b79b39d865": "Удалить проект",
-          "openTerminalWarning_few": "В этом проекте будут закрыты {{count}} открытых терминала.",
-          "openTerminalWarning_many": "В этом проекте будут закрыты {{count}} открытых терминалов."
+          "b79b39d865": "Удалить проект"
         },
         "ScrollToCurrentWorkspaceToolbarButton": {
           "23989bb663": "Показать активное рабочее пространство"

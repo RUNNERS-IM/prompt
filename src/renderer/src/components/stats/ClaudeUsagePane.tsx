@@ -18,6 +18,7 @@ import { UsageFilterRadioGroup, UsageTrackingPaneShell } from './UsageTrackingPa
 import { formatCost, formatTokens, formatUpdatedAt } from './usage-formatters'
 import { unpricedCostLabel } from './unpriced-cost-label'
 import { getIntlLocale, translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 const RANGE_OPTIONS: ClaudeUsageRange[] = ['7d', '30d', '90d', 'all']
 const SCOPE_OPTIONS: { value: ClaudeUsageScope; label: string }[] = [
@@ -161,7 +162,7 @@ export function ClaudeUsagePane(): React.JSX.Element {
       onEnabledChange={handleSetEnabled}
       onRefresh={() => void refreshClaudeUsage()}
       headerAction={
-        summary && daily.length > 0 ? (
+        !PROMPT_SIMPLE_SETTINGS && summary && daily.length > 0 ? (
           <ShareUsageButton provider="claude" summary={summary} daily={daily} range={range} />
         ) : undefined
       }

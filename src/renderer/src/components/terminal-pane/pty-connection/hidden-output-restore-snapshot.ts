@@ -24,6 +24,7 @@ import {
 } from '../terminal-snapshot-replay-paint'
 
 import { HIDDEN_OUTPUT_RESTORE_UNAVAILABLE_WARNING } from './hidden-output-restore-limits'
+import { promptTerminalNoticeText } from '@/lib/pane-manager/prompt-terminal-notice-copy'
 import { shouldWritePtyOutputForeground } from './foreground-output-scan'
 import { restoredSnapshotPaintsPrintableContent } from '../restored-snapshot-coverage'
 import { recordTerminalFreezeBreadcrumb } from '../terminal-freeze-breadcrumbs'
@@ -45,10 +46,11 @@ export function bindHiddenOutputRestoreSnapshot(session: ConnectPanePtySession):
     if (!shouldWritePtyOutputForeground(session.deps.isVisibleRef.current)) {
       return
     }
-    writeTerminalOutput(session.pane.terminal, HIDDEN_OUTPUT_RESTORE_UNAVAILABLE_WARNING, {
-      foreground: true,
-      beforeWrite: session.beforeTerminalOutputWrite
-    })
+    writeTerminalOutput(
+      session.pane.terminal,
+      promptTerminalNoticeText(HIDDEN_OUTPUT_RESTORE_UNAVAILABLE_WARNING),
+      { foreground: true, beforeWrite: session.beforeTerminalOutputWrite }
+    )
     const ptyId = session.transport.getPtyId()
     const episode = session.hiddenOutputRestoreLatestDropEpisode
     if (ptyId !== null && episode !== null) {

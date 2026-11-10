@@ -65,7 +65,7 @@ export function RepositorySourceControlAiSection({
       data-settings-section={getRepositorySourceControlAiSectionId(repo.id)}
       className="space-y-4"
     >
-      <div className="min-w-0 space-y-1">
+      <div data-prompt-group-title="" className="min-w-0 space-y-1">
         <h3 className="text-sm font-semibold">
           {translate(
             'auto.components.settings.RepositorySourceControlAiSection.71b003b62b',

@@ -5,7 +5,27 @@ import process from 'node:process'
 import { repairTranslatedValue } from './locale-translation-policy.mjs'
 
 const LOCALES_DIR = path.join('src', 'renderer', 'src', 'i18n', 'locales')
-const SUPPORTED_LOCALES = new Set(['de', 'es', 'fr', 'ja', 'ko', 'pt', 'ru', 'tr', 'zh', 'zh-Hant'])
+const SUPPORTED_LOCALES = new Set([
+  'ar',
+  'de',
+  'es',
+  'fi',
+  'fr',
+  'hi',
+  'id',
+  'it',
+  'ja',
+  'ko',
+  'nl',
+  'pl',
+  'pt',
+  'ru',
+  'th',
+  'tr',
+  'vi',
+  'zh-Hans',
+  'zh-Hant'
+])
 const PLACEHOLDER_RE = /\{\{[^}]+\}\}/g
 
 function placeholders(value) {

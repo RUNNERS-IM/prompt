@@ -7,6 +7,7 @@ import {
 } from '@/components/cmd-j/quick-action-context'
 import { rankCmdJMiddleResults } from '@/components/cmd-j/palette-results'
 import { buildCmdJBrowserNavigationAction } from '@/components/cmd-j/browser-navigation-action'
+import { PROMPT_PALETTE_HIDES_BROWSER_AND_PLUGIN_ACTIONS } from '@/components/cmd-j/prompt-palette-actions'
 import { openWorkspaceBrowserTab } from '@/lib/workspace-browser-tab-open'
 import { findGroupAndWorktree } from '@/store/slices/tab-group-state'
 import {
@@ -178,7 +179,9 @@ export function useWorktreeJumpPaletteQuickActions({
       settingsResults,
       actionResults: availableActions.actionResults
     })
-    const navigationAction = buildCmdJBrowserNavigationAction(deferredQuery)
+    const navigationAction = PROMPT_PALETTE_HIDES_BROWSER_AND_PLUGIN_ACTIONS
+      ? null
+      : buildCmdJBrowserNavigationAction(deferredQuery)
     if (navigationAction?.isAvailable(availableActions.context).available) {
       results.unshift({ ...navigationAction, order: 0, qualityClass: 'exact-intent' })
     }

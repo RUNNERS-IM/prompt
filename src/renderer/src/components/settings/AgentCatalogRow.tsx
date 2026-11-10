@@ -27,6 +27,7 @@ import {
   type AgentPermissionChoiceRow
 } from './AgentPermissionChoiceControls'
 import { openAppHttpLinkFromAnchor } from '@/lib/app-http-link-open'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type AgentAvailability = 'enabled' | 'disabled'
 
@@ -201,13 +202,23 @@ export function AgentCatalogRow({
               />
             </div>
           )}
-          <AgentAvailabilityControl
-            label={label}
-            isEnabled={isEnabled}
-            onSetEnabled={onSetEnabled}
-          />
-          <div className="grid grid-cols-[minmax(6.5rem,max-content)_1.75rem_1.75rem] items-center gap-1.5">
-            <div className="flex justify-start">
+          {/* Prompt starts Claude only, so it cannot be turned off or made the default. */}
+          {PROMPT_SIMPLE_SETTINGS ? null : (
+            <AgentAvailabilityControl
+              label={label}
+              isEnabled={isEnabled}
+              onSetEnabled={onSetEnabled}
+            />
+          )}
+          <div
+            className={cn(
+              'grid items-center gap-1.5',
+              PROMPT_SIMPLE_SETTINGS
+                ? 'grid-cols-[1.75rem_1.75rem]'
+                : 'grid-cols-[minmax(6.5rem,max-content)_1.75rem_1.75rem]'
+            )}
+          >
+            <div className={cn('flex justify-start', PROMPT_SIMPLE_SETTINGS && 'hidden')}>
               {isDetected && isEnabled && (
                 <Button
                   type="button"

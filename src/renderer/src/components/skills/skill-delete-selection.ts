@@ -11,7 +11,8 @@ import {
 
 /** Do not collapse names: same-name files in different roots are independently deletable. */
 const DELETE_SELECTION_POLICY: SkillSelectionPolicy = {
-  isEligible: (skill) => skillDeletionEligibility(skill).deletable,
+  // A command shares its folder with the other commands, and skill deletion removes whole folders.
+  isEligible: (skill) => !skill.claudeCommand && skillDeletionEligibility(skill).deletable,
   collisionKey: () => null,
   maxSelection: MAX_SKILL_DELETE_BATCH
 }

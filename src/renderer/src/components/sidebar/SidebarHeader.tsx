@@ -10,6 +10,8 @@ import { Sparkles, Bell } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AgentQuestionIcon } from '@/components/AgentQuestionIcon'
 import { useAgentBucketCounts } from '@/components/dashboard/useAgentBucketCounts'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
+import { PromptSidebarTitleOptionsMenu } from './prompt-sidebar-title-options-menu'
 
 type SidebarHeaderProps = {
   onWorkspaceBoardMenuOpenChange: (open: boolean) => void
@@ -42,7 +44,9 @@ const SidebarHeader = React.memo(function SidebarHeader({
   const introTitleId = useId()
   const introDescriptionId = useId()
   // Existing users who opted into the former Experimental Agents view get one explanation.
-  const introOpen = migratedFromExperimental && !agentsSidebarIntroShown
+  // Prompt never had Orca's experimental Agents view, so the migration bubble stays hidden.
+  const introOpen =
+    !PROMPT_BLOCK_UPSTREAM_SERVICES && migratedFromExperimental && !agentsSidebarIntroShown
   const acknowledgeIntro = React.useCallback(() => {
     void updateSettings?.({ agentsSidebarIntroShown: true })
   }, [updateSettings])
@@ -58,112 +62,129 @@ const SidebarHeader = React.memo(function SidebarHeader({
   return (
     <div className="mt-2 flex h-8 min-w-0 shrink-0 items-center justify-between gap-1.5 px-2">
       <div className="flex min-w-0 items-center gap-1">
-        <span
-          // Truncate localized titles because fixed-width actions cannot shrink inside the short header row.
-          className="min-w-0 truncate select-none pl-2 pr-0.5 text-xs font-semibold text-muted-foreground/80"
-          data-sidebar-section-title={groupBy === 'repo' ? 'projects' : 'workspaces'}
-        >
-          {sidebarTitle}
-        </span>
+        {PROMPT_BLOCK_UPSTREAM_SERVICES ? (
+          <PromptSidebarTitleOptionsMenu
+            sectionKind={groupBy === 'repo' ? 'projects' : 'workspaces'}
+            onMenuOpenChange={onWorkspaceBoardMenuOpenChange}
+          >
+            {sidebarTitle}
+          </PromptSidebarTitleOptionsMenu>
+        ) : (
+          <span
+            // Truncate localized titles because fixed-width actions cannot shrink inside the short header row.
+            className="min-w-0 truncate select-none pl-2 pr-0.5 text-xs font-semibold text-muted-foreground/80"
+            data-sidebar-section-title={groupBy === 'repo' ? 'projects' : 'workspaces'}
+          >
+            {sidebarTitle}
+          </span>
+        )}
       </div>
       <div className="flex shrink-0 items-center gap-1">
-        <Popover
-          open={introOpen}
-          onOpenChange={(open) => {
-            if (!open) {
-              acknowledgeIntro()
-            }
-          }}
-        >
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="inline-flex shrink-0">
-                <PopoverAnchor asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-xs"
-                    className={cn(
-                      'w-8 text-muted-foreground',
-                      agentsViewActive &&
-                        'bg-foreground/10 text-foreground hover:bg-foreground/15 dark:hover:bg-foreground/15'
-                    )}
-                    aria-label={activityLabel}
-                    aria-pressed={agentsViewActive}
-                    aria-describedby={activityBadgeId}
-                    onClick={() => setSidebarBody?.(agentsViewActive ? 'workspaces' : 'agents')}
-                  >
-                    <span className="relative h-5 w-6 shrink-0">
-                      <Bell className="absolute left-0 top-1 size-3" />
-                      <span
-                        className="pointer-events-none absolute inset-0"
-                        id={activityBadgeId}
-                        aria-label={`${activityStatusLabel}: ${activityCount}`}
-                      >
-                        <span className="absolute right-0 top-0 flex h-2 w-3 items-center justify-center">
-                          {counts.attention > 0 ? (
-                            <AgentQuestionIcon className="size-2" />
-                          ) : (
+        {/* Prompt: 활동 보기는 왼쪽 목록의 상태 점과 겹쳐 머리 줄에서 뺀다. */}
+        {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+          <Popover
+            open={introOpen}
+            onOpenChange={(open) => {
+              if (!open) {
+                acknowledgeIntro()
+              }
+            }}
+          >
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex shrink-0">
+                  <PopoverAnchor asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-xs"
+                      className={cn(
+                        'w-8 text-muted-foreground',
+                        agentsViewActive &&
+                          'bg-foreground/10 text-foreground hover:bg-foreground/15 dark:hover:bg-foreground/15'
+                      )}
+                      aria-label={activityLabel}
+                      aria-pressed={agentsViewActive}
+                      aria-describedby={activityBadgeId}
+                      onClick={() => setSidebarBody?.(agentsViewActive ? 'workspaces' : 'agents')}
+                    >
+                      <span className="relative h-5 w-6 shrink-0">
+                        <Bell className="absolute left-0 top-1 size-3" />
+                        <span
+                          className="pointer-events-none absolute inset-0"
+                          id={activityBadgeId}
+                          aria-label={`${activityStatusLabel}: ${activityCount}`}
+                        >
+                          <span className="absolute right-0 top-0 flex h-2 w-3 items-center justify-center">
+                            {counts.attention > 0 ? (
+                              <AgentQuestionIcon className="size-2" />
+                            ) : (
+                              <span
+                                className={cn(
+                                  'size-1 rounded-full',
+                                  counts.working > 0
+                                    ? 'bg-(--status-warning)'
+                                    : 'bg-muted-foreground'
+                                )}
+                              />
+                            )}
+                          </span>
+                          <span className="absolute right-0 top-2.5 flex h-2.5 w-3 items-center justify-center">
                             <span
                               className={cn(
-                                'size-1 rounded-full',
-                                counts.working > 0 ? 'bg-(--status-warning)' : 'bg-muted-foreground'
+                                'icon-superscript-count',
+                                activityCount > 99 && 'origin-center scale-x-65'
                               )}
-                            />
-                          )}
-                        </span>
-                        <span className="absolute right-0 top-2.5 flex h-2.5 w-3 items-center justify-center">
-                          <span
-                            className={cn(
-                              'icon-superscript-count',
-                              activityCount > 99 && 'origin-center scale-x-65'
-                            )}
-                            data-multiple-digits={activityCount > 9}
-                          >
-                            {activityCount > 99 ? '99+' : activityCount}
+                              data-multiple-digits={activityCount > 9}
+                            >
+                              {activityCount > 99 ? '99+' : activityCount}
+                            </span>
                           </span>
                         </span>
                       </span>
-                    </span>
+                    </Button>
+                  </PopoverAnchor>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" sideOffset={6}>
+                {activityLabel}
+              </TooltipContent>
+            </Tooltip>
+            <PopoverContent
+              side="bottom"
+              align="center"
+              sideOffset={8}
+              className="w-72 rounded-xl border border-border bg-popover p-3.5 text-popover-foreground shadow-floating"
+              onOpenAutoFocus={(event) => event.preventDefault()}
+              aria-labelledby={introTitleId}
+              aria-describedby={introDescriptionId}
+            >
+              <PopoverArrow />
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
+                  <h3 id={introTitleId} className="text-sm font-semibold text-foreground">
+                    {translate('agentsSidebarIntro.migrated.title', 'Agents are easier to find')}
+                  </h3>
+                </div>
+                <p
+                  id={introDescriptionId}
+                  className="text-xs leading-relaxed text-muted-foreground"
+                >
+                  {translate(
+                    'agentsSidebarIntro.migrated.description',
+                    'Your Agents view is now a dedicated sidebar tab. Your activity and filters are preserved.'
+                  )}
+                </p>
+                <div className="flex justify-end pt-0.5">
+                  <Button size="sm" onClick={acknowledgeIntro}>
+                    {translate('agentsSidebarIntro.migrated.dismiss', 'Got it')}
                   </Button>
-                </PopoverAnchor>
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="bottom" sideOffset={6}>
-              {activityLabel}
-            </TooltipContent>
-          </Tooltip>
-          <PopoverContent
-            side="bottom"
-            align="center"
-            sideOffset={8}
-            className="w-72 rounded-xl border border-border bg-popover p-3.5 text-popover-foreground shadow-floating"
-            onOpenAutoFocus={(event) => event.preventDefault()}
-            aria-labelledby={introTitleId}
-            aria-describedby={introDescriptionId}
-          >
-            <PopoverArrow />
-            <div className="space-y-2.5">
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
-                <h3 id={introTitleId} className="text-sm font-semibold text-foreground">
-                  {translate('agentsSidebarIntro.migrated.title', 'Agents are easier to find')}
-                </h3>
+                </div>
               </div>
-              <p id={introDescriptionId} className="text-xs leading-relaxed text-muted-foreground">
-                {translate(
-                  'agentsSidebarIntro.migrated.description',
-                  'Your Agents view is now a dedicated sidebar tab. Your activity and filters are preserved.'
-                )}
-              </p>
-              <div className="flex justify-end pt-0.5">
-                <Button size="sm" onClick={acknowledgeIntro}>
-                  {translate('agentsSidebarIntro.migrated.dismiss', 'Got it')}
-                </Button>
-              </div>
-            </div>
-          </PopoverContent>
-        </Popover>
+            </PopoverContent>
+          </Popover>
+        )}
         <SidebarHeaderActions
           onWorkspaceBoardMenuOpenChange={onWorkspaceBoardMenuOpenChange}
           agentsViewActive={agentsViewActive}

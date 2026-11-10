@@ -4,7 +4,7 @@ import { skillMatchesAgent } from './skill-agent-filter'
 
 export type SkillsFilterState = {
   query: string
-  sourceKind: SkillSourceKind | 'all'
+  sourceKind: SkillSourceKind | 'all' | 'command'
   /** Owning agent id, or 'all'. Resolved from the root a skill was found in. */
   agent: string
 }
@@ -22,6 +22,18 @@ function normalize(value: string): string {
   return value.trim().toLowerCase()
 }
 
+function skillMatchesSourceFilter(
+  skill: DiscoveredSkill,
+  sourceKind: SkillsFilterState['sourceKind']
+): boolean {
+  if (sourceKind === 'all') {
+    return true
+  }
+  return sourceKind === 'command'
+    ? skill.claudeCommand === true
+    : skill.claudeCommand !== true && skill.sourceKind === sourceKind
+}
+
 export function filterSkills(
   skills: readonly DiscoveredSkill[],
   filters: SkillsFilterState,
@@ -32,7 +44,7 @@ export function filterSkills(
   }
   const query = normalize(filters.query)
   return skills.filter((skill) => {
-    if (filters.sourceKind !== 'all' && skill.sourceKind !== filters.sourceKind) {
+    if (!skillMatchesSourceFilter(skill, filters.sourceKind)) {
       return false
     }
     if (!skillMatchesAgent(skill, filters.agent, agentByRootPath)) {
@@ -59,9 +71,15 @@ export function countSkillsBySource(
 ): Record<SkillSourceKind, number> {
   return skills.reduce<Record<SkillSourceKind, number>>(
     (counts, skill) => {
-      counts[skill.sourceKind] += 1
+      if (!skill.claudeCommand) {
+        counts[skill.sourceKind] += 1
+      }
       return counts
     },
     { home: 0, repo: 0, bundled: 0, plugin: 0 }
   )
+}
+
+export function countClaudeCommands(skills: readonly DiscoveredSkill[]): number {
+  return skills.filter((skill) => skill.claudeCommand).length
 }

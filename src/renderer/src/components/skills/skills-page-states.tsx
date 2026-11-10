@@ -1,3 +1,4 @@
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { BookOpen, Download, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -70,10 +71,12 @@ export function SkillsEmptyState({
         </p>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm" onClick={onInstallFromLink}>
-          <Download className="size-4" />
-          {translate('auto.components.skills.SkillsPage.aee7b99cc6', 'Install from link')}
-        </Button>
+        {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
+          <Button variant="outline" size="sm" onClick={onInstallFromLink}>
+            <Download className="size-4" />
+            {translate('auto.components.skills.SkillsPage.aee7b99cc6', 'Install from link')}
+          </Button>
+        )}
         <Button variant="ghost" size="sm" onClick={onRefresh}>
           <RefreshCw className="size-4" />
           {translate('auto.components.skills.SkillsPage.cb142070b4', 'Refresh')}

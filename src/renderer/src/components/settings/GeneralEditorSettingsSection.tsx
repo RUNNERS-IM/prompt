@@ -17,6 +17,7 @@ import {
   SettingsSwitchRow
 } from './SettingsFormControls'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { RichMarkdownSpellcheckSetting } from './RichMarkdownSpellcheckSetting'
 import { DiffShowWhitespaceSetting } from './DiffShowWhitespaceSetting'
 import { EditorWordWrapSetting } from './EditorWordWrapSetting'
@@ -343,32 +344,39 @@ export function GeneralEditorSettingsSection({
         />
       </SearchableSetting>
 
-      <SearchableSetting
-        title={translate(
-          'auto.components.settings.GeneralEditorSettingsSection.6690b1ffb9',
-          'Minimap'
-        )}
-        description={translate(
-          'auto.components.settings.GeneralEditorSettingsSection.51161d1647',
-          'Show the minimap overview when editing a file.'
-        )}
-        keywords={['minimap', 'overview', 'code', 'scroll']}
-      >
-        <SettingsSwitchRow
-          label={translate(
-            'auto.components.settings.GeneralEditorSettingsSection.6690b1ffb9',
-            'Minimap'
-          )}
-          description={translate(
-            'auto.components.settings.GeneralEditorSettingsSection.51161d1647',
-            'Show the minimap overview when editing a file.'
-          )}
-          checked={settings.editorMinimapEnabled}
-          onChange={() => updateSettings({ editorMinimapEnabled: !settings.editorMinimapEnabled })}
-        />
-      </SearchableSetting>
+      {/* Prompt: Claude sessions rarely open the editor long enough for a minimap or spellcheck. */}
+      {!PROMPT_SIMPLE_SETTINGS ? (
+        <>
+          <SearchableSetting
+            title={translate(
+              'auto.components.settings.GeneralEditorSettingsSection.6690b1ffb9',
+              'Minimap'
+            )}
+            description={translate(
+              'auto.components.settings.GeneralEditorSettingsSection.51161d1647',
+              'Show the minimap overview when editing a file.'
+            )}
+            keywords={['minimap', 'overview', 'code', 'scroll']}
+          >
+            <SettingsSwitchRow
+              label={translate(
+                'auto.components.settings.GeneralEditorSettingsSection.6690b1ffb9',
+                'Minimap'
+              )}
+              description={translate(
+                'auto.components.settings.GeneralEditorSettingsSection.51161d1647',
+                'Show the minimap overview when editing a file.'
+              )}
+              checked={settings.editorMinimapEnabled}
+              onChange={() =>
+                updateSettings({ editorMinimapEnabled: !settings.editorMinimapEnabled })
+              }
+            />
+          </SearchableSetting>
 
-      <RichMarkdownSpellcheckSetting settings={settings} updateSettings={updateSettings} />
+          <RichMarkdownSpellcheckSetting settings={settings} updateSettings={updateSettings} />
+        </>
+      ) : null}
 
       <SearchableSetting
         title={translate(

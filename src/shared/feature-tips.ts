@@ -3,6 +3,7 @@ import {
   type FeatureInteractionId,
   type FeatureInteractionState
 } from './feature-interactions'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from './prompt-upstream'
 
 export type FeatureTipId =
   | 'native-chat-upgrade'
@@ -101,6 +102,11 @@ export const FEATURE_TIPS = [
 
 export const FEATURE_TIP_IDS = FEATURE_TIPS.map((tip) => tip.id)
 
+// Prompt: voice dictation and Orca CLI skills are hidden, and the chat upgrade tip talks about Codex.
+const PROMPT_HIDDEN_FEATURE_TIP_IDS: readonly FeatureTipId[] = PROMPT_BLOCK_UPSTREAM_SERVICES
+  ? ['voice-dictation', 'orca-cli', 'native-chat-upgrade']
+  : []
+
 export function isFeatureTipId(value: unknown): value is FeatureTipId {
   return typeof value === 'string' && FEATURE_TIP_IDS.includes(value as FeatureTipId)
 }
@@ -120,7 +126,7 @@ export function normalizeFeatureTipIds(value: unknown): FeatureTipId[] {
 }
 
 export function getCompletedFeatureTipIds(state: CompletedFeatureTipState): Set<FeatureTipId> {
-  const completedIds = new Set<FeatureTipId>()
+  const completedIds = new Set<FeatureTipId>(PROMPT_HIDDEN_FEATURE_TIP_IDS)
   if (state.cliInstalled) {
     completedIds.add('orca-cli')
   }

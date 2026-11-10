@@ -45,7 +45,9 @@ import { useAppStore } from '@/store'
 import { useDetectedAgents, type AgentDetectionTarget } from '@/hooks/useDetectedAgents'
 import { AgentDefaultSetting } from './AgentDefaultSetting'
 import { AgentDetectionCatalog } from './AgentDetectionCatalog'
-import type { AgentCatalogRowProps } from './AgentCatalogRow'
+import { AgentCatalogRow, type AgentCatalogRowProps } from './AgentCatalogRow'
+import { SettingsSubsectionHeader } from './SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { HostAgentEnvironmentEditor } from './HostAgentEnvironmentEditor'
 import { buildCodexSessionSourceHomeControl } from './codex-session-source-home-control'
 import { buildDefaultAgentOpensAs } from './native-chat-provider-choice'
@@ -231,6 +233,46 @@ export function AgentLaunchSettingsCatalog({
         ? buildCodexSessionSourceHomeControl(local.settings, local.updateSettings)
         : undefined
   })
+  const permissionControl = permissionSettings ? (
+    <AllAgentsPermissionSetting
+      chatOwnSupported={chatOwnSupported}
+      choice={permissionSettings.agentPermissionDefault ?? 'own'}
+      withoutAutoChoice={sharedChoice(
+        PERMISSION_CHOICE_AGENTS.filter(
+          (agent) => !agentPermissionChoices(agent).includes('auto')
+        ).map((agent) => resolveAgentPermission(agent, permissionSettings).choice)
+      )}
+      onChange={(choice) => save({ type: 'permission', choice })}
+      onChangeWithoutAuto={(choice) => save({ type: 'permission', choice, withoutAuto: true })}
+    />
+  ) : (
+    renderPermissions({
+      mode: permissions.globalMode,
+      nonAutoMode: settings.nonAutoPermissionMode,
+      majorityMode: permissions.majorityMode,
+      autoAgentLabels: catalog
+        .filter((agent) => agent.id in AUTO_TUI_AGENT_ARGS)
+        .map((agent) => agent.label),
+      onChange: (mode) => save({ type: 'permissions', mode }),
+      onChangeNonAuto: (mode) => save({ type: 'permissions', mode, exceptAuto: true }),
+      autoSupported
+    })
+  )
+  if (PROMPT_SIMPLE_SETTINGS) {
+    // Prompt starts Claude only: no default-agent choice, and just the Claude row of the catalog.
+    const claude = catalog.find((agent) => agent.id === 'claude')
+    return (
+      <section className="space-y-4">
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.claude.launchGroup', 'New sessions')}
+        />
+        {permissionControl}
+        {claude ? (
+          <AgentCatalogRow {...rowProps(claude, detectedIds?.has('claude') ?? false)} />
+        ) : null}
+      </section>
+    )
+  }
   return (
     <>
       <AgentDefaultSetting
@@ -258,32 +300,7 @@ export function AgentLaunchSettingsCatalog({
         onSetDefault={(agent) => save({ type: 'default', agent })}
         defaultOpensAsChat={defaultOpensAsChat}
       />
-      {permissionSettings ? (
-        <AllAgentsPermissionSetting
-          chatOwnSupported={chatOwnSupported}
-          choice={permissionSettings.agentPermissionDefault ?? 'own'}
-          withoutAutoChoice={sharedChoice(
-            PERMISSION_CHOICE_AGENTS.filter(
-              (agent) => !agentPermissionChoices(agent).includes('auto')
-            ).map((agent) => resolveAgentPermission(agent, permissionSettings).choice)
-          )}
-          onChange={(choice) => save({ type: 'permission', choice })}
-          onChangeWithoutAuto={(choice) => save({ type: 'permission', choice, withoutAuto: true })}
-        />
-      ) : null}
-      {permissionSettings
-        ? null
-        : renderPermissions({
-            mode: permissions.globalMode,
-            nonAutoMode: settings.nonAutoPermissionMode,
-            majorityMode: permissions.majorityMode,
-            autoAgentLabels: catalog
-              .filter((agent) => agent.id in AUTO_TUI_AGENT_ARGS)
-              .map((agent) => agent.label),
-            onChange: (mode) => save({ type: 'permissions', mode }),
-            onChangeNonAuto: (mode) => save({ type: 'permissions', mode, exceptAuto: true }),
-            autoSupported
-          })}
+      {permissionControl}
       <AgentDetectionCatalog
         detectedAgents={detectedAgents}
         undetectedAgents={undetectedAgents}
@@ -309,6 +326,21 @@ function sharedChoice(choices: readonly AgentPermissionChoice[]): AgentPermissio
 }
 
 export function AgentLaunchSettingsLoading(): React.JSX.Element {
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return (
+      <fieldset disabled className="min-w-0 space-y-4">
+        <SettingsSubsectionHeader
+          title={translate('prompt.settings.claude.launchGroup', 'New sessions')}
+        />
+        <AllAgentsPermissionSetting
+          choice={null}
+          withoutAutoChoice={null}
+          onChange={() => {}}
+          onChangeWithoutAuto={() => {}}
+        />
+      </fieldset>
+    )
+  }
   return (
     <fieldset disabled className="min-w-0 space-y-8">
       <AgentDefaultSetting

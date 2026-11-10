@@ -31,7 +31,8 @@ export async function discoverSkillsForRuntimeTarget(
     {
       ...(target?.refresh ? { refresh: true } : {}),
       ...(target?.names?.length ? { names: target.names } : {}),
-      ...(target?.sourceKinds?.length ? { sourceKinds: target.sourceKinds } : {})
+      ...(target?.sourceKinds?.length ? { sourceKinds: target.sourceKinds } : {}),
+      ...(target?.includeClaudeCommands ? { includeClaudeCommands: true } : {})
     },
     { timeoutMs: SKILL_DISCOVERY_TIMEOUT_MS }
   )

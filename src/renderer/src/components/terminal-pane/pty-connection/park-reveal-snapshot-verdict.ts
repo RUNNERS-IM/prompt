@@ -7,6 +7,7 @@ import type { PtyBufferSnapshot } from '../pty-transport-types'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
 import { PARK_REVEAL_NO_HOST_IMAGE_WARNING } from './hidden-output-restore-limits'
+import { promptTerminalNoticeText } from '@/lib/pane-manager/prompt-terminal-notice-copy'
 import type { HiddenOutputSnapshotResult } from './hidden-output-snapshot-serialize'
 
 /** Which restore budget an unverifiable probe is charged to; null when the loop keeps its own count (legacy hosts). */
@@ -96,7 +97,7 @@ export function bindParkRevealSnapshotVerdictActions(session: ConnectPanePtySess
     // Reset only the pen; CAN would abort a subscribe-time escape tail awaiting live continuation.
     writeTerminalOutput(
       session.pane.terminal,
-      `${RESET_GRAPHIC_RENDITION}${PARK_REVEAL_NO_HOST_IMAGE_WARNING}`,
+      `${RESET_GRAPHIC_RENDITION}${promptTerminalNoticeText(PARK_REVEAL_NO_HOST_IMAGE_WARNING)}`,
       { foreground: true, beforeWrite: session.beforeTerminalOutputWrite }
     )
     session.requestRemoteProgramRedraw('park-reveal-no-host-image')

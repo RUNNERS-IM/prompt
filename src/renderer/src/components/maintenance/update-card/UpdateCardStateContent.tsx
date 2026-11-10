@@ -14,7 +14,11 @@ import {
   UpdateAvailableSimpleContent
 } from './UpdateAvailableCardContent'
 import { UpdateDownloadingContent, UpdateReadyToInstallContent } from './UpdateDownloadCardContent'
-import { PROMPT_UPDATE_CARD, PromptUpdateAvailableContent } from './PromptUpdateAvailableContent'
+import {
+  PROMPT_UPDATE_CARD,
+  PromptUpdateAvailableContent,
+  PromptUpdateDownloadingContent
+} from './PromptUpdateAvailableContent'
 
 export function UpdateCardStateContent({
   status,
@@ -123,6 +127,17 @@ export function UpdateCardStateContent({
         version={status.version}
         onRestart={onInstallRetry}
         onClose={onCollapse}
+      />
+    )
+  }
+  if (status.state === 'downloading' && PROMPT_UPDATE_CARD) {
+    return (
+      <PromptUpdateDownloadingContent
+        version={status.version}
+        percent={status.percent}
+        transferredBytes={status.transferredBytes}
+        totalBytes={status.totalBytes}
+        onCollapse={onCollapse}
       />
     )
   }

@@ -16,6 +16,7 @@ import {
   resolveSkillDiscoveryTarget
 } from '../skills/skill-discovery-target'
 import { unavailableWhileWslDistroStopped } from '../skills/skill-discovery-stopped-wsl-roots'
+import { withClaudeCommands } from '../skills/claude-command-discovery'
 import { runAsWslUserAct, wslDistroForPath } from '../wsl/wsl-unc-access-gate'
 import { registerSkillCloudIpcHandlers } from './skill-cloud-ipc-handlers'
 import { handleMainWindowSkillIpc } from './skill-ipc-main-window'
@@ -34,14 +35,13 @@ export function registerSkillsHandlers(store: Store, runtime?: OrcaRuntimeServic
   // Passive UI mounts discovery, so it must not start a stopped WSL distro.
   const discover = async (target?: SkillDiscoveryTarget): Promise<SkillDiscoveryResult> => {
     const parsedTarget = target ? SkillDiscoveryTargetSchema.parse(target) : undefined
-    return unavailableWhileWslDistroStopped(
-      async () =>
-        discoverResolved(
-          await resolveSkillDiscoveryTarget(parsedTarget, { refuseStoppedWslDistro: true }),
-          parsedTarget?.refresh === true
-        ),
-      parsedTarget?.sourceKinds
-    )
+    return unavailableWhileWslDistroStopped(async () => {
+      const result = await discoverResolved(
+        await resolveSkillDiscoveryTarget(parsedTarget, { refuseStoppedWslDistro: true }),
+        parsedTarget?.refresh === true
+      )
+      return parsedTarget?.includeClaudeCommands ? withClaudeCommands(result) : result
+    }, parsedTarget?.sourceKinds)
   }
   // Share is a click on named skills: it may start their distro, as any user act may.
   const discoverForUserAct = async (

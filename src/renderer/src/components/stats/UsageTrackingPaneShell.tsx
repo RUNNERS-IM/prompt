@@ -12,6 +12,8 @@ import {
 } from '../ui/dropdown-menu'
 import { Switch } from '../ui/switch'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type UsageFilterRadioGroupProps<Value extends string> = {
   label: ReactNode
@@ -71,6 +73,9 @@ type UsageTrackingPaneShellProps = {
 )
 
 export function UsageTrackingPaneShell(props: UsageTrackingPaneShellProps): React.JSX.Element {
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return <PromptUsageTrackingGroup {...props} />
+  }
   if (!props.enabled) {
     return (
       <div className="rounded-lg border border-border/60 bg-card/40 p-4">
@@ -97,49 +102,7 @@ export function UsageTrackingPaneShell(props: UsageTrackingPaneShellProps): Reac
           <p className="mt-1 text-xs text-muted-foreground">{props.status}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2 self-start">
-          {props.headerAction}
-          <DropdownMenu>
-            <TooltipProvider delayDuration={250}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon-xs" aria-label={props.optionsLabel}>
-                      <SlidersHorizontal className="size-3.5" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent side="bottom" sideOffset={6}>
-                  {props.filtersLabel}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <DropdownMenuContent align="end" className="w-60">
-              {props.filterSections.map((section, index) => (
-                <Fragment key={section.key}>
-                  {index > 0 && <DropdownMenuSeparator />}
-                  {section}
-                </Fragment>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <TooltipProvider delayDuration={250}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon-xs"
-                  onClick={() => void props.onRefresh()}
-                  disabled={props.isRefreshing}
-                  aria-label={props.refreshAriaLabel}
-                >
-                  <RefreshCw className={`size-3.5 ${props.isRefreshing ? 'animate-spin' : ''}`} />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" sideOffset={6}>
-                {props.refreshLabel}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <UsageTrackingPaneActions {...props} />
           <Switch checked aria-label={props.enableLabel} onCheckedChange={props.onEnabledChange} />
         </div>
       </div>
@@ -156,5 +119,103 @@ export function UsageTrackingPaneShell(props: UsageTrackingPaneShellProps): Reac
         props.children
       )}
     </div>
+  )
+}
+
+type EnabledUsageTrackingPaneShellProps = Extract<UsageTrackingPaneShellProps, { enabled: true }>
+
+function UsageTrackingPaneActions(props: EnabledUsageTrackingPaneShellProps): React.JSX.Element {
+  return (
+    <>
+      {props.headerAction}
+      <DropdownMenu>
+        <TooltipProvider delayDuration={250}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon-xs" aria-label={props.optionsLabel}>
+                  <SlidersHorizontal className="size-3.5" />
+                </Button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={6}>
+              {props.filtersLabel}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <DropdownMenuContent align="end" className="w-60">
+          {props.filterSections.map((section, index) => (
+            <Fragment key={section.key}>
+              {index > 0 && <DropdownMenuSeparator />}
+              {section}
+            </Fragment>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <TooltipProvider delayDuration={250}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              onClick={() => void props.onRefresh()}
+              disabled={props.isRefreshing}
+              aria-label={props.refreshAriaLabel}
+            >
+              <RefreshCw className={`size-3.5 ${props.isRefreshing ? 'animate-spin' : ''}`} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" sideOffset={6}>
+            {props.refreshLabel}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </>
+  )
+}
+
+// Prompt 설정 창: 제목은 묶음 제목으로, 켜기 · 거르기 · 새로 고침은 첫 줄로, 내용은 그 아래 칸들로 둔다.
+function PromptUsageTrackingGroup(props: UsageTrackingPaneShellProps): React.JSX.Element {
+  if (!props.enabled) {
+    return (
+      <>
+        <SettingsSubsectionHeader title={props.title} />
+        <SettingsRow
+          label={props.enableLabel}
+          description={props.disabledDescription}
+          control={
+            <Switch
+              checked={false}
+              aria-label={props.enableLabel}
+              onCheckedChange={props.onEnabledChange}
+            />
+          }
+        />
+      </>
+    )
+  }
+  return (
+    <>
+      <SettingsSubsectionHeader title={props.title} />
+      <SettingsRow
+        label={props.selectionSummary}
+        description={props.status}
+        control={
+          <div className="flex items-center gap-2">
+            <UsageTrackingPaneActions {...props} />
+            <Switch
+              checked
+              aria-label={props.enableLabel}
+              onCheckedChange={props.onEnabledChange}
+            />
+          </div>
+        }
+      />
+      {!props.hasData ? (
+        <p className="text-[13px] leading-4 text-muted-foreground">{props.emptyMessage}</p>
+      ) : (
+        props.children
+      )}
+    </>
   )
 }

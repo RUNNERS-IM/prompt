@@ -24,6 +24,21 @@ export function registerSettingsAndSidebarIpcBridge(unsubs: (() => void)[]): voi
     })
   )
 
+  const openAboutSettings = (): void => {
+    const store = useAppStore.getState()
+    store.openSettingsTarget({ pane: 'prompt-about', repoId: null })
+    store.openSettingsPage()
+  }
+  unsubs.push(window.api.ui.onOpenAboutSettings?.(openAboutSettings) ?? (() => {}))
+  // Test harnesses stub ui methods with plain functions, so wrap the optional result.
+  void Promise.resolve(window.api.ui.consumePendingOpenAboutSettings?.())
+    .then((open) => {
+      if (open) {
+        openAboutSettings()
+      }
+    })
+    .catch(() => {})
+
   const unsubscribeOpenSkillShare = window.api.ui.onOpenSkillShare?.((shareId) => {
     useAppStore.getState().openSkillShare(shareId)
   })

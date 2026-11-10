@@ -14,6 +14,7 @@ import { useConfirmationDialog } from '@/components/confirmation-dialog-context'
 import { getSettingOwnershipSummary } from './setting-ownership'
 import { translate } from '@/i18n/i18n'
 import { QuickCommandsList } from './QuickCommandsList'
+import { SettingsUntitledGroupStart } from './SettingsFormControls'
 import { QuickCommandsToolbar } from './QuickCommandsToolbar'
 import { GLOBAL_SCOPE_KEY } from './QuickCommandsScopeFilter'
 import {
@@ -302,6 +303,9 @@ export function QuickCommandsPane({
         handleSelectAll={handleSelectAll}
         toggleScope={toggleScope}
       />
+
+      {/* Prompt: the command list is one box under the toolbar. */}
+      <SettingsUntitledGroupStart />
 
       {selectedRuntimeCommandsAreCurrent && selectedRuntimeCommands?.supported === false ? (
         <div className="px-3 py-6 text-sm text-muted-foreground">

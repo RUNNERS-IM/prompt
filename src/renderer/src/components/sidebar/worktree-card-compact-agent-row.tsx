@@ -319,6 +319,14 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
     ? promptSessionStatusLine(agent, dotState, secondary, now)
     : ''
   const dimText = highlighted ? 'text-foreground/70' : 'text-muted-foreground/65'
+  const helperPill = (
+    <PromptHelperPill
+      count={childAgentCount ?? 0}
+      expanded={childAgentsExpanded}
+      onToggle={onToggleChildAgents ?? (() => {})}
+      className={promptStatus ? 'mr-1 -ml-1' : undefined}
+    />
+  )
 
   const promptRowBody = usePromptLayout ? (
     <>
@@ -363,13 +371,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
             {trailingLabel}
           </span>
         ) : null}
-        {hasChildDisclosure && !rename ? (
-          <PromptHelperPill
-            count={childAgentCount ?? 0}
-            expanded={childAgentsExpanded}
-            onToggle={onToggleChildAgents ?? (() => {})}
-          />
-        ) : null}
+        {hasChildDisclosure && !rename && !promptStatus ? helperPill : null}
         {cacheTimer && !rename && (
           <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />
         )}
@@ -385,6 +387,7 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
           title={sendTargetDisabledReason ? undefined : promptStatus}
           data-prompt-session-status=""
         >
+          {hasChildDisclosure && !rename ? helperPill : null}
           {promptStatus}
         </div>
       ) : null}

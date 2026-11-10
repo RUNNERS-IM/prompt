@@ -220,7 +220,7 @@ it('places one Google section after the rows and clears the current Active profi
     expect.objectContaining({ title: 'Clear Google cookies from Private?' })
   )
   cleanup()
-  await i18n.changeLanguage('zh')
+  await i18n.changeLanguage('zh-Hans')
   store.setState({ settingsSearchQuery: '谷歌' })
   mount(<SessionSection />)
   expect(screen.getByRole('button', { name: 'Clear Google cookies…' })).toBeTruthy()

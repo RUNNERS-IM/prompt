@@ -296,7 +296,7 @@ describe('AppearancePane', () => {
       '[data-slot="select-trigger"][aria-label="Language"]'
     )
     const chineseOption = container.querySelector<HTMLButtonElement>(
-      '[data-slot="select-item"][data-value="zh"]'
+      '[data-slot="select-item"][data-value="zh-Hans"]'
     )
     const portugueseOption = container.querySelector<HTMLButtonElement>(
       '[data-slot="select-item"][data-value="pt"]'
@@ -309,7 +309,7 @@ describe('AppearancePane', () => {
       chineseOption?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     })
 
-    expect(updateSettings).toHaveBeenNthCalledWith(1, { uiLanguage: 'zh' })
+    expect(updateSettings).toHaveBeenNthCalledWith(1, { uiLanguage: 'zh-Hans' })
 
     await act(async () => {
       portugueseOption?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -323,7 +323,7 @@ describe('AppearancePane', () => {
     mocks.state.settingsSearchQuery = ''
     const settings = {
       ...getDefaultSettings('/tmp'),
-      uiLanguage: 'zh' as const,
+      uiLanguage: 'zh-Hans' as const,
       theme: 'dark' as const,
       appFontFamily: 'Inter'
     }

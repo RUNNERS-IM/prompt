@@ -63,6 +63,10 @@ export abstract class UpdaterScheduling extends UpdaterCheckFailure {
     if (this.backgroundCheckLaunchPending || this.currentStatus.state === 'checking') {
       return false
     }
+    // 「업데이트 자동 확인」이 꺼져 있으면 건너뛴다. false 를 돌려주므로 하루 타이머는 다시 걸려, 다시 켜면 그다음 차례에 확인한다.
+    if (this._isAutomaticCheckOn && !this._isAutomaticCheckOn()) {
+      return false
+    }
     if (!app.isPackaged) {
       this.sendStatus({ state: 'not-available' })
       return false

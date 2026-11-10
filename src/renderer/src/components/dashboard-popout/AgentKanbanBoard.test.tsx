@@ -138,7 +138,7 @@ describe('AgentKanbanBoard', () => {
   })
 
   it('uses the visible translated names for all regions when idle agents are shown', async () => {
-    await i18n.changeLanguage('zh')
+    await i18n.changeLanguage('zh-Hans')
     renderBoard([], { showIdle: true })
 
     expect(screen.getAllByRole('region')).toHaveLength(4)

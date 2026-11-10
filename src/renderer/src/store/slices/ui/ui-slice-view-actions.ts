@@ -1,5 +1,6 @@
 import type { UISlice, UISliceGet, UISliceSet } from './ui-slice-contract'
 import { rewindHistoryIndexPastView } from '../worktree-nav-history'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../../shared/prompt-upstream'
 
 export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<UISlice> {
   return {
@@ -51,6 +52,10 @@ export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<U
         activeView: state.previousViewBeforeSpace
       })),
     openSkillsPage: () => {
+      if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+        get().openModal('prompt-skills')
+        return
+      }
       get().recordViewVisit('skills')
       set((state) => ({
         activeView: 'skills',
@@ -58,11 +63,16 @@ export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<U
           state.activeView === 'skills' ? state.previousViewBeforeSkills : state.activeView
       }))
     },
-    closeSkillsPage: () =>
+    closeSkillsPage: () => {
+      if (PROMPT_BLOCK_UPSTREAM_SERVICES) {
+        get().closeModal()
+        return
+      }
       set((state) => ({
         activeView: state.previousViewBeforeSkills,
         worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'skills')
-      })),
+      }))
+    },
     openSkillShare: (shareId) => {
       get().recordViewVisit('skills')
       set((state) => ({

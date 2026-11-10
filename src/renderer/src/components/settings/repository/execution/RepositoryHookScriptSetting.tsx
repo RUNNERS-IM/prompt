@@ -3,6 +3,7 @@ import { AlertTriangle, Plus } from 'lucide-react'
 import { Button } from '../../../ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../ui/tooltip'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { getRepositoryHookScriptTextareaRows } from '@/lib/script-textarea-rows'
 import type {
   LocalCommandSourcePolicyNotice,
@@ -136,7 +137,12 @@ export function RepositoryHookScriptSetting({
   const showLocalEditor = showLocal || value.length > 0 || !hasShared
   return (
     <div
-      className="space-y-3 rounded-2xl border border-border/50 bg-background/80 p-4 shadow-sm"
+      // Prompt: each hook is a plain row of the settings box, not a card inside it.
+      className={
+        PROMPT_SIMPLE_SETTINGS
+          ? 'space-y-3'
+          : 'space-y-3 rounded-2xl border border-border/50 bg-background/80 p-4 shadow-sm'
+      }
       id={sectionId}
     >
       <div className="space-y-1">

@@ -14,6 +14,7 @@ export type SettingsNavInstallStatus =
   | 'checking'
 
 const SETTINGS_NAV_TARGETS = [
+  'prompt-about',
   'general',
   'integrations',
   'accounts',

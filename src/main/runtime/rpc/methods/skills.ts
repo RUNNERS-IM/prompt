@@ -44,6 +44,7 @@ import {
   SkillsGetInstallProgressParams
 } from '../../../../shared/rpc-contract/skills-params'
 import { unavailableWhileWslDistroStopped } from '../../../skills/skill-discovery-stopped-wsl-roots'
+import { withClaudeCommands } from '../../../skills/claude-command-discovery'
 import { runAsWslUserAct, wslDistroForPath } from '../../../wsl/wsl-unc-access-gate'
 
 // Use the same target resolution for discovery and delete-plan roots, including WSL.
@@ -99,10 +100,11 @@ export const SKILL_METHODS = [
           runtime,
           { refuseStoppedWslDistro: true }
         )
-        return discoverSkillsOnTarget(resolvedTarget, runtime.listRepos(), {
+        const result = await discoverSkillsOnTarget(resolvedTarget, runtime.listRepos(), {
           providerRootOverrides: await runtime.resolveSkillDiscoveryProviderRoots(resolvedTarget),
           refresh: params.refresh === true
         })
+        return params.includeClaudeCommands ? withClaudeCommands(result) : result
       }, params.sourceKinds)
   }),
   defineMethod({

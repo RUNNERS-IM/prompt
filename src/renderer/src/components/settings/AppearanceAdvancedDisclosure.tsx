@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useAppStore } from '../../store'
 import { normalizeSettingsSearchQuery } from './settings-search'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type AppearanceAdvancedDisclosureProps = {
   label?: string
@@ -29,6 +30,10 @@ export function AppearanceAdvancedDisclosure({
   const [open, setOpen] = useState(false)
   const forced = isSearching || forceOpen
   const expanded = open || forced
+  // Prompt: callers lay these rows out as their own titled boxes, so nothing is folded away.
+  if (PROMPT_SIMPLE_SETTINGS) {
+    return <>{children}</>
+  }
 
   return (
     <div className={cn('mt-3 pt-2', showTopBorder && 'border-t border-border/50', className)}>

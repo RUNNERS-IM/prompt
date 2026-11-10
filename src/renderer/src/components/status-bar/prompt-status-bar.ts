@@ -3,15 +3,22 @@ import type { StatusBarItem } from '../../../../shared/ui-chrome-types'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 // Status bar segments Prompt never shows. They belong to features Prompt hides
-// (plugins, Orca remote servers, skill sharing, the pet), so they would only appear as
-// unexplained items. Kept in a Prompt-only file so the daily upstream merge stays clean.
-export type PromptStatusSegment = 'plugins' | 'remote-server-update' | 'skill-update' | 'pet'
+// (plugins, Orca remote servers, skill sharing, the pet, the floating terminal), so they would only
+// appear as unexplained items. Kept in a Prompt-only file so the daily upstream merge stays clean.
+export type PromptStatusSegment =
+  | 'plugins'
+  | 'remote-server-update'
+  | 'skill-update'
+  | 'pet'
+  | 'floating-terminal'
 
 const PROMPT_HIDDEN_STATUS_SEGMENTS: ReadonlySet<PromptStatusSegment> = new Set([
   'plugins',
   'remote-server-update',
   'skill-update',
-  'pet'
+  'pet',
+  // Its settings page (floating-workspace) is hidden, so the toggle would have no way back.
+  'floating-terminal'
 ])
 
 export function promptShowsStatusSegment(segment: PromptStatusSegment): boolean {

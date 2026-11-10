@@ -95,6 +95,8 @@ import { speechApi } from './api/speech-bridge'
 import { promptClaudeSessionTitleApi } from './api/prompt-claude-session-title-bridge'
 import { promptClaudeLoginSyncApi } from './api/prompt-claude-login-sync-bridge'
 import { promptThirdPartyNoticesApi } from './api/prompt-third-party-notices-bridge'
+import { promptMenuPanelApi } from './api/prompt-menu-panel-bridge'
+import { promptRunnersAccountApi } from './api/prompt-runners-account-bridge'
 
 installBrowserFindListener()
 
@@ -203,7 +205,9 @@ const api = {
   speech: speechApi,
   promptClaudeSessionTitle: promptClaudeSessionTitleApi,
   promptClaudeLoginSync: promptClaudeLoginSyncApi,
-  promptThirdPartyNotices: promptThirdPartyNoticesApi
+  promptThirdPartyNotices: promptThirdPartyNoticesApi,
+  promptMenuPanel: promptMenuPanelApi,
+  promptRunnersAccount: promptRunnersAccountApi
 } satisfies PreloadApi
 
 if (process.contextIsolated) {

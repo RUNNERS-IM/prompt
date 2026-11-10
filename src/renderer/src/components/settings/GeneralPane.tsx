@@ -1,6 +1,7 @@
 import type React from 'react'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { useAppStore } from '../../store'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { CliSection } from './CliSection'
 import { GeneralEditorSettingsSection } from './GeneralEditorSettingsSection'
 import { GeneralSupportSection } from './GeneralSupportSection'
@@ -24,7 +25,8 @@ import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormContr
 import { translate } from '@/i18n/i18n'
 import { DefaultWindowsProjectRuntimeSetting } from './DefaultWindowsProjectRuntimeSetting'
 import { defaultScopeHost } from '@/lib/default-creation-host'
-import { PromptRunnersAppsSettingsSection } from '../prompt-runners-apps/PromptRunnersAppsSettingsSection'
+import { PromptGeneralAppSettingsSection } from './PromptGeneralAppSettingsSection'
+import { getPromptGeneralAppSearchEntries } from './prompt-general-app-search'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 export {
@@ -120,6 +122,14 @@ export function GeneralPane({
     : []
 
   const visibleSections = [
+    PROMPT_BLOCK_UPSTREAM_SERVICES &&
+    matchesSettingsSearch(searchQuery, getPromptGeneralAppSearchEntries()) ? (
+      <PromptGeneralAppSettingsSection
+        key="prompt-app"
+        settings={settings}
+        updateSettings={updateSettings}
+      />
+    ) : null,
     matchesSettingsSearch(searchQuery, generalNavigationSearchEntries) ? (
       <section key="navigation" className="space-y-4">
         <SettingsSubsectionHeader
@@ -251,6 +261,7 @@ export function GeneralPane({
         />
       </section>
     ) : null,
+    !PROMPT_SIMPLE_SETTINGS &&
     matchesSettingsSearch(searchQuery, getGeneralEditorSearchEntries()) ? (
       <GeneralEditorSettingsSection
         key="editor"
@@ -286,7 +297,6 @@ export function GeneralPane({
           hasPrecedingSections={visibleSections.some((section) => section !== null)}
         />
       ) : null}
-      <PromptRunnersAppsSettingsSection />
     </div>
   )
 }

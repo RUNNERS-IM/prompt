@@ -3,6 +3,7 @@ import { translate } from '@/i18n/i18n'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 import { getAccountsClaudeSearchEntries } from './accounts-claude-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getAccountsLocationSearchEntries = createLocalizedCatalog(() => [
   {
@@ -276,15 +277,20 @@ export const getAccountsZcodePlanSearchEntries = createLocalizedCatalog(() => [
   }
 ])
 
-export const getAccountsPaneSearchEntries = createLocalizedCatalog((): SettingsSearchEntry[] => [
-  ...getAccountsLocationSearchEntries(),
-  ...getAccountsClaudeSearchEntries(),
-  ...getAccountsCodexSearchEntries(),
-  ...getAccountsGeminiSearchEntries(),
-  ...getAccountsOpencodeSearchEntries(),
-  ...getAccountsMiniMaxSearchEntries(),
-  ...getAccountsGrokSearchEntries(),
-  ...getAccountsAntigravitySearchEntries(),
-  ...getAccountsCursorSearchEntries(),
-  ...getAccountsZcodePlanSearchEntries()
-])
+export const getAccountsPaneSearchEntries = createLocalizedCatalog((): SettingsSearchEntry[] =>
+  // Prompt runs Claude only, so the other providers' account rows are not searchable.
+  PROMPT_SIMPLE_SETTINGS
+    ? getAccountsClaudeSearchEntries()
+    : [
+        ...getAccountsLocationSearchEntries(),
+        ...getAccountsClaudeSearchEntries(),
+        ...getAccountsCodexSearchEntries(),
+        ...getAccountsGeminiSearchEntries(),
+        ...getAccountsOpencodeSearchEntries(),
+        ...getAccountsMiniMaxSearchEntries(),
+        ...getAccountsGrokSearchEntries(),
+        ...getAccountsAntigravitySearchEntries(),
+        ...getAccountsCursorSearchEntries(),
+        ...getAccountsZcodePlanSearchEntries()
+      ]
+)

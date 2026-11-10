@@ -34,6 +34,8 @@ import {
   type AgentPermissionsSettingProps
 } from './AgentPermissionsSetting'
 import type { SettingsHostScope } from './settings-host-scope'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { translate } from '@/i18n/i18n'
 
 export {
   buildAgentAvailabilitySettingsUpdate,
@@ -75,15 +77,23 @@ export function AgentsPane({
         hostScope={hostScope}
         renderPermissions={renderAgentPermissions}
       />
-      <section className="space-y-3">
-        <CodexHistorySharingSetting
-          settings={settings}
-          updateSettings={updateSettings}
-          hostScope={hostScope}
-        />
-      </section>
+      {!PROMPT_SIMPLE_SETTINGS ? (
+        <section className="space-y-3">
+          <CodexHistorySharingSetting
+            settings={settings}
+            updateSettings={updateSettings}
+            hostScope={hostScope}
+          />
+        </section>
+      ) : null}
       <section className="space-y-8">
-        <SettingsSubsectionHeader title={getLocalExecutionHostLabel()} />
+        <SettingsSubsectionHeader
+          title={
+            PROMPT_SIMPLE_SETTINGS
+              ? translate('prompt.settings.claude.sessionGroup', 'Claude sessions')
+              : getLocalExecutionHostLabel()
+          }
+        />
         <AgentRuntimeSetting
           settings={settings}
           updateSettings={updateSettings}
@@ -108,10 +118,12 @@ export function AgentsPane({
         {!isPairedWebClientWindow() ? (
           <>
             <AgentWorkspaceTrustSetting settings={settings} updateSettings={updateSettings} />
-            <CodexTerminalServerIsolationSetting
-              settings={settings}
-              updateSettings={updateSettings}
-            />
+            {!PROMPT_SIMPLE_SETTINGS ? (
+              <CodexTerminalServerIsolationSetting
+                settings={settings}
+                updateSettings={updateSettings}
+              />
+            ) : null}
           </>
         ) : null}
         <AgentGeneratedTabTitlesSetting settings={settings} updateSettings={updateSettings} />
@@ -119,8 +131,14 @@ export function AgentsPane({
           <AgentAwakeSetting settings={settings} updateSettings={updateSettings} />
         ) : null}
         <PromptDefaultModelSetting settings={settings} updateSettings={updateSettings} />
-        <AgentCacheTimerSection settings={settings} updateSettings={updateSettings} />
+        {!PROMPT_SIMPLE_SETTINGS ? (
+          <AgentCacheTimerSection settings={settings} updateSettings={updateSettings} />
+        ) : null}
       </section>
+      {/* 캐시 타이머는 제목이 있는 묶음이라 Prompt 에서는 칸 안에 넣지 않고 따로 둔다. */}
+      {PROMPT_SIMPLE_SETTINGS ? (
+        <AgentCacheTimerSection settings={settings} updateSettings={updateSettings} />
+      ) : null}
     </div>
   )
 }

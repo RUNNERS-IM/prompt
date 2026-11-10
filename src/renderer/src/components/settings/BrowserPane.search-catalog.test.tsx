@@ -93,7 +93,10 @@ vi.mock('./BrowserProfileScopeSetting', () => ({
 vi.mock('./BrowserUserAgentSetting', () => ({
   BrowserUserAgentSetting: () => <span>Identity row</span>
 }))
-vi.mock('./SettingsFormControls', () => ({ SettingsSubsectionHeader: () => null }))
+vi.mock('./SettingsFormControls', () => ({
+  SettingsSubsectionHeader: () => null,
+  SettingsUntitledGroupStart: () => null
+}))
 vi.mock('./BrowserSessionCookiesSection', () => ({
   BrowserSessionCookiesSection: () => <span>Cookies row</span>
 }))

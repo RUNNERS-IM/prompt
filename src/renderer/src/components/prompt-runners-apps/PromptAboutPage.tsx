@@ -4,19 +4,18 @@ import { useTranslation } from 'react-i18next'
 import { translate } from '@/i18n/i18n'
 import appIconUrl from '../../../../../resources/icon.png?url'
 import { PromptRunnersApps } from './PromptRunnersApps'
+import './prompt-about.css'
 import { loadPromptRunnersAppGroups, openRunnersAppUrl } from './prompt-runners-apps-source'
 import { isSafeRunnersAppUrl, pickRunnersAppsLocale } from './runners-apps-model'
-import { formatPromptDisplayVersion } from '../../../../shared/prompt-display-version'
 
 const COPYRIGHT = '© 2026 RUNNERS. All rights reserved.'
 
 const WEBSITE_URL = 'https://runners.im/prompt'
 const GITHUB_URL = 'https://github.com/RUNNERS-IM/prompt'
 
-/** Content of Prompt's About window, laid out like Split's: app icon, name, version line, website and
+/** Settings › About, laid out like Split's About window: app icon, name, version line, website and
  *  GitHub buttons, the RUNNERS app cards, then one footer line with the copyright and a link to the
- *  open source notices window (the Orca credit lives there). Replaces the native About panel,
- *  which cannot hold cards. */
+ *  open source notices window (the Orca credit lives there). */
 export function PromptAboutPage(): React.JSX.Element {
   const { i18n } = useTranslation()
   const [version, setVersion] = useState('')
@@ -29,19 +28,12 @@ export function PromptAboutPage(): React.JSX.Element {
       .getVersion()
       .then((value) => {
         if (!cancelled) {
-          setVersion(formatPromptDisplayVersion(value))
+          setVersion(value)
         }
       })
       .catch(() => undefined)
-    const closeOnEscape = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') {
-        window.close()
-      }
-    }
-    window.addEventListener('keydown', closeOnEscape)
     return () => {
       cancelled = true
-      window.removeEventListener('keydown', closeOnEscape)
     }
   }, [])
 
@@ -53,7 +45,7 @@ export function PromptAboutPage(): React.JSX.Element {
   }
 
   return (
-    <main className="prompt-about">
+    <div className="prompt-about">
       <header className="prompt-about-header">
         <img className="prompt-about-icon" src={appIconUrl} alt="" draggable={false} />
         <h1 className="prompt-about-name">Prompt</h1>
@@ -89,6 +81,6 @@ export function PromptAboutPage(): React.JSX.Element {
           </>
         ) : null}
       </footer>
-    </main>
+    </div>
   )
 }

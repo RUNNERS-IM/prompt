@@ -7,6 +7,7 @@ import { useConfirmationDialog } from '@/components/confirmation-dialog-context'
 import { useMountedRef } from '@/hooks/useMountedRef'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SettingsRow } from './SettingsFormControls'
 
 /** Shared by the Clear row and its confirm dialog so both promise the same thing. */
@@ -89,7 +90,7 @@ export function SessionSearchAdvancedSection({
   }
 
   return (
-    <div className="border-t border-border">
+    <div className={PROMPT_SIMPLE_SETTINGS ? undefined : 'border-t border-border'}>
       <Collapsible open={open} onOpenChange={setOpen}>
         <CollapsibleTrigger asChild>
           <Button type="button" variant="ghost" size="xs">

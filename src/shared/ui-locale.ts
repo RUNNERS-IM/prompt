@@ -2,7 +2,7 @@ import { UI_LANGUAGE_SYSTEM, isPluginUiLanguage, type UiLanguage } from './ui-la
 
 export const SUPPORTED_UI_LOCALES = [
   'en',
-  'zh',
+  'zh-Hans',
   'zh-Hant',
   'ko',
   'ja',
@@ -11,7 +11,16 @@ export const SUPPORTED_UI_LOCALES = [
   'pt',
   'ru',
   'tr',
-  'de'
+  'de',
+  'ar',
+  'fi',
+  'hi',
+  'id',
+  'it',
+  'nl',
+  'pl',
+  'th',
+  'vi'
 ] as const
 export type SupportedUiLocale = (typeof SUPPORTED_UI_LOCALES)[number]
 
@@ -63,9 +72,9 @@ export function matchUiLocaleParts({
   if (base === 'zh') {
     if (script) {
       const scriptName = script.toLowerCase()
-      return scriptName === 'hans' ? 'zh' : scriptName === 'hant' ? 'zh-Hant' : null
+      return scriptName === 'hans' ? 'zh-Hans' : scriptName === 'hant' ? 'zh-Hant' : null
     }
-    return ['TW', 'HK', 'MO'].includes(region?.toUpperCase() ?? '') ? 'zh-Hant' : 'zh'
+    return ['TW', 'HK', 'MO'].includes(region?.toUpperCase() ?? '') ? 'zh-Hant' : 'zh-Hans'
   }
   return SUPPORTED_UI_LOCALES.find((supported) => supported === base) ?? null
 }

@@ -75,7 +75,7 @@ describe('PetOverlay sprite keyframes', () => {
   let container: HTMLDivElement | null = null
 
   beforeEach(async () => {
-    await i18n.changeLanguage('zh')
+    await i18n.changeLanguage('zh-Hans')
     installLocalStorage()
   })
 

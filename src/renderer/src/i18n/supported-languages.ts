@@ -12,6 +12,15 @@ import {
   UI_LANGUAGE_SPANISH,
   UI_LANGUAGE_SYSTEM,
   UI_LANGUAGE_TURKISH,
+  UI_LANGUAGE_ARABIC,
+  UI_LANGUAGE_FINNISH,
+  UI_LANGUAGE_HINDI,
+  UI_LANGUAGE_INDONESIAN,
+  UI_LANGUAGE_ITALIAN,
+  UI_LANGUAGE_DUTCH,
+  UI_LANGUAGE_POLISH,
+  UI_LANGUAGE_THAI,
+  UI_LANGUAGE_VIETNAMESE,
   UI_LANGUAGE_NATIVE_NAMES,
   type BuiltInUiLanguage,
   type UiLanguage
@@ -41,7 +50,16 @@ export const UI_LANGUAGE_CHOICES: UiLanguageChoice[] = [
   { value: UI_LANGUAGE_PORTUGUESE, labelKey: 'settings.appearance.language.portuguese' },
   { value: UI_LANGUAGE_RUSSIAN, labelKey: 'settings.appearance.language.russian' },
   { value: UI_LANGUAGE_TURKISH, labelKey: 'settings.appearance.language.turkish' },
-  { value: UI_LANGUAGE_GERMAN, labelKey: 'settings.appearance.language.german' }
+  { value: UI_LANGUAGE_GERMAN, labelKey: 'settings.appearance.language.german' },
+  { value: UI_LANGUAGE_ARABIC, labelKey: 'settings.appearance.language.arabic' },
+  { value: UI_LANGUAGE_FINNISH, labelKey: 'settings.appearance.language.finnish' },
+  { value: UI_LANGUAGE_HINDI, labelKey: 'settings.appearance.language.hindi' },
+  { value: UI_LANGUAGE_INDONESIAN, labelKey: 'settings.appearance.language.indonesian' },
+  { value: UI_LANGUAGE_ITALIAN, labelKey: 'settings.appearance.language.italian' },
+  { value: UI_LANGUAGE_DUTCH, labelKey: 'settings.appearance.language.dutch' },
+  { value: UI_LANGUAGE_POLISH, labelKey: 'settings.appearance.language.polish' },
+  { value: UI_LANGUAGE_THAI, labelKey: 'settings.appearance.language.thai' },
+  { value: UI_LANGUAGE_VIETNAMESE, labelKey: 'settings.appearance.language.vietnamese' }
 ]
 
 export function getUiLanguageChoiceLabel(

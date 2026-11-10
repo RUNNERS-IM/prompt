@@ -51,4 +51,26 @@ describe('mergeWorktree identity projection', () => {
 
     expect(worktree.displayNameMode).toBe('fixed')
   })
+
+  it('names a linked worktree without a branch after its folder, not the project', () => {
+    const worktree = mergeWorktree(
+      'repo-1',
+      { ...git, path: '/workspace/runners-web-sheet.noindex', branch: '' },
+      undefined,
+      '러너스'
+    )
+
+    expect(worktree.displayName).toBe('runners-web-sheet.noindex')
+  })
+
+  it('keeps the project name for a main worktree without a branch', () => {
+    const worktree = mergeWorktree(
+      'repo-1',
+      { ...git, path: '/Users/me/sense', branch: '', isMainWorktree: true },
+      undefined,
+      '센스'
+    )
+
+    expect(worktree.displayName).toBe('센스')
+  })
 })

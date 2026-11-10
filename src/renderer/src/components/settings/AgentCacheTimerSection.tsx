@@ -50,14 +50,14 @@ export function AgentCacheTimerSection({
         <div className="min-w-0 flex-1 space-y-0.5">
           <div className="flex items-center gap-2">
             <Timer className="size-4 text-muted-foreground" />
-            <Label>
+            <Label className="text-[13px] leading-4">
               {translate(
                 'auto.components.settings.AgentCacheTimerSection.b4e7302944',
                 'Cache Timer'
               )}
             </Label>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-2xs leading-[14px] text-muted-foreground">
             {translate(
               'auto.components.settings.AgentCacheTimerSection.487b176240',
               'Show a countdown in the sidebar after a Claude agent becomes idle.'
@@ -94,13 +94,13 @@ export function AgentCacheTimerSection({
           className="flex items-center justify-between gap-4 py-2 pl-7"
         >
           <div className="min-w-0 flex-1 space-y-0.5">
-            <Label>
+            <Label className="text-[13px] leading-4">
               {translate(
                 'auto.components.settings.AgentCacheTimerSection.a2a8962138',
                 'Timer Duration'
               )}
             </Label>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-2xs leading-[14px] text-muted-foreground">
               {translate(
                 'auto.components.settings.AgentCacheTimerSection.8b9e202e0a',
                 "Match this to your provider's cache TTL. The default is 5 minutes."

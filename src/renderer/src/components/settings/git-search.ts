@@ -2,6 +2,7 @@ import { getAutoRenameBranchSearchEntries } from './auto-rename-branch-search'
 import { translate } from '@/i18n/i18n'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
   {
@@ -16,23 +17,31 @@ export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.git.search.769ddd7f81', 'custom')
     ]
   },
-  {
-    title: translate(
-      'auto.components.settings.git.search.jiraIssueKeyCasingTitle',
-      'Jira Key Casing'
-    ),
-    description: translate(
-      'auto.components.settings.git.search.jiraIssueKeyCasingDescription',
-      'Casing of the Jira issue key in the workspace and branch names Orca suggests for new Jira-linked workspaces, such as PROJ-123-fix-login instead of proj-123-fix-login. Existing workspaces and names you type are never changed.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.git.search.jira', 'jira'),
-      ...translateSearchKeyword('auto.components.settings.git.search.issueKey', 'issue key'),
-      ...translateSearchKeyword('auto.components.settings.git.search.f83c8937c4', 'branch naming'),
-      ...translateSearchKeyword('auto.components.settings.git.search.uppercase', 'uppercase'),
-      ...translateSearchKeyword('auto.components.settings.git.search.lowercase', 'lowercase')
-    ]
-  },
+  // Prompt hides the Jira integration, so its key casing row is hidden too.
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.git.search.jiraIssueKeyCasingTitle',
+            'Jira Key Casing'
+          ),
+          description: translate(
+            'auto.components.settings.git.search.jiraIssueKeyCasingDescription',
+            'Casing of the Jira issue key in the workspace and branch names Orca suggests for new Jira-linked workspaces, such as PROJ-123-fix-login instead of proj-123-fix-login. Existing workspaces and names you type are never changed.'
+          ),
+          keywords: [
+            ...translateSearchKeyword('auto.components.settings.git.search.jira', 'jira'),
+            ...translateSearchKeyword('auto.components.settings.git.search.issueKey', 'issue key'),
+            ...translateSearchKeyword(
+              'auto.components.settings.git.search.f83c8937c4',
+              'branch naming'
+            ),
+            ...translateSearchKeyword('auto.components.settings.git.search.uppercase', 'uppercase'),
+            ...translateSearchKeyword('auto.components.settings.git.search.lowercase', 'lowercase')
+          ]
+        }
+      ]),
   {
     title: translate(
       'auto.components.settings.git.search.f8bda25f29',

@@ -313,7 +313,7 @@ describe('verify-localization-catalog', () => {
           ['components.agentSessionContinuation.originalAgent', 'Original agent: {{agent}}']
         ]),
         new Map([['components.agentSessionContinuation.originalAgent', '原智能体：{{agent}}']]),
-        'zh'
+        'zh-Hans'
       )
     ).toEqual([])
   })

@@ -33,6 +33,7 @@ import {
 } from './app-root-surface-settings'
 import type { FloatingWorkspacePanelState } from './use-floating-workspace-panel'
 import type { OnboardingGate } from './use-onboarding-and-feature-tips'
+import { PromptSkillsModal } from '../components/skills/PromptSkillsModal'
 
 const QuickOpen = lazy(() => import('../components/QuickOpen'))
 const WorkspaceCleanupDialog = lazy(
@@ -254,6 +255,7 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
             <WorktreeJumpPalette />
           </ModalBoundary>
         ) : null}
+        {mountedLazyModalIds.has('prompt-skills') ? <PromptSkillsModal /> : null}
         {mountedLazyModalIds.has('setup-guide') ? (
           <ModalBoundary boundaryId="modal.setup-guide" resetKey={activeModal === 'setup-guide'}>
             <SetupGuideModal />

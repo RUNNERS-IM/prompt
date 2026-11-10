@@ -1,4 +1,5 @@
 import promptKoFill from './prompt-ko-fill.json'
+import promptKoSettingsWording from './prompt-ko-settings-wording.json'
 
 // Prompt keeps the upstream catalogs (src/renderer/src/i18n/locales/*.json) untouched so the
 // daily merge from Orca does not conflict. Wording Prompt wants different, and keys the
@@ -11,6 +12,8 @@ import promptKoFill from './prompt-ko-fill.json'
 
 /** Korean wording Prompt changes on purpose (the upstream Korean exists but reads wrong). */
 export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
+  // Settings window wording (kept in JSON so this file stays readable).
+  ...promptKoSettingsWording,
   // Workspace right-click: "Update" opens the rename / comment dialog, not an app update.
   'auto.components.sidebar.WorktreeContextMenu.439fa94d53': '이름 · 메모 바꾸기',
   // Settings sidebar group "Set Up" (general + integrations); "설정 시작" read as a verb.
@@ -24,8 +27,12 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.status.bar.SkillUpdateStatusSegment.successLabel': '스킬 업데이트됨',
   'auto.components.skills.SkillFreshnessUpdateDialog.progressAria': '스킬 업데이트 중',
   'auto.components.crash.report.CrashReportDialog.50b00dc327': '세부 정보 복사',
-  // Update card and status bar show the version as 2.6.1030.2, without "v".
-  'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}}을(를) 받는 중입니다.',
+  // Update card and status bar show the real version (2.6.110501), without "v".
+  'auto.components.UpdateCard.93794ea932': 'Prompt {{value0}} 받는 중입니다.',
+  'auto.components.UpdateCard.558842597d': '업데이트 받는 중',
+  'auto.components.UpdateCard.downloadingPercent': '받는 중… {{percent}}%',
+  'updates.installBlock.preparingSummary':
+    '다시 시작하기 전에 실행 중인 다른 Prompt 를 확인하는 중입니다.',
   'auto.components.status.bar.UpdateStatusSegment.248ee5d8ef':
     'Prompt {{value0}} 받는 중… {{value1}}%',
   'auto.components.status.bar.UpdateStatusSegment.9d13213a56': 'Prompt {{value0}} 설치 준비됨',
@@ -45,11 +52,25 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'quitAndStopAllSessions.message': '모든 터미널 세션을 멈추고 Orca를 종료할까요?',
   'quitAndStopAllSessions.detail':
     '실행 중인 에이전트를 포함해 모든 터미널 세션이 멈추고, 닫힌 탭은 다음에 다시 열리지 않습니다. 그냥 종료하면 세션은 계속 돌아갑니다.'
+  // Settings redesign: Prompt instead of Orca, Korean where the catalog left English.
 }
 
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
+  'prompt.settings.group.more': '더 보기',
+  'prompt.settings.appearance.title': '모양',
+  'prompt.settings.appearance.description': '테마, 언어, 화면 크기, 글꼴, 터미널 색을 정합니다.',
+  'prompt.skills.mySkills': '내 스킬',
+  'prompt.skills.commands': '명령어',
+  'prompt.skills.commandCount': '명령어 {{count}}개',
+  'prompt.settings.cli.notInstalled': '다른 터미널에서도 쓰려면 {{path}} 를 등록합니다.',
+  'prompt.settings.claude.title': 'Claude',
+  'prompt.settings.claude.description': 'Claude 계정, 새 세션을 시작하는 방식, 사용량을 정합니다.',
+  'prompt.settings.git.title': 'Git',
+  'prompt.settings.git.description': '브랜치, 소스 제어 작업, GitHub · GitLab 연결을 정합니다.',
+  'prompt.settings.advanced.title': '고급',
+  'prompt.settings.advanced.description': '네트워크, macOS 권한, 세션 검색, 실험 기능을 정합니다.',
   'prompt.about.menuLabel': '{{name}} 정보',
   'prompt.about.versionLine': '버전 {{version}} · 무료',
   'prompt.about.website': '웹사이트',
@@ -67,17 +88,74 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.crashReport.cancel': '취소',
   'prompt.crashReport.open': 'GitHub에서 열기',
   'prompt.crashReport.opened': 'GitHub 이슈 화면을 열었습니다. 거기서 등록해야 접수됩니다.',
-  'prompt.update.title': '새 버전이 있습니다',
-  'prompt.update.bodyWithCurrent':
-    'Prompt {{version}}을(를) 설치할 수 있습니다. 지금은 {{current}}입니다. 설치하면 Prompt가 다시 시작됩니다.',
-  'prompt.update.body':
-    'Prompt {{version}}을(를) 설치할 수 있습니다. 설치하면 Prompt가 다시 시작됩니다.',
+  'prompt.update.titleVersion': '새 버전 {{version}}',
+  'prompt.update.subtitleWithCurrent': '지금 {{current}} · 설치하면 Prompt가 다시 시작됩니다',
+  'prompt.update.subtitle': '설치하면 Prompt가 다시 시작됩니다',
+  'prompt.update.releaseNotes': '바뀐 점 보기',
+  'prompt.update.dismiss': '닫기',
+  'prompt.update.downloadingTitle': '새 버전 {{version}} 받는 중',
+  'prompt.update.downloadingSubtitle': '다 받으면 Prompt가 다시 시작됩니다',
   'prompt.update.later': '나중에',
   'prompt.update.install': '설치',
   'prompt.update.restartFailed':
     '업데이트를 설치하려고 다시 시작하지 못했습니다. Prompt를 종료했다가 다시 연 뒤 시도하세요.',
   'prompt.update.installerFailed':
-    '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.'
+    '업데이트 설치 프로그램을 시작하지 못했습니다. Prompt는 그대로 열려 있습니다.',
+  // Terminal link hover hints (terminal-link-open-hints.ts); {{mod}} is ⌘ or Ctrl.
+  'prompt.terminalLinkHint.actionsPrefix': '클릭: 동작 메뉴 · ',
+  'prompt.terminalLinkHint.actionsOrPrefix': '클릭: 동작 메뉴 · ',
+  'prompt.terminalLinkHint.fileOpen': '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: 기본 앱으로 열기',
+  'prompt.terminalLinkHint.orcaFileOpen': '{{mod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.urlInvertsToOrca':
+    '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.urlSystemBrowser':
+    '{{mod}}+클릭: 열기 · {{shiftMod}}+클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.systemBrowserOnly': '{{shiftMod}}+클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.clickSystemBrowser': '클릭: 기본 브라우저로 열기',
+  'prompt.terminalLinkHint.orcaBrowserOnly': '{{shiftMod}}+클릭: Prompt 에서 열기',
+  'prompt.terminalLinkHint.switchWorkspace': '{{mod}}+클릭: 이 워크스페이스로 이동',
+  'prompt.terminalLinkHint.switchWorkspaceFinder':
+    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: Finder 에서 열기',
+  'prompt.terminalLinkHint.switchWorkspaceFolder':
+    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: 폴더 열기',
+  // Notices written into a terminal (prompt-terminal-notice-copy.ts).
+  'prompt.terminalNotice.hiddenBacklog':
+    '출력이 너무 많이 쌓여서, 화면에 안 보이던 동안의 터미널 출력 일부를 건너뛰었습니다.',
+  'prompt.terminalNotice.foregroundBurst':
+    '출력이 한꺼번에 너무 많이 들어와서 터미널 출력 일부를 건너뛰었습니다.',
+  'prompt.terminalNotice.restoreUnavailable':
+    '화면에 안 보이던 동안의 터미널 출력을 되살릴 수 없어 건너뛰었습니다.',
+  'prompt.terminalNotice.noHostImage': '이 터미널의 지난 출력을 호스트에서 되살리지 못했습니다.',
+  // Settings redesign: group titles and copy of the merged pages.
+  'prompt.settings.claude.accountsGroup': '계정',
+  'prompt.settings.claude.launchGroup': '새 세션',
+  'prompt.settings.claude.permissionDescription': 'Claude 가 묻지 않고 할 수 있는 일입니다.',
+  'prompt.settings.claude.sessionGroup': 'Claude 세션',
+  'prompt.settings.claude.usageGroup': '사용량',
+  'prompt.settings.claude.usageSearchDescription':
+    '에이전트 횟수와 Claude 토큰 · 모델 · 세션 사용량.',
+  'prompt.settings.cli.installDescriptionMac':
+    '`prompt` 와 `orca` 를 /usr/local/bin 에 등록합니다.',
+  'prompt.settings.general.appGroup': '앱',
+  'prompt.settings.general.openAtLoginDescription':
+    '맥에 로그인하면 Prompt 를 메뉴 막대에 띄워 둡니다.',
+  'prompt.settings.general.autoCheckUpdatesDescription': '새 판이 나오면 알려 줍니다.',
+  'prompt.settings.general.menuBarIconDescription': '메뉴 막대에 Prompt 아이콘을 보입니다.',
+  'prompt.settings.about.title': '정보',
+  'prompt.settings.about.description': '버전, RUNNERS 앱, 오픈소스 고지.',
+  'prompt.settings.appearance.trayGroup': '시스템 트레이',
+  'prompt.settings.appearance.terminalWindowGroup': '터미널 창',
+  'prompt.settings.terminal.scrollbackKeysGroup': '스크롤 · 키 입력',
+  'prompt.settings.terminal.shellArgsGroup': '셸 시작 인수',
+  'prompt.settings.notifications.alertsGroup': '알림',
+  'prompt.settings.notifications.soundGroup': '소리',
+  'prompt.settings.notifications.visibleScreenGroup': '보이는 화면',
+  'prompt.settings.git.branchesGroup': '브랜치와 작업 공간',
+  'prompt.settings.git.apiBudgetGroup': 'API 사용 한도',
+  'prompt.settings.git.integrationsGroup': '연동',
+  'prompt.settings.advanced.permissionsGroup': 'macOS 권한',
+  'prompt.settings.advanced.sessionSearchGroup': '에이전트 세션 검색',
+  'prompt.settings.advanced.experimentalGroup': '실험 기능'
 }
 
 /** Keys missing from upstream ko.json, translated for Prompt (P13). */

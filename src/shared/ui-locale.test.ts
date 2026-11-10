@@ -26,7 +26,7 @@ describe('ui-locale', () => {
       expect(normalizeSupportedUiLocale(tag)).toBe('zh-Hant')
     }
     for (const tag of ['zh', 'zh-CN', 'zh-SG', 'zh-Hans']) {
-      expect(normalizeSupportedUiLocale(tag)).toBe('zh')
+      expect(normalizeSupportedUiLocale(tag)).toBe('zh-Hans')
     }
   })
 
@@ -43,13 +43,13 @@ describe('system language detection', () => {
     ['fr_CA.UTF-8', 'fr', 'supported'],
     ['pt-PT', 'pt', 'supported'],
     ['tr_TR.UTF-8', 'tr', 'supported'],
-    ['zh-Hans-TW', 'zh', 'supported'],
+    ['zh-Hans-TW', 'zh-Hans', 'supported'],
     ['zh-Hant-CN', 'zh-Hant', 'supported'],
     ['zh-Latn-CN', 'en', 'unsupported'],
     ['zh-MO', 'zh-Hant', 'supported'],
     ['zh_CN.UTF-8@hant', 'zh-Hant', 'supported'],
-    ['zh_TW.UTF-8@hans', 'zh', 'supported'],
-    ['it-IT', 'en', 'unsupported'],
+    ['zh_TW.UTF-8@hans', 'zh-Hans', 'supported'],
+    ['sv-SE', 'en', 'unsupported'],
     ['en--US', 'en', 'unknown'],
     ['C.UTF-8', 'en', 'unknown'],
     ['POSIX', 'en', 'unknown']
@@ -58,8 +58,8 @@ describe('system language detection', () => {
   })
 
   it('retains an unsupported primary instead of using a supported secondary', () => {
-    expect(detectUiLanguage(['it-IT', 'fr-FR', 'C'], 'native')).toMatchObject({
-      detectedTag: 'it-IT',
+    expect(detectUiLanguage(['sv-SE', 'fr-FR', 'C'], 'native')).toMatchObject({
+      detectedTag: 'sv-SE',
       locale: 'en',
       status: 'unsupported'
     })

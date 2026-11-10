@@ -42,7 +42,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.lib.agent.catalog.12e6baa4f7',
         enValue: 'Gemini',
         localeValue: '双子座',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('Gemini')
   })
@@ -53,7 +53,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.web.WebConnect.27393856e4',
         enValue: 'orca://pair?code=...',
         localeValue: '虎鲸://pair?code=...',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('orca://pair?code=...')
   })
@@ -102,7 +102,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.settings.AgentsPane.92033495ff',
         enValue: 'Auto',
         localeValue: '汽车',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('自动')
     expect(
@@ -265,7 +265,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.sidebar.SidebarNav.e518f544b1',
         enValue: 'No agents detected',
         localeValue: '未已检测代理',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('未检测到智能体')
     expect(
@@ -273,7 +273,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.skills.SkillsPage.38e0951c3a',
         enValue: 'Agent Skills',
         localeValue: '代理技巧',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('智能体技能')
     expect(
@@ -281,7 +281,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.settings.appearance.search.9ae151b26b',
         enValue: 'linear',
         localeValue: '线性',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('Linear')
     expect(
@@ -289,7 +289,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.JiraIssueWorkspace.ef21405c6d',
         enValue: 'Jira issue',
         localeValue: '吉拉问题',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('Jira 议题')
     expect(
@@ -297,7 +297,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.dbe5e2448e',
         enValue: 'Pull request merged',
         localeValue: '合并请求请求',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('拉取请求已合并')
     expect(
@@ -305,7 +305,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.3ab6ac0fc8',
         enValue: 'Preview and edit the selected GitHub issue or pull request.',
         localeValue: '预览并编辑选定的 GitHub 问题或拉取请求。',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('预览并编辑选定的 GitHub 议题或拉取请求。')
     expect(
@@ -313,7 +313,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.LinearIssueWorkspace.0190b760c1',
         enValue: 'Open on Linear',
         localeValue: 'Linear打开',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('在 Linear 中打开')
     expect(
@@ -321,7 +321,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.TaskPage.d0e3c8f933',
         enValue: 'No matching GitHub work',
         localeValue: '没有匹配的 GitHub 作品',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('没有匹配的 GitHub 工作项')
     expect(
@@ -329,7 +329,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.hooks.useSettingsNavigationMetadata.4a728cd56b',
         enValue: 'New features that are still taking shape. Give them a try.',
         localeValue: '仍在形成的新特征。尝试一下。',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('仍在形成的新功能。尝试一下。')
   })
@@ -472,7 +472,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.settings.appearance.search.5e5b8878bf',
         enValue: 'phone',
         localeValue: '电话',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('手机')
     expect(
@@ -480,7 +480,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.mobile.slides.TerminalSlide.985373052e',
         enValue: 'Switch to phone mode',
         localeValue: '切换到电话模式',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('切换到手机模式')
     expect(
@@ -488,7 +488,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.settings.GitPane.b559bf9899',
         enValue: 'e.g. feature',
         localeValue: '例如特征',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('例如 feature')
     expect(
@@ -496,7 +496,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.settings.terminal.search.d5e6c7fab1',
         enValue: 'font features',
         localeValue: '字体特征',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('字体特性')
     expect(
@@ -504,7 +504,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.934add88b6',
         enValue: 'Reviewer',
         localeValue: '审稿人',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('评审人')
     expect(
@@ -512,7 +512,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.a341343303',
         enValue: 'Review comment added.',
         localeValue: '添加了评论评论。',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('已添加评审评论。')
     expect(
@@ -520,7 +520,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.6e43a16435',
         enValue: 'Inline',
         localeValue: '排队',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('内联')
     expect(
@@ -528,7 +528,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.github.pr.merge.state.bf5e4c6c92',
         enValue: 'Blocked',
         localeValue: '被阻止',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('已阻塞')
     expect(
@@ -536,7 +536,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.sidebar.workspace.status.6c1efa2cf8',
         enValue: 'In review',
         localeValue: '审核中',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('评审中')
     expect(
@@ -544,7 +544,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.sidebar.workspace.status.2c19d1db33',
         enValue: 'Play',
         localeValue: '玩',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('播放')
     expect(
@@ -552,7 +552,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.right.sidebar.SourceControlAgentActionDialogForm.1bc0bdbb5e',
         enValue: 'Launch:',
         localeValue: '发射：',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('启动：')
     expect(
@@ -560,7 +560,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.UpdateCard.actionBadge',
         enValue: 'Action',
         localeValue: '行动',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('操作')
   })
@@ -590,7 +590,7 @@ describe('locale-translation-policy', () => {
         key: 'auto.components.GitHubItemDialog.8c45901789',
         enValue: 'Request reviewer {{value0}}',
         localeValue: '请求审阅者 {{value0}}',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('请求评审人 {{value0}}')
     expect(

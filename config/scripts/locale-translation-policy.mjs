@@ -216,6 +216,11 @@ export const NEVER_TRANSLATE_VALUES = new Set([
   'orca · zsh'
 ])
 
+// Prompt: the rule tables predate script codes and still key Simplified Chinese as 'zh'.
+export function tableLocale(locale) {
+  return locale === 'zh-Hans' ? 'zh' : locale
+}
+
 export const NATIVE_PICKER_LABELS = {
   zh: {
     chinese: '中文（简体）',
@@ -309,7 +314,7 @@ function replaceMistranslatedForm(value, wrong, brand, locale) {
 
 function applyBrandMistranslationFixes(enValue, localeValue, locale, key = '') {
   let result = localeValue
-  const mistranslations = BRAND_MISTRANSLATIONS[locale] ?? {}
+  const mistranslations = BRAND_MISTRANSLATIONS[tableLocale(locale)] ?? {}
 
   for (const [brand, wrongForms] of Object.entries(mistranslations).sort(
     ([left], [right]) => right.length - left.length
@@ -387,7 +392,7 @@ function phraseFixMatchesEnglish(enValue, fix) {
 
 function applyPhraseFixes(enValue, localeValue, locale, key = '') {
   let result = localeValue
-  for (const fix of LOCALE_PHRASE_FIXES[locale] ?? []) {
+  for (const fix of LOCALE_PHRASE_FIXES[tableLocale(locale)] ?? []) {
     if (!phraseFixMatchesEnglish(enValue, fix)) {
       continue
     }
@@ -400,22 +405,22 @@ function applyPhraseFixes(enValue, localeValue, locale, key = '') {
 }
 
 export function repairTranslatedValue({ key, enValue, localeValue, locale }) {
-  const keyOverride = LOCALE_KEY_OVERRIDES[key]?.[locale]
+  const keyOverride = LOCALE_KEY_OVERRIDES[key]?.[tableLocale(locale)]
   if (keyOverride) {
     // Why: exact key overrides can still carry stale MT output, so glossary repairs remain the final gate.
     let result = applyBrandMistranslationFixes(enValue, keyOverride, locale, key)
     result = applyPhraseFixes(enValue, result, locale, key)
-    if (['zh', 'ja', 'ko'].includes(locale)) {
+    if (['zh-Hans', 'zh-Hant', 'ja', 'ko'].includes(locale)) {
       result = applyCjkLatinTermSpacing(result, locale)
     }
     return result
   }
 
-  const valueOverride = LOCALE_VALUE_OVERRIDES[locale]?.[enValue]
+  const valueOverride = LOCALE_VALUE_OVERRIDES[tableLocale(locale)]?.[enValue]
   if (valueOverride) {
     let result = applyBrandMistranslationFixes(enValue, valueOverride, locale, key)
     result = applyPhraseFixes(enValue, result, locale, key)
-    if (['zh', 'ja', 'ko'].includes(locale)) {
+    if (['zh-Hans', 'zh-Hant', 'ja', 'ko'].includes(locale)) {
       result = applyCjkLatinTermSpacing(result, locale)
     }
     return result
@@ -428,7 +433,7 @@ export function repairTranslatedValue({ key, enValue, localeValue, locale }) {
   let result = localeValue
 
   if (key.includes('.search.')) {
-    const searchOverride = SEARCH_KEYWORD_OVERRIDES[locale]?.[enValue]
+    const searchOverride = SEARCH_KEYWORD_OVERRIDES[tableLocale(locale)]?.[enValue]
     if (searchOverride) {
       result = searchOverride
     }
@@ -436,7 +441,7 @@ export function repairTranslatedValue({ key, enValue, localeValue, locale }) {
 
   result = applyBrandMistranslationFixes(enValue, result, locale, key)
   result = applyPhraseFixes(enValue, result, locale, key)
-  if (['zh', 'ja', 'ko'].includes(locale)) {
+  if (['zh-Hans', 'zh-Hant', 'ja', 'ko'].includes(locale)) {
     result = applyCjkLatinTermSpacing(result, locale)
   }
 
@@ -504,7 +509,9 @@ export function repairCatalog(enCatalog, localeCatalog, locale) {
   }
 
   if (localeCatalog.settings?.appearance?.language) {
-    for (const [labelKey, label] of Object.entries(NATIVE_PICKER_LABELS[locale] ?? {})) {
+    for (const [labelKey, label] of Object.entries(
+      NATIVE_PICKER_LABELS[tableLocale(locale)] ?? {}
+    )) {
       if (localeCatalog.settings.appearance.language[labelKey] !== label) {
         localeCatalog.settings.appearance.language[labelKey] = label
         repaired += 1
@@ -513,7 +520,7 @@ export function repairCatalog(enCatalog, localeCatalog, locale) {
   }
 
   if (localeCatalog.menu) {
-    if (locale === 'zh') {
+    if (locale === 'zh-Hans') {
       if (localeCatalog.menu.exploreOrca !== '探索 Orca') {
         localeCatalog.menu.exploreOrca = '探索 Orca'
         repaired += 1

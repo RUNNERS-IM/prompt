@@ -4,6 +4,7 @@ import { GitProviderApiBudgetPane } from './GitProviderApiBudgetPane'
 import { TasksPane } from './TasksPane'
 import { SettingsSection } from './SettingsSection'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import type { SettingsRenderContext } from './settings-render-context'
 
 export function renderGitSettingsSection(context: SettingsRenderContext): React.JSX.Element {
@@ -31,18 +32,23 @@ export function renderGitSettingsSection(context: SettingsRenderContext): React.
             branchPromptDiscardSignal={model.sourceControlAiPromptDiscardSignal}
             settingsSearchQuery={model.settingsSearchQuery}
           />
-          <CommitMessageAiPane
-            settings={model.settings}
-            updateSettings={model.updateSettings}
-            writeSourceControlAiSettings={interactions.writeSourceControlAiSettingsOrThrow}
-            onCustomPromptDirtyChange={model.setHasUnsavedCommitPromptChanges}
-            customPromptDiscardSignal={model.sourceControlAiPromptDiscardSignal}
-            settingsSearchQuery={model.settingsSearchQuery}
-          />
-          <GitProviderApiBudgetPane
-            settingsSearchQuery={model.settingsSearchQuery}
-            target={model.settingsHostScope.target}
-          />
+          {/* Prompt: 소스 제어 AI 명령 틀은 숨기고 지금 값 그대로 쓴다. */}
+          {PROMPT_SIMPLE_SETTINGS ? null : (
+            <CommitMessageAiPane
+              settings={model.settings}
+              updateSettings={model.updateSettings}
+              writeSourceControlAiSettings={interactions.writeSourceControlAiSettingsOrThrow}
+              onCustomPromptDirtyChange={model.setHasUnsavedCommitPromptChanges}
+              customPromptDiscardSignal={model.sourceControlAiPromptDiscardSignal}
+              settingsSearchQuery={model.settingsSearchQuery}
+            />
+          )}
+          <div className={PROMPT_SIMPLE_SETTINGS ? 'pt-6' : undefined}>
+            <GitProviderApiBudgetPane
+              settingsSearchQuery={model.settingsSearchQuery}
+              target={model.settingsHostScope.target}
+            />
+          </div>
         </>
       ) : null}
     </SettingsSection>

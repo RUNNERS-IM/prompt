@@ -1,10 +1,14 @@
 import type { SettingsSearchEntry } from './settings-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { getGeneralEditorSearchEntries } from './general-editor-search'
+import { getGeneralExternalWorktreesSearchEntries } from './general-external-worktrees-search'
 import { translate } from '@/i18n/i18n'
 import { searchKeywords, translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 import { getGeneralProjectRuntimeSearchEntries } from './general-project-runtime-search'
 import { getGeneralSupportSearchEntries } from './general-support-search'
+import { getPromptGeneralAppSearchEntries } from './prompt-general-app-search'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 
 export { getGeneralEditorSearchEntries } from './general-editor-search'
 export { getGeneralSupportSearchEntries } from './general-support-search'
@@ -23,25 +27,7 @@ export const getGeneralWorkspaceSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.general.search.df10666259', 'worktree')
     ]
   },
-  {
-    title: translate(
-      'auto.components.settings.general.search.externalWorktrees',
-      'External worktrees'
-    ),
-    description: translate(
-      'auto.components.settings.general.search.externalWorktreesDescription',
-      'Choose whether worktrees created outside Orca appear by default.'
-    ),
-    keywords: [
-      ...translateSearchKeyword(
-        'auto.components.settings.general.search.externalKeyword',
-        'external'
-      ),
-      ...translateSearchKeyword('auto.components.settings.general.search.visibility', 'visibility'),
-      ...translateSearchKeyword('auto.components.settings.general.search.sidebar', 'sidebar'),
-      ...translateSearchKeyword('auto.components.settings.general.search.df10666259', 'worktree')
-    ]
-  },
+  ...(PROMPT_SIMPLE_SETTINGS ? [] : getGeneralExternalWorktreesSearchEntries()),
   {
     title: translate('auto.components.settings.general.search.141f71c69f', 'Nest Workspaces'),
     description: translate(
@@ -72,24 +58,43 @@ export const getGeneralWorkspaceSearchEntries = createLocalizedCatalog(() => [
       ...translateSearchKeyword('auto.components.settings.general.search.0efc9d96ad', 'prompt')
     ]
   },
-  {
-    title: translate(
-      'auto.components.settings.general.search.d0a65b27fd',
-      'Ask Before Deleting Automations'
-    ),
-    description: translate(
-      'auto.components.settings.general.search.a0c44061ee',
-      'Show a confirmation dialog before deleting an automation and its run history.'
-    ),
-    keywords: [
-      ...translateSearchKeyword('auto.components.settings.general.search.84c67d0108', 'delete'),
-      ...translateSearchKeyword('auto.components.settings.general.search.7edf4f69e2', 'automation'),
-      ...translateSearchKeyword('auto.components.settings.general.search.9f8558233a', 'confirm'),
-      ...translateSearchKeyword('auto.components.settings.general.search.ca86dd6e27', 'dialog'),
-      ...translateSearchKeyword('auto.components.settings.general.search.7e9b556873', 'skip'),
-      ...translateSearchKeyword('auto.components.settings.general.search.0efc9d96ad', 'prompt')
-    ]
-  },
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.general.search.d0a65b27fd',
+            'Ask Before Deleting Automations'
+          ),
+          description: translate(
+            'auto.components.settings.general.search.a0c44061ee',
+            'Show a confirmation dialog before deleting an automation and its run history.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.84c67d0108',
+              'delete'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.7edf4f69e2',
+              'automation'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.9f8558233a',
+              'confirm'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.ca86dd6e27',
+              'dialog'
+            ),
+            ...translateSearchKeyword('auto.components.settings.general.search.7e9b556873', 'skip'),
+            ...translateSearchKeyword(
+              'auto.components.settings.general.search.0efc9d96ad',
+              'prompt'
+            )
+          ]
+        }
+      ]),
   {
     title: translate('auto.components.settings.general.search.451d4af994', 'Open In Apps'),
     description: translate(
@@ -267,10 +272,11 @@ export function getGeneralPaneSearchEntries(
   options: GeneralPaneSearchOptions = {}
 ): SettingsSearchEntry[] {
   return [
+    ...(PROMPT_BLOCK_UPSTREAM_SERVICES ? getPromptGeneralAppSearchEntries() : []),
     ...getGeneralWorkspaceSearchEntries(),
     ...getGeneralNavigationSearchEntries(),
     ...(options.includeProjectRuntime === false ? [] : getGeneralProjectRuntimeSearchEntries()),
-    ...getGeneralEditorSearchEntries(),
+    ...(PROMPT_SIMPLE_SETTINGS ? [] : getGeneralEditorSearchEntries()),
     ...getGeneralCliSearchEntries(),
     ...getGeneralUpdateSearchEntries(),
     ...getGeneralSupportSearchEntries()

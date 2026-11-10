@@ -182,6 +182,7 @@ export const UI_STATE_GLOBAL_FIELDS = [
   '_kimiStatusBarDefaultAdded',
   '_minimaxStatusBarDefaultAdded',
   '_portsStatusBarDefaultAdded',
+  '_promptStatusBarRetired',
   '_sortBySmartMigrated',
   '_workspaceStatusesDefaultOrderMigrated',
   '_workspaceStatusesDefaultVisualsMigrated',

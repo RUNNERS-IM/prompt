@@ -8,6 +8,7 @@ import { SettingsDisabledControlTooltip } from './SettingsDisabledControlTooltip
 import { normalizeColor } from '@/lib/terminal-theme'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export { FontAutocomplete } from './FontAutocomplete'
 export { ThemePicker } from './TerminalThemePicker'
@@ -171,7 +172,7 @@ export function SettingsSegmentedControl<T extends string | number>({
             }}
             className={cn(
               'rounded-sm text-center outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50',
-              size === 'sm' ? 'px-2.5 py-0.5 text-xs' : 'px-3 py-1 text-sm',
+              size === 'sm' ? 'px-2.5 py-0.5 text-xs' : 'px-3 py-1 text-[13px]',
               equalWidth && 'flex-1',
               active
                 ? 'bg-accent font-medium text-accent-foreground'
@@ -250,6 +251,14 @@ export function SettingsSubsectionHeader({
       {action ? <div className="shrink-0">{action}</div> : null}
     </div>
   )
+}
+
+/**
+ * Prompt: starts a box with no title above it (the first box of a page, or rows that need no
+ * heading). Draws nothing outside the Prompt box layout.
+ */
+export function SettingsUntitledGroupStart(): React.JSX.Element | null {
+  return PROMPT_SIMPLE_SETTINGS ? <div data-prompt-group-title="" aria-hidden="true" /> : null
 }
 
 type ColorFieldProps = {

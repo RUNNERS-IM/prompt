@@ -21,7 +21,7 @@ describe('Portuguese UI language load migration', () => {
   it.each([
     'system',
     'en',
-    'zh',
+    'zh-Hans',
     'ko',
     'ja',
     'es',

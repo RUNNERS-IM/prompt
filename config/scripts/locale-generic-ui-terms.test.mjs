@@ -26,7 +26,7 @@ describe('locale generic UI terms', () => {
         key: 'auto.components.mobile.MobileHero.a8fb43cf1c',
         enValue: 'Continue',
         localeValue: '继续',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('继续')
   })
@@ -73,7 +73,7 @@ describe('locale generic UI terms', () => {
         key: 'auto.components.settings.NetworkPane.tailscale',
         enValue: 'Connect over Tailscale',
         localeValue: '通过尾鳞连接',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('通过 Tailscale 连接')
   })
@@ -85,7 +85,7 @@ describe('locale generic UI terms', () => {
         key: 'auto.components.settings.AdvancedNetworkSettingsSection.823e0f15b1',
         enValue: 'Proxy URL for Orca network requests and local terminal subprocesses.',
         localeValue: '用于 Orca 网络请求和本地终端子进程的代理 URL。',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('用于 Orca 网络请求和本地终端子进程的代理 URL。')
   })
@@ -107,7 +107,7 @@ describe('locale generic UI terms', () => {
         key: 'auto.lib.agent.catalog.9e2a9bb87b',
         enValue: 'Continue',
         localeValue: '继续',
-        locale: 'zh'
+        locale: 'zh-Hans'
       })
     ).toBe('Continue')
   })

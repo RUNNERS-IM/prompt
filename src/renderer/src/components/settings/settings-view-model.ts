@@ -5,6 +5,7 @@ import type { SettingsStoreModel } from './use-settings-store-model'
 import type { SettingsInteractionController } from './use-settings-interaction-controller'
 import type { SettingsNavigationModel } from './use-settings-navigation-model'
 import { getSettingsNavGroupDefinitionsForSearch } from './settings-navigation-foundations'
+import { promptSettingsGroupTitle, promptSettingsHostSectionId } from '@/lib/prompt-hidden-settings'
 
 export function useSettingsNavigationActions(
   model: Pick<
@@ -95,7 +96,7 @@ export function buildSettingsViewModel(
   const generalNavGroups: SettingsNavGroup[] = generalNavGroupDefinitions
     .map((group) => ({
       id: group.id,
-      title: translate(group.titleKey, group.titleDefault),
+      title: promptSettingsGroupTitle(group.id, translate(group.titleKey, group.titleDefault)),
       sections: generalNavSections.filter((section) => section.group === group.id)
     }))
     .filter((group) => group.sections.length > 0 || group.id === 'setup')
@@ -112,7 +113,7 @@ export function buildSettingsViewModel(
       }
     })
   const isSectionMounted = (sectionId: string): boolean =>
-    navigation.neededSectionIds.has(sectionId)
+    navigation.neededSectionIds.has(promptSettingsHostSectionId(sectionId))
   const isFocusedShortcutsPane =
     model.activeSectionId === 'shortcuts' && model.settingsSearchQuery.trim() === ''
   const isFocusedSetupGuidePane =

@@ -213,7 +213,9 @@ export function registerAutoUpdaterHandlers({
     sendStatus({
       state: 'downloading',
       percent: Math.round(progress.percent),
-      version
+      version,
+      transferredBytes: progress.transferred,
+      totalBytes: progress.total
     })
   })
 

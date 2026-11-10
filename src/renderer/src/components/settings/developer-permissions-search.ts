@@ -1,6 +1,7 @@
 import { translate } from '@/i18n/i18n'
 import { translateSearchKeyword } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getDeveloperPermissionsPaneSearchEntries = createLocalizedCatalog(() => [
   {
@@ -35,50 +36,55 @@ export const getDeveloperPermissionsPaneSearchEntries = createLocalizedCatalog((
       )
     ]
   },
-  {
-    title: translate(
-      'auto.components.settings.developer.permissions.search.302c0c42f9',
-      'Microphone and Camera'
-    ),
-    description: translate(
-      'auto.components.settings.developer.permissions.search.6eca1636b7',
-      'Allow voice, transcription, webcam, and media capture tools.'
-    ),
-    keywords: [
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.ed7c12bdb4',
-        'microphone'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.259b829b84',
-        'camera'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.af122938a3',
-        'voice'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.b192432ef0',
-        'audio'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.a765112513',
-        'video'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.f061f08b7b',
-        'sox'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.1e6e27b202',
-        'ffmpeg'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.00e954319e',
-        'whisper'
-      )
-    ]
-  },
+  // Prompt hides the microphone, camera, USB and Bluetooth rows; Claude sessions do not use them.
+  ...(PROMPT_SIMPLE_SETTINGS
+    ? []
+    : [
+        {
+          title: translate(
+            'auto.components.settings.developer.permissions.search.302c0c42f9',
+            'Microphone and Camera'
+          ),
+          description: translate(
+            'auto.components.settings.developer.permissions.search.6eca1636b7',
+            'Allow voice, transcription, webcam, and media capture tools.'
+          ),
+          keywords: [
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.ed7c12bdb4',
+              'microphone'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.259b829b84',
+              'camera'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.af122938a3',
+              'voice'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.b192432ef0',
+              'audio'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.a765112513',
+              'video'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.f061f08b7b',
+              'sox'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.1e6e27b202',
+              'ffmpeg'
+            ),
+            ...translateSearchKeyword(
+              'auto.components.settings.developer.permissions.search.00e954319e',
+              'whisper'
+            )
+          ]
+        }
+      ]),
   {
     title: translate(
       'auto.components.settings.developer.permissions.search.39bb49e662',
@@ -144,10 +150,12 @@ export const getDeveloperPermissionsPaneSearchEntries = createLocalizedCatalog((
     ]
   },
   {
-    title: translate(
-      'auto.components.settings.developer.permissions.search.3363889768',
-      'LAN, USB, and Bluetooth'
-    ),
+    title: PROMPT_SIMPLE_SETTINGS
+      ? translate('auto.components.settings.DeveloperPermissionsPane.e7bb06007c', 'Local Network')
+      : translate(
+          'auto.components.settings.developer.permissions.search.3363889768',
+          'LAN, USB, and Bluetooth'
+        ),
     description: translate(
       'auto.components.settings.developer.permissions.search.acad3d4743',
       'Allow device tools and LAN access used from terminal sessions.'
@@ -163,14 +171,18 @@ export const getDeveloperPermissionsPaneSearchEntries = createLocalizedCatalog((
         'local network',
         { aliases: ['local-network'] }
       ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.c4a4a02ea4',
-        'usb'
-      ),
-      ...translateSearchKeyword(
-        'auto.components.settings.developer.permissions.search.e3fbc48083',
-        'bluetooth'
-      ),
+      ...(PROMPT_SIMPLE_SETTINGS
+        ? []
+        : translateSearchKeyword(
+            'auto.components.settings.developer.permissions.search.c4a4a02ea4',
+            'usb'
+          )),
+      ...(PROMPT_SIMPLE_SETTINGS
+        ? []
+        : translateSearchKeyword(
+            'auto.components.settings.developer.permissions.search.e3fbc48083',
+            'bluetooth'
+          )),
       ...translateSearchKeyword(
         'auto.components.settings.developer.permissions.search.78a10b826f',
         'bonjour'

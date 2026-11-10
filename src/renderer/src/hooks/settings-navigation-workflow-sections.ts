@@ -2,6 +2,7 @@ import { getArtifactsSettingsSearchEntries } from '@/components/settings/artifac
 import { getAutomationsSettingsSearchEntries } from '@/components/settings/automations-settings-search'
 import { getBrowserPaneCombinedSearchEntries } from '@/components/settings/browser-pane-search'
 import { getCommitMessageAiPaneSearchEntries } from '@/components/settings/commit-message-ai-search'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { getFloatingWorkspaceSearchEntries } from '@/components/settings/floating-workspace-search'
 import { getGitProviderApiBudgetSearchEntries } from '@/components/settings/git-provider-api-budget-search'
 import { getGitPaneSearchEntries } from '@/components/settings/git-search'
@@ -101,7 +102,7 @@ export function buildWorkflowSettingsSections(
       // Git AI Author lives inside Git, so search metadata covers both surfaces.
       searchEntries: [
         ...getGitPaneSearchEntries(),
-        ...getCommitMessageAiPaneSearchEntries(),
+        ...(PROMPT_SIMPLE_SETTINGS ? [] : getCommitMessageAiPaneSearchEntries()),
         ...getGitProviderApiBudgetSearchEntries()
       ],
       group: 'workflows'

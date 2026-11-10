@@ -6,6 +6,7 @@ import {
   SettingsSubsectionHeader
 } from './SettingsFormControls'
 import { SearchableSetting } from './SearchableSetting'
+import { SettingsGroupRows } from './settings-group-rows'
 import { translate } from '@/i18n/i18n'
 import { ShellIcon } from '../tab-bar/shell-icons'
 
@@ -43,7 +44,7 @@ export function TerminalWindowsShellSection({
         )}
       />
 
-      <div className="divide-y divide-border/40">
+      <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
           className="@container"
           title={translate('auto.components.settings.TerminalPane.27e301f22c', 'Default Shell')}
@@ -147,7 +148,7 @@ export function TerminalWindowsShellSection({
             }
           />
         </SearchableSetting>
-      </div>
+      </SettingsGroupRows>
     </section>
   )
 }

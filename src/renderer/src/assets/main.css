@@ -3426,3 +3426,34 @@ html.native-shell .app-layout {
   white-space: nowrap;
   pointer-events: none;
 }
+
+/* Prompt: Arabic keeps the left-to-right layout; each text run picks its own direction so
+   sentence-end punctuation stays at the end. Plaintext would also right-align each Arabic
+   paragraph, so text stays left unless a centered or right-aligned area says otherwise.
+   Zero specificity so explicit classes win. Terminals keep their own rendering. */
+:where(:root:lang(ar))
+  :where(p, span, div, label, h1, h2, h3, h4, button, a, li, td, th, input, textarea):where(
+    :not(.xterm, .xterm *)
+  ) {
+  unicode-bidi: plaintext;
+}
+/* Buttons keep their own centering. */
+:where(:root:lang(ar))
+  :where(p, span, div, label, h1, h2, h3, h4, a, li, td, th, input, textarea):where(
+    :not(
+      .xterm,
+      .xterm *,
+      .text-center,
+      .text-center *,
+      .text-right,
+      .text-right *,
+      .text-end,
+      .text-end *
+    )
+  ) {
+  text-align: left;
+}
+/* Prompt: placeholders pick their own direction too, so an Arabic hint ends with its ellipsis. */
+:where(:root:lang(ar)) :where(input, textarea):where(:not(.xterm *))::placeholder {
+  unicode-bidi: plaintext;
+}

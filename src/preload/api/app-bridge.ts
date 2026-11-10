@@ -26,6 +26,8 @@ export const appApi = {
   getIdentity: (): Promise<AppIdentity> => ipcRenderer.invoke('app:getIdentity'),
   getWindowsAdministratorStatus: (): Promise<boolean | null> =>
     ipcRenderer.invoke('app:getWindowsAdministratorStatus'),
+  getOpenAtLogin: (): Promise<boolean> => ipcRenderer.invoke('app:getOpenAtLogin'),
+  setOpenAtLogin: (on: boolean): Promise<boolean> => ipcRenderer.invoke('app:setOpenAtLogin', on),
   restartAsAdministrator: (): Promise<void> =>
     prepareAndInvokeAppRestart(
       window,

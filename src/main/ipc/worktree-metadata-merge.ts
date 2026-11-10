@@ -15,7 +15,10 @@ export function mergeWorktree(
   const branchShort = git.branch.replace(/^refs\/heads\//, '')
   const creatorProvenance = normalizeWorkspaceCreatorProvenance(meta?.creatorProvenance)
   const worktreeId = `${repoId}::${git.path}`
-  const automaticDisplayName = branchShort || defaultDisplayName || basename(git.path)
+  // Prompt: a linked worktree without a branch (git worktree add --detach) is named after its folder,
+  // never the project, so it cannot read as a second copy of the project (decision 2026-11-05, 3).
+  const automaticDisplayName =
+    branchShort || (git.isMainWorktree ? defaultDisplayName : undefined) || basename(git.path)
   // CLI-created labels predate displayNameIsPinned but are still explicit names.
   const legacyCliDisplayNameIsPinned =
     meta?.displayNameIsPinned === undefined && meta?.cliProvenance?.kind === 'created-by-cli'

@@ -73,11 +73,11 @@ it.each([
   {
     platform: 'Linux',
     preferences: ['zh_CN.UTF-8', 'zh_CN', 'zh', 'C'],
-    locale: 'zh',
+    locale: 'zh-Hans',
     status: 'supported'
   },
   { platform: 'Linux C-only', preferences: ['C.UTF-8', 'C'], locale: 'en', status: 'unknown' },
-  { platform: 'unsupported', preferences: ['it-IT', 'fr-FR'], locale: 'en', status: 'unsupported' }
+  { platform: 'unsupported', preferences: ['sv-SE', 'fr-FR'], locale: 'en', status: 'unsupported' }
 ])('handles $platform preference lists', async ({ preferences, locale, status }) => {
   getPreferredSystemLanguages.mockReturnValue(preferences)
   const { getSystemLanguageDetection } = await import('./system-language')

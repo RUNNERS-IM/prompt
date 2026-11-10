@@ -2,15 +2,24 @@ import type { TOptions } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 import enRuntimeRequired from './en-runtime-required.json'
+import arCatalogUrl from './locales/ar.json?url'
 import deCatalogUrl from './locales/de.json?url'
 import esCatalogUrl from './locales/es.json?url'
+import fiCatalogUrl from './locales/fi.json?url'
 import frCatalogUrl from './locales/fr.json?url'
+import hiCatalogUrl from './locales/hi.json?url'
+import idCatalogUrl from './locales/id.json?url'
+import itCatalogUrl from './locales/it.json?url'
 import jaCatalogUrl from './locales/ja.json?url'
 import koCatalogUrl from './locales/ko.json?url'
+import nlCatalogUrl from './locales/nl.json?url'
+import plCatalogUrl from './locales/pl.json?url'
 import ptCatalogUrl from './locales/pt.json?url'
 import ruCatalogUrl from './locales/ru.json?url'
+import thCatalogUrl from './locales/th.json?url'
 import trCatalogUrl from './locales/tr.json?url'
-import zhCatalogUrl from './locales/zh.json?url'
+import viCatalogUrl from './locales/vi.json?url'
+import zhHansCatalogUrl from './locales/zh-Hans.json?url'
 import zhHantCatalogUrl from './locales/zh-Hant.json?url'
 import {
   advanceTranslationResourceVersion,
@@ -27,15 +36,24 @@ import { applyPromptLocaleOverrides } from '../../../shared/prompt-locale-overri
 
 // Fetch catalogs as data: Chromium caches rejected module imports for the document's lifetime.
 const NON_DEFAULT_LOCALE_URLS: Record<Exclude<SupportedUiLocale, 'en'>, string> = {
+  ar: arCatalogUrl,
   de: deCatalogUrl,
   es: esCatalogUrl,
+  fi: fiCatalogUrl,
   fr: frCatalogUrl,
+  hi: hiCatalogUrl,
+  id: idCatalogUrl,
+  it: itCatalogUrl,
   ja: jaCatalogUrl,
   ko: koCatalogUrl,
+  nl: nlCatalogUrl,
+  pl: plCatalogUrl,
   pt: ptCatalogUrl,
   ru: ruCatalogUrl,
+  th: thCatalogUrl,
   tr: trCatalogUrl,
-  zh: zhCatalogUrl,
+  vi: viCatalogUrl,
+  'zh-Hans': zhHansCatalogUrl,
   'zh-Hant': zhHantCatalogUrl
 }
 
@@ -83,6 +101,12 @@ export const i18n = orcaI18n.i18n
 i18n.store.on('added', advanceTranslationResourceVersion)
 i18n.store.on('removed', advanceTranslationResourceVersion)
 i18n.on('languageChanged', advanceTranslationResourceVersion)
+// Prompt: <html lang> lets CSS fix Arabic punctuation order while the layout stays left to right.
+i18n.on('languageChanged', (language) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = language
+  }
+})
 
 // Re-rendered chrome resolves hundreds of option-free strings per workspace switch; they only change with language or resources.
 const PLAIN_TRANSLATION_CACHE_LIMIT = 5000

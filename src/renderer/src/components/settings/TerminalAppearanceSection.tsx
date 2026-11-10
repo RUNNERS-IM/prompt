@@ -37,6 +37,7 @@ import type { UseWarpThemeImportReturn } from './useWarpThemeImport'
 import { isWebClientLocation } from '@/lib/web-client-location'
 import ghosttyIcon from '../../../../../resources/ghostty.svg'
 import { translate } from '@/i18n/i18n'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 type TerminalAppearanceSectionProps = {
   settings: GlobalSettings
@@ -101,13 +102,17 @@ export function TerminalAppearanceSection({
   const preferredThemeTarget = getPreferredThemeTarget(darkThemeTargetScore, lightThemeTargetScore)
 
   // Filter each advanced group independently so search cannot leave empty headers.
-  const typographyMatches = matchesSettingsSearch(
-    searchQuery,
-    getTerminalAdvancedTypographySearchEntries()
-  )
-  const cursorMatches = matchesSettingsSearch(searchQuery, getTerminalCursorSearchEntries())
-  const paneMatches = matchesSettingsSearch(searchQuery, getTerminalPaneAppearanceSearchEntries())
-  const windowMatches = matchesSettingsSearch(searchQuery, getTerminalWindowSearchEntries())
+  // Prompt: 글자 세부 · 커서 · 패널 · 창 묶음은 숨겨 지금 값 그대로 쓴다.
+  const typographyMatches =
+    !PROMPT_SIMPLE_SETTINGS &&
+    matchesSettingsSearch(searchQuery, getTerminalAdvancedTypographySearchEntries())
+  const cursorMatches =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, getTerminalCursorSearchEntries())
+  const paneMatches =
+    !PROMPT_SIMPLE_SETTINGS &&
+    matchesSettingsSearch(searchQuery, getTerminalPaneAppearanceSearchEntries())
+  const windowMatches =
+    !PROMPT_SIMPLE_SETTINGS && matchesSettingsSearch(searchQuery, getTerminalWindowSearchEntries())
   const themeCatalogMatches = matchesSettingsSearch(searchQuery, themeCatalogSearchEntries)
   const previewAdvancedMatches = cursorMatches || paneMatches || windowMatches
   const showThemeCatalog = !isSearching || themeCatalogMatches || previewAdvancedMatches
@@ -169,69 +174,139 @@ export function TerminalAppearanceSection({
     </AppearanceAdvancedDisclosure>
   ) : null
 
+  const typographyHeader = (
+    <SettingsSubsectionHeader
+      className="items-center"
+      title={translate(
+        'auto.components.settings.TerminalAppearanceSection.048aac8a64',
+        'Terminal Typography'
+      )}
+      action={
+        showGhosttyImport ? (
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1.5"
+            onClick={() => void ghostty.handleClick()}
+          >
+            <img src={ghosttyIcon} alt="" aria-hidden="true" className="size-4" />
+            {translate(
+              'auto.components.settings.TerminalAppearanceSection.855a76343a',
+              'Import from Ghostty'
+            )}
+          </Button>
+        ) : null
+      }
+    />
+  )
+  const fontSizeRow = (
+    <TerminalFontSizeSetting
+      settings={settings}
+      updateSettings={updateSettings}
+      forceVisible={forceVisiblePrimary}
+    />
+  )
+  const fontFamilyRow = (
+    <SearchableSetting
+      title={translate(
+        'auto.components.settings.TerminalAppearanceSection.a408266e67',
+        'Font Family'
+      )}
+      description={terminalTypographyEntries[1]?.description}
+      keywords={terminalTypographyEntries[1]?.keywords ?? ['terminal', 'typography', 'font']}
+      forceVisible={forceVisiblePrimary}
+    >
+      <SettingsRow
+        label={translate(
+          'auto.components.settings.TerminalAppearanceSection.a408266e67',
+          'Font Family'
+        )}
+        control={
+          <FontAutocomplete
+            value={settings.terminalFontFamily}
+            suggestions={terminalFontSuggestions}
+            onRequestSuggestions={onRequestFontSuggestions}
+            onChange={(value) => updateSettings({ terminalFontFamily: value })}
+            onPreviewFontFamily={setPreviewFontFamily}
+          />
+        }
+      />
+    </SearchableSetting>
+  )
+  const importModals = (
+    <>
+      {showDesktopThemeImports ? (
+        <>
+          <GhosttyImportModal
+            open={ghostty.open}
+            onOpenChange={ghostty.handleOpenChange}
+            preview={ghostty.preview}
+            loading={ghostty.loading}
+            onApply={ghostty.handleApply}
+            applied={ghostty.applied}
+            applyError={ghostty.applyError}
+          />
+          <WarpThemeImportModal
+            open={warpThemes.open}
+            mode={warpThemes.mode}
+            preview={warpThemes.preview}
+            loading={warpThemes.loading}
+            desktopOnly={warpThemes.desktopOnly}
+            applyError={warpThemes.applyError}
+            selectedThemeIds={warpThemes.selectedThemeIds}
+            handlePreviewSource={warpThemes.handlePreviewSource}
+            handleToggleTheme={warpThemes.handleToggleTheme}
+            handleToggleAll={warpThemes.handleToggleAll}
+            handleApply={warpThemes.handleApply}
+            handleOpenChange={warpThemes.handleOpenChange}
+          />
+        </>
+      ) : null}
+    </>
+  )
+
+  if (PROMPT_SIMPLE_SETTINGS) {
+    // Prompt: every group is its own titled box; nothing sits behind an Advanced toggle.
+    return (
+      <>
+        {showPrimaryTypography ? (
+          <section>
+            {typographyHeader}
+            {fontSizeRow}
+            {fontFamilyRow}
+          </section>
+        ) : null}
+        {showThemeCatalog ? (
+          <TerminalThemeCatalogSection
+            key={`theme-catalog-${preferredThemeTarget ?? 'manual'}`}
+            settings={settings}
+            systemPrefersDark={systemPrefersDark}
+            themeSearch={themeSearch}
+            setThemeSearch={setThemeSearch}
+            updateSettings={updateSettings}
+            previewFontFamily={previewFontFamily}
+            importedHighlightSignal={warpThemes.importSignal}
+            warpThemes={warpThemes}
+            showThemeImport={showDesktopThemeImports}
+            preferredTarget={preferredThemeTarget}
+          />
+        ) : null}
+        {importModals}
+      </>
+    )
+  }
+
   return (
     <div className="space-y-5">
       {/* Preview grids stack full-width because this expanded column stays narrower than xl. */}
       {showPrimaryTypography ? (
         <section className="space-y-3 pt-2">
-          <SettingsSubsectionHeader
-            className="items-center"
-            title={translate(
-              'auto.components.settings.TerminalAppearanceSection.048aac8a64',
-              'Terminal Typography'
-            )}
-            action={
-              showGhosttyImport ? (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-1.5"
-                  onClick={() => void ghostty.handleClick()}
-                >
-                  <img src={ghosttyIcon} alt="" aria-hidden="true" className="size-4" />
-                  {translate(
-                    'auto.components.settings.TerminalAppearanceSection.855a76343a',
-                    'Import from Ghostty'
-                  )}
-                </Button>
-              ) : null
-            }
-          />
+          {typographyHeader}
 
           <div className="ml-4 divide-y divide-border/40 border-y border-border/40">
-            <TerminalFontSizeSetting
-              settings={settings}
-              updateSettings={updateSettings}
-              forceVisible={forceVisiblePrimary}
-            />
+            {fontSizeRow}
 
-            <SearchableSetting
-              title={translate(
-                'auto.components.settings.TerminalAppearanceSection.a408266e67',
-                'Font Family'
-              )}
-              description={terminalTypographyEntries[1]?.description}
-              keywords={
-                terminalTypographyEntries[1]?.keywords ?? ['terminal', 'typography', 'font']
-              }
-              forceVisible={forceVisiblePrimary}
-            >
-              <SettingsRow
-                label={translate(
-                  'auto.components.settings.TerminalAppearanceSection.a408266e67',
-                  'Font Family'
-                )}
-                control={
-                  <FontAutocomplete
-                    value={settings.terminalFontFamily}
-                    suggestions={terminalFontSuggestions}
-                    onRequestSuggestions={onRequestFontSuggestions}
-                    onChange={(value) => updateSettings({ terminalFontFamily: value })}
-                    onPreviewFontFamily={setPreviewFontFamily}
-                  />
-                }
-              />
-            </SearchableSetting>
+            {fontFamilyRow}
           </div>
 
           {showTypographyAdvancedDisclosure ? (
@@ -264,33 +339,7 @@ export function TerminalAppearanceSection({
         />
       ) : null}
 
-      {showDesktopThemeImports ? (
-        <>
-          <GhosttyImportModal
-            open={ghostty.open}
-            onOpenChange={ghostty.handleOpenChange}
-            preview={ghostty.preview}
-            loading={ghostty.loading}
-            onApply={ghostty.handleApply}
-            applied={ghostty.applied}
-            applyError={ghostty.applyError}
-          />
-          <WarpThemeImportModal
-            open={warpThemes.open}
-            mode={warpThemes.mode}
-            preview={warpThemes.preview}
-            loading={warpThemes.loading}
-            desktopOnly={warpThemes.desktopOnly}
-            applyError={warpThemes.applyError}
-            selectedThemeIds={warpThemes.selectedThemeIds}
-            handlePreviewSource={warpThemes.handlePreviewSource}
-            handleToggleTheme={warpThemes.handleToggleTheme}
-            handleToggleAll={warpThemes.handleToggleAll}
-            handleApply={warpThemes.handleApply}
-            handleOpenChange={warpThemes.handleOpenChange}
-          />
-        </>
-      ) : null}
+      {importModals}
     </div>
   )
 }

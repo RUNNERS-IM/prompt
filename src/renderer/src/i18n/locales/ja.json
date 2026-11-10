@@ -40,6 +40,247 @@
       "resume": "続きを開く",
       "showAll": "すべて表示…",
       "launchFailed": "この設定で Claude を開始できませんでした。"
+    },
+    "about": {
+      "menuLabel": "{{name}}について",
+      "notices": "オープンソースライセンス情報",
+      "versionLine": "バージョン {{version}} · 無料",
+      "website": "Web サイト",
+      "noticesMissing": "ライセンス情報ファイルを読み込めませんでした。",
+      "chromiumLicenses": "Chromium のライセンスを開く",
+      "close": "閉じる"
+    },
+    "windows": {
+      "newWindow": "新規ウィンドウ",
+      "rememberTitle": "開いているウィンドウを記憶",
+      "rememberDescription": "Prompt の起動時に、すべてのウィンドウをタブ、サイズ、位置とともに再度開きます。",
+      "openInNewWindow": "新規ウィンドウで開く",
+      "windowLabelNamed": "ウィンドウ {{index}} — {{name}}",
+      "windowLabel": "ウィンドウ {{index}}",
+      "mainWindowSuffix": "(メイン)",
+      "moveTabToWindow": "タブをウィンドウに移動"
+    },
+    "crashReport": {
+      "title": "クラッシュを報告",
+      "description": "メモとバージョンを入力済みの新しい GitHub Issue を開きます。GitHub アカウントが必要です。",
+      "cancel": "キャンセル",
+      "open": "GitHub で開く",
+      "opened": "GitHub の Issue ページを開きました。レポートはそこで送信すると提出されます。"
+    },
+    "update": {
+      "titleVersion": "新バージョン {{version}}",
+      "subtitleWithCurrent": "現在のバージョン: {{current}} · インストールすると Prompt が再起動します",
+      "subtitle": "インストールすると Prompt が再起動します",
+      "dismiss": "閉じる",
+      "releaseNotes": "変更内容",
+      "later": "後で",
+      "install": "インストール",
+      "downloadingTitle": "バージョン {{version}} をダウンロード中",
+      "downloadingSubtitle": "ダウンロードが完了すると Prompt が再起動します",
+      "restartFailed": "アップデートをインストールするための再起動に失敗しました。Prompt を終了して開き直し、もう一度お試しください。",
+      "installerFailed": "アップデートのインストーラーを起動できませんでした。Prompt は開いたままです。"
+    },
+    "onboarding": {
+      "beforeYouStart": {
+        "title": "開始する前に",
+        "subtitle": "Prompt は Claude を使用します。Claude が確認なしで操作してよいかを選択してください。",
+        "tooltip": "Yolo モード"
+      },
+      "close": "閉じる"
+    },
+    "claudeModel": {
+      "rejected": "Claude は以前のモデルを維持しました。",
+      "submenu": "モデル",
+      "badgeTitle": "モデル: {{model}}(クリックして変更)"
+    },
+    "defaultModel": {
+      "title": "デフォルトモデル",
+      "description": "タブとサイドバーの行には、セッションが別のモデルで実行されている場合にのみモデル名が表示されます。タブまたは行にカーソルを合わせるとモデルを確認できます。"
+    },
+    "sessionCard": {
+      "model": "モデル",
+      "status": "ステータス",
+      "task": "タスク",
+      "folder": "フォルダー",
+      "subagents": "サブ Agent",
+      "subagentsRunning": "{{count}} 件実行中",
+      "minutes": "{{m}}分",
+      "hours": "{{h}}時間",
+      "hoursMinutes": "{{h}}時間{{m}}分",
+      "justNow": "{{status}} · たった今",
+      "ongoing": "{{status}} · {{duration}}",
+      "ago": "{{status}} · {{duration}}前"
+    },
+    "settings": {
+      "claude": {
+        "launchGroup": "新規セッション",
+        "permissionDescription": "確認なしで Claude に許可する操作です。",
+        "sessionGroup": "Claude セッション",
+        "accountsGroup": "アカウント",
+        "usageGroup": "使用状況",
+        "usageSearchDescription": "Agent 数と、Claude のトークン、モデル、セッションの使用状況。",
+        "title": "Claude",
+        "description": "Claude アカウント、新規セッションの開始方法、使用状況。"
+      },
+      "appearance": {
+        "trayGroup": "システムトレイ",
+        "terminalWindowGroup": "ターミナルウィンドウ",
+        "title": "外観",
+        "description": "テーマ、言語、ズーム、フォント、ターミナルの色。"
+      },
+      "cli": {
+        "installDescriptionMac": "`prompt` と `orca` を /usr/local/bin に登録します。",
+        "notInstalled": "他のターミナルから Prompt を使用するには、{{path}} を登録します。"
+      },
+      "advanced": {
+        "permissionsGroup": "macOS の権限",
+        "experimentalGroup": "実験的機能",
+        "sessionSearchGroup": "Agent セッション検索",
+        "title": "詳細設定",
+        "description": "ネットワーク、macOS の権限、セッション検索、実験的機能。"
+      },
+      "git": {
+        "branchesGroup": "ブランチとワークスペース",
+        "apiBudgetGroup": "API 使用制限",
+        "integrationsGroup": "連携",
+        "title": "Git",
+        "description": "ブランチ、ソース管理の操作、GitHub · GitLab の接続。"
+      },
+      "notifications": {
+        "alertsGroup": "通知",
+        "soundGroup": "サウンド",
+        "visibleScreenGroup": "表示中の画面"
+      },
+      "sidebarTitle": "Prompt 設定",
+      "terminal": {
+        "scrollbackKeysGroup": "スクロールバックとキー",
+        "shellArgsGroup": "シェル起動引数"
+      },
+      "group": {
+        "more": "その他"
+      },
+      "general": {
+        "appGroup": "アプリ",
+        "openAtLoginDescription": "Mac にログインしたときに Prompt をメニューバーに表示します。",
+        "autoCheckUpdatesDescription": "新しいバージョンが出たらお知らせします。",
+        "menuBarIconDescription": "メニューバーに Prompt のアイコンを表示します。"
+      },
+      "about": {
+        "title": "情報",
+        "description": "バージョン、RUNNERS のアプリ、オープンソースの表示。"
+      }
+    },
+    "mobile": {
+      "directOnly": "Prompt ではリレーがオフです。スマートフォンは、このコンピューターと同じ Wi-Fi 上、または Tailscale 経由でのみ接続できます。"
+    },
+    "projectRemoval": {
+      "wholeProject": "これは 1 つのセッションだけでなく、プロジェクト全体を削除します。",
+      "runningSessions": "その中で実行中の {{count}} 件のセッションがすべて停止します。",
+      "filesVmRecipe": "VM レシピによって、環境とそのファイルを完全に削除するかどうかが決まります。",
+      "filesSsh": "フォルダーとファイルは {{host}} に残ります。元に戻すには、その SSH ホストを再度追加してください。",
+      "filesLocal": "フォルダーとファイルはそのまま残ります。",
+      "closeOneSession": "1 つのセッションだけを閉じるには、その行の × を使用してください。",
+      "title": "プロジェクト「{{name}}」を一覧から削除しますか？",
+      "confirm": "プロジェクトを削除",
+      "menuItem": "プロジェクトを一覧から削除…"
+    },
+    "computerPicker": {
+      "connected": "接続済み",
+      "connecting": "接続中",
+      "offline": "オフライン",
+      "thisMac": "(この Mac)",
+      "thisComputer": "このコンピューター",
+      "label": "コンピューター",
+      "add": "コンピューターを追加…",
+      "share": "このコンピューターを共有…",
+      "shareTitle": "このコンピューターを共有"
+    },
+    "sessionRow": {
+      "helpers": "ヘルパー {{count}}",
+      "tool": {
+        "command": "コマンドを実行中",
+        "read": "ファイルを読み込み中",
+        "edit": "ファイルを編集中",
+        "search": "ファイルを検索中",
+        "web": "Web を検索中",
+        "helper": "ヘルパーに作業を引き継ぎ中",
+        "plan": "プランを更新中",
+        "other": "{{tool}} を使用中"
+      },
+      "noUpdateMinutes": "{{count}} 分間更新なし · 停止している可能性があります",
+      "noUpdateHours": "{{count}} 時間更新なし · 停止している可能性があります",
+      "noUpdateDays": "{{count}} 日間更新なし · 停止している可能性があります",
+      "monitoring": "バックグラウンドタスクを監視中",
+      "done": "完了 · 入力待ち",
+      "failure": {
+        "signIn": "サインインが必要です",
+        "usageLimit": "使用制限に達しました",
+        "overloaded": "サーバー混雑中"
+      }
+    },
+    "sessionMove": {
+      "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",
+      "cancelNoSession": "このセッションには、移動できる Claude の会話がまだありません。",
+      "cancelSeveral": "このタブには複数の Claude の会話があるため、どれを移動するか判断できません。",
+      "hintCopy": "ここにコピー",
+      "hintMove": "ここに移動 · ⌥でコピー",
+      "hintMoveShell": "ここに移動",
+      "cancel": "キャンセル",
+      "movingTo": "「{{name}}」に移動中",
+      "alreadyMoving": "このセッションはすでに移動中です。",
+      "cancelled": "「{{name}}」への移動をキャンセルしました。セッションは元の場所に残ります。",
+      "waiting": "このセッションは作業中です。完了すると「{{name}}」に移動します。",
+      "stillWorking": "セッションが作業を続けたため、移動されませんでした。",
+      "noSession": "このセッションには、移動できる Claude の会話がありません。",
+      "opening": "「{{name}}」でセッションを開いています…",
+      "copyFailed": "セッションを移動できませんでした。",
+      "notStarted": "「{{name}}」で会話を開けなかったため、元のタブを保持しました。",
+      "copiedPinned": "「{{name}}」で開きました。元のタブはピン留めされているため、保持されました。",
+      "moved": "「{{name}}」に移動しました",
+      "undo": "元に戻す"
+    },
+    "sidebar": {
+      "terminal": "ターミナル",
+      "openWorkspace": "ターミナルを開く"
+    },
+    "skills": {
+      "commandCount": "{{count}} 件のコマンド",
+      "mySkills": "マイスキル",
+      "commands": "コマンド"
+    },
+    "closeSession": {
+      "titleNamed": "「{{name}}」を閉じますか？",
+      "titleUnnamed": "このセッションを閉じますか？",
+      "commandDescription": "実行中のコマンドは停止します。",
+      "agentDescription": "作業は停止します。会話は保持されるため、後で再開できます。",
+      "dontAskAgain": "今後は確認しない",
+      "confirm": "閉じる"
+    },
+    "timeAgo": {
+      "now": "今",
+      "minutes": "{{value}}分",
+      "hours": "{{value}}時間",
+      "days": "{{value}}日"
+    },
+    "terminalLinkHint": {
+      "actionsPrefix": "クリックで操作を表示、",
+      "fileOpen": "{{mod}}+クリックで開く、{{shiftMod}}+クリックでデフォルトのアプリで開く",
+      "actionsOrPrefix": "クリックで操作を表示、または ",
+      "orcaFileOpen": "{{mod}}+クリックで Orca で開く",
+      "urlInvertsToOrca": "{{mod}}+クリックで開く、{{shiftMod}}+クリックで Orca で開く",
+      "urlSystemBrowser": "{{mod}}+クリックで開く、{{shiftMod}}+クリックでシステムブラウザで開く",
+      "systemBrowserOnly": "{{shiftMod}}+クリックでシステムブラウザで開く",
+      "clickSystemBrowser": "クリックでシステムブラウザで開く",
+      "orcaBrowserOnly": "{{shiftMod}}+クリックで Orca で開く",
+      "switchWorkspace": "{{mod}}+クリックでワークスペースを切り替え",
+      "switchWorkspaceFinder": "{{mod}}+クリックでワークスペースを切り替え、{{shiftMod}}+クリックで Finder で開く",
+      "switchWorkspaceFolder": "{{mod}}+クリックでワークスペースを切り替え、{{shiftMod}}+クリックでフォルダーを開く"
+    },
+    "terminalNotice": {
+      "hiddenBacklog": "バックログが大きくなりすぎたため、Orca は非表示のターミナル出力をスキップしました。",
+      "foregroundBurst": "バックログが大きくなりすぎたため、Orca はターミナル出力のバーストをスキップしました。",
+      "restoreUnavailable": "メインのリカバリーが利用できなかったため、Orca は非表示のターミナル出力をスキップしました。",
+      "noHostImage": "Orca はこのターミナルの履歴をホストから復元できませんでした。"
     }
   },
   "agentLaunch": {
@@ -186,7 +427,16 @@
         "portuguese": "Português (Brasil)",
         "russian": "Русский",
         "turkish": "Türkçe",
-        "german": "Deutsch"
+        "german": "Deutsch",
+        "arabic": "العربية",
+        "finnish": "Suomi",
+        "hindi": "हिन्दी",
+        "indonesian": "Bahasa Indonesia",
+        "italian": "Italiano",
+        "dutch": "Nederlands",
+        "polish": "Polski",
+        "thai": "ไทย",
+        "vietnamese": "Tiếng Việt"
       },
       "statusBar": {
         "claudeToggleDescription": "アクティブなワークスペースの Claude トークンとコストの使用状況を表示します。",
@@ -590,7 +840,9 @@
       "body": "Orca はシステムトレイで実行中です"
     },
     "activityWaiting": "Orca - アクティビティ待機中",
-    "activityWaitingSuffix": "件のアクティビティが待機中"
+    "activityWaitingSuffix": "件のアクティビティが待機中",
+    "openAtLogin": "ログイン時に開く",
+    "autoCheckUpdates": "アップデートを自動的に確認"
   },
   "worktreeJumpPalette": {
     "matchLabel": {
@@ -5220,6 +5472,15 @@
         "managedRemoval": {
           "removed": "{{removed}} 件を削除しました。",
           "removedPreserved_other": "{{removed}} 件を削除 · 変更済みのスキル {{count}} 件を保持しました。"
+        },
+        "SkillQuickActions": {
+          "command": "コマンド",
+          "path": "パス",
+          "copyCommand": "コマンドをコピー",
+          "commandCopied": "{{command}} をコピーしました",
+          "copiedForChat": "{{command}} をコピーしました。チャット欄に貼り付けてください。",
+          "copiedNoTerminal": "開いているターミナルがないため、{{command}} をコピーしました。",
+          "insert": "ターミナルに {{command}} を入力"
         }
       },
       "sidebar": {

@@ -38,6 +38,7 @@ import {
 import { translate } from '@/i18n/i18n'
 import { searchKeywords, translateSearchKeyword, uniqueKeywords } from './settings-search-keywords'
 import { createLocalizedCatalog } from '@/i18n/localized-catalog'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 function buildAgentSettingsKeywords(): string[] {
   const keywords = searchKeywords([
@@ -65,7 +66,10 @@ function buildAgentSettingsKeywords(): string[] {
     }
   ])
 
-  for (const agent of getAgentCatalog()) {
+  const agents = PROMPT_SIMPLE_SETTINGS
+    ? getAgentCatalog().filter((agent) => agent.id === 'claude')
+    : getAgentCatalog()
+  for (const agent of agents) {
     keywords.push(...expandAgentSearchText(agent.id), ...expandAgentSearchText(agent.label))
     keywords.push(...expandAgentSearchText(agent.cmd))
   }
@@ -93,6 +97,7 @@ const AGENT_AWAKE_SEARCH_ENTRY_ID = 'agent-awake'
 const AGENT_WORKSPACE_TRUST_SEARCH_ENTRY_ID = 'agent-workspace-trust'
 const AGENT_RUNTIME_SEARCH_ENTRY_ID = 'agent-runtime'
 const CODEX_TERMINAL_SERVER_ISOLATION_SEARCH_ENTRY_ID = 'codex-terminal-server-isolation'
+const CODEX_HISTORY_SHARING_SEARCH_ENTRY_ID = 'codex-history-sharing'
 
 const getAllAgentsPaneSearchEntries = createLocalizedCatalog(() => [
   {
@@ -149,6 +154,7 @@ const getAllAgentsPaneSearchEntries = createLocalizedCatalog(() => [
   },
   {
     title: getCodexHistorySharingTitle(),
+    id: CODEX_HISTORY_SHARING_SEARCH_ENTRY_ID,
     description: getCodexHistorySharingDescription(),
     keywords: getCodexHistorySharingSearchKeywords()
   },
@@ -215,8 +221,11 @@ export function getAgentsPaneSearchEntries({
   if (!includeAgentWorkspaceTrust) {
     hiddenIds.add(AGENT_WORKSPACE_TRUST_SEARCH_ENTRY_ID)
   }
-  if (!includeCodexTerminalServerIsolation) {
+  if (!includeCodexTerminalServerIsolation || PROMPT_SIMPLE_SETTINGS) {
     hiddenIds.add(CODEX_TERMINAL_SERVER_ISOLATION_SEARCH_ENTRY_ID)
+  }
+  if (PROMPT_SIMPLE_SETTINGS) {
+    hiddenIds.add(CODEX_HISTORY_SHARING_SEARCH_ENTRY_ID)
   }
   return getAllAgentsPaneSearchEntries().filter(
     (entry) => !('id' in entry) || !hiddenIds.has(entry.id)

@@ -182,6 +182,7 @@ patchedDependencies:
   '@xterm/addon-serialize@0.15.0-beta.301': b35533fe252e7e45433150170348889f4e08a6c17f7017ac34ea694d831fec7f
   '@xterm/addon-webgl@0.20.0-beta.300': 5349718f2c19d9319a81552580bf9618ded9b00f3707a5c6cdbbae1910849cd9
   '@xterm/xterm@6.1.0-beta.304': 6a96a556cb32825d4084043f7e18fe16203686d8352affd2f01613c0b464a6ed
+  electron-updater@6.8.10: c2c0a63d767e63185a5cff3ea9e400c571d42d395a341d9c79ef904fef6c3219
   i18next-cli@1.74.2: 2ee32eef742615cd133e1a6940f027deb3723a8430bb7953bba3a6769b0aac47
   lint-staged@16.4.0: 7333b3837f80a7fbd045964db6d76ba4fc118e49134bdbabb00585b6b7b60673
   monaco-editor@0.55.1: 53b71f7d8a7c00b76ffdb73ce83d18e31692f193f5fafa6a390e48f5b3fdd636
@@ -221,7 +222,7 @@ importers:
         version: 0.39.4
       electron-updater:
         specifier: ^6.8.10
-        version: 6.8.10(electron@43.8.1(supports-color@7.2.0))(supports-color@7.2.0)
+        version: 6.8.10(patch_hash=c2c0a63d767e63185a5cff3ea9e400c571d42d395a341d9c79ef904fef6c3219)(electron@43.8.1(supports-color@7.2.0))(supports-color@7.2.0)
       fflate:
         specifier: 0.8.3
         version: 0.8.3
@@ -11910,7 +11911,7 @@ snapshots:
 
   electron-to-chromium@1.5.422: {}
 
-  electron-updater@6.8.10(electron@43.8.1(supports-color@7.2.0))(supports-color@7.2.0):
+  electron-updater@6.8.10(patch_hash=c2c0a63d767e63185a5cff3ea9e400c571d42d395a341d9c79ef904fef6c3219)(electron@43.8.1(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:
       builder-util-runtime: 9.7.0(supports-color@7.2.0)
       fs-extra: 10.1.0

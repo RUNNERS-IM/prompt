@@ -124,6 +124,8 @@ export const mainProcessState = {
   recoveryReloadInFlight: createWebContentsTimedFlag(),
   // Retain Settings clicks until the renderer pulls after listener mount.
   pendingOpenSettings: createWebContentsTimedFlag(),
+  // Prompt: the app menu's About item opens Settings › About; kept the same way as Settings clicks.
+  pendingOpenAboutSettings: createWebContentsTimedFlag(),
   // Why: a confirmed Quit Completely can open the window; its renderer pulls this one-shot on mount.
   pendingQuitAndStopAllSessions: createWebContentsTimedFlag(),
   skillShareDeepLinks: new SkillShareDeepLinkState(),

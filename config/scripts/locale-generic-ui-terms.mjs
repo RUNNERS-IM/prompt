@@ -69,12 +69,17 @@ export function isLocalizableGenericTerm(term) {
 }
 
 export function isCanonicalGenericRendering(term, locale, form) {
-  return RENDERINGS_BY_TERM.get(term)?.[locale]?.includes(form) ?? false
+  return (
+    RENDERINGS_BY_TERM.get(term)?.[locale === 'zh-Hans' ? 'zh' : locale]?.includes(form) ?? false
+  )
 }
 
 export function canonicalGenericRenderings(locale) {
   return GENERIC_TERM_FAMILIES.flatMap((family) =>
-    (family.renderings[locale] ?? []).map((form) => ({ form, terms: family.terms }))
+    (family.renderings[locale === 'zh-Hans' ? 'zh' : locale] ?? []).map((form) => ({
+      form,
+      terms: family.terms
+    }))
   )
 }
 
@@ -89,7 +94,7 @@ function spansOf(value, needle) {
 // Why: zh 终端子进程 ("terminal sub-process") contains 端子, so a blind revert of the
 // electrical-connector mistranslation would cut a valid word in half.
 export function overlapsCanonicalRendering(term, locale, value, start, end) {
-  const renderings = RENDERINGS_BY_TERM.get(term)?.[locale] ?? []
+  const renderings = RENDERINGS_BY_TERM.get(term)?.[locale === 'zh-Hans' ? 'zh' : locale] ?? []
   return renderings.some((form) =>
     spansOf(value, form).some(([from, to]) => start < to && from < end)
   )

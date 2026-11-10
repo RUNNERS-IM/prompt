@@ -1,14 +1,13 @@
-import { Menu, Tray, nativeImage, nativeTheme, type NativeImage } from 'electron'
-import menuBarIconPath from '../../../resources/tray/orca-menu-barTemplate.png?asset&asarUnpack'
-import menuBarIconRetinaPath from '../../../resources/tray/orca-menu-barTemplate@2x.png?asset&asarUnpack'
+import { Menu, Tray, nativeTheme, type NativeImage } from 'electron'
+import type { PromptMenuCommandId, PromptMenuRow } from '../../shared/prompt-menu-panel'
 import menuBarOffIconPath from '../../../resources/tray/prompt-menu-bar-offTemplate.png?asset&asarUnpack'
 import menuBarOffIconRetinaPath from '../../../resources/tray/prompt-menu-bar-offTemplate@2x.png?asset&asarUnpack'
 import { deferAppKitSceneMutation } from '../appkit-scene-mutation'
 import { createAppIconImage } from '../app-icon'
 import { translateMain } from '../i18n/main-i18n'
 import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
-import { stampTrayDevBadge } from './tray-dev-badge'
-import { buildTrayMenuTemplate } from './tray-menu-template'
+import { createMacMenuBarImage, stampMacDevBadge } from './tray-mac-images'
+import { buildTrayMenuTemplate, buildTrayPanelRows, runTrayMenuCommand } from './tray-menu-template'
 import {
   isMenuBarCursorVisible,
   startMenuBarCursorBlink,
@@ -26,10 +25,8 @@ export type SystemTrayOptions = {
   onOpen: () => void
   /** Restore the main window and open its Settings surface. */
   onOpenSettings: () => void
-  /** Run the existing user-initiated update check. */
-  onCheckForUpdates: () => void
-  /** Show the About window (name, version, RUNNERS, original MIT credit). */
-  onShowAbout: () => void
+  /** Open one more Prompt window (the app menu's Window › New Window); omitted hides the row. */
+  onNewWindow?: () => void
   /** Open the Help & Feedback page (GitHub issues). */
   onOpenHelp: () => void
   /** Live terminal count for the status line; omitted hides the line. */
@@ -40,11 +37,20 @@ export type SystemTrayOptions = {
   onQuit: () => void
   /** Confirm, then quit with every terminal session stopped; omitted where the item must not show (serve mode). */
   onQuitAndStopAllSessions?: () => void
+  /** 맥: 있으면 왼쪽 · 오른쪽 클릭 모두 앱이 그린 패널을 열고 닫는다. 없으면 예전처럼 기본 메뉴만. */
+  onTogglePanel?: (tray: Tray) => void
+  /** 맥 패널 모드에서 줄 글이 바뀌었을 때(언어 바꿈 등) 열린 패널을 새로 그리게 한다. */
+  onMenuRowsChanged?: () => void
 }
 
 // Keep a live reference or Electron GC removes the tray icon.
 let tray: Tray | null = null
 let trayOptions: SystemTrayOptions | null = null
+
+// 맥 패널 모드: 메뉴를 아이콘에 붙여 두지 않고, 어느 쪽 클릭이든 패널을 연다.
+function usesMacPanel(opts: SystemTrayOptions | null): boolean {
+  return process.platform === 'darwin' && typeof opts?.onTogglePanel === 'function'
+}
 
 // Cache the plain icon so attention changes do not reload the app PNG.
 let baseTrayImage: NativeImage | null = null
@@ -78,7 +84,8 @@ function readTerminalCount(opts: SystemTrayOptions): number | null {
 }
 
 function startTerminalCountWatch(): void {
-  if (terminalCountTimer || !trayOptions?.getRunningTerminalCount) {
+  // 패널 모드에는 붙여 둔 메뉴가 없어 다시 만들 것이 없다(패널과 오른쪽 클릭 메뉴는 열 때마다 새로 읽는다).
+  if (terminalCountTimer || !trayOptions?.getRunningTerminalCount || usesMacPanel(trayOptions)) {
     return
   }
   terminalCountTimer = setInterval(() => {
@@ -169,59 +176,6 @@ function scheduleTrayImage(): void {
   })
 }
 
-function createMacMenuBarImage(
-  iconPath: string = menuBarIconPath,
-  retinaIconPath: string = menuBarIconRetinaPath
-): NativeImage | null {
-  const image = nativeImage.createFromPath(iconPath)
-  const { width, height } = image.getSize()
-  if (width <= 0 || height <= 0) {
-    console.warn('[system-tray] macOS menu bar icon could not be loaded')
-    return null
-  }
-
-  const retinaImage = nativeImage.createFromPath(retinaIconPath)
-  const retinaSize = retinaImage.getSize()
-  if (retinaSize.width > 0 && retinaSize.height > 0) {
-    try {
-      // Import/package the 2x asset explicitly instead of relying on bundler-renamed siblings.
-      image.addRepresentation({
-        scaleFactor: 2,
-        dataURL: retinaImage.toDataURL()
-      })
-    } catch (error) {
-      // Bad 2x data may blur Retina but must not abort tray creation.
-      console.warn('[system-tray] macOS retina menu bar icon could not be added', error)
-    }
-  } else {
-    // Report degraded Retina rendering so blurry status icons remain diagnosable.
-    console.warn('[system-tray] macOS retina menu bar icon could not be loaded')
-  }
-  image.setTemplateImage(true)
-  return image
-}
-
-// Badge dev pixels inside the production-width template; attention tint inherits them, unlike a separate tray title.
-function stampMacDevBadge(base: NativeImage): NativeImage {
-  try {
-    const stamped = stampTrayDevBadge(base)
-    if (base.getScaleFactors().includes(2)) {
-      // Bitmap creation drops 2x data; rebuild it so the dev badge stays sharp on Retina.
-      const retinaStamped = stampTrayDevBadge(base, 2)
-      stamped.addRepresentation({
-        scaleFactor: 2,
-        dataURL: retinaStamped.toDataURL()
-      })
-    }
-    stamped.setTemplateImage(true)
-    return stamped
-  } catch (error) {
-    // Diagnostic dev badges must degrade to the plain icon rather than abort creation.
-    console.warn('[system-tray] dev badge could not be stamped; showing plain icon', error)
-    return base
-  }
-}
-
 function watchMacAppearance(): void {
   if (nativeThemeUpdatedListener) {
     return
@@ -286,7 +240,15 @@ export function createSystemTray(opts: SystemTrayOptions): Tray | null {
   applyTrayImage()
 
   trayOptions = opts
-  tray.setContextMenu(buildTrayMenu(opts))
+  if (usesMacPanel(opts)) {
+    const created = tray
+    const togglePanel = safeMenuAction(() => opts.onTogglePanel?.(created))
+    // 결정 2026-11-07 다섯 앱 2A: 오른쪽 클릭도 같은 패널.
+    created.on('click', togglePanel)
+    created.on('right-click', togglePanel)
+  } else {
+    tray.setContextMenu(buildTrayMenu(opts))
+  }
   if (process.platform === 'win32') {
     tray.setToolTip(baseTooltip())
     // Windows left-click restores the app; macOS uses its attached menu.
@@ -313,6 +275,26 @@ function buildTrayMenu(opts: SystemTrayOptions): Menu {
   )
 }
 
+/** 지금 상태로 새로 만든 줄 목록(맥 패널이 쓴다). 아이콘이 없으면 null. */
+export function getTrayMenuRows(): PromptMenuRow[] | null {
+  if (!tray || tray.isDestroyed() || !trayOptions) {
+    return null
+  }
+  return buildTrayPanelRows(trayOptions, {
+    devLabel: devIndicator ? baseTooltip() : null,
+    terminalCount: readTerminalCount(trayOptions)
+  })
+}
+
+/** 패널에서 누른 줄을 실행한다. 실패해도 main 이 죽지 않게 감싼다. */
+export function runTrayMenuCommandFromPanel(id: PromptMenuCommandId): void {
+  const opts = trayOptions
+  if (!opts) {
+    return
+  }
+  safeMenuAction(() => runTrayMenuCommand(opts, id))()
+}
+
 /** Refreshes translated labels without recreating the tray or its actions. */
 export function rebuildSystemTrayMenu(): void {
   // Native tray writes must run outside AppKit callbacks.
@@ -320,7 +302,11 @@ export function rebuildSystemTrayMenu(): void {
     if (!tray || tray.isDestroyed() || !trayOptions) {
       return
     }
-    tray.setContextMenu(buildTrayMenu(trayOptions))
+    if (usesMacPanel(trayOptions)) {
+      trayOptions.onMenuRowsChanged?.()
+    } else {
+      tray.setContextMenu(buildTrayMenu(trayOptions))
+    }
     applyTrayImage()
   })
 }

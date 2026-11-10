@@ -68,6 +68,7 @@ import {
 } from './ui-slice-hydration-sanitizers'
 import { hydrateAgentReadState, sanitizeTaskResumeState } from './ui-slice-hydration-values'
 import { hydrateStatusBarItems } from './ui-slice-hydration-status-bar-items'
+import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../../shared/prompt-upstream'
 
 const MAX_LEFT_SIDEBAR_WIDTH = 500
 const MAX_RIGHT_SIDEBAR_WIDTH = 4000
@@ -121,7 +122,10 @@ export function createUiHydrationActions(set: UISliceSet, _get: UISliceGet): Par
             s.combinedDiffFileTreeWidth
           ),
           sidebarOpen: typeof ui.sidebarOpen === 'boolean' ? ui.sidebarOpen : true,
-          rightSidebarOpen: typeof ui.rightSidebarOpen === 'boolean' ? ui.rightSidebarOpen : true,
+          rightSidebarOpen:
+            typeof ui.rightSidebarOpen === 'boolean'
+              ? ui.rightSidebarOpen
+              : !PROMPT_BLOCK_UPSTREAM_SERVICES,
           ...normalizeRightSidebarRoute(ui.rightSidebarTab, ui.rightSidebarExplorerView),
           groupBy: (ui.groupBy as UISlice['groupBy'] | 'parent') === 'parent' ? 'repo' : ui.groupBy,
           sortBy,

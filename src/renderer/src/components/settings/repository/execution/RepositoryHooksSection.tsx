@@ -104,7 +104,7 @@ export function RepositoryHooksSection({
 
   return (
     <section ref={flushScriptDraftOnUnmount} className="space-y-6">
-      <div className="space-y-1">
+      <div data-prompt-group-title="" className="space-y-1">
         <h2 className="text-sm font-semibold">
           {translate(
             'auto.components.settings.RepositoryHooksSection.ff082fe7c6',

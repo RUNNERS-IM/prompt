@@ -67,6 +67,7 @@ import type { LegacyRelayBridgeApi } from './api/legacy-relay-bridge-api'
 import type { DiagnosticsApi, MemoryApi, StatsApi, TelemetryApi } from './api/telemetry-api'
 import type { UiCommandEventApi } from './api/ui-command-event-api'
 import type { UiWindowApi } from './api/ui-window-api'
+import type { PromptAboutSettingsEventApi } from './api/prompt-about-settings-event-api'
 import type { UpdaterApi } from './api/updater-api'
 import type { WorkspaceCleanupApi, WorkspaceSpaceApi } from './api/workspace-cleanup-api'
 import type { LocalhostWorktreeLabelsApi, WorkspacePortsApi } from './api/workspace-port-api'
@@ -76,6 +77,8 @@ import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/w
 import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
 import type { PromptClaudeLoginSyncApi } from '../shared/prompt-claude-login-sync'
 import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
+import type { PromptMenuPanelApi } from '../shared/prompt-menu-panel'
+import type { PromptRunnersAccountApi } from '../shared/prompt-runners-account'
 
 // Flattens contracts that share one PreloadApi key: an intersection is not type-identical to the flat shape.
 type Merged<T> = { [K in keyof T]: T[K] }
@@ -151,7 +154,7 @@ export type PreloadApi = {
   nativeChat: NativeChatApi
   fs: FilesystemApi['fs']
   git: Merged<GitInspectionApi & GitOperationApi>
-  ui: Merged<UiCommandEventApi & UiWindowApi>
+  ui: Merged<UiCommandEventApi & UiWindowApi & PromptAboutSettingsEventApi>
   runtime: RuntimeApi['runtime']
   runtimeEnvironments: RuntimeApi['runtimeEnvironments']
   rateLimits: RateLimitsApi
@@ -185,6 +188,10 @@ export type PreloadApi = {
   promptClaudeLoginSync?: PromptClaudeLoginSyncApi
   /** Optional: only the desktop preload has it; the web client has no bundled notices file. */
   promptThirdPartyNotices?: PromptThirdPartyNoticesApi
+  /** Optional: only the desktop preload has it; the macOS menu bar panel uses it. */
+  promptMenuPanel?: PromptMenuPanelApi
+  /** Optional: only the desktop preload has it; the web client never signs in to a RUNNERS account. */
+  promptRunnersAccount?: PromptRunnersAccountApi
 }
 
 export type {
