@@ -9,6 +9,7 @@ import { MOBILE_SESSION_STATUS_LABELS } from './mobile-session-route-helpers'
 import type { MobileSessionBulkCloseModel } from './use-mobile-session-bulk-close'
 import { hostOs } from '../platform/host-os'
 import { useCalmConnectionState } from '../transport/calm-connection-state'
+import { translate } from '../i18n/mobile-i18n'
 
 export function useMobileSessionPresentation(scope: MobileSessionBulkCloseModel) {
   const {
@@ -68,10 +69,12 @@ export function useMobileSessionPresentation(scope: MobileSessionBulkCloseModel)
   const terminalSummary =
     presentedConnState === 'connected'
       ? showLoadingState
-        ? 'Loading tabs'
+        ? translate('session.presentation.loadingTabs', 'Loading tabs')
         : visibleTabs.length === 1
-          ? '1 tab'
-          : `${visibleTabs.length} tabs`
+          ? translate('session.presentation.tabs_one', '{{count}} tab', { count: 1 })
+          : translate('session.presentation.tabs_other', '{{count}} tabs', {
+              count: visibleTabs.length
+            })
       : showConnectionRetry
         ? `${verdictDisplayLabel(connectionVerdict)} — tap to retry`
         : connectionEscalated

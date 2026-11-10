@@ -2398,7 +2398,13 @@
     "terminalRecords": {
       "defaultTitle": "ターミナル"
     },
+    "presentation": {
+      "loadingTabs": "タブを読み込み中",
+      "tabs_one": "タブ {{count}} 個",
+      "tabs_other": "タブ {{count}} 個"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "ターミナル {{number}}",
       "browser": "ブラウザ",
       "chat": "チャット",
       "file": "ファイル",

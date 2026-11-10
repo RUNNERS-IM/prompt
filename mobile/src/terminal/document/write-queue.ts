@@ -11,6 +11,9 @@ const EMOJI_PRESENTATION_SELECTOR = '\ufe0f'
 // Use a literal to keep module evaluation inert; replace does not retain lastIndex across document calls.
 const CLAUDE_STATUS_DOT_PATTERN = /\u23fa[\ufe0e\ufe0f]*/g
 
+// Node's test summary prints this sign; phone WebViews otherwise draw it as an emoji tile.
+const INFO_SIGN_WITHOUT_SELECTOR_PATTERN = /\u2139(?![\ufe0e\ufe0f])/g
+
 const PRIVATE_MODE_SCAN_TAIL_LIMIT = 4096
 
 export function resetWriteQueue(scope: TerminalDocumentScope) {
@@ -51,7 +54,7 @@ export function normalizeStatusDotPresentation(scope: TerminalDocumentScope, dat
     CLAUDE_STATUS_DOT + TEXT_PRESENTATION_SELECTOR
   )
   scope.statusDotPendingSelector = endsWithStatusDotPresentationSequence(data)
-  return normalized
+  return normalized.replace(INFO_SIGN_WITHOUT_SELECTOR_PATTERN, `$&${TEXT_PRESENTATION_SELECTOR}`)
 }
 
 export function enqueueWrite(scope: TerminalDocumentScope, data: string) {

@@ -69,6 +69,20 @@ export function resolveMobileTerminalTabAgentId(
   })
 }
 
+const STORED_DEFAULT_TERMINAL_TITLE = /^Terminal(?: (\d+))?$/
+
+// Hosts keep saving "Terminal N" because their default-name checks read it; only the screen translates.
+function localizedTerminalTitle(title: string): string {
+  const match = STORED_DEFAULT_TERMINAL_TITLE.exec(title.trim())
+  if (!match) {
+    return title
+  }
+  const number = match[1]
+  return number
+    ? translate('session.terminalTabAgent.terminalNumber', 'Terminal {{number}}', { number })
+    : translate('session.terminalTabAgent.terminal', 'Terminal')
+}
+
 export function getMobileSessionTabTitle(
   tab: MobileSessionTab,
   hostAgentIdentity?: string | null
@@ -95,9 +109,11 @@ export function getMobileSessionTabTitle(
   // Strip status glyphs when showing provider icons; glyph-only iOS titles otherwise leave stray colored boxes.
   if (resolveMobileTerminalTabAgentId(tab, hostAgentIdentity)) {
     return (
-      stripLeadingAgentTitleDecorationOrEmpty(tab.title) ||
+      localizedTerminalTitle(stripLeadingAgentTitleDecorationOrEmpty(tab.title)) ||
       translate('session.terminalTabAgent.terminal', 'Terminal')
     )
   }
-  return tab.title || translate('session.terminalTabAgent.terminal', 'Terminal')
+  return (
+    localizedTerminalTitle(tab.title) || translate('session.terminalTabAgent.terminal', 'Terminal')
+  )
 }

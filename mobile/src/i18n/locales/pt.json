@@ -2477,7 +2477,13 @@
     "terminalRecords": {
       "defaultTitle": "Terminal"
     },
+    "presentation": {
+      "loadingTabs": "Carregando abas",
+      "tabs_one": "{{count}} aba",
+      "tabs_other": "{{count}} abas"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
       "browser": "Navegador",
       "chat": "Chat",
       "file": "Arquivo",

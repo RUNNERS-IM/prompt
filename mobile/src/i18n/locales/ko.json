@@ -2398,7 +2398,13 @@
     "terminalRecords": {
       "defaultTitle": "터미널"
     },
+    "presentation": {
+      "loadingTabs": "탭을 불러오는 중",
+      "tabs_one": "탭 {{count}}개",
+      "tabs_other": "탭 {{count}}개"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "터미널 {{number}}",
       "browser": "브라우저",
       "chat": "채팅",
       "file": "파일",

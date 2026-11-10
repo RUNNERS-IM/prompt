@@ -2402,7 +2402,13 @@
     "terminalRecords": {
       "defaultTitle": "Terminal"
     },
+    "presentation": {
+      "loadingTabs": "Tabs werden geladen",
+      "tabs_one": "{{count}} Tab",
+      "tabs_other": "{{count}} Tabs"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
       "browser": "Browser",
       "chat": "Chat",
       "file": "Datei",

@@ -2398,7 +2398,13 @@
     "terminalRecords": {
       "defaultTitle": "终端"
     },
+    "presentation": {
+      "loadingTabs": "正在加载标签页",
+      "tabs_one": "{{count}} 个标签页",
+      "tabs_other": "{{count}} 个标签页"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "终端 {{number}}",
       "browser": "浏览器",
       "chat": "聊天",
       "file": "文件",

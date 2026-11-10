@@ -162,6 +162,14 @@ describe('terminal WebView write queue', () => {
     expect(order).toEqual(['boundary', 'drained'])
   })
 
+  it('keeps the info sign as text unless the output asks for an emoji', () => {
+    const queue = createWriteQueue()
+    queue.enqueue('\u2139 tests 1 \u2139\ufe0f')
+    drain(queue)
+
+    expect(queue.writes).toEqual(['\u2139\ufe0e tests 1 \u2139\ufe0f'])
+  })
+
   it('submits callback-only and empty writes', () => {
     const queue = createWriteQueue()
     const calls: string[] = []

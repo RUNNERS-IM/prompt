@@ -2552,7 +2552,13 @@
     "terminalRecords": {
       "defaultTitle": "Терминал"
     },
+    "presentation": {
+      "loadingTabs": "Загрузка вкладок",
+      "tabs_one": "Вкладки: {{count}}",
+      "tabs_other": "Вкладки: {{count}}"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Терминал {{number}}",
       "browser": "Браузер",
       "chat": "Чат",
       "file": "Файл",

@@ -2398,7 +2398,13 @@
     "terminalRecords": {
       "defaultTitle": "終端機"
     },
+    "presentation": {
+      "loadingTabs": "正在載入分頁",
+      "tabs_one": "{{count}} 個分頁",
+      "tabs_other": "{{count}} 個分頁"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "終端機 {{number}}",
       "browser": "瀏覽器",
       "chat": "聊天",
       "file": "檔案",

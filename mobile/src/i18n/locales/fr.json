@@ -2477,7 +2477,13 @@
     "terminalRecords": {
       "defaultTitle": "Terminal"
     },
+    "presentation": {
+      "loadingTabs": "Chargement des onglets",
+      "tabs_one": "{{count}} onglet",
+      "tabs_other": "{{count}} onglets"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
       "browser": "Navigateur",
       "chat": "Chat",
       "file": "Fichier",

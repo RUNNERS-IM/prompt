@@ -2116,7 +2116,13 @@
     "terminalRecords": {
       "defaultTitle": "Terminal"
     },
+    "presentation": {
+      "loadingTabs": "Loading tabs",
+      "tabs_one": "{{count}} tab",
+      "tabs_other": "{{count}} tabs"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
       "newBrowser": "New Browser",
       "browser": "Browser",
       "markdown": "Markdown",

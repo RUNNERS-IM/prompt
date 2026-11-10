@@ -2402,7 +2402,13 @@
     "terminalRecords": {
       "defaultTitle": "Terminal"
     },
+    "presentation": {
+      "loadingTabs": "Sekmeler yükleniyor",
+      "tabs_one": "{{count}} sekme",
+      "tabs_other": "{{count}} sekme"
+    },
     "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
       "browser": "Tarayıcı",
       "chat": "Sohbet",
       "file": "Dosya",
