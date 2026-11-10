@@ -1,4 +1,8 @@
-import { getRepoExecutionHostId, normalizeExecutionHostId } from './execution-host'
+import {
+  getRepoExecutionHostId,
+  LOCAL_EXECUTION_HOST_ID,
+  normalizeExecutionHostId
+} from './execution-host'
 import { getRepoHostIdentityForParts } from './repo-host-identity'
 import type { Repo } from './repo-types'
 import type { ManualRepoOrderEntry } from './ui-chrome-types'
@@ -40,6 +44,29 @@ export function getManualRepoOrder(repos: readonly Repo[]): ManualRepoOrderEntry
   )
 }
 
+function inheritRemovedLocalSlots(
+  repos: readonly Repo[],
+  order: readonly ManualRepoOrderEntry[],
+  rankByKey: Map<string, number>
+): void {
+  const localRepoKey = (repo: Repo): string =>
+    getEntryKey({ hostId: LOCAL_EXECUTION_HOST_ID, repoId: repo.id })
+  const localRepos = repos.filter(
+    (repo) => getRepoExecutionHostId(repo) === LOCAL_EXECUTION_HOST_ID
+  )
+  const liveKeys = new Set(localRepos.map(localRepoKey))
+  const removedSlots = order.flatMap((entry, index) =>
+    entry.hostId === LOCAL_EXECUTION_HOST_ID && !liveKeys.has(getEntryKey(entry)) ? [index] : []
+  )
+  // Why: moving a project to another folder re-registers it under a new id; its old slot must not outrank it forever.
+  const unrankedRepos = localRepos
+    .filter((repo) => !rankByKey.has(localRepoKey(repo)))
+    .sort((a, b) => a.addedAt - b.addedAt)
+  unrankedRepos.slice(0, removedSlots.length).forEach((repo, index) => {
+    rankByKey.set(localRepoKey(repo), removedSlots[index])
+  })
+}
+
 export function applyManualRepoOrder(
   repos: readonly Repo[],
   order: readonly ManualRepoOrderEntry[] | null | undefined
@@ -50,6 +77,7 @@ export function applyManualRepoOrder(
     return repos
   }
   const rankByKey = new Map(normalized.map((entry, index) => [getEntryKey(entry), index]))
+  inheritRemovedLocalSlots(repos, normalized, rankByKey)
   const ordered = repos
     .map((repo, index) => ({
       repo,

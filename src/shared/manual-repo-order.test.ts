@@ -85,6 +85,45 @@ describe('manual repo order', () => {
     ])
   })
 
+  it('gives a re-registered local project the slot of the removed one', () => {
+    const moved = repo('moved', 'local')
+    const order = [
+      { hostId: 'local', repoId: 'removed' },
+      { hostId: 'local', repoId: 'alpha' },
+      { hostId: 'local', repoId: 'bravo' }
+    ] satisfies ManualRepoOrderEntry[]
+
+    expect(applyManualRepoOrder([localAlpha, localBravo, moved], order)).toEqual([
+      moved,
+      localAlpha,
+      localBravo
+    ])
+  })
+
+  it('fills removed local slots oldest project first and appends the rest', () => {
+    const newest = { ...repo('newest', 'local'), addedAt: 3 }
+    const older = { ...repo('older', 'local'), addedAt: 2 }
+    const order = [
+      { hostId: 'local', repoId: 'removed' },
+      { hostId: 'local', repoId: 'alpha' }
+    ] satisfies ManualRepoOrderEntry[]
+
+    expect(applyManualRepoOrder([localAlpha, newest, older], order)).toEqual([
+      older,
+      localAlpha,
+      newest
+    ])
+  })
+
+  it('leaves remote slots for a host whose catalog may still be loading', () => {
+    const order = [
+      { hostId: 'runtime:node-b', repoId: 'removed' },
+      { hostId: 'local', repoId: 'alpha' }
+    ] satisfies ManualRepoOrderEntry[]
+
+    expect(applyManualRepoOrder([localAlpha, localBravo], order)).toEqual([localAlpha, localBravo])
+  })
+
   it('normalizes malformed, invalid-host, and duplicate entries', () => {
     const value = [
       null,
