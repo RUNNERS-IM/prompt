@@ -22,11 +22,13 @@ export function computeWorktreeSidebarHeaderDropPreview<
   scrollTop: number
   rects: readonly TRect[]
   headerCount: number
+  sourceHeaderIndex: number
   getId: (rect: TRect) => string
   // Measured scroll-content bottom bounds live snap slots; geometry-only tests may omit it.
   contentBottom?: number
 }): WorktreeSidebarHeaderDropPreview | null {
-  if (args.rects.length === 0 || args.headerCount === 0) {
+  const { sourceHeaderIndex } = args
+  if (args.rects.length === 0 || args.headerCount === 0 || sourceHeaderIndex < 0) {
     return null
   }
 
@@ -58,78 +60,31 @@ export function computeWorktreeSidebarHeaderDropPreview<
     return null
   }
   if (boundaryDrop.kind === 'drop') {
+    if (
+      boundaryDrop.dropIndex === sourceHeaderIndex ||
+      boundaryDrop.dropIndex === sourceHeaderIndex + 1
+    ) {
+      return null
+    }
     return {
       dropIndex: boundaryDrop.dropIndex,
       dropIndicatorY: Math.max(args.scrollTop, boundaryDrop.indicatorY)
     }
   }
 
-  const hoveredRect = args.rects.find((rect) => localY >= rect.top && localY <= rect.bottom)
-  if (hoveredRect) {
-    const mid = (hoveredRect.top + hoveredRect.bottom) / 2
-    const dropIndex = localY < mid ? hoveredRect.headerIndex : hoveredRect.headerIndex + 1
-    const nextRect =
-      localY < mid ? hoveredRect : args.rects.find((rect) => rect.headerIndex >= dropIndex)
-    const indicatorY = nextRect
-      ? Math.max(0, nextRect.top - INDICATOR_GAP_PX)
-      : Math.max(hoveredRect.bottom, hoveredRect.sectionBottom ?? hoveredRect.bottom) +
-        INDICATOR_GAP_PX
-
-    return {
-      dropIndex,
-      dropIndicatorY: Math.max(args.scrollTop, indicatorY)
-    }
-  }
-
-  // Snap interior section/gap drops to the nearest boundary so they cannot silently become no-ops.
-  const boundary = pickNearestHeaderBoundarySlot(args.rects, localY)
-  if (!boundary) {
+  const target = args.rects.findLast((rect) => rect.top <= localY)
+  if (!target || target.headerIndex === sourceHeaderIndex) {
     return null
   }
+  // Dropping anywhere on a section takes that section's place, so one-step moves are reachable.
+  const dropIndex =
+    target.headerIndex < sourceHeaderIndex ? target.headerIndex : target.headerIndex + 1
+  const nextRect = args.rects.find((rect) => rect.headerIndex >= dropIndex)
+  const indicatorY = nextRect
+    ? Math.max(0, nextRect.top - INDICATOR_GAP_PX)
+    : Math.max(target.bottom, target.sectionBottom ?? target.bottom) + INDICATOR_GAP_PX
   return {
-    dropIndex: boundary.dropIndex,
-    dropIndicatorY: Math.max(args.scrollTop, boundary.indicatorY)
+    dropIndex,
+    dropIndicatorY: Math.max(args.scrollTop, indicatorY)
   }
-}
-
-type WorktreeSidebarHeaderBoundarySlot = {
-  dropIndex: number
-  indicatorY: number
-}
-
-function pickNearestHeaderBoundarySlot(
-  rects: readonly WorktreeSidebarHeaderDragRect[],
-  localY: number
-): WorktreeSidebarHeaderBoundarySlot | null {
-  let prevRect: WorktreeSidebarHeaderDragRect | undefined
-  let nextRect: WorktreeSidebarHeaderDragRect | undefined
-  for (const rect of rects) {
-    if (rect.top <= localY) {
-      prevRect = rect
-    } else if (nextRect === undefined) {
-      nextRect = rect
-    }
-  }
-
-  const afterPrev: WorktreeSidebarHeaderBoundarySlot | null = prevRect
-    ? {
-        dropIndex: prevRect.headerIndex + 1,
-        indicatorY:
-          Math.max(prevRect.bottom, prevRect.sectionBottom ?? prevRect.bottom) + INDICATOR_GAP_PX
-      }
-    : null
-  const beforeNext: WorktreeSidebarHeaderBoundarySlot | null = nextRect
-    ? { dropIndex: nextRect.headerIndex, indicatorY: Math.max(0, nextRect.top - INDICATOR_GAP_PX) }
-    : null
-
-  if (!afterPrev) {
-    return beforeNext
-  }
-  if (!beforeNext) {
-    return afterPrev
-  }
-  // Ties (localY at the span midpoint) resolve to the next header's boundary.
-  return Math.abs(localY - beforeNext.indicatorY) <= Math.abs(localY - afterPrev.indicatorY)
-    ? beforeNext
-    : afterPrev
 }

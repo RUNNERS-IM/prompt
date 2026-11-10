@@ -135,6 +135,7 @@ describe('computeProjectGroupHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarProjectGroupHeaderIds: ['a', 'b', 'c', 'd', 'e'],
+      draggedGroupId: 'e',
       rects: [
         { groupId: 'b', bucketKey: 'root', headerIndex: 1, top: 100, bottom: 128 },
         { groupId: 'c', bucketKey: 'root', headerIndex: 2, top: 200, bottom: 228 },
@@ -151,6 +152,7 @@ describe('computeProjectGroupHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarProjectGroupHeaderIds: ['a', 'b', 'c'],
+      draggedGroupId: 'a',
       rects: [
         {
           groupId: 'c',
@@ -174,6 +176,7 @@ describe('computeProjectGroupHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarProjectGroupHeaderIds: ['a', 'b', 'c'],
+      draggedGroupId: 'a',
       rects: [
         {
           groupId: 'c',

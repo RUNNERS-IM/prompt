@@ -81,6 +81,7 @@ export function useRepoHeaderDrag({
         scrollTop: container.scrollTop,
         rects: session.headerRects,
         sidebarRepoHeaderIds: session.sidebarRepoHeaderIds,
+        draggedRepoId: session.repo.id,
         contentBottom: container.scrollHeight
       })
     },

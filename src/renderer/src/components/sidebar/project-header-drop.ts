@@ -171,6 +171,7 @@ export function computeProjectHeaderDropPreview(args: {
   scrollTop: number
   rects: readonly ProjectHeaderDragRect[]
   sidebarRepoHeaderIds: readonly string[]
+  draggedRepoId: string
   contentBottom?: number
 }): ProjectHeaderDropPreview | null {
   const { rects, sidebarRepoHeaderIds } = args
@@ -180,6 +181,7 @@ export function computeProjectHeaderDropPreview(args: {
     scrollTop: args.scrollTop,
     rects,
     headerCount: sidebarRepoHeaderIds.length,
+    sourceHeaderIndex: sidebarRepoHeaderIds.indexOf(args.draggedRepoId),
     getId: (rect) => rect.repoId,
     contentBottom: args.contentBottom
   })

@@ -152,6 +152,7 @@ describe('computeProjectHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarRepoHeaderIds: ['a', 'b', 'c', 'd', 'e'],
+      draggedRepoId: 'e',
       rects: [
         { repoId: 'b', bucketKey: 'ungrouped', headerIndex: 1, top: 100, bottom: 128 },
         { repoId: 'c', bucketKey: 'ungrouped', headerIndex: 2, top: 200, bottom: 228 },
@@ -168,6 +169,7 @@ describe('computeProjectHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarRepoHeaderIds: ['a', 'b', 'c'],
+      draggedRepoId: 'a',
       rects: [
         {
           repoId: 'c',
@@ -191,6 +193,7 @@ describe('computeProjectHeaderDropPreview', () => {
       containerTop: 0,
       scrollTop: 0,
       sidebarRepoHeaderIds: ['a', 'b', 'c'],
+      draggedRepoId: 'a',
       rects: [
         {
           repoId: 'c',
@@ -206,91 +209,62 @@ describe('computeProjectHeaderDropPreview', () => {
     expect(preview).toEqual({ dropIndex: 3, dropIndicatorY: sectionBottom + INDICATOR_GAP })
   })
 
-  it('snaps a drop between sibling project headers to the nearer boundary', () => {
-    const INDICATOR_GAP = 4
-    const nextHeaderTop = 220
-    const preview = computeProjectHeaderDropPreview({
-      pointerY: 150,
-      containerTop: 0,
-      scrollTop: 0,
-      sidebarRepoHeaderIds: ['a', 'b'],
-      rects: [
-        {
-          repoId: 'a',
-          bucketKey: 'ungrouped',
-          headerIndex: 0,
-          top: 100,
-          bottom: 128,
-          sectionBottom: nextHeaderTop
-        },
-        { repoId: 'b', bucketKey: 'ungrouped', headerIndex: 1, top: nextHeaderTop, bottom: 248 }
-      ]
-    })
-
-    expect(preview).toEqual({ dropIndex: 1, dropIndicatorY: nextHeaderTop - INDICATOR_GAP })
-  })
-
-  describe('nearest-boundary choice across an interior gap', () => {
-    // Estimated section ends can drift from actual header geometry; test snapping on both sides of the gap.
-    const INDICATOR_GAP = 4
-    const prevSectionBottom = 200
-    const nextHeaderTop = 240
-    const sectionBottomSlotY = prevSectionBottom + INDICATOR_GAP
-    const nextHeaderSlotY = nextHeaderTop - INDICATOR_GAP
-    const midpointY = (sectionBottomSlotY + nextHeaderSlotY) / 2
-    const gapRects = [
+  describe('dropping on a project section', () => {
+    const rects = [
       {
         repoId: 'a',
         bucketKey: 'ungrouped',
         headerIndex: 0,
         top: 100,
         bottom: 128,
-        sectionBottom: prevSectionBottom
+        sectionBottom: 220
       },
       {
         repoId: 'b',
         bucketKey: 'ungrouped',
         headerIndex: 1,
-        top: nextHeaderTop,
-        bottom: 268,
+        top: 220,
+        bottom: 248,
         sectionBottom: 340
+      },
+      {
+        repoId: 'c',
+        bucketKey: 'ungrouped',
+        headerIndex: 2,
+        top: 340,
+        bottom: 368,
+        sectionBottom: 460
       }
-    ] as const
-
-    it('snaps to the previous section bottom when the pointer is nearer to it', () => {
-      const preview = computeProjectHeaderDropPreview({
-        pointerY: sectionBottomSlotY + 1,
+    ]
+    const preview = (draggedRepoId: string, pointerY: number) =>
+      computeProjectHeaderDropPreview({
+        pointerY,
         containerTop: 0,
         scrollTop: 0,
-        sidebarRepoHeaderIds: ['a', 'b'],
-        rects: gapRects.map((rect) => ({ ...rect }))
+        sidebarRepoHeaderIds: ['a', 'b', 'c'],
+        draggedRepoId,
+        rects
       })
 
-      expect(preview).toEqual({ dropIndex: 1, dropIndicatorY: sectionBottomSlotY })
+    it('moves one step up from a session row of the project above', () => {
+      expect(preview('c', 300)).toEqual({ dropIndex: 1, dropIndicatorY: 216 })
     })
 
-    it('snaps to the next header top when the pointer is nearer to it', () => {
-      const preview = computeProjectHeaderDropPreview({
-        pointerY: nextHeaderSlotY - 1,
-        containerTop: 0,
-        scrollTop: 0,
-        sidebarRepoHeaderIds: ['a', 'b'],
-        rects: gapRects.map((rect) => ({ ...rect }))
-      })
-
-      expect(preview).toEqual({ dropIndex: 1, dropIndicatorY: nextHeaderSlotY })
+    it('moves one step up from the lower half of the header above', () => {
+      expect(preview('b', 124)).toEqual({ dropIndex: 0, dropIndicatorY: 96 })
     })
 
-    it('breaks the midpoint tie toward the next header boundary', () => {
-      const preview = computeProjectHeaderDropPreview({
-        pointerY: midpointY, // Equidistant boundaries prefer the next header.
-        containerTop: 0,
-        scrollTop: 0,
-        sidebarRepoHeaderIds: ['a', 'b'],
-        rects: gapRects.map((rect) => ({ ...rect }))
-      })
+    it('moves after the target when dragged down', () => {
+      expect(preview('a', 225)).toEqual({ dropIndex: 2, dropIndicatorY: 336 })
+    })
 
-      expect(preview).toEqual({ dropIndex: 1, dropIndicatorY: nextHeaderSlotY })
+    it('shows no slot over the dragged section', () => {
+      expect(preview('b', 300)).toBeNull()
+    })
+
+    it('shows no slot at the list edge the dragged project already occupies', () => {
+      expect(preview('a', 95 - 10)).toBeNull()
+      expect(preview('c', 465)).toBeNull()
     })
   })
 
@@ -313,6 +287,7 @@ describe('computeProjectHeaderDropPreview', () => {
         containerTop: 0,
         scrollTop: 0,
         sidebarRepoHeaderIds: ['a', 'b', 'c'],
+        draggedRepoId: 'a',
         rects: lastRects.map((rect) => ({ ...rect })),
         contentBottom
       })

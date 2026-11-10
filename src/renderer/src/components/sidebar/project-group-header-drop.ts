@@ -187,6 +187,7 @@ export function computeProjectGroupHeaderDropPreview(args: {
   scrollTop: number
   rects: readonly ProjectGroupHeaderDragRect[]
   sidebarProjectGroupHeaderIds: readonly string[]
+  draggedGroupId: string
   contentBottom?: number
 }): ProjectGroupHeaderDropPreview | null {
   const { rects, sidebarProjectGroupHeaderIds } = args
@@ -196,6 +197,7 @@ export function computeProjectGroupHeaderDropPreview(args: {
     scrollTop: args.scrollTop,
     rects,
     headerCount: sidebarProjectGroupHeaderIds.length,
+    sourceHeaderIndex: sidebarProjectGroupHeaderIds.indexOf(args.draggedGroupId),
     getId: (rect) => rect.groupId,
     contentBottom: args.contentBottom
   })
