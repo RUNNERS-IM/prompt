@@ -220,11 +220,11 @@ export function ThemeStep({ theme, onThemeChange, settings, updateSettings }: Th
                 )}
               </div>
               <div className="flex items-baseline justify-between gap-2">
-                <div className="flex items-center gap-1.5 text-sm font-medium text-foreground">
+                <div className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-sm font-medium text-foreground">
                   <Icon className="size-3.5 text-muted-foreground" />
                   {label}
                 </div>
-                <div className="text-[11px] text-muted-foreground">{hint}</div>
+                <div className="min-w-0 break-keep text-[11px] text-muted-foreground">{hint}</div>
               </div>
             </button>
           )
