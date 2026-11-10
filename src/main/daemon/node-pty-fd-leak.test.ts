@@ -1,6 +1,17 @@
 import { execFileSync, spawn } from 'node:child_process'
 import { once } from 'node:events'
-import { existsSync, readdirSync, readFileSync, readlinkSync, renameSync } from 'node:fs'
+import {
+  cpSync,
+  existsSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  readlinkSync,
+  rmSync
+} from 'node:fs'
+import { createRequire } from 'node:module'
+import { tmpdir } from 'node:os'
+import { dirname, join, relative } from 'node:path'
 import { setTimeout as delay } from 'node:timers/promises'
 import * as pty from 'node-pty'
 import { describe, expect, it } from 'vitest'
@@ -56,22 +67,23 @@ describeOnDarwin('node-pty macOS spawn fd handling', () => {
   }, 15000)
 
   it('does not leak fds when native posix_spawn setup fails', async () => {
+    // Hide the helper in a private copy; renaming the shared one breaks PTY tests running alongside.
     const helperPath = getExistingSpawnHelper()
-    const hiddenHelperPath = `${helperPath}.orca-test-hidden`
-    expect(existsSync(hiddenHelperPath)).toBe(false)
+    const packageRoot = dirname(dirname(createRequire(import.meta.url).resolve('node-pty')))
+    const copyRoot = mkdtempSync(join(tmpdir(), 'orca-node-pty-copy-'))
+    const nativeDir = relative(packageRoot, dirname(helperPath))
+    cpSync(join(packageRoot, 'lib'), join(copyRoot, 'lib'), { recursive: true })
+    cpSync(dirname(helperPath), join(copyRoot, nativeDir), { recursive: true })
+    rmSync(join(copyRoot, nativeDir, 'spawn-helper'))
+    const copiedPty: typeof pty = createRequire(join(copyRoot, 'lib', 'index.js'))(
+      join(copyRoot, 'lib', 'index.js')
+    )
 
     const before = currentOpenFdCount()
-    renameSync(helperPath, hiddenHelperPath)
-    const restoreHelper = (): void => {
-      if (existsSync(hiddenHelperPath) && !existsSync(helperPath)) {
-        renameSync(hiddenHelperPath, helperPath)
-      }
-    }
-    process.on('exit', restoreHelper)
     try {
       for (let i = 0; i < 20; i++) {
         expect(() =>
-          pty.spawn('/bin/sh', ['-c', 'exit 0'], {
+          copiedPty.spawn('/bin/sh', ['-c', 'exit 0'], {
             name: 'xterm-256color',
             cols: 80,
             rows: 24,
@@ -81,8 +93,7 @@ describeOnDarwin('node-pty macOS spawn fd handling', () => {
         ).toThrow(/node-pty: posix_spawn failed: ENOENT/)
       }
     } finally {
-      restoreHelper()
-      process.off('exit', restoreHelper)
+      rmSync(copyRoot, { recursive: true, force: true })
     }
 
     await delay(500)
