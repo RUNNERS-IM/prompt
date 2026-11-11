@@ -1,6 +1,9 @@
 // Keep shapes aligned with shared types/rate-limit-types without pulling Electron-coupled desktop graph into mobile.
 // Pure RN-free selectors stay directly testable; AccountUsage re-exports them with UsageBar.
-import { formatResetDuration } from '../../../src/shared/rate-limit-reset-format'
+import {
+  getResetDurationParts,
+  type ResetDurationParts
+} from '../../../src/shared/rate-limit-reset-format'
 import type { Translate } from '../i18n/mobile-i18n'
 import type {
   AccountsSnapshot,
@@ -88,7 +91,7 @@ export function showsSessionWindow(limits: ProviderRateLimits | null): boolean {
   return limits?.session != null || limits?.weekly == null
 }
 
-// Desktop duration units with injectable now; return null without reset timestamp to retain bars-only UI.
+// Desktop duration rounding with translated unit words; return null without reset timestamp to retain bars-only UI.
 export function getWindowResetLabel(
   limits: ProviderRateLimits | null,
   windowKey: 'session' | 'weekly',
@@ -99,10 +102,26 @@ export function getWindowResetLabel(
   if (resetsAt == null) {
     return null
   }
-  const duration = formatResetDuration(resetsAt - now)
-  return duration === 'now'
-    ? t('accounts.screen.resetsNow', 'Resets now')
-    : t('accounts.screen.resetsIn', 'Resets in {{duration}}', { duration })
+  const parts = getResetDurationParts(resetsAt - now)
+  if (parts === null) {
+    return t('accounts.screen.resetsNow', 'Resets now')
+  }
+  const duration = formatResetDurationParts(parts, t)
+  return t('accounts.screen.resetsIn', 'Resets in {{duration}}', { duration })
+}
+
+function formatResetDurationParts(parts: ResetDurationParts, t: Translate): string {
+  if (parts.unit === 'minutes') {
+    return t('accounts.screen.durationMinutes', '{{minutes}}m', { minutes: parts.minutes })
+  }
+  if (parts.unit === 'days') {
+    return parts.hours > 0
+      ? t('accounts.screen.durationDaysHours', '{{days}}d {{hours}}h', parts)
+      : t('accounts.screen.durationDays', '{{days}}d', { days: parts.days })
+  }
+  return parts.minutes > 0
+    ? t('accounts.screen.durationHoursMinutes', '{{hours}}h {{minutes}}m', parts)
+    : t('accounts.screen.durationHours', '{{hours}}h', { hours: parts.hours })
 }
 
 // Show provider with managed accounts or active system-default quota; management is not required for usage UI.

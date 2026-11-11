@@ -1,22 +1,39 @@
 // Share renderer/mobile countdown copy without platform imports.
 
-/** Floor durations to whole units (47m, 3h 54m, 6d 7h); nonpositive values return now for reset-specific copy. */
-export function formatResetDuration(ms: number): string {
+export type ResetDurationParts =
+  | { unit: 'days'; days: number; hours: number }
+  | { unit: 'hours'; hours: number; minutes: number }
+  | { unit: 'minutes'; minutes: number }
+
+/** Floored whole units so callers can render them in their own language; null when already due. */
+export function getResetDurationParts(ms: number): ResetDurationParts | null {
   if (ms <= 0) {
-    return 'now'
+    return null
   }
   const totalMins = Math.floor(ms / 60_000)
   if (totalMins < 60) {
-    return `${totalMins}m`
+    return { unit: 'minutes', minutes: totalMins }
   }
   const hours = Math.floor(totalMins / 60)
-  const mins = totalMins % 60
   if (hours >= 24) {
-    const days = Math.floor(hours / 24)
-    const remHours = hours % 24
-    return remHours > 0 ? `${days}d ${remHours}h` : `${days}d`
+    return { unit: 'days', days: Math.floor(hours / 24), hours: hours % 24 }
   }
-  return mins > 0 ? `${hours}h ${mins}m` : `${hours}h`
+  return { unit: 'hours', hours, minutes: totalMins % 60 }
+}
+
+/** Floor durations to whole units (47m, 3h 54m, 6d 7h); nonpositive values return now for reset-specific copy. */
+export function formatResetDuration(ms: number): string {
+  const parts = getResetDurationParts(ms)
+  if (parts === null) {
+    return 'now'
+  }
+  if (parts.unit === 'minutes') {
+    return `${parts.minutes}m`
+  }
+  if (parts.unit === 'days') {
+    return parts.hours > 0 ? `${parts.days}d ${parts.hours}h` : `${parts.days}d`
+  }
+  return parts.minutes > 0 ? `${parts.hours}h ${parts.minutes}m` : `${parts.hours}h`
 }
 
 /** "Resets in 3h 54m" / "Resets now" for a window's time-until-reset (ms). */

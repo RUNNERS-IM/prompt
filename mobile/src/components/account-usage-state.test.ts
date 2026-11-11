@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Translate } from '../i18n/mobile-i18n'
+import koCatalog from '../i18n/locales/ko.json'
 
 import {
   getInactiveProviderUsage,
@@ -129,8 +130,18 @@ describe('getInactiveProviderUsage', () => {
   })
 })
 
-const en: Translate = (_key, fallback, options) =>
-  fallback.replace('{{duration}}', String(options?.duration ?? ''))
+function interpolate(template: string, options?: Record<string, unknown>): string {
+  return template.replace(/\{\{(\w+)\}\}/g, (_match, name: string) => String(options?.[name] ?? ''))
+}
+
+const en: Translate = (_key, fallback, options) => interpolate(fallback, options)
+
+// Real Korean catalog: unit words must not fall back to the English d/h/m abbreviations.
+const ko: Translate = (key, fallback, options) => {
+  const screen: Record<string, string> = koCatalog.accounts.screen
+  const name = key.replace('accounts.screen.', '')
+  return interpolate(screen[name] ?? fallback, options)
+}
 
 describe('getWindowResetLabel', () => {
   const now = 1_700_000_000_000
@@ -192,6 +203,28 @@ describe('getWindowResetLabel', () => {
     ).toBe('Resets now')
   })
 
+  it('uses Korean unit words on a Korean screen', () => {
+    expect(
+      getWindowResetLabel(
+        makeLimits({ weekly: makeWindow(now + 3 * day + 19 * hour) }),
+        'weekly',
+        now,
+        ko
+      )
+    ).toBe('3일 19시간 후 초기화')
+    expect(
+      getWindowResetLabel(
+        makeLimits({ session: makeWindow(now + 3 * hour + 54 * min) }),
+        'session',
+        now,
+        ko
+      )
+    ).toBe('3시간 54분 후 초기화')
+    expect(
+      getWindowResetLabel(makeLimits({ session: makeWindow(now - min) }), 'session', now, ko)
+    ).toBe('곧 초기화')
+  })
+
   it('reads the requested window only', () => {
     const limits = makeLimits({ session: makeWindow(now + hour) })
     expect(getWindowResetLabel(limits, 'weekly', now, en)).toBe(null)
@@ -238,19 +271,5 @@ describe('showsSessionWindow', () => {
     const limits = makeLimits({ status: 'ok', weekly })
     expect(getUsageBarState(limits, 'session').hidden).toBe(true)
     expect(getUsageBarState(limits, 'weekly').hidden).toBe(false)
-  })
-})
-
-describe('getWindowResetLabel in another language', () => {
-  it('fills the translated copy with the countdown', () => {
-    const ko: Translate = (key, _fallback, options) =>
-      key === 'accounts.screen.resetsIn' ? `${String(options?.duration)} 후 초기화` : '곧 초기화'
-    const now = 1_000_000
-    const resetsAt = now + (4 * 24 + 7) * 60 * 60 * 1000
-    const limits = makeLimits({
-      weekly: { usedPercent: 49, windowMinutes: 10080, resetsAt, resetDescription: null }
-    })
-    expect(getWindowResetLabel(limits, 'weekly', now, ko)).toBe('4d 7h 후 초기화')
-    expect(getWindowResetLabel(limits, 'weekly', resetsAt + 1, ko)).toBe('곧 초기화')
   })
 })
