@@ -467,7 +467,7 @@ describe('tui agent startup plans', () => {
         launchCwd
       })?.launchCommand
 
-    expect(resume('/repo/pkg', '/repo')).toBe("cd '/repo/pkg' && claude '--resume' 's1'")
+    expect(resume('/repo/pkg', '/repo')).toBe("cd '/repo/pkg'; claude '--resume' 's1'")
     expect(resume('/repo/', '/repo')).toBe("claude '--resume' 's1'")
     expect(resume('/home/me/repo', '\\\\wsl.localhost\\Ubuntu\\home\\me\\repo')).toBe(
       "claude '--resume' 's1'"
@@ -817,5 +817,24 @@ describe('tui agent startup plans', () => {
     expect(resolveTuiAgentLaunchArgs('devin', null)).toBe(
       '--permission-mode bypass --respect-workspace-trust false'
     )
+  })
+})
+
+describe('Claude resume when its recorded folder is gone', () => {
+  const plan = (agent: 'claude' | 'codex') =>
+    buildAgentResumeStartupPlan({
+      agent,
+      providerSession: { key: 'session_id', id: 's1', cwd: '/repo/.worktrees/gone' },
+      cmdOverrides: {},
+      platform: 'darwin',
+      launchCwd: '/repo'
+    })
+
+  it('still starts Claude from the launch folder after a failed cd', () => {
+    expect(plan('claude')?.launchCommand).toMatch(/^cd '\/repo\/\.worktrees\/gone'; /)
+  })
+
+  it('keeps stopping at the failed cd for other agents', () => {
+    expect(plan('codex')?.launchCommand).toMatch(/^cd '\/repo\/\.worktrees\/gone' && /)
   })
 })

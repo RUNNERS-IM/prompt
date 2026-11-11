@@ -233,7 +233,11 @@
       "noUpdateDays_one": "Нет обновлений {{count}} дн. · возможно, завис",
       "noUpdateDays_few": "Нет обновлений {{count}} дн. · возможно, завис",
       "noUpdateDays_many": "Нет обновлений {{count}} дн. · возможно, завис",
-      "noUpdateDays_other": "Нет обновлений {{count}} дн. · возможно, завис"
+      "noUpdateDays_other": "Нет обновлений {{count}} дн. · возможно, завис",
+      "loginUnmoved": "Не перешла на новый вход",
+      "restartSession": "Перезапустить",
+      "resumeFailed": "Не удалось снова открыть этот сеанс",
+      "retryResume": "Повторить"
     },
     "sessionMove": {
       "cancelRemote": "Сессии можно переносить только между проектами на этом компьютере.",

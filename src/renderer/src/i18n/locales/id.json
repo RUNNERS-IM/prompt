@@ -22863,7 +22863,11 @@
         "other": "Menggunakan {{tool}}"
       },
       "noUpdateHours_other": "Tidak ada pembaruan selama {{count}} jam · mungkin macet",
-      "noUpdateDays_other": "Tidak ada pembaruan selama {{count}} hari · mungkin macet"
+      "noUpdateDays_other": "Tidak ada pembaruan selama {{count}} hari · mungkin macet",
+      "loginUnmoved": "Tidak pindah ke login baru",
+      "restartSession": "Mulai ulang",
+      "resumeFailed": "Tidak dapat membuka kembali sesi ini",
+      "retryResume": "Coba lagi"
     },
     "timeAgo": {
       "now": "sekarang",

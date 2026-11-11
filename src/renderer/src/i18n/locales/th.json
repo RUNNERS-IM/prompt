@@ -22863,7 +22863,11 @@
         "other": "กำลังใช้ {{tool}}"
       },
       "noUpdateHours_other": "ไม่มีอัปเดต {{count}} ชม. · อาจค้างอยู่",
-      "noUpdateDays_other": "ไม่มีอัปเดต {{count}} วัน · อาจค้างอยู่"
+      "noUpdateDays_other": "ไม่มีอัปเดต {{count}} วัน · อาจค้างอยู่",
+      "loginUnmoved": "ย้ายไปยังการเข้าสู่ระบบใหม่ไม่ได้",
+      "restartSession": "เริ่มใหม่",
+      "resumeFailed": "เปิดเซสชันนี้อีกครั้งไม่ได้",
+      "retryResume": "ลองอีกครั้ง"
     },
     "timeAgo": {
       "now": "ตอนนี้",

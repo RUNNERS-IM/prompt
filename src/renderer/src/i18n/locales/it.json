@@ -23645,7 +23645,11 @@
       "noUpdateHours_other": "Nessun aggiornamento da {{count}} h · potrebbe essere bloccato",
       "noUpdateDays_one": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
       "noUpdateDays_many": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
-      "noUpdateDays_other": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato"
+      "noUpdateDays_other": "Nessun aggiornamento da {{count}} g · potrebbe essere bloccato",
+      "loginUnmoved": "Non spostata al nuovo accesso",
+      "restartSession": "Riavvia",
+      "resumeFailed": "Impossibile riaprire questa sessione",
+      "retryResume": "Riprova"
     },
     "timeAgo": {
       "now": "ora",

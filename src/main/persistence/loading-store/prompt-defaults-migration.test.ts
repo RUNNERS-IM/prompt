@@ -37,6 +37,19 @@ describe('applyPromptDefaultsOnce', () => {
     expect(result.defaultTuiAgent).toBe('codex')
   })
 
+  it('restarts sessions on a new login by itself unless the user opted out', () => {
+    const asked = applyPromptDefaultsOnce(
+      { claudeAccountSwitchRunningSessions: 'ask' } as unknown as Settings,
+      () => {}
+    )
+    expect(asked.claudeAccountSwitchRunningSessions).toBe('restart')
+    const kept = applyPromptDefaultsOnce(
+      { claudeAccountSwitchRunningSessions: 'keep' } as unknown as Settings,
+      () => {}
+    )
+    expect(kept.claudeAccountSwitchRunningSessions).toBe('keep')
+  })
+
   it('does not run again, so a later choice sticks', () => {
     const markNeedsSave = vi.fn()
     const loaded = {

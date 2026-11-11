@@ -22689,7 +22689,11 @@
         "other": "{{tool}} 쓰는 중"
       },
       "noUpdateHours_other": "{{count}}시간째 소식 없음 · 멈췄을 수 있음",
-      "noUpdateDays_other": "{{count}}일째 소식 없음 · 멈췄을 수 있음"
+      "noUpdateDays_other": "{{count}}일째 소식 없음 · 멈췄을 수 있음",
+      "loginUnmoved": "새 로그인으로 옮기지 못함",
+      "restartSession": "재시작",
+      "resumeFailed": "세션을 다시 열지 못함",
+      "retryResume": "다시 시도"
     },
     "windows": {
       "newWindow": "새 창",

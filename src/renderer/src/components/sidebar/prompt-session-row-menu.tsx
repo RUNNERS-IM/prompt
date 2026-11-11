@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Copy, Layers, Pencil, X } from 'lucide-react'
+import { toast } from 'sonner'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +17,7 @@ import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
 import { useUiLanguageRevision } from '@/i18n/use-ui-language-revision'
 import { useOptionalShortcutLabel } from '@/hooks/useShortcutLabel'
+import { resolvePaneAgentSessionId } from '@/components/terminal-pane/pane-agent-session-id'
 import { CLOSE_ALL_CONTEXT_MENUS_EVENT } from '@/lib/close-all-context-menus'
 import { TAB_COLORS } from '@/components/tab-bar/tab-colors'
 import { PromptClaudeModelSubmenu } from '@/components/prompt-claude-model-menu'
@@ -149,6 +151,10 @@ export function PromptSessionRowMenu({
     [name, renaming, tabId, worktreeId]
   )
 
+  const sessionId = useAppStore((state) =>
+    open && paneKey ? resolvePaneAgentSessionId(state, paneKey) : null
+  )
+
   const handleDoubleClick = useCallback((event: React.MouseEvent) => {
     // Buttons on the row (×, helper count) keep their own double-click.
     if ((event.target as HTMLElement).closest('button')) {
@@ -242,16 +248,36 @@ export function PromptSessionRowMenu({
           </DropdownMenuSub>
           <DropdownMenuSeparator />
           {copyCommand ? (
-            <>
-              <DropdownMenuItem
-                onSelect={() => duplicatePromptSession(worktreeId, tabId, copyCommand)}
-              >
-                <Copy className="size-3.5" />
-                {translate('prompt.sidebarSessions.duplicate', 'Duplicate')}
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-            </>
+            <DropdownMenuItem
+              onSelect={() => duplicatePromptSession(worktreeId, tabId, copyCommand)}
+            >
+              <Copy className="size-3.5" />
+              {translate('prompt.sidebarSessions.duplicate', 'Duplicate')}
+            </DropdownMenuItem>
           ) : null}
+          {sessionId ? (
+            <DropdownMenuItem
+              onSelect={() =>
+                void window.api.ui
+                  .writeClipboardText(sessionId)
+                  .then(() =>
+                    toast.success(
+                      translate(
+                        'components.terminalPane.TerminalContextMenu.copySessionIdSuccess',
+                        'Session ID copied'
+                      )
+                    )
+                  )
+              }
+            >
+              <Copy className="size-3.5" />
+              {translate(
+                'components.terminalPane.TerminalContextMenu.copySessionId',
+                'Copy Session ID'
+              )}
+            </DropdownMenuItem>
+          ) : null}
+          {copyCommand || sessionId ? <DropdownMenuSeparator /> : null}
           <DropdownMenuItem
             variant="destructive"
             onSelect={() => closePromptSession(worktreeId, tabId)}

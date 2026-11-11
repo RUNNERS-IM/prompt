@@ -224,7 +224,11 @@
         "overloaded": "サーバー混雑中"
       },
       "noUpdateHours_other": "{{count}} 時間更新なし · 停止している可能性があります",
-      "noUpdateDays_other": "{{count}} 日間更新なし · 停止している可能性があります"
+      "noUpdateDays_other": "{{count}} 日間更新なし · 停止している可能性があります",
+      "loginUnmoved": "新しいログインに移行できませんでした",
+      "restartSession": "再起動",
+      "resumeFailed": "セッションを再度開けませんでした",
+      "retryResume": "再試行"
     },
     "sessionMove": {
       "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",

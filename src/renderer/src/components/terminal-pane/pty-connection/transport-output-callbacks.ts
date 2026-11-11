@@ -2,6 +2,7 @@ import {
   applyTerminalLaunchResult,
   captureTerminalLaunchContext
 } from './terminal-launch-result-policy'
+import { watchClaudeResumeFromStartup } from './claude-resume-startup-watch'
 import type { ColdRestoreAgentResumeStartup } from './fresh-spawn-types'
 import type { TerminalAttachmentLaunchResult } from '../../../../../shared/terminal-attachment-launch-result'
 import { isPaneOwnerRefusal } from './pane-owner-recovery'
@@ -44,6 +45,7 @@ export function bindCaptureTransportOutputCallbacks(session: ConnectPanePtySessi
       isForeground: () => session.deps.isVisibleRef.current,
       onRender: (callback) => session.pane.terminal.onRender(callback)
     })
+    let resumeWatched = false
     return {
       generation,
       launchContext,
@@ -74,6 +76,11 @@ export function bindCaptureTransportOutputCallbacks(session: ConnectPanePtySessi
             session.reportRemoteRendererSerializerReady()
             // Re-derive the pause bit after a rebind; visibility can change while no PTY is bound.
             session.syncHiddenRendererPtyDelivery()
+            const ptyId = session.transport.getPtyId()
+            if (ptyId && !resumeWatched) {
+              resumeWatched = true
+              watchClaudeResumeFromStartup(session, ptyId, savedStartup)
+            }
           }
         },
         onStreamRecovered: (): void => {
