@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { getRendererAppPlatform } from '@/lib/renderer-app-platform'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -53,10 +54,20 @@ function statusLabel(status: PromptComputerStatus): string {
   }
 }
 
+/** Mac, PC or computer, as each OS calls the machine (Draw review-1111 4b4074d). */
+function thisComputerTag(): string {
+  const platform = getRendererAppPlatform()
+  if (platform === 'darwin') {
+    return translate('prompt.computerPicker.thisMac', '(this Mac)')
+  }
+  if (platform === 'win32') {
+    return translate('prompt.computerPicker.thisPc', '(this PC)')
+  }
+  return translate('prompt.computerPicker.thisComputerLinux', '(this computer)')
+}
+
 function rowLabel(row: PromptComputerRow): string {
-  return row.isLocal
-    ? `${row.label} ${translate('prompt.computerPicker.thisMac', '(this Mac)')}`
-    : row.label
+  return row.isLocal ? `${row.label} ${thisComputerTag()}` : row.label
 }
 
 /** Each part isolated so an Arabic screen does not reorder the machine name and its bracket. */
@@ -66,7 +77,7 @@ function RowLabelText({ row }: { row: PromptComputerRow }): React.JSX.Element {
   }
   return (
     <>
-      <bdi>{row.label}</bdi> <bdi>{translate('prompt.computerPicker.thisMac', '(this Mac)')}</bdi>
+      <bdi>{row.label}</bdi> <bdi>{thisComputerTag()}</bdi>
     </>
   )
 }

@@ -138,7 +138,8 @@
         "experimentalGroup": "Fonctionnalités expérimentales",
         "sessionSearchGroup": "Recherche dans les sessions d'agent",
         "title": "Avancé",
-        "description": "Réseau, autorisations macOS, recherche dans les sessions et fonctionnalités expérimentales."
+        "description": "Réseau, autorisations macOS, recherche dans les sessions et fonctionnalités expérimentales.",
+        "descriptionNoPermissions": "Réseau, recherche dans les sessions et fonctionnalités expérimentales."
       },
       "git": {
         "branchesGroup": "Branches et espaces de travail",
@@ -197,6 +198,8 @@
       "connecting": "Connexion en cours",
       "offline": "Hors ligne",
       "thisMac": "(ce Mac)",
+      "thisPc": "(ce PC)",
+      "thisComputerLinux": "(cet ordinateur)",
       "thisComputer": "Cet ordinateur",
       "label": "Ordinateur",
       "add": "Ajouter un ordinateur…",

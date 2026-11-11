@@ -23195,6 +23195,8 @@
     "computerPicker": {
       "label": "Computer",
       "thisMac": "(this Mac)",
+      "thisPc": "(this PC)",
+      "thisComputerLinux": "(this computer)",
       "thisComputer": "This computer",
       "connected": "Connected",
       "connecting": "Connecting",
@@ -23378,7 +23380,8 @@
         "experimentalGroup": "Experimental features",
         "sessionSearchGroup": "Agent session search",
         "title": "Advanced",
-        "description": "Network, macOS permissions, session search, and experimental features."
+        "description": "Network, macOS permissions, session search, and experimental features.",
+        "descriptionNoPermissions": "Network, session search, and experimental features."
       },
       "git": {
         "branchesGroup": "Branches and workspaces",

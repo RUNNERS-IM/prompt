@@ -138,7 +138,8 @@
         "experimentalGroup": "Experimentelle Funktionen",
         "sessionSearchGroup": "Suche in Agentensitzungen",
         "title": "Erweitert",
-        "description": "Netzwerk, macOS-Berechtigungen, Sitzungssuche und experimentelle Funktionen."
+        "description": "Netzwerk, macOS-Berechtigungen, Sitzungssuche und experimentelle Funktionen.",
+        "descriptionNoPermissions": "Netzwerk, Sitzungssuche und experimentelle Funktionen."
       },
       "git": {
         "branchesGroup": "Branches und Arbeitsbereiche",
@@ -196,6 +197,8 @@
       "connecting": "Verbindung wird hergestellt",
       "offline": "Offline",
       "thisMac": "(dieser Mac)",
+      "thisPc": "(dieser PC)",
+      "thisComputerLinux": "(dieser Computer)",
       "thisComputer": "Dieser Computer",
       "label": "Computer",
       "add": "Computer hinzufügen…",

@@ -22806,6 +22806,8 @@
     "computerPicker": {
       "label": "Máy tính",
       "thisMac": "(Mac này)",
+      "thisPc": "(PC này)",
+      "thisComputerLinux": "(máy tính này)",
       "thisComputer": "Máy tính này",
       "connected": "Đã kết nối",
       "connecting": "Đang kết nối",
@@ -22987,7 +22989,8 @@
         "experimentalGroup": "Tính năng thử nghiệm",
         "sessionSearchGroup": "Tìm kiếm phiên agent",
         "title": "Nâng cao",
-        "description": "Mạng, quyền macOS, tìm kiếm phiên và tính năng thử nghiệm."
+        "description": "Mạng, quyền macOS, tìm kiếm phiên và tính năng thử nghiệm.",
+        "descriptionNoPermissions": "Mạng, tìm kiếm phiên và tính năng thử nghiệm."
       },
       "git": {
         "branchesGroup": "Branch và không gian làm việc",

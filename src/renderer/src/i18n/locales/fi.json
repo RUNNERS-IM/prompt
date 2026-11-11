@@ -23195,6 +23195,8 @@
     "computerPicker": {
       "label": "Tietokone",
       "thisMac": "(tämä Mac)",
+      "thisPc": "(tämä PC)",
+      "thisComputerLinux": "(tämä tietokone)",
       "thisComputer": "Tämä tietokone",
       "connected": "Yhdistetty",
       "connecting": "Yhdistetään",
@@ -23378,7 +23380,8 @@
         "experimentalGroup": "Kokeelliset ominaisuudet",
         "sessionSearchGroup": "Agenttisessioiden haku",
         "title": "Lisäasetukset",
-        "description": "Verkko, macOS-käyttöoikeudet, sessiohaku ja kokeelliset ominaisuudet."
+        "description": "Verkko, macOS-käyttöoikeudet, sessiohaku ja kokeelliset ominaisuudet.",
+        "descriptionNoPermissions": "Verkko, sessiohaku ja kokeelliset ominaisuudet."
       },
       "git": {
         "branchesGroup": "Branchit ja työtilat",

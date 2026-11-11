@@ -23195,6 +23195,8 @@
     "computerPicker": {
       "label": "Computer",
       "thisMac": "(deze Mac)",
+      "thisPc": "(deze pc)",
+      "thisComputerLinux": "(deze computer)",
       "thisComputer": "Deze computer",
       "connected": "Verbonden",
       "connecting": "Bezig met verbinden",
@@ -23378,7 +23380,8 @@
         "experimentalGroup": "Experimentele functies",
         "sessionSearchGroup": "Zoeken in agentsessies",
         "title": "Geavanceerd",
-        "description": "Netwerk, macOS-toestemmingen, sessies doorzoeken en experimentele functies."
+        "description": "Netwerk, macOS-toestemmingen, sessies doorzoeken en experimentele functies.",
+        "descriptionNoPermissions": "Netwerk, sessies doorzoeken en experimentele functies."
       },
       "git": {
         "branchesGroup": "Branches en werkruimtes",

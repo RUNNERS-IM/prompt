@@ -71,6 +71,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.git.description': '브랜치, 소스 제어 작업, GitHub · GitLab 연결을 정합니다.',
   'prompt.settings.advanced.title': '고급',
   'prompt.settings.advanced.description': '네트워크, macOS 권한, 세션 검색, 실험 기능을 정합니다.',
+  'prompt.settings.advanced.descriptionNoPermissions': '네트워크, 세션 검색, 실험 기능을 정합니다.',
   'prompt.about.menuLabel': '{{name}} 정보',
   'prompt.about.versionLine': '버전 {{version}} · 무료',
   'prompt.about.website': '웹사이트',

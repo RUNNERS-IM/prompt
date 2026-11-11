@@ -1,6 +1,8 @@
 import { Bot, CircleUserRound, Info } from 'lucide-react'
 import type { SettingsNavSection } from '@/lib/settings-navigation-types'
 import { translate } from '@/i18n/i18n'
+import { getRendererAppPlatform } from '@/lib/renderer-app-platform'
+import { isWebClientLocation } from '@/lib/web-client-location'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
 
 // Prompt only runs Claude Code sessions, so these Orca settings pages are hidden from the
@@ -111,10 +113,17 @@ export function promptSettingsSectionCopy(
     case 'advanced':
       return {
         title: translate('prompt.settings.advanced.title', 'Advanced'),
-        description: translate(
-          'prompt.settings.advanced.description',
-          'Network, macOS permissions, session search, and experimental features.'
-        )
+        // The permissions box only shows in the Mac desktop app (settings-remote-security-section-renderers).
+        description:
+          getRendererAppPlatform() === 'darwin' && !isWebClientLocation()
+            ? translate(
+                'prompt.settings.advanced.description',
+                'Network, macOS permissions, session search, and experimental features.'
+              )
+            : translate(
+                'prompt.settings.advanced.descriptionNoPermissions',
+                'Network, session search, and experimental features.'
+              )
       }
     default:
       return null

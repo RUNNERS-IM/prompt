@@ -23973,6 +23973,8 @@
     "computerPicker": {
       "label": "Komputer",
       "thisMac": "(ten Mac)",
+      "thisPc": "(ten komputer PC)",
+      "thisComputerLinux": "(ten komputer)",
       "thisComputer": "Ten komputer",
       "connected": "Połączono",
       "connecting": "Łączenie…",
@@ -24160,7 +24162,8 @@
         "experimentalGroup": "Funkcje eksperymentalne",
         "sessionSearchGroup": "Wyszukiwanie sesji agentów",
         "title": "Zaawansowane",
-        "description": "Sieć, uprawnienia macOS, wyszukiwanie sesji i funkcje eksperymentalne."
+        "description": "Sieć, uprawnienia macOS, wyszukiwanie sesji i funkcje eksperymentalne.",
+        "descriptionNoPermissions": "Sieć, wyszukiwanie sesji i funkcje eksperymentalne."
       },
       "git": {
         "branchesGroup": "Branche i obszary robocze",

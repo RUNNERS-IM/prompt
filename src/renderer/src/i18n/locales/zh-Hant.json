@@ -138,7 +138,8 @@
         "experimentalGroup": "實驗性功能",
         "sessionSearchGroup": "代理程式工作階段搜尋",
         "title": "進階",
-        "description": "網路、macOS 權限、工作階段搜尋與實驗性功能。"
+        "description": "網路、macOS 權限、工作階段搜尋與實驗性功能。",
+        "descriptionNoPermissions": "網路、工作階段搜尋與實驗性功能。"
       },
       "git": {
         "branchesGroup": "分支與工作區",
@@ -194,6 +195,8 @@
       "connecting": "連線中",
       "offline": "離線",
       "thisMac": "（這部 Mac）",
+      "thisPc": "（這台電腦）",
+      "thisComputerLinux": "（這部電腦）",
       "thisComputer": "這部電腦",
       "label": "電腦",
       "add": "新增電腦…",

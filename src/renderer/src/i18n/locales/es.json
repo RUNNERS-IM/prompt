@@ -138,7 +138,8 @@
         "experimentalGroup": "Funciones experimentales",
         "sessionSearchGroup": "Búsqueda de sesiones de agentes",
         "title": "Avanzado",
-        "description": "Red, permisos de macOS, búsqueda de sesiones y funciones experimentales."
+        "description": "Red, permisos de macOS, búsqueda de sesiones y funciones experimentales.",
+        "descriptionNoPermissions": "Red, búsqueda de sesiones y funciones experimentales."
       },
       "git": {
         "branchesGroup": "Ramas y espacios de trabajo",
@@ -197,6 +198,8 @@
       "connecting": "Conectando",
       "offline": "Sin conexión",
       "thisMac": "(este Mac)",
+      "thisPc": "(este PC)",
+      "thisComputerLinux": "(este equipo)",
       "thisComputer": "Este equipo",
       "label": "Equipo",
       "add": "Agregar equipo…",

@@ -138,7 +138,8 @@
         "experimentalGroup": "实验性功能",
         "sessionSearchGroup": "智能体会话搜索",
         "title": "高级",
-        "description": "网络、macOS 权限、会话搜索和实验性功能。"
+        "description": "网络、macOS 权限、会话搜索和实验性功能。",
+        "descriptionNoPermissions": "网络、会话搜索和实验性功能。"
       },
       "git": {
         "branchesGroup": "分支和工作区",
@@ -194,6 +195,8 @@
       "connecting": "正在连接",
       "offline": "离线",
       "thisMac": "（这台 Mac）",
+      "thisPc": "（这台电脑）",
+      "thisComputerLinux": "（这台计算机）",
       "thisComputer": "这台电脑",
       "label": "电脑",
       "add": "添加电脑…",

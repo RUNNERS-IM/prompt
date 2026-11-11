@@ -22806,6 +22806,8 @@
     "computerPicker": {
       "label": "Komputer",
       "thisMac": "(Mac ini)",
+      "thisPc": "(PC ini)",
+      "thisComputerLinux": "(komputer ini)",
       "thisComputer": "Komputer ini",
       "connected": "Terhubung",
       "connecting": "Menghubungkan",
@@ -22987,7 +22989,8 @@
         "experimentalGroup": "Fitur eksperimental",
         "sessionSearchGroup": "Pencarian sesi agen",
         "title": "Lanjutan",
-        "description": "Jaringan, izin macOS, pencarian sesi, dan fitur eksperimental."
+        "description": "Jaringan, izin macOS, pencarian sesi, dan fitur eksperimental.",
+        "descriptionNoPermissions": "Jaringan, pencarian sesi, dan fitur eksperimental."
       },
       "git": {
         "branchesGroup": "Branch dan workspace",

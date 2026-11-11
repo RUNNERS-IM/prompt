@@ -22632,6 +22632,8 @@
     "computerPicker": {
       "label": "컴퓨터",
       "thisMac": "(이 맥)",
+      "thisPc": "(이 PC)",
+      "thisComputerLinux": "(이 컴퓨터)",
       "thisComputer": "이 컴퓨터",
       "connected": "연결됨",
       "connecting": "연결 중",

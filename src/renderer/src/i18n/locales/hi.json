@@ -23195,6 +23195,8 @@
     "computerPicker": {
       "label": "कंप्यूटर",
       "thisMac": "(यह Mac)",
+      "thisPc": "(यह PC)",
+      "thisComputerLinux": "(यह कंप्यूटर)",
       "thisComputer": "यह कंप्यूटर",
       "connected": "कनेक्ट हो गया",
       "connecting": "कनेक्ट हो रहा है…",
@@ -23378,7 +23380,8 @@
         "experimentalGroup": "प्रायोगिक सुविधाएँ",
         "sessionSearchGroup": "Agent सत्र खोज",
         "title": "उन्नत",
-        "description": "नेटवर्क, macOS अनुमतियाँ, सत्र खोज और प्रायोगिक सुविधाएँ।"
+        "description": "नेटवर्क, macOS अनुमतियाँ, सत्र खोज और प्रायोगिक सुविधाएँ।",
+        "descriptionNoPermissions": "नेटवर्क, सत्र खोज और प्रायोगिक सुविधाएँ।"
       },
       "git": {
         "branchesGroup": "Branch और वर्कस्पेस",

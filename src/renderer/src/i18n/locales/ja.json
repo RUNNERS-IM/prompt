@@ -138,7 +138,8 @@
         "experimentalGroup": "実験的機能",
         "sessionSearchGroup": "Agent セッション検索",
         "title": "詳細設定",
-        "description": "ネットワーク、macOS の権限、セッション検索、実験的機能。"
+        "description": "ネットワーク、macOS の権限、セッション検索、実験的機能。",
+        "descriptionNoPermissions": "ネットワーク、セッション検索、実験的機能。"
       },
       "git": {
         "branchesGroup": "ブランチとワークスペース",
@@ -194,6 +195,8 @@
       "connecting": "接続中",
       "offline": "オフライン",
       "thisMac": "(この Mac)",
+      "thisPc": "(この PC)",
+      "thisComputerLinux": "(このコンピュータ)",
       "thisComputer": "このコンピューター",
       "label": "コンピューター",
       "add": "コンピューターを追加…",

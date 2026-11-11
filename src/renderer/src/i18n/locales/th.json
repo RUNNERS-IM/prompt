@@ -22806,6 +22806,8 @@
     "computerPicker": {
       "label": "คอมพิวเตอร์",
       "thisMac": "(Mac เครื่องนี้)",
+      "thisPc": "(พีซีเครื่องนี้)",
+      "thisComputerLinux": "(คอมพิวเตอร์เครื่องนี้)",
       "thisComputer": "คอมพิวเตอร์เครื่องนี้",
       "connected": "เชื่อมต่อแล้ว",
       "connecting": "กำลังเชื่อมต่อ…",
@@ -22987,7 +22989,8 @@
         "experimentalGroup": "ฟีเจอร์ทดลอง",
         "sessionSearchGroup": "ค้นหา agent session",
         "title": "ขั้นสูง",
-        "description": "เครือข่าย สิทธิ์ของ macOS การค้นหา session และฟีเจอร์ทดลอง"
+        "description": "เครือข่าย สิทธิ์ของ macOS การค้นหา session และฟีเจอร์ทดลอง",
+        "descriptionNoPermissions": "เครือข่าย การค้นหา session และฟีเจอร์ทดลอง"
       },
       "git": {
         "branchesGroup": "Branch และ workspace",

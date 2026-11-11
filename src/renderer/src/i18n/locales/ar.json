@@ -24751,6 +24751,8 @@
     "computerPicker": {
       "label": "الكمبيوتر",
       "thisMac": "(هذا الـ Mac)",
+      "thisPc": "(جهاز الكمبيوتر هذا)",
+      "thisComputerLinux": "(هذا الكمبيوتر)",
       "thisComputer": "هذا الكمبيوتر",
       "connected": "متصل",
       "connecting": "جارٍ الاتصال…",
@@ -24942,7 +24944,8 @@
         "experimentalGroup": "الميزات التجريبية",
         "sessionSearchGroup": "البحث في جلسات الوكيل",
         "title": "متقدم",
-        "description": "الشبكة وأذونات macOS والبحث في الجلسات والميزات التجريبية."
+        "description": "الشبكة وأذونات macOS والبحث في الجلسات والميزات التجريبية.",
+        "descriptionNoPermissions": "الشبكة والبحث في الجلسات والميزات التجريبية."
       },
       "git": {
         "branchesGroup": "branches ومساحات العمل",
