@@ -227,14 +227,14 @@ export function MobileAccountsScreen() {
                   <UsageBar
                     label={t('accounts.screen.sessionWindow', '5h')}
                     {...activeSessionBar}
-                    resetText={getWindowResetLabel(activeUsage, 'session', now)}
+                    resetText={getWindowResetLabel(activeUsage, 'session', now, t)}
                   />
                   <UsageBar
                     label={t('accounts.screen.weeklyWindow', '7d')}
                     usedPercent={activeWeeklyBar.usedPercent}
                     unavailable={activeWeeklyBar.unavailable}
                     loading={activeWeeklyBar.loading}
-                    resetText={getWindowResetLabel(activeUsage, 'weekly', now)}
+                    resetText={getWindowResetLabel(activeUsage, 'weekly', now, t)}
                   />
                 </View>
               ) : null}
@@ -280,14 +280,14 @@ export function MobileAccountsScreen() {
                       <UsageBar
                         label={t('accounts.screen.sessionWindow', '5h')}
                         {...sessionBar}
-                        resetText={getWindowResetLabel(usage, 'session', now)}
+                        resetText={getWindowResetLabel(usage, 'session', now, t)}
                       />
                       <UsageBar
                         label={t('accounts.screen.weeklyWindow', '7d')}
                         usedPercent={weeklyBar.usedPercent}
                         unavailable={weeklyBar.unavailable}
                         loading={weeklyBar.loading}
-                        resetText={getWindowResetLabel(usage, 'weekly', now)}
+                        resetText={getWindowResetLabel(usage, 'weekly', now, t)}
                       />
                     </View>
                     {usage?.error ? (

@@ -10,6 +10,8 @@
       "loadingAccounts": "Cargando cuentas…",
       "manageAccountsHint": "Añade cuentas o vuelve a autenticarlas desde Ajustes → Cuentas en el escritorio.",
       "refreshAccounts": "Actualizar cuentas",
+      "resetsIn": "Se restablece en {{duration}}",
+      "resetsNow": "Se restablece ahora",
       "sessionWindow": "5h",
       "switchFailed": "No se pudo cambiar de cuenta",
       "title": "Cuentas",

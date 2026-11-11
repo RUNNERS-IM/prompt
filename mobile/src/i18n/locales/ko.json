@@ -10,6 +10,8 @@
       "loadingAccounts": "계정 로드 중…",
       "manageAccountsHint": "데스크톱의 설정 → 계정에서 계정을 추가하거나 다시 인증하세요.",
       "refreshAccounts": "계정 새로고침",
+      "resetsIn": "{{duration}} 후 초기화",
+      "resetsNow": "곧 초기화",
       "sessionWindow": "5시간",
       "switchFailed": "계정을 전환하지 못했습니다.",
       "title": "계정",

@@ -1,6 +1,7 @@
 // Keep shapes aligned with shared types/rate-limit-types without pulling Electron-coupled desktop graph into mobile.
 // Pure RN-free selectors stay directly testable; AccountUsage re-exports them with UsageBar.
-import { formatResetCountdown } from '../../../src/shared/rate-limit-reset-format'
+import { formatResetDuration } from '../../../src/shared/rate-limit-reset-format'
+import type { Translate } from '../i18n/mobile-i18n'
 import type {
   AccountsSnapshot,
   InactiveAccountUsage,
@@ -87,17 +88,21 @@ export function showsSessionWindow(limits: ProviderRateLimits | null): boolean {
   return limits?.session != null || limits?.weekly == null
 }
 
-// Use desktop formatResetCountdown copy with injectable now; return null without reset timestamp to retain bars-only UI.
+// Desktop duration units with injectable now; return null without reset timestamp to retain bars-only UI.
 export function getWindowResetLabel(
   limits: ProviderRateLimits | null,
   windowKey: 'session' | 'weekly',
-  now: number
+  now: number,
+  t: Translate
 ): string | null {
   const resetsAt = limits?.[windowKey]?.resetsAt
   if (resetsAt == null) {
     return null
   }
-  return formatResetCountdown(resetsAt - now)
+  const duration = formatResetDuration(resetsAt - now)
+  return duration === 'now'
+    ? t('accounts.screen.resetsNow', 'Resets now')
+    : t('accounts.screen.resetsIn', 'Resets in {{duration}}', { duration })
 }
 
 // Show provider with managed accounts or active system-default quota; management is not required for usage UI.
