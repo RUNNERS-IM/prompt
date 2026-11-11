@@ -17,6 +17,7 @@ describe('buildRunnersAppGroups', () => {
     expect(groups[0].items.map((i) => i.id)).toEqual(['split', 'monitor', 'remote', 'draw'])
     expect(groups[1].items.map((i) => i.id)).toEqual(['sense', 'pudding'])
     expect(groups[0].items[0].iconUrl).toBe('icons/split.png')
+    expect(groups[0].items[0].iconDarkUrl).toBe('icons/split-dark.png')
   })
 
   it('skips rows whose url is empty or not https, and groups left empty', () => {
