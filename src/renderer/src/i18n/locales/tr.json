@@ -205,6 +205,25 @@
       "share": "Bu bilgisayarı paylaş…",
       "shareTitle": "Bu bilgisayarı paylaş"
     },
+    "library": {
+      "folderTab": "Klasör",
+      "promptsTab": "İstemler",
+      "search": "İstem ara",
+      "add": "Yeni istem",
+      "edit": "Düzenle",
+      "delete": "Sil",
+      "nameField": "Ad",
+      "bodyField": "İstem",
+      "save": "Kaydet",
+      "cancel": "İptal",
+      "emptyTitle": "Henüz kayıtlı istem yok",
+      "emptyBody": "Sık kullandığınız istemleri kaydedin, tıklayınca giriş satırına yerleşsin.",
+      "noTerminal": "Önce bir terminal oturumu açın",
+      "chatView": "İstem kullanmak için bu oturumu terminale geçirin",
+      "listView": "Liste görünümü",
+      "gridView": "Simge görünümü",
+      "upFolder": "Bir üst klasör"
+    },
     "sessionRow": {
       "helpers": "Yardımcılar {{count}}",
       "tool": {

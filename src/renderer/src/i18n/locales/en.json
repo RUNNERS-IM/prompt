@@ -23231,6 +23231,25 @@
       "dontAskAgain": "Don't ask again",
       "confirm": "Close"
     },
+    "library": {
+      "folderTab": "Folder",
+      "promptsTab": "Prompts",
+      "search": "Search prompts",
+      "add": "New prompt",
+      "edit": "Edit",
+      "delete": "Delete",
+      "nameField": "Name",
+      "bodyField": "Prompt",
+      "save": "Save",
+      "cancel": "Cancel",
+      "emptyTitle": "No saved prompts yet",
+      "emptyBody": "Save prompts you use often, then click one to put it in the input line.",
+      "noTerminal": "Open a terminal session first",
+      "chatView": "Switch this session to the terminal to use a prompt",
+      "listView": "List view",
+      "gridView": "Icon view",
+      "upFolder": "Up one folder"
+    },
     "sessionRow": {
       "helpers": "Helpers {{count}}",
       "monitoring": "Watching background tasks",

@@ -20,6 +20,7 @@ import { isGitRepoKind } from '../../../../shared/repo-kind'
 import { getVisibleFileExplorerWorktreePath } from './file-explorer-reset'
 import { FileExplorerBackgroundMenu } from './FileExplorerBackgroundMenu'
 import { FileExplorerFilesTreePane } from './FileExplorerFilesTreePane'
+import { FileExplorerGridPane } from './FileExplorerGridPane'
 import { FileExplorerNameFilter } from './FileExplorerNameFilter'
 import { FileExplorerQueryStrip } from './FileExplorerQueryStrip'
 import { FileExplorerToolbar } from './FileExplorerToolbar'
@@ -72,6 +73,8 @@ function FileExplorerFiles(): React.JSX.Element {
     activeWorktreeId ? (s.showDotfilesByWorktree[activeWorktreeId] ?? true) : true
   )
   const toggleShowDotfilesForWorktree = useAppStore((s) => s.toggleShowDotfilesForWorktree)
+  const viewMode = useAppStore((s) => s.settings?.fileExplorerViewMode ?? 'grid')
+  const updateSettings = useAppStore((s) => s.updateSettings)
 
   const savedRoot = useAppStore((s) =>
     activeWorktreeId ? s.explorerDisplayRootByWorktree[activeWorktreeId] : undefined
@@ -263,6 +266,10 @@ function FileExplorerFiles(): React.JSX.Element {
           onToggleGitIgnoredFiles={toggleGitIgnoredFiles}
           showDotfiles={showDotfiles}
           onToggleDotfiles={handleToggleDotfiles}
+          viewMode={viewMode}
+          onToggleViewMode={() =>
+            void updateSettings({ fileExplorerViewMode: viewMode === 'grid' ? 'list' : 'grid' })
+          }
         />
         {activeWorktree?.isSparse && (
           <FileExplorerScopeNotice
@@ -330,6 +337,15 @@ function FileExplorerFiles(): React.JSX.Element {
             handleExplorerBackgroundDoubleClick={handleExplorerBackgroundDoubleClick}
             wslHostUnavailable={wslHostUnavailable}
           />
+          {viewMode === 'grid' && isFilesViewActive && !hasNameFilter && activeWorktreeId ? (
+            <FileExplorerGridPane
+              rootPath={displayRootPath ?? worktreePath}
+              worktreeId={activeWorktreeId}
+              runtimeEnvironmentId={runtimeEnvironmentId}
+              showDotfiles={showDotfiles}
+              tree={tree}
+            />
+          ) : null}
           <div
             className={cn(
               'absolute inset-0 flex min-h-0 flex-col',

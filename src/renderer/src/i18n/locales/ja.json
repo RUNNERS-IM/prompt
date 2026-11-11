@@ -203,6 +203,25 @@
       "share": "このコンピューターを共有…",
       "shareTitle": "このコンピューターを共有"
     },
+    "library": {
+      "folderTab": "フォルダー",
+      "promptsTab": "プロンプト",
+      "search": "プロンプトを検索",
+      "add": "新しいプロンプト",
+      "edit": "編集",
+      "delete": "削除",
+      "nameField": "名前",
+      "bodyField": "プロンプト",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "emptyTitle": "保存したプロンプトはありません",
+      "emptyBody": "よく使うプロンプトを保存しておくと、クリックで入力欄に入ります。",
+      "noTerminal": "先にターミナルセッションを開いてください",
+      "chatView": "プロンプトを使うにはこのセッションをターミナル表示に切り替えてください",
+      "listView": "リスト表示",
+      "gridView": "アイコン表示",
+      "upFolder": "上のフォルダーへ"
+    },
     "sessionRow": {
       "helpers": "ヘルパー {{count}}",
       "tool": {

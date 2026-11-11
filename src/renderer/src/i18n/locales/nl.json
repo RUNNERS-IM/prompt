@@ -23231,6 +23231,25 @@
       "dontAskAgain": "Niet meer vragen",
       "confirm": "Sluiten"
     },
+    "library": {
+      "folderTab": "Map",
+      "promptsTab": "Prompts",
+      "search": "Prompts zoeken",
+      "add": "Nieuwe prompt",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "nameField": "Naam",
+      "bodyField": "Prompt",
+      "save": "Opslaan",
+      "cancel": "Annuleren",
+      "emptyTitle": "Nog geen opgeslagen prompts",
+      "emptyBody": "Sla prompts op die je vaak gebruikt en klik om ze in de invoerregel te zetten.",
+      "noTerminal": "Open eerst een terminalsessie",
+      "chatView": "Schakel deze sessie over naar de terminal om een prompt te gebruiken",
+      "listView": "Lijstweergave",
+      "gridView": "Pictogramweergave",
+      "upFolder": "Eén map omhoog"
+    },
     "sessionRow": {
       "helpers": "Helpers {{count}}",
       "monitoring": "Achtergrondtaken bewaken",

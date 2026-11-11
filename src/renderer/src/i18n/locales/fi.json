@@ -23231,6 +23231,25 @@
       "dontAskAgain": "Älä kysy uudelleen",
       "confirm": "Sulje"
     },
+    "library": {
+      "folderTab": "Kansio",
+      "promptsTab": "Kehotteet",
+      "search": "Hae kehotteita",
+      "add": "Uusi kehote",
+      "edit": "Muokkaa",
+      "delete": "Poista",
+      "nameField": "Nimi",
+      "bodyField": "Kehote",
+      "save": "Tallenna",
+      "cancel": "Peruuta",
+      "emptyTitle": "Tallennettuja kehotteita ei vielä ole",
+      "emptyBody": "Tallenna usein käyttämäsi kehotteet ja lisää ne syöttöriville napsauttamalla.",
+      "noTerminal": "Avaa ensin pääteistunto",
+      "chatView": "Vaihda tämä istunto päätteeseen käyttääksesi kehotetta",
+      "listView": "Luettelonäkymä",
+      "gridView": "Kuvakenäkymä",
+      "upFolder": "Kansio ylöspäin"
+    },
     "sessionRow": {
       "helpers": "Apulaiset {{count}}",
       "monitoring": "Seurataan taustatehtäviä",

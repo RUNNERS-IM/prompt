@@ -206,6 +206,25 @@
       "share": "Partager cet ordinateur…",
       "shareTitle": "Partager cet ordinateur"
     },
+    "library": {
+      "folderTab": "Dossier",
+      "promptsTab": "Prompts",
+      "search": "Rechercher des prompts",
+      "add": "Nouveau prompt",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "nameField": "Nom",
+      "bodyField": "Prompt",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "emptyTitle": "Aucun prompt enregistré",
+      "emptyBody": "Enregistrez vos prompts fréquents, puis cliquez pour les placer dans la ligne de saisie.",
+      "noTerminal": "Ouvrez d'abord une session de terminal",
+      "chatView": "Passez cette session au terminal pour utiliser un prompt",
+      "listView": "Vue en liste",
+      "gridView": "Vue en icônes",
+      "upFolder": "Dossier parent"
+    },
     "sessionRow": {
       "helpers": "Assistants {{count}}",
       "tool": {

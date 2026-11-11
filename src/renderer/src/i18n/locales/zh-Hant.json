@@ -203,6 +203,25 @@
       "share": "分享這部電腦…",
       "shareTitle": "分享這部電腦"
     },
+    "library": {
+      "folderTab": "資料夾",
+      "promptsTab": "提示詞",
+      "search": "搜尋提示詞",
+      "add": "新增提示詞",
+      "edit": "編輯",
+      "delete": "刪除",
+      "nameField": "名稱",
+      "bodyField": "提示詞",
+      "save": "儲存",
+      "cancel": "取消",
+      "emptyTitle": "尚未儲存提示詞",
+      "emptyBody": "儲存常用提示詞,點一下即可放入輸入列。",
+      "noTerminal": "請先開啟終端機工作階段",
+      "chatView": "若要使用提示詞,請將此工作階段切換到終端機檢視",
+      "listView": "清單檢視",
+      "gridView": "圖示檢視",
+      "upFolder": "上一層資料夾"
+    },
     "sessionRow": {
       "helpers": "協助程式 {{count}}",
       "tool": {

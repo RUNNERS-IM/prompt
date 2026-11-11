@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Plug, Files, GitBranch, ListChecks, Workflow } from 'lucide-react'
+import { Plug, Files, GitBranch, ListChecks, MessageSquareText, Workflow } from 'lucide-react'
 import { useAppStore } from '@/store'
 import { useRepoById } from '@/store/selectors'
 import { isFolderRepo } from '../../../../shared/repo-kind'
@@ -57,6 +57,7 @@ export function useRightSidebarActivityItems({
       s.runtimeEnvironments
     )
   )
+  const activeTab = useAppStore((s) => s.rightSidebarTab)
   const pluginSystemEnabled = useAppStore((s) => s.settings?.pluginSystemEnabled === true)
   const pluginPanels = usePluginPanels()
   const visiblePluginPanels = useMemo(
@@ -76,14 +77,23 @@ export function useRightSidebarActivityItems({
       {
         id: 'explorer',
         icon: Files,
-        title: translate('auto.components.right.sidebar.index.8bc2bbc3a0', 'Explorer'),
-        shortcut: explorerShortcut === 'Unassigned' ? '' : explorerShortcut
+        title: translate('prompt.library.folderTab', 'Folder'),
+        shortcut: explorerShortcut === 'Unassigned' ? '' : explorerShortcut,
+        showsTitle: true
+      },
+      {
+        id: 'prompts',
+        icon: MessageSquareText,
+        title: translate('prompt.library.promptsTab', 'Prompts'),
+        shortcut: '',
+        showsTitle: true
       },
       {
         id: 'vault',
         icon: AgentSessionHistoryIcon,
         title: translate('auto.components.right.sidebar.index.aiVaultSessionHistory', 'Agents'),
-        shortcut: ''
+        shortcut: '',
+        onlyWhileActive: true
       },
       {
         id: 'workspaces',
@@ -107,14 +117,16 @@ export function useRightSidebarActivityItems({
         icon: GitBranch,
         title: translate('auto.components.right.sidebar.index.0314901467', 'Source Control'),
         shortcut: sourceControlShortcut === 'Unassigned' ? '' : sourceControlShortcut,
-        gitOnly: true
+        gitOnly: true,
+        onlyWhileActive: true
       },
       {
         id: 'checks',
         icon: ListChecks,
         title: translate('auto.components.right.sidebar.index.83a10e3c44', 'Checks'),
         shortcut: checksShortcut === 'Unassigned' ? '' : checksShortcut,
-        gitOnly: true
+        gitOnly: true,
+        onlyWhileActive: true
       },
       {
         id: 'ports',
@@ -143,9 +155,10 @@ export function useRightSidebarActivityItems({
       getVisibleRightSidebarActivityItems(activityItems, {
         isFolder,
         isFolderWorkspace,
-        hasSshHost
+        hasSshHost,
+        activeTab
       }),
-    [activityItems, isFolder, isFolderWorkspace, hasSshHost]
+    [activityItems, isFolder, isFolderWorkspace, hasSshHost, activeTab]
   )
 
   const activeFolderWorkspaceKey = isFolderWorkspace ? (activeWorktreeId ?? null) : null

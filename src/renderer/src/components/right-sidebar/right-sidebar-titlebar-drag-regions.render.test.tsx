@@ -248,9 +248,8 @@ describe('rendered right sidebar titlebar drag regions', () => {
     expect(activityStrip).toContain('data-context-menu-trigger="true"')
     expect(markup).toContain('right-sidebar-header-drag')
 
-    expectNoDrag(buttonOpeningTag(markup, 'Explorer'))
-    expectNoDrag(buttonOpeningTag(markup, 'Source Control'))
-    expectNoDrag(buttonOpeningTag(markup, 'Checks'))
+    expectNoDrag(buttonOpeningTag(markup, 'Folder'))
+    expectNoDrag(buttonOpeningTag(markup, 'Prompts'))
     expect(buttonOpeningTag(markup, 'Toggle right sidebar')).toContain('sidebar-toggle')
     expect(markup).toContain(RIGHT_SIDEBAR_HEADER_NO_DRAG_CLASS_NAME)
   })
@@ -309,9 +308,8 @@ describe('rendered right sidebar titlebar drag regions', () => {
     expect(sideHeader).toContain('right-sidebar-header-side-inset')
     expect(sideStrip).toContain('data-context-menu-trigger="true"')
 
-    expectNoDrag(buttonOpeningTag(markup, 'Explorer'))
-    expectNoDrag(buttonOpeningTag(markup, 'Source Control'))
-    expectNoDrag(buttonOpeningTag(markup, 'Checks'))
+    expectNoDrag(buttonOpeningTag(markup, 'Folder'))
+    expectNoDrag(buttonOpeningTag(markup, 'Prompts'))
     expect(buttonOpeningTag(markup, 'Toggle right sidebar')).toContain('sidebar-toggle')
   })
 
@@ -321,8 +319,8 @@ describe('rendered right sidebar titlebar drag regions', () => {
 
     const markup = renderToStaticMarkup(<RightSidebar />)
 
-    expect(markup).toContain('aria-label="Explorer')
-    expect(markup).toContain('aria-label="Agents')
+    expect(markup).toContain('aria-label="Folder')
+    expect(markup).toContain('aria-label="Prompts')
     expect(markup).not.toContain('aria-label="Search')
     expect(markup).toContain('aria-label="Attached worktrees')
     expect(markup).toContain('aria-label="PR Checks')
@@ -382,7 +380,7 @@ describe('rendered right sidebar titlebar drag regions', () => {
 
     await act(async () => {
       container
-        .querySelector<HTMLButtonElement>('[aria-label^="Explorer"]')
+        .querySelector<HTMLButtonElement>('[aria-label^="Folder"]')
         ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     })
 

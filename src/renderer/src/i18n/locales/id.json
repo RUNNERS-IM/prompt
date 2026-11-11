@@ -22842,6 +22842,25 @@
       "dontAskAgain": "Jangan tanya lagi",
       "confirm": "Tutup"
     },
+    "library": {
+      "folderTab": "Folder",
+      "promptsTab": "Prompt",
+      "search": "Cari prompt",
+      "add": "Prompt baru",
+      "edit": "Edit",
+      "delete": "Hapus",
+      "nameField": "Nama",
+      "bodyField": "Prompt",
+      "save": "Simpan",
+      "cancel": "Batal",
+      "emptyTitle": "Belum ada prompt tersimpan",
+      "emptyBody": "Simpan prompt yang sering dipakai, lalu klik untuk memasukkannya ke baris input.",
+      "noTerminal": "Buka sesi terminal terlebih dahulu",
+      "chatView": "Alihkan sesi ini ke terminal untuk memakai prompt",
+      "listView": "Tampilan daftar",
+      "gridView": "Tampilan ikon",
+      "upFolder": "Naik satu folder"
+    },
     "sessionRow": {
       "helpers": "Helper {{count}}",
       "monitoring": "Memantau tugas latar belakang",

@@ -203,6 +203,25 @@
       "share": "共享这台电脑…",
       "shareTitle": "共享这台电脑"
     },
+    "library": {
+      "folderTab": "文件夹",
+      "promptsTab": "提示词",
+      "search": "搜索提示词",
+      "add": "新建提示词",
+      "edit": "编辑",
+      "delete": "删除",
+      "nameField": "名称",
+      "bodyField": "提示词",
+      "save": "保存",
+      "cancel": "取消",
+      "emptyTitle": "还没有保存的提示词",
+      "emptyBody": "保存常用提示词,点击即可放入输入行。",
+      "noTerminal": "请先打开终端会话",
+      "chatView": "要使用提示词,请将此会话切换到终端视图",
+      "listView": "列表视图",
+      "gridView": "图标视图",
+      "upFolder": "上一级文件夹"
+    },
     "sessionRow": {
       "helpers": "辅助 {{count}}",
       "tool": {

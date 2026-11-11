@@ -4,6 +4,7 @@ import type { ActiveRightSidebarTab } from '@/store/slices/editor'
 import { isPluginPanelTabKey } from '../../../../shared/plugins/manifest/plugin-manifest'
 
 const FileExplorer = lazy(() => import('./FileExplorer'))
+const PromptLibraryPanel = lazy(() => import('./PromptLibraryPanel'))
 const SourceControl = lazy(() => import('./SourceControl'))
 const ChecksPanel = lazy(() => import('./ChecksPanel'))
 const PortsPanel = lazy(() => import('./PortsPanel'))
@@ -25,6 +26,7 @@ export function RightSidebarPanelContent({
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       <Suspense fallback={null}>
         {effectiveTab === 'explorer' && <FileExplorer />}
+        {effectiveTab === 'prompts' && <PromptLibraryPanel />}
         {effectiveTab === 'source-control' && <SourceControl />}
         {effectiveTab === 'checks' && <ChecksPanel />}
         {/* SSH forwarding needs raw ports.detect data absent from the workspace-scoped status popover. */}
