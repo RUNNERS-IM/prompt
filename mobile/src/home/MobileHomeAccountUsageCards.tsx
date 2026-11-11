@@ -74,9 +74,7 @@ export function MobileHomeAccountUsageCards(props: {
                     <View style={styles.bars}>
                       <UsageBar
                         label={t('home.accountUsageCards.sessionWindow', '5h')}
-                        usedPercent={sessionBar.usedPercent}
-                        unavailable={sessionBar.unavailable}
-                        loading={sessionBar.loading}
+                        {...sessionBar}
                       />
                       <UsageBar
                         label={t('home.accountUsageCards.weeklyWindow', '7d')}

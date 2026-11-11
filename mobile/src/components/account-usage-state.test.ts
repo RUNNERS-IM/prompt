@@ -6,6 +6,7 @@ import {
   getWindowResetLabel,
   hasActiveProviderUsage,
   hasRenderableUsage,
+  showsSessionWindow,
   type AccountsSnapshot,
   type InactiveAccountUsage,
   type ProviderRateLimits
@@ -197,14 +198,34 @@ describe('getUsageBarState', () => {
       'session'
     )
 
-    expect(bar).toEqual({ usedPercent: 72, unavailable: false, loading: false })
+    expect(bar).toEqual({ usedPercent: 72, unavailable: false, loading: false, hidden: false })
   })
 
   it('shows loading for a fetching provider without a window', () => {
     expect(getUsageBarState(makeLimits({ status: 'fetching' }), 'weekly')).toEqual({
       usedPercent: null,
       unavailable: false,
-      loading: true
+      loading: true,
+      hidden: false
     })
+  })
+})
+
+describe('showsSessionWindow', () => {
+  const weekly = { usedPercent: 40, windowMinutes: 10080, resetsAt: null, resetDescription: null }
+
+  it('drops the 5h row for a plan that reports only the weekly window', () => {
+    expect(showsSessionWindow(makeLimits({ status: 'ok', weekly }))).toBe(false)
+  })
+
+  it('keeps the 5h row while no window has arrived, so errors and loading still show', () => {
+    expect(showsSessionWindow(makeLimits({ status: 'fetching' }))).toBe(true)
+    expect(showsSessionWindow(makeLimits({ status: 'error', error: 'offline' }))).toBe(true)
+    expect(showsSessionWindow(null)).toBe(true)
+  })
+  it('hides only the 5h bar of a weekly-only plan', () => {
+    const limits = makeLimits({ status: 'ok', weekly })
+    expect(getUsageBarState(limits, 'session').hidden).toBe(true)
+    expect(getUsageBarState(limits, 'weekly').hidden).toBe(false)
   })
 })
