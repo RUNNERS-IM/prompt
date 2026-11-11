@@ -226,9 +226,7 @@ export function MobileAccountsScreen() {
                 <View style={styles.usageRow}>
                   <UsageBar
                     label={t('accounts.screen.sessionWindow', '5h')}
-                    usedPercent={activeSessionBar.usedPercent}
-                    unavailable={activeSessionBar.unavailable}
-                    loading={activeSessionBar.loading}
+                    {...activeSessionBar}
                     resetText={getWindowResetLabel(activeUsage, 'session', now)}
                   />
                   <UsageBar
@@ -281,9 +279,7 @@ export function MobileAccountsScreen() {
                     <View style={styles.usageRow}>
                       <UsageBar
                         label={t('accounts.screen.sessionWindow', '5h')}
-                        usedPercent={sessionBar.usedPercent}
-                        unavailable={sessionBar.unavailable}
-                        loading={sessionBar.loading}
+                        {...sessionBar}
                         resetText={getWindowResetLabel(usage, 'session', now)}
                       />
                       <UsageBar

@@ -27,6 +27,7 @@ export type UsageBarState = {
   usedPercent: number | null
   unavailable: boolean
   loading: boolean
+  hidden: boolean
 }
 
 export function getActiveProviderRateLimits(
@@ -76,8 +77,14 @@ export function getUsageBarState(
   return {
     usedPercent: window?.usedPercent ?? null,
     unavailable: window == null && !fetching,
-    loading: fetching && window == null
+    loading: fetching && window == null,
+    hidden: windowKey === 'session' && !showsSessionWindow(limits)
   }
+}
+
+// Plans without a 5-hour cap report only the weekly window; an empty 5h row would read as unused quota.
+export function showsSessionWindow(limits: ProviderRateLimits | null): boolean {
+  return limits?.session != null || limits?.weekly == null
 }
 
 // Use desktop formatResetCountdown copy with injectable now; return null without reset timestamp to retain bars-only UI.
