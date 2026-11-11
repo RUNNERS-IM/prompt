@@ -10,6 +10,8 @@
       "loadingAccounts": "Konten werden geladen…",
       "manageAccountsHint": "Konten auf dem Desktop unter Einstellungen → Konten hinzufügen oder erneut authentifizieren.",
       "refreshAccounts": "Konten aktualisieren",
+      "resetsIn": "Zurückgesetzt in {{duration}}",
+      "resetsNow": "Wird jetzt zurückgesetzt",
       "sessionWindow": "5 h",
       "switchFailed": "Konto konnte nicht gewechselt werden",
       "title": "Konten",

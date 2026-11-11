@@ -10,6 +10,8 @@
       "loadingAccounts": "Hesaplar yükleniyor…",
       "manageAccountsHint": "Masaüstünde Ayarlar → Hesaplar bölümünden hesap ekleyin veya hesaplarınızda yeniden oturum açın.",
       "refreshAccounts": "Hesapları yenile",
+      "resetsIn": "{{duration}} sonra sıfırlanır",
+      "resetsNow": "Şimdi sıfırlanır",
       "sessionWindow": "5 sa",
       "switchFailed": "Hesap değiştirilemedi",
       "title": "Hesaplar",

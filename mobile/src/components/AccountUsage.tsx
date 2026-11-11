@@ -102,7 +102,8 @@ const styles = themedStyleSheet(() => ({
   usageLabel: {
     fontSize: typography.metaSize,
     color: colors.textMuted,
-    width: 22
+    minWidth: 22,
+    flexShrink: 0
   },
   usageTrack: {
     flex: 1,
