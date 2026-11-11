@@ -10,6 +10,8 @@
       "loadingAccounts": "Chargement des comptes…",
       "manageAccountsHint": "Ajoutez ou réauthentifiez des comptes dans Paramètres → Comptes sur l'ordinateur.",
       "refreshAccounts": "Actualiser les comptes",
+      "resetsIn": "Réinitialisation dans {{duration}}",
+      "resetsNow": "Réinitialisation maintenant",
       "sessionWindow": "5 h",
       "switchFailed": "Impossible de changer de compte",
       "title": "Comptes",

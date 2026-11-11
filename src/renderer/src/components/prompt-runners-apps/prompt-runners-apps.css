@@ -79,6 +79,12 @@
   object-fit: contain;
 }
 
+/* Why: <picture> is inline, which would add a text baseline gap under the icon. */
+.runners-apps-row > picture {
+  display: flex;
+  flex: none;
+}
+
 span.runners-apps-icon {
   background: var(--runners-apps-button);
 }

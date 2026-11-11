@@ -36,6 +36,8 @@ export type RunnersAppItem = {
   nameEn?: string
   /** Resolved image URL (the json only holds the file name). Empty when no file is bundled. */
   iconUrl: string
+  /** Black icon for dark screens ("split-dark.png" beside "split.png"); absent when none is bundled. */
+  iconDarkUrl?: string
   desc: RunnersLocalizedText
   url: string
 }
@@ -108,11 +110,13 @@ export function buildRunnersAppGroups(
         continue
       }
       const iconFile = typeof item.icon === 'string' ? item.icon : ''
+      const iconDarkUrl = iconFile && resolveIcon(iconFile.replace(/\.png$/, '-dark.png'))
       items.push({
         id: item.id,
         name: item.name,
         ...(typeof item.nameEn === 'string' ? { nameEn: item.nameEn } : {}),
         iconUrl: (iconFile && resolveIcon(iconFile)) || '',
+        ...(iconDarkUrl ? { iconDarkUrl } : {}),
         desc: readText(item.desc),
         url
       })

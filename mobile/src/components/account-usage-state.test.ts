@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import type { Translate } from '../i18n/mobile-i18n'
 
 import {
   getInactiveProviderUsage,
@@ -6,6 +7,7 @@ import {
   getWindowResetLabel,
   hasActiveProviderUsage,
   hasRenderableUsage,
+  showsSessionWindow,
   type AccountsSnapshot,
   type InactiveAccountUsage,
   type ProviderRateLimits
@@ -127,6 +129,9 @@ describe('getInactiveProviderUsage', () => {
   })
 })
 
+const en: Translate = (_key, fallback, options) =>
+  fallback.replace('{{duration}}', String(options?.duration ?? ''))
+
 describe('getWindowResetLabel', () => {
   const now = 1_700_000_000_000
   const min = 60_000
@@ -138,51 +143,58 @@ describe('getWindowResetLabel', () => {
   }
 
   it('is null when there are no limits or the window has no reset timestamp', () => {
-    expect(getWindowResetLabel(null, 'session', now)).toBe(null)
-    expect(getWindowResetLabel(makeLimits({ status: 'ok' }), 'session', now)).toBe(null)
+    expect(getWindowResetLabel(null, 'session', now, en)).toBe(null)
+    expect(getWindowResetLabel(makeLimits({ status: 'ok' }), 'session', now, en)).toBe(null)
     expect(
-      getWindowResetLabel(makeLimits({ status: 'ok', session: makeWindow(null) }), 'session', now)
+      getWindowResetLabel(
+        makeLimits({ status: 'ok', session: makeWindow(null) }),
+        'session',
+        now,
+        en
+      )
     ).toBe(null)
   })
 
   it('formats minutes, hours+minutes, and days+hours like the desktop tooltip', () => {
     expect(
-      getWindowResetLabel(makeLimits({ session: makeWindow(now + 47 * min) }), 'session', now)
+      getWindowResetLabel(makeLimits({ session: makeWindow(now + 47 * min) }), 'session', now, en)
     ).toBe('Resets in 47m')
     expect(
       getWindowResetLabel(
         makeLimits({ session: makeWindow(now + 3 * hour + 54 * min) }),
         'session',
-        now
+        now,
+        en
       )
     ).toBe('Resets in 3h 54m')
     expect(
       getWindowResetLabel(
         makeLimits({ weekly: makeWindow(now + 6 * day + 7 * hour) }),
         'weekly',
-        now
+        now,
+        en
       )
     ).toBe('Resets in 6d 7h')
   })
 
   it('formats exact hours and exact days without a zero remainder', () => {
     expect(
-      getWindowResetLabel(makeLimits({ session: makeWindow(now + 2 * hour) }), 'session', now)
+      getWindowResetLabel(makeLimits({ session: makeWindow(now + 2 * hour) }), 'session', now, en)
     ).toBe('Resets in 2h')
     expect(
-      getWindowResetLabel(makeLimits({ weekly: makeWindow(now + 7 * day) }), 'weekly', now)
+      getWindowResetLabel(makeLimits({ weekly: makeWindow(now + 7 * day) }), 'weekly', now, en)
     ).toBe('Resets in 7d')
   })
 
   it('reports "Resets now" for a reset timestamp in the past', () => {
     expect(
-      getWindowResetLabel(makeLimits({ session: makeWindow(now - min) }), 'session', now)
+      getWindowResetLabel(makeLimits({ session: makeWindow(now - min) }), 'session', now, en)
     ).toBe('Resets now')
   })
 
   it('reads the requested window only', () => {
     const limits = makeLimits({ session: makeWindow(now + hour) })
-    expect(getWindowResetLabel(limits, 'weekly', now)).toBe(null)
+    expect(getWindowResetLabel(limits, 'weekly', now, en)).toBe(null)
   })
 })
 
@@ -197,14 +209,48 @@ describe('getUsageBarState', () => {
       'session'
     )
 
-    expect(bar).toEqual({ usedPercent: 72, unavailable: false, loading: false })
+    expect(bar).toEqual({ usedPercent: 72, unavailable: false, loading: false, hidden: false })
   })
 
   it('shows loading for a fetching provider without a window', () => {
     expect(getUsageBarState(makeLimits({ status: 'fetching' }), 'weekly')).toEqual({
       usedPercent: null,
       unavailable: false,
-      loading: true
+      loading: true,
+      hidden: false
     })
+  })
+})
+
+describe('showsSessionWindow', () => {
+  const weekly = { usedPercent: 40, windowMinutes: 10080, resetsAt: null, resetDescription: null }
+
+  it('drops the 5h row for a plan that reports only the weekly window', () => {
+    expect(showsSessionWindow(makeLimits({ status: 'ok', weekly }))).toBe(false)
+  })
+
+  it('keeps the 5h row while no window has arrived, so errors and loading still show', () => {
+    expect(showsSessionWindow(makeLimits({ status: 'fetching' }))).toBe(true)
+    expect(showsSessionWindow(makeLimits({ status: 'error', error: 'offline' }))).toBe(true)
+    expect(showsSessionWindow(null)).toBe(true)
+  })
+  it('hides only the 5h bar of a weekly-only plan', () => {
+    const limits = makeLimits({ status: 'ok', weekly })
+    expect(getUsageBarState(limits, 'session').hidden).toBe(true)
+    expect(getUsageBarState(limits, 'weekly').hidden).toBe(false)
+  })
+})
+
+describe('getWindowResetLabel in another language', () => {
+  it('fills the translated copy with the countdown', () => {
+    const ko: Translate = (key, _fallback, options) =>
+      key === 'accounts.screen.resetsIn' ? `${String(options?.duration)} 후 초기화` : '곧 초기화'
+    const now = 1_000_000
+    const resetsAt = now + (4 * 24 + 7) * 60 * 60 * 1000
+    const limits = makeLimits({
+      weekly: { usedPercent: 49, windowMinutes: 10080, resetsAt, resetDescription: null }
+    })
+    expect(getWindowResetLabel(limits, 'weekly', now, ko)).toBe('4d 7h 후 초기화')
+    expect(getWindowResetLabel(limits, 'weekly', resetsAt + 1, ko)).toBe('곧 초기화')
   })
 })

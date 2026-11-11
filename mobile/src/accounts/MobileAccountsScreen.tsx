@@ -226,17 +226,15 @@ export function MobileAccountsScreen() {
                 <View style={styles.usageRow}>
                   <UsageBar
                     label={t('accounts.screen.sessionWindow', '5h')}
-                    usedPercent={activeSessionBar.usedPercent}
-                    unavailable={activeSessionBar.unavailable}
-                    loading={activeSessionBar.loading}
-                    resetText={getWindowResetLabel(activeUsage, 'session', now)}
+                    {...activeSessionBar}
+                    resetText={getWindowResetLabel(activeUsage, 'session', now, t)}
                   />
                   <UsageBar
                     label={t('accounts.screen.weeklyWindow', '7d')}
                     usedPercent={activeWeeklyBar.usedPercent}
                     unavailable={activeWeeklyBar.unavailable}
                     loading={activeWeeklyBar.loading}
-                    resetText={getWindowResetLabel(activeUsage, 'weekly', now)}
+                    resetText={getWindowResetLabel(activeUsage, 'weekly', now, t)}
                   />
                 </View>
               ) : null}
@@ -281,17 +279,15 @@ export function MobileAccountsScreen() {
                     <View style={styles.usageRow}>
                       <UsageBar
                         label={t('accounts.screen.sessionWindow', '5h')}
-                        usedPercent={sessionBar.usedPercent}
-                        unavailable={sessionBar.unavailable}
-                        loading={sessionBar.loading}
-                        resetText={getWindowResetLabel(usage, 'session', now)}
+                        {...sessionBar}
+                        resetText={getWindowResetLabel(usage, 'session', now, t)}
                       />
                       <UsageBar
                         label={t('accounts.screen.weeklyWindow', '7d')}
                         usedPercent={weeklyBar.usedPercent}
                         unavailable={weeklyBar.unavailable}
                         loading={weeklyBar.loading}
-                        resetText={getWindowResetLabel(usage, 'weekly', now)}
+                        resetText={getWindowResetLabel(usage, 'weekly', now, t)}
                       />
                     </View>
                     {usage?.error ? (

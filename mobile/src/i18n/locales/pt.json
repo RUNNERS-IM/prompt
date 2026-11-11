@@ -10,6 +10,8 @@
       "loadingAccounts": "Carregando contas…",
       "manageAccountsHint": "Adicione contas ou autentique-as novamente em Configurações → Contas no desktop.",
       "refreshAccounts": "Atualizar contas",
+      "resetsIn": "Redefine em {{duration}}",
+      "resetsNow": "Redefine agora",
       "sessionWindow": "5h",
       "switchFailed": "Não foi possível trocar de conta",
       "title": "Contas",

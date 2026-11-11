@@ -30,15 +30,20 @@ export function UsageBar({
   usedPercent,
   unavailable,
   loading,
-  resetText
+  resetText,
+  hidden
 }: {
   label: string
   usedPercent: number | null
   unavailable: boolean
   loading?: boolean
   resetText?: string | null
+  hidden?: boolean
 }) {
   useMobileColorScheme()
+  if (hidden) {
+    return null
+  }
   // Why: round then clamp so bar width, color, and label share one value (desktop parity).
   const used = usedPercent == null ? null : Math.max(0, Math.min(100, Math.round(usedPercent)))
   // Why: same consumption bands as desktop barColor (green <60, amber <80, red ≥80).
@@ -97,7 +102,8 @@ const styles = themedStyleSheet(() => ({
   usageLabel: {
     fontSize: typography.metaSize,
     color: colors.textMuted,
-    width: 22
+    minWidth: 22,
+    flexShrink: 0
   },
   usageTrack: {
     flex: 1,

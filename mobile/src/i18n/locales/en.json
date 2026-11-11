@@ -262,6 +262,8 @@
       "weeklyWindow": "7d",
       "title": "Accounts",
       "refreshAccounts": "Refresh accounts",
+      "resetsIn": "Resets in {{duration}}",
+      "resetsNow": "Resets now",
       "connectingTo": "Connecting to {{name}}…",
       "connecting": "Connecting to host…",
       "loadingAccounts": "Loading accounts…",

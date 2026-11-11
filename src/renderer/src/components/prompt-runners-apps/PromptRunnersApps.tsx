@@ -42,12 +42,18 @@ export function PromptRunnersApps({
               {group.items.map((item) => (
                 <li key={item.id} className="runners-apps-row">
                   {item.iconUrl ? (
-                    <img
-                      className="runners-apps-icon"
-                      src={item.iconUrl}
-                      alt=""
-                      draggable={false}
-                    />
+                    // Dark screens (the app theme drives nativeTheme) swap in the black icon.
+                    <picture>
+                      {item.iconDarkUrl && (
+                        <source media="(prefers-color-scheme: dark)" srcSet={item.iconDarkUrl} />
+                      )}
+                      <img
+                        className="runners-apps-icon"
+                        src={item.iconUrl}
+                        alt=""
+                        draggable={false}
+                      />
+                    </picture>
                   ) : (
                     <span className="runners-apps-icon" aria-hidden="true" />
                   )}
