@@ -13,7 +13,7 @@
       "hostNotFound": "호스트를 찾을 수 없습니다.",
       "invalidSnapshot": "호스트에서 받은 계정 스냅샷이 유효하지 않습니다.",
       "loadingAccounts": "계정 로드 중…",
-      "manageAccountsHint": "데스크톱의 설정 → 계정에서 계정을 추가하거나 다시 인증하세요.",
+      "manageAccountsHint": "컴퓨터의 설정 → 계정에서 계정을 추가하거나 다시 인증하세요.",
       "refreshAccounts": "계정 새로고침",
       "resetsIn": "{{duration}} 후 초기화",
       "resetsNow": "곧 초기화",
@@ -90,21 +90,21 @@
       "backToHome": "홈으로 돌아가기",
       "connectTimedOut": "{{seconds}}초 내에 연결하지 못했습니다. 어느 단계에서 멈췄는지 아래 로그를 확인하세요.",
       "connecting": "연결 중…",
-      "description": "데스크톱의 페어링 링크를 열었습니다. 확인하면 이 데스크톱이 호스트 목록에 추가됩니다.",
+      "description": "컴퓨터의 페어링 링크를 열었습니다. 확인하면 이 컴퓨터가 호스트 목록에 추가됩니다.",
       "pairButton": "페어링",
       "pairingFailed": "페어링 실패: {{error}}",
       "pairingLog": "페어링 로그",
-      "title": "이 데스크톱과 페어링하시겠습니까?"
+      "title": "이 컴퓨터와 페어링하시겠습니까?"
     },
     "pairScan": {
       "cameraDisabledDescription": "설정에서 카메라 접근을 허용하거나 페어링 코드를 붙여넣으세요.",
       "cameraDisabledTitle": "카메라 접근 비활성화",
-      "cameraPermissionDescription": "데스크톱의 Prompt에 표시된 QR 코드를 스캔하거나 페어링 코드를 붙여넣으세요.",
+      "cameraPermissionDescription": "컴퓨터의 Prompt에 표시된 QR 코드를 스캔하거나 페어링 코드를 붙여넣으세요.",
       "connectTimedOut": "{{seconds}}초 내에 연결하지 못했습니다. 어느 단계에서 멈췄는지 아래 로그를 확인하세요.",
       "connecting": "연결 중…",
       "invalidPairingCode": "유효한 페어링 코드가 아닙니다. 컴퓨터에서 코드를 복사해 다시 붙여넣으세요.",
       "invalidQrCode": "유효한 Prompt QR 코드가 아닙니다.",
-      "downloadQrCode": "다운로드용 코드입니다. 데스크톱의 2단계에 있는 페어링 코드를 스캔하세요.",
+      "downloadQrCode": "다운로드용 코드입니다. 컴퓨터의 2단계에 있는 페어링 코드를 스캔하세요.",
       "openDesktopStep": "컴퓨터에서 Prompt를 실행하세요",
       "openMobileSettingsStep": "설정 → 모바일로 이동하세요",
       "openSettings": "설정 열기",
@@ -116,7 +116,7 @@
       "pasteInstead": "대신 코드 붙여넣기",
       "pastePairingCode": "또는 페어링 코드 붙여넣기",
       "scanCodeStep": "QR 코드를 스캔하세요",
-      "title": "데스크톱과 페어링",
+      "title": "컴퓨터와 페어링",
       "tryAgain": "다시 시도"
     },
     "terminalSettings": {
@@ -130,9 +130,9 @@
       "largeText": "크게 (125%)",
       "largerText": "더 크게 (150%)",
       "largestText": "가장 크게 (200%)",
-      "leaveAppDescription": "휴대폰에서 터미널을 사용하는 동안 Prompt는 화면에 맞게 터미널을 축소합니다. 앱을 닫거나 다른 앱으로 전환할 때, 대화형 CLI 도구의 화면 배치가 바뀌지 않도록 휴대폰 크기를 유지할지 데스크톱 크기로 되돌릴지 설정합니다. 데스크톱 배너의 '복원'을 눌러 언제든 직접 크기를 조정할 수 있습니다.",
+      "leaveAppDescription": "휴대폰에서 터미널을 사용하는 동안 Prompt는 화면에 맞게 터미널을 축소합니다. 앱을 닫거나 다른 앱으로 전환할 때, 대화형 CLI 도구의 화면 배치가 바뀌지 않도록 휴대폰 크기를 유지할지 컴퓨터 터미널 크기로 되돌릴지 설정합니다. 컴퓨터 화면 배너의 '복원'을 눌러 언제든 직접 크기를 조정할 수 있습니다.",
       "leaveAppHeading": "앱을 벗어날 때",
-      "noPairedDesktops": "아직 페어링된 데스크톱이 없습니다. 터미널 동작을 설정하려면 데스크톱을 페어링하세요.",
+      "noPairedDesktops": "아직 페어링된 컴퓨터가 없습니다. 터미널 동작을 설정하려면 컴퓨터를 페어링하세요.",
       "restoreAfterMinutes_one": "{{count}}분 후",
       "restoreAfterMinutes_other": "{{count}}분 후",
       "restoreAfterSeconds_one": "{{count}}초 후",
@@ -141,7 +141,7 @@
       "smallerText": "작게 (75%)",
       "smallestText": "가장 작게 (50%)",
       "textSize": "텍스트 크기",
-      "textSizeDescription": "터미널 텍스트 크기를 조절합니다. 크기를 줄이면 좌우 여백을 두고 더 많은 열이 표시되고, 크기를 키우면 표시되는 열이 줄어듭니다. 옆으로 드래그하면 가로로 이동할 수 있습니다. 터미널에서 두 손가락을 오므리거나 벌려 확대·축소해도 이 설정이 바뀝니다. 기기별 화면 표시에만 적용되며 데스크톱 터미널은 바뀌지 않습니다.",
+      "textSizeDescription": "터미널 텍스트 크기를 조절합니다. 크기를 줄이면 좌우 여백을 두고 더 많은 열이 표시되고, 크기를 키우면 표시되는 열이 줄어듭니다. 옆으로 드래그하면 가로로 이동할 수 있습니다. 터미널에서 두 손가락을 오므리거나 벌려 확대·축소해도 이 설정이 바뀝니다. 기기별 화면 표시에만 적용되며 컴퓨터 터미널은 바뀌지 않습니다.",
       "textSizeHeading": "텍스트 크기",
       "textSizePickerTitle": "터미널 텍스트 크기",
       "title": "터미널"
@@ -566,7 +566,7 @@
       "unverifiable": "최근 업데이트 없음"
     },
     "authFailedBanner": {
-      "message": "인증에 실패했습니다. 먼저 다시 연결하고, 계속 실패하면 데스크톱에서 다시 페어링하세요."
+      "message": "인증에 실패했습니다. 먼저 다시 연결하고, 계속 실패하면 컴퓨터에서 다시 페어링하세요."
     },
     "authFailedBannerActions": {
       "repair": "다시 페어링",
@@ -773,7 +773,7 @@
     },
     "homeQuickActions": {
       "newWorkspace": "새 워크스페이스",
-      "pairDesktop": "데스크탑 페어링",
+      "pairDesktop": "컴퓨터 페어링",
       "title": "빠른 작업"
     },
     "hostCard": {
@@ -781,9 +781,9 @@
       "openHost": "{{title}} 열기",
       "pairingInvalid": "페어링이 유효하지 않음",
       "pairingTemporarilyUnavailable": "페어링 일시 사용 불가",
-      "repairHint": "탭하여 데스크톱과 다시 페어링하세요.",
+      "repairHint": "탭하여 컴퓨터와 다시 페어링하세요.",
       "unlockHint": "휴대폰 잠금을 해제한 후 탭하여 다시 시도하세요.",
-      "updateDesktopHint": "어디서나 연결하려면 데스크톱 Prompt를 업데이트하고 로그인하세요.",
+      "updateDesktopHint": "어디서나 연결하려면 컴퓨터의 Prompt를 업데이트하고 로그인하세요.",
       "worktreeAccessibilitySummary": "{{summary}}, 활성 {{activeCount}}개"
     },
     "hostDiagnosticsLink": {
@@ -804,10 +804,10 @@
     },
     "jiraConnectPrompt": {
       "checkAgain": "다시 확인",
-      "connectHint": "Prompt 데스크톱의 설정 → 연동에서 Jira 사이트를 추가한 뒤 다시 확인하세요.",
-      "connectOnDesktop": "데스크톱에서 Jira 연결",
+      "connectHint": "컴퓨터용 Prompt의 설정 → 연동에서 Jira 사이트를 추가한 뒤 다시 확인하세요.",
+      "connectOnDesktop": "컴퓨터에서 Jira 연결",
       "credentialUnreadable": "Jira 인증 정보가 저장되어 있지만 읽을 수 없습니다: {{credentialError}}",
-      "updateDesktop": "Prompt 데스크톱 업데이트"
+      "updateDesktop": "컴퓨터용 Prompt 업데이트"
     },
     "markdownBlocks": {
       "copyCode": "코드 복사",
@@ -830,7 +830,7 @@
       "connect": "연결",
       "connecting": "연결 중…",
       "label": "SSH 연결",
-      "serverRecovery": "데스크톱의 설정 → SSH 호스트 → 서버 복구에서 서버를 복구해야 합니다."
+      "serverRecovery": "컴퓨터의 설정 → SSH 호스트 → 서버 복구에서 서버를 복구해야 합니다."
     },
     "newWorktreeAgentSelection": {
       "blankTerminal": "빈 Terminal"
@@ -869,20 +869,20 @@
     },
     "protocolBlockScreen": {
       "backToHosts": "호스트로 돌아가기",
-      "desktopTooOldBody": "페어링된 데스크톱 앱의 버전이 오래되어 현재 Prompt 모바일 앱과 호환되지 않습니다. 컴퓨터에서 Prompt를 업데이트한 후 이 호스트에 다시 연결하세요.",
+      "desktopTooOldBody": "페어링된 컴퓨터의 Prompt 앱 버전이 오래되어 현재 Prompt 모바일 앱과 호환되지 않습니다. 컴퓨터에서 Prompt를 업데이트한 후 이 호스트에 다시 연결하세요.",
       "getVersion": "Prompt {{version}} 받기",
-      "mobileTooOldAppStore": "이 데스크톱에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
-      "mobileTooOldGitHubReleases": "이 데스크톱에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
+      "mobileTooOldAppStore": "이 컴퓨터에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
+      "mobileTooOldGitHubReleases": "이 컴퓨터에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
       "openAppStore": "App Store 열기",
       "openGitHubReleases": "GitHub Releases 열기",
       "refreshRecoveryNote": "이 메시지가 계속 표시되면 이 호스트를 제거한 후 다시 페어링하세요.",
-      "refreshWorkspaceBody": "이 호스트용으로 캐시된 워크스페이스가 데스크톱에서 요구하는 버전보다 오래되었습니다. 이 호스트에 다시 연결하여 최신 버전을 다운로드하세요.",
+      "refreshWorkspaceBody": "이 호스트용으로 캐시된 워크스페이스가 컴퓨터에서 요구하는 버전보다 오래되었습니다. 이 호스트에 다시 연결하여 최신 버전을 다운로드하세요.",
       "refreshWorkspaceTitle": "모바일 워크스페이스 새로고침",
       "updateDesktopTitle": "컴퓨터의 Prompt 업데이트",
       "updateMobileTitle": "Prompt 모바일 업데이트",
       "updateRecoveryNote": "이미 업데이트하셨습니까? 호스트 화면으로 돌아가 연결을 새로고침하세요. 이 메시지가 계속 표시되면 이 호스트를 제거한 후 다시 페어링하세요.",
-      "workspaceNeedsUpdateAppStore": "이 데스크톱의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
-      "workspaceNeedsUpdateGitHubReleases": "이 데스크톱의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요."
+      "workspaceNeedsUpdateAppStore": "이 컴퓨터의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
+      "workspaceNeedsUpdateGitHubReleases": "이 컴퓨터의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요."
     },
     "richMarkdownEditor": {
       "imageUrl": "이미지 URL",
@@ -1021,19 +1021,19 @@
       "connected": "연결됨",
       "connecting": "연결 중…",
       "connectingViaRelay": "Relay를 통해 연결 중…",
-      "desktopUnreachable": "데스크톱에 연결할 수 없음",
+      "desktopUnreachable": "컴퓨터에 연결할 수 없음",
       "disconnected": "연결 끊김",
       "hostFallback": "호스트",
       "hostOffline": "{{host}} 오프라인",
       "hostOfflineDetail": "컴퓨터가 절전 모드가 아닌지, Prompt가 실행 중인지, 로그인되어 있는지 확인하세요.",
       "labelWithHint": "{{label}} — {{hint}}",
-      "pairingInvalid": "페어링이 유효하지 않습니다. 데스크톱과 다시 페어링하세요.",
-      "rePairDetail": "데스크톱과 다시 페어링하세요.",
+      "pairingInvalid": "페어링이 유효하지 않습니다. 컴퓨터와 다시 페어링하세요.",
+      "rePairDetail": "컴퓨터와 다시 페어링하세요.",
       "reconnecting": "다시 연결 중…",
       "relayAccessExpired": "{{host}}의 Relay 접근 권한 만료",
       "relayConnectFailed": "Relay를 통해 연결할 수 없음",
       "relayUnreachable": "Relay에 연결할 수 없음",
-      "signInDetail": "다시 연결하려면 데스크톱에서 Prompt에 로그인하세요.",
+      "signInDetail": "다시 연결하려면 컴퓨터에서 Prompt에 로그인하세요.",
       "signInRequired": "{{host}}에서 로그인 필요",
       "tailscaleHint": "Tailscale 확인"
     },
@@ -1102,8 +1102,8 @@
     },
     "troubleshootCommonIssues": {
       "allowNotifications": "시스템 설정에서 Prompt 알림이 허용되어 있고 집중 모드나 방해 금지 모드가 꺼져 있는지 확인하세요.",
-      "checkTailnet": "데스크톱이 절전 모드가 아니며 tailnet에 연결된 상태로 표시되는지 확인하세요.",
-      "desktopTitle": "데스크톱 앱이 실행되지 않음",
+      "checkTailnet": "컴퓨터가 절전 모드가 아니며 tailnet에 연결된 상태로 표시되는지 확인하세요.",
+      "desktopTitle": "컴퓨터의 Prompt 앱이 실행되지 않음",
       "disableVpn": "해당 VPN을 끄거나 분할 터널링 / \"LAN 허용\"을 켜세요.",
       "firewallTitle": "방화벽에서 포트 {{port}} 차단",
       "linuxFirewall": "Linux: sudo ufw allow {{port}}",
@@ -1111,7 +1111,7 @@
       "macosFirewall": "macOS: 시스템 설정 → 네트워크 → 방화벽에서 Prompt를 허용하세요.",
       "notificationNetwork": "모바일 데이터나 다른 Wi-Fi 네트워크를 사용해 보세요. 전환 후 알림이 도착한다면 기존 네트워크에서 알림 전달이 지연되고 있을 수 있습니다.",
       "notificationsTitle": "푸시 알림",
-      "openDesktop": "연결을 받으려면 데스크톱에서 Prompt가 실행 중이어야 합니다.",
+      "openDesktop": "연결을 받으려면 컴퓨터에서 Prompt가 실행 중이어야 합니다.",
       "pairAfterUpdate": "업데이트 후에는 QR 코드로 다시 페어링해야 할 수 있습니다.",
       "reconnectWifi": "두 기기에서 WiFi를 다시 연결해 보세요.",
       "restartBothApps": "시간 초과가 계속되면 두 앱을 모두 다시 시작하세요.",
@@ -1205,7 +1205,7 @@
       "alreadyActive": "컴퓨터나 다른 휴대폰에서 이미 받아쓰기를 사용 중입니다.",
       "cloudModelNeedsKey": "OpenAI 키 필요",
       "deleteFailed": "모델을 삭제하지 못했습니다.",
-      "desktopUpdateRequired": "모바일 음성 설정을 사용하려면 페어링된 데스크톱의 Prompt 앱을 업데이트하세요.",
+      "desktopUpdateRequired": "모바일 음성 설정을 사용하려면 페어링된 컴퓨터의 Prompt 앱을 업데이트하세요.",
       "downloadFailed": "다운로드를 시작하지 못했습니다.",
       "loadFailed": "받아쓰기 모델을 로드하지 못했습니다.",
       "repairRequired": "받아쓰기를 사용하려면 이 휴대폰을 컴퓨터와 다시 페어링하세요.",
@@ -1218,13 +1218,13 @@
     "fileExplorerPanel": {
       "backToSession": "세션으로 돌아가기",
       "closeFiles": "파일 닫기",
-      "connecting": "데스크톱에 연결 중…",
+      "connecting": "컴퓨터에 연결 중…",
       "emptyState": "찾은 파일이 없습니다.",
       "loadFailed": "파일을 불러올 수 없습니다.",
       "loadInterrupted": "폴더 로드가 중단되었습니다.",
       "title": "파일",
       "truncatedList": "{{worktreeLabel}} - 처음 5000개 표시",
-      "waiting": "데스크톱 대기 중…"
+      "waiting": "컴퓨터 응답 대기 중…"
     },
     "fileExplorerRow": {
       "fileUnavailable": "모바일에서 {{name}} 사용 불가",
@@ -1245,7 +1245,7 @@
       "downloading": "{{total}} 중 {{bytes}} 다운로드 중",
       "loadFailed": "미디어를 불러올 수 없습니다.",
       "loading": "미디어 로드 중…",
-      "waiting": "데스크톱 대기 중…"
+      "waiting": "컴퓨터 응답 대기 중…"
     },
     "fileMutationOwnership": {
       "sshOwnerChanged": "SSH 연결을 확인하지 못했습니다. 호스트에 다시 연결한 후 다시 시도하세요."
@@ -1260,10 +1260,10 @@
     "filePreviewResponse": {
       "binaryUnavailable": "바이너리 파일을 미리 볼 수 없습니다.",
       "bytes": "{{size}} B",
-      "fileChanged": "데스크톱에서 파일이 변경되었습니다. 저장하기 전에 미리보기를 새로고침하세요.",
+      "fileChanged": "컴퓨터에서 파일이 변경되었습니다. 저장하기 전에 미리보기를 새로고침하세요.",
       "fileNotFound": "파일을 찾을 수 없습니다.",
       "fileTooLarge": "파일이 너무 커서 모바일에서 미리 볼 수 없습니다.",
-      "filesystemUnreachable": "데스크톱 파일 시스템에 연결할 수 없습니다.",
+      "filesystemUnreachable": "컴퓨터 파일 시스템에 연결할 수 없습니다.",
       "kilobytes": "{{size}} KB",
       "loadFailed": "미리보기를 불러올 수 없습니다.",
       "megabytes": "{{size}} MB",
@@ -1285,7 +1285,7 @@
       "saveFailed": "파일을 저장할 수 없습니다.",
       "stay": "계속 편집",
       "title": "미리보기",
-      "waiting": "데스크톱 대기 중…"
+      "waiting": "컴퓨터 응답 대기 중…"
     },
     "filePreviewSourceText": {
       "previewLabel": "파일 미리보기",
@@ -1318,16 +1318,16 @@
       "updateHint": "탭하여 업데이트하세요"
     },
     "emptyState": {
-      "connectedDescription": "데스크톱이 여기에 표시됩니다. 모든 데이터는 종단 간 암호화로 보호됩니다.",
+      "connectedDescription": "컴퓨터가 여기에 표시됩니다. 모든 데이터는 종단 간 암호화로 보호됩니다.",
       "connectedTitle": "연결 완료",
       "description": "컴퓨터의 Prompt와 페어링하여 에이전트 상태를 확인하고, 원하는 터미널에 접속하고, 휴대폰으로 작업을 진행하세요.",
       "openDesktopDescription": "설정 → 모바일에서 페어링 QR 코드를 생성하세요.",
-      "openDesktopTitle": "Prompt 데스크톱 앱 열기",
-      "pairDesktop": "데스크탑 페어링",
-      "scanCodeDescription": "위의 버튼을 탭해 스캐너를 여세요. 데스크톱 화면의 QR 코드에 카메라를 맞추세요.",
+      "openDesktopTitle": "컴퓨터의 Prompt 앱 열기",
+      "pairDesktop": "컴퓨터 페어링",
+      "scanCodeDescription": "위의 버튼을 탭해 스캐너를 여세요. 컴퓨터 화면의 QR 코드에 카메라를 맞추세요.",
       "scanCodeTitle": "코드 스캔",
       "stepsHeading": "사용 방법",
-      "title": "데스크톱을 연결하세요"
+      "title": "컴퓨터를 연결하세요"
     },
     "listFooter": {
       "hostPickerTitle": "작업을 열 호스트",
@@ -1338,7 +1338,7 @@
       "agentTime": "Agent 시간",
       "agentsSpawned": "시작된 Agents",
       "daysHours": "{{days}}일 {{hours}}시간",
-      "desktopsHeading": "데스크탑",
+      "desktopsHeading": "컴퓨터",
       "hoursMinutes": "{{hours}}시간 {{minutes}}분",
       "minutes": "{{minutes}}분",
       "prsCreated": "생성된 PR",
@@ -1375,7 +1375,7 @@
       "addressHint": "IP, host:port 또는 ws:// / wss:// 형식을 사용할 수 있습니다. 포트가 없는 wss:// URL은 443을 사용합니다. 스킴과 포트 없이 주소만 입력하면 현재 포트(또는 6768)를 유지합니다.",
       "connectionPreview": "{{endpoint}}에 연결",
       "goBack": "돌아가기",
-      "help": "표시 이름이나 연결 주소를 변경하세요. 이름을 비워 두면 데스크톱에서 보내는 이름을 사용합니다. 주소를 수정하면 이 휴대폰이 연결하는 주소만 바뀌며 다시 페어링하지 않습니다. 같은 데스크톱에 다른 IP로 연결할 때 사용하세요(예: 홈 LAN과 Tailscale 간 전환).",
+      "help": "표시 이름이나 연결 주소를 변경하세요. 이름을 비워 두면 컴퓨터에서 보내는 이름을 사용합니다. 주소를 수정하면 이 휴대폰이 연결하는 주소만 바뀌며 다시 페어링하지 않습니다. 같은 컴퓨터에 다른 IP로 연결할 때 사용하세요(예: 홈 LAN과 Tailscale 간 전환).",
       "hostNamePlaceholder": "호스트 이름",
       "hostRemoved": "이 호스트는 이 휴대폰에서 제거되었습니다.",
       "loadFailed": "호스트 정보를 불러오지 못했습니다.",
@@ -1505,13 +1505,13 @@
       "localWindows": "로컬 Windows",
       "projectOrder": "프로젝트 순서",
       "projects": "프로젝트",
-      "savingToDesktop": "데스크톱에 저장 중",
+      "savingToDesktop": "컴퓨터에 저장 중",
       "show": "표시",
       "showProperties": "속성 표시",
       "sortBy": "정렬 기준",
       "syncedAcrossDevices": "기기 간 동기화됨",
       "thisComputer": "이 컴퓨터",
-      "waitingForDesktop": "아직 데스크톱 응답을 기다리는 중",
+      "waitingForDesktop": "아직 컴퓨터 응답을 기다리는 중",
       "workspaceOptions": "워크스페이스 옵션"
     }
   },
@@ -1541,13 +1541,13 @@
   },
   "notifications": {
     "desktopChannel": {
-      "name": "데스크톱 알림",
+      "name": "컴퓨터 알림",
       "silentName": "Prompt 무음 알림"
     },
     "notificationDeliverySection": {
-      "footer": "알림 유형은 페어링된 각 데스크톱의 알림 설정을 따릅니다. 이 앱을 7일 동안 사용하지 않으면 알림이 일시 중지됩니다. 다시 받으려면 앱을 열고 다시 연결하세요.",
-      "onlyWhenAway": "데스크톱을 사용하지 않을 때만",
-      "onlyWhenAwayHint": "키보드나 마우스를 3분간 사용하지 않거나 데스크톱이 잠겨 있을 때 알림을 보냅니다.",
+      "footer": "알림 유형은 페어링된 각 컴퓨터의 알림 설정을 따릅니다. 이 앱을 7일 동안 사용하지 않으면 알림이 일시 중지됩니다. 다시 받으려면 앱을 열고 다시 연결하세요.",
+      "onlyWhenAway": "컴퓨터를 사용하지 않을 때만",
+      "onlyWhenAwayHint": "키보드나 마우스를 3분간 사용하지 않거나 컴퓨터가 잠겨 있을 때 알림을 보냅니다.",
       "sound": "알림음",
       "suppressWhileFocused": "보고 있는 동안 알림 끄기",
       "suppressWhileFocusedHint": "이 휴대폰에서 열어 둔 워크스페이스의 알림을 받지 않습니다."
@@ -1567,7 +1567,7 @@
       "keepTerminal": "터미널 유지",
       "notNow": "나중에",
       "notificationsDescription": "앱을 사용하지 않아도 에이전트가 작업을 마치거나 대기 중이면 이 휴대폰으로 알림을 받습니다.",
-      "notificationsDisclosure": "데스크톱을 3분 동안 사용하지 않으면 Prompt 푸시 서비스를 통해 알림이 전달됩니다. 언제든지 설정에서 변경할 수 있습니다.",
+      "notificationsDisclosure": "컴퓨터를 3분 동안 사용하지 않으면 Prompt 푸시 서비스를 통해 알림이 전달됩니다. 언제든지 설정에서 변경할 수 있습니다.",
       "notificationsTitle": "에이전트의 요청을 놓치지 마세요",
       "openInChatUi": "채팅 UI에서 세션 열기",
       "openInTerminal": "터미널에서 세션 열기",
@@ -1991,7 +1991,7 @@
       "committedChangesFailed": "커밋된 변경 사항을 불러오지 못했습니다.",
       "committedChangesUnavailable": "커밋된 변경 사항을 사용할 수 없습니다.",
       "committedDiffUnavailable": "커밋된 차이점을 사용할 수 없습니다.",
-      "desktopUpdateRequired": "모바일에서 변경 사항을 리뷰하려면 데스크톱의 Prompt를 업데이트하세요.",
+      "desktopUpdateRequired": "모바일에서 변경 사항을 리뷰하려면 컴퓨터의 Prompt를 업데이트하세요.",
       "diffLoadFailed": "차이점을 불러올 수 없습니다.",
       "invalidSourceControlResponse": "소스 제어 응답이 올바르지 않습니다.",
       "reviewNotesLoadFailed": "리뷰 메모를 불러올 수 없습니다."
@@ -2151,7 +2151,7 @@
       "moreActions": "세션 작업 더 보기",
       "openFileExplorer": "파일 탐색기 열기",
       "openSourceControl": "소스 제어 열기",
-      "reconnectToDesktop": "데스크톱에 다시 연결",
+      "reconnectToDesktop": "컴퓨터에 다시 연결",
       "showSidebar": "사이드바 표시",
       "terminalTitle": "터미널"
     },
@@ -2162,7 +2162,7 @@
       "checksHint": "PR 체크 열기"
     },
     "markdownReader": {
-      "changedOnDesktop": "데스크톱에서 변경됨",
+      "changedOnDesktop": "컴퓨터에서 변경됨",
       "copyLoaded": "불러온 내용 복사",
       "copyLoadedSource": "불러온 Markdown 소스 복사",
       "copyPath": "경로 복사",
@@ -2327,7 +2327,7 @@
     },
     "sheets": {
       "browser": "브라우저",
-      "browserUpdateRequired": "모바일 브라우저 스트리밍을 사용하려면 데스크톱 업데이트가 필요합니다.",
+      "browserUpdateRequired": "모바일 브라우저 스트리밍을 사용하려면 컴퓨터의 Prompt 업데이트가 필요합니다.",
       "chat": "채팅",
       "copyAllAndLeave": "모두 복사 후 나가기",
       "copyDraftsFailed": "초안을 복사하지 못했습니다.",
@@ -2337,7 +2337,7 @@
       "discard": "버리기",
       "discardAndLeave": "버리고 나가기",
       "discardChanges": "변경사항 취소",
-      "discardMessage": "휴대폰의 초안을 데스크톱의 최신 파일로 바꾸시겠습니까?",
+      "discardMessage": "휴대폰의 초안을 컴퓨터의 최신 파일로 바꾸시겠습니까?",
       "draftsHint": "나가기 전에 휴대폰의 초안을 복사하거나 버리세요.",
       "file": "파일",
       "markdown": "Markdown",
@@ -2370,9 +2370,9 @@
       "messageNotSent": "메시지가 전송되지 않음"
     },
     "tabStrip": {
-      "checkingCapabilities": "데스크톱에서 지원하는 기능을 확인 중입니다. 잠시 후 다시 시도하세요.",
+      "checkingCapabilities": "컴퓨터에서 지원하는 기능을 확인 중입니다. 잠시 후 다시 시도하세요.",
       "newTab": "새 탭",
-      "quickCommandsUpdateRequired": "빠른 명령을 사용하려면 데스크톱 업데이트가 필요합니다.",
+      "quickCommandsUpdateRequired": "빠른 명령을 사용하려면 컴퓨터의 Prompt 업데이트가 필요합니다.",
       "tabStatus": "{{title}}, {{status}}"
     },
     "terminalActionSheetActions": {
@@ -2398,7 +2398,7 @@
       "releaseMicHint": "중지하려면 마이크에서 손을 떼세요",
       "startingMic": "마이크 시작 중",
       "stopHint": "중지하려면 마이크를 탭하세요",
-      "transcribing": "데스크톱에서 텍스트로 변환 중",
+      "transcribing": "컴퓨터에서 텍스트로 변환 중",
       "uploadingImage": "호스트에 이미지 업로드 중",
       "uploadingImageTitle": "이미지 업로드 중"
     },
@@ -2433,7 +2433,7 @@
       "browserCommandFailed": "브라우저 명령 실행에 실패했습니다.",
       "browserCreateFailed": "브라우저를 만들지 못했습니다.",
       "browserUnavailable": "아직 브라우저 페이지를 사용할 수 없습니다.",
-      "browserUpdateRequired": "모바일 브라우저 스트리밍을 사용하려면 데스크톱 업데이트가 필요합니다.",
+      "browserUpdateRequired": "모바일 브라우저 스트리밍을 사용하려면 컴퓨터의 Prompt 업데이트가 필요합니다.",
       "invalidUrl": "올바른 URL을 입력하세요.",
       "noteCreateFailed": "Markdown 노트를 만들지 못했습니다.",
       "untitledNoteCreateFailed": "제목 없는 Markdown 노트를 만들 수 없습니다."
@@ -2445,28 +2445,28 @@
       "notesCopied": "메모 복사됨",
       "saveNoteFailed": "메모를 저장하지 못했습니다.",
       "saveNotesFailed": "리뷰 메모를 저장하지 못했습니다.",
-      "waitingForDesktop": "데스크톱 대기 중…"
+      "waitingForDesktop": "컴퓨터 응답 대기 중…"
     },
     "useDiffReviewCommentActions": {
       "saveFailed": "리뷰를 저장하지 못했습니다.",
       "saveStateFailed": "리뷰 상태를 저장하지 못했습니다.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useDiffReviewController": {
       "loadFailed": "리뷰를 로드할 수 없습니다.",
       "missingWorktree": "워크트리가 없습니다.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useDiffReviewDiffLoading": {
       "loadFailed": "차이점을 로드할 수 없습니다.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useDiffReviewGitActions": {
       "actionFailed": "소스 제어 작업에 실패했습니다.",
       "reviewedFilesStaged_one": "리뷰한 파일 {{count}}개 스테이징됨",
       "reviewedFilesStaged_other": "리뷰한 파일 {{count}}개 스테이징됨",
       "stageResults": "{{staged}}개 스테이징됨, {{failed}}개 실패",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useDiffReviewInteractions": {
       "openFailed": "세션에서 열 수 없습니다."
@@ -2481,7 +2481,7 @@
       "promptNotSent": "에이전트가 시작되었지만 메모가 전송되지 않았습니다. '메모 복사'로 복사한 후 붙여넣으세요.",
       "sendFailed": "메모를 전송하지 못했습니다.",
       "startingAgent": "에이전트 시작 중…",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useImageAttachment": {
       "attachFailed": "첨부 실패",
@@ -2520,13 +2520,13 @@
     },
     "usePrAiTriage": {
       "launchFailed": "에이전트를 실행하지 못했습니다.",
-      "waitingForDesktop": "데스크톱 대기 중…"
+      "waitingForDesktop": "컴퓨터 응답 대기 중…"
     },
     "usePrCommentActions": {
       "actionFailed": "댓글 작업에 실패했습니다."
     },
     "usePrTitleAction": {
-      "disconnected": "데스크톱에 연결되어 있지 않습니다.",
+      "disconnected": "컴퓨터에 연결되어 있지 않습니다.",
       "updateFailed": "제목을 업데이트하지 못했습니다."
     },
     "useQuickCommands": {
@@ -2686,8 +2686,8 @@
       "title": "모양"
     },
     "browserSettingsScreen": {
-      "desktopBrowser": "데스크톱 Prompt 브라우저",
-      "desktopBrowserDescription": "페어링된 데스크톱에서 스트리밍되는 브라우저로 엽니다.",
+      "desktopBrowser": "컴퓨터의 Prompt 브라우저",
+      "desktopBrowserDescription": "페어링된 컴퓨터에서 스트리밍되는 브라우저로 엽니다.",
       "linksDescription": "터미널 출력의 HTTP(S) 링크를 탭했을 때 열 브라우저를 선택하세요.",
       "linksHeading": "링크",
       "loadFailed": "브라우저 설정을 불러오지 못했습니다. 다시 시도하세요.",
@@ -2712,7 +2712,7 @@
       "support": "지원"
     },
     "nativeChatSettingsScreen": {
-      "defaultViewDescription": "지원되는 에이전트 세션(Claude, Codex 및 기타 채팅 지원 에이전트)을 이 기기에서 여는 방식을 선택하세요. 터미널은 CLI를 그대로 표시하며, 채팅 UI는 데스크톱 앱과 같은 채팅 인터페이스를 표시합니다. 각 세션의 보기 방식은 길게 눌러 여는 메뉴에서 개별적으로 전환할 수 있습니다.",
+      "defaultViewDescription": "지원되는 에이전트 세션(Claude, Codex 및 기타 채팅 지원 에이전트)을 이 기기에서 여는 방식을 선택하세요. 터미널은 CLI를 그대로 표시하며, 채팅 UI는 컴퓨터의 Prompt 앱과 같은 채팅 인터페이스를 표시합니다. 각 세션의 보기 방식은 길게 눌러 여는 메뉴에서 개별적으로 전환할 수 있습니다.",
       "defaultViewHeading": "기본 보기",
       "off": "꺼짐",
       "on": "켜짐",
@@ -2722,15 +2722,15 @@
     "nativeNotificationDeliverySettings": {
       "loadFailed": "알림 전송 설정을 불러오지 못했습니다. 다시 시도하려면 이 화면을 다시 여세요.",
       "saveFailed": "알림 전송 설정을 저장하지 못했습니다. 다시 시도하세요.",
-      "updateDesktopHint": "이 휴대폰에서 알림을 받으려면 업데이트된 데스크톱을 페어링하세요."
+      "updateDesktopHint": "이 휴대폰에서 알림을 받으려면 Prompt를 업데이트한 컴퓨터를 페어링하세요."
     },
     "notificationDisplayTest": {
       "accepted": "Prompt 푸시 서비스에서 요청을 접수했습니다. 알림이 도착했는지 확인하세요.",
-      "connectDesktop": "데스크톱에 연결한 후 다시 시도하세요.",
+      "connectDesktop": "컴퓨터에 연결한 후 다시 시도하세요.",
       "description": "Prompt 푸시 서비스를 통해 테스트 알림을 보내세요.",
-      "desktopUnreachable": "데스크톱에 연결하지 못했습니다. 다시 시도하세요.",
-      "loadFailed": "페어링된 데스크톱 목록을 불러오지 못했습니다.",
-      "pairDesktop": "데스크톱을 페어링한 후 다시 시도하세요.",
+      "desktopUnreachable": "컴퓨터에 연결하지 못했습니다. 다시 시도하세요.",
+      "loadFailed": "페어링된 컴퓨터 목록을 불러오지 못했습니다.",
+      "pairDesktop": "컴퓨터를 페어링한 후 다시 시도하세요.",
       "pushServiceFailed": "Prompt 푸시 서비스를 통해 전송하지 못했습니다. 다시 시도하세요.",
       "rateLimited": "알림이 너무 많습니다. 나중에 다시 시도하세요.",
       "reconnectPhone": "이 휴대폰을 알림 수신 기기로 등록하려면 다시 연결하세요.",
@@ -2739,7 +2739,7 @@
       "sending": "전송 중…",
       "troubleReceivingAlerts": "알림 수신에 문제가 있나요?",
       "troubleshooting": "문제 해결",
-      "updateDesktop": "이 테스트를 실행하려면 데스크톱을 업데이트하세요."
+      "updateDesktop": "이 테스트를 실행하려면 컴퓨터의 Prompt를 업데이트하세요."
     },
     "notificationSettingsScreen": {
       "description": "에이전트가 입력을 요청하거나 작업을 완료하면 이 기기에서 알림을 받으세요.",
@@ -2763,9 +2763,9 @@
       "pseudoLanguage": "가상 언어 (en-XA)"
     },
     "voiceSettingsScreen": {
-      "connectDesktop": "음성 설정을 관리하려면 데스크톱에 연결하세요.",
+      "connectDesktop": "음성 설정을 관리하려면 컴퓨터에 연결하세요.",
       "deleteFailed": "삭제 실패",
-      "dictationDescription": "데스크톱에서 포커스가 있는 창에 음성으로 텍스트를 입력합니다.",
+      "dictationDescription": "컴퓨터에서 포커스가 있는 창에 음성으로 텍스트를 입력합니다.",
       "dictationHeading": "받아쓰기",
       "dictationMode": "받아쓰기 모드",
       "dictationModeDescription": "토글: 한 번 누르면 받아쓰기를 시작하고, 다시 누르면 중지합니다. 길게 누르기: 누르고 있는 동안 받아쓰기합니다.",
@@ -2786,7 +2786,7 @@
   "sourceControl": {
     "actionSheetRunners": {
       "noBaseBranch": "리베이스할 기본 브랜치가 없습니다.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "actions": {
       "checkingReviewStatus": "리뷰 상태를 확인 중입니다.",
@@ -2901,7 +2901,7 @@
       "generateMessage": "AI로 commit 메시지 생성",
       "noStagedFiles": "스테이징된 파일 없음",
       "openActions": "소스 제어 작업 열기",
-      "reconnecting": "데스크톱에 다시 연결 중…",
+      "reconnecting": "컴퓨터에 다시 연결 중…",
       "regenerateHint": "다시 생성하려면 메시지를 지웁니다.",
       "stageAll": "모두 스테이지",
       "unstageAll": "모두 언스테이징"
@@ -2976,7 +2976,7 @@
       "noCommits": "커밋이 없습니다.",
       "noFileChanges": "파일 변경 사항 없음",
       "retryFiles": "커밋 파일 다시 불러오기",
-      "waitingForDesktop": "데스크톱 응답 대기 중…"
+      "waitingForDesktop": "컴퓨터 응답 대기 중…"
     },
     "gitStatus": {
       "changes": "변경 사항",
@@ -3044,10 +3044,10 @@
       "pullRequest": "PR"
     },
     "loaders": {
-      "connectingToDesktop": "데스크톱에 연결 중…",
+      "connectingToDesktop": "컴퓨터에 연결 중…",
       "loadFailed": "소스 제어를 로드할 수 없습니다.",
-      "updateDesktop": "모바일에서 소스 제어를 사용하려면 Prompt 데스크톱 앱을 업데이트하세요.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "updateDesktop": "모바일에서 소스 제어를 사용하려면 컴퓨터의 Prompt 앱을 업데이트하세요.",
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "modals": {
       "actionsTitle": "소스 제어",
@@ -3063,7 +3063,7 @@
     "openers": {
       "openDiffFailed": "차이점을 열 수 없습니다.",
       "tabNotReady": "파일은 열렸지만 탭이 아직 준비되지 않았습니다. 다시 시도하세요.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "panel": {
       "loadFailedTitle": "로드 실패",
@@ -3103,7 +3103,7 @@
     "primaryAction": {
       "commit": "Commit",
       "forcePush": "강제 푸시",
-      "forcePushFromDesktop": "데스크톱에서 이 PR의 브랜치를 강제 푸시하세요.",
+      "forcePushFromDesktop": "컴퓨터에서 이 PR의 브랜치를 강제 푸시하세요.",
       "publishBranch": "브랜치 게시",
       "pull": "풀",
       "push": "푸시",
@@ -3251,7 +3251,7 @@
     },
     "useMobileCommitFailureRecovery": {
       "launchFailed": "에이전트를 실행하지 못했습니다.",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     },
     "useMobileCommitMessageGeneration": {
       "generateFailed": "커밋 메시지를 생성하지 못했습니다."
@@ -3263,7 +3263,7 @@
       "actionFailed": "소스 제어 작업에 실패했습니다.",
       "branchUnavailable": "브랜치 상태를 확인할 수 없습니다.",
       "commitFailed": "커밋 실패",
-      "waitingForDesktop": "데스크톱 연결 대기 중…"
+      "waitingForDesktop": "컴퓨터 연결 대기 중…"
     }
   },
   "tasks": {
@@ -3455,8 +3455,8 @@
       "connectLinearMessage": "작업 화면에서 할당받은 Linear 이슈를 바로 살펴보고 작업을 시작하세요.",
       "connectLinearTitle": "Linear 계정 연결",
       "jiraStatusFailed": "Jira 상태를 읽지 못했습니다.",
-      "updateDesktopMessage": "모바일 작업 화면을 사용하려면 더 최신 버전의 데스크톱 런타임이 필요합니다.",
-      "updateDesktopTitle": "Prompt 데스크톱 업데이트"
+      "updateDesktopMessage": "모바일 작업 화면을 사용하려면 컴퓨터의 Prompt를 더 최신 버전으로 업데이트해야 합니다.",
+      "updateDesktopTitle": "컴퓨터용 Prompt 업데이트"
     },
     "options": {
       "all": "모두",
@@ -3555,7 +3555,7 @@
       "show": "표시"
     },
     "projectDetailDrawer": {
-      "addRepositoryFromDesktop": "{{repository}}이(가) Prompt에 추가되지 않았습니다. 데스크톱 앱에서 이 저장소를 추가한 후 모바일의 작업 화면을 새로고침하세요.",
+      "addRepositoryFromDesktop": "{{repository}}이(가) Prompt에 추가되지 않았습니다. 컴퓨터의 Prompt 앱에서 이 저장소를 추가한 후 모바일의 작업 화면을 새로고침하세요.",
       "clearType": "유형 해제",
       "closeItem": "항목 닫기",
       "copyGitHubLink": "GitHub 링크 복사",
