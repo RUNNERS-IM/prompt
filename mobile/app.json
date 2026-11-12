@@ -8,7 +8,7 @@
     },
     "name": "Prompt",
     "slug": "prompt-mobile",
-    "version": "2.6.111301",
+    "version": "2.6.111302",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -35,7 +35,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "im.runners.prompt.mobile",
-      "buildNumber": "6111301",
+      "buildNumber": "6111302",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
         "NSLocalNetworkUsageDescription": "Prompt connects to the desktop app on your LAN.",
@@ -104,7 +104,7 @@
         "MODIFY_AUDIO_SETTINGS"
       ],
       "package": "im.runners.prompt.mobile",
-      "versionCode": 6111301,
+      "versionCode": 6111302,
       "googleServicesFile": "./google-services.json"
     },
     "plugins": [
