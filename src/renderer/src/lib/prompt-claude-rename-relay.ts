@@ -144,6 +144,9 @@ export function startPromptClaudeRenameRelay(deps: PromptClaudeRenameRelayDeps):
   }
 }
 
+// A fresh Claude shows a dimmed suggestion in the box; screen text cannot tell it from typing.
+const CLAUDE_INPUT_PLACEHOLDER = /^Try ".*"$/
+
 /** Whether Claude's input box, as shown on screen, has nothing the user has typed into it. */
 export function isClaudeInputBoxEmpty(screenLines: readonly string[]): boolean {
   for (let index = screenLines.length - 1; index > 0; index -= 1) {
@@ -154,7 +157,8 @@ export function isClaudeInputBoxEmpty(screenLines: readonly string[]): boolean {
     const isBox =
       screenLines[index - 1]!.trim().startsWith('─') &&
       screenLines[index + 1]?.trim().startsWith('─') === true
-    return isBox && line.slice(1).trim().length === 0
+    const typed = line.slice(1).trim()
+    return isBox && (typed.length === 0 || CLAUDE_INPUT_PLACEHOLDER.test(typed))
   }
   return false
 }
