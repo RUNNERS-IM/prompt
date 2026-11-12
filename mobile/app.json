@@ -2,7 +2,7 @@
   "expo": {
     "name": "Prompt",
     "slug": "prompt-mobile",
-    "version": "2.6.1030",
+    "version": "2.6.111301",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -29,7 +29,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "im.runners.prompt.mobile",
-      "buildNumber": "1",
+      "buildNumber": "6111301",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
         "NSLocalNetworkUsageDescription": "Prompt connects to the desktop app on your LAN.",
@@ -67,15 +67,21 @@
         "NSPrivacyAccessedAPITypes": [
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-            "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
-            "NSPrivacyAccessedAPITypeReasons": ["C617.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "C617.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
-            "NSPrivacyAccessedAPITypeReasons": ["35F9.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "35F9.1"
+            ]
           }
         ]
       }
@@ -87,9 +93,12 @@
       },
       "usesCleartextTraffic": true,
       "allowBackup": false,
-      "permissions": ["RECORD_AUDIO", "MODIFY_AUDIO_SETTINGS"],
+      "permissions": [
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS"
+      ],
       "package": "im.runners.prompt.mobile",
-      "versionCode": 1,
+      "versionCode": 6111301,
       "googleServicesFile": "./google-services.json"
     },
     "plugins": [
@@ -98,14 +107,38 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt-BR", "ru", "tr", "de"]
+            "ios": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "es",
+              "fr",
+              "pt-BR",
+              "ru",
+              "tr",
+              "de"
+            ]
           }
         }
       ],
       [
         "./plugins/android-locale-config.js",
         {
-          "locales": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt-BR", "ru", "tr", "de"]
+          "locales": [
+            "en",
+            "zh-Hans",
+            "zh-Hant",
+            "ja",
+            "ko",
+            "es",
+            "fr",
+            "pt-BR",
+            "ru",
+            "tr",
+            "de"
+          ]
         }
       ],
       "expo-notifications",
