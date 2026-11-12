@@ -202,7 +202,7 @@ export function buildDefaultSettings(args: {
     terminalModelQueryAuthority: true,
     // Prompt only runs Claude Code, so first launch starts with it selected.
     defaultTuiAgent: 'claude',
-    // Prompt restarts Claude sessions on a new login by itself; busy ones wait for idle.
+    // On a new login Prompt restarts only the Claude sessions stopped at their usage limit.
     claudeAccountSwitchRunningSessions: 'limited',
     disabledTuiAgents: [...DEFAULT_DISABLED_TUI_AGENTS],
     pluginSystemEnabled: false,
