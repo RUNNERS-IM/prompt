@@ -1,0 +1,72 @@
+# 휴대폰 출시 가지(mobile-release)에 올리면 판 번호와 빌드 번호를 정해 mobile-release 에 커밋하고([skip ci])
+# mobile-v<번호> 태그를 남긴다. 번호 규칙은 mobile/scripts/bump-release.sh 에 있다(컴퓨터판과 같은
+# 2.{연도 끝자리}.{MMDD}{NN}, 휴대폰 태그만 봄). Monitor 휴대폰 앱과 같은 모양이다.
+#
+# 이 저장소의 release 가지 · v 태그는 컴퓨터판(prompt-release.yml) 몫이라 휴대폰은 가지 · 태그 이름을 따로 쓴다.
+# 스토어 빌드 · 제출은 여기서 하지 않는다. 스토어 출시는 사용자 확인을 거쳐야 해서, 이 번호 커밋을 받아 사람이
+# mobile-ios-release.yml · mobile-android-release.yml 을 따로 돌린다. 둘 다 mobile/app.json 의 번호를 고치지 않고 그대로 쓴다.
+#
+# 이 파일이나 번호 스크립트를 고친 PR 에서는 번호만 계산해 보고 커밋 · 태그는 하지 않는다(시험 실행).
+name: Mobile Release Version
+
+on:
+  push:
+    branches: [mobile-release]
+  pull_request:
+    paths:
+      - mobile/scripts/bump-release.sh
+      - .github/workflows/mobile-release.yml
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: '번호를 올려 커밋하고 태그 남기기 (끄면 시험 실행)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prompt-mobile-release
+  cancel-in-progress: false
+
+env:
+  PUBLISH: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/mobile-release') || inputs.publish == true }}
+
+jobs:
+  version:
+    # 번호 올림 커밋이 다시 이 작업을 부르지 않게 막는다
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ env.PUBLISH == 'true' && 'mobile-release' || github.ref }}
+          fetch-depth: 0 # 태그로 같은 날 낸 번호가 있는지 본다
+
+      - name: Bump the version
+        run: |
+          set -euo pipefail
+          BUMPED=$(mobile/scripts/bump-release.sh)
+          VERSION=$(echo "$BUMPED" | sed -n 1p)
+          BUILD=$(echo "$BUMPED" | sed -n 2p)
+          TAG=$(echo "$BUMPED" | sed -n 3p)
+          echo "판 번호 $VERSION · 빌드 번호 $BUILD · 태그 $TAG" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "$(echo "$BUMPED" | sed -n 4p)" = already ]; then
+            echo "이 커밋은 이미 $TAG 로 출시했습니다. 새 번호를 만들지 않습니다." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ "$PUBLISH" != "true" ]; then
+            echo "시험 실행이라 커밋 · 태그를 하지 않습니다." | tee -a "$GITHUB_STEP_SUMMARY"
+            git diff -- mobile/app.json
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mobile/app.json
+          # 번호 커밋은 올렸는데 태그를 못 올리고 멈춘 출시를 같은 날 다시 돌리면, 같은 번호가 다시 나와 mobile/app.json 이
+          # 그대로다. 그때는 커밋을 건너뛰고 태그만 단다. 태그까지 단 커밋은 위 already 에서 끝난다.
+          git diff --cached --quiet || git commit -q -m "Prompt 휴대폰 $VERSION [skip ci]"
+          git push origin HEAD:mobile-release
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
