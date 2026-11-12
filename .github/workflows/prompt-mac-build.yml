@@ -49,8 +49,42 @@ jobs:
           HEAVY="$HOME/git/claude-config/bin/heavy-run"
           [ -x "$HEAVY" ] && echo "HEAVY=$HEAVY --name Prompt-release" >> "$GITHUB_ENV" || true
 
+      # 맥 스튜디오 서명 잠금(Split · Remote 와 같은 경로 · 같은 방식). 두 작업이 같은 순간에 키체인 검색 목록을
+      # 고치면 한쪽 키체인이 빠진다(2026-11-12 Split 시험에서 실제로 빠짐). 그래서 저장소를 가리지 않고 맥 전체에서
+      #   잡기: ~/.runners/signing.lock 디렉터리를 mkdir 로 만든 작업이 주인이다. owner 파일에 저장소 · 실행 번호를 적는다.
+      #   풀기: 맨 끝 always 단계에서, owner 가 자기일 때만 지운다.
+      #   오래된 잠금: 150분이 지난 것은 주인이 죽은 것으로 보고 치운다. 60분을 기다려도 못 잡으면 실패.
+      - name: Wait for the signing turn on an office Mac
+        if: runner.environment == 'self-hosted'
+        shell: bash
+        run: |
+          set -euo pipefail
+          LOCK="$HOME/.runners/signing.lock"
+          OWNER="$GITHUB_REPOSITORY run $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
+          mkdir -p "$HOME/.runners"
+          START=$(date +%s)
+          until mkdir "$LOCK" 2>/dev/null; do
+            NOW=$(date +%s)
+            HELD=$(( NOW - $(stat -f %m "$LOCK" 2>/dev/null || echo "$NOW") ))
+            if [ "$HELD" -gt 9000 ]; then
+              echo "::warning::Removing a signing lock held for $HELD s by $(cat "$LOCK/owner" 2>/dev/null)"
+              rm -rf "$LOCK"
+              continue
+            fi
+            if [ $(( NOW - START )) -gt 3600 ]; then
+              echo "::error::Waited 60 minutes for the signing lock held by $(cat "$LOCK/owner" 2>/dev/null)"
+              exit 1
+            fi
+            echo "Waiting for the signing lock held by $(cat "$LOCK/owner" 2>/dev/null) for $HELD s"
+            sleep 20
+          done
+          echo "$OWNER" > "$LOCK/owner"
+          echo "SIGNING_LOCK_OWNER=$OWNER" >> "$GITHUB_ENV"
+          echo "Took the signing lock after $(( $(date +%s) - START )) s"
+
       # 20분 넘는 빌드 전에 서명 준비부터 해서, 비밀값이 빠졌으면 바로 멈춘다
       - name: Prepare a temporary signing keychain
+        shell: bash
         env:
           DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
           DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
@@ -70,15 +104,23 @@ jobs:
           mkdir -p "$SECRETS" && chmod 700 "$SECRETS"
           KEYCHAIN="$RUNNER_TEMP/prompt-signing.keychain-db"
           KEYCHAIN_PASSWORD="$(uuidgen)"
-          # The search list is put back as it was when the run ends.
-          security list-keychains -d user | tr -d '" ' > "$SECRETS/keychains-before"
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
           security set-keychain-settings -lut 21600 "$KEYCHAIN"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
           echo "$DEVELOPER_ID_P12_BASE64" | base64 --decode > "$SECRETS/developer-id.p12"
           security import "$SECRETS/developer-id.p12" -k "$KEYCHAIN" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
-          security list-keychains -d user -s "$KEYCHAIN" $(cat "$SECRETS/keychains-before")
+          # Only this keychain goes in and comes out of the search list; other jobs' keychains stay.
+          # Re-added right before signing, since another job may change the list during the build.
+          cat > "$RUNNER_TEMP/prompt-keychain-on.sh" <<'EOF'
+          #!/bin/bash
+          set -euo pipefail
+          K="$RUNNER_TEMP/prompt-signing.keychain-db"
+          OTHERS=$(security list-keychains -d user | tr -d '" ' | grep -vxF "$K" || true)
+          security list-keychains -d user -s "$K" $OTHERS
+          EOF
+          chmod 700 "$RUNNER_TEMP/prompt-keychain-on.sh"
+          "$RUNNER_TEMP/prompt-keychain-on.sh"
           rm "$SECRETS/developer-id.p12"
           # The certificate must belong to the team the build config checks (ORCA_MAC_TEAM_ID).
           if ! security find-identity -v -p codesigning "$KEYCHAIN" | grep -q 'Developer ID Application:.*(RGWVXJ8URP)'; then
@@ -149,7 +191,13 @@ jobs:
       - name: Ensure the Rust toolchain for the Prompt native module
         run: |
           set -euo pipefail
-          if ! command -v cargo >/dev/null; then
+          # 맥 스튜디오는 ~/.cargo/bin 이 PATH 에 없고, 2026-11-12 에는 rustup 본체가 빠져 있었다
+          export PATH="$HOME/.cargo/bin:$PATH"
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --no-modify-path
+          fi
+          if ! cargo --version >/dev/null 2>&1; then
             rustup toolchain install stable --profile minimal
             rustup default stable
           fi
@@ -196,7 +244,8 @@ jobs:
             if [ "$PUBLISH" = "true" ]; then MODE=always; else MODE=never; fi
             node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs $NODE_SLOTS
             node config/scripts/ensure-native-runtime.mjs --runtime=electron
-            ORCA_MAC_RELEASE=1 ${HEAVY:-} pnpm exec electron-builder --config config/electron-builder.config.cjs --mac dmg zip $ARCH_FLAGS --publish "$MODE"
+            ORCA_MAC_RELEASE=1 ${HEAVY:-} bash -c '"$RUNNER_TEMP/prompt-keychain-on.sh" && exec "$@"' _ \
+              pnpm exec electron-builder --config config/electron-builder.config.cjs --mac dmg zip $ARCH_FLAGS --publish "$MODE"
         env:
           GH_TOKEN: ${{ github.token }}
           # The draft was created by the prepare job; long template/build time must not make builder refuse it.
@@ -219,11 +268,13 @@ jobs:
 
       - name: Remove the temporary keychain and keys
         if: always()
+        shell: bash
         run: |
           SECRETS="$RUNNER_TEMP/prompt-secrets"
-          if [ -f "$SECRETS/keychains-before" ]; then
-            security list-keychains -d user -s $(cat "$SECRETS/keychains-before")
-          fi
+          K="$RUNNER_TEMP/prompt-signing.keychain-db"
+          OTHERS=$(security list-keychains -d user | tr -d '" ' | grep -vxF "$K" || true)
+          security list-keychains -d user -s $OTHERS
+          rm -f "$RUNNER_TEMP/prompt-keychain-on.sh"
           security delete-keychain "$RUNNER_TEMP/prompt-signing.keychain-db" 2>/dev/null || true
           rm -rf "$SECRETS"
           # Why: an office Mac stays after the job. Fail the run when the signing keychain is still reachable
@@ -232,3 +283,16 @@ jobs:
             echo "::error::서명 키체인이 이 기계에 남아 있다"; exit 1
           fi
           echo "이 기계에 남은 키체인:"; security list-keychains -d user
+
+      # 앞 단계가 실패해도 잠금은 돌려준다. 자기가 잡은 잠금일 때만 지운다.
+      - name: Give the signing lock back
+        if: always() && env.SIGNING_LOCK_OWNER != ''
+        shell: bash
+        run: |
+          LOCK="$HOME/.runners/signing.lock"
+          if [ "$(cat "$LOCK/owner" 2>/dev/null)" = "$SIGNING_LOCK_OWNER" ]; then
+            rm -rf "$LOCK"
+            echo "Gave the signing lock back"
+          else
+            echo "::warning::The signing lock is no longer ours: $(cat "$LOCK/owner" 2>/dev/null)"
+          fi

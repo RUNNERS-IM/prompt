@@ -46,6 +46,10 @@ on:
         description: Use Blacksmith where the platform and architecture are available
         type: boolean
         default: true
+    outputs:
+      template_ready:
+        description: The orcad-template artifact qualified every slot, counting Mac Studio reruns of GitHub Mac lanes
+        value: ${{ jobs.desktop_template.outputs.ready }}
   # Requalify fresh builds daily; publish missing immutable Windows cache keys.
   schedule:
     - cron: '30 11 * * *'
@@ -337,6 +341,94 @@ jobs:
           # A rerun attempt re-uploads under the same name, which v4 otherwise refuses.
           overwrite: true
 
+
+  # A GitHub Mac lane that never got a machine (cancelled) reruns on the office Mac Studio, so the release template
+  # still qualifies both macOS slots; macos-15-intel runs x64 Node under Rosetta there. Real failures are not retried.
+  persistence_mac_studio:
+    name: persistence_mac_studio (${{ matrix.os }})
+    needs: [changes, mobile_web_bundle, persistence]
+    if: ${{ !cancelled() && inputs.build_template && needs.persistence.result != 'success' }}
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - os: macos-15
+            arch: arm64
+          - os: macos-15-intel
+            arch: x64
+    runs-on: [self-hosted, macOS, ARM64, m2-ultra-sun-1]
+    timeout-minutes: 45
+    env:
+      ORCA_BACKGROUND_LAUNCH: '1'
+    steps:
+      - name: Check whether the GitHub lane went without a machine
+        id: lane
+        uses: actions/github-script@v8
+        env:
+          LANE: persistence (${{ matrix.os }})
+        with:
+          script: |
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              ...context.repo, run_id: context.runId, filter: 'latest', per_page: 100
+            })
+            const lanes = jobs.filter(job => job.name === process.env.LANE || job.name.endsWith(` / ${process.env.LANE}`))
+            if (lanes.length > 1) throw new Error(`Ambiguous lane: ${process.env.LANE}`)
+            core.setOutput('rerun', String(lanes[0]?.conclusion === 'cancelled'))
+      - uses: actions/checkout@v6
+        if: steps.lane.outputs.rerun == 'true'
+        with:
+          ref: ${{ inputs.ref }}
+          persist-credentials: false
+      - uses: ./.github/actions/install-node-dependencies
+        if: steps.lane.outputs.rerun == 'true'
+        with:
+          node-architecture: ${{ matrix.arch }}
+          cache-pnpm-store: 'false'
+      - name: Confirm the slot this lane qualifies
+        if: steps.lane.outputs.rerun == 'true'
+        run: |
+          SLOT=$(node config/scripts/build-orcad-prebuilds.mjs --print-slot)
+          [ "$SLOT" = "darwin-${{ matrix.arch }}" ] || { echo "Expected darwin-${{ matrix.arch }}, got $SLOT" >&2; exit 1; }
+          # The Mac Studio serves other repositories too; heavy steps wait their turn there.
+          HEAVY="$HOME/git/claude-config/bin/heavy-run"
+          [ -x "$HEAVY" ] && echo "HEAVY=$HEAVY --name Prompt-template" >> "$GITHUB_ENV" || true
+      - uses: ./.github/actions/prepare-orcad-prebuilds
+        if: steps.lane.outputs.rerun == 'true'
+      - uses: actions/download-artifact@v8
+        if: steps.lane.outputs.rerun == 'true' && needs.changes.outputs.qualification != 'false'
+        with:
+          name: orcad-mobile-web-bundle
+          path: out/mobile-web
+      - uses: ./.github/actions/build-mobile-web-bundle
+        if: steps.lane.outputs.rerun == 'true' && needs.changes.outputs.qualification == 'false'
+      - if: steps.lane.outputs.rerun == 'true'
+        run: ${HEAVY:-} pnpm build:orcad
+      - if: steps.lane.outputs.rerun == 'true'
+        run: ${HEAVY:-} pnpm test:node-server --artifact
+      - uses: actions/setup-node@v6
+        if: steps.lane.outputs.rerun == 'true' && matrix.arch == 'x64'
+        with:
+          node-version: '18'
+          architecture: x64
+      - name: Verify Node 18 loads and hands off to the pinned Node
+        if: steps.lane.outputs.rerun == 'true' && matrix.arch == 'x64'
+        run: |
+          node out/orcad/orcad.js --orcad-smoke-load-check
+          node out/orcad/orcad.js --orcad-profile-state-preflight 00000000-0000-4000-8000-000000000018 | tee "$RUNNER_TEMP/preflight.json"
+          node -e "const r=JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'));if(r.runtime!=='node'||!/^24\./.test(r.runtimeVersion))process.exit(1)" "$RUNNER_TEMP/preflight.json"
+      - name: Keep this runner's qualified slot for the desktop template
+        if: steps.lane.outputs.rerun == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: orcad-prebuild-${{ matrix.os }}
+          path: out/orcad-prebuilds/
+          if-no-files-found: error
+          retention-days: 7
+          overwrite: true
   # Every qualification lane tests the same platform-independent page.
   mobile_web_bundle:
     needs: changes
@@ -581,7 +673,10 @@ jobs:
       contents: read
       actions: read
     runs-on: ${{ inputs.fast_runners && 'blacksmith-4vcpu-ubuntu-2404' || 'ubuntu-latest' }}
-    timeout-minutes: 30
+    # A cancelled GitHub Mac lane is followed by its Mac Studio rerun.
+    timeout-minutes: 90
+    outputs:
+      ready: ${{ steps.assembled.outputs.ready }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -592,7 +687,8 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const deadline = Date.now() + 25 * 60_000
+            const deadline = Date.now() + 80 * 60_000
+            const macStudioLanes = ['macos-15', 'macos-15-intel']
             const expected = {
               persistence: 6,
               mobile_web_bundle: 1,
@@ -615,9 +711,15 @@ jobs:
                     job.name.startsWith(`${prefix}${name} (`))
                   if (lanes.length > count) throw new Error(`Unexpected qualification lanes: ${name}`)
                   for (const lane of lanes) {
-                    if (lane.status === 'completed' && lane.conclusion !== 'success') {
-                      throw new Error(`Template qualification did not succeed: ${lane.name} (${lane.conclusion})`)
+                    if (lane.status !== 'completed' || lane.conclusion === 'success') continue
+                    const os = name === 'persistence' && lane.conclusion === 'cancelled' &&
+                      macStudioLanes.find(os => lane.name === `${prefix}persistence (${os})`)
+                    if (!os) throw new Error(`Template qualification did not succeed: ${lane.name} (${lane.conclusion})`)
+                    const rerun = jobs.find(job => job.name === `${prefix}persistence_mac_studio (${os})`)
+                    if (rerun?.status === 'completed' && rerun.conclusion !== 'success') {
+                      throw new Error(`Template qualification did not succeed: ${rerun.name} (${rerun.conclusion})`)
                     }
+                    if (rerun?.status !== 'completed') ready = false
                   }
                   if (lanes.length !== count || lanes.some(lane => lane.status !== 'completed')) ready = false
                 }
@@ -679,3 +781,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           overwrite: true
+      - name: Mark the template ready
+        id: assembled
+        run: echo "ready=true" >> "$GITHUB_OUTPUT"

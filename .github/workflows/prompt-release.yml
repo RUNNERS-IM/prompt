@@ -132,7 +132,7 @@ jobs:
     # 템플릿을 일부러 건너뛴 경우(skipped)에도 진행한다
     if: >-
       !cancelled() && !inputs.skip_github_mac && needs.prepare.result == 'success' &&
-      (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
+      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
     permissions:
       contents: write
     uses: ./.github/workflows/prompt-mac-build.yml
@@ -142,7 +142,7 @@ jobs:
       version: ${{ needs.prepare.outputs.version }}
       sha: ${{ needs.prepare.outputs.sha }}
       publish: ${{ needs.prepare.outputs.publish }}
-      with_template: ${{ needs.orcad-template.result == 'success' }}
+      with_template: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
 
   # GitHub Mac 작업이 취소 · 실패하면(시험에서 건너뛰어도) 같은 출시 안에서 사무실 맥 스튜디오가 이어서 만든다.
   # 서명 키체인은 끝나면 지우고, 남아 있으면 이 작업을 실패로 끝낸다(prompt-mac-build.yml 맨 끝 단계).
@@ -150,7 +150,7 @@ jobs:
     needs: [prepare, orcad-template, mac]
     if: >-
       !cancelled() && needs.prepare.result == 'success' && needs.mac.result != 'success' &&
-      (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
+      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
     permissions:
       contents: write
     uses: ./.github/workflows/prompt-mac-build.yml
@@ -160,13 +160,13 @@ jobs:
       version: ${{ needs.prepare.outputs.version }}
       sha: ${{ needs.prepare.outputs.sha }}
       publish: ${{ needs.prepare.outputs.publish }}
-      with_template: ${{ needs.orcad-template.result == 'success' }}
+      with_template: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
 
   windows:
     needs: [prepare, orcad-template]
     if: >-
       !cancelled() && needs.prepare.result == 'success' &&
-      (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
+      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
     # upstream: windows-latest(2025 이미지)는 node-gyp 가 새 Visual Studio 를 못 찾아 네이티브 설치가 깨진다
     runs-on: windows-2022
     timeout-minutes: 90
@@ -175,7 +175,7 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
-      WITH_TEMPLATE: ${{ needs.orcad-template.result == 'success' }}
+      WITH_TEMPLATE: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -284,7 +284,7 @@ jobs:
     needs: [prepare, orcad-template]
     if: >-
       !cancelled() && needs.prepare.result == 'success' &&
-      (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
+      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
@@ -292,7 +292,7 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
-      WITH_TEMPLATE: ${{ needs.orcad-template.result == 'success' }}
+      WITH_TEMPLATE: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
     steps:
       - uses: actions/checkout@v6
         with:
