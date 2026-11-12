@@ -115,12 +115,12 @@ function announceAutoPick(
   const nextId = getProviderAccountActiveIdForView(after, HOST_VIEW)
   void useAppStore.getState().fetchSettings()
   toast.info(
-    translate('accounts.claude.autoPick.switched', 'Switched Claude to {{next}}', {
+    translate('prompt.claudeAccount.autoPickSwitched', 'Switched Claude to {{next}}', {
       next: getClaudeAccountLabel(after, nextId)
     }),
     {
       description: translate(
-        'accounts.claude.autoPick.switchedReason',
+        'prompt.claudeAccount.autoPickSwitchedReason',
         '{{previous}} → {{next}}. Its weekly limit resets sooner.',
         {
           previous: getClaudeAccountLabel(before, previousId),

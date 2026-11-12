@@ -21476,7 +21476,7 @@
         "busy": "Työskentelee",
         "idle": "Joutilas",
         "settingTitle": "Kun tiliä vaihdetaan Clauden ollessa käynnissä",
-        "settingDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä. Pysähtyneet ovat saavuttaneet käyttörajansa.",
+        "settingDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä.",
         "keyword": {
           "restart": "käynnistä uudelleen",
           "running": "käynnissä"
@@ -21504,8 +21504,7 @@
         "reviewBody_one": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "reviewBody_other": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "body_one": "{{count}} Claude-sessio on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
-        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
-        "settingLimited": "Käynnistä vain pysähtyneet"
+        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä."
       },
       "loginSync": {
         "previousLogin": "edellinen kirjautuminen"
@@ -23387,7 +23386,7 @@
         "usageGroup": "Käyttö",
         "usageSearchDescription": "Agenttien määrät sekä Clauden token-, malli- ja sessiokäyttö.",
         "title": "Claude",
-        "description": "Claude-tilit, uusien sessioiden käynnistys ja käyttö."
+        "description": "Uusien sessioiden käynnistys ja käyttö."
       },
       "appearance": {
         "trayGroup": "Ilmaisinalue",
@@ -23439,7 +23438,7 @@
       },
       "account": {
         "title": "Tili",
-        "description": "Yksi RUNNERS-tili, jota kaikki RUNNERS-sovellukset käyttävät."
+        "description": "RUNNERS-tili, jota kaikki RUNNERS-sovellukset käyttävät, ja tämän Macin Claude-tilit."
       }
     },
     "skills": {
@@ -23477,6 +23476,19 @@
       "durationHoursMinutes": "{{hours}} t {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "nyt"
+    },
+    "claudeAccount": {
+      "title": "Claude-tili",
+      "noUsage": "Käyttöä ei ole vielä luettu",
+      "weeklyShort": "Viikko {{percent}}",
+      "autoPick": "Valitse automaattisesti",
+      "autoPickHint": "Käyttää tiliä, jonka viikkoraja nollautuu ensimmäisenä",
+      "manage": "Lisää tai hallitse tilejä…",
+      "signInAgain": "Kirjaudu uudelleen käyttääksesi sitä",
+      "switchLimited": "Käynnistä vain pysähtyneet",
+      "switchDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä. Pysähtyneet ovat saavuttaneet käyttörajansa.",
+      "autoPickSwitched": "Claude vaihdettiin tiliin {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sen viikkoraja nollautuu aiemmin."
     }
   }
 }

@@ -21109,7 +21109,7 @@
         "busy": "กำลังทำงาน",
         "idle": "ว่าง",
         "settingTitle": "เมื่อสลับบัญชีขณะที่ Claude กำลังทำงาน",
-        "settingDescription": "การเริ่มใหม่จะทำให้การสนทนาที่กำลังทำงานดำเนินต่อในบัญชีใหม่ ที่หยุดคือเซสชันที่ถึงขีดจำกัดการใช้งาน",
+        "settingDescription": "การรีสตาร์ตจะทำให้แต่ละการสนทนาที่กำลังทำงานอยู่ดำเนินต่อด้วยบัญชีใหม่",
         "keyword": {
           "restart": "เริ่มใหม่",
           "running": "กำลังทำงาน"
@@ -21134,8 +21134,7 @@
         "review": "รีวิว",
         "restartCount_other": "รีสตาร์ท {{count}} session",
         "reviewBody_other": "Claude session อื่นอีก {{count}} session ไม่ได้ถูกย้ายไปยัง {{next}}",
-        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท",
-        "settingLimited": "เริ่มใหม่เฉพาะที่หยุด"
+        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท"
       },
       "loginSync": {
         "previousLogin": "การเข้าสู่ระบบก่อนหน้า"
@@ -22996,7 +22995,7 @@
         "usageGroup": "การใช้งาน",
         "usageSearchDescription": "จำนวน agent พร้อมการใช้งาน token โมเดล และ session ของ Claude",
         "title": "Claude",
-        "description": "บัญชี Claude วิธีเริ่ม session ใหม่ และการใช้งาน"
+        "description": "วิธีเริ่ม session ใหม่ และการใช้งาน"
       },
       "appearance": {
         "trayGroup": "ถาดระบบ",
@@ -23048,7 +23047,7 @@
       },
       "account": {
         "title": "บัญชี",
-        "description": "บัญชี RUNNERS เดียวที่แอป RUNNERS ทุกตัวใช้ร่วมกัน"
+        "description": "บัญชี RUNNERS ที่แอป RUNNERS ทุกตัวใช้ร่วมกัน และบัญชี Claude ของ Mac เครื่องนี้"
       }
     },
     "skills": {
@@ -23085,6 +23084,19 @@
       "durationHoursMinutes": "{{hours}} ชม. {{minutes}} นาที",
       "durationMinutes": "{{minutes}} นาที",
       "now": "ตอนนี้"
+    },
+    "claudeAccount": {
+      "title": "บัญชี Claude",
+      "noUsage": "ยังไม่ได้อ่านการใช้งาน",
+      "weeklyShort": "รายสัปดาห์ {{percent}}",
+      "autoPick": "เลือกให้อัตโนมัติ",
+      "autoPickHint": "ใช้บัญชีที่ขีดจำกัดรายสัปดาห์รีเซ็ตเร็วที่สุด",
+      "manage": "เพิ่มหรือจัดการบัญชี…",
+      "signInAgain": "ลงชื่อเข้าใช้อีกครั้งเพื่อใช้งาน",
+      "switchLimited": "เริ่มใหม่เฉพาะที่หยุด",
+      "switchDescription": "การเริ่มใหม่จะทำให้การสนทนาที่กำลังทำงานดำเนินต่อในบัญชีใหม่ ที่หยุดคือเซสชันที่ถึงขีดจำกัดการใช้งาน",
+      "autoPickSwitched": "เปลี่ยน Claude เป็น {{next}} แล้ว",
+      "autoPickSwitchedReason": "{{previous}} → {{next}} ขีดจำกัดรายสัปดาห์รีเซ็ตเร็วกว่า"
     }
   }
 }

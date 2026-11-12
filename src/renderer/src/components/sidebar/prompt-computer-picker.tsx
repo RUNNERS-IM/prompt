@@ -14,6 +14,7 @@ import {
 import type { ExecutionHostId } from '../../../../shared/execution-host'
 import { AddRemoteHostDialog, type AddRemoteHostMode } from './AddRemoteHostDialog'
 import { PromptShareComputerDialog } from './prompt-share-computer-dialog'
+import { PromptClaudeAccountRow } from './prompt-claude-account-row'
 import { useSidebarHostScopeOptions } from './use-sidebar-host-scope-options'
 import { thisComputerTag, usePromptLocalComputerName } from './prompt-local-computer-label'
 import {
@@ -197,6 +198,8 @@ export function PromptComputerPicker(): React.JSX.Element {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      {/* Accounts are kept per Mac, so the row follows only this Mac. */}
+      {selectedRow?.isLocal ? <PromptClaudeAccountRow /> : null}
       <AddRemoteHostDialog
         mode={addMode}
         onOpenChange={(mode) => {

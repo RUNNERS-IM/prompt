@@ -21109,7 +21109,7 @@
         "busy": "Đang xử lý",
         "idle": "Không hoạt động",
         "settingTitle": "Khi chuyển tài khoản lúc Claude đang chạy",
-        "settingDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
+        "settingDescription": "Khởi động lại sẽ tiếp tục từng cuộc trò chuyện đang chạy trên tài khoản mới.",
         "keyword": {
           "restart": "khởi động lại",
           "running": "đang chạy"
@@ -21134,8 +21134,7 @@
         "review": "Review",
         "restartCount_other": "Khởi động lại {{count}} phiên",
         "reviewBody_other": "{{count}} phiên Claude khác chưa được chuyển sang {{next}}.",
-        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại.",
-        "settingLimited": "Chỉ khởi động lại phiên đã dừng"
+        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại."
       },
       "loginSync": {
         "previousLogin": "lần đăng nhập trước"
@@ -22996,7 +22995,7 @@
         "usageGroup": "Mức sử dụng",
         "usageSearchDescription": "Số lượng agent cùng mức sử dụng token, model và phiên của Claude.",
         "title": "Claude",
-        "description": "Tài khoản Claude, cách khởi động phiên mới và mức sử dụng."
+        "description": "Cách khởi động phiên mới và mức sử dụng."
       },
       "appearance": {
         "trayGroup": "Khay hệ thống",
@@ -23048,7 +23047,7 @@
       },
       "account": {
         "title": "Tài khoản",
-        "description": "Một tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS."
+        "description": "Tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS và các tài khoản Claude của Mac này."
       }
     },
     "skills": {
@@ -23085,6 +23084,19 @@
       "durationHoursMinutes": "{{hours}} giờ {{minutes}} phút",
       "durationMinutes": "{{minutes}} phút",
       "now": "ngay"
+    },
+    "claudeAccount": {
+      "title": "Tài khoản Claude",
+      "noUsage": "Chưa đọc được mức sử dụng",
+      "weeklyShort": "Tuần {{percent}}",
+      "autoPick": "Tự động chọn",
+      "autoPickHint": "Dùng tài khoản có giới hạn tuần được đặt lại sớm nhất",
+      "manage": "Thêm hoặc quản lý tài khoản…",
+      "signInAgain": "Đăng nhập lại để dùng",
+      "switchLimited": "Chỉ khởi động lại phiên đã dừng",
+      "switchDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
+      "autoPickSwitched": "Đã chuyển Claude sang {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn."
     }
   }
 }

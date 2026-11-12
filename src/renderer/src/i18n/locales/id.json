@@ -21109,7 +21109,7 @@
         "busy": "Berjalan",
         "idle": "Diam",
         "settingTitle": "Saat berganti akun ketika Claude sedang berjalan",
-        "settingDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
+        "settingDescription": "Memulai ulang akan melanjutkan setiap percakapan yang sedang berjalan dengan akun baru.",
         "keyword": {
           "restart": "mulai ulang",
           "running": "berjalan"
@@ -21134,8 +21134,7 @@
         "review": "Review",
         "restartCount_other": "Mulai ulang {{count}} sesi",
         "reviewBody_other": "{{count}} sesi Claude lainnya tidak dipindahkan ke {{next}}.",
-        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang.",
-        "settingLimited": "Mulai ulang yang berhenti"
+        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang."
       },
       "loginSync": {
         "previousLogin": "login sebelumnya"
@@ -22996,7 +22995,7 @@
         "usageGroup": "Penggunaan",
         "usageSearchDescription": "Jumlah agen beserta penggunaan token, model, dan sesi Claude.",
         "title": "Claude",
-        "description": "Akun Claude, cara sesi baru dimulai, dan penggunaan."
+        "description": "Cara sesi baru dimulai, dan penggunaan."
       },
       "appearance": {
         "trayGroup": "System tray",
@@ -23048,7 +23047,7 @@
       },
       "account": {
         "title": "Akun",
-        "description": "Satu akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS."
+        "description": "Akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS, dan akun Claude di Mac ini."
       }
     },
     "skills": {
@@ -23085,6 +23084,19 @@
       "durationHoursMinutes": "{{hours}} j {{minutes}} mnt",
       "durationMinutes": "{{minutes}} mnt",
       "now": "sekarang"
+    },
+    "claudeAccount": {
+      "title": "Akun Claude",
+      "noUsage": "Penggunaan belum terbaca",
+      "weeklyShort": "Mingguan {{percent}}",
+      "autoPick": "Pilih otomatis",
+      "autoPickHint": "Memakai akun yang batas mingguannya direset paling awal",
+      "manage": "Tambah atau kelola akun…",
+      "signInAgain": "Masuk lagi untuk memakainya",
+      "switchLimited": "Mulai ulang yang berhenti",
+      "switchDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
+      "autoPickSwitched": "Claude dialihkan ke {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal."
     }
   }
 }

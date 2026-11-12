@@ -121,7 +121,7 @@
         "usageGroup": "Utilisation",
         "usageSearchDescription": "Nombre d'agents, ainsi que l'utilisation des tokens, des modèles et des sessions de Claude.",
         "title": "Claude",
-        "description": "Comptes Claude, démarrage des nouvelles sessions et utilisation."
+        "description": "Démarrage des nouvelles sessions et utilisation."
       },
       "appearance": {
         "trayGroup": "Zone de notification",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "Compte",
-        "description": "Le compte RUNNERS unique partagé par toutes les apps RUNNERS."
+        "description": "Le compte RUNNERS partagé par toutes les apps RUNNERS, et les comptes Claude de ce Mac."
       }
     },
     "mobile": {
@@ -331,6 +331,19 @@
       "durationHoursMinutes": "{{hours}} h {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "maintenant"
+    },
+    "claudeAccount": {
+      "title": "Compte Claude",
+      "noUsage": "Utilisation pas encore lue",
+      "weeklyShort": "Semaine {{percent}}",
+      "autoPick": "Choisir automatiquement",
+      "autoPickHint": "Utilise le compte dont la limite hebdomadaire se réinitialise le plus tôt",
+      "manage": "Ajouter ou gérer des comptes…",
+      "signInAgain": "Reconnectez-vous pour l’utiliser",
+      "switchLimited": "Redémarrer celles arrêtées",
+      "switchDescription": "Le redémarrage poursuit chaque conversation en cours sur le nouveau compte. Les sessions arrêtées sont celles qui ont atteint leur limite d’utilisation.",
+      "autoPickSwitched": "Claude est passé à {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt."
     }
   },
   "agentLaunch": {
@@ -21816,7 +21829,7 @@
         "listLabel": "Sessions Claude à redémarrer",
         "settingRestart": "Toujours redémarrer",
         "settingKeep": "Ne jamais redémarrer",
-        "settingDescription": "Le redémarrage poursuit chaque conversation en cours sur le nouveau compte. Les sessions arrêtées sont celles qui ont atteint leur limite d’utilisation.",
+        "settingDescription": "Le redémarrage continue chaque conversation en cours sur le nouveau compte.",
         "restartingOne": "Redémarrage d’une session Claude sur {{account}}",
         "restartingOther": "Redémarrage de {{count}} sessions Claude sur {{account}}",
         "groupOnAccount": "En cours sur {{account}}",
@@ -21840,8 +21853,7 @@
         "reviewBody_many": "{{count}} autres sessions Claude n’ont pas été déplacées vers {{next}}.",
         "body_one": "{{count}} session Claude est toujours active sur {{previous}}. Le redémarrage poursuit la conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
         "body_other": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
-        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
-        "settingLimited": "Redémarrer celles arrêtées"
+        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer."
       },
       "loginSync": {
         "previousLogin": "la connexion précédente"

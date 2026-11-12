@@ -28,7 +28,7 @@ export function ClaudeRunningSessionSwitchSetting({
     'When you switch accounts while Claude is running'
   )
   const description = translate(
-    'accounts.claude.switchSessions.settingDescription',
+    'prompt.claudeAccount.switchDescription',
     'Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.'
   )
   return (
@@ -58,7 +58,7 @@ export function ClaudeRunningSessionSwitchSetting({
             {translate('accounts.claude.switchSessions.settingAsk', 'Ask')}
           </SelectItem>
           <SelectItem value="limited">
-            {translate('accounts.claude.switchSessions.settingLimited', 'Restart stopped ones')}
+            {translate('prompt.claudeAccount.switchLimited', 'Restart stopped ones')}
           </SelectItem>
           <SelectItem value="restart">
             {translate('accounts.claude.switchSessions.settingRestart', 'Always restart')}

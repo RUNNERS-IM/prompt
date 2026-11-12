@@ -22210,7 +22210,7 @@
         "busy": "Praca w toku",
         "idle": "Bezczynna",
         "settingTitle": "Przy przełączaniu kont, gdy działa Claude",
-        "settingDescription": "Ponowne uruchomienie kontynuuje każdą trwającą rozmowę na nowym koncie. Zatrzymane to te, które osiągnęły limit użycia.",
+        "settingDescription": "Ponowne uruchomienie kontynuuje każdą trwającą rozmowę na nowym koncie.",
         "keyword": {
           "restart": "restart",
           "running": "uruchomione"
@@ -22244,8 +22244,7 @@
         "body_one": "{{count}} sesja Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
         "body_few": "{{count}} sesje Claude nadal działają na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
         "body_many": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
-        "body_other": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
-        "settingLimited": "Uruchom ponownie tylko zatrzymane"
+        "body_other": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem."
       },
       "loginSync": {
         "previousLogin": "poprzednie logowanie"
@@ -24169,7 +24168,7 @@
         "usageGroup": "Użycie",
         "usageSearchDescription": "Liczba agentów oraz użycie tokenów, modeli i sesji Claude.",
         "title": "Claude",
-        "description": "Konta Claude, sposób uruchamiania nowych sesji i użycie."
+        "description": "Sposób uruchamiania nowych sesji i użycie."
       },
       "appearance": {
         "trayGroup": "Zasobnik systemowy",
@@ -24221,7 +24220,7 @@
       },
       "account": {
         "title": "Konto",
-        "description": "Jedno konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS."
+        "description": "Konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS oraz konta Claude na tym Macu."
       }
     },
     "skills": {
@@ -24261,6 +24260,19 @@
       "durationHoursMinutes": "{{hours}} godz. {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "teraz"
+    },
+    "claudeAccount": {
+      "title": "Konto Claude",
+      "noUsage": "Użycie jeszcze nie odczytane",
+      "weeklyShort": "Tydzień {{percent}}",
+      "autoPick": "Wybieraj automatycznie",
+      "autoPickHint": "Używa konta, którego limit tygodniowy resetuje się najwcześniej",
+      "manage": "Dodaj konta lub zarządzaj nimi…",
+      "signInAgain": "Zaloguj się ponownie, aby go użyć",
+      "switchLimited": "Uruchom ponownie tylko zatrzymane",
+      "switchDescription": "Ponowne uruchomienie kontynuuje każdą trwającą rozmowę na nowym koncie. Zatrzymane to te, które osiągnęły limit użycia.",
+      "autoPickSwitched": "Przełączono Claude na {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Jego limit tygodniowy resetuje się wcześniej."
     }
   }
 }

@@ -121,7 +121,7 @@
         "usageGroup": "Uso",
         "usageSearchDescription": "Recuento de agentes más el uso de tokens, modelos y sesiones de Claude.",
         "title": "Claude",
-        "description": "Cuentas de Claude, cómo se inician las sesiones nuevas y uso."
+        "description": "Cómo se inician las sesiones nuevas y uso."
       },
       "appearance": {
         "trayGroup": "Bandeja del sistema",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "Cuenta",
-        "description": "La cuenta RUNNERS que comparten todas las apps de RUNNERS."
+        "description": "La cuenta RUNNERS que comparten todas las apps de RUNNERS y las cuentas de Claude de este Mac."
       }
     },
     "mobile": {
@@ -331,6 +331,19 @@
       "durationHoursMinutes": "{{hours}} h {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "ahora"
+    },
+    "claudeAccount": {
+      "title": "Cuenta de Claude",
+      "noUsage": "Uso aún no leído",
+      "weeklyShort": "Semanal {{percent}}",
+      "autoPick": "Elegir automáticamente",
+      "autoPickHint": "Usa la cuenta cuyo límite semanal se reinicia antes",
+      "manage": "Añadir o gestionar cuentas…",
+      "signInAgain": "Vuelve a iniciar sesión para usarla",
+      "switchLimited": "Reiniciar solo las detenidas",
+      "switchDescription": "Al reiniciar, cada conversación en curso continúa en la nueva cuenta. Las detenidas son las que alcanzaron su límite de uso.",
+      "autoPickSwitched": "Claude cambió a {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Su límite semanal se reinicia antes."
     }
   },
   "agentLaunch": {
@@ -21207,7 +21220,7 @@
         "settingKeep": "Nunca reiniciar",
         "settingRestart": "Reiniciar siempre",
         "settingTitle": "Cuando cambias de cuenta mientras Claude se está ejecutando",
-        "settingDescription": "Al reiniciar, cada conversación en curso continúa en la nueva cuenta. Las detenidas son las que alcanzaron su límite de uso.",
+        "settingDescription": "El reinicio continúa con cada conversación en ejecución en la nueva cuenta.",
         "restartingOther": "Reiniciando {{count}} sesiones de Claude con {{account}}",
         "restartingOne": "Reiniciando 1 sesión de Claude con {{account}}",
         "groupOnAccount": "En ejecución con {{account}}",
@@ -21231,8 +21244,7 @@
         "reviewBody_many": "No se trasladaron {{count}} sesiones más de Claude a {{next}}.",
         "body_one": "{{count}} sesión de Claude sigue ejecutándose en {{previous}}. Al reiniciarla, la conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
         "body_other": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
-        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
-        "settingLimited": "Reiniciar solo las detenidas"
+        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse."
       },
       "loginSync": {
         "previousLogin": "el inicio de sesión anterior"

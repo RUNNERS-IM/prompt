@@ -66,7 +66,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.skills.commandCount': '명령어 {{count}}개',
   'prompt.settings.cli.notInstalled': '다른 터미널에서도 쓰려면 {{path}} 를 등록합니다.',
   'prompt.settings.claude.title': 'Claude',
-  'prompt.settings.claude.description': 'Claude 계정, 새 세션을 시작하는 방식, 사용량을 정합니다.',
+  'prompt.settings.claude.description': '새 세션을 시작하는 방식과 사용량을 정합니다.',
   'prompt.settings.git.title': 'Git',
   'prompt.settings.git.description': '브랜치, 소스 제어 작업, GitHub · GitLab 연결을 정합니다.',
   'prompt.settings.advanced.title': '고급',
@@ -143,7 +143,8 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.general.autoCheckUpdatesDescription': '새 판이 나오면 알려 줍니다.',
   'prompt.settings.general.menuBarIconDescription': '메뉴 막대에 Prompt 아이콘을 보입니다.',
   'prompt.settings.account.title': '계정',
-  'prompt.settings.account.description': 'RUNNERS 앱들이 함께 쓰는 RUNNERS 계정 하나입니다.',
+  'prompt.settings.account.description':
+    'RUNNERS 앱들이 함께 쓰는 RUNNERS 계정과 이 맥의 Claude 계정입니다.',
   'prompt.settings.about.title': '정보',
   'prompt.settings.about.description': '버전, RUNNERS 앱, 오픈소스 고지.',
   'prompt.settings.appearance.trayGroup': '시스템 트레이',

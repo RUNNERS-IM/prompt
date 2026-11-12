@@ -21843,7 +21843,7 @@
         "busy": "In lavorazione",
         "idle": "Inattivo",
         "settingTitle": "Quando cambi account mentre Claude è in esecuzione",
-        "settingDescription": "Il riavvio continua ogni conversazione in corso sul nuovo account. Quelle ferme sono quelle che hanno raggiunto il limite di utilizzo.",
+        "settingDescription": "Il riavvio riprende ogni conversazione in corso con il nuovo account",
         "keyword": {
           "restart": "riavvio",
           "running": "in esecuzione"
@@ -21874,8 +21874,7 @@
         "reviewBody_other": "{{count}} altre sessioni di Claude non sono state spostate su {{next}}.",
         "body_one": "{{count}} sessione di Claude è ancora in esecuzione su {{previous}}. Riavviando, la conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
         "body_many": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
-        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
-        "settingLimited": "Riavvia solo quelle ferme"
+        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio."
       },
       "loginSync": {
         "previousLogin": "il login precedente"
@@ -23778,7 +23777,7 @@
         "usageGroup": "Utilizzo",
         "usageSearchDescription": "Numero di agenti più utilizzo di token, modelli e sessioni di Claude",
         "title": "Claude",
-        "description": "Account di Claude, avvio delle nuove sessioni e utilizzo"
+        "description": "Avvio delle nuove sessioni e utilizzo"
       },
       "appearance": {
         "trayGroup": "Area di notifica",
@@ -23830,7 +23829,7 @@
       },
       "account": {
         "title": "Account",
-        "description": "L’unico account RUNNERS condiviso da tutte le app RUNNERS."
+        "description": "L’account RUNNERS condiviso da tutte le app RUNNERS e gli account Claude di questo Mac."
       }
     },
     "skills": {
@@ -23869,6 +23868,19 @@
       "durationHoursMinutes": "{{hours}} h {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "ora"
+    },
+    "claudeAccount": {
+      "title": "Account Claude",
+      "noUsage": "Utilizzo non ancora letto",
+      "weeklyShort": "Settimana {{percent}}",
+      "autoPick": "Scegli automaticamente",
+      "autoPickHint": "Usa l’account il cui limite settimanale si azzera prima",
+      "manage": "Aggiungi o gestisci account…",
+      "signInAgain": "Accedi di nuovo per usarlo",
+      "switchLimited": "Riavvia solo quelle ferme",
+      "switchDescription": "Il riavvio continua ogni conversazione in corso sul nuovo account. Quelle ferme sono quelle che hanno raggiunto il limite di utilizzo.",
+      "autoPickSwitched": "Claude passato a {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Il suo limite settimanale si azzera prima."
     }
   }
 }
