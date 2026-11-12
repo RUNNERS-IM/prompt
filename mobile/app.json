@@ -1,5 +1,11 @@
 {
   "expo": {
+    "owner": "runners2026",
+    "extra": {
+      "eas": {
+        "projectId": "7cb9c1d8-ba83-4553-ba2a-af56b8568e7e"
+      }
+    },
     "name": "Prompt",
     "slug": "prompt-mobile",
     "version": "2.6.111301",
