@@ -13,6 +13,7 @@ import {
 import type { Translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { UiLanguageSettingsSection } from './ui-language-settings-section'
+import { WordText } from '../components/WordText'
 
 function appearanceOptions(t: Translate): { value: MobileAppearancePreference; label: string }[] {
   return [
@@ -48,12 +49,12 @@ export default function AppearanceSettingsScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.groupHeading}>{t('settings.appearance.theme.heading', 'THEME')}</Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'settings.appearance.theme.description',
             'System follows this device’s light or dark setting.'
           )}
-        </Text>
+        </WordText>
         <View style={[styles.section, styles.sectionTopGap]} accessibilityRole="radiogroup">
           {appearanceOptions(t).map(({ value, label }, index) => {
             const selected = preference === value

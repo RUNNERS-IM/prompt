@@ -6,7 +6,6 @@ import {
   PanResponder,
   Pressable,
   StyleSheet,
-  Text,
   View,
   useWindowDimensions
 } from 'react-native'
@@ -24,6 +23,7 @@ import { SHELL_PAGE_COVER_FADE_MS } from '../mobile-web-shell/ShellWaitingFrame'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from '../components/WordText'
 
 const CANCEL_DRAG_DISTANCE = 40
 
@@ -140,11 +140,11 @@ function DownloadProgress({ download }: { download: ShellOverlayDownload }) {
         totalBytes={download.totalBytes}
         accessibilityLabel={t('newWorkspace.loadingDrawer.downloading', 'Downloading')}
       />
-      <Text style={styles.caption}>
+      <WordText style={styles.caption}>
         {t('newWorkspace.loadingDrawer.downloadProgress', 'Downloading… {{progress}}', {
           progress: downloadedMegabytesCaption(download.receivedBytes, download.totalBytes)
         })}
-      </Text>
+      </WordText>
     </>
   )
 }

@@ -16,6 +16,7 @@ import { isQuickCommandDraftPromptTooLong, isQuickCommandDraftValid } from './qu
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { getUiIntlLocale } from '../i18n/ui-intl-locale'
+import { WordText } from '../components/WordText'
 
 type Props = {
   draft: QuickCommandDraft
@@ -168,15 +169,19 @@ export function QuickCommandEditorForm({
         {promptTooLong ? (
           <View>
             {/* Why static text in the alert: a live count would re-announce on every keystroke. */}
-            <Text style={styles.error} accessibilityRole="alert" accessibilityLiveRegion="polite">
+            <WordText
+              style={styles.error}
+              accessibilityRole="alert"
+              accessibilityLiveRegion="polite"
+            >
               {promptSize.olderHostCap
                 ? t(
                     'session.quickCommandEditorForm.olderHostPromptTooLong',
                     'Too long for this host. Update Prompt on the host to save longer prompts.'
                   )
                 : t('session.quickCommandEditorForm.promptTooLong', 'Too long to save.')}
-            </Text>
-            <Text style={styles.hint}>
+            </WordText>
+            <WordText style={styles.hint}>
               {promptSize.unit === 'bytes'
                 ? t(
                     'session.quickCommandEditorForm.promptSizeKilobytes',
@@ -194,15 +199,15 @@ export function QuickCommandEditorForm({
                       max: promptSize.max.toLocaleString(getUiIntlLocale())
                     }
                   )}
-            </Text>
+            </WordText>
           </View>
         ) : isAgent ? (
-          <Text style={styles.hint}>
+          <WordText style={styles.hint}>
             {t(
               'session.quickCommandEditorForm.promptHint',
               'Supports skills, file paths, and built-in commands.'
             )}
-          </Text>
+          </WordText>
         ) : null}
       </View>
 
@@ -231,12 +236,12 @@ export function QuickCommandEditorForm({
                   <Text style={styles.switchTitle}>
                     {t('session.quickCommandEditorForm.appendEnter', 'Append Enter')}
                   </Text>
-                  <Text style={styles.switchDesc}>
+                  <WordText style={styles.switchDesc}>
                     {t(
                       'session.quickCommandEditorForm.appendEnterDescription',
                       'Submit immediately instead of only inserting text.'
                     )}
-                  </Text>
+                  </WordText>
                 </View>
                 <Switch
                   value={draft.appendEnter}

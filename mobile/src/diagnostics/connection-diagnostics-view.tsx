@@ -11,6 +11,7 @@ import type { ConnectionDiagnosis } from './connection-diagnostics-analysis'
 import type { DiagnosticsSubmissionState } from './connection-diagnostics-screen-data'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../src/shared/prompt-upstream'
+import { WordText } from '../components/WordText'
 
 export function ConnectionDiagnosticsView({
   hostPicker,
@@ -70,7 +71,7 @@ export function ConnectionDiagnosticsView({
       {hasHost || entries.length > 0 ? (
         <>
           <View style={styles.statusRow}>
-            <Text style={styles.statusText}>
+            <WordText style={styles.statusText}>
               {!hasHost
                 ? t('diagnostics.connectionDiagnosticsView.noHosts', 'No paired hosts.')
                 : reconnectAttempts > 0
@@ -80,7 +81,7 @@ export function ConnectionDiagnosticsView({
                       { state: stateLabels[state], attempts: reconnectAttempts }
                     )
                   : stateLabels[state]}
-            </Text>
+            </WordText>
             <Pressable style={styles.copyButton} onPress={() => void copyDiagnostics()}>
               {copied ? (
                 <Check size={14} color={colors.statusGreen} />
@@ -104,12 +105,12 @@ export function ConnectionDiagnosticsView({
               {/* Prompt: reports went to Orca's onorca.dev feedback endpoint, so sending is not offered. */}
               {!PROMPT_BLOCK_UPSTREAM_SERVICES && diagnosis.reportability === 'orca-relay' && (
                 <>
-                  <Text style={styles.privacyHint}>
+                  <WordText style={styles.privacyHint}>
                     {t(
                       'diagnostics.connectionDiagnosticsView.privacyHint',
                       'Sends a size-limited redacted report including host name, endpoint, versions, connection state, and events—never terminal contents or credentials.'
                     )}
-                  </Text>
+                  </WordText>
                   <Pressable
                     style={styles.sendButton}
                     onPress={() => void sendDiagnostics()}
@@ -143,12 +144,12 @@ export function ConnectionDiagnosticsView({
           {entries.length > 0 ? (
             <ConnectionLog entries={[...entries]} title={hostName} fillAvailableHeight />
           ) : (
-            <Text style={styles.emptyText}>
+            <WordText style={styles.emptyText}>
               {t(
                 'diagnostics.connectionDiagnosticsView.noEvents',
                 'No connection events yet. Events appear as the app dials this host.'
               )}
-            </Text>
+            </WordText>
           )}
         </>
       ) : (

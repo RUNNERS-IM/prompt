@@ -16,6 +16,7 @@ import type {
 import { PageRouteUnavailableScreen } from './PageRouteUnavailableScreen'
 import { ShellDownloadProgress } from './ShellDownloadProgress'
 import { ShellWaitingFrame } from './ShellWaitingFrame'
+import { WordText } from '../components/WordText'
 
 function failureMessage(reason: MobileWebShellFailureCause, t: Translate): string {
   switch (reason) {
@@ -110,12 +111,12 @@ function StateView({
     case 'offline':
       return (
         <Centered>
-          <Text style={styles.waitingLabel} testID="mobile-web-shell-offline">
+          <WordText style={styles.waitingLabel} testID="mobile-web-shell-offline">
             {t(
               'webShell.shellStateScreen.connectToDownload',
               'Connect to this host to download the latest app'
             )}
-          </Text>
+          </WordText>
         </Centered>
       )
     case 'fetching':

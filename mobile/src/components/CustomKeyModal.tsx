@@ -15,6 +15,7 @@ import { customKeyModalStyles as styles } from './CustomKeyModal.styles'
 import { updateStoredCustomKeys, type CustomKey } from '../terminal/terminal-custom-keys'
 import type { Translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from './WordText'
 
 type Step = 'choose-type' | 'shortcut-combo' | 'special-keys' | 'text-macro'
 
@@ -207,12 +208,12 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
             <Text style={styles.rowLabel}>
               {t('components.customKeyModal.shortcutCombo', 'Shortcut Combo')}
             </Text>
-            <Text style={styles.rowHint}>
+            <WordText style={styles.rowHint}>
               {t(
                 'components.customKeyModal.shortcutComboHint',
                 'Build Ctrl, Alt, and Shift key chords'
               )}
-            </Text>
+            </WordText>
           </Pressable>
           <View style={styles.separator} />
           <Pressable
@@ -236,12 +237,12 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
                 <Text style={styles.rowLabel}>
                   {t('components.customKeyModal.manageShortcuts', 'Manage Shortcuts')}
                 </Text>
-                <Text style={styles.rowHint}>
+                <WordText style={styles.rowHint}>
                   {t(
                     'components.customKeyModal.manageShortcutsHint',
                     'Show, hide, or reorder shortcut keys'
                   )}
-                </Text>
+                </WordText>
               </Pressable>
             </>
           ) : null}
@@ -316,9 +317,9 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
               style={({ pressed }) => [styles.moreLink, pressed && styles.moreLinkPressed]}
               onPress={() => setStep('special-keys')}
             >
-              <Text style={styles.moreLinkText}>
+              <WordText style={styles.moreLinkText}>
                 {t('components.customKeyModal.moreKeys', 'More keys — Tab, arrows, F1–F12…')}
-              </Text>
+              </WordText>
             </Pressable>
           </View>
 

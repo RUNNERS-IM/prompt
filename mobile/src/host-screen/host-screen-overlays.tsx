@@ -16,6 +16,7 @@ import { WorkspaceOptionsSheet } from './workspace-options-sheet'
 import { WorkspaceDetailsSheet } from './workspace-details-sheet'
 import type { HostScreenController } from './use-host-screen-controller'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function HostScreenOverlays({ controller }: { controller: HostScreenController }) {
   const t = useMobileTranslation()
@@ -57,7 +58,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
               <Text style={styles.confirmTitle}>
                 {t('hostScreen.hostScreenOverlays.deleteWorktree', 'Delete Worktree')}
               </Text>
-              <Text style={styles.confirmMessage}>
+              <WordText style={styles.confirmMessage}>
                 {t(
                   'hostScreen.hostScreenOverlays.deleteConfirmMessage',
                   'Delete "{{name}}" ({{branch}})?',
@@ -66,7 +67,7 @@ export function HostScreenOverlays({ controller }: { controller: HostScreenContr
                     branch: state.confirmDelete.branch
                   }
                 )}
-              </Text>
+              </WordText>
             </View>
             <View style={styles.confirmButtons}>
               <Pressable

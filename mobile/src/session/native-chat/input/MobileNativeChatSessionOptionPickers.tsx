@@ -55,6 +55,7 @@ import {
 } from '../../../../../src/shared/agent-chat-permission-mode'
 import type { MobileNativeChatSessionOptionsController } from './use-mobile-native-chat-session-options'
 import { sessionOptionPickerStyles as styles } from './mobile-native-chat-session-option-picker-styles'
+import { WordText } from '../../../components/WordText'
 
 export type MobileNativeChatPickerPresentation = { page: string | null; refocus: boolean }
 
@@ -265,12 +266,12 @@ export function MobileNativeChatSessionOptionPickers({
                   <Text style={styles.lockNoticeTitle}>
                     {t('chat.sessionOptionPickers.agentWorking', 'Agent is working')}
                   </Text>
-                  <Text style={styles.lockNoticeDescription}>
+                  <WordText style={styles.lockNoticeDescription}>
                     {t(
                       'chat.sessionOptionPickers.settingsLocked',
                       'Model settings unlock when this turn finishes.'
                     )}
-                  </Text>
+                  </WordText>
                 </View>
               </View>
             ) : null}

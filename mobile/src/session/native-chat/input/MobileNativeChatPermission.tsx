@@ -13,6 +13,7 @@ import {
   isPlanApprovalSubject
 } from '../../../../../src/shared/agent-session-approval-subject'
 import type { MobileChatPermission } from './mobile-native-chat-permission'
+import { WordText } from '../../../components/WordText'
 
 function MobileNativeChatPermissionImpl({
   permission,
@@ -137,23 +138,23 @@ function MobileNativeChatPermissionContext({
         <View>
           <MobileMarkdown content={permission.subject.text} />
           {permission.subject.filePath ? (
-            <Text style={styles.planFile}>
+            <WordText style={styles.planFile}>
               {t('chat.permission.planFile', 'Plan file: {{filePath}}', {
                 filePath: permission.subject.filePath
               })}
-            </Text>
+            </WordText>
           ) : null}
         </View>
       ) : permission.detail ? (
         <Text style={styles.detail}>{permission.detail}</Text>
       ) : null}
       {newerSubject ? (
-        <Text testID="native-chat-approval-needs-newer-orca" style={styles.detail}>
+        <WordText testID="native-chat-approval-needs-newer-orca" style={styles.detail}>
           {t(
             'chat.permission.newerVersionRequired',
             'This request needs a newer version of Prompt.'
           )}
-        </Text>
+        </WordText>
       ) : null}
     </ScrollView>
   )

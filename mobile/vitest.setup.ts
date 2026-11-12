@@ -11,4 +11,13 @@ vi.mock('react-native-svg', () => ({
   Stop: 'Stop'
 }))
 
+// Many tests mock react-native without Platform, which WordText reads; there it is plain Text.
+vi.mock('./src/components/WordText', async () => {
+  const { createElement } = await import('react')
+  const { Text } = await import('react-native')
+  return {
+    WordText: (props: Record<string, unknown>) => createElement(Text, props)
+  }
+})
+
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true })

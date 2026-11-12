@@ -80,6 +80,7 @@ import {
   renderMobileTasksProjectDetailDrawer
 } from './mobile-tasks-project-detail-drawer'
 import { renderMobileTasksItemDetailDrawer } from './mobile-tasks-item-detail-drawer'
+import { WordText } from '../components/WordText'
 
 export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentationModel }) {
   const colorScheme = useMobileColorScheme()
@@ -127,13 +128,13 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
               key={`github-source-fallback:${fallback.repoId}`}
               style={styles.sourceNoticeBanner}
             >
-              <Text style={styles.sourceNoticeText}>
+              <WordText style={styles.sourceNoticeText}>
                 {t(
                   'tasks.legacySurface.sourceFallback',
                   'Preferred issue source upstream is unavailable for {{repo}}. Using origin.',
                   { repo: fallback.repoLabel }
                 )}
-              </Text>
+              </WordText>
             </View>
           ))
         : null}
@@ -191,12 +192,12 @@ export function MobileTasksLegacySurface({ model }: { model: ConnectionPresentat
       githubProjectTable?.parentFieldDropped === true ? (
         <View style={styles.projectDataNotice}>
           <AlertTriangle size={15} color={colors.statusAmber} />
-          <Text style={styles.projectDataNoticeText}>
+          <WordText style={styles.projectDataNoticeText}>
             {t(
               'tasks.legacySurface.subIssueDataUnavailable',
               'Sub-issue data is unavailable for your token.'
             )}
-          </Text>
+          </WordText>
         </View>
       ) : null}
 

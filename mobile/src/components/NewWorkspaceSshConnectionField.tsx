@@ -4,6 +4,7 @@ import type { WorkspaceSshGate } from '../tasks/workspace-ssh-gate'
 import { workspaceSshStatusLabel } from '../tasks/workspace-ssh-gate'
 import { newWorktreeFormStyles as styles } from './new-worktree-form-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from './WordText'
 
 export function NewWorkspaceSshConnectionField({
   repoName,
@@ -55,12 +56,12 @@ export function NewWorkspaceSshConnectionField({
         </View>
         {sshGate.error ? <Text style={styles.errorInline}>{sshGate.error}</Text> : null}
         {sshGate.needsDesktopServerRecovery ? (
-          <Text style={styles.sshSubtitle}>
+          <WordText style={styles.sshSubtitle}>
             {t(
               'components.newWorkspaceSshConnectionField.serverRecovery',
               'Its server needs recovering from the desktop: Settings → SSH hosts → Recover server.'
             )}
-          </Text>
+          </WordText>
         ) : null}
       </View>
     </View>

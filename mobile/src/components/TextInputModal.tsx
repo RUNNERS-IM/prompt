@@ -6,6 +6,7 @@ import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { TEXT_INPUT_FONT_SIZE } from '../platform/text-input-font-size'
 import { BottomDrawer } from './BottomDrawer'
+import { WordText } from './WordText'
 
 type Props = {
   visible: boolean
@@ -66,7 +67,7 @@ export function TextInputModal({
     <BottomDrawer visible={visible} onClose={onCancel} onAfterClose={onAfterClose}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {message ? <Text style={styles.message}>{message}</Text> : null}
+        {message ? <WordText style={styles.message}>{message}</WordText> : null}
       </View>
 
       <TextInput

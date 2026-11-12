@@ -14,6 +14,7 @@ import {
 } from './mobile-source-control-screen-state'
 import type { MobileSourceControlState } from './use-mobile-source-control-state'
 import { styles } from './mobile-source-control-styles'
+import { WordText } from '../components/WordText'
 
 type RowState = Pick<
   MobileSourceControlState,
@@ -226,10 +227,10 @@ export function BranchCompareHeader({ state }: { state: BranchState }) {
         </View>
       ) : branchCompareResult && branchCompareResult.summary.status !== 'ready' ? (
         <View style={styles.branchStateRow}>
-          <Text style={styles.branchStateText}>
+          <WordText style={styles.branchStateText}>
             {branchCompareResult.summary.errorMessage ??
               t('sourceControl.fileRows.committedUnavailable', 'Committed changes unavailable.')}
-          </Text>
+          </WordText>
         </View>
       ) : null}
     </View>

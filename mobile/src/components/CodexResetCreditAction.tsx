@@ -5,6 +5,7 @@ import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import type { CodexResetCreditSummary } from './codex-reset-credit'
+import { WordText } from './WordText'
 
 export function CodexResetCreditAction({
   summary,
@@ -27,10 +28,10 @@ export function CodexResetCreditAction({
       <View style={styles.row}>
         <View style={styles.copy}>
           <Text style={styles.title}>{summary.availabilityLabel}</Text>
-          <Text style={styles.subtitle}>
+          <WordText style={styles.subtitle}>
             {[summary.expiryLabel, scopeLabel].filter(Boolean).join(' · ') ||
               t('components.codexResetCreditAction.earnedReset', 'Earned Codex rate-limit reset')}
-          </Text>
+          </WordText>
         </View>
         <Pressable
           style={({ pressed }) => [

@@ -4,6 +4,7 @@ import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import type { NotificationDeliveryPreferences } from './notification-delivery-preferences'
+import { WordText } from '../components/WordText'
 
 type Props = {
   value: NotificationDeliveryPreferences
@@ -60,12 +61,12 @@ export function NotificationDeliverySection({ value, disabled, onChange }: Props
           )
         )}
       </View>
-      <Text style={styles.footer}>
+      <WordText style={styles.footer}>
         {t(
           'notifications.notificationDeliverySection.footer',
           'Alert types follow each paired desktop’s notification settings. Notifications pause after 7 days without using this app; open it and reconnect to resume.'
         )}
-      </Text>
+      </WordText>
     </>
   )
 }

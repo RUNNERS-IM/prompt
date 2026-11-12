@@ -31,6 +31,7 @@ import {
 import { prCommentsStyles as styles } from './pr-comments-styles'
 import { mobilePrSidebarStyles as shared } from './mobile-pr-sidebar-styles'
 import { useNow } from '../../hooks/use-now'
+import { WordText } from '../WordText'
 
 type Props = {
   details: GitHubWorkItemDetails | null
@@ -137,12 +138,12 @@ export function PRCommentsSection({
         {loadingDetails ? (
           <ActivityIndicator color={colors.textSecondary} />
         ) : detailsFailed ? (
-          <Text style={styles.noDescription}>
+          <WordText style={styles.noDescription}>
             {t(
               'pullRequest.commentsSection.descriptionLoadFailed',
               'Could not load description. Tap refresh to try again.'
             )}
-          </Text>
+          </WordText>
         ) : body.trim() ? (
           <CommentMarkdown content={body} variant="document" />
         ) : (
@@ -165,12 +166,12 @@ export function PRCommentsSection({
         {loadingDetails ? (
           <ActivityIndicator color={colors.textSecondary} />
         ) : detailsFailed ? (
-          <Text style={styles.empty}>
+          <WordText style={styles.empty}>
             {t(
               'pullRequest.commentsSection.commentsLoadFailed',
               'Could not load comments. Tap refresh to try again.'
             )}
-          </Text>
+          </WordText>
         ) : (
           <View style={styles.list}>
             {comments.length === 0 ? (
@@ -224,7 +225,7 @@ export function PRCommentsSection({
                         onPress={() => setLimit((l) => l + COMMENT_PAGE)}
                         accessibilityRole="button"
                       >
-                        <Text style={styles.showMoreText}>
+                        <WordText style={styles.showMoreText}>
                           {remaining > COMMENT_PAGE
                             ? t(
                                 'pullRequest.commentsSection.showMoreOf',
@@ -234,7 +235,7 @@ export function PRCommentsSection({
                             : t('pullRequest.commentsSection.showMore', 'Show {{count}} more', {
                                 count
                               })}
-                        </Text>
+                        </WordText>
                       </Pressable>
                     ) : null}
                   </>

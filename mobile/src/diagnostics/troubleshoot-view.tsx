@@ -16,6 +16,7 @@ import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { troubleshootCommonIssues } from './troubleshoot-common-issues'
 import { troubleshootScreenStyles as styles } from './troubleshoot-screen-styles'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 export type DiagnosticStatus = 'idle' | 'running' | 'done'
 
 export type CheckResult = {
@@ -168,7 +169,7 @@ export function TroubleshootView({
                   {section.steps.map((step, j) => (
                     <View key={j} style={styles.stepRow}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.stepText}>{step}</Text>
+                      <WordText style={styles.stepText}>{step}</WordText>
                     </View>
                   ))}
                 </View>

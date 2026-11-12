@@ -14,6 +14,7 @@ import {
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from '../components/WordText'
 
 function linkModeOptions(t: Translate): PickerOption<MobileTerminalLinkOpenMode>[] {
   return [
@@ -124,14 +125,14 @@ export default function BrowserSettingsScreen({
         <Text style={styles.groupHeading}>
           {t('settings.browserSettingsScreen.linksHeading', 'LINKS')}
         </Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'settings.browserSettingsScreen.linksDescription',
             'Choose where HTTP(S) links tapped in terminal output open.'
           )}
-        </Text>
+        </WordText>
         {error && (
-          <Text accessibilityRole="alert" style={styles.groupDescription}>
+          <WordText accessibilityRole="alert" style={styles.groupDescription}>
             {error === 'load'
               ? t(
                   'settings.browserSettingsScreen.loadFailed',
@@ -141,7 +142,7 @@ export default function BrowserSettingsScreen({
                   'settings.browserSettingsScreen.saveFailed',
                   'Could not save browser preferences. Try again.'
                 )}
-          </Text>
+          </WordText>
         )}
         <View style={[styles.section, styles.sectionTopGap]}>
           <Pressable

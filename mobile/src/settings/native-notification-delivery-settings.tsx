@@ -12,6 +12,7 @@ import { useRemotePushCapableHosts } from '../notifications/use-remote-push-capa
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function NativeNotificationDeliverySettings({ enabled }: { enabled: boolean }) {
   useMobileColorScheme()
@@ -102,12 +103,12 @@ export function NativeNotificationDeliverySettings({ enabled }: { enabled: boole
         </Text>
       )}
       {support.resolved && !support.supported && (
-        <Text style={hintStyle}>
+        <WordText style={hintStyle}>
           {t(
             'settings.nativeNotificationDeliverySettings.updateDesktopHint',
             'Pair an updated desktop to receive notifications on this phone.'
           )}
-        </Text>
+        </WordText>
       )}
     </>
   )

@@ -21,6 +21,7 @@ import {
   MobileNativeChatItemSourceContext,
   readMobileNativeChatItem
 } from './mobile-native-chat-item-read'
+import { WordText } from '../components/WordText'
 
 // Keep full-content state per row so live transcript revisions cannot overwrite the reader’s requested expansion.
 
@@ -130,12 +131,12 @@ export function MobileNativeChatToolOutput({
         </Text>
       </MobileNativeChatOwnedScrollView>
       {partial ? (
-        <Text style={styles.showFullText}>
+        <WordText style={styles.showFullText}>
           {t('session.nativeChatFullContent.partialOutput', 'Showing {{shown}} of {{total}}.', {
             shown: partial.shown,
             total: partial.total
           })}
-        </Text>
+        </WordText>
       ) : null}
       {clipped ? (
         <ShowFull
@@ -193,9 +194,9 @@ export function useMobileNativeChatFullMessage(message: NativeChatMessage): {
     recovery: state === 'available' ? { load, onPress: showFull } : null,
     showFull:
       state === 'partial' ? (
-        <Text style={styles.showFullText}>
+        <WordText style={styles.showFullText}>
           {t('session.nativeChatFullContent.partialMessage', 'Showing part of this message.')}
-        </Text>
+        </WordText>
       ) : state === 'available' ? (
         <ShowFull
           label={t('session.nativeChatFullContent.showFullMessage', 'Show full message')}

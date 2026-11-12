@@ -4,6 +4,7 @@ import { colors, spacing, radii, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { BottomDrawer } from './BottomDrawer'
+import { WordText } from './WordText'
 
 type ContentProps = {
   title: string
@@ -42,7 +43,7 @@ export function ConfirmContent({
     <>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
-        {message ? <Text style={styles.message}>{message}</Text> : null}
+        {message ? <WordText style={styles.message}>{message}</WordText> : null}
       </View>
       <View style={styles.buttons}>
         {cancelLabel === null ? null : (

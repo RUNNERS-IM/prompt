@@ -23,6 +23,7 @@ import { fetchWorktreeGitHubPRLink } from '../../source-control/mobile-pr-link'
 import { openMobilePrUrl } from '../mobile-pr-url'
 import { MobileLinkPrForm } from './MobileLinkPrForm'
 import { prCreateEmptyStateStyles as styles } from './pr-create-empty-state-styles'
+import { WordText } from '../WordText'
 
 type Props = {
   client: RpcClient | null
@@ -215,7 +216,7 @@ export function PrSidebarCreateEmptyState({
         </View>
       </View>
       <View style={styles.body}>
-        <Text style={styles.bodyTitle}>
+        <WordText style={styles.bodyTitle}>
           {orphanLinkedPR
             ? t(
                 'pullRequest.prSidebarCreateEmptyState.linkedPrUnavailable',
@@ -223,8 +224,8 @@ export function PrSidebarCreateEmptyState({
                 { number: orphanLinkedPR }
               )
             : t('pullRequest.prSidebarCreateEmptyState.noOpenPullRequest', 'No open pull request')}
-        </Text>
-        <Text style={styles.bodyText}>
+        </WordText>
+        <WordText style={styles.bodyText}>
           {orphanLinkedPR
             ? t(
                 'pullRequest.prSidebarCreateEmptyState.refreshOrCreate',
@@ -240,7 +241,7 @@ export function PrSidebarCreateEmptyState({
                   'pullRequest.prSidebarCreateEmptyState.currentBranchNotLinked',
                   'The current branch is not linked to an open PR.'
                 )}
-        </Text>
+        </WordText>
         {commitFailureRecovery ? (
           <MobileCommitFailurePanel
             failure={commitFailureRecovery}

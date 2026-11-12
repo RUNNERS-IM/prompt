@@ -34,6 +34,7 @@ import { BottomDrawer } from './BottomDrawer'
 import { smartWorkspaceSourceDrawerStyles as styles } from './smart-workspace-source-drawer-styles'
 import { SmartSourceModeIcon } from './SmartSourceModeIcon'
 import { SmartWorkspaceSourceRow } from './SmartWorkspaceSourceRow'
+import { WordText } from './WordText'
 
 // Delay focus like MobileSearchField: native autoFocus may not raise keyboard during drawer animation.
 const SOURCE_INPUT_FOCUS_DELAY_MS = 120
@@ -219,7 +220,7 @@ export function SmartWorkspaceSourceDrawer({
         <View style={styles.results}>
           {crossRepoPrompt ? (
             <View style={styles.crossRepo}>
-              <Text style={styles.crossRepoText}>
+              <WordText style={styles.crossRepoText}>
                 {t(
                   'components.smartWorkspaceSourceDrawer.crossRepoMessage',
                   'This item lives in {{owner}}/{{repo}}.',
@@ -228,7 +229,7 @@ export function SmartWorkspaceSourceDrawer({
                     repo: crossRepoPrompt.link.slug.repo
                   }
                 )}
-              </Text>
+              </WordText>
               <View style={styles.crossRepoActions}>
                 <Pressable style={styles.crossRepoDismiss} onPress={dismissCrossRepoPrompt}>
                   <Text style={styles.crossRepoDismissText}>{t('common.cancel', 'Cancel')}</Text>
@@ -237,7 +238,7 @@ export function SmartWorkspaceSourceDrawer({
                   style={styles.crossRepoSwitch}
                   onPress={() => void handleAcceptCrossRepo()}
                 >
-                  <Text style={styles.crossRepoSwitchText}>
+                  <WordText style={styles.crossRepoSwitchText}>
                     {t(
                       'components.smartWorkspaceSourceDrawer.switchRepo',
                       'Switch to {{repoName}}',
@@ -245,7 +246,7 @@ export function SmartWorkspaceSourceDrawer({
                         repoName: crossRepoPrompt.matchingRepo.displayName
                       }
                     )}
-                  </Text>
+                  </WordText>
                 </Pressable>
               </View>
             </View>
@@ -256,19 +257,19 @@ export function SmartWorkspaceSourceDrawer({
           effectiveMode !== 'linear' &&
           effectiveMode !== 'jira' &&
           !jiraUrlIntent ? (
-            <Text style={styles.notice}>
+            <WordText style={styles.notice}>
               {t(
                 'components.smartWorkspaceSourceDrawer.connectRepository',
                 'Connect the repository to search sources.'
               )}
-            </Text>
+            </WordText>
           ) : needsGitHubRemote ? (
-            <Text style={styles.notice}>
+            <WordText style={styles.notice}>
               {t(
                 'components.smartWorkspaceSourceDrawer.gitHubRemoteRequired',
                 'This SSH repo needs a GitHub remote to list issues and PRs.'
               )}
-            </Text>
+            </WordText>
           ) : error ? (
             <Text style={styles.errorNotice}>{error}</Text>
           ) : null}
@@ -292,12 +293,12 @@ export function SmartWorkspaceSourceDrawer({
                     t('components.smartWorkspaceSourceDrawer.noResults', 'No results found.')}
                 </Text>
               ) : rows.length === 0 && effectiveMode === 'text' ? (
-                <Text style={styles.empty}>
+                <WordText style={styles.empty}>
                   {t(
                     'components.smartWorkspaceSourceDrawer.typeWorkspaceName',
                     'Type a workspace name in the field below.'
                   )}
-                </Text>
+                </WordText>
               ) : null
             }
             renderItem={({ item }) => (

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useRef } from 'react'
 import { MobileQueuedMessageComposerContext } from './mobile-queued-message-composer-context'
-import { Text, type TextInput, View } from 'react-native'
+import { type TextInput, View } from 'react-native'
 import { MobileNativeChatComposer } from './native-chat/composer/MobileNativeChatComposer'
 import type { MobileQueuedMessageInlineEditor } from './use-mobile-structured-queued-edit'
 import { useMobileNativeChatFileAttachments } from './native-chat/composer/use-mobile-native-chat-file-attachments'
@@ -14,6 +14,7 @@ import { colors } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { createUuidV4 } from '../../../src/shared/uuid-v4'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function MobileQueuedMessageComposer({
   editor,
@@ -72,7 +73,7 @@ export function MobileQueuedMessageComposer({
   }
   return (
     <View testID="queued-card-editor">
-      <Text style={{ color: colors.textMuted }}>
+      <WordText style={{ color: colors.textMuted }}>
         {attribution
           ? t(
               'session.queuedMessageComposer.editingAttributed',
@@ -82,7 +83,7 @@ export function MobileQueuedMessageComposer({
               }
             )
           : t('session.queuedMessageComposer.editing', 'Editing message')}
-      </Text>
+      </WordText>
       <MobileNativeChatComposer
         inputRef={inputRef}
         draftScopeKey={editor.scopeKey}

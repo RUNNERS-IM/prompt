@@ -9,6 +9,7 @@ import type { RpcClient } from '../../transport/rpc-client'
 import { fetchAssignableUsers } from '../../session/github-pr-rpc'
 import { BottomDrawer } from '../BottomDrawer'
 import { mobilePrSidebarStyles as styles } from './mobile-pr-sidebar-styles'
+import { WordText } from '../WordText'
 
 type Props = {
   visible: boolean
@@ -109,10 +110,10 @@ export function ReviewerPickerDrawer({
         </View>
       ) : load.status === 'error' ? (
         <View style={styles.pickerStateArea}>
-          <Text style={styles.emptyText}>
+          <WordText style={styles.emptyText}>
             {load.message ??
               t('pullRequest.reviewerPickerDrawer.loadFailed', 'Failed to load people')}
-          </Text>
+          </WordText>
         </View>
       ) : ordered.length === 0 ? (
         <View style={styles.pickerStateArea}>

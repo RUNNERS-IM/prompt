@@ -31,6 +31,7 @@ import {
 } from '../src/onboarding/mobile-onboarding-plan'
 import { pairScanStyles as styles } from '../src/pair-scan-styles'
 import { PairScanDirectOnlyHint } from '../src/pair-scan-direct-only-hint'
+import { WordText } from '../src/components/WordText'
 
 // Bound initial pairing at ~25s (one connect timeout plus retry) so broken routes show an actionable error/log; live RPC retries indefinitely.
 const PAIRING_OVERALL_TIMEOUT_MS = 25_000
@@ -255,7 +256,7 @@ export default function PairScanScreen() {
               ? t('app.pairScan.title', 'Pair with desktop')
               : t('app.pairScan.cameraDisabledTitle', 'Camera Access Disabled')}
           </Text>
-          <Text style={styles.subtitle}>
+          <WordText style={styles.subtitle}>
             {canAskAgain
               ? t(
                   'app.pairScan.cameraPermissionDescription',
@@ -265,7 +266,7 @@ export default function PairScanScreen() {
                   'app.pairScan.cameraDisabledDescription',
                   'Enable camera access in Settings, or paste the pairing code instead.'
                 )}
-          </Text>
+          </WordText>
           <Pressable
             style={styles.primaryButton}
             onPress={canAskAgain ? requestPermission : () => void Linking.openSettings()}

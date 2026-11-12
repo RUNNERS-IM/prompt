@@ -12,6 +12,7 @@ import { MobileNativeChatQuestion } from './MobileNativeChatQuestion'
 import { MobileNativeChatStructuredAsk } from './MobileNativeChatStructuredAsk'
 import { mobileChatQuestionKey, type MobileChatQuestion } from './mobile-native-chat-question'
 import { MobileNativeChatPromptStrip } from './MobileNativeChatPromptStrip'
+import { WordText } from '../../../components/WordText'
 
 // Keep dismissal in the controller across chat/terminal toggles; the shared resolver already chose the terminal card.
 export function MobileNativeChatPromptCard({
@@ -55,9 +56,9 @@ export function MobileNativeChatPromptCard({
   const card =
     ask && requiresTerminal ? (
       <View style={styles.terminalCard}>
-        <Text style={styles.explanation}>
+        <WordText style={styles.explanation}>
           {t('chat.promptCard.terminalExplanation', 'Answer this OMP question in the terminal.')}
-        </Text>
+        </WordText>
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={t('chat.promptCard.answerInTerminal', 'Answer in terminal')}

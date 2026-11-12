@@ -12,6 +12,7 @@ import { prConflictStyles as styles } from './pr-conflict-styles'
 import { prAiTriageStyles as triageStyles } from './pr-ai-triage-styles'
 import { AgentLaunchNotice } from '../AgentLaunchNotice'
 import type { MobileAgentLaunchAvailability } from '../../session/mobile-agent-launch-availability'
+import { WordText } from '../WordText'
 
 // Launches the "Resolve conflicts with AI" agent. Absent for display-only usages.
 export type PrConflictsTriage = {
@@ -123,12 +124,12 @@ export function PRConflictingFilesSection({ pr, isRefreshing = false, triage }: 
 
       {conflict.fileDetailsUnavailable ? (
         <View>
-          <Text style={styles.noticeTitle}>
+          <WordText style={styles.noticeTitle}>
             {t(
               'pullRequest.conflictingFilesSection.mustResolve',
               'This branch has conflicts that must be resolved'
             )}
-          </Text>
+          </WordText>
           <Text style={styles.noticeBody}>{noticeBody}</Text>
           {conflict.mergeabilityRefreshCommands ? (
             <View style={styles.commandBox}>

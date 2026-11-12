@@ -31,6 +31,7 @@ import {
   loadTerminalAutocompleteEnabled,
   saveTerminalAutocompleteEnabled
 } from '../src/storage/preferences'
+import { WordText } from '../src/components/WordText'
 
 type RestoreValue = 'indefinite' | '60s' | '5m' | '30m'
 
@@ -301,21 +302,21 @@ export default function TerminalSettingsScreen() {
         <Text style={styles.groupHeading}>
           {t('app.terminalSettings.leaveAppHeading', 'WHEN YOU LEAVE THE APP')}
         </Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'app.terminalSettings.leaveAppDescription',
             "While you're using a terminal on your phone, Prompt shrinks it to fit your screen. When you close the app or switch away, this controls whether it stays at phone size (so interactive CLI tools don't reflow) or resizes back to your desktop. You can always use Restore on the desktop banner to resize manually."
           )}
-        </Text>
+        </WordText>
 
         {hosts.length === 0 ? (
           <View style={[styles.section, styles.sectionTopGap]}>
-            <Text style={styles.emptyText}>
+            <WordText style={styles.emptyText}>
               {t(
                 'app.terminalSettings.noPairedDesktops',
                 'No paired desktops yet. Pair one to control terminal behavior.'
               )}
-            </Text>
+            </WordText>
           </View>
         ) : (
           <View style={[styles.section, styles.sectionTopGap]}>
@@ -339,12 +340,12 @@ export default function TerminalSettingsScreen() {
         <Text style={[styles.groupHeading, styles.inputGroupGap]}>
           {t('app.terminalSettings.textSizeHeading', 'TEXT SIZE')}
         </Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'app.terminalSettings.textSizeDescription',
             "Scale the terminal text. Smaller sizes fit more columns with side margins; larger sizes show fewer columns — drag sideways to pan. You can also pinch to zoom in the terminal itself, which updates this setting. Per-device display only; doesn't change the desktop terminal."
           )}
-        </Text>
+        </WordText>
         <View style={[styles.section, styles.sectionTopGap]}>
           <Pressable
             style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
@@ -362,12 +363,12 @@ export default function TerminalSettingsScreen() {
         <Text style={[styles.groupHeading, styles.inputGroupGap]}>
           {t('app.terminalSettings.keyboardInputHeading', 'KEYBOARD INPUT')}
         </Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'app.terminalSettings.keyboardInputDescription',
             'Autocomplete, autocorrect, and spelling suggestions apply only to buffered command input. Use the double-chevron button above the keyboard to switch from live input, then edit your command before tapping Send. Off by default to avoid rewriting commands, flags, or paths.'
           )}
-        </Text>
+        </WordText>
         <View style={[styles.section, styles.sectionTopGap]}>
           <View style={styles.row}>
             <View style={styles.rowContent}>

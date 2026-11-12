@@ -13,6 +13,7 @@ import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { colors } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { appearanceSettingsStyles as styles } from './appearance-settings-styles'
+import { WordText } from '../components/WordText'
 
 const LANGUAGE_CHOICES: readonly MobileUiLanguagePreference[] = [
   UI_LANGUAGE_SYSTEM,
@@ -39,12 +40,12 @@ export function UiLanguageSettingsSection() {
       <Text style={[styles.groupHeading, styles.groupHeadingSpaced]}>
         {t('settings.appearance.language.heading', 'LANGUAGE')}
       </Text>
-      <Text style={styles.groupDescription}>
+      <WordText style={styles.groupDescription}>
         {t(
           'settings.appearance.language.description',
           'System follows this device’s language. Permission prompts always use the device language.'
         )}
-      </Text>
+      </WordText>
       <View style={[styles.section, styles.sectionTopGap]} accessibilityRole="radiogroup">
         {LANGUAGE_CHOICES.map((choice, index) => {
           const selected = preference === choice && !pseudo

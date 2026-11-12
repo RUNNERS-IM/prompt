@@ -8,6 +8,7 @@ import {
   selectHostWorkspaceListState,
   type HostWorkspaceListStateInput
 } from './host-workspace-list-state'
+import { WordText } from '../components/WordText'
 
 export function HostWorkspaceListStates(
   props: HostWorkspaceListStateInput & {
@@ -30,45 +31,45 @@ export function HostWorkspaceListStates(
     return (
       <View style={styles.centered}>
         <Text style={styles.emptyText}>{verdictDisplayLabel(connectionVerdict)}</Text>
-        <Text style={styles.catalogErrorDetail}>
+        <WordText style={styles.catalogErrorDetail}>
           {(isConnectionOutage(connectionVerdict) ? connectionVerdict.detail : undefined) ??
             t(
               'worktree.hostWorkspaceListStates.checkHost',
               'Check that your computer is awake and Prompt is running'
             )}
-        </Text>
+        </WordText>
       </View>
     )
   }
   if (state === 'catalog-error') {
     return (
       <View style={styles.centered}>
-        <Text style={styles.emptyText}>
+        <WordText style={styles.emptyText}>
           {t(
             'worktree.hostWorkspaceListStates.loadFailed',
             'Could not load workspaces from this host'
           )}
-        </Text>
-        <Text style={styles.catalogErrorDetail}>
+        </WordText>
+        <WordText style={styles.catalogErrorDetail}>
           {t(
             'worktree.hostWorkspaceListStates.retrying',
             'worktree.ps failed ({{error}}) — retrying automatically',
             { error: props.catalogError }
           )}
-        </Text>
+        </WordText>
       </View>
     )
   }
   if (state === 'empty') {
     return (
       <View style={styles.centered}>
-        <Text style={styles.emptyText}>
+        <WordText style={styles.emptyText}>
           {props.search
             ? t('worktree.hostWorkspaceListStates.noMatches', 'No matching workspaces')
             : props.activeFilterCount > 0
               ? t('worktree.hostWorkspaceListStates.noFilterMatches', 'No workspaces match filters')
               : t('worktree.hostWorkspaceListStates.empty', 'No workspaces')}
-        </Text>
+        </WordText>
       </View>
     )
   }
@@ -84,12 +85,12 @@ export function HostWorkspaceListReopen({ aboveRows }: { aboveRows: boolean }) {
       <Text style={styles.emptyText}>
         {t('worktree.hostWorkspaceListStates.reopen', 'Reopen to update')}
       </Text>
-      <Text style={styles.catalogErrorDetail}>
+      <WordText style={styles.catalogErrorDetail}>
         {t(
           'worktree.hostWorkspaceListStates.reopenDetail',
           'This host lists workspaces in a way this page does not know yet.'
         )}
-      </Text>
+      </WordText>
     </View>
   )
 }

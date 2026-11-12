@@ -22,6 +22,7 @@ import {
   type MobileSpeechModel,
   type MobileSpeechSetup
 } from '../dictation/mobile-dictation-setup'
+import { WordText } from './WordText'
 
 const POLL_INTERVAL_MS = 1500
 
@@ -173,12 +174,12 @@ export function MobileDictationSetupSheet({ visible, client, onClose, onReady }:
         <Text style={styles.heading}>
           {t('components.dictationSetupSheet.title', 'Set up voice dictation')}
         </Text>
-        <Text style={styles.subtitle}>
+        <WordText style={styles.subtitle}>
           {t(
             'components.dictationSetupSheet.description',
             'Download or pick a model and enable dictation on the paired computer — all from here.'
           )}
-        </Text>
+        </WordText>
 
         {setup === null ? (
           <View style={styles.loading}>

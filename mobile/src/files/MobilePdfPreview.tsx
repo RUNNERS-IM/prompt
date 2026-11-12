@@ -10,6 +10,7 @@ import { filePreviewStyles as styles } from './mobile-file-preview-styles'
 import { MobileLoadErrorState, MobileStateButton } from '../components/MobileLoadErrorState'
 import { translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 type State =
   | { status: 'opening' }
@@ -61,9 +62,9 @@ export function MobilePdfPreview({ media }: { media: MobileFileMedia }) {
   if (!opener) {
     return (
       <View style={styles.state}>
-        <Text style={styles.stateText}>
+        <WordText style={styles.stateText}>
           {t('files.pdfPreview.updateRequired', 'Update Prompt Mobile to open PDFs')}
-        </Text>
+        </WordText>
       </View>
     )
   }
