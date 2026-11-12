@@ -10,6 +10,7 @@ import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { PROMPT_APP_NAME } from '../../../src/shared/prompt-brand'
 import { PROMPT_REPO_SLUG, PROMPT_REPO_URL } from '../../../src/shared/prompt-upstream'
+import { WordText } from '../components/WordText'
 
 function GithubIcon({ size = 16, color = colors.textSecondary }) {
   useMobileColorScheme()
@@ -55,9 +56,9 @@ export default function AboutScreen({
       <View style={styles.brand}>
         <OrcaLogo size={28} />
         <Text style={styles.brandName}>{PROMPT_APP_NAME}</Text>
-        <Text style={styles.brandSub}>
+        <WordText style={styles.brandSub}>
           {t('settings.aboutScreen.tagline', 'Open-source agent IDE for 100x builders')}
-        </Text>
+        </WordText>
       </View>
 
       <View style={styles.section}>
@@ -75,9 +76,9 @@ export default function AboutScreen({
 
       <Text style={styles.versionText}>{versionLabel}</Text>
       {error && (
-        <Text accessibilityRole="alert" style={styles.errorText}>
+        <WordText accessibilityRole="alert" style={styles.errorText}>
           {t('settings.aboutScreen.openLinkFailed', 'Could not open the link. Try again.')}
-        </Text>
+        </WordText>
       )}
     </View>
   )

@@ -8,6 +8,7 @@ import { MobileSyntaxSegments } from '../components/MobileSyntaxSegments'
 import { mobileDiffLineNumber, mobileDiffLinePrefix } from './mobile-diff-format'
 import type { MobileBranchDiffPreviewState } from './mobile-source-control-screen-state'
 import { styles } from './mobile-source-control-styles'
+import { WordText } from '../components/WordText'
 
 type Props = {
   branchDiffPreview: MobileBranchDiffPreviewState | null
@@ -65,12 +66,12 @@ export function MobileBranchDiffPreviewDrawer({ branchDiffPreview, onClose }: Pr
       ) : (
         <View style={styles.diffLines}>
           {branchDiffPreview.truncated ? (
-            <Text style={styles.diffTruncatedText}>
+            <WordText style={styles.diffTruncatedText}>
               {t(
                 'sourceControl.branchDiffPreviewDrawer.truncated',
                 'Diff truncated for mobile preview.'
               )}
-            </Text>
+            </WordText>
           ) : null}
           {branchDiffPreview.lines.map((line, index) => (
             <View

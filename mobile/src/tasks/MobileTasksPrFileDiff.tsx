@@ -17,6 +17,7 @@ import { MAX_RENDERED_PR_DIFF_LINES } from './mobile-tasks-options'
 import type { GitHubPRFileContents } from './mobile-tasks-provider-detail-types'
 import { styles } from './mobile-tasks-legacy-styles'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function formatDiffLineNumber(value: number | undefined): string {
   return value === undefined ? '    ' : value.toString().padStart(4, ' ')
@@ -76,7 +77,7 @@ export function GitHubPrFileDiff({
   return (
     <View style={styles.fileDiff}>
       {hiddenDiffLineCount > 0 ? (
-        <Text style={styles.detailMuted}>
+        <WordText style={styles.detailMuted}>
           {t(
             'tasks.prFileDiff.showingDiffLines',
             'Showing first {{limit}} of {{total}} diff lines.',
@@ -85,7 +86,7 @@ export function GitHubPrFileDiff({
               total: diffPreview.totalLineCount
             }
           )}
-        </Text>
+        </WordText>
       ) : null}
       {visibleDiffLines.map((line) => {
         const commentLine = line.kind === 'removed' ? undefined : line.newLineNumber
@@ -138,11 +139,11 @@ export function GitHubPrFileDiff({
                   disabled={disabled || !(commentDrafts[draftKey] ?? '').trim()}
                   onPress={() => onSubmitComment(commentLine)}
                 >
-                  <Text style={styles.inlineSaveText}>
+                  <WordText style={styles.inlineSaveText}>
                     {t('tasks.prFileDiff.commentOnLine', 'Comment on line {{line}}', {
                       line: commentLine
                     })}
-                  </Text>
+                  </WordText>
                 </Pressable>
               </>
             ) : null}

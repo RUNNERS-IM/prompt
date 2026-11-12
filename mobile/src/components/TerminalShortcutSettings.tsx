@@ -32,6 +32,7 @@ import {
   setTerminalAccessoryBuiltInVisible,
   type TerminalAccessoryLayout
 } from '../terminal/terminal-accessory-layout'
+import { WordText } from './WordText'
 
 // Absolutely positioned DragReorderList rows require one fixed height per section.
 const REORDER_ROW_HEIGHT = 56
@@ -194,12 +195,12 @@ export function TerminalShortcutSettings({
       <Text style={[styles.groupHeading, styles.groupTopGap]}>
         {t('components.terminalShortcutSettings.shortcutBar', 'SHORTCUT BAR')}
       </Text>
-      <Text style={styles.groupDescription}>
+      <WordText style={styles.groupDescription}>
         {t(
           'components.terminalShortcutSettings.shortcutBarDescription',
           'Toggle keys to show or hide them, and hold the grip to drag a key into the order you want on the terminal shortcut bar.'
         )}
-      </Text>
+      </WordText>
       <View style={[styles.section, styles.sectionTopGap]}>
         <DragReorderList
           items={orderedAccessoryKeys}
@@ -226,12 +227,12 @@ export function TerminalShortcutSettings({
             <Text style={styles.rowLabel}>
               {t('components.terminalShortcutSettings.resetDefaults', 'Reset Defaults')}
             </Text>
-            <Text style={styles.rowSublabel}>
+            <WordText style={styles.rowSublabel}>
               {t(
                 'components.terminalShortcutSettings.resetDescription',
                 'Show every built-in shortcut key in the original order'
               )}
-            </Text>
+            </WordText>
           </View>
         </Pressable>
       </View>
@@ -243,9 +244,9 @@ export function TerminalShortcutSettings({
         {customKeys.length === 0 ? (
           <>
             <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>
+              <WordText style={styles.emptyText}>
                 {t('components.terminalShortcutSettings.empty', 'No custom shortcuts defined yet.')}
-              </Text>
+              </WordText>
             </View>
             <View style={styles.separator} />
           </>
@@ -298,12 +299,12 @@ export function TerminalShortcutSettings({
             <Text style={styles.rowLabel}>
               {t('components.terminalShortcutSettings.addShortcut', 'Add Custom Shortcut…')}
             </Text>
-            <Text style={styles.rowSublabel}>
+            <WordText style={styles.rowSublabel}>
               {t(
                 'components.terminalShortcutSettings.addDescription',
                 'Create key combo or text macro'
               )}
-            </Text>
+            </WordText>
           </View>
           <ChevronRight size={16} color={colors.textMuted} />
         </Pressable>

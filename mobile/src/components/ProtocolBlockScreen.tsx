@@ -11,6 +11,7 @@ import type { CompatVerdict } from '../transport/protocol-compat'
 import type { MobileWebBundleCompatVerdict } from '../transport/mobile-web-bundle-compat'
 import type { PageRouteRefusalVerdict } from '../mobile-web-shell/page-route-policy'
 import { PROMPT_RELEASES_URL, promptOr } from '../../../src/shared/prompt-upstream'
+import { WordText } from './WordText'
 
 // Prompt: Prompt mobile has no App Store listing yet, so both platforms open Prompt's releases.
 const RELEASES_URL = promptOr(PROMPT_RELEASES_URL, 'https://github.com/stablyai/orca/releases')
@@ -152,7 +153,7 @@ export function ProtocolBlockScreen({ verdict }: Props) {
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.body}>{body}</Text>
+        <WordText style={styles.body}>{body}</WordText>
         {primaryAction ? (
           <Pressable
             style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]}
@@ -175,7 +176,7 @@ export function ProtocolBlockScreen({ verdict }: Props) {
             {t('components.protocolBlockScreen.backToHosts', 'Back to hosts')}
           </Text>
         </Pressable>
-        <Text style={styles.recoveryNote}>{recoveryNote}</Text>
+        <WordText style={styles.recoveryNote}>{recoveryNote}</WordText>
       </View>
     </View>
   )

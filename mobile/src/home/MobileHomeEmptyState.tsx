@@ -5,6 +5,7 @@ import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { colors, radii, spacing } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from '../components/WordText'
 
 function onboardingSteps(t: Translate) {
   return [
@@ -58,12 +59,12 @@ export function MobileHomeEmptyState(props: {
     >
       <View style={styles.emptyHero}>
         <Text style={styles.emptyTitle}>{t('home.emptyState.title', 'Connect your desktop')}</Text>
-        <Text style={styles.emptyBody}>
+        <WordText style={styles.emptyBody}>
           {t(
             'home.emptyState.description',
             'Pair with Prompt on your computer to check on your agents, jump into any terminal, and drive work from your phone.'
           )}
-        </Text>
+        </WordText>
         <Pressable style={styles.primaryButton} onPress={props.onPairDesktop}>
           <QrCode size={17} color={colors.bgBase} />
           <Text style={styles.primaryButtonText}>
@@ -82,7 +83,7 @@ export function MobileHomeEmptyState(props: {
             </View>
             <View style={styles.stepText}>
               <Text style={styles.stepTitle}>{step.title}</Text>
-              <Text style={styles.stepDesc}>{step.desc}</Text>
+              <WordText style={styles.stepDesc}>{step.desc}</WordText>
             </View>
           </View>
         ))}

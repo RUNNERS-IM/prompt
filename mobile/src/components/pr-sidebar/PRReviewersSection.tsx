@@ -13,6 +13,7 @@ import { getGitHubPRReviewerRows } from '../../../../src/shared/github/pr-review
 import { ReviewerPickerDrawer } from './ReviewerPickerDrawer'
 import { PRSection } from './PRSection'
 import { mobilePrSidebarStyles as styles } from './mobile-pr-sidebar-styles'
+import { WordText } from '../WordText'
 
 type Props = {
   details: GitHubWorkItemDetails | null
@@ -108,12 +109,12 @@ export function PRReviewersSection({ details, actions, client, worktreeId }: Pro
           </Text>
         </View>
       ) : detailsFailed ? (
-        <Text style={styles.emptyText}>
+        <WordText style={styles.emptyText}>
           {t(
             'pullRequest.reviewersSection.loadFailed',
             'Could not load reviewers. Tap refresh to try again.'
           )}
-        </Text>
+        </WordText>
       ) : rows.length === 0 ? (
         <Text style={styles.emptyText}>
           {t('pullRequest.reviewersSection.noReviewers', 'No reviewers requested')}

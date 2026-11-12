@@ -2,6 +2,7 @@ import { Pressable, Text } from 'react-native'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { authFailedBannerStyles as styles } from './auth-failed-banner-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from './WordText'
 
 // Offer shell-routed /pair-scan only; web forceReconnect is null and page-host-removal-refusal rejects Remove, so direct users to app for both.
 export function AuthFailedBannerActions({
@@ -21,12 +22,12 @@ export function AuthFailedBannerActions({
           {t('components.authFailedBannerActions.repair', 'Re-pair')}
         </Text>
       </Pressable>
-      <Text style={styles.note}>
+      <WordText style={styles.note}>
         {t(
           'components.authFailedBannerActions.webNote',
           'Reconnect or remove this host from the Prompt app.'
         )}
-      </Text>
+      </WordText>
     </>
   )
 }

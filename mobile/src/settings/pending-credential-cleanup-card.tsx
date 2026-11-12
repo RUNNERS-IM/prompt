@@ -11,6 +11,7 @@ import {
 } from '../transport/host-credential-cleanup'
 import { retryPendingHostCredentialCleanup } from '../transport/host-store'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function PendingCredentialCleanupCard() {
   useMobileColorScheme()
@@ -80,7 +81,7 @@ export function PendingCredentialCleanupCard() {
           <Text style={styles.credentialCleanupTitle}>
             {t('settings.pendingCredentialCleanupCard.title', 'Pairing credential cleanup')}
           </Text>
-          <Text accessibilityLiveRegion="polite" style={styles.rowHint}>
+          <WordText accessibilityLiveRegion="polite" style={styles.rowHint}>
             {credentialRetryFailed
               ? t(
                   'settings.pendingCredentialCleanupCard.retryFailed',
@@ -102,7 +103,7 @@ export function PendingCredentialCleanupCard() {
                     'settings.pendingCredentialCleanupCard.statusCheckFailed',
                     "Couldn't check cleanup status on this device. Retry to be safe."
                   )}
-          </Text>
+          </WordText>
         </View>
         <Pressable
           accessibilityRole="button"

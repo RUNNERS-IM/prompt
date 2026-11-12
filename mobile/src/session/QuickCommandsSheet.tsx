@@ -18,6 +18,7 @@ import {
   type QuickCommandDraft
 } from './quick-command-draft'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 type Props = {
   visible: boolean
@@ -199,12 +200,12 @@ export function QuickCommandsSheet({
 
       {view === 'editor' && draft ? (
         <View style={styles.editorDesc}>
-          <Text style={styles.descText}>
+          <WordText style={styles.descText}>
             {t(
               'session.quickCommandsSheet.editorDescription',
               'Save terminal commands or agent prompts for quick access.'
             )}
-          </Text>
+          </WordText>
         </View>
       ) : null}
 

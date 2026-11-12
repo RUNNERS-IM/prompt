@@ -4,6 +4,7 @@ import { colors, spacing } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from './WordText'
 
 // Wide tablet/foldable detail stays empty beside list until workspace opens.
 export function WorkspaceDetailPlaceholder() {
@@ -17,12 +18,12 @@ export function WorkspaceDetailPlaceholder() {
       <Text style={styles.title}>
         {t('components.workspaceDetailPlaceholder.title', 'No workspace open')}
       </Text>
-      <Text style={styles.body}>
+      <WordText style={styles.body}>
         {t(
           'components.workspaceDetailPlaceholder.description',
           'Pick a workspace from the sidebar to open its terminal here.'
         )}
-      </Text>
+      </WordText>
     </View>
   )
 }

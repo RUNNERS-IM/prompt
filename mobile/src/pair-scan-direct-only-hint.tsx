@@ -1,7 +1,7 @@
-import { Text } from 'react-native'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../src/shared/prompt-upstream'
 import { useMobileTranslation } from './i18n/use-mobile-translation'
 import { pairScanStyles as styles } from './pair-scan-styles'
+import { WordText } from './components/WordText'
 
 // Prompt: relay is off, so pairing and later connections need the same network.
 export function PairScanDirectOnlyHint() {
@@ -10,11 +10,11 @@ export function PairScanDirectOnlyHint() {
     return null
   }
   return (
-    <Text style={styles.stepText}>
+    <WordText style={styles.stepText}>
       {t(
         'prompt.connection.directOnly',
         'Your phone and computer must be on the same Wi-Fi or Tailscale. Relay is off in Prompt.'
       )}
-    </Text>
+    </WordText>
   )
 }

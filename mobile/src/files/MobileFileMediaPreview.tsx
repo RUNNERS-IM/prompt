@@ -13,6 +13,7 @@ import { formatPreviewByteLength } from './mobile-file-preview-response'
 import { MobileLoadErrorState } from '../components/MobileLoadErrorState'
 import { translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 type State = { uri: string } | { error: string } | { bytes: number; total: number }
 type Props = { media: MobileFileMedia; client: MobileFilePreviewRpcSender | null; title: string }
@@ -86,14 +87,14 @@ function MediaDownload({ media, client, title }: Props) {
   return (
     <View style={styles.state}>
       <ActivityIndicator color={colors.textSecondary} />
-      <Text style={styles.stateText}>
+      <WordText style={styles.stateText}>
         {state.total
           ? t('files.fileMediaPreview.downloading', 'Downloading {{bytes}} of {{total}}', {
               bytes: formatPreviewByteLength(state.bytes),
               total: formatPreviewByteLength(state.total)
             })
           : t('files.fileMediaPreview.loading', 'Loading media...')}
-      </Text>
+      </WordText>
     </View>
   )
 }

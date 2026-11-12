@@ -17,6 +17,7 @@ import {
   type MobileSpeechModel,
   type MobileSpeechSetup
 } from '../dictation/mobile-dictation-setup'
+import { WordText } from '../components/WordText'
 
 const POLL_INTERVAL_MS = 1500
 
@@ -261,12 +262,12 @@ export default function VoiceSettingsScreen({
 
       {!operations ? (
         <View style={[styles.section, styles.sectionTopGap]}>
-          <Text style={styles.emptyText}>
+          <WordText style={styles.emptyText}>
             {t(
               'settings.voiceSettingsScreen.connectDesktop',
               'Connect to a desktop to manage voice settings.'
             )}
-          </Text>
+          </WordText>
         </View>
       ) : loading && setup === null ? (
         <View style={styles.loading}>
@@ -274,10 +275,10 @@ export default function VoiceSettingsScreen({
         </View>
       ) : setup === null ? (
         <View style={[styles.section, styles.sectionTopGap]}>
-          <Text style={styles.errorText}>
+          <WordText style={styles.errorText}>
             {loadErrorMessage ??
               t('settings.voiceSettingsScreen.loadFailedMessage', 'Failed to load voice settings.')}
-          </Text>
+          </WordText>
         </View>
       ) : (
         <ScrollView
@@ -293,12 +294,12 @@ export default function VoiceSettingsScreen({
                 <Text style={styles.rowLabel}>
                   {t('settings.voiceSettingsScreen.enableDictation', 'Enable Voice Dictation')}
                 </Text>
-                <Text style={styles.rowSublabel}>
+                <WordText style={styles.rowSublabel}>
                   {t(
                     'settings.voiceSettingsScreen.dictationDescription',
                     'Dictate text into any focused pane on your desktop.'
                   )}
-                </Text>
+                </WordText>
               </View>
               <Switch
                 testID="voice-enabled"
@@ -323,12 +324,12 @@ export default function VoiceSettingsScreen({
                 <Text style={styles.rowLabel}>
                   {t('settings.voiceSettingsScreen.dictationMode', 'Dictation Mode')}
                 </Text>
-                <Text style={styles.rowSublabel}>
+                <WordText style={styles.rowSublabel}>
                   {t(
                     'settings.voiceSettingsScreen.dictationModeDescription',
                     'Toggle: press once to start, again to stop. Hold: dictate while held.'
                   )}
-                </Text>
+                </WordText>
               </View>
               <MobileSegmentedControl
                 segments={dictationModes(t)}

@@ -30,6 +30,7 @@ import { CodexResetCreditAction } from '../components/CodexResetCreditAction'
 import { useCodexResetCreditAction } from '../components/use-codex-reset-credit-action'
 import { ConfirmModal } from '../components/ConfirmModal'
 import { useRouteHandoff } from '../navigation/route-handoff'
+import { WordText } from '../components/WordText'
 
 type AccountsNotice = { title: string; message: string }
 
@@ -385,12 +386,12 @@ export function MobileAccountsScreen() {
             {renderProviderSection('codex', 'Codex')}
             <View style={styles.footerHint}>
               <User size={14} color={colors.textMuted} />
-              <Text style={styles.footerHintText}>
+              <WordText style={styles.footerHintText}>
                 {t(
                   'accounts.screen.manageAccountsHint',
                   'Add or re-authenticate accounts from desktop Settings → Accounts.'
                 )}
-              </Text>
+              </WordText>
             </View>
           </>
         )}

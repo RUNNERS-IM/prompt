@@ -17,6 +17,7 @@ import { useHostProfile } from '../transport/use-host-profile'
 import { useHostDisplay } from '../transport/use-host-display'
 import { FileReader } from './MobileSessionFileReader'
 import { MarkdownReader } from './MobileSessionMarkdownReader'
+import { WordText } from '../components/WordText'
 
 export function MobileSessionActiveContent({
   controller
@@ -208,7 +209,7 @@ export function MobileSessionActiveContent({
       {!isPendingTerminalRecoveryParked && (
         <ActivityIndicator size="small" color={colors.textSecondary} />
       )}
-      <Text style={styles.emptyText}>
+      <WordText style={styles.emptyText}>
         {isPendingTerminalRecoveryParked
           ? t(
               'session.activeContent.terminalTakingLonger',
@@ -216,7 +217,7 @@ export function MobileSessionActiveContent({
             )
           : activePendingTerminalTab.title ||
             t('session.activeContent.loadingTerminal', 'Loading terminal')}
-      </Text>
+      </WordText>
       {isPendingTerminalRecoveryParked && (
         <Pressable
           accessibilityRole="button"

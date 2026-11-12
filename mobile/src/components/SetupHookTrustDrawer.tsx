@@ -5,6 +5,7 @@ import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { BottomDrawer } from './BottomDrawer'
+import { WordText } from './WordText'
 
 export type SetupTrustPrompt = {
   repoId: string
@@ -41,7 +42,7 @@ export function SetupHookTrustDrawer({
       {prompt ? (
         <View>
           <View style={styles.trustHeader}>
-            <Text style={styles.title}>
+            <WordText style={styles.title}>
               {prompt.previouslyApproved
                 ? t(
                     'components.setupHookTrustDrawer.scriptChangedTitle',
@@ -55,13 +56,13 @@ export function SetupHookTrustDrawer({
                       repoName: prompt.repoName
                     }
                   )}
-            </Text>
-            <Text style={styles.subtitle}>
+            </WordText>
+            <WordText style={styles.subtitle}>
               {t(
                 'components.setupHookTrustDrawer.description',
                 "This repository's orca.yaml runs before the workspace starts. Only run it if you trust this repository."
               )}
-            </Text>
+            </WordText>
           </View>
 
           <View style={styles.trustScriptBox}>
