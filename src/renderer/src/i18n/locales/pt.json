@@ -321,6 +321,16 @@
       "foregroundBurst": "O Orca ignorou uma rajada de saída do terminal porque a fila acumulada ficou grande demais.",
       "restoreUnavailable": "O Orca ignorou a saída oculta do terminal porque a recuperação principal não estava disponível.",
       "noHostImage": "O Orca não conseguiu restaurar o histórico deste terminal a partir do host."
+    },
+    "usageReset": {
+      "resetsIn": "Redefine em {{duration}}",
+      "resetsNow": "Redefine agora",
+      "durationDays": "{{days}} d",
+      "durationDaysHours": "{{days}} d {{hours}} h",
+      "durationHours": "{{hours}} h",
+      "durationHoursMinutes": "{{hours}} h {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "agora"
     }
   },
   "agentLaunch": {

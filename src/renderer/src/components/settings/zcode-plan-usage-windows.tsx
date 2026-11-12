@@ -1,5 +1,5 @@
 import { translate } from '@/i18n/i18n'
-import { formatResetDuration } from '../../../../shared/rate-limit-reset-format'
+import { formatLocalizedResetDuration } from '@/lib/reset-duration-label'
 import type { ProviderRateLimits, RateLimitWindow } from '../../../../shared/rate-limit-types'
 import { Badge } from '../ui/badge'
 
@@ -25,7 +25,7 @@ function formatWindowReset(window: RateLimitWindow, now: number): string | null 
     return null
   }
   const remaining = window.resetsAt - now
-  return remaining > 0 ? formatResetDuration(remaining) : null
+  return remaining > 0 ? formatLocalizedResetDuration(remaining) : null
 }
 
 // Render only mapped windows; error/MCP-less snapshots must not invent missing windows.

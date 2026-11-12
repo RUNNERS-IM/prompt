@@ -317,6 +317,16 @@
       "foregroundBurst": "Bekleyen veriler çok biriktiği için Orca bir terminal çıktısı yığınını atladı.",
       "restoreUnavailable": "Ana kurtarma kullanılamadığı için Orca gizli terminal çıktısını atladı.",
       "noHostImage": "Orca bu terminalin geçmişini sunucudan geri yükleyemedi."
+    },
+    "usageReset": {
+      "resetsIn": "{{duration}} sonra sıfırlanır",
+      "resetsNow": "Şimdi sıfırlanır",
+      "durationDays": "{{days}} g",
+      "durationDaysHours": "{{days}} g {{hours}} sa",
+      "durationHours": "{{hours}} sa",
+      "durationHoursMinutes": "{{hours}} sa {{minutes}} dk",
+      "durationMinutes": "{{minutes}} dk",
+      "now": "şimdi"
     }
   },
   "agentLaunch": {

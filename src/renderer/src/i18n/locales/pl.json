@@ -24250,6 +24250,16 @@
       "foregroundBurst": "Orca pominęła serię danych wyjściowych terminala, ponieważ zaległości urosły zbyt mocno.",
       "restoreUnavailable": "Orca pominęła ukryte dane wyjściowe terminala, ponieważ odzyskiwanie w procesie głównym było niedostępne.",
       "noHostImage": "Orca nie mogła przywrócić historii tego terminala z jego hosta."
+    },
+    "usageReset": {
+      "resetsIn": "Reset za {{duration}}",
+      "resetsNow": "Reset teraz",
+      "durationDays": "{{days}} d",
+      "durationDaysHours": "{{days}} d {{hours}} godz.",
+      "durationHours": "{{hours}} godz.",
+      "durationHoursMinutes": "{{hours}} godz. {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "teraz"
     }
   }
 }

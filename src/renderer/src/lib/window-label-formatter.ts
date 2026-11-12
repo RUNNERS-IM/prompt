@@ -1,4 +1,5 @@
-import { formatResetDuration } from '../../../shared/rate-limit-reset-format'
+import { translate } from '@/i18n/i18n'
+import { formatLocalizedResetDuration } from './reset-duration-label'
 
 /** Format usage-window duration; retain 10080 minutes → wk compatibility with the original status bar. */
 export function formatWindowLabel(windowMinutes: number): string {
@@ -32,7 +33,10 @@ export function formatRateLimitWindowChipLabel(
   now: number = Date.now()
 ): string {
   if (window.resetsAt != null) {
-    return formatResetDuration(window.resetsAt - now)
+    return (
+      formatLocalizedResetDuration(window.resetsAt - now) ??
+      translate('prompt.usageReset.now', 'now')
+    )
   }
   return formatWindowLabel(window.windowMinutes)
 }

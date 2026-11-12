@@ -23466,6 +23466,16 @@
       "foregroundBurst": "Orca skipped a burst of terminal output because the backlog grew too large.",
       "restoreUnavailable": "Orca skipped hidden terminal output because main recovery was unavailable.",
       "noHostImage": "Orca could not restore this terminal's history from its host."
+    },
+    "usageReset": {
+      "resetsIn": "Resets in {{duration}}",
+      "resetsNow": "Resets now",
+      "durationDays": "{{days}}d",
+      "durationDaysHours": "{{days}}d {{hours}}h",
+      "durationHours": "{{hours}}h",
+      "durationHoursMinutes": "{{hours}}h {{minutes}}m",
+      "durationMinutes": "{{minutes}}m",
+      "now": "now"
     }
   }
 }

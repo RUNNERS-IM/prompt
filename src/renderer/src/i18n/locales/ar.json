@@ -25034,6 +25034,16 @@
       "foregroundBurst": "تخطّى Orca دفعة من مخرجات الطرفية لأن تراكم المخرجات أصبح كبيرًا جدًا.",
       "restoreUnavailable": "تخطّى Orca مخرجات الطرفية المخفية لأن الاسترداد الرئيسي غير متاح.",
       "noHostImage": "تعذّرت استعادة سجل هذه الطرفية من مضيفها."
+    },
+    "usageReset": {
+      "resetsIn": "يُعاد التعيين خلال {{duration}}",
+      "resetsNow": "يُعاد التعيين الآن",
+      "durationDays": "{{days}} ي",
+      "durationDaysHours": "{{days}} ي {{hours}} س",
+      "durationHours": "{{hours}} س",
+      "durationHoursMinutes": "{{hours}} س {{minutes}} د",
+      "durationMinutes": "{{minutes}} د",
+      "now": "الآن"
     }
   }
 }

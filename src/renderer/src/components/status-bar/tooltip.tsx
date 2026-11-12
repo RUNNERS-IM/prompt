@@ -1,8 +1,8 @@
 import type { ProviderRateLimits, RateLimitWindow } from '../../../../shared/rate-limit-types'
 import {
-  formatResetCountdown,
-  formatResetDuration
-} from '../../../../shared/rate-limit-reset-format'
+  formatLocalizedResetCountdown,
+  formatLocalizedResetDuration
+} from '@/lib/reset-duration-label'
 import { AgentIcon } from '@/lib/agent-catalog'
 import { ClaudeIcon, GeminiIcon, MiniMaxIcon, OpenAIIcon, OpenCodeGoIcon } from './icons'
 import { translate } from '@/i18n/i18n'
@@ -50,8 +50,8 @@ export function formatTimeAgo(ts: number): string {
   return translate('auto.components.status.bar.tooltip.hoursAgo', '{{hours}}h ago', { hours })
 }
 
-// Preserve tooltip imports while sharing countdown formatting with mobile.
-export { formatResetCountdown }
+// Preserve tooltip imports; the countdown copy follows the UI language like the mobile accounts screen.
+export { formatLocalizedResetCountdown as formatResetCountdown }
 
 export function formatResetCreditExpiry(
   expiresAt: number | null | undefined,
@@ -60,8 +60,8 @@ export function formatResetCreditExpiry(
   if (!expiresAt) {
     return null
   }
-  const duration = formatResetDuration(expiresAt - Date.now())
-  if (duration === 'now') {
+  const duration = formatLocalizedResetDuration(expiresAt - Date.now())
+  if (duration === null) {
     return count > 1
       ? translate('auto.components.status.bar.tooltip.7ec6e030a0', 'Next expires now')
       : translate('auto.components.status.bar.tooltip.d1e442a9e5', 'Expires now')
@@ -218,7 +218,7 @@ function ProviderRateLimitWindowSection({
   }
   const usedPct = clampUsedPercent(window.usedPercent)
   const displayedPct = getDisplayedUsagePercentage(usedPct, usagePercentageDisplay)
-  const resetLabel = window.resetsAt ? formatResetCountdown(window.resetsAt - now) : null
+  const resetLabel = window.resetsAt ? formatLocalizedResetCountdown(window.resetsAt - now) : null
 
   return (
     <div className="space-y-1">

@@ -312,6 +312,16 @@
       "foregroundBurst": "バックログが大きくなりすぎたため、Orca はターミナル出力のバーストをスキップしました。",
       "restoreUnavailable": "メインのリカバリーが利用できなかったため、Orca は非表示のターミナル出力をスキップしました。",
       "noHostImage": "Orca はこのターミナルの履歴をホストから復元できませんでした。"
+    },
+    "usageReset": {
+      "resetsIn": "{{duration}}後にリセット",
+      "resetsNow": "まもなくリセット",
+      "durationDays": "{{days}}日",
+      "durationDaysHours": "{{days}}日{{hours}}時間",
+      "durationHours": "{{hours}}時間",
+      "durationHoursMinutes": "{{hours}}時間{{minutes}}分",
+      "durationMinutes": "{{minutes}}分",
+      "now": "まもなく"
     }
   },
   "agentLaunch": {

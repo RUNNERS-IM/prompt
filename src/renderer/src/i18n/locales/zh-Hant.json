@@ -312,6 +312,16 @@
       "foregroundBurst": "Orca 因積壓量過大，已略過一波終端機輸出。",
       "restoreUnavailable": "Orca 因主要復原機制無法使用，已略過隱藏的終端機輸出。",
       "noHostImage": "Orca 無法從主機還原此終端機的歷史記錄。"
+    },
+    "usageReset": {
+      "resetsIn": "{{duration}}後重設",
+      "resetsNow": "即將重設",
+      "durationDays": "{{days}}天",
+      "durationDaysHours": "{{days}}天{{hours}}小時",
+      "durationHours": "{{hours}}小時",
+      "durationHoursMinutes": "{{hours}}小時{{minutes}}分鐘",
+      "durationMinutes": "{{minutes}}分鐘",
+      "now": "即將"
     }
   },
   "agentLaunch": {

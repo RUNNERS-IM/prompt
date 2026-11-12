@@ -321,6 +321,16 @@
       "foregroundBurst": "Orca a ignoré une rafale de sortie de terminal car l'arriéré est devenu trop important.",
       "restoreUnavailable": "Orca a ignoré une sortie de terminal masquée car la récupération principale n'était pas disponible.",
       "noHostImage": "Orca n'a pas pu restaurer l'historique de ce terminal depuis son hôte."
+    },
+    "usageReset": {
+      "resetsIn": "Réinitialisation dans {{duration}}",
+      "resetsNow": "Réinitialisation maintenant",
+      "durationDays": "{{days}} j",
+      "durationDaysHours": "{{days}} j {{hours}} h",
+      "durationHours": "{{hours}} h",
+      "durationHoursMinutes": "{{hours}} h {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "maintenant"
     }
   },
   "agentLaunch": {

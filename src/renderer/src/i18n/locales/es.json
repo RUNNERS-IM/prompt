@@ -321,6 +321,16 @@
       "foregroundBurst": "Orca omitió una ráfaga de salida de la terminal porque la cola pendiente creció demasiado.",
       "restoreUnavailable": "Orca omitió la salida de una terminal oculta porque la recuperación principal no estaba disponible.",
       "noHostImage": "Orca no pudo restaurar el historial de esta terminal desde su host."
+    },
+    "usageReset": {
+      "resetsIn": "Se restablece en {{duration}}",
+      "resetsNow": "Se restablece ahora",
+      "durationDays": "{{days}} d",
+      "durationDaysHours": "{{days}} d {{hours}} h",
+      "durationHours": "{{hours}} h",
+      "durationHoursMinutes": "{{hours}} h {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "ahora"
     }
   },
   "agentLaunch": {

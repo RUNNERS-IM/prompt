@@ -23466,6 +23466,16 @@
       "foregroundBurst": "Orca ohitti päätteen tulosteen purskeen, koska jono kasvoi liian suureksi.",
       "restoreUnavailable": "Orca ohitti piilotetun päätteen tulosteen, koska pääprosessin palautus ei ollut käytettävissä.",
       "noHostImage": "Orca ei voinut palauttaa tämän päätteen historiaa sen isännältä."
+    },
+    "usageReset": {
+      "resetsIn": "Nollautuu {{duration}} kuluttua",
+      "resetsNow": "Nollautuu nyt",
+      "durationDays": "{{days}} pv",
+      "durationDaysHours": "{{days}} pv {{hours}} t",
+      "durationHours": "{{hours}} t",
+      "durationHoursMinutes": "{{hours}} t {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "nyt"
     }
   }
 }

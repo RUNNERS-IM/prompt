@@ -23074,6 +23074,16 @@
       "foregroundBurst": "Orca melewati sekumpulan output terminal karena antrean output terlalu besar.",
       "restoreUnavailable": "Orca melewati output terminal tersembunyi karena pemulihan utama tidak tersedia.",
       "noHostImage": "Orca tidak dapat memulihkan riwayat terminal ini dari host-nya."
+    },
+    "usageReset": {
+      "resetsIn": "Direset dalam {{duration}}",
+      "resetsNow": "Direset sekarang",
+      "durationDays": "{{days}} hr",
+      "durationDaysHours": "{{days}} hr {{hours}} j",
+      "durationHours": "{{hours}} j",
+      "durationHoursMinutes": "{{hours}} j {{minutes}} mnt",
+      "durationMinutes": "{{minutes}} mnt",
+      "now": "sekarang"
     }
   }
 }

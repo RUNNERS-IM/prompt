@@ -23466,6 +23466,16 @@
       "foregroundBurst": "Orca heeft een reeks terminaluitvoer overgeslagen omdat de achterstand te groot werd.",
       "restoreUnavailable": "Orca heeft verborgen terminaluitvoer overgeslagen omdat herstel via de hoofdprocessen niet beschikbaar was.",
       "noHostImage": "Orca kon de geschiedenis van deze terminal niet herstellen vanaf de host."
+    },
+    "usageReset": {
+      "resetsIn": "Wordt gereset over {{duration}}",
+      "resetsNow": "Wordt nu gereset",
+      "durationDays": "{{days}} d",
+      "durationDaysHours": "{{days}} d {{hours}} u",
+      "durationHours": "{{hours}} u",
+      "durationHoursMinutes": "{{hours}} u {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "nu"
     }
   }
 }

@@ -317,6 +317,16 @@
       "foregroundBurst": "Orca hat einen Schwall an Terminalausgaben übersprungen, weil der Rückstau zu groß wurde.",
       "restoreUnavailable": "Orca hat ausgeblendete Terminalausgaben übersprungen, weil die Wiederherstellung im Hauptprozess nicht verfügbar war.",
       "noHostImage": "Orca konnte den Verlauf dieses Terminals nicht vom Host wiederherstellen."
+    },
+    "usageReset": {
+      "resetsIn": "Zurückgesetzt in {{duration}}",
+      "resetsNow": "Wird jetzt zurückgesetzt",
+      "durationDays": "{{days}} T.",
+      "durationDaysHours": "{{days}} T. {{hours}} Std.",
+      "durationHours": "{{hours}} Std.",
+      "durationHoursMinutes": "{{hours}} Std. {{minutes}} Min.",
+      "durationMinutes": "{{minutes}} Min.",
+      "now": "jetzt"
     }
   },
   "agentLaunch": {

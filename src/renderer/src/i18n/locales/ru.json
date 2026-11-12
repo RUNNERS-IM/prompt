@@ -324,6 +324,16 @@
       "foregroundBurst": "Orca пропустила часть вывода терминала, так как очередь стала слишком большой.",
       "restoreUnavailable": "Orca пропустила скрытый вывод терминала, так как основное восстановление было недоступно.",
       "noHostImage": "Orca не удалось восстановить историю этого терминала с сервера."
+    },
+    "usageReset": {
+      "resetsIn": "Сброс через {{duration}}",
+      "resetsNow": "Сброс сейчас",
+      "durationDays": "{{days}} д",
+      "durationDaysHours": "{{days}} д {{hours}} ч",
+      "durationHours": "{{hours}} ч",
+      "durationHoursMinutes": "{{hours}} ч {{minutes}} мин",
+      "durationMinutes": "{{minutes}} мин",
+      "now": "сейчас"
     }
   },
   "agentLaunch": {

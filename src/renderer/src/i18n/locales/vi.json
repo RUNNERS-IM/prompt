@@ -23074,6 +23074,16 @@
       "foregroundBurst": "Orca đã bỏ qua một loạt output terminal vì backlog quá lớn.",
       "restoreUnavailable": "Orca đã bỏ qua output terminal ẩn vì không thể khôi phục từ tiến trình chính.",
       "noHostImage": "Orca không thể khôi phục lịch sử của terminal này từ máy chủ của nó."
+    },
+    "usageReset": {
+      "resetsIn": "Đặt lại sau {{duration}}",
+      "resetsNow": "Đặt lại ngay",
+      "durationDays": "{{days}} ngày",
+      "durationDaysHours": "{{days}} ngày {{hours}} giờ",
+      "durationHours": "{{hours}} giờ",
+      "durationHoursMinutes": "{{hours}} giờ {{minutes}} phút",
+      "durationMinutes": "{{minutes}} phút",
+      "now": "ngay"
     }
   }
 }

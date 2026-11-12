@@ -23858,6 +23858,16 @@
       "foregroundBurst": "Orca ha saltato un picco di output del terminale perché l'arretrato era diventato troppo grande.",
       "restoreUnavailable": "Orca ha saltato l'output nascosto del terminale perché il recupero principale non era disponibile.",
       "noHostImage": "Orca non è riuscito a ripristinare la cronologia di questo terminale dal relativo host."
+    },
+    "usageReset": {
+      "resetsIn": "Si azzera tra {{duration}}",
+      "resetsNow": "Si azzera ora",
+      "durationDays": "{{days}} g",
+      "durationDaysHours": "{{days}} g {{hours}} h",
+      "durationHours": "{{hours}} h",
+      "durationHoursMinutes": "{{hours}} h {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "now": "ora"
     }
   }
 }

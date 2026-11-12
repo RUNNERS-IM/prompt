@@ -312,6 +312,16 @@
       "foregroundBurst": "由于积压过多，Orca 跳过了一批终端输出。",
       "restoreUnavailable": "由于主进程恢复不可用，Orca 跳过了隐藏的终端输出。",
       "noHostImage": "Orca 无法从其主机恢复此终端的历史记录。"
+    },
+    "usageReset": {
+      "resetsIn": "{{duration}}后重置",
+      "resetsNow": "即将重置",
+      "durationDays": "{{days}}天",
+      "durationDaysHours": "{{days}}天{{hours}}小时",
+      "durationHours": "{{hours}}小时",
+      "durationHoursMinutes": "{{hours}}小时{{minutes}}分钟",
+      "durationMinutes": "{{minutes}}分钟",
+      "now": "即将"
     }
   },
   "agentLaunch": {

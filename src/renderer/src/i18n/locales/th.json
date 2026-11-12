@@ -23074,6 +23074,16 @@
       "foregroundBurst": "Orca ข้ามเอาต์พุต terminal ช่วงหนึ่ง เพราะข้อมูลค้างประมวลผลมีขนาดใหญ่เกินไป",
       "restoreUnavailable": "Orca ข้ามเอาต์พุต terminal ที่ซ่อนอยู่ เพราะไม่สามารถกู้คืนผ่านโปรเซสหลักได้",
       "noHostImage": "Orca ไม่สามารถกู้คืนประวัติของ terminal นี้จากโฮสต์ได้"
+    },
+    "usageReset": {
+      "resetsIn": "รีเซ็ตในอีก {{duration}}",
+      "resetsNow": "รีเซ็ตตอนนี้",
+      "durationDays": "{{days}} วัน",
+      "durationDaysHours": "{{days}} วัน {{hours}} ชม.",
+      "durationHours": "{{hours}} ชม.",
+      "durationHoursMinutes": "{{hours}} ชม. {{minutes}} นาที",
+      "durationMinutes": "{{minutes}} นาที",
+      "now": "ตอนนี้"
     }
   }
 }

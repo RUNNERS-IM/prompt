@@ -23466,6 +23466,16 @@
       "foregroundBurst": "बैकलॉग बहुत बढ़ जाने के कारण Orca ने टर्मिनल आउटपुट के एक बड़े हिस्से को छोड़ दिया।",
       "restoreUnavailable": "main recovery उपलब्ध न होने के कारण Orca ने छिपे हुए टर्मिनल आउटपुट को छोड़ दिया।",
       "noHostImage": "Orca इस टर्मिनल का इतिहास उसके होस्ट से बहाल नहीं कर सका।"
+    },
+    "usageReset": {
+      "resetsIn": "{{duration}} में रीसेट होगा",
+      "resetsNow": "अभी रीसेट होगा",
+      "durationDays": "{{days}} दिन",
+      "durationDaysHours": "{{days}} दिन {{hours}} घं",
+      "durationHours": "{{hours}} घं",
+      "durationHoursMinutes": "{{hours}} घं {{minutes}} मि",
+      "durationMinutes": "{{minutes}} मि",
+      "now": "अभी"
     }
   }
 }
