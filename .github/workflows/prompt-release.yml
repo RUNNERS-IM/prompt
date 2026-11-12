@@ -5,6 +5,8 @@
 # 2) GitHub Releases(RUNNERS-IM/prompt, 태그 v<버전>)에 초안을 먼저 만들고, 운영체제별 작업이 그 초안에 파일을 올린다.
 #    - macOS(Apple silicon arm64): Developer ID 로 서명하고 Apple 공증까지 한다. 저장소 변수 PROMPT_MAC_X64 가
 #      'true' 면 Intel(x64) 판도 같은 실행에서 함께 만든다(시험 전이라 기본은 끔).
+#      Mac 판 단계는 prompt-mac-build.yml 에 있다. GitHub Mac(macos-15)에서 먼저 만들고, 그 작업이 취소 · 실패하면
+#      사무실 맥 스튜디오(m2-ultra-sun-1)가 같은 출시 안에서 이어서 만든다. 시험할 때는 skip_github_mac 을 켠다.
 #    - Windows(x64): 코드 서명 인증서가 없어서 서명하지 않는다. 처음 설치할 때 SmartScreen 경고가 뜬다.
 #    - Linux(x64): AppImage·deb·rpm.
 # 3) 세 운영체제의 업데이트 목록 파일(latest-mac.yml·latest.yml·latest-linux.yml)과 설치 파일이 모두 올라간 것을
@@ -28,6 +30,10 @@ on:
     inputs:
       publish:
         description: '버전을 올리고 배포하기 (끄면 시험 실행)'
+        type: boolean
+        default: false
+      skip_github_mac:
+        description: 'GitHub Mac 작업을 건너뛰어 맥 스튜디오 대체 경로를 시험하기'
         type: boolean
         default: false
 
@@ -120,202 +126,41 @@ jobs:
       build_template: true
       fast_runners: false
 
+  # Mac 판은 먼저 GitHub 의 Apple 칩 Mac(macos-15)에서 만든다. 단계는 prompt-mac-build.yml 에 있다.
   mac:
     needs: [prepare, orcad-template]
     # 템플릿을 일부러 건너뛴 경우(skipped)에도 진행한다
     if: >-
-      !cancelled() && needs.prepare.result == 'success' &&
+      !cancelled() && !inputs.skip_github_mac && needs.prepare.result == 'success' &&
       (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
-    # GitHub 호스팅 macos-15 는 Apple silicon(arm64) 러너다
-    runs-on: macos-15
-    timeout-minutes: 150
-    env:
-      ORCA_BACKGROUND_LAUNCH: '1'
-      NODE_OPTIONS: --max-old-space-size=4096
-      PUBLISH: ${{ needs.prepare.outputs.publish }}
-      VERSION: ${{ needs.prepare.outputs.version }}
-      WITH_X64: ${{ vars.PROMPT_MAC_X64 == 'true' }}
-      WITH_TEMPLATE: ${{ needs.orcad-template.result == 'success' }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.prepare.outputs.sha }}
+    permissions:
+      contents: write
+    uses: ./.github/workflows/prompt-mac-build.yml
+    secrets: inherit
+    with:
+      runner: '"macos-15"'
+      version: ${{ needs.prepare.outputs.version }}
+      sha: ${{ needs.prepare.outputs.sha }}
+      publish: ${{ needs.prepare.outputs.publish }}
+      with_template: ${{ needs.orcad-template.result == 'success' }}
 
-      # 20분 넘는 빌드 전에 서명 준비부터 해서, 비밀값이 빠졌으면 바로 멈춘다
-      - name: Prepare a temporary signing keychain
-        env:
-          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
-          DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
-          ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
-          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
-          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
-        run: |
-          set -euo pipefail
-          # The .p12 may be exported without a password, so an empty DEVELOPER_ID_P12_PASSWORD is allowed.
-          for name in DEVELOPER_ID_P12_BASE64 ASC_API_KEY_P8 ASC_API_KEY_ID ASC_API_ISSUER_ID; do
-            if [ -z "${!name}" ]; then
-              echo "::error::비밀값 $name 이 없다. 서명·공증 없이는 출시하지 않는다."
-              exit 1
-            fi
-          done
-          SECRETS="$RUNNER_TEMP/prompt-secrets"
-          mkdir -p "$SECRETS" && chmod 700 "$SECRETS"
-          KEYCHAIN="$RUNNER_TEMP/prompt-signing.keychain-db"
-          KEYCHAIN_PASSWORD="$(uuidgen)"
-          # The search list is put back as it was when the run ends.
-          security list-keychains -d user | tr -d '" ' > "$SECRETS/keychains-before"
-          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
-          security set-keychain-settings -lut 21600 "$KEYCHAIN"
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
-          echo "$DEVELOPER_ID_P12_BASE64" | base64 --decode > "$SECRETS/developer-id.p12"
-          security import "$SECRETS/developer-id.p12" -k "$KEYCHAIN" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
-          security list-keychains -d user -s "$KEYCHAIN" $(cat "$SECRETS/keychains-before")
-          rm "$SECRETS/developer-id.p12"
-          # The certificate must belong to the team the build config checks (ORCA_MAC_TEAM_ID).
-          if ! security find-identity -v -p codesigning "$KEYCHAIN" | grep -q 'Developer ID Application:.*(RGWVXJ8URP)'; then
-            echo "::error::임시 키체인에 팀 RGWVXJ8URP 의 Developer ID Application 인증서가 없다."
-            security find-identity -v -p codesigning "$KEYCHAIN"
-            exit 1
-          fi
-          printf '%s' "$ASC_API_KEY_P8" > "$SECRETS/AuthKey_${ASC_API_KEY_ID}.p8"
-          chmod 600 "$SECRETS/"*
-          # electron-builder: CSC_KEYCHAIN 으로 이 키체인에서 서명 인증서를 찾고,
-          # APPLE_API_KEY(파일 경로)·APPLE_API_KEY_ID·APPLE_API_ISSUER 로 공증한다.
-          echo "CSC_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
-          echo "APPLE_API_KEY=$SECRETS/AuthKey_${ASC_API_KEY_ID}.p8" >> "$GITHUB_ENV"
-          echo "APPLE_API_KEY_ID=$ASC_API_KEY_ID" >> "$GITHUB_ENV"
-          echo "APPLE_API_ISSUER=$ASC_API_ISSUER_ID" >> "$GITHUB_ENV"
-
-      - name: Setup pnpm
-        uses: ./.github/actions/setup-pnpm
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: package.json
-          check-latest: true
-          cache: pnpm
-          cache-dependency-path: |
-            pnpm-lock.yaml
-            mobile/pnpm-lock.yaml
-
-      # Bundled host Node is cached by its exact pin.
-      - name: Locate the pinned Node runtime cache
-        run: echo "ORCA_NODE_RUNTIME_CACHE_DIR=$HOME/Library/Caches/orca-node-runtime" >>"$GITHUB_ENV"
-
-      - name: Cache the pinned Node runtime
-        uses: actions/cache@v5
-        with:
-          path: ~/Library/Caches/orca-node-runtime
-          key: orca-node-runtime-mac-${{ hashFiles('src/shared/node-runtime-pin.ts') }}
-
-      # Intel 판의 터미널 호스트를 묶은 뒤 실제로 켜 보는 검사가 있어서 x64 를 만들 때는 Rosetta 가 필요하다
-      - name: Install Rosetta for the x64 slice
-        if: env.WITH_X64 == 'true'
-        run: sudo softwareupdate --install-rosetta --agree-to-license
-
-      - name: Install dependencies
-        uses: nick-fields/retry@v4
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          retry_wait_seconds: 30
-          shell: bash
-          command: |
-            if [ "$WITH_X64" = "true" ]; then
-              pnpm install --frozen-lockfile --cpu=current,x64,arm64
-            else
-              pnpm install --frozen-lockfile
-            fi
-
-      # Build required out/mobile-web using mobile's React Native/Expo install.
-      - uses: ./.github/actions/install-mobile-dependencies
-
-      # plutil lint accepts duplicate entitlements but codesign rejects them.
-      - name: Verify macOS entitlements
-        run: pnpm verify:macos-entitlements
-
-      # Prompt 네이티브 모듈(native/prompt-native, Rust)은 build:release 안의 build:native 가 만든다.
-      # Intel 판을 안 내도 두 CPU 를 다 만든다(build:prompt-native 기본). 그래서 x86_64 대상도 깐다.
-      - name: Ensure the Rust toolchain for the Prompt native module
-        run: |
-          set -euo pipefail
-          if ! command -v cargo >/dev/null; then
-            rustup toolchain install stable --profile minimal
-            rustup default stable
-          fi
-          rustup target add aarch64-apple-darwin x86_64-apple-darwin
-          cargo --version
-
-      # 내려받은 크레이트와 빌드 결과를 남겨 다음 실행이 처음부터 컴파일하지 않게 한다.
-      - name: Cache the Prompt native module build
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            native/prompt-native/target
-          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
-          restore-keys: |
-            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
-
-      - name: Build app
-        run: pnpm run build:release
-
-      - name: Download the orcad deployment template
-        if: env.WITH_TEMPLATE == 'true'
-        uses: actions/download-artifact@v8
-        with:
-          name: orcad-template
-          path: out/orcad-template
-
-      - name: Gate runtime file-watcher process isolation
-        run: |
-          node config/scripts/runtime-file-watcher-fault-harness.mjs
-          ELECTRON_RUN_AS_NODE=1 pnpm exec electron config/scripts/runtime-file-watcher-fault-harness.mjs
-
-      # 서명 → 공증 → 스테이플 → dmg/zip → (publish 면) 초안 릴리스에 올리기. latest-mac.yml 도 여기서 만든다.
-      - name: Package, sign, notarize (macOS)
-        uses: nick-fields/retry@v4
-        with:
-          timeout_minutes: 60
-          max_attempts: 2
-          retry_wait_seconds: 30
-          shell: bash
-          command: |
-            set -euo pipefail
-            if [ "$WITH_X64" = "true" ]; then ARCH_FLAGS="--x64 --arm64"; NODE_SLOTS="darwin-arm64 darwin-x64"; else ARCH_FLAGS="--arm64"; NODE_SLOTS="darwin-arm64"; fi
-            if [ "$PUBLISH" = "true" ]; then MODE=always; else MODE=never; fi
-            node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs $NODE_SLOTS
-            node config/scripts/ensure-native-runtime.mjs --runtime=electron
-            ORCA_MAC_RELEASE=1 pnpm exec electron-builder --config config/electron-builder.config.cjs --mac dmg zip $ARCH_FLAGS --publish "$MODE"
-        env:
-          GH_TOKEN: ${{ github.token }}
-          # The draft was created by the prepare job; long template/build time must not make builder refuse it.
-          EP_GH_IGNORE_TIME: 'true'
-          ORCA_BUILD_COMMIT: ${{ needs.prepare.outputs.sha }}
-          ORCA_REQUIRE_ORCAD_TEMPLATE: ${{ env.WITH_TEMPLATE == 'true' && '1' || '' }}
-
-      - name: Keep the files of a test run
-        if: env.PUBLISH != 'true'
-        uses: actions/upload-artifact@v7
-        with:
-          name: prompt-${{ env.VERSION }}-mac-test
-          path: |
-            dist/*.dmg
-            dist/*.zip
-            dist/*.yml
-          retention-days: 3
-
-      - name: Remove the temporary keychain and keys
-        if: always()
-        run: |
-          SECRETS="$RUNNER_TEMP/prompt-secrets"
-          if [ -f "$SECRETS/keychains-before" ]; then
-            security list-keychains -d user -s $(cat "$SECRETS/keychains-before")
-          fi
-          security delete-keychain "$RUNNER_TEMP/prompt-signing.keychain-db" 2>/dev/null || true
-          rm -rf "$SECRETS"
+  # GitHub Mac 작업이 취소 · 실패하면(시험에서 건너뛰어도) 같은 출시 안에서 사무실 맥 스튜디오가 이어서 만든다.
+  # 서명 키체인은 끝나면 지우고, 남아 있으면 이 작업을 실패로 끝낸다(prompt-mac-build.yml 맨 끝 단계).
+  mac-studio:
+    needs: [prepare, orcad-template, mac]
+    if: >-
+      !cancelled() && needs.prepare.result == 'success' && needs.mac.result != 'success' &&
+      (needs.orcad-template.result == 'success' || needs.orcad-template.result == 'skipped')
+    permissions:
+      contents: write
+    uses: ./.github/workflows/prompt-mac-build.yml
+    secrets: inherit
+    with:
+      runner: '["self-hosted", "macOS", "ARM64", "m2-ultra-sun-1"]'
+      version: ${{ needs.prepare.outputs.version }}
+      sha: ${{ needs.prepare.outputs.sha }}
+      publish: ${{ needs.prepare.outputs.publish }}
+      with_template: ${{ needs.orcad-template.result == 'success' }}
 
   windows:
     needs: [prepare, orcad-template]
@@ -542,8 +387,12 @@ jobs:
   # 세 운영체제가 다 올라간 것을 확인한 뒤에만 공개한다. 하나라도 실패하면 이 작업은 건너뛰고 초안으로 남는다.
   # 다음 실행(또는 실패한 작업만 다시 돌리기)이 그 초안을 이어 쓰거나 지우고 새로 만든다.
   publish:
-    needs: [prepare, mac, windows, linux]
-    if: needs.prepare.outputs.publish == 'true'
+    needs: [prepare, mac, mac-studio, windows, linux]
+    # 둘 중 성공한 Mac 판이 초안에 올린 파일로 공개한다. 맥 스튜디오 작업은 GitHub Mac 이 성공하면 건너뛰어진다.
+    if: >-
+      !cancelled() && needs.prepare.outputs.publish == 'true' &&
+      needs.windows.result == 'success' && needs.linux.result == 'success' &&
+      (needs.mac.result == 'success' || needs.mac-studio.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
