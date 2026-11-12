@@ -21476,7 +21476,7 @@
         "busy": "Working",
         "idle": "Idle",
         "settingTitle": "When you switch accounts while Claude is running",
-        "settingDescription": "Restarting continues each running conversation on the new account.",
+        "settingDescription": "Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.",
         "keyword": {
           "restart": "restart",
           "running": "running"
@@ -21504,7 +21504,8 @@
         "reviewBody_other": "{{count}} other Claude sessions weren't moved to {{next}}.",
         "body_one": "{{count}} Claude session is still running on {{previous}}. Restarting continues the conversation on {{next}}. Busy sessions wait for idle before restarting.",
         "body_other": "{{count}} Claude sessions are still running on {{previous}}. Restarting continues each conversation on {{next}}. Busy sessions wait for idle before restarting.",
-        "restartCount_one": "Restart {{count}} session"
+        "restartCount_one": "Restart {{count}} session",
+        "settingLimited": "Restart stopped ones"
       },
       "loginSync": {
         "previousLogin": "the previous login"

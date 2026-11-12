@@ -21143,7 +21143,7 @@
         "dontAskAgainHint": "您可以在“设置”→“AI 提供商帐户”中关闭此功能。",
         "listLabel": "要重新启动的 Claude 会话",
         "settingTitle": "Claude 运行期间切换账户时",
-        "settingDescription": "重启后，每个正在进行的对话都会在新账户上继续。",
+        "settingDescription": "重启会在新账号上继续每个正在运行的对话。已停止的是达到使用上限的会话。",
         "settingRestart": "总是重新启动",
         "session": "Claude 会话",
         "restartingOther": "正在 {{account}} 账户上重启 {{count}} 个 Claude 会话",
@@ -21164,7 +21164,8 @@
         "review": "查看",
         "restartCount_other": "重启 {{count}} 个会话",
         "reviewBody_other": "其他 {{count}} 个 Claude 会话未移至 {{next}}。",
-        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。"
+        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。",
+        "settingLimited": "只重启已停止的"
       },
       "loginSync": {
         "previousLogin": "之前的登录"

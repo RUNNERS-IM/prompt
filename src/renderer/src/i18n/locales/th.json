@@ -21109,7 +21109,7 @@
         "busy": "กำลังทำงาน",
         "idle": "ว่าง",
         "settingTitle": "เมื่อสลับบัญชีขณะที่ Claude กำลังทำงาน",
-        "settingDescription": "การรีสตาร์ตจะทำให้แต่ละการสนทนาที่กำลังทำงานอยู่ดำเนินต่อด้วยบัญชีใหม่",
+        "settingDescription": "การเริ่มใหม่จะทำให้การสนทนาที่กำลังทำงานดำเนินต่อในบัญชีใหม่ ที่หยุดคือเซสชันที่ถึงขีดจำกัดการใช้งาน",
         "keyword": {
           "restart": "เริ่มใหม่",
           "running": "กำลังทำงาน"
@@ -21134,7 +21134,8 @@
         "review": "รีวิว",
         "restartCount_other": "รีสตาร์ท {{count}} session",
         "reviewBody_other": "Claude session อื่นอีก {{count}} session ไม่ได้ถูกย้ายไปยัง {{next}}",
-        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท"
+        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท",
+        "settingLimited": "เริ่มใหม่เฉพาะที่หยุด"
       },
       "loginSync": {
         "previousLogin": "การเข้าสู่ระบบก่อนหน้า"

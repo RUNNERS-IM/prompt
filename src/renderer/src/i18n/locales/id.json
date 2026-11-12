@@ -21109,7 +21109,7 @@
         "busy": "Berjalan",
         "idle": "Diam",
         "settingTitle": "Saat berganti akun ketika Claude sedang berjalan",
-        "settingDescription": "Memulai ulang akan melanjutkan setiap percakapan yang sedang berjalan dengan akun baru.",
+        "settingDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
         "keyword": {
           "restart": "mulai ulang",
           "running": "berjalan"
@@ -21134,7 +21134,8 @@
         "review": "Review",
         "restartCount_other": "Mulai ulang {{count}} sesi",
         "reviewBody_other": "{{count}} sesi Claude lainnya tidak dipindahkan ke {{next}}.",
-        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang."
+        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang.",
+        "settingLimited": "Mulai ulang yang berhenti"
       },
       "loginSync": {
         "previousLogin": "login sebelumnya"

@@ -20979,7 +20979,7 @@
         "busy": "工作中",
         "idle": "閒置",
         "settingTitle": "Claude 執行期間切換帳戶時",
-        "settingDescription": "重新啟動後，所有進行中的對話都會使用新帳戶繼續。",
+        "settingDescription": "重新啟動會在新帳號上繼續每個執行中的對話。已停止的是達到使用上限的工作階段。",
         "keyword": {
           "restart": "重新啟動",
           "running": "執行中"
@@ -21004,7 +21004,8 @@
         "review": "審查",
         "restartCount_other": "重新啟動 {{count}} 個工作階段",
         "reviewBody_other": "其他 {{count}} 個 Claude 工作階段未移至 {{next}}。",
-        "body_other": "{{count}} 個 Claude 工作階段仍在 {{previous}} 上執行。重新啟動後，各對話將在 {{next}} 上繼續。忙碌的工作階段會等待閒置後再重新啟動。"
+        "body_other": "{{count}} 個 Claude 工作階段仍在 {{previous}} 上執行。重新啟動後，各對話將在 {{next}} 上繼續。忙碌的工作階段會等待閒置後再重新啟動。",
+        "settingLimited": "只重新啟動已停止的"
       },
       "loginSync": {
         "previousLogin": "先前的登入"

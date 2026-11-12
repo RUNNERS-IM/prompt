@@ -37,12 +37,12 @@ describe('applyPromptDefaultsOnce', () => {
     expect(result.defaultTuiAgent).toBe('codex')
   })
 
-  it('restarts sessions on a new login by itself unless the user opted out', () => {
+  it('restarts only sessions stopped at the limit unless the user opted out', () => {
     const asked = applyPromptDefaultsOnce(
       { claudeAccountSwitchRunningSessions: 'ask' } as unknown as Settings,
       () => {}
     )
-    expect(asked.claudeAccountSwitchRunningSessions).toBe('restart')
+    expect(asked.claudeAccountSwitchRunningSessions).toBe('limited')
     const kept = applyPromptDefaultsOnce(
       { claudeAccountSwitchRunningSessions: 'keep' } as unknown as Settings,
       () => {}

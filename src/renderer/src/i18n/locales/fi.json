@@ -21476,7 +21476,7 @@
         "busy": "Työskentelee",
         "idle": "Joutilas",
         "settingTitle": "Kun tiliä vaihdetaan Clauden ollessa käynnissä",
-        "settingDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä.",
+        "settingDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä. Pysähtyneet ovat saavuttaneet käyttörajansa.",
         "keyword": {
           "restart": "käynnistä uudelleen",
           "running": "käynnissä"
@@ -21504,7 +21504,8 @@
         "reviewBody_one": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "reviewBody_other": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "body_one": "{{count}} Claude-sessio on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
-        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä."
+        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
+        "settingLimited": "Käynnistä vain pysähtyneet"
       },
       "loginSync": {
         "previousLogin": "edellinen kirjautuminen"

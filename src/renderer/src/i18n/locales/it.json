@@ -21843,7 +21843,7 @@
         "busy": "In lavorazione",
         "idle": "Inattivo",
         "settingTitle": "Quando cambi account mentre Claude è in esecuzione",
-        "settingDescription": "Il riavvio riprende ogni conversazione in corso con il nuovo account",
+        "settingDescription": "Il riavvio continua ogni conversazione in corso sul nuovo account. Quelle ferme sono quelle che hanno raggiunto il limite di utilizzo.",
         "keyword": {
           "restart": "riavvio",
           "running": "in esecuzione"
@@ -21874,7 +21874,8 @@
         "reviewBody_other": "{{count}} altre sessioni di Claude non sono state spostate su {{next}}.",
         "body_one": "{{count}} sessione di Claude è ancora in esecuzione su {{previous}}. Riavviando, la conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
         "body_many": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
-        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio."
+        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
+        "settingLimited": "Riavvia solo quelle ferme"
       },
       "loginSync": {
         "previousLogin": "il login precedente"

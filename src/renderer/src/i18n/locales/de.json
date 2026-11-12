@@ -21310,7 +21310,7 @@
         "busy": "In Arbeit",
         "idle": "Inaktiv",
         "settingTitle": "Bei Kontowechsel, während Claude läuft",
-        "settingDescription": "Ein Neustart setzt jedes laufende Gespräch mit dem neuen Konto fort.",
+        "settingDescription": "Ein Neustart setzt jede laufende Unterhaltung mit dem neuen Konto fort. Gestoppt sind Sitzungen, die ihr Nutzungslimit erreicht haben.",
         "keyword": {
           "restart": "Neustart",
           "running": "laufend"
@@ -21338,7 +21338,8 @@
         "reviewBody_one": "{{count}} weitere Claude-Sitzung wurde nicht zu {{next}} verschoben.",
         "reviewBody_other": "{{count}} weitere Claude-Sitzungen wurden nicht zu {{next}} verschoben.",
         "body_one": "{{count}} Claude-Sitzung läuft noch auf {{previous}}. Ein Neustart setzt das Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind.",
-        "body_other": "{{count}} Claude-Sitzungen laufen noch auf {{previous}}. Ein Neustart setzt jedes Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind."
+        "body_other": "{{count}} Claude-Sitzungen laufen noch auf {{previous}}. Ein Neustart setzt jedes Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind.",
+        "settingLimited": "Nur gestoppte neu starten"
       },
       "loginSync": {
         "previousLogin": "die vorherige Anmeldung"

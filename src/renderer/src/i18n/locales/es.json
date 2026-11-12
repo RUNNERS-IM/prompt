@@ -21207,7 +21207,7 @@
         "settingKeep": "Nunca reiniciar",
         "settingRestart": "Reiniciar siempre",
         "settingTitle": "Cuando cambias de cuenta mientras Claude se está ejecutando",
-        "settingDescription": "El reinicio continúa con cada conversación en ejecución en la nueva cuenta.",
+        "settingDescription": "Al reiniciar, cada conversación en curso continúa en la nueva cuenta. Las detenidas son las que alcanzaron su límite de uso.",
         "restartingOther": "Reiniciando {{count}} sesiones de Claude con {{account}}",
         "restartingOne": "Reiniciando 1 sesión de Claude con {{account}}",
         "groupOnAccount": "En ejecución con {{account}}",
@@ -21231,7 +21231,8 @@
         "reviewBody_many": "No se trasladaron {{count}} sesiones más de Claude a {{next}}.",
         "body_one": "{{count}} sesión de Claude sigue ejecutándose en {{previous}}. Al reiniciarla, la conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
         "body_other": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
-        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse."
+        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
+        "settingLimited": "Reiniciar solo las detenidas"
       },
       "loginSync": {
         "previousLogin": "el inicio de sesión anterior"

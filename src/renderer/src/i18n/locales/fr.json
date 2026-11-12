@@ -21816,7 +21816,7 @@
         "listLabel": "Sessions Claude à redémarrer",
         "settingRestart": "Toujours redémarrer",
         "settingKeep": "Ne jamais redémarrer",
-        "settingDescription": "Le redémarrage continue chaque conversation en cours sur le nouveau compte.",
+        "settingDescription": "Le redémarrage poursuit chaque conversation en cours sur le nouveau compte. Les sessions arrêtées sont celles qui ont atteint leur limite d’utilisation.",
         "restartingOne": "Redémarrage d’une session Claude sur {{account}}",
         "restartingOther": "Redémarrage de {{count}} sessions Claude sur {{account}}",
         "groupOnAccount": "En cours sur {{account}}",
@@ -21840,7 +21840,8 @@
         "reviewBody_many": "{{count}} autres sessions Claude n’ont pas été déplacées vers {{next}}.",
         "body_one": "{{count}} session Claude est toujours active sur {{previous}}. Le redémarrage poursuit la conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
         "body_other": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
-        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer."
+        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
+        "settingLimited": "Redémarrer celles arrêtées"
       },
       "loginSync": {
         "previousLogin": "la connexion précédente"

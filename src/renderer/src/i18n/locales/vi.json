@@ -21109,7 +21109,7 @@
         "busy": "Đang xử lý",
         "idle": "Không hoạt động",
         "settingTitle": "Khi chuyển tài khoản lúc Claude đang chạy",
-        "settingDescription": "Khởi động lại sẽ tiếp tục từng cuộc trò chuyện đang chạy trên tài khoản mới.",
+        "settingDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
         "keyword": {
           "restart": "khởi động lại",
           "running": "đang chạy"
@@ -21134,7 +21134,8 @@
         "review": "Review",
         "restartCount_other": "Khởi động lại {{count}} phiên",
         "reviewBody_other": "{{count}} phiên Claude khác chưa được chuyển sang {{next}}.",
-        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại."
+        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại.",
+        "settingLimited": "Chỉ khởi động lại phiên đã dừng"
       },
       "loginSync": {
         "previousLogin": "lần đăng nhập trước"

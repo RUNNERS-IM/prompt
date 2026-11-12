@@ -21476,7 +21476,7 @@
         "busy": "Bezig",
         "idle": "Inactief",
         "settingTitle": "Bij wisselen van account terwijl Claude actief is",
-        "settingDescription": "Bij herstarten wordt elk lopend gesprek voortgezet op het nieuwe account.",
+        "settingDescription": "Herstarten zet elk lopend gesprek voort op het nieuwe account. Gestopte sessies zijn sessies die hun gebruikslimiet hebben bereikt.",
         "keyword": {
           "restart": "herstarten",
           "running": "actief"
@@ -21504,7 +21504,8 @@
         "reviewBody_one": "{{count}} andere Claude-sessie is niet verplaatst naar {{next}}.",
         "reviewBody_other": "{{count}} andere Claude-sessies zijn niet verplaatst naar {{next}}.",
         "body_one": "{{count}} Claude-sessie draait nog op {{previous}}. Bij opnieuw starten wordt het gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
-        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten."
+        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
+        "settingLimited": "Alleen gestopte herstarten"
       },
       "loginSync": {
         "previousLogin": "de vorige login"
