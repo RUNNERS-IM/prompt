@@ -2,50 +2,6 @@ require "minitest/autorun"
 require_relative "ios_release_version"
 
 class IosReleaseVersionTest < Minitest::Test
-  def test_exact_version_wins_without_checking_trains
-    checked_versions = []
-
-    version = IosReleaseVersion.resolve(
-      requested: " 0.0.40 ",
-      bump_patch: true,
-      current_version: "0.0.32",
-      train_closed: ->(candidate) { checked_versions << candidate },
-    )
-
-    assert_equal("0.0.40", version)
-    assert_empty(checked_versions)
-  end
-
-  def test_uses_current_version_without_a_patch_bump
-    version = IosReleaseVersion.resolve(
-      requested: "",
-      bump_patch: false,
-      current_version: "0.0.32",
-      train_closed: ->(_) { flunk("should not check trains") },
-    )
-
-    assert_equal("0.0.32", version)
-  end
-
-  def test_skips_closed_patch_versions_from_a_stale_repo_version
-    closed_versions = %w[0.0.33 0.0.34]
-
-    version = IosReleaseVersion.resolve(
-      requested: "",
-      bump_patch: true,
-      current_version: "0.0.32",
-      train_closed: ->(candidate) { closed_versions.include?(candidate) },
-    )
-
-    assert_equal("0.0.35", version)
-  end
-
-  def test_rejects_non_semver_versions
-    error = assert_raises(ArgumentError) { IosReleaseVersion.bump_patch("0.0") }
-
-    assert_equal("Cannot bump non-semver mobile version '0.0'", error.message)
-  end
-
   # 0.0.34 regression: shipping 0.0.35 closed older versions even without an App Store record.
   def test_versions_at_or_below_the_highest_closed_version_are_closed
     assert(IosReleaseVersion.closed_train?("0.0.34", "0.0.35"))
@@ -60,17 +16,6 @@ class IosReleaseVersionTest < Minitest::Test
 
   def test_non_semver_candidates_are_treated_as_open
     refute(IosReleaseVersion.closed_train?("0.0", "0.0.35"))
-  end
-
-  def test_resolve_skips_past_the_highest_closed_version
-    version = IosReleaseVersion.resolve(
-      requested: "",
-      bump_patch: true,
-      current_version: "0.0.32",
-      train_closed: ->(candidate) { IosReleaseVersion.closed_train?(candidate, "0.0.35") },
-    )
-
-    assert_equal("0.0.36", version)
   end
 
   def test_max_version_compares_numerically_not_lexically

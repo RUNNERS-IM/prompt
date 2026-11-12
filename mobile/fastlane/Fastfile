@@ -85,10 +85,20 @@ rescue StandardError => error
 end
 
 platform :ios do
-  desc "Resolve the iOS release version and next TestFlight build number"
+  desc "Check the committed iOS version and build number before building"
+  # 번호는 mobile/scripts/bump-release.sh(mobile-release.yml)가 mobile/app.json 에 커밋한 것을 그대로 쓴다.
+  # 여기서 끝자리를 올리거나 TestFlight 다음 번호를 고르지 않는다(2026-11-12 휴대폰 판 번호 1A).
   lane :prepare_release_version do |options|
     api_key = app_store_connect_api_key_from_env
     config = load_mobile_app_config
+    version = current_mobile_version(config)
+    build_number = config.fetch("expo").fetch("ios", {})["buildNumber"].to_s.strip
+
+    requested = options[:version].to_s.strip
+    unless requested.empty? || requested == version
+      UI.user_error!("release_version #{requested} must match mobile/app.json #{version}.")
+    end
+    UI.user_error!("mobile/app.json has no expo.ios.buildNumber.") unless build_number.match?(/\A\d+\z/)
 
     app =
       begin
@@ -99,31 +109,11 @@ platform :ios do
       end
     highest_closed = highest_closed_app_store_version(app)
     UI.message("Highest closed App Store version: #{highest_closed || 'none'}")
-
-    version =
-      begin
-        IosReleaseVersion.resolve(
-          requested: options[:version],
-          bump_patch: options[:bump_patch],
-          current_version: current_mobile_version(config),
-          train_closed: ->(candidate) { IosReleaseVersion.closed_train?(candidate, highest_closed) },
-        )
-      rescue ArgumentError => error
-        UI.user_error!(error.message)
-      end
-
-    # Patch bumps skip closed trains because workflow-only releases can outpace Git; explicit/current versions fail fast.
     if IosReleaseVersion.closed_train?(version, highest_closed)
-      retry_guidance =
-        if IosReleaseVersion.truthy?(options[:bump_patch])
-          "Use a higher release_version or land a \"Prepare mobile <version>\" commit."
-        else
-          "Re-dispatch with bump_patch_version: true (or a higher release_version), " \
-            "or land a \"Prepare mobile <version>\" commit."
-        end
       UI.user_error!(
         "iOS version #{version} is not higher than #{highest_closed}, which is already " \
-        "submitted/released on the App Store, so Apple will reject the upload. #{retry_guidance}",
+          "submitted/released on the App Store, so Apple will reject the upload. " \
+          "Push mobile-release to commit a new phone version first.",
       )
     end
 
@@ -133,12 +123,12 @@ platform :ios do
       version: version,
       initial_build_number: 0,
     )
-    build_number = latest_build_number.to_i + 1
-
-    # Expo copies app.json into the native project and About-screen runtime manifest.
-    config.fetch("expo")["version"] = version
-    config.fetch("expo").fetch("ios")["buildNumber"] = build_number.to_s
-    write_mobile_app_config(config)
+    if latest_build_number.to_i >= build_number.to_i
+      UI.user_error!(
+        "TestFlight already has #{version} build #{latest_build_number}; " \
+          "committed build #{build_number} must be higher. Push mobile-release to commit a new phone version.",
+      )
+    end
 
     UI.message("Prepared Prompt iOS #{version} (#{build_number})")
   end
