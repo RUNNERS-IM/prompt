@@ -91,15 +91,19 @@ export function buildAgentResumeStartupPlan(args: {
   })
   const resumeCommand = buildAgentResumeLaunchCommand(args.agent, baseCommand.command, argv, shell)
   const agentCwd = args.providerSession.cwd
+  // Why not Claude: its --resume finds the conversation from the tab folder, and a subfolder it
+  // last cd'd into would load that folder's memory or stop at its folder-trust prompt.
   const launchCommand =
-    agentCwd && args.launchCwd && !args.resumeInLaunchCwd && !isSameFolder(agentCwd, args.launchCwd)
+    args.agent !== 'claude' &&
+    agentCwd &&
+    args.launchCwd &&
+    !args.resumeInLaunchCwd &&
+    !isSameFolder(agentCwd, args.launchCwd)
       ? buildAiVaultResumeShellCommand({
           resumeCommand,
           cwd: agentCwd,
           platform: args.platform,
-          shell,
-          // Why Claude only: its --resume finds the conversation from another folder of the repo.
-          continueIfCwdMissing: args.agent === 'claude'
+          shell
         })
       : resumeCommand
   const applied = baseCommand.appliedSessionOptions
