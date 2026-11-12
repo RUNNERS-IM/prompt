@@ -361,7 +361,7 @@ export function DeveloperPermissionsPane({
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-sm font-medium">{permission.label}</span>
                       <span
-                        className={`rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${developerPermissionStatusClass(
+                        className={`rounded-full border px-2 py-0.5 text-[10px] font-medium ${developerPermissionStatusClass(
                           status
                         )}`}
                       >
@@ -382,13 +382,12 @@ export function DeveloperPermissionsPane({
                         )}
                         {developerPermissionStatusLabel(permission.id, state.terminalHostStatus)}
                         {state.terminalHostStatus !== 'granted' && (
-                          <>
-                            {' '}
+                          <span className="mt-1 block">
                             {translate(
                               'auto.components.settings.DeveloperPermissionsPane.terminalHostRecovery',
                               'If a terminal cannot read protected files, save its work and close it in Terminal → Manage Sessions. Restart the daemon if new terminals are also affected; restarting closes its current terminals.'
                             )}
-                          </>
+                          </span>
                         )}
                       </p>
                     )}
