@@ -126,13 +126,47 @@ jobs:
       build_template: true
       fast_runners: false
 
+  # 틀 묶음은 안의 한 줄만 취소돼도(맥 스튜디오가 대신 만들어도) 전체가 실패로 끝나 template_ready 를 넘기지 못한다.
+  # 빌드가 받는 것은 결국 orcad-template 첨부 파일이므로, 이 실행에 그 파일이 올라갔는지로 정한다.
+  template:
+    needs: [prepare, orcad-template]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' }}
+    permissions:
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+      proceed: ${{ steps.check.outputs.proceed }}
+    steps:
+      - name: Check the orcad-template artifact
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEMPLATE_RESULT: ${{ needs.orcad-template.result }}
+        run: |
+          if [ "$TEMPLATE_RESULT" = skipped ]; then
+            echo "템플릿을 일부러 건너뛰었다. 템플릿 없이 묶는다."
+            { echo ready=false; echo proceed=true; } >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=orcad-template" \
+            --jq '[.artifacts[] | select(.expired | not)] | length')
+          if [ "$count" -gt 0 ]; then
+            echo "orcad-template 첨부가 있다(틀 묶음 결과: $TEMPLATE_RESULT)."
+            { echo ready=true; echo proceed=true; } >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::orcad-template 첨부가 없다(틀 묶음 결과: $TEMPLATE_RESULT). 빌드하지 않는다."
+            exit 1
+          fi
+
   # Mac 판은 먼저 GitHub 의 Apple 칩 Mac(macos-15)에서 만든다. 단계는 prompt-mac-build.yml 에 있다.
   mac:
-    needs: [prepare, orcad-template]
+    needs: [prepare, template]
     # 템플릿을 일부러 건너뛴 경우(skipped)에도 진행한다
     if: >-
       !cancelled() && !inputs.skip_github_mac && needs.prepare.result == 'success' &&
-      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
+      needs.template.outputs.proceed == 'true'
     permissions:
       contents: write
     uses: ./.github/workflows/prompt-mac-build.yml
@@ -142,15 +176,15 @@ jobs:
       version: ${{ needs.prepare.outputs.version }}
       sha: ${{ needs.prepare.outputs.sha }}
       publish: ${{ needs.prepare.outputs.publish }}
-      with_template: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
+      with_template: ${{ needs.template.outputs.ready == 'true' }}
 
   # GitHub Mac 작업이 취소 · 실패하면(시험에서 건너뛰어도) 같은 출시 안에서 사무실 맥 스튜디오가 이어서 만든다.
   # 서명 키체인은 끝나면 지우고, 남아 있으면 이 작업을 실패로 끝낸다(prompt-mac-build.yml 맨 끝 단계).
   mac-studio:
-    needs: [prepare, orcad-template, mac]
+    needs: [prepare, template, mac]
     if: >-
       !cancelled() && needs.prepare.result == 'success' && needs.mac.result != 'success' &&
-      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
+      needs.template.outputs.proceed == 'true'
     permissions:
       contents: write
     uses: ./.github/workflows/prompt-mac-build.yml
@@ -160,13 +194,13 @@ jobs:
       version: ${{ needs.prepare.outputs.version }}
       sha: ${{ needs.prepare.outputs.sha }}
       publish: ${{ needs.prepare.outputs.publish }}
-      with_template: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
+      with_template: ${{ needs.template.outputs.ready == 'true' }}
 
   windows:
-    needs: [prepare, orcad-template]
+    needs: [prepare, template]
     if: >-
       !cancelled() && needs.prepare.result == 'success' &&
-      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
+      needs.template.outputs.proceed == 'true'
     # upstream: windows-latest(2025 이미지)는 node-gyp 가 새 Visual Studio 를 못 찾아 네이티브 설치가 깨진다
     runs-on: windows-2022
     timeout-minutes: 90
@@ -175,7 +209,7 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
-      WITH_TEMPLATE: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
+      WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -281,10 +315,10 @@ jobs:
           retention-days: 3
 
   linux:
-    needs: [prepare, orcad-template]
+    needs: [prepare, template]
     if: >-
       !cancelled() && needs.prepare.result == 'success' &&
-      (needs.orcad-template.outputs.template_ready == 'true' || needs.orcad-template.result == 'skipped')
+      needs.template.outputs.proceed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
@@ -292,7 +326,7 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
-      WITH_TEMPLATE: ${{ needs.orcad-template.outputs.template_ready == 'true' }}
+      WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}
     steps:
       - uses: actions/checkout@v6
         with:
