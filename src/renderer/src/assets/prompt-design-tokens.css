@@ -7,6 +7,8 @@ html:root {
     'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --rw-window-bg: #ffffff;
   --rw-box-bg: #f5f5f5;
+  --rw-text: #0a0a0a;
+  --rw-control-bg: rgba(10, 10, 10, 0.06);
   --rw-primary: #0a0a0a;
   --rw-on-primary: #ffffff;
   --rw-danger: #e11d1d;
@@ -15,6 +17,8 @@ html:root {
 html:root.dark {
   --rw-window-bg: #0a0a0a;
   --rw-box-bg: #171717;
+  --rw-text: #ffffff;
+  --rw-control-bg: rgba(255, 255, 255, 0.09);
   --rw-primary: #ffffff;
   --rw-on-primary: #0a0a0a;
   --rw-danger: #fa2929;
