@@ -29,10 +29,13 @@ const EXPECTED_MATRIX = {
       'linux_glibc_floor',
       'linux_musl',
       'mobile_web_bundle',
-      'persistence'
+      'persistence',
+      'persistence_mac_studio'
     ].map((job) => [
       `.github/workflows/release-mac-build.yml#qualification-template -> .github/workflows/qualified-orcad-template.yml#qualify -> .github/workflows/node-server-tests.yml#${job}`,
-      job === 'desktop_template' ? { actions: 'read', contents: 'read' } : { contents: 'read' }
+      job === 'desktop_template' || job === 'persistence_mac_studio'
+        ? { actions: 'read', contents: 'read' }
+        : { contents: 'read' }
     ])
   ),
   ...Object.fromEntries(
@@ -98,6 +101,11 @@ const EXPECTED_MATRIX = {
     },
   [`${RELEASE_WORKFLOW}#orcad-template -> .github/workflows/qualified-orcad-template.yml#qualify -> .github/workflows/node-server-tests.yml#persistence`]:
     {
+      contents: 'read'
+    },
+  [`${RELEASE_WORKFLOW}#orcad-template -> .github/workflows/qualified-orcad-template.yml#qualify -> .github/workflows/node-server-tests.yml#persistence_mac_studio`]:
+    {
+      actions: 'read',
       contents: 'read'
     },
   [`${RELEASE_WORKFLOW}#post-release-e2e`]: { actions: 'write' },

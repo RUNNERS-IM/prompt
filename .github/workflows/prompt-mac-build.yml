@@ -1,0 +1,298 @@
+# Prompt Release 가 부르는 macOS 판 빌드 한 벌. 같은 단계를 GitHub Mac(macos-15)과 사무실 맥 스튜디오가 같이 쓰려고
+# 떼어 냈다(2026-11-12 결정 「Mac 판은 GitHub 기계 먼저, 못 받으면 맥 스튜디오에서」, Split 과 같은 모양).
+# 버전 · 서명 · 공증 · 초안 릴리스 설명은 prompt-release.yml 맨 위에 있다.
+name: Prompt Mac Build
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: 'runs-on 값을 JSON 으로 ("macos-15" 또는 ["self-hosted", …])'
+        type: string
+        required: true
+      version:
+        type: string
+        required: true
+      sha:
+        type: string
+        required: true
+      publish:
+        description: "'true' 면 초안 릴리스에 올린다"
+        type: string
+        required: true
+      with_template:
+        description: "orcad 템플릿을 받아 함께 묶는다"
+        type: boolean
+        required: true
+
+jobs:
+  build:
+    runs-on: ${{ fromJSON(inputs.runner) }}
+    timeout-minutes: 150
+    env:
+      ORCA_BACKGROUND_LAUNCH: '1'
+      NODE_OPTIONS: --max-old-space-size=4096
+      PUBLISH: ${{ inputs.publish }}
+      VERSION: ${{ inputs.version }}
+      WITH_X64: ${{ vars.PROMPT_MAC_X64 == 'true' }}
+      WITH_TEMPLATE: ${{ inputs.with_template }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.sha }}
+
+      # Why: on the office Mac Studio this build waits its turn behind the phone builds and Claude sessions there
+      # (heavy-run runs one heavy job at a time on a Mac). GitHub's machines run only this job, so nothing waits.
+      - name: Take a turn on an office Mac
+        if: runner.environment == 'self-hosted'
+        run: |
+          HEAVY="$HOME/git/claude-config/bin/heavy-run"
+          [ -x "$HEAVY" ] && echo "HEAVY=$HEAVY --name Prompt-release" >> "$GITHUB_ENV" || true
+
+      # 맥 스튜디오 서명 잠금(Split · Remote 와 같은 경로 · 같은 방식). 두 작업이 같은 순간에 키체인 검색 목록을
+      # 고치면 한쪽 키체인이 빠진다(2026-11-12 Split 시험에서 실제로 빠짐). 그래서 저장소를 가리지 않고 맥 전체에서
+      #   잡기: ~/.runners/signing.lock 디렉터리를 mkdir 로 만든 작업이 주인이다. owner 파일에 저장소 · 실행 번호를 적는다.
+      #   풀기: 맨 끝 always 단계에서, owner 가 자기일 때만 지운다.
+      #   오래된 잠금: 150분이 지난 것은 주인이 죽은 것으로 보고 치운다. 60분을 기다려도 못 잡으면 실패.
+      - name: Wait for the signing turn on an office Mac
+        if: runner.environment == 'self-hosted'
+        shell: bash
+        run: |
+          set -euo pipefail
+          LOCK="$HOME/.runners/signing.lock"
+          OWNER="$GITHUB_REPOSITORY run $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
+          mkdir -p "$HOME/.runners"
+          START=$(date +%s)
+          until mkdir "$LOCK" 2>/dev/null; do
+            NOW=$(date +%s)
+            HELD=$(( NOW - $(stat -f %m "$LOCK" 2>/dev/null || echo "$NOW") ))
+            if [ "$HELD" -gt 9000 ]; then
+              echo "::warning::Removing a signing lock held for $HELD s by $(cat "$LOCK/owner" 2>/dev/null)"
+              rm -rf "$LOCK"
+              continue
+            fi
+            if [ $(( NOW - START )) -gt 3600 ]; then
+              echo "::error::Waited 60 minutes for the signing lock held by $(cat "$LOCK/owner" 2>/dev/null)"
+              exit 1
+            fi
+            echo "Waiting for the signing lock held by $(cat "$LOCK/owner" 2>/dev/null) for $HELD s"
+            sleep 20
+          done
+          echo "$OWNER" > "$LOCK/owner"
+          echo "SIGNING_LOCK_OWNER=$OWNER" >> "$GITHUB_ENV"
+          echo "Took the signing lock after $(( $(date +%s) - START )) s"
+
+      # 20분 넘는 빌드 전에 서명 준비부터 해서, 비밀값이 빠졌으면 바로 멈춘다
+      - name: Prepare a temporary signing keychain
+        shell: bash
+        env:
+          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+          ASC_API_KEY_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          # The .p12 may be exported without a password, so an empty DEVELOPER_ID_P12_PASSWORD is allowed.
+          for name in DEVELOPER_ID_P12_BASE64 ASC_API_KEY_P8 ASC_API_KEY_ID ASC_API_ISSUER_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::비밀값 $name 이 없다. 서명·공증 없이는 출시하지 않는다."
+              exit 1
+            fi
+          done
+          SECRETS="$RUNNER_TEMP/prompt-secrets"
+          mkdir -p "$SECRETS" && chmod 700 "$SECRETS"
+          KEYCHAIN="$RUNNER_TEMP/prompt-signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(uuidgen)"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          echo "$DEVELOPER_ID_P12_BASE64" | base64 --decode > "$SECRETS/developer-id.p12"
+          security import "$SECRETS/developer-id.p12" -k "$KEYCHAIN" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
+          # Only this keychain goes in and comes out of the search list; other jobs' keychains stay.
+          # Re-added right before signing, since another job may change the list during the build.
+          cat > "$RUNNER_TEMP/prompt-keychain-on.sh" <<'EOF'
+          #!/bin/bash
+          set -euo pipefail
+          K="$RUNNER_TEMP/prompt-signing.keychain-db"
+          OTHERS=$(security list-keychains -d user | tr -d '" ' | grep -vxF "$K" || true)
+          security list-keychains -d user -s "$K" $OTHERS
+          EOF
+          chmod 700 "$RUNNER_TEMP/prompt-keychain-on.sh"
+          "$RUNNER_TEMP/prompt-keychain-on.sh"
+          rm "$SECRETS/developer-id.p12"
+          # The certificate must belong to the team the build config checks (ORCA_MAC_TEAM_ID).
+          if ! security find-identity -v -p codesigning "$KEYCHAIN" | grep -q 'Developer ID Application:.*(RGWVXJ8URP)'; then
+            echo "::error::임시 키체인에 팀 RGWVXJ8URP 의 Developer ID Application 인증서가 없다."
+            security find-identity -v -p codesigning "$KEYCHAIN"
+            exit 1
+          fi
+          printf '%s' "$ASC_API_KEY_P8" > "$SECRETS/AuthKey_${ASC_API_KEY_ID}.p8"
+          chmod 600 "$SECRETS/"*
+          # electron-builder: CSC_KEYCHAIN 으로 이 키체인에서 서명 인증서를 찾고,
+          # APPLE_API_KEY(파일 경로)·APPLE_API_KEY_ID·APPLE_API_ISSUER 로 공증한다.
+          echo "CSC_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
+          echo "APPLE_API_KEY=$SECRETS/AuthKey_${ASC_API_KEY_ID}.p8" >> "$GITHUB_ENV"
+          echo "APPLE_API_KEY_ID=$ASC_API_KEY_ID" >> "$GITHUB_ENV"
+          echo "APPLE_API_ISSUER=$ASC_API_ISSUER_ID" >> "$GITHUB_ENV"
+
+      - name: Setup pnpm
+        uses: ./.github/actions/setup-pnpm
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+          check-latest: true
+          cache: pnpm
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            mobile/pnpm-lock.yaml
+
+      # Bundled host Node is cached by its exact pin.
+      - name: Locate the pinned Node runtime cache
+        run: echo "ORCA_NODE_RUNTIME_CACHE_DIR=$HOME/Library/Caches/orca-node-runtime" >>"$GITHUB_ENV"
+
+      - name: Cache the pinned Node runtime
+        uses: actions/cache@v5
+        with:
+          path: ~/Library/Caches/orca-node-runtime
+          key: orca-node-runtime-mac-${{ hashFiles('src/shared/node-runtime-pin.ts') }}
+
+      # Intel 판의 터미널 호스트를 묶은 뒤 실제로 켜 보는 검사가 있어서 x64 를 만들 때는 Rosetta 가 필요하다
+      - name: Install Rosetta for the x64 slice
+        if: env.WITH_X64 == 'true'
+        run: sudo softwareupdate --install-rosetta --agree-to-license
+
+      - name: Install dependencies
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          retry_wait_seconds: 30
+          shell: bash
+          command: |
+            if [ "$WITH_X64" = "true" ]; then
+              pnpm install --frozen-lockfile --cpu=current,x64,arm64
+            else
+              pnpm install --frozen-lockfile
+            fi
+
+      # Build required out/mobile-web using mobile's React Native/Expo install.
+      - uses: ./.github/actions/install-mobile-dependencies
+
+      # plutil lint accepts duplicate entitlements but codesign rejects them.
+      - name: Verify macOS entitlements
+        run: pnpm verify:macos-entitlements
+
+      # Prompt 네이티브 모듈(native/prompt-native, Rust)은 build:release 안의 build:native 가 만든다.
+      # Intel 판을 안 내도 두 CPU 를 다 만든다(build:prompt-native 기본). 그래서 x86_64 대상도 깐다.
+      - name: Ensure the Rust toolchain for the Prompt native module
+        run: |
+          set -euo pipefail
+          # 맥 스튜디오는 ~/.cargo/bin 이 PATH 에 없고, 2026-11-12 에는 rustup 본체가 빠져 있었다
+          export PATH="$HOME/.cargo/bin:$PATH"
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --no-modify-path
+          fi
+          if ! cargo --version >/dev/null 2>&1; then
+            rustup toolchain install stable --profile minimal
+            rustup default stable
+          fi
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          cargo --version
+
+      # 내려받은 크레이트와 빌드 결과를 남겨 다음 실행이 처음부터 컴파일하지 않게 한다.
+      - name: Cache the Prompt native module build
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            native/prompt-native/target
+          key: prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('native/prompt-native/Cargo.lock', 'native/prompt-native/Cargo.toml', 'native/prompt-native/build.rs', 'native/prompt-native/.cargo/**', 'native/prompt-native/src/**', 'config/scripts/build-prompt-native.mjs') }}
+          restore-keys: |
+            prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Build app
+        run: ${HEAVY:-} pnpm run build:release
+
+      - name: Download the orcad deployment template
+        if: env.WITH_TEMPLATE == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: orcad-template
+          path: out/orcad-template
+
+      - name: Gate runtime file-watcher process isolation
+        run: |
+          node config/scripts/runtime-file-watcher-fault-harness.mjs
+          ELECTRON_RUN_AS_NODE=1 pnpm exec electron config/scripts/runtime-file-watcher-fault-harness.mjs
+
+      # 서명 → 공증 → 스테이플 → dmg/zip → (publish 면) 초안 릴리스에 올리기. latest-mac.yml 도 여기서 만든다.
+      - name: Package, sign, notarize (macOS)
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 60
+          max_attempts: 2
+          retry_wait_seconds: 30
+          shell: bash
+          command: |
+            set -euo pipefail
+            if [ "$WITH_X64" = "true" ]; then ARCH_FLAGS="--x64 --arm64"; NODE_SLOTS="darwin-arm64 darwin-x64"; else ARCH_FLAGS="--arm64"; NODE_SLOTS="darwin-arm64"; fi
+            if [ "$PUBLISH" = "true" ]; then MODE=always; else MODE=never; fi
+            node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs $NODE_SLOTS
+            node config/scripts/ensure-native-runtime.mjs --runtime=electron
+            ORCA_MAC_RELEASE=1 ${HEAVY:-} bash -c '"$RUNNER_TEMP/prompt-keychain-on.sh" && exec "$@"' _ \
+              pnpm exec electron-builder --config config/electron-builder.config.cjs --mac dmg zip $ARCH_FLAGS --publish "$MODE"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # The draft was created by the prepare job; long template/build time must not make builder refuse it.
+          EP_GH_IGNORE_TIME: 'true'
+          ORCA_BUILD_COMMIT: ${{ inputs.sha }}
+          ORCA_REQUIRE_ORCAD_TEMPLATE: ${{ env.WITH_TEMPLATE == 'true' && '1' || '' }}
+
+      - name: Keep the files of a test run
+        if: env.PUBLISH != 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: prompt-${{ env.VERSION }}-mac-test
+          path: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*.yml
+          retention-days: 3
+          # Why: the Mac Studio build after a GitHub Mac build that failed late replaces that build's files.
+          overwrite: true
+
+      - name: Remove the temporary keychain and keys
+        if: always()
+        shell: bash
+        run: |
+          SECRETS="$RUNNER_TEMP/prompt-secrets"
+          K="$RUNNER_TEMP/prompt-signing.keychain-db"
+          OTHERS=$(security list-keychains -d user | tr -d '" ' | grep -vxF "$K" || true)
+          security list-keychains -d user -s $OTHERS
+          rm -f "$RUNNER_TEMP/prompt-keychain-on.sh"
+          security delete-keychain "$RUNNER_TEMP/prompt-signing.keychain-db" 2>/dev/null || true
+          rm -rf "$SECRETS"
+          # Why: an office Mac stays after the job. Fail the run when the signing keychain is still reachable
+          # there, so a leftover certificate shows up instead of staying on that Mac.
+          if [ -e "$RUNNER_TEMP/prompt-signing.keychain-db" ] || security list-keychains -d user | grep -q prompt-signing; then
+            echo "::error::서명 키체인이 이 기계에 남아 있다"; exit 1
+          fi
+          echo "이 기계에 남은 키체인:"; security list-keychains -d user
+
+      # 앞 단계가 실패해도 잠금은 돌려준다. 자기가 잡은 잠금일 때만 지운다.
+      - name: Give the signing lock back
+        if: always() && env.SIGNING_LOCK_OWNER != ''
+        shell: bash
+        run: |
+          LOCK="$HOME/.runners/signing.lock"
+          if [ "$(cat "$LOCK/owner" 2>/dev/null)" = "$SIGNING_LOCK_OWNER" ]; then
+            rm -rf "$LOCK"
+            echo "Gave the signing lock back"
+          else
+            echo "::warning::The signing lock is no longer ours: $(cat "$LOCK/owner" 2>/dev/null)"
+          fi
