@@ -163,8 +163,8 @@ export default function NotificationsScreen({
             )}
             disabled={notificationsBlocked || saving}
             onValueChange={(v) => void togglePush(v)}
-            trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-            thumbColor={colors.textPrimary}
+            trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+            thumbColor={colors.switchThumb}
           />
         </View>
         <Text style={styles.hint}>{hint}</Text>

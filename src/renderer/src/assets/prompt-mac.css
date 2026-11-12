@@ -572,16 +572,6 @@ html.prompt-mac-vibrancy
   margin-top: 13px;
 }
 
-/* Switches that are on use the design-system fill. */
-html.prompt-mac-vibrancy [data-settings-section] [data-slot='switch'][data-state='checked'] {
-  background: var(--rw-primary);
-}
-
-/* New Claude session start box: its switches use the design-system fill. */
-[data-prompt-claude-start] [data-slot='switch'][data-state='checked'] {
-  background: var(--rw-primary);
-}
-
 /* Design system 4: the settings page sits on the plain window colour, boxes on the box colour. */
 html.prompt-mac-vibrancy:root:not(.dark):has(.settings-view-shell),
 html.prompt-mac-vibrancy.dark:has(.settings-view-shell) {

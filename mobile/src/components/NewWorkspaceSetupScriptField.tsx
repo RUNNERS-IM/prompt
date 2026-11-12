@@ -75,8 +75,8 @@ export function NewWorkspaceSetupScriptField({
             <Switch
               value={runSetup}
               onValueChange={onRunSetupChange}
-              trackColor={{ false: colors.borderSubtle, true: colors.textSecondary }}
-              thumbColor={colors.textPrimary}
+              trackColor={{ false: colors.borderSubtle, true: colors.switchOn }}
+              thumbColor={colors.switchThumb}
               style={styles.setupSwitch}
             />
           </View>

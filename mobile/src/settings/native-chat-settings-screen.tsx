@@ -65,8 +65,8 @@ export default function NativeChatSettingsScreen({ onBack }: { onBack?: () => vo
               )}
               value={chatDefault}
               onValueChange={(next) => setDefaultView(next ? 'chat' : 'terminal')}
-              trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-              thumbColor={colors.textPrimary}
+              trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+              thumbColor={colors.switchThumb}
             />
           </View>
         </View>

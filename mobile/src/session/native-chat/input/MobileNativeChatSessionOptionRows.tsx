@@ -156,8 +156,8 @@ function ToggleRow({
         value={checked}
         onValueChange={onToggle}
         disabled={disabled}
-        trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-        thumbColor={colors.textPrimary}
+        trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+        thumbColor={colors.switchThumb}
       />
     </View>
   )

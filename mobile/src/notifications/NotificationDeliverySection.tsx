@@ -27,8 +27,8 @@ export function NotificationDeliverySection({ value, disabled, onChange }: Props
           value={value[key]}
           disabled={disabled}
           onValueChange={(enabled) => onChange({ ...value, [key]: enabled })}
-          trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-          thumbColor={colors.textPrimary}
+          trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+          thumbColor={colors.switchThumb}
         />
       </View>
     )

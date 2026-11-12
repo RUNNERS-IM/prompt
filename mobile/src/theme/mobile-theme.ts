@@ -31,6 +31,9 @@ const darkColors = {
   accentBlue: '#3b82f6',
   // White text preserves contrast on saturated accent fills.
   onAccent: '#ffffff',
+  // Shared RUNNERS on/off switch: green track and white thumb in every app.
+  switchOn: '#30d158',
+  switchThumb: '#ffffff',
 
   // --status-success, --status-warning, --destructive
   statusGreen: '#86efac',
@@ -91,6 +94,8 @@ const lightColors: MobilePalette = {
 
   accentBlue: '#2563eb',
   onAccent: '#ffffff',
+  switchOn: '#34c759',
+  switchThumb: '#ffffff',
 
   statusGreen: '#15803d',
   statusAmber: '#ca8a04',

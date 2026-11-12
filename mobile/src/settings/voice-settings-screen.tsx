@@ -308,8 +308,8 @@ export default function VoiceSettingsScreen({
                 )}
                 value={enabled}
                 onValueChange={(enabled) => void configure({ enabled })}
-                trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-                thumbColor={colors.textPrimary}
+                trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+                thumbColor={colors.switchThumb}
               />
             </View>
 

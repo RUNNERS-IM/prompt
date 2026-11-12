@@ -406,8 +406,8 @@ export function CustomKeyModal({ visible, onClose, onKeysChanged, onManageShortc
               <Switch
                 value={macroEnter}
                 onValueChange={setMacroEnter}
-                trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-                thumbColor={colors.textPrimary}
+                trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+                thumbColor={colors.switchThumb}
               />
             </View>
             <Pressable

@@ -45,11 +45,7 @@ export function FilterToggleRow({
       </span>
       <span className="inline-flex items-center gap-2 mt-0.5">
         {shortcutLabel ? <DropdownMenuShortcut>{shortcutLabel}</DropdownMenuShortcut> : null}
-        <SwitchIndicator
-          checked={checked}
-          size="compact"
-          className="data-[state=checked]:bg-primary"
-        />
+        <SwitchIndicator checked={checked} size="compact" />
       </span>
     </button>
   )

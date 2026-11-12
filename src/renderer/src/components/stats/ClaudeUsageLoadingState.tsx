@@ -40,11 +40,7 @@ export function ClaudeUsageLoadingState({
         </div>
         <div className="flex shrink-0 items-center gap-2 self-start">
           <RefreshCw className="size-3.5 animate-spin text-muted-foreground" />
-          <SwitchIndicator
-            checked
-            className="data-[state=checked]:bg-foreground/80"
-            thumbClassName="transition-none"
-          />
+          <SwitchIndicator checked thumbClassName="transition-none" />
         </div>
       </div>
 

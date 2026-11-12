@@ -10,17 +10,17 @@ export type MobileSwitchProps = {
   testID?: string
 }
 
-/** The app's switch: neutral track and thumb, no platform accent. */
+/** The app's switch: shared RUNNERS green track and white thumb. */
 export function MobileSwitch(props: MobileSwitchProps) {
   useMobileColorScheme()
   // RN Web defaults active thumb to teal; override via activeThumbColor absent from native types.
-  const onThumb = { activeThumbColor: colors.textPrimary }
+  const onThumb = { activeThumbColor: colors.switchThumb }
   return (
     <Switch
       {...props}
       {...onThumb}
-      trackColor={{ false: colors.bgRaised, true: colors.textSecondary }}
-      thumbColor={colors.textPrimary}
+      trackColor={{ false: colors.bgRaised, true: colors.switchOn }}
+      thumbColor={colors.switchThumb}
     />
   )
 }
