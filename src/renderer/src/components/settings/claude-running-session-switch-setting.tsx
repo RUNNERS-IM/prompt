@@ -50,7 +50,7 @@ export function ClaudeRunningSessionSwitchSetting({
           }
         }}
       >
-        <SelectTrigger size="sm" className="w-[168px]" aria-label={title}>
+        <SelectTrigger size="sm" className="min-w-[168px] shrink-0" aria-label={title}>
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
