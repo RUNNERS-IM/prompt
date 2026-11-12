@@ -128,6 +128,10 @@ jobs:
             security find-identity -v -p codesigning "$KEYCHAIN"
             exit 1
           fi
+          # 도우미 앱은 이 키체인 인증서의 지문으로 서명한다. 이름으로 찾으면 러너 맥 로그인 키체인의 인증서가 잡힐 수 있다.
+          IDENTITY_SHA=$(security find-identity -v -p codesigning "$KEYCHAIN" | awk '/Developer ID Application:.*\(RGWVXJ8URP\)/ { print $2; exit }')
+          echo "::add-mask::$IDENTITY_SHA"
+          echo "ORCA_COMPUTER_MACOS_SIGN_IDENTITY=$IDENTITY_SHA" >> "$GITHUB_ENV"
           printf '%s' "$ASC_API_KEY_P8" > "$SECRETS/AuthKey_${ASC_API_KEY_ID}.p8"
           chmod 600 "$SECRETS/"*
           # electron-builder: CSC_KEYCHAIN 으로 이 키체인에서 서명 인증서를 찾고,
@@ -216,7 +220,7 @@ jobs:
             prompt-native-v1-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Build app
-        run: ${HEAVY:-} pnpm run build:release
+        run: ${HEAVY:-} bash -c '"$RUNNER_TEMP/prompt-keychain-on.sh" && exec "$@"' _ pnpm run build:release
 
       - name: Download the orcad deployment template
         if: env.WITH_TEMPLATE == 'true'
