@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
-import { getRendererAppPlatform } from '@/lib/renderer-app-platform'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,10 +12,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import type { ExecutionHostId } from '../../../../shared/execution-host'
-import { usePublishedMachineName } from '../settings/use-published-machine-name'
 import { AddRemoteHostDialog, type AddRemoteHostMode } from './AddRemoteHostDialog'
 import { PromptShareComputerDialog } from './prompt-share-computer-dialog'
 import { useSidebarHostScopeOptions } from './use-sidebar-host-scope-options'
+import { thisComputerTag, usePromptLocalComputerName } from './prompt-local-computer-label'
 import {
   buildPromptComputerRows,
   fallbackPromptComputer,
@@ -54,18 +53,6 @@ function statusLabel(status: PromptComputerStatus): string {
   }
 }
 
-/** Mac, PC or computer, as each OS calls the machine (Draw review-1111 4b4074d). */
-function thisComputerTag(): string {
-  const platform = getRendererAppPlatform()
-  if (platform === 'darwin') {
-    return translate('prompt.computerPicker.thisMac', '(this Mac)')
-  }
-  if (platform === 'win32') {
-    return translate('prompt.computerPicker.thisPc', '(this PC)')
-  }
-  return translate('prompt.computerPicker.thisComputerLinux', '(this computer)')
-}
-
 function rowLabel(row: PromptComputerRow): string {
   return row.isLocal ? `${row.label} ${thisComputerTag()}` : row.label
 }
@@ -93,14 +80,11 @@ export function PromptComputerPicker(): React.JSX.Element {
   const setVisibleWorkspaceHostIds = useAppStore((s) => s.setVisibleWorkspaceHostIds)
   const runtimeCatalogHydrated = useAppStore((s) => s.runtimeEnvironmentCatalogHydrated)
   const runtimeEnvironments = useAppStore((s) => s.runtimeEnvironments)
-  const machineName = useAppStore((s) => s.settings?.machineName ?? '')
-  const publishedMachineName = usePublishedMachineName(machineName)
   const [addMode, setAddMode] = useState<AddRemoteHostMode | null>(null)
   const [shareOpen, setShareOpen] = useState(false)
   const environmentIdsBeforeAdd = useRef<ReadonlySet<string> | null>(null)
 
-  const localLabel =
-    publishedMachineName ?? translate('prompt.computerPicker.thisComputer', 'This computer')
+  const localLabel = usePromptLocalComputerName()
   const rows = useMemo(
     () => buildPromptComputerRows(hostOptions, localLabel),
     [hostOptions, localLabel]

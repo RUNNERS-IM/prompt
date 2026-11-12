@@ -29,7 +29,16 @@ import {
   type AiVaultGroup,
   type AiVaultScope
 } from '../../../../shared/ai-vault-types'
-import { getExecutionHostLabel, type ExecutionHostScope } from '../../../../shared/execution-host'
+import {
+  ALL_EXECUTION_HOSTS_SCOPE,
+  LOCAL_EXECUTION_HOST_ID,
+  getExecutionHostLabel,
+  type ExecutionHostScope
+} from '../../../../shared/execution-host'
+import {
+  thisComputerTag,
+  usePromptLocalComputerName
+} from '../sidebar/prompt-local-computer-label'
 import { agentLabel, type AiVaultSessionGroup } from './ai-vault-session-filters'
 import { translate } from '@/i18n/i18n'
 import type { AiVaultHostScopeOption } from './ai-vault-host-scope'
@@ -163,8 +172,21 @@ export function VaultHostScopeMenu({
   hostOptions: readonly AiVaultHostScopeOption[]
   onExecutionHostScopeChange: (scope: ExecutionHostScope) => void
 }): React.JSX.Element {
+  // Prompt: name this machine and "all" the way the sidebar computer picker does, not "Local Mac".
+  const localName = usePromptLocalComputerName()
+  const optionLabel = (option: AiVaultHostScopeOption): string => {
+    if (option.id === LOCAL_EXECUTION_HOST_ID) {
+      return `${localName} ${thisComputerTag()}`
+    }
+    if (option.id === ALL_EXECUTION_HOSTS_SCOPE) {
+      return translate('auto.components.right.sidebar.AiVaultPanelControls.allScope', 'All')
+    }
+    return option.label
+  }
   const selectedOption = hostOptions.find((option) => option.id === executionHostScope)
-  const label = selectedOption?.label ?? getExecutionHostLabel(executionHostScope)
+  const label = selectedOption
+    ? optionLabel(selectedOption)
+    : getExecutionHostLabel(executionHostScope)
 
   return (
     <DropdownMenu
@@ -180,7 +202,7 @@ export function VaultHostScopeMenu({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-6 max-w-24 shrink-0 gap-1 px-1.5 text-[11px] font-medium text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground @max-[340px]/ai-vault:w-6 @max-[340px]/ai-vault:px-0"
+          className="h-6 max-w-36 shrink-0 gap-1 px-1.5 text-[11px] font-medium text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground @max-[340px]/ai-vault:w-6 @max-[340px]/ai-vault:px-0"
           aria-label={translate(
             'auto.components.right.sidebar.AiVaultPanelControls.hostScopeAriaLabel',
             'Session History host: {{value0}}',
@@ -201,7 +223,7 @@ export function VaultHostScopeMenu({
         >
           {hostOptions.map((option) => (
             <DropdownMenuRadioItem key={option.id} value={option.id}>
-              {option.label}
+              {optionLabel(option)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

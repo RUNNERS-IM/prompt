@@ -153,7 +153,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.notifications.alertsGroup': '알림',
   'prompt.settings.notifications.soundGroup': '소리',
   'prompt.settings.notifications.visibleScreenGroup': '보이는 화면',
-  'prompt.settings.git.branchesGroup': '브랜치와 작업 공간',
+  'prompt.settings.git.branchesGroup': '브랜치와 워크스페이스',
   'prompt.settings.git.apiBudgetGroup': 'API 사용 한도',
   'prompt.settings.git.integrationsGroup': '연동',
   'prompt.settings.advanced.permissionsGroup': 'macOS 권한',
