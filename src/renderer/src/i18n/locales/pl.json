@@ -24168,7 +24168,7 @@
         "usageGroup": "Użycie",
         "usageSearchDescription": "Liczba agentów oraz użycie tokenów, modeli i sesji Claude.",
         "title": "Claude",
-        "description": "Konta Claude, sposób uruchamiania nowych sesji i użycie."
+        "description": "Sposób uruchamiania nowych sesji i użycie."
       },
       "appearance": {
         "trayGroup": "Zasobnik systemowy",
@@ -24220,7 +24220,7 @@
       },
       "account": {
         "title": "Konto",
-        "description": "Jedno konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS."
+        "description": "Konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS oraz konta Claude na tym Macu."
       }
     },
     "skills": {
@@ -24260,6 +24260,19 @@
       "durationHoursMinutes": "{{hours}} godz. {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "teraz"
+    },
+    "claudeAccount": {
+      "title": "Konto Claude",
+      "noUsage": "Użycie jeszcze nie odczytane",
+      "weeklyShort": "Tydzień {{percent}}",
+      "autoPick": "Wybieraj automatycznie",
+      "autoPickHint": "Używa konta, którego limit tygodniowy resetuje się najwcześniej",
+      "manage": "Dodaj konta lub zarządzaj nimi…",
+      "signInAgain": "Zaloguj się ponownie, aby go użyć",
+      "switchLimited": "Uruchom ponownie tylko zatrzymane",
+      "switchDescription": "Ponowne uruchomienie kontynuuje każdą trwającą rozmowę na nowym koncie. Zatrzymane to te, które osiągnęły limit użycia.",
+      "autoPickSwitched": "Przełączono Claude na {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Jego limit tygodniowy resetuje się wcześniej."
     }
   }
 }

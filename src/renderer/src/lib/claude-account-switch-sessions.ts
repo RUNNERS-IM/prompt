@@ -8,6 +8,7 @@ import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
 import { getClaudeAccountLabel } from './claude-account-label'
 import { findClaudeLoginFollowers } from './claude-login-followers'
 import { setClaudeLoginUnmovedPanes } from './claude-login-unmoved-panes'
+import { isStoppedAtUsageLimit } from './claude-usage-limit-sessions'
 import type { ClaudeHostFolders } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
@@ -177,6 +178,14 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     previousAccountLabel: getClaudeAccountLabel(args.before.state, args.before.accountId),
     nextAccountLabel
   }
+  if (policy === 'limited') {
+    const stopped = found.onAccount.filter(isStoppedAtUsageLimit)
+    if (stopped.length > 0) {
+      queueClaudeRestarts(stopped.map((candidate) => candidate.ptyId))
+      announceRestart(stopped.length, nextAccountLabel, 0, () => {})
+    }
+    return 'handled'
+  }
   if (policy === 'restart') {
     queueClaudeRestarts(found.onAccount.map((candidate) => candidate.ptyId))
     const others = found.elsewhere.length + found.cantMove.length
@@ -233,9 +242,14 @@ export async function handleRunningClaudeSessionsAfterLogin(args: {
     found.accountId === null && args.host?.systemDefaultEmail
       ? args.host.systemDefaultEmail
       : getClaudeAccountLabel(args.host ?? { accounts: [] }, found.accountId)
-  if (policy === 'restart') {
-    queueClaudeRestarts(found.sessions.map((session) => session.ptyId))
-    announceRestart(found.sessions.length, nextAccountLabel, 0, () => {})
+  if (policy === 'restart' || policy === 'limited') {
+    const restarting =
+      policy === 'limited' ? found.sessions.filter(isStoppedAtUsageLimit) : found.sessions
+    if (restarting.length === 0) {
+      return 'nothing'
+    }
+    queueClaudeRestarts(restarting.map((session) => session.ptyId))
+    announceRestart(restarting.length, nextAccountLabel, 0, () => {})
     return 'handled'
   }
   setPrompt({

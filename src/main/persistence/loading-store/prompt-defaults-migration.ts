@@ -1,7 +1,7 @@
 import type { PersistedState } from '../../../shared/persisted-state-types'
 
 /** Bump when PROMPT_FORCED_DEFAULTS changes so every Mac applies the new list once more. */
-export const PROMPT_DEFAULTS_VERSION = 3
+export const PROMPT_DEFAULTS_VERSION = 4
 
 type PromptSettings = PersistedState['settings'] & {
   promptDefaultsVersion?: number
@@ -41,9 +41,9 @@ export function applyPromptDefaultsOnce(
     ...PROMPT_FORCED_DEFAULTS,
     // Prompt only runs Claude Code; keep an explicit earlier choice.
     defaultTuiAgent: current.defaultTuiAgent ?? 'claude',
-    // Keep an explicit opt-out; the former default was asking every time.
+    // Keep an explicit opt-out; earlier versions forced 'restart', which now restarts working sessions too.
     claudeAccountSwitchRunningSessions:
-      current.claudeAccountSwitchRunningSessions === 'keep' ? 'keep' : 'restart',
+      current.claudeAccountSwitchRunningSessions === 'keep' ? 'keep' : 'limited',
     promptDefaultsVersion: PROMPT_DEFAULTS_VERSION
   }
   return next

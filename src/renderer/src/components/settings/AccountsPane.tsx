@@ -73,6 +73,7 @@ import { MiniMaxAccountsSection } from './MiniMaxAccountsSection'
 import { useUsageHostSettings } from './use-usage-host-settings'
 import { ManagedDataAccountsSection } from './ManagedDataAccountsSection'
 import { renderAccountsRemovalDialogs } from './accounts-pane-removal-dialogs'
+import { getClaudeAccountSyncKey } from '../status-bar/provider-account-sync-key'
 
 export { getAccountsPaneSearchEntries }
 
@@ -226,6 +227,8 @@ export function AccountsPane({
     updateSettings
   )
 
+  // Why: an account added from the sidebar, the CLI or an automatic switch changes settings, not this pane.
+  const localClaudeSyncKey = scopeEnvironmentId ? null : getClaudeAccountSyncKey(settings)
   useEffect(() => {
     const owner: RuntimeClientTarget = scopeEnvironmentId
       ? { kind: 'environment', environmentId: scopeEnvironmentId }
@@ -255,7 +258,7 @@ export function AccountsPane({
     return () => {
       watcher.close()
     }
-  }, [scopeEnvironmentId])
+  }, [scopeEnvironmentId, localClaudeSyncKey])
 
   const runCodexAccountAction = createCodexAccountActionRunner({
     settings,

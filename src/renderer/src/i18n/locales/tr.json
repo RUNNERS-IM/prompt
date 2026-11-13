@@ -121,7 +121,7 @@
         "usageGroup": "Kullanım",
         "usageSearchDescription": "Ajan sayıları ile Claude token, model ve oturum kullanımı.",
         "title": "Claude",
-        "description": "Claude hesapları, yeni oturumların nasıl başlayacağı ve kullanım."
+        "description": "Yeni oturumların nasıl başlayacağı ve kullanım."
       },
       "appearance": {
         "trayGroup": "Sistem Tepsisi",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "Hesap",
-        "description": "Tüm RUNNERS uygulamalarının paylaştığı tek RUNNERS hesabı."
+        "description": "Tüm RUNNERS uygulamalarının paylaştığı RUNNERS hesabı ve bu Mac'in Claude hesapları."
       }
     },
     "mobile": {
@@ -327,6 +327,19 @@
       "durationHoursMinutes": "{{hours}} sa {{minutes}} dk",
       "durationMinutes": "{{minutes}} dk",
       "now": "şimdi"
+    },
+    "claudeAccount": {
+      "title": "Claude hesabı",
+      "noUsage": "Kullanım henüz okunmadı",
+      "weeklyShort": "Haftalık {{percent}}",
+      "autoPick": "Otomatik seç",
+      "autoPickHint": "Haftalık sınırı en erken sıfırlanan hesabı kullanır",
+      "manage": "Hesap ekle veya yönet…",
+      "signInAgain": "Kullanmak için yeniden giriş yapın",
+      "switchLimited": "Yalnızca durdurulanları yeniden başlat",
+      "switchDescription": "Yeniden başlatma, süren her konuşmayı yeni hesapta sürdürür. Durdurulanlar kullanım sınırına ulaşan oturumlardır.",
+      "autoPickSwitched": "Claude {{next}} hesabına geçirildi",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Haftalık sınırı daha erken sıfırlanır."
     }
   },
   "agentLaunch": {

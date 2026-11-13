@@ -22995,7 +22995,7 @@
         "usageGroup": "Mức sử dụng",
         "usageSearchDescription": "Số lượng agent cùng mức sử dụng token, model và phiên của Claude.",
         "title": "Claude",
-        "description": "Tài khoản Claude, cách khởi động phiên mới và mức sử dụng."
+        "description": "Cách khởi động phiên mới và mức sử dụng."
       },
       "appearance": {
         "trayGroup": "Khay hệ thống",
@@ -23047,7 +23047,7 @@
       },
       "account": {
         "title": "Tài khoản",
-        "description": "Một tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS."
+        "description": "Tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS và các tài khoản Claude của Mac này."
       }
     },
     "skills": {
@@ -23084,6 +23084,19 @@
       "durationHoursMinutes": "{{hours}} giờ {{minutes}} phút",
       "durationMinutes": "{{minutes}} phút",
       "now": "ngay"
+    },
+    "claudeAccount": {
+      "title": "Tài khoản Claude",
+      "noUsage": "Chưa đọc được mức sử dụng",
+      "weeklyShort": "Tuần {{percent}}",
+      "autoPick": "Tự động chọn",
+      "autoPickHint": "Dùng tài khoản có giới hạn tuần được đặt lại sớm nhất",
+      "manage": "Thêm hoặc quản lý tài khoản…",
+      "signInAgain": "Đăng nhập lại để dùng",
+      "switchLimited": "Chỉ khởi động lại phiên đã dừng",
+      "switchDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
+      "autoPickSwitched": "Đã chuyển Claude sang {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn."
     }
   }
 }

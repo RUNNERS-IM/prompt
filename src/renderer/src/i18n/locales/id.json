@@ -22995,7 +22995,7 @@
         "usageGroup": "Penggunaan",
         "usageSearchDescription": "Jumlah agen beserta penggunaan token, model, dan sesi Claude.",
         "title": "Claude",
-        "description": "Akun Claude, cara sesi baru dimulai, dan penggunaan."
+        "description": "Cara sesi baru dimulai, dan penggunaan."
       },
       "appearance": {
         "trayGroup": "System tray",
@@ -23047,7 +23047,7 @@
       },
       "account": {
         "title": "Akun",
-        "description": "Satu akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS."
+        "description": "Akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS, dan akun Claude di Mac ini."
       }
     },
     "skills": {
@@ -23084,6 +23084,19 @@
       "durationHoursMinutes": "{{hours}} j {{minutes}} mnt",
       "durationMinutes": "{{minutes}} mnt",
       "now": "sekarang"
+    },
+    "claudeAccount": {
+      "title": "Akun Claude",
+      "noUsage": "Penggunaan belum terbaca",
+      "weeklyShort": "Mingguan {{percent}}",
+      "autoPick": "Pilih otomatis",
+      "autoPickHint": "Memakai akun yang batas mingguannya direset paling awal",
+      "manage": "Tambah atau kelola akun…",
+      "signInAgain": "Masuk lagi untuk memakainya",
+      "switchLimited": "Mulai ulang yang berhenti",
+      "switchDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
+      "autoPickSwitched": "Claude dialihkan ke {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal."
     }
   }
 }

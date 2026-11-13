@@ -121,7 +121,7 @@
         "usageGroup": "使用状況",
         "usageSearchDescription": "Agent 数と、Claude のトークン、モデル、セッションの使用状況。",
         "title": "Claude",
-        "description": "Claude アカウント、新規セッションの開始方法、使用状況。"
+        "description": "新規セッションの開始方法、使用状況。"
       },
       "appearance": {
         "trayGroup": "システムトレイ",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "アカウント",
-        "description": "すべての RUNNERS アプリで共通の RUNNERS アカウントです。"
+        "description": "すべての RUNNERS アプリで共通の RUNNERS アカウントと、この Mac の Claude アカウントです。"
       }
     },
     "mobile": {
@@ -322,6 +322,19 @@
       "durationHoursMinutes": "{{hours}}時間{{minutes}}分",
       "durationMinutes": "{{minutes}}分",
       "now": "まもなく"
+    },
+    "claudeAccount": {
+      "title": "Claude アカウント",
+      "noUsage": "使用状況はまだ読み込まれていません",
+      "weeklyShort": "週間 {{percent}}",
+      "autoPick": "自動で選ぶ",
+      "autoPickHint": "週間上限が最も早くリセットされるアカウントを使います",
+      "manage": "アカウントを追加・管理…",
+      "signInAgain": "もう一度ログインすると使えます",
+      "switchLimited": "停止したものだけ再起動",
+      "switchDescription": "再起動すると、実行中の各会話が新しいアカウントで続きます。停止したものとは使用上限に達したセッションです。",
+      "autoPickSwitched": "Claude を {{next}} に切り替えました",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。週間上限がより早くリセットされます。"
     }
   },
   "agentLaunch": {

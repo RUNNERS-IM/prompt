@@ -22788,6 +22788,19 @@
       "durationHoursMinutes": "{{hours}}시간 {{minutes}}분",
       "durationMinutes": "{{minutes}}분",
       "now": "곧"
+    },
+    "claudeAccount": {
+      "title": "Claude 계정",
+      "noUsage": "아직 사용량을 읽지 못했습니다",
+      "weeklyShort": "주간 {{percent}}",
+      "autoPick": "알아서 고르기",
+      "autoPickHint": "주간 한도가 가장 먼저 초기화되는 계정을 씁니다",
+      "manage": "계정 추가 · 관리…",
+      "signInAgain": "다시 로그인하면 쓸 수 있습니다",
+      "switchLimited": "멈춘 세션만 다시 시작",
+      "switchDescription": "다시 시작하면 실행 중인 대화가 새 계정에서 이어집니다. 멈춘 세션은 사용 한도에 걸린 세션입니다.",
+      "autoPickSwitched": "Claude 계정을 {{next}}(으)로 바꿨습니다",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. 주간 한도가 더 먼저 초기화됩니다."
     }
   }
 }

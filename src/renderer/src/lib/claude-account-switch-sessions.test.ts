@@ -23,7 +23,9 @@ import {
   resetClaudeAccountSwitchSessionsForTests
 } from './claude-account-switch-sessions'
 
-type SwitchSettings = { claudeAccountSwitchRunningSessions?: ClaudeAccountSwitchRunningSessions }
+type SwitchSettings = {
+  claudeAccountSwitchRunningSessions?: ClaudeAccountSwitchRunningSessions
+}
 
 type StoreStub = {
   settings: SwitchSettings
@@ -31,6 +33,7 @@ type StoreStub = {
   terminalLayoutsByTabId: Record<string, { ptyIdsByLeafId: Record<string, string> }>
   queuePaneAccountRestarts: (ptyIds: string[], agent: string) => void
   consumePendingPaneAccountRestart: (ptyId: string) => void
+  agentStatusByPaneKey: Record<string, unknown>
 }
 
 const store = vi.hoisted((): StoreStub => ({
@@ -38,7 +41,8 @@ const store = vi.hoisted((): StoreStub => ({
   terminalLayoutsByTabId: {},
   updateSettings: vi.fn(async () => {}),
   queuePaneAccountRestarts: vi.fn(),
-  consumePendingPaneAccountRestart: vi.fn()
+  consumePendingPaneAccountRestart: vi.fn(),
+  agentStatusByPaneKey: {}
 }))
 const toastSuccess = vi.hoisted(() => vi.fn())
 
@@ -56,10 +60,22 @@ const candidate = (n: number) => ({
   tabId: `tab-${n}`,
   leafId: `leaf-${n}`
 })
+// Usage-limit lookups key panes by real leaf ids, which are UUIDs.
+const LEAF_1 = '11111111-1111-4111-8111-111111111111'
+const LEAF_2 = '22222222-2222-4222-8222-222222222222'
+const uuidCandidate = (n: number, leafId: string) => ({
+  ...candidate(n),
+  leafId
+})
 const scan = (
   onAccount: ReturnType<typeof candidate>[],
   others: Partial<ClaudeSwitchSessions> = {}
-): ClaudeSwitchSessions => ({ onAccount, elsewhere: [], cantMove: [], ...others })
+): ClaudeSwitchSessions => ({
+  onAccount,
+  elsewhere: [],
+  cantMove: [],
+  ...others
+})
 const row = (id: string, extra: Partial<ClaudeManagedAccountSummary> = {}) => ({
   id,
   email: `${id}@example.com`,
@@ -89,6 +105,7 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     vi.clearAllMocks()
     resetClaudeAccountSwitchSessionsForTests()
     store.settings = {}
+    store.agentStatusByPaneKey = {}
     store.terminalLayoutsByTabId = Object.fromEntries(
       [1, 2, 3].map((n) => [`tab-${n}`, { ptyIdsByLeafId: { [`leaf-${n}`]: `pty-${n}` } }])
     )
@@ -153,7 +170,9 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     vi.mocked(findClaudeSwitchSessions).mockResolvedValue(scan([candidate(1), candidate(2)]))
     await handleRunningClaudeSessionsAfterSwitch(SWITCH)
 
-    answerClaudeAccountSwitchPrompt('restart', { ptyIds: ['pty-2', 'pty-unlisted'] })
+    answerClaudeAccountSwitchPrompt('restart', {
+      ptyIds: ['pty-2', 'pty-unlisted']
+    })
 
     expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
   })
@@ -161,7 +180,9 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
   it('restarts a pane on the PTY it has now, and skips a pane that closed', async () => {
     vi.mocked(findClaudeSwitchSessions).mockResolvedValue(scan([candidate(1), candidate(2)]))
     await handleRunningClaudeSessionsAfterSwitch(SWITCH)
-    store.terminalLayoutsByTabId = { 'tab-1': { ptyIdsByLeafId: { 'leaf-1': 'pty-1-reattached' } } }
+    store.terminalLayoutsByTabId = {
+      'tab-1': { ptyIdsByLeafId: { 'leaf-1': 'pty-1-reattached' } }
+    }
 
     answerClaudeAccountSwitchPrompt('restart')
 
@@ -211,6 +232,41 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     )
   })
 
+  it('restarts only sessions stopped at their usage limit when the setting says so', async () => {
+    store.settings = { claudeAccountSwitchRunningSessions: 'limited' }
+    store.agentStatusByPaneKey = {
+      [`tab-1:${LEAF_1}`]: {
+        state: 'done',
+        mainAgent: {
+          state: 'done',
+          outcome: 'failure',
+          failureKind: 'usage-limit'
+        }
+      },
+      [`tab-2:${LEAF_2}`]: { state: 'working' }
+    }
+    vi.mocked(findClaudeSwitchSessions).mockResolvedValue(
+      scan([uuidCandidate(1, LEAF_1), uuidCandidate(2, LEAF_2)])
+    )
+
+    expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
+    expect(getClaudeAccountSwitchPrompt()).toBeNull()
+    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1'], 'claude')
+    expect(toastSuccess).toHaveBeenCalledWith(
+      'Restarting 1 Claude session on account-b@example.com'
+    )
+  })
+
+  it('leaves working sessions alone and asks nothing when none hit the limit', async () => {
+    store.settings = { claudeAccountSwitchRunningSessions: 'limited' }
+    vi.mocked(findClaudeSwitchSessions).mockResolvedValue(scan([uuidCandidate(1, LEAF_1)]))
+
+    expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
+    expect(getClaudeAccountSwitchPrompt()).toBeNull()
+    expect(store.queuePaneAccountRestarts).not.toHaveBeenCalled()
+    expect(toastSuccess).not.toHaveBeenCalled()
+  })
+
   it('names sessions an automatic restart left behind, and reviews only those', async () => {
     store.settings = { claudeAccountSwitchRunningSessions: 'restart' }
     vi.mocked(findClaudeSwitchSessions).mockResolvedValue(
@@ -229,7 +285,12 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
       review: true,
       sessions: {
         onAccount: [],
-        elsewhere: [expect.objectContaining({ ptyId: 'pty-2', accountLabel: 'System default' })],
+        elsewhere: [
+          expect.objectContaining({
+            ptyId: 'pty-2',
+            accountLabel: 'System default'
+          })
+        ],
         cantMove: [expect.objectContaining({ ptyId: 'pty-3' })]
       }
     })
@@ -310,13 +371,22 @@ describe('switching from a saved account that runs on System default, as the sta
   })
 
   it('looks for its sessions on System default when switching to another account', async () => {
-    const after = { ...host, activeAccountIdsByRuntime: { host: 'account-b', wsl: {} } }
+    const after = {
+      ...host,
+      activeAccountIdsByRuntime: { host: 'account-b', wsl: {} }
+    }
 
     await handleRunningClaudeSessionsAfterSwitch({
       owner: { kind: 'local' },
       target: hostTarget,
-      before: { state: before, accountId: getClaudeStatusActiveId(before, hostTarget) },
-      after: { state: after, accountId: getClaudeStatusActiveId(after, hostTarget) }
+      before: {
+        state: before,
+        accountId: getClaudeStatusActiveId(before, hostTarget)
+      },
+      after: {
+        state: after,
+        accountId: getClaudeStatusActiveId(after, hostTarget)
+      }
     })
 
     expect(findClaudeSwitchSessions).toHaveBeenCalledWith(
@@ -325,14 +395,23 @@ describe('switching from a saved account that runs on System default, as the sta
   })
 
   it('moves nothing when switching to System default itself', async () => {
-    const after = { ...host, activeAccountIdsByRuntime: { host: null, wsl: {} } }
+    const after = {
+      ...host,
+      activeAccountIdsByRuntime: { host: null, wsl: {} }
+    }
 
     expect(
       await handleRunningClaudeSessionsAfterSwitch({
         owner: { kind: 'local' },
         target: hostTarget,
-        before: { state: before, accountId: getClaudeStatusActiveId(before, hostTarget) },
-        after: { state: after, accountId: getClaudeStatusActiveId(after, hostTarget) }
+        before: {
+          state: before,
+          accountId: getClaudeStatusActiveId(before, hostTarget)
+        },
+        after: {
+          state: after,
+          accountId: getClaudeStatusActiveId(after, hostTarget)
+        }
       })
     ).toBe('show-confirmation')
     expect(findClaudeSwitchSessions).not.toHaveBeenCalled()

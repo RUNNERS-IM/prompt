@@ -23386,7 +23386,7 @@
         "usageGroup": "Usage",
         "usageSearchDescription": "Agent counts plus Claude token, model, and session usage.",
         "title": "Claude",
-        "description": "Claude accounts, how new sessions start, and usage."
+        "description": "How new sessions start, and usage."
       },
       "appearance": {
         "trayGroup": "System Tray",
@@ -23438,7 +23438,7 @@
       },
       "account": {
         "title": "Account",
-        "description": "The one RUNNERS account every RUNNERS app shares."
+        "description": "The RUNNERS account every RUNNERS app shares, and this Mac's Claude accounts."
       }
     },
     "skills": {
@@ -23476,6 +23476,19 @@
       "durationHoursMinutes": "{{hours}}h {{minutes}}m",
       "durationMinutes": "{{minutes}}m",
       "now": "now"
+    },
+    "claudeAccount": {
+      "title": "Claude account",
+      "noUsage": "Usage not read yet",
+      "weeklyShort": "Weekly {{percent}}",
+      "autoPick": "Pick automatically",
+      "autoPickHint": "Uses the account whose weekly limit resets soonest",
+      "manage": "Add or manage accounts…",
+      "signInAgain": "Sign in again to use it",
+      "switchLimited": "Restart stopped ones",
+      "switchDescription": "Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.",
+      "autoPickSwitched": "Switched Claude to {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner."
     }
   }
 }

@@ -23386,7 +23386,7 @@
         "usageGroup": "उपयोग",
         "usageSearchDescription": "Agent की संख्या के साथ Claude token, model और सत्र का उपयोग।",
         "title": "Claude",
-        "description": "Claude खाते, नए सत्र कैसे शुरू हों और उपयोग।"
+        "description": "नए सत्र कैसे शुरू हों और उपयोग।"
       },
       "appearance": {
         "trayGroup": "सिस्टम ट्रे",
@@ -23438,7 +23438,7 @@
       },
       "account": {
         "title": "खाता",
-        "description": "एक RUNNERS खाता जिसे सभी RUNNERS ऐप साझा करते हैं।"
+        "description": "सभी RUNNERS ऐप का साझा RUNNERS खाता, और इस Mac के Claude खाते।"
       }
     },
     "skills": {
@@ -23476,6 +23476,19 @@
       "durationHoursMinutes": "{{hours}} घं {{minutes}} मि",
       "durationMinutes": "{{minutes}} मि",
       "now": "अभी"
+    },
+    "claudeAccount": {
+      "title": "Claude खाता",
+      "noUsage": "उपयोग अभी पढ़ा नहीं गया",
+      "weeklyShort": "साप्ताहिक {{percent}}",
+      "autoPick": "अपने आप चुनें",
+      "autoPickHint": "वह खाता इस्तेमाल करता है जिसकी साप्ताहिक सीमा सबसे पहले रीसेट होती है",
+      "manage": "खाते जोड़ें या प्रबंधित करें…",
+      "signInAgain": "इस्तेमाल करने के लिए फिर से साइन इन करें",
+      "switchLimited": "केवल रुके हुए फिर से शुरू करें",
+      "switchDescription": "फिर से शुरू करने पर हर चल रही बातचीत नए खाते पर जारी रहती है। रुके हुए वे हैं जो अपनी उपयोग सीमा तक पहुँच गए।",
+      "autoPickSwitched": "Claude को {{next}} पर बदला गया",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}। इसकी साप्ताहिक सीमा पहले रीसेट होती है।"
     }
   }
 }

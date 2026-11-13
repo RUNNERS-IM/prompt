@@ -5,7 +5,12 @@ import { Label } from '../ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { SearchableSetting } from './SearchableSetting'
 
-const POLICIES: readonly ClaudeAccountSwitchRunningSessions[] = ['ask', 'restart', 'keep']
+const POLICIES: readonly ClaudeAccountSwitchRunningSessions[] = [
+  'ask',
+  'limited',
+  'restart',
+  'keep'
+]
 
 function isPolicy(value: string): value is ClaudeAccountSwitchRunningSessions {
   return POLICIES.some((policy) => policy === value)
@@ -23,8 +28,8 @@ export function ClaudeRunningSessionSwitchSetting({
     'When you switch accounts while Claude is running'
   )
   const description = translate(
-    'accounts.claude.switchSessions.settingDescription',
-    'Restarting continues each running conversation on the new account.'
+    'prompt.claudeAccount.switchDescription',
+    'Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.'
   )
   return (
     <SearchableSetting
@@ -45,12 +50,15 @@ export function ClaudeRunningSessionSwitchSetting({
           }
         }}
       >
-        <SelectTrigger size="sm" className="w-[140px]" aria-label={title}>
+        <SelectTrigger size="sm" className="min-w-[168px] shrink-0" aria-label={title}>
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="ask">
             {translate('accounts.claude.switchSessions.settingAsk', 'Ask')}
+          </SelectItem>
+          <SelectItem value="limited">
+            {translate('prompt.claudeAccount.switchLimited', 'Restart stopped ones')}
           </SelectItem>
           <SelectItem value="restart">
             {translate('accounts.claude.switchSessions.settingRestart', 'Always restart')}

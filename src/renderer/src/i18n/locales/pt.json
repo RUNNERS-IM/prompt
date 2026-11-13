@@ -121,7 +121,7 @@
         "usageGroup": "Uso",
         "usageSearchDescription": "Contagem de agentes e uso de tokens, modelos e sessões do Claude.",
         "title": "Claude",
-        "description": "Contas do Claude, como as novas sessões começam e uso."
+        "description": "Como as novas sessões começam e uso."
       },
       "appearance": {
         "trayGroup": "Bandeja do sistema",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "Conta",
-        "description": "A conta RUNNERS única partilhada por todas as apps RUNNERS."
+        "description": "A conta RUNNERS partilhada por todas as apps RUNNERS e as contas do Claude deste Mac."
       }
     },
     "mobile": {
@@ -331,6 +331,19 @@
       "durationHoursMinutes": "{{hours}} h {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "agora"
+    },
+    "claudeAccount": {
+      "title": "Conta do Claude",
+      "noUsage": "Uso ainda não lido",
+      "weeklyShort": "Semanal {{percent}}",
+      "autoPick": "Escolher automaticamente",
+      "autoPickHint": "Usa a conta cujo limite semanal é reposto primeiro",
+      "manage": "Adicionar ou gerir contas…",
+      "signInAgain": "Inicie sessão novamente para a usar",
+      "switchLimited": "Reiniciar só as paradas",
+      "switchDescription": "Reiniciar continua cada conversa em andamento na nova conta. As paradas são as que atingiram o limite de uso.",
+      "autoPickSwitched": "Claude mudou para {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. O limite semanal é reposto mais cedo."
     }
   },
   "agentLaunch": {

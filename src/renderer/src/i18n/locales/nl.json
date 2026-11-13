@@ -23386,7 +23386,7 @@
         "usageGroup": "Gebruik",
         "usageSearchDescription": "Aantallen agents plus Claude-token-, model- en sessiegebruik.",
         "title": "Claude",
-        "description": "Claude-accounts, hoe nieuwe sessies starten en gebruik."
+        "description": "Hoe nieuwe sessies starten en gebruik."
       },
       "appearance": {
         "trayGroup": "Systeemvak",
@@ -23438,7 +23438,7 @@
       },
       "account": {
         "title": "Account",
-        "description": "Het ene RUNNERS-account dat alle RUNNERS-apps delen."
+        "description": "Het RUNNERS-account dat alle RUNNERS-apps delen, en de Claude-accounts van deze Mac."
       }
     },
     "skills": {
@@ -23476,6 +23476,19 @@
       "durationHoursMinutes": "{{hours}} u {{minutes}} min",
       "durationMinutes": "{{minutes}} min",
       "now": "nu"
+    },
+    "claudeAccount": {
+      "title": "Claude-account",
+      "noUsage": "Gebruik nog niet gelezen",
+      "weeklyShort": "Week {{percent}}",
+      "autoPick": "Automatisch kiezen",
+      "autoPickHint": "Gebruikt het account waarvan de weeklimiet het eerst wordt gereset",
+      "manage": "Accounts toevoegen of beheren…",
+      "signInAgain": "Log opnieuw in om het te gebruiken",
+      "switchLimited": "Alleen gestopte herstarten",
+      "switchDescription": "Herstarten zet elk lopend gesprek voort op het nieuwe account. Gestopte sessies zijn sessies die hun gebruikslimiet hebben bereikt.",
+      "autoPickSwitched": "Claude overgezet naar {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. De weeklimiet wordt eerder gereset."
     }
   }
 }

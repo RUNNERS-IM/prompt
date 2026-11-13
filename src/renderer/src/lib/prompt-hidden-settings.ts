@@ -99,7 +99,7 @@ export function promptSettingsSectionCopy(
         title: translate('prompt.settings.claude.title', 'Claude'),
         description: translate(
           'prompt.settings.claude.description',
-          'Claude accounts, how new sessions start, and usage.'
+          'How new sessions start, and usage.'
         )
       }
     case 'git':
@@ -179,14 +179,20 @@ function promptAccountSettingsSection(): SettingsNavSection {
   const title = translate('prompt.settings.account.title', 'Account')
   const description = translate(
     'prompt.settings.account.description',
-    'The one RUNNERS account every RUNNERS app shares.'
+    "The RUNNERS account every RUNNERS app shares, and this Mac's Claude accounts."
   )
   return {
     id: PROMPT_ACCOUNT_SETTINGS_SECTION_ID,
     title,
     description,
     icon: CircleUserRound,
-    searchEntries: [{ title, description, keywords: ['RUNNERS', 'login', 'sign in', 'email'] }],
+    searchEntries: [
+      {
+        title,
+        description,
+        keywords: ['RUNNERS', 'login', 'sign in', 'email', 'Claude', 'account']
+      }
+    ],
     group: 'setup'
   }
 }

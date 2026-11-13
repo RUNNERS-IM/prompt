@@ -12,6 +12,7 @@ import { translate } from '@/i18n/i18n'
 import type { SettingsRenderContext } from './settings-render-context'
 import { PromptAboutPage } from '../prompt-runners-apps/PromptAboutPage'
 import { PromptRunnersAccountSettings } from '../prompt-runners-account/PromptRunnersAccountSettings'
+import { renderAccountsPane } from './settings-capability-section-renderers'
 
 export function renderOrcaAccountSettingsSection(
   context: SettingsRenderContext
@@ -89,11 +90,16 @@ export function renderPromptAccountSettingsSection(
       title={translate('prompt.settings.account.title', 'Account')}
       description={translate(
         'prompt.settings.account.description',
-        'The one RUNNERS account every RUNNERS app shares.'
+        "The RUNNERS account every RUNNERS app shares, and this Mac's Claude accounts."
       )}
       searchEntries={navigation.getSectionSearchEntries('prompt-account')}
     >
-      {view.isSectionMounted('prompt-account') ? <PromptRunnersAccountSettings /> : null}
+      {view.isSectionMounted('prompt-account') ? (
+        <div className="space-y-8">
+          <PromptRunnersAccountSettings />
+          {renderAccountsPane(context)}
+        </div>
+      ) : null}
     </SettingsSection>
   )
 }

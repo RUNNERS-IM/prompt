@@ -121,7 +121,7 @@
         "usageGroup": "用量",
         "usageSearchDescription": "智能体数量，以及 Claude 的令牌、模型和会话用量。",
         "title": "Claude",
-        "description": "Claude 账号、新会话的启动方式和用量。"
+        "description": "新会话的启动方式和用量。"
       },
       "appearance": {
         "trayGroup": "系统托盘",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "账户",
-        "description": "所有 RUNNERS 应用共用的一个 RUNNERS 账户。"
+        "description": "所有 RUNNERS 应用共用的 RUNNERS 账户，以及这台 Mac 的 Claude 账号。"
       }
     },
     "mobile": {
@@ -322,6 +322,19 @@
       "durationHoursMinutes": "{{hours}}小时{{minutes}}分钟",
       "durationMinutes": "{{minutes}}分钟",
       "now": "即将"
+    },
+    "claudeAccount": {
+      "title": "Claude 账号",
+      "noUsage": "尚未读取用量",
+      "weeklyShort": "每周 {{percent}}",
+      "autoPick": "自动选择",
+      "autoPickHint": "使用每周限额最先重置的账号",
+      "manage": "添加或管理账号…",
+      "signInAgain": "重新登录后即可使用",
+      "switchLimited": "只重启已停止的",
+      "switchDescription": "重启会在新账号上继续每个正在运行的对话。已停止的是达到使用上限的会话。",
+      "autoPickSwitched": "已将 Claude 切换到 {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。"
     }
   },
   "agentLaunch": {

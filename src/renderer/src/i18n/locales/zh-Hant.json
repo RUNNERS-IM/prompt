@@ -121,7 +121,7 @@
         "usageGroup": "用量",
         "usageSearchDescription": "代理程式數量，以及 Claude 的 token、模型與工作階段用量。",
         "title": "Claude",
-        "description": "Claude 帳號、新工作階段的啟動方式與用量。"
+        "description": "新工作階段的啟動方式與用量。"
       },
       "appearance": {
         "trayGroup": "系統匣",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "帳號",
-        "description": "所有 RUNNERS App 共用的一個 RUNNERS 帳號。"
+        "description": "所有 RUNNERS App 共用的 RUNNERS 帳號，以及這台 Mac 的 Claude 帳號。"
       }
     },
     "mobile": {
@@ -322,6 +322,19 @@
       "durationHoursMinutes": "{{hours}}小時{{minutes}}分鐘",
       "durationMinutes": "{{minutes}}分鐘",
       "now": "即將"
+    },
+    "claudeAccount": {
+      "title": "Claude 帳號",
+      "noUsage": "尚未讀取用量",
+      "weeklyShort": "每週 {{percent}}",
+      "autoPick": "自動選擇",
+      "autoPickHint": "使用每週限額最先重設的帳號",
+      "manage": "新增或管理帳號…",
+      "signInAgain": "重新登入後即可使用",
+      "switchLimited": "只重新啟動已停止的",
+      "switchDescription": "重新啟動會在新帳號上繼續每個執行中的對話。已停止的是達到使用上限的工作階段。",
+      "autoPickSwitched": "已將 Claude 切換到 {{next}}",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每週限額較早重設。"
     }
   },
   "agentLaunch": {

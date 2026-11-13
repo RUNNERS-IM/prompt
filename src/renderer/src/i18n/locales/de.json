@@ -121,7 +121,7 @@
         "usageGroup": "Nutzung",
         "usageSearchDescription": "Anzahl der Agenten sowie Claude-Token-, Modell- und Sitzungsnutzung.",
         "title": "Claude",
-        "description": "Claude-Konten, Start neuer Sitzungen und Nutzung."
+        "description": "Start neuer Sitzungen und Nutzung."
       },
       "appearance": {
         "trayGroup": "Infobereich",
@@ -173,7 +173,7 @@
       },
       "account": {
         "title": "Konto",
-        "description": "Das eine RUNNERS-Konto, das alle RUNNERS-Apps teilen."
+        "description": "Das RUNNERS-Konto, das alle RUNNERS-Apps teilen, und die Claude-Konten dieses Macs."
       }
     },
     "mobile": {
@@ -327,6 +327,19 @@
       "durationHoursMinutes": "{{hours}} Std. {{minutes}} Min.",
       "durationMinutes": "{{minutes}} Min.",
       "now": "jetzt"
+    },
+    "claudeAccount": {
+      "title": "Claude-Konto",
+      "noUsage": "Nutzung noch nicht gelesen",
+      "weeklyShort": "Woche {{percent}}",
+      "autoPick": "Automatisch wählen",
+      "autoPickHint": "Nutzt das Konto, dessen Wochenlimit am frühesten zurückgesetzt wird",
+      "manage": "Konten hinzufügen oder verwalten…",
+      "signInAgain": "Erneut anmelden, um es zu nutzen",
+      "switchLimited": "Nur gestoppte neu starten",
+      "switchDescription": "Ein Neustart setzt jede laufende Unterhaltung mit dem neuen Konto fort. Gestoppt sind Sitzungen, die ihr Nutzungslimit erreicht haben.",
+      "autoPickSwitched": "Claude auf {{next}} umgestellt",
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sein Wochenlimit wird früher zurückgesetzt."
     }
   },
   "agentLaunch": {

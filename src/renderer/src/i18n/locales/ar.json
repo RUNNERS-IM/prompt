@@ -24950,7 +24950,7 @@
         "usageGroup": "الاستخدام",
         "usageSearchDescription": "أعداد الوكلاء مع استخدام token والنموذج والجلسات في Claude.",
         "title": "Claude",
-        "description": "حسابات Claude وطريقة بدء الجلسات الجديدة والاستخدام."
+        "description": "طريقة بدء الجلسات الجديدة والاستخدام."
       },
       "appearance": {
         "trayGroup": "علبة النظام",
@@ -25002,7 +25002,7 @@
       },
       "account": {
         "title": "الحساب",
-        "description": "حساب RUNNERS الواحد الذي تشترك فيه كل تطبيقات RUNNERS."
+        "description": "حساب RUNNERS الذي تشترك فيه كل تطبيقات RUNNERS، وحسابات Claude على هذا الـMac."
       }
     },
     "skills": {
@@ -25044,6 +25044,19 @@
       "durationHoursMinutes": "{{hours}} س {{minutes}} د",
       "durationMinutes": "{{minutes}} د",
       "now": "الآن"
+    },
+    "claudeAccount": {
+      "title": "حساب Claude",
+      "noUsage": "لم تتم قراءة الاستخدام بعد",
+      "weeklyShort": "أسبوعي {{percent}}",
+      "autoPick": "الاختيار تلقائيًا",
+      "autoPickHint": "يستخدم الحساب الذي يُعاد تعيين حده الأسبوعي أولًا",
+      "manage": "إضافة الحسابات أو إدارتها…",
+      "signInAgain": "سجّل الدخول مجددًا لاستخدامه",
+      "switchLimited": "أعد تشغيل المتوقفة فقط",
+      "switchDescription": "تستأنف إعادة التشغيل كل محادثة جارية على الحساب الجديد. المتوقفة هي التي بلغت حد الاستخدام.",
+      "autoPickSwitched": "تم تبديل Claude إلى {{next}}",
+      "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا."
     }
   }
 }
