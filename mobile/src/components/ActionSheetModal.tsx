@@ -5,6 +5,7 @@ import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { BottomDrawer } from './BottomDrawer'
+import { WordText } from './WordText'
 
 export type ActionSheetAction = {
   id?: string
@@ -58,7 +59,7 @@ export function ActionSheetContent({ title, message, children, actions, onClose 
               {title}
             </Text>
           ) : null}
-          {message ? <Text style={styles.message}>{message}</Text> : null}
+          {message ? <WordText style={styles.message}>{message}</WordText> : null}
         </View>
       )}
 

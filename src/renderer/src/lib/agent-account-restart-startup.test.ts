@@ -277,8 +277,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toContain('--model')
   })
 
-  // #31545: `cd pkg && claude` must come back in pkg, not the tab's start folder.
-  it('resumes a Claude started in another folder from that folder', () => {
+  it('resumes a Claude in the tab folder even after it cd-ed into a subfolder', () => {
     seedAgentStatus({
       agentType: 'claude',
       state: 'done',
@@ -293,28 +292,12 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     })
 
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `cd '/repo/pkg'; claude '--resume' '${SESSION_ID}'`
-    )
-  })
-
-  it('falls back to the workspace folder when the tab records no start folder', () => {
-    seedAgentStatus({
-      agentType: 'claude',
-      state: 'done',
-      providerSession: { key: 'session_id', id: SESSION_ID, cwd: '/repo/pkg' }
-    })
-    useAppStore.setState({
-      tabsByWorktree: { [WORKTREE_ID]: [makeTerminalTab({ id: TAB_ID, worktreeId: WORKTREE_ID })] },
-      worktreesByRepo: { r1: [makeWorktree({ id: WORKTREE_ID, repoId: 'r1', path: '/repo' })] }
-    })
-
-    expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `cd '/repo/pkg'; claude '--resume' '${SESSION_ID}'`
+      `claude '--resume' '${SESSION_ID}'`
     )
   })
 
   it.each([
-    ['workspace folder', undefined, "cd '/recorded/session'; "],
+    ['workspace folder', undefined, ''],
     ['saved tab folder', '/recorded/session', '']
   ] as const)('uses the selected host and respects the %s on resume', (_, startupCwd, prefix) => {
     const original = useAppStore.getState()

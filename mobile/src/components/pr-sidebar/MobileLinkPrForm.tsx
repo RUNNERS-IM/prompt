@@ -12,6 +12,7 @@ import {
 import { linkMobilePr } from '../../source-control/mobile-pr-link'
 import { TEXT_INPUT_FONT_SIZE } from '../../platform/text-input-font-size'
 import { useMobileTranslation } from '../../i18n/use-mobile-translation'
+import { WordText } from '../WordText'
 
 type Props = {
   client: RpcClient | null
@@ -75,9 +76,9 @@ export function MobileLinkPrForm({ client, worktreeId, onCancel, onLinked }: Pro
           <Text style={styles.cancelText}>{t('common.cancel', 'Cancel')}</Text>
         </Pressable>
       </View>
-      <Text style={styles.label}>
+      <WordText style={styles.label}>
         {t('pullRequest.linkPrForm.referenceLabel', 'PR number or GitHub URL')}
-      </Text>
+      </WordText>
       <TextInput
         style={styles.input}
         value={input}

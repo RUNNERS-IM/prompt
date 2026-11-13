@@ -22,6 +22,7 @@ import {
   loadMobileOnboardingSteps,
   mobileOnboardingDestination
 } from '../src/onboarding/mobile-onboarding-plan'
+import { WordText } from '../src/components/WordText'
 
 type Status = 'awaiting-confirm' | 'connecting' | 'error'
 
@@ -175,12 +176,12 @@ function PairConfirmContent({ routeState }: { routeState: PairConfirmRouteState 
             <Text style={styles.title}>
               {t('app.pairConfirm.title', 'Pair with this desktop?')}
             </Text>
-            <Text style={styles.subtitle}>
+            <WordText style={styles.subtitle}>
               {t(
                 'app.pairConfirm.description',
                 'You opened a pairing link from your desktop. Confirm to add it to your hosts.'
               )}
-            </Text>
+            </WordText>
             <View style={styles.actionStack}>
               <Pressable style={styles.primaryButton} onPress={() => void confirm()}>
                 <Text style={styles.primaryButtonText}>

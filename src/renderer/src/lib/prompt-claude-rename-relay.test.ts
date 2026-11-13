@@ -118,6 +118,12 @@ describe('isClaudeInputBoxEmpty', () => {
     expect(isClaudeInputBoxEmpty(['done', rule, '❯', '──────', status])).toBe(true)
   })
 
+  it('accepts the dimmed suggestion a fresh Claude shows in its box', () => {
+    expect(isClaudeInputBoxEmpty([rule, '❯ Try "fix typecheck errors"', '──────', status])).toBe(
+      true
+    )
+  })
+
   it('refuses a box holding a draft on one or several lines', () => {
     expect(isClaudeInputBoxEmpty([rule, '❯ half a thought', '──────', status])).toBe(false)
     expect(isClaudeInputBoxEmpty([rule, '❯', '  second line', '──────', status])).toBe(false)

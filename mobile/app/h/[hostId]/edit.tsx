@@ -24,6 +24,7 @@ import { hostOs } from '../../../src/platform/host-os'
 import { SideSafeArea } from '../../../src/layout/side-safe-area'
 import { translate } from '../../../src/i18n/mobile-i18n'
 import { useMobileTranslation } from '../../../src/i18n/use-mobile-translation'
+import { WordText } from '../../../src/components/WordText'
 
 // The host group leaves the Duo's status-bar rail to its pages; this native screen pads it.
 export default function EditHostRoute() {
@@ -229,12 +230,12 @@ function EditHostScreen() {
             contentContainerStyle={[styles.form, { paddingBottom: insets.bottom + spacing.xl }]}
             keyboardShouldPersistTaps="handled"
           >
-            <Text style={styles.help}>
+            <WordText style={styles.help}>
               {t(
                 'host.edit.help',
                 'Change the display name or connection address. Leave the name empty to use the name the desktop reports. Address edits only switch where this phone connects — they do not re-pair. Use this when the same desktop is reachable at a different IP (for example home LAN vs Tailscale).'
               )}
-            </Text>
+            </WordText>
 
             <Text style={styles.label}>{t('host.edit.name', 'Name')}</Text>
             <TextInput
@@ -276,12 +277,12 @@ function EditHostScreen() {
                 }
               }}
             />
-            <Text style={styles.hint}>
+            <WordText style={styles.hint}>
               {t(
                 'host.edit.addressHint',
                 'Accepts IP, host:port, or ws:// / wss://. A wss:// URL without a port uses 443. Bare addresses keep the current port (or 6768).'
               )}
-            </Text>
+            </WordText>
 
             {endpointEdit == null ? null : endpointEdit.kind !== 'invalid' ? (
               <Text style={styles.preview} numberOfLines={2}>

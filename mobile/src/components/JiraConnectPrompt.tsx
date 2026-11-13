@@ -4,6 +4,7 @@ import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { TaskProviderLogo } from './TaskProviderLogo'
+import { WordText } from './WordText'
 
 type Props = {
   credentialError: string | null
@@ -29,7 +30,7 @@ export function JiraConnectPrompt({
           ? t('components.jiraConnectPrompt.updateDesktop', 'Update Prompt desktop')
           : t('components.jiraConnectPrompt.connectOnDesktop', 'Connect Jira on your desktop')}
       </Text>
-      <Text style={styles.centeredHint}>
+      <WordText style={styles.centeredHint}>
         {unavailableReason ??
           (credentialError
             ? t(
@@ -41,7 +42,7 @@ export function JiraConnectPrompt({
                 'components.jiraConnectPrompt.connectHint',
                 'Add your Jira site in Prompt desktop under Settings → Integrations, then check again.'
               ))}
-      </Text>
+      </WordText>
       <Pressable
         style={styles.checkAgainButton}
         disabled={disabled}

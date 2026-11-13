@@ -7,6 +7,7 @@ import { NotificationOnboardingPreview } from './NotificationOnboardingPreview'
 import type { MobileSessionView } from '../storage/session-view-preferences'
 import { colors } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from '../components/WordText'
 
 export type NotificationOnboardingChoice = 'enable' | 'skip'
 export type MobileOnboardingBusyChoice = MobileSessionView | NotificationOnboardingChoice | null
@@ -59,7 +60,7 @@ export function MobileOnboardingPage({
                 'Don’t miss when an agent needs you'
               )}
         </Text>
-        <Text style={styles.body}>
+        <WordText style={styles.body}>
           {isSessionView
             ? t(
                 'onboarding.onboardingPage.sessionViewDescription',
@@ -69,17 +70,17 @@ export function MobileOnboardingPage({
                 'onboarding.onboardingPage.notificationsDescription',
                 'Get a notification on this phone when an agent finishes or is waiting — even if you aren’t using the app.'
               )}
-        </Text>
+        </WordText>
       </View>
 
       <View style={styles.footer}>
         {!isSessionView ? (
-          <Text style={styles.disclosure}>
+          <WordText style={styles.disclosure}>
             {t(
               'onboarding.onboardingPage.notificationsDisclosure',
               'Delivered through Prompt’s push service after your desktop has been idle for 3 minutes. Change this anytime in Settings.'
             )}
-          </Text>
+          </WordText>
         ) : null}
         {error ? (
           <Text style={styles.error} accessibilityRole="alert">

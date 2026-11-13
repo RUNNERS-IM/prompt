@@ -5,6 +5,7 @@ import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { BottomDrawer } from './BottomDrawer'
+import { WordText } from './WordText'
 
 export type PickerOption<T extends string = string> = {
   value: T
@@ -49,7 +50,7 @@ export function PickerModal<T extends string = string>({
     <BottomDrawer visible={visible} onClose={onClose} onAfterClose={onAfterClose} zIndex={zIndex}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+        {subtitle ? <WordText style={styles.subtitle}>{subtitle}</WordText> : null}
       </View>
 
       <PickerModalContent

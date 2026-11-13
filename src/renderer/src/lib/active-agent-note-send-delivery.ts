@@ -15,7 +15,7 @@ import {
 } from './active-agent-terminal-send-readiness'
 import { codeForReadinessStatus, runtimeFailureCode } from './active-agent-note-send-diagnostics'
 
-const ORCA_DESKTOP_TERMINAL_CLIENT = { id: 'orca-desktop', type: 'desktop' as const }
+export const ORCA_DESKTOP_TERMINAL_CLIENT = { id: 'orca-desktop', type: 'desktop' as const }
 
 export async function sendPromptWithLegacyCombinedSend(
   runtimeTarget: Parameters<typeof callRuntimeRpc>[0],

@@ -12,6 +12,7 @@ import type { MobileSourceControlState } from './use-mobile-source-control-state
 import type { MobileSourceControlPrimaryAction } from './mobile-source-control-primary-action'
 import { styles } from './mobile-source-control-styles'
 import { hubStyles } from './mobile-source-control-hub-styles'
+import { WordText } from '../components/WordText'
 
 type Props = {
   state: Omit<MobileSourceControlState, 'primaryActionArgs'>
@@ -184,9 +185,9 @@ export function MobileSourceControlContent({ state, primaryAction }: Props) {
           <Text style={styles.stateTitle}>
             {t('sourceControl.content.emptyTitle', 'No local changes')}
           </Text>
-          <Text style={styles.stateText}>
+          <WordText style={styles.stateText}>
             {t('sourceControl.content.emptyMessage', 'Working tree is clean.')}
-          </Text>
+          </WordText>
         </View>
       ) : (
         fileList

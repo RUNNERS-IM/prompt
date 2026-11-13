@@ -7,6 +7,7 @@ import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { MobileSegmentedControl } from './MobileSegmentedControl'
 import { TEXT_INPUT_FONT_SIZE } from '../platform/text-input-font-size'
+import { WordText } from './WordText'
 
 type Props = {
   composer: MobileComposerSource
@@ -84,9 +85,9 @@ export function SmartWorkspaceAdvancedFields({ composer, selectedRepoIsGit }: Pr
           {composer.reuseSelectedBranch ? (
             <View style={styles.branchDetail}>
               <Text style={styles.branchName}>{composer.reuseEligibleBranch}</Text>
-              <Text style={styles.description}>
+              <WordText style={styles.description}>
                 {t('workspace.branchChoice.existingHint', 'New commits go on this branch.')}
-              </Text>
+              </WordText>
             </View>
           ) : (
             <View style={styles.branchDetail}>

@@ -1,11 +1,15 @@
-import type { RuntimeTerminalAgentStatus, RuntimeTerminalRead } from '../../../shared/runtime-types'
+import type {
+  RuntimeTerminalAgentStatus,
+  RuntimeTerminalRead,
+  RuntimeTerminalSend
+} from '../../../shared/runtime-types'
 import { useAppStore } from '@/store'
 import { callRuntimeRpc } from '@/runtime/runtime-rpc-client'
 import { runtimeTargetForOwnerEnvironment } from '@/runtime/runtime-client-target'
 import { runtimeEnvironmentIdOrLocalUnlessTwin } from '@/lib/worktree-runtime-owner'
 import { parsePaneKey } from '../../../shared/stable-pane-id'
 import { findActiveRuntimeTerminal } from './active-agent-note-target'
-import { sendPromptWithGuardedPasteAndEnter } from './active-agent-note-send-delivery'
+import { ORCA_DESKTOP_TERMINAL_CLIENT } from './active-agent-note-send-delivery'
 import { ACTIVE_AGENT_SEND_RPC_TIMEOUT_MS } from './active-agent-terminal-send-readiness'
 import type { AgentPaneConversation } from './ai-vault-tab-title-requests'
 import {
@@ -55,13 +59,21 @@ async function typeClaudeRename(
   if (!isClaudeInputBoxEmpty(screen.tail)) {
     return 'retry'
   }
-  const sent = await sendPromptWithGuardedPasteAndEnter(
+  // Why agentPrompt: main queues it with `prompt session send` and other prompts to the same pane,
+  // so a paste from elsewhere cannot land between this paste and its Enter.
+  const { send } = await callRuntimeRpc<{ send: RuntimeTerminalSend }>(
     runtimeTarget,
-    terminal.handle,
-    `/rename ${title.replace(/\s+/g, ' ').trim()}`,
-    { allowLegacyFallback: false }
+    'terminal.send',
+    {
+      terminal: terminal.handle,
+      text: `/rename ${title.replace(/\s+/g, ' ').trim()}`,
+      enter: true,
+      agentPrompt: true,
+      client: ORCA_DESKTOP_TERMINAL_CLIENT
+    },
+    { timeoutMs: ACTIVE_AGENT_SEND_RPC_TIMEOUT_MS }
   )
-  return sent.status === 'sent' ? 'sent' : 'retry'
+  return send.accepted ? 'sent' : 'retry'
 }
 
 export function startPromptClaudeRenameRelayToStore(): () => void {

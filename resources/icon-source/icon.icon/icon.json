@@ -1,46 +1,22 @@
 {
-  "fill": {
-    "automatic-gradient": "extended-srgb:0.97,0.97,0.98,1.00000"
-  },
-  "groups": [
+  "fill-specializations" : [
+    { "value" : { "solid" : "srgb:0.90196,0.89804,0.92157,1.00000" } },
+    { "appearance" : "dark", "value" : { "solid" : "srgb:0.25098,0.24706,0.27843,1.00000" } }
+  ],
+  "groups" : [
     {
-      "layers": [
+      "layers" : [
         {
-          "glass": false,
-          "hidden": false,
-          "image-name": "chevron.svg",
-          "name": "chevron",
-          "position": {
-            "scale": 1,
-            "translation-in-points": [0, 0]
-          }
+          "image-name-specializations" : [
+            { "value" : "white.png" },
+            { "appearance" : "dark", "value" : "black.png" }
+          ],
+          "name" : "plate"
         }
       ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.25
-      }
-    },
-    {
-      "layers": [
-        {
-          "glass": false,
-          "hidden": false,
-          "image-name": "cursor.svg",
-          "name": "cursor",
-          "position": {
-            "scale": 1,
-            "translation-in-points": [0, 0]
-          }
-        }
-      ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.25
-      }
+      "shadow" : { "kind" : "none", "opacity" : 0 },
+      "translucency" : { "enabled" : false, "value" : 0 }
     }
   ],
-  "supported-platforms": {
-    "squares": "shared"
-  }
+  "supported-platforms" : { "squares" : [ "macOS" ] }
 }

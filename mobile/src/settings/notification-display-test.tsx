@@ -7,6 +7,7 @@ import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export function NotificationDisplayTest({ onTroubleshoot }: { onTroubleshoot: () => void }) {
   useMobileColorScheme()
@@ -115,12 +116,12 @@ export function NotificationDisplayTest({ onTroubleshoot }: { onTroubleshoot: ()
           'Having trouble receiving alerts?'
         )}
       </Text>
-      <Text style={styles.detail}>
+      <WordText style={styles.detail}>
         {t(
           'settings.notificationDisplayTest.description',
           'Send a test through Prompt’s push service.'
         )}
-      </Text>
+      </WordText>
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={

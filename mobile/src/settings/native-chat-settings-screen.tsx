@@ -7,6 +7,7 @@ import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { useMobileDefaultSessionViewPreference } from '../session/use-mobile-default-session-view-preference'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
+import { WordText } from '../components/WordText'
 
 export default function NativeChatSettingsScreen({ onBack }: { onBack?: () => void }) {
   useMobileColorScheme()
@@ -40,12 +41,12 @@ export default function NativeChatSettingsScreen({ onBack }: { onBack?: () => vo
         <Text style={styles.groupHeading}>
           {t('settings.nativeChatSettingsScreen.defaultViewHeading', 'DEFAULT VIEW')}
         </Text>
-        <Text style={styles.groupDescription}>
+        <WordText style={styles.groupDescription}>
           {t(
             'settings.nativeChatSettingsScreen.defaultViewDescription',
             'Choose how supported agent sessions (Claude, Codex, and other chat-capable agents) open on this device. Terminal shows the raw CLI; Chat UI shows a chat interface like the desktop app. You can still switch any individual session from its long-press menu.'
           )}
-        </Text>
+        </WordText>
         <View style={[styles.section, styles.sectionTopGap]}>
           <View style={styles.row}>
             <View style={styles.rowContent}>

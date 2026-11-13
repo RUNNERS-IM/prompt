@@ -5,6 +5,7 @@ import type { KnownAppUpdate } from '../storage/app-update-preferences'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from '../components/WordText'
 
 export type AppUpdateCheckRowStatus = 'idle' | 'checking' | 'up-to-date' | 'failed'
 
@@ -92,11 +93,11 @@ export function AppUpdateSettingsRows(props: {
       style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
       onPress={() => onUpdate(available.url)}
     >
-      <Text style={styles.rowLabel}>
+      <WordText style={styles.rowLabel}>
         {t('settings.appUpdateSettingsRows.updateToVersion', 'Update to Prompt {{version}}', {
           version: available.version
         })}
-      </Text>
+      </WordText>
       <Text style={styles.actionValue}>{t('settings.appUpdateSettingsRows.update', 'Update')}</Text>
     </Pressable>
   ) : installedVersion ? (
