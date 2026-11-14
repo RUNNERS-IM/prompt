@@ -247,7 +247,8 @@
       "loginUnmoved": "未轉到新的登入",
       "restartSession": "重新啟動",
       "resumeFailed": "無法重新開啟此工作階段",
-      "retryResume": "重試"
+      "retryResume": "重試",
+      "resumedInTabFolder": "[Prompt] 在此資料夾中繼續，而不是上次執行的 {{folder}}"
     },
     "sessionMove": {
       "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",

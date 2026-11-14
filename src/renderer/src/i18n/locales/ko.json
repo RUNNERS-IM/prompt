@@ -22712,7 +22712,8 @@
       "loginUnmoved": "새 로그인으로 옮기지 못함",
       "restartSession": "재시작",
       "resumeFailed": "세션을 다시 열지 못함",
-      "retryResume": "다시 시도"
+      "retryResume": "다시 시도",
+      "resumedInTabFolder": "[Prompt] 일하던 폴더({{folder}})가 아니라 이 폴더에서 이어 갑니다"
     },
     "windows": {
       "newWindow": "새 창",

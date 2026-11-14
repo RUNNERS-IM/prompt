@@ -23277,7 +23277,8 @@
       "loginUnmoved": "Didn't move to the new login",
       "restartSession": "Restart",
       "resumeFailed": "Couldn't reopen this session",
-      "retryResume": "Try again"
+      "retryResume": "Try again",
+      "resumedInTabFolder": "[Prompt] Continuing in this folder, not {{folder}} where it last ran"
     },
     "timeAgo": {
       "now": "now",

@@ -22886,7 +22886,8 @@
       "loginUnmoved": "Tidak pindah ke login baru",
       "restartSession": "Mulai ulang",
       "resumeFailed": "Tidak dapat membuka kembali sesi ini",
-      "retryResume": "Coba lagi"
+      "retryResume": "Coba lagi",
+      "resumedInTabFolder": "[Prompt] Melanjutkan di folder ini, bukan di {{folder}} tempat terakhir berjalan"
     },
     "timeAgo": {
       "now": "sekarang",

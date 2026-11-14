@@ -254,7 +254,8 @@
       "loginUnmoved": "No se pasó al nuevo inicio de sesión",
       "restartSession": "Reiniciar",
       "resumeFailed": "No se pudo reabrir esta sesión",
-      "retryResume": "Reintentar"
+      "retryResume": "Reintentar",
+      "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez"
     },
     "sessionMove": {
       "cancelRemote": "Las sesiones solo se pueden mover entre proyectos de este equipo.",

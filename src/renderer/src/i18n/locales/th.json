@@ -22886,7 +22886,8 @@
       "loginUnmoved": "ย้ายไปยังการเข้าสู่ระบบใหม่ไม่ได้",
       "restartSession": "เริ่มใหม่",
       "resumeFailed": "เปิดเซสชันนี้อีกครั้งไม่ได้",
-      "retryResume": "ลองอีกครั้ง"
+      "retryResume": "ลองอีกครั้ง",
+      "resumedInTabFolder": "[Prompt] ทำต่อในโฟลเดอร์นี้ ไม่ใช่ {{folder}} ที่ทำงานครั้งล่าสุด"
     },
     "timeAgo": {
       "now": "ตอนนี้",
