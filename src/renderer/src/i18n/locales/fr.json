@@ -254,7 +254,8 @@
       "loginUnmoved": "Non transféré vers la nouvelle connexion",
       "restartSession": "Redémarrer",
       "resumeFailed": "Impossible de rouvrir cette session",
-      "retryResume": "Réessayer"
+      "retryResume": "Réessayer",
+      "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",

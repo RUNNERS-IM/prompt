@@ -22886,7 +22886,8 @@
       "loginUnmoved": "Chưa chuyển sang đăng nhập mới",
       "restartSession": "Khởi động lại",
       "resumeFailed": "Không thể mở lại phiên này",
-      "retryResume": "Thử lại"
+      "retryResume": "Thử lại",
+      "resumedInTabFolder": "[Prompt] Tiếp tục trong thư mục này, không phải {{folder}} nơi chạy lần trước"
     },
     "timeAgo": {
       "now": "vừa xong",

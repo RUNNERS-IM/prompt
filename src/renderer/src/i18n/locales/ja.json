@@ -247,7 +247,8 @@
       "loginUnmoved": "新しいログインに移行できませんでした",
       "restartSession": "再起動",
       "resumeFailed": "セッションを再度開けませんでした",
-      "retryResume": "再試行"
+      "retryResume": "再試行",
+      "resumedInTabFolder": "[Prompt] 前回の作業フォルダ（{{folder}}）ではなく、このフォルダで続けます"
     },
     "sessionMove": {
       "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",

@@ -23277,7 +23277,8 @@
       "loginUnmoved": "Niet overgezet naar de nieuwe aanmelding",
       "restartSession": "Opnieuw starten",
       "resumeFailed": "Kan deze sessie niet opnieuw openen",
-      "retryResume": "Opnieuw proberen"
+      "retryResume": "Opnieuw proberen",
+      "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide"
     },
     "timeAgo": {
       "now": "nu",

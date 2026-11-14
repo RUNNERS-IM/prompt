@@ -24059,7 +24059,8 @@
       "loginUnmoved": "Nie przeniesiono do nowego logowania",
       "restartSession": "Uruchom ponownie",
       "resumeFailed": "Nie udało się ponownie otworzyć tej sesji",
-      "retryResume": "Spróbuj ponownie"
+      "retryResume": "Spróbuj ponownie",
+      "resumedInTabFolder": "[Prompt] Kontynuacja w tym folderze, a nie w {{folder}}, gdzie działało ostatnio"
     },
     "timeAgo": {
       "now": "teraz",

@@ -23668,7 +23668,8 @@
       "loginUnmoved": "Non spostata al nuovo accesso",
       "restartSession": "Riavvia",
       "resumeFailed": "Impossibile riaprire questa sessione",
-      "retryResume": "Riprova"
+      "retryResume": "Riprova",
+      "resumedInTabFolder": "[Prompt] Si continua in questa cartella, non in {{folder}} dove era in esecuzione"
     },
     "timeAgo": {
       "now": "ora",
