@@ -20,7 +20,7 @@ describe('PromptProjectHeaderIdentity', () => {
     state = { worktreesByRepo: { 'repo-1': [main] } }
   })
 
-  it('puts the only workspace on the header line: dot and branch in mono grey, no Default chip', async () => {
+  it('puts the only workspace on the header line: dot and folder name in mono grey, no Default chip', async () => {
     const { PromptProjectHeaderIdentity } = await import('./prompt-workspace-identity')
     const markup = renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)
     expect(markup).toContain('data-status-dot="active"')
@@ -50,11 +50,19 @@ describe('PromptProjectHeaderIdentity', () => {
     expect(renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)).toBe('')
   })
 
-  it('uses the folder name for a folder project and no Default chip', async () => {
-    const { promptWorkspaceLocationLabel } = await import('./prompt-workspace-identity')
-    const folder = { id: 'repo-2', kind: 'folder' } as unknown as Repo
-    expect(
-      promptWorkspaceLocationLabel({ ...main, path: '/Users/me/runners' } as never, folder)
-    ).toBe('runners')
+  it('shows the folder name instead of the branch, for git and folder projects alike', async () => {
+    const { PromptProjectHeaderIdentity, promptWorkspaceLocationLabel } =
+      await import('./prompt-workspace-identity')
+    state = {
+      worktreesByRepo: {
+        'repo-1': [{ ...main, branch: 'refs/heads/main', path: '/Users/me/git/pudding' }]
+      }
+    }
+    const markup = renderToStaticMarkup(<PromptProjectHeaderIdentity repo={gitRepo} />)
+    expect(markup).toMatch(/font-mono[^>]*>pudding</)
+    expect(markup).not.toContain('>main<')
+    expect(promptWorkspaceLocationLabel({ ...main, path: '/Users/me/runners/' } as never)).toBe(
+      'runners'
+    )
   })
 })

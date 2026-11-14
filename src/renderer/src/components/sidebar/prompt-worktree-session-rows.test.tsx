@@ -120,16 +120,14 @@ describe('PromptWorktreeSessionRows', () => {
     expect(markup).not.toContain('feature/x')
   })
 
-  it('with several workspaces, shows a line for each other workspace with its branch and dot', async () => {
+  it('with several workspaces, shows a line for each other workspace with its folder name and dot', async () => {
     const { PromptWorktreeSessionRows } = await import('./prompt-worktree-session-rows')
     state.worktreesByRepo = { 'repo-1': [{}, {}] }
     state.tabsByWorktree = { 'wt-1': [{ id: 't1', title: 'zsh' }] }
     agents = [agent('t1:1', 't1')]
     const markup = renderToStaticMarkup(<PromptWorktreeSessionRows card={card(false)} />)
     expect(markup).toContain('data-prompt-workspace-row')
-    expect(markup).toMatch(
-      /data-prompt-workspace-row[^>]*>.*feature-x.*data-status-dot.*feature\/x/s
-    )
+    expect(markup).toMatch(/data-prompt-workspace-row[^>]*>.*feature-x.*data-status-dot.*>app</s)
     expect(markup).not.toContain('data-prompt-default-chip')
     expect(agentProps[0].trailingLabel).toBeUndefined()
   })

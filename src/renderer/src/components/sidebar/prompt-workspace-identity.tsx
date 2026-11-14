@@ -4,38 +4,30 @@ import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 import type { Repo } from '../../../../shared/repo-types'
 import type { Worktree } from '../../../../shared/worktree/types'
-import { isFolderRepo } from '../../../../shared/repo-kind'
-import { getWorktreeGitIdentityDisplay } from '../../../../shared/worktree/git-identity-display'
 import StatusIndicator from './StatusIndicator'
 import { useWorktreeActivityStatus } from './use-worktree-activity-status'
 import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
 import { RepoScanUnavailableIndicator } from './worktree-list/rows/RepoScanUnavailableIndicator'
 
-/** Branch name, or the folder's name for a folder project; '' when neither is known. */
-export function promptWorkspaceLocationLabel(worktree: Worktree, repo: Repo | undefined): string {
-  if (repo && isFolderRepo(repo)) {
-    const parts = worktree.path.split(/[\\/]+/).filter(Boolean)
-    return parts.at(-1) ?? ''
-  }
-  const identity = getWorktreeGitIdentityDisplay(worktree)
-  return identity?.kind === 'branch' ? identity.branchName : ''
+/** The workspace folder's name (pudding, not main), so every project reads the same way; '' without a path. */
+export function promptWorkspaceLocationLabel(worktree: Worktree): string {
+  const parts = worktree.path.split(/[\\/]+/).filter(Boolean)
+  return parts.at(-1) ?? ''
 }
 
 /**
  * Prompt sidebar: what used to fill the workspace row and the branch line, packed onto one line —
- * the connection dot and the branch or folder name in small grey monospace.
+ * the connection dot and the folder name in small grey monospace.
  */
 export function PromptWorkspaceIdentity({
   worktree,
-  repo,
   className
 }: {
   worktree: Worktree
-  repo: Repo | undefined
   className?: string
 }): React.JSX.Element {
   const status = useWorktreeActivityStatus(worktree.id)
-  const location = promptWorkspaceLocationLabel(worktree, repo)
+  const location = promptWorkspaceLocationLabel(worktree)
   return (
     <span
       className={cn('flex min-w-0 shrink items-center gap-1.5', className)}
@@ -69,7 +61,7 @@ export function PromptProjectHeaderIdentity({ repo }: { repo: Repo }): React.JSX
   if (!target) {
     return null
   }
-  return <PromptWorkspaceIdentity worktree={target} repo={repo} className="ml-auto" />
+  return <PromptWorkspaceIdentity worktree={target} className="ml-auto" />
 }
 
 /** End of a repo header line: the upstream scan warning, then (two-level sidebar) the workspace marks. */
