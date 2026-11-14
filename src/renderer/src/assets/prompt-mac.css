@@ -157,8 +157,9 @@ html.prompt-mac-vibrancy [data-contextual-tour-target='sidebar-navigation'] > bu
 html.prompt-mac-vibrancy
   [data-contextual-tour-target='sidebar-navigation']
   button[aria-current='page'] {
-  background: var(--rw-control-bg);
-  color: var(--rw-text);
+  background: var(--r-selected-bg);
+  color: var(--r-selected-text);
+  font-weight: 600;
 }
 
 /* The status bar sits on the window background below the three cards. */
@@ -190,7 +191,7 @@ html.prompt-mac-vibrancy .prompt-status-bar .text-xs {
   font-size: 11px;
 }
 
-/* P9: one selection style in every sidebar, a grey fill with the usual text, as the Split and
+/* P9: one selection style in every sidebar, the kit's selected fill with bold text, as the Split and
    Monitor settings windows. The top navigation rows already use it above; workspace / project
    cards and settings sections follow. */
 html.prompt-mac-vibrancy
@@ -199,9 +200,10 @@ html.prompt-mac-vibrancy
   ),
 html.prompt-mac-vibrancy [data-prompt-settings-sidebar] button[data-current='true'] {
   border-color: transparent;
-  background: var(--rw-control-bg);
+  background: var(--r-selected-bg);
   box-shadow: none;
-  color: var(--rw-text);
+  color: var(--r-selected-text);
+  font-weight: 600;
 }
 
 /* Two-level sidebar (project header, then session rows): like Finder and Mail, only the session
@@ -217,8 +219,16 @@ html.prompt-mac-vibrancy
   [data-worktree-card-active='primary']
   [data-prompt-session-rows]
   :is([data-prompt-row-current='true'], [data-focused-agent-pane='true']) {
-  background: var(--rw-control-bg);
-  color: var(--rw-text);
+  background: var(--r-selected-bg);
+  color: var(--r-selected-text);
+  font-weight: 600;
+}
+
+/* The session rename box takes the kit's input colours, so typed text never sinks into the row. */
+html.prompt-mac-vibrancy [data-prompt-session-rename] {
+  border-color: var(--r-input-border);
+  background: var(--r-input-bg);
+  color: var(--r-input-text);
 }
 
 /* ===== Tab shape 2A: rectangular tabs like Safari and Xcode. The strip shows even with one tab
