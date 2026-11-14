@@ -17,6 +17,7 @@ import { getLocalProjectExecutionRuntimeContext } from '@/lib/local-preflight-co
 import { resolveResumeLaunchRecipe } from '../../../shared/tui-agent-launch-defaults'
 import type { SleepingAgentSessionRecord } from '../../../shared/agent-session-resume'
 import { translate } from '@/i18n/i18n'
+import { resumeRecordedCwdNotice } from '@/lib/resume-recorded-cwd-notice'
 
 export type ResumeSleepingAgentSessionsOptions = {
   suppressNavigation?: boolean
@@ -68,7 +69,8 @@ export function launchSleepingAgentSession(
     platform: resumeTarget.platform,
     agentHostPlatform: resumeTarget.agentHostPlatform,
     shell: resumeTarget.shell,
-    launchCwd: state.getKnownWorktreeById(record.worktreeId)?.path
+    launchCwd: state.getKnownWorktreeById(record.worktreeId)?.path,
+    recordedCwdNotice: resumeRecordedCwdNotice
   })
   if (!startupPlan) {
     toast.error(

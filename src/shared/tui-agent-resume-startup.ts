@@ -8,7 +8,12 @@ import type { SessionOptionValue } from './native-chat/input/native-chat-session
 import { buildSleepingAgentLaunchConfig } from './sleeping-agent-launch-config'
 import { resolveAgentLaunchCommand, withAgentTerminalInputArgs } from './tui-agent-launch-command'
 import type { AgentStartupPlan } from './tui-agent-startup'
-import { resolveStartupShell, type AgentStartupShell } from './tui-agent-startup-shell'
+import {
+  commandSeparator,
+  quoteStartupArg,
+  resolveStartupShell,
+  type AgentStartupShell
+} from './tui-agent-startup-shell'
 import { TUI_AGENT_CONFIG } from './tui-agent-config'
 import type { TuiAgent } from './tui-agent'
 import { buildAgentResumeLaunchCommand } from './agent-resume-launch-command'
@@ -32,8 +37,11 @@ export function buildAgentResumeStartupPlan(args: {
   isRemote?: boolean
   /** The caller chose the terminal folder on purpose, so Codex must not ask for the recorded one. */
   resumeInLaunchCwd?: boolean
-  /** Folder the resume shell starts in; an agent recorded elsewhere is resumed from its own folder (#16960). */
+  /** Folder the resume shell starts in; an agent that ran elsewhere resumes here with a one-line notice
+   *  (Gemini still cds to its own folder, #16960, unless that folder was deleted). */
   launchCwd?: string | null
+  /** The notice line in the app's language; English when the caller cannot translate. */
+  recordedCwdNotice?: (recordedCwd: string) => string
   /** Open a copy of the conversation instead of re-entering it; null for agents that cannot. */
   fork?: boolean
   /** OS that runs the agent when `platform` only picks quoting; null when unreported. */
@@ -45,9 +53,19 @@ export function buildAgentResumeStartupPlan(args: {
   if (!resumeArgv) {
     return null
   }
+  const agentCwd = args.providerSession.cwd
+  // The folder the agent last ran in, when it is not the one this resume starts in.
+  const recordedCwd =
+    agentCwd && args.launchCwd && !args.resumeInLaunchCwd && !isSameFolder(agentCwd, args.launchCwd)
+      ? agentCwd
+      : null
+  // Why: `cd <recorded folder> && <agent>` left the tab empty once that worktree was deleted, so
+  // agents resume in the tab folder (decision 2026-11-06 1C 2B). Gemini 0.37 only looks for the
+  // conversation under the folder it starts in, so it alone still moves there when it can.
+  const staysInTabFolder = args.agent !== 'gemini'
   // Codex otherwise asks for its old folder, even if deleted (#17745). Keep before resume so argv removal preserves the folder choice.
   const argv =
-    args.agent === 'codex' && args.resumeInLaunchCwd
+    args.agent === 'codex' && (args.resumeInLaunchCwd || recordedCwd)
       ? [resumeArgv[0], '-c', 'tui.resume_cwd=current', ...resumeArgv.slice(1)]
       : resumeArgv
   const shell = resolveStartupShell(args.platform, args.shell)
@@ -90,22 +108,20 @@ export function buildAgentResumeStartupPlan(args: {
     ...baseCommand.resumeLaunch
   })
   const resumeCommand = buildAgentResumeLaunchCommand(args.agent, baseCommand.command, argv, shell)
-  const agentCwd = args.providerSession.cwd
-  // Why not Claude: its --resume finds the conversation from the tab folder, and a subfolder it
-  // last cd'd into would load that folder's memory or stop at its folder-trust prompt.
-  const launchCommand =
-    args.agent !== 'claude' &&
-    agentCwd &&
-    args.launchCwd &&
-    !args.resumeInLaunchCwd &&
-    !isSameFolder(agentCwd, args.launchCwd)
-      ? buildAiVaultResumeShellCommand({
-          resumeCommand,
-          cwd: agentCwd,
-          platform: args.platform,
+  const launchCommand = !recordedCwd
+    ? resumeCommand
+    : staysInTabFolder
+      ? `${recordedCwdNoticeCommand(
+          (args.recordedCwdNotice ?? englishRecordedCwdNotice)(recordedCwd),
           shell
+        )}${commandSeparator(shell)}${resumeCommand}`
+      : buildAiVaultResumeShellCommand({
+          resumeCommand,
+          cwd: recordedCwd,
+          platform: args.platform,
+          shell,
+          continueIfCwdMissing: true
         })
-      : resumeCommand
   const applied = baseCommand.appliedSessionOptions
   return {
     agent: args.agent,
@@ -117,6 +133,19 @@ export function buildAgentResumeStartupPlan(args: {
     ...(Object.keys(applied).length > 0 ? { sessionOptions: { ...applied } } : {}),
     ...(args.agentEnv ? { env: { ...args.agentEnv } } : {})
   }
+}
+
+function englishRecordedCwdNotice(recordedCwd: string): string {
+  return `[Prompt] Continuing in this folder, not ${recordedCwd} where it last ran`
+}
+
+/** Printed before the agent starts; a full-screen agent then covers it until it exits. */
+function recordedCwdNoticeCommand(notice: string, shell: AgentStartupShell): string {
+  const quoted = quoteStartupArg(notice, shell)
+  if (shell === 'powershell') {
+    return `Write-Output ${quoted}`
+  }
+  return shell === 'cmd' ? `echo ${quoted}` : `printf '%s\\n' ${quoted}`
 }
 
 /** WSL panes start at a UNC path while the agent reports its Linux path. */

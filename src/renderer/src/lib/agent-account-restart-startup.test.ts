@@ -257,7 +257,10 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
       providerSession: { key: 'session_id', id: SESSION_ID }
     })
     useAppStore.setState({
-      settings: { ...getDefaultSettings('/home/dev'), agentDefaultArgs: { codex: '--search' } }
+      settings: {
+        ...getDefaultSettings('/home/dev'),
+        agentDefaultArgs: { codex: '--search' }
+      }
     })
 
     expect(buildPaneAccountRestartStartup('codex', pane)?.command).toContain('--search')
@@ -277,7 +280,10 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toContain('--model')
   })
 
-  it('resumes a Claude in the tab folder even after it cd-ed into a subfolder', () => {
+  const notice = (folder: string): string =>
+    `printf '%s\\n' '[Prompt] Continuing in this folder, not ${folder} where it last ran'; `
+
+  it('resumes a Claude in the tab folder even after it cd-ed into a subfolder, with one line', () => {
     seedAgentStatus({
       agentType: 'claude',
       state: 'done',
@@ -286,18 +292,22 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     useAppStore.setState({
       tabsByWorktree: {
         [WORKTREE_ID]: [
-          makeTerminalTab({ id: TAB_ID, worktreeId: WORKTREE_ID, startupCwd: '/repo' })
+          makeTerminalTab({
+            id: TAB_ID,
+            worktreeId: WORKTREE_ID,
+            startupCwd: '/repo'
+          })
         ]
       }
     })
 
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `claude '--resume' '${SESSION_ID}'`
+      `${notice('/repo/pkg')}claude '--resume' '${SESSION_ID}'`
     )
   })
 
   it.each([
-    ['workspace folder', undefined, ''],
+    ['workspace folder', undefined, notice('/recorded/session')],
     ['saved tab folder', '/recorded/session', '']
   ] as const)('uses the selected host and respects the %s on resume', (_, startupCwd, prefix) => {
     const original = useAppStore.getState()
@@ -305,12 +315,20 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
       seedAgentStatus({
         agentType: 'claude',
         state: 'done',
-        providerSession: { key: 'session_id', id: SESSION_ID, cwd: '/recorded/session' }
+        providerSession: {
+          key: 'session_id',
+          id: SESSION_ID,
+          cwd: '/recorded/session'
+        }
       })
       useAppStore.setState({
         repos: [
           TEST_REPO,
-          { ...TEST_REPO, executionHostId: 'runtime:remote-host', connectionId: 'selected-ssh' }
+          {
+            ...TEST_REPO,
+            executionHostId: 'runtime:remote-host',
+            connectionId: 'selected-ssh'
+          }
         ],
         worktreesByRepo: {
           [TEST_REPO.id]: [
@@ -332,7 +350,13 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
         activeWorktreeId: WORKTREE_ID,
         activeWorkspaceExecutionHostId: 'runtime:remote-host',
         tabsByWorktree: {
-          [WORKTREE_ID]: [makeTerminalTab({ id: TAB_ID, worktreeId: WORKTREE_ID, startupCwd })]
+          [WORKTREE_ID]: [
+            makeTerminalTab({
+              id: TAB_ID,
+              worktreeId: WORKTREE_ID,
+              startupCwd
+            })
+          ]
         }
       })
 
@@ -390,7 +414,10 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
         wslAvailable: true,
         availableWslDistros: ['Ubuntu-24.04']
       })
-      expect(projectRuntimeContext).toMatchObject({ status: 'resolved', runtime: { kind: 'wsl' } })
+      expect(projectRuntimeContext).toMatchObject({
+        status: 'resolved',
+        runtime: { kind: 'wsl' }
+      })
       useAppStore.getState().registerAgentLaunchConfig(makePaneKey(TAB_ID, LEAF_ID), {
         agentArgs: resolveTuiAgentLaunchArgs('claude', {
           agentPermissionDefault: 'full-access',
@@ -404,7 +431,10 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
       expect(startup?.command).toBe(
         `claude '--dangerously-skip-permissions' '--tools' 'Read' '--resume' '${SESSION_ID}'`
       )
-      expect(startup?.resumeProviderSession).toEqual({ key: 'session_id', id: SESSION_ID })
+      expect(startup?.resumeProviderSession).toEqual({
+        key: 'session_id',
+        id: SESSION_ID
+      })
     }
   )
 })

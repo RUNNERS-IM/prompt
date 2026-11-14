@@ -251,7 +251,8 @@
       "loginUnmoved": "Nicht zur neuen Anmeldung gewechselt",
       "restartSession": "Neu starten",
       "resumeFailed": "Sitzung konnte nicht wieder geöffnet werden",
-      "retryResume": "Erneut versuchen"
+      "retryResume": "Erneut versuchen",
+      "resumedInTabFolder": "[Prompt] Wird in diesem Ordner fortgesetzt, nicht in {{folder}}, wo zuletzt gearbeitet wurde"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",

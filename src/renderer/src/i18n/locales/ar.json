@@ -24841,7 +24841,8 @@
       "loginUnmoved": "لم يُنقل إلى تسجيل الدخول الجديد",
       "restartSession": "إعادة التشغيل",
       "resumeFailed": "تعذّرت إعادة فتح هذه الجلسة",
-      "retryResume": "إعادة المحاولة"
+      "retryResume": "إعادة المحاولة",
+      "resumedInTabFolder": "[Prompt] المتابعة في هذا المجلد، وليس في {{folder}} حيث كانت تعمل آخر مرة"
     },
     "timeAgo": {
       "now": "الآن",

@@ -247,7 +247,8 @@
       "loginUnmoved": "未转到新的登录",
       "restartSession": "重新启动",
       "resumeFailed": "无法重新打开此会话",
-      "retryResume": "重试"
+      "retryResume": "重试",
+      "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",

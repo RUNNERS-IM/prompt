@@ -23277,7 +23277,8 @@
       "loginUnmoved": "नए लॉगिन पर नहीं गया",
       "restartSession": "फिर से शुरू करें",
       "resumeFailed": "यह सत्र फिर से नहीं खुल सका",
-      "retryResume": "फिर से कोशिश करें"
+      "retryResume": "फिर से कोशिश करें",
+      "resumedInTabFolder": "[Prompt] इसी फ़ोल्डर में जारी, {{folder}} में नहीं जहाँ यह पिछली बार चला था"
     },
     "timeAgo": {
       "now": "अभी",
