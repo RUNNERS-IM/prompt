@@ -30,7 +30,8 @@ export function PromptWorkspaceIdentity({
   const location = promptWorkspaceLocationLabel(worktree)
   return (
     <span
-      className={cn('flex min-w-0 shrink items-center gap-1.5', className)}
+      // Folder names run long (worktree folders); give way before the workspace name does.
+      className={cn('flex min-w-0 shrink-[4] items-center gap-1.5', className)}
       data-prompt-workspace-identity=""
     >
       <StatusIndicator status={status} tooltipSide="right" />
