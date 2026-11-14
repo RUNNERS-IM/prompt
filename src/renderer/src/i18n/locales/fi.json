@@ -23277,7 +23277,8 @@
       "loginUnmoved": "Ei siirtynyt uuteen kirjautumiseen",
       "restartSession": "Käynnistä uudelleen",
       "resumeFailed": "Istunnon avaaminen uudelleen epäonnistui",
-      "retryResume": "Yritä uudelleen"
+      "retryResume": "Yritä uudelleen",
+      "resumedInTabFolder": "[Prompt] Jatketaan tässä kansiossa, ei kansiossa {{folder}}, jossa istunto viimeksi toimi"
     },
     "timeAgo": {
       "now": "nyt",

@@ -251,7 +251,8 @@
       "loginUnmoved": "Yeni oturuma taşınamadı",
       "restartSession": "Yeniden başlat",
       "resumeFailed": "Bu oturum yeniden açılamadı",
-      "retryResume": "Yeniden dene"
+      "retryResume": "Yeniden dene",
+      "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",

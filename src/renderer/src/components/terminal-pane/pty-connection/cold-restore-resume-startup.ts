@@ -28,8 +28,12 @@ import type { HeldPaneReopenOutcome } from '../newer-daemon-hold-state'
 import type { ColdRestoreAgentResumeStartup } from './fresh-spawn-types'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
+import { resumeRecordedCwdNotice } from '@/lib/resume-recorded-cwd-notice'
 
-export const NOT_REOPENED: HeldPaneReopenOutcome = { reopened: false, agentResumed: false }
+export const NOT_REOPENED: HeldPaneReopenOutcome = {
+  reopened: false,
+  agentResumed: false
+}
 
 type AppState = ReturnType<typeof useAppStore.getState>
 
@@ -119,7 +123,8 @@ export function bindBuildColdRestoreAgentResumeStartup(session: ConnectPanePtySe
       platform: resumeTarget.platform,
       agentHostPlatform: resumeTarget.agentHostPlatform,
       shell: resumeTarget.shell,
-      launchCwd: session.worktree?.path
+      launchCwd: session.worktree?.path,
+      recordedCwdNotice: resumeRecordedCwdNotice
     })
     if (!startupPlan) {
       return null
