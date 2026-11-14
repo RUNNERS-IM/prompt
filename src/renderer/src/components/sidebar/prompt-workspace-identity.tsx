@@ -30,8 +30,8 @@ export function PromptWorkspaceIdentity({
   const location = promptWorkspaceLocationLabel(worktree)
   return (
     <span
-      // Folder names run long (worktree folders); give way before the workspace name does.
-      className={cn('flex min-w-0 shrink-[4] items-center gap-1.5', className)}
+      // Folder names run long (worktree folders); basis 0 means this label only gets the room the workspace name leaves.
+      className={cn('flex min-w-0 flex-1 basis-0 items-center gap-1.5', className)}
       data-prompt-workspace-identity=""
     >
       <StatusIndicator status={status} tooltipSide="right" />
@@ -62,7 +62,7 @@ export function PromptProjectHeaderIdentity({ repo }: { repo: Repo }): React.JSX
   if (!target) {
     return null
   }
-  return <PromptWorkspaceIdentity worktree={target} className="ml-auto" />
+  return <PromptWorkspaceIdentity worktree={target} className="justify-end" />
 }
 
 /** End of a repo header line: the upstream scan warning, then (two-level sidebar) the workspace marks. */
