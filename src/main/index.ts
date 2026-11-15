@@ -1,3 +1,4 @@
+import './error-report-start'
 import { app, clipboard, dialog, type BrowserWindow } from 'electron'
 import { isRoutedOrcaDeepLink } from './startup/orca-deep-link-url'
 import { createMacAppActivationHandler } from './window/macos-app-activation'

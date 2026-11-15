@@ -207,6 +207,9 @@ jobs:
     env:
       ORCA_BACKGROUND_LAUNCH: '1'
       NODE_OPTIONS: --max-old-space-size=4096
+      # 오류 자동 수집 주소. 시크릿이 없으면 비어 앱이 아무것도 보내지 않는다(src/main/error-report-start.ts)
+      MAIN_VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
       WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}
@@ -324,6 +327,9 @@ jobs:
     env:
       ORCA_BACKGROUND_LAUNCH: '1'
       NODE_OPTIONS: --max-old-space-size=4096
+      # 오류 자동 수집 주소. 시크릿이 없으면 비어 앱이 아무것도 보내지 않는다(src/main/error-report-start.ts)
+      MAIN_VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
       WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}

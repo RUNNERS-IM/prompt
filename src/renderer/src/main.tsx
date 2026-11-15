@@ -1,3 +1,7 @@
+import * as Sentry from '@sentry/electron/renderer'
+import { startErrorReport } from './components/runners-account/error-report'
+// Renderer errors go out through main, which sets the release. With no DSN nothing starts.
+startErrorReport(Sentry, { dsn: import.meta.env.VITE_SENTRY_DSN })
 // Install the import-free hook before react-dom reads it during evaluation; the observer below wraps a per-commit property and can load later.
 import './lib/react-devtools-commit-hook-shim'
 import './lib/react-commit-cascade-observer'
