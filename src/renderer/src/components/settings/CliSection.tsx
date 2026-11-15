@@ -18,6 +18,7 @@ import { AgentSkillSetupPanel } from './AgentSkillSetupPanel'
 import { CliRegistrationDialog } from './CliRegistrationDialog'
 import { getSelectedAgentRuntime, getSkillDiscoveryTargetForRuntime } from './CliSkillRuntimeSetup'
 import { WslCliRegistration } from './WslCliRegistration'
+import { localizeCliStatusDetail } from './cli-status-detail-copy'
 import { useCliRegistrationActions } from './use-cli-registration-actions'
 import { useLocalCliSkillFreshnessName } from './use-local-cli-skill-freshness-name'
 import { translate } from '@/i18n/i18n'
@@ -184,7 +185,9 @@ export function CliSection({
                       'Register {{path}} to use Prompt from other terminals.',
                       { path: status.commandPath }
                     )
-                  : (status?.detail ?? getInstallDescription(currentPlatform))}
+                  : status?.detail
+                    ? localizeCliStatusDetail(status.detail)
+                    : getInstallDescription(currentPlatform)}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -254,7 +257,7 @@ export function CliSection({
         ) : null}
 
         {!loading && !isSupported && !isBrowserManaged && status?.detail ? (
-          <p className="text-xs text-muted-foreground">{status.detail}</p>
+          <p className="text-xs text-muted-foreground">{localizeCliStatusDetail(status.detail)}</p>
         ) : null}
 
         {installFailure ? (
