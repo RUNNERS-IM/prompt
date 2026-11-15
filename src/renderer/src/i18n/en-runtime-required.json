@@ -555,6 +555,9 @@
               }
             }
           },
+          "index": {
+            "8bc2bbc3a0": "Explorer"
+          },
           "pull": {
             "policy": {
               "notice": {
@@ -639,6 +642,9 @@
         "McpConfigSection": {
           "detectedServers_one": "{{detected}} detected · {{count}} server",
           "detectedServers_other": "{{detected}} detected · {{count}} servers"
+        },
+        "MobileEmulatorExamples": {
+          "4daa95f25a": "Paste any of these into Claude Code, Codex, or another agent in a project where the Orca CLI skill is installed."
         },
         "OrchestrationPane": {
           "chatErrorEscalationKeywordChat": "chat",
@@ -2109,6 +2115,56 @@
   "prompt": {
     "claudeModel": {
       "change": "Change model"
+    },
+    "cliStatus": {
+      "appImageMissing": "The AppImage file at {{path}} is missing. Move it back or register the CLI again from the current AppImage location.",
+      "appImageUnverified": "Prompt could not verify the AppImage it was started from, so CLI registration is unavailable.",
+      "buildUnavailable": "CLI registration is unavailable on this build.",
+      "devLauncher": "Development mode uses a generated launcher for validation only.",
+      "differentLauncher": "{{path}} points to a different launcher.",
+      "differentOrcaLauncher": "{{path}} points to a different Prompt launcher.",
+      "launcherMissing": "The bundled CLI launcher is missing from this Prompt build.",
+      "missingBridge": "{{path}} is missing its PowerShell bridge.",
+      "noPathChanges": "{{reason}} PATH was not changed.",
+      "nonOrcaLauncher": "{{path}} points to a launcher that is not Prompt's.",
+      "notLauncherScript": "{{path}} exists but is not a Prompt launcher script.",
+      "notManaged": "{{path}} exists but is not managed by Prompt.",
+      "notOnPath": "{{path}} is registered, but {{folder}} is not on PATH for this shell.",
+      "notOrcaSymlink": "{{path}} exists but is not a Prompt symlink.",
+      "olderLauncherContent": "{{path}} contains an older Prompt launcher.",
+      "olderLauncherTarget": "{{path}} points to an older Prompt launcher.",
+      "platformUnsupported": "CLI registration is not available on this platform.",
+      "promptConflict": "{{path}} already exists and is not a Prompt command. Remove it to use `prompt` from the terminal.",
+      "promptMissing": "{{path}} is not registered yet. Register again to add the `prompt` command.",
+      "refuseRemove": "{{path}} is not a Prompt command, so it was not removed.",
+      "refuseRemoveNotOwned": "{{path}} is not managed by Prompt, so it was not removed.",
+      "refuseReplace": "{{path}} is not a Prompt command, so it was not replaced. Remove it and register again if you no longer need it.",
+      "registerTerminal": "Register {{path}} to use Prompt from the terminal.",
+      "registerWindows": "Register {{path}} to use Prompt from Command Prompt or PowerShell.",
+      "registerWsl": "Register {{path}} to use Prompt from WSL.",
+      "registered": "Registered at {{path}}.",
+      "registeredInDistro": "Registered in {{distro}} at {{path}}.",
+      "registryFormat": "The Windows user PATH registry value has an unsupported format.",
+      "registryKeyUnreadable": "Prompt could not read the Windows user PATH registry key.",
+      "registryValueUnreadable": "Prompt could not read the Windows user PATH registry value.",
+      "registryWindowsOnly": "The Windows user PATH registry is only available on Windows.",
+      "restartShell": "{{path}} is registered. Restart your shell if the command is not visible yet.",
+      "staleAppImage": "{{path}} does not point to the current Prompt AppImage.",
+      "unreadable": "{{path}} cannot be read. Register again to repair it.",
+      "windowsLauncherMissing": "The Windows Prompt CLI launcher is missing.",
+      "windowsPathUnchecked": "The Prompt launcher exists, but Prompt could not check your Windows user PATH.",
+      "wslHome": "Could not find the WSL home folder.",
+      "wslInterop": "WSL Windows interop is off, so Prompt cannot start the Windows CLI from WSL.",
+      "wslNone": "No WSL distribution is available.",
+      "wslNotOnPath": "{{path}} is registered, but {{folder}} is not on PATH in {{distro}}.",
+      "wslPathUnreadable": "{{path}} is registered, but the WSL login PATH could not be read in {{distro}}.",
+      "wslStopped": "WSL ({{distro}}) is not running. Refresh to start it and check the CLI.",
+      "wslTimeoutRefresh": "WSL ({{distro}}) did not respond in time. It may still be starting; refresh to try again.",
+      "wslTimeoutRetry": "WSL ({{distro}}) did not respond in time. It may still be starting; try again.",
+      "wslUnavailable": "WSL CLI registration is unavailable.",
+      "wslUnknownState": "WSL did not say whether {{distro}} is running. Refresh to try again.",
+      "wslUnreachable": "Could not reach the WSL distro. Try again.",
+      "wslWindowsOnly": "WSL CLI registration is only available on Windows."
     },
     "projectRemoval": {
       "runningSessions": "All {{count}} running sessions in it will be stopped.",

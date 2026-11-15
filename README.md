@@ -79,6 +79,11 @@ from Orca are picked by hand when needed. Prompt changes:
   `prompt://`.
 - **No Orca services:** Prompt does not talk to Orca's servers. Orca sign-in, relay, push, plugin
   catalogs and update feeds are turned off, and no usage data (telemetry) is sent.
+- **Error reports:** when Prompt hits a JavaScript error, it sends the error type, the code lines,
+  the app version and the OS version to RUNNERS' Sentry. Emails, tokens, your home folder name,
+  the computer name, window titles, typed text and request bodies are replaced with `[가림]` before
+  sending; IP addresses, screenshots, screen recordings and console logs are not sent. Crash dumps
+  from a whole-app crash are not sent either, because they hold memory that cannot be redacted.
 - **Its own data folder:** settings and sessions live in a `Prompt` folder. On first launch, an
   existing Orca folder is copied into it. Since 2.6.110201, on macOS the old folder is deleted once
   nothing runs from it any more and Orca.app itself is not installed.

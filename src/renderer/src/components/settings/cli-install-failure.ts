@@ -1,4 +1,5 @@
 import type { CliInstallStatus } from '../../../../shared/cli-install-types'
+import { localizeCliStatusDetail } from './cli-status-detail-copy'
 
 // Strip Electron’s invoke wrapper to expose the installer’s own reason and remedy.
 const IPC_INVOKE_PREFIX = /^Error invoking remote method '[^']*':\s*(?:Error:\s*)?/
@@ -19,7 +20,7 @@ export function readCliInstallFailure(
     return null
   }
   return {
-    reason: status.detail?.trim() || fallbackReason,
+    reason: localizeCliStatusDetail(status.detail?.trim() || fallbackReason),
     conflictCommandPath: status.state === 'conflict' ? status.commandPath : null
   }
 }
@@ -28,7 +29,9 @@ export function readCliInstallFailure(
 export function readCliInstallRejection(error: unknown, fallbackReason: string): CliInstallFailure {
   const message = error instanceof Error ? error.message : String(error)
   return {
-    reason: message.replace(IPC_INVOKE_PREFIX, '').trim() || fallbackReason,
+    reason: localizeCliStatusDetail(
+      message.replace(IPC_INVOKE_PREFIX, '').trim() || fallbackReason
+    ),
     conflictCommandPath: null
   }
 }

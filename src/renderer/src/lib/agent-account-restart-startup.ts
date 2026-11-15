@@ -26,6 +26,7 @@ import type { AccountRestartAgent } from '@/store/terminals/terminal-contracts'
 import type { ProjectExecutionRuntimeResolution } from '../../../shared/project-execution-runtime'
 import { resolveAgentLaunchCommand } from '../../../shared/tui-agent-launch-command'
 import { resolveStartupShell } from '../../../shared/tui-agent-startup-shell'
+import { resumeRecordedCwdNotice } from '@/lib/resume-recorded-cwd-notice'
 
 export type AgentAccountRestartStartup = {
   command: string
@@ -111,7 +112,8 @@ export function resolveAgentAccountRestartResumeStartup(
       state.getKnownWorktreeById(
         args.worktreeId,
         getExecutionHostIdForWorktree(state, args.worktreeId)
-      )?.path
+      )?.path,
+    recordedCwdNotice: resumeRecordedCwdNotice
   })
   if (!startupPlan) {
     return null

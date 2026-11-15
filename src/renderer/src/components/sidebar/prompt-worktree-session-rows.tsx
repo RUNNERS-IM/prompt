@@ -193,7 +193,7 @@ export function PromptWorktreeSessionRows({
           <span className="min-w-0 truncate font-medium" title={worktree.displayName}>
             {worktree.displayName}
           </span>
-          <PromptWorkspaceIdentity worktree={worktree} repo={repo ?? undefined} />
+          <PromptWorkspaceIdentity worktree={worktree} />
           {/* Same "+" menu as the project header, aimed at this workspace (decision 1B). */}
           <span className="ml-auto inline-flex">
             <PromptNewSessionMenuButton worktreeId={worktree.id} label={worktree.displayName} />

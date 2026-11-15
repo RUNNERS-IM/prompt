@@ -1,6 +1,8 @@
 /* RUNNERS 디자인 시스템 값(runners-window.css). 그 파일을 그대로 부르면 뿌리 글자 크기가 13px 로 바뀌어 rem 크기가 모두 줄고,
    운영체제 테마만 따라가므로 Prompt 의 테마 설정(<html> 의 dark)에 맞춰 값만 둔다. */
 @import '../components/runners-account/runners-font.css';
+/* RUNNERS 색 칸(--r-*). 운영체제 테마를 따르지만 Prompt 는 테마 설정을 nativeTheme.themeSource 로 넘겨 둘이 같다. */
+@import '../components/runners-account/runners-tokens.css';
 
 html:root {
   --rw-font-family:

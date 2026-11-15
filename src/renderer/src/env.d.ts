@@ -155,6 +155,8 @@ declare global {
 
 // oxlint-disable-next-line typescript-eslint/consistent-type-definitions -- declaration merging requires interface
 interface ImportMetaEnv {
+  /** Sentry DSN injected at build time (GitHub secret SENTRY_DSN). Empty means errors are not sent. */
+  readonly VITE_SENTRY_DSN?: string
   readonly VITE_DIRECT_SSH_RECONNECT_COORDINATOR?: string
   readonly VITE_EXPOSE_STORE?: boolean
   readonly VITE_SKILL_WARNING_PREVIEW?: string

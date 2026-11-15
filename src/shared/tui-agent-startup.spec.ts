@@ -46,7 +46,9 @@ describe('tui agent startup plans', () => {
       agent: 'claude',
       prompt: '',
       agentArgs: resolveTuiAgentLaunchArgs('claude', {
-        agentDefaultArgs: { claude: '--dangerously-skip-permissions --model Opus' }
+        agentDefaultArgs: {
+          claude: '--dangerously-skip-permissions --model Opus'
+        }
       }),
       cmdOverrides: {},
       platform: 'linux',
@@ -395,7 +397,9 @@ describe('tui agent startup plans', () => {
         cmdOverrides: {},
         platform,
         shell,
-        agentArgs: resolveTuiAgentLaunchArgs('muse', { agentDefaultArgs: defaults })
+        agentArgs: resolveTuiAgentLaunchArgs('muse', {
+          agentDefaultArgs: defaults
+        })
       })
 
       expect(plan).toMatchObject({
@@ -457,7 +461,7 @@ describe('tui agent startup plans', () => {
     expect(plan?.startupCommandDelivery).toBe('shell-ready')
   })
 
-  it('resumes an agent from the folder it ran in when the pane starts elsewhere (#16960)', () => {
+  it('resumes Claude in the tab folder with one line when it ran elsewhere', () => {
     const resume = (cwd: string, launchCwd: string) =>
       buildAgentResumeStartupPlan({
         agent: 'claude',
@@ -467,7 +471,9 @@ describe('tui agent startup plans', () => {
         launchCwd
       })?.launchCommand
 
-    expect(resume('/repo/pkg', '/repo')).toBe("cd '/repo/pkg'; claude '--resume' 's1'")
+    expect(resume('/repo/pkg', '/repo')).toBe(
+      "printf '%s\\n' '[Prompt] Continuing in this folder, not /repo/pkg where it last ran'; claude '--resume' 's1'"
+    )
     expect(resume('/repo/', '/repo')).toBe("claude '--resume' 's1'")
     expect(resume('/home/me/repo', '\\\\wsl.localhost\\Ubuntu\\home\\me\\repo')).toBe(
       "claude '--resume' 's1'"
@@ -477,7 +483,10 @@ describe('tui agent startup plans', () => {
   it('quotes Windows resume argv for cmd.exe when shell is cmd', () => {
     const plan = buildAgentResumeStartupPlan({
       agent: 'grok',
-      providerSession: { key: 'session_id', id: '019fc272-80fa-7a91-80a2-9c461ef1a9da' },
+      providerSession: {
+        key: 'session_id',
+        id: '019fc272-80fa-7a91-80a2-9c461ef1a9da'
+      },
       cmdOverrides: {},
       agentArgs: '--permission-mode bypassPermissions',
       platform: 'win32',
@@ -493,7 +502,10 @@ describe('tui agent startup plans', () => {
   it('keeps cmd-quoted agentCommand aligned with cmd resume suffix', () => {
     const plan = buildAgentResumeStartupPlan({
       agent: 'grok',
-      providerSession: { key: 'session_id', id: '019fc272-80fa-7a91-80a2-9c461ef1a9da' },
+      providerSession: {
+        key: 'session_id',
+        id: '019fc272-80fa-7a91-80a2-9c461ef1a9da'
+      },
       cmdOverrides: {},
       agentCommand: 'grok "--permission-mode" "bypassPermissions"',
       platform: 'win32',
@@ -613,7 +625,11 @@ describe('tui agent startup plans', () => {
       allowEmptyPromptLaunch: true
     })
 
-    expect(plan?.launchConfig).toEqual({ agentCommand: 'claude', agentArgs: '', agentEnv: {} })
+    expect(plan?.launchConfig).toEqual({
+      agentCommand: 'claude',
+      agentArgs: '',
+      agentEnv: {}
+    })
   })
 
   it('does not append the unsupported OpenCode TUI skip-permissions arg', () => {
@@ -805,7 +821,10 @@ describe('tui agent startup plans', () => {
       platform: 'linux'
     })
 
-    expect(plan?.env).toEqual({ ORCA_AGENT_MODE: 'managed', ORCA_PI_PREFILL: 'prefill text' })
+    expect(plan?.env).toEqual({
+      ORCA_AGENT_MODE: 'managed',
+      ORCA_PI_PREFILL: 'prefill text'
+    })
     expect(plan?.launchConfig).toEqual({
       agentCommand: 'pi',
       agentArgs: '',
@@ -824,17 +843,20 @@ describe('Claude resume when its recorded folder is gone', () => {
   const plan = (agent: 'claude' | 'codex') =>
     buildAgentResumeStartupPlan({
       agent,
-      providerSession: { key: 'session_id', id: 's1', cwd: '/repo/.worktrees/gone' },
+      providerSession: {
+        key: 'session_id',
+        id: 's1',
+        cwd: '/repo/.worktrees/gone'
+      },
       cmdOverrides: {},
       platform: 'darwin',
       launchCwd: '/repo'
     })
 
-  it('still starts Claude from the launch folder after a failed cd', () => {
-    expect(plan('claude')?.launchCommand).toMatch(/^cd '\/repo\/\.worktrees\/gone'; /)
-  })
-
-  it('keeps stopping at the failed cd for other agents', () => {
-    expect(plan('codex')?.launchCommand).toMatch(/^cd '\/repo\/\.worktrees\/gone' && /)
+  it('starts Claude and Codex in the launch folder without a cd', () => {
+    expect(plan('claude')?.launchCommand).not.toContain('cd ')
+    expect(plan('codex')?.launchCommand).not.toContain('cd ')
+    // Codex would otherwise stop and ask for the deleted folder (#17745).
+    expect(plan('codex')?.launchCommand).toContain('tui.resume_cwd=current')
   })
 })

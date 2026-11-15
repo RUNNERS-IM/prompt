@@ -111,6 +111,10 @@ jobs:
           - Windows: 코드 서명이 없어 처음 설치할 때 SmartScreen 경고가 뜬다("추가 정보" → "실행")
           - Linux: AppImage · deb · rpm
           EOF
+          # 이번 판의 바뀐 점(RELEASE_NOTES.md 의 「## 한국어」 · 「## English」 목록)을 본문 아래에 붙인다.
+          if [ -f RELEASE_NOTES.md ]; then
+            { echo; cat RELEASE_NOTES.md; } >> "$RUNNER_TEMP/notes.md"
+          fi
           gh release create "$TAG" --draft --target "$SHA" --title "Prompt $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
 
   # SSH 원격 호스트용 orcad 템플릿. upstream 출시와 같은 방식이고, GitHub 호스팅 러너만 쓴다(fast_runners: false).
@@ -207,6 +211,9 @@ jobs:
     env:
       ORCA_BACKGROUND_LAUNCH: '1'
       NODE_OPTIONS: --max-old-space-size=4096
+      # 오류 자동 수집 주소. 시크릿이 없으면 비어 앱이 아무것도 보내지 않는다(src/main/error-report-start.ts)
+      MAIN_VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
       WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}
@@ -324,6 +331,9 @@ jobs:
     env:
       ORCA_BACKGROUND_LAUNCH: '1'
       NODE_OPTIONS: --max-old-space-size=4096
+      # 오류 자동 수집 주소. 시크릿이 없으면 비어 앱이 아무것도 보내지 않는다(src/main/error-report-start.ts)
+      MAIN_VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       PUBLISH: ${{ needs.prepare.outputs.publish }}
       VERSION: ${{ needs.prepare.outputs.version }}
       WITH_TEMPLATE: ${{ needs.template.outputs.ready == 'true' }}
