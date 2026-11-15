@@ -30,7 +30,9 @@ const BUNDLED_MAIN_DEPENDENCIES = new Set([
   'remark-parse',
   'remark-gfm',
   // Windows NSIS copies app.asar before external resources; bootstrap must not race resources/node_modules.
-  'zod'
+  'zod',
+  // Copying its node_modules would add ~95 MB (bundler plugins, oxc-parser); main only needs the SDK code.
+  '@sentry/electron'
 ])
 // Official CI alone injects ORCA_BUILD_IDENTITY (stable|rc) and ORCA_POSTHOG_WRITE_KEY secrets; other builds substitute literal null.
 // Compile-time substitution gates telemetry at module load without runtime env fallback; declarations live in src/types/build-constants.d.ts.
