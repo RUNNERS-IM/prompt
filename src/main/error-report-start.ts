@@ -12,3 +12,10 @@ startErrorReport(Sentry, {
   environment: app.isPackaged ? 'production' : 'development',
   hide: [hostname(), userInfo().username]
 })
+
+declare global {
+  interface ImportMetaEnv {
+    /** Sentry DSN injected at build time (GitHub secret SENTRY_DSN). Empty means errors are not sent. */
+    readonly MAIN_VITE_SENTRY_DSN?: string
+  }
+}
