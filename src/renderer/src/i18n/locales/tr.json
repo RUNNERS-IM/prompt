@@ -391,6 +391,24 @@
       "wslInterop": "WSL Windows birlikte çalışabilirliği kapalı olduğundan Prompt, Windows CLI'yi WSL'den başlatamıyor.",
       "windowsLauncherMissing": "Windows için Prompt CLI başlatıcısı eksik.",
       "noPathChanges": "{{reason}} PATH değiştirilmedi."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Commit mesajı",
+      "pullRequest": "Pull request ayrıntıları",
+      "branchName": "Dal adı",
+      "fixCommitFailure": "Commit hatası düzeltmeleri",
+      "fixPushFailure": "Push hatası düzeltmeleri",
+      "fixChecks": "Başarısız kontrol düzeltmeleri",
+      "resolveConflicts": "Çakışma çözümü",
+      "resolveComments": "İnceleme yorumu çözümü",
+      "scopeRepository": "Bu depo için özelleştirildi",
+      "scopeGlobal": "Genel ayarlar kullanılıyor",
+      "promptRepository": "Depoya özel istem",
+      "promptDefault": "Varsayılan istem",
+      "promptGlobal": "Genel özel istem",
+      "argsNone": "Argüman yok",
+      "argsRepository": "Depoya özel argümanlar",
+      "argsGlobal": "Genel özel argümanlar"
     }
   },
   "agentLaunch": {

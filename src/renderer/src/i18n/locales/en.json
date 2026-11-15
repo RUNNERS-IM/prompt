@@ -23540,6 +23540,24 @@
       "wslInterop": "WSL Windows interop is off, so Prompt cannot start the Windows CLI from WSL.",
       "windowsLauncherMissing": "The Windows Prompt CLI launcher is missing.",
       "noPathChanges": "{{reason}} PATH was not changed."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Commit message",
+      "pullRequest": "Pull request details",
+      "branchName": "Branch name",
+      "fixCommitFailure": "Commit failure fixes",
+      "fixPushFailure": "Push failure fixes",
+      "fixChecks": "Broken checks fixes",
+      "resolveConflicts": "Conflict resolution",
+      "resolveComments": "Review comment resolution",
+      "scopeRepository": "Customized for this repository",
+      "scopeGlobal": "Using global settings",
+      "promptRepository": "Repository custom prompt",
+      "promptDefault": "Default prompt",
+      "promptGlobal": "Global custom prompt",
+      "argsNone": "No args",
+      "argsRepository": "Repository custom args",
+      "argsGlobal": "Global custom args"
     }
   }
 }

@@ -386,6 +386,24 @@
       "wslInterop": "WSL の Windows 相互運用がオフのため、Prompt は WSL から Windows の CLI を起動できません。",
       "windowsLauncherMissing": "Windows 用の Prompt CLI ランチャーがありません。",
       "noPathChanges": "{{reason}} PATH は変更されていません。"
+    },
+    "sourceControlAction": {
+      "commitMessage": "コミットメッセージ",
+      "pullRequest": "プルリクエストの詳細",
+      "branchName": "ブランチ名",
+      "fixCommitFailure": "コミット失敗の修正",
+      "fixPushFailure": "プッシュ失敗の修正",
+      "fixChecks": "失敗したチェックの修正",
+      "resolveConflicts": "コンフリクトの解決",
+      "resolveComments": "レビューコメントへの対応",
+      "scopeRepository": "このリポジトリ用にカスタマイズ",
+      "scopeGlobal": "グローバル設定を使用",
+      "promptRepository": "リポジトリのカスタムプロンプト",
+      "promptDefault": "デフォルトのプロンプト",
+      "promptGlobal": "グローバルのカスタムプロンプト",
+      "argsNone": "引数なし",
+      "argsRepository": "リポジトリのカスタム引数",
+      "argsGlobal": "グローバルのカスタム引数"
     }
   },
   "agentLaunch": {

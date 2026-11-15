@@ -23148,6 +23148,24 @@
       "wslInterop": "Tính năng tương tác Windows của WSL đang tắt, nên Prompt không thể khởi chạy CLI Windows từ WSL.",
       "windowsLauncherMissing": "Thiếu trình khởi chạy Prompt CLI cho Windows.",
       "noPathChanges": "{{reason}} PATH không được thay đổi."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Thông điệp commit",
+      "pullRequest": "Chi tiết pull request",
+      "branchName": "Tên nhánh",
+      "fixCommitFailure": "Sửa lỗi commit",
+      "fixPushFailure": "Sửa lỗi push",
+      "fixChecks": "Sửa kiểm tra thất bại",
+      "resolveConflicts": "Giải quyết xung đột",
+      "resolveComments": "Xử lý bình luận review",
+      "scopeRepository": "Tùy chỉnh cho kho này",
+      "scopeGlobal": "Dùng cài đặt chung",
+      "promptRepository": "Prompt tùy chỉnh của kho",
+      "promptDefault": "Prompt mặc định",
+      "promptGlobal": "Prompt tùy chỉnh chung",
+      "argsNone": "Không có tham số",
+      "argsRepository": "Tham số tùy chỉnh của kho",
+      "argsGlobal": "Tham số tùy chỉnh chung"
     }
   }
 }

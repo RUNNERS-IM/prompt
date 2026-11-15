@@ -22852,6 +22852,24 @@
       "wslInterop": "WSL 의 Windows 연동이 꺼져 있어 WSL 에서 Windows CLI 를 실행할 수 없습니다.",
       "windowsLauncherMissing": "Windows 용 Prompt CLI 실행 파일이 없습니다.",
       "noPathChanges": "{{reason}} PATH 는 바꾸지 않았습니다."
+    },
+    "sourceControlAction": {
+      "commitMessage": "커밋 메시지",
+      "pullRequest": "PR 제목 · 설명",
+      "branchName": "브랜치 이름",
+      "fixCommitFailure": "커밋 실패 고치기",
+      "fixPushFailure": "푸시 실패 고치기",
+      "fixChecks": "실패한 검사 고치기",
+      "resolveConflicts": "충돌 해결",
+      "resolveComments": "리뷰 댓글 반영",
+      "scopeRepository": "이 저장소 전용 설정",
+      "scopeGlobal": "전역 설정 사용 중",
+      "promptRepository": "저장소 전용 프롬프트",
+      "promptDefault": "기본 프롬프트",
+      "promptGlobal": "전역 사용자 프롬프트",
+      "argsNone": "인수 없음",
+      "argsRepository": "저장소 전용 인수",
+      "argsGlobal": "전역 사용자 인수"
     }
   }
 }

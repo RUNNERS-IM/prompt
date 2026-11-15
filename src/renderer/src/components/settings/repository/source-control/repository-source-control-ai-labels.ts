@@ -10,6 +10,7 @@ import type { TuiAgent } from '../../../../../../shared/tui-agent'
 import { readActionModelSelection } from '../../../../../../shared/source-control-action-model-selection'
 import {
   DEFAULT_SOURCE_CONTROL_ACTION_COMMAND_TEMPLATES,
+  SOURCE_CONTROL_ACTION_LABELS,
   resolveSourceControlActionCommandTemplate,
   type SourceControlActionId,
   type SourceControlActionRecipe
@@ -20,6 +21,7 @@ import type {
 } from '../../../../../../shared/source-control-ai-types'
 import type { CustomAgentId } from '../../../../../../shared/commit-message-agent-spec'
 import { isCustomAgentId } from '../../../../../../shared/commit-message-agent-spec'
+import { translate } from '@/i18n/i18n'
 
 export const ACTION_MODE_INHERIT = 'inherit'
 export const ACTION_MODE_OVERRIDE = 'override'
@@ -84,7 +86,9 @@ export function completeRepoActionRecipe(
 }
 
 export function actionScopeLabel(hasOverride: boolean): string {
-  return hasOverride ? 'Customized for this repository' : 'Using global settings'
+  return hasOverride
+    ? translate('prompt.sourceControlAction.scopeRepository', 'Customized for this repository')
+    : translate('prompt.sourceControlAction.scopeGlobal', 'Using global settings')
 }
 
 export function commandTemplateStateLabel(args: {
@@ -93,11 +97,11 @@ export function commandTemplateStateLabel(args: {
   actionId: SourceControlActionId
 }): string {
   if (args.hasOverride) {
-    return 'Repository custom prompt'
+    return translate('prompt.sourceControlAction.promptRepository', 'Repository custom prompt')
   }
   return args.inheritedTemplate === DEFAULT_SOURCE_CONTROL_ACTION_COMMAND_TEMPLATES[args.actionId]
-    ? 'Orca default prompt'
-    : 'Global custom prompt'
+    ? translate('prompt.sourceControlAction.promptDefault', 'Default prompt')
+    : translate('prompt.sourceControlAction.promptGlobal', 'Global custom prompt')
 }
 
 export function agentArgsStateLabel(args: {
@@ -117,11 +121,26 @@ export function agentArgsStateLabel(args: {
     )?.trim() &&
     !hasChoices
   ) {
-    return 'No args'
+    return translate('prompt.sourceControlAction.argsNone', 'No args')
   }
   const ownChoices = args.override?.launchPreferences
   const ownsChoices = Boolean(readActionModelSelection(ownChoices))
   return args.override?.agentArgs !== undefined || ownsChoices
-    ? 'Repository custom args'
-    : 'Global custom args'
+    ? translate('prompt.sourceControlAction.argsRepository', 'Repository custom args')
+    : translate('prompt.sourceControlAction.argsGlobal', 'Global custom args')
+}
+
+const ACTION_LABEL_KEYS: Record<SourceControlActionId, string> = {
+  commitMessage: 'prompt.sourceControlAction.commitMessage',
+  pullRequest: 'prompt.sourceControlAction.pullRequest',
+  branchName: 'prompt.sourceControlAction.branchName',
+  fixCommitFailure: 'prompt.sourceControlAction.fixCommitFailure',
+  fixPushFailure: 'prompt.sourceControlAction.fixPushFailure',
+  fixChecks: 'prompt.sourceControlAction.fixChecks',
+  resolveConflicts: 'prompt.sourceControlAction.resolveConflicts',
+  resolveComments: 'prompt.sourceControlAction.resolveComments'
+}
+
+export function localizeSourceControlActionLabel(actionId: SourceControlActionId): string {
+  return translate(ACTION_LABEL_KEYS[actionId], SOURCE_CONTROL_ACTION_LABELS[actionId])
 }
