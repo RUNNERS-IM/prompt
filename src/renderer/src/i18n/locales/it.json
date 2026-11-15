@@ -23932,6 +23932,24 @@
       "wslInterop": "L'interoperabilità con Windows di WSL è disattivata, quindi Prompt non può avviare la CLI di Windows da WSL.",
       "windowsLauncherMissing": "Manca il launcher CLI di Prompt per Windows.",
       "noPathChanges": "{{reason}} Il PATH non è stato modificato."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Messaggio di commit",
+      "pullRequest": "Dettagli della pull request",
+      "branchName": "Nome del branch",
+      "fixCommitFailure": "Correzione commit non riusciti",
+      "fixPushFailure": "Correzione push non riusciti",
+      "fixChecks": "Correzione controlli non riusciti",
+      "resolveConflicts": "Risoluzione dei conflitti",
+      "resolveComments": "Risoluzione commenti di revisione",
+      "scopeRepository": "Personalizzato per questo repository",
+      "scopeGlobal": "Usa le impostazioni globali",
+      "promptRepository": "Prompt personalizzato del repository",
+      "promptDefault": "Prompt predefinito",
+      "promptGlobal": "Prompt personalizzato globale",
+      "argsNone": "Nessun argomento",
+      "argsRepository": "Argomenti personalizzati del repository",
+      "argsGlobal": "Argomenti personalizzati globali"
     }
   }
 }

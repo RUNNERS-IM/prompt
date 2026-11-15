@@ -23148,6 +23148,24 @@
       "wslInterop": "Interop Windows di WSL nonaktif, jadi Prompt tidak dapat menjalankan CLI Windows dari WSL.",
       "windowsLauncherMissing": "Peluncur CLI Prompt untuk Windows tidak ada.",
       "noPathChanges": "{{reason}} PATH tidak diubah."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Pesan commit",
+      "pullRequest": "Detail pull request",
+      "branchName": "Nama branch",
+      "fixCommitFailure": "Perbaikan commit gagal",
+      "fixPushFailure": "Perbaikan push gagal",
+      "fixChecks": "Perbaikan pemeriksaan gagal",
+      "resolveConflicts": "Penyelesaian konflik",
+      "resolveComments": "Penyelesaian komentar review",
+      "scopeRepository": "Disesuaikan untuk repositori ini",
+      "scopeGlobal": "Memakai pengaturan global",
+      "promptRepository": "Prompt kustom repositori",
+      "promptDefault": "Prompt bawaan",
+      "promptGlobal": "Prompt kustom global",
+      "argsNone": "Tanpa argumen",
+      "argsRepository": "Argumen kustom repositori",
+      "argsGlobal": "Argumen kustom global"
     }
   }
 }

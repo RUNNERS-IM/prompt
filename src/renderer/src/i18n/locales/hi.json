@@ -23540,6 +23540,24 @@
       "wslInterop": "WSL का Windows इंटरऑप बंद है, इसलिए Prompt WSL से Windows CLI शुरू नहीं कर सकता।",
       "windowsLauncherMissing": "Windows के लिए Prompt CLI लॉन्चर मौजूद नहीं है।",
       "noPathChanges": "{{reason}} PATH नहीं बदला गया।"
+    },
+    "sourceControlAction": {
+      "commitMessage": "कमिट संदेश",
+      "pullRequest": "पुल रिक्वेस्ट विवरण",
+      "branchName": "ब्रांच नाम",
+      "fixCommitFailure": "कमिट विफलता सुधार",
+      "fixPushFailure": "पुश विफलता सुधार",
+      "fixChecks": "विफल चेक सुधार",
+      "resolveConflicts": "कॉन्फ़्लिक्ट समाधान",
+      "resolveComments": "रिव्यू टिप्पणियों का समाधान",
+      "scopeRepository": "इस रिपॉज़िटरी के लिए अनुकूलित",
+      "scopeGlobal": "ग्लोबल सेटिंग्स का उपयोग",
+      "promptRepository": "रिपॉज़िटरी का कस्टम प्रॉम्प्ट",
+      "promptDefault": "डिफ़ॉल्ट प्रॉम्प्ट",
+      "promptGlobal": "ग्लोबल कस्टम प्रॉम्प्ट",
+      "argsNone": "कोई आर्ग्युमेंट नहीं",
+      "argsRepository": "रिपॉज़िटरी के कस्टम आर्ग्युमेंट",
+      "argsGlobal": "ग्लोबल कस्टम आर्ग्युमेंट"
     }
   }
 }

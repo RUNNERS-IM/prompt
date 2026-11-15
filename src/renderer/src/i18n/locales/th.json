@@ -23148,6 +23148,24 @@
       "wslInterop": "การทำงานร่วมกับ Windows ของ WSL ปิดอยู่ Prompt จึงเปิด CLI ของ Windows จาก WSL ไม่ได้",
       "windowsLauncherMissing": "ไม่มีตัวเรียกใช้ Prompt CLI สำหรับ Windows",
       "noPathChanges": "{{reason}} ไม่ได้เปลี่ยน PATH"
+    },
+    "sourceControlAction": {
+      "commitMessage": "ข้อความคอมมิต",
+      "pullRequest": "รายละเอียดพูลรีเควสต์",
+      "branchName": "ชื่อแบรนช์",
+      "fixCommitFailure": "แก้ไขคอมมิตที่ล้มเหลว",
+      "fixPushFailure": "แก้ไขพุชที่ล้มเหลว",
+      "fixChecks": "แก้ไขการตรวจสอบที่ล้มเหลว",
+      "resolveConflicts": "แก้ไขความขัดแย้ง",
+      "resolveComments": "จัดการความคิดเห็นรีวิว",
+      "scopeRepository": "กำหนดเองสำหรับรีโพนี้",
+      "scopeGlobal": "ใช้การตั้งค่าส่วนกลาง",
+      "promptRepository": "พรอมต์กำหนดเองของรีโพ",
+      "promptDefault": "พรอมต์เริ่มต้น",
+      "promptGlobal": "พรอมต์กำหนดเองส่วนกลาง",
+      "argsNone": "ไม่มีอาร์กิวเมนต์",
+      "argsRepository": "อาร์กิวเมนต์กำหนดเองของรีโพ",
+      "argsGlobal": "อาร์กิวเมนต์กำหนดเองส่วนกลาง"
     }
   }
 }

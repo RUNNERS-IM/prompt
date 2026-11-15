@@ -2181,6 +2181,16 @@
       "commandCount_one": "{{count}} command",
       "commandCount_other": "{{count}} commands"
     },
+    "sourceControlAction": {
+      "branchName": "Branch name",
+      "commitMessage": "Commit message",
+      "fixChecks": "Broken checks fixes",
+      "fixCommitFailure": "Commit failure fixes",
+      "fixPushFailure": "Push failure fixes",
+      "pullRequest": "Pull request details",
+      "resolveComments": "Review comment resolution",
+      "resolveConflicts": "Conflict resolution"
+    },
     "terminalLinkHint": {
       "actionsOrPrefix": "Click for actions or ",
       "actionsPrefix": "Click for actions, ",

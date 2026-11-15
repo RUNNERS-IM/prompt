@@ -386,6 +386,24 @@
       "wslInterop": "WSL 的 Windows 互通性已關閉，Prompt 無法從 WSL 啟動 Windows CLI。",
       "windowsLauncherMissing": "缺少 Windows 版 Prompt CLI 啟動器。",
       "noPathChanges": "{{reason}} PATH 未變更。"
+    },
+    "sourceControlAction": {
+      "commitMessage": "提交訊息",
+      "pullRequest": "拉取請求詳細資料",
+      "branchName": "分支名稱",
+      "fixCommitFailure": "修正提交失敗",
+      "fixPushFailure": "修正推送失敗",
+      "fixChecks": "修正失敗的檢查",
+      "resolveConflicts": "解決衝突",
+      "resolveComments": "處理審查留言",
+      "scopeRepository": "已為此存放庫自訂",
+      "scopeGlobal": "使用全域設定",
+      "promptRepository": "存放庫自訂提示詞",
+      "promptDefault": "預設提示詞",
+      "promptGlobal": "全域自訂提示詞",
+      "argsNone": "無參數",
+      "argsRepository": "存放庫自訂參數",
+      "argsGlobal": "全域自訂參數"
     }
   },
   "agentLaunch": {

@@ -398,6 +398,24 @@
       "wslInterop": "Взаимодействие WSL с Windows отключено, поэтому Prompt не может запустить Windows CLI из WSL.",
       "windowsLauncherMissing": "Отсутствует лаунчер Prompt CLI для Windows.",
       "noPathChanges": "{{reason}} PATH не изменён."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Сообщение коммита",
+      "pullRequest": "Данные пул-реквеста",
+      "branchName": "Имя ветки",
+      "fixCommitFailure": "Исправление ошибок коммита",
+      "fixPushFailure": "Исправление ошибок пуша",
+      "fixChecks": "Исправление непройденных проверок",
+      "resolveConflicts": "Разрешение конфликтов",
+      "resolveComments": "Обработка комментариев ревью",
+      "scopeRepository": "Настроено для этого репозитория",
+      "scopeGlobal": "Используются глобальные настройки",
+      "promptRepository": "Свой промпт репозитория",
+      "promptDefault": "Промпт по умолчанию",
+      "promptGlobal": "Глобальный свой промпт",
+      "argsNone": "Без аргументов",
+      "argsRepository": "Свои аргументы репозитория",
+      "argsGlobal": "Глобальные свои аргументы"
     }
   },
   "agentLaunch": {

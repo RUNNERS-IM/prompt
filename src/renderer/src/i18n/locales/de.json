@@ -391,6 +391,24 @@
       "wslInterop": "Die Windows-Interoperabilität von WSL ist deaktiviert, daher kann Prompt die Windows-CLI nicht aus WSL starten.",
       "windowsLauncherMissing": "Der Windows-CLI-Launcher von Prompt fehlt.",
       "noPathChanges": "{{reason}} PATH wurde nicht geändert."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Commit-Nachricht",
+      "pullRequest": "Pull-Request-Details",
+      "branchName": "Branch-Name",
+      "fixCommitFailure": "Commit-Fehler beheben",
+      "fixPushFailure": "Push-Fehler beheben",
+      "fixChecks": "Fehlgeschlagene Checks beheben",
+      "resolveConflicts": "Konflikte lösen",
+      "resolveComments": "Review-Kommentare umsetzen",
+      "scopeRepository": "Für dieses Repository angepasst",
+      "scopeGlobal": "Globale Einstellungen",
+      "promptRepository": "Repository-eigener Prompt",
+      "promptDefault": "Standard-Prompt",
+      "promptGlobal": "Globaler eigener Prompt",
+      "argsNone": "Keine Argumente",
+      "argsRepository": "Repository-eigene Argumente",
+      "argsGlobal": "Globale eigene Argumente"
     }
   },
   "agentLaunch": {

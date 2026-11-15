@@ -386,6 +386,24 @@
       "wslInterop": "WSL 的 Windows 互操作已关闭，Prompt 无法从 WSL 启动 Windows CLI。",
       "windowsLauncherMissing": "缺少 Windows 版 Prompt CLI 启动器。",
       "noPathChanges": "{{reason}} PATH 未更改。"
+    },
+    "sourceControlAction": {
+      "commitMessage": "提交信息",
+      "pullRequest": "拉取请求详情",
+      "branchName": "分支名称",
+      "fixCommitFailure": "修复提交失败",
+      "fixPushFailure": "修复推送失败",
+      "fixChecks": "修复失败的检查",
+      "resolveConflicts": "解决冲突",
+      "resolveComments": "处理审查评论",
+      "scopeRepository": "已为此仓库自定义",
+      "scopeGlobal": "使用全局设置",
+      "promptRepository": "仓库自定义提示词",
+      "promptDefault": "默认提示词",
+      "promptGlobal": "全局自定义提示词",
+      "argsNone": "无参数",
+      "argsRepository": "仓库自定义参数",
+      "argsGlobal": "全局自定义参数"
     }
   },
   "agentLaunch": {
