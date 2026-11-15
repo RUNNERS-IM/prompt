@@ -23540,6 +23540,24 @@
       "wslInterop": "WSL:n Windows-yhteentoimivuus on poissa käytöstä, joten Prompt ei voi käynnistää Windowsin CLI:tä WSL:stä.",
       "windowsLauncherMissing": "Promptin Windows-CLI-käynnistin puuttuu.",
       "noPathChanges": "{{reason}} PATHia ei muutettu."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Commit-viesti",
+      "pullRequest": "Pull requestin tiedot",
+      "branchName": "Haaran nimi",
+      "fixCommitFailure": "Commit-virheiden korjaus",
+      "fixPushFailure": "Push-virheiden korjaus",
+      "fixChecks": "Epäonnistuneiden tarkistusten korjaus",
+      "resolveConflicts": "Ristiriitojen ratkaisu",
+      "resolveComments": "Katselmointikommenttien käsittely",
+      "scopeRepository": "Mukautettu tälle repositoriolle",
+      "scopeGlobal": "Käyttää yleisiä asetuksia",
+      "promptRepository": "Repositorion oma kehote",
+      "promptDefault": "Oletuskehote",
+      "promptGlobal": "Yleinen oma kehote",
+      "argsNone": "Ei argumentteja",
+      "argsRepository": "Repositorion omat argumentit",
+      "argsGlobal": "Yleiset omat argumentit"
     }
   }
 }

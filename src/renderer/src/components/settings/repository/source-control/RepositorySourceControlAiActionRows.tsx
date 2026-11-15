@@ -20,10 +20,7 @@ import {
   isCustomAgentId
 } from '../../../../../../shared/commit-message-agent-spec'
 
-import {
-  SOURCE_CONTROL_ACTION_IDS,
-  SOURCE_CONTROL_ACTION_LABELS
-} from '../../../../../../shared/source-control-ai-actions'
+import { SOURCE_CONTROL_ACTION_IDS } from '../../../../../../shared/source-control-ai-actions'
 import { Input } from '../../../ui/input'
 import { Label } from '../../../ui/label'
 import { RepositorySourceControlAiActionSaveControls } from '../../RepositorySourceControlAiActionSaveControls'
@@ -44,6 +41,7 @@ import {
   DEFAULT_AGENT_VALUE,
   actionAgentSelectValue,
   actionScopeLabel,
+  localizeSourceControlActionLabel,
   agentArgsStateLabel,
   commandTemplateStateLabel,
   readInheritedAgentArgs,
@@ -159,7 +157,7 @@ export function RepositorySourceControlAiActionRows({
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 space-y-0.5">
                 <p className="text-xs font-medium text-foreground">
-                  {SOURCE_CONTROL_ACTION_LABELS[actionId]}
+                  {localizeSourceControlActionLabel(actionId)}
                 </p>
                 <p className="text-[11px] text-muted-foreground">
                   {getActionDescriptions()[actionId]}

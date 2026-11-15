@@ -7,11 +7,10 @@ import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import type { TuiAgent } from '../../../../shared/tui-agent'
 import type { CustomAgentId } from '../../../../shared/commit-message-agent-spec'
 import { CUSTOM_AGENT_ID, isCustomAgentId } from '../../../../shared/commit-message-agent-spec'
-import {
-  SOURCE_CONTROL_ACTION_LABELS,
-  type SourceControlActionRecipe,
-  type AiActionId,
-  type SourceControlActionLaunchPreferences
+import type {
+  SourceControlActionRecipe,
+  AiActionId,
+  SourceControlActionLaunchPreferences
 } from '../../../../shared/source-control-ai-actions'
 import { AgentIcon } from '@/lib/agent-catalog'
 import { SourceControlActionVariableChips } from '../source-control/SourceControlActionVariableChips'
@@ -29,6 +28,7 @@ import {
   getSourceControlAgentArgsPlaceholder
 } from './source-control-action-recipe-options'
 import { translate } from '@/i18n/i18n'
+import { localizeSourceControlActionLabel } from './repository/source-control/repository-source-control-ai-labels'
 import { SourceControlActionOptionField } from './SourceControlActionOptionField'
 import { useSourceControlActionAgent } from './use-source-control-action-agent'
 import { shouldShowSourceControlActionArguments } from './source-control-action-arguments-visibility'
@@ -84,7 +84,7 @@ function resolveAgentArgsPlaceholderAgent(
 function getActionLabel(actionId: AiActionId): string {
   return actionId === 'conversationName'
     ? translate('settings.chat.names.recipe', 'Chat name')
-    : SOURCE_CONTROL_ACTION_LABELS[actionId]
+    : localizeSourceControlActionLabel(actionId)
 }
 
 export function SourceControlActionRecipeRow<ActionId extends AiActionId>({

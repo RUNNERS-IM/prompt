@@ -25108,6 +25108,24 @@
       "wslInterop": "التشغيل البيني مع Windows في WSL معطّل، لذلك لا يستطيع Prompt تشغيل CLI الخاص بـ Windows من WSL.",
       "windowsLauncherMissing": "مشغّل Prompt CLI الخاص بـ Windows مفقود.",
       "noPathChanges": "{{reason}} لم يتم تغيير PATH."
+    },
+    "sourceControlAction": {
+      "commitMessage": "رسالة الالتزام",
+      "pullRequest": "تفاصيل طلب السحب",
+      "branchName": "اسم الفرع",
+      "fixCommitFailure": "إصلاح فشل الالتزام",
+      "fixPushFailure": "إصلاح فشل الدفع",
+      "fixChecks": "إصلاح الفحوصات الفاشلة",
+      "resolveConflicts": "حل التعارضات",
+      "resolveComments": "معالجة تعليقات المراجعة",
+      "scopeRepository": "مخصص لهذا المستودع",
+      "scopeGlobal": "يستخدم الإعدادات العامة",
+      "promptRepository": "موجّه مخصص للمستودع",
+      "promptDefault": "الموجّه الافتراضي",
+      "promptGlobal": "موجّه مخصص عام",
+      "argsNone": "بلا وسائط",
+      "argsRepository": "وسائط مخصصة للمستودع",
+      "argsGlobal": "وسائط مخصصة عامة"
     }
   }
 }

@@ -24324,6 +24324,24 @@
       "wslInterop": "Współdziałanie WSL z Windows jest wyłączone, więc Prompt nie może uruchomić CLI Windows z WSL.",
       "windowsLauncherMissing": "Brakuje programu uruchamiającego Prompt CLI dla Windows.",
       "noPathChanges": "{{reason}} PATH nie został zmieniony."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Komunikat commita",
+      "pullRequest": "Szczegóły pull requesta",
+      "branchName": "Nazwa gałęzi",
+      "fixCommitFailure": "Naprawa nieudanych commitów",
+      "fixPushFailure": "Naprawa nieudanych pushy",
+      "fixChecks": "Naprawa nieudanych sprawdzeń",
+      "resolveConflicts": "Rozwiązywanie konfliktów",
+      "resolveComments": "Obsługa komentarzy z przeglądu",
+      "scopeRepository": "Dostosowane dla tego repozytorium",
+      "scopeGlobal": "Używa ustawień globalnych",
+      "promptRepository": "Własny prompt repozytorium",
+      "promptDefault": "Domyślny prompt",
+      "promptGlobal": "Globalny własny prompt",
+      "argsNone": "Brak argumentów",
+      "argsRepository": "Własne argumenty repozytorium",
+      "argsGlobal": "Globalne własne argumenty"
     }
   }
 }

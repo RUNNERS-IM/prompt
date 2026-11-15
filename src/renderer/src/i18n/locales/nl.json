@@ -23540,6 +23540,24 @@
       "wslInterop": "Windows-interoperabiliteit in WSL staat uit, dus Prompt kan de Windows-CLI niet vanuit WSL starten.",
       "windowsLauncherMissing": "De Windows-CLI-launcher van Prompt ontbreekt.",
       "noPathChanges": "{{reason}} PATH is niet gewijzigd."
+    },
+    "sourceControlAction": {
+      "commitMessage": "Commitbericht",
+      "pullRequest": "Pull-requestdetails",
+      "branchName": "Branchnaam",
+      "fixCommitFailure": "Mislukte commits herstellen",
+      "fixPushFailure": "Mislukte pushes herstellen",
+      "fixChecks": "Mislukte checks herstellen",
+      "resolveConflicts": "Conflicten oplossen",
+      "resolveComments": "Reviewopmerkingen verwerken",
+      "scopeRepository": "Aangepast voor deze repository",
+      "scopeGlobal": "Gebruikt globale instellingen",
+      "promptRepository": "Aangepaste prompt van repository",
+      "promptDefault": "Standaardprompt",
+      "promptGlobal": "Globale aangepaste prompt",
+      "argsNone": "Geen argumenten",
+      "argsRepository": "Aangepaste argumenten van repository",
+      "argsGlobal": "Globale aangepaste argumenten"
     }
   }
 }
