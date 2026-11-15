@@ -13,6 +13,9 @@ const dialog = vi.hoisted(() => ({
 
 vi.mock('sonner', () => ({ toast: toasts }))
 
+// Prompt translates main's CLI text; these cases check the unwrapping, so it passes text through.
+vi.mock('./cli-status-detail-copy', () => ({ localizeCliStatusDetail: (detail: string) => detail }))
+
 vi.mock('@/hooks/useInstalledAgentSkills', () => ({
   GLOBAL_AGENT_SKILL_SOURCE_KINDS: ['global'],
   useInstalledAgentSkill: () => ({

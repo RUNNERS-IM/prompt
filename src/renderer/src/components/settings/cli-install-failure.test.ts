@@ -1,6 +1,9 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { CliInstallStatus } from '../../../../shared/cli-install-types'
 import { readCliInstallFailure, readCliInstallRejection } from './cli-install-failure'
+
+// Prompt translates main's CLI text; these cases check the unwrapping, so it passes text through.
+vi.mock('./cli-status-detail-copy', () => ({ localizeCliStatusDetail: (detail: string) => detail }))
 
 const FALLBACK = 'Orca could not finish CLI registration and reported no reason.'
 
