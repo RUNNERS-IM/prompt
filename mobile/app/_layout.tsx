@@ -1,3 +1,7 @@
+// Error reporting starts before the other modules load so startup errors are caught too.
+import * as Sentry from '@sentry/react-native'
+import Constants from 'expo-constants'
+import { startErrorReport } from '../src/error-report/error-report'
 import { startAndroidForegroundPushPresentation } from '../src/notifications/android-foreground-push'
 import { registerPushDismissalTask } from '../src/notifications/push-background-dismissal'
 import { readNativeNotificationData } from '../src/notifications/native-notification-data'
@@ -34,6 +38,13 @@ import { startMobileUiLanguage } from '../src/i18n/ui-language-preference'
 import { subscribeMobileUiLanguage } from '../src/i18n/mobile-i18n'
 
 export { NativeScreenRecovery as ErrorBoundary } from '../src/components/NativeScreenRecovery'
+
+// With no DSN (development, or a build made before EAS has EXPO_PUBLIC_SENTRY_DSN) nothing starts and nothing is sent.
+startErrorReport(Sentry, {
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  release: `prompt-mobile@${Constants.expoConfig?.version ?? ''}`,
+  environment: __DEV__ ? 'development' : 'production'
+})
 
 // Keep splash visible until React content is ready to avoid a blank frame.
 SplashScreen.preventAutoHideAsync()
