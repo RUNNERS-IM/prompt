@@ -545,3 +545,80 @@ html.prompt-mac-vibrancy.dark:has(.settings-view-shell) {
   --prompt-card: var(--rw-box-bg);
   --card: var(--rw-box-bg);
 }
+
+/* ===== kit 0.1.40 colours (user decisions 2026-11-15 「칸 경계 · 꺼진 스위치 · 상태 색」 1A 2A 3B and
+   2026-11-16 「켜짐 부가 색」 1A 2A). Same values as runners-window.css .rw-selected / .rw-picked, written
+   against Prompt's own hooks because that file is not loaded in the main window. The terminal, main
+   buttons and text keep their black and white. ===== */
+
+/* Switches: on is the kit blue, off is the darker kit track. */
+html.prompt-mac-vibrancy:root {
+  --switch-checked: var(--r-active);
+}
+
+html.prompt-mac-vibrancy
+  :is([data-slot='switch'], [data-slot='switch-indicator'])[data-state='unchecked'] {
+  background: var(--r-track);
+}
+
+/* Settings boxes and every floating panel take the kit border, so a box never melts into the window. */
+html.prompt-mac-vibrancy .settings-view-shell,
+html.prompt-mac-vibrancy
+  :is(
+    [data-slot='dialog-content'],
+    [data-slot='popover-content'],
+    [data-slot='dropdown-menu-content'],
+    [data-slot='dropdown-menu-sub-content'],
+    [data-slot='context-menu-content'],
+    [data-slot='context-menu-sub-content'],
+    [data-slot='select-content'],
+    [data-slot='hover-card-content'],
+    [data-slot='command-dialog-content'],
+    [data-slot='sheet-content']
+  ) {
+  --border: var(--r-border);
+  --input: var(--r-border);
+}
+
+html.prompt-mac-vibrancy
+  :is(
+    [data-slot='dialog-content'],
+    [data-slot='popover-content'],
+    [data-slot='dropdown-menu-content'],
+    [data-slot='dropdown-menu-sub-content'],
+    [data-slot='context-menu-content'],
+    [data-slot='context-menu-sub-content'],
+    [data-slot='select-content'],
+    [data-slot='hover-card-content'],
+    [data-slot='command-dialog-content']
+  ) {
+  border: 1px solid var(--r-border);
+}
+
+/* Selected tab: the kit selected fill with bold text and a blue icon. */
+html.prompt-mac-vibrancy
+  [data-slot='tabs-list']:not([data-variant='line'])
+  [data-slot='tabs-trigger'][aria-selected='true'] {
+  border-color: transparent;
+  background: var(--r-selected-bg);
+  box-shadow: none;
+  color: var(--r-selected-text);
+  font-weight: 600;
+}
+
+html.prompt-mac-vibrancy [data-slot='tabs-trigger'][aria-selected='true'] svg,
+html.prompt-mac-vibrancy [data-prompt-settings-sidebar] button[data-current='true'] svg,
+html.prompt-mac-vibrancy
+  [data-contextual-tour-target='sidebar-navigation']
+  button[aria-current='page']
+  svg {
+  color: var(--r-active);
+}
+
+/* Picked chip or picker button (one of several): solid kit blue with white text. */
+html.prompt-mac-vibrancy [data-prompt-picker] [aria-checked='true'],
+html.prompt-mac-vibrancy [data-prompt-picker] [aria-pressed='true'] {
+  border-color: var(--r-active);
+  background: var(--r-active);
+  color: var(--r-on-active);
+}
