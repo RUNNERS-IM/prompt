@@ -2,14 +2,18 @@ import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
 import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
-import { getClaudeResumeFailures, subscribeClaudeResumeFailures } from './claude-resume-failure'
+import {
+  getClaudeResumeFailures,
+  isClaudeResumeStartPending,
+  subscribeClaudeResumeFailures
+} from './claude-resume-failure'
 
 export type RestartingPane = { ptyId: string; tabId: string; leafId: string }
 
 // 다시 시작은 한 장의 알림으로 묶는다(사용자 답 2A). 진행 중에 또 시작하면 같은 알림에 더한다.
 const RESTART_TOAST_ID = 'claude-account-restart'
-// 모두 다시 연 뒤 대화를 못 연 세션이 셸로 돌아오는지 지켜보는 시간.
-const RESUME_WATCH_MS = 20_000
+// 모두 다시 연 뒤 각 창의 다시 열기 감시가 시작될 때까지 기다리는 시간. 그 뒤로는 감시가 모두 끝나면 결과를 낸다.
+const RESUME_WATCH_START_MS = 3_000
 // 이 시간이 지나도 남은 세션은 하던 턴이 끝나거나 탭이 열릴 때 다시 시작된다고 알리고 알림을 닫는다.
 const RESTART_SETTLE_MS = 2 * 60_000
 const RESULT_MS = 5_000
@@ -132,10 +136,12 @@ function settle(): void {
   if (waiting === 0 && current.allRunAt === null) {
     current.allRunAt = now
   }
-  const watched = current.allRunAt !== null && now - current.allRunAt >= RESUME_WATCH_MS
-  // Why both: every failure that already came back ends the watch early.
-  const allFailed = waiting === 0 && failedCount(current) === current.panes.length
-  if (!watched && !allFailed && now < current.deadline) {
+  // Why wait on the watch: a resume that can't find its conversation is only called failed once it settles.
+  const watched =
+    current.allRunAt !== null &&
+    now - current.allRunAt >= RESUME_WATCH_START_MS &&
+    !current.panes.some((pane) => isClaudeResumeStartPending(pane.tabId, pane.leafId))
+  if (!watched && now < current.deadline) {
     return
   }
   batch = null

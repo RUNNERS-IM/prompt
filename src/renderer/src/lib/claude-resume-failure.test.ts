@@ -18,6 +18,7 @@ vi.mock('@/runtime/runtime-terminal-inspection', () => ({ inspectRuntimeTerminal
 
 import {
   getClaudeResumeFailures,
+  isClaudeResumeStartPending,
   retryClaudeResume,
   takeClaudeResumeRetryStartup,
   watchClaudeResumeStart
@@ -90,8 +91,10 @@ describe('watchClaudeResumeStart', () => {
     watchClaudeResumeStart(pane)
     await vi.advanceTimersByTimeAsync(40_000)
     expect(getClaudeResumeFailures()).toEqual([])
+    expect(isClaudeResumeStartPending('tab', 'leaf')).toBe(true)
     await vi.advanceTimersByTimeAsync(10_000)
     expect(getClaudeResumeFailures()).toHaveLength(1)
+    expect(isClaudeResumeStartPending('tab', 'leaf')).toBe(false)
   })
 
   it('retries with the startup that failed', async () => {

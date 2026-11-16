@@ -6,7 +6,10 @@ import {
 } from './claude-account-restart-toast'
 
 const store = vi.hoisted(() => ({ pendingPaneAccountRestarts: {} as Record<string, string> }))
-const failures = vi.hoisted(() => ({ list: [] as ClaudeResumeFailure[] }))
+const failures = vi.hoisted(() => ({
+  list: [] as ClaudeResumeFailure[],
+  watching: new Set<string>()
+}))
 const toast = vi.hoisted(() => ({
   loading: vi.fn(),
   success: vi.fn(),
@@ -19,6 +22,8 @@ vi.mock('sonner', () => ({ toast }))
 vi.mock('@/components/ui/sonner', () => ({ INLINE_ACTION_CLASS_NAMES: {} }))
 vi.mock('./claude-resume-failure', () => ({
   getClaudeResumeFailures: () => failures.list,
+  isClaudeResumeStartPending: (tabId: string, leafId: string) =>
+    failures.watching.has(`${tabId}:${leafId}`),
   subscribeClaudeResumeFailures: () => () => {}
 }))
 
@@ -31,6 +36,7 @@ describe('announceRestart', () => {
     resetClaudeAccountRestartToastForTests()
     store.pendingPaneAccountRestarts = {}
     failures.list = []
+    failures.watching = new Set()
   })
 
   afterEach(() => {
@@ -57,7 +63,7 @@ describe('announceRestart', () => {
     expect(toast.success).not.toHaveBeenCalled()
 
     store.pendingPaneAccountRestarts = {}
-    vi.advanceTimersByTime(21_000)
+    vi.advanceTimersByTime(4_000)
 
     expect(toast.success).toHaveBeenCalledWith(
       'Restarted 2 Claude sessions on b@example.com',
@@ -74,6 +80,24 @@ describe('announceRestart', () => {
 
     expect(toast.warning).toHaveBeenCalledWith(
       'Restarted 2 Claude sessions · 1 failed',
+      expect.objectContaining({ duration: 5_000 })
+    )
+  })
+
+  it('waits for a resume still being watched before giving the result', () => {
+    announceRestart([pane(1), pane(2)], 'b@example.com', 0, undefined)
+    failures.watching.add('tab-2:leaf-2')
+    vi.advanceTimersByTime(30_000)
+    expect(toast.success).not.toHaveBeenCalled()
+
+    failures.watching.clear()
+    failures.list = [
+      { ...pane(2), startup: {} as ClaudeResumeFailure['startup'], failedAt: Date.now() }
+    ]
+    vi.advanceTimersByTime(1_000)
+
+    expect(toast.warning).toHaveBeenCalledWith(
+      'Restarted 1 Claude sessions · 1 failed',
       expect.objectContaining({ duration: 5_000 })
     )
   })
