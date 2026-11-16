@@ -135,6 +135,8 @@ async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<
   if (!(await setUpdateCardHidden(window, false))) {
     pass.note('새 판 알림 카드가 없음(새 판이 없음)')
   }
+  // 다시 보이게 한 카드가 그려지기 전에 찍으면 빈 자리만 찍힌다(어두운 차례에서 실제로 빠졌다).
+  await pause(SETTLE_MS)
   await pass.shot(window, 'popups', '새-판-알림')
   await setUpdateCardHidden(window, true)
 
