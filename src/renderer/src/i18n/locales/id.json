@@ -22854,12 +22854,57 @@
       "save": "Simpan",
       "cancel": "Batal",
       "emptyTitle": "Belum ada prompt tersimpan",
-      "emptyBody": "Simpan prompt yang sering dipakai, lalu klik untuk memasukkannya ke baris input.",
       "noTerminal": "Buka sesi terminal terlebih dahulu",
       "chatView": "Alihkan sesi ini ke terminal untuk memakai prompt",
       "listView": "Tampilan daftar",
       "gridView": "Tampilan ikon",
-      "upFolder": "Naik satu folder"
+      "upFolder": "Naik satu folder",
+      "groupMine": "Milik saya",
+      "groupFrequent": "Sering dipakai",
+      "groupShared": "Bersama",
+      "noResults": "Tidak ada prompt yang cocok",
+      "defaults": {
+        "plan": {
+          "title": "Rencana kerja",
+          "body": "Sebelum mengubah kode, baca file yang terkait dan tulis rencana langkah demi langkah. Sebutkan file yang akan diubah dan risikonya, lalu tunggu persetujuan saya."
+        },
+        "options": {
+          "title": "Tanya dengan pilihan",
+          "body": "Jika ada lebih dari satu cara yang masuk akal, tampilkan pilihan bernomor beserta kelebihan dan kekurangannya, lalu rekomendasikan satu. Jangan mulai sebelum saya memilih."
+        },
+        "rootCause": {
+          "title": "Cari penyebab",
+          "body": "Cari penyebab masalah ini sebelum memperbaiki apa pun. Tunjukkan bukti seperti log dan baris kode, dan pisahkan yang sudah dipastikan dari yang masih dugaan."
+        },
+        "review": {
+          "title": "Tinjau perubahan",
+          "body": "Tinjau perubahan saat ini untuk mencari bug, kasus yang terlewat, dan nama yang membingungkan. Urutkan masalah dari yang paling serius, dengan file dan baris."
+        },
+        "overview": {
+          "title": "Jelaskan struktur",
+          "body": "Jelaskan bagaimana proyek ini disusun: folder utama, dari mana mulainya, dan bagaimana data mengalir antarbagian. Singkat dan mudah diikuti."
+        },
+        "tests": {
+          "title": "Tulis tes",
+          "body": "Tulis tes untuk kode yang baru saja saya ubah. Cakup kasus normal, kasus batas, dan satu kasus gagal, lalu jalankan dan tunjukkan hasilnya."
+        },
+        "buildTest": {
+          "title": "Build dan tes",
+          "body": "Jalankan build dan tes. Jika ada yang gagal, tunjukkan galat dan penyebabnya, perbaiki, lalu jalankan lagi."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Kelompokkan perubahan menurut tujuannya dan buat satu commit per kelompok, dengan pesan yang menjelaskan apa yang berubah dan mengapa. Tunjukkan daftarnya sebelum commit."
+        },
+        "status": {
+          "title": "Kemajuan",
+          "body": "Ringkas posisi kita sekarang: apa yang selesai, apa yang sedang dikerjakan, apa yang tersisa, dan apa yang terhambat."
+        },
+        "handoff": {
+          "title": "Catatan serah terima",
+          "body": "Tulis catatan serah terima agar orang lain bisa melanjutkan: tujuan, apa yang berubah, cara menjalankan dan memeriksanya, serta pertanyaan yang belum terjawab."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Helper {{count}}",

@@ -23632,12 +23632,57 @@
       "save": "Salva",
       "cancel": "Annulla",
       "emptyTitle": "Nessun prompt salvato",
-      "emptyBody": "Salva i prompt che usi spesso e fai clic per inserirli nella riga di input.",
       "noTerminal": "Apri prima una sessione del terminale",
       "chatView": "Passa questa sessione al terminale per usare un prompt",
       "listView": "Vista elenco",
       "gridView": "Vista icone",
-      "upFolder": "Cartella superiore"
+      "upFolder": "Cartella superiore",
+      "groupMine": "Miei",
+      "groupFrequent": "Usati spesso",
+      "groupShared": "Condivisi",
+      "noResults": "Nessun prompt corrisponde",
+      "defaults": {
+        "plan": {
+          "title": "Piano di lavoro",
+          "body": "Prima di modificare il codice, leggi i file coinvolti e scrivi un piano passo per passo. Indica i file che toccherai e i rischi, poi aspetta il mio via libera."
+        },
+        "options": {
+          "title": "Chiedi con opzioni",
+          "body": "Se ci sono più modi ragionevoli, mostra opzioni numerate con pro e contro e consigliane una. Non iniziare finché non scelgo."
+        },
+        "rootCause": {
+          "title": "Trova la causa",
+          "body": "Trova la causa di questo problema prima di correggere qualsiasi cosa. Mostra le prove, come log e righe di codice, e separa ciò che è confermato da ciò che è un'ipotesi."
+        },
+        "review": {
+          "title": "Rivedi le modifiche",
+          "body": "Rivedi le modifiche attuali per trovare bug, casi dimenticati e nomi poco chiari. Elenca i problemi dal più grave al meno grave, con file e riga."
+        },
+        "overview": {
+          "title": "Spiega la struttura",
+          "body": "Spiega come è organizzato questo progetto: le cartelle principali, da dove parte e come i dati passano tra le parti. Breve e facile da seguire."
+        },
+        "tests": {
+          "title": "Scrivi i test",
+          "body": "Scrivi i test per il codice che ho appena modificato. Copri il caso normale, i casi limite e un caso di errore, poi eseguili e mostra il risultato."
+        },
+        "buildTest": {
+          "title": "Build e test",
+          "body": "Esegui la build e i test. Se qualcosa fallisce, mostra l'errore e la causa, correggilo ed eseguili di nuovo."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Raggruppa le modifiche per scopo e fai un commit per gruppo, con un messaggio che dica cosa è cambiato e perché. Mostrami la lista prima del commit."
+        },
+        "status": {
+          "title": "Avanzamento",
+          "body": "Riassumi a che punto siamo: cosa è fatto, cosa è in corso, cosa manca e cosa è bloccato."
+        },
+        "handoff": {
+          "title": "Nota di passaggio",
+          "body": "Scrivi una nota di passaggio perché qualcun altro possa continuare: obiettivo, cosa è cambiato, come eseguirlo e verificarlo, e domande aperte."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Helper {{count}}",

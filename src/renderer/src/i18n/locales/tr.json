@@ -217,12 +217,57 @@
       "save": "Kaydet",
       "cancel": "İptal",
       "emptyTitle": "Henüz kayıtlı istem yok",
-      "emptyBody": "Sık kullandığınız istemleri kaydedin, tıklayınca giriş satırına yerleşsin.",
       "noTerminal": "Önce bir terminal oturumu açın",
       "chatView": "İstem kullanmak için bu oturumu terminale geçirin",
       "listView": "Liste görünümü",
       "gridView": "Simge görünümü",
-      "upFolder": "Bir üst klasör"
+      "upFolder": "Bir üst klasör",
+      "groupMine": "Benimkiler",
+      "groupFrequent": "Sık kullanılan",
+      "groupShared": "Paylaşılan",
+      "noResults": "Eşleşen istem yok",
+      "defaults": {
+        "plan": {
+          "title": "Çalışma planı",
+          "body": "Kodu değiştirmeden önce ilgili dosyaları oku ve adım adım bir plan yaz. Değiştireceğin dosyaları ve riskleri listele, sonra onayımı bekle."
+        },
+        "options": {
+          "title": "Seçeneklerle sor",
+          "body": "Birden fazla makul yol varsa, artıları ve eksileriyle numaralı seçenekler göster ve birini öner. Ben seçmeden başlama."
+        },
+        "rootCause": {
+          "title": "Nedeni bul",
+          "body": "Bir şeyi düzeltmeden önce bu sorunun nedenini bul. Günlükler ve kod satırları gibi kanıtları göster, doğrulananla tahmini ayır."
+        },
+        "review": {
+          "title": "Değişiklikleri incele",
+          "body": "Mevcut değişikliklerde hataları, atlanan durumları ve anlaşılmaz adları ara. Sorunları en ciddisinden başlayarak dosya ve satırla listele."
+        },
+        "overview": {
+          "title": "Yapıyı açıkla",
+          "body": "Bu projenin nasıl düzenlendiğini açıkla: ana klasörler, nereden başladığı ve verinin parçalar arasında nasıl aktığı. Kısa ve kolay anlaşılır olsun."
+        },
+        "tests": {
+          "title": "Test yaz",
+          "body": "Az önce değiştirdiğim kod için test yaz. Normal durumu, sınır durumlarını ve bir hata durumunu kapsa, sonra çalıştırıp sonucu göster."
+        },
+        "buildTest": {
+          "title": "Derle ve test et",
+          "body": "Derlemeyi ve testleri çalıştır. Bir şey başarısız olursa hatayı ve nedenini göster, düzelt ve yeniden çalıştır."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Değişiklikleri amaca göre grupla ve her grup için bir commit yap; mesajda neyin neden değiştiğini yaz. Commit öncesi listeyi bana göster."
+        },
+        "status": {
+          "title": "İlerleme",
+          "body": "Nerede olduğumuzu özetle: bitenler, devam edenler, kalanlar ve takılanlar."
+        },
+        "handoff": {
+          "title": "Devir notu",
+          "body": "Başka biri devam edebilsin diye bir devir notu yaz: amaç, neyin değiştiği, nasıl çalıştırılıp kontrol edileceği ve açık sorular."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Yardımcılar {{count}}",

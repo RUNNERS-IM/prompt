@@ -39,6 +39,7 @@ import { readCommandStdout, readKeyboardInputSourceId } from './macos-keyboard-i
 import { getWindowsAdministratorStatus } from '../windows/windows-administrator-status'
 import { isOpenAtLoginOn, setOpenAtLogin } from '../startup/open-at-login'
 import { registerPromptThirdPartyNoticesHandlers } from '../window/prompt-notices-window'
+import { registerPromptSharedLibraryHandlers } from '../prompt-shared-library'
 
 import type { ReconnectFactsFor } from '../persistence/window-save-view'
 
@@ -165,6 +166,7 @@ export function registerAppHandlers(store: Store, options: RegisterAppHandlersOp
     typeof on === 'boolean' ? setOpenAtLogin(on) : isOpenAtLoginOn()
   )
   registerPromptThirdPartyNoticesHandlers(store)
+  registerPromptSharedLibraryHandlers()
   ipcMain.handle('app:getFeatureWallAssetBaseUrl', (): string => getFeatureWallAssetBaseUrl())
 
   ipcMain.handle('app:getIdentity', (): AppIdentity => {
