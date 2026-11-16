@@ -31,6 +31,7 @@ import {
 } from './accounts-pane-action-errors'
 import { getClaudeAccountLabel } from '@/lib/claude-account-label'
 import { handleRunningClaudeSessionsAfterSwitch } from '@/lib/claude-account-switch-sessions'
+import { selectClaudeProviderAccount } from '@/runtime/runtime-provider-accounts-client'
 
 type CodexActionContext = {
   settings: GlobalSettings
@@ -154,6 +155,18 @@ type ClaudeActionContext = {
   isCurrentAccountOwner: () => boolean
 }
 
+/** The login the next Claude uses: the selected saved account's, or System default's. */
+function activeClaudeEmail(
+  state: ClaudeRateLimitAccountsState,
+  accountId: string | null
+): string | undefined {
+  const email =
+    accountId === null
+      ? state.systemDefaultEmail
+      : state.accounts.find((account) => account.id === accountId)?.email
+  return email?.toLowerCase()
+}
+
 export function createClaudeAccountActionRunner(
   context: ClaudeActionContext
 ): ClaudeAccountActionRunner {
@@ -177,7 +190,11 @@ export function createClaudeAccountActionRunner(
     }
   }
 
-  return async (action, operation, actionRuntime = accountRuntime): Promise<void> => {
+  const run: ClaudeAccountActionRunner = async (
+    action,
+    operation,
+    actionRuntime = accountRuntime
+  ): Promise<void> => {
     const previousActiveAccountId = getProviderAccountActiveIdForView(claudeAccounts, actionRuntime)
     setClaudeAction(action)
     try {
@@ -218,7 +235,28 @@ export function createClaudeAccountActionRunner(
           }
         })
       } else if (action === 'adding') {
-        showUpdatedToast()
+        const added = next.accounts.find(
+          (account) => !claudeAccounts.accounts.some((known) => known.id === account.id)
+        )
+        if (added && added.email.toLowerCase() !== activeClaudeEmail(next, nextActiveAccountId)) {
+          // A login just made is the one the user wants now; selecting it moves every session too.
+          await run(`select:${added.id}`, () =>
+            selectClaudeProviderAccount(accountOwner, {
+              accountId: added.id,
+              runtime: actionRuntime.runtime,
+              wslDistro: actionRuntime.wslDistro
+            })
+          )
+        } else {
+          // The new login is already the one in use (often System default), so nothing needs selecting.
+          toast.success(
+            translate(
+              'accounts.claude.addedInUse',
+              'Claude account saved. All sessions already use {{account}}.',
+              { account: added?.email ?? getClaudeAccountLabel(next, nextActiveAccountId) }
+            )
+          )
+        }
       }
     } catch (error) {
       if (isClaudeAccountCancellation(error)) {
@@ -237,4 +275,5 @@ export function createClaudeAccountActionRunner(
       setClaudeAction('idle')
     }
   }
+  return run
 }

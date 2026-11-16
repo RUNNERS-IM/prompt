@@ -110,6 +110,8 @@ type ColumnKey =
   | 'last'
   | 'agent'
   | 'resume'
+  | 'limit'
+  | 'action'
 
 const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, string>>>> = {
   en: {
@@ -124,7 +126,9 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     state: 'STATE',
     last: 'LAST',
     agent: 'AGENT',
-    resume: 'RESUME ID'
+    resume: 'RESUME ID',
+    limit: 'LIMIT',
+    action: 'ACTION'
   },
   ko: {
     id: 'ID',
@@ -138,7 +142,9 @@ const COLUMN_LABELS: Readonly<Record<CliLocale, Readonly<Record<ColumnKey, strin
     state: '상태',
     last: '마지막',
     agent: '에이전트',
-    resume: '재개 ID'
+    resume: '재개 ID',
+    limit: '한도',
+    action: '처리'
   }
 }
 

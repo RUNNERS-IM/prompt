@@ -242,7 +242,9 @@
       "failure": {
         "signIn": "Oturum açmak gerekli",
         "usageLimit": "Kullanım sınırına ulaşıldı",
-        "overloaded": "Sunucu meşgul"
+        "overloaded": "Sunucu meşgul",
+        "failed": "Başarısız",
+        "failedWith": "Başarısız: {{message}}"
       },
       "noUpdateHours_one": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
       "noUpdateHours_other": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
@@ -252,7 +254,10 @@
       "restartSession": "Yeniden başlat",
       "resumeFailed": "Bu oturum yeniden açılamadı",
       "retryResume": "Yeniden dene",
-      "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor"
+      "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor",
+      "interruptedByUser": "Kullanıcı tarafından durduruldu",
+      "interrupted": "Durduruldu",
+      "unconfirmed": "Doğrulanamadı"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
@@ -21403,11 +21408,17 @@
         "reviewBody_other": "Diğer {{count}} Claude oturumu {{next}} hesabına taşınmadı.",
         "reviewBody_one": "Diğer {{count}} Claude oturumu {{next}} hesabına taşınmadı.",
         "body_other": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler.",
-        "body_one": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler."
+        "body_one": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler.",
+        "continuePrompt": "Claude hesabı değişti. Lütfen yaptığın işe devam et.",
+        "restartedOne": "{{account}} üzerinde 1 Claude oturumu yeniden başlatıldı",
+        "restartedOther": "{{account}} üzerinde {{count}} Claude oturumu yeniden başlatıldı",
+        "restartedWithFailures": "{{done}} Claude oturumu yeniden başlatıldı · {{failed}} başarısız",
+        "restartWaiting": "{{account}} üzerinde {{count}} Claude oturumundan {{done}} tanesi yeniden başlatıldı. Kalanlar sıraları bittiğinde veya sekmeleri açıldığında yeniden başlar."
       },
       "loginSync": {
         "previousLogin": "önceki oturum açma"
-      }
+      },
+      "addedInUse": "Claude hesabı kaydedildi. Tüm oturumlar zaten {{account}} kullanıyor."
     },
     "managedData": {
       "description": "Orca ana makinesindeki bir terminalde bu komutu çalıştırarak hesap ekleyin. Seçim, o ana makinede açıkça başlatılan yeni ajanlar için geçerlidir; doğrudan SSH aktarması ve Windows ana makinesindeki WSL başlatmaları kendi kimlik bilgilerini kullanır.",

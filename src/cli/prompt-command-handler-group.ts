@@ -22,7 +22,8 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
     'prompt session rename',
     'prompt session read',
     'prompt session send',
-    'prompt session wait'
+    'prompt session wait',
+    'prompt session restart'
   ],
   load: async () => ({
     ...(await import('./handlers/prompt-project.js')).PROMPT_PROJECT_HANDLERS,

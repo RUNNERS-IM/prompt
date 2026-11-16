@@ -14,3 +14,18 @@ export function getClaudeAccountLabel(
     translate('accounts.claude.unnamedAccount', 'Claude account')
   )
 }
+
+/** A saved account signed in as the active System default: the same login, so one row names it. */
+export function isActiveSystemDefaultTwin(
+  account: ClaudeRateLimitAccountsState['accounts'][number],
+  state: Pick<ClaudeRateLimitAccountsState, 'systemDefaultEmail'>,
+  activeAccountId: string | null
+): boolean {
+  const email = state.systemDefaultEmail?.toLowerCase()
+  return (
+    activeAccountId === null &&
+    account.managedAuthRuntime !== 'wsl' &&
+    !!email &&
+    account.email.toLowerCase() === email
+  )
+}

@@ -4,11 +4,14 @@ import { useAppStore } from '@/store'
 import type { CodexAccountSelectionTarget } from '../../../shared/codex-selection-lane'
 import type { ClaudeAccountSwitchRunningSessions } from '../../../shared/claude-account-switch-settings'
 import type { RuntimeClientTarget } from '../../../shared/runtime-client-target'
-import { INLINE_ACTION_CLASS_NAMES } from '@/components/ui/sonner'
 import { getClaudeAccountLabel } from './claude-account-label'
+import { announceRestart, type RestartingPane } from './claude-account-restart-toast'
 import { findClaudeLoginFollowers } from './claude-login-followers'
 import { setClaudeLoginUnmovedPanes } from './claude-login-unmoved-panes'
-import { isStoppedAtUsageLimit } from './claude-usage-limit-sessions'
+import {
+  findClaudeSessionsStoppedAtUsageLimit,
+  markContinueAfterRestart
+} from './claude-usage-limit-sessions'
 import type { ClaudeHostFolders } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
@@ -57,12 +60,45 @@ function queueClaudeRestarts(ptyIds: string[]): void {
   useAppStore.getState().queuePaneAccountRestarts(ptyIds, 'claude')
 }
 
+/**
+ * Restart these sessions on the selected account. Those stopped at their usage limit, picker included,
+ * get a continue line once resumed. All are queued together; each runs as soon as its turn allows.
+ */
+async function restartClaudeSessions(
+  sessions: readonly ClaudeSessionMoveCandidate[],
+  announce: RestartAnnouncement
+): Promise<void> {
+  const stopped = await findClaudeSessionsStoppedAtUsageLimit(sessions)
+  queueClaudeRestartsWithContinue(sessions, stopped, announce)
+}
+
+type RestartAnnouncement = {
+  account: string
+  others?: number
+  review?: () => void
+  /** The continue line; the window's own wording when absent. */
+  continueText?: string
+}
+
+/** Queue the restarts already sorted out; `stopped` get the continue line once resumed. */
+export function queueClaudeRestartsWithContinue(
+  sessions: readonly ClaudeSessionMoveCandidate[],
+  stopped: readonly ClaudeSessionMoveCandidate[],
+  announce: RestartAnnouncement
+): void {
+  const panes = currentPanes(sessions)
+  const stoppedPtyIds = currentPanes(stopped).map((pane) => pane.ptyId)
+  markContinueAfterRestart(stoppedPtyIds, announce.continueText)
+  queueClaudeRestarts(panes.map((pane) => pane.ptyId))
+  announceRestart(panes, announce.account, announce.others ?? 0, announce.review)
+}
+
 /** Why now: a reattach can rebind a pane while the dialog is open, and a closed pane has none. */
-function currentPtyIds(sessions: readonly ClaudeSessionMoveCandidate[]): string[] {
+function currentPanes(sessions: readonly ClaudeSessionMoveCandidate[]): RestartingPane[] {
   const layouts = useAppStore.getState().terminalLayoutsByTabId
   return sessions.flatMap((session) => {
     const ptyId = layouts[session.tabId]?.ptyIdsByLeafId?.[session.leafId]
-    return ptyId ? [ptyId] : []
+    return ptyId ? [{ ptyId, tabId: session.tabId, leafId: session.leafId }] : []
   })
 }
 
@@ -85,7 +121,7 @@ export function answerClaudeAccountSwitchPrompt(
     // Why filtered: only sessions this question listed may restart.
     const listed = [...request.sessions.onAccount, ...request.sessions.elsewhere]
     const picked = chosen ? listed.filter((session) => chosen.includes(session.ptyId)) : listed
-    queueClaudeRestarts(currentPtyIds(picked))
+    void restartClaudeSessions(picked, { account: request.nextAccountLabel })
   }
   if (options.dontAskAgain) {
     void useAppStore.getState().updateSettings({ claudeAccountSwitchRunningSessions: 'restart' })
@@ -162,8 +198,7 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
       getClaudeAccountLabel(args.before.state, args.before.accountId)
     )
   }
-  // Why: other sessions are listed only alongside a move, so parallel-account users get no prompt.
-  if (!found || found.onAccount.length === 0) {
+  if (!found) {
     return 'show-confirmation'
   }
   const nextAccountLabel = getClaudeAccountLabel(args.after.state, args.after.accountId)
@@ -179,27 +214,37 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     nextAccountLabel
   }
   if (policy === 'limited') {
-    const stopped = found.onAccount.filter(isStoppedAtUsageLimit)
-    if (stopped.length > 0) {
-      queueClaudeRestarts(stopped.map((candidate) => candidate.ptyId))
-      announceRestart(stopped.length, nextAccountLabel, 0, () => {})
+    const stopped = await findClaudeSessionsStoppedAtUsageLimit(found.onAccount)
+    if (stopped.length > 0 && generation === switchGeneration) {
+      await restartClaudeSessions(stopped, { account: nextAccountLabel })
     }
     return 'handled'
   }
   if (policy === 'restart') {
-    queueClaudeRestarts(found.onAccount.map((candidate) => candidate.ptyId))
-    const others = found.elsewhere.length + found.cantMove.length
-    announceRestart(found.onAccount.length, nextAccountLabel, others, () => {
-      if (generation === switchGeneration) {
-        setPrompt({
-          id: generation,
-          review: true,
-          sessions: { ...sessions, onAccount: [] },
-          ...labels
-        })
+    // Why every account: whichever way the account changed, all of this Mac's Claude sessions follow it.
+    const moving = [...found.onAccount, ...found.elsewhere]
+    if (moving.length === 0) {
+      return 'show-confirmation'
+    }
+    await restartClaudeSessions(moving, {
+      account: nextAccountLabel,
+      others: found.cantMove.length,
+      review: () => {
+        if (generation === switchGeneration) {
+          setPrompt({
+            id: generation,
+            review: true,
+            sessions: { ...sessions, onAccount: [], elsewhere: [] },
+            ...labels
+          })
+        }
       }
     })
     return 'handled'
+  }
+  // Why: other sessions are listed only alongside a move, so parallel-account users get no prompt.
+  if (found.onAccount.length === 0) {
+    return 'show-confirmation'
   }
   setPrompt({ id: generation, sessions, ...labels })
   return 'handled'
@@ -244,12 +289,13 @@ export async function handleRunningClaudeSessionsAfterLogin(args: {
       : getClaudeAccountLabel(args.host ?? { accounts: [] }, found.accountId)
   if (policy === 'restart' || policy === 'limited') {
     const restarting =
-      policy === 'limited' ? found.sessions.filter(isStoppedAtUsageLimit) : found.sessions
-    if (restarting.length === 0) {
+      policy === 'limited'
+        ? await findClaudeSessionsStoppedAtUsageLimit(found.sessions)
+        : found.sessions
+    if (restarting.length === 0 || generation !== switchGeneration) {
       return 'nothing'
     }
-    queueClaudeRestarts(restarting.map((session) => session.ptyId))
-    announceRestart(restarting.length, nextAccountLabel, 0, () => {})
+    await restartClaudeSessions(restarting, { account: nextAccountLabel })
     return 'handled'
   }
   setPrompt({
@@ -262,41 +308,6 @@ export async function handleRunningClaudeSessionsAfterLogin(args: {
     nextAccountLabel
   })
   return 'handled'
-}
-
-/** Name the sessions left behind and offer the same list, without the ones already restarting. */
-function announceRestart(count: number, account: string, others: number, review: () => void): void {
-  const title =
-    count === 1
-      ? translate(
-          'accounts.claude.switchSessions.restartingOne',
-          'Restarting 1 Claude session on {{account}}',
-          { account }
-        )
-      : translate(
-          'accounts.claude.switchSessions.restartingOther',
-          'Restarting {{count}} Claude sessions on {{account}}',
-          { count, account }
-        )
-  if (others === 0) {
-    toast.success(title)
-    return
-  }
-  toast.success(title, {
-    description:
-      others === 1
-        ? translate('accounts.claude.switchSessions.notMovedOne', "1 other session wasn't moved.")
-        : translate(
-            'accounts.claude.switchSessions.notMovedOther',
-            "{{count}} other sessions weren't moved.",
-            { count: others }
-          ),
-    classNames: INLINE_ACTION_CLASS_NAMES,
-    action: {
-      label: translate('accounts.claude.switchSessions.review', 'Review'),
-      onClick: review
-    }
-  })
 }
 
 /** Why a toast: these sessions keep the previous account, and only a manual restart moves them. */

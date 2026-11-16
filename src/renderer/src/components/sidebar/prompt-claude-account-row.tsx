@@ -12,9 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { useModalReturnFocus } from '@/hooks/useModalReturnFocus'
 import { useResetCountdownClock } from '@/hooks/useResetCountdownClock'
 import { formatLocalizedResetCountdown } from '@/lib/reset-duration-label'
-import { getClaudeAccountLabel } from '@/lib/claude-account-label'
+import { getClaudeAccountLabel, isActiveSystemDefaultTwin } from '@/lib/claude-account-label'
 import { handleRunningClaudeSessionsAfterSwitch } from '@/lib/claude-account-switch-sessions'
 import { signInToClaudeAccount } from '@/lib/claude-account-sign-in'
 import type { ClaudeRateLimitAccountsState } from '../../../../shared/managed-account-types'
@@ -104,6 +105,9 @@ function AccountUsage({ limits }: { limits: ProviderRateLimits | null }): React.
 export function PromptClaudeAccountRow(): React.JSX.Element | null {
   const [accounts, setAccounts] = useState<ClaudeRateLimitAccountsState>(EMPTY)
   const [switching, setSwitching] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  // Why: Radix hands focus back to the trigger on close, so the next Enter or Space reopened the menu.
+  const { skipReturnFocus } = useModalReturnFocus(menuOpen)
   const syncKey = useAppStore((s) => getClaudeAccountSyncKey(s.settings))
   const autoPick = useAppStore((s) => s.settings?.claudeAccountAutoPick === true)
   const activeUsage = useAppStore((s) =>
@@ -129,7 +133,11 @@ export function PromptClaudeAccountRow(): React.JSX.Element | null {
     return null
   }
   const activeId = getProviderAccountActiveIdForView(accounts, HOST_VIEW)
-  const hostAccounts = accounts.accounts.filter((account) => account.managedAuthRuntime !== 'wsl')
+  const hostAccounts = accounts.accounts.filter(
+    (account) =>
+      account.managedAuthRuntime !== 'wsl' &&
+      !isActiveSystemDefaultTwin(account, accounts, activeId)
+  )
   const activeLabel = getClaudeAccountLabel(accounts, activeId)
   const activeWeekly = activeUsage?.weekly ? clampUsedPercent(activeUsage.weekly.usedPercent) : null
 
@@ -169,6 +177,8 @@ export function PromptClaudeAccountRow(): React.JSX.Element | null {
   }
 
   const openManage = (): void => {
+    // Settings takes focus itself; handing it back to the terminal would pull it away again.
+    skipReturnFocus()
     const store = useAppStore.getState()
     store.openSettingsTarget({ pane: 'prompt-account', repoId: null, sectionId: 'accounts-claude' })
     store.openSettingsPage()
@@ -176,7 +186,9 @@ export function PromptClaudeAccountRow(): React.JSX.Element | null {
 
   return (
     <DropdownMenu
+      open={menuOpen}
       onOpenChange={(open) => {
+        setMenuOpen(open)
         if (open) {
           load()
           void useAppStore.getState().fetchInactiveClaudeAccountUsage()
@@ -217,6 +229,7 @@ export function PromptClaudeAccountRow(): React.JSX.Element | null {
         sideOffset={4}
         className="w-80"
         data-prompt-claude-account-menu=""
+        onCloseAutoFocus={(event) => event.preventDefault()}
       >
         <DropdownMenuLabel>
           {translate('prompt.claudeAccount.title', 'Claude account')}

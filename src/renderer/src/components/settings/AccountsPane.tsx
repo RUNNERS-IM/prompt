@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { useAppStore } from '../../store'
 import { translate } from '@/i18n/i18n'
 import { isWebClientLocation } from '@/lib/web-client-location'
+import { isActiveSystemDefaultTwin } from '@/lib/claude-account-label'
 import {
   emptyClaudeAccountsState,
   emptyCodexAccountsState,
@@ -160,8 +161,15 @@ export function AccountsPane({
     remoteOwner: isRemoteAccountScope,
     ownerPlatform: accountOwnerPlatform
   }
-  const visibleClaudeAccounts = claudeAccounts.accounts.filter((account) =>
-    providerAccountMatchesView(account, accountRuntime, accountVisibilityOptions)
+  const activeClaudeAccountId = getProviderAccountActiveIdForView(claudeAccounts, accountRuntime)
+  const visibleClaudeAccounts = claudeAccounts.accounts.filter(
+    (account) =>
+      providerAccountMatchesView(account, accountRuntime, accountVisibilityOptions) &&
+      // Prompt: the System default row already names this login.
+      !(
+        accountRuntime.runtime === 'host' &&
+        isActiveSystemDefaultTwin(account, claudeAccounts, activeClaudeAccountId)
+      )
   )
   const visibleCodexAccounts = codexAccounts.accounts.filter((account) =>
     providerAccountMatchesView(account, accountRuntime, accountVisibilityOptions)

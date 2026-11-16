@@ -240,7 +240,9 @@
       "failure": {
         "signIn": "需要登录",
         "usageLimit": "已达到用量上限",
-        "overloaded": "服务器繁忙"
+        "overloaded": "服务器繁忙",
+        "failed": "失败",
+        "failedWith": "失败：{{message}}"
       },
       "noUpdateHours_other": "{{count}} 小时无更新 · 可能已卡住",
       "noUpdateDays_other": "{{count}} 天无更新 · 可能已卡住",
@@ -248,7 +250,10 @@
       "restartSession": "重新启动",
       "resumeFailed": "无法重新打开此会话",
       "retryResume": "重试",
-      "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}"
+      "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}",
+      "interruptedByUser": "已被用户中断",
+      "interrupted": "已中断",
+      "unconfirmed": "无法确认"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",
@@ -21246,11 +21251,17 @@
         "review": "查看",
         "restartCount_other": "重启 {{count}} 个会话",
         "reviewBody_other": "其他 {{count}} 个 Claude 会话未移至 {{next}}。",
-        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。"
+        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。",
+        "continuePrompt": "Claude 账户已更换。请继续之前的工作。",
+        "restartedOne": "已在 {{account}} 上重新启动 1 个 Claude 会话",
+        "restartedOther": "已在 {{account}} 上重新启动 {{count}} 个 Claude 会话",
+        "restartedWithFailures": "已重启 {{done}} 个会话 · 失败 {{failed}} 个",
+        "restartWaiting": "已在 {{account}} 上重新启动 {{count}} 个 Claude 会话中的 {{done}} 个。其余会话将在当前任务结束或打开其标签页时重新启动。"
       },
       "loginSync": {
         "previousLogin": "之前的登录"
-      }
+      },
+      "addedInUse": "已保存 Claude 账户。所有会话已在使用 {{account}}。"
     },
     "hostSignIn": {
       "copied": "已复制",

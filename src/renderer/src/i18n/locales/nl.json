@@ -21504,11 +21504,17 @@
         "reviewBody_one": "{{count}} andere Claude-sessie is niet verplaatst naar {{next}}.",
         "reviewBody_other": "{{count}} andere Claude-sessies zijn niet verplaatst naar {{next}}.",
         "body_one": "{{count}} Claude-sessie draait nog op {{previous}}. Bij opnieuw starten wordt het gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
-        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten."
+        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
+        "continuePrompt": "Het Claude-account is gewijzigd. Ga verder met het werk waarmee je bezig was.",
+        "restartedOne": "1 Claude-sessie opnieuw gestart op {{account}}",
+        "restartedOther": "{{count}} Claude-sessies opnieuw gestart op {{account}}",
+        "restartedWithFailures": "{{done}} Claude-sessies opnieuw gestart · {{failed}} mislukt",
+        "restartWaiting": "{{done}} van {{count}} Claude-sessies opnieuw gestart op {{account}}. De rest start opnieuw zodra hun beurt eindigt of hun tabblad wordt geopend."
       },
       "loginSync": {
         "previousLogin": "de vorige login"
-      }
+      },
+      "addedInUse": "Claude-account opgeslagen. Alle sessies gebruiken al {{account}}."
     },
     "managedData": {
       "description": "Accounts toevoegen door deze opdracht uit te voeren in een terminal op de Orca-host. De selectie geldt voor nieuwe expliciete agentstarts op die host; directe SSH-relay en door Windows gehoste WSL-starts gebruiken eigen inloggegevens.",
@@ -23258,7 +23264,9 @@
       "failure": {
         "signIn": "Inloggen vereist",
         "usageLimit": "Gebruikslimiet bereikt",
-        "overloaded": "Server druk bezet"
+        "overloaded": "Server druk bezet",
+        "failed": "Mislukt",
+        "failedWith": "Mislukt: {{message}}"
       },
       "tool": {
         "command": "Opdracht uitvoeren",
@@ -23278,7 +23286,10 @@
       "restartSession": "Opnieuw starten",
       "resumeFailed": "Kan deze sessie niet opnieuw openen",
       "retryResume": "Opnieuw proberen",
-      "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide"
+      "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide",
+      "interruptedByUser": "Onderbroken door gebruiker",
+      "interrupted": "Onderbroken",
+      "unconfirmed": "Kon niet bevestigen"
     },
     "timeAgo": {
       "now": "nu",

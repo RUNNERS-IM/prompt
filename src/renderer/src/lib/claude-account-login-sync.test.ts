@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ClaudeAccountSwitchRunningSessions } from '../../../shared/claude-account-switch-settings'
 import { findClaudeLoginFollowers } from './claude-login-followers'
+import { resetClaudeAccountRestartToastForTests } from './claude-account-restart-toast'
 import {
   getClaudeAccountSwitchPrompt,
   handleRunningClaudeSessionsAfterLogin,
@@ -10,12 +11,18 @@ import {
 const store = vi.hoisted(() => ({
   settings: {} as { claudeAccountSwitchRunningSessions?: ClaudeAccountSwitchRunningSessions },
   queuePaneAccountRestarts: vi.fn(),
-  consumePendingPaneAccountRestart: vi.fn()
+  consumePendingPaneAccountRestart: vi.fn(),
+  agentStatusByPaneKey: {},
+  pendingPaneAccountRestarts: {},
+  terminalLayoutsByTabId: { 'tab-2': { ptyIdsByLeafId: { 'leaf-2': 'pty-2' } } }
 }))
-const toastSuccess = vi.hoisted(() => vi.fn())
+const toastLoading = vi.hoisted(() => vi.fn())
 
-vi.mock('@/store', () => ({ useAppStore: { getState: () => store } }))
-vi.mock('sonner', () => ({ toast: { success: toastSuccess } }))
+vi.mock('@/store', () => ({ useAppStore: { getState: () => store, subscribe: () => () => {} } }))
+vi.mock('sonner', () => ({ toast: { success: vi.fn(), loading: toastLoading, info: vi.fn() } }))
+vi.mock('./active-agent-note-target', () => ({
+  findActiveRuntimeTerminal: vi.fn(async () => null)
+}))
 vi.mock('./claude-login-followers', () => ({ findClaudeLoginFollowers: vi.fn() }))
 
 const follower = { ptyId: 'pty-2', worktreeId: 'wt-1', tabId: 'tab-2', leafId: 'leaf-2' }
@@ -25,6 +32,7 @@ describe('handleRunningClaudeSessionsAfterLogin', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     resetClaudeAccountSwitchSessionsForTests()
+    resetClaudeAccountRestartToastForTests()
     store.settings = {}
     vi.mocked(findClaudeLoginFollowers).mockResolvedValue({
       accountId: null,
@@ -50,7 +58,7 @@ describe('handleRunningClaudeSessionsAfterLogin', () => {
     store.settings = { claudeAccountSwitchRunningSessions: 'restart' }
     await handleRunningClaudeSessionsAfterLogin({ paneKey: 'tab-1:leaf-1', host: HOST })
     expect(store.queuePaneAccountRestarts).toHaveBeenCalledWith(['pty-2'], 'claude')
-    expect(toastSuccess).toHaveBeenCalled()
+    expect(toastLoading).toHaveBeenCalled()
     expect(getClaudeAccountSwitchPrompt()).toBeNull()
   })
 

@@ -21134,11 +21134,17 @@
         "review": "Review",
         "restartCount_other": "Mulai ulang {{count}} sesi",
         "reviewBody_other": "{{count}} sesi Claude lainnya tidak dipindahkan ke {{next}}.",
-        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang."
+        "body_other": "{{count}} sesi Claude masih berjalan di {{previous}}. Memulai ulang akan melanjutkan percakapan di {{next}}. Sesi yang sedang sibuk menunggu hingga idle sebelum dimulai ulang.",
+        "continuePrompt": "Akun Claude telah berganti. Silakan lanjutkan pekerjaan yang sedang dikerjakan.",
+        "restartedOne": "1 sesi Claude dimulai ulang di {{account}}",
+        "restartedOther": "{{count}} sesi Claude dimulai ulang di {{account}}",
+        "restartedWithFailures": "{{done}} sesi Claude dimulai ulang · {{failed}} gagal",
+        "restartWaiting": "{{done}} dari {{count}} sesi Claude dimulai ulang di {{account}}. Sisanya dimulai ulang saat gilirannya selesai atau tabnya dibuka."
       },
       "loginSync": {
         "previousLogin": "login sebelumnya"
-      }
+      },
+      "addedInUse": "Akun Claude disimpan. Semua sesi sudah memakai {{account}}."
     },
     "managedData": {
       "description": "Tambahkan akun dengan menjalankan perintah ini di terminal pada host Orca. Pilihan berlaku untuk peluncuran agen eksplisit baru di host tersebut; relay SSH langsung dan peluncuran WSL yang dihosting Windows memakai kredensial masing-masing.",
@@ -22869,7 +22875,9 @@
       "failure": {
         "signIn": "Perlu masuk",
         "usageLimit": "Batas penggunaan tercapai",
-        "overloaded": "Server sibuk"
+        "overloaded": "Server sibuk",
+        "failed": "Gagal",
+        "failedWith": "Gagal: {{message}}"
       },
       "tool": {
         "command": "Menjalankan perintah",
@@ -22887,7 +22895,10 @@
       "restartSession": "Mulai ulang",
       "resumeFailed": "Tidak dapat membuka kembali sesi ini",
       "retryResume": "Coba lagi",
-      "resumedInTabFolder": "[Prompt] Melanjutkan di folder ini, bukan di {{folder}} tempat terakhir berjalan"
+      "resumedInTabFolder": "[Prompt] Melanjutkan di folder ini, bukan di {{folder}} tempat terakhir berjalan",
+      "interruptedByUser": "Dihentikan oleh pengguna",
+      "interrupted": "Terhenti",
+      "unconfirmed": "Tidak dapat dikonfirmasi"
     },
     "timeAgo": {
       "now": "sekarang",

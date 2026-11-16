@@ -251,5 +251,24 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     'Wait until a session is idle or has exited',
     'prompt session wait [<session>] --for exit|tui-idle [--timeout-ms <ms>] [--json]',
     ['for', 'timeout-ms']
+  ),
+  sessionSpec(
+    'restart',
+    'Move Claude sessions onto the selected account and continue their work',
+    'prompt session restart [<session>] [--all] [--limited] [--continue <text>] [--json]',
+    ['all', 'limited', 'continue'],
+    {
+      notes: [
+        '--all takes every Claude session on this Mac; --limited only those stopped at their usage limit, including ones waiting on the limit picker. --limited alone means --all --limited.',
+        'Each session gets what moves it: one already on the selected login only receives the continue line; one on another account folder, or waiting on the limit picker, restarts on the selected account and then receives the line. A session still working restarts after its turn ends.',
+        'Only sessions stopped at their limit receive the line. --continue replaces its wording.',
+        'Needs the Prompt window open; it owns the sessions.'
+      ],
+      examples: [
+        'prompt session restart --limited',
+        'prompt session restart --all',
+        'prompt session restart app --continue "Carry on with the release checks."'
+      ]
+    }
   )
 ]
