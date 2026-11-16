@@ -77,7 +77,7 @@ export function AgentDefaultSetting({
         title={translate('auto.components.settings.AgentsPane.385212c7a1', 'Default Agent')}
         description={description}
       />
-      <div className="flex flex-wrap gap-2">
+      <div data-prompt-picker="" className="flex flex-wrap gap-2">
         <DefaultAgentPill
           active={defaultAgent === null}
           onClick={() => onSetDefault(defaultAgent === null ? 'blank' : null)}

@@ -33,6 +33,7 @@ function ToggleGroup({
   return (
     <ToggleGroupPrimitive.Root
       data-slot="toggle-group"
+      data-prompt-picker=""
       data-variant={variant}
       data-size={size}
       data-spacing={spacing}
