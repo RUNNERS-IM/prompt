@@ -71,7 +71,10 @@ function prefersDark(store: Pick<Store, 'getSettings'> | null): boolean {
   return theme === 'dark' || (theme === 'system' && nativeTheme.shouldUseDarkColors)
 }
 
-function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
+function showNoticesWindow(
+  store: Pick<Store, 'getSettings'> | null,
+  prepare?: (window: BrowserWindow) => void
+): BrowserWindow {
   const existing = noticesWindow
   if (existing && !existing.isDestroyed()) {
     if (existing.isMinimized()) {
@@ -79,7 +82,7 @@ function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
     }
     existing.show()
     existing.focus()
-    return
+    return existing
   }
 
   const title = (): string => translateMain('prompt.about.notices', 'Open Source Notices')
@@ -103,6 +106,7 @@ function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
     }
   })
   noticesWindow = window
+  prepare?.(window)
   // Links leave through the default browser; the window itself never navigates away.
   installPrivilegedWindowNavigationPolicy(window.webContents)
   window.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) =>
@@ -134,4 +138,13 @@ function showNoticesWindow(store: Pick<Store, 'getSettings'> | null): void {
       query: { view: 'notices' }
     })
   }
+  return window
+}
+
+/** 시험 촬영 모드에서만 부른다. prepare 가 창을 숨기고 앞으로 띄우지 않게 한 뒤에 읽기 시작한다. */
+export function openPromptNoticesWindowForTestShots(
+  store: Pick<Store, 'getSettings'> | null,
+  prepare: (window: BrowserWindow) => void
+): BrowserWindow {
+  return showNoticesWindow(store, prepare)
 }
