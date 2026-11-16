@@ -215,12 +215,57 @@
       "save": "保存",
       "cancel": "取消",
       "emptyTitle": "还没有保存的提示词",
-      "emptyBody": "保存常用提示词,点击即可放入输入行。",
       "noTerminal": "请先打开终端会话",
       "chatView": "要使用提示词,请将此会话切换到终端视图",
       "listView": "列表视图",
       "gridView": "图标视图",
-      "upFolder": "上一级文件夹"
+      "upFolder": "上一级文件夹",
+      "groupMine": "我的",
+      "groupFrequent": "常用",
+      "groupShared": "共享",
+      "noResults": "没有匹配的提示词",
+      "defaults": {
+        "plan": {
+          "title": "工作计划",
+          "body": "修改代码之前，先阅读相关文件并写出分步计划。列出要改动的文件和风险，等我同意后再开始。"
+        },
+        "options": {
+          "title": "用选项询问",
+          "body": "如果有多种合理做法，请用编号选项列出优缺点并推荐一个。在我选择之前不要开始。"
+        },
+        "rootCause": {
+          "title": "查找原因",
+          "body": "在修复之前先找出这个问题的原因。给出日志、代码行等证据，并分开说明哪些已确认、哪些是推测。"
+        },
+        "review": {
+          "title": "审查改动",
+          "body": "检查当前改动中的错误、遗漏的情况和不清楚的命名。按严重程度从高到低列出，并注明文件和行号。"
+        },
+        "overview": {
+          "title": "说明结构",
+          "body": "说明这个项目是怎样组织的：主要文件夹、从哪里启动、数据在各部分之间如何流动。简短易懂。"
+        },
+        "tests": {
+          "title": "编写测试",
+          "body": "为我刚修改的代码编写测试。覆盖正常情况、边界情况和一个失败情况，然后运行并展示结果。"
+        },
+        "buildTest": {
+          "title": "构建并测试",
+          "body": "运行构建和测试。如果失败，展示错误和原因，修复后再运行一次。"
+        },
+        "commit": {
+          "title": "提交",
+          "body": "按目的把改动分组，每组提交一次，提交信息写清改了什么、为什么改。提交前先给我看列表。"
+        },
+        "status": {
+          "title": "进度",
+          "body": "总结目前的进度：已完成的、进行中的、剩下的，以及被卡住的。"
+        },
+        "handoff": {
+          "title": "交接说明",
+          "body": "写一份交接说明，让别人能接着做：目标、改了什么、如何运行和检查，以及待解决的问题。"
+        }
+      }
     },
     "sessionRow": {
       "helpers": "辅助 {{count}}",
@@ -240,7 +285,9 @@
       "failure": {
         "signIn": "需要登录",
         "usageLimit": "已达到用量上限",
-        "overloaded": "服务器繁忙"
+        "overloaded": "服务器繁忙",
+        "failed": "失败",
+        "failedWith": "失败：{{message}}"
       },
       "noUpdateHours_other": "{{count}} 小时无更新 · 可能已卡住",
       "noUpdateDays_other": "{{count}} 天无更新 · 可能已卡住",
@@ -248,7 +295,10 @@
       "restartSession": "重新启动",
       "resumeFailed": "无法重新打开此会话",
       "retryResume": "重试",
-      "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}"
+      "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}",
+      "interruptedByUser": "已被用户中断",
+      "interrupted": "已中断",
+      "unconfirmed": "无法确认"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",
@@ -21246,11 +21296,17 @@
         "review": "查看",
         "restartCount_other": "重启 {{count}} 个会话",
         "reviewBody_other": "其他 {{count}} 个 Claude 会话未移至 {{next}}。",
-        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。"
+        "body_other": "{{count}} 个 Claude 会话仍在 {{previous}} 上运行。重启后，各对话将在 {{next}} 上继续。忙碌的会话会等待空闲后再重启。",
+        "continuePrompt": "Claude 账户已更换。请继续之前的工作。",
+        "restartedOne": "已在 {{account}} 上重新启动 1 个 Claude 会话",
+        "restartedOther": "已在 {{account}} 上重新启动 {{count}} 个 Claude 会话",
+        "restartedWithFailures": "已重启 {{done}} 个会话 · 失败 {{failed}} 个",
+        "restartWaiting": "已在 {{account}} 上重新启动 {{count}} 个 Claude 会话中的 {{done}} 个。其余会话将在当前任务结束或打开其标签页时重新启动。"
       },
       "loginSync": {
         "previousLogin": "之前的登录"
-      }
+      },
+      "addedInUse": "已保存 Claude 账户。所有会话已在使用 {{account}}。"
     },
     "hostSignIn": {
       "copied": "已复制",

@@ -17,6 +17,7 @@ import {
   RemoveAccountParams,
   SelectAccountParams,
   SelectClaudeAccountParams,
+  RestartClaudeSessionsParams,
   SelectCodexAccountForTargetParams,
   HostAccountSignInStartParams,
   HostAccountSignInWaitParams,
@@ -25,6 +26,7 @@ import {
 } from '../../../../shared/rpc-contract/accounts-params'
 import { HostAccountLaunchEnvParams } from '../../../../shared/host-account-launch-env'
 import { emitClaudeAccountSwitchedByCommand } from '../../../claude-accounts/claude-account-switch-events'
+import { requestClaudeSessionRestart } from '../../../claude-accounts/claude-session-restart-requests'
 
 // Use a per-process counter: same-millisecond subscriptions must not evict each other's cleanup.
 let accountsSubscriptionSeq = 0
@@ -152,6 +154,25 @@ const ACCOUNT_METHOD_DEFINITIONS = [
         emitClaudeAccountSwitchedByCommand({ before, after })
       }
       return after
+    }
+  }),
+  defineMethod({
+    // The window owns its panes, so it decides per session: a continue line, or a restart on the selected account.
+    name: 'accounts.restartClaudeSessions',
+    permission: 'workspace',
+    params: RestartClaudeSessionsParams,
+    handler: async (params, { clientKind }) => {
+      if (clientKind !== undefined) {
+        throw Object.assign(
+          new Error('accounts.restartClaudeSessions is available only to callers on this machine.'),
+          { code: 'forbidden' }
+        )
+      }
+      return requestClaudeSessionRestart({
+        ...(params.panes ? { panes: params.panes } : {}),
+        limitedOnly: params.limitedOnly === true,
+        ...(params.continueText ? { continueText: params.continueText } : {})
+      })
     }
   }),
   defineMethod({
@@ -284,7 +305,8 @@ const ACCOUNT_METHOD_DEFINITIONS = [
 // The desktop's launch-env push and unsubscribes never touch the account services.
 const ACCOUNT_SERVICE_FREE_METHODS: ReadonlySet<string> = new Set([
   'accounts.setHostLaunchEnv',
-  'accounts.unsubscribe'
+  'accounts.unsubscribe',
+  'accounts.restartClaudeSessions'
 ])
 
 export const ACCOUNT_METHODS = ACCOUNT_METHOD_DEFINITIONS.map((method) =>

@@ -224,6 +224,7 @@
     "cloud/**",
     ".github/actions/cloud-sql-rollout-lease/**",
     "tests/e2e/.cross-version-checkouts",
-    "src/renderer/src/components/runners-account/**"
+    "src/renderer/src/components/runners-account/**",
+    "src/main/runners-app-kit/**"
   ]
 }

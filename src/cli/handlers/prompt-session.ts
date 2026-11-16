@@ -4,10 +4,12 @@ import { getOptionalStringFlag, getRequiredStringFlag } from '../flags'
 import { printResult } from '../format'
 import { getOptionalWorktreeSelector, getTerminalHandle } from '../selectors'
 import { RuntimeClientError } from '../runtime/types'
+import type { PromptClaudeRestartResult } from '../../shared/prompt-claude-login-sync'
 import { columnHeaders, emptyListText, formatTable, shortId } from '../command-tree/prompt-output'
 import {
   listTerminals,
   resolvePromptProjectSelector,
+  terminalName,
   resolvePromptTerminalSelector
 } from '../command-tree/prompt-selectors'
 import { terminalRow } from './prompt-lists'
@@ -88,6 +90,48 @@ function resumeCommand(agent: string, resumeId: string): string {
     return `codex resume ${resumeId}`
   }
   throw new RuntimeClientError('invalid_argument', '--agent must be claude or codex.')
+}
+
+type PaneTerminal = { handle: string; name: string }
+
+function formatRestart(
+  result: PromptClaudeRestartResult,
+  terminals: Map<string, PaneTerminal>
+): string {
+  if (result.sessions.length === 0) {
+    return emptyListText()
+  }
+  return formatTable(
+    columnHeaders(['id', 'name', 'limit', 'action']),
+    result.sessions.map((session) => {
+      const terminal = terminals.get(`${session.tabId}:${session.leafId}`)
+      return [
+        terminal ? shortId(terminal.handle) : '-',
+        terminal?.name ?? '-',
+        session.limited ? 'stopped' : '-',
+        session.reason ? `${session.outcome} (${session.reason})` : session.outcome
+      ]
+    })
+  )
+}
+
+/** Which sessions `prompt session restart` looks at: one, or all of this Mac's (undefined). */
+async function restartPanes(
+  ctx: HandlerContext
+): Promise<{ tabId: string; leafId: string }[] | undefined> {
+  const all = ctx.flags.get('all') === true
+  const limited = ctx.flags.get('limited') === true
+  if (!getOptionalStringFlag(ctx.flags, 'session') && (all || limited)) {
+    return undefined
+  }
+  const handle = await sessionHandle(ctx)
+  const terminal = (await listTerminals(ctx.client)).result.terminals.find(
+    (candidate) => candidate.handle === handle
+  )
+  if (!terminal) {
+    throw new RuntimeClientError('selector_not_found', `Session ${shortId(handle)} is not open.`)
+  }
+  return [{ tabId: terminal.tabId, leafId: terminal.leafId }]
 }
 
 export const PROMPT_SESSION_HANDLERS: Record<string, CommandHandler> = {
@@ -209,5 +253,24 @@ export const PROMPT_SESSION_HANDLERS: Record<string, CommandHandler> = {
     assertNoAttachWithoutHost(ctx.flags)
     await onSessionTerminal('send')(ctx)
   },
-  'prompt session wait': onSessionTerminal('wait')
+  'prompt session wait': onSessionTerminal('wait'),
+  'prompt session restart': async (ctx) => {
+    const panes = await restartPanes(ctx)
+    const continueText = getOptionalStringFlag(ctx.flags, 'continue')
+    const [result, terminals] = await Promise.all([
+      ctx.client.call<PromptClaudeRestartResult>('accounts.restartClaudeSessions', {
+        ...(panes ? { panes } : {}),
+        limitedOnly: ctx.flags.get('limited') === true,
+        ...(continueText ? { continueText } : {})
+      }),
+      listTerminals(ctx.client)
+    ])
+    const byPane = new Map(
+      terminals.result.terminals.map((terminal) => [
+        `${terminal.tabId}:${terminal.leafId}`,
+        { handle: terminal.handle, name: terminalName(terminal) }
+      ])
+    )
+    printResult(result, ctx.json, (sessions) => formatRestart(sessions, byPane))
+  }
 }

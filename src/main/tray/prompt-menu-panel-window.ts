@@ -199,6 +199,23 @@ export function togglePromptMenuPanel(tray: Tray): void {
   window.focus()
 }
 
+/** 시험 촬영 모드에서만 부른다. prepare 로 창을 숨긴 뒤 앞으로 띄우지 않고(showInactive) 연다. */
+export function showPromptMenuPanelForTestShots(
+  prepare: (window: BrowserWindow) => void
+): BrowserWindow | null {
+  ensurePromptMenuPanel()
+  const window = panel
+  if (!window) {
+    return null
+  }
+  prepare(window)
+  placeUnderTray(window, null)
+  shownAt = Date.now()
+  window.webContents.send(PROMPT_MENU_PANEL_SHOWN_CHANNEL, rows())
+  window.showInactive()
+  return window
+}
+
 /** 열린 패널의 줄을 지금 상태로 다시 그린다(언어 바꿈 등). */
 export function refreshPromptMenuPanel(): void {
   if (!panel || panel.isDestroyed()) {

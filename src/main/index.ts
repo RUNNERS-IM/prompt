@@ -46,6 +46,7 @@ import { clearWindowsStdHandleInheritance } from './startup/windows-std-handle-i
 import { installWindowsIsolatedSpawner } from './startup/windows-isolated-spawner'
 import { dropE2eSpawnLogOutsideE2e } from './startup/e2e-spawn-log-env'
 import { scheduleLegacyUserDataRemoval } from './startup/prompt-legacy-user-data-removal'
+import { preparePromptTestShots, startPromptTestShots } from './startup/prompt-test-shots'
 
 // Before anything spawns, so no daemon, PTY or agent inherits it outside e2e.
 dropE2eSpawnLogOutsideE2e()
@@ -168,6 +169,7 @@ if (preflightReady) {
   state.osOpenedDocuments.capture(process.argv)
   registerMainProcessIpcHandlers()
   installMainProcessQuitHandlers()
+  preparePromptTestShots()
   void app.whenReady().then(async () => {
     if (!state.isServeMode && !isBackgroundLaunch() && !isOrcadSidecarLaunch()) {
       applyOpenAtLoginDefault()
@@ -178,6 +180,7 @@ if (preflightReady) {
         handleMacAppActivation
       })
       scheduleLegacyUserDataRemoval(app.getPath('userData'))
+      void startPromptTestShots()
     } catch (error) {
       const detail = error instanceof Error ? error.message : String(error)
       const message =

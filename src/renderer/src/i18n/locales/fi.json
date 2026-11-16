@@ -21504,11 +21504,17 @@
         "reviewBody_one": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "reviewBody_other": "{{count}} muuta Claude-sessiota ei siirretty kohteeseen {{next}}.",
         "body_one": "{{count}} Claude-sessio on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
-        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä."
+        "body_other": "{{count}} Claude-sessiota on yhä käynnissä kohteessa {{previous}}. Uudelleenkäynnistys jatkaa jokaista keskustelua kohteessa {{next}}. Varatut sessiot odottavat joutotilaa ennen uudelleenkäynnistystä.",
+        "continuePrompt": "Claude-tili vaihtui. Jatka kesken ollutta työtä.",
+        "restartedOne": "1 Claude-istunto käynnistettiin uudelleen tilillä {{account}}",
+        "restartedOther": "{{count}} Claude-istuntoa käynnistettiin uudelleen tilillä {{account}}",
+        "restartedWithFailures": "{{done}} Claude-istuntoa käynnistetty uudelleen · {{failed}} epäonnistui",
+        "restartWaiting": "{{done}}/{{count}} Claude-istuntoa käynnistettiin uudelleen tilillä {{account}}. Loput käynnistyvät, kun niiden vuoro päättyy tai välilehti avataan."
       },
       "loginSync": {
         "previousLogin": "edellinen kirjautuminen"
-      }
+      },
+      "addedInUse": "Claude-tili tallennettiin. Kaikki istunnot käyttävät jo tiliä {{account}}."
     },
     "managedData": {
       "description": "Lisää tilejä suorittamalla tämä komento Orca-hostin päätteessä. Valinta koskee kyseisen hostin uusia nimenomaisia agenttikäynnistyksiä; suora SSH-relay ja Windows-hostattu WSL käyttävät omia tunnistetietojaan.",
@@ -23243,12 +23249,57 @@
       "save": "Tallenna",
       "cancel": "Peruuta",
       "emptyTitle": "Tallennettuja kehotteita ei vielä ole",
-      "emptyBody": "Tallenna usein käyttämäsi kehotteet ja lisää ne syöttöriville napsauttamalla.",
       "noTerminal": "Avaa ensin pääteistunto",
       "chatView": "Vaihda tämä istunto päätteeseen käyttääksesi kehotetta",
       "listView": "Luettelonäkymä",
       "gridView": "Kuvakenäkymä",
-      "upFolder": "Kansio ylöspäin"
+      "upFolder": "Kansio ylöspäin",
+      "groupMine": "Omat",
+      "groupFrequent": "Usein käytetyt",
+      "groupShared": "Yhteiset",
+      "noResults": "Hakua vastaavia kehotteita ei ole",
+      "defaults": {
+        "plan": {
+          "title": "Työsuunnitelma",
+          "body": "Ennen kuin muutat koodia, lue asiaan liittyvät tiedostot ja kirjoita vaiheittainen suunnitelma. Luettele muutettavat tiedostot ja riskit, ja odota sitten hyväksyntääni."
+        },
+        "options": {
+          "title": "Kysy vaihtoehdoilla",
+          "body": "Jos järkeviä tapoja on useampi, näytä numeroidut vaihtoehdot hyvine ja huonoine puolineen ja suosittele yhtä. Älä aloita ennen kuin olen valinnut."
+        },
+        "rootCause": {
+          "title": "Etsi syy",
+          "body": "Etsi tämän ongelman syy ennen kuin korjaat mitään. Näytä todisteet, kuten lokit ja koodirivit, ja erottele varmistettu arvauksista."
+        },
+        "review": {
+          "title": "Tarkista muutokset",
+          "body": "Tarkista nykyiset muutokset virheiden, unohtuneiden tapausten ja epäselvien nimien varalta. Luettele ongelmat vakavimmasta alkaen tiedoston ja rivin kanssa."
+        },
+        "overview": {
+          "title": "Selitä rakenne",
+          "body": "Selitä, miten tämä projekti on järjestetty: tärkeimmät kansiot, mistä se käynnistyy ja miten tieto kulkee osien välillä. Lyhyesti ja helposti."
+        },
+        "tests": {
+          "title": "Kirjoita testit",
+          "body": "Kirjoita testit koodille, jota juuri muutin. Kata tavallinen tapaus, rajatapaukset ja yksi virhetapaus, aja ne ja näytä tulos."
+        },
+        "buildTest": {
+          "title": "Käännä ja testaa",
+          "body": "Aja käännös ja testit. Jos jokin epäonnistuu, näytä virhe ja sen syy, korjaa se ja aja uudelleen."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Ryhmittele muutokset tarkoituksen mukaan ja tee yksi commit ryhmää kohden viestillä, joka kertoo mitä muuttui ja miksi. Näytä lista ennen commitia."
+        },
+        "status": {
+          "title": "Edistyminen",
+          "body": "Tiivistä, missä mennään: mikä on valmis, mikä on kesken, mitä on jäljellä ja mikä on jumissa."
+        },
+        "handoff": {
+          "title": "Luovutusmuistio",
+          "body": "Kirjoita luovutusmuistio, jotta joku muu voi jatkaa: tavoite, mitä muuttui, miten ajaa ja tarkistaa, ja avoimet kysymykset."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Apulaiset {{count}}",
@@ -23258,7 +23309,9 @@
       "failure": {
         "signIn": "Kirjautuminen vaaditaan",
         "usageLimit": "Käyttöraja ylitetty",
-        "overloaded": "Palvelin on kuormitettu"
+        "overloaded": "Palvelin on kuormitettu",
+        "failed": "Epäonnistui",
+        "failedWith": "Epäonnistui: {{message}}"
       },
       "tool": {
         "command": "Suorittaa komentoa",
@@ -23278,7 +23331,10 @@
       "restartSession": "Käynnistä uudelleen",
       "resumeFailed": "Istunnon avaaminen uudelleen epäonnistui",
       "retryResume": "Yritä uudelleen",
-      "resumedInTabFolder": "[Prompt] Jatketaan tässä kansiossa, ei kansiossa {{folder}}, jossa istunto viimeksi toimi"
+      "resumedInTabFolder": "[Prompt] Jatketaan tässä kansiossa, ei kansiossa {{folder}}, jossa istunto viimeksi toimi",
+      "interruptedByUser": "Käyttäjä keskeytti",
+      "interrupted": "Keskeytetty",
+      "unconfirmed": "Ei voitu vahvistaa"
     },
     "timeAgo": {
       "now": "nyt",

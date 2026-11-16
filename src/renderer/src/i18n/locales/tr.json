@@ -217,12 +217,57 @@
       "save": "Kaydet",
       "cancel": "İptal",
       "emptyTitle": "Henüz kayıtlı istem yok",
-      "emptyBody": "Sık kullandığınız istemleri kaydedin, tıklayınca giriş satırına yerleşsin.",
       "noTerminal": "Önce bir terminal oturumu açın",
       "chatView": "İstem kullanmak için bu oturumu terminale geçirin",
       "listView": "Liste görünümü",
       "gridView": "Simge görünümü",
-      "upFolder": "Bir üst klasör"
+      "upFolder": "Bir üst klasör",
+      "groupMine": "Benimkiler",
+      "groupFrequent": "Sık kullanılan",
+      "groupShared": "Paylaşılan",
+      "noResults": "Eşleşen istem yok",
+      "defaults": {
+        "plan": {
+          "title": "Çalışma planı",
+          "body": "Kodu değiştirmeden önce ilgili dosyaları oku ve adım adım bir plan yaz. Değiştireceğin dosyaları ve riskleri listele, sonra onayımı bekle."
+        },
+        "options": {
+          "title": "Seçeneklerle sor",
+          "body": "Birden fazla makul yol varsa, artıları ve eksileriyle numaralı seçenekler göster ve birini öner. Ben seçmeden başlama."
+        },
+        "rootCause": {
+          "title": "Nedeni bul",
+          "body": "Bir şeyi düzeltmeden önce bu sorunun nedenini bul. Günlükler ve kod satırları gibi kanıtları göster, doğrulananla tahmini ayır."
+        },
+        "review": {
+          "title": "Değişiklikleri incele",
+          "body": "Mevcut değişikliklerde hataları, atlanan durumları ve anlaşılmaz adları ara. Sorunları en ciddisinden başlayarak dosya ve satırla listele."
+        },
+        "overview": {
+          "title": "Yapıyı açıkla",
+          "body": "Bu projenin nasıl düzenlendiğini açıkla: ana klasörler, nereden başladığı ve verinin parçalar arasında nasıl aktığı. Kısa ve kolay anlaşılır olsun."
+        },
+        "tests": {
+          "title": "Test yaz",
+          "body": "Az önce değiştirdiğim kod için test yaz. Normal durumu, sınır durumlarını ve bir hata durumunu kapsa, sonra çalıştırıp sonucu göster."
+        },
+        "buildTest": {
+          "title": "Derle ve test et",
+          "body": "Derlemeyi ve testleri çalıştır. Bir şey başarısız olursa hatayı ve nedenini göster, düzelt ve yeniden çalıştır."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Değişiklikleri amaca göre grupla ve her grup için bir commit yap; mesajda neyin neden değiştiğini yaz. Commit öncesi listeyi bana göster."
+        },
+        "status": {
+          "title": "İlerleme",
+          "body": "Nerede olduğumuzu özetle: bitenler, devam edenler, kalanlar ve takılanlar."
+        },
+        "handoff": {
+          "title": "Devir notu",
+          "body": "Başka biri devam edebilsin diye bir devir notu yaz: amaç, neyin değiştiği, nasıl çalıştırılıp kontrol edileceği ve açık sorular."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Yardımcılar {{count}}",
@@ -242,7 +287,9 @@
       "failure": {
         "signIn": "Oturum açmak gerekli",
         "usageLimit": "Kullanım sınırına ulaşıldı",
-        "overloaded": "Sunucu meşgul"
+        "overloaded": "Sunucu meşgul",
+        "failed": "Başarısız",
+        "failedWith": "Başarısız: {{message}}"
       },
       "noUpdateHours_one": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
       "noUpdateHours_other": "{{count}} sa'tir güncelleme yok · takılmış olabilir",
@@ -252,7 +299,10 @@
       "restartSession": "Yeniden başlat",
       "resumeFailed": "Bu oturum yeniden açılamadı",
       "retryResume": "Yeniden dene",
-      "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor"
+      "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor",
+      "interruptedByUser": "Kullanıcı tarafından durduruldu",
+      "interrupted": "Durduruldu",
+      "unconfirmed": "Doğrulanamadı"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
@@ -21403,11 +21453,17 @@
         "reviewBody_other": "Diğer {{count}} Claude oturumu {{next}} hesabına taşınmadı.",
         "reviewBody_one": "Diğer {{count}} Claude oturumu {{next}} hesabına taşınmadı.",
         "body_other": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler.",
-        "body_one": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler."
+        "body_one": "{{count}} Claude oturumu hâlâ {{previous}} hesabında çalışıyor. Yeniden başlatma her konuşmayı {{next}} hesabında sürdürür. Meşgul oturumlar yeniden başlatılmadan önce boşta kalmayı bekler.",
+        "continuePrompt": "Claude hesabı değişti. Lütfen yaptığın işe devam et.",
+        "restartedOne": "{{account}} üzerinde 1 Claude oturumu yeniden başlatıldı",
+        "restartedOther": "{{account}} üzerinde {{count}} Claude oturumu yeniden başlatıldı",
+        "restartedWithFailures": "{{done}} Claude oturumu yeniden başlatıldı · {{failed}} başarısız",
+        "restartWaiting": "{{account}} üzerinde {{count}} Claude oturumundan {{done}} tanesi yeniden başlatıldı. Kalanlar sıraları bittiğinde veya sekmeleri açıldığında yeniden başlar."
       },
       "loginSync": {
         "previousLogin": "önceki oturum açma"
-      }
+      },
+      "addedInUse": "Claude hesabı kaydedildi. Tüm oturumlar zaten {{account}} kullanıyor."
     },
     "managedData": {
       "description": "Orca ana makinesindeki bir terminalde bu komutu çalıştırarak hesap ekleyin. Seçim, o ana makinede açıkça başlatılan yeni ajanlar için geçerlidir; doğrudan SSH aktarması ve Windows ana makinesindeki WSL başlatmaları kendi kimlik bilgilerini kullanır.",

@@ -218,12 +218,57 @@
       "save": "Enregistrer",
       "cancel": "Annuler",
       "emptyTitle": "Aucun prompt enregistré",
-      "emptyBody": "Enregistrez vos prompts fréquents, puis cliquez pour les placer dans la ligne de saisie.",
       "noTerminal": "Ouvrez d'abord une session de terminal",
       "chatView": "Passez cette session au terminal pour utiliser un prompt",
       "listView": "Vue en liste",
       "gridView": "Vue en icônes",
-      "upFolder": "Dossier parent"
+      "upFolder": "Dossier parent",
+      "groupMine": "Les miens",
+      "groupFrequent": "Fréquents",
+      "groupShared": "Partagés",
+      "noResults": "Aucun prompt ne correspond",
+      "defaults": {
+        "plan": {
+          "title": "Plan de travail",
+          "body": "Avant de modifier le code, lis les fichiers concernés et écris un plan étape par étape. Indique les fichiers que tu vas toucher et les risques, puis attends mon accord."
+        },
+        "options": {
+          "title": "Demander avec des options",
+          "body": "S'il existe plusieurs façons raisonnables de faire, présente des options numérotées avec leurs avantages et inconvénients, et recommandes-en une. Ne commence pas avant mon choix."
+        },
+        "rootCause": {
+          "title": "Trouver la cause",
+          "body": "Trouve la cause de ce problème avant de corriger quoi que ce soit. Montre les preuves, comme les journaux et les lignes de code, et distingue ce qui est confirmé de ce qui est supposé."
+        },
+        "review": {
+          "title": "Relire les changements",
+          "body": "Relis les changements actuels pour trouver les bugs, les cas oubliés et les noms peu clairs. Liste les problèmes du plus grave au moins grave, avec fichier et ligne."
+        },
+        "overview": {
+          "title": "Expliquer la structure",
+          "body": "Explique comment ce projet est organisé : les dossiers principaux, le point de départ et la façon dont les données circulent entre les parties. Court et facile à suivre."
+        },
+        "tests": {
+          "title": "Écrire des tests",
+          "body": "Écris des tests pour le code que je viens de modifier. Couvre le cas normal, les cas limites et un cas d'échec, puis lance-les et montre le résultat."
+        },
+        "buildTest": {
+          "title": "Compiler et tester",
+          "body": "Lance la compilation et les tests. Si quelque chose échoue, montre l'erreur et sa cause, corrige-la et relance."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Regroupe les changements par objectif et fais un commit par groupe, avec un message qui dit ce qui a changé et pourquoi. Montre-moi la liste avant de valider."
+        },
+        "status": {
+          "title": "Avancement",
+          "body": "Résume où nous en sommes : ce qui est fait, ce qui est en cours, ce qui reste et ce qui est bloqué."
+        },
+        "handoff": {
+          "title": "Note de passation",
+          "body": "Écris une note de passation pour qu'une autre personne puisse continuer : l'objectif, ce qui a changé, comment lancer et vérifier, et les questions ouvertes."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Assistants {{count}}",
@@ -243,7 +288,9 @@
       "failure": {
         "signIn": "Connexion requise",
         "usageLimit": "Limite d'utilisation atteinte",
-        "overloaded": "Serveur occupé"
+        "overloaded": "Serveur occupé",
+        "failed": "Échec",
+        "failedWith": "Échec : {{message}}"
       },
       "noUpdateHours_one": "Aucune mise à jour depuis {{count}} h · peut-être bloqué",
       "noUpdateHours_many": "Aucune mise à jour depuis {{count}} h · peut-être bloqué",
@@ -255,7 +302,10 @@
       "restartSession": "Redémarrer",
       "resumeFailed": "Impossible de rouvrir cette session",
       "retryResume": "Réessayer",
-      "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait"
+      "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait",
+      "interruptedByUser": "Interrompu par l’utilisateur",
+      "interrupted": "Interrompu",
+      "unconfirmed": "Confirmation impossible"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",
@@ -21922,11 +21972,17 @@
         "reviewBody_many": "{{count}} autres sessions Claude n’ont pas été déplacées vers {{next}}.",
         "body_one": "{{count}} session Claude est toujours active sur {{previous}}. Le redémarrage poursuit la conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
         "body_other": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
-        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer."
+        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
+        "continuePrompt": "Le compte Claude a changé. Reprends le travail en cours.",
+        "restartedOne": "1 session Claude redémarrée sur {{account}}",
+        "restartedOther": "{{count}} sessions Claude redémarrées sur {{account}}",
+        "restartedWithFailures": "{{done}} sessions Claude redémarrées · {{failed}} en échec",
+        "restartWaiting": "{{done}} sessions Claude sur {{count}} redémarrées sur {{account}}. Les autres redémarreront à la fin de leur tour ou à l’ouverture de leur onglet."
       },
       "loginSync": {
         "previousLogin": "la connexion précédente"
-      }
+      },
+      "addedInUse": "Compte Claude enregistré. Toutes les sessions utilisent déjà {{account}}."
     },
     "hostSignIn": {
       "copied": "Copié",

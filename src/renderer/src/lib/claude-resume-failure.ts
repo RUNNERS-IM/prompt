@@ -30,11 +30,23 @@ let failures: readonly ClaudeResumeFailure[] = []
 const listeners = new Set<() => void>()
 const retryStartups = new Map<string, AgentAccountRestartStartup>()
 
-function publish(next: readonly ClaudeResumeFailure[]): void {
-  failures = next
+// 다시 연 Claude 가 뜨는지 아직 지켜보는 창(tabId:leafId). 다시 시작 알림이 결과를 낼 때를 정한다.
+const watching = new Set<string>()
+
+function notify(): void {
   for (const listener of listeners) {
     listener()
   }
+}
+
+function publish(next: readonly ClaudeResumeFailure[]): void {
+  failures = next
+  notify()
+}
+
+/** Whether the resume launched in this pane is still being watched for a start or a failure. */
+export function isClaudeResumeStartPending(tabId: string, leafId: string): boolean {
+  return watching.has(`${tabId}:${leafId}`)
 }
 
 export function getClaudeResumeFailures(): readonly ClaudeResumeFailure[] {
@@ -132,11 +144,19 @@ export function watchClaudeResumeStart(
   pane: Pick<ClaudeResumeFailure, 'tabId' | 'leafId' | 'ptyId' | 'startup'>
 ): void {
   clearFailure(pane.ptyId)
-  void readResumeOutcome(pane).then((outcome) => {
-    if (outcome === 'failed' && boundPtyId(pane) === pane.ptyId) {
-      reportFailure({ ...pane, failedAt: Date.now() })
-    }
-  })
+  const key = `${pane.tabId}:${pane.leafId}`
+  watching.add(key)
+  notify()
+  void readResumeOutcome(pane)
+    .then((outcome) => {
+      if (outcome === 'failed' && boundPtyId(pane) === pane.ptyId) {
+        reportFailure({ ...pane, failedAt: Date.now() })
+      }
+    })
+    .finally(() => {
+      watching.delete(key)
+      notify()
+    })
 }
 
 export function retryClaudeResume(ptyId: string): void {

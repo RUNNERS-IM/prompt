@@ -30,7 +30,7 @@ import {
   claudeRowHasUnlistedLiveWork
 } from './claude-pane-hold-evidence'
 import { buildClaudeStatusPayload } from './claude-status-build'
-import { claudeStopFailureKind } from './claude-stop-failure-kind'
+import { claudeStopFailureKind, isClaudeLimitStop } from './claude-stop-failure-kind'
 import { trackClaudeTaskNotificationDelivery } from './claude-task-notification-delivery'
 import { recordClaudeTeammateSpawn } from './claude-teammate-spawn'
 
@@ -86,11 +86,10 @@ export function normalizeClaudeEvent(
     : (eventAgentId === undefined && hookPayload['is_interrupt'] === true) ||
         previousLead?.outcome === 'cancellation'
       ? ('cancellation' as const)
-      : eventName === 'StopFailure'
+      : eventName === 'StopFailure' || isClaudeLimitStop(eventName, hookPayload)
         ? ('failure' as const)
         : undefined
-  const failureKind =
-    outcome === 'failure' ? claudeStopFailureKind(hookPayload['error']) : undefined
+  const failureKind = outcome === 'failure' ? claudeStopFailureKind(hookPayload) : undefined
   const backgroundTasks = readClaudeBackgroundAgentTasks(hookPayload)
   const isTaskWakeup =
     eventAgentId === undefined &&

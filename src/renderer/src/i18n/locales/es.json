@@ -218,12 +218,57 @@
       "save": "Guardar",
       "cancel": "Cancelar",
       "emptyTitle": "Aún no hay prompts guardados",
-      "emptyBody": "Guarda los prompts que más usas y haz clic para ponerlos en la línea de entrada.",
       "noTerminal": "Abre primero una sesión de terminal",
       "chatView": "Cambia esta sesión al terminal para usar un prompt",
       "listView": "Vista de lista",
       "gridView": "Vista de iconos",
-      "upFolder": "Subir una carpeta"
+      "upFolder": "Subir una carpeta",
+      "groupMine": "Míos",
+      "groupFrequent": "Más usados",
+      "groupShared": "Compartidos",
+      "noResults": "Ningún prompt coincide",
+      "defaults": {
+        "plan": {
+          "title": "Plan de trabajo",
+          "body": "Antes de cambiar el código, lee los archivos relacionados y escribe un plan paso a paso. Indica los archivos que vas a tocar y los riesgos, y espera mi visto bueno."
+        },
+        "options": {
+          "title": "Preguntar con opciones",
+          "body": "Si hay más de una forma razonable de hacerlo, muestra opciones numeradas con ventajas y desventajas y recomienda una. No empieces hasta que elija."
+        },
+        "rootCause": {
+          "title": "Buscar la causa",
+          "body": "Busca la causa de este problema antes de arreglar nada. Muestra las pruebas, como registros y líneas de código, y separa lo confirmado de lo supuesto."
+        },
+        "review": {
+          "title": "Revisar cambios",
+          "body": "Revisa los cambios actuales en busca de errores, casos olvidados y nombres confusos. Enumera los problemas del más grave al menos grave, con archivo y línea."
+        },
+        "overview": {
+          "title": "Explicar la estructura",
+          "body": "Explica cómo está organizado este proyecto: las carpetas principales, dónde empieza y cómo fluyen los datos entre las partes. Breve y fácil de seguir."
+        },
+        "tests": {
+          "title": "Escribir pruebas",
+          "body": "Escribe pruebas para el código que acabo de cambiar. Cubre el caso normal, los casos límite y un caso de fallo; luego ejecútalas y muestra el resultado."
+        },
+        "buildTest": {
+          "title": "Compilar y probar",
+          "body": "Ejecuta la compilación y las pruebas. Si algo falla, muestra el error y su causa, corrígelo y vuelve a ejecutarlas."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Agrupa los cambios por propósito y haz un commit por grupo, con un mensaje que diga qué cambió y por qué. Enséñame la lista antes de hacer commit."
+        },
+        "status": {
+          "title": "Progreso",
+          "body": "Resume dónde estamos: qué está hecho, qué está en curso, qué falta y qué está bloqueado."
+        },
+        "handoff": {
+          "title": "Nota de traspaso",
+          "body": "Escribe una nota de traspaso para que otra persona pueda seguir: el objetivo, qué cambió, cómo ejecutarlo y comprobarlo, y las preguntas abiertas."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Ayudantes {{count}}",
@@ -243,7 +288,9 @@
       "failure": {
         "signIn": "Se requiere iniciar sesión",
         "usageLimit": "Límite de uso alcanzado",
-        "overloaded": "Servidor ocupado"
+        "overloaded": "Servidor ocupado",
+        "failed": "Error",
+        "failedWith": "Error: {{message}}"
       },
       "noUpdateHours_one": "Sin novedades desde hace {{count}} h · puede estar bloqueado",
       "noUpdateHours_many": "Sin novedades desde hace {{count}} h · puede estar bloqueado",
@@ -255,7 +302,10 @@
       "restartSession": "Reiniciar",
       "resumeFailed": "No se pudo reabrir esta sesión",
       "retryResume": "Reintentar",
-      "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez"
+      "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez",
+      "interruptedByUser": "Interrumpido por el usuario",
+      "interrupted": "Interrumpido",
+      "unconfirmed": "No se pudo confirmar"
     },
     "sessionMove": {
       "cancelRemote": "Las sesiones solo se pueden mover entre proyectos de este equipo.",
@@ -21313,11 +21363,17 @@
         "reviewBody_many": "No se trasladaron {{count}} sesiones más de Claude a {{next}}.",
         "body_one": "{{count}} sesión de Claude sigue ejecutándose en {{previous}}. Al reiniciarla, la conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
         "body_other": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
-        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse."
+        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
+        "continuePrompt": "La cuenta de Claude ha cambiado. Continúa con el trabajo que estabas haciendo.",
+        "restartedOne": "Se reinició 1 sesión de Claude en {{account}}",
+        "restartedOther": "Se reiniciaron {{count}} sesiones de Claude en {{account}}",
+        "restartedWithFailures": "Se reiniciaron {{done}} sesiones de Claude · {{failed}} fallaron",
+        "restartWaiting": "Se reiniciaron {{done}} de {{count}} sesiones de Claude en {{account}}. Las demás se reiniciarán cuando terminen su turno o se abra su pestaña."
       },
       "loginSync": {
         "previousLogin": "el inicio de sesión anterior"
-      }
+      },
+      "addedInUse": "Cuenta de Claude guardada. Todas las sesiones ya usan {{account}}."
     },
     "hostSignIn": {
       "copied": "Copiado",

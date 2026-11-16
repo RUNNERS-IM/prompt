@@ -21504,11 +21504,17 @@
         "reviewBody_one": "{{count}} andere Claude-sessie is niet verplaatst naar {{next}}.",
         "reviewBody_other": "{{count}} andere Claude-sessies zijn niet verplaatst naar {{next}}.",
         "body_one": "{{count}} Claude-sessie draait nog op {{previous}}. Bij opnieuw starten wordt het gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
-        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten."
+        "body_other": "{{count}} Claude-sessies draaien nog op {{previous}}. Bij opnieuw starten wordt elk gesprek voortgezet op {{next}}. Drukke sessies wachten tot ze inactief zijn voordat ze opnieuw starten.",
+        "continuePrompt": "Het Claude-account is gewijzigd. Ga verder met het werk waarmee je bezig was.",
+        "restartedOne": "1 Claude-sessie opnieuw gestart op {{account}}",
+        "restartedOther": "{{count}} Claude-sessies opnieuw gestart op {{account}}",
+        "restartedWithFailures": "{{done}} Claude-sessies opnieuw gestart · {{failed}} mislukt",
+        "restartWaiting": "{{done}} van {{count}} Claude-sessies opnieuw gestart op {{account}}. De rest start opnieuw zodra hun beurt eindigt of hun tabblad wordt geopend."
       },
       "loginSync": {
         "previousLogin": "de vorige login"
-      }
+      },
+      "addedInUse": "Claude-account opgeslagen. Alle sessies gebruiken al {{account}}."
     },
     "managedData": {
       "description": "Accounts toevoegen door deze opdracht uit te voeren in een terminal op de Orca-host. De selectie geldt voor nieuwe expliciete agentstarts op die host; directe SSH-relay en door Windows gehoste WSL-starts gebruiken eigen inloggegevens.",
@@ -23243,12 +23249,57 @@
       "save": "Opslaan",
       "cancel": "Annuleren",
       "emptyTitle": "Nog geen opgeslagen prompts",
-      "emptyBody": "Sla prompts op die je vaak gebruikt en klik om ze in de invoerregel te zetten.",
       "noTerminal": "Open eerst een terminalsessie",
       "chatView": "Schakel deze sessie over naar de terminal om een prompt te gebruiken",
       "listView": "Lijstweergave",
       "gridView": "Pictogramweergave",
-      "upFolder": "Eén map omhoog"
+      "upFolder": "Eén map omhoog",
+      "groupMine": "Van mij",
+      "groupFrequent": "Vaak gebruikt",
+      "groupShared": "Gedeeld",
+      "noResults": "Geen prompts gevonden",
+      "defaults": {
+        "plan": {
+          "title": "Werkplan",
+          "body": "Lees eerst de betrokken bestanden voordat je code wijzigt en schrijf een stappenplan. Noem de bestanden die je aanpast en de risico's, en wacht dan op mijn akkoord."
+        },
+        "options": {
+          "title": "Vragen met opties",
+          "body": "Als er meerdere redelijke manieren zijn, toon dan genummerde opties met voor- en nadelen en raad er één aan. Begin pas als ik heb gekozen."
+        },
+        "rootCause": {
+          "title": "Oorzaak vinden",
+          "body": "Zoek de oorzaak van dit probleem voordat je iets oplost. Laat het bewijs zien, zoals logs en coderegels, en scheid wat bevestigd is van wat een vermoeden is."
+        },
+        "review": {
+          "title": "Wijzigingen nakijken",
+          "body": "Kijk de huidige wijzigingen na op fouten, gemiste gevallen en onduidelijke namen. Zet de problemen op volgorde van ernst, met bestand en regel."
+        },
+        "overview": {
+          "title": "Structuur uitleggen",
+          "body": "Leg uit hoe dit project in elkaar zit: de belangrijkste mappen, waar het start en hoe gegevens tussen de onderdelen gaan. Kort en goed te volgen."
+        },
+        "tests": {
+          "title": "Tests schrijven",
+          "body": "Schrijf tests voor de code die ik net heb gewijzigd. Dek het normale geval, randgevallen en één foutgeval af, voer ze uit en laat het resultaat zien."
+        },
+        "buildTest": {
+          "title": "Bouwen en testen",
+          "body": "Voer de build en de tests uit. Als iets mislukt, laat de fout en de oorzaak zien, los het op en voer alles opnieuw uit."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Groepeer de wijzigingen per doel en maak per groep één commit, met een bericht dat zegt wat er veranderde en waarom. Laat me eerst de lijst zien."
+        },
+        "status": {
+          "title": "Voortgang",
+          "body": "Vat samen waar we staan: wat klaar is, wat bezig is, wat nog moet en wat vastzit."
+        },
+        "handoff": {
+          "title": "Overdrachtsnotitie",
+          "body": "Schrijf een overdrachtsnotitie zodat iemand anders verder kan: het doel, wat er veranderde, hoe je het uitvoert en controleert, en open vragen."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Helpers {{count}}",
@@ -23258,7 +23309,9 @@
       "failure": {
         "signIn": "Inloggen vereist",
         "usageLimit": "Gebruikslimiet bereikt",
-        "overloaded": "Server druk bezet"
+        "overloaded": "Server druk bezet",
+        "failed": "Mislukt",
+        "failedWith": "Mislukt: {{message}}"
       },
       "tool": {
         "command": "Opdracht uitvoeren",
@@ -23278,7 +23331,10 @@
       "restartSession": "Opnieuw starten",
       "resumeFailed": "Kan deze sessie niet opnieuw openen",
       "retryResume": "Opnieuw proberen",
-      "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide"
+      "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide",
+      "interruptedByUser": "Onderbroken door gebruiker",
+      "interrupted": "Onderbroken",
+      "unconfirmed": "Kon niet bevestigen"
     },
     "timeAgo": {
       "now": "nu",
