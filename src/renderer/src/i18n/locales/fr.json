@@ -288,7 +288,9 @@
       "failure": {
         "signIn": "Connexion requise",
         "usageLimit": "Limite d'utilisation atteinte",
-        "overloaded": "Serveur occupé"
+        "overloaded": "Serveur occupé",
+        "failed": "Échec",
+        "failedWith": "Échec : {{message}}"
       },
       "noUpdateHours_one": "Aucune mise à jour depuis {{count}} h · peut-être bloqué",
       "noUpdateHours_many": "Aucune mise à jour depuis {{count}} h · peut-être bloqué",
@@ -300,7 +302,10 @@
       "restartSession": "Redémarrer",
       "resumeFailed": "Impossible de rouvrir cette session",
       "retryResume": "Réessayer",
-      "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait"
+      "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait",
+      "interruptedByUser": "Interrompu par l’utilisateur",
+      "interrupted": "Interrompu",
+      "unconfirmed": "Confirmation impossible"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",
@@ -21967,11 +21972,17 @@
         "reviewBody_many": "{{count}} autres sessions Claude n’ont pas été déplacées vers {{next}}.",
         "body_one": "{{count}} session Claude est toujours active sur {{previous}}. Le redémarrage poursuit la conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
         "body_other": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
-        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer."
+        "body_many": "{{count}} sessions Claude sont toujours actives sur {{previous}}. Le redémarrage poursuit chaque conversation sur {{next}}. Les sessions occupées attendent d’être inactives avant de redémarrer.",
+        "continuePrompt": "Le compte Claude a changé. Reprends le travail en cours.",
+        "restartedOne": "1 session Claude redémarrée sur {{account}}",
+        "restartedOther": "{{count}} sessions Claude redémarrées sur {{account}}",
+        "restartedWithFailures": "{{done}} sessions Claude redémarrées · {{failed}} en échec",
+        "restartWaiting": "{{done}} sessions Claude sur {{count}} redémarrées sur {{account}}. Les autres redémarreront à la fin de leur tour ou à l’ouverture de leur onglet."
       },
       "loginSync": {
         "previousLogin": "la connexion précédente"
-      }
+      },
+      "addedInUse": "Compte Claude enregistré. Toutes les sessions utilisent déjà {{account}}."
     },
     "hostSignIn": {
       "copied": "Copié",

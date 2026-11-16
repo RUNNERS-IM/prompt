@@ -287,7 +287,9 @@
       "failure": {
         "signIn": "Anmeldung erforderlich",
         "usageLimit": "Nutzungslimit erreicht",
-        "overloaded": "Server ausgelastet"
+        "overloaded": "Server ausgelastet",
+        "failed": "Fehlgeschlagen",
+        "failedWith": "Fehlgeschlagen: {{message}}"
       },
       "noUpdateHours_one": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
       "noUpdateHours_other": "Seit {{count}} Std. keine Aktualisierung · hängt möglicherweise",
@@ -297,7 +299,10 @@
       "restartSession": "Neu starten",
       "resumeFailed": "Sitzung konnte nicht wieder geöffnet werden",
       "retryResume": "Erneut versuchen",
-      "resumedInTabFolder": "[Prompt] Wird in diesem Ordner fortgesetzt, nicht in {{folder}}, wo zuletzt gearbeitet wurde"
+      "resumedInTabFolder": "[Prompt] Wird in diesem Ordner fortgesetzt, nicht in {{folder}}, wo zuletzt gearbeitet wurde",
+      "interruptedByUser": "Vom Benutzer unterbrochen",
+      "interrupted": "Unterbrochen",
+      "unconfirmed": "Nicht bestätigt"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",
@@ -21465,11 +21470,17 @@
         "reviewBody_one": "{{count}} weitere Claude-Sitzung wurde nicht zu {{next}} verschoben.",
         "reviewBody_other": "{{count}} weitere Claude-Sitzungen wurden nicht zu {{next}} verschoben.",
         "body_one": "{{count}} Claude-Sitzung läuft noch auf {{previous}}. Ein Neustart setzt das Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind.",
-        "body_other": "{{count}} Claude-Sitzungen laufen noch auf {{previous}}. Ein Neustart setzt jedes Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind."
+        "body_other": "{{count}} Claude-Sitzungen laufen noch auf {{previous}}. Ein Neustart setzt jedes Gespräch auf {{next}} fort. Beschäftigte Sitzungen warten vor dem Neustart, bis sie inaktiv sind.",
+        "continuePrompt": "Das Claude-Konto wurde gewechselt. Bitte setze die begonnene Arbeit fort.",
+        "restartedOne": "1 Claude-Sitzung auf {{account}} neu gestartet",
+        "restartedOther": "{{count}} Claude-Sitzungen auf {{account}} neu gestartet",
+        "restartedWithFailures": "{{done}} Claude-Sitzungen neu gestartet · {{failed}} fehlgeschlagen",
+        "restartWaiting": "{{done}} von {{count}} Claude-Sitzungen auf {{account}} neu gestartet. Die übrigen starten neu, sobald ihre Runde endet oder ihr Tab geöffnet wird."
       },
       "loginSync": {
         "previousLogin": "die vorherige Anmeldung"
-      }
+      },
+      "addedInUse": "Claude-Konto gespeichert. Alle Sitzungen verwenden bereits {{account}}."
     },
     "managedData": {
       "description": "Zum Hinzufügen von Konten diesen Befehl in einem Terminal auf dem Orca-Host ausführen. Die Auswahl gilt für neue explizite Agentenstarts auf diesem Host; direkte SSH-Weiterleitungen und WSL-Starts auf Windows-Hosts verwenden eigene Anmeldedaten.",

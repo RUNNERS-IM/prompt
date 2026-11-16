@@ -21134,11 +21134,17 @@
         "review": "Review",
         "restartCount_other": "Khởi động lại {{count}} phiên",
         "reviewBody_other": "{{count}} phiên Claude khác chưa được chuyển sang {{next}}.",
-        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại."
+        "body_other": "{{count}} phiên Claude vẫn đang chạy trên {{previous}}. Khởi động lại sẽ tiếp tục từng cuộc trò chuyện trên {{next}}. Các phiên đang bận sẽ chờ đến khi rảnh rồi mới khởi động lại.",
+        "continuePrompt": "Tài khoản Claude đã thay đổi. Hãy tiếp tục công việc đang làm.",
+        "restartedOne": "Đã khởi động lại 1 phiên Claude trên {{account}}",
+        "restartedOther": "Đã khởi động lại {{count}} phiên Claude trên {{account}}",
+        "restartedWithFailures": "Đã khởi động lại {{done}} phiên Claude · {{failed}} thất bại",
+        "restartWaiting": "Đã khởi động lại {{done}}/{{count}} phiên Claude trên {{account}}. Số còn lại sẽ khởi động lại khi xong lượt hoặc khi mở thẻ của chúng."
       },
       "loginSync": {
         "previousLogin": "lần đăng nhập trước"
-      }
+      },
+      "addedInUse": "Đã lưu tài khoản Claude. Mọi phiên đều đang dùng {{account}}."
     },
     "managedData": {
       "description": "Thêm tài khoản bằng cách chạy lệnh này trong terminal trên máy chủ Orca. Lựa chọn áp dụng cho các lần khởi chạy agent tường minh mới trên máy chủ đó; relay SSH trực tiếp và các lần khởi chạy WSL do Windows lưu trữ dùng thông tin xác thực riêng.",
@@ -22914,7 +22920,9 @@
       "failure": {
         "signIn": "Cần đăng nhập",
         "usageLimit": "Đã đạt giới hạn sử dụng",
-        "overloaded": "Máy chủ đang bận"
+        "overloaded": "Máy chủ đang bận",
+        "failed": "Thất bại",
+        "failedWith": "Thất bại: {{message}}"
       },
       "tool": {
         "command": "Đang chạy lệnh",
@@ -22932,7 +22940,10 @@
       "restartSession": "Khởi động lại",
       "resumeFailed": "Không thể mở lại phiên này",
       "retryResume": "Thử lại",
-      "resumedInTabFolder": "[Prompt] Tiếp tục trong thư mục này, không phải {{folder}} nơi chạy lần trước"
+      "resumedInTabFolder": "[Prompt] Tiếp tục trong thư mục này, không phải {{folder}} nơi chạy lần trước",
+      "interruptedByUser": "Người dùng đã dừng",
+      "interrupted": "Bị gián đoạn",
+      "unconfirmed": "Không thể xác nhận"
     },
     "timeAgo": {
       "now": "vừa xong",

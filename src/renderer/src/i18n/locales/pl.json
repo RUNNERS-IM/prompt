@@ -22244,11 +22244,17 @@
         "body_one": "{{count}} sesja Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
         "body_few": "{{count}} sesje Claude nadal działają na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
         "body_many": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
-        "body_other": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem."
+        "body_other": "{{count}} sesji Claude nadal działa na {{previous}}. Ponowne uruchomienie kontynuuje każdą rozmowę na {{next}}. Zajęte sesje czekają na stan bezczynności przed ponownym uruchomieniem.",
+        "continuePrompt": "Konto Claude zostało zmienione. Kontynuuj pracę, którą wykonywałeś.",
+        "restartedOne": "Uruchomiono ponownie 1 sesję Claude na {{account}}",
+        "restartedOther": "Uruchomiono ponownie sesje Claude na {{account}}: {{count}}",
+        "restartedWithFailures": "Ponownie uruchomiono sesje Claude: {{done}} · nieudane: {{failed}}",
+        "restartWaiting": "Uruchomiono ponownie {{done}} z {{count}} sesji Claude na {{account}}. Pozostałe uruchomią się po zakończeniu tury lub otwarciu ich karty."
       },
       "loginSync": {
         "previousLogin": "poprzednie logowanie"
-      }
+      },
+      "addedInUse": "Zapisano konto Claude. Wszystkie sesje już używają {{account}}."
     },
     "managedData": {
       "description": "Konta dodaje się, uruchamiając to polecenie w terminalu na hoście Orca. Wybór dotyczy nowych jawnych uruchomień agentów na tym hoście; bezpośredni relay SSH i uruchomienia WSL hostowane w systemie Windows używają własnych poświadczeń.",
@@ -24081,7 +24087,9 @@
       "failure": {
         "signIn": "Wymagane logowanie",
         "usageLimit": "Osiągnięto limit użycia",
-        "overloaded": "Serwer zajęty"
+        "overloaded": "Serwer zajęty",
+        "failed": "Niepowodzenie",
+        "failedWith": "Niepowodzenie: {{message}}"
       },
       "tool": {
         "command": "Uruchamianie polecenia",
@@ -24105,7 +24113,10 @@
       "restartSession": "Uruchom ponownie",
       "resumeFailed": "Nie udało się ponownie otworzyć tej sesji",
       "retryResume": "Spróbuj ponownie",
-      "resumedInTabFolder": "[Prompt] Kontynuacja w tym folderze, a nie w {{folder}}, gdzie działało ostatnio"
+      "resumedInTabFolder": "[Prompt] Kontynuacja w tym folderze, a nie w {{folder}}, gdzie działało ostatnio",
+      "interruptedByUser": "Przerwane przez użytkownika",
+      "interrupted": "Przerwane",
+      "unconfirmed": "Nie udało się potwierdzić"
     },
     "timeAgo": {
       "now": "teraz",

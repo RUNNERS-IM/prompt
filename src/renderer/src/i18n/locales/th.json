@@ -21134,11 +21134,17 @@
         "review": "รีวิว",
         "restartCount_other": "รีสตาร์ท {{count}} session",
         "reviewBody_other": "Claude session อื่นอีก {{count}} session ไม่ได้ถูกย้ายไปยัง {{next}}",
-        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท"
+        "body_other": "Claude session {{count}} session ยังทำงานอยู่บน {{previous}} การรีสตาร์ทจะทำให้การสนทนาดำเนินต่อบน {{next}} session ที่กำลังทำงานจะรอจนว่างก่อนจึงรีสตาร์ท",
+        "continuePrompt": "บัญชี Claude เปลี่ยนแล้ว โปรดทำงานที่ค้างอยู่ต่อ",
+        "restartedOne": "เริ่มเซสชัน Claude 1 รายการใหม่บน {{account}} แล้ว",
+        "restartedOther": "เริ่มเซสชัน Claude {{count}} รายการใหม่บน {{account}} แล้ว",
+        "restartedWithFailures": "เริ่มเซสชัน Claude ใหม่แล้ว {{done}} รายการ · ล้มเหลว {{failed}} รายการ",
+        "restartWaiting": "เริ่มเซสชัน Claude ใหม่ {{done}} จาก {{count}} รายการบน {{account}} แล้ว ที่เหลือจะเริ่มใหม่เมื่องานเสร็จหรือเมื่อเปิดแท็บนั้น"
       },
       "loginSync": {
         "previousLogin": "การเข้าสู่ระบบก่อนหน้า"
-      }
+      },
+      "addedInUse": "บันทึกบัญชี Claude แล้ว ทุกเซสชันใช้ {{account}} อยู่แล้ว"
     },
     "managedData": {
       "description": "เพิ่มบัญชีโดยรันคำสั่งนี้ใน terminal บน Orca host ตัวเลือกจะมีผลกับการเปิด agent แบบระบุเองครั้งใหม่บนโฮสต์นั้น ส่วน SSH relay โดยตรงและ WSL ที่โฮสต์บน Windows จะใช้ข้อมูลรับรองของตัวเอง",
@@ -22914,7 +22920,9 @@
       "failure": {
         "signIn": "ต้องลงชื่อเข้าใช้",
         "usageLimit": "ถึงขีดจำกัดการใช้งานแล้ว",
-        "overloaded": "เซิร์ฟเวอร์ไม่ว่าง"
+        "overloaded": "เซิร์ฟเวอร์ไม่ว่าง",
+        "failed": "ล้มเหลว",
+        "failedWith": "ล้มเหลว: {{message}}"
       },
       "tool": {
         "command": "กำลังเรียกใช้คำสั่ง",
@@ -22932,7 +22940,10 @@
       "restartSession": "เริ่มใหม่",
       "resumeFailed": "เปิดเซสชันนี้อีกครั้งไม่ได้",
       "retryResume": "ลองอีกครั้ง",
-      "resumedInTabFolder": "[Prompt] ทำต่อในโฟลเดอร์นี้ ไม่ใช่ {{folder}} ที่ทำงานครั้งล่าสุด"
+      "resumedInTabFolder": "[Prompt] ทำต่อในโฟลเดอร์นี้ ไม่ใช่ {{folder}} ที่ทำงานครั้งล่าสุด",
+      "interruptedByUser": "ผู้ใช้หยุดไว้",
+      "interrupted": "ถูกขัดจังหวะ",
+      "unconfirmed": "ยืนยันไม่ได้"
     },
     "timeAgo": {
       "now": "ตอนนี้",

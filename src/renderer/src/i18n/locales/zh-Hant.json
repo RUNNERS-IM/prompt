@@ -285,7 +285,9 @@
       "failure": {
         "signIn": "需要登入",
         "usageLimit": "已達用量上限",
-        "overloaded": "伺服器忙碌中"
+        "overloaded": "伺服器忙碌中",
+        "failed": "失敗",
+        "failedWith": "失敗：{{message}}"
       },
       "noUpdateHours_other": "已 {{count}} 小時沒有更新 · 可能已卡住",
       "noUpdateDays_other": "已 {{count}} 天沒有更新 · 可能已卡住",
@@ -293,7 +295,10 @@
       "restartSession": "重新啟動",
       "resumeFailed": "無法重新開啟此工作階段",
       "retryResume": "重試",
-      "resumedInTabFolder": "[Prompt] 在此資料夾中繼續，而不是上次執行的 {{folder}}"
+      "resumedInTabFolder": "[Prompt] 在此資料夾中繼續，而不是上次執行的 {{folder}}",
+      "interruptedByUser": "已被使用者中斷",
+      "interrupted": "已中斷",
+      "unconfirmed": "無法確認"
     },
     "sessionMove": {
       "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",
@@ -21131,11 +21136,17 @@
         "review": "審查",
         "restartCount_other": "重新啟動 {{count}} 個工作階段",
         "reviewBody_other": "其他 {{count}} 個 Claude 工作階段未移至 {{next}}。",
-        "body_other": "{{count}} 個 Claude 工作階段仍在 {{previous}} 上執行。重新啟動後，各對話將在 {{next}} 上繼續。忙碌的工作階段會等待閒置後再重新啟動。"
+        "body_other": "{{count}} 個 Claude 工作階段仍在 {{previous}} 上執行。重新啟動後，各對話將在 {{next}} 上繼續。忙碌的工作階段會等待閒置後再重新啟動。",
+        "continuePrompt": "Claude 帳號已更換。請繼續先前的工作。",
+        "restartedOne": "已在 {{account}} 上重新啟動 1 個 Claude 工作階段",
+        "restartedOther": "已在 {{account}} 上重新啟動 {{count}} 個 Claude 工作階段",
+        "restartedWithFailures": "已重新啟動 {{done}} 個工作階段 · 失敗 {{failed}} 個",
+        "restartWaiting": "已在 {{account}} 上重新啟動 {{count}} 個 Claude 工作階段中的 {{done}} 個。其餘將在目前工作結束或開啟其分頁時重新啟動。"
       },
       "loginSync": {
         "previousLogin": "先前的登入"
-      }
+      },
+      "addedInUse": "已儲存 Claude 帳號。所有工作階段已在使用 {{account}}。"
     },
     "managedData": {
       "description": "在 Orca 主機的終端機中執行此命令以新增帳戶。此選擇適用於該主機上明確發起的新代理程式啟動操作；直接 SSH 轉送和在 Windows 主機上啟動的 WSL 使用各自的憑證。",

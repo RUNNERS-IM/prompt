@@ -21874,11 +21874,17 @@
         "reviewBody_other": "{{count}} altre sessioni di Claude non sono state spostate su {{next}}.",
         "body_one": "{{count}} sessione di Claude è ancora in esecuzione su {{previous}}. Riavviando, la conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
         "body_many": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
-        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio."
+        "body_other": "{{count}} sessioni di Claude sono ancora in esecuzione su {{previous}}. Riavviando, ogni conversazione continua su {{next}}. Le sessioni occupate attendono di essere inattive prima del riavvio.",
+        "continuePrompt": "L’account Claude è cambiato. Continua il lavoro che stavi facendo.",
+        "restartedOne": "1 sessione Claude riavviata su {{account}}",
+        "restartedOther": "{{count}} sessioni Claude riavviate su {{account}}",
+        "restartedWithFailures": "{{done}} sessioni Claude riavviate · {{failed}} non riuscite",
+        "restartWaiting": "Riavviate {{done}} di {{count}} sessioni Claude su {{account}}. Le altre si riavviano al termine del turno o quando ne apri la scheda."
       },
       "loginSync": {
         "previousLogin": "il login precedente"
-      }
+      },
+      "addedInUse": "Account Claude salvato. Tutte le sessioni usano già {{account}}."
     },
     "managedData": {
       "description": "Aggiungi account eseguendo questo comando in un terminale sull'host Orca. La selezione vale per i nuovi avvii espliciti di agenti su quell'host; il relay SSH diretto e gli avvii WSL ospitati da Windows usano le proprie credenziali.",
@@ -23692,7 +23698,9 @@
       "failure": {
         "signIn": "Accesso necessario",
         "usageLimit": "Limite di utilizzo raggiunto",
-        "overloaded": "Server occupato"
+        "overloaded": "Server occupato",
+        "failed": "Non riuscito",
+        "failedWith": "Non riuscito: {{message}}"
       },
       "tool": {
         "command": "Esecuzione di un comando",
@@ -23714,7 +23722,10 @@
       "restartSession": "Riavvia",
       "resumeFailed": "Impossibile riaprire questa sessione",
       "retryResume": "Riprova",
-      "resumedInTabFolder": "[Prompt] Si continua in questa cartella, non in {{folder}} dove era in esecuzione"
+      "resumedInTabFolder": "[Prompt] Si continua in questa cartella, non in {{folder}} dove era in esecuzione",
+      "interruptedByUser": "Interrotto dall’utente",
+      "interrupted": "Interrotto",
+      "unconfirmed": "Impossibile confermare"
     },
     "timeAgo": {
       "now": "ora",

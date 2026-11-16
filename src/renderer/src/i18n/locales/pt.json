@@ -288,7 +288,9 @@
       "failure": {
         "signIn": "Login necessário",
         "usageLimit": "Limite de uso atingido",
-        "overloaded": "Servidor ocupado"
+        "overloaded": "Servidor ocupado",
+        "failed": "Falhou",
+        "failedWith": "Falhou: {{message}}"
       },
       "noUpdateHours_one": "Sem atualização há {{count}} h · pode estar travada",
       "noUpdateHours_many": "Sem atualização há {{count}} h · pode estar travada",
@@ -300,7 +302,10 @@
       "restartSession": "Reiniciar",
       "resumeFailed": "Não foi possível reabrir esta sessão",
       "retryResume": "Tentar novamente",
-      "resumedInTabFolder": "[Prompt] Continuando nesta pasta, não em {{folder}}, onde foi executado por último"
+      "resumedInTabFolder": "[Prompt] Continuando nesta pasta, não em {{folder}}, onde foi executado por último",
+      "interruptedByUser": "Interrompido pelo usuário",
+      "interrupted": "Interrompido",
+      "unconfirmed": "Não foi possível confirmar"
     },
     "sessionMove": {
       "cancelRemote": "As sessões só podem ser movidas entre projetos neste computador.",
@@ -21924,11 +21929,17 @@
         "reviewBody_many": "{{count}} outras sessões do Claude não foram movidas para {{next}}.",
         "body_one": "{{count}} sessão do Claude ainda está em execução em {{previous}}. Ao reiniciar, a conversa continua em {{next}}. As sessões ocupadas aguardam ficar ociosas antes de reiniciar.",
         "body_other": "{{count}} sessões do Claude ainda estão em execução em {{previous}}. Ao reiniciar, cada conversa continua em {{next}}. As sessões ocupadas aguardam ficar ociosas antes de reiniciar.",
-        "body_many": "{{count}} sessões do Claude ainda estão em execução em {{previous}}. Ao reiniciar, cada conversa continua em {{next}}. As sessões ocupadas aguardam ficar ociosas antes de reiniciar."
+        "body_many": "{{count}} sessões do Claude ainda estão em execução em {{previous}}. Ao reiniciar, cada conversa continua em {{next}}. As sessões ocupadas aguardam ficar ociosas antes de reiniciar.",
+        "continuePrompt": "A conta do Claude mudou. Continue o trabalho que estava fazendo.",
+        "restartedOne": "1 sessão do Claude reiniciada em {{account}}",
+        "restartedOther": "{{count}} sessões do Claude reiniciadas em {{account}}",
+        "restartedWithFailures": "{{done}} sessões do Claude reiniciadas · {{failed}} falharam",
+        "restartWaiting": "{{done}} de {{count}} sessões do Claude reiniciadas em {{account}}. As demais reiniciam quando o turno terminar ou a aba for aberta."
       },
       "loginSync": {
         "previousLogin": "o login anterior"
-      }
+      },
+      "addedInUse": "Conta do Claude salva. Todas as sessões já usam {{account}}."
     },
     "managedData": {
       "description": "Adicione contas executando este comando em um terminal no host do Orca. A seleção se aplica a novos agentes iniciados explicitamente nesse host; relay SSH direto e agentes iniciados no WSL hospedado no Windows usam suas próprias credenciais.",

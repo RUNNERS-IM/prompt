@@ -22,6 +22,7 @@ import {
   handleRunningClaudeSessionsAfterSwitch,
   resetClaudeAccountSwitchSessionsForTests
 } from './claude-account-switch-sessions'
+import { resetClaudeAccountRestartToastForTests } from './claude-account-restart-toast'
 
 type SwitchSettings = {
   claudeAccountSwitchRunningSessions?: ClaudeAccountSwitchRunningSessions
@@ -34,6 +35,7 @@ type StoreStub = {
   queuePaneAccountRestarts: (ptyIds: string[], agent: string) => void
   consumePendingPaneAccountRestart: (ptyId: string) => void
   agentStatusByPaneKey: Record<string, unknown>
+  pendingPaneAccountRestarts: Record<string, string>
 }
 
 const store = vi.hoisted((): StoreStub => ({
@@ -42,12 +44,29 @@ const store = vi.hoisted((): StoreStub => ({
   updateSettings: vi.fn(async () => {}),
   queuePaneAccountRestarts: vi.fn(),
   consumePendingPaneAccountRestart: vi.fn(),
-  agentStatusByPaneKey: {}
+  agentStatusByPaneKey: {},
+  pendingPaneAccountRestarts: {}
 }))
 const toastSuccess = vi.hoisted(() => vi.fn())
+const toastLoading = vi.hoisted(() => vi.fn())
+const screenLines = vi.hoisted(() => ({ byTab: {} as Record<string, string[]> }))
 
-vi.mock('@/store', () => ({ useAppStore: { getState: () => store } }))
-vi.mock('sonner', () => ({ toast: { success: toastSuccess } }))
+vi.mock('@/store', () => ({ useAppStore: { getState: () => store, subscribe: () => () => {} } }))
+vi.mock('sonner', () => ({
+  toast: { success: toastSuccess, loading: toastLoading, info: vi.fn(), warning: vi.fn() }
+}))
+vi.mock('@/runtime/runtime-rpc-client', () => ({
+  callRuntimeRpc: vi.fn(
+    async (_target: unknown, _method: string, params: { terminal: string }) => ({
+      terminal: { tail: screenLines.byTab[params.terminal] ?? [] }
+    })
+  )
+}))
+vi.mock('./active-agent-note-target', () => ({
+  findActiveRuntimeTerminal: vi.fn(async (_t: unknown, _w: string, pane: { tabId: string }) => ({
+    handle: pane.tabId
+  }))
+}))
 vi.mock('./claude-session-account-move', async (importOriginal) => ({
   ...(await importOriginal<typeof AccountMove>()),
   findClaudeSwitchSessions: vi.fn(),
@@ -104,10 +123,17 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     resetClaudeAccountSwitchSessionsForTests()
+    resetClaudeAccountRestartToastForTests()
     store.settings = {}
     store.agentStatusByPaneKey = {}
+    screenLines.byTab = {}
     store.terminalLayoutsByTabId = Object.fromEntries(
-      [1, 2, 3].map((n) => [`tab-${n}`, { ptyIdsByLeafId: { [`leaf-${n}`]: `pty-${n}` } }])
+      [1, 2, 3].map((n) => [
+        `tab-${n}`,
+        {
+          ptyIdsByLeafId: { [`leaf-${n}`]: `pty-${n}`, [[LEAF_1, LEAF_2][n - 1] ?? '']: `pty-${n}` }
+        }
+      ])
     )
   })
 
@@ -161,7 +187,9 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
 
     answerClaudeAccountSwitchPrompt('restart')
 
-    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1', 'pty-2'], 'claude')
+    await vi.waitFor(() =>
+      expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1', 'pty-2'], 'claude')
+    )
     expect(getClaudeAccountSwitchPrompt()).toBeNull()
     expect(store.updateSettings).not.toHaveBeenCalled()
   })
@@ -174,7 +202,9 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
       ptyIds: ['pty-2', 'pty-unlisted']
     })
 
-    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
+    await vi.waitFor(() =>
+      expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
+    )
   })
 
   it('restarts a pane on the PTY it has now, and skips a pane that closed', async () => {
@@ -186,7 +216,12 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
 
     answerClaudeAccountSwitchPrompt('restart')
 
-    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1-reattached'], 'claude')
+    await vi.waitFor(() =>
+      expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(
+        ['pty-1-reattached'],
+        'claude'
+      )
+    )
   })
 
   it('asks nothing when launches run on the same folder before and after the switch', async () => {
@@ -227,9 +262,37 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
     expect(getClaudeAccountSwitchPrompt()).toBeNull()
     expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1', 'pty-2'], 'claude')
-    expect(toastSuccess).toHaveBeenCalledWith(
-      'Restarting 2 Claude sessions on account-b@example.com'
+    expect(toastLoading).toHaveBeenCalledWith(
+      'Restarting 2 Claude sessions on account-b@example.com',
+      expect.anything()
     )
+  })
+
+  it('moves sessions on every account, not only the one being left', async () => {
+    store.settings = { claudeAccountSwitchRunningSessions: 'restart' }
+    vi.mocked(findClaudeSwitchSessions).mockResolvedValue(
+      scan([], { elsewhere: [{ ...candidate(2), accountId: null }] })
+    )
+
+    expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
+    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
+  })
+
+  it('counts a session waiting on the usage-limit picker as stopped at the limit', async () => {
+    store.settings = { claudeAccountSwitchRunningSessions: 'limited' }
+    screenLines.byTab['tab-2'] = [
+      "You've hit your weekly limit · resets Nov 21 at 12pm",
+      ' What do you want to do?',
+      ' ❯ 1. Stop and wait for limit to reset',
+      '   3. Switch to usage credits'
+    ]
+    vi.mocked(findClaudeSwitchSessions).mockResolvedValue(
+      scan([uuidCandidate(1, LEAF_1), uuidCandidate(2, LEAF_2)])
+    )
+
+    await handleRunningClaudeSessionsAfterSwitch(SWITCH)
+
+    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
   })
 
   it('restarts only sessions stopped at their usage limit when the setting says so', async () => {
@@ -252,8 +315,9 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
     expect(getClaudeAccountSwitchPrompt()).toBeNull()
     expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1'], 'claude')
-    expect(toastSuccess).toHaveBeenCalledWith(
-      'Restarting 1 Claude session on account-b@example.com'
+    expect(toastLoading).toHaveBeenCalledWith(
+      'Restarting 1 Claude session on account-b@example.com',
+      expect.anything()
     )
   })
 
@@ -264,7 +328,7 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     expect(await handleRunningClaudeSessionsAfterSwitch(SWITCH)).toBe('handled')
     expect(getClaudeAccountSwitchPrompt()).toBeNull()
     expect(store.queuePaneAccountRestarts).not.toHaveBeenCalled()
-    expect(toastSuccess).not.toHaveBeenCalled()
+    expect(toastLoading).not.toHaveBeenCalled()
   })
 
   it('names sessions an automatic restart left behind, and reviews only those', async () => {
@@ -277,26 +341,19 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
     )
 
     await handleRunningClaudeSessionsAfterSwitch(SWITCH)
-    const [, options] = toastSuccess.mock.lastCall!
-    expect(options.description).toBe("2 other sessions weren't moved.")
+    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1', 'pty-2'], 'claude')
+    const [, options] = toastLoading.mock.lastCall!
+    expect(options.description).toBe("1 other session wasn't moved.")
     options.action.onClick()
 
     expect(getClaudeAccountSwitchPrompt()).toMatchObject({
       review: true,
       sessions: {
         onAccount: [],
-        elsewhere: [
-          expect.objectContaining({
-            ptyId: 'pty-2',
-            accountLabel: 'System default'
-          })
-        ],
+        elsewhere: [],
         cantMove: [expect.objectContaining({ ptyId: 'pty-3' })]
       }
     })
-    answerClaudeAccountSwitchPrompt('restart')
-    expect(store.queuePaneAccountRestarts).toHaveBeenNthCalledWith(1, ['pty-1'], 'claude')
-    expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-2'], 'claude')
   })
 
   it('keeps sessions without scanning when the setting is Never restart', async () => {

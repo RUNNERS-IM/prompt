@@ -285,7 +285,9 @@
       "failure": {
         "signIn": "サインインが必要です",
         "usageLimit": "使用制限に達しました",
-        "overloaded": "サーバー混雑中"
+        "overloaded": "サーバー混雑中",
+        "failed": "失敗",
+        "failedWith": "失敗: {{message}}"
       },
       "noUpdateHours_other": "{{count}} 時間更新なし · 停止している可能性があります",
       "noUpdateDays_other": "{{count}} 日間更新なし · 停止している可能性があります",
@@ -293,7 +295,10 @@
       "restartSession": "再起動",
       "resumeFailed": "セッションを再度開けませんでした",
       "retryResume": "再試行",
-      "resumedInTabFolder": "[Prompt] 前回の作業フォルダ（{{folder}}）ではなく、このフォルダで続けます"
+      "resumedInTabFolder": "[Prompt] 前回の作業フォルダ（{{folder}}）ではなく、このフォルダで続けます",
+      "interruptedByUser": "ユーザーが中断",
+      "interrupted": "中断",
+      "unconfirmed": "確認できません"
     },
     "sessionMove": {
       "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",
@@ -21290,11 +21295,17 @@
         "uncheckedOther": "{{count}} 個のターミナルで Claude を確認できませんでした。そこで実行中の Claude は、再起動するまで {{previous}} のままになります。",
         "restartCount_other": "{{count}} 件のセッションを再起動",
         "reviewBody_other": "ほかの {{count}} 件の Claude セッションは {{next}} に移動されませんでした。",
-        "body_other": "{{count}} 件の Claude セッションがまだ {{previous}} で実行中です。再起動すると、各会話が {{next}} で続行されます。処理中のセッションは待機状態になってから再起動します。"
+        "body_other": "{{count}} 件の Claude セッションがまだ {{previous}} で実行中です。再起動すると、各会話が {{next}} で続行されます。処理中のセッションは待機状態になってから再起動します。",
+        "continuePrompt": "Claude のアカウントが切り替わりました。作業の続きを進めてください。",
+        "restartedOne": "{{account}} で Claude セッションを 1 件再起動しました",
+        "restartedOther": "{{account}} で Claude セッションを {{count}} 件再起動しました",
+        "restartedWithFailures": "{{done}} 件のセッションを再起動しました · 失敗 {{failed}} 件",
+        "restartWaiting": "{{account}} で Claude セッション {{count}} 件中 {{done}} 件を再起動しました。残りは作業が終わるか、そのタブを開いたときに再起動します。"
       },
       "loginSync": {
         "previousLogin": "以前のログイン"
-      }
+      },
+      "addedInUse": "Claude アカウントを保存しました。すべてのセッションはすでに {{account}} を使っています。"
     },
     "hostSignIn": {
       "copied": "コピーしました",

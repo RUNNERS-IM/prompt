@@ -202,8 +202,8 @@ export function buildDefaultSettings(args: {
     terminalModelQueryAuthority: true,
     // Prompt only runs Claude Code, so first launch starts with it selected.
     defaultTuiAgent: 'claude',
-    // On a new login Prompt restarts only the Claude sessions stopped at their usage limit.
-    claudeAccountSwitchRunningSessions: 'limited',
+    // 계정이 바뀌면 이 맥의 모든 Claude 세션을 새 계정으로 다시 시작한다. 일하던 세션은 그 턴이 끝난 뒤에.
+    claudeAccountSwitchRunningSessions: 'restart',
     disabledTuiAgents: [...DEFAULT_DISABLED_TUI_AGENTS],
     pluginSystemEnabled: false,
     pluginSystemDefaultedOn: true,
