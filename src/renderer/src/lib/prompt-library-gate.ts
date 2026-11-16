@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { translate } from '@/i18n/i18n'
+import { useLanguageReadiness } from '@/i18n/language-readiness'
 import { useAppStore } from '@/store'
 import type { AgentStatusEntry } from '../../../shared/agent-status-types'
 import type { GlobalSettings } from '../../../shared/global-settings-types'
@@ -54,7 +55,14 @@ export function startPromptLibraryBackground(): () => void {
 
   const seedDefaults = (): void => {
     const settings = useAppStore.getState().settings
-    if (seedSent || !settings || settings.promptLibrarySeeded || !isSharedPromptsLoaded()) {
+    // 언어 글 묶음을 다 읽기 전에 넣으면 기본 글이 영어로 저장된다.
+    if (
+      seedSent ||
+      !settings ||
+      settings.promptLibrarySeeded ||
+      !isSharedPromptsLoaded() ||
+      !useLanguageReadiness.getState().ready
+    ) {
       return
     }
     seedSent = true
@@ -119,6 +127,7 @@ export function startPromptLibraryBackground(): () => void {
   }
   seedDefaults()
   const stopShared = subscribeSharedPrompts(seedDefaults)
+  const stopLanguage = useLanguageReadiness.subscribe(seedDefaults)
   const stopStore = useAppStore.subscribe((state, previous) => {
     if (state.settings !== previous.settings) {
       seedDefaults()
@@ -129,6 +138,7 @@ export function startPromptLibraryBackground(): () => void {
   })
   return () => {
     stopShared()
+    stopLanguage()
     stopStore()
   }
 }
