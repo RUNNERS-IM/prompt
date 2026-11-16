@@ -12,7 +12,7 @@ vi.mock('electron', () => ({
   nativeImage: { createFromBitmap: createFromBitmapMock }
 }))
 
-import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
+import { composeTrayAttentionIcon, composeTrayTemplateAttentionIcon } from './tray-attention-icon'
 
 type FakeImage = {
   getSize: () => { width: number; height: number }
@@ -85,58 +85,41 @@ describe('composeTrayAttentionIcon', () => {
   })
 })
 
-describe('tintTrayTemplateForAttention', () => {
-  it('preserves alpha while selecting literal black pixels for a light menu bar', () => {
-    createFromBitmapMock.mockClear()
-    const bitmap = Buffer.from([0x22, 0x33, 0x44, 0x80, 0xaa, 0xbb, 0xcc, 0x00])
-    const base = {
-      getSize: () => ({ width: 2, height: 1 }),
-      toBitmap: () => bitmap
+describe('composeTrayTemplateAttentionIcon', () => {
+  function opaqueBase(width: number, height: number, scale = 1) {
+    return {
+      getSize: () => ({ width, height }),
+      toBitmap: vi.fn(() => Buffer.alloc(width * scale * height * scale * 4, 0xff))
     }
+  }
 
-    tintTrayTemplateForAttention(base as never, false)
+  function alphaAt(buffer: Buffer, width: number, x: number, y: number): number {
+    return buffer[(y * width + x) * 4 + 3]
+  }
 
-    expect(createFromBitmapMock.mock.calls[0][0]).toEqual(
-      Buffer.from([0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00])
-    )
+  it('returns the base unchanged when it has no pixels', () => {
+    const base = { getSize: () => ({ width: 0, height: 0 }), toBitmap: () => Buffer.alloc(0) }
+    expect(composeTrayTemplateAttentionIcon(base as never)).toBe(base)
   })
 
-  it('selects literal white pixels for a dark menu bar', () => {
+  it('paints an opaque dot and cuts its ring out of the glyph, leaving the rest alone', () => {
     createFromBitmapMock.mockClear()
-    const base = {
-      getSize: () => ({ width: 1, height: 1 }),
-      toBitmap: () => Buffer.from([0x00, 0x00, 0x00, 0xff])
-    }
+    composeTrayTemplateAttentionIcon(opaqueBase(18, 18) as never)
 
-    tintTrayTemplateForAttention(base as never, true)
-
-    expect(createFromBitmapMock.mock.calls[0][0]).toEqual(Buffer.from([0xff, 0xff, 0xff, 0xff]))
-  })
-
-  it('keeps white edge pixels premultiplied-valid at partial alpha', () => {
-    createFromBitmapMock.mockClear()
-    const base = {
-      getSize: () => ({ width: 1, height: 1 }),
-      toBitmap: () => Buffer.from([0x00, 0x00, 0x00, 0x80])
-    }
-
-    tintTrayTemplateForAttention(base as never, true)
-
-    // Premultiplied alpha requires 0x80 channels for half-covered white, not 0xff.
-    expect(createFromBitmapMock.mock.calls[0][0]).toEqual(Buffer.from([0x80, 0x80, 0x80, 0x80]))
+    const out = createFromBitmapMock.mock.calls[0][0] as Buffer
+    // 18px: dot radius 4 centred at (13, 4); the ring is the next pixel out.
+    const dot = (4 * 18 + 13) * 4
+    expect([...out.subarray(dot, dot + 4)]).toEqual([0, 0, 0, 0xff])
+    expect(alphaAt(out, 18, 8, 4)).toBe(0x00)
+    expect(alphaAt(out, 18, 2, 15)).toBe(0xff)
   })
 
   it('reads and sizes the requested scale factor', () => {
     createFromBitmapMock.mockClear()
-    const toBitmap = vi.fn(() => Buffer.from([0x00, 0x00, 0x00, 0xff]))
-    const base = {
-      getSize: () => ({ width: 1, height: 1 }),
-      toBitmap
-    }
+    const base = opaqueBase(18, 18, 2)
+    composeTrayTemplateAttentionIcon(base as never, 2)
 
-    tintTrayTemplateForAttention(base as never, true, 2)
-
-    expect(toBitmap).toHaveBeenCalledWith({ scaleFactor: 2 })
-    expect(createFromBitmapMock.mock.calls[0][1]).toEqual({ width: 2, height: 2 })
+    expect(base.toBitmap).toHaveBeenCalledWith({ scaleFactor: 2 })
+    expect(createFromBitmapMock.mock.calls[0][1]).toEqual({ width: 36, height: 36, scaleFactor: 2 })
   })
 })

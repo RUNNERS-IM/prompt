@@ -11,7 +11,7 @@ import {
 import { ShortcutKeyCombo } from './ShortcutKeyCombo'
 import { useShortcutKeyDetails, type ShortcutKeyComboDetails } from '@/hooks/useShortcutLabel'
 import { useMountedRef } from '@/hooks/useMountedRef'
-import appIconUrl from '../../../../resources/icon.png?url'
+import welcomePanda from './runners-account/assets/panda/welcome.webp'
 import { translate } from '@/i18n/i18n'
 import { hasGitHubBackedProject, type PreflightIssue } from './landing-preflight-issues'
 import { useLandingPreflightRuntime } from './landing-preflight-runtime'
@@ -260,8 +260,8 @@ export default function Landing(): React.JSX.Element {
     <div className="absolute inset-0 flex items-center justify-center bg-background">
       <div className="w-full max-w-lg px-6">
         <div className="flex flex-col items-center gap-4 py-8">
-          {/* Prompt: the app icon at 64 as in the About window, so light mode shows no dark tile. */}
-          <img src={appIconUrl} alt={PROMPT_APP_NAME} className="size-16" draggable={false} />
+          {/* Prompt: the RUNNERS welcome panda (kit assets/panda, guide 「빈 상태」). */}
+          <img src={welcomePanda} alt="" className="size-24" draggable={false} />
           <h1 className="text-xl font-semibold text-foreground">
             {/* Prompt: the app name comes from code so no catalog can show the old brand. */}
             {PROMPT_APP_NAME}

@@ -15,8 +15,7 @@ const {
   retinaMacImage,
   stampDevBadgeMock,
   themeState,
-  tintedMacImage,
-  tintTemplateMock,
+  composeTemplateMock,
   trayInstances
 } = vi.hoisted(() => {
   const makeImage = (name: string) => ({
@@ -31,7 +30,6 @@ const {
   const resizedImage = makeImage('windows')
   const baseMacImage = makeImage('mac-base')
   const retinaMacImage = makeImage('mac-retina')
-  const tintedMacImage = makeImage('mac-tinted')
   const attentionImage = makeImage('attention')
   const devBadgeImage = makeImage('dev-badge')
   const devBadgeRetinaImage = makeImage('dev-badge-retina')
@@ -63,8 +61,7 @@ const {
       scaleFactor === 2 ? devBadgeRetinaImage : devBadgeImage
     ),
     themeState,
-    tintedMacImage,
-    tintTemplateMock: vi.fn(() => tintedMacImage),
+    composeTemplateMock: vi.fn(() => attentionImage),
     trayInstances: [] as FakeTray[]
   }
 })
@@ -104,7 +101,7 @@ vi.mock('../app-icon', () => ({
 
 vi.mock('./tray-attention-icon', () => ({
   composeTrayAttentionIcon: composeAttentionMock,
-  tintTrayTemplateForAttention: tintTemplateMock
+  composeTrayTemplateAttentionIcon: composeTemplateMock
 }))
 
 vi.mock('./tray-dev-badge', () => ({
@@ -165,7 +162,7 @@ beforeEach(() => {
   trayInstances.length = 0
   menuFromTemplateMock.mockClear()
   composeAttentionMock.mockClear()
-  tintTemplateMock.mockClear()
+  composeTemplateMock.mockClear()
   createAppIconImageMock.mockReset()
   createAppIconImageMock.mockReturnValue({ resize: vi.fn(() => resizedImage) })
   createFromPathMock.mockReset()
@@ -179,7 +176,6 @@ beforeEach(() => {
   for (const image of [
     baseMacImage,
     retinaMacImage,
-    tintedMacImage,
     attentionImage,
     devBadgeImage,
     devBadgeRetinaImage
@@ -411,7 +407,7 @@ describe('dev instance indicator', () => {
     })
   })
 
-  it('tints the badged image (not the plain one) for macOS attention', async () => {
+  it('badges the dev-stamped image (not the plain one) for macOS attention', async () => {
     setPlatform('darwin')
     const { createSystemTray, setTrayAttention } = await loadModule()
     createSystemTray(createOptions({ isDevInstance: true, devInstanceLabel: 'my-branch' }))
@@ -419,7 +415,7 @@ describe('dev instance indicator', () => {
     setTrayAttention(true)
     flushTraySceneMutation()
 
-    expect(tintTemplateMock).toHaveBeenCalledWith(devBadgeImage, false)
+    expect(composeTemplateMock).toHaveBeenCalledWith(devBadgeImage)
   })
 
   it('falls back to the plain icon when badge stamping fails', async () => {
@@ -520,7 +516,7 @@ describe('setTrayAttention', () => {
     expect(created.setImage).toHaveBeenLastCalledWith(resizedImage)
   })
 
-  it('uses a literal theme-aware glyph for macOS attention, then restores template mode', async () => {
+  it('keeps the macOS attention badge a template image so any menu bar tints it', async () => {
     setPlatform('darwin')
     const { createSystemTray, setTrayAttention } = await loadModule()
     createSystemTray(createOptions())
@@ -530,15 +526,14 @@ describe('setTrayAttention', () => {
 
     setTrayAttention(true)
     flushTraySceneMutation()
-    expect(tintTemplateMock).toHaveBeenCalledWith(baseMacImage, false)
-    expect(composeAttentionMock).toHaveBeenCalledWith(tintedMacImage)
+    expect(composeTemplateMock).toHaveBeenCalledWith(baseMacImage)
     // Bitmap rebuild starts at 1x; re-add 2x or attention glyphs blur on Retina.
-    expect(tintTemplateMock).toHaveBeenCalledWith(baseMacImage, false, 2)
+    expect(composeTemplateMock).toHaveBeenCalledWith(baseMacImage, 2)
     expect(attentionImage.addRepresentation).toHaveBeenCalledWith({
       scaleFactor: 2,
       dataURL: 'data:image/png;base64,attention'
     })
-    expect(attentionImage.setTemplateImage).toHaveBeenCalledWith(false)
+    expect(attentionImage.setTemplateImage).toHaveBeenCalledWith(true)
     expect(created.setImage).toHaveBeenCalledWith(attentionImage)
     expect(created.setToolTip).toHaveBeenCalledWith('Prompt - activity waiting')
 
@@ -555,15 +550,15 @@ describe('setTrayAttention', () => {
     createSystemTray(createOptions())
     setTrayAttention(true)
     flushTraySceneMutation()
-    tintTemplateMock.mockClear()
+    composeTemplateMock.mockClear()
     nativeThemeMock.shouldUseDarkColors = true
 
     themeState.updatedListener?.()
     // Appearance events also arrive from AppKit; defer their native writes.
-    expect(tintTemplateMock).not.toHaveBeenCalled()
+    expect(composeTemplateMock).not.toHaveBeenCalled()
 
     flushTraySceneMutation()
-    expect(tintTemplateMock).toHaveBeenCalledWith(baseMacImage, true)
+    expect(composeTemplateMock).toHaveBeenCalledWith(baseMacImage)
   })
 
   it('reflects attention requested before deferred macOS creation', async () => {
@@ -704,7 +699,7 @@ describe('macOS hardening', () => {
     createSystemTray(createOptions())
     const created = trayInstances[0]
     created.setImage.mockClear()
-    composeAttentionMock.mockImplementationOnce(() => {
+    composeTemplateMock.mockImplementationOnce(() => {
       throw new Error('native image failure')
     })
 
@@ -798,7 +793,7 @@ describe('language changes', () => {
       'Prompt DEV (language-test) - 件のアクティビティが待機中'
     )
     expect(builtMenuItems()[0].label).toBe('Prompt DEV (language-test)')
-    expect(composeAttentionMock).toHaveBeenCalled()
+    expect(composeTemplateMock).toHaveBeenCalled()
 
     mainI18n.addResource('ja', 'translation', 'tray.openApp', 'Prompt を表示')
     rebuildSystemTrayMenu()
