@@ -2,6 +2,7 @@ import { Blocks, ChevronLeft, Loader2, PackageCheck, SearchX } from 'lucide-reac
 import { translate } from '@/i18n/i18n'
 import { Button } from '../../ui/button'
 import { PluginCatalogEmptyState } from './PluginCatalogEmptyState'
+import emptyPanda from '../../runners-account/assets/panda/empty.webp'
 
 /** Nothing matches the search and/or filters; one button clears whatever is narrowing. */
 export function PluginNoMatches({
@@ -16,6 +17,7 @@ export function PluginNoMatches({
   return (
     <PluginCatalogEmptyState
       icon={SearchX}
+      image={emptyPanda}
       title={
         query
           ? translate(
@@ -80,6 +82,7 @@ export function PluginNoneInstalled({ onBrowse }: { onBrowse: () => void }): Rea
   return (
     <PluginCatalogEmptyState
       icon={Blocks}
+      image={emptyPanda}
       title={translate(
         'auto.components.settings.PluginManager.noneInstalledTitle',
         'No plugins installed'

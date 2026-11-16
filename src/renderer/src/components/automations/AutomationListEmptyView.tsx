@@ -9,6 +9,7 @@ import {
   recoveryActionLabel,
   type AutomationHostRecoveryAction
 } from './automation-host-status-descriptors'
+import emptyPanda from '../runners-account/assets/panda/empty.webp'
 
 /** Renders whichever empty/partial/failure state the list is in; nothing when rows exist. */
 
@@ -16,6 +17,9 @@ export type AutomationListEmptyViewProps = AutomationListEmptyStateInput & {
   onRecover?: (action: AutomationHostRecoveryAction) => void
   className?: string
 }
+
+// Prompt: the kit's empty-list panda only where the list is truly empty, not on host errors.
+const EMPTY_KINDS = new Set(['search-no-match', 'host-empty', 'all-hosts-empty'])
 
 export function AutomationListEmptyView({
   onRecover,
@@ -36,6 +40,9 @@ export function AutomationListEmptyView({
         className
       )}
     >
+      {EMPTY_KINDS.has(state.kind) ? (
+        <img src={emptyPanda} alt="" className="mb-2 size-28" draggable={false} />
+      ) : null}
       <p className="text-sm text-foreground">{state.title}</p>
       {state.detail ? <p className="text-xs">{state.detail}</p> : null}
       {recovery && onRecover ? (

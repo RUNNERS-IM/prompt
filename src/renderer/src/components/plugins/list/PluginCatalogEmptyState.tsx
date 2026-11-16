@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils'
 
 type PluginCatalogEmptyStateProps = {
   icon: LucideIcon
+  /** Prompt: kit panda art shown instead of the icon tile in wide empty lists. */
+  image?: string
   title: string
   description?: string
   action?: React.ReactNode
@@ -12,6 +14,7 @@ type PluginCatalogEmptyStateProps = {
 
 export function PluginCatalogEmptyState({
   icon: Icon,
+  image,
   title,
   description,
   action,
@@ -27,16 +30,20 @@ export function PluginCatalogEmptyState({
         className
       )}
     >
-      <div
-        className={cn(
-          'mb-4 flex size-12 items-center justify-center rounded-2xl border shadow-xs',
-          destructive
-            ? 'border-destructive/25 bg-destructive/10 text-destructive'
-            : 'border-border/70 bg-card text-muted-foreground'
-        )}
-      >
-        <Icon className="size-5" aria-hidden="true" />
-      </div>
+      {image ? (
+        <img src={image} alt="" className="mb-4 size-28" draggable={false} />
+      ) : (
+        <div
+          className={cn(
+            'mb-4 flex size-12 items-center justify-center rounded-2xl border shadow-xs',
+            destructive
+              ? 'border-destructive/25 bg-destructive/10 text-destructive'
+              : 'border-border/70 bg-card text-muted-foreground'
+          )}
+        >
+          <Icon className="size-5" aria-hidden="true" />
+        </div>
+      )}
       <h4
         className={cn(
           'text-sm font-semibold tracking-tight',

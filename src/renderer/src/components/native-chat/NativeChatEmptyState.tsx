@@ -1,8 +1,10 @@
-import { MessageSquare, TriangleAlert } from 'lucide-react'
+import { MessageSquare } from 'lucide-react'
 import { translate } from '@/i18n/i18n'
 import { formatAgentTypeLabel } from '@/lib/agent-status'
 import { NATIVE_CHAT_EMPTY_STATE_COPY } from '../../../../shared/native-chat/native-chat-empty-state'
 import type { NativeChatSession } from '../../../../shared/native-chat-types'
+import emptyPanda from '../runners-account/assets/panda/empty.webp'
+import disconnectedArt from '../runners-account/assets/panda/disconnected.webp'
 
 export function NativeChatEmptyState({
   kind,
@@ -22,19 +24,19 @@ export function NativeChatEmptyState({
   const copy = emptyStateCopy(kind, { message, headline }, agent, retrying)
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center">
-      <div
-        className={
-          kind === 'error'
-            ? 'flex size-12 items-center justify-center rounded-full bg-destructive/10 text-destructive'
-            : 'flex size-12 items-center justify-center rounded-full bg-accent text-accent-foreground'
-        }
-      >
-        {kind === 'error' ? (
-          <TriangleAlert className="size-6" />
-        ) : (
+      {/* Prompt: kit panda art for the empty chat and the load failure (guide 「빈 상태」); loading keeps the icon. */}
+      {kind === 'loading' ? (
+        <div className="flex size-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
           <MessageSquare className="size-6" />
-        )}
-      </div>
+        </div>
+      ) : (
+        <img
+          src={kind === 'error' ? disconnectedArt : emptyPanda}
+          alt=""
+          className="size-28"
+          draggable={false}
+        />
+      )}
       <p className="text-sm font-medium text-chat-foreground-strong">{copy.title}</p>
       {copy.subtitle ? (
         <p className="max-w-sm text-balance text-xs text-chat-foreground-faint">{copy.subtitle}</p>
