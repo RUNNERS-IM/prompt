@@ -13,7 +13,7 @@ import { IntegrationsStep } from './IntegrationsStep'
 import { WindowsTerminalStep } from './WindowsTerminalStep'
 import { useOnboardingFlow } from './use-onboarding-flow'
 import { OnboardingFooter } from './OnboardingFooter'
-import logo from '../../../../../resources/logo.svg'
+import welcomePanda from '../runners-account/assets/panda/welcome.webp'
 import { translate } from '@/i18n/i18n'
 import { addAppKeyListener, removeAppKeyListener } from '@/lib/app-keyboard-router'
 
@@ -192,10 +192,11 @@ export default function OnboardingFlow({
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 text-base font-semibold tracking-tight">
                 <img
-                  src={logo}
+                  src={welcomePanda}
                   alt=""
                   aria-hidden="true"
-                  className="h-7 w-auto shrink-0 invert dark:invert-0"
+                  className="size-9 shrink-0"
+                  draggable={false}
                 />
                 <span>
                   {translate('auto.components.onboarding.OnboardingFlow.a249f81538', 'Orca')}
