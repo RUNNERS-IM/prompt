@@ -1,7 +1,8 @@
 // 시험 촬영 모드(RUNNERS_TEST_SHOTS). 앱이 스스로 작업 창 · 설정 탭 · 계정 메뉴 · 정보 · 메뉴 막대 패널을
 // 열어 언어 × 밝은 · 어두운으로 찍고 꺼진다. 공통 부분은 runners-app-kit/test-shots.ts 가 맡고,
 // 여기에는 Prompt 의 화면을 여는 차례만 둔다(규약: ~/git/runners/_docs/[PROGRAM] 시험 촬영 규약.md).
-// 언어를 바꾸려고 설정 파일에 쓰기 때문에, 시험용 사용자 자료 폴더(ORCA_E2E_USER_DATA_DIR)를 줄 때만 켠다.
+// 켜고 끄는 것은 RUNNERS_TEST_SHOTS 하나로만 정한다(개발 전용 분기 뒤에 두지 않아 CI 운영 빌드에서도 찍힌다).
+// 언어를 바꾸려고 설정의 uiLanguage 에 쓰므로, 끝나면 처음 값으로 되돌린 뒤 끈다. 시험은 시험용 사용자 자료 폴더로 돌린다.
 import { app, nativeTheme, type BrowserWindow } from 'electron'
 import { mainProcessState as state } from './main-process-state'
 import {
@@ -14,7 +15,7 @@ import {
 import { showPromptMenuPanelForTestShots } from '../tray/prompt-menu-panel-window'
 import { openPromptNoticesWindowForTestShots } from '../window/prompt-notices-window'
 
-const config = process.env.ORCA_E2E_USER_DATA_DIR ? readTestShots() : null
+const config = readTestShots()
 
 const SHOT_WIDTH = 1280
 const SHOT_HEIGHT = 800
@@ -25,11 +26,6 @@ const pause = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
 
 /** app.whenReady 앞에서 부른다. */
 export function preparePromptTestShots(): void {
-  if (process.env.RUNNERS_TEST_SHOTS && !config) {
-    console.warn(
-      '[test-shots] ORCA_E2E_USER_DATA_DIR 없이는 켜지 않습니다(사용자 설정에 쓰지 않으려고)'
-    )
-  }
   prepareTestShots(config, app.commandLine)
 }
 
@@ -190,14 +186,22 @@ export async function startPromptTestShots(): Promise<void> {
   if (config.account) {
     config.warnings.push(`RUNNERS_TEST_ACCOUNT=${config.account} 는 Prompt 에서 아직 쓰지 않음`)
   }
+  const firstLanguage: unknown = await window.webContents.executeJavaScript(
+    'window.api.settings.get().then((settings) => settings?.uiLanguage ?? null)'
+  )
   await runTestShots({
     config,
     app: {
       getVersion: () => app.getVersion(),
       quit: () => {
-        app.quit()
         // 끄기 확인 창 등으로 멈추지 않게
         setTimeout(() => app.exit(0), 10_000).unref()
+        void window.webContents
+          .executeJavaScript(
+            `window.api.settings.set({ uiLanguage: ${JSON.stringify(firstLanguage ?? 'system')} })`
+          )
+          .catch(() => {})
+          .finally(() => app.quit())
       }
     },
     nativeTheme,
