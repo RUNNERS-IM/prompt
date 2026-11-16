@@ -56,10 +56,13 @@ describe('pickAutoPrompts', () => {
   const base = { library: [], shared: [], dismissed: [], now: 10 }
 
   it('adds a prompt once it reaches the threshold', () => {
-    expect(pickAutoPrompts({ ...base, usage: usageWith('빌드 돌려줘', AUTO_PROMPT_MIN_COUNT - 1) })).toEqual(
-      []
-    )
-    const [added] = pickAutoPrompts({ ...base, usage: usageWith('빌드 돌려줘', AUTO_PROMPT_MIN_COUNT) })
+    expect(
+      pickAutoPrompts({ ...base, usage: usageWith('빌드 돌려줘', AUTO_PROMPT_MIN_COUNT - 1) })
+    ).toEqual([])
+    const [added] = pickAutoPrompts({
+      ...base,
+      usage: usageWith('빌드 돌려줘', AUTO_PROMPT_MIN_COUNT)
+    })
     expect(added).toMatchObject({ title: '빌드 돌려줘', body: '빌드 돌려줘', source: 'auto' })
   })
 

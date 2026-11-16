@@ -141,7 +141,9 @@ export default function PromptLibraryPanel(): React.JSX.Element {
                     className="w-full rounded-md px-2 py-1.5 text-left"
                     onClick={() => insertPrompt(row.body)}
                   >
-                    <div className={cn('truncate text-[13px] text-foreground', row.item && 'pr-12')}>
+                    <div
+                      className={cn('truncate text-[13px] text-foreground', row.item && 'pr-12')}
+                    >
                       {row.title}
                     </div>
                     <div className="mt-0.5 line-clamp-2 text-[11px] leading-4 text-muted-foreground">

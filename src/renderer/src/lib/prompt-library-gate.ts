@@ -4,10 +4,7 @@ import { useAppStore } from '@/store'
 import type { AgentStatusEntry } from '../../../shared/agent-status-types'
 import type { GlobalSettings } from '../../../shared/global-settings-types'
 import type { PromptLibraryItem } from '../../../shared/prompt-library-types'
-import {
-  pickAutoPrompts,
-  recordPromptUse
-} from '@/components/right-sidebar/prompt-library-auto'
+import { pickAutoPrompts, recordPromptUse } from '@/components/right-sidebar/prompt-library-auto'
 import {
   getSharedPrompts,
   isSharedPromptsLoaded,

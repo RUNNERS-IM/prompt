@@ -49,7 +49,13 @@ export function buildPromptLibrarySections(
   const sharedRows = shared
     .filter((item) => !ownIds.has(item.id) && !ownBodies.has(bodyKey(item.body)))
     .filter((item) => !needle || matches(item, needle))
-    .map((item) => ({ id: item.id, title: item.title, body: item.body, readOnly: true, item: null }))
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      body: item.body,
+      readOnly: true,
+      item: null
+    }))
   const sections: PromptLibrarySection[] = [
     { kind: 'mine', rows: mine },
     { kind: 'frequent', rows: frequent },
