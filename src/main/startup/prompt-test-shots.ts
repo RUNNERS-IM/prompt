@@ -73,6 +73,19 @@ async function centerOf(
   })()`)
 }
 
+/** 「나중에」 단추가 든 새 판 알림 카드를 숨기거나 다시 보인다. 카드가 없으면 false. */
+function setUpdateCardHidden(window: BrowserWindow, hidden: boolean): Promise<boolean> {
+  return window.webContents.executeJavaScript(`(() => {
+    const later = [...document.querySelectorAll('button')].find((el) =>
+      ['나중에', 'Later'].includes(el.textContent.trim())
+    )
+    const card = later?.closest('[data-slot="card"]')
+    if (!card) return false
+    card.style.visibility = ${hidden ? "'hidden'" : "''"}
+    return true
+  })()`)
+}
+
 /** Radix 메뉴는 pointerdown 으로 열리므로 element.click() 대신 실제 마우스 입력을 보낸다. */
 async function press(
   window: BrowserWindow,
@@ -117,13 +130,13 @@ async function closeSettings(window: BrowserWindow): Promise<void> {
 async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<void> {
   await pass.shot(window, 'main', '작업 창')
 
-  // 새 판 알림 카드: 시험판은 운영 판보다 낮아 늘 뜬다. 찍은 뒤 닫아 다른 사진을 가리지 않게 한다.
-  await pass.shot(window, 'popups', '새-판-알림')
-  const closed =
-    (await press(window, 'button', '나중에')) || (await press(window, 'button', 'Later'))
-  if (!closed) {
-    pass.note('새 판 알림 카드가 없음(이미 닫았거나 새 판이 없음)')
+  // 새 판 알림 카드: 시험판은 운영 판보다 낮아 늘 뜬다. 「나중에」로 닫으면 다음 언어 · 테마에서는 다시 안 떠서,
+  // 찍은 뒤 숨겨 다른 사진을 가리지 않게만 하고 다음 차례에 다시 보이게 해 찍는다.
+  if (!(await setUpdateCardHidden(window, false))) {
+    pass.note('새 판 알림 카드가 없음(새 판이 없음)')
   }
+  await pass.shot(window, 'popups', '새-판-알림')
+  await setUpdateCardHidden(window, true)
 
   // 계정: 사이드바의 Claude 계정 고르기 메뉴
   const opened =
