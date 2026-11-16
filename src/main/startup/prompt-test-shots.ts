@@ -117,6 +117,14 @@ async function closeSettings(window: BrowserWindow): Promise<void> {
 async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<void> {
   await pass.shot(window, 'main', '작업 창')
 
+  // 새 판 알림 카드: 시험판은 운영 판보다 낮아 늘 뜬다. 찍은 뒤 닫아 다른 사진을 가리지 않게 한다.
+  await pass.shot(window, 'popups', '새-판-알림')
+  const closed =
+    (await press(window, 'button', '나중에')) || (await press(window, 'button', 'Later'))
+  if (!closed) {
+    pass.note('새 판 알림 카드가 없음(이미 닫았거나 새 판이 없음)')
+  }
+
   // 계정: 사이드바의 Claude 계정 고르기 메뉴
   const opened =
     (await press(window, 'button', '시스템 기본값')) ||
@@ -155,12 +163,14 @@ async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<
   } else {
     await pass.shot(window, 'popups', '오픈-소스-고지')
   }
-  pass.note('업데이트 창: Prompt 는 따로 된 업데이트 창이 없어 찍지 않음')
 
   // 메뉴 막대 패널(맥만)
   const panel = pass.wants('menu') ? showPromptMenuPanelForTestShots(hideAndShow) : null
   if (panel) {
     await waitForLoad(panel)
+    // 패널 바탕은 OS 가 그리는 흐림이라 capturePage 에 안 찍힌다. 사진에서 글이 보이게 불투명한 바탕을 깐다.
+    panel.setVibrancy(null)
+    panel.setBackgroundColor(nativeTheme.shouldUseDarkColors ? '#2a2a2a' : '#f2f2f2')
     await pause(SETTLE_MS)
     await pass.shot(panel, 'menu', '메뉴-막대-패널')
     panel.hide()
