@@ -42,6 +42,17 @@ export const SelectClaudeAccountParams = SelectAccountParams.extend({
   followRunningSessions: z.boolean().optional()
 })
 
+export const RestartClaudeSessionsParams = z
+  .object({
+    panes: z
+      .array(z.object({ tabId: z.string().min(1), leafId: z.string().min(1) }).strict())
+      .max(500)
+      .optional(),
+    limitedOnly: z.boolean().optional(),
+    continueText: z.string().trim().min(1).max(2000).optional()
+  })
+  .strict()
+
 export const SelectCodexAccountForTargetParams = SelectAccountParams.extend({
   target: CodexSelectionTarget
 })

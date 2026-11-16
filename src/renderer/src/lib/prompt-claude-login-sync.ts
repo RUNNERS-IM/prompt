@@ -6,6 +6,7 @@ import {
   handleRunningClaudeSessionsAfterLogin,
   handleRunningClaudeSessionsAfterSwitch
 } from './claude-account-switch-sessions'
+import { handleClaudeSessionRestartRequest } from './claude-session-restart-command'
 
 const HOST_VIEW = { runtime: 'host' } as const
 
@@ -41,9 +42,15 @@ export function startPromptClaudeLoginSync(deps: {
       }
     })
   })
+  // `prompt session restart` asks the window, which owns the panes.
+  const stopRestart =
+    deps.api.onRestartRequest?.((request) =>
+      handleClaudeSessionRestartRequest(request, deps.listAccounts)
+    ) ?? (() => {})
   return () => {
     stopLogin()
     stopSwitch()
+    stopRestart()
   }
 }
 

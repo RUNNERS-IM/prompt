@@ -20827,8 +20827,8 @@
         "settingDescription": "다시 시작하면 새 계정에서 실행 중인 각 대화가 계속됩니다.",
         "settingRestart": "항상 다시 시작",
         "settingKeep": "다시 시작하지 않음",
-        "restartingOther": "{{account}} 계정에서 Claude 세션 {{count}}개를 다시 시작하는 중",
-        "restartingOne": "{{account}} 계정에서 Claude 세션 1개를 다시 시작하는 중",
+        "restartingOther": "Claude 세션 {{count}}개를 새 계정({{account}})으로 다시 시작하는 중",
+        "restartingOne": "Claude 세션 1개를 새 계정({{account}})으로 다시 시작하는 중",
         "groupOnAccount": "{{account}}에서 실행 중",
         "groupElsewhere": "{{account}} 외",
         "groupCantMove": "옮길 수 없음",
@@ -20844,11 +20844,17 @@
         "uncheckedOther": "터미널 {{count}}개에서 Claude 실행 여부를 확인할 수 없습니다. 그곳에서 실행 중인 Claude는 다시 시작할 때까지 {{previous}}을(를) 계속 사용합니다.",
         "restartCount_other": "세션 {{count}}개 다시 시작",
         "reviewBody_other": "다른 Claude 세션 {{count}}개가 {{next}}(으)로 이동되지 않았습니다.",
-        "body_other": "Claude 세션 {{count}}개가 아직 {{previous}}에서 실행 중입니다. 다시 시작하면 각 대화가 {{next}}에서 계속됩니다. 작업 중인 세션은 유휴 상태가 된 후 다시 시작됩니다."
+        "body_other": "Claude 세션 {{count}}개가 아직 {{previous}}에서 실행 중입니다. 다시 시작하면 각 대화가 {{next}}에서 계속됩니다. 작업 중인 세션은 유휴 상태가 된 후 다시 시작됩니다.",
+        "continuePrompt": "Claude 계정이 바뀌었습니다. 하던 작업을 이어서 진행해 주세요.",
+        "restartedOne": "세션 1개를 다시 시작했습니다",
+        "restartedOther": "세션 {{count}}개를 다시 시작했습니다",
+        "restartedWithFailures": "세션 {{done}}개를 다시 시작했습니다 · 실패 {{failed}}개",
+        "restartWaiting": "{{account}} 계정에서 Claude 세션 {{count}}개 중 {{done}}개를 다시 시작했습니다. 나머지는 하던 일이 끝나거나 그 탭을 열면 다시 시작합니다."
       },
       "loginSync": {
         "previousLogin": "이전 로그인"
-      }
+      },
+      "addedInUse": "Claude 계정을 저장했습니다. 모든 세션이 이미 {{account}} 계정으로 돌고 있습니다."
     },
     "hostSignIn": {
       "copied": "복사됨",
@@ -22695,7 +22701,9 @@
       "failure": {
         "signIn": "로그인 필요",
         "usageLimit": "사용 한도 도달",
-        "overloaded": "서버 혼잡"
+        "overloaded": "서버 혼잡",
+        "failed": "실패",
+        "failedWith": "실패: {{message}}"
       },
       "tool": {
         "command": "명령 실행 중",
@@ -22713,7 +22721,10 @@
       "restartSession": "재시작",
       "resumeFailed": "세션을 다시 열지 못함",
       "retryResume": "다시 시도",
-      "resumedInTabFolder": "[Prompt] 일하던 폴더({{folder}})가 아니라 이 폴더에서 이어 갑니다"
+      "resumedInTabFolder": "[Prompt] 일하던 폴더({{folder}})가 아니라 이 폴더에서 이어 갑니다",
+      "interruptedByUser": "사용자가 멈춤",
+      "interrupted": "중단됨",
+      "unconfirmed": "확인 못 함"
     },
     "windows": {
       "newWindow": "새 창",

@@ -243,7 +243,9 @@
       "failure": {
         "signIn": "Se requiere iniciar sesión",
         "usageLimit": "Límite de uso alcanzado",
-        "overloaded": "Servidor ocupado"
+        "overloaded": "Servidor ocupado",
+        "failed": "Error",
+        "failedWith": "Error: {{message}}"
       },
       "noUpdateHours_one": "Sin novedades desde hace {{count}} h · puede estar bloqueado",
       "noUpdateHours_many": "Sin novedades desde hace {{count}} h · puede estar bloqueado",
@@ -255,7 +257,10 @@
       "restartSession": "Reiniciar",
       "resumeFailed": "No se pudo reabrir esta sesión",
       "retryResume": "Reintentar",
-      "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez"
+      "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez",
+      "interruptedByUser": "Interrumpido por el usuario",
+      "interrupted": "Interrumpido",
+      "unconfirmed": "No se pudo confirmar"
     },
     "sessionMove": {
       "cancelRemote": "Las sesiones solo se pueden mover entre proyectos de este equipo.",
@@ -21313,11 +21318,17 @@
         "reviewBody_many": "No se trasladaron {{count}} sesiones más de Claude a {{next}}.",
         "body_one": "{{count}} sesión de Claude sigue ejecutándose en {{previous}}. Al reiniciarla, la conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
         "body_other": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
-        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse."
+        "body_many": "{{count}} sesiones de Claude siguen ejecutándose en {{previous}}. Al reiniciarlas, cada conversación continúa en {{next}}. Las sesiones ocupadas esperan a estar inactivas antes de reiniciarse.",
+        "continuePrompt": "La cuenta de Claude ha cambiado. Continúa con el trabajo que estabas haciendo.",
+        "restartedOne": "Se reinició 1 sesión de Claude en {{account}}",
+        "restartedOther": "Se reiniciaron {{count}} sesiones de Claude en {{account}}",
+        "restartedWithFailures": "Se reiniciaron {{done}} sesiones de Claude · {{failed}} fallaron",
+        "restartWaiting": "Se reiniciaron {{done}} de {{count}} sesiones de Claude en {{account}}. Las demás se reiniciarán cuando terminen su turno o se abra su pestaña."
       },
       "loginSync": {
         "previousLogin": "el inicio de sesión anterior"
-      }
+      },
+      "addedInUse": "Cuenta de Claude guardada. Todas las sesiones ya usan {{account}}."
     },
     "hostSignIn": {
       "copied": "Copiado",

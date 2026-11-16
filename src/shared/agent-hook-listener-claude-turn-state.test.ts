@@ -552,6 +552,7 @@ describe('the main agent verdict across a child-induced wait', () => {
     ['authentication_failed', 'sign-in'],
     ['oauth_org_not_allowed', 'sign-in'],
     ['rate_limit', 'usage-limit'],
+    ['billing_error', 'usage-limit'],
     ['overloaded', 'overloaded']
   ] as const)('names a StopFailure %s as a %s failure', (error, failureKind) => {
     claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
@@ -561,6 +562,38 @@ describe('the main agent verdict across a child-induced wait', () => {
       failureKind,
       stateStartedAt: expect.any(Number)
     })
+  })
+
+  it('names a plain Stop whose reply is the limit notice a usage-limit failure', () => {
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
+    expect(
+      claude({
+        hook_event_name: 'Stop',
+        last_assistant_message: "You've hit your weekly limit · resets Nov 21 at 12pm"
+      })?.mainAgent
+    ).toMatchObject({ outcome: 'failure', failureKind: 'usage-limit' })
+  })
+
+  it('keeps a plain Stop that only talks about limits a normal stop', () => {
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
+    expect(
+      claude({
+        hook_event_name: 'Stop',
+        last_assistant_message: 'The API has a usage limit of 100 calls per minute.'
+      })?.mainAgent?.outcome
+    ).toBeUndefined()
+  })
+
+  it.each([
+    ["You've hit your weekly limit · resets Nov 21 at 12pm (Asia/Seoul)"],
+    ["You've reached your Fable limit."],
+    ['Stopped for limit · resets 3pm']
+  ])('names a StopFailure whose message says %s a usage-limit failure', (message) => {
+    claude({ hook_event_name: 'UserPromptSubmit', prompt: 'go' })
+    expect(
+      claude({ hook_event_name: 'StopFailure', error: 'unknown', last_assistant_message: message })
+        ?.mainAgent
+    ).toMatchObject({ outcome: 'failure', failureKind: 'usage-limit' })
   })
 
   it('leaves other StopFailure errors as a plain failure, and clears the kind on the next turn', () => {

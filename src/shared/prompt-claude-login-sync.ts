@@ -5,6 +5,8 @@ import type { ClaudeRateLimitAccountsState } from './managed-account-types'
 
 export const PROMPT_CLAUDE_LOGIN_CHANNEL = 'prompt:claudeLogin'
 export const PROMPT_CLAUDE_ACCOUNT_SWITCHED_CHANNEL = 'prompt:claudeAccountSwitched'
+export const PROMPT_CLAUDE_RESTART_REQUEST_CHANNEL = 'prompt:claudeRestartRequest'
+export const PROMPT_CLAUDE_RESTART_REPLY_CHANNEL = 'prompt:claudeRestartReply'
 
 export type PromptClaudeLoginEvent = {
   paneKey: string
@@ -17,7 +19,39 @@ export type PromptClaudeAccountSwitchedEvent = {
   after: ClaudeRateLimitAccountsState
 }
 
+export type PromptClaudeRestartPane = { tabId: string; leafId: string }
+
+/** `prompt session restart`: move Claude sessions onto the selected account and pick their work back up. */
+export type PromptClaudeRestartRequest = {
+  /** The sessions to look at; every local Claude session when absent. */
+  panes?: PromptClaudeRestartPane[]
+  /** Only sessions stopped at their usage limit, the limit picker included. */
+  limitedOnly: boolean
+  /** The line sent to sessions stopped at the limit; the window's own wording when absent. */
+  continueText?: string
+}
+
+/**
+ * `continued`: already on the selected login, so the continue line alone resumes it.
+ * `restarting`: on another account folder, or waiting on the limit picker, so it restarts on the selected one.
+ * `current`: already on the selected login and not stopped; nothing to do.
+ * `skipped`: can't be moved (own config folder, unknown account, no session to resume).
+ */
+export type PromptClaudeRestartOutcome = 'continued' | 'restarting' | 'current' | 'skipped'
+
+export type PromptClaudeRestartResult = {
+  sessions: (PromptClaudeRestartPane & {
+    limited: boolean
+    outcome: PromptClaudeRestartOutcome
+    reason?: string
+  })[]
+}
+
 export type PromptClaudeLoginSyncApi = {
   onLogin: (callback: (event: PromptClaudeLoginEvent) => void) => () => void
   onAccountSwitched: (callback: (event: PromptClaudeAccountSwitchedEvent) => void) => () => void
+  /** Answers each request with the callback's result. */
+  onRestartRequest?: (
+    callback: (request: PromptClaudeRestartRequest) => Promise<PromptClaudeRestartResult>
+  ) => () => void
 }

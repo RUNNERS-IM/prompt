@@ -37,18 +37,21 @@ describe('applyPromptDefaultsOnce', () => {
     expect(result.defaultTuiAgent).toBe('codex')
   })
 
-  it('restarts only sessions stopped at the limit unless the user opted out', () => {
-    const asked = applyPromptDefaultsOnce(
-      { claudeAccountSwitchRunningSessions: 'ask' } as unknown as Settings,
-      () => {}
-    )
-    expect(asked.claudeAccountSwitchRunningSessions).toBe('limited')
-    const kept = applyPromptDefaultsOnce(
-      { claudeAccountSwitchRunningSessions: 'keep' } as unknown as Settings,
-      () => {}
-    )
-    expect(kept.claudeAccountSwitchRunningSessions).toBe('keep')
-  })
+  it.each(['ask', 'limited'])(
+    'moves every session on an account change unless the user opted out (%s)',
+    (old) => {
+      const asked = applyPromptDefaultsOnce(
+        { claudeAccountSwitchRunningSessions: old } as unknown as Settings,
+        () => {}
+      )
+      expect(asked.claudeAccountSwitchRunningSessions).toBe('restart')
+      const kept = applyPromptDefaultsOnce(
+        { claudeAccountSwitchRunningSessions: 'keep' } as unknown as Settings,
+        () => {}
+      )
+      expect(kept.claudeAccountSwitchRunningSessions).toBe('keep')
+    }
+  )
 
   it('does not run again, so a later choice sticks', () => {
     const markNeedsSave = vi.fn()

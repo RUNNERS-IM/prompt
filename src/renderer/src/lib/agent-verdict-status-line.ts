@@ -22,9 +22,11 @@ export function agentVerdictStatusLine(entry: VerdictLineSource): string | null 
       return kind ? retryableFailureLine(kind) : failedLine(entry)
     }
     case 'interrupted':
-      return agentMainAgentVerdict(entry) === 'cancellation' ? 'Interrupted by user' : 'Interrupted'
+      return agentMainAgentVerdict(entry) === 'cancellation'
+        ? translate('prompt.sessionRow.interruptedByUser', 'Interrupted by user')
+        : translate('prompt.sessionRow.interrupted', 'Interrupted')
     case 'unconfirmed':
-      return 'Couldn’t confirm'
+      return translate('prompt.sessionRow.unconfirmed', 'Couldn’t confirm')
     case null:
       return null
   }
@@ -43,9 +45,12 @@ function retryableFailureLine(kind: AgentFailureKind): string {
 
 // Only program errors are reliable one-line failure summaries; agent replies may be unrelated prose.
 function failedLine(entry: VerdictLineSource): string {
+  const failed = translate('prompt.sessionRow.failure.failed', 'Failed')
   if (!isProgramStatusRow(entry)) {
-    return 'Failed'
+    return failed
   }
   const message = entry.lastAssistantMessage?.trim() || entry.programStatus?.message
-  return message ? `Failed: ${message}` : 'Failed'
+  return message
+    ? translate('prompt.sessionRow.failure.failedWith', 'Failed: {{message}}', { message })
+    : failed
 }

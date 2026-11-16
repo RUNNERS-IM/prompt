@@ -21504,11 +21504,17 @@
         "reviewBody_one": "{{count}} अन्य Claude सत्र {{next}} पर नहीं ले जाया गया।",
         "reviewBody_other": "{{count}} अन्य Claude सत्र {{next}} पर नहीं ले जाए गए।",
         "body_one": "{{count}} Claude सत्र अब भी {{previous}} पर चल रहा है। रीस्टार्ट करने पर बातचीत {{next}} पर जारी रहेगी। व्यस्त सत्र रीस्टार्ट से पहले खाली होने की प्रतीक्षा करते हैं।",
-        "body_other": "{{count}} Claude सत्र अब भी {{previous}} पर चल रहे हैं। रीस्टार्ट करने पर हर बातचीत {{next}} पर जारी रहेगी। व्यस्त सत्र रीस्टार्ट से पहले खाली होने की प्रतीक्षा करते हैं।"
+        "body_other": "{{count}} Claude सत्र अब भी {{previous}} पर चल रहे हैं। रीस्टार्ट करने पर हर बातचीत {{next}} पर जारी रहेगी। व्यस्त सत्र रीस्टार्ट से पहले खाली होने की प्रतीक्षा करते हैं।",
+        "continuePrompt": "Claude खाता बदल गया है। कृपया जो काम कर रहे थे उसे जारी रखें।",
+        "restartedOne": "{{account}} पर 1 Claude सत्र फिर से शुरू किया गया",
+        "restartedOther": "{{account}} पर {{count}} Claude सत्र फिर से शुरू किए गए",
+        "restartedWithFailures": "{{done}} Claude सेशन फिर से शुरू किए · {{failed}} विफल",
+        "restartWaiting": "{{account}} पर {{count}} में से {{done}} Claude सत्र फिर से शुरू किए गए। बाकी तब शुरू होंगे जब उनका काम पूरा हो या उनका टैब खोला जाए।"
       },
       "loginSync": {
         "previousLogin": "पिछला लॉगिन"
-      }
+      },
+      "addedInUse": "Claude खाता सहेजा गया। सभी सत्र पहले से {{account}} का उपयोग कर रहे हैं।"
     },
     "managedData": {
       "description": "Orca host के किसी टर्मिनल में यह कमांड चलाकर खाते जोड़ें। चुना गया खाता उस host पर नए explicit agent लॉन्च पर लागू होता है; सीधे SSH relay और Windows-hosted WSL लॉन्च अपने क्रेडेंशियल इस्तेमाल करते हैं।",
@@ -23258,7 +23264,9 @@
       "failure": {
         "signIn": "साइन इन ज़रूरी है",
         "usageLimit": "उपयोग सीमा पूरी हो गई",
-        "overloaded": "सर्वर व्यस्त है"
+        "overloaded": "सर्वर व्यस्त है",
+        "failed": "विफल",
+        "failedWith": "विफल: {{message}}"
       },
       "tool": {
         "command": "कमांड चला रहा है",
@@ -23278,7 +23286,10 @@
       "restartSession": "फिर से शुरू करें",
       "resumeFailed": "यह सत्र फिर से नहीं खुल सका",
       "retryResume": "फिर से कोशिश करें",
-      "resumedInTabFolder": "[Prompt] इसी फ़ोल्डर में जारी, {{folder}} में नहीं जहाँ यह पिछली बार चला था"
+      "resumedInTabFolder": "[Prompt] इसी फ़ोल्डर में जारी, {{folder}} में नहीं जहाँ यह पिछली बार चला था",
+      "interruptedByUser": "उपयोगकर्ता ने रोका",
+      "interrupted": "बाधित",
+      "unconfirmed": "पुष्टि नहीं हो सकी"
     },
     "timeAgo": {
       "now": "अभी",

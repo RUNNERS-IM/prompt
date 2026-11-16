@@ -3,6 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { useAppStore } from '../../store'
 import { buildPaneAccountRestartStartup } from '@/lib/agent-account-restart-startup'
 import { takeClaudeResumeRetryStartup } from '@/lib/claude-resume-failure'
+import { sendContinueWhenReady, takeContinueAfterRestart } from '@/lib/claude-usage-limit-sessions'
 import {
   isAccountRestartReady,
   selectReadyAccountRestartPtyIds
@@ -250,9 +251,14 @@ export function useTerminalPaneProcessExitActions(controller: TerminalPaneCloseC
       const startup = agent
         ? (takeClaudeResumeRetryStartup(ptyId) ?? buildAccountRestartStartup(agent, pane.leafId))
         : null
+      const continueText = agent === 'claude' ? takeContinueAfterRestart(ptyId) : null
       if (agent && startup) {
         // Why: one Claude switch restarts many panes at once; none was the one the user clicked.
         handleRestartPane(pane.id, startup, { focus: agent === 'codex' })
+        if (continueText) {
+          // A session stopped at its limit sits idle once resumed; this line picks its work back up.
+          void sendContinueWhenReady({ tabId, worktreeId, leafId: pane.leafId }, continueText)
+        }
       }
     }
   }, [
@@ -263,7 +269,8 @@ export function useTerminalPaneProcessExitActions(controller: TerminalPaneCloseC
     readyRestartPtyIds,
     managerRef,
     paneTransportsRef,
-    tabId
+    tabId,
+    worktreeId
   ])
 
   return { handleRestartExitedPane, handleCloseExitedPane }
