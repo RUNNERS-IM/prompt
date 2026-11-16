@@ -148,6 +148,7 @@ export function SettingsSegmentedControl<T extends string | number>({
   return (
     <div
       role="radiogroup"
+      data-prompt-picker=""
       aria-label={ariaLabel}
       className={cn(
         'inline-flex items-center rounded-md border border-border bg-background/50 p-0.5',

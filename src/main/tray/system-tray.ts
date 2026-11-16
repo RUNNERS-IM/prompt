@@ -5,7 +5,7 @@ import menuBarOffIconRetinaPath from '../../../resources/tray/prompt-menu-bar-of
 import { deferAppKitSceneMutation } from '../appkit-scene-mutation'
 import { createAppIconImage } from '../app-icon'
 import { translateMain } from '../i18n/main-i18n'
-import { composeTrayAttentionIcon, tintTrayTemplateForAttention } from './tray-attention-icon'
+import { composeTrayAttentionIcon, composeTrayTemplateAttentionIcon } from './tray-attention-icon'
 import { createMacMenuBarImage, stampMacDevBadge } from './tray-mac-images'
 import { buildTrayMenuTemplate, buildTrayPanelRows, runTrayMenuCommand } from './tray-menu-template'
 import {
@@ -125,22 +125,15 @@ function applyTrayImage(): void {
     const frame = currentMacTrayFrame() ?? baseTrayImage
     if (attentionActive) {
       try {
-        // Disabling template tint enables amber attention but requires theme-appropriate literal glyph pixels.
-        const useLightGlyph = nativeTheme.shouldUseDarkColors
-        const attentionImage = composeTrayAttentionIcon(
-          tintTrayTemplateForAttention(frame, useLightGlyph)
-        )
+        const attentionImage = composeTrayTemplateAttentionIcon(frame)
         if (frame.getScaleFactors().includes(2)) {
           // toBitmap reads 1x only; explicitly rebuild the 2x representation for Retina.
-          const retinaAttentionImage = composeTrayAttentionIcon(
-            tintTrayTemplateForAttention(frame, useLightGlyph, 2)
-          )
           attentionImage.addRepresentation({
             scaleFactor: 2,
-            dataURL: retinaAttentionImage.toDataURL()
+            dataURL: composeTrayTemplateAttentionIcon(frame, 2).toDataURL()
           })
         }
-        attentionImage.setTemplateImage(false)
+        attentionImage.setTemplateImage(true)
         tray.setImage(attentionImage)
         tray.setToolTip(
           devIndicator
