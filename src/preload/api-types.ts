@@ -77,6 +77,7 @@ import type { FolderWorkspacesApi, SparsePresetsApi, WorktreeApi } from './api/w
 import type { PromptClaudeSessionTitleApi } from '../shared/prompt-claude-session-title'
 import type { PromptClaudeLoginSyncApi } from '../shared/prompt-claude-login-sync'
 import type { PromptThirdPartyNoticesApi } from '../shared/prompt-third-party-notices'
+import type { PromptSharedLibraryApi } from '../shared/prompt-shared-library'
 import type { PromptMenuPanelApi } from '../shared/prompt-menu-panel'
 import type { PromptRunnersAccountApi } from '../shared/prompt-runners-account'
 
@@ -188,6 +189,8 @@ export type PreloadApi = {
   promptClaudeLoginSync?: PromptClaudeLoginSyncApi
   /** Optional: only the desktop preload has it; the web client has no bundled notices file. */
   promptThirdPartyNotices?: PromptThirdPartyNoticesApi
+  /** Optional: only the desktop preload reads the shared prompt list file. */
+  promptSharedLibrary?: PromptSharedLibraryApi
   /** Optional: only the desktop preload has it; the macOS menu bar panel uses it. */
   promptMenuPanel?: PromptMenuPanelApi
   /** Optional: only the desktop preload has it; the web client never signs in to a RUNNERS account. */

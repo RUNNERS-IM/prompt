@@ -24027,12 +24027,57 @@
       "save": "Zapisz",
       "cancel": "Anuluj",
       "emptyTitle": "Brak zapisanych promptów",
-      "emptyBody": "Zapisz często używane prompty, a kliknięcie wstawi je do wiersza wprowadzania.",
       "noTerminal": "Najpierw otwórz sesję terminala",
       "chatView": "Przełącz tę sesję na terminal, aby użyć promptu",
       "listView": "Widok listy",
       "gridView": "Widok ikon",
-      "upFolder": "Folder wyżej"
+      "upFolder": "Folder wyżej",
+      "groupMine": "Moje",
+      "groupFrequent": "Często używane",
+      "groupShared": "Wspólne",
+      "noResults": "Brak pasujących promptów",
+      "defaults": {
+        "plan": {
+          "title": "Plan pracy",
+          "body": "Zanim zmienisz kod, przeczytaj powiązane pliki i napisz plan krok po kroku. Wypisz pliki, które zmienisz, i ryzyka, a potem poczekaj na moją zgodę."
+        },
+        "options": {
+          "title": "Zapytaj z opcjami",
+          "body": "Jeśli jest kilka sensownych sposobów, pokaż ponumerowane opcje z zaletami i wadami i poleć jedną. Nie zaczynaj, dopóki nie wybiorę."
+        },
+        "rootCause": {
+          "title": "Znajdź przyczynę",
+          "body": "Znajdź przyczynę tego problemu, zanim cokolwiek naprawisz. Pokaż dowody, takie jak logi i linie kodu, i oddziel to, co potwierdzone, od przypuszczeń."
+        },
+        "review": {
+          "title": "Przejrzyj zmiany",
+          "body": "Przejrzyj bieżące zmiany pod kątem błędów, pominiętych przypadków i niejasnych nazw. Wypisz problemy od najpoważniejszego, z plikiem i linią."
+        },
+        "overview": {
+          "title": "Wyjaśnij strukturę",
+          "body": "Wyjaśnij, jak zorganizowany jest ten projekt: główne foldery, gdzie się uruchamia i jak dane przechodzą między częściami. Krótko i przystępnie."
+        },
+        "tests": {
+          "title": "Napisz testy",
+          "body": "Napisz testy do kodu, który właśnie zmieniłem. Uwzględnij zwykły przypadek, przypadki brzegowe i jeden przypadek błędu, uruchom je i pokaż wynik."
+        },
+        "buildTest": {
+          "title": "Zbuduj i przetestuj",
+          "body": "Uruchom budowanie i testy. Jeśli coś się nie powiedzie, pokaż błąd i jego przyczynę, napraw go i uruchom ponownie."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Pogrupuj zmiany według celu i zrób jeden commit na grupę, z opisem, co i dlaczego się zmieniło. Pokaż mi listę przed commitem."
+        },
+        "status": {
+          "title": "Postęp",
+          "body": "Podsumuj, gdzie jesteśmy: co jest zrobione, co trwa, co zostało i co jest zablokowane."
+        },
+        "handoff": {
+          "title": "Notatka przekazania",
+          "body": "Napisz notatkę przekazania, aby ktoś inny mógł kontynuować: cel, co się zmieniło, jak uruchomić i sprawdzić, oraz otwarte pytania."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Pomocnicy {{count}}",

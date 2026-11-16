@@ -7,6 +7,7 @@
 - 다시 시작 알림을 한 장으로 묶었습니다. 「Claude 세션 N개를 새 계정으로 다시 시작하는 중」이 끝나면 「세션 N개를 다시 시작했습니다 · 실패 M개」로 바뀌고 5초 뒤 닫힙니다.
 - 세션에서 `/login` 으로 계정을 더하면 계정이 저장되고 바로 쓰는 계정이 됩니다. 같은 계정이 「시스템 기본」과 저장된 줄로 두 번 보이지 않습니다.
 - 사이드바 계정 줄 메뉴를 닫은 뒤 입력 위치가 엉뚱한 곳으로 가던 것을 고쳤습니다.
+- 오른쪽 「프롬프트」 칸에 자주 쓰는 프롬프트를 모아 보여 드립니다. 처음 켜면 기본 프롬프트 10개(작업 계획 · 원인 찾기 · 커밋 등)가 들어 있고, 같은 글을 5번 이상 치면 「자주 씀」에 저절로 들어갑니다(지운 글은 다시 넣지 않고, 친 글은 이 컴퓨터에만 남습니다). 빈 칸과 찾기 결과가 없을 때는 그림과 「새 프롬프트」 단추를 보여 드립니다.
 
 ## English
 
@@ -17,3 +18,4 @@
 - Restarts now share one notification: "Restarting N Claude sessions on the new account" turns into "Restarted N sessions · M failed" and closes after 5 seconds.
 - Adding an account with `/login` in a session now saves it and makes it the account in use. The same account no longer appears twice as "System default" and as a saved row.
 - Fixed focus jumping to the wrong place after closing the account row menu in the sidebar.
+- The Prompts panel on the right now collects prompts you use often. It starts with 10 default prompts (work plan, find the cause, commit and more), and text you type 5 or more times is added to "Used often" automatically (deleted items are never added back, and what you type stays on this computer). An empty panel or a search with no results shows a picture and a "New prompt" button.

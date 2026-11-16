@@ -218,12 +218,57 @@
       "save": "Salvar",
       "cancel": "Cancelar",
       "emptyTitle": "Nenhum prompt salvo",
-      "emptyBody": "Salve os prompts que usa com frequência e clique para colocá-los na linha de entrada.",
       "noTerminal": "Abra primeiro uma sessão de terminal",
       "chatView": "Mude esta sessão para o terminal para usar um prompt",
       "listView": "Exibição em lista",
       "gridView": "Exibição em ícones",
-      "upFolder": "Subir uma pasta"
+      "upFolder": "Subir uma pasta",
+      "groupMine": "Meus",
+      "groupFrequent": "Mais usados",
+      "groupShared": "Compartilhados",
+      "noResults": "Nenhum prompt corresponde",
+      "defaults": {
+        "plan": {
+          "title": "Plano de trabalho",
+          "body": "Antes de mudar o código, leia os arquivos relacionados e escreva um plano passo a passo. Liste os arquivos que vai alterar e os riscos, e espere minha aprovação."
+        },
+        "options": {
+          "title": "Perguntar com opções",
+          "body": "Se houver mais de um jeito razoável de fazer, mostre opções numeradas com prós e contras e recomende uma. Não comece até eu escolher."
+        },
+        "rootCause": {
+          "title": "Encontrar a causa",
+          "body": "Encontre a causa deste problema antes de corrigir qualquer coisa. Mostre as evidências, como logs e linhas de código, e separe o que foi confirmado do que é suposição."
+        },
+        "review": {
+          "title": "Revisar mudanças",
+          "body": "Revise as mudanças atuais em busca de bugs, casos esquecidos e nomes confusos. Liste os problemas do mais grave ao menos grave, com arquivo e linha."
+        },
+        "overview": {
+          "title": "Explicar a estrutura",
+          "body": "Explique como este projeto está organizado: as pastas principais, onde ele começa e como os dados passam entre as partes. Curto e fácil de acompanhar."
+        },
+        "tests": {
+          "title": "Escrever testes",
+          "body": "Escreva testes para o código que acabei de mudar. Cubra o caso normal, casos-limite e um caso de falha, depois rode-os e mostre o resultado."
+        },
+        "buildTest": {
+          "title": "Build e testes",
+          "body": "Rode o build e os testes. Se algo falhar, mostre o erro e a causa, corrija e rode de novo."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Agrupe as mudanças por objetivo e faça um commit por grupo, com uma mensagem que diga o que mudou e por quê. Mostre a lista antes de fazer o commit."
+        },
+        "status": {
+          "title": "Andamento",
+          "body": "Resuma onde estamos: o que está pronto, o que está em andamento, o que falta e o que está bloqueado."
+        },
+        "handoff": {
+          "title": "Nota de passagem",
+          "body": "Escreva uma nota de passagem para que outra pessoa possa continuar: o objetivo, o que mudou, como rodar e verificar, e as perguntas em aberto."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Auxiliares {{count}}",

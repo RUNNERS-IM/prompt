@@ -2166,6 +2166,50 @@
       "wslUnreachable": "Could not reach the WSL distro. Try again.",
       "wslWindowsOnly": "WSL CLI registration is only available on Windows."
     },
+    "library": {
+      "defaults": {
+        "buildTest": {
+          "body": "Run the build and the tests. If something fails, show the error and its cause, fix it, and run them again.",
+          "title": "Build and test"
+        },
+        "commit": {
+          "body": "Group the changes by purpose and make one commit per group, with a message that says what changed and why. Show me the list before committing.",
+          "title": "Commit"
+        },
+        "handoff": {
+          "body": "Write a handoff note so someone else can continue this work: the goal, what changed, how to run and check it, and open questions.",
+          "title": "Handoff note"
+        },
+        "options": {
+          "body": "If there is more than one reasonable way to do this, show numbered options with pros and cons and recommend one. Do not start until I pick.",
+          "title": "Ask with options"
+        },
+        "overview": {
+          "body": "Explain how this project is organized: the main folders, where it starts, and how data moves between the parts. Keep it short and easy to follow.",
+          "title": "Explain the structure"
+        },
+        "plan": {
+          "body": "Before changing any code, read the related files and write a step-by-step plan. List the files you will touch and the risks, then wait for my go-ahead.",
+          "title": "Work plan"
+        },
+        "review": {
+          "body": "Review the current changes for bugs, missed cases and confusing names. List the problems from most to least serious, with file and line.",
+          "title": "Review changes"
+        },
+        "rootCause": {
+          "body": "Find the cause of this problem before fixing anything. Show the evidence, such as logs and code lines, and say what is confirmed and what is a guess.",
+          "title": "Find the cause"
+        },
+        "status": {
+          "body": "Summarize where we are: what is done, what is in progress, what is left, and what is blocked.",
+          "title": "Progress"
+        },
+        "tests": {
+          "body": "Write tests for the code I just changed. Cover the normal case, edge cases and one failure case, then run them and show the result.",
+          "title": "Write tests"
+        }
+      }
+    },
     "projectRemoval": {
       "runningSessions": "All {{count}} running sessions in it will be stopped.",
       "runningSessions_one": "Its running session will be stopped.",

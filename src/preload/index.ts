@@ -95,6 +95,7 @@ import { speechApi } from './api/speech-bridge'
 import { promptClaudeSessionTitleApi } from './api/prompt-claude-session-title-bridge'
 import { promptClaudeLoginSyncApi } from './api/prompt-claude-login-sync-bridge'
 import { promptThirdPartyNoticesApi } from './api/prompt-third-party-notices-bridge'
+import { promptSharedLibraryApi } from './api/prompt-shared-library-bridge'
 import { promptMenuPanelApi } from './api/prompt-menu-panel-bridge'
 import { promptRunnersAccountApi } from './api/prompt-runners-account-bridge'
 
@@ -206,6 +207,7 @@ const api = {
   promptClaudeSessionTitle: promptClaudeSessionTitleApi,
   promptClaudeLoginSync: promptClaudeLoginSyncApi,
   promptThirdPartyNotices: promptThirdPartyNoticesApi,
+  promptSharedLibrary: promptSharedLibraryApi,
   promptMenuPanel: promptMenuPanelApi,
   promptRunnersAccount: promptRunnersAccountApi
 } satisfies PreloadApi

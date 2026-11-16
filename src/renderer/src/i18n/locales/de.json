@@ -217,12 +217,57 @@
       "save": "Speichern",
       "cancel": "Abbrechen",
       "emptyTitle": "Noch keine Prompts gespeichert",
-      "emptyBody": "Speichere häufig genutzte Prompts und füge sie per Klick in die Eingabezeile ein.",
       "noTerminal": "Öffne zuerst eine Terminalsitzung",
       "chatView": "Wechsle diese Sitzung zum Terminal, um einen Prompt zu verwenden",
       "listView": "Listenansicht",
       "gridView": "Symbolansicht",
-      "upFolder": "Einen Ordner nach oben"
+      "upFolder": "Einen Ordner nach oben",
+      "groupMine": "Meine",
+      "groupFrequent": "Oft genutzt",
+      "groupShared": "Geteilt",
+      "noResults": "Keine passenden Prompts",
+      "defaults": {
+        "plan": {
+          "title": "Arbeitsplan",
+          "body": "Bevor du Code änderst, lies die betroffenen Dateien und schreib einen Plan Schritt für Schritt. Nenne die Dateien, die du änderst, und die Risiken, und warte dann auf mein Okay."
+        },
+        "options": {
+          "title": "Mit Optionen fragen",
+          "body": "Wenn es mehrere sinnvolle Wege gibt, zeig nummerierte Optionen mit Vor- und Nachteilen und empfiehl eine. Fang erst an, wenn ich gewählt habe."
+        },
+        "rootCause": {
+          "title": "Ursache finden",
+          "body": "Finde die Ursache dieses Problems, bevor du etwas behebst. Zeig Belege wie Logs und Codezeilen und trenne, was bestätigt und was vermutet ist."
+        },
+        "review": {
+          "title": "Änderungen prüfen",
+          "body": "Prüfe die aktuellen Änderungen auf Fehler, übersehene Fälle und unklare Namen. Liste die Probleme nach Schwere, mit Datei und Zeile."
+        },
+        "overview": {
+          "title": "Aufbau erklären",
+          "body": "Erkläre, wie dieses Projekt aufgebaut ist: die wichtigsten Ordner, wo es startet und wie Daten zwischen den Teilen fließen. Kurz und leicht verständlich."
+        },
+        "tests": {
+          "title": "Tests schreiben",
+          "body": "Schreib Tests für den Code, den ich gerade geändert habe. Deck den Normalfall, Grenzfälle und einen Fehlerfall ab, führ sie aus und zeig das Ergebnis."
+        },
+        "buildTest": {
+          "title": "Bauen und testen",
+          "body": "Führ den Build und die Tests aus. Wenn etwas fehlschlägt, zeig den Fehler und die Ursache, behebe ihn und führ alles erneut aus."
+        },
+        "commit": {
+          "title": "Commit",
+          "body": "Gruppiere die Änderungen nach Zweck und mach pro Gruppe einen Commit mit einer Nachricht, die sagt, was und warum geändert wurde. Zeig mir vorher die Liste."
+        },
+        "status": {
+          "title": "Fortschritt",
+          "body": "Fasse den Stand zusammen: was fertig ist, was läuft, was noch fehlt und was blockiert ist."
+        },
+        "handoff": {
+          "title": "Übergabenotiz",
+          "body": "Schreib eine Übergabenotiz, damit jemand anderes weitermachen kann: Ziel, Änderungen, wie man es ausführt und prüft, und offene Fragen."
+        }
+      }
     },
     "sessionRow": {
       "helpers": "Helfer {{count}}",
