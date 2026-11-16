@@ -128,6 +128,10 @@ async function closeSettings(window: BrowserWindow): Promise<void> {
 }
 
 async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<void> {
+  // 새 판 알림 카드는 따로 찍는 사진에만 나오게, 작업 창은 네 장 모두 카드 없이 찍는다.
+  if (await setUpdateCardHidden(window, true)) {
+    await pause(SETTLE_MS)
+  }
   await pass.shot(window, 'main', '작업 창')
 
   // 새 판 알림 카드: 시험판은 운영 판보다 낮아 늘 뜬다. 「나중에」로 닫으면 다음 언어 · 테마에서는 다시 안 떠서,
