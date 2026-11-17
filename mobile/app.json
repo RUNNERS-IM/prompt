@@ -95,7 +95,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#353743"
+        "backgroundColor": "#E6E5EB"
       },
       "usesCleartextTraffic": true,
       "allowBackup": false,
