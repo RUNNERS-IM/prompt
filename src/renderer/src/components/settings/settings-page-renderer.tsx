@@ -4,6 +4,7 @@ import { SettingsContentScrollElementProvider } from './settings-content-scroll-
 import { SettingsSidebar } from './SettingsSidebar'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
+import { promptSettingsSectionUsesHostScope } from '@/lib/prompt-hidden-settings'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import type { SettingsInteractionController } from './use-settings-interaction-controller'
 import type { SettingsRenderContext } from './settings-render-context'
@@ -104,6 +105,7 @@ export function renderSettingsPage(context: SettingsRenderContext): React.JSX.El
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
           {!model.isWebClient &&
+          promptSettingsSectionUsesHostScope(model.activeSectionId) &&
           shouldShowSettingsHostScopePicker(model.settingsHostScope, model.runtimeEnvironments) ? (
             <SettingsHostScopePicker
               scope={model.settingsHostScope}

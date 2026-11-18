@@ -7,10 +7,14 @@ import {
 } from '@/components/settings/plugins-search'
 import { getPrivacyPaneSearchEntries } from '@/components/settings/privacy-search'
 import { getRepositoryPaneSearchEntries } from '@/components/settings/repository/repository-search'
-import { buildSettingsProjectList } from '@/components/settings/settings-project-list'
+import {
+  buildSettingsProjectList,
+  getSettingsProjectHostCount
+} from '@/components/settings/settings-project-list'
 import { getSshPaneSearchEntries } from '@/components/settings/ssh-search'
 import { translate } from '@/i18n/i18n'
 import type { SettingsNavSection } from '@/lib/settings-navigation-types'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { getRepoKindLabel } from '../../../shared/repo-kind'
 import type { Repo } from '../../../shared/repo-types'
 import {
@@ -164,6 +168,7 @@ export function buildRemoteSettingsSections(
     ...buildSettingsProjectList(repos, projectGrouping).map((settingsProject) => {
       const { project, representativeRepoId, setups, checkoutLabel } = settingsProject
       const representativeRepo = reposById.get(representativeRepoId) ?? repos[0]
+      const hostCount = getSettingsProjectHostCount(settingsProject)
       const hostSummary =
         setups.length > 1
           ? translate(
@@ -180,7 +185,14 @@ export function buildRemoteSettingsSections(
         searchEntries: getRepositoryPaneSearchEntries(representativeRepo, {
           windowsRuntimeSupported: isWindowsTerminalHost
         }),
-        group: 'repositories'
+        group: 'repositories',
+        ...(PROMPT_SIMPLE_SETTINGS && hostCount > 1
+          ? {
+              badge: translate('prompt.settings.project.macCount', '{{count}} Macs', {
+                count: hostCount
+              })
+            }
+          : {})
       }
     })
   ]

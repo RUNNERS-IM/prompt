@@ -16,8 +16,6 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   ...promptKoSettingsWording,
   // Workspace right-click: "Update" opens the rename / comment dialog, not an app update.
   'auto.components.sidebar.WorktreeContextMenu.439fa94d53': '이름 · 메모 바꾸기',
-  // Settings sidebar group "Set Up" (general + integrations); "설정 시작" read as a verb.
-  'auto.components.settings.Settings.9abb9be3bc': '기본',
   // English words left in the Korean catalog.
   'tray.activityWaitingSuffix': '활동 대기 중',
   'auto.components.NewWorkspaceComposerCard.ba64270bdb': '에이전트 구성',
@@ -50,6 +48,8 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
   'auto.components.Terminal.b7c1f0a934':
     '원격 호스트에 연결할 수 없어 그곳에서 작업이 실행 중인지 알 수 없습니다.',
   'quitAndStopAllSessions.message': '모든 터미널 세션을 멈추고 Orca를 종료할까요?',
+  'auto.components.settings.SettingsHostScopePicker.unavailableNotice':
+    '이 서버는 더 이상 저장되어 있지 않아 보여 줄 것이 없습니다. 화면 위 「적용할 맥」에서 다른 맥을 고르세요.',
   'quitAndStopAllSessions.detail':
     '실행 중인 에이전트를 포함해 모든 터미널 세션이 멈추고, 닫힌 탭은 다음에 다시 열리지 않습니다. 그냥 종료하면 세션은 계속 돌아갑니다.'
   // Settings redesign: Prompt instead of Orca, Korean where the catalog left English.
@@ -58,7 +58,13 @@ export const PROMPT_KO_WORDING: Readonly<Record<string, string>> = {
 /** Keys that exist only in Prompt (English text is the translate() fallback in code). */
 export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.sidebarTitle': 'Prompt 설정',
-  'prompt.settings.group.more': '더 보기',
+  'prompt.settings.group.claude': 'Claude 와 계정',
+  'prompt.settings.group.tools': '터미널과 도구',
+  'prompt.settings.group.app': '앱',
+  'prompt.settings.hostScope.label': '적용할 맥',
+  'prompt.settings.hostScope.description': '이 화면의 설정은 고른 맥에만 적용됩니다.',
+  'prompt.settings.project.macCount': '맥 {{count}}대',
+  'prompt.settings.project.viewingMac': '이 설정을 볼 맥',
   'prompt.settings.appearance.title': '모양',
   'prompt.settings.appearance.description': '테마, 언어, 화면 크기, 글꼴, 터미널 색을 정합니다.',
   'prompt.skills.mySkills': '내 스킬',
