@@ -11,6 +11,8 @@ export const updaterApi = {
   download: () => ipcRenderer.invoke('updater:download'),
   dismissNudge: () => ipcRenderer.invoke('updater:dismissNudge'),
   dismissAvailableUpdate: () => ipcRenderer.invoke('updater:dismissAvailableUpdate'),
+  getAutoUpdatedNotice: () => ipcRenderer.invoke('updater:getAutoUpdatedNotice'),
+  dismissAutoUpdatedNotice: () => ipcRenderer.invoke('updater:dismissAutoUpdatedNotice'),
   getLinuxPackageInstallInstructions: () =>
     ipcRenderer.invoke('updater:getLinuxPackageInstallInstructions'),
   showLinuxPackage: () => ipcRenderer.invoke('updater:showLinuxPackage'),

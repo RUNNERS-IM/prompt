@@ -270,11 +270,11 @@ describe('updater mac install handoff', () => {
       appMock.emit('before-quit', { preventDefault: resumedPreventDefault })
       appMock.emit('before-quit', { preventDefault: resumedPreventDefault })
       expect(resumedPreventDefault).not.toHaveBeenCalled()
-      expect(sendMock).toHaveBeenCalledWith('updater:status', {
-        state: 'downloading',
-        percent: 100,
-        version: '1.0.61'
-      })
+      // 저절로 한 확인에서 찾은 판이라 autoInstall 표시가 붙는다.
+      expect(sendMock).toHaveBeenCalledWith(
+        'updater:status',
+        expect.objectContaining({ state: 'downloading', percent: 100, version: '1.0.61' })
+      )
     }
   )
 

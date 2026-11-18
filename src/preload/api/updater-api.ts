@@ -14,6 +14,9 @@ export type UpdaterApi = {
   quitAndInstall: () => Promise<void>
   dismissNudge: () => Promise<void>
   dismissAvailableUpdate: () => Promise<void>
+  /** Prompt: 저절로 깐 뒤 처음 열 때 한 번 보여 줄 판. 없으면 null. */
+  getAutoUpdatedNotice?: () => Promise<{ version: string; releaseUrl: string } | null>
+  dismissAutoUpdatedNotice?: () => Promise<void>
   /** Desktop-only. Rejects unless the current status carries `linux-package-install` recovery. */
   getLinuxPackageInstallInstructions: () => Promise<LinuxPackageInstallInstructions>
   /** Desktop-only. Reveals the revalidated cached package in the native file manager. */

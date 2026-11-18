@@ -19,6 +19,10 @@ export function UpdateStatusSegment({
   if (status.state !== 'downloading' && status.state !== 'downloaded' && status.state !== 'error') {
     return null
   }
+  // Prompt: 저절로 받는 판은 카드가 없으므로 펼칠 것도 없다.
+  if (status.state !== 'error' && status.autoInstall) {
+    return null
+  }
 
   const linuxPackageRecovery =
     status.state === 'error' && status.recovery?.kind === 'linux-package-install'

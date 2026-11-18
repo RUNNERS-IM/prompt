@@ -70,6 +70,7 @@ export function attachMainWindowServices(
     onBeforeUpdateQuit?: () => void | Promise<void>
     onBeforeUpdateQuitFailure?: PreQuitCleanupFailureMode
     updateInstallMode?: UpdateInstallMode
+    getWorkingAgentCount?: () => number
     onWorktreeLifecycle?: (event: RuntimeWorktreeLifecycleEvent) => void
   }
 ): void {

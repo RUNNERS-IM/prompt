@@ -14,6 +14,7 @@ import { MarkdownTemplatePicker } from '../components/editor/MarkdownTemplatePic
 import RecentTabSwitcher from '../components/tab-bar/RecentTabSwitcher'
 import { SkillFreshnessUpdateDialog } from '../components/skills/SkillFreshnessUpdateDialog'
 import { StarNagCard } from '../components/StarNagCard'
+import { PromptAutoUpdatedNoticeCard } from '../components/maintenance/update-card/PromptAutoUpdatedNoticeCard'
 import { CodexSharedSettingsNoticeCard } from '../components/CodexSharedSettingsNoticeCard'
 import { NativeChatResumeOnRestartModal } from '../components/NativeChatResumeRuntimeModal'
 import { StarNagAgentValueMomentObserver } from '../components/star-nag/StarNagAgentValueMomentObserver'
@@ -102,7 +103,7 @@ const PetOverlay = lazy(() => import('../components/pet/PetOverlay'))
 const OnboardingFlow = lazy(() => import('../components/onboarding/OnboardingFlow'))
 
 function shouldMountUpdateCardForStatus(status: UpdateStatus): boolean {
-  if (status.state === 'idle') {
+  if (status.state === 'idle' || ('autoInstall' in status && status.autoInstall)) {
     return false
   }
   if (status.state === 'checking' || status.state === 'not-available') {
@@ -298,6 +299,9 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
             </OverlayBoundary>
           </Suspense>
         ) : null}
+        <OverlayBoundary boundaryId="overlay.auto-updated-notice" resetKey={activeView}>
+          <PromptAutoUpdatedNoticeCard />
+        </OverlayBoundary>
         <Suspense fallback={null}>
           <OverlayBoundary boundaryId="overlay.unexpected-signout" resetKey={activeView}>
             <UnexpectedSignoutCard />
