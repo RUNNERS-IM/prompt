@@ -70,6 +70,21 @@ export function promptSettingsHostSectionId(sectionId: string): string {
     : sectionId
 }
 
+// 「적용할 맥」 막대를 쓰는 칸: 고른 맥의 계정 · 에이전트 · 터미널 · Git 한도를 보여 준다.
+const PROMPT_HOST_SCOPED_SETTINGS_SECTION_IDS: ReadonlySet<string> = new Set([
+  'accounts',
+  'terminal',
+  'git'
+])
+
+/** Whether the per-Mac picker belongs above this page; other pages apply to every Mac. */
+export function promptSettingsSectionUsesHostScope(sectionId: string): boolean {
+  return (
+    !PROMPT_SIMPLE_SETTINGS ||
+    PROMPT_HOST_SCOPED_SETTINGS_SECTION_IDS.has(promptSettingsHostSectionId(sectionId))
+  )
+}
+
 /** Flex order that puts a folded section after its host page, or undefined for a sidebar section. */
 export function promptAbsorbedSettingsSectionOrder(sectionId: string): number | undefined {
   if (promptSettingsHostSectionId(sectionId) === sectionId) {
@@ -130,30 +145,27 @@ export function promptSettingsSectionCopy(
   }
 }
 
-/** Sidebar group title; the second group is not called "Advanced" so only the page keeps that name. */
-export function promptSettingsGroupTitle(groupId: string, upstreamTitle: string): string {
-  if (PROMPT_SIMPLE_SETTINGS && groupId === 'advanced') {
-    return translate('prompt.settings.group.more', 'More')
-  }
-  return upstreamTitle
+// 묶음 이름: Claude 와 계정 · 터미널과 도구 · 앱 (runners-wiki 2026-11-19 사용자 위주 화면 개선 5B).
+const PROMPT_SETTINGS_GROUP_TITLES: Readonly<Record<string, readonly [string, string]>> = {
+  setup: ['prompt.settings.group.claude', 'Claude & Accounts'],
+  workflows: ['prompt.settings.group.tools', 'Terminal & Tools'],
+  interface: ['prompt.settings.group.app', 'App']
 }
 
-// 「기본」 묶음: 제일 중요한 Claude 가 맨 앞, 앱 고유 칸, 일반, 계정, 정보 순
-// (runners-wiki 2026-11-07 다섯 앱 창 통일 1A, 2026-11-08 Prompt 창 통일 2A).
-// 나머지 칸은 「더 보기」 묶음에 이 순서로 둔다.
+export function promptSettingsGroupTitle(groupId: string, upstreamTitle: string): string {
+  const title = PROMPT_SIMPLE_SETTINGS ? PROMPT_SETTINGS_GROUP_TITLES[groupId] : undefined
+  return title ? translate(title[0], title[1]) : upstreamTitle
+}
+
+// 묶음마다 이 순서로 둔다. 목록에 없는 칸은 「앱」 묶음 끝에 붙는다.
 const PROMPT_ABOUT_SETTINGS_SECTION_ID = 'prompt-about'
 const PROMPT_ACCOUNT_SETTINGS_SECTION_ID = 'prompt-account'
-const PROMPT_MAIN_SETTINGS_SECTION_IDS: readonly string[] = [
-  'accounts',
-  'terminal',
-  'appearance',
-  'notifications',
-  'shortcuts',
-  'quick-commands',
-  'general',
-  PROMPT_ACCOUNT_SETTINGS_SECTION_ID,
-  PROMPT_ABOUT_SETTINGS_SECTION_ID
+const PROMPT_SETTINGS_GROUP_SECTION_IDS: readonly (readonly [string, readonly string[]])[] = [
+  ['setup', ['accounts', PROMPT_ACCOUNT_SETTINGS_SECTION_ID, 'notifications']],
+  ['workflows', ['terminal', 'shortcuts', 'quick-commands', 'git', 'browser', 'ssh']],
+  ['interface', ['appearance', 'general', 'advanced', PROMPT_ABOUT_SETTINGS_SECTION_ID]]
 ]
+const PROMPT_FALLBACK_SETTINGS_GROUP = 'interface'
 
 /** The pane Settings opens on when nothing asked for a specific one. */
 export const DEFAULT_SETTINGS_SECTION_ID = PROMPT_BLOCK_UPSTREAM_SERVICES ? 'accounts' : 'general'
@@ -196,8 +208,6 @@ function promptAccountSettingsSection(): SettingsNavSection {
     group: 'setup'
   }
 }
-const PROMPT_MORE_SETTINGS_SECTION_IDS: readonly string[] = ['git', 'browser', 'ssh', 'advanced']
-
 function withPromptCopy(
   section: SettingsNavSection,
   visible: readonly SettingsNavSection[]
@@ -218,11 +228,6 @@ function withPromptCopy(
   }
 }
 
-function orderIndex(ids: readonly string[], id: string): number {
-  const index = ids.indexOf(id)
-  return index === -1 ? ids.length : index
-}
-
 export function arrangePromptSettingsSections(
   sections: readonly SettingsNavSection[]
 ): SettingsNavSection[] {
@@ -235,21 +240,19 @@ export function arrangePromptSettingsSections(
     promptAccountSettingsSection(),
     promptAboutSettingsSection()
   ]
-  const main = PROMPT_MAIN_SETTINGS_SECTION_IDS.flatMap((id) => {
-    const section = shown.find((entry) => entry.id === id)
-    return section ? [{ ...withPromptCopy(section, visible), group: 'setup' }] : []
-  })
-  const more = shown
-    .filter(
-      (section) =>
-        !PROMPT_MAIN_SETTINGS_SECTION_IDS.includes(section.id) && !section.id.startsWith('repo-')
-    )
-    .sort(
-      (a, b) =>
-        orderIndex(PROMPT_MORE_SETTINGS_SECTION_IDS, a.id) -
-        orderIndex(PROMPT_MORE_SETTINGS_SECTION_IDS, b.id)
-    )
-    .map((section) => ({ ...withPromptCopy(section, visible), group: 'advanced' }))
+  const listedIds = new Set(PROMPT_SETTINGS_GROUP_SECTION_IDS.flatMap(([, ids]) => ids))
+  const unlisted = shown.filter(
+    (section) => !listedIds.has(section.id) && !section.id.startsWith('repo-')
+  )
+  const grouped = PROMPT_SETTINGS_GROUP_SECTION_IDS.flatMap(([group, ids]) => [
+    ...ids.flatMap((id) => {
+      const section = shown.find((entry) => entry.id === id)
+      return section ? [{ ...withPromptCopy(section, visible), group }] : []
+    }),
+    ...(group === PROMPT_FALLBACK_SETTINGS_GROUP
+      ? unlisted.map((section) => ({ ...withPromptCopy(section, visible), group }))
+      : [])
+  ])
   const repos = shown.filter((section) => section.id.startsWith('repo-'))
-  return [...main, ...more, ...repos]
+  return [...grouped, ...repos]
 }

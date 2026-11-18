@@ -5,8 +5,10 @@ import { SettingsSection } from './SettingsSection'
 import {
   getSettingsEntryHostSelection,
   getSettingsProjectHostRepo,
-  getSettingsProjectRemovalScope
+  getSettingsProjectRemovalScope,
+  settingsProjectJoinsHostLocalProjects
 } from './settings-project-list'
+import { SettingsProjectMacPicker } from './SettingsProjectMacPicker'
 import { translate } from '@/i18n/i18n'
 import type { SettingsRenderContext } from './settings-render-context'
 
@@ -45,6 +47,24 @@ export function renderProjectSettingsSections(context: SettingsRenderContext): R
         description={repo.path}
         searchEntries={navigation.getSectionSearchEntries(repoSectionId)}
       >
+        {view.isSectionMounted(repoSectionId) &&
+        settingsProjectJoinsHostLocalProjects(settingsProject) ? (
+          <SettingsProjectMacPicker
+            setups={settingsProject.setups}
+            selectedSetupId={
+              settingsProject.setups.find(
+                (setup) => setup.repoId === repo.id && setup.hostId === getRepoExecutionHostId(repo)
+              )?.id
+            }
+            onChoose={(setup) =>
+              model.setSettingsProjectHostSelection(
+                settingsProject.selectionKey,
+                setup.hostId,
+                setup.id
+              )
+            }
+          />
+        ) : null}
         {view.isSectionMounted(repoSectionId) ? (
           // Re-key by host so same-ID hosts cannot inherit drafts/effects.
           <RepositoryPane

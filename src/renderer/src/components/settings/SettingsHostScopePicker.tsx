@@ -11,6 +11,8 @@ import type { PublicKnownRuntimeEnvironment } from '../../../../shared/runtime-e
 import { runtimeTargetEnvironmentId } from '@/runtime/runtime-client-target'
 import type { RuntimeClientTarget } from '../../../../shared/runtime-client-target'
 import type { SettingsHostScope } from './settings-host-scope'
+import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
+import { thisComputerTag, usePromptLocalComputerName } from '../sidebar/prompt-local-computer-label'
 
 const LOCAL_VALUE = 'local'
 const ENVIRONMENT_VALUE_PREFIX = 'environment:'
@@ -28,20 +30,29 @@ export function shouldShowSettingsHostScopePicker(
   return environments.length > 0 || scope.target.kind === 'environment'
 }
 
+function hostScopeLabel(): string {
+  return PROMPT_SIMPLE_SETTINGS
+    ? translate('prompt.settings.hostScope.label', 'Apply to')
+    : translate('auto.components.settings.SettingsHostScopePicker.label', 'Host')
+}
+
 export function SettingsHostScopePicker({
   scope,
   environments,
   onChoose
 }: SettingsHostScopePickerProps): React.JSX.Element {
   const scopeEnvironmentId = runtimeTargetEnvironmentId(scope.target)
+  // Prompt: 「Local Mac」 대신 이 맥 이름을 쓴다.
+  const localComputerName = usePromptLocalComputerName()
+  const localLabel = PROMPT_SIMPLE_SETTINGS
+    ? `${localComputerName} ${thisComputerTag()}`
+    : getLocalExecutionHostLabel()
   const value = scopeEnvironmentId
     ? `${ENVIRONMENT_VALUE_PREFIX}${scopeEnvironmentId}`
     : LOCAL_VALUE
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-border px-8 py-2 text-xs">
-      <span className="font-medium text-foreground">
-        {translate('auto.components.settings.SettingsHostScopePicker.label', 'Host')}
-      </span>
+      <span className="font-medium text-foreground">{hostScopeLabel()}</span>
       <Select
         value={value}
         onValueChange={(next) =>
@@ -55,15 +66,11 @@ export function SettingsHostScopePicker({
           )
         }
       >
-        <SelectTrigger
-          size="sm"
-          aria-label={translate('auto.components.settings.SettingsHostScopePicker.label', 'Host')}
-          className="min-w-44"
-        >
+        <SelectTrigger size="sm" aria-label={hostScopeLabel()} className="min-w-44">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value={LOCAL_VALUE}>{getLocalExecutionHostLabel()}</SelectItem>
+          <SelectItem value={LOCAL_VALUE}>{localLabel}</SelectItem>
           {environments.map((environment) => (
             <SelectItem key={environment.id} value={`${ENVIRONMENT_VALUE_PREFIX}${environment.id}`}>
               {environment.name}
@@ -82,10 +89,15 @@ export function SettingsHostScopePicker({
         </SelectContent>
       </Select>
       <span className="text-muted-foreground">
-        {translate(
-          'auto.components.settings.SettingsHostScopePicker.description',
-          'Accounts, detected agents and terminal options below are for this host.'
-        )}
+        {PROMPT_SIMPLE_SETTINGS
+          ? translate(
+              'prompt.settings.hostScope.description',
+              'Settings on this page apply only to the chosen Mac.'
+            )
+          : translate(
+              'auto.components.settings.SettingsHostScopePicker.description',
+              'Accounts, detected agents and terminal options below are for this host.'
+            )}
       </span>
     </div>
   )

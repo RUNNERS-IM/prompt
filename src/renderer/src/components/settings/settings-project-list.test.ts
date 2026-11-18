@@ -7,6 +7,7 @@ import {
   buildRepoIdToHostSelection,
   buildRepoIdToRepresentative,
   buildSettingsProjectList,
+  getSettingsProjectHostCount,
   getSettingsProjectHostRepo,
   getSettingsEntryHostSelection,
   getSettingsProjectRemovalScope,
@@ -14,7 +15,8 @@ import {
   getSettingsTargetHostSelection,
   removeSettingsProjectFromAllHosts,
   resolveEffectiveProjectHost,
-  resolveSettingsTargetRepoId
+  resolveSettingsTargetRepoId,
+  settingsProjectJoinsHostLocalProjects
 } from './settings-project-list'
 
 function makeRepo(overrides: Partial<Repo> & Pick<Repo, 'id'>): Repo {
@@ -80,6 +82,28 @@ describe('buildSettingsProjectList', () => {
     expect(projects).toHaveLength(1)
     expect(projects[0].setups).toHaveLength(2)
     expect(projects[0].representativeRepoId).toBe('folder-x')
+  })
+
+  it('joins one folder name + path added on two Macs under different ids', () => {
+    const repos: Repo[] = [
+      makeRepo({ id: 'folder-a', kind: 'folder', displayName: 'notes', path: '/work/notes' }),
+      makeRepo({
+        id: 'folder-b',
+        kind: 'folder',
+        displayName: 'notes',
+        path: '/work/notes',
+        executionHostId: 'runtime:home-mac'
+      }),
+      makeRepo({ id: 'folder-c', kind: 'folder', displayName: 'notes', path: '/other/notes' })
+    ]
+
+    const projects = buildSettingsProjectList(repos)
+
+    expect(projects).toHaveLength(2)
+    const joined = projects.find((entry) => entry.setups.length === 2)
+    expect(joined && getSettingsProjectHostCount(joined)).toBe(2)
+    expect(joined && settingsProjectJoinsHostLocalProjects(joined)).toBe(true)
+    expect(joined && getSettingsProjectRemovalScope(joined)).toBe('project')
   })
 
   it('gives each same-host clone of one remote its own entry, like the sidebar (#20861)', () => {
