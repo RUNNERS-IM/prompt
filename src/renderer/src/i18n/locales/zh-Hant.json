@@ -385,7 +385,10 @@
       "switchLimited": "只重新啟動已停止的",
       "switchDescription": "重新啟動會在新帳號上繼續每個執行中的對話。已停止的是達到使用上限的工作階段。",
       "autoPickSwitched": "已將 Claude 切換到 {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每週限額較早重設。"
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每週限額較早重設。",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 中是舊版 Prompt 啟動器。",

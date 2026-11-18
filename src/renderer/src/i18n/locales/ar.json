@@ -25113,7 +25113,10 @@
       "switchLimited": "أعد تشغيل المتوقفة فقط",
       "switchDescription": "تستأنف إعادة التشغيل كل محادثة جارية على الحساب الجديد. المتوقفة هي التي بلغت حد الاستخدام.",
       "autoPickSwitched": "تم تبديل Claude إلى {{next}}",
-      "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا."
+      "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "يحتوي {{path}} على مشغّل قديم من Prompt.",

@@ -385,7 +385,10 @@
       "switchLimited": "停止したものだけ再起動",
       "switchDescription": "再起動すると、実行中の各会話が新しいアカウントで続きます。停止したものとは使用上限に達したセッションです。",
       "autoPickSwitched": "Claude を {{next}} に切り替えました",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}。週間上限がより早くリセットされます。"
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。週間上限がより早くリセットされます。",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} には古い Prompt ランチャーが入っています。",

@@ -23545,7 +23545,10 @@
       "switchLimited": "Restart stopped ones",
       "switchDescription": "Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.",
       "autoPickSwitched": "Switched Claude to {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contains an older Prompt launcher.",

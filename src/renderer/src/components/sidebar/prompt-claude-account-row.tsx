@@ -13,89 +13,25 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { useModalReturnFocus } from '@/hooks/useModalReturnFocus'
-import { useResetCountdownClock } from '@/hooks/useResetCountdownClock'
-import { formatLocalizedResetCountdown } from '@/lib/reset-duration-label'
 import { getClaudeAccountLabel, isActiveSystemDefaultTwin } from '@/lib/claude-account-label'
 import { handleRunningClaudeSessionsAfterSwitch } from '@/lib/claude-account-switch-sessions'
 import { signInToClaudeAccount } from '@/lib/claude-account-sign-in'
 import type { ClaudeRateLimitAccountsState } from '../../../../shared/managed-account-types'
-import type { ProviderRateLimits, RateLimitWindow } from '../../../../shared/rate-limit-types'
-import {
-  getDisplayedUsagePercentage,
-  normalizeUsagePercentageDisplay
-} from '../../../../shared/usage-percentage-display'
+import type { ProviderRateLimits } from '../../../../shared/rate-limit-types'
+import { normalizeUsagePercentageDisplay } from '../../../../shared/usage-percentage-display'
 import { getProviderAccountActiveIdForView } from '../settings/provider-account-visibility'
 import { getClaudeAccountErrorDescription } from '../settings/accounts-pane-action-errors'
 import { getClaudeAccountSyncKey } from '../status-bar/provider-account-sync-key'
 import { formatBareUsagePercentage } from '../status-bar/usage-percentage-label'
 import { ClaudeIcon } from '../status-bar/icons'
-import { barColor, clampUsedPercent } from '../status-bar/tooltip'
+import { clampUsedPercent } from '../status-bar/tooltip'
+import { AccountUsage } from './prompt-claude-account-usage'
 
 const HOST_VIEW = { runtime: 'host' } as const
 const EMPTY: ClaudeRateLimitAccountsState = {
   accounts: [],
   activeAccountId: null,
   activeAccountIdsByRuntime: { host: null, wsl: {} }
-}
-
-function UsageLine({
-  label,
-  window,
-  now
-}: {
-  label: string
-  window: RateLimitWindow | null
-  now: number
-}): React.JSX.Element | null {
-  const display = normalizeUsagePercentageDisplay(useAppStore((s) => s.usagePercentageDisplay))
-  if (!window) {
-    return null
-  }
-  const used = clampUsedPercent(window.usedPercent)
-  const reset =
-    window.resetsAt && window.resetsAt > now
-      ? formatLocalizedResetCountdown(window.resetsAt - now)
-      : null
-  return (
-    <div className="flex min-w-0 items-center gap-2 text-[11px] leading-4 text-muted-foreground">
-      <span className="w-10 shrink-0 truncate">{label}</span>
-      <div className="h-[4px] w-14 shrink-0 overflow-hidden rounded-full bg-muted">
-        <div
-          className={cn('h-full rounded-full', barColor(used))}
-          style={{ width: `${getDisplayedUsagePercentage(used, display)}%` }}
-        />
-      </div>
-      <span className="w-9 shrink-0 tabular-nums text-foreground/80">
-        {formatBareUsagePercentage(used, display)}
-      </span>
-      {reset ? <span className="min-w-0 truncate">{reset}</span> : null}
-    </div>
-  )
-}
-
-function AccountUsage({ limits }: { limits: ProviderRateLimits | null }): React.JSX.Element {
-  const now = useResetCountdownClock([limits?.session?.resetsAt, limits?.weekly?.resetsAt])
-  if (!limits || (!limits.session && !limits.weekly)) {
-    return (
-      <span className="text-[11px] leading-4 text-muted-foreground">
-        {translate('prompt.claudeAccount.noUsage', 'Usage not read yet')}
-      </span>
-    )
-  }
-  return (
-    <>
-      <UsageLine
-        label={translate('auto.components.status.bar.tooltip.94038ad2fa', 'Session')}
-        window={limits.session}
-        now={now}
-      />
-      <UsageLine
-        label={translate('auto.components.status.bar.tooltip.252c096536', 'Weekly')}
-        window={limits.weekly}
-        now={now}
-      />
-    </>
-  )
 }
 
 /**
@@ -269,7 +205,7 @@ export function PromptClaudeAccountRow(): React.JSX.Element | null {
                       {translate('prompt.claudeAccount.signInAgain', 'Sign in again to use it')}
                     </span>
                   ) : (
-                    <AccountUsage limits={usageFor(account.id)} />
+                    <AccountUsage accountId={account.id} limits={usageFor(account.id)} />
                   )}
                 </div>
                 {active ? (

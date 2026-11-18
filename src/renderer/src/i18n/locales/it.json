@@ -23937,7 +23937,10 @@
       "switchLimited": "Riavvia solo quelle ferme",
       "switchDescription": "Il riavvio continua ogni conversazione in corso sul nuovo account. Quelle ferme sono quelle che hanno raggiunto il limite di utilizzo.",
       "autoPickSwitched": "Claude passato a {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Il suo limite settimanale si azzera prima."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Il suo limite settimanale si azzera prima.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un launcher di Prompt obsoleto.",

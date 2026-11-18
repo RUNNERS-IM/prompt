@@ -23153,7 +23153,10 @@
       "switchLimited": "Chỉ khởi động lại phiên đã dừng",
       "switchDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
       "autoPickSwitched": "Đã chuyển Claude sang {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} chứa trình khởi chạy Prompt phiên bản cũ.",
