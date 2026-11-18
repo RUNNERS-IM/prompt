@@ -23334,7 +23334,8 @@
       "resumedInTabFolder": "[Prompt] Continuing in this folder, not {{folder}} where it last ran",
       "interruptedByUser": "Interrupted by user",
       "interrupted": "Interrupted",
-      "unconfirmed": "Couldn’t confirm"
+      "unconfirmed": "Couldn’t confirm",
+      "dialogOpen": "Waiting in a choice dialog"
     },
     "timeAgo": {
       "now": "now",
@@ -23617,6 +23618,9 @@
       "argsNone": "No args",
       "argsRepository": "Repository custom args",
       "argsGlobal": "Global custom args"
+    },
+    "runnersAccount": {
+      "settings": "Account settings"
     }
   }
 }

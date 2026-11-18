@@ -302,7 +302,8 @@
       "resumedInTabFolder": "[Prompt] Wird in diesem Ordner fortgesetzt, nicht in {{folder}}, wo zuletzt gearbeitet wurde",
       "interruptedByUser": "Vom Benutzer unterbrochen",
       "interrupted": "Unterbrochen",
-      "unconfirmed": "Nicht bestätigt"
+      "unconfirmed": "Nicht bestätigt",
+      "dialogOpen": "Wartet in einem Auswahldialog"
     },
     "sessionMove": {
       "cancelRemote": "Sitzungen können nur zwischen Projekten auf diesem Computer verschoben werden.",
@@ -462,6 +463,9 @@
       "argsNone": "Keine Argumente",
       "argsRepository": "Repository-eigene Argumente",
       "argsGlobal": "Globale eigene Argumente"
+    },
+    "runnersAccount": {
+      "settings": "Kontoeinstellungen"
     }
   },
   "agentLaunch": {

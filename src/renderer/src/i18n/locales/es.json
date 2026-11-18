@@ -305,7 +305,8 @@
       "resumedInTabFolder": "[Prompt] Continúa en esta carpeta, no en {{folder}}, donde se ejecutó por última vez",
       "interruptedByUser": "Interrumpido por el usuario",
       "interrupted": "Interrumpido",
-      "unconfirmed": "No se pudo confirmar"
+      "unconfirmed": "No se pudo confirmar",
+      "dialogOpen": "Esperando en un cuadro de elección"
     },
     "sessionMove": {
       "cancelRemote": "Las sesiones solo se pueden mover entre proyectos de este equipo.",
@@ -466,6 +467,9 @@
       "argsNone": "Sin argumentos",
       "argsRepository": "Argumentos personalizados del repositorio",
       "argsGlobal": "Argumentos personalizados globales"
+    },
+    "runnersAccount": {
+      "settings": "Ajustes de la cuenta"
     }
   },
   "agentLaunch": {

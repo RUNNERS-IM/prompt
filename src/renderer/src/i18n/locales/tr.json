@@ -302,7 +302,8 @@
       "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor",
       "interruptedByUser": "Kullanıcı tarafından durduruldu",
       "interrupted": "Durduruldu",
-      "unconfirmed": "Doğrulanamadı"
+      "unconfirmed": "Doğrulanamadı",
+      "dialogOpen": "Seçim penceresinde bekliyor"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
@@ -462,6 +463,9 @@
       "argsNone": "Argüman yok",
       "argsRepository": "Depoya özel argümanlar",
       "argsGlobal": "Genel özel argümanlar"
+    },
+    "runnersAccount": {
+      "settings": "Hesap ayarları"
     }
   },
   "agentLaunch": {

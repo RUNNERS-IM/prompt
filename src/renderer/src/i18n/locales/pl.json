@@ -24116,7 +24116,8 @@
       "resumedInTabFolder": "[Prompt] Kontynuacja w tym folderze, a nie w {{folder}}, gdzie działało ostatnio",
       "interruptedByUser": "Przerwane przez użytkownika",
       "interrupted": "Przerwane",
-      "unconfirmed": "Nie udało się potwierdzić"
+      "unconfirmed": "Nie udało się potwierdzić",
+      "dialogOpen": "Czeka w oknie wyboru"
     },
     "timeAgo": {
       "now": "teraz",
@@ -24401,6 +24402,9 @@
       "argsNone": "Brak argumentów",
       "argsRepository": "Własne argumenty repozytorium",
       "argsGlobal": "Globalne własne argumenty"
+    },
+    "runnersAccount": {
+      "settings": "Ustawienia konta"
     }
   }
 }

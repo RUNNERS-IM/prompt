@@ -22943,7 +22943,8 @@
       "resumedInTabFolder": "[Prompt] Tiếp tục trong thư mục này, không phải {{folder}} nơi chạy lần trước",
       "interruptedByUser": "Người dùng đã dừng",
       "interrupted": "Bị gián đoạn",
-      "unconfirmed": "Không thể xác nhận"
+      "unconfirmed": "Không thể xác nhận",
+      "dialogOpen": "Đang chờ trong hộp chọn"
     },
     "timeAgo": {
       "now": "vừa xong",
@@ -23225,6 +23226,9 @@
       "argsNone": "Không có tham số",
       "argsRepository": "Tham số tùy chỉnh của kho",
       "argsGlobal": "Tham số tùy chỉnh chung"
+    },
+    "runnersAccount": {
+      "settings": "Cài đặt tài khoản"
     }
   }
 }

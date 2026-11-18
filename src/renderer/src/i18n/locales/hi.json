@@ -23334,7 +23334,8 @@
       "resumedInTabFolder": "[Prompt] इसी फ़ोल्डर में जारी, {{folder}} में नहीं जहाँ यह पिछली बार चला था",
       "interruptedByUser": "उपयोगकर्ता ने रोका",
       "interrupted": "बाधित",
-      "unconfirmed": "पुष्टि नहीं हो सकी"
+      "unconfirmed": "पुष्टि नहीं हो सकी",
+      "dialogOpen": "चयन विंडो में प्रतीक्षा"
     },
     "timeAgo": {
       "now": "अभी",
@@ -23617,6 +23618,9 @@
       "argsNone": "कोई आर्ग्युमेंट नहीं",
       "argsRepository": "रिपॉज़िटरी के कस्टम आर्ग्युमेंट",
       "argsGlobal": "ग्लोबल कस्टम आर्ग्युमेंट"
+    },
+    "runnersAccount": {
+      "settings": "खाता सेटिंग"
     }
   }
 }

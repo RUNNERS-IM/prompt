@@ -23725,7 +23725,8 @@
       "resumedInTabFolder": "[Prompt] Si continua in questa cartella, non in {{folder}} dove era in esecuzione",
       "interruptedByUser": "Interrotto dall’utente",
       "interrupted": "Interrotto",
-      "unconfirmed": "Impossibile confermare"
+      "unconfirmed": "Impossibile confermare",
+      "dialogOpen": "In attesa in una finestra di scelta"
     },
     "timeAgo": {
       "now": "ora",
@@ -24009,6 +24010,9 @@
       "argsNone": "Nessun argomento",
       "argsRepository": "Argomenti personalizzati del repository",
       "argsGlobal": "Argomenti personalizzati globali"
+    },
+    "runnersAccount": {
+      "settings": "Impostazioni account"
     }
   }
 }
