@@ -290,8 +290,18 @@ export function SettingsSidebar({
                       />
                       <span className="truncate">{section.title}</span>
                       <RepoForkIndicator upstream={section.upstream} />
+                      {section.badge ? (
+                        <span className="ms-auto shrink-0 rounded-full bg-muted px-1.5 py-0.5 text-3xs font-medium text-muted-foreground">
+                          {section.badge}
+                        </span>
+                      ) : null}
                       {section.isRemote && (
-                        <span className="ms-auto inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground">
+                        <span
+                          className={cn(
+                            'inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground',
+                            !section.badge && 'ms-auto'
+                          )}
+                        >
                           <Server className="size-3" />
                           {translate('auto.components.settings.SettingsSidebar.e0900f83e7', 'SSH')}
                         </span>

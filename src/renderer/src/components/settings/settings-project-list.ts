@@ -5,7 +5,10 @@ import {
   LOCAL_EXECUTION_HOST_ID,
   type ExecutionHostId
 } from '../../../../shared/execution-host'
-import { projectHostSetupProjectionFromRepos } from '../../../../shared/project-host-setup-projection'
+import {
+  isHostLocalProjectId,
+  projectHostSetupProjectionFromRepos
+} from '../../../../shared/project-host-setup-projection'
 import { getRepoHostIdentityForParts } from '../../../../shared/repo-host-identity'
 import { normalizeRuntimePathForComparison } from '../../../../shared/cross-platform-path'
 import {
@@ -29,6 +32,21 @@ export type SettingsProject = {
 
 function getCheckoutSelectionKey(projectId: string, repoId: string): string {
   return `${projectId}::setup:${repoId}`
+}
+
+// Folders and remote-less repos get a per-host project id; one name + path on several Macs is one row.
+function getSameFolderKey(project: Project, setup: ProjectHostSetup): string {
+  return `local-folder:${project.displayName.trim()}\0${normalizeRuntimePathForComparison(setup.path.trim())}`
+}
+
+/** How many Macs (hosts) hold this entry's project. */
+export function getSettingsProjectHostCount(settingsProject: SettingsProject): number {
+  return new Set(settingsProject.setups.map((setup) => setup.hostId)).size
+}
+
+/** True when the entry joins several per-host projects, so the pane's own host list cannot pick between them. */
+export function settingsProjectJoinsHostLocalProjects(settingsProject: SettingsProject): boolean {
+  return settingsProject.setups.some((setup) => setup.projectId !== settingsProject.projectId)
 }
 
 /** Carry the latest explicit host pick across split/unsplit selection keys while that host remains present. */
@@ -123,7 +141,11 @@ export function buildSettingsProjectList(
       continue
     }
     const checkoutScoped = checkoutRepoIds.has(setup.repoId)
-    const key = checkoutScoped ? getCheckoutSelectionKey(project.id, setup.repoId) : project.id
+    const key = checkoutScoped
+      ? getCheckoutSelectionKey(project.id, setup.repoId)
+      : isHostLocalProjectId(project.id)
+        ? getSameFolderKey(project, setup)
+        : project.id
     const entry = entriesByKey.get(key)
     if (entry) {
       entry.setups.push(setup)
