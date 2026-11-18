@@ -11,6 +11,8 @@ export const updaterApi = {
   download: () => ipcRenderer.invoke('updater:download'),
   dismissNudge: () => ipcRenderer.invoke('updater:dismissNudge'),
   dismissAvailableUpdate: () => ipcRenderer.invoke('updater:dismissAvailableUpdate'),
+  getAutoUpdatedNotice: () => ipcRenderer.invoke('updater:getAutoUpdatedNotice'),
+  dismissAutoUpdatedNotice: () => ipcRenderer.invoke('updater:dismissAutoUpdatedNotice'),
   getLinuxPackageInstallInstructions: () =>
     ipcRenderer.invoke('updater:getLinuxPackageInstallInstructions'),
   showLinuxPackage: () => ipcRenderer.invoke('updater:showLinuxPackage'),
@@ -32,5 +34,10 @@ export const updaterApi = {
     const listener = (_event: Electron.IpcRendererEvent) => callback()
     ipcRenderer.on('updater:clearDismissal', listener)
     return () => ipcRenderer.removeListener('updater:clearDismissal', listener)
+  },
+  onAutoInstallRequested: (callback) => {
+    const listener = (_event: Electron.IpcRendererEvent) => callback()
+    ipcRenderer.on('updater:autoInstallRequested', listener)
+    return () => ipcRenderer.removeListener('updater:autoInstallRequested', listener)
   }
 } satisfies PreloadApi['updater']

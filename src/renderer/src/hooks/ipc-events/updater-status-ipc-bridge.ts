@@ -18,4 +18,12 @@ export function registerUpdaterStatusIpcBridge(unsubs: (() => void)[]): void {
       useAppStore.getState().clearDismissedUpdateVersion()
     })
   )
+  unsubs.push(
+    window.api.updater.onAutoInstallRequested(() => {
+      // 카드의 「다시 시작」과 같은 길: 편집기 글을 백업하고 상태를 저장한 뒤 깐다.
+      void window.api.updater.quitAndInstall().catch((error) => {
+        console.warn('[updater] auto install was not started', error)
+      })
+    })
+  )
 }

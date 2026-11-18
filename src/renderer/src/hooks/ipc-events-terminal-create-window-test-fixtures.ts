@@ -148,7 +148,8 @@ export function buildTerminalCreateWindow(args: {
       updater: {
         getStatus: () => Promise.resolve({ state: 'idle' }),
         onStatus: () => () => {},
-        onClearDismissal: () => () => {}
+        onClearDismissal: () => () => {},
+        onAutoInstallRequested: () => () => {}
       },
       browser: {
         onGuestLoadFailed: () => () => {},

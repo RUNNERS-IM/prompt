@@ -150,6 +150,7 @@ export function attachMainWindowCoreServices(
       onBeforeUpdateQuit: () => preserveStateBeforeUpdateRestart({ codexRuntimeHome, store }),
       onBeforeUpdateQuitFailure: 'abort',
       updateInstallMode: resolveUpdateInstallMode(state.isServeMode),
+      getWorkingAgentCount: () => state.agentAwakeService?.getWorkingAgentCount() ?? 0,
       onWorktreeLifecycle: emitPluginWorktreeLifecycle
     }
   )

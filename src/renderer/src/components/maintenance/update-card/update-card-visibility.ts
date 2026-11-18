@@ -27,6 +27,10 @@ export function isUpdateCardVisible({
   if (status.state === 'idle') {
     return false
   }
+  // Prompt: 저절로 받아 쉬는 중에 까는 판은 카드를 띄우지 않는다. 다음에 열 때 한 번 알린다.
+  if ('autoInstall' in status && status.autoInstall) {
+    return false
+  }
   if (cachedVersion && dismissedVersion === cachedVersion && !updateUserInitiatedCycle) {
     if (status.state !== 'downloading' && status.state !== 'error') {
       return false

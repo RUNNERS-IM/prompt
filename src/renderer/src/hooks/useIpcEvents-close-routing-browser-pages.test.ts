@@ -191,7 +191,8 @@ describe('useIpcEvents browser tab close routing', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},
@@ -420,7 +421,8 @@ describe('useIpcEvents browser tab close routing', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},
@@ -644,7 +646,8 @@ describe('useIpcEvents browser tab close routing', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},

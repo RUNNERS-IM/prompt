@@ -14,6 +14,9 @@ export type UpdaterApi = {
   quitAndInstall: () => Promise<void>
   dismissNudge: () => Promise<void>
   dismissAvailableUpdate: () => Promise<void>
+  /** Prompt: 저절로 깐 뒤 처음 열 때 한 번 보여 줄 판. 없으면 null. */
+  getAutoUpdatedNotice?: () => Promise<{ version: string; releaseUrl: string } | null>
+  dismissAutoUpdatedNotice?: () => Promise<void>
   /** Desktop-only. Rejects unless the current status carries `linux-package-install` recovery. */
   getLinuxPackageInstallInstructions: () => Promise<LinuxPackageInstallInstructions>
   /** Desktop-only. Reveals the revalidated cached package in the native file manager. */
@@ -26,4 +29,6 @@ export type UpdaterApi = {
 
   onStatus: (callback: (status: UpdateStatus) => void) => () => void
   onClearDismissal: (callback: () => void) => () => void
+  /** 쉬는 중 저절로 깔 때가 됐다고 본체가 알린다. 화면은 카드와 같은 길로 깐다. */
+  onAutoInstallRequested: (callback: () => void) => () => void
 }
