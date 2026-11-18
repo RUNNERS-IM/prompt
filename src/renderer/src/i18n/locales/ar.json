@@ -24898,7 +24898,8 @@
       "resumedInTabFolder": "[Prompt] المتابعة في هذا المجلد، وليس في {{folder}} حيث كانت تعمل آخر مرة",
       "interruptedByUser": "أوقفه المستخدم",
       "interrupted": "تمت المقاطعة",
-      "unconfirmed": "تعذّر التأكيد"
+      "unconfirmed": "تعذّر التأكيد",
+      "dialogOpen": "ينتظر في نافذة اختيار"
     },
     "timeAgo": {
       "now": "الآن",
@@ -25182,6 +25183,9 @@
       "argsNone": "بلا وسائط",
       "argsRepository": "وسائط مخصصة للمستودع",
       "argsGlobal": "وسائط مخصصة عامة"
+    },
+    "runnersAccount": {
+      "settings": "إعدادات الحساب"
     }
   }
 }

@@ -87,6 +87,10 @@ export function promptSessionStatusLine(
   if (agent.state === 'unverifiable') {
     return promptNoUpdateLine(agent.entry, now)
   }
+  // Claude Code reports "dialog open" while its own picker (permission, plan, choice) is on screen.
+  if (secondary.trim().toLowerCase() === 'dialog open') {
+    return translate('prompt.sessionRow.dialogOpen', 'Waiting in a choice dialog')
+  }
   const toolPreview = formatAgentToolPreview(agent.entry, agent.state)
   const toolName = agent.entry.toolName?.trim() ?? ''
   if (toolPreview && secondary === toolPreview && toolName) {

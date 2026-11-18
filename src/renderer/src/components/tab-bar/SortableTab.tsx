@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { X, Minimize2, Pin } from 'lucide-react'
-import { stripLeadingAgentTitleDecoration } from '../../../../shared/agent-title-decoration'
 import { terminalTabSetName } from '../../../../shared/tab-title-resolution'
 import { getAgentLabel } from '@/lib/agent-catalog'
 import { localizedTerminalTitle } from '@/lib/terminal-default-title-label'
@@ -28,6 +27,8 @@ import { useSortableTabContextMenu } from './use-sortable-tab-context-menu'
 import { useSortableTabMenuDismiss } from './use-sortable-tab-menu-dismiss'
 import { translate } from '@/i18n/i18n'
 import { TAB_LABEL_WIDTH_CLASSES } from './tab-width-rules'
+import { promptTabLabel } from './prompt-tab-label'
+import { tabHoverStatusDetails } from './tab-hover-status-details'
 import { useTabStripSlotProps } from './use-tab-strip-slot-props'
 import { useTabStripPointerActivation } from './tab-strip-pointer-activation'
 import { TerminalTabLeadingIcon } from './TerminalTabLeadingIcon'
@@ -137,10 +138,8 @@ export default function SortableTab({
   // A set name that is only the starting "Terminal N" counts as none, so a later name shows.
   const setName = terminalTabSetName(tab) || null
   useUiLanguageRevision()
-  // Why: with a provider icon shown, strip the agent's own leading glyph so the tab doesn't show two icons for one agent.
-  const displayTitle =
-    setName ??
-    localizedTerminalTitle(tabAgent ? stripLeadingAgentTitleDecoration(tab.title) : tab.title)
+  // Prompt: drop the leading status glyph (the tab icon shows it) and "[ ]" brackets, for every tab.
+  const displayTitle = promptTabLabel(setName ?? localizedTerminalTitle(tab.title))
 
   const { attributes, listeners, setNodeRef } = useSortable({
     id: tab.id,
@@ -370,7 +369,7 @@ export default function SortableTab({
         ) : (
           <TabHoverCard
             title={displayTitle}
-            details={hoverDetails}
+            details={tabHoverStatusDetails(activityStatus, hoverDetails)}
             programName={
               tabAgent
                 ? getAgentLabel(tabAgent)

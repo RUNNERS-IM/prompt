@@ -71,10 +71,15 @@ function RowLabelText({ row }: { row: PromptComputerRow }): React.JSX.Element {
 }
 
 /**
- * Prompt: one select box at the very top of the sidebar ("m2-pro-1 (this Mac) ▾"). Picking a
- * computer switches the whole sidebar to that computer's projects and sessions; one at a time.
+ * Prompt: one select box in the sidebar's bottom row ("m2-pro-1 (this Mac) ▾"), with `trailing`
+ * (the Settings gear) beside it. Picking a computer switches the whole sidebar to that computer's
+ * projects and sessions; one at a time.
  */
-export function PromptComputerPicker(): React.JSX.Element {
+export function PromptComputerPicker({
+  trailing
+}: {
+  trailing?: React.ReactNode
+}): React.JSX.Element {
   useTranslation()
   const { hostOptions } = useSidebarHostScopeOptions()
   const visibleHostIds = useAppStore((s) => s.visibleWorkspaceHostIds)
@@ -133,73 +138,83 @@ export function PromptComputerPicker(): React.JSX.Element {
   const triggerLabel = selectedRow ? <RowLabelText row={selectedRow} /> : '…'
 
   return (
-    <div className="px-2 pt-2" data-prompt-computer-picker="">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button
-            type="button"
-            className="group flex w-full min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] font-semibold tracking-tight text-worktree-sidebar-foreground/85 transition-colors hover:bg-worktree-sidebar-foreground/8 data-[state=open]:bg-worktree-sidebar-foreground/8"
-            aria-label={translate('prompt.computerPicker.label', 'Computer')}
-            data-prompt-computer-trigger=""
-          >
-            <Laptop
-              className="size-4 shrink-0 text-worktree-sidebar-foreground/45"
-              strokeWidth={1.5}
-            />
-            <span className="min-w-0 flex-1 truncate">{triggerLabel}</span>
-            {selectedRow && selectedRow.status !== 'connected' ? (
-              <StatusDot status={selectedRow.status} />
-            ) : null}
-            <ChevronDown
-              className="size-3.5 shrink-0 text-worktree-sidebar-foreground/40"
-              strokeWidth={1.5}
-            />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="start"
-          sideOffset={4}
-          className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
-          data-prompt-computer-menu=""
-        >
-          <div className="max-h-80 overflow-y-auto scrollbar-sleek">
-            {rows.map((row) => {
-              const selected = row.id === selectedId
-              return (
-                <DropdownMenuItem
-                  key={row.id}
-                  onSelect={() => select(row.id)}
-                  className={cn(selected && 'bg-black/6 dark:bg-white/10')}
-                  data-prompt-computer-row={row.id}
-                  data-selected={selected ? 'true' : undefined}
-                  title={`${rowLabel(row)} · ${statusLabel(row.status)}`}
-                >
-                  <StatusDot status={row.status} />
-                  <span className="min-w-0 flex-1 truncate">
-                    <RowLabelText row={row} />
-                  </span>
-                  {selected ? (
-                    <Check className="size-3.5 text-foreground" strokeWidth={1.5} />
-                  ) : (
-                    <span aria-hidden className="size-3.5" />
-                  )}
-                </DropdownMenuItem>
-              )
-            })}
-          </div>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={openAddComputer} data-prompt-computer-action="add">
-            <Plus strokeWidth={1.5} />
-            {translate('prompt.computerPicker.add', 'Add computer…')}
-          </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setShareOpen(true)} data-prompt-computer-action="share">
-            <Share2 strokeWidth={1.5} />
-            {translate('prompt.computerPicker.share', 'Share this computer…')}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    <div
+      className="border-t border-worktree-sidebar-border px-2 py-1.5"
+      data-prompt-computer-picker=""
+    >
       {/* Accounts are kept per Mac, so the row follows only this Mac. */}
       {selectedRow?.isLocal ? <PromptClaudeAccountRow /> : null}
+      <div className="flex min-w-0 items-center gap-1">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="group flex w-full min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] font-semibold tracking-tight text-worktree-sidebar-foreground/85 transition-colors hover:bg-worktree-sidebar-foreground/8 data-[state=open]:bg-worktree-sidebar-foreground/8"
+              aria-label={translate('prompt.computerPicker.label', 'Computer')}
+              data-prompt-computer-trigger=""
+            >
+              <Laptop
+                className="size-4 shrink-0 text-worktree-sidebar-foreground/45"
+                strokeWidth={1.5}
+              />
+              <span className="min-w-0 flex-1 truncate">{triggerLabel}</span>
+              {selectedRow && selectedRow.status !== 'connected' ? (
+                <StatusDot status={selectedRow.status} />
+              ) : null}
+              <ChevronDown
+                className="size-3.5 shrink-0 text-worktree-sidebar-foreground/40"
+                strokeWidth={1.5}
+              />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            side="top"
+            align="start"
+            sideOffset={4}
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
+            data-prompt-computer-menu=""
+          >
+            <div className="max-h-80 overflow-y-auto scrollbar-sleek">
+              {rows.map((row) => {
+                const selected = row.id === selectedId
+                return (
+                  <DropdownMenuItem
+                    key={row.id}
+                    onSelect={() => select(row.id)}
+                    className={cn(selected && 'bg-black/6 dark:bg-white/10')}
+                    data-prompt-computer-row={row.id}
+                    data-selected={selected ? 'true' : undefined}
+                    title={`${rowLabel(row)} · ${statusLabel(row.status)}`}
+                  >
+                    <StatusDot status={row.status} />
+                    <span className="min-w-0 flex-1 truncate">
+                      <RowLabelText row={row} />
+                    </span>
+                    {selected ? (
+                      <Check className="size-3.5 text-foreground" strokeWidth={1.5} />
+                    ) : (
+                      <span aria-hidden className="size-3.5" />
+                    )}
+                  </DropdownMenuItem>
+                )
+              })}
+            </div>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onSelect={openAddComputer} data-prompt-computer-action="add">
+              <Plus strokeWidth={1.5} />
+              {translate('prompt.computerPicker.add', 'Add computer…')}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={() => setShareOpen(true)}
+              data-prompt-computer-action="share"
+            >
+              <Share2 strokeWidth={1.5} />
+              {translate('prompt.computerPicker.share', 'Share this computer…')}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {trailing}
+      </div>
       <AddRemoteHostDialog
         mode={addMode}
         onOpenChange={(mode) => {

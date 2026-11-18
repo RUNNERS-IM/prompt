@@ -303,6 +303,13 @@ describe('promptSessionStatusLine', () => {
     const agent = makeAgent({ state: 'waiting' })
     expect(promptSessionStatusLine(agent, 'permission', 'Approve Bash?')).toBe('Approve Bash?')
   })
+
+  it('says in plain words that a session is waiting in a choice dialog', () => {
+    const agent = makeAgent({ state: 'waiting' })
+    expect(promptSessionStatusLine(agent, 'permission', 'dialog open')).toBe(
+      'Waiting in a choice dialog'
+    )
+  })
 })
 
 describe('promptSessionIconKind', () => {

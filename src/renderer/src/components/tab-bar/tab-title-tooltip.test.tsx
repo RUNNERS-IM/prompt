@@ -200,10 +200,10 @@ function textSpanHtml(markup: string, text: string): string {
 function expectTabContainerWidth(markup: string, root: string): void {
   const container = firstOpeningTag(markup)
   // Prompt: tabs fit their whole title; the width classes sit on the container only.
-  const widthClasses = 'w-max min-w-[72px]'
+  const widthClasses = 'w-max min-w-[150px]'
   expect(container).toContain(widthClasses)
   expect(root).not.toContain('w-max')
-  expect(root).not.toContain('min-w-[72px]')
+  expect(root).not.toContain('min-w-[150px]')
 }
 
 function expectTooltipContent(markup: string, text: string): void {
