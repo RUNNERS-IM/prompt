@@ -3,8 +3,12 @@ import { fetchCodexRateLimits } from '../codex-fetcher'
 import { RateLimitServicePolling } from './service-polling'
 import { INACTIVE_CODEX_PROBE_STAGGER_MS, INACTIVE_FETCH_DEBOUNCE_MS } from './service-types'
 import { delayUnlessAborted } from '../../../shared/abort-aware-delay'
+import type { ProviderRateLimits } from '../../../shared/rate-limit-types'
 
 export abstract class RateLimitServiceInactiveAccounts extends RateLimitServicePolling {
+  // 같은 계정 · 같은 이유의 실패는 한 번만 남긴다. 메뉴를 열 때마다 읽으므로 그대로 두면 기록이 쌓인다.
+  private readonly loggedInactiveClaudeFailure = new Map<string, string>()
+
   async fetchInactiveClaudeAccountsOnOpen(): Promise<void> {
     if (Date.now() - this.lastInactiveClaudeFetchAt < INACTIVE_FETCH_DEBOUNCE_MS) {
       return
@@ -62,6 +66,7 @@ export abstract class RateLimitServiceInactiveAccounts extends RateLimitServiceP
           }
           const cached = this.inactiveClaudeCache.get(account.id) ?? null
           this.inactiveClaudeCache.set(account.id, this.applyStalePolicy(fresh, cached))
+          this.logInactiveClaudeFailure(account.id, fresh)
         } catch {
           // Isolate each account's Keychain/network failure so siblings continue.
           if (
@@ -181,6 +186,22 @@ export abstract class RateLimitServiceInactiveAccounts extends RateLimitServiceP
       this.inactiveCodexFetchInFlight = false
       this.finishFetchCycle(controller)
     }
+  }
+
+  private logInactiveClaudeFailure(accountId: string, fresh: ProviderRateLimits): void {
+    if (fresh.status !== 'error') {
+      this.loggedInactiveClaudeFailure.delete(accountId)
+      return
+    }
+    const kind = fresh.usageMetadata?.failureKind ?? 'unknown'
+    if (this.loggedInactiveClaudeFailure.get(accountId) === kind) {
+      return
+    }
+    this.loggedInactiveClaudeFailure.set(accountId, kind)
+    // 계정 id 와 실패 종류만 남긴다. 이메일 · 토큰은 남기지 않는다.
+    console.warn(
+      `[rate-limits] inactive Claude account usage failed account=${accountId} kind=${kind}`
+    )
   }
 
   evictInactiveClaudeCache(accountId: string): void {

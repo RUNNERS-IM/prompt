@@ -22857,7 +22857,10 @@
       "switchLimited": "멈춘 세션만 다시 시작",
       "switchDescription": "다시 시작하면 실행 중인 대화가 새 계정에서 이어집니다. 멈춘 세션은 사용 한도에 걸린 세션입니다.",
       "autoPickSwitched": "Claude 계정을 {{next}}(으)로 바꿨습니다",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. 주간 한도가 더 먼저 초기화됩니다."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. 주간 한도가 더 먼저 초기화됩니다.",
+      "staleUsage": "로그인이 오래되어 사용량을 못 읽었습니다",
+      "staleUsageHint": "이 계정으로 바꿔 Claude 를 한 번 켜면 다시 보입니다",
+      "lastRead": "마지막으로 읽은 때 {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 에 예전 Prompt 실행 파일이 들어 있습니다.",

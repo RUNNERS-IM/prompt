@@ -385,7 +385,10 @@
       "switchLimited": "只重启已停止的",
       "switchDescription": "重启会在新账号上继续每个正在运行的对话。已停止的是达到使用上限的会话。",
       "autoPickSwitched": "已将 Claude 切换到 {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。"
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 中是旧版 Prompt 启动器。",

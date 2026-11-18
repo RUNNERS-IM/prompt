@@ -394,7 +394,10 @@
       "switchLimited": "Reiniciar solo las detenidas",
       "switchDescription": "Al reiniciar, cada conversación en curso continúa en la nueva cuenta. Las detenidas son las que alcanzaron su límite de uso.",
       "autoPickSwitched": "Claude cambió a {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Su límite semanal se reinicia antes."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Su límite semanal se reinicia antes.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un lanzador antiguo de Prompt.",

@@ -394,7 +394,10 @@
       "switchLimited": "Redémarrer celles arrêtées",
       "switchDescription": "Le redémarrage poursuit chaque conversation en cours sur le nouveau compte. Les sessions arrêtées sont celles qui ont atteint leur limite d’utilisation.",
       "autoPickSwitched": "Claude est passé à {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contient un ancien lanceur Prompt.",

@@ -460,3 +460,31 @@ it.each(['remove', 'stop'])('discards a late 429 after account %s', async (actio
   expect(cached('A')).toBeUndefined()
   expect(service.getState().inactiveClaudeAccounts.every((row) => !row.isFetching)).toBe(true)
 })
+
+it('logs an idle account usage failure once per reason, without the token', async () => {
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  try {
+    fixture.status = 401
+    await service.fetchInactiveClaudeAccountsOnOpen()
+    fixture.now += 61000
+    await service.fetchInactiveClaudeAccountsOnOpen()
+    const lines = warn.mock.calls
+      .map((call) => String(call[0]))
+      .filter((l) => l.includes('account=A'))
+    expect(lines).toEqual([
+      '[rate-limits] inactive Claude account usage failed account=A kind=stale-token'
+    ])
+    expect(warn.mock.calls.flat().join(' ')).not.toContain('synthetic-')
+    fixture.status = 200
+    fixture.now += 61000
+    await service.fetchInactiveClaudeAccountsOnOpen()
+    fixture.status = 401
+    fixture.now += 61000
+    await service.fetchInactiveClaudeAccountsOnOpen()
+    expect(
+      warn.mock.calls.map((call) => String(call[0])).filter((l) => l.includes('account=A'))
+    ).toHaveLength(2)
+  } finally {
+    warn.mockRestore()
+  }
+})

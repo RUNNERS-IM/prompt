@@ -23153,7 +23153,10 @@
       "switchLimited": "Mulai ulang yang berhenti",
       "switchDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
       "autoPickSwitched": "Claude dialihkan ke {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} berisi peluncur Prompt versi lama.",

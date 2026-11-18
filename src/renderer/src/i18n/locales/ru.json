@@ -397,7 +397,10 @@
       "switchLimited": "Перезапускать только остановленные",
       "switchDescription": "Перезапуск продолжает каждый идущий разговор в новом аккаунте. Остановленные — те, что достигли лимита использования.",
       "autoPickSwitched": "Claude переключён на {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Его недельный лимит сбрасывается раньше."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Его недельный лимит сбрасывается раньше.",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} содержит устаревший лаунчер Prompt.",

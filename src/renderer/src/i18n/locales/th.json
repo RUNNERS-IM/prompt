@@ -23153,7 +23153,10 @@
       "switchLimited": "เริ่มใหม่เฉพาะที่หยุด",
       "switchDescription": "การเริ่มใหม่จะทำให้การสนทนาที่กำลังทำงานดำเนินต่อในบัญชีใหม่ ที่หยุดคือเซสชันที่ถึงขีดจำกัดการใช้งาน",
       "autoPickSwitched": "เปลี่ยน Claude เป็น {{next}} แล้ว",
-      "autoPickSwitchedReason": "{{previous}} → {{next}} ขีดจำกัดรายสัปดาห์รีเซ็ตเร็วกว่า"
+      "autoPickSwitchedReason": "{{previous}} → {{next}} ขีดจำกัดรายสัปดาห์รีเซ็ตเร็วกว่า",
+      "staleUsage": "Sign-in is old, so usage could not be read",
+      "staleUsageHint": "Switch to this account and run Claude once to see it again",
+      "lastRead": "Last read {{time}}"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} มีตัวเรียกใช้ Prompt เวอร์ชันเก่าอยู่",
