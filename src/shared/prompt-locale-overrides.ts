@@ -120,11 +120,11 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.terminalLinkHint.systemBrowserOnly': '{{shiftMod}}+클릭: 기본 브라우저로 열기',
   'prompt.terminalLinkHint.clickSystemBrowser': '클릭: 기본 브라우저로 열기',
   'prompt.terminalLinkHint.orcaBrowserOnly': '{{shiftMod}}+클릭: Prompt 에서 열기',
-  'prompt.terminalLinkHint.switchWorkspace': '{{mod}}+클릭: 이 워크스페이스로 이동',
+  'prompt.terminalLinkHint.switchWorkspace': '{{mod}}+클릭: 이 작업 창으로 이동',
   'prompt.terminalLinkHint.switchWorkspaceFinder':
-    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: Finder 에서 열기',
+    '{{mod}}+클릭: 이 작업 창으로 이동 · {{shiftMod}}+클릭: Finder 에서 열기',
   'prompt.terminalLinkHint.switchWorkspaceFolder':
-    '{{mod}}+클릭: 이 워크스페이스로 이동 · {{shiftMod}}+클릭: 폴더 열기',
+    '{{mod}}+클릭: 이 작업 창으로 이동 · {{shiftMod}}+클릭: 폴더 열기',
   // Notices written into a terminal (prompt-terminal-notice-copy.ts).
   'prompt.terminalNotice.hiddenBacklog':
     '출력이 너무 많이 쌓여서, 화면에 안 보이던 동안의 터미널 출력 일부를 건너뛰었습니다.',
@@ -160,7 +160,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.settings.notifications.alertsGroup': '알림',
   'prompt.settings.notifications.soundGroup': '소리',
   'prompt.settings.notifications.visibleScreenGroup': '보이는 화면',
-  'prompt.settings.git.branchesGroup': '브랜치와 워크스페이스',
+  'prompt.settings.git.branchesGroup': '브랜치와 작업 창',
   'prompt.settings.git.apiBudgetGroup': 'API 사용 한도',
   'prompt.settings.git.integrationsGroup': '연동',
   'prompt.settings.advanced.permissionsGroup': 'macOS 권한',
