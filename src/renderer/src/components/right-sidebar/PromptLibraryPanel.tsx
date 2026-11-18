@@ -84,7 +84,9 @@ export default function PromptLibraryPanel(): React.JSX.Element {
   const openNew = (): void => setDraft({ id: null, title: '', body: '' })
   const save = (next: PromptLibraryDraft): void => {
     setDraft(null)
-    void updateSettings({ promptLibrary: savePromptLibraryDraft(prompts, next, Date.now()) })
+    void updateSettings({
+      promptLibrary: savePromptLibraryDraft(prompts, next, Date.now())
+    })
   }
   const remove = (id: string): void => {
     void updateSettings(removePromptLibraryItem(prompts, dismissed, id))
@@ -142,7 +144,10 @@ export default function PromptLibraryPanel(): React.JSX.Element {
                     onClick={() => insertPrompt(row.body)}
                   >
                     <div
-                      className={cn('truncate text-[13px] text-foreground', row.item && 'pr-12')}
+                      className={cn(
+                        'truncate text-[13px] font-semibold text-foreground',
+                        row.item && 'pr-12'
+                      )}
                     >
                       {row.title}
                     </div>
