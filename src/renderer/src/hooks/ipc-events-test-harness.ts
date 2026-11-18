@@ -224,7 +224,8 @@ export async function loadIpcEventsHarness(
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: createApiNamespaceStub({
           ...options.browserApi,

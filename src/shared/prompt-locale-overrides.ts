@@ -99,6 +99,7 @@ export const PROMPT_KO_ONLY_KEYS: Readonly<Record<string, string>> = {
   'prompt.update.subtitleWithCurrent': '지금 {{current}} · 설치하면 Prompt가 다시 시작됩니다',
   'prompt.update.subtitle': '설치하면 Prompt가 다시 시작됩니다',
   'prompt.update.releaseNotes': '바뀐 점 보기',
+  'prompt.update.autoUpdatedTitle': '{{version}} 로 업데이트했습니다',
   'prompt.update.dismiss': '닫기',
   'prompt.update.downloadingTitle': '새 버전 {{version}} 받는 중',
   'prompt.update.downloadingSubtitle': '다 받으면 Prompt가 다시 시작됩니다',

@@ -19,7 +19,7 @@ import { registerAutoUpdaterHandlers } from '../updater-events'
 import { getServeUpdateHandoffFailure } from '../serve-update-handoff'
 import { recordUpdaterLifecycle } from '../updater-lifecycle-diagnostics'
 import { AUTO_UPDATE_CHECK_INTERVAL_MS } from './updater-state'
-import { UpdaterDownloadInstall } from './updater-download-install'
+import { UpdaterAutoInstall } from './updater-auto-install'
 import { configureMacShipItScheduling } from './macos-shipit-scheduling'
 import { handleElectronUpdaterProxyLogin } from './electron-updater-proxy-session'
 import type { PreQuitCleanupFailureMode, UpdateInstallMode } from './updater-state'
@@ -28,6 +28,8 @@ export type UpdaterSetupOptions = {
   getLastUpdateCheckAt?: () => number | null
   /** 「업데이트 자동 확인」 설정. false 를 돌려주면 자동 확인을 건너뛴다(직접 누르는 확인은 된다). */
   isAutomaticCheckOn?: () => boolean
+  /** 답을 쓰는 중인 에이전트 수. 하나라도 있으면 쉬는 중 저절로 깔기를 미룬다. */
+  getWorkingAgentCount?: () => number
   onBeforeQuit?: () => void | Promise<void>
   setLastUpdateCheckAt?: (timestamp: number) => void
   getPendingUpdateNudgeId?: () => string | null
@@ -39,7 +41,7 @@ export type UpdaterSetupOptions = {
   onBeforeQuitFailure?: PreQuitCleanupFailureMode
 }
 
-export class UpdaterSetup extends UpdaterDownloadInstall {
+export class UpdaterSetup extends UpdaterAutoInstall {
   checkForUpdates(): void {
     this.checkForUpdatesInBackground()
   }
@@ -122,6 +124,7 @@ export class UpdaterSetup extends UpdaterDownloadInstall {
     this.persistLastUpdateCheckAt = opts?.setLastUpdateCheckAt ?? null
     this._getLastUpdateCheckAt = opts?.getLastUpdateCheckAt ?? null
     this._isAutomaticCheckOn = opts?.isAutomaticCheckOn ?? null
+    this._getWorkingAgentCount = opts?.getWorkingAgentCount ?? null
     this._getPendingUpdateNudgeId = opts?.getPendingUpdateNudgeId ?? null
     this._getDismissedUpdateNudgeId = opts?.getDismissedUpdateNudgeId ?? null
     this._setPendingUpdateNudgeId = opts?.setPendingUpdateNudgeId ?? null

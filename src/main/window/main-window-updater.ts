@@ -11,8 +11,10 @@ import { updaterCodedMessage } from '../../shared/updater-failure-copy'
 import { isAutomaticUpdateCheckOn } from '../../shared/automatic-update-check'
 import {
   checkForUpdatesFromMenu,
+  dismissAutoUpdatedNotice,
   dismissAvailableUpdate,
   dismissNudge,
+  getAutoUpdatedNotice,
   downloadUpdate,
   getLinuxPackageInstallInstructions,
   getUpdateStatus,
@@ -38,12 +40,14 @@ type UpdaterSetupHooks = {
   onBeforeUpdateQuit?: () => void | Promise<void>
   onBeforeUpdateQuitFailure?: PreQuitCleanupFailureMode
   updateInstallMode?: UpdateInstallMode
+  getWorkingAgentCount?: () => number
 }
 
 function buildUpdaterSetupOptions(store: Store, options?: UpdaterSetupHooks): UpdaterSetupOptions {
   return {
     getLastUpdateCheckAt: () => store.getUI().lastUpdateCheckAt,
     isAutomaticCheckOn: () => isAutomaticUpdateCheckOn(store.getSettings()),
+    getWorkingAgentCount: options?.getWorkingAgentCount,
     onBeforeQuit: async () => {
       try {
         await options?.onBeforeUpdateQuit?.()
@@ -147,6 +151,8 @@ export function registerUpdaterHandlers(_store: Store): void {
   ipcMain.removeHandler('updater:quitAndInstall')
   ipcMain.removeHandler('updater:dismissNudge')
   ipcMain.removeHandler('updater:dismissAvailableUpdate')
+  ipcMain.removeHandler('updater:getAutoUpdatedNotice')
+  ipcMain.removeHandler('updater:dismissAutoUpdatedNotice')
   ipcMain.removeHandler('updater:getLinuxPackageInstallInstructions')
   ipcMain.removeHandler('updater:showLinuxPackage')
   ipcMain.removeHandler('updater:listBuilds')
@@ -161,6 +167,8 @@ export function registerUpdaterHandlers(_store: Store): void {
   ipcMain.handle('updater:quitAndInstall', () => quitAndInstall())
   ipcMain.handle('updater:dismissNudge', () => dismissNudge())
   ipcMain.handle('updater:dismissAvailableUpdate', () => dismissAvailableUpdate())
+  ipcMain.handle('updater:getAutoUpdatedNotice', () => getAutoUpdatedNotice())
+  ipcMain.handle('updater:dismissAutoUpdatedNotice', () => dismissAutoUpdatedNotice())
   // Package paths/native reveal belong only to the current trusted main renderer; refuse guests, popouts and stale/utility windows.
   ipcMain.handle('updater:getLinuxPackageInstallInstructions', (event) => {
     assertTrustedUpdaterRecoverySender(event)

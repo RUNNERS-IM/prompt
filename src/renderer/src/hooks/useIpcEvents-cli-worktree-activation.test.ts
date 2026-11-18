@@ -179,7 +179,8 @@ describe('useIpcEvents CLI-created worktree activation', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},
@@ -441,7 +442,8 @@ describe('useIpcEvents CLI-created worktree activation', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},

@@ -211,7 +211,8 @@ describe('useIpcEvents browser tab create routing', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: {
           onGuestLoadFailed: () => () => {},
