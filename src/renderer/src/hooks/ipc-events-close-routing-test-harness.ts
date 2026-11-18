@@ -260,7 +260,8 @@ export async function useIpcEventsForCloseRouting({
       updater: {
         getStatus: () => Promise.resolve({ state: 'idle' }),
         onStatus: () => () => {},
-        onClearDismissal: () => () => {}
+        onClearDismissal: () => () => {},
+        onAutoInstallRequested: () => () => {}
       },
       browser: {
         onGuestLoadFailed: () => () => {},

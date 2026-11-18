@@ -29,6 +29,7 @@ export function createUpdaterApi(): NonNullable<Partial<PreloadApi>['updater']> 
         )
       }),
     onStatus: () => noopUnsubscribe,
-    onClearDismissal: () => noopUnsubscribe
+    onClearDismissal: () => noopUnsubscribe,
+    onAutoInstallRequested: () => noopUnsubscribe
   }
 }

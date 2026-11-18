@@ -34,5 +34,10 @@ export const updaterApi = {
     const listener = (_event: Electron.IpcRendererEvent) => callback()
     ipcRenderer.on('updater:clearDismissal', listener)
     return () => ipcRenderer.removeListener('updater:clearDismissal', listener)
+  },
+  onAutoInstallRequested: (callback) => {
+    const listener = (_event: Electron.IpcRendererEvent) => callback()
+    ipcRenderer.on('updater:autoInstallRequested', listener)
+    return () => ipcRenderer.removeListener('updater:autoInstallRequested', listener)
   }
 } satisfies PreloadApi['updater']

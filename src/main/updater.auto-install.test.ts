@@ -132,6 +132,9 @@ describe('updater auto install', () => {
     working = 0
     await vi.advanceTimersByTimeAsync(60_000)
     expect(lifecycleEvents()).toContain('auto_install_idle_started')
+    // 창이 있으면 바로 깔지 않고, 편집기 글을 백업하는 화면 쪽 설치 길로 넘긴다.
+    expect(send).toHaveBeenCalledWith('updater:autoInstallRequested')
+    expect(autoUpdaterMock.quitAndInstall).not.toHaveBeenCalled()
   })
 
   it('shows the updated notice once on the next launch of the downloaded version', async () => {

@@ -89,7 +89,8 @@ export function buildWindowApi(args: {
       updater: {
         getStatus: () => Promise.resolve({ state: 'idle' }),
         onStatus: () => () => {},
-        onClearDismissal: () => () => {}
+        onClearDismissal: () => () => {},
+        onAutoInstallRequested: () => () => {}
       },
       browser: {
         onGuestLoadFailed: () => () => {},

@@ -15,6 +15,7 @@ import {
 import { UpdaterDownloadInstall } from './updater-download-install'
 
 const AUTO_INSTALL_RECORD_FILE = 'prompt-auto-update.json'
+const AUTO_INSTALL_RENDERER_RETRY_MS = 10 * 60 * 1000
 
 export type AutoUpdatedNotice = { version: string; releaseUrl: string }
 
@@ -31,6 +32,7 @@ export abstract class UpdaterAutoInstall extends UpdaterDownloadInstall {
   // 지금 받는 · 받아 둔 판이 저절로 받은 것인지.
   private autoInstallCycle = false
   private autoInstallTimer: ReturnType<typeof setInterval> | null = null
+  private autoInstallRetryTimer: ReturnType<typeof setTimeout> | null = null
   private autoInstallRecord: AutoInstallRecord | null = null
 
   protected checkForUpdatesFromMenu(options?: UpdateCheckOptions): void {
@@ -123,13 +125,38 @@ export abstract class UpdaterAutoInstall extends UpdaterDownloadInstall {
       version: this.currentStatus.version,
       idleSeconds
     })
+    // 창이 있으면 카드로 깔 때와 같은 길(편집기 글 백업 · 상태 저장)을 거치게 화면에 맡긴다.
+    if (this.requestRendererAutoInstall()) {
+      // 화면이 백업에 실패해 멈췄으면 다음 쉬는 때 다시 해 본다.
+      this.autoInstallRetryTimer = setTimeout(() => {
+        this.autoInstallRetryTimer = null
+        if (this.autoInstallCycle && this.currentStatus.state === 'downloaded' && !this.currentStatus.installing) {
+          this.startAutoInstallTimer()
+        }
+      }, AUTO_INSTALL_RENDERER_RETRY_MS)
+      this.autoInstallRetryTimer.unref?.()
+      return
+    }
     this.quitAndInstall()
+  }
+
+  private requestRendererAutoInstall(): boolean {
+    const win = this.mainWindowRef
+    if (!win || win.isDestroyed() || win.webContents.isDestroyed()) {
+      return false
+    }
+    this.sendToMainWindow('updater:autoInstallRequested')
+    return true
   }
 
   private stopAutoInstallTimer(): void {
     if (this.autoInstallTimer) {
       clearInterval(this.autoInstallTimer)
       this.autoInstallTimer = null
+    }
+    if (this.autoInstallRetryTimer) {
+      clearTimeout(this.autoInstallRetryTimer)
+      this.autoInstallRetryTimer = null
     }
   }
 

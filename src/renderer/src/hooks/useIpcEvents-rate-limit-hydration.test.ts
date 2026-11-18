@@ -147,7 +147,8 @@ describe('useIpcEvents rate-limit hydration', () => {
         updater: {
           getStatus: () => Promise.resolve({ state: 'idle' }),
           onStatus: () => () => {},
-          onClearDismissal: () => () => {}
+          onClearDismissal: () => () => {},
+          onAutoInstallRequested: () => () => {}
         },
         browser: makeEvents(),
         rateLimits: {
