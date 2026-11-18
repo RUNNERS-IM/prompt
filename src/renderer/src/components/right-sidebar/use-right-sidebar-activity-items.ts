@@ -1,5 +1,13 @@
 import { useMemo } from 'react'
-import { Plug, Files, GitBranch, ListChecks, MessageSquareText, Workflow } from 'lucide-react'
+import {
+  BookOpen,
+  Plug,
+  Files,
+  GitBranch,
+  ListChecks,
+  MessageSquareText,
+  Workflow
+} from 'lucide-react'
 import { useAppStore } from '@/store'
 import { useRepoById } from '@/store/selectors'
 import { isFolderRepo } from '../../../../shared/repo-kind'
@@ -85,6 +93,13 @@ export function useRightSidebarActivityItems({
         id: 'prompts',
         icon: MessageSquareText,
         title: translate('prompt.library.promptsTab', 'Prompts'),
+        shortcut: '',
+        showsTitle: true
+      },
+      {
+        id: 'skills',
+        icon: BookOpen,
+        title: translate('prompt.library.skillsTab', 'Skills'),
         shortcut: '',
         showsTitle: true
       },
