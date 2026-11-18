@@ -38,7 +38,8 @@ export function shouldShowArtifactsButton(
 export function shouldShowSkillsButton(
   settings: Partial<Pick<GlobalSettings, 'showSkillsButton'>> | null | undefined
 ): boolean {
-  return settings?.showSkillsButton === true
+  // Prompt 는 스킬을 오른쪽 칸 「스킬」에서 쓴다. 왼쪽에 같은 목록을 또 두지 않는다.
+  return !PROMPT_BLOCK_UPSTREAM_SERVICES && settings?.showSkillsButton === true
 }
 
 export function shouldShowAgentDashboardButton(
