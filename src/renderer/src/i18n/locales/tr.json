@@ -390,7 +390,10 @@
       "switchLimited": "Yalnızca durdurulanları yeniden başlat",
       "switchDescription": "Yeniden başlatma, süren her konuşmayı yeni hesapta sürdürür. Durdurulanlar kullanım sınırına ulaşan oturumlardır.",
       "autoPickSwitched": "Claude {{next}} hesabına geçirildi",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Haftalık sınırı daha erken sıfırlanır."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Haftalık sınırı daha erken sıfırlanır.",
+      "limitRescuedReason": "{{previous}} kullanım sınırına ulaştı. Sınırda duran oturumlar {{next}} ile devam eder.",
+      "systemLoginChanged": "Claude girişi {{next}} olarak değişti",
+      "systemLoginChangedReason": "Kullanım sınırında duran oturumlar yeni girişle yeniden başlar ve devam eder."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} eski bir Prompt başlatıcısı içeriyor.",

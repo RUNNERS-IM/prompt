@@ -7,6 +7,7 @@ import {
   handleRunningClaudeSessionsAfterSwitch
 } from './claude-account-switch-sessions'
 import { handleClaudeSessionRestartRequest } from './claude-session-restart-command'
+import { startPromptClaudeSystemLoginWatch } from './prompt-claude-system-login-watch'
 
 const HOST_VIEW = { runtime: 'host' } as const
 
@@ -22,11 +23,22 @@ export function startPromptClaudeLoginSync(deps: {
   if (!deps.api) {
     return () => {}
   }
+  // A login changed outside every pane (a plain terminal's `claude /login`) has no transcript record.
+  const systemLogin = startPromptClaudeSystemLoginWatch({
+    listAccounts: deps.listAccounts,
+    restart: (request) => handleClaudeSessionRestartRequest(request, deps.listAccounts)
+  })
   const stopLogin = deps.api.onLogin((event) => {
     void deps
       .listAccounts()
       .catch(() => undefined)
-      .then((host) => handleRunningClaudeSessionsAfterLogin({ paneKey: event.paneKey, host }))
+      .then((host) => {
+        // This login already moves the other sessions; the watch must not restart them a second time.
+        if (host) {
+          systemLogin.acknowledge(host)
+        }
+        return handleRunningClaudeSessionsAfterLogin({ paneKey: event.paneKey, host })
+      })
   })
   const stopSwitch = deps.api.onAccountSwitched((event) => {
     void handleRunningClaudeSessionsAfterSwitch({
@@ -48,6 +60,7 @@ export function startPromptClaudeLoginSync(deps: {
       handleClaudeSessionRestartRequest(request, deps.listAccounts)
     ) ?? (() => {})
   return () => {
+    systemLogin.stop()
     stopLogin()
     stopSwitch()
     stopRestart()

@@ -23153,7 +23153,10 @@
       "switchLimited": "Chỉ khởi động lại phiên đã dừng",
       "switchDescription": "Khởi động lại sẽ tiếp tục mỗi cuộc trò chuyện đang chạy trên tài khoản mới. Phiên đã dừng là phiên chạm giới hạn sử dụng.",
       "autoPickSwitched": "Đã chuyển Claude sang {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn.",
+      "limitRescuedReason": "{{previous}} đã chạm giới hạn sử dụng. Các phiên dừng do giới hạn sẽ tiếp tục trên {{next}}.",
+      "systemLoginChanged": "Đăng nhập Claude đã đổi sang {{next}}",
+      "systemLoginChangedReason": "Các phiên dừng do giới hạn sử dụng sẽ khởi động lại với đăng nhập mới và tiếp tục."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} chứa trình khởi chạy Prompt phiên bản cũ.",

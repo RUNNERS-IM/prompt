@@ -394,7 +394,10 @@
       "switchLimited": "Reiniciar solo las detenidas",
       "switchDescription": "Al reiniciar, cada conversación en curso continúa en la nueva cuenta. Las detenidas son las que alcanzaron su límite de uso.",
       "autoPickSwitched": "Claude cambió a {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Su límite semanal se reinicia antes."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Su límite semanal se reinicia antes.",
+      "limitRescuedReason": "{{previous}} alcanzó su límite de uso. Las sesiones detenidas por el límite continúan en {{next}}.",
+      "systemLoginChanged": "El inicio de sesión de Claude cambió a {{next}}",
+      "systemLoginChangedReason": "Las sesiones detenidas por su límite de uso se reinician con el nuevo inicio de sesión y continúan."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un lanzador antiguo de Prompt.",

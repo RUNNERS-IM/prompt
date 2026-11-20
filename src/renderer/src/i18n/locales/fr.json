@@ -394,7 +394,10 @@
       "switchLimited": "Redémarrer celles arrêtées",
       "switchDescription": "Le redémarrage poursuit chaque conversation en cours sur le nouveau compte. Les sessions arrêtées sont celles qui ont atteint leur limite d’utilisation.",
       "autoPickSwitched": "Claude est passé à {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt.",
+      "limitRescuedReason": "{{previous}} a atteint sa limite d’utilisation. Les sessions arrêtées à la limite continuent sur {{next}}.",
+      "systemLoginChanged": "Connexion Claude changée pour {{next}}",
+      "systemLoginChangedReason": "Les sessions arrêtées à leur limite d’utilisation redémarrent avec la nouvelle connexion et continuent."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contient un ancien lanceur Prompt.",

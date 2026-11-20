@@ -23545,7 +23545,10 @@
       "switchLimited": "Alleen gestopte herstarten",
       "switchDescription": "Herstarten zet elk lopend gesprek voort op het nieuwe account. Gestopte sessies zijn sessies die hun gebruikslimiet hebben bereikt.",
       "autoPickSwitched": "Claude overgezet naar {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. De weeklimiet wordt eerder gereset."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. De weeklimiet wordt eerder gereset.",
+      "limitRescuedReason": "{{previous}} heeft zijn gebruikslimiet bereikt. Sessies die op de limiet zijn gestopt, gaan verder op {{next}}.",
+      "systemLoginChanged": "Claude-login gewijzigd naar {{next}}",
+      "systemLoginChangedReason": "Sessies die op hun gebruikslimiet zijn gestopt, starten opnieuw met de nieuwe login en gaan verder."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} bevat een oudere Prompt-launcher.",

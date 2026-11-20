@@ -13,6 +13,11 @@ function isFull(window: RateLimitWindow | null, now: number): boolean {
   return window.usedPercent >= 100
 }
 
+/** The 5-hour or weekly window is used up and has not reset yet; no reading means not known to be full. */
+export function isClaudeLimitsFull(limits: ProviderRateLimits | null, now: number): boolean {
+  return !!limits && (isFull(limits.session, now) || isFull(limits.weekly, now))
+}
+
 /** Unknown or past weekly resets sort last, so a known nearer reset always wins. */
 function weeklyResetKey(limits: ProviderRateLimits, now: number): number {
   const resetsAt = limits.weekly?.resetsAt ?? null

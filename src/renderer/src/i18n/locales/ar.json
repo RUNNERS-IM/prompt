@@ -25113,7 +25113,10 @@
       "switchLimited": "أعد تشغيل المتوقفة فقط",
       "switchDescription": "تستأنف إعادة التشغيل كل محادثة جارية على الحساب الجديد. المتوقفة هي التي بلغت حد الاستخدام.",
       "autoPickSwitched": "تم تبديل Claude إلى {{next}}",
-      "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا."
+      "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا.",
+      "limitRescuedReason": "بلغ {{previous}} حد الاستخدام. تستمر الجلسات المتوقفة عند الحد على {{next}}.",
+      "systemLoginChanged": "تم تغيير تسجيل دخول Claude إلى {{next}}",
+      "systemLoginChangedReason": "تُعاد الجلسات المتوقفة عند حد الاستخدام بتسجيل الدخول الجديد وتواصل العمل."
     },
     "cliStatus": {
       "olderLauncherContent": "يحتوي {{path}} على مشغّل قديم من Prompt.",

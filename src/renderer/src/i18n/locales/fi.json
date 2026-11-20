@@ -23545,7 +23545,10 @@
       "switchLimited": "Käynnistä vain pysähtyneet",
       "switchDescription": "Uudelleenkäynnistys jatkaa jokaista käynnissä olevaa keskustelua uudella tilillä. Pysähtyneet ovat saavuttaneet käyttörajansa.",
       "autoPickSwitched": "Claude vaihdettiin tiliin {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sen viikkoraja nollautuu aiemmin."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Sen viikkoraja nollautuu aiemmin.",
+      "limitRescuedReason": "{{previous}} saavutti käyttörajansa. Rajaan pysähtyneet istunnot jatkuvat tilillä {{next}}.",
+      "systemLoginChanged": "Clauden kirjautuminen vaihtui: {{next}}",
+      "systemLoginChangedReason": "Käyttörajaan pysähtyneet istunnot käynnistyvät uudella kirjautumisella ja jatkavat."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} sisältää vanhemman Prompt-käynnistimen.",

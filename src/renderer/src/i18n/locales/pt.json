@@ -394,7 +394,10 @@
       "switchLimited": "Reiniciar só as paradas",
       "switchDescription": "Reiniciar continua cada conversa em andamento na nova conta. As paradas são as que atingiram o limite de uso.",
       "autoPickSwitched": "Claude mudou para {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. O limite semanal é reposto mais cedo."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. O limite semanal é reposto mais cedo.",
+      "limitRescuedReason": "{{previous}} atingiu o limite de uso. As sessões paradas no limite continuam em {{next}}.",
+      "systemLoginChanged": "O login do Claude mudou para {{next}}",
+      "systemLoginChangedReason": "As sessões paradas no limite de uso reiniciam com o novo login e continuam."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contém um inicializador antigo do Prompt.",
