@@ -8,6 +8,8 @@ import { TabBarQuickCommandsButton } from '../tab-bar/TabBarQuickCommandsButton'
 import { TabGroupPaneActionsMenu } from './TabGroupPaneActionsMenu'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../../shared/prompt-upstream'
 import { PromptSettingsButton } from '../prompt-settings-button/PromptSettingsButton'
+import { PromptRunnersAccountButton } from '../prompt-runners-account/PromptRunnersAccountButton'
+import { isPromptTwoLevelSidebar } from '../sidebar/prompt-sidebar-layout'
 import { useTabGroupWorkspaceModel } from './useTabGroupWorkspaceModel'
 import { closeTerminalTab } from '../terminal/terminal-tab-actions'
 import { resolveGroupTabFromVisibleId } from './tab-group-visible-id'
@@ -307,9 +309,16 @@ export default function TabGroupPanel({
                 <TabGroupPaneActionsMenu isFocused={isFocused} onCloseGroup={commands.closeGroup} />
               ) : null}
             </div>
-            {/* Only the window's top-right strip gets the gear; it stays undimmed in an unfocused split. */}
-            {PROMPT_BLOCK_UPSTREAM_SERVICES && reserveClosedExplorerToggleSpace ? (
+            {/* The gear lives in the sidebar's bottom row; with the sidebar collapsed only the window's
+                top-right strip gets it, undimmed in an unfocused split. */}
+            {PROMPT_BLOCK_UPSTREAM_SERVICES &&
+            reserveClosedExplorerToggleSpace &&
+            (!sidebarOpen || !isPromptTwoLevelSidebar()) ? (
               <PromptSettingsButton />
+            ) : null}
+            {/* The RUNNERS account badge ends the window's top-right strip (runners-wiki 2026-11-19 1B). */}
+            {PROMPT_BLOCK_UPSTREAM_SERVICES && reserveClosedExplorerToggleSpace ? (
+              <PromptRunnersAccountButton />
             ) : null}
             {/* Why: Electron drag hit-test respects no-drag only on DOM descendants, not z-index siblings, so this no-drag spacer keeps the floating right-sidebar toggle + window controls clickable. */}
             {reserveClosedExplorerToggleSpace && !rightSidebarOpen ? (

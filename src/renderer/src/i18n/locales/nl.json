@@ -23334,7 +23334,8 @@
       "resumedInTabFolder": "[Prompt] Gaat verder in deze map, niet in {{folder}} waar het laatst draaide",
       "interruptedByUser": "Onderbroken door gebruiker",
       "interrupted": "Onderbroken",
-      "unconfirmed": "Kon niet bevestigen"
+      "unconfirmed": "Kon niet bevestigen",
+      "dialogOpen": "Wacht in een keuzevenster"
     },
     "timeAgo": {
       "now": "nu",
@@ -23614,6 +23615,9 @@
       "argsNone": "Geen argumenten",
       "argsRepository": "Aangepaste argumenten van repository",
       "argsGlobal": "Globale aangepaste argumenten"
+    },
+    "runnersAccount": {
+      "settings": "Accountinstellingen"
     }
   }
 }

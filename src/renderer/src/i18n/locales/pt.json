@@ -305,7 +305,8 @@
       "resumedInTabFolder": "[Prompt] Continuando nesta pasta, não em {{folder}}, onde foi executado por último",
       "interruptedByUser": "Interrompido pelo usuário",
       "interrupted": "Interrompido",
-      "unconfirmed": "Não foi possível confirmar"
+      "unconfirmed": "Não foi possível confirmar",
+      "dialogOpen": "Aguardando numa janela de escolha"
     },
     "sessionMove": {
       "cancelRemote": "As sessões só podem ser movidas entre projetos neste computador.",
@@ -463,6 +464,9 @@
       "argsNone": "Sem argumentos",
       "argsRepository": "Argumentos personalizados do repositório",
       "argsGlobal": "Argumentos personalizados globais"
+    },
+    "runnersAccount": {
+      "settings": "Configurações da conta"
     }
   },
   "agentLaunch": {

@@ -298,7 +298,8 @@
       "resumedInTabFolder": "[Prompt] 在此文件夹中继续，而不是上次运行的 {{folder}}",
       "interruptedByUser": "已被用户中断",
       "interrupted": "已中断",
-      "unconfirmed": "无法确认"
+      "unconfirmed": "无法确认",
+      "dialogOpen": "正在选择窗口中等待"
     },
     "sessionMove": {
       "cancelRemote": "会话只能在这台电脑上的项目之间移动。",
@@ -454,6 +455,9 @@
       "argsNone": "无参数",
       "argsRepository": "仓库自定义参数",
       "argsGlobal": "全局自定义参数"
+    },
+    "runnersAccount": {
+      "settings": "账户设置"
     }
   },
   "agentLaunch": {

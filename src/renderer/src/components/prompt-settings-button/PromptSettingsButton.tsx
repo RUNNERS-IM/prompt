@@ -5,9 +5,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '../../store'
 
-/** Prompt's one Settings gear at the window's top right, where the sidebar's bottom row used to keep it
- *  (runners-wiki 2026-11-07 「Prompt 설정은 탭 줄 오른쪽」). */
-export function PromptSettingsButton(): React.JSX.Element {
+/** Prompt's Settings gear. It sits in the sidebar's bottom row next to the computer picker; with
+ *  the sidebar collapsed it moves back to the tab strip's right end (runners-wiki 2026-11-19 7A). */
+export function PromptSettingsButton({
+  tooltipSide = 'bottom'
+}: {
+  tooltipSide?: 'top' | 'bottom'
+}): React.JSX.Element {
   const openSettingsPage = useAppStore((s) => s.openSettingsPage)
   const label = translate('auto.components.sidebar.SidebarSettingsHelpMenu.a428c25998', 'Settings')
   return (
@@ -24,7 +28,7 @@ export function PromptSettingsButton(): React.JSX.Element {
           <Settings className="size-3.5" />
         </Button>
       </TooltipTrigger>
-      <TooltipContent side="bottom" sideOffset={4}>
+      <TooltipContent side={tooltipSide} sideOffset={4}>
         {label}
       </TooltipContent>
     </Tooltip>

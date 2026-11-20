@@ -279,8 +279,9 @@ export default function Landing(): React.JSX.Element {
           </p>
 
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
+            {/* Prompt: one filled button per screen (RUNNERS guide), so the first step stands out. */}
             <button
-              className="inline-flex items-center gap-1.5 bg-secondary/70 border border-border/80 text-foreground font-medium text-sm px-4 py-2 rounded-md cursor-pointer hover:bg-accent transition-colors"
+              className="inline-flex items-center gap-1.5 bg-primary border border-transparent text-primary-foreground font-medium text-sm px-4 py-2 rounded-md cursor-pointer hover:bg-primary/90 transition-colors"
               onClick={() => openModal('add-repo')}
             >
               <FolderPlus className="size-3.5" />

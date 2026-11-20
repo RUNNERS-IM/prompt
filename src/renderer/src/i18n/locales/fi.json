@@ -23334,7 +23334,8 @@
       "resumedInTabFolder": "[Prompt] Jatketaan tässä kansiossa, ei kansiossa {{folder}}, jossa istunto viimeksi toimi",
       "interruptedByUser": "Käyttäjä keskeytti",
       "interrupted": "Keskeytetty",
-      "unconfirmed": "Ei voitu vahvistaa"
+      "unconfirmed": "Ei voitu vahvistaa",
+      "dialogOpen": "Odottaa valintaikkunassa"
     },
     "timeAgo": {
       "now": "nyt",
@@ -23614,6 +23615,9 @@
       "argsNone": "Ei argumentteja",
       "argsRepository": "Repositorion omat argumentit",
       "argsGlobal": "Yleiset omat argumentit"
+    },
+    "runnersAccount": {
+      "settings": "Tilin asetukset"
     }
   }
 }

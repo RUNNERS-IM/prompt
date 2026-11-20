@@ -22943,7 +22943,8 @@
       "resumedInTabFolder": "[Prompt] ทำต่อในโฟลเดอร์นี้ ไม่ใช่ {{folder}} ที่ทำงานครั้งล่าสุด",
       "interruptedByUser": "ผู้ใช้หยุดไว้",
       "interrupted": "ถูกขัดจังหวะ",
-      "unconfirmed": "ยืนยันไม่ได้"
+      "unconfirmed": "ยืนยันไม่ได้",
+      "dialogOpen": "กำลังรอในหน้าต่างตัวเลือก"
     },
     "timeAgo": {
       "now": "ตอนนี้",
@@ -23222,6 +23223,9 @@
       "argsNone": "ไม่มีอาร์กิวเมนต์",
       "argsRepository": "อาร์กิวเมนต์กำหนดเองของรีโพ",
       "argsGlobal": "อาร์กิวเมนต์กำหนดเองส่วนกลาง"
+    },
+    "runnersAccount": {
+      "settings": "การตั้งค่าบัญชี"
     }
   }
 }

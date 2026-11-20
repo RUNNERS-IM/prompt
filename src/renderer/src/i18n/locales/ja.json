@@ -298,7 +298,8 @@
       "resumedInTabFolder": "[Prompt] 前回の作業フォルダ（{{folder}}）ではなく、このフォルダで続けます",
       "interruptedByUser": "ユーザーが中断",
       "interrupted": "中断",
-      "unconfirmed": "確認できません"
+      "unconfirmed": "確認できません",
+      "dialogOpen": "選択画面で待機中"
     },
     "sessionMove": {
       "cancelRemote": "セッションは、このコンピューター上のプロジェクト間でのみ移動できます。",
@@ -454,6 +455,9 @@
       "argsNone": "引数なし",
       "argsRepository": "リポジトリのカスタム引数",
       "argsGlobal": "グローバルのカスタム引数"
+    },
+    "runnersAccount": {
+      "settings": "アカウント設定"
     }
   },
   "agentLaunch": {
