@@ -23559,7 +23559,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} reached its usage limit. Sessions stopped at the limit continue on {{next}}.",
+      "systemLoginChanged": "Claude login changed to {{next}}",
+      "systemLoginChangedReason": "Sessions stopped at their usage limit restart on the new login and continue."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contains an older Prompt launcher.",

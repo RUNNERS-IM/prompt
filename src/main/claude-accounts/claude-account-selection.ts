@@ -83,8 +83,9 @@ export class ClaudeAccountSelection {
       .sort((a, b) => b.updatedAt - a.updatedAt)
     const userConfigDir = this.runtimeAuth.router.userConfigDir()
     // Throttle parsing of the large, frequently rewritten personal state file.
-    const systemDefault =
-      accounts.length > 0 ? readClaudeFolderLogin(claudeStateFile(userConfigDir), 5_000) : null
+    // Read with no saved account too: the window follows a login change made outside it (a plain
+    // terminal's `claude /login`), and a Mac with no saved account runs every session on this login.
+    const systemDefault = readClaudeFolderLogin(claudeStateFile(userConfigDir), 5_000)
     return {
       accounts,
       activeAccountId: selection.host,

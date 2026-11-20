@@ -24343,7 +24343,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Jego limit tygodniowy resetuje się wcześniej.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} osiągnęło limit użycia. Sesje zatrzymane na limicie są kontynuowane na {{next}}.",
+      "systemLoginChanged": "Logowanie Claude zmieniono na {{next}}",
+      "systemLoginChangedReason": "Sesje zatrzymane na limicie użycia uruchamiają się ponownie z nowym logowaniem i kontynuują pracę."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} zawiera starszy program uruchamiający Prompt.",

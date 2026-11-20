@@ -399,7 +399,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}。週間上限がより早くリセットされます。",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} の使用制限に達しました。制限で止まったセッションは {{next}} で続行します。",
+      "systemLoginChanged": "Claude のログインが {{next}} に変わりました",
+      "systemLoginChangedReason": "使用制限で止まったセッションを新しいログインで再起動し、作業を続けます。"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} には古い Prompt ランチャーが入っています。",

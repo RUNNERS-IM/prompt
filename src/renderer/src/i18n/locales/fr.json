@@ -408,7 +408,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} a atteint sa limite d’utilisation. Les sessions arrêtées à la limite continuent sur {{next}}.",
+      "systemLoginChanged": "Connexion Claude changée pour {{next}}",
+      "systemLoginChangedReason": "Les sessions arrêtées à leur limite d’utilisation redémarrent avec la nouvelle connexion et continuent."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contient un ancien lanceur Prompt.",

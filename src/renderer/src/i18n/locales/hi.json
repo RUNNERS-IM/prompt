@@ -23559,7 +23559,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}। इसकी साप्ताहिक सीमा पहले रीसेट होती है।",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} की उपयोग सीमा पूरी हो गई। सीमा पर रुके सत्र {{next}} पर जारी रहेंगे।",
+      "systemLoginChanged": "Claude लॉगिन {{next}} में बदल गया",
+      "systemLoginChangedReason": "उपयोग सीमा पर रुके सत्र नए लॉगिन के साथ फिर से शुरू होकर काम जारी रखेंगे।"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} में Prompt का पुराना लॉन्चर है।",

@@ -25127,7 +25127,10 @@
       "autoPickSwitchedReason": "{{previous}} ← {{next}}. يُعاد تعيين حده الأسبوعي أولًا.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "بلغ {{previous}} حد الاستخدام. تستمر الجلسات المتوقفة عند الحد على {{next}}.",
+      "systemLoginChanged": "تم تغيير تسجيل دخول Claude إلى {{next}}",
+      "systemLoginChangedReason": "تُعاد الجلسات المتوقفة عند حد الاستخدام بتسجيل الدخول الجديد وتواصل العمل."
     },
     "cliStatus": {
       "olderLauncherContent": "يحتوي {{path}} على مشغّل قديم من Prompt.",

@@ -23559,7 +23559,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Sen viikkoraja nollautuu aiemmin.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} saavutti käyttörajansa. Rajaan pysähtyneet istunnot jatkuvat tilillä {{next}}.",
+      "systemLoginChanged": "Clauden kirjautuminen vaihtui: {{next}}",
+      "systemLoginChangedReason": "Käyttörajaan pysähtyneet istunnot käynnistyvät uudella kirjautumisella ja jatkavat."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} sisältää vanhemman Prompt-käynnistimen.",

@@ -399,7 +399,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} 已达到使用限额。因限额停止的会话将在 {{next}} 上继续。",
+      "systemLoginChanged": "Claude 登录已更改为 {{next}}",
+      "systemLoginChangedReason": "因使用限额停止的会话将使用新登录重新启动并继续。"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 中是旧版 Prompt 启动器。",

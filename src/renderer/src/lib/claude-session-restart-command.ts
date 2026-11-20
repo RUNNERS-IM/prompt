@@ -40,7 +40,8 @@ function decide(
   pane: LocalClaudePane,
   stopped: boolean,
   host: ClaudeRateLimitAccountsState,
-  launchAccountId: string | null
+  launchAccountId: string | null,
+  restartLimited: boolean
 ): Decision {
   const folder = resolveClaudePaneFolder(
     pane.transcriptPath,
@@ -55,7 +56,7 @@ function decide(
     return { outcome: 'skipped', reason: 'own-folder' }
   }
   const onSelected = isClaudePaneOnAccount(folder, launchAccountId, host)
-  if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId)) {
+  if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId) && !(restartLimited && stopped)) {
     return { outcome: stopped ? 'continued' : 'current' }
   }
   const resumable = resolveAgentAccountRestartResumeStartup('claude', {
@@ -89,7 +90,7 @@ export async function handleClaudeSessionRestartRequest(
   const sessions: PromptClaudeRestartResult['sessions'] = []
   for (const pane of looked) {
     const limited = stoppedPanes.has(pane)
-    const decision = decide(pane, limited, host, launchAccountId)
+    const decision = decide(pane, limited, host, launchAccountId, request.restartLimited === true)
     sessions.push({ tabId: pane.tabId, leafId: pane.leafId, limited, ...decision })
     if (decision.outcome === 'restarting') {
       restarting.push(pane)

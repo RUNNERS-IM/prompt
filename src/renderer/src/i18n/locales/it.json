@@ -23951,7 +23951,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Il suo limite settimanale si azzera prima.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} ha raggiunto il limite di utilizzo. Le sessioni ferme al limite continuano su {{next}}.",
+      "systemLoginChanged": "Accesso a Claude cambiato in {{next}}",
+      "systemLoginChangedReason": "Le sessioni ferme al limite di utilizzo si riavviano con il nuovo accesso e continuano."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un launcher di Prompt obsoleto.",

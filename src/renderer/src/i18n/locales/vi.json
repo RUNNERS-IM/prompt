@@ -23167,7 +23167,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} đã chạm giới hạn sử dụng. Các phiên dừng do giới hạn sẽ tiếp tục trên {{next}}.",
+      "systemLoginChanged": "Đăng nhập Claude đã đổi sang {{next}}",
+      "systemLoginChangedReason": "Các phiên dừng do giới hạn sử dụng sẽ khởi động lại với đăng nhập mới và tiếp tục."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} chứa trình khởi chạy Prompt phiên bản cũ.",

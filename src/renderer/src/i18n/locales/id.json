@@ -23167,7 +23167,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} mencapai batas penggunaan. Sesi yang berhenti di batas berlanjut di {{next}}.",
+      "systemLoginChanged": "Login Claude berubah ke {{next}}",
+      "systemLoginChangedReason": "Sesi yang berhenti di batas penggunaan dimulai ulang dengan login baru dan berlanjut."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} berisi peluncur Prompt versi lama.",

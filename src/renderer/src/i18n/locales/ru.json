@@ -411,7 +411,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Его недельный лимит сбрасывается раньше.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} достиг лимита использования. Сессии, остановленные по лимиту, продолжатся на {{next}}.",
+      "systemLoginChanged": "Вход в Claude изменён на {{next}}",
+      "systemLoginChangedReason": "Сессии, остановленные по лимиту использования, перезапускаются с новым входом и продолжают работу."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} содержит устаревший лаунчер Prompt.",

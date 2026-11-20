@@ -23559,7 +23559,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. De weeklimiet wordt eerder gereset.",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} heeft zijn gebruikslimiet bereikt. Sessies die op de limiet zijn gestopt, gaan verder op {{next}}.",
+      "systemLoginChanged": "Claude-login gewijzigd naar {{next}}",
+      "systemLoginChangedReason": "Sessies die op hun gebruikslimiet zijn gestopt, starten opnieuw met de nieuwe login en gaan verder."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} bevat een oudere Prompt-launcher.",

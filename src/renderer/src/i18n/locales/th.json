@@ -23167,7 +23167,10 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}} ขีดจำกัดรายสัปดาห์รีเซ็ตเร็วกว่า",
       "staleUsage": "Sign-in is old, so usage could not be read",
       "staleUsageHint": "Switch to this account and run Claude once to see it again",
-      "lastRead": "Last read {{time}}"
+      "lastRead": "Last read {{time}}",
+      "limitRescuedReason": "{{previous}} ใช้ครบขีดจำกัดแล้ว เซสชันที่หยุดเพราะขีดจำกัดจะทำงานต่อบน {{next}}",
+      "systemLoginChanged": "การเข้าสู่ระบบ Claude เปลี่ยนเป็น {{next}}",
+      "systemLoginChangedReason": "เซสชันที่หยุดเพราะขีดจำกัดการใช้งานจะเริ่มใหม่ด้วยการเข้าสู่ระบบใหม่และทำงานต่อ"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} มีตัวเรียกใช้ Prompt เวอร์ชันเก่าอยู่",
