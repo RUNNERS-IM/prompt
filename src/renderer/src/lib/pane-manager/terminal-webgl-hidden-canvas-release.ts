@@ -9,6 +9,8 @@ type CanvasRelease = {
   // A zero-size element yields no initial ResizeObserver entry, so "no box" is the default until one reports.
   hasBox: boolean
   released: boolean
+  /** When the canvas last lost its box; how long a veto has held is measured from here. */
+  hiddenSince: number
 }
 
 const releasesByCanvas = new WeakMap<HTMLCanvasElement, CanvasRelease>()
@@ -19,11 +21,12 @@ const releasesByCanvas = new WeakMap<HTMLCanvasElement, CanvasRelease>()
  * a box. The reveal's ResizeObserver callback runs before that frame paints, and `restore` must
  * reallocate and draw synchronously there: xterm's renderer stays paused until its
  * IntersectionObserver task lands a frame later, and not every engine re-sizes the canvas itself.
- * `canRelease` vetoes panes whose reveal must stay allocation-free.
+ * `canRelease` vetoes panes whose reveal must stay allocation-free; it is told how long the canvas
+ * has been without a box, so a veto can lapse for panes nobody came back to.
  */
 export function releaseWebglCanvasBackingWhileHidden(
   canvas: HTMLCanvasElement,
-  canRelease: () => boolean,
+  canRelease: (hiddenForMs: number) => boolean,
   restore: (devicePixelSize: { width: number; height: number } | null) => void
 ): void {
   const view = canvas.ownerDocument.defaultView
@@ -45,7 +48,7 @@ export function releaseWebglCanvasBackingWhileHidden(
       if (release.hasBox) {
         return
       }
-      if (!canRelease()) {
+      if (!canRelease(Date.now() - release.hiddenSince)) {
         scheduleRelease()
         return
       }
@@ -59,8 +62,12 @@ export function releaseWebglCanvasBackingWhileHidden(
     resize: new view.ResizeObserver((entries) => {
       const entry = entries.at(-1)
       const box = entry?.contentRect
+      const hadBox = release.hasBox
       release.hasBox = Boolean(box && (box.width > 0 || box.height > 0))
       if (!release.hasBox) {
+        if (hadBox) {
+          release.hiddenSince = Date.now()
+        }
         scheduleRelease()
         return
       }
@@ -77,7 +84,8 @@ export function releaseWebglCanvasBackingWhileHidden(
     mutation: new view.MutationObserver(() => scheduleRelease()),
     timer: null,
     hasBox: false,
-    released: false
+    released: false,
+    hiddenSince: Date.now()
   }
   release.resize.observe(canvas)
   release.mutation.observe(canvas, { attributeFilter: ['width', 'height'] })
