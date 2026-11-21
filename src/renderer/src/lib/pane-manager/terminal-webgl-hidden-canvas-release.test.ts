@@ -69,4 +69,19 @@ describe('releaseWebglCanvasBackingWhileHidden', () => {
     stopReleasingWebglCanvasBacking(vetoed.canvas)
     stopReleasingWebglCanvasBacking(visible.canvas)
   })
+
+  it('tells the veto how long the canvas has been hidden, so it can lapse', () => {
+    vi.useFakeTimers()
+    const { canvas, reportBox } = makeCanvas()
+    const keepMs = HIDDEN_WEBGL_CANVAS_RELEASE_DELAY_MS * 4
+    releaseWebglCanvasBackingWhileHidden(canvas, (hiddenForMs) => hiddenForMs >= keepMs, vi.fn())
+    reportBox(500)
+    reportBox(0)
+
+    vi.advanceTimersByTime(keepMs - 1)
+    expect(canvas.width).toBe(2000)
+    vi.advanceTimersByTime(HIDDEN_WEBGL_CANVAS_RELEASE_DELAY_MS)
+    expect(canvas.width).toBe(0)
+    stopReleasingWebglCanvasBacking(canvas)
+  })
 })
