@@ -1,11 +1,15 @@
-import { app, safeStorage } from 'electron'
+import { app, BrowserWindow, safeStorage } from 'electron'
 import { join } from 'node:path'
-import type {
-  PromptRunnersCodePurpose,
-  PromptRunnersSendCodeResult,
-  PromptRunnersSignInProblem,
-  PromptRunnersSignInResult,
-  PromptRunnersSignMode
+import {
+  PROMPT_RUNNERS_ACCOUNT_CHANGED_CHANNEL,
+  PROMPT_RUNNERS_NICKNAME_MAX,
+  type PromptRunnersCodePurpose,
+  type PromptRunnersProfile,
+  type PromptRunnersSendCodeResult,
+  type PromptRunnersSetNicknameResult,
+  type PromptRunnersSignInProblem,
+  type PromptRunnersSignInResult,
+  type PromptRunnersSignMode
 } from '../../shared/prompt-runners-account'
 import { createAccount, type Account } from '../runners-app-kit/account'
 
@@ -23,6 +27,16 @@ const SIGN_IN_PROBLEMS: readonly PromptRunnersSignInProblem[] = [
 ]
 
 let account: Account | null = null
+let profileLoaded = false
+let subscribed = false
+
+function tellWindows(): void {
+  for (const window of BrowserWindow.getAllWindows()) {
+    if (!window.isDestroyed()) {
+      window.webContents.send(PROMPT_RUNNERS_ACCOUNT_CHANGED_CHANNEL)
+    }
+  }
+}
 
 function runnersAccount(): Account {
   account ??= createAccount({
@@ -33,6 +47,11 @@ function runnersAccount(): Account {
     isPackaged: app.isPackaged,
     userAgent: `Prompt/${app.getVersion()}`
   })
+  if (!subscribed) {
+    subscribed = true
+    // Sign-in, sign-out and a nickname answered by the server all land here.
+    account.onChange(tellWindows)
+  }
   return account
 }
 
@@ -93,4 +112,39 @@ export function resetRunnersAccountPassword(
 /** Forgets the account here at once; telling the server is best effort so an offline Mac can still sign out. */
 export function signOutRunnersAccount(): Promise<void> {
   return runnersAccount().signOut()
+}
+
+function currentProfile(): PromptRunnersProfile {
+  const signedIn = runnersAccount()
+  return {
+    email: signedIn.current(),
+    nickname: signedIn.nickname(),
+    custom: signedIn.customNickname()
+  }
+}
+
+/** The account with its nickname. The first call this run also asks the server, so a nickname set in another
+ *  RUNNERS app shows here; the answer arrives through the changed event. */
+export function runnersAccountProfile(): PromptRunnersProfile {
+  const signedIn = runnersAccount()
+  if (!profileLoaded && signedIn.current()) {
+    profileLoaded = true
+    void signedIn.loadProfile()
+  }
+  return currentProfile()
+}
+
+/** Saves the nickname on the account server; empty goes back to the email's part before @. */
+export async function setRunnersAccountNickname(
+  name: string
+): Promise<PromptRunnersSetNicknameResult> {
+  if (name.trim().length > PROMPT_RUNNERS_NICKNAME_MAX) {
+    return { ok: false, problem: 'format' }
+  }
+  try {
+    await runnersAccount().setNickname(name)
+    return { ok: true, profile: currentProfile() }
+  } catch (error) {
+    return { ok: false, problem: problemOf(error) === 'format' ? 'format' : 'network' }
+  }
 }

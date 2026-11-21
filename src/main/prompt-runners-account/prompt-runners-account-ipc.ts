@@ -1,17 +1,23 @@
 import { ipcMain, type IpcMainInvokeEvent } from 'electron'
 import {
   PROMPT_RUNNERS_ACCOUNT_GET_CHANNEL,
+  PROMPT_RUNNERS_ACCOUNT_PROFILE_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL,
+  PROMPT_RUNNERS_ACCOUNT_SET_NICKNAME_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL,
   PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL,
+  type PromptRunnersProfile,
   type PromptRunnersSendCodeResult,
+  type PromptRunnersSetNicknameResult,
   type PromptRunnersSignInResult
 } from '../../shared/prompt-runners-account'
 import {
   resetRunnersAccountPassword,
   runnersAccountEmail,
+  runnersAccountProfile,
   sendRunnersAccountCode,
+  setRunnersAccountNickname,
   signInRunnersAccount,
   signOutRunnersAccount
 } from './prompt-runners-account-server'
@@ -28,6 +34,22 @@ export function registerPromptRunnersAccountHandlers(): void {
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL)
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL)
   ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL)
+  ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_PROFILE_CHANNEL)
+  ipcMain.removeHandler(PROMPT_RUNNERS_ACCOUNT_SET_NICKNAME_CHANNEL)
+  ipcMain.handle(
+    PROMPT_RUNNERS_ACCOUNT_PROFILE_CHANNEL,
+    (event): PromptRunnersProfile =>
+      fromAppWindow(event)
+        ? runnersAccountProfile()
+        : { email: null, nickname: null, custom: false }
+  )
+  ipcMain.handle(
+    PROMPT_RUNNERS_ACCOUNT_SET_NICKNAME_CHANNEL,
+    async (event, name: unknown): Promise<PromptRunnersSetNicknameResult> =>
+      fromAppWindow(event) && typeof name === 'string'
+        ? setRunnersAccountNickname(name)
+        : { ok: false, problem: 'network' }
+  )
   ipcMain.handle(PROMPT_RUNNERS_ACCOUNT_GET_CHANNEL, (event) =>
     fromAppWindow(event) ? runnersAccountEmail() : null
   )

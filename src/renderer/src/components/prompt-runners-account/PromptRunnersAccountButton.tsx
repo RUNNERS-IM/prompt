@@ -31,6 +31,7 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
         <AccountButton
           lang={lang}
           account={email}
+          nickname={account.profile?.nickname}
           items={[
             {
               label: translate('prompt.runnersAccount.settings', 'Account settings'),

@@ -457,7 +457,13 @@
       "argsGlobal": "全局自定义参数"
     },
     "runnersAccount": {
-      "settings": "账户设置"
+      "settings": "账户设置",
+      "nickname": "昵称",
+      "nicknameHint": "显示在熊猫旁边和其他 RUNNERS 应用中的名字。留空则使用邮箱 @ 前面的部分。",
+      "nicknameLong": "昵称最多 30 个字符。",
+      "save": "保存",
+      "saved": "已保存",
+      "network": "无法连接服务器，请稍后再试。"
     }
   },
   "agentLaunch": {

@@ -457,7 +457,13 @@
       "argsGlobal": "グローバルのカスタム引数"
     },
     "runnersAccount": {
-      "settings": "アカウント設定"
+      "settings": "アカウント設定",
+      "nickname": "ニックネーム",
+      "nicknameHint": "パンダの横とほかの RUNNERS アプリに表示される名前です。空にするとメールの @ より前を使います。",
+      "nicknameLong": "ニックネームは30文字までです。",
+      "save": "保存",
+      "saved": "保存しました",
+      "network": "サーバーに接続できませんでした。しばらくしてからもう一度お試しください。"
     }
   },
   "agentLaunch": {

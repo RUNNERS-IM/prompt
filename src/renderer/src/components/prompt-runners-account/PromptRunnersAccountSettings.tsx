@@ -7,6 +7,7 @@ import { SignInSheet, accountText } from '../runners-account/runners-account'
 import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
 import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 import { usePromptRunnersSignIn } from './use-prompt-runners-sign-in'
+import { PromptRunnersNickname } from './PromptRunnersNickname'
 import './prompt-runners-account.css'
 
 /** Settings › Account: the RUNNERS account row, Log In while signed out and the email with Log Out after.
@@ -22,8 +23,9 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
   return (
     <section className="space-y-4">
       <SettingsSubsectionHeader title="RUNNERS" />
+      {/* Signed in: the nickname above the email, as in Draw and the other RUNNERS apps. */}
       <SettingsRow
-        label={accountText(lang, 'title')}
+        label={email ? (account.profile?.nickname ?? email) : accountText(lang, 'title')}
         description={email ?? accountText(lang, 'sheetIntro')}
         control={
           email ? (
@@ -37,6 +39,9 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
           )
         }
       />
+      {email && account.profile ? (
+        <PromptRunnersNickname api={api} profile={account.profile} />
+      ) : null}
       {/* Why a portal: the sheet covers the whole window, not just the scrolling settings pane. */}
       {account.signingIn
         ? createPortal(

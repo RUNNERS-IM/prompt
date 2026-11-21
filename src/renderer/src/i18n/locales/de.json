@@ -462,7 +462,13 @@
       "argsGlobal": "Globale eigene Argumente"
     },
     "runnersAccount": {
-      "settings": "Kontoeinstellungen"
+      "settings": "Kontoeinstellungen",
+      "nickname": "Spitzname",
+      "nicknameHint": "Wird neben dem Panda und in den anderen RUNNERS-Apps angezeigt. Leer lassen, um den Teil der E-Mail vor @ zu verwenden.",
+      "nicknameLong": "Ein Spitzname darf höchstens 30 Zeichen haben.",
+      "save": "Sichern",
+      "saved": "Gesichert",
+      "network": "Der Server ist nicht erreichbar. Versuche es gleich noch einmal."
     }
   },
   "agentLaunch": {

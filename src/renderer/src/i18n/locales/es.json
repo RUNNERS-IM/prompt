@@ -466,7 +466,13 @@
       "argsGlobal": "Argumentos personalizados globales"
     },
     "runnersAccount": {
-      "settings": "Ajustes de la cuenta"
+      "settings": "Ajustes de la cuenta",
+      "nickname": "Apodo",
+      "nicknameHint": "Se muestra junto al panda y en las demás apps de RUNNERS. Déjalo vacío para usar la parte del correo antes de @.",
+      "nicknameLong": "El apodo puede tener hasta 30 caracteres.",
+      "save": "Guardar",
+      "saved": "Guardado",
+      "network": "No se pudo llegar al servidor. Inténtalo de nuevo en un momento."
     }
   },
   "agentLaunch": {

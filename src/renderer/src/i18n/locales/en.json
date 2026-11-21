@@ -23617,7 +23617,13 @@
       "argsGlobal": "Global custom args"
     },
     "runnersAccount": {
-      "settings": "Account settings"
+      "settings": "Account settings",
+      "nickname": "Nickname",
+      "nicknameHint": "Shown beside the panda and in the other RUNNERS apps. Leave it empty to use the part of your email before @.",
+      "nicknameLong": "A nickname can be up to 30 characters.",
+      "save": "Save",
+      "saved": "Saved",
+      "network": "Could not reach the server. Try again in a moment."
     }
   }
 }

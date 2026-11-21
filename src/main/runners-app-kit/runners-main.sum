@@ -1,6 +1,6 @@
-# runners-app-kit v0.1.44 476fe64. Do not edit these files here; change runners-app-kit and copy again.
+# runners-app-kit v0.1.50 9c5b86c. Do not edit these files here; change runners-app-kit and copy again.
 # skip: runners-shared-login, error-report.ts, locale.ts, login-item.ts, native-loader.ts, relay-core.ts, release-notes.ts, settings-file.ts, update-window.ts, updates.ts
-9fa9819c04944da9d7ffb1eb05a68d3827f8cbdcdc913817e9636977d1123656  account.ts
+e61d7546dbb141a37d0ef80e835421f7972d000f1be71ce34a653d395734080c  account.ts
 0076caeb2f85cedc3c46ed0dc2fecfcec411d75d0f94e61c63ef520ffc5f3513  test-shots.ts
 e021b827bbce28487fa0cdd3b8dbcd20cc1ac8bbc127f254ead91df610b2df4d  shared-login.ts
 a5181c7bdcac658c9d414b6d343b37e528407165f151d1257844eb93b73312cf  check.mjs

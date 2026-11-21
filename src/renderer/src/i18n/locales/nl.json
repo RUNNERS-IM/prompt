@@ -23617,7 +23617,13 @@
       "argsGlobal": "Globale aangepaste argumenten"
     },
     "runnersAccount": {
-      "settings": "Accountinstellingen"
+      "settings": "Accountinstellingen",
+      "nickname": "Bijnaam",
+      "nicknameHint": "Staat naast de panda en in de andere RUNNERS-apps. Laat leeg om het deel van je e-mail vóór @ te gebruiken.",
+      "nicknameLong": "Een bijnaam mag maximaal 30 tekens hebben.",
+      "save": "Bewaar",
+      "saved": "Bewaard",
+      "network": "Kan de server niet bereiken. Probeer het zo opnieuw."
     }
   }
 }
