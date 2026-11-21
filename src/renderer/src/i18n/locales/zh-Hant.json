@@ -402,7 +402,13 @@
       "lastRead": "Last read {{time}}",
       "limitRescuedReason": "{{previous}} 已達到使用限額。因限額停止的工作階段將在 {{next}} 上繼續。",
       "systemLoginChanged": "Claude 登入已變更為 {{next}}",
-      "systemLoginChangedReason": "因使用限額停止的工作階段將使用新登入重新啟動並繼續。"
+      "systemLoginChangedReason": "因使用限額停止的工作階段將使用新登入重新啟動並繼續。",
+      "allLimitsFull": "所有 Claude 帳號都已達到限額",
+      "allLimitsFullReason": "在最早重設的 {{time}}，因限額停止的工作階段會自動繼續。",
+      "limitResumed": "Claude 使用限額已重設",
+      "limitResumedReason": "因限額停止的 {{count}} 個工作階段將依序繼續。",
+      "otherComputersTitle": "其他電腦上的帳號",
+      "otherComputersHint": "這台電腦上還沒有。用「新增帳號」加入後，因限額停止的工作階段就能轉到這些帳號。"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 中是舊版 Prompt 啟動器。",

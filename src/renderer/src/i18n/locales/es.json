@@ -411,7 +411,13 @@
       "lastRead": "Last read {{time}}",
       "limitRescuedReason": "{{previous}} alcanzó su límite de uso. Las sesiones detenidas por el límite continúan en {{next}}.",
       "systemLoginChanged": "El inicio de sesión de Claude cambió a {{next}}",
-      "systemLoginChangedReason": "Las sesiones detenidas por su límite de uso se reinician con el nuevo inicio de sesión y continúan."
+      "systemLoginChangedReason": "Las sesiones detenidas por su límite de uso se reinician con el nuevo inicio de sesión y continúan.",
+      "allLimitsFull": "Todas las cuentas de Claude alcanzaron su límite",
+      "allLimitsFullReason": "Las sesiones detenidas por el límite continúan solas a las {{time}}, cuando se restablezca la primera.",
+      "limitResumed": "Se restableció el límite de uso de Claude",
+      "limitResumedReason": "{{count}} sesiones detenidas por el límite continúan una a una.",
+      "otherComputersTitle": "Cuentas en tus otros equipos",
+      "otherComputersHint": "Aún no están aquí. Agrégalas con Agregar cuenta para que una sesión detenida por su límite pueda pasar a una."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un lanzador antiguo de Prompt.",

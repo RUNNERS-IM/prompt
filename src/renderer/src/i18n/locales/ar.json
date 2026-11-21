@@ -25130,7 +25130,13 @@
       "lastRead": "Last read {{time}}",
       "limitRescuedReason": "بلغ {{previous}} حد الاستخدام. تستمر الجلسات المتوقفة عند الحد على {{next}}.",
       "systemLoginChanged": "تم تغيير تسجيل دخول Claude إلى {{next}}",
-      "systemLoginChangedReason": "تُعاد الجلسات المتوقفة عند حد الاستخدام بتسجيل الدخول الجديد وتواصل العمل."
+      "systemLoginChangedReason": "تُعاد الجلسات المتوقفة عند حد الاستخدام بتسجيل الدخول الجديد وتواصل العمل.",
+      "allLimitsFull": "بلغت جميع حسابات Claude حدّها",
+      "allLimitsFullReason": "تستأنف الجلسات المتوقفة عند الحد تلقائيًا عند {{time}}، حين يُعاد ضبط أولها.",
+      "limitResumed": "تمت إعادة ضبط حد استخدام Claude",
+      "limitResumedReason": "تستأنف {{count}} جلسات متوقفة عند الحد واحدة تلو الأخرى.",
+      "otherComputersTitle": "حسابات على أجهزتك الأخرى",
+      "otherComputersHint": "لم تُضف هنا بعد. أضفها عبر «إضافة حساب» حتى تنتقل إليها الجلسة المتوقفة عند حدها."
     },
     "cliStatus": {
       "olderLauncherContent": "يحتوي {{path}} على مشغّل قديم من Prompt.",

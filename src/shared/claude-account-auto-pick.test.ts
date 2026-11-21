@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import type { ProviderRateLimits } from './rate-limit-types'
-import { pickClaudeAccountBySoonestReset } from './claude-account-auto-pick'
+import {
+  claudeLimitsFreeAt,
+  claudeLimitsNextResetAt,
+  pickClaudeAccountBySoonestReset
+} from './claude-account-auto-pick'
 
 const NOW = 1_000_000
 const HOUR = 3_600_000
@@ -95,5 +99,31 @@ describe('pickClaudeAccountBySoonestReset', () => {
       NOW
     )
     expect(picked).toBe('b')
+  })
+})
+
+describe('claudeLimitsFreeAt', () => {
+  const window = (usedPercent: number, resetsAt: number | null) => ({
+    usedPercent,
+    windowMinutes: 300,
+    resetsAt,
+    resetDescription: null
+  })
+  const limits = (session: ReturnType<typeof window>, weekly: ReturnType<typeof window>) =>
+    ({ provider: 'claude', session, weekly, updatedAt: 0, error: null, status: 'ok' }) as const
+
+  it('waits for every full window', () => {
+    expect(claudeLimitsFreeAt(limits(window(100, 500), window(100, 900)), 0)).toBe(900)
+    expect(claudeLimitsFreeAt(limits(window(40, 500), window(100, 900)), 0)).toBe(900)
+  })
+
+  it('is null when nothing is full or a full window has no reset', () => {
+    expect(claudeLimitsFreeAt(limits(window(40, 500), window(60, 900)), 0)).toBeNull()
+    expect(claudeLimitsFreeAt(limits(window(100, null), window(60, 900)), 0)).toBeNull()
+  })
+
+  it('takes the nearer reset for a limit not yet shown in the reading', () => {
+    expect(claudeLimitsNextResetAt(limits(window(97, 500), window(60, 900)), 0)).toBe(500)
+    expect(claudeLimitsNextResetAt(limits(window(97, 500), window(60, 900)), 600)).toBe(900)
   })
 })

@@ -23562,7 +23562,13 @@
       "lastRead": "Last read {{time}}",
       "limitRescuedReason": "{{previous}} की उपयोग सीमा पूरी हो गई। सीमा पर रुके सत्र {{next}} पर जारी रहेंगे।",
       "systemLoginChanged": "Claude लॉगिन {{next}} में बदल गया",
-      "systemLoginChangedReason": "उपयोग सीमा पर रुके सत्र नए लॉगिन के साथ फिर से शुरू होकर काम जारी रखेंगे।"
+      "systemLoginChangedReason": "उपयोग सीमा पर रुके सत्र नए लॉगिन के साथ फिर से शुरू होकर काम जारी रखेंगे।",
+      "allLimitsFull": "सभी Claude खातों की सीमा पूरी हो गई",
+      "allLimitsFullReason": "सीमा पर रुके सत्र {{time}} पर अपने आप जारी होंगे, जब पहली सीमा रीसेट होगी।",
+      "limitResumed": "Claude उपयोग सीमा रीसेट हो गई",
+      "limitResumedReason": "सीमा पर रुके {{count}} सत्र एक-एक करके जारी हो रहे हैं।",
+      "otherComputersTitle": "आपके दूसरे कंप्यूटरों के खाते",
+      "otherComputersHint": "यहाँ अभी नहीं जोड़े गए। «खाता जोड़ें» से जोड़ें ताकि सीमा पर रुका सत्र इन पर जा सके।"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} में Prompt का पुराना लॉन्चर है।",

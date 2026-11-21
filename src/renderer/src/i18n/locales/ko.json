@@ -22874,7 +22874,13 @@
       "lastRead": "마지막으로 읽은 때 {{time}}",
       "limitRescuedReason": "{{previous}}의 사용 한도가 찼습니다. 한도로 멈춘 세션은 {{next}}(으)로 이어서 진행합니다.",
       "systemLoginChanged": "Claude 로그인이 {{next}}(으)로 바뀌었습니다",
-      "systemLoginChangedReason": "한도로 멈춘 세션을 새 로그인으로 다시 시작해 하던 작업을 이어 갑니다."
+      "systemLoginChangedReason": "한도로 멈춘 세션을 새 로그인으로 다시 시작해 하던 작업을 이어 갑니다.",
+      "allLimitsFull": "모든 Claude 계정이 한도에 찼습니다",
+      "allLimitsFullReason": "가장 먼저 풀리는 {{time}}에 한도로 멈춘 세션이 저절로 이어서 진행합니다.",
+      "limitResumed": "Claude 사용 한도가 풀렸습니다",
+      "limitResumedReason": "한도로 멈춘 세션 {{count}}개를 차례로 이어서 진행합니다.",
+      "otherComputersTitle": "다른 컴퓨터에 있는 계정",
+      "otherComputersHint": "이 컴퓨터에는 아직 없습니다. 「계정 추가」로 넣어 두면 한도로 멈춘 세션이 이 계정으로 옮겨 갈 수 있습니다."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 에 예전 Prompt 실행 파일이 들어 있습니다.",

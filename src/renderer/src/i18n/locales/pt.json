@@ -411,7 +411,13 @@
       "lastRead": "Last read {{time}}",
       "limitRescuedReason": "{{previous}} atingiu o limite de uso. As sessões paradas no limite continuam em {{next}}.",
       "systemLoginChanged": "O login do Claude mudou para {{next}}",
-      "systemLoginChangedReason": "As sessões paradas no limite de uso reiniciam com o novo login e continuam."
+      "systemLoginChangedReason": "As sessões paradas no limite de uso reiniciam com o novo login e continuam.",
+      "allLimitsFull": "Todas as contas do Claude atingiram o limite",
+      "allLimitsFullReason": "As sessões paradas no limite continuam sozinhas às {{time}}, quando a primeira for redefinida.",
+      "limitResumed": "Limite de uso do Claude redefinido",
+      "limitResumedReason": "{{count}} sessões paradas no limite continuam uma a uma.",
+      "otherComputersTitle": "Contas nos seus outros computadores",
+      "otherComputersHint": "Ainda não adicionadas aqui. Adicione com Adicionar conta para que uma sessão parada no limite possa passar para uma delas."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contém um inicializador antigo do Prompt.",
