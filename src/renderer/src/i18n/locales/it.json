@@ -23940,7 +23940,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Il suo limite settimanale si azzera prima.",
       "limitRescuedReason": "{{previous}} ha raggiunto il limite di utilizzo. Le sessioni ferme al limite continuano su {{next}}.",
       "systemLoginChanged": "Accesso a Claude cambiato in {{next}}",
-      "systemLoginChangedReason": "Le sessioni ferme al limite di utilizzo si riavviano con il nuovo accesso e continuano."
+      "systemLoginChangedReason": "Le sessioni ferme al limite di utilizzo si riavviano con il nuovo accesso e continuano.",
+      "allLimitsFull": "Tutti gli account Claude hanno raggiunto il limite",
+      "allLimitsFullReason": "Le sessioni ferme al limite riprendono da sole alle {{time}}, quando si azzera il primo.",
+      "limitResumed": "Limite di utilizzo di Claude azzerato",
+      "limitResumedReason": "{{count}} sessioni ferme al limite riprendono una alla volta.",
+      "otherComputersTitle": "Account sugli altri tuoi computer",
+      "otherComputersHint": "Non ancora aggiunti qui. Aggiungili con Aggiungi account così una sessione ferma al limite può passare a uno di essi."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contiene un launcher di Prompt obsoleto.",

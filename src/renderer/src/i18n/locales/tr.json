@@ -393,7 +393,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Haftalık sınırı daha erken sıfırlanır.",
       "limitRescuedReason": "{{previous}} kullanım sınırına ulaştı. Sınırda duran oturumlar {{next}} ile devam eder.",
       "systemLoginChanged": "Claude girişi {{next}} olarak değişti",
-      "systemLoginChangedReason": "Kullanım sınırında duran oturumlar yeni girişle yeniden başlar ve devam eder."
+      "systemLoginChangedReason": "Kullanım sınırında duran oturumlar yeni girişle yeniden başlar ve devam eder.",
+      "allLimitsFull": "Tüm Claude hesapları sınıra ulaştı",
+      "allLimitsFullReason": "Sınırda duran oturumlar, ilki sıfırlandığında {{time}} itibarıyla kendiliğinden devam eder.",
+      "limitResumed": "Claude kullanım sınırı sıfırlandı",
+      "limitResumedReason": "Sınırda duran {{count}} oturum sırayla devam ediyor.",
+      "otherComputersTitle": "Diğer bilgisayarlarınızdaki hesaplar",
+      "otherComputersHint": "Henüz buraya eklenmedi. Sınırda duran bir oturumun bunlara geçebilmesi için Hesap ekle ile ekleyin."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} eski bir Prompt başlatıcısı içeriyor.",

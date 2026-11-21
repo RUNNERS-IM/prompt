@@ -47,3 +47,34 @@ export function pickClaudeAccountBySoonestReset(
   }
   return best?.accountId ?? currentAccountId
 }
+
+/**
+ * When a full account has room again: the latest reset among its full windows, since both must
+ * free up. Null when it is not full or a full window has no known reset.
+ */
+export function claudeLimitsFreeAt(limits: ProviderRateLimits | null, now: number): number | null {
+  if (!limits) {
+    return null
+  }
+  const full = [limits.session, limits.weekly].filter(
+    (window): window is RateLimitWindow => window !== null && isFull(window, now)
+  )
+  if (full.length === 0 || full.some((window) => window.resetsAt === null)) {
+    return null
+  }
+  return Math.max(...full.map((window) => window.resetsAt as number))
+}
+
+/**
+ * The next reset of any window still ahead. Used for an account a stopped session reported as full
+ * before its usage reading shows 100%: which window ran out is not known, so the nearer one is tried.
+ */
+export function claudeLimitsNextResetAt(
+  limits: ProviderRateLimits | null,
+  now: number
+): number | null {
+  const ahead = [limits?.session?.resetsAt ?? null, limits?.weekly?.resetsAt ?? null].filter(
+    (resetsAt): resetsAt is number => resetsAt !== null && resetsAt > now
+  )
+  return ahead.length > 0 ? Math.min(...ahead) : null
+}

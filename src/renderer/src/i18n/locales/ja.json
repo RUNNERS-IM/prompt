@@ -388,7 +388,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}。週間上限がより早くリセットされます。",
       "limitRescuedReason": "{{previous}} の使用制限に達しました。制限で止まったセッションは {{next}} で続行します。",
       "systemLoginChanged": "Claude のログインが {{next}} に変わりました",
-      "systemLoginChangedReason": "使用制限で止まったセッションを新しいログインで再起動し、作業を続けます。"
+      "systemLoginChangedReason": "使用制限で止まったセッションを新しいログインで再起動し、作業を続けます。",
+      "allLimitsFull": "すべての Claude アカウントが制限に達しました",
+      "allLimitsFullReason": "最初に制限が解除される {{time}} に、制限で止まったセッションが自動で再開します。",
+      "limitResumed": "Claude の使用制限が解除されました",
+      "limitResumedReason": "制限で止まった {{count}} 件のセッションを順番に再開します。",
+      "otherComputersTitle": "ほかのコンピュータのアカウント",
+      "otherComputersHint": "このコンピュータにはまだありません。「アカウントを追加」で追加すると、制限で止まったセッションがこのアカウントに移れます。"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} には古い Prompt ランチャーが入っています。",

@@ -23548,7 +23548,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Sen viikkoraja nollautuu aiemmin.",
       "limitRescuedReason": "{{previous}} saavutti käyttörajansa. Rajaan pysähtyneet istunnot jatkuvat tilillä {{next}}.",
       "systemLoginChanged": "Clauden kirjautuminen vaihtui: {{next}}",
-      "systemLoginChangedReason": "Käyttörajaan pysähtyneet istunnot käynnistyvät uudella kirjautumisella ja jatkavat."
+      "systemLoginChangedReason": "Käyttörajaan pysähtyneet istunnot käynnistyvät uudella kirjautumisella ja jatkavat.",
+      "allLimitsFull": "Kaikki Claude-tilit ovat saavuttaneet rajansa",
+      "allLimitsFullReason": "Rajaan pysähtyneet istunnot jatkuvat itsestään {{time}}, kun ensimmäinen raja nollautuu.",
+      "limitResumed": "Clauden käyttöraja nollautui",
+      "limitResumedReason": "{{count}} rajaan pysähtynyttä istuntoa jatkaa yksi kerrallaan.",
+      "otherComputersTitle": "Tilit muilla tietokoneillasi",
+      "otherComputersHint": "Ei vielä lisätty tänne. Lisää ne kohdasta Lisää tili, jotta rajaan pysähtynyt istunto voi siirtyä niihin."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} sisältää vanhemman Prompt-käynnistimen.",

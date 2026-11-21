@@ -48,16 +48,19 @@ function decide(
     useAppStore.getState().settings?.claudeManagedAccounts ?? [],
     host
   )
-  if (!folder) {
-    return { outcome: 'skipped', reason: 'unknown-account' }
-  }
-  // Why: the pane keeps its own CLAUDE_CONFIG_DIR, so a restart lands in the same folder.
-  if (folder.kind === 'own-folder') {
-    return { outcome: 'skipped', reason: 'own-folder' }
-  }
-  const onSelected = isClaudePaneOnAccount(folder, launchAccountId, host)
-  if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId) && !(restartLimited && stopped)) {
-    return { outcome: stopped ? 'continued' : 'current' }
+  // Why stopped only: a session stopped at its limit goes nowhere where it is. Its folder may be
+  // unread (no hook since Prompt reopened) or one Prompt no longer lists, such as `~/.claude` or a
+  // removed account; the restart reads the selected-account pointer, so it moves all the same.
+  // A running session there is left alone: its folder may be the user's own on purpose.
+  if (!folder || folder.kind === 'own-folder') {
+    if (!stopped) {
+      return { outcome: 'skipped', reason: folder ? 'own-folder' : 'unknown-account' }
+    }
+  } else {
+    const onSelected = isClaudePaneOnAccount(folder, launchAccountId, host)
+    if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId) && !(restartLimited && stopped)) {
+      return { outcome: stopped ? 'continued' : 'current' }
+    }
   }
   const resumable = resolveAgentAccountRestartResumeStartup('claude', {
     tabId: pane.tabId,

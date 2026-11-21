@@ -187,7 +187,12 @@ describe('runClaudeAutoPick', () => {
         readUsage: () => ({
           active: limits(50, 2 * HOUR),
           inactive: [
-            { accountId: 'b', rateLimits: limits(40, 5 * 24 * HOUR), updatedAt: NOW, isFetching: false }
+            {
+              accountId: 'b',
+              rateLimits: limits(40, 5 * 24 * HOUR),
+              updatedAt: NOW,
+              isFetching: false
+            }
           ]
         }),
         onSwitched: vi.fn(),
@@ -197,5 +202,96 @@ describe('runClaudeAutoPick', () => {
     )
 
     expect(picked).toEqual({ accountId: 'b', rescued: true })
+  })
+
+  describe('every account full', () => {
+    it('reports when the first full account frees up, and does not switch', async () => {
+      const onAllFull = vi.fn()
+      const select = vi.fn()
+      const picked = await runClaudeAutoPick(
+        {
+          listAccounts: async () => roster('a', account('a'), account('b')),
+          select,
+          readUsage: () => ({
+            active: limits(100, 6 * HOUR),
+            inactive: [
+              {
+                accountId: 'b',
+                rateLimits: limits(100, 2 * HOUR),
+                updatedAt: NOW,
+                isFetching: false
+              }
+            ]
+          }),
+          onSwitched: vi.fn(),
+          now: () => NOW,
+          onAllFull
+        },
+        { mode: 'rescue', currentReportedFull: true }
+      )
+
+      expect(picked).toBeNull()
+      expect(select).not.toHaveBeenCalled()
+      expect(onAllFull).toHaveBeenCalledWith(NOW + 2 * HOUR)
+    })
+
+    it('says nothing when another account still has room', async () => {
+      const onAllFull = vi.fn()
+      await runClaudeAutoPick(
+        {
+          listAccounts: async () => roster('a', account('a'), account('b')),
+          select: vi.fn(async () => roster('b', account('a'), account('b'))),
+          readUsage: () => ({
+            active: limits(100, 6 * HOUR),
+            inactive: [
+              {
+                accountId: 'b',
+                rateLimits: limits(40, 2 * HOUR),
+                updatedAt: NOW,
+                isFetching: false
+              }
+            ]
+          }),
+          onSwitched: vi.fn(),
+          now: () => NOW,
+          onAllFull
+        },
+        { mode: 'rescue' }
+      )
+
+      expect(onAllFull).not.toHaveBeenCalled()
+    })
+
+    it('moves a System default session stopped at its limit to a saved account with room', async () => {
+      const state = {
+        ...roster('a', account('a')),
+        activeAccountId: null,
+        activeAccountIdsByRuntime: { host: null, wsl: {} }
+      } as ClaudeRateLimitAccountsState
+      const select = vi.fn(async () => roster('a', account('a')))
+      const picked = await runClaudeAutoPick(
+        {
+          listAccounts: async () => state,
+          select,
+          readUsage: () => ({
+            active: limits(100, 6 * HOUR),
+            inactive: [
+              {
+                accountId: 'a',
+                rateLimits: limits(30, 2 * HOUR),
+                updatedAt: NOW,
+                isFetching: false
+              }
+            ]
+          }),
+          onSwitched: vi.fn(),
+          now: () => NOW
+        },
+        { mode: 'rescue', currentReportedFull: true }
+      )
+
+      expect(picked).toEqual({ accountId: 'a', rescued: true })
+      expect(select).toHaveBeenCalledWith('a')
+    })
   })
 })

@@ -393,7 +393,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Sein Wochenlimit wird früher zurückgesetzt.",
       "limitRescuedReason": "{{previous}} hat sein Nutzungslimit erreicht. Am Limit gestoppte Sitzungen laufen mit {{next}} weiter.",
       "systemLoginChanged": "Claude-Anmeldung auf {{next}} geändert",
-      "systemLoginChangedReason": "Am Nutzungslimit gestoppte Sitzungen starten mit der neuen Anmeldung neu und machen weiter."
+      "systemLoginChangedReason": "Am Nutzungslimit gestoppte Sitzungen starten mit der neuen Anmeldung neu und machen weiter.",
+      "allLimitsFull": "Alle Claude-Konten haben ihr Limit erreicht",
+      "allLimitsFullReason": "Am Limit gestoppte Sitzungen machen um {{time}} von selbst weiter, wenn das erste zurückgesetzt wird.",
+      "limitResumed": "Claude-Nutzungslimit zurückgesetzt",
+      "limitResumedReason": "{{count}} am Limit gestoppte Sitzungen machen nacheinander weiter.",
+      "otherComputersTitle": "Konten auf deinen anderen Computern",
+      "otherComputersHint": "Hier noch nicht hinzugefügt. Füge sie mit „Konto hinzufügen“ hinzu, damit eine am Limit gestoppte Sitzung dorthin wechseln kann."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} enthält einen älteren Prompt-Launcher.",

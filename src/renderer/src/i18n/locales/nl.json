@@ -23548,7 +23548,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. De weeklimiet wordt eerder gereset.",
       "limitRescuedReason": "{{previous}} heeft zijn gebruikslimiet bereikt. Sessies die op de limiet zijn gestopt, gaan verder op {{next}}.",
       "systemLoginChanged": "Claude-login gewijzigd naar {{next}}",
-      "systemLoginChangedReason": "Sessies die op hun gebruikslimiet zijn gestopt, starten opnieuw met de nieuwe login en gaan verder."
+      "systemLoginChangedReason": "Sessies die op hun gebruikslimiet zijn gestopt, starten opnieuw met de nieuwe login en gaan verder.",
+      "allLimitsFull": "Alle Claude-accounts hebben hun limiet bereikt",
+      "allLimitsFullReason": "Sessies die op de limiet zijn gestopt, gaan om {{time}} vanzelf verder, als de eerste wordt gereset.",
+      "limitResumed": "Claude-gebruikslimiet gereset",
+      "limitResumedReason": "{{count}} sessies die op de limiet zijn gestopt, gaan één voor één verder.",
+      "otherComputersTitle": "Accounts op je andere computers",
+      "otherComputersHint": "Hier nog niet toegevoegd. Voeg ze toe met Account toevoegen, zodat een sessie die op de limiet stopt ernaartoe kan."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} bevat een oudere Prompt-launcher.",

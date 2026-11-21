@@ -23156,7 +23156,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Giới hạn tuần của nó được đặt lại sớm hơn.",
       "limitRescuedReason": "{{previous}} đã chạm giới hạn sử dụng. Các phiên dừng do giới hạn sẽ tiếp tục trên {{next}}.",
       "systemLoginChanged": "Đăng nhập Claude đã đổi sang {{next}}",
-      "systemLoginChangedReason": "Các phiên dừng do giới hạn sử dụng sẽ khởi động lại với đăng nhập mới và tiếp tục."
+      "systemLoginChangedReason": "Các phiên dừng do giới hạn sử dụng sẽ khởi động lại với đăng nhập mới và tiếp tục.",
+      "allLimitsFull": "Mọi tài khoản Claude đều đã chạm giới hạn",
+      "allLimitsFullReason": "Các phiên dừng do giới hạn sẽ tự tiếp tục lúc {{time}}, khi tài khoản đầu tiên được đặt lại.",
+      "limitResumed": "Giới hạn sử dụng Claude đã được đặt lại",
+      "limitResumedReason": "{{count}} phiên dừng do giới hạn đang lần lượt tiếp tục.",
+      "otherComputersTitle": "Tài khoản trên các máy tính khác của bạn",
+      "otherComputersHint": "Chưa được thêm ở đây. Thêm bằng Thêm tài khoản để phiên dừng do giới hạn có thể chuyển sang."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} chứa trình khởi chạy Prompt phiên bản cũ.",

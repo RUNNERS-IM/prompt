@@ -134,7 +134,7 @@ describe('detached Claude account-move restart', () => {
         leafId: LEAF_ID
       })
     )
-    expect(spawnArgs?.command).toMatch(new RegExp(`^claude .*'--resume' '${SESSION_ID}'$`))
+    expect(spawnArgs?.command).toMatch(new RegExp(`^\x15claude .*'--resume' '${SESSION_ID}'$`))
     const state = useAppStore.getState()
     expect(state.pendingPaneAccountRestarts).toEqual({})
     expect(state.terminalLayoutsByTabId['tab-1']?.ptyIdsByLeafId).toEqual({ [LEAF_ID]: NEW_PTY })

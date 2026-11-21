@@ -1,16 +1,25 @@
 import type { AppState } from '@/store'
 import { isClaudePaneMidTurn } from '@/lib/claude-session-account-move'
 import { isHeldAtUsageLimitPicker } from '@/lib/claude-usage-limit-sessions'
+import { agentRetryableFailureKind } from '../../../../shared/agent-main-agent-verdict'
 import { makePaneKey } from '../../../../shared/stable-pane-id'
 
-/** Why the picker: Claude waiting on its usage-limit choice still reads as mid-turn, yet only a restart moves it on. */
-function isClaudeRestartReady(
+/**
+ * Why the limit: Claude waiting on its usage-limit choice, or whose turn the hook reported as stopped
+ * at the limit, can still read as mid-turn, yet only a restart moves it on.
+ */
+export function isClaudeRestartReady(
   state: AppState,
   tabId: string,
   leafId: string,
   ptyId: string
 ): boolean {
-  return !isClaudePaneMidTurn(state, makePaneKey(tabId, leafId)) || isHeldAtUsageLimitPicker(ptyId)
+  const paneKey = makePaneKey(tabId, leafId)
+  if (!isClaudePaneMidTurn(state, paneKey) || isHeldAtUsageLimitPicker(ptyId)) {
+    return true
+  }
+  const row = state.agentStatusByPaneKey[paneKey]
+  return !!row && agentRetryableFailureKind(row) === 'usage-limit'
 }
 
 /** PTYs whose queued account restart can run now: Codex at once, this tab's Claude once its turn ends. */

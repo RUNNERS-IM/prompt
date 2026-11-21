@@ -1,5 +1,5 @@
 /** Execute accepted Codex/Claude account restarts for unmounted local panes so input cannot stay blocked until reveal. */
-import { isTerminalLeafId, makePaneKey } from '../../../../shared/stable-pane-id'
+import { isTerminalLeafId } from '../../../../shared/stable-pane-id'
 import type { TerminalLayoutSnapshot, TerminalTab } from '../../../../shared/terminal-tab-types'
 import type { AppState } from '@/store'
 import { useAppStore } from '@/store'
@@ -9,7 +9,7 @@ import {
   buildCodexAccountRestartStartup,
   buildPaneAccountRestartStartup
 } from '@/lib/agent-account-restart-startup'
-import { isClaudePaneMidTurn } from '@/lib/claude-session-account-move'
+import { isClaudeRestartReady } from './pane-account-restart-readiness'
 import type { AccountRestartAgent } from '@/store/terminals/terminal-contracts'
 import { isForeignMachineCodexPtyId } from '@/lib/codex-pane-selection-lane'
 import { getLocalProjectExecutionRuntimeContext } from '@/lib/local-preflight-context'
@@ -77,11 +77,12 @@ async function restartUnclaimedPane(ptyId: string, onSettled?: () => void): Prom
     if (hasRegisteredRuntimeTerminalTab(located.tab.id, located.worktreeId)) {
       return
     }
-    // Why: a Claude restart waits out the turn; the scheduler re-sweeps on status changes.
+    // Why: a Claude restart waits out the turn, as a mounted tab's does; one held at its usage limit
+    // goes now. The scheduler re-sweeps on status changes.
     if (
       state.pendingPaneAccountRestarts[ptyId] === 'claude' &&
       located.leafId &&
-      isClaudePaneMidTurn(state, makePaneKey(located.tab.id, located.leafId))
+      !isClaudeRestartReady(state, located.tab.id, located.leafId, ptyId)
     ) {
       return
     }

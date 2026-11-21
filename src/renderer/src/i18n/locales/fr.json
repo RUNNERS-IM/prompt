@@ -397,7 +397,13 @@
       "autoPickSwitchedReason": "{{previous}} → {{next}}. Sa limite hebdomadaire se réinitialise plus tôt.",
       "limitRescuedReason": "{{previous}} a atteint sa limite d’utilisation. Les sessions arrêtées à la limite continuent sur {{next}}.",
       "systemLoginChanged": "Connexion Claude changée pour {{next}}",
-      "systemLoginChangedReason": "Les sessions arrêtées à leur limite d’utilisation redémarrent avec la nouvelle connexion et continuent."
+      "systemLoginChangedReason": "Les sessions arrêtées à leur limite d’utilisation redémarrent avec la nouvelle connexion et continuent.",
+      "allLimitsFull": "Tous les comptes Claude ont atteint leur limite",
+      "allLimitsFullReason": "Les sessions arrêtées à la limite reprennent seules à {{time}}, quand la première se réinitialise.",
+      "limitResumed": "Limite d’utilisation de Claude réinitialisée",
+      "limitResumedReason": "{{count}} sessions arrêtées à la limite reprennent une par une.",
+      "otherComputersTitle": "Comptes sur vos autres ordinateurs",
+      "otherComputersHint": "Pas encore ajoutés ici. Ajoutez-les avec Ajouter un compte pour qu’une session arrêtée à sa limite puisse y passer."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contient un ancien lanceur Prompt.",
