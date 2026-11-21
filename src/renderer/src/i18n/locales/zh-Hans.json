@@ -385,7 +385,16 @@
       "switchLimited": "只重启已停止的",
       "switchDescription": "重启会在新账号上继续每个正在运行的对话。已停止的是达到使用上限的会话。",
       "autoPickSwitched": "已将 Claude 切换到 {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。"
+      "autoPickSwitchedReason": "{{previous}} → {{next}}。它的每周限额更早重置。",
+      "limitRescuedReason": "{{previous}} 已达到使用限额。因限额停止的会话将在 {{next}} 上继续。",
+      "systemLoginChanged": "Claude 登录已更改为 {{next}}",
+      "systemLoginChangedReason": "因使用限额停止的会话将使用新登录重新启动并继续。",
+      "allLimitsFull": "所有 Claude 账号都已达到限额",
+      "allLimitsFullReason": "在最早重置的 {{time}}，因限额停止的会话会自动继续。",
+      "limitResumed": "Claude 使用限额已重置",
+      "limitResumedReason": "因限额停止的 {{count}} 个会话将依次继续。",
+      "otherComputersTitle": "其他电脑上的账号",
+      "otherComputersHint": "此电脑上还没有。用“添加账号”添加后，因限额停止的会话就能转到这些账号。"
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} 中是旧版 Prompt 启动器。",

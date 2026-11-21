@@ -14,6 +14,7 @@ import {
   stablePaneHasLivePty
 } from './sleeping-agent-pane-ownership'
 import { isPaneSpawnDeferred } from './pane-spawn-deferral-registry'
+import { getSleepingRecordTabId } from './sleeping-agent-wake-requests'
 import { settleSweptRecord, sweepTreatsAsFinished } from './swept-sleep-record-settlement'
 import {
   launchSleepingAgentSession,
@@ -212,6 +213,17 @@ function parkWorktreeResumeSweepUntilHostMirrorAnswers(
   parkUntilHostSessionMirrorHydrates(mirror.environmentId, worktreeId, replay)
 }
 
+function sleepingRecordTabIsOpen(
+  record: SleepingAgentSessionRecord,
+  state: ReturnType<typeof useAppStore.getState>
+): boolean {
+  const tabId = getSleepingRecordTabId(record)
+  return (
+    tabId !== null &&
+    (state.tabsByWorktree[record.worktreeId] ?? []).some((tab) => tab.id === tabId)
+  )
+}
+
 export function resumeSleepingAgentSessionsForWorktree(
   worktreeId: string,
   options?: ResumeSleepingAgentSessionsOptions
@@ -307,6 +319,11 @@ export function resumeSleepingAgentSessionsForWorktree(
     }
     // Paired-runtime local rows cannot prove another client’s close versus rekey/pending handle (#21235); only the host authorizes writers. Mirror records represent their claim keys, suppressing native siblings.
     if (hostAuthority === 'live' || isHostMirroredSleepingRecord(record)) {
+      continue
+    }
+    // Why: a deferred restart's record waits for its own tab to open. While that tab exists, a fresh
+    // tab here races the original pane for the same conversation and is left empty when it loses.
+    if (record.restoreOnTabOpenOnly === true && sleepingRecordTabIsOpen(record, currentState)) {
       continue
     }
     // Provider sessions span workspaces; stale record IDs must not relaunch a transcript owned by another record’s pane.

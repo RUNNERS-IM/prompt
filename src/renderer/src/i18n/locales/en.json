@@ -23545,7 +23545,16 @@
       "switchLimited": "Restart stopped ones",
       "switchDescription": "Restarting continues each running conversation on the new account. Stopped ones are those that hit their usage limit.",
       "autoPickSwitched": "Switched Claude to {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Its weekly limit resets sooner.",
+      "limitRescuedReason": "{{previous}} reached its usage limit. Sessions stopped at the limit continue on {{next}}.",
+      "systemLoginChanged": "Claude login changed to {{next}}",
+      "systemLoginChangedReason": "Sessions stopped at their usage limit restart on the new login and continue.",
+      "allLimitsFull": "Every Claude account has reached its limit",
+      "allLimitsFullReason": "Sessions stopped at the limit continue on their own at {{time}}, when the first one resets.",
+      "limitResumed": "Claude usage limit reset",
+      "limitResumedReason": "{{count}} sessions stopped at the limit continue one by one.",
+      "otherComputersTitle": "Accounts on your other computers",
+      "otherComputersHint": "Not added here yet. Add them with Add Account so a session stopped at its limit can move to one."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} contains an older Prompt launcher.",

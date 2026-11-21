@@ -29,6 +29,11 @@ export type PromptClaudeRestartRequest = {
   limitedOnly: boolean
   /** The line sent to sessions stopped at the limit; the window's own wording when absent. */
   continueText?: string
+  /**
+   * Restart sessions stopped at the limit even when already on the selected folder. The login behind
+   * that folder changed, and a running Claude keeps the old token in memory, so the line alone fails.
+   */
+  restartLimited?: boolean
 }
 
 /**

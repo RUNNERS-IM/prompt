@@ -121,12 +121,28 @@ export function resolveAgentAccountRestartResumeStartup(
   return {
     startupCommandDelivery: 'shell-ready',
     launchAgent: agent,
-    command: startupPlan.launchCommand,
+    command: withClearedShellLine(startupPlan.launchCommand, resumeTarget),
     ...(startupPlan.env ? { env: startupPlan.env } : {}),
     launchConfig: startupPlan.launchConfig,
     // Main repins launch home only when the spawn names its resumed session; keep that identity with the account move.
     resumeProviderSession: providerSession
   }
+}
+
+// Ctrl-U: zsh, bash and fish discard what is on the line, and so does the terminal's own line editing.
+const CLEAR_SHELL_LINE = '\x15'
+
+/**
+ * Keys typed while the new shell starts land on its line ahead of the resume command, which then
+ * runs as `<typed text>claude --resume …` and fails in the shell. Clearing the line first drops
+ * them. Not on Windows shells, where Ctrl-U is not a line discard.
+ */
+function withClearedShellLine(command: string, target: AgentResumeLaunchTarget): string {
+  const windows = target.platform === 'win32' || target.agentHostPlatform === 'win32'
+  if (windows || (target.shell !== undefined && target.shell !== 'posix')) {
+    return command
+  }
+  return `${CLEAR_SHELL_LINE}${command}`
 }
 
 /** Account-switch startup: Codex can relaunch fresh; Claude requires its recorded conversation. */

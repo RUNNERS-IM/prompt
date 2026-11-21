@@ -172,13 +172,25 @@ export type ClaudeSwitchSessions = {
   onAccount: ClaudeSessionMoveCandidate[]
   /** On another account, or System default (null), that a restart could also move. */
   elsewhere: (ClaudeSessionMoveCandidate & { accountId: string | null })[]
-  cantMove: (ClaudeSessionMoveCandidate & { reason: ClaudeSessionCantMoveReason })[]
+  cantMove: (ClaudeSessionMoveCandidate & {
+    reason: ClaudeSessionCantMoveReason
+    /**
+     * Its folder is unread or one Prompt does not list, yet its conversation can resume: once
+     * stopped at its usage limit it moves anyway, since staying put cannot continue it.
+     */
+    resumable?: true
+  })[]
 }
 
 type ScannedPane =
   | { group: 'onAccount'; pane: LocalClaudePane }
   | { group: 'elsewhere'; pane: LocalClaudePane; accountId: string | null }
-  | { group: 'cantMove'; pane: LocalClaudePane; reason: ClaudeSessionCantMoveReason }
+  | {
+      group: 'cantMove'
+      pane: LocalClaudePane
+      reason: ClaudeSessionCantMoveReason
+      resumable?: true
+    }
 
 function scanPane(
   pane: LocalClaudePane,
@@ -197,23 +209,24 @@ function scanPane(
       : null
   }
   const folder = resolveClaudePaneFolder(pane.transcriptPath, args.saved, args.host)
-  if (!folder) {
-    return { group: 'cantMove', pane, reason: 'unknown-account' }
-  }
+  const resumable = (): boolean =>
+    resolveAgentAccountRestartResumeStartup('claude', {
+      tabId: pane.tabId,
+      leafId: pane.leafId,
+      worktreeId: pane.worktreeId,
+      shellOverride: pane.tab.shellOverride
+    }) !== null
   // Why: the shell function keeps a pane's own CLAUDE_CONFIG_DIR, so a restart lands in the same folder.
-  if (folder.kind === 'own-folder') {
-    return { group: 'cantMove', pane, reason: 'own-folder' }
+  if (!folder || folder.kind === 'own-folder') {
+    const reason = folder ? 'own-folder' : 'unknown-account'
+    return resumable()
+      ? { group: 'cantMove', pane, reason, resumable: true }
+      : { group: 'cantMove', pane, reason }
   }
   if (isClaudePaneOnAccount(folder, args.toAccountId, args.host)) {
     return null
   }
-  const resumable = resolveAgentAccountRestartResumeStartup('claude', {
-    tabId: pane.tabId,
-    leafId: pane.leafId,
-    worktreeId: pane.worktreeId,
-    shellOverride: pane.tab.shellOverride
-  })
-  if (!resumable) {
+  if (!resumable()) {
     return { group: 'cantMove', pane, reason: 'no-session' }
   }
   return isClaudePaneOnAccount(folder, args.fromAccountId, args.host)
@@ -292,7 +305,11 @@ export async function findClaudeSwitchSessions(args: {
     } else if (row.group === 'elsewhere') {
       found.elsewhere.push({ ...candidate, accountId: row.accountId })
     } else {
-      found.cantMove.push({ ...candidate, reason: row.reason })
+      found.cantMove.push({
+        ...candidate,
+        reason: row.reason,
+        ...(row.resumable ? { resumable: true as const } : {})
+      })
     }
   }
   if (unchecked.length > 0) {

@@ -24329,7 +24329,16 @@
       "switchLimited": "Uruchom ponownie tylko zatrzymane",
       "switchDescription": "Ponowne uruchomienie kontynuuje każdą trwającą rozmowę na nowym koncie. Zatrzymane to te, które osiągnęły limit użycia.",
       "autoPickSwitched": "Przełączono Claude na {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Jego limit tygodniowy resetuje się wcześniej."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Jego limit tygodniowy resetuje się wcześniej.",
+      "limitRescuedReason": "{{previous}} osiągnęło limit użycia. Sesje zatrzymane na limicie są kontynuowane na {{next}}.",
+      "systemLoginChanged": "Logowanie Claude zmieniono na {{next}}",
+      "systemLoginChangedReason": "Sesje zatrzymane na limicie użycia uruchamiają się ponownie z nowym logowaniem i kontynuują pracę.",
+      "allLimitsFull": "Wszystkie konta Claude osiągnęły limit",
+      "allLimitsFullReason": "Sesje zatrzymane na limicie wznowią się same o {{time}}, gdy pierwszy limit się odnowi.",
+      "limitResumed": "Limit użycia Claude odnowiony",
+      "limitResumedReason": "{{count}} sesji zatrzymanych na limicie wznawia się po kolei.",
+      "otherComputersTitle": "Konta na Twoich innych komputerach",
+      "otherComputersHint": "Jeszcze ich tu nie dodano. Dodaj je przez Dodaj konto, aby sesja zatrzymana na limicie mogła na nie przejść."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} zawiera starszy program uruchamiający Prompt.",

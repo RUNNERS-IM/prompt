@@ -23153,7 +23153,16 @@
       "switchLimited": "Mulai ulang yang berhenti",
       "switchDescription": "Memulai ulang melanjutkan setiap percakapan yang berjalan di akun baru. Yang berhenti adalah yang mencapai batas penggunaan.",
       "autoPickSwitched": "Claude dialihkan ke {{next}}",
-      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal."
+      "autoPickSwitchedReason": "{{previous}} → {{next}}. Batas mingguannya direset lebih awal.",
+      "limitRescuedReason": "{{previous}} mencapai batas penggunaan. Sesi yang berhenti di batas berlanjut di {{next}}.",
+      "systemLoginChanged": "Login Claude berubah ke {{next}}",
+      "systemLoginChangedReason": "Sesi yang berhenti di batas penggunaan dimulai ulang dengan login baru dan berlanjut.",
+      "allLimitsFull": "Semua akun Claude sudah mencapai batas",
+      "allLimitsFullReason": "Sesi yang berhenti di batas berlanjut sendiri pada {{time}}, saat yang pertama direset.",
+      "limitResumed": "Batas penggunaan Claude direset",
+      "limitResumedReason": "{{count}} sesi yang berhenti di batas berlanjut satu per satu.",
+      "otherComputersTitle": "Akun di komputer Anda yang lain",
+      "otherComputersHint": "Belum ditambahkan di sini. Tambahkan dengan Tambah Akun agar sesi yang berhenti di batas bisa pindah ke akun itu."
     },
     "cliStatus": {
       "olderLauncherContent": "{{path}} berisi peluncur Prompt versi lama.",

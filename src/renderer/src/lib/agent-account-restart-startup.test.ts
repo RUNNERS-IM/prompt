@@ -222,7 +222,8 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
 
     const startup = buildPaneAccountRestartStartup('claude', pane)
 
-    expect(startup?.command).toMatch(/^claude\b/)
+    // Ctrl-U clears keys typed while the shell started.
+    expect(startup?.command).toMatch(/^\x15claude\b/)
     expect(startup?.command).toContain('--resume')
     expect(startup?.command).toContain(SESSION_ID)
     expect(startup?.launchAgent).toBe('claude')
@@ -302,7 +303,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
     })
 
     expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-      `${notice('/repo/pkg')}claude '--resume' '${SESSION_ID}'`
+      `\x15${notice('/repo/pkg')}claude '--resume' '${SESSION_ID}'`
     )
   })
 
@@ -361,7 +362,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
       })
 
       expect(buildPaneAccountRestartStartup('claude', pane)?.command).toBe(
-        `${prefix}claude '--resume' '${SESSION_ID}'`
+        `\x15${prefix}claude '--resume' '${SESSION_ID}'`
       )
       expect(resolveAgentResumeLaunchTarget).toHaveBeenLastCalledWith(
         expect.objectContaining({
@@ -429,7 +430,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
       const startup = buildPaneAccountRestartStartup('claude', pane)
 
       expect(startup?.command).toBe(
-        `claude '--dangerously-skip-permissions' '--tools' 'Read' '--resume' '${SESSION_ID}'`
+        `\x15claude '--dangerously-skip-permissions' '--tools' 'Read' '--resume' '${SESSION_ID}'`
       )
       expect(startup?.resumeProviderSession).toEqual({
         key: 'session_id',

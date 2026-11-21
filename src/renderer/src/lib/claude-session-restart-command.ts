@@ -40,23 +40,27 @@ function decide(
   pane: LocalClaudePane,
   stopped: boolean,
   host: ClaudeRateLimitAccountsState,
-  launchAccountId: string | null
+  launchAccountId: string | null,
+  restartLimited: boolean
 ): Decision {
   const folder = resolveClaudePaneFolder(
     pane.transcriptPath,
     useAppStore.getState().settings?.claudeManagedAccounts ?? [],
     host
   )
-  if (!folder) {
-    return { outcome: 'skipped', reason: 'unknown-account' }
-  }
-  // Why: the pane keeps its own CLAUDE_CONFIG_DIR, so a restart lands in the same folder.
-  if (folder.kind === 'own-folder') {
-    return { outcome: 'skipped', reason: 'own-folder' }
-  }
-  const onSelected = isClaudePaneOnAccount(folder, launchAccountId, host)
-  if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId)) {
-    return { outcome: stopped ? 'continued' : 'current' }
+  // Why stopped only: a session stopped at its limit goes nowhere where it is. Its folder may be
+  // unread (no hook since Prompt reopened) or one Prompt no longer lists, such as `~/.claude` or a
+  // removed account; the restart reads the selected-account pointer, so it moves all the same.
+  // A running session there is left alone: its folder may be the user's own on purpose.
+  if (!folder || folder.kind === 'own-folder') {
+    if (!stopped) {
+      return { outcome: 'skipped', reason: folder ? 'own-folder' : 'unknown-account' }
+    }
+  } else {
+    const onSelected = isClaudePaneOnAccount(folder, launchAccountId, host)
+    if (onSelected && !isHeldAtUsageLimitPicker(pane.ptyId) && !(restartLimited && stopped)) {
+      return { outcome: stopped ? 'continued' : 'current' }
+    }
   }
   const resumable = resolveAgentAccountRestartResumeStartup('claude', {
     tabId: pane.tabId,
@@ -89,7 +93,7 @@ export async function handleClaudeSessionRestartRequest(
   const sessions: PromptClaudeRestartResult['sessions'] = []
   for (const pane of looked) {
     const limited = stoppedPanes.has(pane)
-    const decision = decide(pane, limited, host, launchAccountId)
+    const decision = decide(pane, limited, host, launchAccountId, request.restartLimited === true)
     sessions.push({ tabId: pane.tabId, leafId: pane.leafId, limited, ...decision })
     if (decision.outcome === 'restarting') {
       restarting.push(pane)

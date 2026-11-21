@@ -213,8 +213,20 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     previousAccountLabel: getClaudeAccountLabel(args.before.state, args.before.accountId),
     nextAccountLabel
   }
+  // Why: a session stopped at its usage limit cannot continue where it is, whatever folder it ran
+  // in, so it moves without a question; staying put is the one thing that never helps it.
+  const stranded = found.cantMove.filter((session) => session.resumable)
+  const strandedStopped = await findClaudeSessionsStoppedAtUsageLimit(stranded)
+  if (generation !== switchGeneration) {
+    return 'handled'
+  }
+  const notMoving = found.cantMove.length - strandedStopped.length
   if (policy === 'limited') {
-    const stopped = await findClaudeSessionsStoppedAtUsageLimit(found.onAccount)
+    const stopped = await findClaudeSessionsStoppedAtUsageLimit([
+      ...found.onAccount,
+      ...found.elsewhere,
+      ...strandedStopped
+    ])
     if (stopped.length > 0 && generation === switchGeneration) {
       await restartClaudeSessions(stopped, { account: nextAccountLabel })
     }
@@ -222,13 +234,13 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
   }
   if (policy === 'restart') {
     // Why every account: whichever way the account changed, all of this Mac's Claude sessions follow it.
-    const moving = [...found.onAccount, ...found.elsewhere]
+    const moving = [...found.onAccount, ...found.elsewhere, ...strandedStopped]
     if (moving.length === 0) {
       return 'show-confirmation'
     }
     await restartClaudeSessions(moving, {
       account: nextAccountLabel,
-      others: found.cantMove.length,
+      others: notMoving,
       review: () => {
         if (generation === switchGeneration) {
           setPrompt({
@@ -242,11 +254,29 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     })
     return 'handled'
   }
-  // Why: other sessions are listed only alongside a move, so parallel-account users get no prompt.
-  if (found.onAccount.length === 0) {
-    return 'show-confirmation'
+  // Asking: sessions stopped at their limit move now; only the ones still working wait on the answer.
+  const stoppedNow = await findClaudeSessionsStoppedAtUsageLimit([
+    ...found.onAccount,
+    ...found.elsewhere,
+    ...strandedStopped
+  ])
+  if (generation !== switchGeneration) {
+    return 'handled'
   }
-  setPrompt({ id: generation, sessions, ...labels })
+  if (stoppedNow.length > 0) {
+    await restartClaudeSessions(stoppedNow, { account: nextAccountLabel })
+  }
+  const moved = new Set(stoppedNow.map((session) => session.ptyId))
+  const asking: ClaudeAccountSwitchPromptSessions = {
+    onAccount: sessions.onAccount.filter((session) => !moved.has(session.ptyId)),
+    elsewhere: sessions.elsewhere.filter((session) => !moved.has(session.ptyId)),
+    cantMove: sessions.cantMove.filter((session) => !moved.has(session.ptyId))
+  }
+  // Why: other sessions are listed only alongside a move, so parallel-account users get no prompt.
+  if (asking.onAccount.length === 0) {
+    return stoppedNow.length > 0 ? 'handled' : 'show-confirmation'
+  }
+  setPrompt({ id: generation, sessions: asking, ...labels })
   return 'handled'
 }
 

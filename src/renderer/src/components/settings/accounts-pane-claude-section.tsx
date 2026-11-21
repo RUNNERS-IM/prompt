@@ -9,6 +9,7 @@ import { ClaudeIcon } from '../status-bar/icons'
 import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SearchableSetting } from './SearchableSetting'
 import { ClaudeRunningSessionSwitchSetting } from './claude-running-session-switch-setting'
+import { ClaudeAccountsOnOtherComputers } from './claude-accounts-on-other-computers'
 import {
   getProviderAccountRuntime,
   providerAccountIsActiveInView
@@ -391,6 +392,9 @@ export function renderClaudeAccountsSection(model: AccountsPaneSectionModel): Re
           )}
         </div>
       </SearchableSetting>
+      {isRemoteAccountScope || accountRuntime.runtime !== 'host' ? null : (
+        <ClaudeAccountsOnOtherComputers here={claudeAccounts} />
+      )}
       {isRemoteAccountScope ? null : (
         <ClaudeRunningSessionSwitchSetting settings={settings} updateSettings={updateSettings} />
       )}
