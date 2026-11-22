@@ -23639,7 +23639,13 @@
       "argsGlobal": "Yleiset omat argumentit"
     },
     "runnersAccount": {
-      "settings": "Tilin asetukset"
+      "settings": "Tilin asetukset",
+      "nickname": "Lempinimi",
+      "nicknameHint": "Näkyy pandan vieressä ja muissa RUNNERS-apeissa. Jätä tyhjäksi, niin käytetään sähköpostin @-merkkiä edeltävää osaa.",
+      "nicknameLong": "Lempinimessä voi olla enintään 30 merkkiä.",
+      "save": "Tallenna",
+      "saved": "Tallennettu",
+      "network": "Palvelimeen ei saatu yhteyttä. Yritä hetken päästä uudelleen."
     }
   }
 }

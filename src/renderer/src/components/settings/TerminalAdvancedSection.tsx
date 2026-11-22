@@ -116,7 +116,7 @@ export function TerminalAdvancedSection({
 
       <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
-          title={translate('auto.components.settings.TerminalPane.9df53f7c14', 'Scrollback Rows')}
+          title={translate('auto.components.settings.TerminalPane.9df53f7c14', 'Scrollback rows')}
           description={translate(
             'auto.components.settings.TerminalPane.c3810b2b42',
             'Retained desktop terminal rows.'
@@ -125,7 +125,7 @@ export function TerminalAdvancedSection({
         >
           <SettingsRow
             alignTop={scrollbackMode === 'custom'}
-            label={translate('auto.components.settings.TerminalPane.9df53f7c14', 'Scrollback Rows')}
+            label={translate('auto.components.settings.TerminalPane.9df53f7c14', 'Scrollback rows')}
             description={translate(
               'auto.components.settings.TerminalPane.81d86b2dd2',
               'Retained desktop terminal rows for new and open panes.'
@@ -208,7 +208,7 @@ export function TerminalAdvancedSection({
         {hostScope ? <TerminalLimitSetting scope={hostScope} /> : null}
 
         <SearchableSetting
-          title={translate('auto.components.settings.TerminalPane.4bebcc2b2c', 'Word Separators')}
+          title={translate('auto.components.settings.TerminalPane.4bebcc2b2c', 'Word separators')}
           description={translate(
             'settings.terminal.wordSeparators.description',
             'Characters treated as word boundaries for double-click selection, including space.'
@@ -216,7 +216,7 @@ export function TerminalAdvancedSection({
           keywords={['word', 'separator', 'boundary', 'double-click', 'selection']}
         >
           <SettingsRow
-            label={translate('auto.components.settings.TerminalPane.4bebcc2b2c', 'Word Separators')}
+            label={translate('auto.components.settings.TerminalPane.4bebcc2b2c', 'Word separators')}
             description={translate(
               'settings.terminal.wordSeparators.description',
               'Characters treated as word boundaries for double-click selection, including space.'
@@ -263,7 +263,7 @@ export function TerminalAdvancedSection({
           <SearchableSetting
             title={translate(
               'auto.components.settings.TerminalPane.fe20f79dd1',
-              'PowerShell Version'
+              'PowerShell version'
             )}
             description={translate(
               'auto.components.settings.TerminalPane.3d88af864d',
@@ -284,7 +284,7 @@ export function TerminalAdvancedSection({
               alignTop
               label={translate(
                 'auto.components.settings.TerminalPane.fe20f79dd1',
-                'PowerShell Version'
+                'PowerShell version'
               )}
               description={
                 pwshAvailable ? (
@@ -318,7 +318,7 @@ export function TerminalAdvancedSection({
                 <SettingsSegmentedControl
                   ariaLabel={translate(
                     'auto.components.settings.TerminalPane.fe20f79dd1',
-                    'PowerShell Version'
+                    'PowerShell version'
                   )}
                   value={powerShellImplementation}
                   onChange={(value) =>

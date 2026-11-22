@@ -2,7 +2,7 @@
 // 「[REMOTE] 개발 - 네 앱 계정 · 연결 통일」 2A 4A and 「… 연결 요금 · 웹 · 세션 역할」 2A, 2026-11-05):
 // - signed out, the app shows one Sign In button where its main content goes, and that button opens <SignInSheet>;
 // - signed in, <AccountButton> is a round badge with the RUNNERS panda at the window's top right that opens the
-//   account menu (the email, one line the app chooses, the app's own items, then Log Out).
+//   account menu (the email, one line the app chooses, the app's own items, then Sign Out).
 // The source lives in runners-app-kit/desktop; each app copies this folder unchanged and runs check.mjs before it
 // builds. It needs only React: the R mark and icons are drawn here, and the words come from runners-account-text.ts.
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
@@ -102,6 +102,8 @@ function LogOutIcon() {
 export function AccountButton(props: {
   lang: string
   account: string
+  /** The name beside the panda (account.nickname()). Without it the badge is the round panda alone. */
+  nickname?: string | null
   /** One line under the email, such as how many computers of the account are on. */
   line?: ReactNode
   items?: AccountMenuItem[]
@@ -143,16 +145,32 @@ export function AccountButton(props: {
 
   return (
     <div className="ra-menu-box" ref={box}>
-      <button
-        type="button"
-        className="ra-badge"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        title={props.account}
-        onClick={() => setOpen(!open)}
-      >
-        <BadgePanda />
-      </button>
+      {props.nickname ? (
+        <button
+          type="button"
+          className="ra-named"
+          aria-haspopup="menu"
+          aria-expanded={open}
+          title={props.account}
+          onClick={() => setOpen(!open)}
+        >
+          <span className="ra-badge" aria-hidden>
+            <BadgePanda />
+          </span>
+          <span className="ra-named-text">{props.nickname}</span>
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="ra-badge"
+          aria-haspopup="menu"
+          aria-expanded={open}
+          title={props.account}
+          onClick={() => setOpen(!open)}
+        >
+          <BadgePanda />
+        </button>
+      )}
       {open && (
         <div className="ra-menu" role="menu">
           <div className="ra-menu-head">
@@ -160,8 +178,11 @@ export function AccountButton(props: {
               <BadgePanda />
             </span>
             <span className="ra-menu-text">
-              <span className="ra-menu-email">{props.account}</span>
-              <span className="ra-hint">{accountText(props.lang, 'title')}</span>
+              {/* With a name, the name leads and the email takes the hint line. */}
+              <span className="ra-menu-email">{props.nickname || props.account}</span>
+              <span className="ra-hint">
+                {props.nickname ? props.account : accountText(props.lang, 'title')}
+              </span>
             </span>
           </div>
           {props.signedInFrom && (

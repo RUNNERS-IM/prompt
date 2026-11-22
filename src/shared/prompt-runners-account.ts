@@ -7,6 +7,25 @@ export const PROMPT_RUNNERS_ACCOUNT_SIGN_IN_CHANNEL = 'prompt:runnersAccountSign
 export const PROMPT_RUNNERS_ACCOUNT_SIGN_OUT_CHANNEL = 'prompt:runnersAccountSignOut'
 export const PROMPT_RUNNERS_ACCOUNT_SEND_CODE_CHANNEL = 'prompt:runnersAccountSendCode'
 export const PROMPT_RUNNERS_ACCOUNT_RESET_PASSWORD_CHANNEL = 'prompt:runnersAccountResetPassword'
+export const PROMPT_RUNNERS_ACCOUNT_PROFILE_CHANNEL = 'prompt:runnersAccountProfile'
+export const PROMPT_RUNNERS_ACCOUNT_SET_NICKNAME_CHANNEL = 'prompt:runnersAccountSetNickname'
+/** Main tells the windows the account or its nickname changed (here, or in another RUNNERS app). */
+export const PROMPT_RUNNERS_ACCOUNT_CHANGED_CHANNEL = 'prompt:runnersAccountChanged'
+
+/** The nickname every RUNNERS app shows beside the panda (runners-wiki 2026-11-19 2B), kept on the account server. */
+export const PROMPT_RUNNERS_NICKNAME_MAX = 30
+
+export type PromptRunnersProfile = {
+  email: string | null
+  /** The nickname to show: the one the person set, else the part of the email before @. null while signed out. */
+  nickname: string | null
+  /** Whether the person set the nickname; if not, the settings field stays empty with the default as its hint. */
+  custom: boolean
+}
+
+export type PromptRunnersSetNicknameResult =
+  | { ok: true; profile: PromptRunnersProfile }
+  | { ok: false; problem: 'format' | 'network' }
 
 export type PromptRunnersSignMode = 'login' | 'signup'
 
@@ -53,4 +72,9 @@ export type PromptRunnersAccountApi = {
     password: string
   ) => Promise<PromptRunnersSignInResult>
   signOut: () => Promise<void>
+  /** The account with its nickname; asks the server once for a nickname changed in another app. */
+  profile: () => Promise<PromptRunnersProfile>
+  /** Empty sets the nickname back to the email's part before @. */
+  setNickname: (name: string) => Promise<PromptRunnersSetNicknameResult>
+  onChanged: (listener: () => void) => () => void
 }

@@ -38,7 +38,7 @@ describe('AutomationsSettingsPane', () => {
       />
     )
 
-    const toggle = screen.getByRole('switch', { name: 'Show Automations Button' })
+    const toggle = screen.getByRole('switch', { name: 'Show Automations button' })
     expect(toggle).toHaveAttribute('aria-checked', 'false')
     await user.click(toggle)
     expect(updateSettings).toHaveBeenCalledWith({ showAutomationsButton: true })

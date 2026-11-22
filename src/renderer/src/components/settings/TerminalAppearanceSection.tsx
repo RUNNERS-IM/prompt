@@ -210,7 +210,7 @@ export function TerminalAppearanceSection({
     <SearchableSetting
       title={translate(
         'auto.components.settings.TerminalAppearanceSection.a408266e67',
-        'Font Family'
+        'Font family'
       )}
       description={terminalTypographyEntries[1]?.description}
       keywords={terminalTypographyEntries[1]?.keywords ?? ['terminal', 'typography', 'font']}
@@ -219,7 +219,7 @@ export function TerminalAppearanceSection({
       <SettingsRow
         label={translate(
           'auto.components.settings.TerminalAppearanceSection.a408266e67',
-          'Font Family'
+          'Font family'
         )}
         control={
           <FontAutocomplete

@@ -79,7 +79,7 @@ export function GeneralRemoteServerUpdates(): React.JSX.Element | null {
     <SearchableSetting
       title={translate(
         'auto.components.settings.GeneralRemoteServerUpdates.title',
-        'Remote Orca Servers'
+        'Remote Orca servers'
       )}
       description={translate(
         'auto.components.settings.GeneralRemoteServerUpdates.description',
@@ -92,7 +92,7 @@ export function GeneralRemoteServerUpdates(): React.JSX.Element | null {
         <div className="text-sm font-medium">
           {translate(
             'auto.components.settings.GeneralRemoteServerUpdates.title',
-            'Remote Orca Servers'
+            'Remote Orca servers'
           )}
         </div>
         <p className="text-xs text-muted-foreground">

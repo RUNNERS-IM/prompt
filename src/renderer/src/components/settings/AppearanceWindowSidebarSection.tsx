@@ -199,12 +199,12 @@ export function AppearanceWindowSidebarSection({
   )
   const tasksRow = (
     <SearchableSetting
-      title={translate('auto.components.settings.AppearancePane.cf81907069', 'Show Tasks Button')}
+      title={translate('auto.components.settings.AppearancePane.cf81907069', 'Show Tasks button')}
       description={sidebarEntries[0]?.description}
       keywords={sidebarEntries[0]?.keywords ?? ['tasks', 'sidebar', 'button']}
     >
       <SettingsSwitchRow
-        label={translate('auto.components.settings.AppearancePane.cf81907069', 'Show Tasks Button')}
+        label={translate('auto.components.settings.AppearancePane.cf81907069', 'Show Tasks button')}
         checked={settings.showTasksButton !== false}
         onChange={() => updateSettings({ showTasksButton: !(settings.showTasksButton !== false) })}
       />
@@ -214,7 +214,7 @@ export function AppearanceWindowSidebarSection({
     <SearchableSetting
       title={translate(
         'auto.components.settings.AppearancePane.511f270ebb',
-        'Show Automations Button'
+        'Show Automations button'
       )}
       description={sidebarEntries[1]?.description}
       keywords={sidebarEntries[1]?.keywords ?? ['automations', 'automation', 'schedule']}
@@ -222,7 +222,7 @@ export function AppearanceWindowSidebarSection({
       <SettingsSwitchRow
         label={translate(
           'auto.components.settings.AppearancePane.511f270ebb',
-          'Show Automations Button'
+          'Show Automations button'
         )}
         checked={settings.showAutomationsButton !== false}
         onChange={() =>
@@ -237,7 +237,7 @@ export function AppearanceWindowSidebarSection({
     <SearchableSetting
       title={translate(
         'auto.components.settings.AppearancePane.9da1020447',
-        'Show Orca Mobile Button'
+        'Show Orca Mobile button'
       )}
       description={sidebarEntries[2]?.description}
       keywords={sidebarEntries[2]?.keywords ?? ['mobile', 'phone', 'sidebar']}
@@ -245,7 +245,7 @@ export function AppearanceWindowSidebarSection({
       <SettingsSwitchRow
         label={translate(
           'auto.components.settings.AppearancePane.9da1020447',
-          'Show Orca Mobile Button'
+          'Show Orca Mobile button'
         )}
         // Explain the remaining Toolbox route so hiding the shortcut cannot imply feature removal.
         description={translate(
@@ -288,7 +288,7 @@ export function AppearanceWindowSidebarSection({
     <SearchableSetting
       title={
         layoutEntries[0]?.title ??
-        translate('auto.components.settings.AppearancePane.0fafabcf35', 'Show Git-Ignored Files')
+        translate('auto.components.settings.AppearancePane.0fafabcf35', 'Show Git-ignored files')
       }
       description={layoutEntries[0]?.description}
       keywords={layoutEntries[0]?.keywords ?? ['git', 'gitignore', 'ignored']}
@@ -296,7 +296,7 @@ export function AppearanceWindowSidebarSection({
       <SettingsSwitchRow
         label={translate(
           'auto.components.settings.AppearancePane.0fafabcf35',
-          'Show Git-Ignored Files'
+          'Show Git-ignored files'
         )}
         description={translate(
           'auto.components.settings.AppearancePane.gitIgnoredGlossary',

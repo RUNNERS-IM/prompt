@@ -488,7 +488,13 @@
       "argsGlobal": "Arguments personnalisés globaux"
     },
     "runnersAccount": {
-      "settings": "Paramètres du compte"
+      "settings": "Paramètres du compte",
+      "nickname": "Pseudo",
+      "nicknameHint": "Affiché à côté du panda et dans les autres apps RUNNERS. Laissez vide pour utiliser la partie de l’e-mail avant @.",
+      "nicknameLong": "Un pseudo peut contenir 30 caractères au maximum.",
+      "save": "Enregistrer",
+      "saved": "Enregistré",
+      "network": "Impossible de joindre le serveur. Réessayez dans un instant."
     }
   },
   "agentLaunch": {

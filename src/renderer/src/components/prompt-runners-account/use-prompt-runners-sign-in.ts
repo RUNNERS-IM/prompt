@@ -3,21 +3,25 @@ import { useTranslation } from 'react-i18next'
 import type {
   PromptRunnersAccountApi,
   PromptRunnersCodePurpose,
+  PromptRunnersProfile,
   PromptRunnersSignInResult,
   PromptRunnersSignMode
 } from '../../../../shared/prompt-runners-account'
 import {
-  getRunnersAccountEmail,
-  loadRunnersAccountEmail,
-  setRunnersAccountEmail,
-  subscribeRunnersAccountEmail
-} from './prompt-runners-account-email'
+  getRunnersAccountProfile,
+  loadRunnersAccountProfile,
+  setRunnersAccountProfile,
+  signedInRunnersAccountProfile,
+  subscribeRunnersAccountProfile
+} from './prompt-runners-account-profile'
 
 export type PromptRunnersSignIn = {
   api: PromptRunnersAccountApi | undefined
   lang: string
   /** undefined until main has answered, null while signed out. */
   email: string | null | undefined
+  /** The signed-in account with its nickname; undefined until main has answered. */
+  profile: PromptRunnersProfile | undefined
   signingIn: boolean
   openSignIn: () => void
   closeSignIn: () => void
@@ -36,26 +40,32 @@ export type PromptRunnersSignIn = {
 export function usePromptRunnersSignIn(): PromptRunnersSignIn {
   const api = window.api.promptRunnersAccount
   const { i18n } = useTranslation()
-  const email = useSyncExternalStore(subscribeRunnersAccountEmail, getRunnersAccountEmail)
+  const profile = useSyncExternalStore(subscribeRunnersAccountProfile, getRunnersAccountProfile)
+  const email = profile === undefined ? undefined : profile.email
   const [signingIn, setSigningIn] = useState(false)
   const openSignIn = useCallback(() => setSigningIn(true), [])
   const closeSignIn = useCallback(() => setSigningIn(false), [])
 
   useEffect(() => {
     if (api) {
-      loadRunnersAccountEmail(api)
+      loadRunnersAccountProfile(api)
     }
   }, [api])
 
   const lang = i18n.language
 
   // The shared sheet reads the failure's short code (bad, none, code, …) from the error's message.
-  const signedIn = useCallback((result: PromptRunnersSignInResult) => {
-    if (!result.ok) {
-      throw new Error(result.problem)
-    }
-    setRunnersAccountEmail(result.email)
-  }, [])
+  const signedIn = useCallback(
+    (result: PromptRunnersSignInResult) => {
+      if (!result.ok) {
+        throw new Error(result.problem)
+      }
+      setRunnersAccountProfile(signedInRunnersAccountProfile(result.email))
+      // The server's answer holds the nickname set in another app; main's changed event re-reads it too.
+      void api?.profile().then(setRunnersAccountProfile, () => {})
+    },
+    [api]
+  )
   const signIn = useCallback(
     async (mode: PromptRunnersSignMode, address: string, password: string, code?: string) => {
       if (!api) {
@@ -84,7 +94,7 @@ export function usePromptRunnersSignIn(): PromptRunnersSignIn {
     [api, signedIn]
   )
   const signOut = useCallback(() => {
-    setRunnersAccountEmail(null)
+    setRunnersAccountProfile(null)
     void api?.signOut()
   }, [api])
 
@@ -92,6 +102,7 @@ export function usePromptRunnersSignIn(): PromptRunnersSignIn {
     api,
     lang,
     email,
+    profile,
     signingIn,
     openSignIn,
     closeSignIn,

@@ -125,7 +125,7 @@ export function RepositoryWorktreeDefaultsSection({
       <SearchableSetting
         title={translate(
           'auto.components.settings.RepositoryPane.f88db4fece',
-          'Default Worktree Base'
+          'Default worktree base'
         )}
         description={translate(
           'auto.components.settings.RepositoryPane.8984d06520',
@@ -136,7 +136,7 @@ export function RepositoryWorktreeDefaultsSection({
         forceVisible={forceVisible}
       >
         <Label className="text-sm font-semibold">
-          {translate('auto.components.settings.RepositoryPane.f88db4fece', 'Default Worktree Base')}
+          {translate('auto.components.settings.RepositoryPane.f88db4fece', 'Default worktree base')}
         </Label>
         <BaseRefPicker
           repoId={repo.id}
@@ -148,7 +148,7 @@ export function RepositoryWorktreeDefaultsSection({
       </SearchableSetting>
 
       <SearchableSetting
-        title={translate('auto.components.settings.RepositoryPane.e9bd57a336', 'Worktree Location')}
+        title={translate('auto.components.settings.RepositoryPane.e9bd57a336', 'Worktree location')}
         description={translate(
           'auto.components.settings.RepositoryPane.e63bb96a9b',
           'Project-specific directory for new worktrees.'
@@ -166,7 +166,7 @@ export function RepositoryWorktreeDefaultsSection({
       >
         <div className="flex items-center justify-between gap-3">
           <Label className="text-sm font-semibold">
-            {translate('auto.components.settings.RepositoryPane.e9bd57a336', 'Worktree Location')}
+            {translate('auto.components.settings.RepositoryPane.e9bd57a336', 'Worktree location')}
           </Label>
           {repo.worktreeBasePath ? (
             <Button

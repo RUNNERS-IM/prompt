@@ -6,7 +6,7 @@ import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.git.search.68bd65fdb8', 'Branch Prefix'),
+    title: translate('auto.components.settings.git.search.68bd65fdb8', 'Branch prefix'),
     description: translate(
       'auto.components.settings.git.search.5ecd91c5ef',
       'Prefix added to branch names when creating worktrees.'
@@ -24,7 +24,7 @@ export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
         {
           title: translate(
             'auto.components.settings.git.search.jiraIssueKeyCasingTitle',
-            'Jira Key Casing'
+            'Jira key casing'
           ),
           description: translate(
             'auto.components.settings.git.search.jiraIssueKeyCasingDescription',
@@ -45,7 +45,7 @@ export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.git.search.f8bda25f29',
-      'Keep Local Main Up to Date'
+      'Keep local main up to date'
     ),
     description: translate(
       'auto.components.settings.git.search.0e993bf00f',
@@ -72,7 +72,7 @@ export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.git.search.sourceControlGroupOrderTitle',
-      'Source Control Group Order'
+      'Source control group order'
     ),
     description: translate(
       'auto.components.settings.git.search.sourceControlGroupOrderDescription',
@@ -99,7 +99,7 @@ export const getGitPaneSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.git.search.compareAgainstUpstreamTitle',
-      'Default Compare Base'
+      'Default compare base'
     ),
     description: translate(
       'auto.components.settings.git.search.compareAgainstUpstreamDescription',

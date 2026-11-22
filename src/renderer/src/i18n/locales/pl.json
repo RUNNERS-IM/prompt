@@ -24423,7 +24423,13 @@
       "argsGlobal": "Globalne własne argumenty"
     },
     "runnersAccount": {
-      "settings": "Ustawienia konta"
+      "settings": "Ustawienia konta",
+      "nickname": "Pseudonim",
+      "nicknameHint": "Widoczny obok pandy i w innych aplikacjach RUNNERS. Zostaw puste, aby użyć części adresu e-mail przed @.",
+      "nicknameLong": "Pseudonim może mieć najwyżej 30 znaków.",
+      "save": "Zapisz",
+      "saved": "Zapisano",
+      "network": "Nie udało się połączyć z serwerem. Spróbuj za chwilę."
     }
   }
 }

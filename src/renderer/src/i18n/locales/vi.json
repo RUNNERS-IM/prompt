@@ -23247,7 +23247,13 @@
       "argsGlobal": "Tham số tùy chỉnh chung"
     },
     "runnersAccount": {
-      "settings": "Cài đặt tài khoản"
+      "settings": "Cài đặt tài khoản",
+      "nickname": "Biệt danh",
+      "nicknameHint": "Hiện cạnh gấu trúc và trong các ứng dụng RUNNERS khác. Để trống để dùng phần email trước @.",
+      "nicknameLong": "Biệt danh tối đa 30 ký tự.",
+      "save": "Lưu",
+      "saved": "Đã lưu",
+      "network": "Không kết nối được máy chủ. Hãy thử lại sau giây lát."
     }
   }
 }

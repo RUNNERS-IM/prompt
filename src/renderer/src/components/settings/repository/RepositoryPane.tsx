@@ -168,18 +168,18 @@ export function RepositoryPane({
 
   const allEntries = getRepositoryPaneSearchEntries(repo, { isLocalWindowsProject })
   const identityEntryTitles = new Set([
-    translate('auto.components.settings.repository.search.7e1e456a95', 'Display Name'),
-    translate('auto.components.settings.repository.search.b24f00294a', 'Project Icon'),
+    translate('auto.components.settings.repository.search.7e1e456a95', 'Display name'),
+    translate('auto.components.settings.repository.search.b24f00294a', 'Project icon'),
     translate('components.RepositoryJiraProjectSection.title', 'Default Jira project'),
-    translate('auto.components.settings.repository.search.githubAccount', 'GitHub Account'),
+    translate('auto.components.settings.repository.search.githubAccount', 'GitHub account'),
     translate(
       'auto.components.settings.repository.search.keepForkUpToDate',
-      'Keep Fork Up to Date'
+      'Keep fork up to date'
     ),
-    translate('auto.components.settings.repository.search.094adbe930', 'Default Worktree Base'),
-    translate('auto.components.settings.repository.search.443d127b5a', 'Worktree Location'),
+    translate('auto.components.settings.repository.search.094adbe930', 'Default worktree base'),
+    translate('auto.components.settings.repository.search.443d127b5a', 'Worktree location'),
     translate('auto.components.settings.repository.search.externalWorktrees', 'External worktrees'),
-    translate('auto.components.settings.repository.search.projectRuntime', 'Project Runtime'),
+    translate('auto.components.settings.repository.search.projectRuntime', 'Project runtime'),
     translate('auto.components.settings.repository.search.c5266c2c9d', 'Remove Project')
   ])
   const identityEntries = allEntries.filter((entry) => identityEntryTitles.has(entry.title))
@@ -254,7 +254,7 @@ export function RepositoryPane({
         </div>
 
         <SearchableSetting
-          title={translate('auto.components.settings.RepositoryPane.c7ef4415de', 'Display Name')}
+          title={translate('auto.components.settings.RepositoryPane.c7ef4415de', 'Display name')}
           description={translate(
             'auto.components.settings.RepositoryPane.b0a0c14a1c',
             'Project-specific display details for the sidebar and tabs.'
@@ -264,7 +264,7 @@ export function RepositoryPane({
           forceVisible={forceFullPaneForRepoMatch}
         >
           <Label htmlFor={`repo-display-name-${repo.id}`} className="text-sm font-semibold">
-            {translate('auto.components.settings.RepositoryPane.c7ef4415de', 'Display Name')}
+            {translate('auto.components.settings.RepositoryPane.c7ef4415de', 'Display name')}
           </Label>
           <RepoSettingsDraftInput
             id={`repo-display-name-${repo.id}`}
@@ -276,7 +276,7 @@ export function RepositoryPane({
         </SearchableSetting>
 
         <SearchableSetting
-          title={translate('auto.components.settings.RepositoryPane.26fef02bf3', 'Project Icon')}
+          title={translate('auto.components.settings.RepositoryPane.26fef02bf3', 'Project icon')}
           description={translate(
             'auto.components.settings.RepositoryPane.e641c359de',
             'Project icon and color used in the sidebar and tabs.'

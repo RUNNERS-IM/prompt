@@ -152,14 +152,14 @@ export function TerminalThemeCatalogSection({
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalThemeSections.target_title',
-          'Theme Mode'
+          'Theme mode'
         )}
         keywords={['terminal', 'theme', 'dark', 'light']}
         forceVisible
       >
         <div className="space-y-2">
           <p className="text-xs font-medium text-muted-foreground">
-            {translate('auto.components.settings.TerminalThemeSections.target_title', 'Theme Mode')}
+            {translate('auto.components.settings.TerminalThemeSections.target_title', 'Theme mode')}
           </p>
           <SettingsSegmentedControl
             value={target}
@@ -282,11 +282,11 @@ export function TerminalThemeCatalogSection({
         isLightTarget
           ? translate(
               'auto.components.settings.TerminalThemeSections.db210115c5',
-              'Light Mode Preview'
+              'Light mode preview'
             )
           : translate(
               'auto.components.settings.TerminalThemeSections.bc8e8a251a',
-              'Dark Mode Preview'
+              'Dark mode preview'
             )
       }
       description={

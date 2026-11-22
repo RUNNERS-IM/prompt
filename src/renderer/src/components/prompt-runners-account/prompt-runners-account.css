@@ -12,6 +12,17 @@ html:root {
   --ra-bad: var(--destructive);
   --ra-mark-bg: var(--foreground);
   --ra-mark-fg: var(--background);
+  /* The kit's red follows the OS theme; here it follows Prompt's. Same two values as runners-tokens.css. */
+  --r-danger-text: #d70f0f;
+}
+
+html.dark:root {
+  --r-danger-text: #ff6b6b;
+}
+
+/* The nickname line's note when it is too long or the save failed (kit --r-danger-text, as in Draw). */
+.prompt-runners-nickname-note {
+  color: var(--r-danger-text);
 }
 
 /* Electron drag hit-testing ignores z-index, so the sheet and menu over the title bar must opt out of dragging. */

@@ -22951,7 +22951,13 @@
       "argsGlobal": "전역 사용자 인수"
     },
     "runnersAccount": {
-      "settings": "계정 설정"
+      "settings": "계정 설정",
+      "nickname": "닉네임",
+      "nicknameHint": "판다 옆과 다른 RUNNERS 앱에 보이는 이름입니다. 비우면 이메일 @ 앞부분을 씁니다.",
+      "nicknameLong": "닉네임은 30자까지 쓸 수 있습니다.",
+      "save": "저장",
+      "saved": "저장됨",
+      "network": "서버에 연결하지 못했습니다. 잠시 뒤 다시 해 보세요."
     }
   }
 }

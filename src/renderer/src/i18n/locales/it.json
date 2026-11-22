@@ -24031,7 +24031,13 @@
       "argsGlobal": "Argomenti personalizzati globali"
     },
     "runnersAccount": {
-      "settings": "Impostazioni account"
+      "settings": "Impostazioni account",
+      "nickname": "Nickname",
+      "nicknameHint": "Mostrato accanto al panda e nelle altre app RUNNERS. Lascia vuoto per usare la parte dell’e-mail prima di @.",
+      "nicknameLong": "Il nickname può avere al massimo 30 caratteri.",
+      "save": "Salva",
+      "saved": "Salvato",
+      "network": "Impossibile raggiungere il server. Riprova tra poco."
     }
   }
 }
