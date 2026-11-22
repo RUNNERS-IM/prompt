@@ -98,7 +98,7 @@ export function renderClaudeAccountsSection(model: AccountsPaneSectionModel): Re
       </div>
 
       <SearchableSetting
-        title={translate('auto.components.settings.AccountsPane.8bbfd74556', 'Claude Accounts')}
+        title={translate('auto.components.settings.AccountsPane.8bbfd74556', 'Claude accounts')}
         description={translate(
           'accounts.claude.profileSwitching',
           'Switching applies to the next Claude you start in any tab.'

@@ -235,13 +235,13 @@ export function AppearanceInterfaceSection({
   )
   const zoomRow = (
     <SearchableSetting
-      title={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
+      title={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI zoom')}
       description={zoomEntry?.description}
       keywords={zoomEntry?.keywords ?? ['zoom', 'scale', 'shortcut']}
       forceVisible={forceVisiblePrimary}
     >
       <SettingsRow
-        label={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI Zoom')}
+        label={translate('auto.components.settings.AppearancePane.5e6d7aba8d', 'UI zoom')}
         // Explain the shortcut and terminal exception; the zoom buttons already explain scaling.
         description={
           <>
@@ -259,13 +259,13 @@ export function AppearanceInterfaceSection({
   )
   const fontRow = (
     <SearchableSetting
-      title={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
+      title={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE font')}
       description={typographyEntry?.description}
       keywords={typographyEntry?.keywords ?? ['font', 'typeface', 'typography']}
       forceVisible={forceVisiblePrimary}
     >
       <SettingsRow
-        label={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE Font')}
+        label={translate('auto.components.settings.AppearancePane.102d6b5f9b', 'IDE font')}
         control={
           <FontAutocomplete
             value={settings.appFontFamily}
@@ -282,12 +282,12 @@ export function AppearanceInterfaceSection({
   )
   const titlebarRow = (
     <SearchableSetting
-      title={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar App Name')}
+      title={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar app name')}
       description={titlebarEntry?.description}
       keywords={titlebarEntry?.keywords ?? ['titlebar', 'orca', 'app', 'name']}
     >
       <SettingsSwitchRow
-        label={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar App Name')}
+        label={translate('auto.components.settings.AppearancePane.9868f39007', 'Titlebar app name')}
         checked={settings.showTitlebarAppName}
         onChange={() => updateSettings({ showTitlebarAppName: !settings.showTitlebarAppName })}
       />
@@ -299,7 +299,7 @@ export function AppearanceInterfaceSection({
         <SearchableSetting
           title={translate(
             'auto.components.settings.AppearancePane.2edf606c46',
-            'Minimize to Tray on Close'
+            'Minimize to tray on close'
           )}
           description={systemTrayEntry?.description}
           keywords={systemTrayEntry?.keywords ?? ['tray', 'minimize', 'close']}
@@ -307,7 +307,7 @@ export function AppearanceInterfaceSection({
           <SettingsSwitchRow
             label={translate(
               'auto.components.settings.AppearancePane.2edf606c46',
-              'Minimize to Tray on Close'
+              'Minimize to tray on close'
             )}
             // Explain the non-obvious platform restriction and keep-running consequence.
             description={translate(
@@ -327,12 +327,12 @@ export function AppearanceInterfaceSection({
     <>
       {isDesktopMac ? (
         <SearchableSetting
-          title={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
+          title={translate('settings.appearance.menuBarIcon.title', 'Show menu bar icon')}
           description={menuBarIconEntry?.description}
           keywords={menuBarIconEntry?.keywords ?? ['menu bar', 'status item', 'activity']}
         >
           <SettingsSwitchRow
-            label={translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon')}
+            label={translate('settings.appearance.menuBarIcon.title', 'Show menu bar icon')}
             // Hiding the status item preserves Dock activation and close-keeps-running behavior.
             description={translate(
               'settings.appearance.menuBarIcon.description',

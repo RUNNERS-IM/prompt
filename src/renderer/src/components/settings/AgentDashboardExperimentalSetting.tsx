@@ -22,7 +22,7 @@ export function AgentDashboardExperimentalSetting({
     <SearchableSetting
       title={translate(
         'auto.components.settings.ExperimentalPane.agentDashboard.title',
-        'Agent Dashboard'
+        'Agent dashboard'
       )}
       description={translate(
         'auto.components.settings.ExperimentalPane.agentDashboard.description',
@@ -37,7 +37,7 @@ export function AgentDashboardExperimentalSetting({
           <Label>
             {translate(
               'auto.components.settings.ExperimentalPane.agentDashboard.title',
-              'Agent Dashboard'
+              'Agent dashboard'
             )}
           </Label>
           <p className="text-xs text-muted-foreground">

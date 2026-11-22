@@ -104,7 +104,7 @@ export function NotificationSoundSection({
           <Label className={PROMPT_SIMPLE_SETTINGS ? 'text-[13px] leading-4' : undefined}>
             {translate(
               'auto.components.settings.NotificationsPane.88686e6ca8',
-              'Notification Sound'
+              'Notification sound'
             )}
           </Label>
         </div>

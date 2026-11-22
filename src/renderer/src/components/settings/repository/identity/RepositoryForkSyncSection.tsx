@@ -159,7 +159,7 @@ export function RepositoryForkSyncSection({
     <SearchableSetting
       title={translate(
         'auto.components.settings.RepositoryForkSyncSection.title',
-        'Keep Fork Up to Date'
+        'Keep fork up to date'
       )}
       description={translate(
         'auto.components.settings.RepositoryForkSyncSection.description',
@@ -198,7 +198,7 @@ export function RepositoryForkSyncSection({
           <div className="text-sm font-semibold">
             {translate(
               'auto.components.settings.RepositoryForkSyncSection.title',
-              'Keep Fork Up to Date'
+              'Keep fork up to date'
             )}
           </div>
           <p className="text-xs text-muted-foreground">
