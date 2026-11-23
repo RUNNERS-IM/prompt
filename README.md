@@ -1,109 +1,61 @@
-<h1 align="center">
-  <img src="resources/build/icon.png" alt="" width="64" valign="middle" /> Prompt
-</h1>
-
 <p align="center">
-  A Mac terminal that runs many Claude Code sessions, grouped by project, in one window.<br/>
-  <a href="https://runners.im/prompt">runners.im/prompt</a>
+  <img src="https://runners.im/images/apps/prompt/icon.webp" width="96" alt="Prompt">
 </p>
-
+<h1 align="center">Prompt</h1>
+<p align="center"><b>Many Claude sessions, one window.</b><br>A Mac terminal that runs many Claude Code sessions in one window, grouped by project.</p>
 <p align="center">
-  <sub>English · <a href="docs/readme/README.ko.md">한국어</a></sub>
+  <a href="https://github.com/RUNNERS-IM/prompt/releases/latest/download/prompt-macos-arm64.dmg"><b>Download for Mac</b></a> ·
+  <a href="https://runners.im/prompt">runners.im/prompt</a> ·
+  <a href="docs/readme/README.ko.md">한국어</a>
 </p>
+<p align="center"><sub>Free · macOS 12 or later · Apple silicon · 20 languages</sub></p>
 
-<!-- Screenshot from runners.im/prompt goes here. -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/stage-en-dark.webp">
+  <img src="https://runners.im/images/apps/prompt/stage-en-light.webp" alt="The whole Prompt window: sessions grouped by project on the left, a Claude terminal in the middle, files on the right">
+</picture>
 
-## 1. Install
+## What it does
 
-Prompt is published on [GitHub Releases](https://github.com/RUNNERS-IM/prompt/releases/latest).
+<table>
+<tr>
+<td width="50%" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/projects-en-dark.webp"><img src="https://runners.im/images/apps/prompt/projects-en-light.webp" alt="Workspaces and sessions under each project, each line showing its current status"></picture><br><b>See what every session is doing</b><br>Each project lists its sessions underneath, and every row shows what it's doing — editing files, running a command, done and waiting for you.</td>
+<td width="50%" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/worktrees-en-dark.webp"><img src="https://runners.im/images/apps/prompt/worktrees-en-light.webp" alt="Two workspaces (main and fix-login) under one project, next to the session terminal"></picture><br><b>A separate workspace for each task</b><br>Each workspace gets its own git worktree, so sessions never overwrite each other's files.</td>
+</tr>
+<tr>
+<td valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/keep-running-en-dark.webp"><img src="https://runners.im/images/apps/prompt/keep-running-en-light.webp" alt="A build log that keeps going without a gap after Prompt is reopened"></picture><br><b>Quit, and sessions keep going</b><br>Terminals keep running after you quit Prompt; reopen it and they reattach. Quit Completely… in the menu bar icon stops everything.</td>
+<td valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/folders-en-dark.webp"><img src="https://runners.im/images/apps/prompt/folders-en-light.webp" alt="A letter logo on each project, with a plain non-git folder in the same list"></picture><br><b>Any folder, with its own logo</b><br>Add plain folders as projects, not just git repositories, and give each project a logo so it stands out.</td>
+</tr>
+<tr>
+<td valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/images/apps/prompt/usage-en-dark.webp"><img src="https://runners.im/images/apps/prompt/usage-en-light.webp" alt="Claude usage in the status bar at the bottom"></picture><br><b>Usage and finished sessions, at a glance</b><br>The status bar shows your Claude usage so limits don't surprise you, and a macOS notification appears when a session finishes.</td>
+<td valign="top"><b>Sessions on your other Macs</b><br>Click the computer name at the top of the sidebar to switch to another Mac. Share This Computer… makes a link; paste it into Add Computer… on the other Mac.</td>
+</tr>
+</table>
 
-**macOS (Apple silicon):** download
-[`prompt-macos-arm64.dmg`](https://github.com/RUNNERS-IM/prompt/releases/latest/download/prompt-macos-arm64.dmg),
-open it and drag Prompt into Applications. The Mac build is signed with a Developer ID and
-notarized by Apple, so it opens without a security warning.
+## Install
 
-The same release page also has these builds:
+Download [`prompt-macos-arm64.dmg`](https://github.com/RUNNERS-IM/prompt/releases/latest/download/prompt-macos-arm64.dmg), open it and drag Prompt into Applications. The Mac build is signed and notarized by Apple, so it opens without a security warning. There is no Intel Mac build.
 
-- **Windows (x64):** `prompt-windows-setup.exe`. It is not code-signed yet, so Windows SmartScreen
-  shows a warning the first time. Choose "More info", then "Run anyway".
-- **Linux (x64):** `prompt-linux.AppImage`, plus `.deb` and `.rpm` packages.
+The [Releases](https://github.com/RUNNERS-IM/prompt/releases/latest) page also has a Windows installer (`prompt-windows-setup.exe`, not code-signed yet, so SmartScreen warns the first time) and Linux builds (`.AppImage`, `.deb`, `.rpm`).
 
-There is no Intel Mac build at the moment.
+Prompt checks Releases for new versions and offers to install them. You can also choose Check for Updates from the menu bar icon or the app menu.
 
-**Updates:** Prompt checks the same GitHub Releases page for new versions and offers to install
-them. You can also check by hand from the menu bar icon or the app menu ("Check for Updates").
+## Command line
 
-## 2. What you can do
+Prompt includes a command called `prompt`. Terminals inside Prompt can run it right away; to use it elsewhere, turn it on in Settings › General › CLI, which registers `prompt` in `/usr/local/bin`. `prompt --help` lists every command, such as `prompt project list` and `prompt session list`. The old `orca` name is being retired; use `prompt`.
 
-1. **See every session by project in the sidebar.** The sidebar has two levels: a row for each
-   project, and under it one row per Claude session. Each session row shows its name, how long
-   ago it was active, what it is doing now, and a status icon (working, waiting for your answer,
-   done, failed).
-2. **Manage sessions from the sidebar.** Right-click a session to rename it, give its tab a color,
-   copy it into a new window, or close it. A project row has a menu for starting a new session.
-3. **Choose the Claude model per session.** Each session has a model menu. Picking a model types
-   `/model` into that Claude session for you. Tabs and sidebar rows show the model only when it is
-   not the default one.
-4. **Use several windows.** Open a new window, move a tab to another window or to a new one, and
-   open a project in its own window. With "Remember Open Windows" in Settings, Prompt reopens the
-   windows with their tabs, size and position the next time it starts.
-5. **Switch Claude accounts and watch usage.** The status bar at the bottom shows Claude usage and
-   lets you switch between Claude accounts. Accounts are added in Settings.
-6. **See from the menu bar that Claude is working.** The `>_` icon in the macOS menu bar blinks its
-   cursor while an agent is working, and stays still when everything is idle.
-7. **Split terminals.** One tab can hold several terminal panes side by side.
-8. **Use a Mac-style interface.** Prompt uses the system font, your macOS accent color, and follows
-   the system light or dark mode. The terminal uses the "Prompt Dark" theme by default.
-9. **Use it in Korean.** The interface is available in Korean and other languages, and Korean
-   strings missing upstream are filled in.
+## Privacy
 
-## 3. CLI
+Prompt does not talk to Orca's servers and sends no usage data. When Prompt hits a JavaScript error, it sends the error type, the code lines, the app version and the OS version to RUNNERS' Sentry. Emails, tokens, your home folder name, the computer name, window titles, typed text and request bodies are removed before sending. IP addresses, screenshots, recordings, console logs and crash dumps are not sent.
 
-Prompt includes a command line tool called `prompt`.
+## Based on Orca
 
-- Terminals opened inside Prompt can already run `prompt`.
-- To use it in other terminals, turn it on in Settings > General, in the CLI section. On macOS this
-  registers `prompt` in `/usr/local/bin`.
-- `prompt --help` lists every command. Today they include, for example, `prompt project list` and
-  `prompt session list`.
-- The old `orca` name still works for existing scripts, runs the earlier command set and prints a
-  notice that it was renamed.
+Prompt is based on [Orca](https://github.com/stablyai/orca) by Stably AI. Most of the engine (terminals, worktrees, editor) comes from Orca; Prompt adds the two-level sidebar, per-session model menu, multiple windows, the menu bar icon and Mac-to-Mac sessions, and hides Orca-only services. Settings and sessions live in their own `Prompt` folder; an existing Orca folder is copied on first launch. Orca's original README is in [docs/upstream/README.orca.md](docs/upstream/README.orca.md).
 
-## 4. How Prompt differs from Orca
+## License
 
-Prompt is based on [Orca](https://github.com/stablyai/orca). Most of the engine (terminals,
-worktrees, editor) comes from Orca. Since 2026-11-02 Prompt no longer merges Orca's changes; fixes
-from Orca are picked by hand when needed. Prompt changes:
+Copyright (c) 2026 Runners Co., Ltd. All rights reserved. See [LICENSE](LICENSE). Orca is distributed under the MIT License (Copyright (c) 2026 Lovecast Inc.); its notice and those of other third-party components are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-- **Name and identity:** app name Prompt, bundle id `im.runners.prompt`, and links that start with
-  `prompt://`.
-- **No Orca services:** Prompt does not talk to Orca's servers. Orca sign-in, relay, push, plugin
-  catalogs and update feeds are turned off, and no usage data (telemetry) is sent.
-- **Error reports:** when Prompt hits a JavaScript error, it sends the error type, the code lines,
-  the app version and the OS version to RUNNERS' Sentry. Emails, tokens, your home folder name,
-  the computer name, window titles, typed text and request bodies are replaced with `[가림]` before
-  sending; IP addresses, screenshots, screen recordings and console logs are not sent. Crash dumps
-  from a whole-app crash are not sent either, because they hold memory that cannot be redacted.
-- **Its own data folder:** settings and sessions live in a `Prompt` folder. On first launch, an
-  existing Orca folder is copied into it. Since 2.6.110201, on macOS the old folder is deleted once
-  nothing runs from it any more and Orca.app itself is not installed.
-- **Claude-focused interface:** the two-level sidebar, per-session model menu, multi-window
-  support and menu bar icon above are Prompt additions. Usage meters for other AI providers are
-  hidden.
-- **Fewer settings pages:** settings pages for Orca-only features (orchestration, computer use,
-  voice, Orca account, mobile, plugins, automations, tasks and others) are hidden.
-- **Shorter first run:** the welcome steps appear only on a brand-new profile and cover theme,
-  notifications and Yolo mode.
-- **Updates and issues** come from and go to [RUNNERS-IM/prompt](https://github.com/RUNNERS-IM/prompt).
+---
 
-Orca's original README is kept in [docs/upstream/README.orca.md](docs/upstream/README.orca.md).
-
-## 5. Made by · License
-
-Prompt is made by RUNNERS (Runners Co., Ltd.).
-
-Copyright (c) 2026 Runners Co., Ltd. All rights reserved. See [LICENSE](LICENSE).
-
-Prompt is based on Orca by Stably AI, distributed under the MIT License
-(Copyright (c) 2026 Lovecast Inc.). Orca's full copyright and permission notice, and the notices
-of the other third-party components, are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+<p align="center"><a href="https://runners.im"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/icons/logos/RUNNERS_H_W.svg"><img src="https://runners.im/icons/logos/RUNNERS_H.svg" height="20" alt="RUNNERS"></picture></a><br><sub>Made by RUNNERS · Based on Orca (MIT)</sub></p>
