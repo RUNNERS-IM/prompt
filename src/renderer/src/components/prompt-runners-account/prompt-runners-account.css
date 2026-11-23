@@ -13,7 +13,7 @@ html:root {
   --ra-mark-bg: var(--foreground);
   --ra-mark-fg: var(--background);
   /* The kit's red follows the OS theme; here it follows Prompt's. Same two values as runners-tokens.css. */
-  --r-danger-text: #d70f0f;
+  --r-danger-text: #c20c0c;
 }
 
 html.dark:root {
