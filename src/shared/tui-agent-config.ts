@@ -30,7 +30,12 @@ const TUI_AGENT_CONFIG_SOURCE: Record<TuiAgent, TuiAgentConfigSource> = {
     draftPasteReadySignal: 'claude-composer-prompt',
     workerStartReadsComposerMarker: true,
     // Why: Claude decodes CSI-u Ctrl+Enter on local ConPTY; CR made a remapped ctrl+enter act as Enter (#29711).
-    ctrlEnterEncoding: 'csi-u'
+    ctrlEnterEncoding: 'csi-u',
+    // Why: an idle Claude (after an auto-compact, with a background shell) can drop the first Enter
+    // and keep the prompt in its composer for hours; press Enter again only while it still holds it.
+    submitRetryDelayMs: 1500,
+    submitRetryBudgetMs: 20_000,
+    submitRetryReadsDraft: true
   },
   'claude-agent-teams': {
     // This launch mode uses Orca’s CLI wrapper rather than a separate agent binary.
@@ -314,7 +319,8 @@ const TUI_AGENT_CONFIG_SOURCE: Record<TuiAgent, TuiAgentConfigSource> = {
     draftPasteReadySignal: 'dsh-composer-prompt',
     // Why: dsh-tui 0.17's launchpad refuses Enter, keeping the draft, until its session opens (1-24 s).
     submitRetryDelayMs: 1000,
-    submitRetryBudgetMs: 30_000
+    submitRetryBudgetMs: 30_000,
+    submitRetryReadsDraft: true
   },
   zcode: {
     detectCmd: 'zcode',
