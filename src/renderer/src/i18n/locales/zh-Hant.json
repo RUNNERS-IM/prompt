@@ -130,7 +130,7 @@
         "description": "佈景主題、語言、縮放、字型與終端機色彩。"
       },
       "cli": {
-        "installDescriptionMac": "在 /usr/local/bin 中註冊 `prompt` 與 `orca`。",
+        "installDescriptionMac": "在 /usr/local/bin 中註冊 `prompt`。",
         "notInstalled": "註冊 {{path}}，以便從其他終端機使用 Prompt。"
       },
       "advanced": {

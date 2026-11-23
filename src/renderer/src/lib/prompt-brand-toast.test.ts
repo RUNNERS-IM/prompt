@@ -36,15 +36,17 @@ it('swaps Orca for Prompt in untranslated toast titles and descriptions', () => 
   ])
 })
 
-it('leaves non-string content, identifiers and the orca CLI alone', () => {
+it('leaves non-string content and identifiers alone, and names the CLI the host registers', () => {
   const { api, calls } = fakeToastApi()
   installPromptBrandToasts(api)
   const node = { type: 'span' }
   api.warning(node as never, { description: node as never })
   api.info('Run orca status or set ORCA_HOME')
+  // macOS registers only `prompt`; other platforms keep the `orca` command.
+  const cli = process.platform === 'darwin' ? 'prompt' : 'orca'
   expect(calls).toEqual([
     ['warning', node, { description: node }],
-    ['info', 'Run orca status or set ORCA_HOME', undefined]
+    ['info', `Run ${cli} status or set ORCA_HOME`, undefined]
   ])
 })
 

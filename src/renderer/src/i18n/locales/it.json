@@ -23854,7 +23854,7 @@
         "description": "Tema, lingua, zoom, font e colori del terminale"
       },
       "cli": {
-        "installDescriptionMac": "Registra `prompt` e `orca` in /usr/local/bin",
+        "installDescriptionMac": "Registra `prompt` in /usr/local/bin",
         "notInstalled": "Registra {{path}} per usare Prompt da altri terminali"
       },
       "advanced": {

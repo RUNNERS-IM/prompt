@@ -25027,7 +25027,7 @@
         "description": "السمة واللغة والتكبير والخطوط وألوان الطرفية."
       },
       "cli": {
-        "installDescriptionMac": "سجّل `prompt` و`orca` في /usr/local/bin.",
+        "installDescriptionMac": "سجّل `prompt` في /usr/local/bin.",
         "notInstalled": "سجّل {{path}} لاستخدام Prompt من طرفيات أخرى."
       },
       "advanced": {

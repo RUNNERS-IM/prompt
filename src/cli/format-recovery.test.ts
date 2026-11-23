@@ -3,6 +3,9 @@ import { describe, expect, it, vi } from 'vitest'
 import { formatCliError, reportCliError } from './format'
 import { RuntimeClientError, RuntimeRpcFailureError } from './runtime-client'
 
+// reportCliError prints the command macOS registers (`prompt`); elsewhere it stays `orca`.
+const PRINTED_CLI = process.platform === 'darwin' ? 'prompt' : 'orca'
+
 function selectorNotFound(): RuntimeRpcFailureError {
   return new RuntimeRpcFailureError({
     id: 'req_selector',
@@ -54,7 +57,7 @@ describe('ambiguous selector recovery', () => {
       error: {
         data: {
           nextSteps: expect.arrayContaining([
-            'List the exact values with `orca worktree list --json`.'
+            `List the exact values with \`${PRINTED_CLI} worktree list --json\`.`
           ])
         }
       }

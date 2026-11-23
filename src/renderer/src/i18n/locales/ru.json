@@ -130,7 +130,7 @@
         "description": "Тема, язык, масштаб, шрифты и цвета терминала."
       },
       "cli": {
-        "installDescriptionMac": "Зарегистрировать `prompt` и `orca` в /usr/local/bin.",
+        "installDescriptionMac": "Зарегистрировать `prompt` в /usr/local/bin.",
         "notInstalled": "Зарегистрируйте {{path}}, чтобы использовать Prompt из других терминалов."
       },
       "advanced": {

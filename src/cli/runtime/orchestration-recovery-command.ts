@@ -9,7 +9,11 @@ export function resolveOrchestrationCliExecutable(
   if (env.ORCA_DEV_REPO_ROOT) {
     return 'orca-dev'
   }
-  return platform === 'linux' ? 'orca-ide' : 'orca'
+  if (platform === 'linux') {
+    return 'orca-ide'
+  }
+  // Prompt ships only `prompt` on macOS.
+  return platform === 'darwin' ? 'prompt' : 'orca'
 }
 
 export function buildOrchestrationRecoveryCommand(

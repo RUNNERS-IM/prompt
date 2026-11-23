@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs'
 import { mkdir, unlink } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import type { CliInstallStatus } from '../../shared/cli-install-types'
@@ -14,7 +13,7 @@ import {
   resolveLegacyAppImageNamespacePath
 } from './appimage-extracted-root'
 import { isAppImageStableLauncherReady } from './appimage-stable-launcher'
-import { MAC_PROMPT_COMMAND_NAME } from './cli-install-constants'
+import { LEGACY_MAC_COMMAND_NAME } from './cli-install-constants'
 import { CliPathRegistration } from './cli-path-registration'
 import { removeLinuxBareOrcaDispatcher } from './linux-bare-orca-dispatcher'
 
@@ -100,16 +99,20 @@ export class CliInstaller extends CliPathRegistration {
             detail: `${spec.commandPath} does not point to the current Orca AppImage payload.`
           }
         : inspectedStatus
-    const promptStatus = await this.withMacPromptCommandStatus(baseStatus)
     const pathDirectory = dirname(spec.commandPath)
     const pathProbe = await this.probePathConfiguration(pathDirectory)
-    return this.withPathInfo(promptStatus, pathDirectory, pathProbe)
+    const legacyStatus = await this.withLegacyMacOrcaCommandStatus(baseStatus)
+    return this.withPathInfo(legacyStatus, pathDirectory, pathProbe)
   }
 
-  /** `prompt` beside the registered `orca`, when this build ships its launcher. */
-  private macPromptCommand(
+  /**
+   * `orca` links older Prompt builds registered beside `prompt` on macOS. Each entry pairs the
+   * link with the launcher it would have pointed to in this app, so inspectSymlink can tell a
+   * Prompt-owned link (this app or another *.app, even a deleted one) from someone else's `orca`.
+   */
+  private macLegacyOrcaCommands(
     status: Pick<CliInstallStatus, 'commandPath' | 'launcherPath'>
-  ): { commandPath: string; launcherPath: string } | null {
+  ): { commandPath: string; launcherPath: string }[] {
     if (
       this.platform !== 'darwin' ||
       !this.isPackaged ||
@@ -117,51 +120,56 @@ export class CliInstaller extends CliPathRegistration {
       !status.commandPath ||
       !status.launcherPath
     ) {
-      return null
+      return []
     }
-    const launcherPath = join(dirname(status.launcherPath), MAC_PROMPT_COMMAND_NAME)
-    return existsSync(launcherPath)
-      ? { commandPath: join(dirname(status.commandPath), MAC_PROMPT_COMMAND_NAME), launcherPath }
-      : null
+    const launcherPath = join(dirname(status.launcherPath), LEGACY_MAC_COMMAND_NAME)
+    const registeredPath = status.commandPath
+    const commandPaths = new Set([
+      join(dirname(registeredPath), LEGACY_MAC_COMMAND_NAME),
+      join(this.homePath, '.local', 'bin', LEGACY_MAC_COMMAND_NAME)
+    ])
+    // Why: a custom default path may itself be named `orca`; never undo the command just registered.
+    return [...commandPaths]
+      .filter((commandPath) => commandPath !== registeredPath)
+      .map((commandPath) => ({ commandPath, launcherPath }))
   }
 
-  // A registration made before `prompt` shipped reads as stale so Settings offers to register again.
-  private async withMacPromptCommandStatus(status: CliInstallStatus): Promise<CliInstallStatus> {
-    const prompt = this.macPromptCommand(status)
-    if (!prompt || status.state !== 'installed') {
+  // Why: a Mac that already has `prompt` never registers again, so an old `orca` link would stay
+  // pointing at a launcher this build no longer ships. Reading as stale makes Settings offer it.
+  private async withLegacyMacOrcaCommandStatus(
+    status: CliInstallStatus
+  ): Promise<CliInstallStatus> {
+    if (status.state !== 'installed') {
       return status
     }
-    const promptStatus = await this.inspectSymlink(prompt.commandPath, prompt.launcherPath)
-    if (promptStatus.state === 'installed') {
-      return status
+    for (const legacy of this.macLegacyOrcaCommands(status)) {
+      const legacyStatus = await this.inspectSymlink(legacy.commandPath, legacy.launcherPath)
+      if (legacyStatus.state === 'installed' || legacyStatus.state === 'stale') {
+        return {
+          ...status,
+          state: 'stale',
+          detail: `${legacy.commandPath} is an old \`orca\` command from an earlier Prompt. Register again to remove it; \`prompt\` keeps working.`
+        }
+      }
     }
-    return {
-      ...status,
-      state: 'stale',
-      detail:
-        promptStatus.state === 'conflict'
-          ? `${prompt.commandPath} already exists and is not a Prompt command. Remove it to use \`prompt\` from the terminal.`
-          : `${prompt.commandPath} is not registered yet. Register again to add the \`prompt\` command.`
-    }
+    return status
   }
 
-  private async installMacPromptCommand(status: CliInstallStatus): Promise<void> {
-    const prompt = this.macPromptCommand(status)
-    if (!prompt) {
-      return
-    }
-    await this.installSymlink(await this.inspectSymlink(prompt.commandPath, prompt.launcherPath))
-  }
-
-  private async removeMacPromptCommand(status: CliInstallStatus): Promise<void> {
-    const prompt = this.macPromptCommand(status)
-    if (!prompt) {
-      return
-    }
-    // Someone else's `prompt` is left alone; it must not block removing `orca`.
-    const promptStatus = await this.inspectSymlink(prompt.commandPath, prompt.launcherPath)
-    if (promptStatus.state === 'installed' || promptStatus.state === 'stale') {
-      await this.removeSymlink(prompt.commandPath, prompt.launcherPath)
+  // Someone else's `orca` reads as a conflict and stays; only Prompt's own old links go.
+  private async removeLegacyMacOrcaCommands(status: CliInstallStatus): Promise<void> {
+    for (const legacy of this.macLegacyOrcaCommands(status)) {
+      try {
+        const legacyStatus = await this.inspectSymlink(legacy.commandPath, legacy.launcherPath)
+        if (legacyStatus.state === 'installed' || legacyStatus.state === 'stale') {
+          await this.removeSymlink(legacy.commandPath, legacy.launcherPath)
+        }
+      } catch (error) {
+        // Why: `prompt` is already registered or removed; a leftover `orca` link must not fail it.
+        console.warn(
+          `[cli] Could not remove the old command at ${legacy.commandPath}:`,
+          error instanceof Error ? error.message : String(error)
+        )
+      }
     }
   }
 
@@ -199,7 +207,7 @@ export class CliInstaller extends CliPathRegistration {
 
     if (status.installMethod === 'symlink') {
       await this.installSymlink(status)
-      await this.installMacPromptCommand(status)
+      await this.removeLegacyMacOrcaCommands(status)
       await this.removeLegacyLinuxCommandIfManaged(status.launcherPath)
     } else if (this.isWindowsPackagedBundledCommand(status.commandPath, status.launcherPath)) {
       // Why: packaged Windows already ships resources/bin/orca.exe; registration only owns the PATH entry.
@@ -256,8 +264,8 @@ export class CliInstaller extends CliPathRegistration {
     }
 
     if (status.installMethod === 'symlink') {
-      await this.removeMacPromptCommand(status)
       await this.removeSymlink(status.commandPath)
+      await this.removeLegacyMacOrcaCommands(status)
       await this.removeLegacyLinuxCommandIfManaged(status.launcherPath)
     } else if (this.isWindowsPackagedBundledCommand(status.commandPath, status.launcherPath)) {
       await this.removeWindowsPathEntry(dirname(status.commandPath))

@@ -130,7 +130,7 @@
         "description": "主题、语言、缩放、字体和终端颜色。"
       },
       "cli": {
-        "installDescriptionMac": "在 /usr/local/bin 中注册 `prompt` 和 `orca`。",
+        "installDescriptionMac": "在 /usr/local/bin 中注册 `prompt`。",
         "notInstalled": "注册 {{path}}，以便在其他终端中使用 Prompt。"
       },
       "advanced": {

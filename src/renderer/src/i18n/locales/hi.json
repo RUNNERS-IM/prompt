@@ -23463,7 +23463,7 @@
         "description": "थीम, भाषा, ज़ूम, फ़ॉन्ट और टर्मिनल रंग।"
       },
       "cli": {
-        "installDescriptionMac": "`prompt` और `orca` को /usr/local/bin में रजिस्टर करें।",
+        "installDescriptionMac": "`prompt` को /usr/local/bin में रजिस्टर करें।",
         "notInstalled": "अन्य टर्मिनल से Prompt इस्तेमाल करने के लिए {{path}} रजिस्टर करें।"
       },
       "advanced": {

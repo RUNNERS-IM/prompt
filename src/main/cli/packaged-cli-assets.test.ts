@@ -31,7 +31,8 @@ const builderConfig = require('../../../config/electron-builder.config.cjs') as 
   asarUnpack?: string[]
 }
 const linuxLauncherAsset = new URL('../../../resources/linux/bin/orca-ide', import.meta.url)
-const darwinLauncherAsset = new URL('../../../resources/darwin/bin/orca', import.meta.url)
+// Prompt ships only `prompt` on macOS; it runs the Prompt CLI entry (out/cli/prompt.js).
+const darwinLauncherAsset = new URL('../../../resources/darwin/bin/prompt', import.meta.url)
 const unixLauncherFixtures = [
   {
     name: 'Linux',
@@ -44,10 +45,10 @@ const unixLauncherFixtures = [
   {
     name: 'macOS',
     asset: darwinLauncherAsset,
-    appDir: ['Orca.app'],
-    launcher: ['Contents', 'Resources', 'bin', 'orca'],
+    appDir: ['Prompt.app'],
+    launcher: ['Contents', 'Resources', 'bin', 'prompt'],
     executable: ['Contents', 'MacOS', 'Prompt'],
-    cli: ['Contents', 'Resources', 'app.asar.unpacked', 'out', 'cli', 'index.js']
+    cli: ['Contents', 'Resources', 'app.asar.unpacked', 'out', 'cli', 'prompt.js']
   }
 ] as const
 

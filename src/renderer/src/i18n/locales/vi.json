@@ -23072,7 +23072,7 @@
         "description": "Chủ đề, ngôn ngữ, thu phóng, phông chữ và màu terminal."
       },
       "cli": {
-        "installDescriptionMac": "Đăng ký `prompt` và `orca` trong /usr/local/bin.",
+        "installDescriptionMac": "Đăng ký `prompt` trong /usr/local/bin.",
         "notInstalled": "Đăng ký {{path}} để dùng Prompt từ các terminal khác."
       },
       "advanced": {

@@ -1,5 +1,15 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { applyPromptBrand } from './prompt-brand'
+
+const originalPlatform = process.platform
+
+function setPlatform(platform: NodeJS.Platform): void {
+  Object.defineProperty(process, 'platform', { configurable: true, value: platform })
+}
+
+afterEach(() => {
+  setPlatform(originalPlatform)
+})
 
 describe('applyPromptBrand', () => {
   it('swaps the brand word but keeps identifiers', () => {
@@ -19,11 +29,19 @@ describe('applyPromptBrand', () => {
     expect(applyPromptBrand('오르카는 세션을 두었습니다.')).toBe('프롬프트는 세션을 두었습니다.')
   })
 
-  it('renames the Claude keybinding action in every catalog, but not orca CLI commands', async () => {
+  it('names the prompt CLI command on macOS only', () => {
+    setPlatform('darwin')
+    expect(applyPromptBrand('Run orca status')).toBe('Run prompt status')
+    setPlatform('linux')
+    expect(applyPromptBrand('Run orca status')).toBe('Run orca status')
+    setPlatform('win32')
+    expect(applyPromptBrand('Run orca status')).toBe('Run orca status')
+  })
+
+  it('renames the Claude keybinding action in every catalog', async () => {
     expect(applyPromptBrand('binds Ctrl+Alt+G to command:orca-agent-view.')).toBe(
       'binds Ctrl+Alt+G to command:prompt-agent-view.'
     )
-    expect(applyPromptBrand('Run orca status')).toBe('Run orca status')
     const { readdirSync, readFileSync } = await import('node:fs')
     const { join } = await import('node:path')
     const dir = join(__dirname, '../renderer/src/i18n/locales')

@@ -9,7 +9,8 @@ export function getBundledLauncherPath(
   resourcesPath: string
 ): string | null {
   if (platform === 'darwin') {
-    return join(resourcesPath, 'bin', 'orca')
+    // Prompt ships only `prompt` on macOS (the `orca` launcher was dropped).
+    return join(resourcesPath, 'bin', 'prompt')
   }
   if (platform === 'linux') {
     return join(resourcesPath, 'bin', LINUX_CLI_COMMAND_NAME)

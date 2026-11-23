@@ -49,17 +49,17 @@ vi.mock('./CliRegistrationDialog', () => ({
 function notInstalledStatus(overrides: Partial<CliInstallStatus> = {}): CliInstallStatus {
   return {
     platform: 'darwin',
-    commandName: 'orca',
-    commandPath: '/usr/local/bin/orca',
+    commandName: 'prompt',
+    commandPath: '/usr/local/bin/prompt',
     pathDirectory: '/usr/local/bin',
     pathConfigured: true,
-    launcherPath: '/Applications/Orca.app/Contents/Resources/bin/orca',
+    launcherPath: '/Applications/Prompt.app/Contents/Resources/bin/prompt',
     installMethod: 'symlink',
     supported: true,
     state: 'not_installed',
     currentTarget: null,
     unsupportedReason: null,
-    detail: 'Register /usr/local/bin/orca to use Orca from the terminal.',
+    detail: 'Register /usr/local/bin/prompt to use Orca from the terminal.',
     ...overrides
   }
 }
@@ -96,14 +96,14 @@ describe('CliSection install failure surfacing', () => {
     await renderCliSectionAndInstall(async () => {
       throw new Error(
         "Error invoking remote method 'cli:install': Error: Refusing to replace non-Orca " +
-          'command at /usr/local/bin/orca. Remove it and register again if it is no longer needed.'
+          'command at /usr/local/bin/prompt. Remove it and register again if it is no longer needed.'
       )
     })
 
     const alert = screen.getByRole('alert')
-    expect(alert.textContent).toContain('Failed to register `orca` in PATH.')
+    expect(alert.textContent).toContain('Failed to register `prompt` in PATH.')
     expect(alert.textContent).toContain(
-      'Refusing to replace non-Orca command at /usr/local/bin/orca.'
+      'Refusing to replace non-Orca command at /usr/local/bin/prompt.'
     )
     expect(alert.textContent).toContain('Remove it and register again if it is no longer needed.')
     expect(alert.textContent).not.toContain('invoking remote method')
@@ -115,14 +115,14 @@ describe('CliSection install failure surfacing', () => {
     await renderCliSectionAndInstall(async () =>
       notInstalledStatus({
         state: 'conflict',
-        detail: '/usr/local/bin/orca exists but is not an Orca symlink.'
+        detail: '/usr/local/bin/prompt exists but is not an Orca symlink.'
       })
     )
 
     const alert = screen.getByRole('alert')
-    expect(alert.textContent).toContain('/usr/local/bin/orca exists but is not an Orca symlink.')
+    expect(alert.textContent).toContain('/usr/local/bin/prompt exists but is not an Orca symlink.')
     expect(alert.textContent).toContain(
-      'Remove /usr/local/bin/orca and register again if it is no longer needed.'
+      'Remove /usr/local/bin/prompt and register again if it is no longer needed.'
     )
     expect(toasts.success).not.toHaveBeenCalled()
   })

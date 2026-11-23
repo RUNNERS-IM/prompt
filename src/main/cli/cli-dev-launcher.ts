@@ -123,7 +123,10 @@ export function extractManagedUnixLauncherTarget(content: string): string | null
   }
 
   // Why: only Orca's compiled CLI entrypoints count as managed; arbitrary Electron-launching scripts stay conflicts.
-  return /(?:^|[/\\])(?:out|app\.asar\.unpacked[/\\]out)[/\\]cli[/\\]index\.js$/.test(cliPath)
+  // Prompt's macOS launcher runs prompt.js, the `prompt` entry beside index.js.
+  return /(?:^|[/\\])(?:out|app\.asar\.unpacked[/\\]out)[/\\]cli[/\\](?:index|prompt)\.js$/.test(
+    cliPath
+  )
     ? cliPath
     : null
 }

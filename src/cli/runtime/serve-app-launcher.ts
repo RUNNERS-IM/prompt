@@ -13,7 +13,11 @@ export function canStartOrcaServer(env: NodeJS.ProcessEnv): boolean {
 
 /** Linux installs the app's CLI as `orca-ide`: a bare `orca` there is often the screen reader. */
 export function appCliName(platform: NodeJS.Platform): string {
-  return platform === 'linux' ? 'orca-ide' : 'orca'
+  if (platform === 'linux') {
+    return 'orca-ide'
+  }
+  // Prompt ships only `prompt` on macOS.
+  return platform === 'darwin' ? 'prompt' : 'orca'
 }
 
 const NOT_AN_APP_CLI =

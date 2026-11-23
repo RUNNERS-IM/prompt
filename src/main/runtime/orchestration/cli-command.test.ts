@@ -1,5 +1,15 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { resolveTerminalOrchestrationCliCommand } from './cli-command'
+
+const originalPlatform = process.platform
+
+function setPlatform(platform: NodeJS.Platform): void {
+  Object.defineProperty(process, 'platform', { configurable: true, value: platform })
+}
+
+afterEach(() => {
+  setPlatform(originalPlatform)
+})
 
 describe('resolveTerminalOrchestrationCliCommand', () => {
   it('uses orca-ide for a pane recorded as WSL', () => {
@@ -41,6 +51,7 @@ describe('resolveTerminalOrchestrationCliCommand', () => {
   })
 
   it('preserves native and SSH bare-orca commands', () => {
+    setPlatform('linux')
     expect(
       resolveTerminalOrchestrationCliCommand({
         connectionId: null,
@@ -53,6 +64,31 @@ describe('resolveTerminalOrchestrationCliCommand', () => {
         connectionId: 'ssh-1',
         isWsl: null,
         worktreeId: 'repo::\\\\wsl.localhost\\Ubuntu\\home\\alice\\repo'
+      })
+    ).toBe('orca')
+  })
+
+  it('names prompt for a native macOS terminal but keeps orca for SSH hosts', () => {
+    setPlatform('darwin')
+    expect(
+      resolveTerminalOrchestrationCliCommand({
+        connectionId: null,
+        isWsl: false,
+        worktreeId: 'repo::/Users/alice/repo'
+      })
+    ).toBe('prompt')
+    expect(
+      resolveTerminalOrchestrationCliCommand({
+        connectionId: null,
+        isWsl: null,
+        worktreeId: 'repo::/Users/alice/repo'
+      })
+    ).toBe('prompt')
+    expect(
+      resolveTerminalOrchestrationCliCommand({
+        connectionId: 'ssh-1',
+        isWsl: null,
+        worktreeId: 'repo::/home/alice/repo'
       })
     ).toBe('orca')
   })

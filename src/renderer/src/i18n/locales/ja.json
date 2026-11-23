@@ -130,7 +130,7 @@
         "description": "テーマ、言語、ズーム、フォント、ターミナルの色。"
       },
       "cli": {
-        "installDescriptionMac": "`prompt` と `orca` を /usr/local/bin に登録します。",
+        "installDescriptionMac": "`prompt` を /usr/local/bin に登録します。",
         "notInstalled": "他のターミナルから Prompt を使用するには、{{path}} を登録します。"
       },
       "advanced": {
