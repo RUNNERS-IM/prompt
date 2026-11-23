@@ -8,6 +8,7 @@ import { UiTextDirectionScope } from '../ui/ui-text-direction-scope'
 import { SettingsRow, SettingsSubsectionHeader } from '../settings/SettingsFormControls'
 import { usePromptRunnersSignIn } from './use-prompt-runners-sign-in'
 import { PromptRunnersNickname } from './PromptRunnersNickname'
+import signInPanda from '../runners-account/assets/panda/signin.webp'
 import './prompt-runners-account.css'
 
 /** Settings › Account: the RUNNERS account row, Log In while signed out and the email with Log Out after.
@@ -23,6 +24,12 @@ export function PromptRunnersAccountSettings(): React.JSX.Element | null {
   return (
     <section className="space-y-4">
       <SettingsSubsectionHeader title="RUNNERS" />
+      {/* Signed out: the sign-in panda, as on Split, Monitor, Remotrol and Draw's account tab. */}
+      {email ? null : (
+        <div className="prompt-runners-account-empty">
+          <img className="prompt-runners-account-empty-panda" src={signInPanda} alt="" />
+        </div>
+      )}
       {/* Signed in: the nickname above the email, as in Draw and the other RUNNERS apps. */}
       <SettingsRow
         label={email ? (account.profile?.nickname ?? email) : accountText(lang, 'title')}

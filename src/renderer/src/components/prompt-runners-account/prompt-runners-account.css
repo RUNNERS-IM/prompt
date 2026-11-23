@@ -30,3 +30,15 @@ html.dark:root {
 .ra-menu {
   -webkit-app-region: no-drag;
 }
+
+/* Settings › Account while signed out: the sign-in panda above the Log In row. */
+.prompt-runners-account-empty {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+}
+
+.prompt-runners-account-empty-panda {
+  width: 128px;
+  height: 128px;
+}
