@@ -83,10 +83,11 @@ async function createMacCommandFixture() {
   const root = await mkdtemp(join(tmpdir(), 'orca-cli-command-race-'))
   createdRoots.push(root)
   const commandDirectory = join(root, 'bin')
-  const commandPath = join(commandDirectory, 'orca')
+  // Prompt registers and ships only `prompt` on macOS.
+  const commandPath = join(commandDirectory, 'prompt')
   const resourcesPath = join(root, 'Current.app', 'Contents', 'Resources')
-  const launcherPath = join(resourcesPath, 'bin', 'orca')
-  const staleLauncherPath = join(root, 'Old.app', 'Contents', 'Resources', 'bin', 'orca')
+  const launcherPath = join(resourcesPath, 'bin', 'prompt')
+  const staleLauncherPath = join(root, 'Old.app', 'Contents', 'Resources', 'bin', 'prompt')
   await mkdir(commandDirectory, { recursive: true })
   await mkdir(dirname(launcherPath), { recursive: true })
   await writeFile(launcherPath, '#!/usr/bin/env bash\n', { mode: 0o755 })
@@ -138,7 +139,7 @@ async function recoveryPath(commandDirectory: string): Promise<string> {
   if (!transactionName) {
     throw new Error('Expected a preserved CLI command transaction.')
   }
-  return join(commandDirectory, transactionName, 'orca')
+  return join(commandDirectory, transactionName, 'prompt')
 }
 
 async function rejectionFrom(operation: Promise<unknown>): Promise<Error> {

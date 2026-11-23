@@ -46,7 +46,7 @@ function getInstallDescription(platform: string): string {
   if (platform === 'darwin') {
     return translate(
       'prompt.settings.cli.installDescriptionMac',
-      'Register `prompt` and `orca` in /usr/local/bin.'
+      'Register `prompt` in /usr/local/bin.'
     )
   }
   if (platform === 'linux') {
@@ -59,7 +59,10 @@ function getInstallDescription(platform: string): string {
 }
 
 function getFallbackCommandName(platform: string): string {
-  return platform === 'linux' ? 'orca-ide' : 'orca'
+  if (platform === 'linux') {
+    return 'orca-ide'
+  }
+  return platform === 'darwin' ? 'prompt' : 'orca'
 }
 
 export function CliSection({

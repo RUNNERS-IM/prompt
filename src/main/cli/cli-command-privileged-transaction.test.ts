@@ -43,7 +43,8 @@ async function createPrivilegedFixture() {
   createdRoots.push(root)
   const protectedDirectory = join(root, 'protected')
   protectedDirectories.push(protectedDirectory)
-  const commandPath = join(protectedDirectory, 'orca')
+  // macOS registers `prompt`; a dev launcher with a command override takes the same name.
+  const commandPath = join(protectedDirectory, 'prompt')
   const userDataPath = join(root, 'user-data')
   const appPath = join(root, 'app')
   await mkdir(protectedDirectory)
@@ -106,7 +107,7 @@ describe.skipIf(process.platform !== 'darwin' || process.getuid?.() === 0)(
 
     it('restores a trailing-newline symlink inserted after privileged inspection', async () => {
       const fixture = await createPrivilegedFixture()
-      const staleTarget = join(fixture.userDataPath, 'cli', 'bin', 'old', 'orca')
+      const staleTarget = join(fixture.userDataPath, 'cli', 'bin', 'old', 'prompt')
       const foreignTarget = `${staleTarget}\n`
       await symlink(staleTarget, fixture.commandPath)
       const original = await lstat(fixture.commandPath, { bigint: true })
@@ -169,7 +170,7 @@ describe.skipIf(process.platform !== 'darwin' || process.getuid?.() === 0)(
 
     it('creates missing parent directories readable by the user', async () => {
       const fixture = await createPrivilegedFixture()
-      const commandPath = join(fixture.protectedDirectory, 'nested', 'bin', 'orca')
+      const commandPath = join(fixture.protectedDirectory, 'nested', 'bin', 'prompt')
       const installer = new CliInstaller({
         ...fixtureInstallerOptions(fixture),
         commandPathOverride: commandPath,
@@ -214,9 +215,12 @@ describe.skipIf(process.platform !== 'darwin' || process.getuid?.() === 0)(
       await expect(readlink(fixture.commandPath)).resolves.toBe(launcherPath)
     })
 
-    it('repairs an unreadable link to an older Orca launcher through the transaction', async () => {
+    it('repairs an unreadable link to an older Prompt launcher through the transaction', async () => {
       const fixture = await createPrivilegedFixture()
-      await symlink('/Applications/Old Orca.app/Contents/Resources/bin/orca', fixture.commandPath)
+      await symlink(
+        '/Applications/Old Prompt.app/Contents/Resources/bin/prompt',
+        fixture.commandPath
+      )
       await lchmod(fixture.commandPath, 0o300)
       const commands: string[] = []
       const installer = new CliInstaller({
@@ -239,7 +243,7 @@ describe.skipIf(process.platform !== 'darwin' || process.getuid?.() === 0)(
 
     it('refuses an unreadable symlink that is not an Orca launcher once root makes it readable', async () => {
       const fixture = await createPrivilegedFixture()
-      const foreignTarget = '/opt/other/bin/orca'
+      const foreignTarget = '/opt/other/bin/prompt'
       await symlink(foreignTarget, fixture.commandPath)
       await lchmod(fixture.commandPath, 0o300)
       const installer = new CliInstaller({
@@ -257,7 +261,7 @@ describe.skipIf(process.platform !== 'darwin' || process.getuid?.() === 0)(
 
     it('restores the displaced command when publication setup fails', async () => {
       const fixture = await createPrivilegedFixture()
-      const staleTarget = join(fixture.userDataPath, 'cli', 'bin', 'old', 'orca')
+      const staleTarget = join(fixture.userDataPath, 'cli', 'bin', 'old', 'prompt')
       await symlink(staleTarget, fixture.commandPath)
       const installer = new CliInstaller({
         ...fixtureInstallerOptions(fixture),

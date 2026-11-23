@@ -3,7 +3,12 @@ import { isWslUncPath } from '../../../shared/wsl-paths'
 import { splitWorktreeIdForFilesystem } from '../../../shared/worktree/id'
 import { getAppEnvironment, hasAppEnvironment } from '../../../shared/app-environment'
 
-export type OrchestrationCliCommand = 'orca' | 'orca-dev' | 'orca-ide'
+export type OrchestrationCliCommand = 'orca' | 'orca-dev' | 'orca-ide' | 'prompt'
+
+// Prompt ships only `prompt` on macOS; SSH hosts keep the `orca` their server puts on PATH.
+function localPackagedCliCommand(): OrchestrationCliCommand {
+  return process.platform === 'darwin' ? 'prompt' : 'orca'
+}
 
 /** Dev builds run the CLI as `orca-dev`; a packaged app, or a process with no app, must not advertise it. */
 export function runtimeOrchestrationCliCommand(): OrchestrationCliCommand | undefined {
@@ -12,7 +17,7 @@ export function runtimeOrchestrationCliCommand(): OrchestrationCliCommand | unde
 
 /** What a local, non-WSL terminal is told to run; a structured session is always one. */
 export function localOrchestrationCliCommand(): OrchestrationCliCommand {
-  return runtimeOrchestrationCliCommand() ?? 'orca'
+  return runtimeOrchestrationCliCommand() ?? localPackagedCliCommand()
 }
 
 export function resolveTerminalOrchestrationCliCommand(args: {
@@ -29,12 +34,12 @@ export function resolveTerminalOrchestrationCliCommand(args: {
     return args.runtimeCliCommand
   }
   if (args.isWsl !== null && args.isWsl !== undefined) {
-    return args.isWsl ? 'orca-ide' : 'orca'
+    return args.isWsl ? 'orca-ide' : localPackagedCliCommand()
   }
   if (args.projectRuntime?.status === 'resolved' && args.projectRuntime.runtime.kind === 'wsl') {
     return 'orca-ide'
   }
 
   const worktreePath = splitWorktreeIdForFilesystem(args.worktreeId)?.worktreePath
-  return worktreePath && isWslUncPath(worktreePath) ? 'orca-ide' : 'orca'
+  return worktreePath && isWslUncPath(worktreePath) ? 'orca-ide' : localPackagedCliCommand()
 }

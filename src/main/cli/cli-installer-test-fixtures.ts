@@ -22,7 +22,8 @@ export async function createPackagedMacLauncher(
 ): Promise<string> {
   const resourcesPath = join(root, 'resources')
   await mkdir(join(resourcesPath, 'bin'), { recursive: true })
-  await writeFile(join(resourcesPath, 'bin', 'orca'), launcherContent, {
+  // Prompt ships only the `prompt` launcher on macOS.
+  await writeFile(join(resourcesPath, 'bin', 'prompt'), launcherContent, {
     encoding: 'utf8',
     mode: 0o755
   })

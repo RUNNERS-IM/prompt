@@ -5,6 +5,7 @@ import {
   taskNotStartableRefusal,
   type DispatchRefusalReceipt
 } from '../shared/orchestration-dispatch-refusal-contract'
+import { promptCliCommandTextOnMac } from '../shared/prompt-cli-command-text'
 import { formatCliError, reportCliError } from './format'
 import { RuntimeRpcFailureError, type RuntimeRpcFailure } from './runtime/types'
 
@@ -43,7 +44,8 @@ describe('orchestration dispatch refusals through the CLI error boundary', () =>
     reportCliError(error, true, { commandPath: ['orchestration', 'dispatch'] })
     const printed = JSON.parse(log.mock.calls[0]?.[0] as string) as RuntimeRpcFailure
     expect(printed.ok).toBe(false)
-    expect(printed.error).toEqual(receipt)
+    // macOS prints the `prompt` command in the runtime's `orca …` recovery steps.
+    expect(printed.error).toEqual(JSON.parse(promptCliCommandTextOnMac(JSON.stringify(receipt))))
   })
 })
 

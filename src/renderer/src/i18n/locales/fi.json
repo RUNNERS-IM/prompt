@@ -23452,7 +23452,7 @@
         "description": "Teema, kieli, zoomaus, fontit ja päätteen värit."
       },
       "cli": {
-        "installDescriptionMac": "Rekisteröi `prompt` ja `orca` hakemistoon /usr/local/bin.",
+        "installDescriptionMac": "Rekisteröi `prompt` hakemistoon /usr/local/bin.",
         "notInstalled": "Rekisteröi {{path}}, jotta Promptia voi käyttää muista päätteistä."
       },
       "advanced": {

@@ -130,7 +130,7 @@
         "description": "Thème, langue, zoom, polices et couleurs du terminal."
       },
       "cli": {
-        "installDescriptionMac": "Enregistrer `prompt` et `orca` dans /usr/local/bin.",
+        "installDescriptionMac": "Enregistrer `prompt` dans /usr/local/bin.",
         "notInstalled": "Enregistrer {{path}} pour utiliser Prompt depuis d'autres terminaux."
       },
       "advanced": {

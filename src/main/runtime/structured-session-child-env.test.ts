@@ -169,7 +169,8 @@ describe('sealStructuredSessionChild identity', () => {
       installFakeAppEnvironment({ isPackaged: () => true, getPath: () => USER_DATA })
       const env = sealedChildEnv(SESSION_ID, { PATH: '/usr/bin' })
       expect(env.PATH).toBe(`${join(RESOURCES, 'bin')}:/usr/bin`)
-      expect(env.ORCA_CLI_COMMAND).toBe(join(RESOURCES, 'bin', 'orca'))
+      // Prompt ships only the `prompt` launcher on macOS.
+      expect(env.ORCA_CLI_COMMAND).toBe(join(RESOURCES, 'bin', 'prompt'))
     })
 
     it('on packaged Windows, through the bundled CLI dir under the env block spelling', () => {

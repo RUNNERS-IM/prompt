@@ -1,4 +1,5 @@
 import type { PostProcessorModule } from 'i18next'
+import { promptCliCommandTextOnMac } from './prompt-cli-command-text'
 
 // Prompt keeps upstream catalogs untouched so daily merges stay conflict-free; the brand is swapped as strings render.
 export const PROMPT_BRAND_POST_PROCESSOR = 'promptBrand'
@@ -10,7 +11,7 @@ export const PROMPT_APP_NAME = 'Prompt'
 const BRAND_REPLACEMENTS: readonly (readonly [RegExp, string])[] = [
   [/github\.com\/stablyai\/orca\b/g, 'github.com/RUNNERS-IM/prompt'],
   // Claude keybinding action renamed with the Prompt plugin (subagent navigation setup hint, all
-  // languages). Commands of the `orca` CLI are left for the CLI rename.
+  // languages).
   [/\bcommand:orca-agent-view\b/g, 'command:prompt-agent-view'],
   // Pairing links: desktop and mobile both use the prompt:// scheme.
   [/\borca:\/\//g, 'prompt://'],
@@ -34,7 +35,8 @@ export function applyPromptBrand(value: string): string {
   for (const [pattern, replacement] of BRAND_REPLACEMENTS) {
     result = result.replace(pattern, replacement)
   }
-  return result
+  // Commands of the `orca` CLI read `prompt` on macOS, the only name Prompt registers there.
+  return promptCliCommandTextOnMac(result)
 }
 
 export const promptBrandPostProcessor: PostProcessorModule = {

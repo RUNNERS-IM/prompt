@@ -1,3 +1,4 @@
+import { promptCliCommandTextOnMac } from '../shared/prompt-cli-command-text'
 import { computerUseErrorRecoveryData } from '../shared/computer-use-error-recovery'
 import {
   matchAutomationOwnerConflict,
@@ -135,7 +136,7 @@ export function reportCliError(error: unknown, json: boolean, context: CliErrorC
       const response = sidecarExit
         ? { ...error.response, error: { ...error.response.error, data: sidecarExit } }
         : withAutomationOwnerConflictRecovery(error.response)
-      console.log(
+      writeCliErrorStdout(
         JSON.stringify(
           selector
             ? {
@@ -167,11 +168,16 @@ export function reportCliError(error: unknown, json: boolean, context: CliErrorC
           runtimeId: null
         }
       }
-      console.log(JSON.stringify(response, null, 2))
+      writeCliErrorStdout(JSON.stringify(response, null, 2))
     }
   } else {
-    console.error(formatCliError(error, context))
+    console.error(promptCliCommandTextOnMac(formatCliError(error, context)))
   }
+}
+
+// macOS has only `prompt`: hints the runtime wrote for `orca` must name the command that exists.
+function writeCliErrorStdout(text: string): void {
+  console.log(promptCliCommandTextOnMac(text))
 }
 
 function withAutomationOwnerConflictRecovery(response: RuntimeRpcFailure): RuntimeRpcFailure {
