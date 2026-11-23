@@ -58,4 +58,4 @@ Copyright (c) 2026 Runners Co., Ltd. All rights reserved. [LICENSE](../../LICENS
 
 ---
 
-<p align="center"><a href="https://runners.im"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/icons/logos/RUNNERS_H_W.svg"><img src="https://runners.im/icons/logos/RUNNERS_H.svg" height="20" alt="RUNNERS"></picture></a><br><sub>RUNNERS 가 만듦 · Orca(MIT) 기반</sub></p>
+<p align="center"><a href="https://runners.im"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/icons/logos/RUNNERS_H_W.svg"><img src="https://runners.im/icons/logos/RUNNERS_H.svg" height="20" alt="RUNNERS"></picture></a><br><sub>RUNNERS 가 만듦 · © 2026 Runners Co., Ltd. All rights reserved</sub></p>
