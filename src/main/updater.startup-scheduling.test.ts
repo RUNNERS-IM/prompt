@@ -211,6 +211,8 @@ describe('updater', () => {
       })
       return Promise.resolve(undefined)
     })
+    // Prompt downloads a found update at once (auto-install), so the download must settle too.
+    autoUpdaterMock.downloadUpdate.mockResolvedValue(undefined)
 
     const sendMock = vi.fn()
     const setLastUpdateCheckAt = vi.fn()
@@ -236,7 +238,8 @@ describe('updater', () => {
     expect(sendMock).toHaveBeenCalledWith('updater:status', {
       state: 'available',
       version: '1.0.61',
-      changelog: null
+      changelog: null,
+      autoInstall: true
     })
 
     await vi.advanceTimersByTimeAsync(23 * 60 * 60 * 1000)
