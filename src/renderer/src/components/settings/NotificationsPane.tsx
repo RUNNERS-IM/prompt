@@ -116,7 +116,7 @@ export function NotificationsPane({
     <NotificationSettingToggle
       label={translate(
         'auto.components.settings.NotificationsPane.841c8c549f',
-        'Enable Notifications'
+        'Enable notifications'
       )}
       description={translate(
         'auto.components.settings.NotificationsPane.deff6d30da',
@@ -136,7 +136,7 @@ export function NotificationsPane({
       icon={<Bot className="size-4" />}
       label={translate(
         'auto.components.settings.NotificationsPane.ca76d06fd2',
-        'Agent Task Complete'
+        'Agent task complete'
       )}
       description={translate(
         'auto.components.settings.NotificationsPane.55f901a59b',
@@ -154,7 +154,7 @@ export function NotificationsPane({
   const terminalBellToggle = (
     <NotificationSettingToggle
       icon={<Siren className="size-4" />}
-      label={translate('auto.components.settings.NotificationsPane.591fe605b9', 'Terminal Bell')}
+      label={translate('auto.components.settings.NotificationsPane.591fe605b9', 'Terminal bell')}
       description={translate(
         'auto.components.settings.NotificationsPane.b6fc369244',
         'A background terminal emits a bell character.'
@@ -193,7 +193,7 @@ export function NotificationsPane({
       icon={<EyeOff className="size-4" />}
       label={translate(
         'auto.components.settings.NotificationsPane.ba07e60f38',
-        'Notify About Hidden Workspaces'
+        'Notify about hidden workspaces'
       )}
       description={translate(
         'auto.components.settings.NotificationsPane.e4b5e909ff',
@@ -221,7 +221,7 @@ export function NotificationsPane({
     <NotificationSettingToggle
       label={translate(
         'auto.components.settings.NotificationsPane.00cd406dbb',
-        'Suppress While Focused'
+        'Suppress while focused'
       )}
       description={translate(
         'auto.components.settings.NotificationsPane.2772d2f257',

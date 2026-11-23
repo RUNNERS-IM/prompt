@@ -16,7 +16,7 @@ export function getPromptGeneralAppSearchEntries(): SettingsSearchEntry[] {
     ...(mac
       ? [
           {
-            title: translate('tray.openAtLogin', 'Open at Login'),
+            title: translate('tray.openAtLogin', 'Open at login'),
             description: translate(
               'prompt.settings.general.openAtLoginDescription',
               'Keep Prompt in the menu bar when you log in to your Mac.'
@@ -26,7 +26,7 @@ export function getPromptGeneralAppSearchEntries(): SettingsSearchEntry[] {
         ]
       : []),
     {
-      title: translate('tray.autoCheckUpdates', 'Check for Updates Automatically'),
+      title: translate('tray.autoCheckUpdates', 'Check for updates automatically'),
       description: translate(
         'prompt.settings.general.autoCheckUpdatesDescription',
         'Let you know when a new version is out.'
@@ -36,7 +36,7 @@ export function getPromptGeneralAppSearchEntries(): SettingsSearchEntry[] {
     ...(mac
       ? [
           {
-            title: translate('settings.appearance.menuBarIcon.title', 'Show Menu Bar Icon'),
+            title: translate('settings.appearance.menuBarIcon.title', 'Show menu bar icon'),
             description: translate(
               'prompt.settings.general.menuBarIconDescription',
               'Show the Prompt icon in the menu bar.'

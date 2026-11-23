@@ -68,7 +68,7 @@ export function renderCodexAccountsSection(model: AccountsPaneSectionModel): Rea
       </div>
 
       <SearchableSetting
-        title={translate('auto.components.settings.AccountsPane.3180536c7a', 'Codex Accounts')}
+        title={translate('auto.components.settings.AccountsPane.3180536c7a', 'Codex accounts')}
         description={translate(
           'auto.components.settings.AccountsPane.d0d53b7eb0',
           'Manage which Codex account Orca uses for live rate limit fetching.'

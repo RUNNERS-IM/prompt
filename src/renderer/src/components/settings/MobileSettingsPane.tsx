@@ -69,7 +69,7 @@ export function MobileSettingsPane(): React.JSX.Element {
       <SearchableSetting
         title={translate(
           'auto.components.settings.MobileSettingsPane.1de96ec8a6',
-          'Show Orca Mobile Button'
+          'Show Orca Mobile button'
         )}
         description={translate(
           'auto.components.settings.MobileSettingsPane.682293cadf',
@@ -81,7 +81,7 @@ export function MobileSettingsPane(): React.JSX.Element {
         <SettingsSwitchRow
           label={translate(
             'auto.components.settings.MobileSettingsPane.1de96ec8a6',
-            'Show Orca Mobile Button'
+            'Show Orca Mobile button'
           )}
           description={translate(
             'auto.components.settings.MobileSettingsPane.d4f2b65f30',

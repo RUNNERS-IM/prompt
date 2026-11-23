@@ -22943,7 +22943,8 @@
       "resumedInTabFolder": "[Prompt] Melanjutkan di folder ini, bukan di {{folder}} tempat terakhir berjalan",
       "interruptedByUser": "Dihentikan oleh pengguna",
       "interrupted": "Terhenti",
-      "unconfirmed": "Tidak dapat dikonfirmasi"
+      "unconfirmed": "Tidak dapat dikonfirmasi",
+      "dialogOpen": "Menunggu di jendela pilihan"
     },
     "timeAgo": {
       "now": "sekarang",
@@ -23222,6 +23223,15 @@
       "argsNone": "Tanpa argumen",
       "argsRepository": "Argumen kustom repositori",
       "argsGlobal": "Argumen kustom global"
+    },
+    "runnersAccount": {
+      "settings": "Pengaturan akun",
+      "nickname": "Nama panggilan",
+      "nicknameHint": "Tampil di samping panda dan di aplikasi RUNNERS lain. Kosongkan untuk memakai bagian email sebelum @.",
+      "nicknameLong": "Nama panggilan paling banyak 30 karakter.",
+      "save": "Simpan",
+      "saved": "Tersimpan",
+      "network": "Tidak dapat menjangkau server. Coba lagi sebentar lagi."
     }
   }
 }

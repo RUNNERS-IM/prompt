@@ -302,7 +302,8 @@
       "resumedInTabFolder": "[Prompt] En son çalıştığı {{folder}} yerine bu klasörde devam ediliyor",
       "interruptedByUser": "Kullanıcı tarafından durduruldu",
       "interrupted": "Durduruldu",
-      "unconfirmed": "Doğrulanamadı"
+      "unconfirmed": "Doğrulanamadı",
+      "dialogOpen": "Seçim penceresinde bekliyor"
     },
     "sessionMove": {
       "cancelRemote": "Oturumlar yalnızca bu bilgisayardaki projeler arasında taşınabilir.",
@@ -459,6 +460,15 @@
       "argsNone": "Argüman yok",
       "argsRepository": "Depoya özel argümanlar",
       "argsGlobal": "Genel özel argümanlar"
+    },
+    "runnersAccount": {
+      "settings": "Hesap ayarları",
+      "nickname": "Takma ad",
+      "nicknameHint": "Pandanın yanında ve diğer RUNNERS uygulamalarında görünür. E-postanın @ öncesini kullanmak için boş bırakın.",
+      "nicknameLong": "Takma ad en fazla 30 karakter olabilir.",
+      "save": "Kaydet",
+      "saved": "Kaydedildi",
+      "network": "Sunucuya ulaşılamadı. Biraz sonra yeniden deneyin."
     }
   },
   "agentLaunch": {

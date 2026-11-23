@@ -58,7 +58,7 @@ export function getRepositoryPaneSearchEntries(
           }
         ]),
     {
-      title: translate('auto.components.settings.repository.search.7e1e456a95', 'Display Name'),
+      title: translate('auto.components.settings.repository.search.7e1e456a95', 'Display name'),
       description: translate(
         'auto.components.settings.repository.search.883aad2801',
         'Project-specific display details for the sidebar and tabs.'
@@ -77,7 +77,7 @@ export function getRepositoryPaneSearchEntries(
       ]
     },
     {
-      title: translate('auto.components.settings.repository.search.b24f00294a', 'Project Icon'),
+      title: translate('auto.components.settings.repository.search.b24f00294a', 'Project icon'),
       description: translate(
         'auto.components.settings.repository.search.a1f3a2bd47',
         'Project icon and color used in the sidebar and tabs.'
@@ -115,7 +115,7 @@ export function getRepositoryPaneSearchEntries(
           {
             title: translate(
               'auto.components.settings.repository.search.githubAccount',
-              'GitHub Account'
+              'GitHub account'
             ),
             description: translate(
               'auto.components.settings.repository.search.githubAccountDescription',
@@ -149,7 +149,7 @@ export function getRepositoryPaneSearchEntries(
           {
             title: translate(
               'auto.components.settings.repository.search.keepForkUpToDate',
-              'Keep Fork Up to Date'
+              'Keep fork up to date'
             ),
             description: translate(
               'auto.components.settings.repository.search.keepForkUpToDateDescription',
@@ -194,7 +194,7 @@ export function getRepositoryPaneSearchEntries(
           {
             title: translate(
               'auto.components.settings.repository.search.projectRuntime',
-              'Project Runtime'
+              'Project runtime'
             ),
             description: translate(
               'auto.components.settings.repository.search.projectRuntimeDescription',

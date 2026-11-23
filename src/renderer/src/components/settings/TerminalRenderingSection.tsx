@@ -32,7 +32,7 @@ export function TerminalRenderingSection({
 
       <SettingsGroupRows className="divide-y divide-border/40">
         <SearchableSetting
-          title={translate('auto.components.settings.TerminalPane.c1fc9e9444', 'GPU Acceleration')}
+          title={translate('auto.components.settings.TerminalPane.c1fc9e9444', 'GPU acceleration')}
           description={translate(
             'auto.components.settings.TerminalPane.f07dfb4466',
             'Controls whether the terminal uses xterm.js WebGL rendering. Auto tries WebGL when the renderer is supported, with a conservative Linux fallback for software or unknown GPU renderers.'
@@ -51,7 +51,7 @@ export function TerminalRenderingSection({
           <SettingsRow
             label={translate(
               'auto.components.settings.TerminalPane.c1fc9e9444',
-              'GPU Acceleration'
+              'GPU acceleration'
             )}
             description={
               settings.terminalGpuAcceleration === 'off'
@@ -73,7 +73,7 @@ export function TerminalRenderingSection({
               <SettingsSegmentedControl
                 ariaLabel={translate(
                   'auto.components.settings.TerminalPane.c1fc9e9444',
-                  'GPU Acceleration'
+                  'GPU acceleration'
                 )}
                 value={settings.terminalGpuAcceleration ?? 'auto'}
                 onChange={(option) => updateSettings({ terminalGpuAcceleration: option })}
@@ -101,7 +101,7 @@ export function TerminalRenderingSection({
         <SearchableSetting
           title={translate(
             'auto.components.settings.TerminalRenderingSection.6d4c55bacc',
-            'Inline Images'
+            'Inline images'
           )}
           description={translate(
             'auto.components.settings.TerminalRenderingSection.fffab5890b',
@@ -124,7 +124,7 @@ export function TerminalRenderingSection({
           <SettingsSwitchRow
             label={translate(
               'auto.components.settings.TerminalRenderingSection.6d4c55bacc',
-              'Inline Images'
+              'Inline images'
             )}
             description={translate(
               'auto.components.settings.TerminalRenderingSection.fffab5890b',

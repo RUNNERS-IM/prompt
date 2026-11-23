@@ -34,7 +34,7 @@ export function AgentCacheTimerSection({
       <SearchableSetting
         title={translate(
           'auto.components.settings.AgentCacheTimerSection.b4e7302944',
-          'Cache Timer'
+          'Cache timer'
         )}
         description={translate(
           'auto.components.settings.AgentCacheTimerSection.9c20253679',
@@ -53,7 +53,7 @@ export function AgentCacheTimerSection({
             <Label className="text-[13px] leading-4">
               {translate(
                 'auto.components.settings.AgentCacheTimerSection.b4e7302944',
-                'Cache Timer'
+                'Cache timer'
               )}
             </Label>
           </div>
@@ -67,7 +67,7 @@ export function AgentCacheTimerSection({
         <SettingsSwitch
           ariaLabel={translate(
             'auto.components.settings.AgentCacheTimerSection.b4e7302944',
-            'Cache Timer'
+            'Cache timer'
           )}
           checked={settings.promptCacheTimerEnabled}
           onChange={() => {
@@ -84,7 +84,7 @@ export function AgentCacheTimerSection({
         <SearchableSetting
           title={translate(
             'auto.components.settings.AgentCacheTimerSection.a2a8962138',
-            'Timer Duration'
+            'Timer duration'
           )}
           description={translate(
             'auto.components.settings.AgentCacheTimerSection.80c454e8a6',
@@ -97,7 +97,7 @@ export function AgentCacheTimerSection({
             <Label className="text-[13px] leading-4">
               {translate(
                 'auto.components.settings.AgentCacheTimerSection.a2a8962138',
-                'Timer Duration'
+                'Timer duration'
               )}
             </Label>
             <p className="text-2xs leading-[14px] text-muted-foreground">

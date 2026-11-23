@@ -305,7 +305,8 @@
       "resumedInTabFolder": "[Prompt] Reprise dans ce dossier, et non dans {{folder}} où la session tournait",
       "interruptedByUser": "Interrompu par l’utilisateur",
       "interrupted": "Interrompu",
-      "unconfirmed": "Confirmation impossible"
+      "unconfirmed": "Confirmation impossible",
+      "dialogOpen": "En attente dans une fenêtre de choix"
     },
     "sessionMove": {
       "cancelRemote": "Les sessions ne peuvent être déplacées qu'entre des projets de cet ordinateur.",
@@ -463,6 +464,15 @@
       "argsNone": "Aucun argument",
       "argsRepository": "Arguments personnalisés du dépôt",
       "argsGlobal": "Arguments personnalisés globaux"
+    },
+    "runnersAccount": {
+      "settings": "Paramètres du compte",
+      "nickname": "Pseudo",
+      "nicknameHint": "Affiché à côté du panda et dans les autres apps RUNNERS. Laissez vide pour utiliser la partie de l’e-mail avant @.",
+      "nicknameLong": "Un pseudo peut contenir 30 caractères au maximum.",
+      "save": "Enregistrer",
+      "saved": "Enregistré",
+      "network": "Impossible de joindre le serveur. Réessayez dans un instant."
     }
   },
   "agentLaunch": {

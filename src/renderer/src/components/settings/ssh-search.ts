@@ -4,7 +4,7 @@ import { createLocalizedCatalog } from '@/i18n/localized-catalog'
 
 export const getSshPaneSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.ssh.search.380a788da7', 'SSH Connections'),
+    title: translate('auto.components.settings.ssh.search.380a788da7', 'SSH connections'),
     description: translate('auto.components.settings.ssh.search.74c6d90d78', 'Manage SSH hosts.'),
     keywords: [
       ...translateSearchKeyword('auto.components.settings.ssh.search.7efd17e816', 'ssh'),

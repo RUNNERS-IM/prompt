@@ -36,7 +36,7 @@ export function TerminalAdvancedTypographyControls({
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalAppearanceSection.4aae5db258',
-          'Font Weight'
+          'Font weight'
         )}
         description={searchEntries[0]?.description}
         keywords={searchEntries[0]?.keywords ?? ['terminal', 'typography', 'weight']}
@@ -44,7 +44,7 @@ export function TerminalAdvancedTypographyControls({
         <NumberField
           label={translate(
             'auto.components.settings.TerminalAppearanceSection.4aae5db258',
-            'Font Weight'
+            'Font weight'
           )}
           description=""
           value={normalizeTerminalFontWeight(settings.terminalFontWeight)}
@@ -62,7 +62,7 @@ export function TerminalAdvancedTypographyControls({
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalAdvancedTypographyControls.f5fa1a08f1',
-          'Bold Font Weight'
+          'Bold font weight'
         )}
         description={translate(
           'auto.components.settings.TerminalAdvancedTypographyControls.0e0d1ee15a',
@@ -73,7 +73,7 @@ export function TerminalAdvancedTypographyControls({
         <NumberField
           label={translate(
             'auto.components.settings.TerminalAdvancedTypographyControls.f5fa1a08f1',
-            'Bold Font Weight'
+            'Bold font weight'
           )}
           description=""
           value={normalizeTerminalFontWeightBold(settings.terminalFontWeightBold)}
@@ -91,7 +91,7 @@ export function TerminalAdvancedTypographyControls({
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalAppearanceSection.c084eb7d4c',
-          'Line Height'
+          'Line height'
         )}
         description={searchEntries[1]?.description}
         keywords={
@@ -101,7 +101,7 @@ export function TerminalAdvancedTypographyControls({
         <NumberField
           label={translate(
             'auto.components.settings.TerminalAppearanceSection.c084eb7d4c',
-            'Line Height'
+            'Line height'
           )}
           description=""
           value={settings.terminalLineHeight}
@@ -117,7 +117,7 @@ export function TerminalAdvancedTypographyControls({
       <SearchableSetting
         title={translate(
           'auto.components.settings.TerminalAppearanceSection.be8da35e7f',
-          'Font Ligatures'
+          'Font ligatures'
         )}
         description={searchEntries[2]?.description}
         keywords={
@@ -138,7 +138,7 @@ export function TerminalAdvancedTypographyControls({
         <SettingsRow
           label={translate(
             'auto.components.settings.TerminalAppearanceSection.be8da35e7f',
-            'Font Ligatures'
+            'Font ligatures'
           )}
           // Explain whether Auto enables ligatures for the current font.
           description={
@@ -168,7 +168,7 @@ export function TerminalAdvancedTypographyControls({
             <SettingsSegmentedControl
               ariaLabel={translate(
                 'auto.components.settings.TerminalAppearanceSection.be8da35e7f',
-                'Font Ligatures'
+                'Font ligatures'
               )}
               value={settings.terminalLigatures ?? 'auto'}
               onChange={(option) => updateSettings({ terminalLigatures: option })}

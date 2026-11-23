@@ -298,7 +298,8 @@
       "resumedInTabFolder": "[Prompt] 在此資料夾中繼續，而不是上次執行的 {{folder}}",
       "interruptedByUser": "已被使用者中斷",
       "interrupted": "已中斷",
-      "unconfirmed": "無法確認"
+      "unconfirmed": "無法確認",
+      "dialogOpen": "正在選擇視窗中等待"
     },
     "sessionMove": {
       "cancelRemote": "工作階段只能在這部電腦上的專案之間移動。",
@@ -454,6 +455,15 @@
       "argsNone": "無參數",
       "argsRepository": "存放庫自訂參數",
       "argsGlobal": "全域自訂參數"
+    },
+    "runnersAccount": {
+      "settings": "帳戶設定",
+      "nickname": "暱稱",
+      "nicknameHint": "顯示在熊貓旁邊和其他 RUNNERS App 中的名字。留空則使用電子郵件 @ 前面的部分。",
+      "nicknameLong": "暱稱最多 30 個字元。",
+      "save": "儲存",
+      "saved": "已儲存",
+      "network": "無法連線到伺服器，請稍後再試。"
     }
   },
   "agentLaunch": {

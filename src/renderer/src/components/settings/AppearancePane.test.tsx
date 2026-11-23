@@ -265,7 +265,7 @@ describe('AppearancePane', () => {
     expect(advancedTrigger).toBeDefined()
     expect(advancedTrigger?.getAttribute('aria-expanded')).toBe('false')
     expect(
-      container.querySelector('button[role="switch"][aria-label="Titlebar App Name"]')
+      container.querySelector('button[role="switch"][aria-label="Titlebar app name"]')
     ).toBeNull()
   })
 
@@ -279,7 +279,7 @@ describe('AppearancePane', () => {
     expect(languageTrigger).not.toBeNull()
     expect(container.textContent).not.toContain('Advanced')
     expect(
-      container.querySelector('button[role="switch"][aria-label="Titlebar App Name"]')
+      container.querySelector('button[role="switch"][aria-label="Titlebar app name"]')
     ).toBeNull()
   })
 
@@ -372,7 +372,7 @@ describe('AppearancePane', () => {
 
     const container = await renderAppearancePane(settings, updateSettings)
     const switchControl = container.querySelector<HTMLButtonElement>(
-      'button[role="switch"][aria-label="Show Automations Button"]'
+      'button[role="switch"][aria-label="Show Automations button"]'
     )
 
     expect(switchControl).not.toBeNull()
@@ -412,7 +412,7 @@ describe('AppearancePane', () => {
 
     expect(container.textContent).toContain('Interface')
     expect(container.textContent).toContain('Terminal')
-    expect(container.textContent).toContain('Window & Sidebar')
+    expect(container.textContent).toContain('Window & sidebar')
     // No Appearance-level code/Markdown settings exist; that section would be empty.
     expect(container.textContent).not.toContain('Code & Markdown')
   })
@@ -458,13 +458,13 @@ describe('AppearancePane', () => {
     mocks.state.settingsSearchQuery = ''
     const collapsedContainer = await renderAppearancePane(getDefaultSettings('/tmp'))
     expect(
-      collapsedContainer.querySelector('button[role="switch"][aria-label="Show Tasks Button"]')
+      collapsedContainer.querySelector('button[role="switch"][aria-label="Show Tasks button"]')
     ).toBeNull()
 
     mocks.state.settingsSearchQuery = 'tasks'
     const searchedContainer = await renderAppearancePane(getDefaultSettings('/tmp'))
     expect(
-      searchedContainer.querySelector('button[role="switch"][aria-label="Show Tasks Button"]')
+      searchedContainer.querySelector('button[role="switch"][aria-label="Show Tasks button"]')
     ).not.toBeNull()
   })
 
@@ -474,11 +474,11 @@ describe('AppearancePane', () => {
     const updateSettings = vi.fn()
     const container = await renderAppearancePane(getDefaultSettings('/tmp'), updateSettings)
     const toggle = container.querySelector<HTMLButtonElement>(
-      'button[role="switch"][aria-label="Show Menu Bar Icon"]'
+      'button[role="switch"][aria-label="Show menu bar icon"]'
     )
 
     expect(toggle).not.toBeNull()
-    expect(container.textContent).not.toContain('Minimize to Tray on Close')
+    expect(container.textContent).not.toContain('Minimize to tray on close')
     await act(async () => {
       toggle?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     })
@@ -494,10 +494,10 @@ describe('AppearancePane', () => {
   })
 
   it('shows useful primary rows for a Window & Sidebar section-label search', async () => {
-    mocks.state.settingsSearchQuery = 'Window & Sidebar'
+    mocks.state.settingsSearchQuery = 'Window & sidebar'
     const container = await renderAppearancePane(getDefaultSettings('/tmp'))
 
-    expect(container.textContent).toContain('Left Sidebar Appearance')
+    expect(container.textContent).toContain('Left sidebar appearance')
     expect(container.textContent).toContain('Status Bar')
     expect(container.textContent).not.toContain('Advanced')
   })
@@ -539,7 +539,7 @@ describe('AppearancePane', () => {
     mocks.state.availableStatusBarToggles = [
       {
         id: 'minimax',
-        title: 'MiniMax Usage',
+        title: 'MiniMax usage',
         description: 'Show MiniMax subscription usage in the status bar.',
         toggleDescription: 'Show MiniMax subscription usage for the active workspace.',
         keywords: ['status bar', 'minimax', 'usage']
@@ -548,7 +548,7 @@ describe('AppearancePane', () => {
     mocks.state.settingsSearchQuery = 'minimax'
     const container = await renderAppearancePane(getDefaultSettings('/tmp'))
     const miniMaxSwitch = container.querySelector<HTMLButtonElement>(
-      'button[role="switch"][aria-label="MiniMax Usage"]'
+      'button[role="switch"][aria-label="MiniMax usage"]'
     )
 
     expect(miniMaxSwitch).not.toBeNull()
@@ -564,7 +564,7 @@ describe('AppearancePane', () => {
     mocks.state.availableStatusBarToggles = [
       {
         id: 'antigravity',
-        title: 'Antigravity Usage',
+        title: 'Antigravity usage',
         description: 'Show Antigravity subscription usage in the status bar.',
         toggleDescription: 'Show Antigravity subscription usage for the active workspace.',
         keywords: ['status bar', 'antigravity', 'usage']
@@ -573,7 +573,7 @@ describe('AppearancePane', () => {
     mocks.state.settingsSearchQuery = 'antigravity'
     const container = await renderAppearancePane(getDefaultSettings('/tmp'))
     const antigravitySwitch = container.querySelector<HTMLButtonElement>(
-      'button[role="switch"][aria-label="Antigravity Usage"]'
+      'button[role="switch"][aria-label="Antigravity usage"]'
     )
 
     expect(antigravitySwitch).not.toBeNull()
@@ -596,7 +596,7 @@ describe('AppearancePane', () => {
     expect(expanded).toHaveLength(3)
     expect(expanded.map((button) => button.textContent).join(' ')).toContain('Interface')
     expect(expanded.map((button) => button.textContent).join(' ')).toContain('Terminal')
-    expect(expanded.map((button) => button.textContent).join(' ')).toContain('Window & Sidebar')
+    expect(expanded.map((button) => button.textContent).join(' ')).toContain('Window & sidebar')
   })
 
   it('lets each appearance section collapse independently', async () => {
@@ -620,7 +620,7 @@ describe('AppearancePane', () => {
     expect(stillExpanded).toHaveLength(2)
     expect(stillExpanded.map((button) => button.textContent).join(' ')).toContain('Interface')
     expect(stillExpanded.map((button) => button.textContent).join(' ')).toContain(
-      'Window & Sidebar'
+      'Window & sidebar'
     )
   })
 

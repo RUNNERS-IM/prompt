@@ -7,7 +7,7 @@ import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
 export const getAccountsLocationSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.accounts.search.d09fb5ca92', 'Account Location'),
+    title: translate('auto.components.settings.accounts.search.d09fb5ca92', 'Account location'),
     description: translate(
       'auto.components.settings.accounts.search.b84a5b0c8a',
       'Choose whether provider accounts are inspected and added on this device or in WSL.'
@@ -26,7 +26,7 @@ export const getAccountsLocationSearchEntries = createLocalizedCatalog(() => [
 
 export const getAccountsCodexSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.accounts.search.17c5d244eb', 'Codex Accounts'),
+    title: translate('auto.components.settings.accounts.search.17c5d244eb', 'Codex accounts'),
     description: translate(
       'auto.components.settings.accounts.search.b40d5b6570',
       'Optional account switching for Codex and live rate limit fetching.'
@@ -56,7 +56,7 @@ export const getAccountsCodexSearchEntries = createLocalizedCatalog(() => [
     ]
   },
   {
-    title: translate('auto.components.settings.accounts.search.a4bcfd6f86', 'Active Codex Account'),
+    title: translate('auto.components.settings.accounts.search.a4bcfd6f86', 'Active Codex account'),
     description: translate(
       'auto.components.settings.accounts.search.87a4a8584e',
       'Choose which optional saved Codex account powers live quota reads.'
@@ -111,7 +111,7 @@ export const getAccountsOpencodeSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.accounts.search.6ed1401020',
-      'OpenCode Go Session Cookie'
+      'OpenCode Go session cookie'
     ),
     description: translate(
       'auto.components.settings.accounts.search.25591bf95b',
@@ -132,7 +132,7 @@ export const getAccountsOpencodeSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.accounts.search.4ee2029e9c',
-      'OpenCode Go Workspace ID'
+      'OpenCode Go workspace ID'
     ),
     description: translate(
       'auto.components.settings.accounts.search.38d22ff8d6',
@@ -154,7 +154,7 @@ export const getAccountsOpencodeSearchEntries = createLocalizedCatalog(() => [
 
 export const getAccountsMiniMaxSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.accounts.search.733f9e2a93', 'MiniMax Usage'),
+    title: translate('auto.components.settings.accounts.search.733f9e2a93', 'MiniMax usage'),
     description: translate(
       'auto.components.settings.accounts.search.f8374c3151',
       'Configure MiniMax usage tracking. Pick the overseas or China endpoint, then paste a session cookie or save an API key that works on either host.'
@@ -178,7 +178,7 @@ export const getAccountsMiniMaxSearchEntries = createLocalizedCatalog(() => [
 
 export const getAccountsGrokSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.accounts.search.f4a8c2e1b7', 'Grok (xAI) Usage'),
+    title: translate('auto.components.settings.accounts.search.f4a8c2e1b7', 'Grok (xAI) usage'),
     description: translate(
       'auto.components.settings.accounts.search.e3b7d1f9a2',
       'OAuth sign-in via Grok CLI (grok login) for weekly credit usage.'
@@ -199,7 +199,7 @@ export const getAccountsGrokSearchEntries = createLocalizedCatalog(() => [
 
 export const getAccountsAntigravitySearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('accounts.antigravity.searchTitle', 'Antigravity Accounts'),
+    title: translate('accounts.antigravity.searchTitle', 'Antigravity accounts'),
     description: translate(
       'accounts.antigravity.searchDescription',
       'Save and select native agy Google accounts on the execution host.'
@@ -217,7 +217,7 @@ export const getAccountsAntigravitySearchEntries = createLocalizedCatalog(() => 
 
 export const getAccountsCursorSearchEntries = createLocalizedCatalog(() => [
   {
-    title: translate('auto.components.settings.accounts.search.cursor.title', 'Cursor Usage'),
+    title: translate('auto.components.settings.accounts.search.cursor.title', 'Cursor usage'),
     description: translate(
       'auto.components.settings.accounts.search.cursor.description',
       'Plan usage read from the Cursor sign-in already on this computer (cursor-agent login).'

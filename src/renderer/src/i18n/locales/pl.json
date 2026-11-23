@@ -24116,7 +24116,8 @@
       "resumedInTabFolder": "[Prompt] Kontynuacja w tym folderze, a nie w {{folder}}, gdzie działało ostatnio",
       "interruptedByUser": "Przerwane przez użytkownika",
       "interrupted": "Przerwane",
-      "unconfirmed": "Nie udało się potwierdzić"
+      "unconfirmed": "Nie udało się potwierdzić",
+      "dialogOpen": "Czeka w oknie wyboru"
     },
     "timeAgo": {
       "now": "teraz",
@@ -24398,6 +24399,15 @@
       "argsNone": "Brak argumentów",
       "argsRepository": "Własne argumenty repozytorium",
       "argsGlobal": "Globalne własne argumenty"
+    },
+    "runnersAccount": {
+      "settings": "Ustawienia konta",
+      "nickname": "Pseudonim",
+      "nicknameHint": "Widoczny obok pandy i w innych aplikacjach RUNNERS. Zostaw puste, aby użyć części adresu e-mail przed @.",
+      "nicknameLong": "Pseudonim może mieć najwyżej 30 znaków.",
+      "save": "Zapisz",
+      "saved": "Zapisano",
+      "network": "Nie udało się połączyć z serwerem. Spróbuj za chwilę."
     }
   }
 }

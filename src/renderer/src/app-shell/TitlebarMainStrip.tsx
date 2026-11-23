@@ -4,6 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { TOGGLE_TERMINAL_PANE_EXPAND_EVENT } from '@/constants/terminal'
 import { ActivityTitlebarControls } from '../components/activity/ActivityTitlebarControls'
 import { PROMPT_BLOCK_UPSTREAM_SERVICES } from '../../../shared/prompt-upstream'
+import { PromptRunnersAccountButton } from '../components/prompt-runners-account/PromptRunnersAccountButton'
 import { PromptSettingsButton } from '../components/prompt-settings-button/PromptSettingsButton'
 import { useShortcutLabel } from '../hooks/useShortcutLabel'
 import { useAppStore } from '../store'
@@ -35,6 +36,7 @@ export function RightSidebarToggle(): React.JSX.Element {
 }
 
 export function TitlebarMainStrip({ layout }: { layout: AppChromeLayout }): React.JSX.Element {
+  const showRightSidebarToggle = layout.showRightSidebarControls && !layout.rightSidebarOpen
   const handleToggleExpand = (): void => {
     const { effectiveActiveTabId } = selectActiveTerminalChromeState(useAppStore.getState())
     if (!effectiveActiveTabId) {
@@ -80,8 +82,12 @@ export function TitlebarMainStrip({ layout }: { layout: AppChromeLayout }): Reac
       layout.activeView === 'settings' ? null : (
         <PromptSettingsButton />
       )}
+      {/* Pages without a workspace tab strip (the landing screen, settings) keep the RUNNERS account at the top right too. */}
+      {PROMPT_BLOCK_UPSTREAM_SERVICES && !layout.workspaceChromeActive ? (
+        <PromptRunnersAccountButton lastInTitlebar={!showRightSidebarToggle} />
+      ) : null}
       {/* The open sidebar already renders its close button. */}
-      {layout.showRightSidebarControls && !layout.rightSidebarOpen ? <RightSidebarToggle /> : null}
+      {showRightSidebarToggle ? <RightSidebarToggle /> : null}
       {/* Reserve the custom window-controls overlay’s width. */}
       {hasCustomTitleBar && <div className="window-controls-titlebar-spacer" />}
     </>

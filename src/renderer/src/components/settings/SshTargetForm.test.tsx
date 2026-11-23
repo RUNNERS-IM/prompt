@@ -221,7 +221,7 @@ describe('SshTargetForm', () => {
       }
     })
     expect(button('Advanced').getAttribute('data-state')).toBe('open')
-    expect(document.body.textContent).toContain('Jump Host')
+    expect(document.body.textContent).toContain('Jump host')
     act(() => root.unmount())
   })
 })

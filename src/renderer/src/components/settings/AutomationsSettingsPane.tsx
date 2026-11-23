@@ -19,7 +19,7 @@ export function AutomationsSettingsPane({
       <SettingsSwitchRow
         label={translate(
           'auto.components.settings.automations.showButton',
-          'Show Automations Button'
+          'Show Automations button'
         )}
         description={translate(
           'auto.components.settings.automations.showButtonDescription',

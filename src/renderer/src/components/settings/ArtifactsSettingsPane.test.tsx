@@ -96,7 +96,7 @@ describe('ArtifactsSettingsPane', () => {
       />
     )
 
-    const toggle = screen.getByRole('switch', { name: 'Show Artifacts Button' })
+    const toggle = screen.getByRole('switch', { name: 'Show Artifacts button' })
     expect(toggle).toHaveAttribute('aria-checked', 'false')
     await user.click(toggle)
     expect(updateSettings).toHaveBeenCalledWith({ showArtifactsButton: true })

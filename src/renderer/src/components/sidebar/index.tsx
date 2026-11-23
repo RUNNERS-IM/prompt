@@ -6,6 +6,7 @@ import SidebarHeader from './SidebarHeader'
 import SidebarNav from './SidebarNav'
 import { PromptComputerPicker } from './prompt-computer-picker'
 import { isPromptTwoLevelSidebar } from './prompt-sidebar-layout'
+import { PromptSettingsButton } from '../prompt-settings-button/PromptSettingsButton'
 import { setSidebarLiveWidth } from './sidebar-live-width'
 import SetupScriptPromptCard from './SetupScriptPromptCard'
 import WorktreeList from './WorktreeList'
@@ -169,7 +170,6 @@ function Sidebar({
       >
         {sidebarOpen && (
           <>
-            {isPromptTwoLevelSidebar() ? <PromptComputerPicker /> : null}
             <SidebarNav />
             <SidebarHeader
               onWorkspaceBoardMenuOpenChange={setWorkspaceBoardMenuOpen}
@@ -212,7 +212,10 @@ function Sidebar({
             <div className="relative shrink-0">
               <SetupScriptPromptCard />
 
-              {/* Prompt drops the bottom row: settings sit at the tab strip's right end, help in the menu bar. */}
+              {/* Prompt's bottom row: computer picker + Settings gear (runners-wiki 2026-11-19 7A). */}
+              {isPromptTwoLevelSidebar() ? (
+                <PromptComputerPicker trailing={<PromptSettingsButton tooltipSide="top" />} />
+              ) : null}
               {PROMPT_BLOCK_UPSTREAM_SERVICES ? null : (
                 <SidebarToolbar
                   workspaceBoardOpen={workspaceBoardOpen}

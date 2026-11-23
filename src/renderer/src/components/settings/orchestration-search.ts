@@ -34,7 +34,7 @@ const getAllOrchestrationPaneSearchEntries = createLocalizedCatalog(() => [
   {
     title: translate(
       'auto.components.settings.orchestration.search.c34045764e',
-      'Agent Orchestration'
+      'Agent orchestration'
     ),
     description: translate(
       'auto.components.settings.orchestration.search.e05ff36753',

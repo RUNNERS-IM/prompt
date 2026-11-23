@@ -152,7 +152,7 @@ describe('settings navigation metadata', () => {
       .map((section) => section.id)
 
     expect(automations?.group).toBe('workflows')
-    expect(automations?.searchEntries[0]?.title).toBe('Show Automations Button')
+    expect(automations?.searchEntries[0]?.title).toBe('Show Automations button')
     expect(artifacts?.group).toBe('workflows')
     expect(artifacts?.badge).toBe('Beta')
     expect(artifacts?.description).toBe(
@@ -310,10 +310,10 @@ describe('settings navigation metadata', () => {
     const general = sections.find((section) => section.id === 'general')
     const repoSection = sections.find((section) => section.id === 'repo-repo-1')
 
-    expect(general?.searchEntries.some((entry) => entry.title === 'Default Project Runtime')).toBe(
+    expect(general?.searchEntries.some((entry) => entry.title === 'Default project runtime')).toBe(
       false
     )
-    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project Runtime')).toBe(
+    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project runtime')).toBe(
       false
     )
   })
@@ -329,10 +329,10 @@ describe('settings navigation metadata', () => {
     const general = sections.find((section) => section.id === 'general')
     const repoSection = sections.find((section) => section.id === 'repo-repo-1')
 
-    expect(general?.searchEntries.some((entry) => entry.title === 'Default Project Runtime')).toBe(
+    expect(general?.searchEntries.some((entry) => entry.title === 'Default project runtime')).toBe(
       true
     )
-    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project Runtime')).toBe(true)
+    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project runtime')).toBe(true)
   })
 
   it('surfaces Windows-host and universal terminal settings in Windows-host metadata', () => {
@@ -346,8 +346,8 @@ describe('settings navigation metadata', () => {
 
     const terminal = sections.find((section) => section.id === 'terminal')
 
-    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default Shell')).toBe(true)
-    expect(terminal?.searchEntries.some((entry) => entry.title === 'PowerShell Version')).toBe(true)
+    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default shell')).toBe(true)
+    expect(terminal?.searchEntries.some((entry) => entry.title === 'PowerShell version')).toBe(true)
     // Right-click paste is indexed on every client platform, including clients of Windows terminal hosts.
     expect(terminal?.searchEntries.some((entry) => entry.title === 'Right-click to paste')).toBe(
       true
@@ -369,12 +369,12 @@ describe('settings navigation metadata', () => {
     const terminal = sections.find((section) => section.id === 'terminal')
     const repoSection = sections.find((section) => section.id === 'repo-repo-1')
 
-    expect(agents?.searchEntries.some((entry) => entry.title === 'Agent Runtime')).toBe(false)
-    expect(general?.searchEntries.some((entry) => entry.title === 'Default Project Runtime')).toBe(
+    expect(agents?.searchEntries.some((entry) => entry.title === 'Agent runtime')).toBe(false)
+    expect(general?.searchEntries.some((entry) => entry.title === 'Default project runtime')).toBe(
       false
     )
-    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default Shell')).toBe(true)
-    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project Runtime')).toBe(true)
+    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default shell')).toBe(true)
+    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project runtime')).toBe(true)
   })
 
   it('keeps local runtime settings but hides remote Linux entries on a Windows desktop', () => {
@@ -392,12 +392,12 @@ describe('settings navigation metadata', () => {
     const terminal = sections.find((section) => section.id === 'terminal')
     const repoSection = sections.find((section) => section.id === 'repo-repo-1')
 
-    expect(agents?.searchEntries.some((entry) => entry.title === 'Agent Runtime')).toBe(true)
-    expect(general?.searchEntries.some((entry) => entry.title === 'Default Project Runtime')).toBe(
+    expect(agents?.searchEntries.some((entry) => entry.title === 'Agent runtime')).toBe(true)
+    expect(general?.searchEntries.some((entry) => entry.title === 'Default project runtime')).toBe(
       true
     )
-    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default Shell')).toBe(false)
-    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project Runtime')).toBe(
+    expect(terminal?.searchEntries.some((entry) => entry.title === 'Default shell')).toBe(false)
+    expect(repoSection?.searchEntries.some((entry) => entry.title === 'Project runtime')).toBe(
       false
     )
   })
