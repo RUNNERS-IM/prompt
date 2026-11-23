@@ -23452,7 +23452,7 @@
         "description": "Thema, taal, zoom, lettertypen en terminalkleuren."
       },
       "cli": {
-        "installDescriptionMac": "`prompt` en `orca` registreren in /usr/local/bin.",
+        "installDescriptionMac": "`prompt` registreren in /usr/local/bin.",
         "notInstalled": "Registreer {{path}} om Prompt vanuit andere terminals te gebruiken."
       },
       "advanced": {

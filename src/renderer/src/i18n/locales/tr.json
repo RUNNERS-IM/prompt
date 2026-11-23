@@ -130,7 +130,7 @@
         "description": "Tema, dil, yakınlaştırma, yazı tipleri ve terminal renkleri."
       },
       "cli": {
-        "installDescriptionMac": "`prompt` ve `orca` komutlarını /usr/local/bin içine kaydedin.",
+        "installDescriptionMac": "`prompt` komutunu /usr/local/bin içine kaydedin.",
         "notInstalled": "Prompt'u diğer terminallerden kullanmak için {{path}} yolunu kaydedin."
       },
       "advanced": {

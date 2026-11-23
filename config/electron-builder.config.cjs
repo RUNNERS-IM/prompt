@@ -627,10 +627,6 @@ module.exports = {
       macSpeechNativeResource,
       { from: 'resources/build/Assets.car', to: 'Assets.car' },
       {
-        from: 'resources/darwin/bin/orca',
-        to: 'bin/orca'
-      },
-      {
         from: 'resources/darwin/bin/prompt',
         to: 'bin/prompt'
       },

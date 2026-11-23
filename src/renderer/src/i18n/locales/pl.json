@@ -24234,7 +24234,7 @@
         "description": "Motyw, język, powiększenie, czcionki i kolory terminala."
       },
       "cli": {
-        "installDescriptionMac": "Zarejestruj `prompt` i `orca` w /usr/local/bin.",
+        "installDescriptionMac": "Zarejestruj `prompt` w /usr/local/bin.",
         "notInstalled": "Zarejestruj {{path}}, aby używać Prompt z innych terminali."
       },
       "advanced": {

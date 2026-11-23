@@ -23061,7 +23061,7 @@
         "description": "Tema, bahasa, zoom, font, dan warna terminal."
       },
       "cli": {
-        "installDescriptionMac": "Daftarkan `prompt` dan `orca` di /usr/local/bin.",
+        "installDescriptionMac": "Daftarkan `prompt` di /usr/local/bin.",
         "notInstalled": "Daftarkan {{path}} agar Prompt dapat digunakan dari terminal lain."
       },
       "advanced": {

@@ -177,7 +177,9 @@ describe('a chat agent and a terminal agent see the same text but for how each i
         worktreeId: 'repo::/tmp/wt',
         runtimeCliCommand: runtimeOrchestrationCliCommand()
       })
-      expect(terminalCli).toBe(packaged ? 'orca' : 'orca-dev')
+      // A packaged macOS app registers only `prompt`; other platforms keep `orca`.
+      const packagedCli = process.platform === 'darwin' ? 'prompt' : 'orca'
+      expect(terminalCli).toBe(packaged ? packagedCli : 'orca-dev')
 
       for (const mailbox of ['run:run_parity', CHAT_ADDRESS]) {
         expect(await renderChatPointer(mailbox)).toBe(

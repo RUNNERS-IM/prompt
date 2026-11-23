@@ -371,9 +371,10 @@ describe('agent-session create operation ledger', () => {
       request(operationId(), { agent: 'claude-agent-teams', prompt: '' })
     )
 
-    expect(planned?.command).toContain(
-      process.platform === 'linux' ? 'orca-ide claude-teams' : 'orca claude-teams'
-    )
+    // The local CLI name: `orca-ide` on Linux, `prompt` on macOS (Prompt ships only that), else `orca`.
+    const localCli =
+      process.platform === 'linux' ? 'orca-ide' : process.platform === 'darwin' ? 'prompt' : 'orca'
+    expect(planned?.command).toContain(`${localCli} claude-teams`)
   })
 
   it('requests exact client legacy fallback before nested SSH side effects', async () => {

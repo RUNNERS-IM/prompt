@@ -23061,7 +23061,7 @@
         "description": "ธีม ภาษา การซูม ฟอนต์ และสีของ terminal"
       },
       "cli": {
-        "installDescriptionMac": "ลงทะเบียน `prompt` และ `orca` ใน /usr/local/bin",
+        "installDescriptionMac": "ลงทะเบียน `prompt` ใน /usr/local/bin",
         "notInstalled": "ลงทะเบียน {{path}} เพื่อใช้ Prompt จาก terminal อื่น"
       },
       "advanced": {

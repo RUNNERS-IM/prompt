@@ -7,7 +7,8 @@ export function getOrcaCliCommandNameForPlatform(platform: NodeJS.Platform): str
   if (platform === 'win32') {
     return 'orca.cmd'
   }
-  return 'orca'
+  // Prompt ships only `prompt` on macOS.
+  return platform === 'darwin' ? 'prompt' : 'orca'
 }
 
 /** The GNOME-conflict `orca-ide` rename is desktop-only: SSH relays and headless Orca servers put plain `orca` on PATH. */
