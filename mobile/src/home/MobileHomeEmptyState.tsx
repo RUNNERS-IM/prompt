@@ -1,11 +1,15 @@
 import { QrCode } from 'lucide-react-native'
-import { Pressable, ScrollView, Text, View } from 'react-native'
+import { Image, Pressable, ScrollView, Text, View } from 'react-native'
 import type { Translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
 import { colors, radii, spacing } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { WordText } from '../components/WordText'
+
+// The RUNNERS panda for "no computer yet", the same picture the desktop apps use for this state
+// (runners-wiki 2026-11-16 앱 판다 그림). The pairing QR stays on the button below.
+const NO_COMPUTER_PANDA = require('../../assets/panda/no-computer.png') as number
 
 function onboardingSteps(t: Translate) {
   return [
@@ -58,6 +62,12 @@ export function MobileHomeEmptyState(props: {
       ]}
     >
       <View style={styles.emptyHero}>
+        <Image
+          source={NO_COMPUTER_PANDA}
+          style={styles.emptyPanda}
+          accessibilityIgnoresInvertColors
+          accessible={false}
+        />
         <Text style={styles.emptyTitle}>{t('home.emptyState.title', 'Connect your desktop')}</Text>
         <WordText style={styles.emptyBody}>
           {t(
@@ -101,6 +111,7 @@ const styles = themedStyleSheet(() => ({
     paddingHorizontal: 32,
     paddingBottom: 40
   },
+  emptyPanda: { width: 128, height: 128, marginBottom: 16 },
   emptyTitle: {
     fontSize: 22,
     fontWeight: '700',
