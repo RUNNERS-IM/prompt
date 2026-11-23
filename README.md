@@ -5,7 +5,7 @@
 <p align="center"><b>Many Claude sessions, one window.</b><br>A Mac terminal that runs many Claude Code sessions in one window, grouped by project.</p>
 <p align="center">
   <a href="https://github.com/RUNNERS-IM/prompt/releases/latest/download/prompt-macos-arm64.dmg"><b>Download for Mac</b></a> ·
-  <a href="https://runners.im/prompt">runners.im/prompt</a> ·
+  <a href="https://runners.im/en/prompt">runners.im/en/prompt</a> ·
   <a href="docs/readme/README.ko.md">한국어</a>
 </p>
 <p align="center"><sub>Free · macOS 12 or later · Apple silicon · 20 languages</sub></p>
@@ -58,4 +58,4 @@ Copyright (c) 2026 Runners Co., Ltd. All rights reserved. See [LICENSE](LICENSE)
 
 ---
 
-<p align="center"><a href="https://runners.im"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/icons/logos/RUNNERS_H_W.svg"><img src="https://runners.im/icons/logos/RUNNERS_H.svg" height="20" alt="RUNNERS"></picture></a><br><sub>Made by RUNNERS · Based on Orca (MIT)</sub></p>
+<p align="center"><a href="https://runners.im"><picture><source media="(prefers-color-scheme: dark)" srcset="https://runners.im/icons/logos/RUNNERS_H_W.svg"><img src="https://runners.im/icons/logos/RUNNERS_H.svg" height="20" alt="RUNNERS"></picture></a><br><sub>Made by RUNNERS · © 2026 Runners Co., Ltd. All rights reserved</sub></p>
