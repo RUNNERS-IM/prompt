@@ -79,7 +79,8 @@
       "downloadingTitle": "バージョン {{version}} をダウンロード中",
       "downloadingSubtitle": "ダウンロードが完了すると Prompt が再起動します",
       "restartFailed": "アップデートをインストールするための再起動に失敗しました。Prompt を終了して開き直し、もう一度お試しください。",
-      "installerFailed": "アップデートのインストーラーを起動できませんでした。Prompt は開いたままです。"
+      "installerFailed": "アップデートのインストーラーを起動できませんでした。Prompt は開いたままです。",
+      "autoUpdatedTitle": "{{version}} にアップデートしました"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "シェル起動引数"
       },
       "group": {
-        "more": "その他"
+        "more": "その他",
+        "claude": "Claude とアカウント",
+        "tools": "ターミナルとツール",
+        "app": "アプリ"
       },
       "general": {
         "appGroup": "アプリ",
@@ -174,6 +178,14 @@
       "account": {
         "title": "アカウント",
         "description": "すべての RUNNERS アプリで共通の RUNNERS アカウントと、この Mac の Claude アカウントです。"
+      },
+      "hostScope": {
+        "label": "適用先",
+        "description": "このページの設定は選んだ Mac にだけ適用されます。"
+      },
+      "project": {
+        "macCount": "Mac {{count}} 台",
+        "viewingMac": "設定を表示する Mac"
       }
     },
     "mobile": {

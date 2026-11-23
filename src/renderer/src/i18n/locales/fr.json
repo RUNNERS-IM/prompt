@@ -79,7 +79,8 @@
       "downloadingTitle": "Téléchargement de la version {{version}}",
       "downloadingSubtitle": "Prompt redémarre à la fin du téléchargement",
       "restartFailed": "Impossible de redémarrer pour installer la mise à jour. Quittez puis rouvrez Prompt, puis réessayez.",
-      "installerFailed": "Impossible de lancer le programme d'installation de la mise à jour. Prompt reste ouvert."
+      "installerFailed": "Impossible de lancer le programme d'installation de la mise à jour. Prompt reste ouvert.",
+      "autoUpdatedTitle": "Mis à jour vers {{version}}"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Arguments de démarrage du shell"
       },
       "group": {
-        "more": "Plus"
+        "more": "Plus",
+        "claude": "Claude et comptes",
+        "tools": "Terminal et outils",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -174,6 +178,14 @@
       "account": {
         "title": "Compte",
         "description": "Le compte RUNNERS partagé par toutes les apps RUNNERS, et les comptes Claude de ce Mac."
+      },
+      "hostScope": {
+        "label": "Appliquer à",
+        "description": "Les réglages de cette page ne s'appliquent qu'au Mac choisi."
+      },
+      "project": {
+        "macCount": "{{count}} Mac",
+        "viewingMac": "Mac dont les réglages sont affichés"
       }
     },
     "mobile": {

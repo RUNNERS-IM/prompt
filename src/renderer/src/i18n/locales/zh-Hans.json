@@ -79,7 +79,8 @@
       "downloadingTitle": "正在下载版本 {{version}}",
       "downloadingSubtitle": "下载完成后 Prompt 将重启",
       "restartFailed": "无法重启以安装更新。请退出并重新打开 Prompt，然后重试。",
-      "installerFailed": "无法启动更新安装程序。Prompt 仍保持打开。"
+      "installerFailed": "无法启动更新安装程序。Prompt 仍保持打开。",
+      "autoUpdatedTitle": "已更新到 {{version}}"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Shell 启动参数"
       },
       "group": {
-        "more": "更多"
+        "more": "更多",
+        "claude": "Claude 与账户",
+        "tools": "终端与工具",
+        "app": "应用"
       },
       "general": {
         "appGroup": "应用",
@@ -174,6 +178,14 @@
       "account": {
         "title": "账户",
         "description": "所有 RUNNERS 应用共用的 RUNNERS 账户，以及这台 Mac 的 Claude 账号。"
+      },
+      "hostScope": {
+        "label": "应用到",
+        "description": "此页面的设置只适用于所选的 Mac。"
+      },
+      "project": {
+        "macCount": "{{count}} 台 Mac",
+        "viewingMac": "要显示其设置的 Mac"
       }
     },
     "mobile": {

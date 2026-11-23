@@ -23374,7 +23374,8 @@
       "dismiss": "बंद करें",
       "releaseNotes": "क्या बदला",
       "downloadingTitle": "वर्शन {{version}} डाउनलोड हो रहा है",
-      "downloadingSubtitle": "डाउनलोड पूरा होने पर Prompt रीस्टार्ट होता है"
+      "downloadingSubtitle": "डाउनलोड पूरा होने पर Prompt रीस्टार्ट होता है",
+      "autoUpdatedTitle": "{{version}} पर अपडेट किया गया"
     },
     "windows": {
       "newWindow": "नई विंडो",
@@ -23492,7 +23493,10 @@
         "shellArgsGroup": "Shell शुरू करने के आर्ग्युमेंट"
       },
       "group": {
-        "more": "अधिक"
+        "more": "अधिक",
+        "claude": "Claude और खाते",
+        "tools": "टर्मिनल और टूल",
+        "app": "ऐप"
       },
       "general": {
         "appGroup": "ऐप",
@@ -23507,6 +23511,14 @@
       "account": {
         "title": "खाता",
         "description": "सभी RUNNERS ऐप का साझा RUNNERS खाता, और इस Mac के Claude खाते।"
+      },
+      "hostScope": {
+        "label": "इस पर लागू करें",
+        "description": "इस पेज की सेटिंग सिर्फ़ चुने गए Mac पर लागू होती हैं।"
+      },
+      "project": {
+        "macCount": "{{count}} Mac",
+        "viewingMac": "वह Mac जिसकी सेटिंग दिखानी है"
       }
     },
     "skills": {

@@ -79,7 +79,8 @@
       "downloadingTitle": "Version {{version}} wird heruntergeladen",
       "downloadingSubtitle": "Prompt wird neu gestartet, sobald der Download abgeschlossen ist",
       "restartFailed": "Der Neustart zur Installation des Updates war nicht möglich. Beende Prompt, öffne es erneut und versuche es noch einmal.",
-      "installerFailed": "Das Update-Installationsprogramm konnte nicht gestartet werden. Prompt bleibt geöffnet."
+      "installerFailed": "Das Update-Installationsprogramm konnte nicht gestartet werden. Prompt bleibt geöffnet.",
+      "autoUpdatedTitle": "Auf {{version}} aktualisiert"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Startargumente der Shell"
       },
       "group": {
-        "more": "Mehr"
+        "more": "Mehr",
+        "claude": "Claude & Konten",
+        "tools": "Terminal & Werkzeuge",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -174,6 +178,14 @@
       "account": {
         "title": "Konto",
         "description": "Das RUNNERS-Konto, das alle RUNNERS-Apps teilen, und die Claude-Konten dieses Macs."
+      },
+      "hostScope": {
+        "label": "Anwenden auf",
+        "description": "Die Einstellungen auf dieser Seite gelten nur für den gewählten Mac."
+      },
+      "project": {
+        "macCount": "{{count}} Macs",
+        "viewingMac": "Mac, dessen Einstellungen angezeigt werden"
       }
     },
     "mobile": {

@@ -22983,7 +22983,8 @@
       "dismiss": "ปิด",
       "releaseNotes": "มีอะไรเปลี่ยนแปลง",
       "downloadingTitle": "กำลังดาวน์โหลดเวอร์ชัน {{version}}",
-      "downloadingSubtitle": "Prompt จะรีสตาร์ทเมื่อดาวน์โหลดเสร็จ"
+      "downloadingSubtitle": "Prompt จะรีสตาร์ทเมื่อดาวน์โหลดเสร็จ",
+      "autoUpdatedTitle": "อัปเดตเป็น {{version}} แล้ว"
     },
     "windows": {
       "newWindow": "หน้าต่างใหม่",
@@ -23101,7 +23102,10 @@
         "shellArgsGroup": "อาร์กิวเมนต์เริ่มต้น shell"
       },
       "group": {
-        "more": "มากขึ้น"
+        "more": "มากขึ้น",
+        "claude": "Claude และบัญชี",
+        "tools": "เทอร์มินัลและเครื่องมือ",
+        "app": "แอป"
       },
       "general": {
         "appGroup": "แอป",
@@ -23116,6 +23120,14 @@
       "account": {
         "title": "บัญชี",
         "description": "บัญชี RUNNERS ที่แอป RUNNERS ทุกตัวใช้ร่วมกัน และบัญชี Claude ของ Mac เครื่องนี้"
+      },
+      "hostScope": {
+        "label": "ใช้กับ",
+        "description": "การตั้งค่าในหน้านี้ใช้กับ Mac ที่เลือกเท่านั้น"
+      },
+      "project": {
+        "macCount": "Mac {{count}} เครื่อง",
+        "viewingMac": "Mac ที่จะแสดงการตั้งค่า"
       }
     },
     "skills": {

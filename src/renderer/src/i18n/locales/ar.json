@@ -24938,7 +24938,8 @@
       "dismiss": "إغلاق",
       "releaseNotes": "ما الذي تغيّر",
       "downloadingTitle": "جارٍ تنزيل الإصدار {{version}}",
-      "downloadingSubtitle": "يُعاد تشغيل Prompt عند اكتمال التنزيل"
+      "downloadingSubtitle": "يُعاد تشغيل Prompt عند اكتمال التنزيل",
+      "autoUpdatedTitle": "تم التحديث إلى {{version}}"
     },
     "windows": {
       "newWindow": "نافذة جديدة",
@@ -25056,7 +25057,10 @@
         "shellArgsGroup": "وسائط بدء shell"
       },
       "group": {
-        "more": "أكثر"
+        "more": "أكثر",
+        "claude": "Claude والحسابات",
+        "tools": "الطرفية والأدوات",
+        "app": "التطبيق"
       },
       "general": {
         "appGroup": "التطبيق",
@@ -25071,6 +25075,14 @@
       "account": {
         "title": "الحساب",
         "description": "حساب RUNNERS الذي تشترك فيه كل تطبيقات RUNNERS، وحسابات Claude على هذا الـMac."
+      },
+      "hostScope": {
+        "label": "تطبيق على",
+        "description": "تنطبق إعدادات هذه الصفحة على جهاز Mac المختار فقط."
+      },
+      "project": {
+        "macCount": "أجهزة Mac: {{count}}",
+        "viewingMac": "جهاز Mac الذي تُعرض إعداداته"
       }
     },
     "skills": {

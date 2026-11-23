@@ -23374,7 +23374,8 @@
       "dismiss": "Sulje",
       "releaseNotes": "Mitä muuttui",
       "downloadingTitle": "Ladataan versiota {{version}}",
-      "downloadingSubtitle": "Prompt käynnistyy uudelleen, kun lataus on valmis"
+      "downloadingSubtitle": "Prompt käynnistyy uudelleen, kun lataus on valmis",
+      "autoUpdatedTitle": "Päivitetty versioon {{version}}"
     },
     "windows": {
       "newWindow": "Uusi ikkuna",
@@ -23492,7 +23493,10 @@
         "shellArgsGroup": "Komentotulkin käynnistysargumentit"
       },
       "group": {
-        "more": "Enemmän"
+        "more": "Enemmän",
+        "claude": "Claude ja tilit",
+        "tools": "Pääte ja työkalut",
+        "app": "Sovellus"
       },
       "general": {
         "appGroup": "Sovellus",
@@ -23507,6 +23511,14 @@
       "account": {
         "title": "Tili",
         "description": "RUNNERS-tili, jota kaikki RUNNERS-sovellukset käyttävät, ja tämän Macin Claude-tilit."
+      },
+      "hostScope": {
+        "label": "Käytä kohteessa",
+        "description": "Tämän sivun asetukset koskevat vain valittua Macia."
+      },
+      "project": {
+        "macCount": "{{count}} Macia",
+        "viewingMac": "Mac, jonka asetukset näytetään"
       }
     },
     "skills": {

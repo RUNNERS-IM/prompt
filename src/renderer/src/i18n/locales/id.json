@@ -22983,7 +22983,8 @@
       "dismiss": "Tutup",
       "releaseNotes": "Yang berubah",
       "downloadingTitle": "Mengunduh versi {{version}}",
-      "downloadingSubtitle": "Prompt dimulai ulang setelah unduhan selesai"
+      "downloadingSubtitle": "Prompt dimulai ulang setelah unduhan selesai",
+      "autoUpdatedTitle": "Diperbarui ke {{version}}"
     },
     "windows": {
       "newWindow": "Jendela baru",
@@ -23101,7 +23102,10 @@
         "shellArgsGroup": "Argumen awal shell"
       },
       "group": {
-        "more": "Lebih banyak"
+        "more": "Lebih banyak",
+        "claude": "Claude & Akun",
+        "tools": "Terminal & Alat",
+        "app": "Aplikasi"
       },
       "general": {
         "appGroup": "Aplikasi",
@@ -23116,6 +23120,14 @@
       "account": {
         "title": "Akun",
         "description": "Akun RUNNERS yang dipakai bersama semua aplikasi RUNNERS, dan akun Claude di Mac ini."
+      },
+      "hostScope": {
+        "label": "Terapkan ke",
+        "description": "Pengaturan di halaman ini hanya berlaku untuk Mac yang dipilih."
+      },
+      "project": {
+        "macCount": "{{count}} Mac",
+        "viewingMac": "Mac yang pengaturannya ditampilkan"
       }
     },
     "skills": {

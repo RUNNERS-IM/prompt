@@ -24156,7 +24156,8 @@
       "dismiss": "Zamknij",
       "releaseNotes": "Co się zmieniło",
       "downloadingTitle": "Pobieranie wersji {{version}}",
-      "downloadingSubtitle": "Prompt uruchomi się ponownie po zakończeniu pobierania"
+      "downloadingSubtitle": "Prompt uruchomi się ponownie po zakończeniu pobierania",
+      "autoUpdatedTitle": "Zaktualizowano do {{version}}"
     },
     "windows": {
       "newWindow": "Nowe okno",
@@ -24274,7 +24275,10 @@
         "shellArgsGroup": "Argumenty startowe powłoki"
       },
       "group": {
-        "more": "Więcej"
+        "more": "Więcej",
+        "claude": "Claude i konta",
+        "tools": "Terminal i narzędzia",
+        "app": "Aplikacja"
       },
       "general": {
         "appGroup": "Aplikacja",
@@ -24289,6 +24293,14 @@
       "account": {
         "title": "Konto",
         "description": "Konto RUNNERS wspólne dla wszystkich aplikacji RUNNERS oraz konta Claude na tym Macu."
+      },
+      "hostScope": {
+        "label": "Zastosuj do",
+        "description": "Ustawienia na tej stronie dotyczą tylko wybranego Maca."
+      },
+      "project": {
+        "macCount": "Komputery Mac: {{count}}",
+        "viewingMac": "Mac, którego ustawienia są pokazywane"
       }
     },
     "skills": {

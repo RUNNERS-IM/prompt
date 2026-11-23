@@ -79,7 +79,8 @@
       "downloadingTitle": "正在下載版本 {{version}}",
       "downloadingSubtitle": "下載完成後 Prompt 會重新啟動",
       "restartFailed": "無法重新啟動以安裝更新。請結束並重新開啟 Prompt，然後再試一次。",
-      "installerFailed": "無法啟動更新安裝程式。Prompt 仍保持開啟。"
+      "installerFailed": "無法啟動更新安裝程式。Prompt 仍保持開啟。",
+      "autoUpdatedTitle": "已更新至 {{version}}"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Shell 啟動引數"
       },
       "group": {
-        "more": "更多"
+        "more": "更多",
+        "claude": "Claude 與帳號",
+        "tools": "終端機與工具",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -174,6 +178,14 @@
       "account": {
         "title": "帳號",
         "description": "所有 RUNNERS App 共用的 RUNNERS 帳號，以及這台 Mac 的 Claude 帳號。"
+      },
+      "hostScope": {
+        "label": "套用到",
+        "description": "此頁面的設定只適用於所選的 Mac。"
+      },
+      "project": {
+        "macCount": "{{count}} 台 Mac",
+        "viewingMac": "要顯示其設定的 Mac"
       }
     },
     "mobile": {

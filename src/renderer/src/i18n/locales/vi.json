@@ -22983,7 +22983,8 @@
       "dismiss": "Đóng",
       "releaseNotes": "Có gì thay đổi",
       "downloadingTitle": "Đang tải phiên bản {{version}}",
-      "downloadingSubtitle": "Prompt sẽ khởi động lại khi tải xong"
+      "downloadingSubtitle": "Prompt sẽ khởi động lại khi tải xong",
+      "autoUpdatedTitle": "Đã cập nhật lên {{version}}"
     },
     "windows": {
       "newWindow": "Cửa sổ mới",
@@ -23101,7 +23102,10 @@
         "shellArgsGroup": "Đối số khởi động shell"
       },
       "group": {
-        "more": "Nhiều hơn"
+        "more": "Nhiều hơn",
+        "claude": "Claude và tài khoản",
+        "tools": "Terminal và công cụ",
+        "app": "Ứng dụng"
       },
       "general": {
         "appGroup": "Ứng dụng",
@@ -23116,6 +23120,14 @@
       "account": {
         "title": "Tài khoản",
         "description": "Tài khoản RUNNERS dùng chung cho mọi ứng dụng RUNNERS và các tài khoản Claude của Mac này."
+      },
+      "hostScope": {
+        "label": "Áp dụng cho",
+        "description": "Cài đặt trên trang này chỉ áp dụng cho máy Mac đã chọn."
+      },
+      "project": {
+        "macCount": "{{count}} máy Mac",
+        "viewingMac": "Máy Mac để xem cài đặt"
       }
     },
     "skills": {

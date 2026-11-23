@@ -79,7 +79,8 @@
       "downloadingTitle": "Загрузка версии {{version}}",
       "downloadingSubtitle": "Prompt перезапустится после завершения загрузки",
       "restartFailed": "Не удалось перезапустить для установки обновления. Закройте и снова откройте Prompt, затем повторите попытку.",
-      "installerFailed": "Не удалось запустить установщик обновления. Prompt остаётся открытым."
+      "installerFailed": "Не удалось запустить установщик обновления. Prompt остаётся открытым.",
+      "autoUpdatedTitle": "Обновлено до {{version}}"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Аргументы запуска оболочки"
       },
       "group": {
-        "more": "Ещё"
+        "more": "Ещё",
+        "claude": "Claude и аккаунты",
+        "tools": "Терминал и инструменты",
+        "app": "Приложение"
       },
       "general": {
         "appGroup": "Приложение",
@@ -174,6 +178,14 @@
       "account": {
         "title": "Аккаунт",
         "description": "Аккаунт RUNNERS для всех приложений RUNNERS и аккаунты Claude на этом Mac."
+      },
+      "hostScope": {
+        "label": "Применить к",
+        "description": "Настройки на этой странице действуют только для выбранного Mac."
+      },
+      "project": {
+        "macCount": "Mac: {{count}}",
+        "viewingMac": "Mac, настройки которого показаны"
       }
     },
     "mobile": {

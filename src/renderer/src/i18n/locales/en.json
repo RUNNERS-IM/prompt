@@ -23374,7 +23374,8 @@
       "dismiss": "Close",
       "releaseNotes": "What changed",
       "downloadingTitle": "Downloading version {{version}}",
-      "downloadingSubtitle": "Prompt restarts when the download finishes"
+      "downloadingSubtitle": "Prompt restarts when the download finishes",
+      "autoUpdatedTitle": "Updated to {{version}}"
     },
     "windows": {
       "newWindow": "New Window",
@@ -23492,7 +23493,10 @@
         "shellArgsGroup": "Shell Start Arguments"
       },
       "group": {
-        "more": "More"
+        "more": "More",
+        "claude": "Claude & Accounts",
+        "tools": "Terminal & Tools",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -23507,6 +23511,14 @@
       "account": {
         "title": "Account",
         "description": "The RUNNERS account every RUNNERS app shares, and this Mac's Claude accounts."
+      },
+      "hostScope": {
+        "label": "Apply to",
+        "description": "Settings on this page apply only to the chosen Mac."
+      },
+      "project": {
+        "macCount": "{{count}} Macs",
+        "viewingMac": "Mac to show settings for"
       }
     },
     "skills": {

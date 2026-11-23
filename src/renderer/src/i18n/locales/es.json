@@ -79,7 +79,8 @@
       "downloadingTitle": "Descargando la versión {{version}}",
       "downloadingSubtitle": "Prompt se reinicia cuando termine la descarga",
       "restartFailed": "No se pudo reiniciar para instalar la actualización. Cierra y vuelve a abrir Prompt, e inténtalo de nuevo.",
-      "installerFailed": "No se pudo iniciar el instalador de la actualización. Prompt sigue abierto."
+      "installerFailed": "No se pudo iniciar el instalador de la actualización. Prompt sigue abierto.",
+      "autoUpdatedTitle": "Actualizado a {{version}}"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Argumentos de inicio del shell"
       },
       "group": {
-        "more": "Más"
+        "more": "Más",
+        "claude": "Claude y cuentas",
+        "tools": "Terminal y herramientas",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -174,6 +178,14 @@
       "account": {
         "title": "Cuenta",
         "description": "La cuenta RUNNERS que comparten todas las apps de RUNNERS y las cuentas de Claude de este Mac."
+      },
+      "hostScope": {
+        "label": "Aplicar a",
+        "description": "Los ajustes de esta página solo se aplican al Mac elegido."
+      },
+      "project": {
+        "macCount": "{{count}} Mac",
+        "viewingMac": "Mac cuyos ajustes se muestran"
       }
     },
     "mobile": {

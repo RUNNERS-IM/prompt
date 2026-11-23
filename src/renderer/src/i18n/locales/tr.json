@@ -79,7 +79,8 @@
       "downloadingTitle": "{{version}} sürümü indiriliyor",
       "downloadingSubtitle": "İndirme bittiğinde Prompt yeniden başlar",
       "restartFailed": "Güncellemeyi yüklemek için yeniden başlatılamadı. Prompt'u kapatıp yeniden açın, sonra tekrar deneyin.",
-      "installerFailed": "Güncelleme yükleyicisi başlatılamadı. Prompt açık kalıyor."
+      "installerFailed": "Güncelleme yükleyicisi başlatılamadı. Prompt açık kalıyor.",
+      "autoUpdatedTitle": "{{version}} sürümüne güncellendi"
     },
     "onboarding": {
       "beforeYouStart": {
@@ -159,7 +160,10 @@
         "shellArgsGroup": "Kabuk Başlatma Argümanları"
       },
       "group": {
-        "more": "Daha fazla"
+        "more": "Daha fazla",
+        "claude": "Claude ve hesaplar",
+        "tools": "Terminal ve araçlar",
+        "app": "Uygulama"
       },
       "general": {
         "appGroup": "Uygulama",
@@ -174,6 +178,14 @@
       "account": {
         "title": "Hesap",
         "description": "Tüm RUNNERS uygulamalarının paylaştığı RUNNERS hesabı ve bu Mac'in Claude hesapları."
+      },
+      "hostScope": {
+        "label": "Şuna uygula",
+        "description": "Bu sayfadaki ayarlar yalnızca seçilen Mac için geçerlidir."
+      },
+      "project": {
+        "macCount": "{{count}} Mac",
+        "viewingMac": "Ayarları gösterilecek Mac"
       }
     },
     "mobile": {

@@ -23374,7 +23374,8 @@
       "dismiss": "Sluiten",
       "releaseNotes": "Wat is er gewijzigd",
       "downloadingTitle": "Versie {{version}} downloaden",
-      "downloadingSubtitle": "Prompt wordt opnieuw gestart zodra de download klaar is"
+      "downloadingSubtitle": "Prompt wordt opnieuw gestart zodra de download klaar is",
+      "autoUpdatedTitle": "Bijgewerkt naar {{version}}"
     },
     "windows": {
       "newWindow": "Nieuw venster",
@@ -23492,7 +23493,10 @@
         "shellArgsGroup": "Startargumenten van shell"
       },
       "group": {
-        "more": "Meer"
+        "more": "Meer",
+        "claude": "Claude & accounts",
+        "tools": "Terminal & tools",
+        "app": "App"
       },
       "general": {
         "appGroup": "App",
@@ -23507,6 +23511,14 @@
       "account": {
         "title": "Account",
         "description": "Het RUNNERS-account dat alle RUNNERS-apps delen, en de Claude-accounts van deze Mac."
+      },
+      "hostScope": {
+        "label": "Toepassen op",
+        "description": "Instellingen op deze pagina gelden alleen voor de gekozen Mac."
+      },
+      "project": {
+        "macCount": "{{count}} Macs",
+        "viewingMac": "Mac waarvan de instellingen worden getoond"
       }
     },
     "skills": {
