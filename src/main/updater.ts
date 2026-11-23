@@ -12,6 +12,7 @@ import type {
 import type { ReleaseBuild, ReleaseChannel } from '../shared/release-channel'
 import type { ReleaseBuildListOptions } from './updater-release-build-cache'
 import { UpdaterSetup, type UpdaterSetupOptions } from './updater/updater-setup'
+import type { AutoUpdatedNotice } from './updater/updater-auto-install'
 import type { PreQuitCleanupFailureMode, UpdateInstallMode } from './updater/updater-state'
 
 const updater = new UpdaterSetup()
@@ -86,6 +87,14 @@ export async function listAvailableReleaseBuilds(
 
 export function dismissNudge(): void {
   updater.dismissNudge()
+}
+
+export function getAutoUpdatedNotice(): AutoUpdatedNotice | null {
+  return updater.getAutoUpdatedNotice()
+}
+
+export function dismissAutoUpdatedNotice(): void {
+  updater.dismissAutoUpdatedNotice()
 }
 
 export function dismissAvailableUpdate(): void {

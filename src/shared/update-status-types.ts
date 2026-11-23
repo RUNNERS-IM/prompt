@@ -69,6 +69,8 @@ export type UpdateStatus = (
       state: 'available'
       version: string
       activeNudgeId?: string
+      /** Prompt: 저절로 받아 쉬는 중에 까는 판. 카드를 띄우지 않는다. */
+      autoInstall?: boolean
       // Kept for Settings release-link fallback; the current update-available handler does not populate it.
       releaseUrl?: string
       // Main always sets this: null means fetch failure/missing version, object enables rich mode. Avoid an undefined third state.
@@ -83,6 +85,7 @@ export type UpdateStatus = (
       percent: number
       version: string
       activeNudgeId?: string
+      autoInstall?: boolean
       /** Optional so older paired clients keep showing the percent alone. */
       transferredBytes?: number
       totalBytes?: number
@@ -92,6 +95,7 @@ export type UpdateStatus = (
       version: string
       releaseUrl?: string
       activeNudgeId?: string
+      autoInstall?: boolean
       /** Install preparation is in progress; older clients can still render downloaded. */
       installing?: boolean
     }
