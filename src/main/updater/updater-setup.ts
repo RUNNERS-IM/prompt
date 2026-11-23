@@ -18,6 +18,7 @@ import { createUpdaterDiagnosticLogger } from '../linux-package-install-diagnost
 import { registerAutoUpdaterHandlers } from '../updater-events'
 import { getServeUpdateHandoffFailure } from '../serve-update-handoff'
 import { recordUpdaterLifecycle } from '../updater-lifecycle-diagnostics'
+import { getMainE2EConfig } from '../e2e-config'
 import { AUTO_UPDATE_CHECK_INTERVAL_MS } from './updater-state'
 import { UpdaterDownloadInstall } from './updater-download-install'
 import { configureMacShipItScheduling } from './macos-shipit-scheduling'
@@ -141,6 +142,11 @@ export class UpdaterSetup extends UpdaterDownloadInstall {
     }
 
     if (!app.isPackaged) {
+      return
+    }
+    // Why: a packaged test run (test shots) found a newer release, quit mid-run to install it, and
+    // ShipIt relaunched the swapped app without the disposable-home env.
+    if (getMainE2EConfig().enabled) {
       return
     }
 
