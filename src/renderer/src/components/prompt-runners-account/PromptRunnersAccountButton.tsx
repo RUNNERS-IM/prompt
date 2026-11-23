@@ -13,7 +13,12 @@ import './prompt-runners-account.css'
 /** The RUNNERS account at the window's top right (runners-wiki 2026-11-19 1B): Log In while signed out, the
  *  round panda badge after, whose menu holds the email, Account settings and Log Out. Desktop windows on this
  *  computer only: the web client and a window driving a remote runtime draw nothing. */
-export function PromptRunnersAccountButton(): React.JSX.Element | null {
+export function PromptRunnersAccountButton({
+  lastInTitlebar = false
+}: {
+  /** Nothing follows it (settings has no right-sidebar toggle), so it keeps the toggle's 8px from the edge. */
+  lastInTitlebar?: boolean
+} = {}): React.JSX.Element | null {
   const account = usePromptRunnersSignIn()
   const remoteRuntime = useAppStore((s) => Boolean(s.settings?.activeRuntimeEnvironmentId?.trim()))
   const openSettingsTarget = useAppStore((s) => s.openSettingsTarget)
@@ -24,7 +29,7 @@ export function PromptRunnersAccountButton(): React.JSX.Element | null {
   }
   return (
     <div
-      className="ml-1 flex shrink-0 items-center [-webkit-app-region:no-drag]"
+      className={`ml-1 flex shrink-0 items-center [-webkit-app-region:no-drag]${lastInTitlebar ? ' mr-2' : ''}`}
       data-prompt-runners-account=""
     >
       {email ? (
