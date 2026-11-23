@@ -349,5 +349,10 @@
   "keybindings.group.global": "전역",
   "settings.appearance.menuBarIcon.title": "메뉴 막대 아이콘 표시",
   "auto.components.settings.GeneralPane.editor_preview_tabs": "파일 탐색 시 미리 보기 탭 다시 쓰기",
-  "auto.components.settings.SshPane.c0f1c80166": "등록된 SSH 호스트가 없습니다."
+  "auto.components.settings.SshPane.c0f1c80166": "등록된 SSH 호스트가 없습니다.",
+  "auto.hooks.useSettingsNavigationMetadata.3fc3db144f": "빠른 명령",
+  "auto.components.terminal.pane.TerminalContextMenu.ec85df5914": "빠른 명령",
+  "auto.components.settings.Settings.13d4fe30ad": "빠른 명령",
+  "keybindings.title.tabOpenQuickCommandsMenu": "빠른 명령 메뉴 전환",
+  "keybindings.group.quickCommands": "빠른 명령"
 }
