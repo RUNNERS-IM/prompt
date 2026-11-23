@@ -3472,3 +3472,13 @@ html.native-shell .app-layout {
 :where(:root:lang(ar)) :where(input, textarea):where(:not(.xterm *))::placeholder {
   unicode-bidi: plaintext;
 }
+/* Prompt: Korean wraps between words, not inside one (a settings description broke as 「씁니 / 다.」).
+   Japanese and Chinese have no spaces, so they keep breaking anywhere. A word too long for its line
+   still breaks instead of overflowing; terminals and code keep their own wrapping. */
+:where(:root:lang(ko)) body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+:where(:root:lang(ko)) :where(.xterm, pre, code, kbd, input, textarea, .font-mono) {
+  word-break: normal;
+}
