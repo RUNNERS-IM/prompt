@@ -103,17 +103,20 @@ jobs:
             echo "앞선 실행이 남긴 초안 $TAG 를 지우고 새로 만든다."
             gh release delete "$TAG" --yes
           fi
-          cat > "$RUNNER_TEMP/notes.md" <<EOF
-          Prompt $VERSION
-
-          - 기반 커밋: \`${SHA:0:12}\`
-          - macOS: Apple silicon 용, 서명·공증됨
-          - Windows: 코드 서명이 없어 처음 설치할 때 SmartScreen 경고가 뜬다("추가 정보" → "실행")
-          - Linux: AppImage · deb · rpm
-          EOF
-          # 이번 판의 바뀐 점(RELEASE_NOTES.md 의 「## 한국어」 · 「## English」 목록)을 본문 아래에 붙인다.
-          if [ -f RELEASE_NOTES.md ]; then
-            { echo; cat RELEASE_NOTES.md; } >> "$RUNNER_TEMP/notes.md"
+          # 손님이 처음 보는 글이라 「## 한국어」 · 「## English」로 바로 시작한다(Split · Monitor · Remotrol · Draw 와 같은 모양).
+          # 설치 안내는 칸마다 맨 아래 「설치」 줄로 붙인다. 기반 커밋은 태그가 이미 가리키므로 적지 않는다.
+          KO_INSTALL='- 설치: Mac 판은 Apple 칩용이고 서명 · 공증돼 있어요. Windows 판은 코드 서명이 없어서 처음 설치할 때 SmartScreen 경고가 떠요. 「추가 정보」 → 「실행」을 누르면 돼요. Linux 판은 AppImage · deb · rpm 이 있어요.'
+          EN_INSTALL='- Install: the Mac build is for Apple silicon and is signed and notarized. The Windows build has no code signature, so SmartScreen warns on first install; choose "More info" → "Run anyway". Linux comes as AppImage, deb and rpm.'
+          if [ -f RELEASE_NOTES.md ] && grep -q '^## English' RELEASE_NOTES.md; then
+            KO_INSTALL="$KO_INSTALL" EN_INSTALL="$EN_INSTALL" awk '
+              # 빈 줄은 다음 글이 올 때까지 미뤄, 설치 줄이 목록 바로 밑에 붙게 한다.
+              /^[[:space:]]*$/ { blanks++; next }
+              /^## English/ { print ENVIRON["KO_INSTALL"]; english = 1 }
+              { while (blanks > 0) { print ""; blanks-- } print }
+              END { if (english) { print ENVIRON["EN_INSTALL"] } }
+            ' RELEASE_NOTES.md > "$RUNNER_TEMP/notes.md"
+          else
+            printf '## 한국어\n\n%s\n\n## English\n\n%s\n' "$KO_INSTALL" "$EN_INSTALL" > "$RUNNER_TEMP/notes.md"
           fi
           gh release create "$TAG" --draft --target "$SHA" --title "Prompt $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
 
