@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "อนุญาตให้ Prompt ใช้กล้องเพื่อสแกนคิวอาร์โค้ด",
+    "NSLocalNetworkUsageDescription": "Prompt เชื่อมต่อกับแอป Prompt บนคอมพิวเตอร์ผ่านเครือข่ายภายในของคุณ",
+    "NSMicrophoneUsageDescription": "อนุญาตให้ Prompt ใช้ไมโครโฟนสำหรับการพิมพ์ด้วยเสียง เสียงจะถูกส่งไปยังคอมพิวเตอร์ที่จับคู่ไว้เพื่อแปลงเป็นข้อความ",
+    "NSPhotoLibraryUsageDescription": "อนุญาตให้ Prompt แนบรูปภาพจากคลังของคุณไปยังเซสชันเทอร์มินัลบนคอมพิวเตอร์ที่จับคู่ไว้"
+  }
+}

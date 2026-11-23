@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Pressable, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
-import { ChevronLeft, ChevronRight, Globe } from 'lucide-react-native'
+import { Globe } from 'lucide-react-native'
+import { BackChevron, ForwardChevron } from '../components/ReadingChevron'
 import { PickerModal, type PickerOption } from '../components/PickerModal'
 import type { Translate } from '../i18n/mobile-i18n'
 import { useMobileTranslation } from '../i18n/use-mobile-translation'
@@ -116,7 +117,7 @@ export default function BrowserSettingsScreen({
           style={styles.backButton}
           onPress={onBack ?? (() => router.back())}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>{t('settings.browserSettingsScreen.title', 'Browser')}</Text>
       </View>
@@ -161,7 +162,7 @@ export default function BrowserSettingsScreen({
               </Text>
               <Text style={styles.rowSublabel}>{linkModeLabel(linkMode, options)}</Text>
             </View>
-            <ChevronRight size={16} color={colors.textMuted} />
+            <ForwardChevron size={16} color={colors.textMuted} />
           </Pressable>
         </View>
       </ScrollView>

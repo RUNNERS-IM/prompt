@@ -32,6 +32,7 @@ import { SideSafeArea } from '../src/layout/side-safe-area'
 import { useFollowDeviceUiLocale } from '../src/i18n/use-follow-device-ui-locale'
 import { startMobileUiLanguage } from '../src/i18n/ui-language-preference'
 import { subscribeMobileUiLanguage } from '../src/i18n/mobile-i18n'
+import { useMobileUiDirection } from '../src/i18n/ui-direction'
 
 export { NativeScreenRecovery as ErrorBoundary } from '../src/components/NativeScreenRecovery'
 
@@ -61,6 +62,9 @@ const handledNotificationIds = new Set<string>()
 export default function RootLayout() {
   const colorScheme = useMobileColorScheme()
   useFollowDeviceUiLocale()
+  const uiDirection = useMobileUiDirection()
+  // Home and host screens stay left to right in Arabic (see isLeftToRightOnlyRoute).
+  const leftToRightContent = { backgroundColor: colors.bgBase, direction: 'ltr' as const }
   const pathname = usePathname()
   const { hostId, worktreeId, executionHost } = useGlobalSearchParams<{
     hostId?: string
@@ -189,7 +193,7 @@ export default function RootLayout() {
               headerStyle: { backgroundColor: colors.bgPanel },
               headerTintColor: colors.textPrimary,
               headerTitleStyle: { fontSize: 16, fontWeight: '600' },
-              contentStyle: { backgroundColor: colors.bgBase },
+              contentStyle: { backgroundColor: colors.bgBase, direction: uiDirection },
               headerShadowVisible: false
               // Leave orientation unset: react-native-screens overrides rotation lock even for default; Android manifest fullUser honors the user’s setting.
             }}
@@ -198,6 +202,7 @@ export default function RootLayout() {
               name="index"
               options={{
                 headerShown: false,
+                contentStyle: leftToRightContent,
                 headerTitle: () => <OrcaLogo size={22} />
               }}
             />
@@ -218,7 +223,10 @@ export default function RootLayout() {
             <Stack.Screen name="troubleshoot" options={{ headerShown: false }} />
             <Stack.Screen name="connection-log" options={{ headerShown: false }} />
             <Stack.Screen name="about" options={{ headerShown: false }} />
-            <Stack.Screen name="h" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="h"
+              options={{ headerShown: false, contentStyle: leftToRightContent }}
+            />
             <Stack.Screen
               name="new-workspace"
               options={{
@@ -226,7 +234,7 @@ export default function RootLayout() {
                 // Draws nothing of its own: the drawer is the page's, over Home.
                 presentation: 'transparentModal',
                 animation: 'none',
-                contentStyle: { backgroundColor: 'transparent' }
+                contentStyle: { backgroundColor: 'transparent', direction: 'ltr' }
               }}
             />
           </Stack>

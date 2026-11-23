@@ -1,0 +1,3952 @@
+{
+  "settings": {
+    "appearance": {
+      "theme": {
+        "system": "Sistem",
+        "light": "Terang",
+        "dark": "Gelap",
+        "heading": "TEMA",
+        "description": "Sistem mengikuti pengaturan terang atau gelap perangkat ini."
+      },
+      "title": "Tampilan",
+      "language": {
+        "systemWithCurrent": "Sistem ({{language}})",
+        "heading": "BAHASA",
+        "description": "Sistem mengikuti bahasa perangkat ini. Permintaan izin selalu menggunakan bahasa perangkat."
+      }
+    },
+    "aboutScreen": {
+      "title": "Tentang",
+      "tagline": "IDE agen sumber terbuka untuk 100x pembuat",
+      "sourceCode": "Prompt kode sumber",
+      "openLinkFailed": "Tidak dapat membuka tautan. Coba lagi."
+    },
+    "appUpdateSettingsRows": {
+      "checking": "Memeriksa…",
+      "upToDate": "Sudah terbaru",
+      "checkFailed": "Tidak dapat memeriksa",
+      "neverChecked": "Tidak pernah",
+      "lastCheckedJustNow": "Terakhir diperiksa tadi",
+      "lastCheckedMinutes_one": "Terakhir diperiksa {{count}}m yang lalu",
+      "lastCheckedMinutes_other": "Terakhir diperiksa {{count}}m yang lalu",
+      "lastCheckedHours_one": "Terakhir diperiksa {{count}} jam yang lalu",
+      "lastCheckedHours_other": "Terakhir diperiksa {{count}} jam yang lalu",
+      "lastCheckedDays_one": "Terakhir diperiksa {{count}} hari yang lalu",
+      "lastCheckedDays_other": "Terakhir diperiksa {{count}} hari yang lalu",
+      "updateToVersion": "Perbarui ke Prompt {{version}}",
+      "update": "Perbarui",
+      "installedVersion": "Versi {{version}}",
+      "checkUpdatesStatus": "Periksa pembaruan, {{status}}",
+      "checkUpdates": "Periksa pembaruan"
+    },
+    "browserSettingsScreen": {
+      "desktopBrowser": "Prompt peramban di desktop",
+      "desktopBrowserDescription": "Buka di browser streaming dari desktop pasangan Anda.",
+      "phoneBrowser": "Peramban telepon",
+      "phoneBrowserDescription": "Buka di Safari, Chrome, atau browser lain di ponsel ini.",
+      "title": "Peramban",
+      "linksHeading": "TAUTAN",
+      "linksDescription": "Pilih di mana tautan HTTP(S) yang disadap di keluaran terminal terbuka.",
+      "loadFailed": "Tidak dapat memuat preferensi browser. Coba lagi.",
+      "saveFailed": "Tidak dapat menyimpan preferensi browser. Coba lagi.",
+      "openTerminalLinks": "Buka tautan terminal"
+    },
+    "menuItems": {
+      "appearance": "Tampilan",
+      "terminal": "Terminal",
+      "chatUi": "UI chat",
+      "browser": "Peramban",
+      "voice": "Suara",
+      "notifications": "Notifikasi",
+      "troubleshooting": "Pemecahan masalah",
+      "about": "Tentang"
+    },
+    "nativeChatSettingsScreen": {
+      "title": "UI chat",
+      "defaultViewHeading": "TAMPILAN DEFAULT",
+      "defaultViewDescription": "Pilih cara sesi agen yang didukung (Claude, Codex, dan agen berkemampuan chat lainnya) dibuka di perangkat ini. Terminal menunjukkan CLI mentah; UI Obrolan menampilkan antarmuka obrolan seperti aplikasi desktop. Anda masih dapat mengganti sesi individual mana pun dari menu tekan lama.",
+      "openInChatUi": "Buka sesi di UI Obrolan",
+      "on": "Aktif",
+      "off": "Nonaktif"
+    },
+    "nativeNotificationDeliverySettings": {
+      "loadFailed": "Tidak dapat memuat setelan pengiriman. Buka kembali layar ini untuk mencoba lagi.",
+      "saveFailed": "Tidak dapat menyimpan setelan pengiriman. Coba lagi.",
+      "updateDesktopHint": "Pasangkan desktop yang diperbarui untuk menerima notifikasi di ponsel ini."
+    },
+    "notificationDisplayTest": {
+      "loadFailed": "Tidak dapat memuat desktop yang dipasangkan.",
+      "pairDesktop": "Pasangkan desktop dan coba lagi.",
+      "connectDesktop": "Hubungkan desktop dan coba lagi.",
+      "updateDesktop": "Perbarui desktop Anda untuk menjalankan tes ini.",
+      "desktopUnreachable": "Tidak dapat menjangkau desktop. Coba lagi.",
+      "accepted": "Diterima oleh layanan push Prompt. Periksa notifikasinya.",
+      "reconnectPhone": "Sambungkan kembali untuk mendaftarkan ponsel ini agar mendapat notifikasi.",
+      "rateLimited": "Terlalu banyak notifikasi. Coba lagi nanti.",
+      "pushServiceFailed": "Tidak dapat mengirim melalui layanan push Prompt. Coba lagi.",
+      "sendFailed": "Tidak dapat mengirim tes push.",
+      "troubleReceivingAlerts": "Mengalami kesulitan menerima peringatan?",
+      "description": "Kirim tes melalui layanan push Prompt.",
+      "sending": "Mengirim…",
+      "sendButton": "Kirim notifikasi uji",
+      "troubleshooting": "Pemecahan masalah"
+    },
+    "notificationSettingsScreen": {
+      "loadFailed": "Tidak dapat memuat setelan notifikasi. Coba lagi.",
+      "saveFailed": "Tidak dapat menyimpan setelan notifikasi. Coba lagi.",
+      "notificationsBlocked": "Notifikasi dinonaktifkan di pengaturan sistem.",
+      "description": "Dapatkan pemberitahuan di perangkat ini ketika agen memerlukan masukan Anda atau menyelesaikan tugas.",
+      "title": "Notifikasi",
+      "enableNotifications": "Aktifkan notifikasi",
+      "openSettingsFailed": "Tidak dapat membuka pengaturan sistem. Coba lagi.",
+      "openSettings": "Buka Pengaturan"
+    },
+    "pendingCredentialCleanupCard": {
+      "title": "Memasangkan pembersihan kredensial",
+      "retryFailed": "Pembersihan masih belum dapat dikonfirmasi. Coba lagi nanti.",
+      "cleanupUnconfirmed_one": "Tidak dapat mengonfirmasi pembersihan kredensial {{count}} pada perangkat ini.",
+      "cleanupUnconfirmed_other": "Tidak dapat mengonfirmasi pembersihan kredensial {{count}} pada perangkat ini.",
+      "statusCheckFailed": "Tidak dapat memeriksa status pembersihan pada perangkat ini. Coba lagi untuk aman.",
+      "retryCleanup": "Coba lagi menghapus kredensial penyandingan"
+    },
+    "menuScreen": {
+      "support": "Mendukung"
+    },
+    "uiLanguageSettingsSection": {
+      "pseudoLanguage": "Semu (en-XA)"
+    },
+    "voiceSettingsScreen": {
+      "toggleMode": "Alihkan",
+      "holdMode": "Tahan",
+      "loadFailed": "Gagal memuat pengaturan suara",
+      "updateFailed": "Tidak dapat memperbarui",
+      "selectModelFailed": "Tidak dapat memilih model",
+      "downloadFailed": "Pengunduhan gagal",
+      "deleteFailed": "Penghapusan gagal",
+      "noneSelected": "Tidak ada yang dipilih",
+      "title": "Suara",
+      "connectDesktop": "Hubungkan ke desktop untuk mengelola pengaturan suara.",
+      "loadFailedMessage": "Gagal memuat pengaturan suara.",
+      "dictationHeading": "DIKTE",
+      "enableDictation": "Aktifkan dikte suara",
+      "dictationDescription": "Diktekan teks ke dalam panel fokus mana pun di desktop Anda.",
+      "dictationMode": "Mode dikte",
+      "dictationModeDescription": "Beralih: tekan sekali untuk memulai, sekali lagi untuk berhenti. Tahan: mendiktekan sambil ditahan.",
+      "speechModelHeading": "MODEL PIDATO",
+      "speechModel": "Model ucapan"
+    }
+  },
+  "common": {
+    "back": "Kembali",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "continue": "Lanjutkan",
+    "ok": "OKE",
+    "retry": "Coba lagi",
+    "copied": "Disalin",
+    "remove": "Hapus",
+    "settings": "Pengaturan",
+    "delete": "Hapus",
+    "unknown": "Tidak diketahui",
+    "confirm": "Konfirmasi",
+    "copy": "Salin",
+    "done": "Selesai",
+    "close": "Tutup",
+    "edit": "Sunting",
+    "refresh": "Muat ulang",
+    "open": "Buka"
+  },
+  "host": {
+    "edit": {
+      "missingHost": "Tuan rumah tidak ada.",
+      "hostRemoved": "Host ini telah dihapus dari ponsel ini.",
+      "loadFailed": "Gagal memuat host.",
+      "saveFailed": "Gagal menyimpan host.",
+      "title": "Sunting tuan rumah",
+      "saveHost": "Simpan tuan rumah",
+      "goBack": "Kembali",
+      "help": "Ubah nama tampilan atau alamat koneksi. Biarkan nama kosong untuk menggunakan nama laporan desktop. Pengeditan alamat hanya berpindah tempat ponsel ini terhubung — tidak melakukan penyandingan ulang. Gunakan ini ketika desktop yang sama dapat dijangkau pada IP yang berbeda (misalnya LAN rumah vs Tailscale).",
+      "name": "Nama",
+      "hostNamePlaceholder": "Nama tuan rumah",
+      "address": "Alamat",
+      "addressHint": "Menerima IP, host:port, atau ws:// / wss://. URL wss:// tanpa port menggunakan 443. Alamat kosong mempertahankan port saat ini (atau 6768).",
+      "connectionPreview": "Terhubung ke {{endpoint}}"
+    }
+  },
+  "app": {
+    "mobileOnboarding": {
+      "saveChoiceFailed": "Pilihan Anda tidak dapat disimpan. Coba lagi.",
+      "notificationSettingsFailed": "Setelan notifikasi tidak dapat diperbarui. Coba lagi.",
+      "progress": "Progres onboarding",
+      "stepProgress": "Langkah {{step}} dari {{total}}"
+    },
+    "notifications": {
+      "description": "Dapatkan peringatan agen bahkan ketika aplikasi ditutup. Dikirim melalui layanan push Prompt dan Apple atau Google."
+    },
+    "pairConfirm": {
+      "connectTimedOut": "Tidak dapat tersambung dalam {{seconds}} detik — lihat log di bawah untuk mengetahui lokasi terhentinya koneksi",
+      "pairingFailed": "Gagal memasangkan: {{error}}",
+      "title": "Pasangkan dengan desktop ini?",
+      "description": "Anda membuka tautan penyandingan dari desktop Anda. Konfirmasikan untuk menambahkannya ke host Anda.",
+      "pairButton": "Pasangan",
+      "connecting": "Menghubungkan…",
+      "pairingLog": "Log penyandingan",
+      "backToHome": "Kembali ke rumah"
+    },
+    "pairScan": {
+      "invalidQrCode": "Bukan kode Prompt QR yang valid",
+      "downloadQrCode": "Itu kode unduhannya. Pindai kode penyandingan pada langkah 2 di desktop Anda.",
+      "invalidPairingCode": "Bukan kode penyandingan yang valid — salin dari komputer Anda dan tempel lagi",
+      "connectTimedOut": "Tidak dapat tersambung dalam {{seconds}} detik — lihat log di bawah untuk mengetahui lokasi terhentinya koneksi",
+      "pairingFailed": "Gagal memasangkan: {{error}}",
+      "title": "Sandingkan dengan desktop",
+      "cameraDisabledTitle": "Akses Kamera Dinonaktifkan",
+      "cameraPermissionDescription": "Pindai kode QR dari Prompt di desktop Anda, atau tempelkan kode penyandingan.",
+      "cameraDisabledDescription": "Aktifkan akses kamera di Pengaturan, atau tempelkan kode penyandingan.",
+      "openSettings": "Buka Pengaturan",
+      "pasteInstead": "Tempelkan kode sebagai gantinya",
+      "pasteCodeTitle": "Tempelkan kode penyandingan",
+      "pasteCodeMessage": "Salin kode yang ditunjukkan di bawah QR di komputer Anda.",
+      "pasteCodePlaceholder": "orca://pair?code=... or paste the code",
+      "openDesktopStep": "Buka Prompt di komputer Anda",
+      "openMobileSettingsStep": "Buka Pengaturan → Seluler",
+      "scanCodeStep": "Pindai kode QR.",
+      "pastePairingCode": "Atau tempelkan kode penyandingan",
+      "connecting": "Menghubungkan…",
+      "pairingLog": "Log penyandingan",
+      "tryAgain": "Coba lagi"
+    },
+    "pair": {
+      "missingCode": "Kode penyandingan tidak ada",
+      "backToHome": "Kembali ke rumah"
+    },
+    "terminalSettings": {
+      "smallestText": "Terkecil (50%)",
+      "smallerText": "Lebih kecil (75%)",
+      "defaultText": "Bawaan (100%)",
+      "largeText": "Besar (125%)",
+      "largerText": "Lebih besar (150%)",
+      "largestText": "Terbesar (200%)",
+      "restoreAfterMinutes_one": "Setelah {{count}} menit",
+      "restoreAfterMinutes_other": "Setelah {{count}} menit",
+      "keepPhoneSize": "Tetap di ukuran ponsel (default)",
+      "restoreAfterSeconds_one": "Setelah {{count}} detik",
+      "restoreAfterSeconds_other": "Setelah {{count}} detik",
+      "title": "Terminal",
+      "leaveAppHeading": "KETIKA ANDA MENINGGALKAN APLIKASI",
+      "leaveAppDescription": "Saat Anda menggunakan terminal di ponsel Anda, Prompt mengecilkannya agar sesuai dengan layar Anda. Saat Anda menutup atau beralih dari aplikasi, ini mengontrol apakah aplikasi tetap pada ukuran ponsel (sehingga alat CLI interaktif tidak diubah ukurannya) atau diubah ukurannya kembali ke desktop Anda. Anda selalu dapat menggunakan Pulihkan pada spanduk desktop untuk mengubah ukuran secara manual.",
+      "noPairedDesktops": "Belum ada desktop yang dipasangkan. Pasangkan satu untuk mengontrol perilaku terminal.",
+      "textSizeHeading": "UKURAN TEKS",
+      "textSizeDescription": "Skala teks terminal. Ukuran yang lebih kecil memuat lebih banyak kolom dengan margin samping; ukuran yang lebih besar menampilkan lebih sedikit kolom — seret ke samping untuk menggeser. Anda juga dapat mencubit untuk memperbesar terminal itu sendiri, yang memperbarui pengaturan ini. Hanya tampilan per perangkat; tidak mengubah terminal desktop.",
+      "textSize": "Ukuran teks",
+      "keyboardInputHeading": "MASUKAN KEYBOARD",
+      "keyboardInputDescription": "Pelengkapan otomatis, koreksi otomatis, dan saran ejaan hanya berlaku untuk input perintah yang di-buffer. Gunakan tombol chevron ganda di atas keyboard untuk beralih dari input langsung, lalu edit perintah Anda sebelum mengetuk Kirim. Nonaktif secara default untuk menghindari penulisan ulang perintah, tanda, atau jalur.",
+      "autocomplete": "Pelengkapan otomatis & koreksi otomatis",
+      "autocompleteOn": "Aktif",
+      "autocompleteOff": "Nonaktif",
+      "restoreHost": "Pulihkan {{name}}",
+      "textSizePickerTitle": "Ukuran teks terminal"
+    }
+  },
+  "accounts": {
+    "screen": {
+      "invalidSnapshot": "Cuplikan akun dari host tidak valid",
+      "hostNotFound": "Tuan rumah tidak ditemukan",
+      "switchFailed": "Tidak dapat berpindah akun",
+      "default": "Default sistem",
+      "agentLogin": "Gunakan login agen itu sendiri",
+      "sessionWindow": "5j",
+      "weeklyWindow": "7h",
+      "title": "Akun",
+      "refreshAccounts": "Muat ulang akun",
+      "resetsIn": "Direset dalam {{duration}}",
+      "resetsNow": "Direset sekarang",
+      "durationDays": "{{days}} hr",
+      "durationDaysHours": "{{days}} hr {{hours}} j",
+      "durationHours": "{{hours}} j",
+      "durationHoursMinutes": "{{hours}} j {{minutes}} mnt",
+      "durationMinutes": "{{minutes}} mnt",
+      "connectingTo": "Menghubungkan ke {{name}}…",
+      "connecting": "Menghubungkan ke host…",
+      "loadingAccounts": "Memuat akun…",
+      "manageAccountsHint": "Tambahkan atau autentikasi ulang akun dari Pengaturan desktop → Akun.",
+      "useReset": "Gunakan pengaturan ulang"
+    }
+  },
+  "agentHistory": {
+    "sessionHistoryList": {
+      "messages_one": "{{count}} pesan",
+      "messages_other": "{{count}} pesan",
+      "currentWorktree": "pohon kerja saat ini",
+      "resumeSession": "Lanjutkan sesi agen",
+      "userRole": "pengguna",
+      "assistantRole": "asisten"
+    },
+    "panel": {
+      "workspace": "Ruang kerja",
+      "project": "Proyek",
+      "all": "Semua",
+      "waitingForHost": "Menunggu tuan rumah...",
+      "missingResumeId": "Sesi ini tidak memiliki id resume.",
+      "unknownHostPlatform": "Tidak dapat menentukan platform host.",
+      "sessionQueued": "Sesi agen antri.",
+      "resumeFailed": "Gagal melanjutkan sesi.",
+      "title": "Riwayat sesi agen",
+      "refreshSessions": "Segarkan sesi agen",
+      "unavailable": "Riwayat Sesi Agen Tidak Tersedia",
+      "updateHost": "Perbarui Prompt pada host ini untuk menelusuri riwayat sesi agen.",
+      "loadFailed": "Tidak Dapat Memuat",
+      "placeholder": "Sesi pencarian, repo:, jalur:",
+      "skipped_one": "{{count}} transkrip dilewati",
+      "skipped_other": "{{count}} transkrip dilewati",
+      "noSessions": "Tidak ada sesi agen",
+      "noSearchResults": "Tidak ada sesi yang cocok dengan penelusuran Anda.",
+      "emptyScope": "Tidak ada sesi agen sebelumnya dalam cakupan ini."
+    },
+    "resumeTarget": {
+      "runtimeUnavailable": "Lanjutkan dari riwayat tidak tersedia di ruang kerja yang dihosting runtime.",
+      "differentHost": "Sesi ini milik host lain. Buka workspace pada host yang sama untuk melanjutkannya.",
+      "openWorkspace": "Buka workspace sebelum melanjutkan sesi."
+    },
+    "sessionCard": {
+      "untitledSession": "Sesi tanpa judul"
+    },
+    "useAgentHistoryState": {
+      "waitingForHost": "Menunggu tuan rumah…",
+      "hostUnreachable": "Tidak dapat menghubungi tuan rumah",
+      "loadFailed": "Tidak dapat memuat sesi agen"
+    },
+    "worktreeNavigationActions": {
+      "sourceControl": "Kontrol sumber",
+      "agentSessionHistory": "Riwayat sesi agen"
+    }
+  },
+  "diagnostics": {
+    "connectionDiagnosticsView": {
+      "connecting": "menghubungkan",
+      "handshaking": "berjabat tangan",
+      "connected": "terhubung",
+      "disconnected": "terputus",
+      "reconnecting": "menghubungkan kembali",
+      "authFailed": "auth-gagal",
+      "title": "Diagnostik jaringan",
+      "stateWithAttempt": "{{state}} · upaya {{attempts}}",
+      "copyReport": "Salin laporan",
+      "diagnosisHeading": "Apa yang disarankan di sini",
+      "privacyHint": "Mengirimkan laporan yang disunting dengan ukuran terbatas termasuk nama host, titik akhir, versi, status koneksi, dan peristiwa—tidak pernah berisi konten atau kredensial terminal.",
+      "sending": "Mengirim…",
+      "sent": "Diagnostik terkirim",
+      "retrySending": "Coba kirim lagi",
+      "sendDiagnostics": "Kirim diagnostik ke Prompt",
+      "noEvents": "Belum ada peristiwa koneksi. Acara muncul saat aplikasi memanggil host ini.",
+      "noHosts": "Tidak ada host berpasangan."
+    },
+    "mobileWebBundleProbeRow": {
+      "fetchBundle": "Ambil paket web seluler",
+      "connecting": "Menghubungkan…",
+      "fetching": "Mengambil bundel…",
+      "bundle": "Bundel",
+      "host": "Tuan rumah",
+      "build": "Membangun",
+      "assets": "Aktiva",
+      "bytes": "Byte",
+      "elapsed": "Berlalu",
+      "elapsedMilliseconds": "{{elapsedMs}} ms",
+      "unknownHost": "tuan rumah yang tidak dikenal"
+    },
+    "mobileWebShellUpdateFailureRow": {
+      "title": "Pembaruan ruang kerja"
+    },
+    "troubleshootCommonIssues": {
+      "notificationsTitle": "Pemberitahuan Dorong",
+      "allowNotifications": "Periksa apakah pengaturan sistem mengizinkan notifikasi Prompt dan Fokus atau Jangan Ganggu dalam keadaan mati.",
+      "notificationNetwork": "Coba seluler atau jaringan Wi-Fi lainnya. Jika peringatan muncul setelah peralihan, jaringan Anda mungkin menunda pengiriman.",
+      "wifiTitle": "Jaringan WiFi yang Berbeda",
+      "sameNetwork": "Kedua perangkat harus berada di LAN yang sama (kecuali terhubung melalui Tailscale).",
+      "sameSubnet": "Ethernet dan WiFi harus berbagi subnet yang sama.",
+      "reconnectWifi": "Coba sambungkan kembali WiFi di kedua perangkat.",
+      "firewallTitle": "Port Pemblokiran Firewall {{port}}",
+      "linuxFirewall": "Linux: sudo ufw allow {{port}}",
+      "macosFirewall": "macOS: Pengaturan Sistem → Jaringan → Firewall — izinkan Prompt.",
+      "windowsFirewall": "Windows: Defender Firewall → Izinkan aplikasi — aktifkan Prompt untuk jaringan Pribadi.",
+      "restrictedNetwork": "Jaringan perusahaan/sekolah mungkin memblokir P2P — coba hotspot pribadi.",
+      "desktopTitle": "Aplikasi Desktop Tidak Berjalan",
+      "openDesktop": "Prompt harus terbuka di desktop Anda untuk menerima koneksi.",
+      "restartDesktop": "Coba mulai ulang Prompt — server pendamping dimulai saat peluncuran.",
+      "pairAfterUpdate": "Setelah pembaruan, Anda mungkin perlu memasangkan ulang melalui kode QR.",
+      "timeoutTitle": "Batas Waktu Koneksi",
+      "wifiSignal": "Periksa kekuatan sinyal WiFi di ponsel Anda.",
+      "retryHost": "Kembali ke daftar host dan ketuk host Anda untuk mencoba lagi.",
+      "restartBothApps": "Mulai ulang kedua aplikasi jika waktu habis terus berlanjut.",
+      "tailscaleTitle": "Tailscale Host Tidak Dapat Dijangkau",
+      "keepTailscaleOn": "Alamat host seperti 100.x.x.x atau *.ts.net terhubung melalui Tailscale — tetap AKTIF.",
+      "restartTailscale": "iOS/Android dapat menyumbat terowongan secara diam-diam: matikan dan hidupkan kembali Tailscale di aplikasi Tailscale.",
+      "checkTailnet": "Periksa apakah desktop aktif dan terlihat terhubung di tailnet Anda.",
+      "updateTailscale": "Perbarui aplikasi Tailscale — rilis terbaru memperbaiki bug penyambungan kembali.",
+      "vpnTitle": "Gangguan VPN Lainnya",
+      "vpnRouting": "VPN non-Tailscale dapat merutekan lalu lintas lokal melalui server jarak jauh.",
+      "disableVpn": "Nonaktifkan VPN tersebut atau aktifkan kanalisasi terbagi / \"Izinkan LAN\"."
+    },
+    "troubleshootView": {
+      "title": "Pemecahan masalah",
+      "running": "Berlari…",
+      "runAgain": "Jalankan lagi",
+      "runDiagnostics": "Jalankan diagnostik",
+      "viewNetworkDiagnostics": "Lihat diagnostik jaringan",
+      "commonIssues": "Masalah umum"
+    },
+    "useTroubleshootDiagnostics": {
+      "pairedHosts": "Host berpasangan",
+      "pairedCount": "{{count}} berpasangan",
+      "noPairedHosts": "Tidak ada — pindai QR untuk memasangkan",
+      "hostDataFailed": "Tidak dapat membaca data host",
+      "internet": "Internet",
+      "connected": "Terhubung",
+      "unexpectedResponse": "Respons yang tidak terduga",
+      "noConnection": "Tidak ada koneksi",
+      "reachable": "Dapat dijangkau di {{endpoint}}",
+      "hosts": "Host",
+      "hostTestFailed": "Tidak dapat menguji",
+      "platform": "Platform"
+    },
+    "webShellUpdateFailureCopy": {
+      "failedJustNow": "Pembaruan terakhir dari {{hostName}} gagal sekarang: {{reason}} {{offered}}. {{outcome}}",
+      "failedAgo": "Pembaruan terakhir dari {{hostName}} gagal {{time}} yang lalu: {{reason}}{{offered}}. {{outcome}}",
+      "reasonCopy": {
+        "noConnection": "tidak terhubung ke host",
+        "connectionLost": "koneksi terputus",
+        "hostRefused": "tuan rumah menolak membaca",
+        "replyUnreadable": "tuan rumah mengirimkan balasan yang tidak dapat dibaca oleh aplikasi ini",
+        "chunkOversize": "sebagian lebih besar dari yang diizinkan oleh tuan rumah",
+        "assetOverlong": "suatu aset lebih panjang dari yang dinyatakan dalam manifes",
+        "assetNoProgress": "pembacaan aset tidak mengalami kemajuan",
+        "assetShort": "suatu aset berakhir kurang dari ukuran yang dinyatakan",
+        "assetChecksumMismatch": "ketidakcocokan checksum aset",
+        "buildChangedMidFetch": "build host berubah selama pengunduhan",
+        "chunkMisrouted": "sepotong menjawab aset atau offset yang salah",
+        "assetEntryChanged": "suatu aset tidak lagi cocok dengan manifes",
+        "rangeUndecodable": "pembacaan terkompresi tidak dapat didekodekan",
+        "fetchStopped": "pengunduhan dihentikan",
+        "cacheWriteFailed": "gagal menyimpan unduhan di ponsel ini",
+        "unrecognisedError": "kesalahan yang tidak dikenali"
+      },
+      "hostCodeCopy": {
+        "unavailable": "tuan rumah tidak memiliki paket ruang kerja",
+        "buildChanged": "build host berubah selama pengunduhan",
+        "assetUnknown": "tuan rumah tidak mengenali suatu aset",
+        "assetChanged": "aset diubah pada host",
+        "offsetInvalid": "tuan rumah menolak offset baca",
+        "readLimited": "tuan rumah membatasi pembacaan bersamaan"
+      },
+      "wallCopy": {
+        "bundleUnavailable": "tuan rumah tidak memiliki paket ruang kerja",
+        "bundleShellTooOld": "aplikasi ini terlalu lama untuk paket yang disimpan",
+        "hostTooOldForBundle": "host terlalu tua untuk paket yang disimpan",
+        "bundleTooOldForHost": "paket yang disimpan terlalu lama untuk host",
+        "pageRouteUnlisted": "ruang kerja host tidak menyertakan layar ini",
+        "pageRouteGrantMissing": "layar ini memerlukan aplikasi yang lebih baru"
+      },
+      "openedCached": "Kembali ke versi yang disimpan.",
+      "openedCachedGeneration": "Kembali ke versi yang disimpan (generasi {{generation}}).",
+      "blockedWorkspace": "Memblokir ruang kerja.",
+      "blockedReason": "Diblokir: {{reason}}.",
+      "nativeRoute": "Menampilkan layar asli.",
+      "routeUnavailable": "Menunjukkan bahwa layar tidak tersedia.",
+      "failed": "Menampilkan layar kegagalan.",
+      "waiting": "Menunggu tuan rumah.",
+      "offeredGeneration": "(generasi {{generation}})"
+    }
+  },
+  "dictation": {
+    "setup": {
+      "serverUpdateRequired": "Perbarui Prompt di server ini untuk menggunakan dikte suara.",
+      "alreadyActive": "Dikte sudah digunakan di komputer atau ponsel lain.",
+      "repairRequired": "Pasangkan kembali ponsel ini dengan komputer untuk menggunakan dikte.",
+      "sessionLost": "Dikte kehilangan koneksi ke komputer. Coba lagi.",
+      "desktopUpdateRequired": "Perbarui aplikasi desktop Prompt yang dipasangkan untuk menggunakan pengaturan suara seluler.",
+      "loadFailed": "Gagal memuat model dikte",
+      "downloadFailed": "Gagal memulai pengunduhan",
+      "deleteFailed": "Gagal menghapus model",
+      "updateFailed": "Gagal memperbarui pengaturan dikte",
+      "cloudModelNeedsKey": "Membutuhkan kunci OpenAI"
+    }
+  },
+  "home": {
+    "appUpdateCard": {
+      "title": "Prompt {{version}} tersedia",
+      "updateAccessibilityLabel": "Prompt {{version}} tersedia, ketuk untuk memperbarui",
+      "updateHint": "Ketuk untuk memperbarui",
+      "dismissAccessibilityLabel": "Tutup pembaruan Prompt {{version}}."
+    },
+    "accountUsageCards": {
+      "sectionHeading": "Penggunaan akun",
+      "systemDefault": "Default sistem",
+      "sessionWindow": "5j",
+      "weeklyWindow": "7h"
+    },
+    "emptyState": {
+      "openDesktopTitle": "Buka Prompt desktop",
+      "openDesktopDescription": "Buka Pengaturan → Seluler dan buat kode pasangan QR.",
+      "scanCodeTitle": "Pindai kodenya",
+      "scanCodeDescription": "Ketuk tombol di atas untuk membuka pemindai. Arahkan ke kode QR di layar Anda.",
+      "connectedTitle": "Anda terhubung",
+      "connectedDescription": "Desktop Anda akan muncul di sini. Semuanya dienkripsi ujung ke ujung.",
+      "title": "Hubungkan desktop Anda",
+      "description": "Pasangkan dengan Prompt di komputer Anda untuk memeriksa agen Anda, masuk ke terminal mana pun, dan jalankan pekerjaan dari ponsel Anda.",
+      "pairDesktop": "Pasangkan Desktop",
+      "stepsHeading": "Bagaimana cara kerjanya"
+    },
+    "listFooter": {
+      "resumeHeading": "Lanjutkan",
+      "tasksHeading": "Tugas",
+      "hostPickerTitle": "Buka Tugas Aktif"
+    },
+    "listHeader": {
+      "daysHours": "{{days}} hr {{hours}} j",
+      "hoursMinutes": "{{hours}} j {{minutes}} mnt",
+      "minutes": "{{minutes}} mnt",
+      "title": "Selamat datang kembali",
+      "agentsSpawned": "Agen dijalankan",
+      "agentTime": "Waktu agen",
+      "prsCreated": "PR dibuat",
+      "desktopsHeading": "Desktop"
+    },
+    "screen": {
+      "pairingCheckFailed": "Tidak dapat memeriksa penyandingan",
+      "tryAgain": "Silakan coba lagi.",
+      "removeHostFailed": "Tidak dapat menghapus host",
+      "removeHostTitle": "Hapus Tuan Rumah",
+      "removeHostMessage": "Hapus \"{{name}}\"? Anda dapat memasangkannya kembali nanti."
+    },
+    "tasksCard": {
+      "title": "Tugas",
+      "noSources": "Tidak ada sumber tugas yang terhubung",
+      "openProviderTasks": "Buka {{provider}} tugas"
+    }
+  },
+  "hooks": {
+    "dictationDesktopStart": {
+      "recordingFailed": "Gagal memulai perekaman mikrofon"
+    },
+    "useMobileDictation": {
+      "microphonePermissionDenied": "Izin mikrofon ditolak",
+      "microphoneInitFailed": "Gagal menginisialisasi mikrofon",
+      "noSpeech": "Tidak ada ucapan terdeteksi.",
+      "microphoneInterrupted": "Dikte suara terhenti karena mikrofon terganggu. Coba lagi.",
+      "inputClosed": "Dikte suara dihentikan karena sesi ini tidak lagi menerima masukan. Coba lagi."
+    }
+  },
+  "hostScreen": {
+    "hostListActionSheetActions": {
+      "reconnect": "Hubungkan ulang",
+      "connect": "Hubungkan",
+      "disconnect": "Putuskan koneksi",
+      "networkDiagnostics": "Diagnostik jaringan",
+      "editHost": "Sunting tuan rumah"
+    },
+    "hostPendingCreationRow": {
+      "creatingWorkspace": "Membuat workspace…"
+    },
+    "hostRailActions": {
+      "accounts": "Akun",
+      "tasks": "Tugas",
+      "floatingWorkspace": "Workspace mengambang",
+      "newWorkspace": "Workspace baru",
+      "closeSearch": "Tutup pencarian",
+      "searchWorkspaces": "Cari workspace"
+    },
+    "hostScreenHeader": {
+      "workspaceOptions": "Opsi workspace",
+      "activeFilters_one": "Opsi ruang kerja (filter {{count}} aktif)",
+      "activeFilters_other": "Opsi workspace ({{count}} filter aktif)",
+      "backToHosts": "Kembali ke tuan rumah",
+      "reconnect": "Hubungkan ulang",
+      "floatingWorkspace": "Workspace mengambang",
+      "hideSidebar": "Sembunyikan bilah sisi",
+      "accounts": "Akun",
+      "tasks": "Tugas",
+      "closeSearch": "Tutup pencarian",
+      "searchWorkspaces": "Cari workspace"
+    },
+    "hostScreenOverlays": {
+      "deleteWorktree": "Hapus worktree",
+      "deleteConfirmMessage": "Hapus \"{{name}}\" ({{branch}})?",
+      "sleep": "Tidurkan",
+      "unpin": "Lepas sematan",
+      "pin": "Sematkan",
+      "primaryWorktreeDeleteHint": "Worktree utama tidak dapat dihapus. Hapus proyek sebagai gantinya.",
+      "removeHost": "Hapus Tuan Rumah",
+      "removeHostMessage": "Hapus \"{{name}}\"? Anda dapat memasangkannya kembali nanti."
+    },
+    "hostWorkspaceList": {
+      "searchPlaceholder": "Cari ruang kerja…",
+      "searchWorkspaces": "Cari workspace"
+    },
+    "workspaceDetailsSheet": {
+      "merged": "Di-merge",
+      "closed": "Ditutup",
+      "draft": "Draf",
+      "checksPassing": "Pemeriksaan: Lulus",
+      "checksFailing": "Pemeriksaan: Gagal",
+      "checksPending": "Pemeriksaan: Tertunda",
+      "createdFromCli": "Dibuat dari Prompt CLI",
+      "createdByNamedAutomation": "Dibuat oleh otomatisasi “{{name}}”",
+      "createdByAutomation": "Dibuat oleh otomatisasi",
+      "openLinkWithTitle": "Buka {{label}}, {{title}}",
+      "openLink": "Buka {{label}}",
+      "prOpen": "Buka"
+    },
+    "workspaceOptionControls": {
+      "none": "Tidak ada",
+      "status": "Status",
+      "pr": "PR",
+      "project": "Proyek",
+      "name": "Nama",
+      "agentActivitySort": "Aktivitas agen",
+      "recent": "Terbaru",
+      "manual": "petunjuk",
+      "agentActivitySortDescription": "Agen yang memerlukan perhatian, lalu aktivitas terbaru.",
+      "manualWorkspaceOrderDescription": "Seret workspace untuk mengaturnya dalam setiap grup.",
+      "manualProjectOrderDescription": "Seret proyek untuk mengaturnya",
+      "recentProjectOrderDescription": "Aktivitas workspace terbaru",
+      "detailed": "Detail",
+      "compact": "Ringkas",
+      "fullList": "Daftar lengkap",
+      "githubTicket": "Tiket GitHub",
+      "linearIssue": "Issue Linear",
+      "jiraIssue": "Issue Jira",
+      "prMrLink": "Tautan PR/MR",
+      "automation": "Otomatisasi",
+      "notes": "Catatan",
+      "ports": "Port",
+      "agentActivity": "Aktivitas agen",
+      "host": "Tuan rumah",
+      "githubIssues": "Issue GitHub",
+      "linearIssues": "Issue Linear",
+      "jiraIssues": "Issue Jira",
+      "agentStatuses": "Status agen",
+      "branchFolderPath": "Path branch / folder",
+      "branchName": "Nama branch",
+      "selectedCount": "{{count}} dari {{total}}",
+      "allHosts": "Semua host",
+      "allProjects": "Semua proyek",
+      "searchProjectsPlaceholder": "Cari proyek…",
+      "searchProjects": "Cari proyek",
+      "hover": "Saat diarahkan",
+      "agentActivityLayout": "Tata letak aktivitas agen"
+    },
+    "workspaceOptionsSheet": {
+      "hosts": "Host",
+      "projects": "Proyek",
+      "groupBy": "Kelompokkan menurut",
+      "sortBy": "Urutkan menurut",
+      "projectOrder": "Urutan proyek",
+      "cardLayout": "Tata letak kartu",
+      "showProperties": "Tampilkan properti",
+      "cardDisplay": "Tampilan kartu",
+      "hideSleeping": "Sembunyikan yang tidur",
+      "exceptDefaultBranch": "Kecuali branch default",
+      "hideDefaultBranch": "Sembunyikan branch default",
+      "hideAutomationCreated": "Sembunyikan yang dibuat otomatisasi",
+      "hideCliCreated": "Sembunyikan yang dibuat CLI",
+      "hideOtherClientWorkspaces": "Sembunyikan workspace klien lain",
+      "hideDetachedHead": "Sembunyikan detached HEAD",
+      "show": "Tampilkan",
+      "filters": "Filter",
+      "localMac": "Lokal Mac",
+      "localWindows": "Jendela Lokal",
+      "localLinux": "Linux Lokal",
+      "thisComputer": "Komputer ini",
+      "waitingForDesktop": "Masih menunggu desktop",
+      "savingToDesktop": "Menyimpan ke desktop",
+      "backToOptions": "Kembali ke opsi Ruang Kerja",
+      "workspaceOptions": "Opsi workspace",
+      "syncedAcrossDevices": "Disinkronkan di seluruh perangkat Anda",
+      "clearFilters": "Hapus filter"
+    }
+  },
+  "webShell": {
+    "shellStateScreen": {
+      "isolationUnavailable": "WebView perangkat ini terlalu tua untuk membuka ruang kerja dengan aman.",
+      "downloadFailed": "Aplikasi terbaru tidak dapat diunduh dari host ini.",
+      "hostProfileUnreadable": "Tidak dapat membaca host ini di perangkat Anda. Coba lagi.",
+      "statusUnreadable": "Tidak dapat membaca status host ini. Kembali dan buka kembali.",
+      "renderProcessGone": "Ruang kerja berhenti merespons.",
+      "documentLoadFailed": "Aplikasi yang diunduh tidak dapat dibuka.",
+      "tryAgain": "Coba lagi",
+      "connectToDownload": "Hubungkan ke host ini untuk mengunduh aplikasi terbaru",
+      "openingWorkspace": "Membuka ruang kerja",
+      "checkingHost": "Memeriksa tuan rumah"
+    }
+  },
+  "navigation": {
+    "hostStackScreens": {
+      "host": "Tuan rumah",
+      "editHost": "Sunting tuan rumah",
+      "accounts": "Akun",
+      "tasks": "Tugas",
+      "terminal": "Terminal",
+      "sourceControl": "Kontrol sumber",
+      "agentSessionHistory": "Riwayat sesi agen",
+      "changes": "Perubahan",
+      "pullRequest": "Pull request",
+      "workspace": "Ruang kerja"
+    }
+  },
+  "notifications": {
+    "notificationDeliverySection": {
+      "onlyWhenAway": "Hanya ketika jauh dari desktop",
+      "onlyWhenAwayHint": "Setelah 3 menit tanpa aktivitas keyboard atau mouse, atau saat terkunci.",
+      "sound": "Suara notifikasi",
+      "suppressWhileFocused": "Tekan sambil fokus",
+      "suppressWhileFocusedHint": "Lewati peringatan untuk ruang kerja yang terbuka di ponsel ini.",
+      "footer": "Jenis peringatan mengikuti pengaturan notifikasi setiap desktop yang dipasangkan. Notifikasi dijeda setelah 7 hari tanpa menggunakan aplikasi ini; buka dan sambungkan kembali untuk melanjutkan."
+    },
+    "desktopChannel": {
+      "silentName": "Prompt notifikasi senyap",
+      "name": "Pemberitahuan Desktop"
+    }
+  },
+  "onboarding": {
+    "onboardingPage": {
+      "sessionViewTitle": "Bagaimana seharusnya sesi dibuka?",
+      "notificationsTitle": "Jangan lewatkan saat agen membutuhkan Anda",
+      "sessionViewDescription": "Pilih apakah sesi agen yang didukung dibuka di terminal atau UI Obrolan di perangkat ini. Tekan dan tahan tab sesi untuk mengalihkan tampilannya, atau mengubah defaultnya nanti di Pengaturan.",
+      "notificationsDescription": "Dapatkan notifikasi di ponsel ini ketika agen selesai atau sedang menunggu — meskipun Anda tidak menggunakan aplikasinya.",
+      "notificationsDisclosure": "Dikirim melalui layanan push Prompt setelah desktop Anda diam selama 3 menit. Ubah ini kapan saja di Pengaturan.",
+      "useChatUi": "Gunakan UI Obrolan",
+      "openInChatUi": "Buka sesi di UI Obrolan",
+      "keepTerminal": "Pertahankan terminal",
+      "openInTerminal": "Buka sesi di terminal",
+      "enableNotifications": "Aktifkan notifikasi",
+      "enableAgentNotifications": "Aktifkan notifikasi agen",
+      "notNow": "Nanti saja",
+      "skipNotifications": "Lewati notifikasi untuk saat ini"
+    },
+    "notificationOnboardingPreview": {
+      "codexFinished": "Codex selesai",
+      "testsPassing": "Ujian telah berlalu.",
+      "claudeNeedsInput": "Claude membutuhkan masukan",
+      "waitingOnYou": "Menunggumu.",
+      "now": "sekarang"
+    }
+  },
+  "connection": {
+    "connectionHealth": {
+      "signInRequired": "Diperlukan proses masuk pada {{host}}",
+      "signInDetail": "Masuk ke Prompt di desktop Anda untuk menyambung kembali",
+      "hostOffline": "{{host}} sedang offline",
+      "hostOfflineDetail": "Periksa apakah sudah aktif, Prompt sedang berjalan, dan Anda sudah masuk",
+      "relayAccessExpired": "Akses relai kedaluwarsa untuk {{host}}",
+      "rePairDetail": "Pasangkan kembali dengan desktop Anda",
+      "relayUnreachable": "Tidak dapat mencapai Relay",
+      "checkConnection": "Periksa koneksi Anda",
+      "tailscaleHint": "periksa Tailscale",
+      "hostFallback": "Tuan rumah",
+      "pairingInvalid": "Penyandingan tidak valid — pasangkan kembali dengan desktop Anda",
+      "connected": "Terhubung",
+      "relayConnectFailed": "Tidak dapat terhubung melalui Relay",
+      "connectingViaRelay": "Menghubungkan melalui Relay…",
+      "disconnected": "Terputus",
+      "desktopUnreachable": "Tidak dapat menjangkau desktop",
+      "connectFailed": "Tidak dapat terhubung",
+      "reconnecting": "Menyambungkan ulang…",
+      "connecting": "Menghubungkan…",
+      "labelWithHint": "{{label}} — {{hint}}"
+    },
+    "hostEndpoint": {
+      "addressRequired": "Masukkan alamat host.",
+      "invalidPort": "Pelabuhan harus 1–65535.",
+      "invalidScheme": "Gunakan ws:// atau wss:// (atau host:port).",
+      "invalidAddress": "Bukan alamat yang valid.",
+      "pathOrQueryNotAllowed": "Host tidak boleh menyertakan jalur atau kueri.",
+      "invalidHostname": "Bukan nama host yang valid.",
+      "hostnameRequired": "Nama host tidak ada."
+    },
+    "connectionPathLabel": {
+      "directTailscale": "Langsung · Tailscale",
+      "directLan": "Langsung · LAN",
+      "directViaTailscale": "Langsung melalui Tailscale",
+      "directViaLan": "Langsung melalui LAN"
+    },
+    "pairConfirmState": {
+      "missingCode": "Kode penyandingan tidak ada",
+      "invalidCode": "Bukan kode penyandingan yang valid"
+    },
+    "rpcClientStreamRegistry": {
+      "interrupted": "Koneksi terputus",
+      "endedBeforeReady": "Permintaan streaming berakhir sebelum siap."
+    },
+    "rpcClientTerminalBinaryFrame": {
+      "unsupportedFrame": "Bingkai aliran terminal tidak didukung (opcode {{opcode}})."
+    }
+  },
+  "worktree": {
+    "agentRowDisplay": {
+      "working": "Berjalan",
+      "monitoring": "Memantau tugas latar belakang",
+      "blocked": "Diblokir",
+      "waiting": "Menunggu input",
+      "interrupted": "Dihentikan",
+      "failed": "Gagal",
+      "unconfirmed": "Tidak dapat dikonfirmasi",
+      "idle": "Diam",
+      "unverifiable": "Tidak ada pembaruan terbaru",
+      "stopping": "Menghentikan…",
+      "justNow": "baru saja",
+      "minutes_one": "{{count}} mnt",
+      "minutes_other": "{{count}} mnt",
+      "hours_one": "{{count}} j",
+      "hours_other": "{{count}} j",
+      "days_one": "{{count}} h",
+      "days_other": "{{count}} h",
+      "done": "Selesai"
+    },
+    "hostWorkspaceListStates": {
+      "checkHost": "Periksa apakah komputer Anda dalam keadaan aktif dan Prompt sedang berjalan",
+      "loadFailed": "Tidak dapat memuat ruang kerja dari host ini",
+      "retrying": "worktree.ps gagal ({{error}}) — mencoba lagi secara otomatis",
+      "noMatches": "Tidak ada ruang kerja yang cocok",
+      "noFilterMatches": "Tidak ada ruang kerja yang cocok dengan filter",
+      "empty": "Tidak ada ruang kerja",
+      "reopen": "Buka kembali untuk memperbarui",
+      "reopenDetail": "Host ini mencantumkan ruang kerja dengan cara yang belum diketahui halaman ini."
+    },
+    "workspaceListSections": {
+      "pinned": "Disematkan",
+      "all": "Semua",
+      "inReview": "Dalam review",
+      "inProgress": "Sedang berlangsung",
+      "closed": "Ditutup",
+      "done": "Selesai"
+    }
+  },
+  "components": {
+    "agentLaunchNotice": {
+      "updateRequired": "Perbarui Prompt di komputer Anda untuk memulai agen dari ponsel Anda.",
+      "statusUnreadable": "Tidak dapat membaca status host ini. Mencoba lagi…",
+      "copyFailed": "Tidak dapat menyalin",
+      "copyPrompt": "Salin prompt"
+    },
+    "agentSpinner": {
+      "monitoring": "Memantau tugas latar belakang",
+      "unconfirmed": "Tidak dapat dikonfirmasi"
+    },
+    "agentStateDot": {
+      "monitoring": "Memantau tugas latar belakang",
+      "unverifiable": "Tidak ada pembaruan terbaru"
+    },
+    "authFailedBanner": {
+      "message": "Otentikasi gagal — coba sambungkan kembali terlebih dahulu; jika terus gagal, pasangkan kembali dari desktop."
+    },
+    "authFailedBannerActions": {
+      "repair": "Pasangkan ulang",
+      "webNote": "Hubungkan kembali atau hapus host ini dari aplikasi Prompt."
+    },
+    "codexResetCreditAction": {
+      "earnedReset": "Mendapatkan Codex pengaturan ulang batas tarif",
+      "resettingLabel": "Menyetel ulang batas kecepatan Codex.",
+      "useResetLabel": "Gunakan Codex pengaturan ulang batas kecepatan",
+      "scopedHint": "Menggunakan satu reset yang diperoleh untuk {{scopeLabel}}",
+      "activeAccountHint": "Menggunakan satu reset yang diperoleh untuk akun Codex yang aktif",
+      "resetting": "Mereset…",
+      "useReset": "Gunakan pengaturan ulang"
+    },
+    "customKeyModal": {
+      "editing": "Mengedit",
+      "navigation": "Navigasi",
+      "function": "Fungsi",
+      "addShortcut": "Tambahkan Pintasan",
+      "shortcutCombo": "Kombo Pintasan",
+      "pickKey": "Pilih kunci",
+      "textMacro": "Makro Teks",
+      "shortcutComboHint": "Buat akord tombol Ctrl, Alt, dan Shift",
+      "textMacroHint": "Kirim perintah teks khusus",
+      "manageShortcuts": "Kelola Pintasan",
+      "manageShortcutsHint": "Menampilkan, menyembunyikan, atau menyusun ulang tombol pintasan",
+      "modifiers": "Pengubah",
+      "key": "Kunci",
+      "moreKeys": "Tombol lainnya — Tab, panah, F1–F12…",
+      "add": "Tambah",
+      "label": "Label",
+      "labelPlaceholder": "misalnya Membangun",
+      "command": "Perintah",
+      "commandPlaceholder": "misalnya pembangunan pnpm",
+      "pressEnter": "Tekan Enter"
+    },
+    "dragReorderRow": {
+      "dragToReorder": "Tarik untuk menyusun ulang",
+      "reorderHint": "Gunakan tindakan pindah ke atas dan turun untuk menyusun ulang tanpa menyeret",
+      "moveUp": "Naik",
+      "moveDown": "Pindah ke bawah"
+    },
+    "hostDiagnosticsLink": {
+      "viewDiagnostics": "Lihat diagnostik jaringan"
+    },
+    "hostProtocolGate": {
+      "checkingCompatibility": "Memeriksa kompatibilitas host"
+    },
+    "hostRouteNoticeBanner": {
+      "dismissNotice": "Tutup pemberitahuan"
+    },
+    "jiraConnectPrompt": {
+      "updateDesktop": "Perbarui Prompt desktop",
+      "connectOnDesktop": "Hubungkan Jira di desktop Anda",
+      "credentialUnreadable": "Jira disimpan tetapi tidak dapat dibaca: {{credentialError}}",
+      "connectHint": "Tambahkan situs Jira Anda di Prompt desktop pada Pengaturan → Integrasi, lalu periksa lagi.",
+      "checkAgain": "Periksa lagi"
+    },
+    "dictationSetupSheet": {
+      "loadFailed": "Gagal memuat",
+      "downloadFailed": "Pengunduhan gagal",
+      "selectFailed": "Tidak dapat memilih model",
+      "updateFailed": "Tidak dapat memperbarui",
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{details}} · {{progress}}%",
+      "modelExtracting": "{{details}} · mengekstraksi…",
+      "title": "Siapkan dikte suara",
+      "description": "Unduh atau pilih model dan aktifkan dikte pada komputer yang dipasangkan — semuanya dari sini.",
+      "enabled": "Dikte diaktifkan",
+      "recommended": "Disarankan",
+      "inUse": "Digunakan",
+      "useModel": "Gunakan {{model}}",
+      "use": "Gunakan",
+      "downloadModel": "Unduh {{model}}",
+      "download": "Unduh"
+    },
+    "diffReviewBody": {
+      "loadingReview": "Memuat ulasan...",
+      "reviewUnavailable": "Tinjauan Tidak Tersedia",
+      "loadFailed": "Tidak Dapat Memuat Ulasan",
+      "noReviewableChanges": "Tidak Ada Perubahan yang Dapat Ditinjau",
+      "tryDifferentFilter": "Coba filter ulasan lain.",
+      "loadingDiff": "Memuat diff…",
+      "diffTruncated": "Perbedaan terpotong untuk pratinjau seluler.",
+      "binaryDiff": "Perbedaan Biner",
+      "diffTooLarge": "Perbedaannya Terlalu Besar",
+      "deletedFile": "File yang Dihapus",
+      "diffUnavailable": "Perbedaan Tidak Tersedia",
+      "binaryMessage": "File ini tidak dapat dirender sebagai teks di perangkat seluler.",
+      "tooLargeMessage": "Perbedaan ini terlalu besar untuk pratinjau seluler.",
+      "deletedMessage": "Berkas ini telah dihapus. Tambahkan catatan file atau tandai sudah ditinjau.",
+      "selectFile": "Pilih file untuk ditinjau.",
+      "retryLabel": "Coba lagi memuat ulasan"
+    },
+    "diffReviewDrawers": {
+      "discardTitle": "Buang Berkas",
+      "discardMessage": "Buang perubahan pada \"{{filePath}}\"? Hal ini tidak dapat dibatalkan.",
+      "discard": "Buang",
+      "actionsTitle": "Tinjau Tindakan",
+      "stageableFiles_one": "{{count}} file yang tidak dipentaskan yang ditinjau dapat dipentaskan",
+      "stageableFiles_other": "{{count}} file yang tidak dipentaskan yang ditinjau dapat dipentaskan",
+      "sendNotes": "Kirim Catatan",
+      "terminalLabel": "{{title}} ({{id}})",
+      "terminal": "Terminal",
+      "newAgentSession": "Sesi Agen Baru",
+      "updateRequired": "Perbarui Prompt di komputer Anda",
+      "statusUnreadable": "Tidak dapat membaca status host ini. Mencoba lagi…",
+      "copyNotes": "Salin Catatan",
+      "sendUnsentNotes": "Kirim Catatan yang Belum Terkirim",
+      "clearSentNotes": "Hapus Catatan Terkirim",
+      "stageReviewedFiles": "File Tahap Ditinjau",
+      "markUnreviewed": "Tandai Belum Ditinjau",
+      "openInSession": "Buka di Sesi",
+      "loadingSessions": "Memuat sesi agen...",
+      "unsentNotes_one": "{{count}} catatan yang belum terkirim",
+      "unsentNotes_other": "{{count}} catatan yang belum terkirim",
+      "editNote": "Sunting Catatan",
+      "addNote": "Tambahkan Catatan",
+      "lineNumber": "Garis {{lineNumber}}",
+      "fileNote": "Catatan berkas",
+      "cancelNote": "Batalkan catatan",
+      "reviewNote": "Catatan ulasan",
+      "saveLineNote": "Simpan catatan online {{lineNumber}}",
+      "deleteNote": "Hapus catatan",
+      "completeTitle": "Tinjauan Selesai",
+      "fileSummary_one": "{{fileCount}} file ditinjau, {{count}} catatan",
+      "fileSummary_other": "{{fileCount}} file ditinjau, {{count}} catatan",
+      "filesSummary_one": "{{fileCount}} file ditinjau, {{count}} catatan",
+      "filesSummary_other": "{{fileCount}} file ditinjau, {{count}} catatan",
+      "stageReviewedLabel": "File tahap ditinjau",
+      "stageReviewed": "Tahap Ditinjau",
+      "sendNotesLabel": "Kirim catatan ke agen"
+    },
+    "diffReviewFileSummary": {
+      "branchFrom": "Cabang dari {{oldPath}}",
+      "stagedFrom": "Dipentaskan dari {{oldPath}}",
+      "unstagedFrom": "Tidak dipentaskan dari {{oldPath}}",
+      "branch": "Cabang",
+      "staged": "Dipentaskan",
+      "unstaged": "Tidak dipentaskan",
+      "reviewed": "Ditinjau",
+      "changed": "Berubah",
+      "notes_one": "{{count}} catatan",
+      "notes_other": "{{count}} catatan",
+      "staleCount": "{{count}} basi",
+      "editFileNote": "Edit catatan file",
+      "stale": "Basi",
+      "previousHunk": "Cowok sebelumnya",
+      "hunk": "Bingkah",
+      "nextHunk": "Cowok berikutnya"
+    },
+    "diffReviewFooter": {
+      "stageFile": "Berkas panggung",
+      "stage": "Panggung",
+      "unstageFile": "File tidak dipentaskan",
+      "unstage": "Tidak panggung",
+      "discardFile": "Buang berkas",
+      "discard": "Buang",
+      "previousFile": "Berkas sebelumnya",
+      "addFileNote": "Tambahkan catatan file",
+      "note": "Catatan",
+      "markFileReviewed": "Tandai file telah ditinjau",
+      "reviewed": "Ditinjau",
+      "markReviewed": "Tandai Ditinjau",
+      "nextFile": "Berkas berikutnya"
+    },
+    "diffReviewHeader": {
+      "filterAll": "Semua",
+      "showAllFiles": "Tampilkan semua file ulasan",
+      "filterUnreviewed": "Belum ditinjau",
+      "showUnreviewedFiles": "Tampilkan file ulasan yang belum ditinjau",
+      "filterNotes": "Catatan",
+      "showNotesFiles": "Tampilkan file ulasan catatan",
+      "filterUnstaged": "Tidak dipentaskan",
+      "showUnstagedFiles": "Tampilkan file ulasan yang tidak dipentaskan",
+      "filterStaged": "Dipentaskan",
+      "showStagedFiles": "Tampilkan file tinjauan bertahap",
+      "filterBranch": "Cabang",
+      "showBranchFiles": "Tampilkan file ulasan cabang",
+      "title": "Perubahan",
+      "openPullRequestSidebar": "Buka sidebar permintaan tarik",
+      "openReviewActions": "Buka tindakan peninjauan",
+      "reviewedProgress": "{{reviewedCount}}/{{queueLength}} ditinjau",
+      "unsentNotes_one": "{{count}} catatan belum terkirim",
+      "unsentNotes_other": "{{count}} catatan yang belum terkirim"
+    },
+    "diffReviewLine": {
+      "addedLineNumber": "Menambahkan baris {{number}}",
+      "addedLine": "Baris yang ditambahkan",
+      "deletedLineNumber": "Baris yang dihapus {{number}}",
+      "deletedLine": "Baris yang dihapus",
+      "contextLineNumber": "Baris konteks {{number}}",
+      "contextLine": "Garis konteks",
+      "addNoteOnLine": "Tambahkan catatan pada baris {{number}}",
+      "editNoteOnLine": "Edit catatan pada baris {{number}}"
+    },
+    "homeQuickActions": {
+      "title": "Tindakan cepat",
+      "pairDesktop": "Pasangkan Desktop",
+      "newWorkspace": "Workspace baru"
+    },
+    "hostCard": {
+      "worktreeAccessibilitySummary": "{{summary}}, {{activeCount}} aktif",
+      "pairingInvalid": "Penyandingan tidak valid",
+      "pairingTemporarilyUnavailable": "Penyandingan untuk sementara tidak tersedia",
+      "updateDesktopHint": "Perbarui desktop Prompt dan masuk untuk terhubung dari mana saja",
+      "repairHint": "Ketuk untuk memasangkan kembali dengan desktop Anda",
+      "unlockHint": "Buka kunci ponsel Anda, lalu ketuk untuk mencoba lagi",
+      "openHost": "Buka {{title}}",
+      "hostActions": "Tindakan untuk {{title}}"
+    },
+    "htmlPreview": {
+      "previewRenderedHtml": "Pratinjau HTML yang dirender",
+      "preview": "Pratinjau",
+      "viewHtmlSource": "Lihat sumber HTML",
+      "source": "Sumber",
+      "title": "Pratinjau HTML"
+    },
+    "prSidebar": {
+      "loading": "Memuat permintaan penarikan…",
+      "loadFailed": "Ada yang tidak beres.",
+      "retryLoading": "Coba lagi memuat permintaan tarik",
+      "notPermitted": "Tidak diizinkan — akun GitHub Anda tidak terhubung."
+    },
+    "richMarkdownEditor": {
+      "linkUrl": "URL tautan",
+      "imageUrl": "URL gambar",
+      "insert": "Sisipkan"
+    },
+    "richMarkdownToolbar": {
+      "body": "Tubuh",
+      "heading1": "H1",
+      "heading2": "H2",
+      "heading3": "H3",
+      "bold": "Tebal",
+      "italic": "Miring",
+      "strike": "Coret",
+      "bulletList": "Daftar berpoin",
+      "numberedList": "Daftar bernomor",
+      "checklist": "Daftar periksa",
+      "quote": "Kutipan",
+      "link": "Tautan",
+      "image": "Gambar",
+      "inlineCode": "Kode inline",
+      "codeBlock": "Blok kode"
+    },
+    "searchField": {
+      "clearSearch": "Hapus pencarian"
+    },
+    "sourceCopyButton": {
+      "copyFailed": "Penyalinan gagal",
+      "clipboardRejected": "Papan klip menolak teks tersebut.",
+      "failed": "Gagal",
+      "copiedLoaded": "Disalin dimuat",
+      "copyLoaded": "Salinan dimuat",
+      "couldNotCopy": "Tidak dapat menyalin"
+    },
+    "workspaceNameInput": {
+      "placeholder": "Nama workspace"
+    },
+    "newWorkspaceFab": {
+      "newWorkspace": "Workspace baru"
+    },
+    "newWorkspaceSetupScriptField": {
+      "label": "Skrip setup",
+      "hooks": "KAIT",
+      "run": "Jalankan",
+      "skip": "Lewati",
+      "runSetupCommand": "Jalankan perintah setup"
+    },
+    "newWorkspaceSshConnectionField": {
+      "label": "SSH Koneksi",
+      "connecting": "Menghubungkan...",
+      "connect": "Hubungkan",
+      "serverRecovery": "Servernya perlu dipulihkan dari desktop: Pengaturan → SSH host → Pulihkan server."
+    },
+    "newWorktreeFormSheet": {
+      "createWorktree": "Buat worktree",
+      "noProjectsFound": "Tidak ada proyek yang ditemukan",
+      "nameOrCreateFrom": "Nama atau 'Buat Dari'",
+      "workspaceName": "Nama workspace",
+      "agent": "Agen",
+      "connectTargetFirst": "Hubungkan target terlebih dahulu",
+      "advanced": "Lanjutan",
+      "note": "Catatan",
+      "notePlaceholder": "Tulis catatan",
+      "connectTarget": "Hubungkan sasaran"
+    },
+    "newWorktreeModal": {
+      "remoteRepository": "Repositori jarak jauh"
+    },
+    "newWorktreeModalDrawers": {
+      "project": "Proyek",
+      "runOn": "Jalankan di",
+      "agent": "Agen"
+    },
+    "newWorktreeProjectTargetFields": {
+      "project": "Proyek",
+      "selectProject": "Pilih proyek",
+      "runOn": "Jalankan di",
+      "selectRunTarget": "Pilih target lari"
+    },
+    "protocolBlockScreen": {
+      "updateMobileTitle": "Perbarui Prompt Seluler",
+      "updateDesktopTitle": "Perbarui Prompt di komputer Anda",
+      "refreshWorkspaceTitle": "Segarkan ruang kerja seluler",
+      "refreshWorkspaceBody": "Ruang kerja yang di-cache untuk host ini lebih lama dari yang diperkirakan desktop. Sambungkan kembali ke host ini untuk mengunduh host saat ini.",
+      "mobileTooOldAppStore": "Desktop ini memerlukan aplikasi seluler Prompt yang lebih baru. Perbarui Prompt Seluler dari App Store, lalu coba host ini lagi.",
+      "mobileTooOldGitHubReleases": "Desktop ini memerlukan aplikasi seluler Prompt yang lebih baru. Perbarui Prompt Seluler dari GitHub Rilis, lalu coba host ini lagi.",
+      "workspaceNeedsUpdateAppStore": "Ruang kerja seluler desktop ini memerlukan aplikasi seluler Prompt yang lebih baru. Perbarui Prompt Seluler dari App Store, lalu coba host ini lagi.",
+      "workspaceNeedsUpdateGitHubReleases": "Ruang kerja seluler desktop ini memerlukan aplikasi seluler Prompt yang lebih baru. Perbarui Prompt Seluler dari GitHub Rilis, lalu coba host ini lagi.",
+      "desktopTooOldBody": "Aplikasi desktop yang dipasangkan ini terlalu lama untuk aplikasi seluler Prompt Anda saat ini. Perbarui Prompt di komputer Anda, lalu coba host ini lagi.",
+      "openAppStore": "Buka App Store",
+      "openGitHubReleases": "Buka GitHub Rilis",
+      "getVersion": "Dapatkan Prompt {{version}}",
+      "refreshRecoveryNote": "Jika pesan ini tetap ada, hapus host ini dan pasangkan kembali.",
+      "updateRecoveryNote": "Sudah diperbarui? Kembali ke Host dan segarkan koneksi. Jika pesan ini tetap ada, hapus host ini dan pasangkan kembali.",
+      "backToHosts": "Kembali ke tuan rumah"
+    },
+    "setupHookTrustDrawer": {
+      "scriptChangedTitle": "skrip pengaturan {{repoName}} berubah",
+      "runSetupTitle": "Jalankan pengaturan dari {{repoName}}?",
+      "description": "Orca.yaml repositori ini berjalan sebelum ruang kerja dimulai. Jalankan hanya jika Anda mempercayai repositori ini.",
+      "newScriptLabel": "Skrip setup baru",
+      "scriptLabel": "Skrip setup",
+      "runHooks": "Jalankan hook",
+      "alwaysTrustAndRun": "Selalu percaya dan lari",
+      "dontRun": "Jangan jalankan"
+    },
+    "smartWorkspaceAdvancedFields": {
+      "name": "Nama",
+      "workspaceName": "Nama workspace",
+      "branchName": "Nama branch",
+      "derivedFromName": "Berasal dari nama"
+    },
+    "smartWorkspaceSourceDrawer": {
+      "title": "Nama atau 'Buat Dari'",
+      "crossRepoMessage": "Item ini berada di {{owner}}/{{repo}}.",
+      "switchRepo": "Beralih ke {{repoName}}",
+      "connectRepository": "Hubungkan repositori ke sumber pencarian.",
+      "gitHubRemoteRequired": "Repo SSH ini memerlukan remote GitHub untuk mencantumkan masalah dan PR.",
+      "noResults": "Tidak ada hasil yang ditemukan.",
+      "typeWorkspaceName": "Ketikkan nama ruang kerja pada kolom di bawah ini.",
+      "searchPlaceholder": "Ketikkan nama atau cari sumber"
+    },
+    "smartWorkspaceSourceField": {
+      "optional": "[Opsional]",
+      "openSelectedSource": "Buka sumber yang dipilih",
+      "searchPlaceholder": "Ketikkan nama atau cari sumber"
+    },
+    "smartWorkspaceSourceRow": {
+      "useName": "Gunakan \"{{name}}\"",
+      "nameWorkspace": "Beri nama ruang kerja ini",
+      "createBranch": "Buat cabang \"{{name}}\"",
+      "newBranch": "Branch baru",
+      "pullRequest": "PR #{{number}}",
+      "issue": "Masalah #{{number}}",
+      "mergeRequest": "MR !{{number}}"
+    },
+    "terminalShortcutSettings": {
+      "shortcutBar": "BAR PINTAS",
+      "shortcutBarDescription": "Alihkan tombol untuk menampilkan atau menyembunyikannya, dan tahan pegangan untuk menyeret kunci sesuai urutan yang Anda inginkan pada bilah pintasan terminal.",
+      "resetDefaults": "Atur Ulang Default",
+      "resetDescription": "Tampilkan setiap tombol pintasan bawaan dalam urutan aslinya",
+      "customShortcuts": "PINTASAN KHUSUS",
+      "empty": "Belum ada pintasan khusus yang ditentukan.",
+      "removeShortcut": "Hapus {{label}}",
+      "addShortcut": "Tambahkan Pintasan Khusus…",
+      "addDescription": "Buat kombo kunci atau makro teks"
+    },
+    "voiceModelList": {
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{size}} · {{progress}}%",
+      "modelExtracting": "{{size}} · mengekstraksi…",
+      "recommended": "Disarankan",
+      "inUse": "Digunakan",
+      "useModel": "Gunakan {{label}}",
+      "use": "Gunakan",
+      "deleteModel": "Hapus {{label}}",
+      "downloadModel": "Unduh {{label}}"
+    },
+    "workspaceDetailPlaceholder": {
+      "title": "Tidak ada ruang kerja yang terbuka",
+      "description": "Pilih ruang kerja dari sidebar untuk membuka terminalnya di sini."
+    },
+    "worktreeListRow": {
+      "folder": "Map",
+      "remoteHost": "Tuan rumah jarak jauh",
+      "project": "Proyek {{repo}}",
+      "child": "Anak",
+      "children_one": "{{count}} anak",
+      "children_other": "{{count}} turunan"
+    },
+    "accountsSnapshot": {
+      "invalidSnapshot": "Cuplikan akun dari host tidak valid"
+    },
+    "codexResetCredit": {
+      "available_one": "{{count}} pengaturan ulang tersedia",
+      "available_other": "{{count}} reset tersedia",
+      "resetTitle": "Batas tarif disetel ulang",
+      "alreadyAppliedTitle": "Reset sudah diterapkan",
+      "refresh": "Codex penggunaan telah disegarkan.",
+      "nothingToResetTitle": "Tidak ada yang perlu diatur ulang",
+      "nothingToResetMessage": "Tidak ada jangka waktu batas tarif Codex yang memenuhi syarat yang habis.",
+      "noResetTitle": "Tidak ada pengaturan ulang yang tersedia",
+      "noResetMessage": "Akun ini tidak memiliki kredit reset yang diperoleh.",
+      "invalidResponse": "Respons reset tidak valid dari host",
+      "expiryNowSingle": "Kedaluwarsa sekarang",
+      "expiryNowMultiple": "Berikutnya kedaluwarsa sekarang",
+      "expiryMinutesSingle": "Kedaluwarsa dalam {{minutes}}m",
+      "expiryMinutesMultiple": "Berikutnya berakhir dalam {{minutes}}m",
+      "expiryHoursMinutesSingle": "Kedaluwarsa dalam {{hours}}j {{minutes}}m",
+      "expiryHoursMinutesMultiple": "Masa berlaku berikutnya akan habis dalam {{hours}}h {{minutes}}m",
+      "expiryHoursSingle": "Kedaluwarsa dalam {{hours}} jam",
+      "expiryHoursMultiple": "Berikutnya berakhir dalam {{hours}}h",
+      "expiryDaysHoursSingle": "Kedaluwarsa dalam {{days}}h {{hours}}h",
+      "expiryDaysHoursMultiple": "Berikutnya berakhir dalam {{days}}d {{hours}}h",
+      "expiryDaysSingle": "Kedaluwarsa dalam {{days}}d",
+      "expiryDaysMultiple": "Berikutnya berakhir pada {{days}}d"
+    },
+    "markdownBlocks": {
+      "copyCode": "Salin kode",
+      "openImage": "Buka gambar"
+    },
+    "mountedBottomDrawer": {
+      "dismissDrawer": "Tutup laci"
+    },
+    "newWorktreeAgentSelection": {
+      "blankTerminal": "Terminal kosong"
+    },
+    "useCodexResetCreditAction": {
+      "hostAccount": "{{identity}} pada tuan rumah",
+      "hostAccountConfirmMessage": "Tindakan ini menghabiskan satu perolehan reset untuk {{identity}} pada host dan segera menyetel ulang jendela batas tarif yang memenuhi syarat.",
+      "hostSelectedAccount": "akun terkelola yang dipilih di host",
+      "hostSelectedAccountConfirmMessage": "Tindakan ini menghabiskan satu perolehan reset untuk akun terkelola yang dipilih di host dan segera menyetel ulang jendela batas tarif yang memenuhi syarat.",
+      "wslAccount": "{{identity}} di WSL {{distro}}",
+      "wslAccountConfirmMessage": "Ini menghabiskan satu perolehan reset untuk {{identity}} di WSL {{distro}} dan segera menyetel ulang jendela batas tarif yang memenuhi syarat.",
+      "wslSelectedAccount": "akun terkelola yang dipilih di WSL {{distro}}",
+      "wslSelectedAccountConfirmMessage": "Ini menghabiskan satu perolehan reset untuk akun terkelola yang dipilih di WSL {{distro}} dan segera menyetel ulang jendela batas tarif yang memenuhi syarat.",
+      "detailsChanged": "Detail pengaturan ulang diubah",
+      "detailsChangedMessage": "Penawaran akun atau reset diubah sebelum host menghubungi Codex. Tinjau detail yang diperbarui, lalu konfirmasi lagi.",
+      "resetFailed": "Tidak dapat menyetel ulang batas kecepatan",
+      "confirmTitle": "Gunakan pengaturan ulang batas tarif?"
+    },
+    "nativeScreenRecovery": {
+      "title": "Ada yang tidak beres",
+      "tryAgain": "Coba lagi",
+      "home": "Rumah"
+    }
+  },
+  "pullRequest": {
+    "linkPrForm": {
+      "title": "Tautkan permintaan penarikan yang ada",
+      "referenceLabel": "Nomor PR atau URL GitHub.",
+      "referencePlaceholder": "#123 atau https://github.com/owner/repo/pull/123",
+      "linkNumber": "Tautan #{{number}}",
+      "linkButton": "Permintaan penarikan tautan"
+    },
+    "prViewPanel": {
+      "providerUnavailable": "Panel ulasan yang dihosting tidak tersedia untuk penyedia ini.",
+      "branchUnavailable": "Cabang saat ini tidak tersedia."
+    },
+    "prActionsSection": {
+      "unlinkFailed": "Gagal membatalkan tautan permintaan penarikan.",
+      "mergeConfirmTitle": "Gabungkan permintaan tarik?",
+      "mergeButton": "Gabungkan",
+      "closeConfirmTitle": "Tutup permintaan penarikan?",
+      "closeConfirmMessage": "#{{number}} akan ditutup tanpa penggabungan.",
+      "reopenConfirmTitle": "Buka kembali permintaan penarikan?",
+      "reopenConfirmMessage": "#{{number}} akan dibuka kembali.",
+      "reopenButton": "Buka kembali",
+      "mergeAccessibilityLabel": "Gabungkan permintaan tarik",
+      "recheckAccessibilityLabel": "Periksa kembali status penggabungan",
+      "recheckButton": "Periksa kembali",
+      "markReadyAccessibilityLabel": "Tandai permintaan penarikan yang siap untuk ditinjau",
+      "markReadyButton": "Siap untuk ditinjau",
+      "autoMergeLabel": "Gabungkan otomatis jika sudah siap",
+      "autoMergeAccessibilityLabel": "Alihkan penggabungan otomatis",
+      "autoMergeOn": "Aktif",
+      "autoMergeOff": "Nonaktif",
+      "closeAccessibilityLabel": "Tutup pull request",
+      "reopenAccessibilityLabel": "Buka kembali permintaan tarik",
+      "unlinkAccessibilityLabel": "Batalkan tautan permintaan tarik",
+      "unlinkButton": "Putuskan tautan"
+    },
+    "prCheckDetail": {
+      "noDetails": "Tidak ada rincian yang tersedia.",
+      "annotations": "Anotasi",
+      "annotationsTruncated": "Menampilkan 20 anotasi pertama",
+      "jobsTruncated": "Menampilkan 100 job pertama"
+    },
+    "checksSection": {
+      "unavailable": "Check tidak tersedia",
+      "noChecks": "Tidak ada pemeriksaan",
+      "failing": "{{count}} gagal",
+      "pendingCount": "{{count}} tertunda",
+      "passed": "{{count}} berlalu",
+      "neutralCount": "{{count}} netral",
+      "successful": "Berhasil",
+      "failed": "Gagal",
+      "cancelled": "Dibatalkan",
+      "timedOut": "Waktu habis",
+      "actionRequired": "Tindakan diperlukan",
+      "neutral": "Netral",
+      "skipped": "Dilewati",
+      "queued": "Dalam antrean",
+      "inProgress": "Sedang berlangsung",
+      "pending": "Tertunda",
+      "loadDetailsFailed": "Gagal memuat detail pemeriksaan",
+      "title": "Check",
+      "rerunFailing": "Jalankan kembali pemeriksaan yang gagal",
+      "failingChecks_one": "{{count}} pemeriksaan gagal",
+      "failingChecks_other": "{{count}} check gagal",
+      "inspectOrFix": "Periksa detail atau mulai perbaikan dengan AI.",
+      "fixFailing": "Perbaiki pemeriksaan yang gagal dengan AI",
+      "fix": "Perbaiki",
+      "checkDetails": "{{name}} periksa detailnya",
+      "openOnWeb": "Buka {{name}} di web"
+    },
+    "commentCard": {
+      "justNow": "baru saja",
+      "minutesAgo_one": "{{count}}m yang lalu",
+      "minutesAgo_other": "{{count}}m yang lalu",
+      "hoursAgo_one": "{{count}} jam yang lalu",
+      "hoursAgo_other": "{{count}} jam yang lalu",
+      "daysAgo_one": "{{count}} hari yang lalu",
+      "daysAgo_other": "{{count}} hari yang lalu",
+      "monthsAgo_one": "{{count}} bulan yang lalu",
+      "monthsAgo_other": "{{count}} bulan yang lalu",
+      "yearsAgo_one": "{{count}}tahun yang lalu",
+      "yearsAgo_other": "{{count}}tahun yang lalu",
+      "resolved": "diselesaikan",
+      "openOnGitHub": "Buka komentar di GitHub",
+      "editPlaceholder": "Sunting komentar…",
+      "replyToComment": "Balas komentar",
+      "reply": "Balas",
+      "editComment": "Sunting komentar",
+      "deleteComment": "Hapus komentar",
+      "unresolveThread": "Utas yang belum terselesaikan",
+      "resolveThread": "Selesaikan utas",
+      "unresolve": "Batalkan penyelesaian",
+      "resolve": "Selesaikan",
+      "replyPlaceholder": "Tulis balasan…",
+      "deleteConfirmTitle": "Hapus komentar?",
+      "deleteConfirmMessage": "Ini secara permanen menghapus komentar di GitHub."
+    },
+    "commentsSection": {
+      "all": "Semua",
+      "humans": "Manusia",
+      "bots": "Bot",
+      "noBotComments": "Tidak ada komentar dari bot.",
+      "noHumanComments": "Tidak ada komentar dari manusia.",
+      "noComments": "Belum ada komentar.",
+      "description": "Deskripsi",
+      "descriptionLoadFailed": "Tidak dapat memuat deskripsi. Ketuk segarkan untuk mencoba lagi.",
+      "noDescription": "Tidak ada deskripsi.",
+      "title": "Komentar",
+      "commentsLoadFailed": "Tidak dapat memuat komentar. Ketuk segarkan untuk mencoba lagi.",
+      "showMoreOf": "Tampilkan {{count}} lebih banyak dari {{remaining}}",
+      "showMore": "Tampilkan {{count}} lagi",
+      "addCommentPlaceholder": "Tambahkan komentar…",
+      "comment": "Komentar",
+      "resolvedThreadSingle": "Thread diselesaikan oleh {{author}}",
+      "resolvedThreadCount": "Thread terselesaikan oleh {{author}} ({{count}})",
+      "resolvedCommentSingle": "Komentar diselesaikan oleh {{author}}",
+      "resolvedCommentCount": "Komentar terselesaikan oleh {{author}} ({{count}})"
+    },
+    "conflictingFilesSection": {
+      "detailsUnavailable": "Detail file konflik tidak tersedia",
+      "refreshing": "Menyegarkan detail konflik…",
+      "localMergeClean": "GitHub melaporkan konflik, tetapi Git lokal tidak mereproduksinya. Segarkan PR atau dorong cabang untuk menghitung ulang kemampuan penggabungan.",
+      "copyFailed": "Gagal menyalin teks",
+      "copyCommands": "Salin perintah",
+      "commitsBehind_one": "{{count}} komit di belakang (komit dasar: {{baseCommit}})",
+      "commitsBehind_other": "{{count}} melakukan di belakang (komit dasar: {{baseCommit}})",
+      "title": "Konflik",
+      "mustResolve": "Branch ini memiliki konflik yang harus diselesaikan",
+      "runFromWorktree": "Jalankan dari worktree ini",
+      "copyRefreshCommands": "Salin perintah penyegaran kemampuan merge",
+      "filesHeading": "File yang konflik",
+      "resolveWithAi": "Selesaikan konflik dengan AI"
+    },
+    "reviewersSection": {
+      "requested": "Diminta",
+      "approved": "Disetujui",
+      "changesRequested": "Perubahan diminta",
+      "commented": "Berkomentar",
+      "dismissed": "Diberhentikan",
+      "pending": "Tertunda",
+      "reviewed": "Ditinjau",
+      "addOrRemove": "Tambahkan atau hapus pengulas",
+      "title": "Reviewer",
+      "loading": "Memuat pengulas…",
+      "loadFailed": "Tidak dapat memuat pengulas. Ketuk segarkan untuk mencoba lagi.",
+      "noReviewers": "Tidak ada pengulas yang diminta",
+      "removeReviewer": "Hapus {{login}}"
+    },
+    "prSidebarHeader": {
+      "openOnWeb": "Buka permintaan tarik #{{number}} di web",
+      "openInBrowser": "Buka permintaan tarik #{{number}} di browser",
+      "cancelEditingTitle": "Batalkan pengeditan judul",
+      "saveTitle": "Simpan judul",
+      "editTitle": "Edit judul permintaan tarik"
+    },
+    "prSidebarCreateEmptyState": {
+      "branchRequired": "Periksa cabang sebelum membuat permintaan tarik.",
+      "createFailed": "Gagal membuat permintaan penarikan.",
+      "title": "Tarik permintaan",
+      "refreshPullRequest": "Segarkan permintaan tarik",
+      "createPullRequest": "Buat permintaan tarik",
+      "createPr": "Buat PR",
+      "linkedPrUnavailable": "PR tertaut #{{number}} tidak tersedia",
+      "noOpenPullRequest": "Tidak ada permintaan penarikan terbuka",
+      "refreshOrCreate": "Refresh untuk memeriksa lagi, atau buat PR baru untuk cabang ini.",
+      "branchNotLinked": "{{branch}} tidak ditautkan ke PR terbuka.",
+      "currentBranchNotLinked": "Cabang saat ini tidak terhubung dengan PR terbuka.",
+      "linkExistingPullRequest": "Tautkan permintaan penarikan yang ada",
+      "linkExistingPr": "Tautkan PR yang ada"
+    },
+    "reviewerPickerDrawer": {
+      "title": "Reviewer",
+      "searchPeople": "Cari orang",
+      "loadFailed": "Gagal memuat orang",
+      "noMatches": "Tidak ada orang yang cocok",
+      "removeReviewer": "Hapus {{login}}",
+      "requestReviewer": "Permintaan {{login}}"
+    },
+    "markdownBlocks": {
+      "details": "Detail"
+    },
+    "prActionsState": {
+      "mergedLabel": "Di-merge",
+      "mergedHint": "Pull request ini sudah di-merge.",
+      "closedLabel": "Ditutup",
+      "closedHint": "Pull request ini sudah ditutup.",
+      "draftLabel": "Draf",
+      "draftHint": "Pull request ini masih berupa draf.",
+      "reviewRequiredLabel": "Approval diperlukan",
+      "reviewRequiredHint": "GitHub mewajibkan approval review sebelum pull request ini dapat di-merge.",
+      "changesRequestedLabel": "Perubahan diminta",
+      "changesRequestedHint": "GitHub melaporkan ada perubahan yang diminta pada pull request ini.",
+      "conflictsLabel": "Konflik",
+      "conflictsHint": "GitHub melaporkan adanya konflik merge.",
+      "mergeQueueLabel": "Merge bila siap",
+      "mergeQueueHint": "Base branch ini menggunakan merge queue GitHub.",
+      "mergeQueueAutoMergeOnLabel": "Auto-merge aktif",
+      "mergeQueueAutoMergeOnHint": "Base branch ini menggunakan merge queue GitHub.",
+      "mergeStatusUnavailableLabel": "Gabungkan",
+      "mergeStatusUnavailableHint": "Status merge tidak tersedia untuk PR ini.",
+      "behindLabel": "Tertinggal",
+      "behindHint": "Perbarui branch sebelum merge.",
+      "blockedLabel": "Diblokir",
+      "blockedHint": "GitHub melaporkan pull request ini diblokir.",
+      "mergeableChecksFailedLabel": "Check gagal",
+      "mergeableChecksFailedHint": "GitHub menyatakan PR ini dapat di-merge, tetapi beberapa check gagal.",
+      "mergeableChecksPendingLabel": "Check tertunda",
+      "mergeableChecksPendingHint": "GitHub menyatakan PR ini dapat di-merge, tetapi check masih berjalan.",
+      "mergeableChecksPassedLabel": "Dapat di-merge",
+      "mergeableChecksPassedHint": "GitHub menyatakan PR ini dapat di-merge dan check lulus.",
+      "mergeableLabel": "Dapat di-merge",
+      "mergeableHint": "GitHub menyatakan PR ini dapat di-merge.",
+      "checksPassedLabel": "Check lulus",
+      "checksPassedHint": "Check lulus. Kelayakan merge akan diperiksa ulang sebelum merge.",
+      "checkingLabel": "Memeriksa",
+      "checkingHint": "GitHub masih menghitung status merge pull request ini.",
+      "stackDraft": "#{{number}} masih berupa draf.",
+      "stackClosed": "#{{number}} ditutup.",
+      "stackConflicts": "#{{number}} memiliki konflik penggabungan.",
+      "stackChangesRequested": "#{{number}} telah meminta perubahan.",
+      "stackReviewRequired": "#{{number}} masih memerlukan persetujuan peninjauan.",
+      "stackBehind": "#{{number}} harus diperbarui.",
+      "stackBlocked": "#{{number}} diblokir.",
+      "methodMerge": "Buat merge commit",
+      "methodSquash": "Squash dan merge",
+      "methodRebase": "Rebase dan merge",
+      "mergeConfirmMessage": "Ini akan menggabungkan #{{number}} ke dalam cabang dasarnya.",
+      "queueThrough_one": "Antrian melalui #{{number}} · {{count}} PR",
+      "queueThrough_other": "Antrian melalui #{{number}} · {{count}} PR",
+      "mergeThrough_one": "Gabungkan melalui #{{number}} · {{count}} PR",
+      "mergeThrough_other": "Gabungkan melalui #{{number}} · {{count}} PR",
+      "queueStackMessage": "GitHub akan menambahkan pull request ini dan semua pull request di bawahnya ke merge queue.",
+      "mergeStackMessage": "GitHub akan melakukan merge pull request ini dan semua pull request di bawahnya dalam stack."
+    },
+    "prCheckDetailContent": {
+      "annotation": "Anotasi",
+      "unknown": "tidak diketahui",
+      "failedJobs": "Job yang gagal",
+      "jobs": "Job"
+    },
+    "prChecksPresentation": {
+      "noChecks": "Tidak ada pemeriksaan",
+      "failing_one": "{{count}} gagal",
+      "failing_other": "{{count}} gagal",
+      "pending_one": "{{count}} tertunda",
+      "pending_other": "{{count}} tertunda",
+      "passed_one": "{{count}} berlalu",
+      "passed_other": "{{count}} berlalu",
+      "neutral_one": "{{count}} netral",
+      "neutral_other": "{{count}} netral",
+      "unavailable": "Check tidak tersedia",
+      "stateOpen": "Buka",
+      "stateMerged": "Di-merge",
+      "stateDraft": "Draf",
+      "stateClosed": "Ditutup"
+    },
+    "prCommentAudienceLabels": {
+      "all": "Semua",
+      "humans": "Manusia",
+      "bots": "Bot",
+      "noBotComments": "Tidak ada komentar dari bot.",
+      "noHumanComments": "Tidak ada komentar dari manusia.",
+      "noComments": "Belum ada komentar."
+    }
+  },
+  "workspace": {
+    "branchChoice": {
+      "title": "Branch untuk worktree ini",
+      "existing": "Branch yang ada",
+      "existingHint": "Commit baru masuk ke branch ini.",
+      "new": "Branch baru",
+      "newHint": "Buat branch lokal baru",
+      "newName": "Nama branch baru",
+      "automaticName": "Nama otomatis",
+      "hostUpdateRequired": "Perbarui Prompt pada host ruang kerja untuk menggunakan kembali cabang atau secara eksplisit membuat cabang terpisah."
+    }
+  },
+  "browser": {
+    "addressField": {
+      "urlPlaceholder": "URL"
+    },
+    "pane": {
+      "invalidUrl": "Masukkan URL yang valid."
+    },
+    "paneView": {
+      "forward": "Maju",
+      "reload": "Muat ulang",
+      "dialogTitle": "Dialog Peramban",
+      "keyboardPlaceholder": "Ketik di halaman…",
+      "sendText": "Kirim teks ke browser"
+    },
+    "pointerModifiers": {
+      "clickModifier": "{{key}} klik pengubah"
+    },
+    "viewModeSwitch": {
+      "webView": "Tampilkan tampilan situs web",
+      "mobileView": "Tampilkan tampilan situs web seluler"
+    },
+    "useBrowserCommands": {
+      "sent": "Terkirim",
+      "deliveryUnconfirmed": "Pengiriman belum dikonfirmasi — periksa halaman sebelum mencoba lagi",
+      "dialogAnswerFailed": "Jawaban itu tidak sampai ke halaman."
+    }
+  },
+  "files": {
+    "fileExplorerPanel": {
+      "connecting": "Menyambungkan ke desktop...",
+      "waiting": "Menunggu desktop...",
+      "loadFailed": "Tidak dapat memuat file",
+      "loadInterrupted": "Pemuatan folder terhenti",
+      "closeFiles": "Tutup file",
+      "backToSession": "Kembali ke sesi",
+      "title": "File",
+      "truncatedList": "{{worktreeLabel}} - Menampilkan 5000 pertama",
+      "emptyState": "Tidak ada file yang ditemukan"
+    },
+    "fileMarkdownPreview": {
+      "viewSource": "Lihat sumber penurunan harga",
+      "viewPreview": "Lihat pratinjau penurunan harga yang dirender",
+      "copyLoadedSource": "Salin sumber penurunan harga yang dimuat",
+      "copySource": "Salin sumber penurunan harga"
+    },
+    "fileMediaPreview": {
+      "loadFailed": "Tidak dapat memuat media",
+      "waiting": "Menunggu desktop...",
+      "downloading": "Mengunduh {{bytes}} dari {{total}}",
+      "loading": "Memuat media..."
+    },
+    "filePreviewBody": {
+      "emptyFile": "File kosong",
+      "imageLabel": "{{title}} gambar"
+    },
+    "filePreviewEditableSource": {
+      "editorLabel": "{{title}} penyunting"
+    },
+    "filePreviewScreen": {
+      "loading": "Memuat pratinjau…",
+      "waiting": "Menunggu desktop...",
+      "loadFailed": "Tidak dapat memuat pratinjau",
+      "title": "Pratinjau",
+      "saveFailed": "Tidak dapat menyimpan file",
+      "backToFiles": "Kembali ke file",
+      "saveArtifact": "Simpan artefak terminal",
+      "fileTitle": "Mengajukan",
+      "openFailed": "Tidak dapat membuka berkas",
+      "chooseWorkspaceFile": "Pilih file di dalam ruang kerja ini.",
+      "discardTitle": "Buang perubahan?",
+      "discardMessage": "Hasil edit yang belum disimpan akan hilang.",
+      "discardMessageSaving": "Penyimpanan yang sedang berlangsung mungkin belum selesai. Hasil edit yang belum disimpan akan hilang.",
+      "discard": "Buang",
+      "stay": "Tinggal"
+    },
+    "filePreviewSourceText": {
+      "previewLabel": "Pratinjau berkas",
+      "truncatedNote": "Pratinjau terpotong. Ukuran berkas: {{size}}."
+    },
+    "markdownPreviewImage": {
+      "loadFailed": "Tidak dapat memuat gambar",
+      "expandImage": "Perluas {{alt}}",
+      "expandFallback": "Perbesar gambar",
+      "imageLabel": "Gambar penurunan harga"
+    },
+    "pdfPreview": {
+      "openFailed": "Tidak dapat membuka PDF ini",
+      "updateRequired": "Perbarui Prompt Seluler untuk membuka PDF",
+      "opening": "Membuka PDF...",
+      "open": "Buka PDF"
+    },
+    "fileExplorerRow": {
+      "loading": "Memuat…",
+      "loadFolderFailed": "Tidak dapat memuat folder",
+      "retryLoading": "Coba lagi memuat {{path}}",
+      "openFolder": "Buka folder {{name}}",
+      "fileUnavailable": "{{name}} tidak tersedia di seluler",
+      "previewFile": "Pratinjau berkas {{name}}",
+      "unavailable": "Tidak tersedia di seluler"
+    },
+    "fileMutationOwnership": {
+      "sshOwnerChanged": "Tidak dapat memverifikasi koneksi SSH. Hubungkan kembali host dan coba lagi."
+    },
+    "filePreviewResponse": {
+      "fileChanged": "File diubah di desktop. Muat ulang pratinjau sebelum menyimpan",
+      "binaryUnavailable": "Pratinjau biner tidak tersedia",
+      "fileTooLarge": "File terlalu besar untuk pratinjau seluler",
+      "reloadBeforeSaving": "Muat ulang pratinjau sebelum menyimpan",
+      "filesystemUnreachable": "Tidak dapat menjangkau sistem file desktop",
+      "fileNotFound": "Berkas tidak ditemukan",
+      "loadFailed": "Tidak dapat memuat pratinjau",
+      "unknownSize": "ukuran yang tidak diketahui",
+      "bytes": "{{size}} B",
+      "kilobytes": "{{size}} KB",
+      "megabytes": "{{size}} MB"
+    }
+  },
+  "session": {
+    "browserTabActionSheet": {
+      "title": "Peramban",
+      "forward": "Maju",
+      "reload": "Muat ulang"
+    },
+    "terminalLiveInputStatus": {
+      "listening": "Mendengarkan",
+      "processing": "Pemrosesan",
+      "startingMic": "Memulai mikrofon",
+      "liveInput": "Masukan langsung",
+      "uploadingImageTitle": "Mengunggah gambar",
+      "releaseMicHint": "Lepaskan mikrofon untuk berhenti",
+      "stopHint": "Ketuk mikrofon untuk berhenti",
+      "transcribing": "Mentranskripsikan di desktop",
+      "preparingMic": "Mempersiapkan mikrofon",
+      "uploadingImage": "Mengunggah gambar ke host"
+    },
+    "diffCommentLineRow": {
+      "diffLine": "{{title}} garis perbedaan {{line}}",
+      "addNote": "Tambahkan catatan pada baris {{line}}",
+      "line": "Garis {{line}}",
+      "deleteNote": "Hapus catatan pada baris {{line}}",
+      "placeholder": "Tambahkan catatan review",
+      "saveNote": "Simpan catatan"
+    },
+    "markdownReader": {
+      "readOnly": "Hanya baca",
+      "changedOnDesktop": "Berubah di desktop",
+      "dismissKeyboard": "Tutup papan ketik",
+      "dismissKeyboardHint": "Menyembunyikan keyboard perangkat lunak dan membiarkan editor penurunan harga tetap terbuka.",
+      "discard": "Buang",
+      "copyLoadedSource": "Salin sumber penurunan harga yang dimuat",
+      "copySource": "Salin sumber penurunan harga",
+      "copyLoaded": "Salinan dimuat",
+      "copyPathLabel": "Salin jalur penurunan harga",
+      "copyPath": "Salin path"
+    },
+    "nativeChatCardHeaderAction": {
+      "collapse": "Ciutkan"
+    },
+    "nativeChatFloatingControls": {
+      "scrollToLatest": "Gulir ke yang terbaru"
+    },
+    "nativeChatFullContent": {
+      "partialOutput": "Menampilkan {{shown}} dari {{total}}.",
+      "showFullOutput": "Tampilkan output lengkap",
+      "loadOutputFailed": "Tampilkan keluaran lengkap — tidak dapat memuat, ketuk untuk mencoba lagi",
+      "partialMessage": "Menampilkan bagian dari pesan ini.",
+      "showFullMessage": "Tampilkan pesan lengkap",
+      "loadMessageFailed": "Tampilkan pesan lengkap — tidak dapat dimuat, ketuk untuk mencoba lagi"
+    },
+    "queuedCardText": {
+      "showLessHint": "Menampilkan lebih sedikit pesan",
+      "showMoreHint": "Menampilkan keseluruhan pesan",
+      "showLess": "Tampilkan lebih sedikit",
+      "showMore": "Tampilkan lebih banyak"
+    },
+    "queuedMessageCardRow": {
+      "images_one": "{{count}} gambar",
+      "images_other": "{{count}} gambar",
+      "sendAgainHint": "Kirim pesan ini lagi",
+      "steerHint": "Kirim tanpa menginterupsi model",
+      "sendHint": "Kirim pesan ini",
+      "steer": "Arahkan",
+      "send": "Kirim",
+      "deleteHint": "Hapus pesan antrean ini",
+      "moreActions": "Aksi lainnya",
+      "showLessHint": "Menampilkan lebih sedikit pesan"
+    },
+    "queuedMessageComposer": {
+      "commandsNotAllowed": "Perintah tidak dapat disimpan dalam pesan yang diantrekan.",
+      "editingAttributed": "Mengedit pesan · {{attribution}}",
+      "editing": "Mengedit pesan"
+    },
+    "accessoryKeys": {
+      "dismissKeyboard": "Tutup papan ketik",
+      "dismissKeyboardHint": "Menyembunyikan keyboard perangkat lunak dan menjaga sesi terminal saat ini tetap terbuka.",
+      "switchToDesktopMode": "Beralih ke mode desktop",
+      "switchToPhoneMode": "Beralih ke mode ponsel",
+      "switchToBufferedInput": "Beralih ke input perintah buffer",
+      "switchToLiveInput": "Beralih ke input terminal langsung",
+      "pasteFromClipboard": "Tempel dari papan klip",
+      "paste": "Tempel",
+      "sendKey": "Kirim {{label}}",
+      "addCustomShortcut": "Tambahkan pintasan khusus"
+    },
+    "activeContent": {
+      "noTabs": "Tidak ada tab di sesi ini",
+      "creatingTab": "Membuat…",
+      "createTab": "Buat Tab",
+      "fileTitle": "Mengajukan",
+      "terminalTakingLonger": "Terminal memerlukan waktu lebih lama dari perkiraan",
+      "loadingTerminal": "Memuat terminal",
+      "retryLoadingTerminal": "Coba lagi memuat terminal"
+    },
+    "commandDock": {
+      "liveInputLabel": "Masukan terminal langsung",
+      "liveInputHint": "Teks yang diketik dikirim langsung ke terminal aktif",
+      "commandPlaceholder": "Ketik perintah…",
+      "sendCommand": "Kirim perintah"
+    },
+    "contentRow": {
+      "dismissCreationWarning": "Abaikan peringatan pembuatan ruang kerja"
+    },
+    "diffLineRow": {
+      "diffLineLabel": "{{title}} garis perbedaan {{line}}",
+      "addNoteLabel": "Tambahkan catatan pada baris {{line}}",
+      "lineNumber": "Garis {{line}}",
+      "deleteNoteLabel": "Hapus catatan pada baris {{line}}",
+      "notePlaceholder": "Tambahkan catatan review",
+      "saveNote": "Simpan catatan"
+    },
+    "fileReader": {
+      "noReviewNotes": "Tidak ada catatan ulasan",
+      "reviewNotes_one": "{{count}} catatan ulasan",
+      "reviewNotes_other": "{{count}} catatan ulasan",
+      "copyReviewNotes": "Salin catatan ulasan",
+      "sendReviewNotes": "Kirim catatan ulasan ke AI",
+      "send": "Kirim",
+      "imageLabel": "{{title}} gambar",
+      "previewLabel": "{{title}} pratinjau"
+    },
+    "header": {
+      "showSidebar": "Tampilkan bilah sisi",
+      "backToWorktrees": "Kembali ke pohon kerja",
+      "terminalTitle": "Terminal",
+      "reconnectToDesktop": "Sambungkan kembali ke desktop",
+      "openFileExplorer": "Buka penjelajah file",
+      "openSourceControl": "Kontrol sumber terbuka",
+      "moreActions": "Tindakan sesi lainnya"
+    },
+    "headerMoreActionsSheet": {
+      "agentHistory": "Sejarah Agen",
+      "agentHistoryHint": "Telusuri dan lanjutkan sesi agen",
+      "checks": "Check",
+      "checksHint": "Buka pemeriksaan permintaan tarik"
+    },
+    "routeScreen": {
+      "openingWorkspace": "Membuka ruang kerja"
+    },
+    "sheets": {
+      "newTab": "Tab baru",
+      "terminal": "Terminal",
+      "browser": "Peramban",
+      "browserUpdateRequired": "Pembaruan desktop diperlukan untuk streaming browser seluler",
+      "markdownNote": "Catatan Penurunan Harga",
+      "sendReviewNotes": "Kirim Catatan Tinjauan",
+      "notesHint": "Pilih sesi agen untuk catatan saat ini.",
+      "copyNotes": "Salin Catatan",
+      "notesCopied": "Catatan disalin",
+      "copyNotesFailed": "Tidak dapat menyalin catatan",
+      "markdown": "Markdown",
+      "copyPath": "Salin path",
+      "file": "Mengajukan",
+      "chat": "Obrolan",
+      "unsavedMarkdown": "Perubahan penurunan harga yang belum disimpan",
+      "draftsHint": "Salin atau buang draft telepon sebelum berangkat.",
+      "copyAllAndLeave": "Salin Semua & Tinggalkan",
+      "copyDraftsFailed": "Tidak dapat menyalin draf",
+      "discardAndLeave": "Buang & Tinggalkan",
+      "discardChanges": "Buang Perubahan",
+      "discardMessage": "Ganti draf ponsel dengan file desktop terbaru?",
+      "discard": "Buang",
+      "newBrowser": "Browser baru",
+      "urlPrompt": "Masukkan URL, atau biarkan kosong untuk tab baru.",
+      "shortcut": "Jalan pintas",
+      "removeShortcutMessage": "Hapus pintasan khusus ini?",
+      "renameTerminal": "Ganti nama Terminal",
+      "terminalName": "Nama terminal"
+    },
+    "tabStrip": {
+      "tabStatus": "{{title}}, {{status}}",
+      "newTab": "Tab baru",
+      "quickCommandsUpdateRequired": "Pembaruan desktop diperlukan untuk perintah cepat",
+      "checkingCapabilities": "Memeriksa kemampuan desktop — coba lagi sebentar lagi"
+    },
+    "terminalInputActions": {
+      "sendingImage": "Mengirim gambar",
+      "attachPhoto": "Lampirkan foto",
+      "attachFileHint": "Tekan lama untuk melampirkan file",
+      "stopDictation": "Hentikan dikte suara",
+      "transcribingDictation": "Mentranskripsikan dikte suara",
+      "startingDictation": "Memulai dikte suara",
+      "startDictation": "Mulai dikte suara"
+    },
+    "quickCommandEditorForm": {
+      "terminalCommand": "Perintah terminal",
+      "agentPrompt": "Prompt agen",
+      "label": "Label",
+      "labelPlaceholder": "Mulai server dev",
+      "action": "Aksi",
+      "agent": "Agen",
+      "chooseAgent": "Pilih agen",
+      "prompt": "Prompt",
+      "commandText": "Teks Perintah",
+      "promptPlaceholder": "Minta agen menyelidiki workspace ini",
+      "olderHostPromptTooLong": "Terlalu lama untuk tuan rumah ini. Perbarui Prompt pada host untuk menyimpan perintah yang lebih panjang.",
+      "promptTooLong": "Terlalu panjang untuk disimpan.",
+      "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
+      "promptSizeCharacters": "{{used}} / {{max}} karakter",
+      "promptHint": "Mendukung keterampilan, jalur file, dan perintah bawaan.",
+      "advanced": "Lanjutan",
+      "appendEnter": "Tambah Enter",
+      "appendEnterDescription": "Kirim langsung, bukan hanya menyisipkan teks.",
+      "scope": "Cakupan",
+      "globalScope": "Global",
+      "projectScope": "Proyek",
+      "addQuickCommand": "Tambah perintah cepat"
+    },
+    "quickCommandRow": {
+      "copyFailed": "Tidak dapat menyalin",
+      "copyCommand": "Salin {{label}}",
+      "nothingToCopy": "Tidak ada yang dapat disalin",
+      "runCommand": "Jalankan {{label}}",
+      "editCommand": "Sunting {{label}}",
+      "deleteCommand": "Hapus {{label}}"
+    },
+    "quickCommandsList": {
+      "searchPlaceholder": "Cari perintah cepat…",
+      "emptyState": "Belum ada perintah cepat.",
+      "noMatches": "Tidak ada perintah cepat yang cocok.",
+      "projectGroup": "Proyek ini",
+      "globalGroup": "Global",
+      "newCommand": "Perintah cepat baru"
+    },
+    "quickCommandsSheet": {
+      "deleteConfirmTitle": "Hapus \"{{label}}\"?",
+      "untitled": "Tanpa judul",
+      "deleteConfirmMessage": "Perintah cepat ini akan dihapus dari daftar tersimpan.",
+      "editTitle": "Edit perintah cepat",
+      "addTitle": "Tambah perintah cepat",
+      "chooseAgentTitle": "Pilih Agen",
+      "title": "Perintah cepat",
+      "editorDescription": "Simpan perintah terminal atau perintah agen untuk akses cepat."
+    },
+    "quickCommandsTabButton": {
+      "quickCommands": "Perintah cepat"
+    },
+    "aiVaultResumeLaunch": {
+      "createFailed": "Gagal membuat terminal",
+      "sendFailed": "Gagal mengirim perintah resume",
+      "inputLocked": "Masukan terminal terkunci"
+    },
+    "aiVaultResumePreparation": {
+      "prepareFailed": "Tidak dapat menyiapkan sesi Codex lama ini. Coba lanjutkan lagi."
+    },
+    "floatingWorkspace": {
+      "title": "Workspace mengambang"
+    },
+    "githubPrMutations": {
+      "titleUpdateFailed": "Gagal memperbarui judul.",
+      "reviewThreadUpdateFailed": "Gagal memperbarui rangkaian ulasan."
+    },
+    "githubPrRpc": {
+      "requestFailed": "Permintaan gagal: {{method}}"
+    },
+    "agentChildRow": {
+      "noRecentUpdate": "Tidak ada pembaruan terbaru",
+      "ended": "Berakhir",
+      "minutes_one": "{{count}} mnt",
+      "minutes_other": "{{count}} mnt",
+      "hours_one": "{{count}} j",
+      "hours_other": "{{count}} j",
+      "days_one": "{{count}} h",
+      "days_other": "{{count}} h",
+      "noUpdate": "Tidak ada pembaruan di {{value0}}",
+      "agent": "Agen"
+    },
+    "agentMessageAttribution": {
+      "messageFromUnnamed": "Pesan dari agen",
+      "fromUnnamed": "Dari agen",
+      "unnamedSender": "agen",
+      "messageFromMore": "Pesan dari {{sender}} +{{count}}",
+      "fromMore": "Dari {{sender}} +{{count}}",
+      "messageFrom": "Pesan dari {{sender}}",
+      "from": "Dari {{sender}}"
+    },
+    "backgroundTask": {
+      "monitoring": "Memantau tugas latar belakang",
+      "stop": "Berhenti",
+      "stopTask": "Hentikan {{value0}}",
+      "stopAll": "Hentikan tugas latar belakang",
+      "agent": "Agen latar belakang",
+      "workflow": "Workflow latar belakang",
+      "command": "Perintah latar belakang",
+      "monitor": "Monitor latar belakang",
+      "task": "Tugas latar belakang",
+      "detailsUnavailable": "Detail tugas tidak tersedia untuk sesi ini.",
+      "countAgents_one": "{{count}} agen",
+      "countAgents_other": "{{count}} agen",
+      "countShell_one": "{{count}} cangkang",
+      "countShell_other": "{{count}} shell",
+      "countShellCommandOne": "1 perintah shell",
+      "countMonitors_one": "{{count}} memantau",
+      "countMonitors_other": "{{count}} monitor",
+      "countWorkflows_one": "{{count}} alur kerja",
+      "countWorkflows_other": "{{count}} workflow",
+      "countTasks_one": "{{count}} tugas",
+      "countTasks_other": "{{count}} tugas",
+      "headerTotalCount_one": "{{count}} tugas latar belakang",
+      "headerTotalCount_other": "{{count}} tugas latar belakang",
+      "stateWorking": "bekerja",
+      "stateMonitoring": "memantau",
+      "stateWaiting": "menunggu",
+      "stateBlocked": "terblokir",
+      "stateDone": "selesai",
+      "stateIdle": "dihentikan",
+      "stateUnverifiable": "status tidak tersedia",
+      "reasonWaiting": "perlu persetujuan",
+      "reasonBlocked": "gagal",
+      "groupAgents": "Agen",
+      "groupShell": "cangkang",
+      "groupMonitors": "Monitor",
+      "groupWorkflows": "Alur kerja",
+      "groupTasks": "Tugas",
+      "stateWorkingCount_one": "{{value0}} bekerja",
+      "stateWorkingCount_other": "{{value0}} bekerja",
+      "stateMonitoringCount_one": "{{value0}} memantau",
+      "stateMonitoringCount_other": "{{value0}} memantau",
+      "stateWaitingCount_one": "{{value0}} menunggu",
+      "stateWaitingCount_other": "{{value0}} menunggu",
+      "stateBlockedCount_one": "{{value0}} terblokir",
+      "stateBlockedCount_other": "{{value0}} terblokir",
+      "stateDoneCount_one": "{{value0}} selesai",
+      "stateDoneCount_other": "{{value0}} selesai",
+      "stateIdleCount_one": "{{value0}} dihentikan",
+      "stateIdleCount_other": "{{value0}} dihentikan",
+      "stateUnverifiableCount_one": "{{value0}} dengan status tidak tersedia",
+      "stateUnverifiableCount_other": "{{value0}} dengan status tidak tersedia"
+    },
+    "bulkCloseSheetActions": {
+      "closeOtherTabs": "Tutup Tab Lainnya"
+    },
+    "bulkTabClose": {
+      "titleOthers": "Tutup tab lainnya?",
+      "titleRight": "Tutup tab di sebelah kanan?",
+      "titleLeft": "Tutup tab di sebelah kiri?",
+      "titleEditors": "Tutup semua tab editor?",
+      "description": "Tab yang dipilih akan ditutup. Tab yang disematkan tetap terbuka.",
+      "confirm": "Tutup tab"
+    },
+    "diffReviewLoaders": {
+      "committedChangesUnavailable": "Perubahan yang dilakukan tidak tersedia",
+      "committedChangesFailed": "Perubahan yang dilakukan gagal",
+      "desktopUpdateRequired": "Perbarui Prompt desktop untuk meninjau perubahan di seluler.",
+      "changesLoadFailed": "Tidak dapat memuat perubahan",
+      "invalidSourceControlResponse": "Respons kontrol sumber tidak valid",
+      "reviewNotesLoadFailed": "Tidak dapat memuat catatan ulasan",
+      "diffLoadFailed": "Tidak dapat memuat perbedaan",
+      "committedDiffUnavailable": "Perbedaan yang dilakukan tidak tersedia"
+    },
+    "diffReviewQueue": {
+      "staged": "Dipentaskan",
+      "unstaged": "Tidak dipentaskan",
+      "committedOnBranch": "Berkomitmen pada cabang"
+    },
+    "diffReviewScreenModel": {
+      "branch": "Cabang",
+      "staged": "Dipentaskan",
+      "unstaged": "Tidak dipentaskan"
+    },
+    "nativeChatAttachActions": {
+      "photos": "Foto",
+      "files": "File",
+      "fileTypes": "PDF, teks, kode…",
+      "workspaceFile": "File workspace",
+      "skills": "Skill",
+      "availableSkills": "{{count}} tersedia",
+      "commands": "Perintah"
+    },
+    "nativeChatCliFork": {
+      "resumeInNewCli": "Lanjutkan di CLI Baru"
+    },
+    "nativeChatRenderData": {
+      "notFoundTitle": "Belum dapat menemukan percakapan ini",
+      "notFoundSubtitle": "Kirim pesan untuk memulainya, atau buka tampilan terminal untuk melihat apa yang {{agent}} lakukan.",
+      "emptyTitle": "Mulai obrolan dengan {{agent}}",
+      "emptySubtitle": "Minta {{agent}} untuk memeriksa kode, menjelaskan keluaran, atau membuat perubahan.",
+      "errorTitle": "Tidak dapat memuat percakapan",
+      "errorSubtitle": "Transkrip tidak dapat dibaca. Alihkan kembali ke terminal untuk melanjutkan pekerjaan.",
+      "defaultAgentLabel": "agen"
+    },
+    "nativeChatToggleAction": {
+      "switchToTerminalView": "Beralih ke tampilan terminal",
+      "switchToChatView": "Beralih ke tampilan obrolan"
+    },
+    "prSidebarState": {
+      "loadFailed": "Tidak dapat memuat permintaan penarikan"
+    },
+    "useNativeChatDictation": {
+      "insertFailedCopied": "Tidak dapat menyisipkan dikte, sehingga disalin ke papan klip",
+      "insertFailed": "Tidak dapat menyisipkan dikte",
+      "inserted": "Dikte dimasukkan",
+      "stoppedAfterSilence": "Berhenti setelah satu menit hening"
+    },
+    "quickCommandLaunch": {
+      "editBeforeRunning": "Edit perintah cepat ini sebelum menjalankannya",
+      "defaultLabel": "Perintah cepat",
+      "runFailed": "Tidak dapat berjalan {{label}}"
+    },
+    "routeHelpers": {
+      "connecting": "Menghubungkan",
+      "securing": "Mengamankan",
+      "connected": "Terhubung",
+      "disconnected": "Terputus",
+      "reconnecting": "Menyambungkan ulang",
+      "pairingInvalid": "Penyandingan tidak valid"
+    },
+    "useTerminalCreateActions": {
+      "forkUnavailable": "Buka obrolan {{agentName}} pada host yang terhubung dan diperbarui, lalu coba lagi.",
+      "forkBusy": "Terminal lain sedang dibuka. Tunggu, lalu coba lagi obrolan {{agentName}}.",
+      "createFailed": "Gagal membuat terminal",
+      "terminalTitle": "Terminal",
+      "sendNotesFailed": "Gagal mengirim catatan",
+      "inputLocked": "Input terminal dikunci oleh klien lain.",
+      "notesSent": "Catatan terkirim",
+      "sendNotesError": "Tidak dapat mengirim catatan"
+    },
+    "sourceControlLaunchAgent": {
+      "savedAgentUnavailable": "Agen yang disimpan untuk tindakan ini tidak tersedia di host ruang kerja ini.",
+      "noEnabledAgent": "Tidak ada agen AI aktif yang terdeteksi di host workspace ini."
+    },
+    "structuredComposerCommand": {
+      "removeAttachments": "Hapus lampiran sebelum menggunakan perintah sesi chat.",
+      "operationUnconfirmed": "Operasi percakapan tidak dikonfirmasi."
+    },
+    "structuredSendDelivery": {
+      "messageNotSent": "Pesan tidak terkirim"
+    },
+    "terminalActionSheetActions": {
+      "switchToDesktop": "Beralih ke Desktop",
+      "switchToPhone": "Beralih ke Telepon",
+      "rename": "Ganti nama",
+      "clearTerminal": "Hapus Terminal"
+    },
+    "terminalRecords": {
+      "defaultTitle": "Terminal"
+    },
+    "presentation": {
+      "loadingTabs": "Memuat tab",
+      "tabs_one": "{{count}} tab",
+      "tabs_other": "{{count}} tab"
+    },
+    "terminalTabAgent": {
+      "terminalNumber": "Terminal {{number}}",
+      "newBrowser": "Browser baru",
+      "browser": "Peramban",
+      "markdown": "Markdown",
+      "file": "Mengajukan",
+      "chat": "Obrolan",
+      "terminal": "Terminal"
+    },
+    "terminalViewportResubscribe": {
+      "fitFailed": "Tidak dapat memuat terminal ke layar ini"
+    },
+    "newTabAgentHostLaunch": {
+      "notesUnconfirmed": "Agen memulai, tetapi tidak dapat memastikan bahwa catatan telah dikirim.",
+      "promptUnconfirmed": "Agen memulai, tetapi tidak dapat mengonfirmasi bahwa perintah telah dikirim.",
+      "notesNotSent": "Agen memulai, tetapi catatan tidak terkirim.",
+      "notesSent": "Catatan terkirim"
+    },
+    "prActionsEngine": {
+      "refreshFailed": "Gagal menyegarkan permintaan penarikan.",
+      "mergeFailed": "Gagal menggabungkan permintaan penarikan."
+    },
+    "prAiTriageLaunch": {
+      "promptNotSent": "Agen memulai, tetapi perintahnya tidak terkirim.",
+      "updateRequired": "Perbarui Prompt di komputer Anda untuk memulai agen dari ponsel Anda.",
+      "loadFailed": "Tidak dapat memuat agen yang tersedia.",
+      "emptyPrompt": "Perintah tersimpan tindakan ini kosong. Perbarui pengaturan AI Kontrol Sumber di komputer Anda.",
+      "agentStartedIn": "Agen dimulai pada {{label}}",
+      "agentStarted": "Agen dimulai"
+    },
+    "sideRail": {
+      "backToWorktrees": "Kembali ke pohon kerja"
+    },
+    "useAttachmentInputLeaseGate": {
+      "reconnecting": "Gagal melampirkan (menyambungkan kembali)"
+    },
+    "useDiffReviewCommentActions": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "saveStateFailed": "Gagal menyimpan status peninjauan",
+      "saveFailed": "Gagal menyimpan ulasan"
+    },
+    "useDiffReviewController": {
+      "missingWorktree": "Pohon kerja tidak ada",
+      "waitingForDesktop": "Menunggu desktop...",
+      "loadFailed": "Tidak dapat memuat ulasan"
+    },
+    "useDiffReviewDiffLoading": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "loadFailed": "Tidak dapat memuat perbedaan"
+    },
+    "useDiffReviewGitActions": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "actionFailed": "Tindakan kontrol sumber gagal",
+      "stageResults": "{{staged}} dipentaskan, {{failed}} gagal",
+      "reviewedFilesStaged_one": "{{count}} file yang ditinjau dipentaskan",
+      "reviewedFilesStaged_other": "{{count}} file yang ditinjau dipentaskan"
+    },
+    "useDiffReviewInteractions": {
+      "openFailed": "Tidak dapat membuka sesi"
+    },
+    "useDiffReviewSendActions": {
+      "copyFailed": "Tidak dapat menyalin catatan ulasan",
+      "notesCopied": "Catatan ulasan disalin",
+      "waitingForDesktop": "Menunggu desktop...",
+      "sendFailed": "Gagal mengirim catatan",
+      "inputLocked": "Masukan terminal terkunci",
+      "notesSent": "Catatan ulasan dikirim",
+      "startingAgent": "Memulai agen...",
+      "promptNotSent": "Agen memulai, tetapi catatan tidak terkirim. Gunakan Salin Catatan untuk menempelkannya.",
+      "notesSentWithWarning": "Catatan ulasan dikirim. {{warning}}",
+      "loadSessionsFailed": "Tidak dapat memuat sesi agen"
+    },
+    "useImageAttachment": {
+      "disconnected": "Gagal melampirkan (terputus)",
+      "permissionDenied": "Izin foto ditolak",
+      "imageTooLarge": "Gambar terlalu besar untuk dilampirkan",
+      "attachFailed": "Gagal melampirkan"
+    },
+    "useNativeChatStop": {
+      "terminalNotReady": "Berhenti tidak terkirim (terminal belum siap)",
+      "stopUnconfirmed": "Berhenti belum dikonfirmasi — periksa obrolan sebelum mencoba lagi",
+      "stopNotSent": "Berhenti tidak dikirim"
+    },
+    "usePrAiTriage": {
+      "waitingForDesktop": "Menunggu desktop…",
+      "launchFailed": "Gagal meluncurkan agen"
+    },
+    "usePrCommentActions": {
+      "actionFailed": "Tindakan komentar gagal"
+    },
+    "usePrTitleAction": {
+      "disconnected": "Tidak terhubung ke desktop.",
+      "updateFailed": "Gagal memperbarui judul."
+    },
+    "useAccessorySelection": {
+      "copyFailed": "Tidak dapat menyalin",
+      "selectionCleared": "Pilihan dihapus (digulir keluar dari buffer)"
+    },
+    "useContentCreateActions": {
+      "noteCreateFailed": "Gagal membuat catatan penurunan harga",
+      "untitledNoteCreateFailed": "Tidak dapat membuat catatan penurunan harga tanpa judul",
+      "browserUpdateRequired": "Pembaruan desktop diperlukan untuk streaming browser seluler",
+      "invalidUrl": "Masukkan URL yang valid",
+      "browserCreateFailed": "Gagal membuat peramban",
+      "browserUnavailable": "Halaman browser belum tersedia.",
+      "browserCommandFailed": "Perintah browser gagal"
+    },
+    "useDiffComments": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "saveNotesFailed": "Gagal menyimpan catatan ulasan",
+      "noteAdded": "Catatan ditambahkan",
+      "saveNoteFailed": "Gagal menyimpan catatan",
+      "deleteNoteFailed": "Gagal menghapus catatan",
+      "notesCopied": "Catatan disalin",
+      "copyNotesFailed": "Tidak dapat menyalin catatan"
+    },
+    "useMarkdownActions": {
+      "copyFailed": "Tidak dapat menyalin",
+      "pathCopied": "Path disalin",
+      "copyPathFailed": "Tidak dapat menyalin jalur",
+      "markdownTitle": "Markdown",
+      "saved": "Tersimpan",
+      "saveFailed": "Gagal menyimpan"
+    },
+    "usePanelRouteActions": {
+      "otherServerAgents": "Agen di Server Lain",
+      "pairServerHint": "Pasangkan server itu secara langsung",
+      "detectingAgents": "Mendeteksi Agen",
+      "noEnabledAgents": "Tidak Ada Agen yang Diaktifkan",
+      "presetsUnavailable": "Preset Agen Tidak Tersedia",
+      "checkHostHint": "Periksa koneksi host",
+      "newSessionHint": "Sesi agen baru",
+      "copyNotesHint": "Salin catatan saja"
+    },
+    "useStartup": {
+      "wakeAgents": "Buka Prompt pada host untuk membangunkan agen tidur."
+    },
+    "useTerminalInput": {
+      "clearFailed": "Tidak dapat menghapus terminal",
+      "cleared": "Terminal dibersihkan"
+    },
+    "useSessionTerminalSendActions": {
+      "inputTooLarge": "Masukan terlalu besar (maks 256 KiB)",
+      "liveInputInterrupted": "Masukan langsung terputus. Lapangan dibersihkan; periksa terminal sebelum melanjutkan."
+    },
+    "useTerminalPaste": {
+      "clipboardReadFailed": "Tidak dapat membaca papan klip",
+      "pasteTooLarge": "Tempel terlalu besar (maks 256 KiB)",
+      "disconnected": "Gagal menempel (terputus)",
+      "terminalChanged": "Tempel dibatalkan (terminal diubah)",
+      "pasteFailed": "Gagal menempel",
+      "imageTooLarge": "Gambar terlalu besar untuk ditempel"
+    },
+    "useQuickCommands": {
+      "loadFailed": "Gagal memuat perintah cepat",
+      "saveFailed": "Gagal menyimpan perintah cepat"
+    },
+    "worktreeLabel": {
+      "fallback": "pohon kerja"
+    },
+    "failure": {
+      "backgroundTasksRunning": "Tugas latar belakang masih berjalan.",
+      "waitForBackgroundTasks": "Tunggu hingga tugas latar belakang selesai.",
+      "agentStarting": "Agen masih dimulai.",
+      "waitForStart": "Tunggu hingga agen selesai dimulai.",
+      "agentStillWorking": "Agen masih bekerja.",
+      "runCommandWhenDone": "Jalankan /{{command}} setelah selesai.",
+      "commandAfterAnswer": "Jawab pertanyaan atau permintaan persetujuan dari agen, lalu jalankan /{{command}}.",
+      "compactionFailed": "Compaction gagal.",
+      "compactionFailedQuoted": "Compaction gagal: {{detail}}.",
+      "compactionUnconfirmed": "Penyelesaian compaction belum dikonfirmasi.",
+      "cancelUnconfirmed": "Pembatalan belum dikonfirmasi.",
+      "stopRefused": "{{agent}} tidak berhenti.",
+      "stopRefusedQuoted": "{{agent}} tidak berhenti: {{detail}}.",
+      "couldNotStop": "Tidak dapat menghentikan {{agent}}.",
+      "couldNotStopTheAgent": "Tidak dapat menghentikan agen.",
+      "noTurnToStop": "{{agent}} tidak memiliki giliran yang sedang berjalan untuk dihentikan.",
+      "backgroundTaskNotStopped": "Tugas latar belakang tidak dihentikan.",
+      "backgroundTasksNotStopped": "Tugas latar belakang tidak dihentikan.",
+      "answerUnconfirmed": "Jawaban Anda telah dicatat, tetapi agen tidak mengonfirmasinya.",
+      "hostFault": "Prompt mengalami masalah, jadi ini tidak berhasil.",
+      "hostFaultTryAgain": "Prompt mengalami masalah, jadi ini tidak berhasil. Coba lagi.",
+      "hostStopped": "{{agent}} tidak pernah selesai memulai, jadi Prompt menghentikannya.",
+      "providerRateLimited": "{{agent}} terkena rate limit dan mencoba lagi.",
+      "providerRetrying": "{{agent}} mengalami masalah sementara dan mencoba lagi.",
+      "providerRetryingQuoted": "{{agent}} mencoba lagi: {{detail}}.",
+      "providerRetryNumber": "Percobaan ulang {{attempt}}.",
+      "providerRetryNumberOf": "Percobaan ulang {{attempt}} dari {{maxRetries}}.",
+      "providerRetryLastError": "Galat terakhir: {{detail}}.",
+      "usageLimitReached": "{{agent}} mencapai batas penggunaan.",
+      "usageLimitReachedNamed": "{{agent}} mencapai batas {{window}}.",
+      "usageLimitWindowSession": "sesi",
+      "usageLimitWindowWeekly": "mingguan",
+      "usageLimitWindowWeeklyModel": "model mingguan",
+      "usageLimitWindowCredits": "penggunaan tambahan",
+      "usageLimitResetsAt": "Batas direset pada {{when}}.",
+      "usageLimitSendAfterReset": "Kirim pesan setelah direset untuk melanjutkan.",
+      "previousExitUnverifiable": "Tidak dapat menghentikan {{agent}} yang berjalan sebelumnya.",
+      "sessionNotRestored": "{{agent}} tidak dapat membuka kembali sesi sebelumnya, sehingga chat ini dilanjutkan di sesi baru. {{agent}} tidak mengingat pesan-pesan sebelumnya.",
+      "providerExitedRow": "{{agent}} berhenti saat respons ini sedang berlangsung. Percakapan ini dapat dilanjutkan.",
+      "providerExitedRejection": "{{agent}} berhenti sebelum pesan ini terkirim.",
+      "providerExitedAnswer": "{{agent}} telah berhenti, sehingga jawaban tidak terkirim. Kirim pesan untuk melanjutkan.",
+      "claudeEffortInvalid": "Effort Claude tidak valid; pilih low, medium, high, xhigh, atau max, lalu kirim lagi.",
+      "modelUnavailable": "{{agent}} tidak dapat menggunakan {{detail}}. Pilih model lain, lalu kirim lagi.",
+      "providerRejected": "{{agent}} tidak menerima pesan ini.",
+      "providerRejectedQuoted": "{{agent}} tidak menerima pesan ini: {{detail}}.",
+      "attachmentEmpty": "Gambar pada pesan ini kosong, sehingga pesan tidak terkirim.",
+      "attachmentTooLarge": "Satu gambar pada pesan ini terlalu besar, sehingga pesan tidak dikirim.",
+      "attachmentLargerThan": "Satu gambar pada pesan ini lebih besar dari {{size}} MB, sehingga pesan tidak dikirim.",
+      "attachmentTooMany": "Pesan ini memiliki terlalu banyak gambar, sehingga tidak dikirim.",
+      "attachmentAtMost": "{{agent}} hanya menerima maksimal {{limit}} gambar dalam satu pesan, sehingga pesan ini tidak dikirim.",
+      "attachmentTotalTooLarge": "Ukuran gabungan gambar pada pesan ini terlalu besar, sehingga pesan tidak dikirim.",
+      "attachmentTotalMoreThan": "Total ukuran gambar pada pesan ini melebihi {{size}} MB, sehingga pesan tidak dikirim.",
+      "attachmentUnsupportedType": "{{agent}} hanya menerima gambar PNG, JPEG, GIF, dan WebP, sehingga pesan ini tidak dikirim.",
+      "attachmentNotAFile": "Satu gambar pada pesan ini bukan berupa file, sehingga pesan tidak dikirim.",
+      "attachmentNoSource": "Satu gambar pada pesan ini tidak memiliki file untuk dikirim, sehingga pesan tidak dikirim.",
+      "attachmentInvalid": "Satu lampiran pada pesan ini tidak dapat dikirim ke agen.",
+      "attachmentUnreadable": "Satu lampiran pada pesan ini tidak dapat dibaca, sehingga pesan tidak dikirim.",
+      "emptyMessage": "Pesan ini kosong, sehingga tidak dikirim.",
+      "commandUnavailable": "Perintah ini tidak tersedia di chat {{agent}}, sehingga tidak dikirim.",
+      "queueFull": "Terlalu banyak pesan yang menunggu agen, sehingga pesan ini tidak dikirim.",
+      "writeFailed": "Prompt tidak dapat menyerahkan pesan ini kepada agen, sehingga tidak terkirim.",
+      "cancelled": "Pesan ini ditarik sebelum agen memulainya.",
+      "chatClosed": "Chat ditutup sebelum pesan ini terkirim.",
+      "hostRestarted": "Prompt dimulai ulang sebelum pesan ini dikirim.",
+      "notDelivered": "Pesan ini tidak terkirim.",
+      "notDeliveredSendAgain": "Pesan ini tidak terkirim. Kirim ulang untuk melanjutkan.",
+      "commandRefused": "Perintah ini tidak dijalankan.",
+      "commandRefusedTryAgain": "Perintah ini tidak dijalankan. Coba lagi.",
+      "theAgent": "Agen",
+      "providerStartFailed": "{{agent}} berhenti sebelum selesai dimulai.",
+      "runCommandAgain": "Jalankan /{{command}} lagi.",
+      "sendToTryAgain": "Kirim pesan untuk mencoba lagi.",
+      "sendAgainToTryOnceMore": "Kirim pesan sekali lagi untuk mencoba lagi.",
+      "couldNotStart": "{{agent}} tidak dapat dimulai.",
+      "couldNotRestart": "{{agent}} tidak dapat dimulai ulang.",
+      "cliTooOld": "{{agent}} {{installedVersion}} terlalu lama untuk chat. Perbarui ke {{minimumVersion}} atau yang lebih baru.",
+      "startTimedOut": "{{agent}} terlalu lama untuk dimulai (tidak ada respons terhadap {{method}} setelah {{seconds}} dtk).",
+      "startTimedOutKeepsHappening": "Jika ini terus terjadi, komputer yang menjalankan chat ini mungkin kelebihan beban.",
+      "argumentsUnsupportedOption": "Argumen tersimpan berisi opsi yang tidak didukung ({{option}}).",
+      "argumentsMissingValue": "Argumen tersimpan memerlukan nilai untuk {{option}}.",
+      "argumentsMultipleValues": "Argumen tersimpan memberi {{option}} lebih dari satu nilai.",
+      "argumentsPositionalPrompt": "Argumen tersimpan menyertakan prompt.",
+      "editSavedArguments": "Ubah di Pengaturan > Agen > Argumen.",
+      "terminalAgentHoldsChat": "Chat ini masih terbuka di agen terminal.",
+      "quitTerminalAgent": "Keluar dari agen tersebut untuk melanjutkan chat di sini.",
+      "startNewChat": "Mulai chat baru untuk melanjutkan.",
+      "notSignedIn": "{{agent}} belum masuk.",
+      "claudeSystemNotSignedIn": "Claude belum masuk. Jalankan `{{loginCommand}}`, atau pilih akun di pengaturan Akun Claude.",
+      "claudeManagedNotSignedIn": "Akun Claude ini belum masuk. Masuk lagi di pengaturan Akun Claude.",
+      "codexSystemNotSignedIn": "Codex belum masuk. Jalankan `{{loginCommand}}`.",
+      "codexManagedNotSignedIn": "Akun Codex ini belum masuk. Masuk lagi di pengaturan Akun Codex.",
+      "antigravityNotSignedIn": "Antigravity belum masuk. Masuk di Pengaturan → Akun → Antigravity. Lalu kirim pesan lagi.",
+      "agentCommandNotSignedIn": "Masuk ke {{agent}} dengan `{{loginCommand}}` di komputer yang menjalankan chat ini.",
+      "interactiveAgentNotSignedIn": "Masuk ke {{agent}} dengan menjalankan `{{loginCommand}}` dan menggunakan `{{slashCommand}}` di komputer yang menjalankan chat ini.",
+      "agentNotSignedIn": "Masuk ke {{agent}}.",
+      "cliMissing": "{{agent}} tidak ditemukan di komputer yang menjalankan chat ini. Instal, atau periksa Command-nya di Pengaturan → Agen.",
+      "cliMissingInWslDistro": "{{agent}} tidak terinstal di distro WSL {{distro}}. Instal di dalam {{distro}}, atau periksa Command-nya di Pengaturan → Agen.",
+      "signInFirst": "Masuk terlebih dahulu.",
+      "signInThenRunCommand": "Masuk, lalu jalankan /{{command}} lagi.",
+      "signInThenSend": "Masuk, lalu kirim pesan lagi.",
+      "thenSendAgain": "Kemudian kirim ulang pesan Anda.",
+      "historyTooLarge": "Riwayat percakapan ini terlalu besar untuk dipulihkan di sini.",
+      "managedAccountEnvOverride": "Peluncuran Claude ini menetapkan variabel masuk Anthropic sendiri. Hapus variabel tersebut untuk menggunakan akun Claude terkelola.",
+      "accountSwitchInProgress": "Penyiapan {{agent}} sedang berubah di host ini. Coba lagi setelah selesai.",
+      "managedAccountUnsupported": "Selama akun Claude ditambahkan di WSL, chat Claude memerlukan akun Claude Windows.",
+      "launchFolderMissing": "Folder tempat chat ini berjalan sudah tidak ada. Pulihkan folder tersebut untuk melanjutkan chat ini.",
+      "historyInOtherAccount": "Riwayat chat ini ada di akun Claude lain. Beralih kembali ke akun tersebut untuk melanjutkannya.",
+      "claudeAccountFolderMissing": "Folder akun Claude yang dipilih tidak ada. Masuk lagi ke akun tersebut atau pilih akun lain.",
+      "claudeAccountSetupFailed": "Akun Claude yang dipilih tidak dapat disiapkan. Coba lagi atau pilih akun lain.",
+      "agentCommandNotRunnable": "Perintah {{agent}} di Pengaturan → Agen harus berupa jalur atau nama program yang dapat ditemukan Prompt, tanpa argumen atau variabel. Ubah atau setel ulang.",
+      "runtimeNotInstalled": "{{agent}} tidak diinstal pada komputer yang menjalankan obrolan ini. Instal dari obrolan dalam versi Prompt saat ini.",
+      "fullAccessAsRoot": "{{agent}} tidak akan menggunakan Akses penuh saat berjalan sebagai root. Pilih izin lain untuk {{agent}} di Pengaturan → Agen pada komputer yang menjalankan chat ini, lalu mulai chat baru.",
+      "launchPreparationFailed": "Prompt tidak dapat mempersiapkan {{agent}} untuk memulai di komputer yang menjalankan obrolan ini.",
+      "conversationOpenElsewhere": "Codex masih menahan percakapan ini tetap terbuka. Coba lagi sebentar lagi, atau tutup terminal Codex lainnya.",
+      "conversationOpenInTerminal": "{{agent}} sudah menjalankan percakapan ini di terminal lain. Keluar dari {{agent}} di sana atau tutup terminal tersebut untuk melanjutkan di sini.",
+      "chooseClaudeAccount": "Pilih atau tambahkan akun di pengaturan Akun Claude.",
+      "chooseClaudeAccountThenRunCommand": "Pilih atau tambahkan akun di pengaturan Akun Claude, lalu jalankan /{{command}} lagi.",
+      "chooseClaudeAccountThenSend": "Pilih atau tambahkan akun di pengaturan Akun Claude, lalu kirim pesan lagi."
+    },
+    "writeNotice": {
+      "notDoneReadHistory": "Riwayat chat ini tidak dapat dimuat.",
+      "notDoneSend": "Pesan Anda tidak terkirim.",
+      "tryAgainComposerSend": "Kirim ulang.",
+      "messageNotSaved": "Tidak dapat menyimpan pesan Anda.",
+      "notDoneStop": "Agen tidak dihentikan.",
+      "notDoneStopTask": "Tugas latar belakang tidak dihentikan.",
+      "notDoneStopTasks": "Tugas latar belakang tidak dihentikan.",
+      "notDoneAnswer": "Jawaban Anda tidak terkirim.",
+      "notDoneOption": "Pengaturan tidak diubah.",
+      "notDoneCommand": "Perintah tidak dijalankan.",
+      "notDoneGoalChangeIncomplete": "Tidak dapat menyelesaikan perubahan goal. Periksa chat.",
+      "notDoneQueuedEdit": "Perubahan Anda tidak tersimpan.",
+      "restartFailed": "Agen tidak dapat dimulai ulang.",
+      "capacity": "Prompt pada komputer yang menjalankan obrolan ini telah mencapai batas permintaan. Perbarui Prompt di sana, lalu coba lagi.",
+      "outcomeUnknown": "Prompt tidak dapat memastikan apa yang terjadi. Periksa obrolan.",
+      "sendOutcomeLost": "Prompt tidak dapat mengonfirmasi pesan Anda sampai ke agen. Cek chatnya, lalu kirim lagi jika diperlukan.",
+      "continuationSuperseded": "Chat ini sudah berlanjut. Periksa pesan terbaru sebelum melanjutkan.",
+      "questionChanged": "Pertanyaan ini sudah dijawab atau telah berubah.",
+      "cancelNotSaved": "Tidak dapat membatalkan pertanyaan atau permintaan persetujuan ini.",
+      "historyUnreadable": "Prompt tidak dapat membaca riwayat simpanan obrolan ini.",
+      "historyUnusable": "Tidak dapat memuat chat ini.",
+      "historyUnavailable": "Prompt tidak dapat membuka riwayat obrolan ini saat ini.",
+      "savedByNewerOrca": "Obrolan disimpan oleh Prompt yang lebih baru.",
+      "updateOrcaToKeepUsing": "Perbarui Prompt untuk terus menggunakannya.",
+      "chatSavedByNewerOrca": "Obrolan ini disimpan oleh Prompt yang lebih baru.",
+      "updateOrcaToOpenChat": "Perbarui Prompt untuk membukanya.",
+      "unsupported": "Ini memerlukan Prompt yang lebih baru di komputer yang menjalankan obrolan ini. Perbarui Prompt di sana, lalu coba lagi.",
+      "notAvailable": "Ini tidak tersedia di chat ini.",
+      "cannotRunHere": "Prompt tidak dapat menjalankan agen ini dalam obrolan di sini.",
+      "unreachable": "Prompt tidak dapat menghubungi agen.",
+      "recordFailed": "Prompt tidak dapat menyimpan ini ke riwayat obrolan.",
+      "attachmentExpired": "Lampiran ini telah kedaluwarsa.",
+      "reattachFile": "Lepas lampiran, lalu lampirkan kembali.",
+      "conversationCleared": "Percakapan ini telah dibersihkan.",
+      "openCurrentConversation": "Buka percakapan saat ini untuk melanjutkan.",
+      "clearUnfinished": "/clear terakhir belum selesai.",
+      "commandRunning": "/compact atau /clear masih berjalan.",
+      "waitForCommand": "Tunggu hingga /compact atau /clear selesai.",
+      "agentStarting": "Agen masih dimulai.",
+      "waitForStart": "Tunggu hingga agen selesai dimulai.",
+      "turnActive": "Agen masih merespons.",
+      "waitForTurn": "Tunggu hingga agen selesai merespons, atau hentikan.",
+      "promptPending": "Agen sedang menunggu jawaban atas pertanyaan atau permintaan persetujuan.",
+      "answerFirst": "Jawab pertanyaan atau permintaan persetujuan terlebih dahulu.",
+      "backgroundTasksRunning": "Tugas latar belakang masih berjalan.",
+      "waitForBackgroundTasks": "Tunggu hingga tugas latar belakang selesai.",
+      "messagesUnsettled": "Pesan yang Anda kirim sebelumnya belum dikonfirmasi.",
+      "settleEarlierMessage": "Tunggu hingga pesan sebelumnya terkirim, atau coba kirim ulang.",
+      "agentStillWorking": "Agen masih bekerja.",
+      "runClearWhenDone": "Jalankan /clear setelah selesai.",
+      "clearAfterAnswer": "Jawab pertanyaan atau permintaan persetujuan dari agen, lalu jalankan /clear.",
+      "runCompactWhenDone": "Jalankan /compact setelah selesai.",
+      "compactAfterAnswer": "Jawab pertanyaan atau permintaan persetujuan dari agen, lalu jalankan /compact.",
+      "clearAfterRetry": "Coba kirim ulang pesan sebelumnya, lalu jalankan /clear.",
+      "compactAfterRetry": "Coba kirim ulang pesan sebelumnya, lalu jalankan /compact.",
+      "clearAfterSending": "Pesan sebelumnya masih dikirim. Jalankan /clear setelah terkirim.",
+      "compactAfterSending": "Pesan sebelumnya masih dikirim. Jalankan /compact setelah terkirim.",
+      "pendingWork": "Tunggu hingga pekerjaan dan pesan yang tertunda selesai sebelum menggunakan perintah ini.",
+      "queueTooLarge": "Terlalu banyak teks dalam antrean.",
+      "shrinkQueue": "Hapus pesan dalam antrean, atau tunggu hingga salah satunya terkirim, lalu coba lagi.",
+      "messageTooLarge": "Ukuran melebihi batas 256 KB untuk satu pesan.",
+      "shortenMessage": "Persingkat atau pisahkan, lalu kirim ulang.",
+      "optionRejected": "Agen tidak menerima pengaturan ini.",
+      "goalsUnsupported": "Agen ini tidak mendukung goal.",
+      "agentRefused": "Agen menolak permintaan ini.",
+      "ownerUnproven": "Agen sebelumnya di chat ini mungkin masih berjalan.",
+      "reopenChat": "Buka kembali chat untuk memeriksa lagi.",
+      "terminalAgentHoldsChat": "Chat ini masih terbuka di agen terminal.",
+      "quitTerminalAgent": "Keluar dari agen tersebut untuk melanjutkan chat di sini.",
+      "hostReconciling": "Prompt masih memeriksa obrolan ini setelah dimulai ulang.",
+      "waitMoment": "Tunggu sebentar.",
+      "recordUnreadable": "Prompt tidak dapat membaca status tersimpan obrolan ini.",
+      "chatNotFound": "Prompt tidak dapat menemukan obrolan ini.",
+      "startNewChat": "Mulai chat baru untuk melanjutkan.",
+      "tryAgain": "Coba lagi."
+    }
+  },
+  "chat": {
+    "composer": {
+      "addToMessage": "Tambahkan ke pesan",
+      "attachImage": "Lampirkan gambar",
+      "placeholder": "Tanyakan apa saja, @ untuk menyebut file, / untuk perintah",
+      "cancelEditing": "Batalkan pengeditan",
+      "saveEditedMessage": "Simpan pesan yang telah diedit",
+      "sendMessage": "Kirim pesan"
+    },
+    "composerAttachments": {
+      "file": "Mengajukan",
+      "fileMeta": "{{type}} · {{size}}",
+      "attachedImage": "Gambar terlampir",
+      "removeImage": "Hapus gambar",
+      "uploadingFile": "Mengunggah {{name}}",
+      "removeFile": "Hapus {{name}}"
+    },
+    "useImageUpload": {
+      "disconnected": "Gagal melampirkan (terputus)",
+      "permissionDenied": "Izin foto ditolak",
+      "imageTooLarge": "Gambar terlalu besar untuk dilampirkan",
+      "attachFailed": "Gagal melampirkan"
+    },
+    "ask": {
+      "submit": "Kirim",
+      "next": "Berikutnya",
+      "skip": "Lewati",
+      "step": "Langkah {{step}}",
+      "other": "Lainnya…",
+      "answerPlaceholder": "Ketik jawaban Anda"
+    },
+    "permission": {
+      "reason": "Alasan:",
+      "needsAccessTo": "Membutuhkan akses ke:",
+      "planFile": "File rencana: {{filePath}}",
+      "newerVersionRequired": "Permintaan ini memerlukan versi Prompt yang lebih baru."
+    },
+    "promptCard": {
+      "terminalExplanation": "Jawab pertanyaan OMP ini di terminal.",
+      "answerInTerminal": "Jawab di terminal"
+    },
+    "promptStrip": {
+      "expand": "Luaskan"
+    },
+    "question": {
+      "submitSelectedOptions": "Kirimkan opsi yang dipilih",
+      "submitCount": "Kirim ({{count}})",
+      "submit": "Kirim",
+      "otherReplyPlaceholder": "Atau ketik balasan…",
+      "replyPlaceholder": "Ketik balasan Anda…",
+      "sendReply": "Kirim balasan"
+    },
+    "queuedMessages": {
+      "deleteAll": "Hapus setiap pesan yang masuk antrian",
+      "clearAll": "Hapus semua",
+      "resumeSending": "Lanjutkan pengiriman pesan antrian",
+      "resume": "Lanjutkan",
+      "title": "Pesan dalam antrean",
+      "pausedState": "Dijeda",
+      "queuedState": "Dalam antrean",
+      "editMessage": "Edit pesan"
+    },
+    "sessionOptionPickers": {
+      "workingAnnouncement": "Agen sedang bekerja. Pengaturan model terbuka ketika giliran ini selesai.",
+      "modelFullAccessLabel": "Model, {{value}}, akses penuh",
+      "modelLabel": "Model, {{value}}",
+      "permissionsLabel": "Izin, {{value}}",
+      "closePicker": "Tutup pemilih",
+      "backToModels": "Kembali ke model",
+      "agentWorking": "Agen sedang bekerja",
+      "settingsLocked": "Pengaturan model terbuka ketika giliran ini selesai.",
+      "dispatchUnconfirmed": "Dikirim ke agen — belum dikonfirmasi",
+      "permissions": "Izin"
+    },
+    "sessionOptionRows": {
+      "defaultMarker": "Bawaan",
+      "notReportedMarker": "Tidak dilaporkan"
+    },
+    "sessionOptionSegments": {
+      "dispatchUnconfirmed": "Dikirim ke agen — belum dikonfirmasi"
+    },
+    "stopButton": {
+      "stoppingState": "Menghentikan…",
+      "stopAgent": "Hentikan agen"
+    },
+    "taskList": {
+      "taskStatus": "{{status}}: {{task}}",
+      "title": "Tugas",
+      "completed": "Selesai",
+      "inProgress": "Sedang berlangsung",
+      "pending": "Tertunda",
+      "empty": "Tidak ada tugas",
+      "progress": "{{completed}} of {{total}} tasks completed",
+      "added": "{{task}} ditambahkan",
+      "removed": "{{task}} dihapus",
+      "started": "{{task}} dimulai",
+      "finished": "{{task}} selesai",
+      "reset": "Ditandai tertunda: {{task}}",
+      "updated": "{{task}} diperbarui",
+      "unchanged": "Tugas tidak berubah",
+      "showAll": "Daftar tugas lengkap"
+    },
+    "sessionOptionCopy": {
+      "on": "Aktif",
+      "off": "Nonaktif",
+      "permissions": "Izin",
+      "notSet": "Tidak disetel",
+      "model": "Model",
+      "effort": "Upaya",
+      "fastMode": "Mode cepat",
+      "speed": "Kecepatan",
+      "thinking": "Berpikir",
+      "standard": "Standar",
+      "minimal": "Minimal",
+      "low": "Rendah",
+      "medium": "Sedang",
+      "high": "Tinggi",
+      "xhigh": "Sangat tinggi",
+      "max": "Maks",
+      "ultra": "Sangat",
+      "minimalShort": "Minimal",
+      "mediumShort": "Sedang",
+      "xhighShort": "XTinggi",
+      "fast": "Cepat",
+      "toggleOption": "Alihkan {{value0}}",
+      "chooseInAgentPicker": "Pilih di pemilih agen…",
+      "setWhenSessionStarts": "Ditetapkan saat sesi dimulai.",
+      "availableAfterSessionStarts": "Tersedia setelah sesi dimulai.",
+      "sessionOptions": "Opsi sesi"
+    },
+    "streamFrame": {
+      "streamFailed": "Aliran transkrip gagal",
+      "streamEnded": "Aliran transkrip berakhir"
+    },
+    "turnStatus": {
+      "seconds_one": "{{count}}s",
+      "seconds_other": "{{count}}s",
+      "minutesSeconds": "{{minutes}}m {{seconds}}dtk",
+      "hoursMinutesSeconds": "{{hours}}jam {{minutes}}m {{seconds}}dtk",
+      "thinking": "Berpikir",
+      "working": "Memproses…",
+      "stopping": "Menghentikan…",
+      "queueAfterStop": "Antrekan pesan untuk dijalankan setelah dihentikan",
+      "sendAfterStop": "Kirim pesan untuk dijalankan setelah dihentikan",
+      "workingFor": "Bekerja selama {{value0}}",
+      "workedFor": "Bekerja selama {{value0}}",
+      "interruptedAfter": "Terhenti setelah {{value0}}",
+      "failedAfter": "Gagal setelah {{value0}}",
+      "toggleDetails": "Alihkan detail giliran",
+      "responding": "Agen sedang merespons"
+    },
+    "message": {
+      "copyMessage": "Salin pesan"
+    },
+    "messageActionsSheet": {
+      "copyMessage": "Salin pesan",
+      "copyFailed": "Penyalinan gagal",
+      "clipboardRejected": "Papan klip menolak teks tersebut.",
+      "selectText": "Pilih teks"
+    },
+    "notice": {
+      "stoppedManually": "Dihentikan secara manual",
+      "compaction": "Konteks dipadatkan",
+      "contextCleared": "Konteks dibersihkan",
+      "plan": "Paket"
+    },
+    "nativeChatProse": {
+      "attachedImage": "Gambar terlampir",
+      "image": "gambar",
+      "openImageHint": "Opens the image full size"
+    },
+    "nativeChatToolLine": {
+      "durationMilliseconds": "{{milliseconds}} ms",
+      "durationSeconds": "{{seconds}}s",
+      "durationMinutes": "{{minutes}}m {{seconds}}dtk",
+      "durationHours": "{{hours}}jam {{minutes}}m {{seconds}}dtk",
+      "result": "Hasil",
+      "exitCode": "keluar {{exitCode}}",
+      "copyCommand": "Salin perintah",
+      "running": "Berjalan",
+      "ran": "Dijalankan",
+      "reading": "Membaca",
+      "read": "Baca",
+      "triedRead": "Mencoba membaca",
+      "editing": "Mengedit",
+      "edited": "Diedit",
+      "triedEdit": "Mencoba mengedit",
+      "added": "Ditambahkan",
+      "deleted": "Dihapus",
+      "renamed": "Diganti nama",
+      "subagent": "Subagen",
+      "searching": "Mencari",
+      "searched": "Dicari",
+      "triedSearch": "Mencoba mencari",
+      "listing": "Mendaftar",
+      "listed": "Menampilkan daftar",
+      "triedList": "Mencoba mendaftar",
+      "fetching": "Mengambil",
+      "fetched": "Diambil",
+      "triedFetch": "Mencoba mengambil",
+      "searchingWeb": "Mencari di web",
+      "searchedWeb": "Dicari di web",
+      "triedSearchWeb": "Mencoba mencari di web"
+    },
+    "nativeChatUserMessageFold": {
+      "showLess": "Tampilkan lebih sedikit",
+      "loadFailed": "Tampilkan pesan lengkap — tidak dapat dimuat, ketuk untuk mencoba lagi",
+      "showFullMessage": "Tampilkan pesan lengkap"
+    },
+    "askRow": {
+      "awaiting": "Menunggu input pengguna:",
+      "awaitingUnnamed": "Menunggu input pengguna",
+      "asked": "Ditanyakan:",
+      "questionCount": "{{value0}} pertanyaan"
+    },
+    "hostStatus": {
+      "historyRepaired": "Sebagian riwayat chat ini tidak dapat dimuat.",
+      "historyItemTooLarge": "Bagian chat ini terlalu besar untuk ditampilkan.",
+      "continuedOutside": "Dilanjutkan di luar chat ini.",
+      "continuedOutsideRewound": "Dilanjutkan di luar chat ini. Balasan sebelumnya di atas tidak lagi ada dalam riwayat percakapan ini."
+    },
+    "orcaStop": {
+      "update": "Prompt pada {{machine}} dimulai ulang untuk pembaruan saat respons ini sedang berlangsung.",
+      "quit": "Prompt pada {{machine}} ditutup saat respons ini sedang berlangsung.",
+      "crash": "Prompt pada {{machine}} berhenti tiba-tiba saat respons ini sedang berlangsung.",
+      "remote": "Prompt pada {{machine}} berhenti saat respons ini sedang berlangsung.",
+      "canContinue": "Percakapan ini dapat dilanjutkan.",
+      "unnamedServer": "server remote"
+    },
+    "toolActivity": {
+      "count_one": "{{count}} panggilan alat",
+      "count_other": "{{count}} pemanggilan tool",
+      "runningPreview": "Berjalan {{preview}}",
+      "runningCommand": "Menjalankan perintah",
+      "runningNamedPreview": "Berjalan {{toolName}} {{preview}}",
+      "runningNamed": "Berjalan {{toolName}}",
+      "result": "Hasil",
+      "moreCalls": "+{{value0}} lagi",
+      "failedCount": "{{value0}} gagal",
+      "failedCallsLabel": "Panggilan tool gagal: {{value0}}",
+      "interruptedCount": "{{value0}} terhenti",
+      "interruptedCallsLabel": "Panggilan tool terhenti: {{value0}}"
+    },
+    "toolRun": {
+      "liveRead_one": "Membaca berkas {{count}}.",
+      "liveRead_other": "Membaca {{count}} file",
+      "liveSearch_one": "Mencari {{count}} waktu",
+      "liveSearch_other": "Mencari {{count}} kali",
+      "liveListFiles_one": "Daftar direktori {{count}}.",
+      "liveListFiles_other": "Mendaftar {{count}} direktori",
+      "liveUnknown_one": "Menjalankan perintah {{count}}.",
+      "liveUnknown_other": "Menjalankan {{count}} perintah",
+      "liveFileChange_one": "Mengedit berkas {{count}}.",
+      "liveFileChange_other": "Mengedit {{count}} file",
+      "liveWebSearch_one": "Mencari web {{count}} waktu",
+      "liveWebSearch_other": "Mencari di web {{count}} kali",
+      "liveBrowserOnce": "Menggunakan browser",
+      "liveBrowserTimes_other": "Menggunakan browser {{count}} kali",
+      "liveMcpToolCall_one": "Menggunakan integrasi {{count}}.",
+      "liveMcpToolCall_other": "Menggunakan {{count}} integrasi",
+      "liveSubAgentActivity_one": "Menjalankan agen {{count}}.",
+      "liveSubAgentActivity_other": "Menjalankan {{count}} agen",
+      "liveTodoListOnce": "Memperbarui rencana",
+      "liveTodoListTimes_other": "Memperbarui rencana {{count}} kali",
+      "liveOther_one": "Menggunakan alat {{count}}.",
+      "liveOther_other": "Menggunakan {{count}} tool",
+      "settledRead_one": "Baca berkas {{count}}.",
+      "settledRead_other": "Membaca {{count}} file",
+      "settledSearch_one": "Mencari {{count}} kali",
+      "settledSearch_other": "Mencari {{count}} kali",
+      "settledListFiles_one": "Direktori {{count}} terdaftar",
+      "settledListFiles_other": "Mendaftar {{count}} direktori",
+      "settledUnknown_one": "Jalankan perintah {{count}}.",
+      "settledUnknown_other": "Menjalankan {{count}} perintah",
+      "settledFileChange_one": "File {{count}} yang diedit",
+      "settledFileChange_other": "Mengedit {{count}} file",
+      "settledWebSearch_one": "Mencari web {{count}} kali",
+      "settledWebSearch_other": "Mencari di web {{count}} kali",
+      "settledBrowserOnce": "Menggunakan browser",
+      "settledBrowserTimes_other": "Menggunakan browser {{count}} kali",
+      "settledMcpToolCall_one": "Integrasi {{count}} yang digunakan",
+      "settledMcpToolCall_other": "Menggunakan {{count}} integrasi",
+      "settledSubAgentActivity_one": "Jalankan {{count}} agen",
+      "settledSubAgentActivity_other": "Menjalankan {{count}} agen",
+      "settledTodoListOnce": "Memperbarui rencana",
+      "settledTodoListTimes_other": "Memperbarui rencana {{count}} kali",
+      "settledOther_one": "Alat {{count}} yang digunakan",
+      "settledOther_other": "Menggunakan {{count}} tool",
+      "pair": "{{value0}} dan {{value1}}",
+      "list": "{{value0}}, dan {{value1}}",
+      "separator": ","
+    },
+    "usageLimit": {
+      "theAgent": "Agen",
+      "windowSession": "sesi",
+      "windowWeekly": "mingguan",
+      "windowWeeklyModel": "model mingguan",
+      "windowCredits": "penggunaan tambahan",
+      "reachedNamed": "{{agent}} mencapai batas {{window}}.",
+      "reached": "{{agent}} mencapai batas penggunaan.",
+      "resetsAt": "Batas direset pada {{when}}."
+    },
+    "composerPlaceholder": {
+      "reconnecting": "Menyambungkan ulang…",
+      "waitingForTerminal": "Menunggu terminal…",
+      "prompt": "Tanyakan apa saja, @ untuk menyebut file, / untuk perintah"
+    },
+    "nativeChatImageViewer": {
+      "closeImage": "Tutup gambar"
+    },
+    "nativeChatVisual": {
+      "defaultTitle": "Visualisasi",
+      "unavailable": "Visualisasi tidak tersedia",
+      "retryHint": "Mencoba memuatnya lagi",
+      "openFullscreen": "Buka {{title}} layar penuh"
+    },
+    "diffCard": {
+      "diffTruncated": "Diff dipotong",
+      "diffGap": "Baris tidak ditampilkan",
+      "copyDiff": "Salin diff"
+    },
+    "receipt": {
+      "emptyAnswer": "Jawaban kosong",
+      "unavailable": "Jawaban terpilih tidak tersedia",
+      "resolved": "Terselesaikan",
+      "cancelled": "Dibatalkan",
+      "resolver": "Dijawab di {{device}}",
+      "cancelledBy": "Dibatalkan di {{device}}"
+    },
+    "subagentGroup": {
+      "stateCompleted": "selesai",
+      "stateWorking": "bekerja",
+      "stateIdle": "idle",
+      "stateFailed": "gagal",
+      "stateStopped": "dihentikan",
+      "stateUnverifiable": "status tidak tersedia",
+      "stateWorkingCount_one": "{{count}} bekerja",
+      "stateWorkingCount_other": "{{count}} bekerja",
+      "stateIdleCount_one": "{{count}} siaga",
+      "stateIdleCount_other": "{{count}} siaga",
+      "stateFailedCount_one": "{{count}} gagal",
+      "stateFailedCount_other": "{{count}} gagal",
+      "stateStoppedCount_one": "{{count}} dihentikan",
+      "stateStoppedCount_other": "{{count}} dihentikan",
+      "stateUnverifiableCount_one": "{{count}} dengan status tidak tersedia",
+      "stateUnverifiableCount_other": "{{count}} dengan status tidak tersedia",
+      "started_one": "Memulai {{count}} subagen",
+      "started_other": "Memulai {{count}} subagen",
+      "ran_one": "Jalankan {{count}} subagen",
+      "ran_other": "Menjalankan {{count}} subagen",
+      "tokens": "{{value0}} token"
+    }
+  },
+  "sourceControl": {
+    "hostedReview": {
+      "prCopy": {
+        "shortLabel": "PR",
+        "reviewLabel": "permintaan tarik",
+        "titleLabel": "Pull request"
+      },
+      "mrCopy": {
+        "shortLabel": "MR",
+        "reviewLabel": "permintaan penggabungan",
+        "titleLabel": "Merge request"
+      }
+    },
+    "commitDropdown": {
+      "commit": "Berkomitmen",
+      "commitStagedChanges": "Commit perubahan staged",
+      "commitPush": "Berkomitmen & Dorong",
+      "commitForcePush": "Commit & force push",
+      "commitSync": "Komit & Sinkronkan",
+      "checkingBranchStatus": "Memeriksa status branch…",
+      "checkingPrStatus": "Memeriksa status PR…",
+      "prAlreadyMerged": "PR sudah di-merge",
+      "checkOutBranchToPush": "Checkout branch sebelum melakukan push commit",
+      "linkedReviewTargetUnavailable": "Target branch review tertaut tidak tersedia",
+      "publishBranchFirstToPush": "Publikasikan branch terlebih dahulu untuk push commit",
+      "commitAndForcePush": "Commit perubahan staged dan force push dengan lease",
+      "commitAndTryPush": "Commit perubahan staged dan coba push",
+      "commitAndPush": "Commit perubahan staged dan push",
+      "checkOutBranchToSync": "Checkout branch sebelum menyinkronkan commit",
+      "publishBranchFirstToSync": "Publikasikan branch terlebih dahulu untuk menyinkronkan commit",
+      "useCommitAndForcePush": "Gunakan Commit & Force Push — remote hanya memiliki salinan lama dari commit lokal",
+      "commitThenPullPush": "Commit, lalu pull dan push",
+      "resolveConflicts": "Selesaikan konflik sebelum commit",
+      "stageFile": "Stage setidaknya satu file untuk commit",
+      "enterMessage": "Masukkan pesan commit untuk melakukan commit"
+    },
+    "createPrAction": {
+      "createReview": "Buat {{titleLabel}}",
+      "createPullRequest": "Buat pull request",
+      "statusUnavailable": "Status review tidak tersedia",
+      "checkingStatus": "Memeriksa status review…",
+      "providerUnavailable": "Pembuatan ulasan tidak tersedia untuk penyedia ini"
+    },
+    "prCreate": {
+      "notReady": "Cabang ini belum siap untuk {{reviewLabel}}.",
+      "existingNumber": "{{titleLabel}} #{{number}} sudah terbuka.",
+      "existing": "{{titleLabel}} sudah terbuka.",
+      "createdNotRefreshed": "{{titleLabel}} dibuat, tetapi Prompt belum dapat menyegarkannya.",
+      "lookupUnconfirmed": "Prompt tidak dapat memastikan apakah cabang ini sudah memiliki {{reviewLabel}}. Coba lagi sebentar lagi.",
+      "dirty": "Komit perubahan sebelum membuat {{reviewLabel}}.",
+      "detachedHead": "Checkout branch sebelum membuat {{reviewLabel}}.",
+      "defaultBranch": "Beralih ke feature branch sebelum membuat {{reviewLabel}}.",
+      "noUpstream": "Publikasikan komit sebelum membuat {{reviewLabel}}.",
+      "needsSync": "Sinkronkan cabang ini sebelum membuat {{reviewLabel}}.",
+      "authRequired": "Otentikasi sebelum membuat {{reviewLabel}}.",
+      "unsupportedMergeRequests": "Membuat permintaan penggabungan tidak didukung untuk repo ini.",
+      "unsupportedPullRequests": "Membuat permintaan tarik tidak didukung untuk repo ini.",
+      "existingReview": "{{reviewLabel}} sudah ada untuk branch ini.",
+      "forkHeadUnsupported": "Membuat {{reviewLabel}} dari fork ini tidak didukung.",
+      "baseNotOnRemote": "Dorong cabang dasar sebelum membuat {{reviewLabel}}."
+    },
+    "hostedReviewCreate": {
+      "pushSucceeded": "Pendorongan berhasil, tetapi pembuatan {{shortLabel}} gagal: {{error}}"
+    },
+    "remoteDropdown": {
+      "push": "Dorong",
+      "forcePush": "Paksa Dorong",
+      "pull": "Tarik",
+      "fastForward": "Maju cepat",
+      "sync": "Sinkronkan",
+      "publishBranch": "Publikasikan branch",
+      "publishPrStatus": "Status PR",
+      "publishLinkedReview": "Review tertaut",
+      "publishNoBranch": "Tanpa branch",
+      "checkingBranchStatus": "Memeriksa status branch…",
+      "checkingPrStatus": "Memeriksa status PR…",
+      "prAlreadyMerged": "PR sudah di-merge",
+      "linkedReviewTargetUnavailable": "Target branch review tertaut tidak tersedia",
+      "checkOutBranchToPush": "Checkout branch sebelum melakukan push commit",
+      "pushAndSetUpstream": "Push branch ini dan setel upstream jika diperlukan",
+      "pushToLinkedReview": "Push pembaruan ke branch review tertaut",
+      "tryRegularPush": "Coba push biasa; git mungkin mengharuskan force push",
+      "pushMayNeedSync": "Push commit lokal; git mungkin mengharuskan sync terlebih dahulu",
+      "nothingToPush": "Tidak ada yang perlu di-push",
+      "checkOutBranchToForcePush": "Checkout branch sebelum melakukan force push commit",
+      "nothingToForcePush": "Tidak ada yang perlu di-force push",
+      "checkOutBranchToPull": "Checkout branch sebelum melakukan pull commit",
+      "publishBranchFirstToPull": "Publikasikan branch terlebih dahulu untuk pull commit",
+      "nothingNewToPull": "Tidak ada yang baru untuk di-pull — remote hanya memiliki salinan lama dari commit lokal",
+      "nothingToPull": "Tidak ada yang perlu di-pull",
+      "checkOutBranchToFastForward": "Checkout branch sebelum fast-forward",
+      "publishBranchFirstToFastForward": "Publikasikan branch terlebih dahulu untuk fast-forward",
+      "nothingNewToFastForward": "Tidak ada yang baru untuk fast-forward — remote hanya memiliki salinan lama dari commit lokal",
+      "nothingToFastForward": "Tidak ada yang perlu di-fast-forward",
+      "tryFastForwardPull": "Coba pull fast-forward; git mungkin menolak commit lokal",
+      "checkOutBranchToSync": "Checkout branch sebelum menyinkronkan commit",
+      "publishBranchFirstToSync": "Publikasikan branch terlebih dahulu untuk menyinkronkan commit",
+      "useForcePushToSync": "Gunakan Force Push — remote hanya memiliki salinan lama dari commit lokal",
+      "branchUpToDate": "Branch sudah up to date",
+      "rebaseFromBase": "Rebase dari base",
+      "rebaseChooseRemoteBase": "Pilih base branch remote untuk rebase",
+      "rebaseDirtyHint": "Coba rebase; git mungkin mengharuskan commit atau stash perubahan lokal terlebih dahulu",
+      "fetch": "Ambil",
+      "fetchTitle": "Fetch dari remote tanpa merge",
+      "linkedReviewBranchExists": "Branch review tertaut sudah ada",
+      "checkOutBranchToPublish": "Checkout branch sebelum mempublikasikan commit",
+      "branchAlreadyPublished": "Branch sudah dipublikasikan",
+      "publishToOrigin": "Publikasikan branch ini ke origin",
+      "nothingToPushTo": "Tidak ada yang perlu di-push ke {{upstreamName}}",
+      "nothingToForcePushTo": "Tidak ada yang perlu di-force push ke {{upstreamName}}",
+      "rebaseFromNamedBase": "Rebase dari {{baseRef}}",
+      "rebaseWithLatestFrom": "Rebase branch saat ini dengan commit terbaru dari {{baseRef}}"
+    },
+    "actions": {
+      "createPr": "Buat PR",
+      "pushAndCreatePr": "Dorong & Buat PR",
+      "switchBranch": "Beralih cabang",
+      "commits": "Commit",
+      "committing": "Komitmen sedang berlangsung.",
+      "forcePushing": "Paksa dorongan sedang berlangsung.",
+      "remoteOperationInProgress": "Operasi jarak jauh sedang berlangsung.",
+      "waitForRemoteOperation": "Coba lagi setelah operasi jarak jauh selesai.",
+      "resolveConflicts": "Selesaikan konflik sebelum melakukan.",
+      "commitStagedChanges": "Lakukan perubahan bertahap.",
+      "enterCommitMessage": "Masukkan pesan komit untuk dikomit.",
+      "stageAllChanges": "Panggung semua perubahan.",
+      "stageFileToCommit": "Tahapkan setidaknya satu file untuk dikomit.",
+      "checkoutBeforePublish": "Checkout branch sebelum mempublikasikan commit.",
+      "checkingReviewStatus": "Memeriksa status ulasan.",
+      "reviewAlreadyMerged": "Tidak ada yang perlu dilakukan. Ulasan sudah digabungkan.",
+      "publishToOrigin": "Publikasikan cabang ini ke asal.",
+      "pushLinkedReview": "Dorong pembaruan ke cabang ulasan tertaut.",
+      "linkedReviewUnavailable": "Cabang ulasan tertaut tidak tersedia.",
+      "forcePushWithLease": "Paksa push dengan sewa untuk memperbarui cabang jarak jauh.",
+      "syncCounts": "Tarik {{behind}}, tekan {{ahead}}.",
+      "pullCommits_one": "Tarik {{count}} komit.",
+      "pullCommits_other": "Tarik {{count}} dilakukan.",
+      "pushCommits_one": "Tekan {{count}} komit.",
+      "pushCommits_other": "Tekan {{count}} dilakukan.",
+      "upToDate": "Tidak ada yang perlu di-commit. Branch sudah up to date."
+    },
+    "dropdownCounts": {
+      "pushCount_one": "Tekan {{count}} komit",
+      "pushCount_other": "Push {{count}} commit",
+      "pullCount_one": "Tarik {{count}} komit",
+      "pullCount_other": "Pull {{count}} commit",
+      "fastForwardCount_one": "Maju cepat {{count}} komit",
+      "fastForwardCount_other": "Fast-forward {{count}} commit",
+      "syncCounts": "Tarik {{behind}}, tekan {{ahead}}",
+      "remoteBranchFallback": "branch remote",
+      "titleForcePushOlderCopiesBranch": "Remote hanya memiliki salinan lama dari commit lokal. Force push branch ini dengan lease untuk memperbarui {{upstreamName}}.",
+      "titleForcePushOlderCopiesCount_one": "Remote hanya memiliki salinan komitmen lokal yang lebih lama. Paksa komit cabang push {{count}} dengan sewa untuk memperbarui {{upstreamName}}.",
+      "titleForcePushOlderCopiesCount_other": "Remote hanya memiliki salinan lama dari commit lokal. Force push {{count}} commit branch dengan lease untuk memperbarui {{upstreamName}}.",
+      "titleManualForcePushReplaceRemote_one": "Paksa push {{count}} komit lokal dengan sewa untuk memperbarui {{upstreamName}} dan ganti komit jarak jauh saja.",
+      "titleManualForcePushReplaceRemote_other": "Force push {{count}} commit lokal dengan lease untuk memperbarui {{upstreamName}} dan mengganti commit yang hanya ada di remote.",
+      "titleManualForcePush_one": "Paksa dorong {{count}} komit lokal dengan sewa untuk memperbarui {{upstreamName}}.",
+      "titleManualForcePush_other": "Force push {{count}} commit lokal dengan lease untuk memperbarui {{upstreamName}}.",
+      "titleUnpublishedForcePushBranch": "Force push branch ini dengan lease dan setel upstream jika diperlukan.",
+      "titleUnpublishedForcePushCount_one": "Paksa komit cabang push {{count}} dengan sewa dan atur upstream jika diperlukan.",
+      "titleUnpublishedForcePushCount_other": "Force push {{count}} commit branch dengan lease dan atur upstream bila diperlukan."
+    },
+    "primaryAction": {
+      "forcePushFromDesktop": "Dorong paksa cabang permintaan tarik ini dari desktop",
+      "forcePush": "Paksa Dorong",
+      "commit": "Berkomitmen",
+      "stageAll": "Stage semua",
+      "push": "Dorong",
+      "pull": "Tarik",
+      "sync": "Sinkronkan",
+      "publishBranch": "Publikasikan branch"
+    },
+    "branchDiffPreviewDrawer": {
+      "committedOnBranch": "Berkomitmen pada cabang",
+      "closePreview": "Tutup pratinjau perbedaan yang dilakukan",
+      "loadFailed": "Tidak Dapat Memuat Diff",
+      "truncated": "Perbedaan terpotong untuk pratinjau seluler."
+    },
+    "commitFailurePanel": {
+      "title": "Komit gagal",
+      "summary": "Komit gagal.",
+      "fixWithAi": "Perbaiki kegagalan commit dengan AI",
+      "fix": "Perbaiki",
+      "hideFailureDetails": "Sembunyikan detail kegagalan penerapan",
+      "showFailureDetails": "Tampilkan detail kegagalan penerapan",
+      "hideDetails": "Sembunyikan detail",
+      "showDetails": "Tampilkan detail"
+    },
+    "gitHistoryList": {
+      "loadFailed": "Gagal memuat riwayat",
+      "loadFilesFailed": "Tidak dapat memuat file komit",
+      "retryFiles": "Coba lagi komit file",
+      "waitingForDesktop": "Menunggu desktop...",
+      "noFileChanges": "Tidak ada perubahan file",
+      "noCommits": "Tidak ada komitmen."
+    },
+    "branchCard": {
+      "mergeState": "bergabung",
+      "rebaseState": "rebase",
+      "cherryPickState": "pilih ceri",
+      "changedCount": "{{count}} berubah",
+      "stagedCount": "{{count}} dipentaskan",
+      "branchCount": "{{count}} di cabang"
+    },
+    "content": {
+      "reconnecting": "Menyambungkan kembali ke desktop...",
+      "stageAll": "Stage semua",
+      "unstageAll": "Hapus Semua",
+      "openActions": "Tindakan kontrol sumber terbuka",
+      "emptyTitle": "Tidak ada perubahan lokal",
+      "emptyMessage": "Pohon yang berfungsi bersih.",
+      "commitMessageDisabled": "Pesan komit dinonaktifkan. Tidak ada file yang dipentaskan.",
+      "noStagedFiles": "Tidak ada file yang dipentaskan",
+      "commitMessagePlaceholder": "Pesan commit",
+      "regenerateHint": "Kosongkan pesan untuk membuat ulang.",
+      "cancelGeneration": "Batalkan pembuatan pesan komit",
+      "generateMessage": "Buat pesan commit dengan AI"
+    },
+    "fileList": {
+      "committedSection": "Di-commit pada branch"
+    },
+    "fileRows": {
+      "bothModified": "Diubah keduanya",
+      "bothAdded": "Ditambahkan keduanya",
+      "deletedByUs": "Dihapus oleh kita",
+      "deletedByThem": "Dihapus oleh mereka",
+      "addedByUs": "Ditambahkan oleh kita",
+      "addedByThem": "Ditambahkan oleh mereka",
+      "bothDeleted": "Dihapus keduanya",
+      "unresolvedConflict": "Konflik yang belum diselesaikan",
+      "openChangedFile": "Buka file yang diubah {{path}}",
+      "renamedFrom": "dari {{path}}",
+      "unstageFile": "Hilangkan panggung {{path}}",
+      "stageFile": "Tahap {{path}}",
+      "discardFile": "Buang {{path}}",
+      "committedSection": "Di-commit pada branch",
+      "loadingCommitted": "Memuat perubahan yang dilakukan...",
+      "committedUnavailable": "Perubahan yang dilakukan tidak tersedia.",
+      "openCommittedChange": "Buka perubahan yang dilakukan {{path}}"
+    },
+    "header": {
+      "close": "Kontrol sumber dekat",
+      "backToSession": "Kembali ke sesi",
+      "title": "Kontrol sumber",
+      "openNumberedPrWeb": "Buka permintaan tarik #{{number}} di web",
+      "openPrWeb": "Buka permintaan tarik di web",
+      "refresh": "Segarkan kontrol sumber"
+    },
+    "modals": {
+      "actionsTitle": "Kontrol sumber",
+      "discardTitle": "Buang Perubahan",
+      "discardConfirmMessage": "Buang perubahan pada \"{{path}}\"? Hal ini tidak dapat dibatalkan.",
+      "discardButton": "Buang",
+      "switchBranchTitle": "Beralih Cabang",
+      "currentBranch": "saat ini",
+      "prCreatedTitle": "Permintaan Tarik Dibuat",
+      "openPrWithWarning": "Buka di browser Anda?\n\n{{warning}}",
+      "openPrMessage": "Buka di browser Anda?"
+    },
+    "panel": {
+      "unavailableTitle": "Kontrol Sumber Tidak Tersedia",
+      "loadFailedTitle": "Tidak Dapat Memuat"
+    },
+    "prChip": {
+      "loading": "Memuat permintaan penarikan…",
+      "createPr": "Buat permintaan tarik",
+      "loadingLabel": "Memuat permintaan tarik",
+      "unavailableLabel": "Permintaan tarik tidak tersedia: {{message}}",
+      "openWithComments_one": "Permintaan tarik #{{number}}, {{state}}, {{checks}}, {{count}} komentar yang belum terselesaikan. Buka permintaan tarik.",
+      "openWithComments_other": "Permintaan tarik #{{number}}, {{state}}, {{checks}}, {{count}} komentar yang belum terselesaikan. Buka permintaan tarik.",
+      "openLabel": "Permintaan tarik #{{number}}, {{state}}, {{checks}}. Buka permintaan tarik."
+    },
+    "hostedReviewCopy": {
+      "updatingBranch": "Memperbarui cabang...",
+      "stagingChanges": "Perubahan pementasan...",
+      "generatingCommitMessage": "Menghasilkan pesan komit...",
+      "committingChanges": "Melakukan perubahan...",
+      "publishingBranch": "Cabang penerbitan...",
+      "pushingCommits": "Mendorong komitmen...",
+      "forcePushing": "Paksa mendorong dengan sewa...",
+      "creatingReview": "Membuat ulasan..."
+    },
+    "branchBaseRef": {
+      "resolveFailed": "Tidak dapat menyelesaikan basis cabang"
+    },
+    "branchCompareOutcome": {
+      "baseBranchUnavailable": "Tidak dapat menyelesaikan cabang dasar untuk perbandingan.",
+      "loadFailed": "Tidak dapat memuat perubahan yang dilakukan"
+    },
+    "branchCompare": {
+      "sectionTitle": "Di-commit pada branch",
+      "summary": "{{files}} - vs {{baseRef}}",
+      "summaryWithCommits": "{{files}} - {{commits}} - vs {{baseRef}}",
+      "files_one": "{{count}} mengajukan",
+      "files_other": "{{count}} file",
+      "commits_one": "{{count}} berkomitmen",
+      "commits_other": "{{count}} berkomitmen"
+    },
+    "commitMessageAi": {
+      "generateFailed": "Gagal membuat pesan penerapan"
+    },
+    "gitHistory": {
+      "justNow": "baru saja",
+      "minutes_one": "{{count}} mnt",
+      "minutes_other": "{{count}} mnt",
+      "hours_one": "{{count}} j",
+      "hours_other": "{{count}} j",
+      "days_one": "{{count}} h",
+      "days_other": "{{count}} h",
+      "months_one": "{{count}}bln",
+      "months_other": "{{count}}bln",
+      "years_one": "{{count}} tahun",
+      "years_other": "{{count}} tahun",
+      "noCommitMessage": "(tidak ada pesan komit)",
+      "loadFailed": "Gagal memuat riwayat penerapan"
+    },
+    "gitStatus": {
+      "conflicts": "Konflik",
+      "changes": "Perubahan",
+      "stagedChanges": "Perubahan staged"
+    },
+    "hostedReviewCreateIntent": {
+      "resolveConflicts": "Selesaikan konflik sebelum membuat permintaan tarik.",
+      "branchChanged": "Cabang berubah saat menyiapkan permintaan penarikan.",
+      "resolveOrStageChanges": "Selesaikan atau lakukan perubahan sebelum membuat permintaan tarik.",
+      "generateMessageFailed": "Tidak dapat membuat pesan penerapan. Tambahkan satu di Kontrol Sumber, lalu coba lagi.",
+      "reviewCommitMessage": "Periksa pesan commit, lalu coba lagi Create PR."
+    },
+    "hostedReviewGitPreparation": {
+      "refreshFailed": "Tidak dapat menyegarkan kontrol sumber",
+      "updateBranchFailed": "Tidak dapat memperbarui branch remote. Coba lagi Create PR.",
+      "stageFailed": "Gagal melakukan perubahan tahap",
+      "commitFailed": "Komit gagal"
+    },
+    "hostedReviewRemotePrerequisite": {
+      "publishFailed": "Gagal mempublikasikan cabang",
+      "pushFailed": "Gagal mendorong komitmen",
+      "forcePushFailed": "Gagal memaksa push dengan sewa"
+    },
+    "hostedReviewService": {
+      "pushBeforeCreateFailed": "Push gagal. Selesaikan galat push, lalu coba lagi.",
+      "createFailed": "Gagal membuat permintaan penarikan"
+    },
+    "prLink": {
+      "updatePullRequestFailed": "Gagal memperbarui permintaan penarikan tertaut",
+      "updateReviewFailed": "Gagal memperbarui ulasan tertaut"
+    },
+    "conflictAbort": {
+      "aborting": "Membatalkan…",
+      "abortMerge": "Batalkan merge",
+      "abortRebase": "Batalkan rebase",
+      "abortOperation": "Batalkan {{operation}}"
+    },
+    "hubTab": {
+      "changes": "Perubahan",
+      "pullRequest": "Pull request",
+      "commits": "Commit"
+    },
+    "screenState": {
+      "noBranch": "Tidak ada cabang"
+    },
+    "useMobileCommitFailureRecovery": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "launchFailed": "Gagal meluncurkan agen"
+    },
+    "useMobileCommitMessageGeneration": {
+      "generateFailed": "Gagal membuat pesan penerapan"
+    },
+    "useMobileCreatePrRunner": {
+      "branchRequired": "Periksa cabang sebelum membuat permintaan tarik."
+    },
+    "useMobileGitRequests": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "actionFailed": "Tindakan kontrol sumber gagal",
+      "commitFailed": "Komit gagal",
+      "branchUnavailable": "Status cabang tidak tersedia"
+    },
+    "actionSheetRunners": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "noBaseBranch": "Tidak ada cabang dasar untuk direbase"
+    },
+    "commitRunners": {
+      "commitFailed": "Komit gagal",
+      "actionFailed": "Tindakan kontrol sumber gagal"
+    },
+    "loaders": {
+      "connectingToDesktop": "Menyambungkan ke desktop...",
+      "waitingForDesktop": "Menunggu desktop...",
+      "updateDesktop": "Perbarui Prompt desktop untuk menggunakan Kontrol Sumber di seluler.",
+      "loadFailed": "Tidak dapat memuat kontrol sumber"
+    },
+    "openers": {
+      "waitingForDesktop": "Menunggu desktop...",
+      "openDiffFailed": "Tidak dapat membuka diff",
+      "tabNotReady": "File dibuka, namun tabnya belum siap. Coba lagi."
+    },
+    "runners": {
+      "actionFailed": "Tindakan kontrol sumber gagal"
+    },
+    "state": {
+      "syncStatus": "{{ahead}} lebih maju, {{behind}} tertinggal",
+      "noUpstream": "Tidak ada hulu"
+    },
+    "textGenerationFailure": {
+      "openCodeInvalidEvents": "OpenCode mengembalikan event JSON yang tidak valid.",
+      "antigravityInvalidEvents": "Antigravity mengembalikan event JSON yang tidak valid.",
+      "antigravityInvalidResult": "Antigravity mengembalikan hasil yang tidak valid.",
+      "antigravityNoFinalResult": "Antigravity tidak mengembalikan hasil akhir.",
+      "kimiUnreadableOutput": "Kimi mengembalikan keluaran Prompt tidak dapat dibaca. Coba lagi.",
+      "kimiSessionOccupied": "Kimi tidak dapat menggunakan sesi ini karena sedang aktif di klien lain. Hentikan sesi di sana atau keluar dari klien tersebut, lalu coba lagi.",
+      "kimiInterrupted": "Kimi terhenti sebelum selesai menghasilkan teks. Coba lagi.",
+      "kimiFailed": "Kimi tidak dapat menyelesaikan pembuatan teks. Buka Kimi di host eksekusi untuk memeriksa kegagalan sebelum mencoba lagi.",
+      "kimiAgentOptionsConflict": "Kimi menerima opsi agen yang bertentangan atau berulang. Pertahankan satu opsi --agent atau --agent-file di recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiOptionRejected": "Kimi menolak sebuah opsi atau argumen. Perbaiki recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiSessionNotFound": "Kimi tidak dapat menemukan sesi yang diminta. Gunakan sesi yang ada atau mulai sesi baru.",
+      "kimiSessionOtherDirectory": "Sesi Kimi ini milik direktori lain. Lanjutkan di sana atau gunakan sesi yang dibuat untuk workspace ini.",
+      "kimiCredentialVariableMissing": "Kimi tidak memiliki variabel lingkungan kredensial yang dikonfigurasi. Setel variabel tersebut di host eksekusi sebelum mencoba lagi.",
+      "kimiCredentialsRequired": "Kimi memerlukan kredensial provider. Buka Kimi di host eksekusi untuk mengonfigurasi provider atau masuk, lalu coba lagi.",
+      "kimiModelMissing": "Kimi tidak memiliki model yang dapat digunakan. Buka Kimi di host eksekusi untuk mengonfigurasi atau memilih model, lalu coba lagi.",
+      "kimiPromptHookBlocked": "Hook prompt Kimi memblokir permintaan atau giliran tidak dapat dimulai. Periksa hook dan konfigurasi Kimi sebelum mencoba lagi.",
+      "kimiCancelled": "Kimi membatalkan permintaan sebelum selesai menghasilkan teks. Coba lagi.",
+      "kimiEmptyPrompt": "Kimi menerima prompt kosong. Perbaiki input tersebut di recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiEmptyModel": "Kimi menerima model kosong. Perbaiki input tersebut di recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiEmptyAgent": "Kimi menerima agen kosong. Perbaiki input tersebut di recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiEmptyAgentFilePath": "Kimi menerima path file agen kosong. Perbaiki input tersebut di recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiOutputFormatInvalid": "Format output Kimi memerlukan mode prompt dan nilai teks atau stream-json yang didukung. Perbaiki recipe pembuatan atau argumen CLI sebelum mencoba lagi.",
+      "kimiSessionIdRequired": "Kimi memerlukan ID sesi untuk melanjutkan dalam mode prompt. Perbaiki recipe pembuatan atau argumen CLI, lalu coba lagi.",
+      "kimiConflictingOptions": "Kimi menerima opsi yang bertentangan: {{option}} dengan {{otherOption}}. Perbaiki recipe pembuatan atau argumen CLI sebelum mencoba lagi.",
+      "kimiContinueSessionConflict": "Kimi menerima opsi yang bertentangan: --continue, --session. Perbaiki recipe pembuatan atau argumen CLI sebelum mencoba lagi.",
+      "kimiAgentChangeOnResume": "Kimi tidak dapat mengganti agen saat melanjutkan sesi. Hapus penggantian agen atau mulai sesi baru di recipe pembuatan atau argumen CLI.",
+      "kimiResponseBlocked": "Kimi tidak dapat mengembalikan respons karena diblokir. Revisi prompt atau konfigurasi model sebelum mencoba lagi.",
+      "kimiAuthFailed": "Kimi tidak dapat mengautentikasi. Masuk atau perbaiki kredensial provider di host eksekusi, lalu coba lagi.",
+      "kimiConnectionFailed": "Kimi tidak dapat terhubung ke provider-nya. Periksa jaringan di host eksekusi, lalu coba lagi.",
+      "kimiProviderLimited": "Kimi mencapai batas provider atau provider sedang sibuk. Tunggu sebelum mencoba lagi atau kurangi frekuensi permintaan.",
+      "kimiContextOverflow": "Konteks Kimi habis. Persingkat prompt atau mulai sesi baru, lalu coba lagi.",
+      "kimiConfigInvalid": "Konfigurasi Kimi tidak valid. Periksa konfigurasi model dan provider di host eksekusi sebelum mencoba lagi.",
+      "promptTooLargeForWindows": "Prompt {{label}} terlalu besar untuk command line Windows. Kurangi perubahan yang di-stage, lalu coba lagi.",
+      "promptTooLargeForArgument": "Prompt {{label}} terlalu besar untuk diteruskan sebagai satu argumen command line. Kurangi perubahan yang di-stage, lalu coba lagi.",
+      "agentCouldNotStart": "{{label}} tidak dapat dimulai. Periksa perintah agen di Pengaturan, lalu coba lagi.",
+      "agentFailedToStart": "{{label}} gagal dimulai. Periksa perintah agen di Pengaturan, lalu coba lagi.",
+      "agentBinaryNotFound": "{{binary}} tidak ditemukan di PATH. Instal {{label}} untuk menggunakan pesan commit AI.",
+      "timedOut": "Pembuatan melebihi batas waktu setelah {{seconds}} detik.",
+      "outputTooLarge": "Perintah CLI {{label}} menghasilkan terlalu banyak output. Periksa konfigurasi CLI agen, lalu coba lagi.",
+      "windowsBatchUnsafeArguments": "{{label}} dijalankan melalui skrip batch Windows yang tidak dapat menggunakan perintah multi-baris sebagai argumen. Arahkan Pengaturan ke executable agen, atau gunakan perintah khusus tanpa {prompt} sehingga Prompt mengirimkan prompt pada stdin.",
+      "cliTerminated": "Perintah CLI {{label}} dihentikan sebelum selesai.",
+      "cliTerminatedWithDetail": "Perintah CLI {{label}} dihentikan sebelum selesai: {{detail}}",
+      "cliFailed": "Perintah CLI {{label}} gagal dengan kode {{exitCode}}.",
+      "cliFailedWithDetail": "Perintah CLI {{label}} gagal dengan kode {{exitCode}}: {{detail}}",
+      "agentReportedError": "{{label}} melaporkan galat.",
+      "emptyCommitMessage": "{{label}} mengembalikan pesan kosong.",
+      "emptyCommitMessageWithDetail": "{{label}} mengembalikan pesan kosong. Output CLI: {{detail}}",
+      "emptyPullRequestDetails": "{{label}} mengembalikan detail kosong.",
+      "emptyPullRequestDetailsWithDetail": "{{label}} mengembalikan detail kosong. Output CLI: {{detail}}",
+      "emptyJiraSummary": "{{label}} mengembalikan ringkasan kosong.",
+      "emptyJiraSummaryWithDetail": "{{label}} mengembalikan ringkasan kosong. Output CLI: {{detail}}",
+      "commitMessageUnparseable": "Pesan commit yang dihasilkan tidak dapat diurai.",
+      "pullRequestDetailsUnparseable": "Detail pull request yang dihasilkan tidak dapat diurai.",
+      "jiraSummaryEmptyAfterSanitization": "Ringkasan yang dihasilkan kosong setelah disanitasi.",
+      "jiraDescriptionRequired": "Deskripsi wajib diisi.",
+      "jiraAccountDisconnected": "Hubungkan kembali akun Jira yang dipilih di host ini.",
+      "jiraSummaryBusyInOtherDraft": "Judul Jira sedang dibuat di draf lain.",
+      "stagedChangesReadFailed": "Gagal membaca perubahan staged.",
+      "noStagedChanges": "Tidak ada perubahan staged untuk diringkas.",
+      "noBranchChanges": "Tidak ada perubahan branch untuk diringkas.",
+      "commandTemplateEmptyCommitMessage": "Template perintah untuk pesan commit kosong.",
+      "commandTemplateEmptyPullRequest": "Template perintah untuk detail pull request kosong.",
+      "commandTemplateEmptyBranchName": "Template perintah untuk nama branch kosong.",
+      "commandTemplateEmptyChatName": "Template perintah untuk nama chat kosong.",
+      "sourceControlAgentUnsupported": "Pilih agen Source Control AI yang didukung untuk tindakan ini di Pengaturan -> Git -> Source Control AI. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "chatNameAgentUnsupported": "Pilih agen nama chat yang didukung untuk tindakan ini di Pengaturan -> Chat -> Nama chat. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "sourceControlCustomCommandEmpty": "Perintah kustom kosong. Tambahkan di Pengaturan -> Git -> Source Control AI.",
+      "chatNameCustomCommandEmpty": "Perintah kustom kosong. Tambahkan di Pengaturan -> Chat -> Nama chat.",
+      "agentCannotGenerateCommitMessage": "Agen \"{{agent}}\" tidak mendukung pesan commit Source Control AI. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "agentCannotGeneratePullRequest": "Agen \"{{agent}}\" tidak mendukung detail pull request Source Control AI. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "agentCannotGenerateBranchName": "Agen \"{{agent}}\" tidak mendukung nama branch Source Control AI. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "agentCannotGenerateChatName": "Agen \"{{agent}}\" tidak mendukung nama chat. Agen yang didukung: {{agents}}, atau Perintah kustom.",
+      "noModelForAgent": "Tidak ada model yang tersedia untuk {{label}}.",
+      "planCustomCommandEmpty": "Perintah kustom kosong. Tambahkan di Pengaturan → Git → Pesan Commit AI.",
+      "planAgentUnsupported": "Agen \"{{agent}}\" tidak mendukung pesan commit AI.",
+      "planModelUnavailable": "Model \"{{model}}\" tidak tersedia untuk {{label}}.",
+      "planModelWithoutThinking": "Model \"{{model}}\" tidak mendukung tingkat thinking effort.",
+      "planThinkingLevelInvalid": "Level thinking \"{{level}}\" tidak valid untuk {{model}}."
+    }
+  },
+  "newWorkspace": {
+    "hostPicker": {
+      "title": "Buat Ruang Kerja Aktif"
+    },
+    "loadingDrawer": {
+      "loading": "Memuat…",
+      "downloading": "Mengunduh",
+      "downloadProgress": "Mengunduh… {{progress}}"
+    }
+  },
+  "tasks": {
+    "legacySurface": {
+      "sourceFallback": "Sumber masalah pilihan di bagian hulu tidak tersedia untuk {{repo}}. Menggunakan asal.",
+      "loadIssuesFailed": "Tidak dapat memuat masalah dari {{source}}.",
+      "retryLoadingIssues": "Coba lagi memuat masalah dari {{source}}",
+      "retrying": "Mencoba lagi...",
+      "subIssueDataUnavailable": "Data sub-issue tidak tersedia untuk token Anda.",
+      "mergeMethodTitle": "Metode penggabungan",
+      "pullRequestMergeMessage": "Pilih bagaimana permintaan penarikan ini harus digabungkan.",
+      "mergeRequestMergeMessage": "Pilih bagaimana permintaan penggabungan ini harus digabungkan.",
+      "mergeAction": "Gabungkan",
+      "mergeRequestTitle": "Merge request",
+      "mergePullRequestTitle": "Permintaan Gabungan Tarik",
+      "updateItemTitle": "Perbarui Barang"
+    },
+    "prFileDiff": {
+      "noTextChanges": "Tidak ada perubahan teks yang ditemukan.",
+      "showingDiffLines": "Menampilkan {{limit}} pertama dari {{total}} garis berbeda.",
+      "commentPlaceholder": "Tambahkan komentar ulasan",
+      "commentOnLine": "Komentar pada baris {{line}}"
+    },
+    "smartSourceModes": {
+      "smart": "Cerdas",
+      "branch": "Cabang",
+      "name": "Nama",
+      "openState": "Buka",
+      "mergedState": "Di-merge",
+      "closedState": "Ditutup",
+      "allStates": "Semua"
+    },
+    "taskViewOptions": {
+      "noGitHubTasks": "Tidak ada GitHub tugas",
+      "noGitLabTasks": "Tidak ada GitLab tugas",
+      "noLinearTasks": "Tidak ada Linear tugas",
+      "noJiraTasks": "Tidak ada tugas Jira",
+      "assignedSubtitle": "Masalah yang belum terselesaikan diberikan kepada Anda",
+      "reportedSubtitle": "Masalah yang belum terselesaikan yang Anda laporkan",
+      "allSubtitle": "Masalah yang belum terselesaikan di seluruh situs yang dipilih",
+      "doneSubtitle": "Masalah Anda yang baru-baru ini terselesaikan"
+    },
+    "tasksCreateDrawers": {
+      "newIssueTitle": "Edisi {{providerLabel}} Baru",
+      "repositorySubtitle": "Buat masalah di repositori yang dipilih.",
+      "linearTeamSubtitle": "Buat masalah di tim Linear yang dipilih.",
+      "repository": "Repositori",
+      "team": "Tim",
+      "issueSource": "Sumber issue",
+      "fileIn": "Berkas dalam {{slug}}",
+      "upstream": "Hulu",
+      "origin": "Asal",
+      "title": "Judul",
+      "titlePlaceholder": "Judul tugas",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Tambahkan konteks",
+      "createIssue": "Buat Masalah",
+      "linearTeam": "Linear Tim",
+      "connectLinearWorkspace": "Hubungkan Linear ruang kerja",
+      "linearConnectSubtitle": "Tempelkan kunci API Pribadi untuk menelusuri masalah dari ruang kerja tersebut.",
+      "personalApiKey": "Kunci API pribadi",
+      "linearSettingsLink": "Linear Pengaturan / Keamanan / Kunci API baru",
+      "keySecurityHint": "Kunci Anda dienkripsi melalui gantungan kunci OS host dan disimpan secara lokal.",
+      "connect": "Hubungkan",
+      "createWorkspaceIn": "Buat Ruang Kerja Di"
+    },
+    "filterPickers": {
+      "fieldsTitle": "Bidang Proyek",
+      "fieldsSubtitle": "Pilih bidang Proyek mana yang muncul di kartu item.",
+      "noFields": "Tampilan ini tidak memiliki kolom tambahan untuk ditampilkan.",
+      "fieldShown": "Ditampilkan di kartu",
+      "fieldHidden": "Tersembunyi dari kartu",
+      "gitlabView": "GitLab Lihat",
+      "gitlabFilter": "GitLab Menyaring",
+      "linearFilter": "Linear Menyaring",
+      "linearWorkspace": "Linear Ruang Kerja",
+      "switchWorkspaceFailed": "Gagal berpindah ruang kerja",
+      "teamsTitle": "Linear Tim",
+      "teamsSubtitle": "Pilih tim mana yang muncul di Tugas.",
+      "allTeams": "Semua tim",
+      "teams_one": "{{count}} tim",
+      "teams_other": "{{count}} tim",
+      "changeStatus": "Ubah Status",
+      "linearIssue": "Issue Linear",
+      "loadingStates": "Memuat status...",
+      "noStates": "Tidak ada negara bagian yang tersedia",
+      "jiraFilter": "Filter Jira",
+      "jiraSite": "Situs Jira"
+    },
+    "githubProjectList": {
+      "chooseProject": "Pilih proyek GitHub.",
+      "browseProjects": "Telusuri proyek",
+      "noItems": "Tidak ada item proyek",
+      "items": "Barang",
+      "pullRequestSubtitle": "Permintaan tarik · {{repository}}{{number}}",
+      "issueSubtitle": "Masalah · {{repository}}{{number}}",
+      "itemSubtitle": "Item proyek · {{repository}}{{number}}",
+      "emptyField": "Kosong",
+      "moreFields_one": "+{{count}} bidang",
+      "moreFields_other": "+{{count}} bidang"
+    },
+    "githubProjectPickers": {
+      "title": "GitHub Proyek",
+      "subtitle": "Pilih tampilan proyek untuk halaman Tugas.",
+      "searchProjects": "Cari proyek",
+      "addPlaceholder": "Tambah melalui URL atau owner/number",
+      "adding": "Menambahkan…",
+      "add": "Tambah",
+      "ownerLoadFailed": "Tidak dapat memuat proyek dari {{owner}}.",
+      "organizationsLoadFailed": "Beberapa organisasi tidak memuat ({{count}}).",
+      "addByUrlHint": "Gunakan Tambahkan berdasarkan URL untuk menjangkau proyek yang hilang.",
+      "organizationsError": "organisasi: {{message}}",
+      "loadFailed": "Gagal memuat proyek",
+      "noProjects": "Tidak ada proyek yang dimuat",
+      "retryHint": "Ketuk untuk mencoba lagi.",
+      "pinned": "Disematkan",
+      "recent": "Terbaru",
+      "pin": "Sematkan",
+      "browseLoading": "Jelajahi semua (memuat...)",
+      "browseAll": "Telusuri semua",
+      "noMatches": "Tidak ada proyek yang cocok.",
+      "noMoreProjects": "Tidak ada lagi proyek.",
+      "chooseView": "Pilih Tampilan Proyek",
+      "view": "Tampilan Proyek",
+      "unsupportedLayout": "Prompt belum mendukung GitHub tata letak Proyek ini.",
+      "sort": "Penyortiran Proyek"
+    },
+    "githubViewControls": {
+      "source": "Sumber: {{source}}",
+      "sort": "Urutkan: {{sort}}",
+      "fields": "Bidang: {{fields}}",
+      "openView": "Buka tampilan di GitHub"
+    },
+    "itemActions": {
+      "creating": "Membuat…",
+      "createWorkspace": "Buat Ruang Kerja",
+      "copyLinearLink": "Salin tautan Linear.",
+      "copyGitHubLink": "Salin tautan GitHub",
+      "mergePullRequest": "Gabungkan permintaan tarik",
+      "mergeConflicts": "GitHub laporan menggabungkan konflik.",
+      "mergeMergeRequest": "Gabungkan permintaan penggabungan",
+      "changeStatus": "Ubah status"
+    },
+    "itemDetailContent": {
+      "pipelineJobs_one": "{{count}} pekerjaan",
+      "pipelineJobs_other": "{{count}} pekerjaan",
+      "type": "Ketik",
+      "status": "Status",
+      "assignee": "Penerima tugas",
+      "project": "Proyek",
+      "assignees": "Assignee",
+      "description": "Deskripsi",
+      "checks": "Check",
+      "rerunFailed": "Pemutaran ulang gagal",
+      "rerunAll": "Jalankan ulang semuanya",
+      "noChecks": "Tidak ada pemeriksaan yang ditemukan.",
+      "pipeline": "Saluran pipa",
+      "none": "Tidak ada",
+      "noPipelineRuns": "Tidak ada pipeline run untuk MR ini.",
+      "subIssues": "Sub-masalah",
+      "noSubIssues": "Tidak ada sub-masalah.",
+      "subIssueTitle": "Judul sub-issue",
+      "addSubIssue": "Tambahkan sub-masalah",
+      "discussion": "Diskusi",
+      "noComments": "Tidak ada komentar."
+    },
+    "itemDetailDrawer": {
+      "refreshDetails": "Segarkan detailnya"
+    },
+    "itemFieldEditors": {
+      "title": "Judul",
+      "saveTitle": "Simpan judul",
+      "labels": "Label",
+      "none": "Tidak ada",
+      "loadingLabels": "Memuat label...",
+      "noLabels": "Tidak ada label di repositori ini.",
+      "addLabels": "Tambahkan label, pisahkan koma",
+      "removeLabels": "Hapus label, pisahkan koma",
+      "updateLabels": "Perbarui label",
+      "assignees": "Assignee",
+      "loadingAssignees": "Memuat penerima tugas...",
+      "noAssignableUsers": "Tidak ditemukan pengguna yang dapat ditetapkan untuk repositori ini.",
+      "addUsernames": "Tambahkan nama pengguna, dipisahkan koma",
+      "removeUsernames": "Hapus nama pengguna, dipisahkan koma",
+      "updateAssignees": "Perbarui penerima tugas"
+    },
+    "itemReviewSections": {
+      "descriptionPlaceholder": "Deskripsi",
+      "saveDescription": "Simpan deskripsi",
+      "noDescription": "Tidak ada deskripsi.",
+      "reviewersTitle": "Reviewer",
+      "noReviewersRequested": "Tidak ada reviewer yang diminta.",
+      "loadingReviewers": "Memuat pengulas...",
+      "noReviewerSuggestions": "Tidak ada saran pengulas ditemukan.",
+      "reviewersPlaceholder": "Minta pengulas",
+      "requestReview": "Minta peninjauan",
+      "changedFilesTitle": "File yang berubah",
+      "hideFile": "Sembunyikan",
+      "viewFile": "Lihat",
+      "markUnviewed": "Tandai belum dilihat",
+      "markViewed": "Tandai sudah dilihat",
+      "binaryFile": "Berkas biner.",
+      "fileContentsUnavailable": "Konten file tidak tersedia."
+    },
+    "linearList": {
+      "changeStatusFrom": "Ubah status dari {{status}}"
+    },
+    "linearViewControls": {
+      "groupLabel": "Grup: {{group}}",
+      "orderLabel": "Pesanan: {{order}}",
+      "displayButton": "Tampilan"
+    },
+    "listDisplayPickers": {
+      "linearViewTitle": "Linear Lihat",
+      "linearGroupTitle": "Grup Linear Masalah",
+      "linearOrderTitle": "Pesan Linear Masalah",
+      "displayPropertiesTitle": "Properti Tampilan",
+      "sortTasksTitle": "Urutkan Tugas"
+    },
+    "listSurface": {
+      "updateDesktopTitle": "Perbarui Prompt desktop",
+      "updateDesktopMessage": "Tampilan Tugas seluler ini memerlukan runtime desktop yang lebih baru.",
+      "jiraStatusFailed": "Gagal membaca status Jira",
+      "connectLinearTitle": "Hubungkan akun Linear Anda",
+      "connectLinearMessage": "Telusuri dan mulai kerjakan masalah Linear yang ditugaskan kepada Anda langsung dari Tugas.",
+      "connectLinearButton": "Hubungkan Linear"
+    },
+    "options": {
+      "githubDescription": "Masalah dan permintaan tarik",
+      "gitlabDescription": "Masalah dan permintaan penggabungan",
+      "linearDescription": "Masalah yang ditugaskan dan tim",
+      "jiraDescription": "Masalah yang ditugaskan dan dilaporkan",
+      "openState": "Buka",
+      "gitlabOpenDescription": "Buka masalah dan gabungkan permintaan",
+      "mergedState": "Di-merge",
+      "gitlabMergedDescription": "Permintaan penggabungan gabungan",
+      "closedState": "Ditutup",
+      "gitlabClosedDescription": "Masalah tertutup dan permintaan penggabungan",
+      "all": "Semua",
+      "gitlabAllDescription": "Status GitLab apa pun",
+      "linearAllDescription": "Masalah terbuka di seluruh ruang kerja yang terhubung",
+      "myIssues": "Masalah Saya",
+      "linearAssignedDescription": "Masalah yang ditugaskan kepada Anda",
+      "createdState": "Dibuat",
+      "linearCreatedDescription": "Masalah yang Anda buat",
+      "completedState": "Selesai",
+      "linearCompletedDescription": "Masalah yang baru saja diselesaikan",
+      "list": "Daftar",
+      "listDescription": "Baris terbitan yang ringkas",
+      "board": "Papan",
+      "boardDescription": "Kolom yang dikelompokkan",
+      "noGrouping": "Tanpa pengelompokan",
+      "status": "Status",
+      "assignee": "Penerima tugas",
+      "priority": "Prioritas",
+      "team": "Tim",
+      "updated": "Diperbarui",
+      "identifier": "Pengenal",
+      "labels": "Label",
+      "issues": "Issue",
+      "githubIssuesDescription": "Issue GitHub",
+      "pullRequests": "PR",
+      "githubPullRequestsDescription": "GitHub permintaan tarik",
+      "projects": "Proyek",
+      "githubProjectsDescription": "GitHub Tampilan proyek",
+      "githubOpenIssuesDescription": "Buka GitHub masalah",
+      "assignedToMe": "Ditugaskan kepada saya",
+      "githubAssignedIssuesDescription": "Masalah terbuka yang ditugaskan kepada Anda",
+      "openPullRequestsDescription": "Buka permintaan tarik",
+      "mine": "Milik saya",
+      "myPullRequestsDescription": "Tarik permintaan yang ditulis oleh Anda",
+      "needsReview": "Perlu review",
+      "reviewRequestsDescription": "Tinjau permintaan yang diberikan kepada Anda",
+      "projectMergeRequests": "Tuan Proyek",
+      "projectMergeRequestsDescription": "Gabungkan permintaan dan masalah berdasarkan repositori",
+      "myTodos": "Todo saya",
+      "myTodosDescription": "Menunggu GitLab tugas",
+      "updatedSortDescription": "Aktivitas terbaru terlebih dahulu",
+      "repository": "Repositori",
+      "repositorySortDescription": "Kelompokkan berdasarkan repositori, lalu aktivitas terbaru"
+    },
+    "projectComments": {
+      "comments_one": "{{count}} komentar",
+      "comments_other": "{{count}} komentar",
+      "discussion": "Diskusi",
+      "noComments": "Tidak ada komentar.",
+      "resolvedThreadBy": "Thread diselesaikan oleh {{author}}",
+      "resolvedCommentBy": "Komentar diselesaikan oleh {{author}}",
+      "show": "Tampilkan",
+      "editComment": "Sunting komentar",
+      "reopenThread": "Buka kembali rangkaian pesan",
+      "resolveThread": "Selesaikan utas",
+      "reply": "Balas"
+    },
+    "projectDetailDrawer": {
+      "repositoryNotInOrca": "Repositori tidak ada di Prompt",
+      "addRepositoryFromDesktop": "{{repository}} tidak ditambahkan ke Prompt. Tambahkan repositori ini dari aplikasi desktop, lalu segarkan Tasks seluler.",
+      "openInGitHub": "Buka di GitHub",
+      "copyRepository": "Salin repositori",
+      "projectSubtitle": "GitHub Proyek · {{repository}}{{itemNumber}}",
+      "type": "Ketik",
+      "pullRequest": "Tarik permintaan",
+      "issue": "Masalah",
+      "draftIssue": "Masalah draf",
+      "projectItem": "Barang proyek",
+      "status": "Status",
+      "issueType": "Tipe issue",
+      "noType": "Tidak ada tipe",
+      "loadingIssueTypes": "Memuat jenis masalah...",
+      "noIssueTypes": "Tidak ada jenis masalah yang dikonfigurasi untuk repositori ini.",
+      "clearType": "Tipe yang jelas",
+      "createWorkspace": "Buat Ruang Kerja",
+      "workspaceCreationRequirement": "Ruang kerja hanya dapat dibuat dari masalah GitHub dan permintaan tarik.",
+      "copyGitHubLink": "Salin tautan GitHub",
+      "reopenItem": "Buka kembali barang",
+      "closeItem": "Tutup barang",
+      "mergePullRequest": "Gabungkan permintaan tarik",
+      "mergeRepositoryRequirement": "Penggabungan memerlukan repositori ini di Prompt."
+    },
+    "projectFieldEditors": {
+      "projectFields": "Bidang proyek",
+      "invalidNumber": "Masukkan nomor yang valid.",
+      "invalidDate": "Masukkan tanggal sebagai YYYY-MM-DD.",
+      "noIterations": "Tidak ada iterasi yang tersedia.",
+      "completedIteration": "Selesai · {{startDate}} · {{duration}}d",
+      "upcomingIteration": "Saat ini & yang akan datang · {{startDate}} · {{duration}}d",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "Nomor",
+      "textPlaceholder": "Teks",
+      "saveField": "Simpan bidang",
+      "clearField": "Kosongkan bidang"
+    },
+    "projectMetadataEditors": {
+      "labels": "Label",
+      "none": "Tidak ada",
+      "loadingLabels": "Memuat label...",
+      "noLabels": "Tidak ada label di repositori ini.",
+      "assignees": "Assignee",
+      "loadingAssignees": "Memuat penerima tugas...",
+      "noAssignableUsers": "Tidak ditemukan pengguna yang dapat ditetapkan untuk repositori ini.",
+      "title": "Judul",
+      "saveTitle": "Simpan judul",
+      "description": "Deskripsi",
+      "saveDescription": "Simpan deskripsi",
+      "noDescription": "Tidak ada deskripsi."
+    },
+    "projectReviewPanels": {
+      "reviewers": "Reviewer",
+      "noReviewers": "Tidak ada reviewer yang diminta.",
+      "loadingReviewers": "Memuat pengulas...",
+      "noSuggestions": "Tidak ada saran pengulas ditemukan.",
+      "requestReviewers": "Minta pengulas",
+      "requestReview": "Minta peninjauan",
+      "checks": "Check",
+      "rerunFailed": "Pemutaran ulang gagal",
+      "rerunAll": "Jalankan ulang semuanya",
+      "noChecks": "Tidak ada pemeriksaan yang ditemukan.",
+      "changedFiles": "File yang berubah",
+      "hideFile": "Sembunyikan",
+      "viewFile": "Lihat",
+      "markUnviewed": "Tandai belum dilihat",
+      "markViewed": "Tandai sudah dilihat",
+      "binaryFile": "Berkas biner.",
+      "fileUnavailable": "Konten file tidak tersedia."
+    },
+    "providerControls": {
+      "projectMergeRequests": "Tuan Proyek",
+      "myTodos": "Todo saya",
+      "sort": "Urutkan: {{sortLabel}}"
+    },
+    "providerItemList": {
+      "previousPage": "Halaman sebelumnya",
+      "selectPage": "Pilih halaman, Halaman {{page}}",
+      "selectPageOfTotal": "Pilih halaman, Halaman {{page}} dari {{total}}",
+      "page": "Halaman {{page}}",
+      "pageOfTotal": "Halaman {{page}} dari {{total}}",
+      "nextPage": "Halaman berikutnya",
+      "intoBranch": "menjadi {{base}}"
+    },
+    "providerPickers": {
+      "taskSource": "Sumber Tugas",
+      "repos": "Repositori",
+      "repoDescription": "Pilih repositori mana yang akan ditanyakan.",
+      "allRepositories": "Semua repositori",
+      "issueSources": "GitHub Sumber Masalah",
+      "issueSourcesDescription": "Pilih apakah setiap repositori menanyakan dan membuat karya dari hulu atau asal.",
+      "noIssueSources": "Tidak ada sumber masalah alternatif yang tersedia.",
+      "queryingSource": "Membuat kueri {{source}}",
+      "upstream": "Hulu",
+      "origin": "Asal",
+      "githubView": "GitHub Lihat",
+      "pullRequests": "Tarik Permintaan",
+      "issues": "Issue",
+      "pages": "GitHub Halaman",
+      "pageHint": "Lompat ke halaman hasil yang dimuat atau tersedia.",
+      "pageNumber": "Halaman {{page}}",
+      "pageLoaded": "Dimuat",
+      "pageNotLoaded": "Memuat hasil yang lebih lama"
+    },
+    "reviewerLinear": {
+      "unassigned": "Belum ditugaskan",
+      "issues": "Issue"
+    },
+    "screenChrome": {
+      "refreshGitHub": "Muat ulang pekerjaan GitHub",
+      "refreshGitLab": "Muat ulang item kerja GitLab",
+      "refreshLinear": "Muat ulang Linear",
+      "refreshJira": "Muat ulang issue Jira",
+      "title": "Tugas",
+      "newGitHubIssue": "Issue GitHub baru",
+      "newLinearIssue": "Issue Linear baru",
+      "connectLinear": "Hubungkan Linear"
+    },
+    "searchControl": {
+      "projectPlaceholder": "Telusuri tampilan proyek...",
+      "jiraPlaceholder": "Jira JQL, mis. proyek = ABC DAN statusCategory != Selesai",
+      "providerPlaceholder": "Cari {{provider}} tugas..."
+    },
+    "workspaceCreateDrawer": {
+      "title": "Buat Ruang Kerja",
+      "repository": "Repositori",
+      "selectRepository": "Pilih repositori",
+      "sshConnection": "SSH Koneksi",
+      "remoteRepository": "Repositori jarak jauh",
+      "connecting": "Menghubungkan...",
+      "connect": "Hubungkan",
+      "workspaceName": "Nama Ruang Kerja",
+      "optional": "[Opsional]",
+      "agent": "Agen",
+      "connectFirst": "Hubungkan repositori terlebih dahulu",
+      "detectingAgents": "Mendeteksi agen…",
+      "advanced": "Lanjutan",
+      "startFrom": "Mulai dari",
+      "defaultBranch": "Cabang bawaan",
+      "createFrom": "Buat dari {{branch}}",
+      "addRepository": "Tambahkan repositori Git sebelum membuat ruang kerja Linear.",
+      "repositoryNotFound": "Repositori tidak ditemukan.",
+      "connectRepository": "Hubungkan Repositori"
+    },
+    "workspaceOptionPickers": {
+      "baseBranchTitle": "Mulai Dari",
+      "baseBranchSubtitle": "Pilih cabang atau referensi yang ada.",
+      "searchBranches": "Cari branch",
+      "defaultBranch": "Cabang bawaan",
+      "defaultBranchSubtitle": "Gunakan basis konfigurasi repositori ini",
+      "noBranches": "Tidak ada cabang yang cocok.",
+      "branchName": "Nama cabang: {{name}}",
+      "sparseCheckoutTitle": "Pembayaran Jarang",
+      "fullCheckout": "Checkout penuh",
+      "fullCheckoutSubtitle": "Gunakan seluruh repositori",
+      "editPreset": "Sunting {{name}}",
+      "newPreset": "Preset baru"
+    },
+    "workspaceTrustDrawers": {
+      "newSparsePreset": "Preset Jarang Baru",
+      "editSparsePreset": "Edit Preset Jarang",
+      "nameLabel": "Nama",
+      "namePlaceholder": "UI perender",
+      "directoriesLabel": "Direktori",
+      "directories_one": "direktori {{count}}.",
+      "directories_other": "{{count}} direktori",
+      "setupTitle": "Jalankan Skrip Pengaturan?",
+      "setupSubtitle": "{{name}} memerlukan pilihan pengaturan sebelum membuat ruang kerja ini.",
+      "creating": "Membuat…",
+      "runSetupAndCreate": "Jalankan pengaturan dan buat",
+      "skipSetupAndCreate": "Lewati penyiapan dan buat",
+      "setupChangedTitle": "skrip pengaturan {{name}} berubah",
+      "runSetupTitle": "Jalankan pengaturan dari {{name}}?",
+      "trustSubtitle": "Orca.yaml repositori ini berjalan di mesin Anda sebelum ruang kerja dimulai. Jalankan hanya jika Anda mempercayai repositori ini.",
+      "newSetupScript": "Skrip setup baru",
+      "setupScript": "Skrip setup",
+      "trustFailed": "Gagal mempercayai skrip penyiapan.",
+      "runHooks": "Jalankan hook",
+      "alwaysTrustAndRun": "Selalu percaya dan lari",
+      "dontRun": "Jangan jalankan"
+    },
+    "sparsePresetDraft": {
+      "repoRelativeDirectoriesRequired": "Gunakan direktori relatif terhadap repositori, bukan root, path absolut, atau segmen induk.",
+      "directoryRequired": "Tambahkan setidaknya satu direktori."
+    },
+    "composerSource": {
+      "baseFailed": "Gagal menyelesaikan cabang dasar.",
+      "forkPushWarning": "PR ini menonaktifkan \"Izinkan pengeditan dari pengelola\"; mendorong ke garpu mungkin ditolak oleh GitHub."
+    },
+    "detailCommentRenderers": {
+      "commentPlaceholder": "Tambahkan komentar",
+      "sendComment": "Kirim komentar",
+      "reopenThread": "Buka kembali rangkaian pesan",
+      "resolveThread": "Selesaikan utas",
+      "reply": "Balas",
+      "comments_one": "{{count}} komentar",
+      "comments_other": "{{count}} komentar",
+      "resolvedThreadBy": "Thread diselesaikan oleh {{author}}",
+      "resolvedCommentBy": "Komentar diselesaikan oleh {{author}}",
+      "show": "Tampilkan"
+    },
+    "pickerProjection": {
+      "sources_one": "{{count}} sumber",
+      "sources_other": "{{count}} sumber",
+      "repos_one": "{{count}} gudang",
+      "repos_other": "{{count}} repo",
+      "selectTarget": "Pilih sasaran",
+      "allSites": "Semua situs",
+      "allRepos": "Semua repo",
+      "updatedSort": "Diperbarui",
+      "fieldDescending": "{{field}} deskripsi",
+      "fieldAscending": "{{field}} tanya",
+      "viewOrder": "Lihat pesanan",
+      "selectedFields": "bidang {{selected}}/{{total}}.",
+      "fields": "Bidang",
+      "usesFieldDescending": "Menggunakan {{field}} deskripsi",
+      "usesFieldAscending": "Menggunakan {{field}} asc",
+      "usesGitHubRankOrder": "Menggunakan urutan peringkat GitHub.",
+      "currentlyDescending": "Saat ini desc · ketuk untuk menaik",
+      "currentlyAscending": "Saat ini asc · ketuk untuk turun",
+      "sortAscending": "Urutkan secara menaik",
+      "viewNumber": "Lihat #{{number}}",
+      "unsupportedLayout": "Tata letak tidak didukung di perangkat seluler"
+    },
+    "providerViewProjection": {
+      "defaultSubtitle": "{{subtitle}} · Bawaan",
+      "default": "Bawaan",
+      "openState": "Buka",
+      "allSites": "Semua situs",
+      "all": "Semua",
+      "list": "Daftar",
+      "noGrouping": "Tanpa pengelompokan",
+      "priority": "Prioritas",
+      "allWorkspaces": "Semua workspace",
+      "workspace": "Ruang kerja",
+      "allTeams": "Semua tim",
+      "teams_one": "{{count}} tim",
+      "teams_other": "{{count}} tim",
+      "projects": "Proyek",
+      "pullRequests": "PR",
+      "issues": "Issue",
+      "chooseProject": "Pilih proyek"
+    },
+    "workspaceCreateProjection": {
+      "nameRequired": "Nama wajib diisi.",
+      "nameTooLong": "Nama maksimal 80 karakter.",
+      "nameAlreadyExists": "\"{{name}}\" sudah ada.",
+      "openShell": "Buka cangkang"
+    },
+    "workspaceAgentSelection": {
+      "blankTerminal": "Terminal kosong"
+    },
+    "workspaceSshGate": {
+      "connected": "Terhubung",
+      "connecting": "Menghubungkan",
+      "deployingRelay": "Menyebarkan relai",
+      "reconnecting": "Menyambungkan ulang",
+      "authenticationFailed": "Otentikasi gagal",
+      "reconnectFailed": "Gagal menyambung kembali",
+      "connectionFailed": "Koneksi gagal",
+      "disconnected": "Terputus"
+    },
+    "worktreeCreateRetry": {
+      "createFailed": "Gagal membuat ruang kerja"
+    },
+    "hostedMerge": {
+      "merged": "Di-merge",
+      "closed": "Ditutup",
+      "conflicts": "Konflik",
+      "behind": "Tertinggal",
+      "blocked": "Diblokir",
+      "checksPending": "Check tertunda",
+      "ableToMerge": "Dapat di-merge",
+      "unknown": "Tidak diketahui"
+    },
+    "pagination": {
+      "pageUnreachable": "Halaman {{page}} melampaui apa yang dapat dihasilkan oleh pencarian GitHub.",
+      "loadPageFailed": "Halaman {{page}} tidak dapat dimuat dari GitHub.",
+      "noMoreResults": "Tidak ada hasil lagi di halaman {{page}}."
+    }
+  },
+  "terminal": {
+    "webView": {
+      "loadFailed": "Pemuatan Terminal WebView gagal",
+      "httpError": "Kesalahan HTTP Tampilan Web Terminal",
+      "renderProcessEnded": "Proses render Terminal WebView berakhir",
+      "documentStartFailed": "dokumen terminal gagal dimulai - {{message}}"
+    },
+    "keyDefinitions": {
+      "forwardDelete": "Hapus teruskan",
+      "arrowUp": "Panah ke atas",
+      "arrowDown": "Panah ke bawah",
+      "arrowLeft": "Panah ke kiri",
+      "arrowRight": "Panah ke kanan",
+      "accessoryArrowUp": "Panah Atas",
+      "accessoryArrowDown": "Panah Bawah",
+      "accessoryArrowLeft": "Panah Kiri",
+      "accessoryArrowRight": "Panah Kanan",
+      "interruptTerminal": "Terminal interupsi",
+      "sendEof": "Kirim EOF",
+      "clearScreen": "Layar jernih",
+      "suspendProcess": "Tangguhkan proses",
+      "reverseSearch": "Pencarian terbalik",
+      "startOfLine": "Mulai dari garis",
+      "endOfLine": "Akhir baris",
+      "deleteWordBackward": "Hapus kata mundur",
+      "clearLineBeforeCursor": "Hapus garis sebelum kursor"
+    },
+    "webviewEngineErrorState": {
+      "status": "status {{statusCode}}",
+      "code": "kode {{code}}",
+      "rendererCrashed": "penyaji mogok",
+      "title": "Terminal gagal memuat",
+      "reload": "Muat ulang"
+    },
+    "webviewNotificationDispatch": {
+      "unknownError": "Kesalahan terminal tidak diketahui"
+    },
+    "webviewReadyWatchdog": {
+      "initializeFailed": "Terminal tidak diinisialisasi - tidak ada sinyal siap dari tampilan terminal"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Ponsel dan komputer Anda harus berada pada Wi-Fi atau Tailscale yang sama. Relai mati di Prompt."
+    }
+  }
+}

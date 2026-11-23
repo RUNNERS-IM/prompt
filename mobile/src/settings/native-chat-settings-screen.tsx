@@ -1,7 +1,7 @@
 import { View, Text, Pressable, ScrollView, Switch } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
-import { ChevronLeft } from 'lucide-react-native'
+import { BackChevron } from '../components/ReadingChevron'
 import { colors, radii, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
@@ -27,7 +27,7 @@ export default function NativeChatSettingsScreen({ onBack }: { onBack?: () => vo
           style={styles.backButton}
           onPress={onBack ?? (() => router.back())}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>
           {t('settings.nativeChatSettingsScreen.title', 'Chat UI')}

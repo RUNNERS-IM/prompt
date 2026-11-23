@@ -1,16 +1,8 @@
 import { useCallback, useState, type ReactNode } from 'react'
 import { View, Text, Pressable, ScrollView, ActivityIndicator } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import {
-  ChevronLeft,
-  ChevronDown,
-  ChevronUp,
-  Activity,
-  CheckCircle2,
-  ScrollText,
-  XCircle,
-  AlertTriangle
-} from 'lucide-react-native'
+import { ChevronDown, ChevronUp, Activity, CheckCircle2, ScrollText, XCircle, AlertTriangle } from 'lucide-react-native'
+import { BackChevron } from '../components/ReadingChevron'
 import { colors, spacing } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { troubleshootCommonIssues } from './troubleshoot-common-issues'
@@ -74,7 +66,7 @@ export function TroubleshootView({
           style={styles.backButton}
           onPress={onBack}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>
           {t('diagnostics.troubleshootView.title', 'Troubleshooting')}

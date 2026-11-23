@@ -205,6 +205,10 @@
       "reviewNotes_one": "{{count}} review note",
       "reviewNotes_other": "{{count}} review notes"
     },
+    "presentation": {
+      "tabs_one": "{{count}} tab",
+      "tabs_other": "{{count}} tabs"
+    },
     "queuedMessageCardRow": {
       "images_one": "{{count}} image",
       "images_other": "{{count}} images"

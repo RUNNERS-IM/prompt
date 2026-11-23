@@ -1,0 +1,3952 @@
+{
+  "settings": {
+    "appearance": {
+      "theme": {
+        "system": "Hệ thống",
+        "light": "Sáng",
+        "dark": "Tối",
+        "heading": "CHỦ ĐỀ",
+        "description": "Hệ thống tuân theo cài đặt sáng hoặc tối của thiết bị này."
+      },
+      "title": "Giao diện",
+      "language": {
+        "systemWithCurrent": "Hệ thống ({{language}})",
+        "heading": "NGÔN NGỮ",
+        "description": "Hệ thống tuân theo ngôn ngữ của thiết bị này. Lời nhắc cấp phép luôn sử dụng ngôn ngữ của thiết bị."
+      }
+    },
+    "aboutScreen": {
+      "title": "Giới thiệu",
+      "tagline": "IDE tác nhân nguồn mở dành cho các nhà xây dựng 100x",
+      "sourceCode": "Prompt mã nguồn",
+      "openLinkFailed": "Không thể mở liên kết. Hãy thử lại."
+    },
+    "appUpdateSettingsRows": {
+      "checking": "Đang kiểm tra…",
+      "upToDate": "Đã cập nhật",
+      "checkFailed": "Không thể kiểm tra",
+      "neverChecked": "Không bao giờ",
+      "lastCheckedJustNow": "Vừa kiểm tra lần cuối",
+      "lastCheckedMinutes_one": "Kiểm tra lần cuối {{count}}phút trước",
+      "lastCheckedMinutes_other": "Kiểm tra lần cuối {{count}}phút trước",
+      "lastCheckedHours_one": "Kiểm tra lần cuối {{count}} giờ trước",
+      "lastCheckedHours_other": "Kiểm tra lần cuối {{count}} giờ trước",
+      "lastCheckedDays_one": "Kiểm tra lần cuối {{count}} ngày trước",
+      "lastCheckedDays_other": "Kiểm tra lần cuối {{count}} ngày trước",
+      "updateToVersion": "Cập nhật lên Prompt {{version}}",
+      "update": "Cập nhật",
+      "installedVersion": "Phiên bản {{version}}",
+      "checkUpdatesStatus": "Kiểm tra cập nhật, {{status}}",
+      "checkUpdates": "Kiểm tra cập nhật"
+    },
+    "browserSettingsScreen": {
+      "desktopBrowser": "Prompt trình duyệt trên máy tính để bàn",
+      "desktopBrowserDescription": "Mở trong trình duyệt truyền phát từ máy tính để bàn được ghép nối của bạn.",
+      "phoneBrowser": "Trình duyệt điện thoại",
+      "phoneBrowserDescription": "Mở trong Safari, Chrome hoặc trình duyệt khác trên điện thoại này.",
+      "title": "Trình duyệt",
+      "linksHeading": "LIÊN KẾT",
+      "linksDescription": "Chọn nơi mở các liên kết HTTP(S) được nhấn vào đầu ra của thiết bị đầu cuối.",
+      "loadFailed": "Không thể tải tùy chọn trình duyệt. Hãy thử lại.",
+      "saveFailed": "Không thể lưu tùy chọn trình duyệt. Hãy thử lại.",
+      "openTerminalLinks": "Mở liên kết thiết bị đầu cuối"
+    },
+    "menuItems": {
+      "appearance": "Giao diện",
+      "terminal": "thiết bị đầu cuối",
+      "chatUi": "Giao diện Chat",
+      "browser": "Trình duyệt",
+      "voice": "Giọng nói",
+      "notifications": "Thông báo",
+      "troubleshooting": "Khắc phục sự cố",
+      "about": "Giới thiệu"
+    },
+    "nativeChatSettingsScreen": {
+      "title": "Giao diện Chat",
+      "defaultViewHeading": "CHẾ ĐỘ XEM MẶC ĐỊNH",
+      "defaultViewDescription": "Chọn cách mở phiên tổng đài viên được hỗ trợ (Claude, Codex và các tổng đài viên có khả năng trò chuyện khác) trên thiết bị này. Terminal hiển thị CLI thô; Giao diện người dùng trò chuyện hiển thị giao diện trò chuyện giống như ứng dụng dành cho máy tính để bàn. Bạn vẫn có thể chuyển đổi bất kỳ phiên riêng lẻ nào từ menu nhấn và giữ của nó.",
+      "openInChatUi": "Mở phiên trong Giao diện người dùng trò chuyện",
+      "on": "Bật",
+      "off": "Tắt"
+    },
+    "nativeNotificationDeliverySettings": {
+      "loadFailed": "Không thể tải cài đặt phân phối. Mở lại màn hình này để thử lại.",
+      "saveFailed": "Không thể lưu cài đặt phân phối. Hãy thử lại.",
+      "updateDesktopHint": "Ghép nối máy tính để bàn được cập nhật để nhận thông báo trên điện thoại này."
+    },
+    "notificationDisplayTest": {
+      "loadFailed": "Không thể tải máy tính để bàn được ghép nối.",
+      "pairDesktop": "Ghép nối máy tính để bàn và thử lại.",
+      "connectDesktop": "Kết nối máy tính để bàn và thử lại.",
+      "updateDesktop": "Cập nhật máy tính để bàn của bạn để chạy thử nghiệm này.",
+      "desktopUnreachable": "Không thể truy cập máy tính để bàn. Hãy thử lại.",
+      "accepted": "Được chấp nhận bởi dịch vụ đẩy của Prompt Kiểm tra thông báo.",
+      "reconnectPhone": "Kết nối lại để đăng ký điện thoại này để nhận thông báo.",
+      "rateLimited": "Quá nhiều thông báo. Hãy thử lại sau.",
+      "pushServiceFailed": "Không thể gửi qua dịch vụ đẩy của Prompt. Hãy thử lại.",
+      "sendFailed": "Không thể gửi bài kiểm tra đẩy.",
+      "troubleReceivingAlerts": "Gặp sự cố khi nhận thông báo?",
+      "description": "Gửi bài kiểm tra thông qua dịch vụ đẩy của Prompt.",
+      "sending": "Đang gửi…",
+      "sendButton": "Gửi thông báo thử",
+      "troubleshooting": "Khắc phục sự cố"
+    },
+    "notificationSettingsScreen": {
+      "loadFailed": "Không thể tải cài đặt thông báo. Hãy thử lại.",
+      "saveFailed": "Không thể lưu cài đặt thông báo. Hãy thử lại.",
+      "notificationsBlocked": "Thông báo bị tắt trong cài đặt hệ thống.",
+      "description": "Nhận thông báo trên thiết bị này khi nhân viên cần thông tin đầu vào của bạn hoặc hoàn thành một nhiệm vụ.",
+      "title": "Thông báo",
+      "enableNotifications": "Bật thông báo",
+      "openSettingsFailed": "Không thể mở cài đặt hệ thống. Hãy thử lại.",
+      "openSettings": "Mở Cài đặt"
+    },
+    "pendingCredentialCleanupCard": {
+      "title": "Ghép nối dọn dẹp thông tin xác thực",
+      "retryFailed": "Việc dọn dẹp vẫn không thể được xác nhận. Hãy thử lại sau.",
+      "cleanupUnconfirmed_one": "Không thể xác nhận việc xóa thông tin xác thực {{count}} trên thiết bị này.",
+      "cleanupUnconfirmed_other": "Không thể xác nhận việc xóa thông tin đăng nhập {{count}} trên thiết bị này.",
+      "statusCheckFailed": "Không thể kiểm tra trạng thái dọn dẹp trên thiết bị này. Hãy thử lại để được an toàn.",
+      "retryCleanup": "Thử lại xóa thông tin xác thực ghép nối"
+    },
+    "menuScreen": {
+      "support": "Hỗ trợ"
+    },
+    "uiLanguageSettingsSection": {
+      "pseudoLanguage": "Giả (en-XA)"
+    },
+    "voiceSettingsScreen": {
+      "toggleMode": "Bật/tắt",
+      "holdMode": "Giữ",
+      "loadFailed": "Không tải được cài đặt giọng nói",
+      "updateFailed": "Không thể cập nhật",
+      "selectModelFailed": "Không thể chọn mô hình",
+      "downloadFailed": "Tải xuống thất bại",
+      "deleteFailed": "Xóa thất bại",
+      "noneSelected": "Không có lựa chọn nào",
+      "title": "Giọng nói",
+      "connectDesktop": "Kết nối với máy tính để bàn để quản lý cài đặt giọng nói.",
+      "loadFailedMessage": "Không tải được cài đặt giọng nói.",
+      "dictationHeading": "chính tả",
+      "enableDictation": "Bật nhập bằng giọng nói",
+      "dictationDescription": "Đọc chính tả văn bản vào bất kỳ ngăn tập trung nào trên màn hình của bạn.",
+      "dictationMode": "Chế độ nhập bằng giọng nói",
+      "dictationModeDescription": "Chuyển đổi: nhấn một lần để bắt đầu, một lần nữa để dừng. Giữ: ra lệnh trong khi giữ.",
+      "speechModelHeading": "MÔ HÌNH NÓI",
+      "speechModel": "Model giọng nói"
+    }
+  },
+  "common": {
+    "back": "Quay lại",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "continue": "Tiếp tục",
+    "ok": "được rồi",
+    "retry": "Thử lại",
+    "copied": "Đã sao chép",
+    "remove": "Gỡ",
+    "settings": "Cài đặt",
+    "delete": "Xóa",
+    "unknown": "Không rõ",
+    "confirm": "Xác nhận",
+    "copy": "Sao chép",
+    "done": "Xong",
+    "close": "Đóng",
+    "edit": "Chỉnh sửa",
+    "refresh": "Làm mới",
+    "open": "Mở"
+  },
+  "host": {
+    "edit": {
+      "missingHost": "Thiếu máy chủ.",
+      "hostRemoved": "Máy chủ này đã bị xóa khỏi điện thoại này.",
+      "loadFailed": "Không tải được máy chủ.",
+      "saveFailed": "Không lưu được máy chủ.",
+      "title": "Chỉnh sửa máy chủ",
+      "saveHost": "Lưu máy chủ",
+      "goBack": "Quay lại",
+      "help": "Thay đổi tên hiển thị hoặc địa chỉ kết nối. Để trống tên để sử dụng tên mà máy tính để bàn báo cáo. Chỉnh sửa địa chỉ chỉ chuyển đổi nơi điện thoại này kết nối — chúng không ghép nối lại. Sử dụng tính năng này khi có thể truy cập cùng một máy tính để bàn ở một IP khác (ví dụ: mạng LAN gia đình so với Tailscale).",
+      "name": "Tên",
+      "hostNamePlaceholder": "Tên máy chủ",
+      "address": "Địa chỉ",
+      "addressHint": "Chấp nhận IP, máy chủ: cổng hoặc ws:// / wss://. URL wss:// không có cổng sử dụng 443. Địa chỉ trần giữ cổng hiện tại (hoặc 6768).",
+      "connectionPreview": "Kết nối với {{endpoint}}"
+    }
+  },
+  "app": {
+    "mobileOnboarding": {
+      "saveChoiceFailed": "Lựa chọn của bạn không thể được lưu. Hãy thử lại.",
+      "notificationSettingsFailed": "Không thể cập nhật cài đặt thông báo. Hãy thử lại.",
+      "progress": "Tiến trình làm quen",
+      "stepProgress": "Bước {{step}} của {{total}}"
+    },
+    "notifications": {
+      "description": "Nhận thông báo của đại lý ngay cả khi đóng ứng dụng. Được phân phối thông qua dịch vụ đẩy của Prompt và Apple hoặc Google."
+    },
+    "pairConfirm": {
+      "connectTimedOut": "Không thể kết nối trong vòng {{seconds}} giây — xem nhật ký bên dưới để biết nơi kết nối bị dừng",
+      "pairingFailed": "Ghép nối không thành công: {{error}}",
+      "title": "Ghép nối với máy tính để bàn này?",
+      "description": "Bạn đã mở liên kết ghép nối từ máy tính để bàn của mình. Xác nhận để thêm nó vào máy chủ của bạn.",
+      "pairButton": "Cặp",
+      "connecting": "Đang kết nối…",
+      "pairingLog": "Nhật ký ghép nối",
+      "backToHome": "Trở về nhà"
+    },
+    "pairScan": {
+      "invalidQrCode": "Mã Prompt QR không hợp lệ",
+      "downloadQrCode": "Đó là mã tải xuống. Quét mã ghép nối ở bước 2 trên máy tính để bàn của bạn.",
+      "invalidPairingCode": "Mã ghép nối không hợp lệ - sao chép mã từ máy tính của bạn và dán lại",
+      "connectTimedOut": "Không thể kết nối trong vòng {{seconds}} giây — xem nhật ký bên dưới để biết nơi kết nối bị dừng",
+      "pairingFailed": "Ghép nối không thành công: {{error}}",
+      "title": "Ghép nối với máy tính để bàn",
+      "cameraDisabledTitle": "Quyền truy cập máy ảnh đã bị vô hiệu hóa",
+      "cameraPermissionDescription": "Quét mã QR từ Prompt trên máy tính để bàn của bạn hoặc dán mã ghép nối thay thế.",
+      "cameraDisabledDescription": "Cho phép truy cập máy ảnh trong Cài đặt hoặc dán mã ghép nối.",
+      "openSettings": "Mở Cài đặt",
+      "pasteInstead": "Dán mã thay thế",
+      "pasteCodeTitle": "Dán mã ghép nối",
+      "pasteCodeMessage": "Sao chép mã hiển thị bên dưới QR trên máy tính của bạn.",
+      "pasteCodePlaceholder": "orca://pair?code=... or paste the code",
+      "openDesktopStep": "Mở Prompt trên máy tính của bạn",
+      "openMobileSettingsStep": "Đi tới Cài đặt → Di động",
+      "scanCodeStep": "Quét mã QR",
+      "pastePairingCode": "Hoặc dán mã ghép nối",
+      "connecting": "Đang kết nối…",
+      "pairingLog": "Nhật ký ghép nối",
+      "tryAgain": "Thử lại"
+    },
+    "pair": {
+      "missingCode": "Thiếu mã ghép nối",
+      "backToHome": "Trở về nhà"
+    },
+    "terminalSettings": {
+      "smallestText": "Nhỏ nhất (50%)",
+      "smallerText": "Nhỏ hơn (75%)",
+      "defaultText": "Mặc định (100%)",
+      "largeText": "Lớn (125%)",
+      "largerText": "Lớn hơn (150%)",
+      "largestText": "Lớn nhất (200%)",
+      "restoreAfterMinutes_one": "Sau {{count}} phút",
+      "restoreAfterMinutes_other": "Sau {{count}} phút",
+      "keepPhoneSize": "Giữ kích thước điện thoại (mặc định)",
+      "restoreAfterSeconds_one": "Sau {{count}} giây",
+      "restoreAfterSeconds_other": "Sau {{count}} giây",
+      "title": "thiết bị đầu cuối",
+      "leaveAppHeading": "KHI BẠN RỜI ỨNG DỤNG",
+      "leaveAppDescription": "Khi bạn đang sử dụng thiết bị đầu cuối trên điện thoại, Prompt sẽ thu nhỏ thiết bị đầu cuối cho vừa với màn hình của bạn. Khi bạn đóng ứng dụng hoặc chuyển đi, điều này sẽ kiểm soát việc ứng dụng vẫn ở kích thước điện thoại (để các công cụ CLI tương tác không chỉnh lại) hay đổi kích thước trở lại màn hình của bạn. Bạn luôn có thể sử dụng Khôi phục trên biểu ngữ trên màn hình để thay đổi kích thước theo cách thủ công.",
+      "noPairedDesktops": "Chưa có máy tính để bàn nào được ghép nối. Ghép nối một để kiểm soát hành vi của thiết bị đầu cuối.",
+      "textSizeHeading": "KÍCH THƯỚC VĂN BẢN",
+      "textSizeDescription": "Chia tỷ lệ văn bản đầu cuối. Kích thước nhỏ hơn phù hợp với nhiều cột hơn với lề bên; kích thước lớn hơn hiển thị ít cột hơn — kéo sang một bên để xoay. Bạn cũng có thể chụm lại để phóng to thiết bị đầu cuối, thao tác này sẽ cập nhật cài đặt này. Chỉ hiển thị trên mỗi thiết bị; không thay đổi thiết bị đầu cuối máy tính để bàn.",
+      "textSize": "Cỡ chữ",
+      "keyboardInputHeading": "ĐẦU VÀO BÀN PHÍM",
+      "keyboardInputDescription": "Các đề xuất tự động hoàn thành, tự động sửa và chính tả chỉ áp dụng cho đầu vào lệnh được đệm. Sử dụng nút hai chữ V phía trên bàn phím để chuyển từ chế độ nhập trực tiếp, sau đó sửa lệnh của bạn trước khi chạm vào Gửi. Tắt theo mặc định để tránh viết lại lệnh, cờ hoặc đường dẫn.",
+      "autocomplete": "Tự động hoàn thành và tự động sửa",
+      "autocompleteOn": "Bật",
+      "autocompleteOff": "Tắt",
+      "restoreHost": "Khôi phục {{name}}",
+      "textSizePickerTitle": "Kích thước văn bản đầu cuối"
+    }
+  },
+  "accounts": {
+    "screen": {
+      "invalidSnapshot": "Ảnh chụp nhanh tài khoản không hợp lệ từ máy chủ",
+      "hostNotFound": "Không tìm thấy máy chủ",
+      "switchFailed": "Không thể chuyển đổi tài khoản",
+      "default": "Mặc định của hệ thống",
+      "agentLogin": "Sử dụng thông tin đăng nhập của chính đại lý",
+      "sessionWindow": "5 giờ",
+      "weeklyWindow": "7 ngày",
+      "title": "Tài khoản",
+      "refreshAccounts": "Làm mới tài khoản",
+      "resetsIn": "Đặt lại sau {{duration}}",
+      "resetsNow": "Đặt lại ngay",
+      "durationDays": "{{days}} ngày",
+      "durationDaysHours": "{{days}} ngày {{hours}} giờ",
+      "durationHours": "{{hours}} giờ",
+      "durationHoursMinutes": "{{hours}} giờ {{minutes}} phút",
+      "durationMinutes": "{{minutes}} phút",
+      "connectingTo": "Đang kết nối với {{name}}…",
+      "connecting": "Đang kết nối với máy chủ…",
+      "loadingAccounts": "Đang tải tài khoản…",
+      "manageAccountsHint": "Thêm hoặc xác thực lại tài khoản từ Cài đặt trên máy tính để bàn → Tài khoản.",
+      "useReset": "Sử dụng đặt lại"
+    }
+  },
+  "agentHistory": {
+    "sessionHistoryList": {
+      "messages_one": "{{count}} tin nhắn",
+      "messages_other": "{{count}} tin nhắn",
+      "currentWorktree": "cây công việc hiện tại",
+      "resumeSession": "Tiếp tục phiên đại lý",
+      "userRole": "người dùng",
+      "assistantRole": "trợ lý"
+    },
+    "panel": {
+      "workspace": "Không gian làm việc",
+      "project": "Dự án",
+      "all": "Tất cả",
+      "waitingForHost": "Đang đợi chủ nhà...",
+      "missingResumeId": "Phiên này thiếu id sơ yếu lý lịch.",
+      "unknownHostPlatform": "Không thể xác định nền tảng máy chủ.",
+      "sessionQueued": "Phiên đại lý được xếp hàng đợi.",
+      "resumeFailed": "Không thể tiếp tục phiên.",
+      "title": "Lịch sử phiên agent",
+      "refreshSessions": "Làm mới phiên đại lý",
+      "unavailable": "Lịch sử phiên đại lý không có sẵn",
+      "updateHost": "Cập nhật Prompt trên máy chủ này để duyệt lịch sử phiên tác nhân.",
+      "loadFailed": "Không thể tải",
+      "placeholder": "Phiên tìm kiếm, repo:, đường dẫn:",
+      "skipped_one": "{{count}} bản ghi bị bỏ qua",
+      "skipped_other": "Đã bỏ qua {{count}} bản ghi",
+      "noSessions": "Không có phiên đại lý",
+      "noSearchResults": "Không có phiên nào phù hợp với tìm kiếm của bạn.",
+      "emptyScope": "Không có phiên đại lý nào trước đây trong phạm vi này."
+    },
+    "resumeTarget": {
+      "runtimeUnavailable": "Tiếp tục từ lịch sử không có sẵn trong không gian làm việc được lưu trữ trong thời gian chạy.",
+      "differentHost": "Phiên này thuộc về một máy chủ khác. Mở không gian làm việc trên cùng máy chủ để tiếp tục.",
+      "openWorkspace": "Mở một không gian làm việc trước khi tiếp tục phiên."
+    },
+    "sessionCard": {
+      "untitledSession": "Phiên không có tiêu đề"
+    },
+    "useAgentHistoryState": {
+      "waitingForHost": "Đang chờ chủ nhà…",
+      "hostUnreachable": "Không thể kết nối với máy chủ",
+      "loadFailed": "Không thể tải phiên đại lý"
+    },
+    "worktreeNavigationActions": {
+      "sourceControl": "Quản lý mã nguồn",
+      "agentSessionHistory": "Lịch sử phiên agent"
+    }
+  },
+  "diagnostics": {
+    "connectionDiagnosticsView": {
+      "connecting": "đang kết nối",
+      "handshaking": "sự bắt tay",
+      "connected": "đã kết nối",
+      "disconnected": "đã ngắt kết nối",
+      "reconnecting": "kết nối lại",
+      "authFailed": "xác thực không thành công",
+      "title": "Chẩn đoán mạng",
+      "stateWithAttempt": "{{state}} · cố gắng {{attempts}}",
+      "copyReport": "Sao chép báo cáo",
+      "diagnosisHeading": "Điều này gợi ý gì",
+      "privacyHint": "Gửi báo cáo được biên tập lại có giới hạn kích thước bao gồm tên máy chủ, điểm cuối, phiên bản, trạng thái kết nối và sự kiện—không bao giờ gửi nội dung hoặc thông tin xác thực cuối cùng.",
+      "sending": "Đang gửi…",
+      "sent": "Đã gửi dữ liệu chẩn đoán",
+      "retrySending": "Thử gửi lại",
+      "sendDiagnostics": "Gửi chẩn đoán tới Prompt",
+      "noEvents": "Chưa có sự kiện kết nối nào. Các sự kiện xuất hiện khi ứng dụng quay số máy chủ này.",
+      "noHosts": "Không có máy chủ được ghép nối."
+    },
+    "mobileWebBundleProbeRow": {
+      "fetchBundle": "Tìm nạp gói web di động",
+      "connecting": "Đang kết nối…",
+      "fetching": "Đang tìm nạp gói…",
+      "bundle": "Gói",
+      "host": "Máy chủ",
+      "build": "Bản dựng",
+      "assets": "Tài sản",
+      "bytes": "Byte",
+      "elapsed": "Đã qua",
+      "elapsedMilliseconds": "{{elapsedMs}} mili giây",
+      "unknownHost": "máy chủ không xác định"
+    },
+    "mobileWebShellUpdateFailureRow": {
+      "title": "Cập nhật không gian làm việc"
+    },
+    "troubleshootCommonIssues": {
+      "notificationsTitle": "Thông báo đẩy",
+      "allowNotifications": "Kiểm tra xem cài đặt hệ thống có cho phép thông báo Prompt hay không và chế độ Lấy nét hoặc Không làm phiền đã tắt.",
+      "notificationNetwork": "Hãy thử mạng di động hoặc mạng Wi-Fi khác. Nếu cảnh báo đến sau khi chuyển đổi, mạng của bạn có thể đang trì hoãn việc gửi.",
+      "wifiTitle": "Mạng WiFi khác nhau",
+      "sameNetwork": "Cả hai thiết bị phải nằm trên cùng một mạng LAN (trừ khi được kết nối qua Tailscale).",
+      "sameSubnet": "Ethernet và WiFi phải chia sẻ cùng một mạng con.",
+      "reconnectWifi": "Hãy thử kết nối lại WiFi trên cả hai thiết bị.",
+      "firewallTitle": "Cổng chặn tường lửa {{port}}",
+      "linuxFirewall": "Linux: sudo ufw allow {{port}}",
+      "macosFirewall": "macOS: Cài đặt hệ thống → Mạng → Tường lửa — cho phép Prompt.",
+      "windowsFirewall": "Windows: Tường lửa bảo vệ → Cho phép ứng dụng — bật Prompt cho mạng riêng.",
+      "restrictedNetwork": "Mạng công ty/trường học có thể chặn P2P — hãy thử điểm phát sóng cá nhân.",
+      "desktopTitle": "Ứng dụng máy tính để bàn không chạy",
+      "openDesktop": "Prompt phải được mở trên màn hình của bạn để chấp nhận kết nối.",
+      "restartDesktop": "Hãy thử khởi động lại Prompt — máy chủ đồng hành bắt đầu khi khởi chạy.",
+      "pairAfterUpdate": "Sau khi cập nhật, bạn có thể cần ghép nối lại thông qua mã QR.",
+      "timeoutTitle": "Hết thời gian kết nối",
+      "wifiSignal": "Kiểm tra cường độ tín hiệu WiFi trên điện thoại của bạn.",
+      "retryHost": "Quay lại danh sách máy chủ và nhấn vào máy chủ của bạn để thử lại.",
+      "restartBothApps": "Khởi động lại cả hai ứng dụng nếu vẫn hết thời gian chờ.",
+      "tailscaleTitle": "Tailscale Máy chủ không thể truy cập được",
+      "keepTailscaleOn": "Các địa chỉ máy chủ như 100.x.x.x hoặc *.ts.net kết nối thông qua Tailscale — hãy BẬT nó.",
+      "restartTailscale": "iOS/Android có thể âm thầm chèn đường hầm: tắt và bật lại Tailscale trong ứng dụng Tailscale.",
+      "checkTailnet": "Kiểm tra xem máy tính để bàn có hoạt động không và hiển thị là đã kết nối trong tailnet của bạn.",
+      "updateTailscale": "Cập nhật ứng dụng Tailscale — các bản phát hành gần đây sửa lỗi kết nối lại.",
+      "vpnTitle": "Sự can thiệp VPN khác",
+      "vpnRouting": "VPN không thuộc Tailscale có thể định tuyến lưu lượng truy cập cục bộ thông qua máy chủ từ xa.",
+      "disableVpn": "Vô hiệu hóa VPN đó hoặc bật đường hầm phân chia/\"Cho phép mạng LAN\"."
+    },
+    "troubleshootView": {
+      "title": "Khắc phục sự cố",
+      "running": "Đang chạy…",
+      "runAgain": "Chạy lại",
+      "runDiagnostics": "Chạy chẩn đoán",
+      "viewNetworkDiagnostics": "Xem chẩn đoán mạng",
+      "commonIssues": "Các vấn đề chung"
+    },
+    "useTroubleshootDiagnostics": {
+      "pairedHosts": "Máy chủ được ghép nối",
+      "pairedCount": "{{count}} đã ghép nối",
+      "noPairedHosts": "Không có — quét QR để ghép nối",
+      "hostDataFailed": "Không thể đọc dữ liệu máy chủ",
+      "internet": "Internet",
+      "connected": "Đã kết nối",
+      "unexpectedResponse": "Phản hồi bất ngờ",
+      "noConnection": "Không có kết nối",
+      "reachable": "Có thể truy cập tại {{endpoint}}",
+      "hosts": "Máy chủ",
+      "hostTestFailed": "Không thể kiểm tra",
+      "platform": "Nền tảng"
+    },
+    "webShellUpdateFailureCopy": {
+      "failedJustNow": "Lần cập nhật cuối cùng từ {{hostName}} vừa rồi không thành công: {{reason}}{{offered}}. {{outcome}}",
+      "failedAgo": "Lần cập nhật cuối cùng từ {{hostName}} không thành công {{time}} trước: {{reason}}{{offered}}. {{outcome}}",
+      "reasonCopy": {
+        "noConnection": "không kết nối với máy chủ",
+        "connectionLost": "kết nối bị rớt",
+        "hostRefused": "chủ nhà từ chối đọc",
+        "replyUnreadable": "người tổ chức đã gửi thư trả lời ứng dụng này không thể đọc được",
+        "chunkOversize": "một đoạn lớn hơn mức mà máy chủ cho phép",
+        "assetOverlong": "một nội dung dài hơn bản kê khai tuyên bố",
+        "assetNoProgress": "việc đọc nội dung không có tiến triển",
+        "assetShort": "một tài sản đã kết thúc ở mức thấp hơn quy mô đã khai báo",
+        "assetChecksumMismatch": "tổng kiểm tra nội dung không khớp",
+        "buildChangedMidFetch": "bản dựng của máy chủ đã thay đổi trong quá trình tải xuống",
+        "chunkMisrouted": "một đoạn trả lời sai nội dung hoặc phần bù",
+        "assetEntryChanged": "một tài sản không còn khớp với bảng kê khai",
+        "rangeUndecodable": "một lần đọc nén không thể được giải mã",
+        "fetchStopped": "quá trình tải xuống đã bị dừng",
+        "cacheWriteFailed": "lưu tải xuống trên điện thoại này không thành công",
+        "unrecognisedError": "một lỗi không được nhận dạng"
+      },
+      "hostCodeCopy": {
+        "unavailable": "máy chủ không có gói không gian làm việc",
+        "buildChanged": "bản dựng của máy chủ đã thay đổi trong quá trình tải xuống",
+        "assetUnknown": "máy chủ không nhận ra tài sản",
+        "assetChanged": "một tài sản đã thay đổi trên máy chủ",
+        "offsetInvalid": "máy chủ đã từ chối phần bù đọc",
+        "readLimited": "máy chủ hạn chế đọc đồng thời"
+      },
+      "wallCopy": {
+        "bundleUnavailable": "máy chủ không có gói không gian làm việc",
+        "bundleShellTooOld": "ứng dụng này quá cũ đối với gói đã lưu",
+        "hostTooOldForBundle": "máy chủ quá cũ để lưu gói",
+        "bundleTooOldForHost": "gói đã lưu quá cũ đối với máy chủ",
+        "pageRouteUnlisted": "không gian làm việc của máy chủ không bao gồm màn hình này",
+        "pageRouteGrantMissing": "màn hình này cần một ứng dụng mới hơn"
+      },
+      "openedCached": "Quay trở lại phiên bản đã lưu.",
+      "openedCachedGeneration": "Quay trở lại phiên bản đã lưu (thế hệ {{generation}}).",
+      "blockedWorkspace": "Đã chặn không gian làm việc.",
+      "blockedReason": "Bị chặn: {{reason}}.",
+      "nativeRoute": "Hiển thị màn hình gốc.",
+      "routeUnavailable": "Cho thấy màn hình không có sẵn.",
+      "failed": "Hiển thị màn hình lỗi.",
+      "waiting": "Chờ đợi chủ nhà.",
+      "offeredGeneration": "(thế hệ {{generation}})"
+    }
+  },
+  "dictation": {
+    "setup": {
+      "serverUpdateRequired": "Cập nhật Prompt trên máy chủ này để sử dụng tính năng đọc chính tả bằng giọng nói.",
+      "alreadyActive": "Tính năng đọc chính tả đã được sử dụng trên máy tính hoặc điện thoại khác.",
+      "repairRequired": "Ghép nối lại điện thoại này với máy tính để sử dụng chức năng đọc chính tả.",
+      "sessionLost": "Đọc chính tả bị mất kết nối với máy tính. Hãy thử lại.",
+      "desktopUpdateRequired": "Cập nhật ứng dụng máy tính để bàn được ghép nối Prompt để sử dụng cài đặt giọng nói trên thiết bị di động.",
+      "loadFailed": "Không tải được mô hình đọc chính tả",
+      "downloadFailed": "Không thể bắt đầu tải xuống",
+      "deleteFailed": "Không xóa được mô hình",
+      "updateFailed": "Không cập nhật được cài đặt đọc chính tả",
+      "cloudModelNeedsKey": "Cần khóa OpenAI"
+    }
+  },
+  "home": {
+    "appUpdateCard": {
+      "title": "Prompt {{version}} có sẵn",
+      "updateAccessibilityLabel": "Prompt {{version}} có sẵn, nhấn để cập nhật",
+      "updateHint": "Nhấn để cập nhật",
+      "dismissAccessibilityLabel": "Loại bỏ Prompt {{version}} cập nhật"
+    },
+    "accountUsageCards": {
+      "sectionHeading": "Mức sử dụng tài khoản",
+      "systemDefault": "Mặc định của hệ thống",
+      "sessionWindow": "5 giờ",
+      "weeklyWindow": "7 ngày"
+    },
+    "emptyState": {
+      "openDesktopTitle": "Mở Prompt máy tính để bàn",
+      "openDesktopDescription": "Vào Cài đặt → Di động và tạo mã ghép nối QR.",
+      "scanCodeTitle": "Quét mã",
+      "scanCodeDescription": "Nhấn vào nút ở trên để mở máy quét. Trỏ vào mã QR trên màn hình của bạn.",
+      "connectedTitle": "Bạn đã kết nối",
+      "connectedDescription": "Máy tính để bàn của bạn sẽ xuất hiện ở đây. Mọi thứ đều được mã hóa từ đầu đến cuối.",
+      "title": "Kết nối máy tính để bàn của bạn",
+      "description": "Ghép nối với Prompt trên máy tính của bạn để kiểm tra các đại lý của bạn, chuyển sang bất kỳ thiết bị đầu cuối nào và thực hiện công việc từ điện thoại của bạn.",
+      "pairDesktop": "Ghép nối máy tính",
+      "stepsHeading": "Nó hoạt động như thế nào"
+    },
+    "listFooter": {
+      "resumeHeading": "Tiếp tục",
+      "tasksHeading": "Tác vụ",
+      "hostPickerTitle": "Mở tác vụ đang bật"
+    },
+    "listHeader": {
+      "daysHours": "{{days}} ngày {{hours}} giờ",
+      "hoursMinutes": "{{hours}} giờ {{minutes}} phút",
+      "minutes": "{{minutes}} phút",
+      "title": "Chào mừng trở lại",
+      "agentsSpawned": "Agent đã khởi chạy",
+      "agentTime": "Thời gian agent",
+      "prsCreated": "PR đã tạo",
+      "desktopsHeading": "Máy tính để bàn"
+    },
+    "screen": {
+      "pairingCheckFailed": "Không thể kiểm tra ghép nối",
+      "tryAgain": "Vui lòng thử lại.",
+      "removeHostFailed": "Không thể xóa máy chủ",
+      "removeHostTitle": "Xóa máy chủ",
+      "removeHostMessage": "Xóa \"{{name}}\"? Bạn có thể ghép nối lại sau."
+    },
+    "tasksCard": {
+      "title": "Tác vụ",
+      "noSources": "Không có nguồn tác vụ nào được kết nối",
+      "openProviderTasks": "Mở {{provider}} nhiệm vụ"
+    }
+  },
+  "hooks": {
+    "dictationDesktopStart": {
+      "recordingFailed": "Không thể bắt đầu ghi âm micrô"
+    },
+    "useMobileDictation": {
+      "microphonePermissionDenied": "Quyền sử dụng micrô bị từ chối",
+      "microphoneInitFailed": "Không khởi tạo được micrô",
+      "noSpeech": "Không phát hiện giọng nói.",
+      "microphoneInterrupted": "Đọc chính tả bằng giọng nói đã dừng do micrô bị gián đoạn. Hãy thử lại.",
+      "inputClosed": "Đọc chính tả bằng giọng nói đã dừng vì phiên này không còn chấp nhận đầu vào nữa. Hãy thử lại."
+    }
+  },
+  "hostScreen": {
+    "hostListActionSheetActions": {
+      "reconnect": "Kết nối lại",
+      "connect": "Kết nối",
+      "disconnect": "Ngắt kết nối",
+      "networkDiagnostics": "Chẩn đoán mạng",
+      "editHost": "Chỉnh sửa máy chủ"
+    },
+    "hostPendingCreationRow": {
+      "creatingWorkspace": "Đang tạo không gian làm việc…"
+    },
+    "hostRailActions": {
+      "accounts": "Tài khoản",
+      "tasks": "Tác vụ",
+      "floatingWorkspace": "Không gian làm việc nổi",
+      "newWorkspace": "Không gian làm việc mới",
+      "closeSearch": "Đóng tìm kiếm",
+      "searchWorkspaces": "Tìm không gian làm việc"
+    },
+    "hostScreenHeader": {
+      "workspaceOptions": "Tùy chọn không gian làm việc",
+      "activeFilters_one": "Tùy chọn không gian làm việc (bộ lọc {{count}} đang hoạt động)",
+      "activeFilters_other": "Tùy chọn không gian làm việc ({{count}} bộ lọc đang bật)",
+      "backToHosts": "Quay lại máy chủ",
+      "reconnect": "Kết nối lại",
+      "floatingWorkspace": "Không gian làm việc nổi",
+      "hideSidebar": "Ẩn thanh bên",
+      "accounts": "Tài khoản",
+      "tasks": "Tác vụ",
+      "closeSearch": "Đóng tìm kiếm",
+      "searchWorkspaces": "Tìm không gian làm việc"
+    },
+    "hostScreenOverlays": {
+      "deleteWorktree": "Xóa worktree",
+      "deleteConfirmMessage": "Xóa \"{{name}}\" ({{branch}})?",
+      "sleep": "Ngủ",
+      "unpin": "Bỏ ghim",
+      "pin": "Ghim",
+      "primaryWorktreeDeleteHint": "Worktree chính — không thể xóa. Hãy gỡ dự án thay thế.",
+      "removeHost": "Xóa máy chủ",
+      "removeHostMessage": "Xóa \"{{name}}\"? Bạn có thể ghép nối lại sau."
+    },
+    "hostWorkspaceList": {
+      "searchPlaceholder": "Tìm kiếm không gian làm việc…",
+      "searchWorkspaces": "Tìm không gian làm việc"
+    },
+    "workspaceDetailsSheet": {
+      "merged": "Đã merge",
+      "closed": "Đã đóng",
+      "draft": "Bản nháp",
+      "checksPassing": "Kiểm tra: Đạt",
+      "checksFailing": "Kiểm tra: Không đạt",
+      "checksPending": "Kiểm tra: Đang chờ xử lý",
+      "createdFromCli": "Tạo từ Prompt CLI",
+      "createdByNamedAutomation": "Được tạo bởi tự động hóa “{{name}}”",
+      "createdByAutomation": "Do automation tạo",
+      "openLinkWithTitle": "Mở {{label}}, {{title}}",
+      "openLink": "Mở {{label}}",
+      "prOpen": "Mở"
+    },
+    "workspaceOptionControls": {
+      "none": "Không có",
+      "status": "Trạng thái",
+      "pr": "PR",
+      "project": "Dự án",
+      "name": "Tên",
+      "agentActivitySort": "Hoạt động của agent",
+      "recent": "Gần đây",
+      "manual": "Thủ công",
+      "agentActivitySortDescription": "Agent cần chú ý trước, sau đó đến hoạt động gần nhất.",
+      "manualWorkspaceOrderDescription": "Kéo không gian làm việc để sắp xếp trong từng nhóm.",
+      "manualProjectOrderDescription": "Kéo dự án để sắp xếp",
+      "recentProjectOrderDescription": "Hoạt động gần nhất của không gian làm việc",
+      "detailed": "Chi tiết",
+      "compact": "Gọn",
+      "fullList": "Danh sách đầy đủ",
+      "githubTicket": "Ticket GitHub",
+      "linearIssue": "Issue Linear",
+      "jiraIssue": "Issue Jira",
+      "prMrLink": "Liên kết PR/MR",
+      "automation": "Tự động hóa",
+      "notes": "Ghi chú",
+      "ports": "Cổng",
+      "agentActivity": "Hoạt động của agent",
+      "host": "Máy chủ",
+      "githubIssues": "Issue trên GitHub",
+      "linearIssues": "Issue Linear",
+      "jiraIssues": "Issue Jira",
+      "agentStatuses": "Trạng thái agent",
+      "branchFolderPath": "Branch / đường dẫn thư mục",
+      "branchName": "Tên branch",
+      "selectedCount": "{{count}} trên {{total}}",
+      "allHosts": "Tất cả máy chủ",
+      "allProjects": "Tất cả dự án",
+      "searchProjectsPlaceholder": "Tìm kiếm dự án…",
+      "searchProjects": "Tìm kiếm dự án",
+      "hover": "Khi di chuột qua",
+      "agentActivityLayout": "Bố cục hoạt động của agent"
+    },
+    "workspaceOptionsSheet": {
+      "hosts": "Máy chủ",
+      "projects": "Dự án",
+      "groupBy": "Nhóm theo",
+      "sortBy": "Sắp xếp theo",
+      "projectOrder": "Thứ tự dự án",
+      "cardLayout": "Bố cục thẻ",
+      "showProperties": "Hiện thuộc tính",
+      "cardDisplay": "Hiển thị thẻ",
+      "hideSleeping": "Ẩn mục đang ngủ",
+      "exceptDefaultBranch": "Trừ default branch",
+      "hideDefaultBranch": "Ẩn default branch",
+      "hideAutomationCreated": "Ẩn mục do automation tạo",
+      "hideCliCreated": "Ẩn mục do CLI tạo",
+      "hideOtherClientWorkspaces": "Ẩn không gian làm việc từ client khác",
+      "hideDetachedHead": "Ẩn detached HEAD",
+      "show": "Hiện",
+      "filters": "Bộ lọc",
+      "localMac": "Địa phương Mac",
+      "localWindows": "Windows cục bộ",
+      "localLinux": "Linux cục bộ",
+      "thisComputer": "Máy tính này",
+      "waitingForDesktop": "Vẫn đang chờ máy tính để bàn",
+      "savingToDesktop": "Lưu vào máy tính để bàn",
+      "backToOptions": "Quay lại tùy chọn Không gian làm việc",
+      "workspaceOptions": "Tùy chọn không gian làm việc",
+      "syncedAcrossDevices": "Đã đồng bộ hóa trên các thiết bị của bạn",
+      "clearFilters": "Xóa bộ lọc"
+    }
+  },
+  "webShell": {
+    "shellStateScreen": {
+      "isolationUnavailable": "WebView của thiết bị này quá cũ để mở không gian làm việc một cách an toàn.",
+      "downloadFailed": "Không thể tải xuống ứng dụng mới nhất từ ​​máy chủ này.",
+      "hostProfileUnreadable": "Không thể đọc máy chủ này trên thiết bị của bạn. Hãy thử lại.",
+      "statusUnreadable": "Không thể đọc trạng thái của máy chủ này. Quay lại và mở lại nó.",
+      "renderProcessGone": "Không gian làm việc ngừng phản hồi.",
+      "documentLoadFailed": "Không thể mở được ứng dụng đã tải xuống.",
+      "tryAgain": "Thử lại",
+      "connectToDownload": "Kết nối với máy chủ này để tải xuống ứng dụng mới nhất",
+      "openingWorkspace": "Mở không gian làm việc",
+      "checkingHost": "Kiểm tra máy chủ"
+    }
+  },
+  "navigation": {
+    "hostStackScreens": {
+      "host": "Máy chủ",
+      "editHost": "Chỉnh sửa máy chủ",
+      "accounts": "Tài khoản",
+      "tasks": "Tác vụ",
+      "terminal": "thiết bị đầu cuối",
+      "sourceControl": "Quản lý mã nguồn",
+      "agentSessionHistory": "Lịch sử phiên agent",
+      "changes": "Thay đổi",
+      "pullRequest": "Pull request",
+      "workspace": "Không gian làm việc"
+    }
+  },
+  "notifications": {
+    "notificationDeliverySection": {
+      "onlyWhenAway": "Chỉ khi rời khỏi máy tính để bàn",
+      "onlyWhenAwayHint": "Sau 3 phút không sử dụng bàn phím hoặc chuột hoặc khi bị khóa.",
+      "sound": "Âm thanh thông báo",
+      "suppressWhileFocused": "Ức chế trong khi tập trung",
+      "suppressWhileFocusedHint": "Bỏ qua cảnh báo về không gian làm việc đang mở trên điện thoại này.",
+      "footer": "Các loại cảnh báo tuân theo cài đặt thông báo của từng màn hình được ghép nối. Thông báo tạm dừng sau 7 ngày không sử dụng ứng dụng này; mở nó và kết nối lại để tiếp tục."
+    },
+    "desktopChannel": {
+      "silentName": "Prompt thông báo im lặng",
+      "name": "Thông báo trên màn hình"
+    }
+  },
+  "onboarding": {
+    "onboardingPage": {
+      "sessionViewTitle": "Phiên nên mở như thế nào?",
+      "notificationsTitle": "Đừng bỏ lỡ khi đại lý cần bạn",
+      "sessionViewDescription": "Chọn mở phiên của tổng đài viên được hỗ trợ trong thiết bị đầu cuối hay Giao diện người dùng trò chuyện trên thiết bị này. Nhấn và giữ tab phiên để chuyển đổi chế độ xem của nó hoặc thay đổi mặc định sau này trong Cài đặt.",
+      "notificationsDescription": "Nhận thông báo trên điện thoại này khi nhân viên kết thúc hoặc đang chờ — ngay cả khi bạn không sử dụng ứng dụng.",
+      "notificationsDisclosure": "Được gửi qua dịch vụ đẩy của Prompt sau khi máy tính để bàn của bạn không hoạt động trong 3 phút. Thay đổi điều này bất cứ lúc nào trong Cài đặt.",
+      "useChatUi": "Sử dụng giao diện người dùng trò chuyện",
+      "openInChatUi": "Mở phiên trong Giao diện người dùng trò chuyện",
+      "keepTerminal": "Giữ thiết bị đầu cuối",
+      "openInTerminal": "Phiên mở trong thiết bị đầu cuối",
+      "enableNotifications": "Bật thông báo",
+      "enableAgentNotifications": "Bật thông báo đại lý",
+      "notNow": "Để sau",
+      "skipNotifications": "Bỏ qua thông báo bây giờ"
+    },
+    "notificationOnboardingPreview": {
+      "codexFinished": "Codex đã hoàn thành",
+      "testsPassing": "Các bài kiểm tra đang trôi qua.",
+      "claudeNeedsInput": "Claude cần đầu vào",
+      "waitingOnYou": "Đang đợi bạn.",
+      "now": "vừa xong"
+    }
+  },
+  "connection": {
+    "connectionHealth": {
+      "signInRequired": "Yêu cầu đăng nhập trên {{host}}",
+      "signInDetail": "Đăng nhập vào Prompt trên máy tính để bàn của bạn để kết nối lại",
+      "hostOffline": "{{host}} đang ngoại tuyến",
+      "hostOfflineDetail": "Kiểm tra xem nó có hoạt động không, Prompt đang chạy và bạn đã đăng nhập",
+      "relayAccessExpired": "Quyền truy cập chuyển tiếp đã hết hạn trong {{host}}",
+      "rePairDetail": "Ghép nối lại với máy tính để bàn của bạn",
+      "relayUnreachable": "Không thể tiếp cận Rơle",
+      "checkConnection": "Kiểm tra kết nối của bạn",
+      "tailscaleHint": "kiểm tra Tailscale",
+      "hostFallback": "Máy chủ",
+      "pairingInvalid": "Ghép nối không hợp lệ - ghép nối lại với máy tính để bàn của bạn",
+      "connected": "Đã kết nối",
+      "relayConnectFailed": "Không thể kết nối qua Rơle",
+      "connectingViaRelay": "Kết nối qua Rơle…",
+      "disconnected": "Đã ngắt kết nối",
+      "desktopUnreachable": "Không thể kết nối với máy tính để bàn",
+      "connectFailed": "Không thể kết nối",
+      "reconnecting": "Đang kết nối lại…",
+      "connecting": "Đang kết nối…",
+      "labelWithHint": "{{label}} — {{hint}}"
+    },
+    "hostEndpoint": {
+      "addressRequired": "Nhập địa chỉ máy chủ.",
+      "invalidPort": "Cổng phải là 1–65535.",
+      "invalidScheme": "Sử dụng ws:// hoặc wss:// (hoặc máy chủ: cổng).",
+      "invalidAddress": "Không phải là một địa chỉ hợp lệ.",
+      "pathOrQueryNotAllowed": "Máy chủ không được bao gồm đường dẫn hoặc truy vấn.",
+      "invalidHostname": "Không phải là tên máy chủ hợp lệ.",
+      "hostnameRequired": "Thiếu tên máy chủ."
+    },
+    "connectionPathLabel": {
+      "directTailscale": "Trực tiếp · Tailscale",
+      "directLan": "Trực tiếp · LAN",
+      "directViaTailscale": "Trực tiếp qua Tailscale",
+      "directViaLan": "Trực tiếp qua mạng LAN"
+    },
+    "pairConfirmState": {
+      "missingCode": "Thiếu mã ghép nối",
+      "invalidCode": "Không phải mã ghép nối hợp lệ"
+    },
+    "rpcClientStreamRegistry": {
+      "interrupted": "Kết nối bị gián đoạn",
+      "endedBeforeReady": "Yêu cầu phát trực tuyến đã kết thúc trước khi nó sẵn sàng."
+    },
+    "rpcClientTerminalBinaryFrame": {
+      "unsupportedFrame": "Khung luồng thiết bị đầu cuối không được hỗ trợ (mã opcode {{opcode}})."
+    }
+  },
+  "worktree": {
+    "agentRowDisplay": {
+      "working": "Đang xử lý",
+      "monitoring": "Đang theo dõi tác vụ nền",
+      "blocked": "Bị chặn",
+      "waiting": "Đang chờ nhập liệu",
+      "interrupted": "Đã bị ngắt",
+      "failed": "Thất bại",
+      "unconfirmed": "Không thể xác nhận",
+      "idle": "Không hoạt động",
+      "unverifiable": "Chưa có cập nhật gần đây",
+      "stopping": "Đang dừng…",
+      "justNow": "vừa xong",
+      "minutes_one": "{{count}} phút",
+      "minutes_other": "{{count}} phút",
+      "hours_one": "{{count}} giờ",
+      "hours_other": "{{count}} giờ",
+      "days_one": "{{count}} ngày",
+      "days_other": "{{count}} ngày",
+      "done": "Xong"
+    },
+    "hostWorkspaceListStates": {
+      "checkHost": "Kiểm tra xem máy tính của bạn có hoạt động không và Prompt đang chạy",
+      "loadFailed": "Không thể tải không gian làm việc từ máy chủ này",
+      "retrying": "Worktree.ps không thành công ({{error}}) — tự động thử lại",
+      "noMatches": "Không có không gian làm việc phù hợp",
+      "noFilterMatches": "Không có bộ lọc không gian làm việc nào phù hợp",
+      "empty": "Không có không gian làm việc",
+      "reopen": "Mở lại để cập nhật",
+      "reopenDetail": "Máy chủ này liệt kê các không gian làm việc theo cách mà trang này chưa biết."
+    },
+    "workspaceListSections": {
+      "pinned": "Đã ghim",
+      "all": "Tất cả",
+      "inReview": "Đang review",
+      "inProgress": "Đang tiến hành",
+      "closed": "Đã đóng",
+      "done": "Xong"
+    }
+  },
+  "components": {
+    "agentLaunchNotice": {
+      "updateRequired": "Cập nhật Prompt trên máy tính của bạn để khởi động tác nhân từ điện thoại của bạn.",
+      "statusUnreadable": "Không thể đọc trạng thái của máy chủ này. Đang thử lại…",
+      "copyFailed": "Không thể sao chép",
+      "copyPrompt": "Sao chép prompt"
+    },
+    "agentSpinner": {
+      "monitoring": "Đang theo dõi tác vụ nền",
+      "unconfirmed": "Không thể xác nhận"
+    },
+    "agentStateDot": {
+      "monitoring": "Đang theo dõi tác vụ nền",
+      "unverifiable": "Chưa có cập nhật gần đây"
+    },
+    "authFailedBanner": {
+      "message": "Xác thực không thành công - trước tiên hãy thử kết nối lại; nếu nó vẫn bị lỗi, hãy ghép nối lại từ máy tính để bàn."
+    },
+    "authFailedBannerActions": {
+      "repair": "Ghép nối lại",
+      "webNote": "Kết nối lại hoặc xóa máy chủ này khỏi ứng dụng Prompt."
+    },
+    "codexResetCreditAction": {
+      "earnedReset": "Đã đạt được Codex thiết lập lại giới hạn tỷ lệ",
+      "resettingLabel": "Đặt lại giới hạn tốc độ Codex",
+      "useResetLabel": "Sử dụng thiết lập lại giới hạn tốc độ Codex",
+      "scopedHint": "Sử dụng một lần đặt lại kiếm được cho {{scopeLabel}}",
+      "activeAccountHint": "Sử dụng một lần đặt lại kiếm được cho tài khoản Codex đang hoạt động",
+      "resetting": "Đang đặt lại…",
+      "useReset": "Sử dụng đặt lại"
+    },
+    "customKeyModal": {
+      "editing": "Đang sửa",
+      "navigation": "Điều hướng",
+      "function": "chức năng",
+      "addShortcut": "Thêm phím tắt",
+      "shortcutCombo": "Tổ hợp phím tắt",
+      "pickKey": "Chọn một chìa khóa",
+      "textMacro": "Macro văn bản",
+      "shortcutComboHint": "Xây dựng hợp âm phím Ctrl, Alt và Shift",
+      "textMacroHint": "Gửi lệnh văn bản tùy chỉnh",
+      "manageShortcuts": "Quản lý phím tắt",
+      "manageShortcutsHint": "Hiển thị, ẩn hoặc sắp xếp lại các phím tắt",
+      "modifiers": "sửa đổi",
+      "key": "Khóa",
+      "moreKeys": "Phím khác — Tab, mũi tên, F1–F12…",
+      "add": "Thêm",
+      "label": "Nhãn",
+      "labelPlaceholder": "ví dụ: xây dựng",
+      "command": "Lệnh",
+      "commandPlaceholder": "ví dụ: xây dựng pnpm",
+      "pressEnter": "Nhấn Enter"
+    },
+    "dragReorderRow": {
+      "dragToReorder": "Kéo để sắp xếp lại",
+      "reorderHint": "Sử dụng các thao tác di chuyển lên và di chuyển xuống để sắp xếp lại mà không cần kéo",
+      "moveUp": "Di chuyển lên",
+      "moveDown": "Di chuyển xuống"
+    },
+    "hostDiagnosticsLink": {
+      "viewDiagnostics": "Xem chẩn đoán mạng"
+    },
+    "hostProtocolGate": {
+      "checkingCompatibility": "Kiểm tra tính tương thích của máy chủ"
+    },
+    "hostRouteNoticeBanner": {
+      "dismissNotice": "Đóng thông báo"
+    },
+    "jiraConnectPrompt": {
+      "updateDesktop": "Cập nhật Prompt máy tính để bàn",
+      "connectOnDesktop": "Kết nối Jira trên máy tính để bàn của bạn",
+      "credentialUnreadable": "Jira đã được lưu nhưng không thể đọc được: {{credentialError}}",
+      "connectHint": "Thêm trang Jira của bạn vào Prompt máy tính để bàn trong Cài đặt → Tích hợp, sau đó kiểm tra lại.",
+      "checkAgain": "Kiểm tra lại"
+    },
+    "dictationSetupSheet": {
+      "loadFailed": "Không tải được",
+      "downloadFailed": "Tải xuống thất bại",
+      "selectFailed": "Không thể chọn mô hình",
+      "updateFailed": "Không thể cập nhật",
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{details}} · {{progress}}%",
+      "modelExtracting": "{{details}} · đang trích xuất…",
+      "title": "Thiết lập nhập bằng giọng nói",
+      "description": "Tải xuống hoặc chọn một kiểu máy và bật tính năng đọc chính tả trên máy tính được ghép nối — tất cả đều từ đây.",
+      "enabled": "Đã bật tính năng đọc chính tả",
+      "recommended": "Khuyến nghị",
+      "inUse": "Đang dùng",
+      "useModel": "Sử dụng {{model}}",
+      "use": "Dùng",
+      "downloadModel": "Tải xuống {{model}}",
+      "download": "Tải xuống"
+    },
+    "diffReviewBody": {
+      "loadingReview": "Đang tải bài đánh giá...",
+      "reviewUnavailable": "Đánh giá không có sẵn",
+      "loadFailed": "Không thể tải bài đánh giá",
+      "noReviewableChanges": "Không có thay đổi nào có thể xem lại",
+      "tryDifferentFilter": "Hãy thử một bộ lọc đánh giá khác.",
+      "loadingDiff": "Đang tải diff…",
+      "diffTruncated": "Sự khác biệt đã bị cắt bớt để xem trước trên thiết bị di động.",
+      "binaryDiff": "Khác biệt nhị phân",
+      "diffTooLarge": "Khác biệt quá lớn",
+      "deletedFile": "Tệp đã xóa",
+      "diffUnavailable": "Khác biệt không có sẵn",
+      "binaryMessage": "Không thể hiển thị tệp này dưới dạng văn bản trên thiết bị di động.",
+      "tooLargeMessage": "Sự khác biệt này quá lớn đối với bản xem trước trên thiết bị di động.",
+      "deletedMessage": "Tập tin này đã bị xóa. Thêm ghi chú tệp hoặc đánh dấu nó đã được xem xét.",
+      "selectFile": "Chọn một tập tin để xem xét.",
+      "retryLabel": "Thử tải lại bài đánh giá"
+    },
+    "diffReviewDrawers": {
+      "discardTitle": "Hủy tập tin",
+      "discardMessage": "Hủy các thay đổi đối với \"{{filePath}}\"? Điều này không thể hoàn tác được.",
+      "discard": "Loại bỏ",
+      "actionsTitle": "Xem lại hành động",
+      "stageableFiles_one": "{{count}} các tập tin chưa được phân loại đã được xem xét có thể được phân loại",
+      "stageableFiles_other": "{{count}} các tập tin chưa được phân loại đã được xem xét có thể được phân loại",
+      "sendNotes": "Gửi ghi chú",
+      "terminalLabel": "{{title}} ({{id}})",
+      "terminal": "thiết bị đầu cuối",
+      "newAgentSession": "Phiên đại lý mới",
+      "updateRequired": "Cập nhật Prompt trên máy tính của bạn",
+      "statusUnreadable": "Không thể đọc trạng thái của máy chủ này. Đang thử lại…",
+      "copyNotes": "Sao chép ghi chú",
+      "sendUnsentNotes": "Gửi ghi chú chưa gửi",
+      "clearSentNotes": "Xóa ghi chú đã gửi",
+      "stageReviewedFiles": "Giai đoạn đánh giá tập tin",
+      "markUnreviewed": "Đánh dấu là chưa được xem xét",
+      "openInSession": "Mở trong phiên",
+      "loadingSessions": "Đang tải phiên đại lý...",
+      "unsentNotes_one": "{{count}} ghi chú chưa gửi",
+      "unsentNotes_other": "{{count}} ghi chú chưa gửi",
+      "editNote": "Chỉnh sửa ghi chú",
+      "addNote": "Thêm ghi chú",
+      "lineNumber": "Dòng {{lineNumber}}",
+      "fileNote": "Tập tin ghi chú",
+      "cancelNote": "Hủy ghi chú",
+      "reviewNote": "Xem lại ghi chú",
+      "saveLineNote": "Lưu ghi chú trên dòng {{lineNumber}}",
+      "deleteNote": "Xóa ghi chú",
+      "completeTitle": "Đánh giá hoàn tất",
+      "fileSummary_one": "{{fileCount}} tập tin được xem xét, {{count}} ghi chú",
+      "fileSummary_other": "{{fileCount}} tập tin được xem xét, {{count}} ghi chú",
+      "filesSummary_one": "{{fileCount}} tập tin được xem xét, {{count}} ghi chú",
+      "filesSummary_other": "{{fileCount}} tập tin được xem xét, {{count}} ghi chú",
+      "stageReviewedLabel": "Giai đoạn xem xét các tập tin",
+      "stageReviewed": "Giai đoạn được đánh giá",
+      "sendNotesLabel": "Gửi ghi chú cho đại lý"
+    },
+    "diffReviewFileSummary": {
+      "branchFrom": "Chi nhánh từ {{oldPath}}",
+      "stagedFrom": "Dàn dựng từ {{oldPath}}",
+      "unstagedFrom": "Chưa được dàn dựng từ {{oldPath}}",
+      "branch": "chi nhánh",
+      "staged": "Đã stage",
+      "unstaged": "Chưa stage",
+      "reviewed": "Đã đánh giá",
+      "changed": "Đã thay đổi",
+      "notes_one": "{{count}} lưu ý",
+      "notes_other": "{{count}} ghi chú",
+      "staleCount": "{{count}} cũ",
+      "editFileNote": "Chỉnh sửa ghi chú tập tin",
+      "stale": "Cũ",
+      "previousHunk": "phần trước",
+      "hunk": "một gã đàn ông to lớn",
+      "nextHunk": "Phần tiếp theo"
+    },
+    "diffReviewFooter": {
+      "stageFile": "Tập tin sân khấu",
+      "stage": "Sân khấu",
+      "unstageFile": "Tập tin hủy giai đoạn",
+      "unstage": "Bỏ stage",
+      "discardFile": "Hủy tập tin",
+      "discard": "Loại bỏ",
+      "previousFile": "tập tin trước",
+      "addFileNote": "Thêm ghi chú tập tin",
+      "note": "Ghi chú",
+      "markFileReviewed": "Đánh dấu tập tin đã xem xét",
+      "reviewed": "Đã đánh giá",
+      "markReviewed": "Đánh dấu đã đánh giá",
+      "nextFile": "Tệp tiếp theo"
+    },
+    "diffReviewHeader": {
+      "filterAll": "Tất cả",
+      "showAllFiles": "Hiển thị tất cả các tập tin đánh giá",
+      "filterUnreviewed": "Chưa được xem xét",
+      "showUnreviewedFiles": "Hiển thị các tệp đánh giá chưa được xem xét",
+      "filterNotes": "Ghi chú",
+      "showNotesFiles": "Hiển thị ghi chú xem lại tập tin",
+      "filterUnstaged": "Chưa stage",
+      "showUnstagedFiles": "Hiển thị các tệp đánh giá chưa được phân loại",
+      "filterStaged": "Đã stage",
+      "showStagedFiles": "Hiển thị các tệp đánh giá theo giai đoạn",
+      "filterBranch": "chi nhánh",
+      "showBranchFiles": "Hiển thị các tập tin đánh giá chi nhánh",
+      "title": "Thay đổi",
+      "openPullRequestSidebar": "Mở thanh bên yêu cầu kéo",
+      "openReviewActions": "Mở hành động đánh giá",
+      "reviewedProgress": "{{reviewedCount}}/{{queueLength}} đã được đánh giá",
+      "unsentNotes_one": "{{count}} ghi chú chưa gửi",
+      "unsentNotes_other": "{{count}} ghi chú chưa gửi"
+    },
+    "diffReviewLine": {
+      "addedLineNumber": "Đã thêm dòng {{number}}",
+      "addedLine": "Đã thêm dòng",
+      "deletedLineNumber": "Đã xóa dòng {{number}}",
+      "deletedLine": "Dòng đã xóa",
+      "contextLineNumber": "Dòng ngữ cảnh {{number}}",
+      "contextLine": "Dòng ngữ cảnh",
+      "addNoteOnLine": "Thêm ghi chú trên dòng {{number}}",
+      "editNoteOnLine": "Chỉnh sửa ghi chú trên dòng {{number}}"
+    },
+    "homeQuickActions": {
+      "title": "Thao tác nhanh",
+      "pairDesktop": "Ghép nối máy tính",
+      "newWorkspace": "Không gian làm việc mới"
+    },
+    "hostCard": {
+      "worktreeAccessibilitySummary": "{{summary}}, {{activeCount}} đang hoạt động",
+      "pairingInvalid": "Ghép nối không hợp lệ",
+      "pairingTemporarilyUnavailable": "Ghép nối tạm thời không khả dụng",
+      "updateDesktopHint": "Cập nhật máy tính để bàn Prompt và đăng nhập để kết nối từ mọi nơi",
+      "repairHint": "Nhấn để ghép nối lại với máy tính để bàn của bạn",
+      "unlockHint": "Mở khóa điện thoại của bạn rồi nhấn để thử lại",
+      "openHost": "Mở {{title}}",
+      "hostActions": "Hành động cho {{title}}"
+    },
+    "htmlPreview": {
+      "previewRenderedHtml": "Xem trước HTML được hiển thị",
+      "preview": "Xem trước",
+      "viewHtmlSource": "Xem nguồn HTML",
+      "source": "Nguồn",
+      "title": "Xem trước HTML"
+    },
+    "prSidebar": {
+      "loading": "Đang tải yêu cầu kéo…",
+      "loadFailed": "Đã xảy ra lỗi.",
+      "retryLoading": "Thử tải lại yêu cầu kéo",
+      "notPermitted": "Không được phép — tài khoản GitHub của bạn chưa được kết nối."
+    },
+    "richMarkdownEditor": {
+      "linkUrl": "URL liên kết",
+      "imageUrl": "URL hình ảnh",
+      "insert": "Chèn"
+    },
+    "richMarkdownToolbar": {
+      "body": "Thân hình",
+      "heading1": "H1",
+      "heading2": "H2",
+      "heading3": "H3",
+      "bold": "In đậm",
+      "italic": "In nghiêng",
+      "strike": "Gạch ngang",
+      "bulletList": "Danh sách dấu đầu dòng",
+      "numberedList": "Danh sách đánh số",
+      "checklist": "Danh sách kiểm tra",
+      "quote": "Trích dẫn",
+      "link": "Liên kết",
+      "image": "Hình ảnh",
+      "inlineCode": "Mã nội tuyến",
+      "codeBlock": "Khối mã"
+    },
+    "searchField": {
+      "clearSearch": "Xóa tìm kiếm"
+    },
+    "sourceCopyButton": {
+      "copyFailed": "Sao chép không thành công",
+      "clipboardRejected": "Clipboard đã từ chối văn bản.",
+      "failed": "Thất bại",
+      "copiedLoaded": "Đã tải bản sao",
+      "copyLoaded": "Đã tải bản sao",
+      "couldNotCopy": "Không thể sao chép"
+    },
+    "workspaceNameInput": {
+      "placeholder": "Tên workspace"
+    },
+    "newWorkspaceFab": {
+      "newWorkspace": "Không gian làm việc mới"
+    },
+    "newWorkspaceSetupScriptField": {
+      "label": "Script setup",
+      "hooks": "MÓC",
+      "run": "Chạy",
+      "skip": "Bỏ qua",
+      "runSetupCommand": "Chạy lệnh setup"
+    },
+    "newWorkspaceSshConnectionField": {
+      "label": "SSH Kết nối",
+      "connecting": "Đang kết nối...",
+      "connect": "Kết nối",
+      "serverRecovery": "Máy chủ của nó cần khôi phục từ máy tính để bàn: Cài đặt → SSH máy chủ → Máy chủ khôi phục."
+    },
+    "newWorktreeFormSheet": {
+      "createWorktree": "Tạo worktree",
+      "noProjectsFound": "Không tìm thấy dự án nào",
+      "nameOrCreateFrom": "Tên hoặc 'Tạo từ'",
+      "workspaceName": "Tên workspace",
+      "agent": "đại lý",
+      "connectTargetFirst": "Kết nối mục tiêu đầu tiên",
+      "advanced": "Nâng cao",
+      "note": "Ghi chú",
+      "notePlaceholder": "Viết ghi chú",
+      "connectTarget": "Kết nối mục tiêu"
+    },
+    "newWorktreeModal": {
+      "remoteRepository": "Kho lưu trữ từ xa"
+    },
+    "newWorktreeModalDrawers": {
+      "project": "Dự án",
+      "runOn": "Chạy trên",
+      "agent": "đại lý"
+    },
+    "newWorktreeProjectTargetFields": {
+      "project": "Dự án",
+      "selectProject": "Chọn một dự án",
+      "runOn": "Chạy trên",
+      "selectRunTarget": "Chọn mục tiêu chạy"
+    },
+    "protocolBlockScreen": {
+      "updateMobileTitle": "Cập nhật Prompt Di động",
+      "updateDesktopTitle": "Cập nhật Prompt trên máy tính của bạn",
+      "refreshWorkspaceTitle": "Làm mới không gian làm việc di động",
+      "refreshWorkspaceBody": "Không gian làm việc được lưu trong bộ nhớ đệm cho máy chủ này cũ hơn so với mong đợi của máy tính để bàn. Kết nối lại với máy chủ này để tải xuống máy chủ hiện tại.",
+      "mobileTooOldAppStore": "Máy tính để bàn này cần có ứng dụng Di động Prompt mới hơn. Cập nhật Prompt Thiết bị di động từ App Store, sau đó thử lại máy chủ này.",
+      "mobileTooOldGitHubReleases": "Máy tính để bàn này cần có ứng dụng Di động Prompt mới hơn. Cập nhật Prompt Thiết bị di động từ GitHub Bản phát hành, sau đó thử lại máy chủ này.",
+      "workspaceNeedsUpdateAppStore": "Không gian làm việc di động của máy tính để bàn này cần có ứng dụng Di động Prompt mới hơn. Cập nhật Prompt Thiết bị di động từ App Store, sau đó thử lại máy chủ này.",
+      "workspaceNeedsUpdateGitHubReleases": "Không gian làm việc di động của máy tính để bàn này cần có ứng dụng Di động Prompt mới hơn. Cập nhật Prompt Thiết bị di động từ GitHub Bản phát hành, sau đó thử lại máy chủ này.",
+      "desktopTooOldBody": "Ứng dụng dành cho máy tính để bàn được ghép nối này quá cũ so với ứng dụng dành cho thiết bị di động Prompt hiện tại của bạn. Cập nhật Prompt trên máy tính của bạn, sau đó thử lại máy chủ này.",
+      "openAppStore": "Mở App Store",
+      "openGitHubReleases": "Mở GitHub Bản phát hành",
+      "getVersion": "Nhận Prompt {{version}}",
+      "refreshRecoveryNote": "Nếu thông báo này vẫn còn, hãy xóa máy chủ này và ghép nối lại.",
+      "updateRecoveryNote": "Đã cập nhật chưa? Quay trở lại Máy chủ và làm mới kết nối. Nếu thông báo này vẫn còn, hãy xóa máy chủ này và ghép nối lại.",
+      "backToHosts": "Quay lại máy chủ"
+    },
+    "setupHookTrustDrawer": {
+      "scriptChangedTitle": "Tập lệnh thiết lập của {{repoName}} đã thay đổi",
+      "runSetupTitle": "Chạy thiết lập từ {{repoName}}?",
+      "description": "Orca.yaml của kho lưu trữ này chạy trước khi không gian làm việc bắt đầu. Chỉ chạy nó nếu bạn tin cậy kho lưu trữ này.",
+      "newScriptLabel": "Setup script mới",
+      "scriptLabel": "Script setup",
+      "runHooks": "Chạy hook",
+      "alwaysTrustAndRun": "Luôn tin tưởng và chạy",
+      "dontRun": "Không chạy"
+    },
+    "smartWorkspaceAdvancedFields": {
+      "name": "Tên",
+      "workspaceName": "Tên workspace",
+      "branchName": "Tên branch",
+      "derivedFromName": "Bắt nguồn từ tên"
+    },
+    "smartWorkspaceSourceDrawer": {
+      "title": "Tên hoặc 'Tạo từ'",
+      "crossRepoMessage": "Mục này tồn tại trong {{owner}}/{{repo}}.",
+      "switchRepo": "Chuyển sang {{repoName}}",
+      "connectRepository": "Kết nối kho lưu trữ với các nguồn tìm kiếm.",
+      "gitHubRemoteRequired": "Kho lưu trữ SSH này cần một điều khiển từ xa GitHub để liệt kê các vấn đề và PR.",
+      "noResults": "Không tìm thấy kết quả nào.",
+      "typeWorkspaceName": "Nhập tên không gian làm việc vào trường bên dưới.",
+      "searchPlaceholder": "Nhập tên hoặc tìm kiếm nguồn"
+    },
+    "smartWorkspaceSourceField": {
+      "optional": "[Tùy chọn]",
+      "openSelectedSource": "Mở nguồn đã chọn",
+      "searchPlaceholder": "Nhập tên hoặc tìm kiếm nguồn"
+    },
+    "smartWorkspaceSourceRow": {
+      "useName": "Sử dụng \"{{name}}\"",
+      "nameWorkspace": "Đặt tên cho không gian làm việc này",
+      "createBranch": "Tạo nhánh \"{{name}}\"",
+      "newBranch": "Branch mới",
+      "pullRequest": "PR #{{number}}",
+      "issue": "Vấn đề #{{number}}",
+      "mergeRequest": "MR !{{number}}"
+    },
+    "terminalShortcutSettings": {
+      "shortcutBar": "THANH TẮT",
+      "shortcutBarDescription": "Chuyển đổi các phím để hiển thị hoặc ẩn chúng và giữ tay cầm để kéo phím theo thứ tự bạn muốn trên thanh phím tắt của thiết bị đầu cuối.",
+      "resetDefaults": "Đặt lại mặc định",
+      "resetDescription": "Hiển thị mọi phím tắt tích hợp theo thứ tự ban đầu",
+      "customShortcuts": "PHÍM TẮT TÙY CHỈNH",
+      "empty": "Chưa có phím tắt tùy chỉnh nào được xác định.",
+      "removeShortcut": "Xóa {{label}}",
+      "addShortcut": "Thêm lối tắt tùy chỉnh…",
+      "addDescription": "Tạo tổ hợp phím hoặc macro văn bản"
+    },
+    "voiceModelList": {
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{size}} · {{progress}}%",
+      "modelExtracting": "{{size}} · đang trích xuất…",
+      "recommended": "Khuyến nghị",
+      "inUse": "Đang dùng",
+      "useModel": "Sử dụng {{label}}",
+      "use": "Dùng",
+      "deleteModel": "Xóa {{label}}",
+      "downloadModel": "Tải xuống {{label}}"
+    },
+    "workspaceDetailPlaceholder": {
+      "title": "Không có không gian làm việc mở",
+      "description": "Chọn một không gian làm việc từ thanh bên để mở terminal ở đây."
+    },
+    "worktreeListRow": {
+      "folder": "Thư mục",
+      "remoteHost": "Máy chủ từ xa",
+      "project": "Dự án {{repo}}",
+      "child": "đứa trẻ",
+      "children_one": "{{count}} đứa trẻ",
+      "children_other": "{{count}} mục con"
+    },
+    "accountsSnapshot": {
+      "invalidSnapshot": "Ảnh chụp nhanh tài khoản không hợp lệ từ máy chủ"
+    },
+    "codexResetCredit": {
+      "available_one": "{{count}} có sẵn thiết lập lại",
+      "available_other": "{{count}} có sẵn đặt lại",
+      "resetTitle": "Đặt lại giới hạn tỷ lệ",
+      "alreadyAppliedTitle": "Đặt lại đã được áp dụng",
+      "refresh": "Codex mức sử dụng đã được làm mới.",
+      "nothingToResetTitle": "Không có gì để thiết lập lại",
+      "nothingToResetMessage": "Không có khoảng thời gian giới hạn tỷ lệ Codex đủ điều kiện nào đã hết.",
+      "noResetTitle": "Không có thiết lập lại",
+      "noResetMessage": "Tài khoản này không kiếm được tín dụng đặt lại nào.",
+      "invalidResponse": "Phản hồi đặt lại không hợp lệ từ máy chủ",
+      "expiryNowSingle": "Hết hạn ngay bây giờ",
+      "expiryNowMultiple": "Mục tiếp theo hết hạn ngay bây giờ",
+      "expiryMinutesSingle": "Hết hạn sau {{minutes}} phút",
+      "expiryMinutesMultiple": "Tiếp theo sẽ hết hạn sau {{minutes}} phút",
+      "expiryHoursMinutesSingle": "Hết hạn sau {{hours}} giờ {{minutes}} phút",
+      "expiryHoursMinutesMultiple": "Tiếp theo sẽ hết hạn sau {{hours}}h {{minutes}}phút",
+      "expiryHoursSingle": "Hết hạn sau {{hours}} giờ",
+      "expiryHoursMultiple": "Tiếp theo sẽ hết hạn sau {{hours}}h",
+      "expiryDaysHoursSingle": "Hết hạn sau {{days}}d {{hours}}h",
+      "expiryDaysHoursMultiple": "Tiếp theo sẽ hết hạn sau {{days}}d {{hours}}h",
+      "expiryDaysSingle": "Hết hạn sau {{days}} ngày",
+      "expiryDaysMultiple": "Tiếp theo sẽ hết hạn sau {{days}}d"
+    },
+    "markdownBlocks": {
+      "copyCode": "Sao chép mã",
+      "openImage": "Mở hình ảnh"
+    },
+    "mountedBottomDrawer": {
+      "dismissDrawer": "Loại bỏ ngăn kéo"
+    },
+    "newWorktreeAgentSelection": {
+      "blankTerminal": "Terminal trống"
+    },
+    "useCodexResetCreditAction": {
+      "hostAccount": "{{identity}} trên máy chủ",
+      "hostAccountConfirmMessage": "Việc này sẽ dành một lần đặt lại kiếm được cho {{identity}} trên máy chủ và ngay lập tức đặt lại các khoảng thời gian giới hạn tỷ lệ đủ điều kiện.",
+      "hostSelectedAccount": "tài khoản được quản lý đã chọn trên máy chủ",
+      "hostSelectedAccountConfirmMessage": "Việc này dành một lần đặt lại kiếm được cho tài khoản được quản lý đã chọn trên máy chủ và ngay lập tức đặt lại khoảng thời gian giới hạn tỷ lệ đủ điều kiện.",
+      "wslAccount": "{{identity}} trên WSL {{distro}}",
+      "wslAccountConfirmMessage": "Điều này dành một lần đặt lại kiếm được cho {{identity}} trên WSL {{distro}} và ngay lập tức đặt lại các khoảng thời gian giới hạn tỷ lệ đủ điều kiện.",
+      "wslSelectedAccount": "tài khoản được quản lý đã chọn trên WSL {{distro}}",
+      "wslSelectedAccountConfirmMessage": "Việc này dành một lần đặt lại kiếm được cho tài khoản được quản lý đã chọn trên WSL {{distro}} và ngay lập tức đặt lại khoảng thời gian giới hạn tỷ lệ đủ điều kiện.",
+      "detailsChanged": "Chi tiết đặt lại đã thay đổi",
+      "detailsChangedMessage": "Tài khoản hoặc đề nghị đặt lại đã thay đổi trước khi chủ nhà liên hệ Codex. Xem lại các chi tiết được cập nhật, sau đó xác nhận lại.",
+      "resetFailed": "Không thể đặt lại giới hạn tỷ lệ",
+      "confirmTitle": "Sử dụng thiết lập lại giới hạn tỷ lệ?"
+    },
+    "nativeScreenRecovery": {
+      "title": "Đã xảy ra lỗi",
+      "tryAgain": "Thử lại",
+      "home": "Thư mục chính"
+    }
+  },
+  "pullRequest": {
+    "linkPrForm": {
+      "title": "Liên kết yêu cầu kéo hiện có",
+      "referenceLabel": "Số PR hoặc URL GitHub",
+      "referencePlaceholder": "#123 hoặc https://github.com/owner/repo/pull/123",
+      "linkNumber": "Liên kết #{{number}}",
+      "linkButton": "Yêu cầu kéo liên kết"
+    },
+    "prViewPanel": {
+      "providerUnavailable": "Bảng đánh giá được lưu trữ không có sẵn cho nhà cung cấp này.",
+      "branchUnavailable": "Current branch unavailable."
+    },
+    "prActionsSection": {
+      "unlinkFailed": "Failed to unlink pull request.",
+      "mergeConfirmTitle": "Hợp nhất yêu cầu kéo?",
+      "mergeButton": "Hợp nhất",
+      "closeConfirmTitle": "Close pull request?",
+      "closeConfirmMessage": "#{{number}} will be closed without merging.",
+      "reopenConfirmTitle": "Mở lại yêu cầu kéo?",
+      "reopenConfirmMessage": "#{{number}} will be reopened.",
+      "reopenButton": "Mở lại",
+      "mergeAccessibilityLabel": "Hợp nhất yêu cầu kéo",
+      "recheckAccessibilityLabel": "Kiểm tra lại trạng thái hợp nhất",
+      "recheckButton": "Kiểm tra lại",
+      "markReadyAccessibilityLabel": "Mark pull request ready for review",
+      "markReadyButton": "Sẵn sàng để xem xét",
+      "autoMergeLabel": "Auto-merge when ready",
+      "autoMergeAccessibilityLabel": "Toggle auto-merge",
+      "autoMergeOn": "Bật",
+      "autoMergeOff": "Tắt",
+      "closeAccessibilityLabel": "Đóng pull request",
+      "reopenAccessibilityLabel": "Reopen pull request",
+      "unlinkAccessibilityLabel": "Hủy liên kết yêu cầu kéo",
+      "unlinkButton": "Hủy liên kết"
+    },
+    "prCheckDetail": {
+      "noDetails": "No details available.",
+      "annotations": "Chú thích",
+      "annotationsTruncated": "Hiển thị 20 chú thích đầu tiên",
+      "jobsTruncated": "Hiển thị 100 job đầu tiên"
+    },
+    "checksSection": {
+      "unavailable": "Check không khả dụng",
+      "noChecks": "No checks",
+      "failing": "{{count}} lỗi",
+      "pendingCount": "{{count}} đang chờ",
+      "passed": "{{count}} passed",
+      "neutralCount": "{{count}} trung lập",
+      "successful": "Thành công",
+      "failed": "Thất bại",
+      "cancelled": "Đã hủy",
+      "timedOut": "Đã hết thời gian chờ",
+      "actionRequired": "Cần thao tác",
+      "neutral": "trung lập",
+      "skipped": "Đã bỏ qua",
+      "queued": "Đang chờ",
+      "inProgress": "Đang tiến hành",
+      "pending": "Đang chờ",
+      "loadDetailsFailed": "Không tải được chi tiết kiểm tra",
+      "title": "Check",
+      "rerunFailing": "Chạy lại các lần kiểm tra không thành công",
+      "failingChecks_one": "{{count}} failing check",
+      "failingChecks_other": "{{count}} check không thành công",
+      "inspectOrFix": "Xem chi tiết hoặc bắt đầu lượt sửa bằng AI.",
+      "fixFailing": "Khắc phục các lần kiểm tra không thành công bằng AI",
+      "fix": "Khắc phục",
+      "checkDetails": "{{name}} check details",
+      "openOnWeb": "Mở {{name}} trên web"
+    },
+    "commentCard": {
+      "justNow": "vừa xong",
+      "minutesAgo_one": "{{count}}m ago",
+      "minutesAgo_other": "{{count}}m ago",
+      "hoursAgo_one": "{{count}}h ago",
+      "hoursAgo_other": "{{count}}h ago",
+      "daysAgo_one": "{{count}}d ago",
+      "daysAgo_other": "{{count}}d ago",
+      "monthsAgo_one": "{{count}}mo ago",
+      "monthsAgo_other": "{{count}}mo ago",
+      "yearsAgo_one": "{{count}}y ago",
+      "yearsAgo_other": "{{count}}y ago",
+      "resolved": "đã giải quyết",
+      "openOnGitHub": "Mở bình luận trên GitHub",
+      "editPlaceholder": "Edit comment…",
+      "replyToComment": "Trả lời bình luận",
+      "reply": "Trả lời",
+      "editComment": "Chỉnh sửa nhận xét",
+      "deleteComment": "Xóa bình luận",
+      "unresolveThread": "Hủy giải quyết chủ đề",
+      "resolveThread": "Giải quyết chủ đề",
+      "unresolve": "Bỏ giải quyết",
+      "resolve": "Giải quyết",
+      "replyPlaceholder": "Viết thư trả lời…",
+      "deleteConfirmTitle": "Xóa bình luận?",
+      "deleteConfirmMessage": "Việc này sẽ xóa vĩnh viễn nhận xét về GitHub."
+    },
+    "commentsSection": {
+      "all": "Tất cả",
+      "humans": "Con người",
+      "bots": "Bot",
+      "noBotComments": "Không có bình luận từ bot.",
+      "noHumanComments": "Không có bình luận từ con người.",
+      "noComments": "Chưa có bình luận.",
+      "description": "Mô tả",
+      "descriptionLoadFailed": "Không thể tải mô tả. Nhấn vào làm mới để thử lại.",
+      "noDescription": "Chưa có mô tả.",
+      "title": "Bình luận",
+      "commentsLoadFailed": "Không thể tải bình luận. Nhấn vào làm mới để thử lại.",
+      "showMoreOf": "Hiển thị {{count}} thêm về {{remaining}}",
+      "showMore": "Hiện thêm {{count}}",
+      "addCommentPlaceholder": "Thêm bình luận…",
+      "comment": "Bình luận",
+      "resolvedThreadSingle": "Luồng đã được giải quyết bởi {{author}}",
+      "resolvedThreadCount": "Đã giải quyết chủ đề bởi {{author}} ({{count}})",
+      "resolvedCommentSingle": "Bình luận đã được giải quyết bởi {{author}}",
+      "resolvedCommentCount": "Đã giải quyết nhận xét của {{author}} ({{count}})"
+    },
+    "conflictingFilesSection": {
+      "detailsUnavailable": "Không có chi tiết tệp xung đột",
+      "refreshing": "Đang làm mới chi tiết xung đột…",
+      "localMergeClean": "GitHub báo cáo xung đột, nhưng Git cục bộ không sao chép chúng. Làm mới PR hoặc đẩy nhánh để tính toán lại khả năng hợp nhất.",
+      "copyFailed": "Không thể sao chép văn bản",
+      "copyCommands": "Sao chép lệnh",
+      "commitsBehind_one": "{{count}} cam kết phía sau (cam kết cơ sở: {{baseCommit}})",
+      "commitsBehind_other": "{{count}} cam kết phía sau (cam kết cơ sở: {{baseCommit}})",
+      "title": "Xung đột",
+      "mustResolve": "Branch này có xung đột cần được giải quyết",
+      "runFromWorktree": "Chạy từ worktree này",
+      "copyRefreshCommands": "Sao chép lệnh làm mới khả năng merge",
+      "filesHeading": "Tệp xung đột",
+      "resolveWithAi": "Giải quyết xung đột với AI"
+    },
+    "reviewersSection": {
+      "requested": "Đã yêu cầu",
+      "approved": "Đã phê duyệt",
+      "changesRequested": "Yêu cầu thay đổi",
+      "commented": "Đã bình luận",
+      "dismissed": "Bị loại bỏ",
+      "pending": "Đang chờ",
+      "reviewed": "Đã đánh giá",
+      "addOrRemove": "Thêm hoặc xóa người đánh giá",
+      "title": "Reviewer",
+      "loading": "Đang tải người đánh giá…",
+      "loadFailed": "Không thể tải người đánh giá. Nhấn vào làm mới để thử lại.",
+      "noReviewers": "Không có người đánh giá nào được yêu cầu",
+      "removeReviewer": "Xóa {{login}}"
+    },
+    "prSidebarHeader": {
+      "openOnWeb": "Mở yêu cầu kéo #{{number}} trên web",
+      "openInBrowser": "Mở yêu cầu kéo #{{number}} trong trình duyệt",
+      "cancelEditingTitle": "Hủy chỉnh sửa tiêu đề",
+      "saveTitle": "Lưu tiêu đề",
+      "editTitle": "Chỉnh sửa tiêu đề yêu cầu kéo"
+    },
+    "prSidebarCreateEmptyState": {
+      "branchRequired": "Kiểm tra một nhánh trước khi tạo yêu cầu kéo.",
+      "createFailed": "Không tạo được yêu cầu kéo.",
+      "title": "Kéo yêu cầu",
+      "refreshPullRequest": "Làm mới yêu cầu kéo",
+      "createPullRequest": "Tạo yêu cầu kéo",
+      "createPr": "Tạo PR",
+      "linkedPrUnavailable": "PR được liên kết #{{number}} không có sẵn",
+      "noOpenPullRequest": "Không có yêu cầu kéo mở",
+      "refreshOrCreate": "Làm mới để kiểm tra lại hoặc tạo PR mới cho chi nhánh này.",
+      "branchNotLinked": "{{branch}} không được liên kết với PR mở.",
+      "currentBranchNotLinked": "Chi nhánh hiện tại không được liên kết với PR mở.",
+      "linkExistingPullRequest": "Liên kết một yêu cầu kéo hiện có",
+      "linkExistingPr": "Liên kết một PR hiện có"
+    },
+    "reviewerPickerDrawer": {
+      "title": "Reviewer",
+      "searchPeople": "Tìm kiếm người",
+      "loadFailed": "Không thể tải người",
+      "noMatches": "Không có người phù hợp",
+      "removeReviewer": "Xóa {{login}}",
+      "requestReviewer": "Yêu cầu {{login}}"
+    },
+    "markdownBlocks": {
+      "details": "Chi tiết"
+    },
+    "prActionsState": {
+      "mergedLabel": "Đã merge",
+      "mergedHint": "Pull request này đã được merge",
+      "closedLabel": "Đã đóng",
+      "closedHint": "Pull request này đã đóng",
+      "draftLabel": "Bản nháp",
+      "draftHint": "Pull request này vẫn là bản nháp",
+      "reviewRequiredLabel": "Cần phê duyệt",
+      "reviewRequiredHint": "GitHub yêu cầu phê duyệt review trước khi pull request này có thể merge",
+      "changesRequestedLabel": "Yêu cầu thay đổi",
+      "changesRequestedHint": "GitHub báo pull request này có yêu cầu thay đổi",
+      "conflictsLabel": "Xung đột",
+      "conflictsHint": "GitHub báo có xung đột merge",
+      "mergeQueueLabel": "Merge khi sẵn sàng",
+      "mergeQueueHint": "Base branch này dùng merge queue của GitHub",
+      "mergeQueueAutoMergeOnLabel": "Tự động merge: bật",
+      "mergeQueueAutoMergeOnHint": "Base branch này dùng merge queue của GitHub",
+      "mergeStatusUnavailableLabel": "Hợp nhất",
+      "mergeStatusUnavailableHint": "Không có trạng thái merge cho PR này",
+      "behindLabel": "Tụt lại",
+      "behindHint": "Cập nhật branch trước khi merge",
+      "blockedLabel": "Bị chặn",
+      "blockedHint": "GitHub báo pull request này đang bị chặn",
+      "mergeableChecksFailedLabel": "Check thất bại",
+      "mergeableChecksFailedHint": "GitHub cho biết PR này có thể merge, nhưng một số check thất bại",
+      "mergeableChecksPendingLabel": "Check đang chờ",
+      "mergeableChecksPendingHint": "GitHub cho biết PR này có thể merge, nhưng các check vẫn đang chạy",
+      "mergeableChecksPassedLabel": "Có thể merge",
+      "mergeableChecksPassedHint": "GitHub cho biết PR này có thể merge và các check đã qua",
+      "mergeableLabel": "Có thể merge",
+      "mergeableHint": "GitHub cho biết PR này có thể merge",
+      "checksPassedLabel": "Check đã qua",
+      "checksPassedHint": "Check đã qua. Điều kiện merge sẽ được kiểm tra lại trước khi merge.",
+      "checkingLabel": "Đang kiểm tra",
+      "checkingHint": "GitHub vẫn đang tính trạng thái merge của pull request này",
+      "stackDraft": "#{{number}} vẫn là bản nháp.",
+      "stackClosed": "#{{number}} đã đóng.",
+      "stackConflicts": "#{{number}} có xung đột hợp nhất.",
+      "stackChangesRequested": "#{{number}} đã yêu cầu thay đổi.",
+      "stackReviewRequired": "#{{number}} vẫn cần phê duyệt đánh giá.",
+      "stackBehind": "#{{number}} phải được cập nhật.",
+      "stackBlocked": "#{{number}} bị chặn.",
+      "methodMerge": "Tạo merge commit",
+      "methodSquash": "Squash và merge",
+      "methodRebase": "Rebase và merge",
+      "mergeConfirmMessage": "Điều này sẽ hợp nhất #{{number}} vào nhánh cơ sở của nó.",
+      "queueThrough_one": "Xếp hàng qua #{{number}} · {{count}} PR",
+      "queueThrough_other": "Xếp hàng qua #{{number}} · {{count}} PR",
+      "mergeThrough_one": "Hợp nhất thông qua #{{number}} · {{count}} PR",
+      "mergeThrough_other": "Hợp nhất thông qua #{{number}} · {{count}} PR",
+      "queueStackMessage": "GitHub sẽ thêm pull request này và mọi pull request bên dưới vào merge queue.",
+      "mergeStackMessage": "GitHub sẽ merge pull request này và mọi pull request bên dưới trong stack."
+    },
+    "prCheckDetailContent": {
+      "annotation": "Chú thích",
+      "unknown": "không rõ",
+      "failedJobs": "Job thất bại",
+      "jobs": "Job"
+    },
+    "prChecksPresentation": {
+      "noChecks": "No checks",
+      "failing_one": "{{count}} lỗi",
+      "failing_other": "{{count}} lỗi",
+      "pending_one": "{{count}} đang chờ",
+      "pending_other": "{{count}} đang chờ",
+      "passed_one": "{{count}} passed",
+      "passed_other": "{{count}} passed",
+      "neutral_one": "{{count}} trung lập",
+      "neutral_other": "{{count}} trung lập",
+      "unavailable": "Check không khả dụng",
+      "stateOpen": "Mở",
+      "stateMerged": "Đã merge",
+      "stateDraft": "Bản nháp",
+      "stateClosed": "Đã đóng"
+    },
+    "prCommentAudienceLabels": {
+      "all": "Tất cả",
+      "humans": "Con người",
+      "bots": "Bot",
+      "noBotComments": "Không có bình luận từ bot.",
+      "noHumanComments": "Không có bình luận từ con người.",
+      "noComments": "Chưa có bình luận."
+    }
+  },
+  "workspace": {
+    "branchChoice": {
+      "title": "Branch cho worktree này",
+      "existing": "Branch hiện có",
+      "existingHint": "Các commit mới sẽ nằm trên branch này.",
+      "new": "Branch mới",
+      "newHint": "Tạo branch cục bộ mới",
+      "newName": "Tên branch mới",
+      "automaticName": "Tên tự động",
+      "hostUpdateRequired": "Cập nhật Prompt trên máy chủ không gian làm việc để sử dụng lại một nhánh hoặc tạo một nhánh riêng biệt một cách rõ ràng."
+    }
+  },
+  "browser": {
+    "addressField": {
+      "urlPlaceholder": "URL"
+    },
+    "pane": {
+      "invalidUrl": "Nhập một URL hợp lệ."
+    },
+    "paneView": {
+      "forward": "Tiến tới",
+      "reload": "Tải lại",
+      "dialogTitle": "Hộp thoại trình duyệt",
+      "keyboardPlaceholder": "Nhập trên trang…",
+      "sendText": "Gửi văn bản tới trình duyệt"
+    },
+    "pointerModifiers": {
+      "clickModifier": "{{key}} công cụ sửa đổi nhấp chuột"
+    },
+    "viewModeSwitch": {
+      "webView": "Hiển thị chế độ xem trang web",
+      "mobileView": "Hiển thị chế độ xem trang web trên thiết bị di động"
+    },
+    "useBrowserCommands": {
+      "sent": "Đã gửi",
+      "deliveryUnconfirmed": "Giao hàng chưa được xác nhận - kiểm tra trang trước khi thử lại",
+      "dialogAnswerFailed": "Câu trả lời đó đã không đến được trang."
+    }
+  },
+  "files": {
+    "fileExplorerPanel": {
+      "connecting": "Đang kết nối với máy tính để bàn...",
+      "waiting": "Đang chờ máy tính để bàn...",
+      "loadFailed": "Không thể tải tập tin",
+      "loadInterrupted": "Tải thư mục bị gián đoạn",
+      "closeFiles": "Đóng tập tin",
+      "backToSession": "Quay lại phiên",
+      "title": "Tệp",
+      "truncatedList": "{{worktreeLabel}} - Hiển thị 5000 đầu tiên",
+      "emptyState": "Không tìm thấy tập tin nào"
+    },
+    "fileMarkdownPreview": {
+      "viewSource": "Xem nguồn Markdown",
+      "viewPreview": "Xem bản xem trước Markdown được hiển thị",
+      "copyLoadedSource": "Sao chép nguồn Markdown đã tải",
+      "copySource": "Sao chép nguồn Markdown"
+    },
+    "fileMediaPreview": {
+      "loadFailed": "Không thể tải phương tiện",
+      "waiting": "Đang chờ máy tính để bàn...",
+      "downloading": "Đang tải xuống {{bytes}} trong số {{total}}",
+      "loading": "Đang tải phương tiện..."
+    },
+    "filePreviewBody": {
+      "emptyFile": "Tệp trống",
+      "imageLabel": "{{title}} hình ảnh"
+    },
+    "filePreviewEditableSource": {
+      "editorLabel": "{{title}} biên tập viên"
+    },
+    "filePreviewScreen": {
+      "loading": "Đang tải bản xem trước…",
+      "waiting": "Đang chờ máy tính để bàn...",
+      "loadFailed": "Không thể tải bản xem trước",
+      "title": "Xem trước",
+      "saveFailed": "Không thể lưu tập tin",
+      "backToFiles": "Quay lại tập tin",
+      "saveArtifact": "Lưu tạo phẩm thiết bị đầu cuối",
+      "fileTitle": "Tệp",
+      "openFailed": "Không thể mở tập tin",
+      "chooseWorkspaceFile": "Chọn một tập tin bên trong không gian làm việc này.",
+      "discardTitle": "Hủy thay đổi?",
+      "discardMessage": "Các chỉnh sửa chưa được lưu sẽ bị mất.",
+      "discardMessageSaving": "Quá trình lưu đang diễn ra có thể không hoàn tất. Các chỉnh sửa chưa được lưu sẽ bị mất.",
+      "discard": "Loại bỏ",
+      "stay": "ở lại"
+    },
+    "filePreviewSourceText": {
+      "previewLabel": "Xem trước tệp",
+      "truncatedNote": "Bản xem trước bị cắt ngắn. Kích thước tệp: {{size}}."
+    },
+    "markdownPreviewImage": {
+      "loadFailed": "Không thể tải hình ảnh",
+      "expandImage": "Mở rộng {{alt}}",
+      "expandFallback": "Phóng to hình ảnh",
+      "imageLabel": "Hình ảnh đánh dấu"
+    },
+    "pdfPreview": {
+      "openFailed": "Không thể mở bản PDF này",
+      "updateRequired": "Cập nhật Prompt Di động để mở tệp PDF",
+      "opening": "Đang mở PDF...",
+      "open": "Mở PDF"
+    },
+    "fileExplorerRow": {
+      "loading": "Đang tải…",
+      "loadFolderFailed": "Không thể tải thư mục",
+      "retryLoading": "Thử tải lại {{path}}",
+      "openFolder": "Mở thư mục {{name}}",
+      "fileUnavailable": "{{name}} không có trên thiết bị di động",
+      "previewFile": "Xem trước tập tin {{name}}",
+      "unavailable": "Không có sẵn trên thiết bị di động"
+    },
+    "fileMutationOwnership": {
+      "sshOwnerChanged": "Không thể xác minh kết nối SSH. Hãy kết nối lại máy chủ và thử lại."
+    },
+    "filePreviewResponse": {
+      "fileChanged": "Tập tin đã thay đổi trên máy tính để bàn. Tải lại bản xem trước trước khi lưu",
+      "binaryUnavailable": "Xem trước nhị phân không có sẵn",
+      "fileTooLarge": "Tệp quá lớn để xem trước trên thiết bị di động",
+      "reloadBeforeSaving": "Tải lại bản xem trước trước khi lưu",
+      "filesystemUnreachable": "Không thể truy cập hệ thống tập tin trên máy tính để bàn",
+      "fileNotFound": "Không tìm thấy tập tin",
+      "loadFailed": "Không thể tải bản xem trước",
+      "unknownSize": "kích thước không xác định",
+      "bytes": "{{size}} B",
+      "kilobytes": "{{size}} KB",
+      "megabytes": "{{size}} MB"
+    }
+  },
+  "session": {
+    "browserTabActionSheet": {
+      "title": "Trình duyệt",
+      "forward": "Tiến tới",
+      "reload": "Tải lại"
+    },
+    "terminalLiveInputStatus": {
+      "listening": "Đang nghe",
+      "processing": "Đang xử lý",
+      "startingMic": "Bắt đầu mic",
+      "liveInput": "Nhập trực tiếp",
+      "uploadingImageTitle": "Đang tải hình ảnh lên",
+      "releaseMicHint": "Nhả mic để dừng",
+      "stopHint": "Nhấn vào micrô để dừng",
+      "transcribing": "Phiên âm trên máy tính để bàn",
+      "preparingMic": "Đang chuẩn bị micrô",
+      "uploadingImage": "Đang tải hình ảnh lên máy chủ"
+    },
+    "diffCommentLineRow": {
+      "diffLine": "{{title}} dòng khác biệt {{line}}",
+      "addNote": "Thêm ghi chú trên dòng {{line}}",
+      "line": "Dòng {{line}}",
+      "deleteNote": "Xóa ghi chú trên dòng {{line}}",
+      "placeholder": "Thêm ghi chú review",
+      "saveNote": "Lưu ghi chú"
+    },
+    "markdownReader": {
+      "readOnly": "Chỉ đọc",
+      "changedOnDesktop": "Đã thay đổi trên máy tính để bàn",
+      "dismissKeyboard": "Loại bỏ bàn phím",
+      "dismissKeyboardHint": "Ẩn bàn phím phần mềm và giữ trình soạn thảo đánh dấu mở.",
+      "discard": "Loại bỏ",
+      "copyLoadedSource": "Sao chép nguồn Markdown đã tải",
+      "copySource": "Sao chép nguồn Markdown",
+      "copyLoaded": "Đã tải bản sao",
+      "copyPathLabel": "Sao chép đường dẫn Markdown",
+      "copyPath": "Sao chép đường dẫn"
+    },
+    "nativeChatCardHeaderAction": {
+      "collapse": "Thu gọn"
+    },
+    "nativeChatFloatingControls": {
+      "scrollToLatest": "Cuộn đến mới nhất"
+    },
+    "nativeChatFullContent": {
+      "partialOutput": "Đang hiện {{shown}} trên {{total}}.",
+      "showFullOutput": "Hiện toàn bộ kết quả",
+      "loadOutputFailed": "Hiển thị đầu ra đầy đủ — không thể tải, nhấn để thử lại",
+      "partialMessage": "Hiển thị một phần của tin nhắn này.",
+      "showFullMessage": "Hiện toàn bộ tin nhắn",
+      "loadMessageFailed": "Hiển thị thông báo đầy đủ — không thể tải, nhấn để thử lại"
+    },
+    "queuedCardText": {
+      "showLessHint": "Hiển thị ít tin nhắn hơn",
+      "showMoreHint": "Hiển thị toàn bộ tin nhắn",
+      "showLess": "Thu gọn",
+      "showMore": "Xem thêm"
+    },
+    "queuedMessageCardRow": {
+      "images_one": "{{count}} hình ảnh",
+      "images_other": "{{count}} hình ảnh",
+      "sendAgainHint": "Gửi lại tin nhắn này",
+      "steerHint": "Gửi mà không ngắt model",
+      "sendHint": "Gửi tin nhắn này",
+      "steer": "Điều hướng",
+      "send": "Gửi",
+      "deleteHint": "Xóa tin nhắn xếp hàng đợi này",
+      "moreActions": "Hành động khác",
+      "showLessHint": "Hiển thị ít tin nhắn hơn"
+    },
+    "queuedMessageComposer": {
+      "commandsNotAllowed": "Không thể lưu lệnh trong tin nhắn trong hàng đợi.",
+      "editingAttributed": "Chỉnh sửa tin nhắn · {{attribution}}",
+      "editing": "Đang sửa tin nhắn"
+    },
+    "accessoryKeys": {
+      "dismissKeyboard": "Loại bỏ bàn phím",
+      "dismissKeyboardHint": "Ẩn bàn phím phần mềm và giữ phiên cuối hiện tại mở.",
+      "switchToDesktopMode": "Chuyển sang chế độ máy tính để bàn",
+      "switchToPhoneMode": "Chuyển sang chế độ điện thoại",
+      "switchToBufferedInput": "Chuyển sang đầu vào lệnh đệm",
+      "switchToLiveInput": "Chuyển sang đầu vào thiết bị đầu cuối trực tiếp",
+      "pasteFromClipboard": "Dán từ clipboard",
+      "paste": "Dán",
+      "sendKey": "Gửi {{label}}",
+      "addCustomShortcut": "Thêm phím tắt tùy chỉnh"
+    },
+    "activeContent": {
+      "noTabs": "Không có tab nào trong phiên này",
+      "creatingTab": "Đang tạo…",
+      "createTab": "Tạo tab",
+      "fileTitle": "Tệp",
+      "terminalTakingLonger": "Thiết bị đầu cuối mất nhiều thời gian hơn dự kiến",
+      "loadingTerminal": "Đang tải thiết bị đầu cuối",
+      "retryLoadingTerminal": "Thử tải lại thiết bị đầu cuối"
+    },
+    "commandDock": {
+      "liveInputLabel": "Đầu vào thiết bị đầu cuối trực tiếp",
+      "liveInputHint": "Văn bản đã nhập được gửi trực tiếp đến thiết bị đầu cuối hoạt động",
+      "commandPlaceholder": "Nhập lệnh…",
+      "sendCommand": "Gửi lệnh"
+    },
+    "contentRow": {
+      "dismissCreationWarning": "Loại bỏ cảnh báo tạo không gian làm việc"
+    },
+    "diffLineRow": {
+      "diffLineLabel": "{{title}} dòng khác biệt {{line}}",
+      "addNoteLabel": "Thêm ghi chú trên dòng {{line}}",
+      "lineNumber": "Dòng {{line}}",
+      "deleteNoteLabel": "Xóa ghi chú trên dòng {{line}}",
+      "notePlaceholder": "Thêm ghi chú review",
+      "saveNote": "Lưu ghi chú"
+    },
+    "fileReader": {
+      "noReviewNotes": "Không có ghi chú đánh giá",
+      "reviewNotes_one": "{{count}} ghi chú đánh giá",
+      "reviewNotes_other": "{{count}} ghi chú đánh giá",
+      "copyReviewNotes": "Sao chép ghi chú đánh giá",
+      "sendReviewNotes": "Gửi ghi chú đánh giá tới AI",
+      "send": "Gửi",
+      "imageLabel": "{{title}} hình ảnh",
+      "previewLabel": "{{title}} xem trước"
+    },
+    "header": {
+      "showSidebar": "Hiển thị thanh bên",
+      "backToWorktrees": "Quay lại cây làm việc",
+      "terminalTitle": "thiết bị đầu cuối",
+      "reconnectToDesktop": "Kết nối lại với máy tính để bàn",
+      "openFileExplorer": "Mở trình khám phá tệp",
+      "openSourceControl": "Kiểm soát nguồn mở",
+      "moreActions": "Thêm hành động trong phiên"
+    },
+    "headerMoreActionsSheet": {
+      "agentHistory": "Lịch sử đại lý",
+      "agentHistoryHint": "Duyệt và tiếp tục các phiên đại lý",
+      "checks": "Check",
+      "checksHint": "Mở kiểm tra yêu cầu kéo"
+    },
+    "routeScreen": {
+      "openingWorkspace": "Mở không gian làm việc"
+    },
+    "sheets": {
+      "newTab": "Tab mới",
+      "terminal": "thiết bị đầu cuối",
+      "browser": "Trình duyệt",
+      "browserUpdateRequired": "Cần có bản cập nhật máy tính để bàn để phát trực tuyến trình duyệt di động",
+      "markdownNote": "Ghi chú giảm giá",
+      "sendReviewNotes": "Gửi ghi chú đánh giá",
+      "notesHint": "Chọn một phiên đại lý cho các ghi chú hiện tại.",
+      "copyNotes": "Sao chép ghi chú",
+      "notesCopied": "Đã sao chép ghi chú",
+      "copyNotesFailed": "Không thể sao chép ghi chú",
+      "markdown": "Markdown",
+      "copyPath": "Sao chép đường dẫn",
+      "file": "Tệp",
+      "chat": "Trò chuyện",
+      "unsavedMarkdown": "Những thay đổi về mức giảm giá chưa được lưu",
+      "draftsHint": "Sao chép hoặc loại bỏ các bản nháp điện thoại trước khi rời đi.",
+      "copyAllAndLeave": "Sao chép tất cả và để lại",
+      "copyDraftsFailed": "Không thể sao chép bản nháp",
+      "discardAndLeave": "Bỏ đi và để lại",
+      "discardChanges": "Hủy thay đổi",
+      "discardMessage": "Thay thế bản nháp điện thoại bằng tệp máy tính để bàn mới nhất?",
+      "discard": "Loại bỏ",
+      "newBrowser": "Trình duyệt mới",
+      "urlPrompt": "Nhập URL hoặc để trống để tạo tab mới.",
+      "shortcut": "Phím tắt",
+      "removeShortcutMessage": "Xóa lối tắt tùy chỉnh này?",
+      "renameTerminal": "Đổi tên thiết bị đầu cuối",
+      "terminalName": "Tên thiết bị đầu cuối"
+    },
+    "tabStrip": {
+      "tabStatus": "{{title}}, {{status}}",
+      "newTab": "Tab mới",
+      "quickCommandsUpdateRequired": "Cần có bản cập nhật máy tính để bàn để có các lệnh nhanh",
+      "checkingCapabilities": "Đang kiểm tra khả năng của máy tính để bàn — hãy thử lại sau giây lát"
+    },
+    "terminalInputActions": {
+      "sendingImage": "Gửi hình ảnh",
+      "attachPhoto": "Đính kèm ảnh",
+      "attachFileHint": "Nhấn và giữ để đính kèm tệp",
+      "stopDictation": "Dừng đọc chính tả bằng giọng nói",
+      "transcribingDictation": "Phiên âm chính tả bằng giọng nói",
+      "startingDictation": "Bắt đầu đọc chính tả bằng giọng nói",
+      "startDictation": "Bắt đầu đọc chính tả bằng giọng nói"
+    },
+    "quickCommandEditorForm": {
+      "terminalCommand": "Lệnh terminal",
+      "agentPrompt": "Prompt cho agent",
+      "label": "Nhãn",
+      "labelPlaceholder": "Khởi động dev server",
+      "action": "Hành động",
+      "agent": "đại lý",
+      "chooseAgent": "Chọn agent",
+      "prompt": "Prompt",
+      "commandText": "Văn bản lệnh",
+      "promptPlaceholder": "Yêu cầu agent khảo sát không gian làm việc này",
+      "olderHostPromptTooLong": "Quá dài cho máy chủ này. Cập nhật Prompt trên máy chủ để lưu lời nhắc dài hơn.",
+      "promptTooLong": "Quá dài để lưu.",
+      "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
+      "promptSizeCharacters": "{{used}} / {{max}} ký tự",
+      "promptHint": "Hỗ trợ các kỹ năng, đường dẫn tệp và các lệnh tích hợp.",
+      "advanced": "Nâng cao",
+      "appendEnter": "Thêm Enter",
+      "appendEnterDescription": "Gửi ngay thay vì chỉ chèn văn bản.",
+      "scope": "Phạm vi",
+      "globalScope": "Toàn cục",
+      "projectScope": "Dự án",
+      "addQuickCommand": "Thêm lệnh nhanh"
+    },
+    "quickCommandRow": {
+      "copyFailed": "Không thể sao chép",
+      "copyCommand": "Sao chép {{label}}",
+      "nothingToCopy": "Không có gì để sao chép",
+      "runCommand": "Chạy {{label}}",
+      "editCommand": "Chỉnh sửa {{label}}",
+      "deleteCommand": "Xóa {{label}}"
+    },
+    "quickCommandsList": {
+      "searchPlaceholder": "Tìm lệnh nhanh…",
+      "emptyState": "Chưa có lệnh nhanh nào.",
+      "noMatches": "Không có lệnh nhanh phù hợp.",
+      "projectGroup": "Dự án này",
+      "globalGroup": "Toàn cục",
+      "newCommand": "Lệnh nhanh mới"
+    },
+    "quickCommandsSheet": {
+      "deleteConfirmTitle": "Xóa \"{{label}}\"?",
+      "untitled": "Chưa đặt tên",
+      "deleteConfirmMessage": "Lệnh nhanh này sẽ bị gỡ khỏi danh sách đã lưu của bạn.",
+      "editTitle": "Sửa lệnh nhanh",
+      "addTitle": "Thêm lệnh nhanh",
+      "chooseAgentTitle": "Chọn đại lý",
+      "title": "Lệnh nhanh",
+      "editorDescription": "Lưu lệnh đầu cuối hoặc lời nhắc của tác nhân để truy cập nhanh."
+    },
+    "quickCommandsTabButton": {
+      "quickCommands": "Lệnh nhanh"
+    },
+    "aiVaultResumeLaunch": {
+      "createFailed": "Không thể tạo thiết bị đầu cuối",
+      "sendFailed": "Không gửi được lệnh tiếp tục",
+      "inputLocked": "Đầu vào đầu cuối bị khóa"
+    },
+    "aiVaultResumePreparation": {
+      "prepareFailed": "Không thể chuẩn bị phiên Codex cũ này. Hãy thử lại sơ yếu lý lịch."
+    },
+    "floatingWorkspace": {
+      "title": "Không gian làm việc nổi"
+    },
+    "githubPrMutations": {
+      "titleUpdateFailed": "Không thể cập nhật tiêu đề.",
+      "reviewThreadUpdateFailed": "Không cập nhật được chuỗi đánh giá."
+    },
+    "githubPrRpc": {
+      "requestFailed": "Yêu cầu không thành công: {{method}}"
+    },
+    "agentChildRow": {
+      "noRecentUpdate": "Chưa có cập nhật gần đây",
+      "ended": "Đã kết thúc",
+      "minutes_one": "{{count}} phút",
+      "minutes_other": "{{count}} phút",
+      "hours_one": "{{count}} giờ",
+      "hours_other": "{{count}} giờ",
+      "days_one": "{{count}} ngày",
+      "days_other": "{{count}} ngày",
+      "noUpdate": "Không có cập nhật trong {{value0}}",
+      "agent": "đại lý"
+    },
+    "agentMessageAttribution": {
+      "messageFromUnnamed": "Tin nhắn từ đại lý",
+      "fromUnnamed": "Từ một đại lý",
+      "unnamedSender": "một agent",
+      "messageFromMore": "Tin nhắn từ {{sender}} +{{count}}",
+      "fromMore": "Từ {{sender}} +{{count}}",
+      "messageFrom": "Tin nhắn từ {{sender}}",
+      "from": "Từ {{sender}}"
+    },
+    "backgroundTask": {
+      "monitoring": "Đang theo dõi tác vụ nền",
+      "stop": "Dừng",
+      "stopTask": "Dừng {{value0}}",
+      "stopAll": "Dừng các tác vụ nền",
+      "agent": "Agent nền",
+      "workflow": "Workflow nền",
+      "command": "Lệnh nền",
+      "monitor": "Monitor nền",
+      "task": "Tác vụ nền",
+      "detailsUnavailable": "Không có chi tiết tác vụ cho phiên này.",
+      "countAgents_one": "{{count}} đại lý",
+      "countAgents_other": "{{count}} agent",
+      "countShell_one": "{{count}} vỏ",
+      "countShell_other": "{{count}} shell",
+      "countShellCommandOne": "1 lệnh shell",
+      "countMonitors_one": "{{count}} màn hình",
+      "countMonitors_other": "{{count}} monitor",
+      "countWorkflows_one": "{{count}} quy trình làm việc",
+      "countWorkflows_other": "{{count}} workflow",
+      "countTasks_one": "{{count}} nhiệm vụ",
+      "countTasks_other": "{{count}} tác vụ",
+      "headerTotalCount_one": "{{count}} tác vụ nền",
+      "headerTotalCount_other": "{{count}} tác vụ nền",
+      "stateWorking": "đang làm việc",
+      "stateMonitoring": "đang theo dõi",
+      "stateWaiting": "đang chờ",
+      "stateBlocked": "bị chặn",
+      "stateDone": "hoàn tất",
+      "stateIdle": "đã dừng",
+      "stateUnverifiable": "không có trạng thái",
+      "reasonWaiting": "cần phê duyệt",
+      "reasonBlocked": "thất bại",
+      "groupAgents": "Agent",
+      "groupShell": "Vỏ",
+      "groupMonitors": "Monitor",
+      "groupWorkflows": "Quy trình làm việc",
+      "groupTasks": "Tác vụ",
+      "stateWorkingCount_one": "{{value0}} đang làm việc",
+      "stateWorkingCount_other": "{{value0}} đang làm việc",
+      "stateMonitoringCount_one": "{{value0}} đang theo dõi",
+      "stateMonitoringCount_other": "{{value0}} đang theo dõi",
+      "stateWaitingCount_one": "{{value0}} đang chờ",
+      "stateWaitingCount_other": "{{value0}} đang chờ",
+      "stateBlockedCount_one": "{{value0}} bị chặn",
+      "stateBlockedCount_other": "{{value0}} bị chặn",
+      "stateDoneCount_one": "{{value0}} đã xong",
+      "stateDoneCount_other": "{{value0}} đã xong",
+      "stateIdleCount_one": "{{value0}} đã dừng",
+      "stateIdleCount_other": "{{value0}} đã dừng",
+      "stateUnverifiableCount_one": "{{value0}} không có trạng thái",
+      "stateUnverifiableCount_other": "{{value0}} không có trạng thái"
+    },
+    "bulkCloseSheetActions": {
+      "closeOtherTabs": "Đóng các tab khác"
+    },
+    "bulkTabClose": {
+      "titleOthers": "Đóng các tab khác?",
+      "titleRight": "Đóng các tab bên phải?",
+      "titleLeft": "Đóng các tab bên trái?",
+      "titleEditors": "Đóng tất cả tab trình soạn thảo?",
+      "description": "Các tab đã chọn sẽ bị đóng. Các tab đã ghim sẽ vẫn mở.",
+      "confirm": "Đóng tab"
+    },
+    "diffReviewLoaders": {
+      "committedChangesUnavailable": "Những thay đổi đã cam kết không có sẵn",
+      "committedChangesFailed": "Những thay đổi đã cam kết không thành công",
+      "desktopUpdateRequired": "Cập nhật Prompt máy tính để bàn để xem xét các thay đổi trên thiết bị di động.",
+      "changesLoadFailed": "Không thể tải các thay đổi",
+      "invalidSourceControlResponse": "Phản hồi kiểm soát nguồn không hợp lệ",
+      "reviewNotesLoadFailed": "Không thể tải ghi chú đánh giá",
+      "diffLoadFailed": "Không thể tải khác biệt",
+      "committedDiffUnavailable": "Sự khác biệt đã cam kết không có sẵn"
+    },
+    "diffReviewQueue": {
+      "staged": "Đã stage",
+      "unstaged": "Chưa stage",
+      "committedOnBranch": "Cam kết tại chi nhánh"
+    },
+    "diffReviewScreenModel": {
+      "branch": "chi nhánh",
+      "staged": "Đã stage",
+      "unstaged": "Chưa stage"
+    },
+    "nativeChatAttachActions": {
+      "photos": "Ảnh",
+      "files": "Tệp",
+      "fileTypes": "PDF, văn bản, mã…",
+      "workspaceFile": "Tệp trong không gian làm việc",
+      "skills": "Skill",
+      "availableSkills": "{{count}} có sẵn",
+      "commands": "Lệnh"
+    },
+    "nativeChatCliFork": {
+      "resumeInNewCli": "Tiếp tục trong CLI mới"
+    },
+    "nativeChatRenderData": {
+      "notFoundTitle": "Chưa thể tìm thấy cuộc trò chuyện này",
+      "notFoundSubtitle": "Gửi tin nhắn để bắt đầu một tin nhắn hoặc mở chế độ xem thiết bị đầu cuối để xem {{agent}} đang làm gì.",
+      "emptyTitle": "Bắt đầu trò chuyện với {{agent}}",
+      "emptySubtitle": "Yêu cầu {{agent}} kiểm tra mã, giải thích đầu ra hoặc thực hiện thay đổi.",
+      "errorTitle": "Không thể tải cuộc trò chuyện",
+      "errorSubtitle": "Không thể đọc bản ghi. Chuyển lại terminal để tiếp tục làm việc.",
+      "defaultAgentLabel": "đại lý"
+    },
+    "nativeChatToggleAction": {
+      "switchToTerminalView": "Chuyển sang chế độ xem thiết bị đầu cuối",
+      "switchToChatView": "Chuyển sang chế độ xem trò chuyện"
+    },
+    "prSidebarState": {
+      "loadFailed": "Không thể tải yêu cầu kéo"
+    },
+    "useNativeChatDictation": {
+      "insertFailedCopied": "Không thể chèn chính tả nên nó đã được sao chép vào bảng nhớ tạm",
+      "insertFailed": "Không thể chèn chính tả",
+      "inserted": "Đã chèn chính tả",
+      "stoppedAfterSilence": "Dừng lại sau một phút im lặng"
+    },
+    "quickCommandLaunch": {
+      "editBeforeRunning": "Chỉnh sửa lệnh nhanh này trước khi chạy nó",
+      "defaultLabel": "Lệnh nhanh",
+      "runFailed": "Không thể chạy {{label}}"
+    },
+    "routeHelpers": {
+      "connecting": "Đang kết nối",
+      "securing": "Bảo vệ",
+      "connected": "Đã kết nối",
+      "disconnected": "Đã ngắt kết nối",
+      "reconnecting": "Đang kết nối lại",
+      "pairingInvalid": "Ghép nối không hợp lệ"
+    },
+    "useTerminalCreateActions": {
+      "forkUnavailable": "Mở cuộc trò chuyện {{agentName}} trên máy chủ đã cập nhật, được kết nối và thử lại.",
+      "forkBusy": "Một thiết bị đầu cuối khác đang mở. Đợi rồi thử lại cuộc trò chuyện {{agentName}}.",
+      "createFailed": "Không thể tạo thiết bị đầu cuối",
+      "terminalTitle": "thiết bị đầu cuối",
+      "sendNotesFailed": "Không gửi được ghi chú",
+      "inputLocked": "Đầu vào đầu cuối bị khóa bởi một máy khách khác.",
+      "notesSent": "Đã gửi ghi chú",
+      "sendNotesError": "Không thể gửi ghi chú"
+    },
+    "sourceControlLaunchAgent": {
+      "savedAgentUnavailable": "Tác nhân đã lưu cho hành động này không có sẵn trên máy chủ không gian làm việc này.",
+      "noEnabledAgent": "Không phát hiện agent AI nào được bật trên máy chủ của không gian làm việc này."
+    },
+    "structuredComposerCommand": {
+      "removeAttachments": "Gỡ các tệp đính kèm trước khi dùng lệnh phiên chat.",
+      "operationUnconfirmed": "Hoạt động hội thoại chưa được xác nhận."
+    },
+    "structuredSendDelivery": {
+      "messageNotSent": "Chưa gửi tin nhắn"
+    },
+    "terminalActionSheetActions": {
+      "switchToDesktop": "Chuyển sang máy tính để bàn",
+      "switchToPhone": "Chuyển sang điện thoại",
+      "rename": "Đổi tên",
+      "clearTerminal": "Xóa thiết bị đầu cuối"
+    },
+    "terminalRecords": {
+      "defaultTitle": "thiết bị đầu cuối"
+    },
+    "presentation": {
+      "loadingTabs": "Đang tải tab",
+      "tabs_one": "tab {{count}}",
+      "tabs_other": "{{count}} tab"
+    },
+    "terminalTabAgent": {
+      "terminalNumber": "Nhà ga {{number}}",
+      "newBrowser": "Trình duyệt mới",
+      "browser": "Trình duyệt",
+      "markdown": "Markdown",
+      "file": "Tệp",
+      "chat": "Trò chuyện",
+      "terminal": "thiết bị đầu cuối"
+    },
+    "terminalViewportResubscribe": {
+      "fitFailed": "Không thể vừa thiết bị đầu cuối với màn hình này"
+    },
+    "newTabAgentHostLaunch": {
+      "notesUnconfirmed": "Người đại diện đã bắt đầu nhưng không thể xác nhận các ghi chú đã được gửi.",
+      "promptUnconfirmed": "Nhân viên đã khởi động nhưng không thể xác nhận lời nhắc đã được gửi.",
+      "notesNotSent": "Người đại diện đã bắt đầu nhưng các ghi chú chưa được gửi.",
+      "notesSent": "Đã gửi ghi chú"
+    },
+    "prActionsEngine": {
+      "refreshFailed": "Không thể làm mới yêu cầu kéo.",
+      "mergeFailed": "Không thể hợp nhất yêu cầu kéo."
+    },
+    "prAiTriageLaunch": {
+      "promptNotSent": "Nhân viên đã khởi động nhưng lời nhắc chưa được gửi.",
+      "updateRequired": "Cập nhật Prompt trên máy tính của bạn để khởi động tác nhân từ điện thoại của bạn.",
+      "loadFailed": "Không thể tải các đại lý có sẵn.",
+      "emptyPrompt": "Lời nhắc đã lưu của hành động này trống. Cập nhật cài đặt AI Kiểm soát nguồn trên máy tính của bạn.",
+      "agentStartedIn": "Đại lý bắt đầu vào {{label}}",
+      "agentStarted": "Đại lý đã bắt đầu"
+    },
+    "sideRail": {
+      "backToWorktrees": "Quay lại cây làm việc"
+    },
+    "useAttachmentInputLeaseGate": {
+      "reconnecting": "Đính kèm không thành công (kết nối lại)"
+    },
+    "useDiffReviewCommentActions": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "saveStateFailed": "Không lưu được trạng thái đánh giá",
+      "saveFailed": "Không lưu được bài đánh giá"
+    },
+    "useDiffReviewController": {
+      "missingWorktree": "Thiếu cây làm việc",
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "loadFailed": "Không thể tải bài đánh giá"
+    },
+    "useDiffReviewDiffLoading": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "loadFailed": "Không thể tải khác biệt"
+    },
+    "useDiffReviewGitActions": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "actionFailed": "Hành động kiểm soát nguồn không thành công",
+      "stageResults": "{{staged}} dàn dựng, {{failed}} thất bại",
+      "reviewedFilesStaged_one": "{{count}} tập tin được đánh giá đã được dàn dựng",
+      "reviewedFilesStaged_other": "{{count}} các tập tin được đánh giá đã được dàn dựng"
+    },
+    "useDiffReviewInteractions": {
+      "openFailed": "Không thể mở trong phiên"
+    },
+    "useDiffReviewSendActions": {
+      "copyFailed": "Không thể sao chép ghi chú đánh giá",
+      "notesCopied": "Xem lại ghi chú đã sao chép",
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "sendFailed": "Không gửi được ghi chú",
+      "inputLocked": "Đầu vào đầu cuối bị khóa",
+      "notesSent": "Xem lại ghi chú đã gửi",
+      "startingAgent": "Bắt đầu một đại lý...",
+      "promptNotSent": "Người đại diện đã bắt đầu nhưng các ghi chú chưa được gửi. Sử dụng Sao chép ghi chú để dán chúng.",
+      "notesSentWithWarning": "Xem lại ghi chú đã gửi. {{warning}}",
+      "loadSessionsFailed": "Không thể tải phiên đại lý"
+    },
+    "useImageAttachment": {
+      "disconnected": "Đính kèm không thành công (ngắt kết nối)",
+      "permissionDenied": "Quyền chụp ảnh bị từ chối",
+      "imageTooLarge": "Hình ảnh quá lớn để đính kèm",
+      "attachFailed": "Đính kèm không thành công"
+    },
+    "useNativeChatStop": {
+      "terminalNotReady": "Dừng không được gửi (thiết bị đầu cuối chưa sẵn sàng)",
+      "stopUnconfirmed": "Dừng chưa được xác nhận - kiểm tra trò chuyện trước khi thử lại",
+      "stopNotSent": "Dừng không được gửi"
+    },
+    "usePrAiTriage": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn…",
+      "launchFailed": "Không thể khởi chạy đại lý"
+    },
+    "usePrCommentActions": {
+      "actionFailed": "Hành động bình luận không thành công"
+    },
+    "usePrTitleAction": {
+      "disconnected": "Không kết nối với máy tính để bàn.",
+      "updateFailed": "Không thể cập nhật tiêu đề."
+    },
+    "useAccessorySelection": {
+      "copyFailed": "Không thể sao chép",
+      "selectionCleared": "Đã xóa lựa chọn (cuộn ra khỏi bộ đệm)"
+    },
+    "useContentCreateActions": {
+      "noteCreateFailed": "Không tạo được ghi chú đánh dấu",
+      "untitledNoteCreateFailed": "Không thể tạo ghi chú đánh dấu không có tiêu đề",
+      "browserUpdateRequired": "Cần có bản cập nhật máy tính để bàn để phát trực tuyến trình duyệt di động",
+      "invalidUrl": "Nhập một URL hợp lệ",
+      "browserCreateFailed": "Không tạo được trình duyệt",
+      "browserUnavailable": "Trang trình duyệt chưa có sẵn.",
+      "browserCommandFailed": "Lệnh trình duyệt không thành công"
+    },
+    "useDiffComments": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "saveNotesFailed": "Không lưu được ghi chú đánh giá",
+      "noteAdded": "Đã thêm ghi chú",
+      "saveNoteFailed": "Không lưu được ghi chú",
+      "deleteNoteFailed": "Không thể xóa ghi chú",
+      "notesCopied": "Đã sao chép ghi chú",
+      "copyNotesFailed": "Không thể sao chép ghi chú"
+    },
+    "useMarkdownActions": {
+      "copyFailed": "Không thể sao chép",
+      "pathCopied": "Đã sao chép đường dẫn",
+      "copyPathFailed": "Không thể sao chép đường dẫn",
+      "markdownTitle": "Markdown",
+      "saved": "Đã lưu",
+      "saveFailed": "Lưu không thành công"
+    },
+    "usePanelRouteActions": {
+      "otherServerAgents": "Đại lý trên máy chủ khác",
+      "pairServerHint": "Ghép nối trực tiếp máy chủ đó",
+      "detectingAgents": "Đại lý phát hiện",
+      "noEnabledAgents": "Không có đại lý được kích hoạt",
+      "presetsUnavailable": "Cài đặt trước đại lý không có sẵn",
+      "checkHostHint": "Kiểm tra kết nối máy chủ",
+      "newSessionHint": "Phiên đại lý mới",
+      "copyNotesHint": "Sao chép ghi chú thay thế"
+    },
+    "useStartup": {
+      "wakeAgents": "Mở Prompt trên máy chủ để đánh thức các tác nhân đang ngủ."
+    },
+    "useTerminalInput": {
+      "clearFailed": "Không thể xóa thiết bị đầu cuối",
+      "cleared": "Đã xóa thiết bị đầu cuối"
+    },
+    "useSessionTerminalSendActions": {
+      "inputTooLarge": "Đầu vào quá lớn (tối đa 256 KiB)",
+      "liveInputInterrupted": "Đầu vào trực tiếp bị gián đoạn. Trường đã bị xóa; kiểm tra thiết bị đầu cuối trước khi tiếp tục."
+    },
+    "useTerminalPaste": {
+      "clipboardReadFailed": "Không thể đọc bảng nhớ tạm",
+      "pasteTooLarge": "Dán quá lớn (tối đa 256 KiB)",
+      "disconnected": "Dán không thành công (ngắt kết nối)",
+      "terminalChanged": "Đã hủy dán (thiết bị đầu cuối đã thay đổi)",
+      "pasteFailed": "Dán không thành công",
+      "imageTooLarge": "Hình ảnh quá lớn để dán"
+    },
+    "useQuickCommands": {
+      "loadFailed": "Không thể tải lệnh nhanh",
+      "saveFailed": "Không thể lưu lệnh nhanh"
+    },
+    "worktreeLabel": {
+      "fallback": "Cây làm việc"
+    },
+    "failure": {
+      "backgroundTasksRunning": "Các tác vụ nền vẫn đang chạy.",
+      "waitForBackgroundTasks": "Chờ các tác vụ nền hoàn tất.",
+      "agentStarting": "Agent vẫn đang khởi động.",
+      "waitForStart": "Chờ agent khởi động xong.",
+      "agentStillWorking": "Agent vẫn đang làm việc.",
+      "runCommandWhenDone": "Chạy /{{command}} khi hoàn tất.",
+      "commandAfterAnswer": "Trả lời câu hỏi hoặc yêu cầu phê duyệt của agent, rồi chạy /{{command}}.",
+      "compactionFailed": "Nén ngữ cảnh không thành công.",
+      "compactionFailedQuoted": "Nén ngữ cảnh không thành công: {{detail}}.",
+      "compactionUnconfirmed": "Chưa xác nhận được việc nén ngữ cảnh đã hoàn tất.",
+      "cancelUnconfirmed": "Chưa xác nhận được việc hủy.",
+      "stopRefused": "{{agent}} chưa dừng.",
+      "stopRefusedQuoted": "{{agent}} chưa dừng: {{detail}}.",
+      "couldNotStop": "Không thể dừng {{agent}}.",
+      "couldNotStopTheAgent": "Không thể dừng agent.",
+      "noTurnToStop": "{{agent}} không có lượt nào đang chạy để dừng.",
+      "backgroundTaskNotStopped": "Tác vụ nền chưa được dừng.",
+      "backgroundTasksNotStopped": "Các tác vụ nền chưa được dừng.",
+      "answerUnconfirmed": "Câu trả lời của bạn đã được ghi lại nhưng agent chưa xác nhận.",
+      "hostFault": "Prompt đã gặp sự cố nên việc này không thành công.",
+      "hostFaultTryAgain": "Prompt đã gặp sự cố nên việc này không thành công. Hãy thử lại.",
+      "hostStopped": "{{agent}} chưa bao giờ bắt đầu xong nên Prompt đã dừng nó.",
+      "providerRateLimited": "{{agent}} đang bị giới hạn tốc độ và đang thử lại.",
+      "providerRetrying": "{{agent}} gặp sự cố tạm thời và đang thử lại.",
+      "providerRetryingQuoted": "{{agent}} đang thử lại: {{detail}}.",
+      "providerRetryNumber": "Thử lại lần {{attempt}}.",
+      "providerRetryNumberOf": "Thử lại lần {{attempt}}/{{maxRetries}}.",
+      "providerRetryLastError": "Lỗi gần nhất: {{detail}}.",
+      "usageLimitReached": "{{agent}} đã đạt giới hạn sử dụng.",
+      "usageLimitReachedNamed": "{{agent}} đã đạt giới hạn {{window}}.",
+      "usageLimitWindowSession": "phiên",
+      "usageLimitWindowWeekly": "hằng tuần",
+      "usageLimitWindowWeeklyModel": "model hằng tuần",
+      "usageLimitWindowCredits": "mức sử dụng bổ sung",
+      "usageLimitResetsAt": "Giới hạn sẽ được đặt lại vào {{when}}.",
+      "usageLimitSendAfterReset": "Gửi tin nhắn sau khi được đặt lại để tiếp tục.",
+      "previousExitUnverifiable": "Không thể dừng {{agent}} từ trước đó.",
+      "sessionNotRestored": "{{agent}} không thể mở lại phiên trước đó nên chat này tiếp tục trong một phiên mới. {{agent}} không nhớ các tin nhắn trước đó.",
+      "providerExitedRow": "{{agent}} đã dừng trong khi phản hồi này đang diễn ra. Bạn có thể tiếp tục trong cuộc trò chuyện này.",
+      "providerExitedRejection": "{{agent}} đã dừng trước khi tin nhắn này được gửi.",
+      "providerExitedAnswer": "{{agent}} đã dừng nên câu trả lời của bạn chưa được gửi. Hãy gửi một tin nhắn để tiếp tục.",
+      "claudeEffortInvalid": "Mức effort của Claude không hợp lệ; hãy chọn low, medium, high, xhigh hoặc max rồi gửi lại.",
+      "modelUnavailable": "{{agent}} không thể dùng {{detail}}. Hãy chọn model khác rồi gửi lại.",
+      "providerRejected": "{{agent}} không chấp nhận tin nhắn này.",
+      "providerRejectedQuoted": "{{agent}} không chấp nhận tin nhắn này: {{detail}}.",
+      "attachmentEmpty": "Một ảnh trong tin nhắn này trống nên tin nhắn chưa được gửi.",
+      "attachmentTooLarge": "Một hình ảnh trong tin nhắn này quá lớn nên tin nhắn chưa được gửi.",
+      "attachmentLargerThan": "Một hình ảnh trong tin nhắn này lớn hơn {{size}} MB nên tin nhắn chưa được gửi.",
+      "attachmentTooMany": "Tin nhắn này có quá nhiều hình ảnh nên chưa được gửi.",
+      "attachmentAtMost": "{{agent}} chỉ nhận tối đa {{limit}} hình ảnh trong một tin nhắn nên tin nhắn này chưa được gửi.",
+      "attachmentTotalTooLarge": "Tổng dung lượng các hình ảnh trong tin nhắn này quá lớn nên tin nhắn chưa được gửi.",
+      "attachmentTotalMoreThan": "Tổng dung lượng các hình ảnh trong tin nhắn này vượt quá {{size}} MB nên tin nhắn chưa được gửi.",
+      "attachmentUnsupportedType": "{{agent}} chỉ nhận hình ảnh PNG, JPEG, GIF và WebP nên tin nhắn này chưa được gửi.",
+      "attachmentNotAFile": "Một hình ảnh trong tin nhắn này không phải là tệp nên tin nhắn chưa được gửi.",
+      "attachmentNoSource": "Một hình ảnh trong tin nhắn này không có tệp để gửi nên tin nhắn chưa được gửi.",
+      "attachmentInvalid": "Không thể gửi một tệp đính kèm trong tin nhắn này cho agent.",
+      "attachmentUnreadable": "Không thể đọc một tệp đính kèm trong tin nhắn này nên tin nhắn chưa được gửi.",
+      "emptyMessage": "Tin nhắn này trống nên chưa được gửi.",
+      "commandUnavailable": "Lệnh này không khả dụng trong chat {{agent}} nên chưa được gửi.",
+      "queueFull": "Có quá nhiều tin nhắn đang chờ agent nên tin nhắn này chưa được gửi.",
+      "writeFailed": "Prompt không thể chuyển tin nhắn này cho người đại diện nên nó không được gửi.",
+      "cancelled": "Tin nhắn này đã bị thu hồi trước khi agent bắt đầu xử lý.",
+      "chatClosed": "Chat đã đóng trước khi tin nhắn này được gửi.",
+      "hostRestarted": "Prompt đã khởi động lại trước khi tin nhắn này được gửi.",
+      "notDelivered": "Tin nhắn này chưa được gửi đi.",
+      "notDeliveredSendAgain": "Tin nhắn này chưa được gửi đi. Gửi lại để tiếp tục.",
+      "commandRefused": "Lệnh này chưa được chạy.",
+      "commandRefusedTryAgain": "Lệnh này chưa được chạy. Hãy thử lại.",
+      "theAgent": "Agent",
+      "providerStartFailed": "{{agent}} đã dừng trước khi khởi động xong.",
+      "runCommandAgain": "Chạy lại /{{command}}.",
+      "sendToTryAgain": "Gửi lại tin nhắn của bạn để thử lại.",
+      "sendAgainToTryOnceMore": "Gửi lại tin nhắn của bạn để thử thêm một lần nữa.",
+      "couldNotStart": "{{agent}} không thể khởi động.",
+      "couldNotRestart": "{{agent}} không thể khởi động lại.",
+      "cliTooOld": "{{agent}} {{installedVersion}} quá cũ để dùng với chat. Hãy cập nhật lên {{minimumVersion}} trở lên.",
+      "startTimedOut": "{{agent}} khởi động quá lâu (không có phản hồi cho {{method}} sau {{seconds}} giây).",
+      "startTimedOutKeepsHappening": "Nếu tình trạng này tiếp diễn, máy tính đang chạy chat này có thể đang bị quá tải.",
+      "argumentsUnsupportedOption": "Saved Arguments chứa một tùy chọn không được hỗ trợ ({{option}}).",
+      "argumentsMissingValue": "Saved Arguments cần một giá trị cho {{option}}.",
+      "argumentsMultipleValues": "Saved Arguments đặt cho {{option}} nhiều hơn một giá trị.",
+      "argumentsPositionalPrompt": "Saved Arguments có chứa một prompt.",
+      "editSavedArguments": "Chỉnh sửa trong Cài đặt > Agents > Arguments.",
+      "terminalAgentHoldsChat": "Chat này vẫn đang mở trong một agent terminal.",
+      "quitTerminalAgent": "Thoát agent đó để tiếp tục chat tại đây.",
+      "startNewChat": "Bắt đầu một chat mới để tiếp tục.",
+      "notSignedIn": "{{agent}} chưa đăng nhập.",
+      "claudeSystemNotSignedIn": "Claude chưa đăng nhập. Chạy `{{loginCommand}}` hoặc chọn một tài khoản trong cài đặt Tài khoản Claude.",
+      "claudeManagedNotSignedIn": "Tài khoản Claude này chưa đăng nhập. Hãy đăng nhập lại trong cài đặt Tài khoản Claude.",
+      "codexSystemNotSignedIn": "Codex chưa đăng nhập. Chạy `{{loginCommand}}`.",
+      "codexManagedNotSignedIn": "Tài khoản Codex này chưa đăng nhập. Hãy đăng nhập lại trong cài đặt Tài khoản Codex.",
+      "antigravityNotSignedIn": "Antigravity chưa đăng nhập. Đăng nhập tại Cài đặt → Tài khoản → Antigravity, sau đó gửi lại tin nhắn của bạn.",
+      "agentCommandNotSignedIn": "Đăng nhập {{agent}} bằng `{{loginCommand}}` trên máy tính đang chạy chat này.",
+      "interactiveAgentNotSignedIn": "Đăng nhập {{agent}} bằng cách chạy `{{loginCommand}}` và dùng `{{slashCommand}}` trên máy tính đang chạy chat này.",
+      "agentNotSignedIn": "Đăng nhập {{agent}}.",
+      "cliMissing": "Không tìm thấy {{agent}} trên máy tính đang chạy chat này. Hãy cài đặt agent hoặc kiểm tra Command của agent trong Cài đặt → Agents.",
+      "cliMissingInWslDistro": "{{agent}} chưa được cài đặt trong bản phân phối WSL {{distro}}. Hãy cài đặt bên trong {{distro}} hoặc kiểm tra Command của agent trong Cài đặt → Agents.",
+      "signInFirst": "Hãy đăng nhập trước.",
+      "signInThenRunCommand": "Đăng nhập, sau đó chạy lại /{{command}}.",
+      "signInThenSend": "Đăng nhập, sau đó gửi lại tin nhắn của bạn.",
+      "thenSendAgain": "Sau đó gửi lại tin nhắn của bạn.",
+      "historyTooLarge": "Lịch sử của cuộc trò chuyện này quá lớn để khôi phục tại đây.",
+      "managedAccountEnvOverride": "Lần khởi chạy Claude này tự đặt các biến đăng nhập Anthropic riêng. Hãy gỡ các biến đó để dùng tài khoản Claude được quản lý.",
+      "accountSwitchInProgress": "Thiết lập của {{agent}} đang thay đổi trên máy chủ này. Hãy thử lại sau khi hoàn tất.",
+      "managedAccountUnsupported": "Khi một tài khoản Claude được thêm trong WSL, chat Claude cần có tài khoản Claude trên Windows.",
+      "launchFolderMissing": "Thư mục mà chat này đã chạy không còn tồn tại. Hãy khôi phục thư mục để tiếp tục chat này.",
+      "historyInOtherAccount": "Lịch sử của chat này nằm trong một tài khoản Claude khác. Hãy chuyển lại sang tài khoản đó để tiếp tục.",
+      "claudeAccountFolderMissing": "Thiếu thư mục của tài khoản Claude đã chọn. Hãy đăng nhập lại vào tài khoản đó hoặc chọn tài khoản khác.",
+      "claudeAccountSetupFailed": "Không thể thiết lập tài khoản Claude đã chọn. Hãy thử lại hoặc chọn tài khoản khác.",
+      "agentCommandNotRunnable": "Lệnh của {{agent}} trong Cài đặt → Tác nhân phải là đường dẫn chương trình hoặc tên Prompt có thể tìm thấy, không có đối số hoặc biến. Thay đổi nó hoặc thiết lập lại nó.",
+      "runtimeNotInstalled": "{{agent}} chưa được cài đặt trên máy tính đang chạy cuộc trò chuyện này. Cài đặt nó từ cuộc trò chuyện trong phiên bản hiện tại của Prompt.",
+      "fullAccessAsRoot": "{{agent}} sẽ không dùng Full access khi chạy với quyền root. Hãy chọn quyền khác cho {{agent}} trong Cài đặt → Agents trên máy tính đang chạy chat này, rồi bắt đầu chat mới.",
+      "launchPreparationFailed": "Prompt không thể chuẩn bị {{agent}} để bắt đầu trên máy tính đang chạy cuộc trò chuyện này.",
+      "conversationOpenElsewhere": "Codex vẫn đang giữ cuộc trò chuyện này ở trạng thái mở. Hãy thử lại sau giây lát hoặc đóng các terminal Codex khác.",
+      "conversationOpenInTerminal": "{{agent}} đang chạy cuộc trò chuyện này trong một terminal khác. Hãy thoát {{agent}} ở đó hoặc đóng terminal đó để tiếp tục tại đây.",
+      "chooseClaudeAccount": "Chọn hoặc thêm một tài khoản trong cài đặt Tài khoản Claude.",
+      "chooseClaudeAccountThenRunCommand": "Chọn hoặc thêm một tài khoản trong cài đặt Tài khoản Claude, sau đó chạy lại /{{command}}.",
+      "chooseClaudeAccountThenSend": "Chọn hoặc thêm một tài khoản trong cài đặt Tài khoản Claude, sau đó gửi lại tin nhắn của bạn."
+    },
+    "writeNotice": {
+      "notDoneReadHistory": "Không thể tải lịch sử của chat này.",
+      "notDoneSend": "Tin nhắn của bạn chưa được gửi.",
+      "tryAgainComposerSend": "Hãy gửi lại.",
+      "messageNotSaved": "Không thể lưu tin nhắn của bạn.",
+      "notDoneStop": "Agent chưa được dừng.",
+      "notDoneStopTask": "Tác vụ nền chưa được dừng.",
+      "notDoneStopTasks": "Các tác vụ nền chưa được dừng.",
+      "notDoneAnswer": "Câu trả lời của bạn chưa được gửi.",
+      "notDoneOption": "Cài đặt chưa được thay đổi.",
+      "notDoneCommand": "Lệnh chưa được chạy.",
+      "notDoneGoalChangeIncomplete": "Không thể hoàn tất việc thay đổi mục tiêu. Hãy kiểm tra chat.",
+      "notDoneQueuedEdit": "Chỉnh sửa của bạn chưa được lưu.",
+      "restartFailed": "Agent không thể khởi động lại.",
+      "capacity": "Prompt trên máy tính chạy cuộc trò chuyện này đã đạt đến giới hạn yêu cầu. Cập nhật Prompt ở đó rồi thử lại.",
+      "outcomeUnknown": "Prompt không thể xác nhận chuyện gì đã xảy ra. Kiểm tra cuộc trò chuyện.",
+      "sendOutcomeLost": "Prompt không thể xác nhận tin nhắn của bạn đã đến được đại lý. Kiểm tra cuộc trò chuyện, sau đó gửi lại nếu cần.",
+      "continuationSuperseded": "Chat này đã có diễn biến mới. Hãy xem các tin nhắn mới nhất trước khi tiếp tục.",
+      "questionChanged": "Câu hỏi này đã được trả lời hoặc đã thay đổi.",
+      "cancelNotSaved": "Không thể hủy câu hỏi hoặc yêu cầu phê duyệt này.",
+      "historyUnreadable": "Prompt không thể đọc lịch sử đã lưu của cuộc trò chuyện này.",
+      "historyUnusable": "Không thể tải chat này.",
+      "historyUnavailable": "Prompt hiện không thể mở lịch sử cuộc trò chuyện này.",
+      "savedByNewerOrca": "Các cuộc trò chuyện đã được lưu bởi Prompt mới hơn.",
+      "updateOrcaToKeepUsing": "Cập nhật Prompt để tiếp tục sử dụng chúng.",
+      "chatSavedByNewerOrca": "Cuộc trò chuyện này đã được lưu bởi Prompt mới hơn.",
+      "updateOrcaToOpenChat": "Cập nhật Prompt để mở nó.",
+      "unsupported": "Điều này cần có Prompt mới hơn trên máy tính đang chạy cuộc trò chuyện này. Cập nhật Prompt ở đó rồi thử lại.",
+      "notAvailable": "Tính năng này không khả dụng trong chat này.",
+      "cannotRunHere": "Prompt không thể chạy đại lý này trong cuộc trò chuyện ở đây.",
+      "unreachable": "Prompt không thể liên lạc được với đại lý.",
+      "recordFailed": "Prompt không thể lưu nội dung này vào lịch sử trò chuyện.",
+      "attachmentExpired": "Tệp đính kèm này đã hết hạn.",
+      "reattachFile": "Hãy gỡ tệp đính kèm rồi đính kèm lại.",
+      "conversationCleared": "Cuộc trò chuyện này đã bị xóa.",
+      "openCurrentConversation": "Mở cuộc trò chuyện hiện tại để tiếp tục.",
+      "clearUnfinished": "Lệnh /clear gần nhất chưa hoàn tất.",
+      "commandRunning": "Lệnh /compact hoặc /clear vẫn đang chạy.",
+      "waitForCommand": "Chờ lệnh /compact hoặc /clear hoàn tất.",
+      "agentStarting": "Agent vẫn đang khởi động.",
+      "waitForStart": "Chờ agent khởi động xong.",
+      "turnActive": "Agent vẫn đang phản hồi.",
+      "waitForTurn": "Chờ agent phản hồi xong, hoặc dừng agent.",
+      "promptPending": "Agent đang chờ câu trả lời cho một câu hỏi hoặc yêu cầu phê duyệt.",
+      "answerFirst": "Hãy trả lời câu hỏi hoặc yêu cầu phê duyệt trước.",
+      "backgroundTasksRunning": "Các tác vụ nền vẫn đang chạy.",
+      "waitForBackgroundTasks": "Chờ các tác vụ nền hoàn tất.",
+      "messagesUnsettled": "Một tin nhắn bạn gửi trước đó chưa được xác nhận.",
+      "settleEarlierMessage": "Chờ tin nhắn trước đó được gửi đi, hoặc thử gửi lại.",
+      "agentStillWorking": "Agent vẫn đang làm việc.",
+      "runClearWhenDone": "Chạy /clear khi hoàn tất.",
+      "clearAfterAnswer": "Trả lời câu hỏi hoặc yêu cầu phê duyệt của agent, rồi chạy /clear.",
+      "runCompactWhenDone": "Chạy /compact khi hoàn tất.",
+      "compactAfterAnswer": "Trả lời câu hỏi hoặc yêu cầu phê duyệt của agent, rồi chạy /compact.",
+      "clearAfterRetry": "Hãy thử gửi lại tin nhắn trước đó, rồi chạy /clear.",
+      "compactAfterRetry": "Hãy thử gửi lại tin nhắn trước đó, rồi chạy /compact.",
+      "clearAfterSending": "Tin nhắn trước đó của bạn vẫn đang được gửi. Chạy /clear sau khi tin nhắn đã được gửi đi.",
+      "compactAfterSending": "Tin nhắn trước đó của bạn vẫn đang được gửi. Chạy /compact sau khi tin nhắn đã được gửi đi.",
+      "pendingWork": "Chờ các tác vụ và tin nhắn đang xử lý hoàn tất trước khi dùng lệnh này.",
+      "queueTooLarge": "Có quá nhiều văn bản đang chờ trong hàng đợi.",
+      "shrinkQueue": "Xóa một tin nhắn trong hàng đợi, hoặc chờ một tin nhắn được gửi đi, rồi thử lại.",
+      "messageTooLarge": "Tin nhắn vượt quá giới hạn 256 KB cho mỗi tin nhắn.",
+      "shortenMessage": "Hãy rút gọn hoặc chia nhỏ rồi gửi lại.",
+      "optionRejected": "Agent không chấp nhận cài đặt này.",
+      "goalsUnsupported": "Agent này không hỗ trợ mục tiêu.",
+      "agentRefused": "Agent đã từ chối yêu cầu này.",
+      "ownerUnproven": "Agent trước đó trong chat này có thể vẫn đang chạy.",
+      "reopenChat": "Mở lại chat để kiểm tra lại.",
+      "terminalAgentHoldsChat": "Chat này vẫn đang mở trong một agent terminal.",
+      "quitTerminalAgent": "Thoát agent đó để tiếp tục chat tại đây.",
+      "hostReconciling": "Prompt vẫn đang kiểm tra cuộc trò chuyện này sau khi khởi động lại.",
+      "waitMoment": "Hãy chờ một lát.",
+      "recordUnreadable": "Prompt không thể đọc trạng thái đã lưu của cuộc trò chuyện này.",
+      "chatNotFound": "Prompt không thể tìm thấy cuộc trò chuyện này.",
+      "startNewChat": "Bắt đầu một chat mới để tiếp tục.",
+      "tryAgain": "Hãy thử lại."
+    }
+  },
+  "chat": {
+    "composer": {
+      "addToMessage": "Thêm vào tin nhắn",
+      "attachImage": "Đính kèm hình ảnh",
+      "placeholder": "Hỏi bất cứ điều gì, @ để nhắc đến tệp, / để dùng lệnh",
+      "cancelEditing": "Hủy chỉnh sửa",
+      "saveEditedMessage": "Lưu tin nhắn đã chỉnh sửa",
+      "sendMessage": "Gửi tin nhắn"
+    },
+    "composerAttachments": {
+      "file": "Tệp",
+      "fileMeta": "{{type}} · {{size}}",
+      "attachedImage": "Hình ảnh đính kèm",
+      "removeImage": "Xóa hình ảnh",
+      "uploadingFile": "Đang tải lên {{name}}",
+      "removeFile": "Gỡ {{name}}"
+    },
+    "useImageUpload": {
+      "disconnected": "Đính kèm không thành công (ngắt kết nối)",
+      "permissionDenied": "Quyền chụp ảnh bị từ chối",
+      "imageTooLarge": "Hình ảnh quá lớn để đính kèm",
+      "attachFailed": "Đính kèm không thành công"
+    },
+    "ask": {
+      "submit": "Gửi",
+      "next": "Tiếp",
+      "skip": "Bỏ qua",
+      "step": "Bước {{step}}",
+      "other": "Khác…",
+      "answerPlaceholder": "Nhập câu trả lời của bạn"
+    },
+    "permission": {
+      "reason": "Lý do:",
+      "needsAccessTo": "Cần truy cập vào:",
+      "planFile": "Hồ sơ kế hoạch: {{filePath}}",
+      "newerVersionRequired": "Yêu cầu này cần có phiên bản mới hơn của Prompt."
+    },
+    "promptCard": {
+      "terminalExplanation": "Trả lời câu hỏi OMP này trong terminal.",
+      "answerInTerminal": "Trả lời trong terminal"
+    },
+    "promptStrip": {
+      "expand": "Mở rộng"
+    },
+    "question": {
+      "submitSelectedOptions": "Gửi các tùy chọn đã chọn",
+      "submitCount": "Gửi ({{count}})",
+      "submit": "Gửi",
+      "otherReplyPlaceholder": "Hoặc gõ câu trả lời…",
+      "replyPlaceholder": "Nhập câu trả lời của bạn…",
+      "sendReply": "Gửi trả lời"
+    },
+    "queuedMessages": {
+      "deleteAll": "Xóa mọi tin nhắn xếp hàng đợi",
+      "clearAll": "Xóa tất cả",
+      "resumeSending": "Tiếp tục gửi tin nhắn đã xếp hàng đợi",
+      "resume": "Tiếp tục",
+      "title": "Tin nhắn trong hàng đợi",
+      "pausedState": "Đã tạm dừng",
+      "queuedState": "Đang chờ",
+      "editMessage": "Sửa tin nhắn"
+    },
+    "sessionOptionPickers": {
+      "workingAnnouncement": "Đại lý đang làm việc. Cài đặt mô hình sẽ mở khóa khi lượt này kết thúc.",
+      "modelFullAccessLabel": "Model, {{value}}, toàn quyền truy cập",
+      "modelLabel": "Người mẫu, {{value}}",
+      "permissionsLabel": "Quyền, {{value}}",
+      "closePicker": "Đóng bộ chọn",
+      "backToModels": "Quay lại mô hình",
+      "agentWorking": "Đại lý đang làm việc",
+      "settingsLocked": "Cài đặt mô hình sẽ mở khóa khi lượt này kết thúc.",
+      "dispatchUnconfirmed": "Đã gửi đến agent — chưa được xác nhận",
+      "permissions": "Quyền"
+    },
+    "sessionOptionRows": {
+      "defaultMarker": "Mặc định",
+      "notReportedMarker": "Không được báo cáo"
+    },
+    "sessionOptionSegments": {
+      "dispatchUnconfirmed": "Đã gửi đến agent — chưa được xác nhận"
+    },
+    "stopButton": {
+      "stoppingState": "Đang dừng…",
+      "stopAgent": "Dừng agent"
+    },
+    "taskList": {
+      "taskStatus": "{{status}}: {{task}}",
+      "title": "Tác vụ",
+      "completed": "Đã hoàn tất",
+      "inProgress": "Đang tiến hành",
+      "pending": "Đang chờ",
+      "empty": "Không có tác vụ",
+      "progress": "{{completed}} trong số {{total}} nhiệm vụ đã hoàn thành",
+      "added": "Đã thêm {{task}}",
+      "removed": "Đã gỡ {{task}}",
+      "started": "Đã bắt đầu {{task}}",
+      "finished": "Đã hoàn tất {{task}}",
+      "reset": "Đã đánh dấu đang chờ: {{task}}",
+      "updated": "Đã cập nhật {{task}}",
+      "unchanged": "Tác vụ không thay đổi",
+      "showAll": "Danh sách tác vụ đầy đủ"
+    },
+    "sessionOptionCopy": {
+      "on": "Bật",
+      "off": "Tắt",
+      "permissions": "Quyền",
+      "notSet": "Chưa đặt",
+      "model": "người mẫu",
+      "effort": "Mức nỗ lực",
+      "fastMode": "Chế độ nhanh",
+      "speed": "Tốc độ",
+      "thinking": "Suy nghĩ",
+      "standard": "Tiêu chuẩn",
+      "minimal": "Tối thiểu",
+      "low": "Thấp",
+      "medium": "Trung bình",
+      "high": "Cao",
+      "xhigh": "Rất cao",
+      "max": "Tối đa",
+      "ultra": "Siêu cao",
+      "minimalShort": "Tối thiểu",
+      "mediumShort": "Vừa",
+      "xhighShort": "XCao",
+      "fast": "Nhanh",
+      "toggleOption": "Bật/tắt {{value0}}",
+      "chooseInAgentPicker": "Chọn trong bộ chọn agent…",
+      "setWhenSessionStarts": "Được đặt khi phiên bắt đầu.",
+      "availableAfterSessionStarts": "Khả dụng sau khi phiên bắt đầu.",
+      "sessionOptions": "Tùy chọn phiên"
+    },
+    "streamFrame": {
+      "streamFailed": "Luồng bản ghi không thành công",
+      "streamEnded": "Luồng chép lời đã kết thúc"
+    },
+    "turnStatus": {
+      "seconds_one": "{{count}} giây",
+      "seconds_other": "{{count}} giây",
+      "minutesSeconds": "{{minutes}} phút {{seconds}} giây",
+      "hoursMinutesSeconds": "{{hours}} giờ {{minutes}} phút {{seconds}} giây",
+      "thinking": "Suy nghĩ",
+      "working": "Đang xử lý…",
+      "stopping": "Đang dừng…",
+      "queueAfterStop": "Xếp hàng một tin nhắn để chạy sau khi dừng",
+      "sendAfterStop": "Gửi một tin nhắn để chạy sau khi dừng",
+      "workingFor": "Đang làm việc trong {{value0}}",
+      "workedFor": "Đã làm việc trong {{value0}}",
+      "interruptedAfter": "Bị gián đoạn sau {{value0}}",
+      "failedAfter": "Thất bại sau {{value0}}",
+      "toggleDetails": "Bật/tắt chi tiết lượt",
+      "responding": "Agent đang phản hồi"
+    },
+    "message": {
+      "copyMessage": "Sao chép tin nhắn"
+    },
+    "messageActionsSheet": {
+      "copyMessage": "Sao chép tin nhắn",
+      "copyFailed": "Sao chép không thành công",
+      "clipboardRejected": "Clipboard đã từ chối văn bản.",
+      "selectText": "Chọn văn bản"
+    },
+    "notice": {
+      "stoppedManually": "Đã dừng thủ công",
+      "compaction": "Đã nén ngữ cảnh",
+      "contextCleared": "Đã xóa ngữ cảnh",
+      "plan": "Gói"
+    },
+    "nativeChatProse": {
+      "attachedImage": "Hình ảnh đính kèm",
+      "image": "hình ảnh",
+      "openImageHint": "Mở hình ảnh ở kích thước đầy đủ"
+    },
+    "nativeChatToolLine": {
+      "durationMilliseconds": "{{milliseconds}} mili giây",
+      "durationSeconds": "{{seconds}} giây",
+      "durationMinutes": "{{minutes}} phút {{seconds}} giây",
+      "durationHours": "{{hours}} giờ {{minutes}} phút {{seconds}} giây",
+      "result": "Kết quả",
+      "exitCode": "lối ra {{exitCode}}",
+      "copyCommand": "Sao chép lệnh",
+      "running": "Đang chạy",
+      "ran": "Đã chạy",
+      "reading": "Đang đọc",
+      "read": "Đọc",
+      "triedRead": "Đã thử đọc",
+      "editing": "Đang sửa",
+      "edited": "Đã chỉnh sửa",
+      "triedEdit": "Đã thử chỉnh sửa",
+      "added": "Đã thêm",
+      "deleted": "Đã xóa",
+      "renamed": "Đã đổi tên",
+      "subagent": "chất phụ",
+      "searching": "Đang tìm kiếm",
+      "searched": "Đã tìm kiếm",
+      "triedSearch": "Đã thử tìm kiếm",
+      "listing": "Đang liệt kê",
+      "listed": "Đã liệt kê",
+      "triedList": "Đã thử liệt kê",
+      "fetching": "Đang lấy",
+      "fetched": "Đã lấy",
+      "triedFetch": "Đã thử lấy",
+      "searchingWeb": "Đang tìm kiếm trên web",
+      "searchedWeb": "Đã tìm kiếm trên web",
+      "triedSearchWeb": "Đã thử tìm kiếm trên web"
+    },
+    "nativeChatUserMessageFold": {
+      "showLess": "Thu gọn",
+      "loadFailed": "Hiển thị thông báo đầy đủ — không thể tải, nhấn để thử lại",
+      "showFullMessage": "Hiện toàn bộ tin nhắn"
+    },
+    "askRow": {
+      "awaiting": "Đang chờ người dùng nhập:",
+      "awaitingUnnamed": "Đang chờ người dùng nhập",
+      "asked": "Đã hỏi:",
+      "questionCount": "{{value0}} câu hỏi"
+    },
+    "hostStatus": {
+      "historyRepaired": "Không thể tải một phần lịch sử của chat này.",
+      "historyItemTooLarge": "Phần này của chat quá lớn để hiển thị.",
+      "continuedOutside": "Đã tiếp tục bên ngoài chat này.",
+      "continuedOutsideRewound": "Đã tiếp tục bên ngoài chat này. Các phản hồi trước đó ở trên không còn nằm trong lịch sử của cuộc trò chuyện này."
+    },
+    "orcaStop": {
+      "update": "Prompt trên {{machine}} đã khởi động lại để cập nhật trong khi phản hồi này đang diễn ra.",
+      "quit": "Prompt trên {{machine}} đã bị đóng trong khi phản hồi này đang diễn ra.",
+      "crash": "Prompt trên {{machine}} dừng đột ngột trong khi phản hồi này đang diễn ra.",
+      "remote": "Prompt trên {{machine}} đã dừng trong khi phản hồi này đang diễn ra.",
+      "canContinue": "Có thể tiếp tục trong cuộc trò chuyện này.",
+      "unnamedServer": "máy chủ từ xa"
+    },
+    "toolActivity": {
+      "count_one": "{{count}} lệnh gọi công cụ",
+      "count_other": "{{count}} lần gọi công cụ",
+      "runningPreview": "Đang chạy {{preview}}",
+      "runningCommand": "Lệnh chạy",
+      "runningNamedPreview": "Đang chạy {{toolName}} {{preview}}",
+      "runningNamed": "Đang chạy {{toolName}}",
+      "result": "Kết quả",
+      "moreCalls": "+{{value0}} mục khác",
+      "failedCount": "{{value0}} không thành công",
+      "failedCallsLabel": "Lệnh gọi công cụ thất bại: {{value0}}",
+      "interruptedCount": "{{value0}} bị gián đoạn",
+      "interruptedCallsLabel": "Lệnh gọi công cụ bị gián đoạn: {{value0}}"
+    },
+    "toolRun": {
+      "liveRead_one": "Đang đọc tệp {{count}}",
+      "liveRead_other": "Đang đọc {{count}} tệp",
+      "liveSearch_one": "Tìm kiếm {{count}} thời gian",
+      "liveSearch_other": "Đang tìm kiếm {{count}} lần",
+      "liveListFiles_one": "Liệt kê {{count}} thư mục",
+      "liveListFiles_other": "Đang liệt kê {{count}} thư mục",
+      "liveUnknown_one": "Đang chạy lệnh {{count}}",
+      "liveUnknown_other": "Đang chạy {{count}} lệnh",
+      "liveFileChange_one": "Chỉnh sửa tập tin {{count}}",
+      "liveFileChange_other": "Đang chỉnh sửa {{count}} tệp",
+      "liveWebSearch_one": "Tìm kiếm trên web {{count}} lần",
+      "liveWebSearch_other": "Đang tìm kiếm trên web {{count}} lần",
+      "liveBrowserOnce": "Đang dùng trình duyệt",
+      "liveBrowserTimes_other": "Đang dùng trình duyệt {{count}} lần",
+      "liveMcpToolCall_one": "Sử dụng tích hợp {{count}}",
+      "liveMcpToolCall_other": "Đang dùng {{count}} tích hợp",
+      "liveSubAgentActivity_one": "Đang chạy {{count}} đại lý",
+      "liveSubAgentActivity_other": "Đang chạy {{count}} agent",
+      "liveTodoListOnce": "Đang cập nhật kế hoạch",
+      "liveTodoListTimes_other": "Đang cập nhật kế hoạch {{count}} lần",
+      "liveOther_one": "Sử dụng công cụ {{count}}",
+      "liveOther_other": "Đang dùng {{count}} công cụ",
+      "settledRead_one": "Đọc tệp {{count}}",
+      "settledRead_other": "Đã đọc {{count}} tệp",
+      "settledSearch_one": "Đã tìm kiếm {{count}} lần",
+      "settledSearch_other": "Đã tìm kiếm {{count}} lần",
+      "settledListFiles_one": "Thư mục được liệt kê {{count}}",
+      "settledListFiles_other": "Đã liệt kê {{count}} thư mục",
+      "settledUnknown_one": "Chạy lệnh {{count}}",
+      "settledUnknown_other": "Đã chạy {{count}} lệnh",
+      "settledFileChange_one": "Đã chỉnh sửa tệp {{count}}",
+      "settledFileChange_other": "Đã chỉnh sửa {{count}} tệp",
+      "settledWebSearch_one": "Đã tìm kiếm trên web {{count}} lần",
+      "settledWebSearch_other": "Đã tìm kiếm trên web {{count}} lần",
+      "settledBrowserOnce": "Đã dùng trình duyệt",
+      "settledBrowserTimes_other": "Đã dùng trình duyệt {{count}} lần",
+      "settledMcpToolCall_one": "Đã sử dụng tích hợp {{count}}",
+      "settledMcpToolCall_other": "Đã dùng {{count}} tích hợp",
+      "settledSubAgentActivity_one": "Đại lý Ran {{count}}",
+      "settledSubAgentActivity_other": "Đã chạy {{count}} agent",
+      "settledTodoListOnce": "Đã cập nhật kế hoạch",
+      "settledTodoListTimes_other": "Đã cập nhật kế hoạch {{count}} lần",
+      "settledOther_one": "Công cụ {{count}} đã qua sử dụng",
+      "settledOther_other": "Đã dùng {{count}} công cụ",
+      "pair": "{{value0}} và {{value1}}",
+      "list": "{{value0}} và {{value1}}",
+      "separator": ","
+    },
+    "usageLimit": {
+      "theAgent": "Agent",
+      "windowSession": "phiên",
+      "windowWeekly": "hằng tuần",
+      "windowWeeklyModel": "model hằng tuần",
+      "windowCredits": "mức sử dụng bổ sung",
+      "reachedNamed": "{{agent}} đã đạt giới hạn {{window}}.",
+      "reached": "{{agent}} đã đạt giới hạn sử dụng.",
+      "resetsAt": "Giới hạn sẽ được đặt lại vào {{when}}."
+    },
+    "composerPlaceholder": {
+      "reconnecting": "Đang kết nối lại…",
+      "waitingForTerminal": "Đang chờ thiết bị đầu cuối…",
+      "prompt": "Hỏi bất cứ điều gì, @ để nhắc đến tệp, / để dùng lệnh"
+    },
+    "nativeChatImageViewer": {
+      "closeImage": "Đóng hình ảnh"
+    },
+    "nativeChatVisual": {
+      "defaultTitle": "Trực quan hóa",
+      "unavailable": "Không có trực quan hóa",
+      "retryHint": "Đang thử tải lại",
+      "openFullscreen": "Mở {{title}} toàn màn hình"
+    },
+    "diffCard": {
+      "diffTruncated": "Diff bị cắt bớt",
+      "diffGap": "Các dòng không hiển thị",
+      "copyDiff": "Sao chép diff"
+    },
+    "receipt": {
+      "emptyAnswer": "Câu trả lời trống",
+      "unavailable": "Câu trả lời đã chọn không khả dụng",
+      "resolved": "Đã giải quyết",
+      "cancelled": "Đã hủy",
+      "resolver": "Đã trả lời trên {{device}}",
+      "cancelledBy": "Đã hủy trên {{device}}"
+    },
+    "subagentGroup": {
+      "stateCompleted": "đã hoàn tất",
+      "stateWorking": "đang làm việc",
+      "stateIdle": "idle",
+      "stateFailed": "thất bại",
+      "stateStopped": "đã dừng",
+      "stateUnverifiable": "không có trạng thái",
+      "stateWorkingCount_one": "{{count}} đang làm việc",
+      "stateWorkingCount_other": "{{count}} đang làm việc",
+      "stateIdleCount_one": "{{count}} đang rảnh",
+      "stateIdleCount_other": "{{count}} đang rảnh",
+      "stateFailedCount_one": "{{count}} thất bại",
+      "stateFailedCount_other": "{{count}} thất bại",
+      "stateStoppedCount_one": "{{count}} đã dừng",
+      "stateStoppedCount_other": "{{count}} đã dừng",
+      "stateUnverifiableCount_one": "{{count}} không có trạng thái",
+      "stateUnverifiableCount_other": "{{count}} không có trạng thái",
+      "started_one": "Đã khởi động {{count}} đại lý phụ",
+      "started_other": "Đã khởi chạy {{count}} subagent",
+      "ran_one": "Ran {{count}} đại lý phụ",
+      "ran_other": "Đã chạy {{count}} subagent",
+      "tokens": "{{value0}} token"
+    }
+  },
+  "sourceControl": {
+    "hostedReview": {
+      "prCopy": {
+        "shortLabel": "PR",
+        "reviewLabel": "kéo yêu cầu",
+        "titleLabel": "Pull request"
+      },
+      "mrCopy": {
+        "shortLabel": "MR",
+        "reviewLabel": "yêu cầu hợp nhất",
+        "titleLabel": "Merge request"
+      }
+    },
+    "commitDropdown": {
+      "commit": "Cam kết",
+      "commitStagedChanges": "Commit các thay đổi đã stage",
+      "commitPush": "Commit và Push",
+      "commitForcePush": "Commit và Force Push",
+      "commitSync": "Commit và Sync",
+      "checkingBranchStatus": "Đang kiểm tra trạng thái branch…",
+      "checkingPrStatus": "Đang kiểm tra trạng thái PR…",
+      "prAlreadyMerged": "PR đã được merge",
+      "checkOutBranchToPush": "Checkout một branch trước khi push các commit",
+      "linkedReviewTargetUnavailable": "Không có sẵn branch đích của review được liên kết",
+      "publishBranchFirstToPush": "Hãy publish branch trước để push các commit",
+      "commitAndForcePush": "Commit các thay đổi đã stage và force push with lease",
+      "commitAndTryPush": "Commit các thay đổi đã stage và thử push",
+      "commitAndPush": "Commit các thay đổi đã stage và push",
+      "checkOutBranchToSync": "Checkout một branch trước khi sync các commit",
+      "publishBranchFirstToSync": "Hãy publish branch trước để sync các commit",
+      "useCommitAndForcePush": "Dùng Commit và Force Push — remote chỉ có các bản cũ hơn của commit cục bộ",
+      "commitThenPullPush": "Commit, sau đó pull và push",
+      "resolveConflicts": "Giải quyết xung đột trước khi commit",
+      "stageFile": "Stage ít nhất một tệp để commit",
+      "enterMessage": "Nhập thông điệp commit để commit"
+    },
+    "createPrAction": {
+      "createReview": "Tạo {{titleLabel}}",
+      "createPullRequest": "Tạo pull request",
+      "statusUnavailable": "Không có trạng thái review",
+      "checkingStatus": "Đang kiểm tra trạng thái review…",
+      "providerUnavailable": "Việc tạo đánh giá không khả dụng đối với nhà cung cấp này"
+    },
+    "prCreate": {
+      "notReady": "Chi nhánh này chưa sẵn sàng cho {{reviewLabel}}.",
+      "existingNumber": "{{titleLabel}} #{{number}} đã được mở.",
+      "existing": "{{titleLabel}} đã được mở.",
+      "createdNotRefreshed": "{{titleLabel}} đã được tạo nhưng Prompt chưa thể làm mới nó.",
+      "lookupUnconfirmed": "Prompt không thể xác nhận liệu chi nhánh này đã có {{reviewLabel}} hay chưa. Hãy thử lại sau giây lát.",
+      "dirty": "Cam kết thay đổi trước khi tạo {{reviewLabel}}.",
+      "detachedHead": "Checkout một branch trước khi tạo {{reviewLabel}}.",
+      "defaultBranch": "Chuyển sang một feature branch trước khi tạo {{reviewLabel}}.",
+      "noUpstream": "Xuất bản các cam kết trước khi tạo {{reviewLabel}}.",
+      "needsSync": "Đồng bộ hóa nhánh này trước khi tạo {{reviewLabel}}.",
+      "authRequired": "Xác thực trước khi tạo {{reviewLabel}}.",
+      "unsupportedMergeRequests": "Việc tạo yêu cầu hợp nhất không được hỗ trợ cho kho lưu trữ này.",
+      "unsupportedPullRequests": "Việc tạo yêu cầu kéo không được hỗ trợ cho kho lưu trữ này.",
+      "existingReview": "Branch này đã có {{reviewLabel}}.",
+      "forkHeadUnsupported": "Việc tạo {{reviewLabel}} từ nhánh này không được hỗ trợ.",
+      "baseNotOnRemote": "Đẩy nhánh cơ sở trước khi tạo {{reviewLabel}}."
+    },
+    "hostedReviewCreate": {
+      "pushSucceeded": "Đẩy thành công, nhưng tạo {{shortLabel}} không thành công: {{error}}"
+    },
+    "remoteDropdown": {
+      "push": "Đẩy",
+      "forcePush": "Lực đẩy",
+      "pull": "Kéo",
+      "fastForward": "Chuyển tiếp nhanh",
+      "sync": "Đồng bộ",
+      "publishBranch": "Xuất bản branch",
+      "publishPrStatus": "Trạng thái PR",
+      "publishLinkedReview": "Review được liên kết",
+      "publishNoBranch": "Không có branch",
+      "checkingBranchStatus": "Đang kiểm tra trạng thái branch…",
+      "checkingPrStatus": "Đang kiểm tra trạng thái PR…",
+      "prAlreadyMerged": "PR đã được merge",
+      "linkedReviewTargetUnavailable": "Không có sẵn branch đích của review được liên kết",
+      "checkOutBranchToPush": "Checkout một branch trước khi push các commit",
+      "pushAndSetUpstream": "Push branch này và đặt upstream nếu cần",
+      "pushToLinkedReview": "Push các cập nhật lên branch của review được liên kết",
+      "tryRegularPush": "Thử push thông thường; git có thể yêu cầu force push",
+      "pushMayNeedSync": "Push các commit cục bộ; git có thể yêu cầu sync trước",
+      "nothingToPush": "Không có gì để push",
+      "checkOutBranchToForcePush": "Checkout một branch trước khi force push các commit",
+      "nothingToForcePush": "Không có gì để force push",
+      "checkOutBranchToPull": "Checkout một branch trước khi pull các commit",
+      "publishBranchFirstToPull": "Hãy publish branch trước để pull các commit",
+      "nothingNewToPull": "Không có gì mới để pull — remote chỉ có các bản cũ hơn của commit cục bộ",
+      "nothingToPull": "Không có gì để pull",
+      "checkOutBranchToFastForward": "Checkout một branch trước khi fast-forward",
+      "publishBranchFirstToFastForward": "Hãy publish branch trước để fast-forward",
+      "nothingNewToFastForward": "Không có gì mới để fast-forward — remote chỉ có các bản cũ hơn của commit cục bộ",
+      "nothingToFastForward": "Không có gì để fast-forward",
+      "tryFastForwardPull": "Thử pull fast-forward; git có thể từ chối các commit cục bộ",
+      "checkOutBranchToSync": "Checkout một branch trước khi sync các commit",
+      "publishBranchFirstToSync": "Hãy publish branch trước để sync các commit",
+      "useForcePushToSync": "Dùng Force Push — remote chỉ có các bản cũ hơn của commit cục bộ",
+      "branchUpToDate": "Branch đã ở trạng thái mới nhất",
+      "rebaseFromBase": "Rebase từ base",
+      "rebaseChooseRemoteBase": "Chọn một base branch trên remote để rebase",
+      "rebaseDirtyHint": "Thử rebase; git có thể yêu cầu commit hoặc stash các thay đổi cục bộ trước",
+      "fetch": "Tìm nạp",
+      "fetchTitle": "Fetch từ remote mà không merge",
+      "linkedReviewBranchExists": "Branch của review được liên kết đã tồn tại",
+      "checkOutBranchToPublish": "Checkout một branch trước khi publish các commit",
+      "branchAlreadyPublished": "Branch đã được publish",
+      "publishToOrigin": "Publish branch này lên origin",
+      "nothingToPushTo": "Không có gì để push đến {{upstreamName}}",
+      "nothingToForcePushTo": "Không có gì để force push đến {{upstreamName}}",
+      "rebaseFromNamedBase": "Rebase từ {{baseRef}}",
+      "rebaseWithLatestFrom": "Rebase branch hiện tại với các commit mới nhất từ {{baseRef}}"
+    },
+    "actions": {
+      "createPr": "Tạo PR",
+      "pushAndCreatePr": "Đẩy & Tạo PR",
+      "switchBranch": "Chuyển nhánh",
+      "commits": "Commit",
+      "committing": "Đang trong quá trình cam kết.",
+      "forcePushing": "Đang tiến hành đẩy mạnh.",
+      "remoteOperationInProgress": "Đang thực hiện thao tác từ xa.",
+      "waitForRemoteOperation": "Hãy thử lại sau khi thao tác từ xa kết thúc.",
+      "resolveConflicts": "Giải quyết xung đột trước khi cam kết.",
+      "commitStagedChanges": "Cam kết thay đổi theo giai đoạn.",
+      "enterCommitMessage": "Nhập thông điệp cam kết để cam kết.",
+      "stageAllChanges": "Giai đoạn tất cả các thay đổi.",
+      "stageFileToCommit": "Giai đoạn ít nhất một tập tin để cam kết.",
+      "checkoutBeforePublish": "Checkout một branch trước khi publish các commit.",
+      "checkingReviewStatus": "Kiểm tra trạng thái xem xét.",
+      "reviewAlreadyMerged": "Không có gì để cam kết. Đánh giá đã được hợp nhất.",
+      "publishToOrigin": "Xuất bản chi nhánh này về nguồn gốc.",
+      "pushLinkedReview": "Đẩy các bản cập nhật tới nhánh đánh giá được liên kết.",
+      "linkedReviewUnavailable": "Nhánh đánh giá được liên kết không có sẵn.",
+      "forcePushWithLease": "Buộc đẩy với hợp đồng thuê để cập nhật chi nhánh từ xa.",
+      "syncCounts": "Kéo {{behind}}, đẩy {{ahead}}.",
+      "pullCommits_one": "Kéo {{count}} cam kết.",
+      "pullCommits_other": "Kéo {{count}} cam kết.",
+      "pushCommits_one": "Đẩy {{count}} cam kết.",
+      "pushCommits_other": "Đẩy {{count}} cam kết.",
+      "upToDate": "Không có gì để commit. Branch đã ở trạng thái mới nhất."
+    },
+    "dropdownCounts": {
+      "pushCount_one": "Đẩy {{count}} cam kết",
+      "pushCount_other": "Push {{count}} commit",
+      "pullCount_one": "Kéo {{count}} cam kết",
+      "pullCount_other": "Pull {{count}} commit",
+      "fastForwardCount_one": "Chuyển tiếp nhanh {{count}} cam kết",
+      "fastForwardCount_other": "Fast-forward {{count}} commit",
+      "syncCounts": "Kéo {{behind}}, đẩy {{ahead}}",
+      "remoteBranchFallback": "branch remote",
+      "titleForcePushOlderCopiesBranch": "Remote chỉ có các bản cũ hơn của commit cục bộ. Force push branch này with lease để cập nhật {{upstreamName}}.",
+      "titleForcePushOlderCopiesCount_one": "Remote chỉ có các bản sao cũ hơn của các cam kết cục bộ. Buộc đẩy chi nhánh {{count}} cam kết cho thuê để cập nhật {{upstreamName}}.",
+      "titleForcePushOlderCopiesCount_other": "Remote chỉ có các bản cũ hơn của commit cục bộ. Force push {{count}} commit của branch với lease để cập nhật {{upstreamName}}.",
+      "titleManualForcePushReplaceRemote_one": "Buộc đẩy {{count}} cam kết cục bộ bằng hợp đồng thuê để cập nhật {{upstreamName}} và thay thế các cam kết chỉ từ xa.",
+      "titleManualForcePushReplaceRemote_other": "Force push {{count}} commit cục bộ với lease để cập nhật {{upstreamName}} và thay thế các commit chỉ có trên remote.",
+      "titleManualForcePush_one": "Buộc đẩy {{count}} cam kết cục bộ với hợp đồng thuê để cập nhật {{upstreamName}}.",
+      "titleManualForcePush_other": "Force push {{count}} commit cục bộ với lease để cập nhật {{upstreamName}}.",
+      "titleUnpublishedForcePushBranch": "Force push branch này with lease và đặt upstream nếu cần.",
+      "titleUnpublishedForcePushCount_one": "Buộc đẩy nhánh {{count}} cam kết thuê và thiết lập ngược dòng nếu cần.",
+      "titleUnpublishedForcePushCount_other": "Force push {{count}} commit của branch với lease và đặt upstream nếu cần."
+    },
+    "primaryAction": {
+      "forcePushFromDesktop": "Buộc đẩy nhánh của yêu cầu kéo này từ máy tính để bàn",
+      "forcePush": "Lực đẩy",
+      "commit": "Cam kết",
+      "stageAll": "Stage tất cả",
+      "push": "Đẩy",
+      "pull": "Kéo",
+      "sync": "Đồng bộ",
+      "publishBranch": "Xuất bản branch"
+    },
+    "branchDiffPreviewDrawer": {
+      "committedOnBranch": "Cam kết tại chi nhánh",
+      "closePreview": "Đóng bản xem trước khác biệt đã cam kết",
+      "loadFailed": "Không thể tải khác biệt",
+      "truncated": "Sự khác biệt đã bị cắt bớt để xem trước trên thiết bị di động."
+    },
+    "commitFailurePanel": {
+      "title": "Cam kết không thành công",
+      "summary": "Cam kết không thành công.",
+      "fixWithAi": "Sửa lỗi commit bằng AI",
+      "fix": "Khắc phục",
+      "hideFailureDetails": "Ẩn chi tiết lỗi cam kết",
+      "showFailureDetails": "Hiển thị chi tiết lỗi cam kết",
+      "hideDetails": "Ẩn chi tiết",
+      "showDetails": "Hiện chi tiết"
+    },
+    "gitHistoryList": {
+      "loadFailed": "Không tải được lịch sử",
+      "loadFilesFailed": "Không thể tải tập tin cam kết",
+      "retryFiles": "Thử lại các tập tin cam kết",
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "noFileChanges": "Không có thay đổi tập tin",
+      "noCommits": "Không có cam kết."
+    },
+    "branchCard": {
+      "mergeState": "hợp nhất",
+      "rebaseState": "nổi loạn",
+      "cherryPickState": "hái anh đào",
+      "changedCount": "{{count}} đã thay đổi",
+      "stagedCount": "{{count}} dàn dựng",
+      "branchCount": "{{count}} trên nhánh"
+    },
+    "content": {
+      "reconnecting": "Đang kết nối lại với máy tính để bàn...",
+      "stageAll": "Stage tất cả",
+      "unstageAll": "Bỏ qua tất cả",
+      "openActions": "Các hành động kiểm soát nguồn mở",
+      "emptyTitle": "Không có thay đổi cục bộ",
+      "emptyMessage": "Cây làm việc sạch sẽ.",
+      "commitMessageDisabled": "Thông báo cam kết bị vô hiệu hóa. Không có tập tin dàn dựng.",
+      "noStagedFiles": "Không có tập tin dàn dựng",
+      "commitMessagePlaceholder": "Thông điệp commit",
+      "regenerateHint": "Xóa thông điệp để tạo lại.",
+      "cancelGeneration": "Hủy việc tạo thông báo cam kết",
+      "generateMessage": "Tạo commit message bằng AI"
+    },
+    "fileList": {
+      "committedSection": "Đã commit trên branch"
+    },
+    "fileRows": {
+      "bothModified": "Cả hai cùng sửa",
+      "bothAdded": "Cả hai cùng thêm",
+      "deletedByUs": "Do phía mình xóa",
+      "deletedByThem": "Do phía họ xóa",
+      "addedByUs": "Do phía mình thêm",
+      "addedByThem": "Do phía họ thêm",
+      "bothDeleted": "Cả hai cùng xóa",
+      "unresolvedConflict": "Xung đột chưa giải quyết",
+      "openChangedFile": "Mở tập tin đã thay đổi {{path}}",
+      "renamedFrom": "từ {{path}}",
+      "unstageFile": "Không có sân khấu {{path}}",
+      "stageFile": "Giai đoạn {{path}}",
+      "discardFile": "Loại bỏ {{path}}",
+      "committedSection": "Đã commit trên branch",
+      "loadingCommitted": "Đang tải các thay đổi đã cam kết...",
+      "committedUnavailable": "Những thay đổi đã cam kết không có sẵn.",
+      "openCommittedChange": "Mở thay đổi đã cam kết {{path}}"
+    },
+    "header": {
+      "close": "Đóng kiểm soát nguồn",
+      "backToSession": "Quay lại phiên",
+      "title": "Quản lý mã nguồn",
+      "openNumberedPrWeb": "Mở yêu cầu kéo #{{number}} trên web",
+      "openPrWeb": "Mở yêu cầu kéo trên web",
+      "refresh": "Làm mới kiểm soát nguồn"
+    },
+    "modals": {
+      "actionsTitle": "Quản lý mã nguồn",
+      "discardTitle": "Hủy thay đổi",
+      "discardConfirmMessage": "Hủy các thay đổi đối với \"{{path}}\"? Điều này không thể hoàn tác được.",
+      "discardButton": "Loại bỏ",
+      "switchBranchTitle": "Chuyển nhánh",
+      "currentBranch": "hiện tại",
+      "prCreatedTitle": "Đã tạo yêu cầu kéo",
+      "openPrWithWarning": "Mở nó trong trình duyệt của bạn?\n\n{{warning}}",
+      "openPrMessage": "Mở nó trong trình duyệt của bạn?"
+    },
+    "panel": {
+      "unavailableTitle": "Kiểm soát nguồn không khả dụng",
+      "loadFailedTitle": "Không thể tải"
+    },
+    "prChip": {
+      "loading": "Đang tải yêu cầu kéo…",
+      "createPr": "Tạo yêu cầu kéo",
+      "loadingLabel": "Đang tải yêu cầu kéo",
+      "unavailableLabel": "Yêu cầu kéo không có sẵn: {{message}}",
+      "openWithComments_one": "Kéo yêu cầu #{{number}}, {{state}}, {{checks}}, {{count}} nhận xét chưa được giải quyết. Mở yêu cầu kéo.",
+      "openWithComments_other": "Kéo yêu cầu #{{number}}, {{state}}, {{checks}}, {{count}} nhận xét chưa được giải quyết. Mở yêu cầu kéo.",
+      "openLabel": "Kéo yêu cầu #{{number}}, {{state}}, {{checks}}. Mở yêu cầu kéo."
+    },
+    "hostedReviewCopy": {
+      "updatingBranch": "Đang cập nhật chi nhánh...",
+      "stagingChanges": "Thay đổi giai đoạn...",
+      "generatingCommitMessage": "Đang tạo thông báo cam kết...",
+      "committingChanges": "Cam kết thay đổi...",
+      "publishingBranch": "Chi nhánh xuất bản...",
+      "pushingCommits": "Đẩy các cam kết...",
+      "forcePushing": "Buộc đẩy bằng hợp đồng thuê...",
+      "creatingReview": "Đang tạo đánh giá..."
+    },
+    "branchBaseRef": {
+      "resolveFailed": "Không thể giải quyết cơ sở chi nhánh"
+    },
+    "branchCompareOutcome": {
+      "baseBranchUnavailable": "Không thể giải quyết nhánh cơ sở để so sánh.",
+      "loadFailed": "Không thể tải các thay đổi đã cam kết"
+    },
+    "branchCompare": {
+      "sectionTitle": "Đã commit trên branch",
+      "summary": "{{files}} - vs {{baseRef}}",
+      "summaryWithCommits": "{{files}} - {{commits}} - vs {{baseRef}}",
+      "files_one": "{{count}} tập tin",
+      "files_other": "{{count}} tệp",
+      "commits_one": "{{count}} cam kết",
+      "commits_other": "{{count}} cam kết"
+    },
+    "commitMessageAi": {
+      "generateFailed": "Không tạo được thông báo cam kết"
+    },
+    "gitHistory": {
+      "justNow": "vừa xong",
+      "minutes_one": "{{count}} phút",
+      "minutes_other": "{{count}} phút",
+      "hours_one": "{{count}} giờ",
+      "hours_other": "{{count}} giờ",
+      "days_one": "{{count}} ngày",
+      "days_other": "{{count}} ngày",
+      "months_one": "{{count}}tháng",
+      "months_other": "{{count}}tháng",
+      "years_one": "{{count}} năm",
+      "years_other": "{{count}} năm",
+      "noCommitMessage": "(không có tin nhắn cam kết)",
+      "loadFailed": "Không tải được lịch sử cam kết"
+    },
+    "gitStatus": {
+      "conflicts": "Xung đột",
+      "changes": "Thay đổi",
+      "stagedChanges": "Thay đổi đã stage"
+    },
+    "hostedReviewCreateIntent": {
+      "resolveConflicts": "Giải quyết xung đột trước khi tạo yêu cầu kéo.",
+      "branchChanged": "Chi nhánh đã thay đổi trong khi chuẩn bị yêu cầu kéo.",
+      "resolveOrStageChanges": "Giải quyết hoặc thực hiện các thay đổi trước khi tạo yêu cầu kéo.",
+      "generateMessageFailed": "Không thể tạo thông báo cam kết. Thêm một cái trong Kiểm soát nguồn, sau đó thử lại.",
+      "reviewCommitMessage": "Xem lại commit message rồi thử lại Create PR."
+    },
+    "hostedReviewGitPreparation": {
+      "refreshFailed": "Không thể làm mới kiểm soát nguồn",
+      "updateBranchFailed": "Không thể cập nhật remote branch. Hãy thử lại Create PR.",
+      "stageFailed": "Không thể thay đổi giai đoạn",
+      "commitFailed": "Cam kết không thành công"
+    },
+    "hostedReviewRemotePrerequisite": {
+      "publishFailed": "Không thể xuất bản chi nhánh",
+      "pushFailed": "Không thể đẩy cam kết",
+      "forcePushFailed": "Không thể buộc đẩy hợp đồng thuê"
+    },
+    "hostedReviewService": {
+      "pushBeforeCreateFailed": "Push không thành công. Hãy xử lý lỗi push rồi thử lại.",
+      "createFailed": "Không tạo được yêu cầu kéo"
+    },
+    "prLink": {
+      "updatePullRequestFailed": "Không thể cập nhật yêu cầu kéo được liên kết",
+      "updateReviewFailed": "Không cập nhật được bài đánh giá được liên kết"
+    },
+    "conflictAbort": {
+      "aborting": "Đang hủy bỏ…",
+      "abortMerge": "Hủy merge",
+      "abortRebase": "Hủy rebase",
+      "abortOperation": "Hủy bỏ {{operation}}"
+    },
+    "hubTab": {
+      "changes": "Thay đổi",
+      "pullRequest": "Pull request",
+      "commits": "Commit"
+    },
+    "screenState": {
+      "noBranch": "Không có chi nhánh"
+    },
+    "useMobileCommitFailureRecovery": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "launchFailed": "Không thể khởi chạy đại lý"
+    },
+    "useMobileCommitMessageGeneration": {
+      "generateFailed": "Không tạo được thông báo cam kết"
+    },
+    "useMobileCreatePrRunner": {
+      "branchRequired": "Kiểm tra một nhánh trước khi tạo yêu cầu kéo."
+    },
+    "useMobileGitRequests": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "actionFailed": "Hành động kiểm soát nguồn không thành công",
+      "commitFailed": "Cam kết không thành công",
+      "branchUnavailable": "Trạng thái chi nhánh không có sẵn"
+    },
+    "actionSheetRunners": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "noBaseBranch": "Không có nhánh cơ sở để rebase"
+    },
+    "commitRunners": {
+      "commitFailed": "Cam kết không thành công",
+      "actionFailed": "Hành động kiểm soát nguồn không thành công"
+    },
+    "loaders": {
+      "connectingToDesktop": "Đang kết nối với máy tính để bàn...",
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "updateDesktop": "Cập nhật Prompt máy tính để bàn để sử dụng Kiểm soát nguồn trên thiết bị di động.",
+      "loadFailed": "Không thể tải kiểm soát nguồn"
+    },
+    "openers": {
+      "waitingForDesktop": "Đang chờ máy tính để bàn...",
+      "openDiffFailed": "Không thể mở khác biệt",
+      "tabNotReady": "Tệp đã mở nhưng tab của nó chưa sẵn sàng. Hãy thử lại."
+    },
+    "runners": {
+      "actionFailed": "Hành động kiểm soát nguồn không thành công"
+    },
+    "state": {
+      "syncStatus": "Trước {{ahead}}, sau {{behind}}",
+      "noUpstream": "Không có ngược dòng"
+    },
+    "textGenerationFailure": {
+      "openCodeInvalidEvents": "OpenCode trả về sự kiện JSON không hợp lệ.",
+      "antigravityInvalidEvents": "Antigravity trả về sự kiện JSON không hợp lệ.",
+      "antigravityInvalidResult": "Antigravity trả về kết quả không hợp lệ.",
+      "antigravityNoFinalResult": "Antigravity không trả về kết quả cuối cùng.",
+      "kimiUnreadableOutput": "Kimi trả về đầu ra Prompt không thể đọc được. Hãy thử lại.",
+      "kimiSessionOccupied": "Kimi không thể dùng phiên này vì phiên đang hoạt động trong một client khác. Dừng phiên ở đó hoặc thoát client đó, rồi thử lại.",
+      "kimiInterrupted": "Kimi bị gián đoạn trước khi tạo xong văn bản. Hãy thử lại.",
+      "kimiFailed": "Kimi không thể tạo xong văn bản. Mở Kimi trên máy chủ thực thi để kiểm tra lỗi trước khi thử lại.",
+      "kimiAgentOptionsConflict": "Kimi nhận được tùy chọn agent xung đột hoặc lặp lại. Chỉ giữ một tùy chọn --agent hoặc --agent-file trong công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiOptionRejected": "Kimi từ chối một tùy chọn hoặc đối số. Hãy sửa công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiSessionNotFound": "Kimi không tìm thấy phiên được yêu cầu. Hãy dùng một phiên có sẵn hoặc bắt đầu phiên mới.",
+      "kimiSessionOtherDirectory": "Phiên Kimi này thuộc một thư mục khác. Hãy tiếp tục phiên ở đó hoặc dùng phiên được tạo cho không gian làm việc này.",
+      "kimiCredentialVariableMissing": "Kimi thiếu một biến môi trường thông tin xác thực đã cấu hình. Hãy đặt biến đó trên máy chủ thực thi trước khi thử lại.",
+      "kimiCredentialsRequired": "Kimi cần thông tin xác thực của nhà cung cấp. Mở Kimi trên máy chủ thực thi để cấu hình nhà cung cấp hoặc đăng nhập, rồi thử lại.",
+      "kimiModelMissing": "Kimi chưa cấu hình model nào dùng được. Mở Kimi trên máy chủ thực thi để cấu hình hoặc chọn model, rồi thử lại.",
+      "kimiPromptHookBlocked": "Một prompt hook của Kimi đã chặn yêu cầu hoặc không thể bắt đầu lượt. Hãy xem lại hook và cấu hình Kimi trước khi thử lại.",
+      "kimiCancelled": "Kimi đã hủy yêu cầu trước khi tạo xong văn bản. Hãy thử lại.",
+      "kimiEmptyPrompt": "Kimi nhận được prompt trống. Hãy sửa dữ liệu đầu vào đó trong công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiEmptyModel": "Kimi nhận được model trống. Hãy sửa dữ liệu đầu vào đó trong công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiEmptyAgent": "Kimi nhận được agent trống. Hãy sửa dữ liệu đầu vào đó trong công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiEmptyAgentFilePath": "Kimi nhận được đường dẫn tệp agent trống. Hãy sửa dữ liệu đầu vào đó trong công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiOutputFormatInvalid": "Định dạng đầu ra của Kimi yêu cầu chế độ prompt và giá trị text hoặc stream-json được hỗ trợ. Hãy sửa công thức tạo hoặc đối số CLI trước khi thử lại.",
+      "kimiSessionIdRequired": "Kimi cần id phiên để tiếp tục ở chế độ prompt. Hãy sửa công thức tạo hoặc đối số CLI, rồi thử lại.",
+      "kimiConflictingOptions": "Kimi nhận được các tùy chọn xung đột: {{option}} với {{otherOption}}. Hãy sửa công thức tạo hoặc đối số CLI trước khi thử lại.",
+      "kimiContinueSessionConflict": "Kimi nhận được các tùy chọn xung đột: --continue, --session. Hãy sửa công thức tạo hoặc đối số CLI trước khi thử lại.",
+      "kimiAgentChangeOnResume": "Kimi không thể đổi agent khi tiếp tục một phiên. Gỡ phần ghi đè agent hoặc bắt đầu phiên mới trong công thức tạo hoặc đối số CLI.",
+      "kimiResponseBlocked": "Kimi không thể trả về phản hồi vì bị chặn. Hãy sửa prompt hoặc cấu hình model trước khi thử lại.",
+      "kimiAuthFailed": "Kimi không thể xác thực. Hãy đăng nhập hoặc sửa thông tin xác thực của nhà cung cấp trên máy chủ thực thi, rồi thử lại.",
+      "kimiConnectionFailed": "Kimi không thể kết nối với nhà cung cấp. Hãy kiểm tra mạng trên máy chủ thực thi, rồi thử lại.",
+      "kimiProviderLimited": "Kimi đã đạt giới hạn của nhà cung cấp hoặc nhà cung cấp đang bận. Hãy chờ rồi thử lại hoặc giảm tần suất yêu cầu.",
+      "kimiContextOverflow": "Kimi đã hết ngữ cảnh. Hãy rút ngắn prompt hoặc bắt đầu phiên mới, rồi thử lại.",
+      "kimiConfigInvalid": "Cấu hình Kimi không hợp lệ. Hãy kiểm tra cấu hình model và nhà cung cấp trên máy chủ thực thi trước khi thử lại.",
+      "promptTooLargeForWindows": "Prompt của {{label}} quá lớn so với dòng lệnh Windows. Hãy stage ít thay đổi hơn rồi thử lại.",
+      "promptTooLargeForArgument": "Prompt của {{label}} quá lớn để truyền dưới dạng một đối số dòng lệnh duy nhất. Hãy stage ít thay đổi hơn rồi thử lại.",
+      "agentCouldNotStart": "Không thể khởi động {{label}}. Hãy kiểm tra lệnh agent trong Cài đặt rồi thử lại.",
+      "agentFailedToStart": "{{label}} không khởi động được. Hãy kiểm tra lệnh agent trong Cài đặt rồi thử lại.",
+      "agentBinaryNotFound": "Không tìm thấy {{binary}} trong PATH. Hãy cài đặt {{label}} để dùng commit message do AI tạo.",
+      "timedOut": "Quá thời gian tạo sau {{seconds}} giây.",
+      "outputTooLarge": "Lệnh CLI của {{label}} tạo ra quá nhiều đầu ra. Hãy kiểm tra cấu hình CLI của agent rồi thử lại.",
+      "windowsBatchUnsafeArguments": "{{label}} chạy qua tập lệnh bó Windows không thể lấy lời nhắc nhiều dòng làm đối số. Trỏ Cài đặt vào tệp thực thi của tác nhân hoặc sử dụng lệnh tùy chỉnh mà không có {prompt} để Prompt gửi lời nhắc trên stdin.",
+      "cliTerminated": "Lệnh CLI của {{label}} bị chấm dứt trước khi thoát.",
+      "cliTerminatedWithDetail": "Lệnh CLI của {{label}} bị chấm dứt trước khi thoát: {{detail}}",
+      "cliFailed": "Lệnh CLI của {{label}} không thành công với mã {{exitCode}}.",
+      "cliFailedWithDetail": "Lệnh CLI của {{label}} không thành công với mã {{exitCode}}: {{detail}}",
+      "agentReportedError": "{{label}} đã báo lỗi.",
+      "emptyCommitMessage": "{{label}} trả về một message trống.",
+      "emptyCommitMessageWithDetail": "{{label}} trả về một message trống. Đầu ra CLI: {{detail}}",
+      "emptyPullRequestDetails": "{{label}} trả về phần chi tiết trống.",
+      "emptyPullRequestDetailsWithDetail": "{{label}} trả về phần chi tiết trống. Đầu ra CLI: {{detail}}",
+      "emptyJiraSummary": "{{label}} trả về bản tóm tắt trống.",
+      "emptyJiraSummaryWithDetail": "{{label}} trả về bản tóm tắt trống. Đầu ra CLI: {{detail}}",
+      "commitMessageUnparseable": "Không thể phân tích commit message đã tạo.",
+      "pullRequestDetailsUnparseable": "Không thể phân tích chi tiết pull request đã tạo.",
+      "jiraSummaryEmptyAfterSanitization": "Bản tóm tắt đã tạo bị trống sau khi làm sạch.",
+      "jiraDescriptionRequired": "Cần có mô tả.",
+      "jiraAccountDisconnected": "Kết nối lại tài khoản Jira đã chọn trên máy chủ này.",
+      "jiraSummaryBusyInOtherDraft": "Một tiêu đề Jira đang được tạo trong bản nháp khác.",
+      "stagedChangesReadFailed": "Không thể đọc các thay đổi đã stage.",
+      "noStagedChanges": "Không có thay đổi đã stage nào để tóm tắt.",
+      "noBranchChanges": "Không có thay đổi nào của branch để tóm tắt.",
+      "commandTemplateEmptyCommitMessage": "Mẫu lệnh cho commit message đang trống.",
+      "commandTemplateEmptyPullRequest": "Mẫu lệnh cho chi tiết pull request đang trống.",
+      "commandTemplateEmptyBranchName": "Mẫu lệnh cho tên branch đang trống.",
+      "commandTemplateEmptyChatName": "Mẫu lệnh cho tên chat đang trống.",
+      "sourceControlAgentUnsupported": "Chọn một agent Source Control AI được hỗ trợ cho thao tác này trong Cài đặt -> Git -> Source Control AI. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "chatNameAgentUnsupported": "Chọn một agent đặt tên chat được hỗ trợ cho thao tác này trong Cài đặt -> Chat -> Chat names. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "sourceControlCustomCommandEmpty": "Lệnh tùy chỉnh đang trống. Hãy thêm lệnh trong Cài đặt -> Git -> Source Control AI.",
+      "chatNameCustomCommandEmpty": "Lệnh tùy chỉnh đang trống. Hãy thêm lệnh trong Cài đặt -> Chat -> Chat names.",
+      "agentCannotGenerateCommitMessage": "Agent \"{{agent}}\" không hỗ trợ commit message của Source Control AI. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "agentCannotGeneratePullRequest": "Agent \"{{agent}}\" không hỗ trợ chi tiết pull request của Source Control AI. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "agentCannotGenerateBranchName": "Agent \"{{agent}}\" không hỗ trợ tên branch của Source Control AI. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "agentCannotGenerateChatName": "Agent \"{{agent}}\" không hỗ trợ tên chat. Các agent được hỗ trợ: {{agents}}, hoặc Lệnh tùy chỉnh.",
+      "noModelForAgent": "Không có model nào khả dụng cho {{label}}.",
+      "planCustomCommandEmpty": "Lệnh tùy chỉnh đang trống. Hãy thêm lệnh trong Cài đặt → Git → AI Commit Messages.",
+      "planAgentUnsupported": "Agent \"{{agent}}\" không hỗ trợ commit message do AI tạo.",
+      "planModelUnavailable": "Model \"{{model}}\" không khả dụng cho {{label}}.",
+      "planModelWithoutThinking": "Model \"{{model}}\" không hỗ trợ mức nỗ lực suy luận.",
+      "planThinkingLevelInvalid": "Mức suy luận \"{{level}}\" không hợp lệ với {{model}}."
+    }
+  },
+  "newWorkspace": {
+    "hostPicker": {
+      "title": "Bật không gian làm việc"
+    },
+    "loadingDrawer": {
+      "loading": "Đang tải",
+      "downloading": "Đang tải xuống",
+      "downloadProgress": "Đang tải xuống… {{progress}}"
+    }
+  },
+  "tasks": {
+    "legacySurface": {
+      "sourceFallback": "Nguồn vấn đề ưu tiên ngược dòng không có sẵn cho {{repo}}. Sử dụng xuất xứ.",
+      "loadIssuesFailed": "Không thể tải các vấn đề từ {{source}}.",
+      "retryLoadingIssues": "Thử lại sự cố tải từ {{source}}",
+      "retrying": "Đang thử lại...",
+      "subIssueDataUnavailable": "Dữ liệu sub-issue không khả dụng với token của bạn.",
+      "mergeMethodTitle": "Phương pháp hợp nhất",
+      "pullRequestMergeMessage": "Chọn cách hợp nhất yêu cầu kéo này.",
+      "mergeRequestMergeMessage": "Chọn cách hợp nhất yêu cầu hợp nhất này.",
+      "mergeAction": "Hợp nhất",
+      "mergeRequestTitle": "Merge request",
+      "mergePullRequestTitle": "Hợp nhất yêu cầu kéo",
+      "updateItemTitle": "Cập nhật mục"
+    },
+    "prFileDiff": {
+      "noTextChanges": "Không tìm thấy thay đổi văn bản.",
+      "showingDiffLines": "Hiển thị {{limit}} đầu tiên trong số {{total}} dòng khác nhau.",
+      "commentPlaceholder": "Thêm nhận xét đánh giá",
+      "commentOnLine": "Bình luận ở dòng {{line}}"
+    },
+    "smartSourceModes": {
+      "smart": "Thông minh",
+      "branch": "chi nhánh",
+      "name": "Tên",
+      "openState": "Mở",
+      "mergedState": "Đã merge",
+      "closedState": "Đã đóng",
+      "allStates": "Tất cả"
+    },
+    "taskViewOptions": {
+      "noGitHubTasks": "Không có GitHub nhiệm vụ",
+      "noGitLabTasks": "Không có GitLab nhiệm vụ",
+      "noLinearTasks": "Không có Linear nhiệm vụ",
+      "noJiraTasks": "Không có nhiệm vụ Jira",
+      "assignedSubtitle": "Các vấn đề chưa được giải quyết được giao cho bạn",
+      "reportedSubtitle": "Các vấn đề chưa được giải quyết mà bạn đã báo cáo",
+      "allSubtitle": "Các vấn đề chưa được giải quyết trên các trang web đã chọn",
+      "doneSubtitle": "Các vấn đề được giải quyết gần đây của bạn"
+    },
+    "tasksCreateDrawers": {
+      "newIssueTitle": "Vấn đề mới {{providerLabel}}",
+      "repositorySubtitle": "Tạo một vấn đề trong kho lưu trữ đã chọn.",
+      "linearTeamSubtitle": "Tạo một vấn đề trong nhóm Linear đã chọn.",
+      "repository": "Kho lưu trữ",
+      "team": "đội",
+      "issueSource": "Nguồn issue",
+      "fileIn": "Tập tin trong {{slug}}",
+      "upstream": "Thượng nguồn",
+      "origin": "Xuất xứ",
+      "title": "Tiêu đề",
+      "titlePlaceholder": "Tiêu đề nhiệm vụ",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Thêm ngữ cảnh",
+      "createIssue": "Tạo vấn đề",
+      "linearTeam": "Linear Đội",
+      "connectLinearWorkspace": "Kết nối không gian làm việc Linear",
+      "linearConnectSubtitle": "Dán khóa API cá nhân để duyệt các vấn đề từ không gian làm việc đó.",
+      "personalApiKey": "API key cá nhân",
+      "linearSettingsLink": "Linear Cài đặt/Bảo mật/Khóa API mới",
+      "keySecurityHint": "Khóa của bạn được mã hóa thông qua chuỗi khóa của hệ điều hành máy chủ và được lưu trữ cục bộ.",
+      "connect": "Kết nối",
+      "createWorkspaceIn": "Tạo không gian làm việc trong"
+    },
+    "filterPickers": {
+      "fieldsTitle": "Lĩnh vực dự án",
+      "fieldsSubtitle": "Chọn trường Dự án nào xuất hiện trên thẻ vật phẩm.",
+      "noFields": "Chế độ xem này không có trường bổ sung để hiển thị.",
+      "fieldShown": "Hiển thị trên thẻ",
+      "fieldHidden": "Ẩn khỏi thẻ",
+      "gitlabView": "GitLab Xem",
+      "gitlabFilter": "GitLab Bộ lọc",
+      "linearFilter": "Linear Bộ lọc",
+      "linearWorkspace": "Linear Không gian làm việc",
+      "switchWorkspaceFailed": "Không thể chuyển đổi không gian làm việc",
+      "teamsTitle": "Linear Đội",
+      "teamsSubtitle": "Chọn nhóm nào sẽ xuất hiện trong Nhiệm vụ.",
+      "allTeams": "Tất cả team",
+      "teams_one": "{{count}} đội",
+      "teams_other": "{{count}} nhóm",
+      "changeStatus": "Thay đổi trạng thái",
+      "linearIssue": "Issue Linear",
+      "loadingStates": "Đang tải trạng thái...",
+      "noStates": "Không có tiểu bang nào",
+      "jiraFilter": "Bộ lọc Jira",
+      "jiraSite": "Trang web Jira"
+    },
+    "githubProjectList": {
+      "chooseProject": "Chọn một dự án GitHub",
+      "browseProjects": "Duyệt dự án",
+      "noItems": "Không có hạng mục dự án",
+      "items": "Mặt hàng",
+      "pullRequestSubtitle": "Kéo yêu cầu · {{repository}}{{number}}",
+      "issueSubtitle": "Vấn đề · {{repository}}{{number}}",
+      "itemSubtitle": "Hạng mục dự án · {{repository}}{{number}}",
+      "emptyField": "Trống",
+      "moreFields_one": "trường +{{count}}",
+      "moreFields_other": "+{{count}} trường"
+    },
+    "githubProjectPickers": {
+      "title": "GitHub Dự án",
+      "subtitle": "Chọn chế độ xem dự án cho trang Nhiệm vụ.",
+      "searchProjects": "Tìm kiếm dự án",
+      "addPlaceholder": "Thêm bằng URL hoặc owner/number",
+      "adding": "Đang thêm…",
+      "add": "Thêm",
+      "ownerLoadFailed": "Không thể tải dự án từ {{owner}}.",
+      "organizationsLoadFailed": "Một số tổ chức không tải được ({{count}}).",
+      "addByUrlHint": "Sử dụng Thêm bằng URL để tiếp cận các dự án còn thiếu.",
+      "organizationsError": "tổ chức: {{message}}",
+      "loadFailed": "Không thể tải dự án",
+      "noProjects": "Không có dự án nào được tải",
+      "retryHint": "Nhấn để thử lại.",
+      "pinned": "Đã ghim",
+      "recent": "Gần đây",
+      "pin": "Ghim",
+      "browseLoading": "Duyệt qua tất cả (đang tải...)",
+      "browseAll": "Duyệt tất cả",
+      "noMatches": "Không có dự án phù hợp.",
+      "noMoreProjects": "Không còn dự án nào nữa.",
+      "chooseView": "Chọn Chế độ xem dự án",
+      "view": "Xem dự án",
+      "unsupportedLayout": "Prompt chưa hỗ trợ bố cục Dự án GitHub này.",
+      "sort": "Sắp xếp dự án"
+    },
+    "githubViewControls": {
+      "source": "Nguồn: {{source}}",
+      "sort": "Sắp xếp: {{sort}}",
+      "fields": "Lĩnh vực: {{fields}}",
+      "openView": "Mở view trong GitHub"
+    },
+    "itemActions": {
+      "creating": "Đang tạo…",
+      "createWorkspace": "Tạo không gian làm việc",
+      "copyLinearLink": "Sao chép liên kết Linear",
+      "copyGitHubLink": "Sao chép liên kết GitHub",
+      "mergePullRequest": "Hợp nhất yêu cầu kéo",
+      "mergeConflicts": "GitHub báo cáo xung đột hợp nhất.",
+      "mergeMergeRequest": "Hợp nhất yêu cầu hợp nhất",
+      "changeStatus": "Đổi trạng thái"
+    },
+    "itemDetailContent": {
+      "pipelineJobs_one": "{{count}} việc làm",
+      "pipelineJobs_other": "{{count}} việc làm",
+      "type": "Nhập",
+      "status": "Trạng thái",
+      "assignee": "Người được giao",
+      "project": "Dự án",
+      "assignees": "Người được giao",
+      "description": "Mô tả",
+      "checks": "Check",
+      "rerunFailed": "Chạy lại không thành công",
+      "rerunAll": "Chạy lại tất cả",
+      "noChecks": "Không tìm thấy séc nào.",
+      "pipeline": "Đường ống",
+      "none": "Không có",
+      "noPipelineRuns": "Không có lần chạy pipeline nào cho MR này.",
+      "subIssues": "Các vấn đề phụ",
+      "noSubIssues": "Không có vấn đề phụ.",
+      "subIssueTitle": "Tiêu đề sub-issue",
+      "addSubIssue": "Thêm vấn đề phụ",
+      "discussion": "Thảo luận",
+      "noComments": "Không có ý kiến."
+    },
+    "itemDetailDrawer": {
+      "refreshDetails": "Làm mới chi tiết"
+    },
+    "itemFieldEditors": {
+      "title": "Tiêu đề",
+      "saveTitle": "Lưu tiêu đề",
+      "labels": "Nhãn",
+      "none": "Không có",
+      "loadingLabels": "Đang tải nhãn...",
+      "noLabels": "Không có nhãn trong kho lưu trữ này.",
+      "addLabels": "Thêm nhãn, phân tách bằng dấu phẩy",
+      "removeLabels": "Xóa nhãn, phân tách bằng dấu phẩy",
+      "updateLabels": "Cập nhật nhãn",
+      "assignees": "Người được giao",
+      "loadingAssignees": "Đang tải người được giao...",
+      "noAssignableUsers": "Không tìm thấy người dùng có thể gán cho kho lưu trữ này.",
+      "addUsernames": "Thêm tên người dùng, phân tách bằng dấu phẩy",
+      "removeUsernames": "Xóa tên người dùng, phân tách bằng dấu phẩy",
+      "updateAssignees": "Cập nhật người được giao"
+    },
+    "itemReviewSections": {
+      "descriptionPlaceholder": "Mô tả",
+      "saveDescription": "Lưu mô tả",
+      "noDescription": "Không có mô tả.",
+      "reviewersTitle": "Reviewer",
+      "noReviewersRequested": "Chưa yêu cầu reviewer nào.",
+      "loadingReviewers": "Đang tải người đánh giá...",
+      "noReviewerSuggestions": "Không tìm thấy đề xuất của người đánh giá.",
+      "reviewersPlaceholder": "Yêu cầu người đánh giá",
+      "requestReview": "Yêu cầu xem xét",
+      "changedFilesTitle": "Tệp đã thay đổi",
+      "hideFile": "Ẩn",
+      "viewFile": "Xem",
+      "markUnviewed": "Đánh dấu là chưa xem",
+      "markViewed": "Đánh dấu đã xem",
+      "binaryFile": "Tệp nhị phân.",
+      "fileContentsUnavailable": "Nội dung tập tin không có sẵn."
+    },
+    "linearList": {
+      "changeStatusFrom": "Thay đổi trạng thái từ {{status}}"
+    },
+    "linearViewControls": {
+      "groupLabel": "Nhóm: {{group}}",
+      "orderLabel": "Đặt hàng: {{order}}",
+      "displayButton": "Hiển thị"
+    },
+    "listDisplayPickers": {
+      "linearViewTitle": "Linear Xem",
+      "linearGroupTitle": "Nhóm Linear Vấn đề",
+      "linearOrderTitle": "Đặt hàng Linear",
+      "displayPropertiesTitle": "Thuộc tính hiển thị",
+      "sortTasksTitle": "Sắp xếp nhiệm vụ"
+    },
+    "listSurface": {
+      "updateDesktopTitle": "Cập nhật Prompt máy tính để bàn",
+      "updateDesktopMessage": "Chế độ xem Nhiệm vụ trên thiết bị di động này cần thời gian chạy trên máy tính để bàn mới hơn.",
+      "jiraStatusFailed": "Không đọc được trạng thái Jira",
+      "connectLinearTitle": "Kết nối tài khoản Linear của bạn",
+      "connectLinearMessage": "Duyệt và bắt đầu xử lý các vấn đề được giao Linear của bạn trực tiếp từ Nhiệm vụ.",
+      "connectLinearButton": "Kết nối Linear"
+    },
+    "options": {
+      "githubDescription": "Sự cố và yêu cầu kéo",
+      "gitlabDescription": "Sự cố và yêu cầu hợp nhất",
+      "linearDescription": "Các vấn đề được chỉ định và nhóm",
+      "jiraDescription": "Các vấn đề được phân công và báo cáo",
+      "openState": "Mở",
+      "gitlabOpenDescription": "Các vấn đề mở và yêu cầu hợp nhất",
+      "mergedState": "Đã merge",
+      "gitlabMergedDescription": "Yêu cầu hợp nhất đã hợp nhất",
+      "closedState": "Đã đóng",
+      "gitlabClosedDescription": "Các vấn đề đã đóng và yêu cầu hợp nhất",
+      "all": "Tất cả",
+      "gitlabAllDescription": "Bất kỳ trạng thái GitLab nào",
+      "linearAllDescription": "Các vấn đề mở trên không gian làm việc được kết nối",
+      "myIssues": "Vấn đề của tôi",
+      "linearAssignedDescription": "Vấn đề được giao cho bạn",
+      "createdState": "Ngày tạo",
+      "linearCreatedDescription": "Các vấn đề do bạn tạo ra",
+      "completedState": "Đã hoàn tất",
+      "linearCompletedDescription": "Các vấn đề đã hoàn thành gần đây",
+      "list": "Danh sách",
+      "listDescription": "Hàng vấn đề nhỏ gọn",
+      "board": "bảng",
+      "boardDescription": "Các cột được nhóm",
+      "noGrouping": "Không nhóm",
+      "status": "Trạng thái",
+      "assignee": "Người được giao",
+      "priority": "Mức ưu tiên",
+      "team": "đội",
+      "updated": "Đã cập nhật",
+      "identifier": "Mã định danh",
+      "labels": "Nhãn",
+      "issues": "Issue",
+      "githubIssuesDescription": "Issue trên GitHub",
+      "pullRequests": "PR",
+      "githubPullRequestsDescription": "GitHub yêu cầu kéo",
+      "projects": "Dự án",
+      "githubProjectsDescription": "GitHub Lượt xem dự án",
+      "githubOpenIssuesDescription": "Vấn đề mở GitHub",
+      "assignedToMe": "Giao cho tôi",
+      "githubAssignedIssuesDescription": "Mở các vấn đề được giao cho bạn",
+      "openPullRequestsDescription": "Mở yêu cầu kéo",
+      "mine": "Của tôi",
+      "myPullRequestsDescription": "Kéo các yêu cầu do bạn tạo",
+      "needsReview": "Cần review",
+      "reviewRequestsDescription": "Xem lại các yêu cầu được giao cho bạn",
+      "projectMergeRequests": "MR dự án",
+      "projectMergeRequestsDescription": "Hợp nhất các yêu cầu và vấn đề theo kho lưu trữ",
+      "myTodos": "Việc cần làm của tôi",
+      "myTodosDescription": "Đang chờ xử lý GitLab việc cần làm",
+      "updatedSortDescription": "Hoạt động mới nhất đầu tiên",
+      "repository": "Kho lưu trữ",
+      "repositorySortDescription": "Nhóm theo kho lưu trữ, sau đó là hoạt động mới nhất"
+    },
+    "projectComments": {
+      "comments_one": "{{count}} bình luận",
+      "comments_other": "{{count}} bình luận",
+      "discussion": "Thảo luận",
+      "noComments": "Không có ý kiến.",
+      "resolvedThreadBy": "Luồng đã được giải quyết bởi {{author}}",
+      "resolvedCommentBy": "Bình luận đã được giải quyết bởi {{author}}",
+      "show": "Hiện",
+      "editComment": "Chỉnh sửa nhận xét",
+      "reopenThread": "Mở lại chủ đề",
+      "resolveThread": "Giải quyết chủ đề",
+      "reply": "Trả lời"
+    },
+    "projectDetailDrawer": {
+      "repositoryNotInOrca": "Kho lưu trữ không có trong Prompt",
+      "addRepositoryFromDesktop": "{{repository}} không được thêm vào Prompt. Thêm kho lưu trữ này từ ứng dụng dành cho máy tính để bàn, sau đó làm mới Nhiệm vụ trên thiết bị di động.",
+      "openInGitHub": "Mở trong GitHub",
+      "copyRepository": "Sao chép kho lưu trữ",
+      "projectSubtitle": "GitHub Dự án · {{repository}} {{itemNumber}}",
+      "type": "Nhập",
+      "pullRequest": "Kéo yêu cầu",
+      "issue": "vấn đề",
+      "draftIssue": "vấn đề dự thảo",
+      "projectItem": "hạng mục dự án",
+      "status": "Trạng thái",
+      "issueType": "Loại issue",
+      "noType": "Không có loại",
+      "loadingIssueTypes": "Đang tải các loại sự cố...",
+      "noIssueTypes": "Không có loại sự cố nào được định cấu hình cho kho lưu trữ này.",
+      "clearType": "Loại rõ ràng",
+      "createWorkspace": "Tạo không gian làm việc",
+      "workspaceCreationRequirement": "Không gian làm việc chỉ có thể được tạo từ GitHub sự cố và yêu cầu kéo.",
+      "copyGitHubLink": "Sao chép liên kết GitHub",
+      "reopenItem": "Mở lại mục",
+      "closeItem": "Đóng mục",
+      "mergePullRequest": "Hợp nhất yêu cầu kéo",
+      "mergeRepositoryRequirement": "Hợp nhất yêu cầu kho lưu trữ này trong Prompt."
+    },
+    "projectFieldEditors": {
+      "projectFields": "Lĩnh vực dự án",
+      "invalidNumber": "Nhập một số hợp lệ.",
+      "invalidDate": "Nhập ngày dưới dạng YYYY-MM-DD.",
+      "noIterations": "Không có lần lặp nào có sẵn.",
+      "completedIteration": "Đã hoàn thành · {{startDate}} · {{duration}}d",
+      "upcomingIteration": "Hiện tại & sắp tới · {{startDate}} · {{duration}}d",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "Số",
+      "textPlaceholder": "Văn bản",
+      "saveField": "Lưu trường",
+      "clearField": "Xóa trường"
+    },
+    "projectMetadataEditors": {
+      "labels": "Nhãn",
+      "none": "Không có",
+      "loadingLabels": "Đang tải nhãn...",
+      "noLabels": "Không có nhãn trong kho lưu trữ này.",
+      "assignees": "Người được giao",
+      "loadingAssignees": "Đang tải người được giao...",
+      "noAssignableUsers": "Không tìm thấy người dùng có thể gán cho kho lưu trữ này.",
+      "title": "Tiêu đề",
+      "saveTitle": "Lưu tiêu đề",
+      "description": "Mô tả",
+      "saveDescription": "Lưu mô tả",
+      "noDescription": "Không có mô tả."
+    },
+    "projectReviewPanels": {
+      "reviewers": "Reviewer",
+      "noReviewers": "Chưa yêu cầu reviewer nào.",
+      "loadingReviewers": "Đang tải người đánh giá...",
+      "noSuggestions": "Không tìm thấy đề xuất của người đánh giá.",
+      "requestReviewers": "Yêu cầu người đánh giá",
+      "requestReview": "Yêu cầu xem xét",
+      "checks": "Check",
+      "rerunFailed": "Chạy lại không thành công",
+      "rerunAll": "Chạy lại tất cả",
+      "noChecks": "Không tìm thấy séc nào.",
+      "changedFiles": "Tệp đã thay đổi",
+      "hideFile": "Ẩn",
+      "viewFile": "Xem",
+      "markUnviewed": "Đánh dấu là chưa xem",
+      "markViewed": "Đánh dấu đã xem",
+      "binaryFile": "Tệp nhị phân.",
+      "fileUnavailable": "Nội dung tập tin không có sẵn."
+    },
+    "providerControls": {
+      "projectMergeRequests": "MR dự án",
+      "myTodos": "Việc cần làm của tôi",
+      "sort": "Sắp xếp: {{sortLabel}}"
+    },
+    "providerItemList": {
+      "previousPage": "Trang trước",
+      "selectPage": "Chọn trang, Trang {{page}}",
+      "selectPageOfTotal": "Chọn trang, Trang {{page}} của {{total}}",
+      "page": "Trang {{page}}",
+      "pageOfTotal": "Trang {{page}} trong số {{total}}",
+      "nextPage": "Trang tiếp",
+      "intoBranch": "vào {{base}}"
+    },
+    "providerPickers": {
+      "taskSource": "Nguồn tác vụ",
+      "repos": "Kho lưu trữ",
+      "repoDescription": "Chọn kho lưu trữ để truy vấn.",
+      "allRepositories": "Tất cả repository",
+      "issueSources": "GitHub Nguồn phát hành",
+      "issueSourcesDescription": "Chọn xem mỗi kho lưu trữ truy vấn và tạo tác phẩm từ thượng nguồn hay gốc.",
+      "noIssueSources": "Không có nguồn vấn đề thay thế có sẵn.",
+      "queryingSource": "Truy vấn {{source}}",
+      "upstream": "Thượng nguồn",
+      "origin": "Xuất xứ",
+      "githubView": "GitHub Xem",
+      "pullRequests": "Kéo yêu cầu",
+      "issues": "Issue",
+      "pages": "GitHub Trang",
+      "pageHint": "Chuyển đến trang kết quả được tải hoặc có sẵn.",
+      "pageNumber": "Trang {{page}}",
+      "pageLoaded": "Đã tải",
+      "pageNotLoaded": "Tải kết quả cũ hơn"
+    },
+    "reviewerLinear": {
+      "unassigned": "Chưa giao",
+      "issues": "Issue"
+    },
+    "screenChrome": {
+      "refreshGitHub": "Làm mới công việc GitHub",
+      "refreshGitLab": "Làm mới work item GitLab",
+      "refreshLinear": "Làm mới Linear",
+      "refreshJira": "Làm mới issue Jira",
+      "title": "Tác vụ",
+      "newGitHubIssue": "Issue GitHub mới",
+      "newLinearIssue": "Issue Linear mới",
+      "connectLinear": "Kết nối Linear"
+    },
+    "searchControl": {
+      "projectPlaceholder": "Tìm kiếm chế độ xem dự án...",
+      "jiraPlaceholder": "Jira JQL, ví dụ: dự án = ABC AND statusCategory != Xong",
+      "providerPlaceholder": "Tìm kiếm {{provider}} nhiệm vụ..."
+    },
+    "workspaceCreateDrawer": {
+      "title": "Tạo không gian làm việc",
+      "repository": "Kho lưu trữ",
+      "selectRepository": "Chọn một kho lưu trữ",
+      "sshConnection": "SSH Kết nối",
+      "remoteRepository": "Kho lưu trữ từ xa",
+      "connecting": "Đang kết nối...",
+      "connect": "Kết nối",
+      "workspaceName": "Tên không gian làm việc",
+      "optional": "[Tùy chọn]",
+      "agent": "đại lý",
+      "connectFirst": "Kết nối kho lưu trữ trước",
+      "detectingAgents": "Đang phát hiện agent…",
+      "advanced": "Nâng cao",
+      "startFrom": "Bắt đầu từ",
+      "defaultBranch": "Nhánh mặc định",
+      "createFrom": "Tạo từ {{branch}}",
+      "addRepository": "Thêm kho lưu trữ Git trước khi tạo không gian làm việc Linear.",
+      "repositoryNotFound": "Không tìm thấy kho lưu trữ.",
+      "connectRepository": "Kết nối kho lưu trữ"
+    },
+    "workspaceOptionPickers": {
+      "baseBranchTitle": "Bắt đầu từ",
+      "baseBranchSubtitle": "Chọn một chi nhánh hoặc người giới thiệu hiện có.",
+      "searchBranches": "Tìm branch",
+      "defaultBranch": "Nhánh mặc định",
+      "defaultBranchSubtitle": "Sử dụng cơ sở được cấu hình của kho lưu trữ này",
+      "noBranches": "Không có nhánh nào phù hợp.",
+      "branchName": "Tên chi nhánh: {{name}}",
+      "sparseCheckoutTitle": "Thanh toán thưa thớt",
+      "fullCheckout": "Checkout đầy đủ",
+      "fullCheckoutSubtitle": "Sử dụng toàn bộ kho lưu trữ",
+      "editPreset": "Sửa {{name}}",
+      "newPreset": "Preset mới"
+    },
+    "workspaceTrustDrawers": {
+      "newSparsePreset": "Cài đặt trước thưa thớt mới",
+      "editSparsePreset": "Chỉnh sửa cài đặt sẵn thưa thớt",
+      "nameLabel": "Tên",
+      "namePlaceholder": "Giao diện người dùng kết xuất",
+      "directoriesLabel": "Thư mục",
+      "directories_one": "{{count}} thư mục",
+      "directories_other": "{{count}} thư mục",
+      "setupTitle": "Chạy tập lệnh thiết lập?",
+      "setupSubtitle": "{{name}} requires a setup choice before creating this workspace.",
+      "creating": "Đang tạo…",
+      "runSetupAndCreate": "Chạy thiết lập và tạo",
+      "skipSetupAndCreate": "Bỏ qua thiết lập và tạo",
+      "setupChangedTitle": "Tập lệnh thiết lập của {{name}} đã thay đổi",
+      "runSetupTitle": "Chạy thiết lập từ {{name}}?",
+      "trustSubtitle": "This repository's orca.yaml runs on your machine before the workspace starts. Chỉ chạy nó nếu bạn tin cậy kho lưu trữ này.",
+      "newSetupScript": "Setup script mới",
+      "setupScript": "Script setup",
+      "trustFailed": "Không tin cậy được tập lệnh thiết lập.",
+      "runHooks": "Chạy hook",
+      "alwaysTrustAndRun": "Luôn tin tưởng và chạy",
+      "dontRun": "Không chạy"
+    },
+    "sparsePresetDraft": {
+      "repoRelativeDirectoriesRequired": "Dùng thư mục tương đối so với repo, không dùng thư mục gốc, đường dẫn tuyệt đối hay thành phần cha.",
+      "directoryRequired": "Thêm ít nhất một thư mục."
+    },
+    "composerSource": {
+      "baseFailed": "Không thể giải quyết nhánh cơ sở.",
+      "forkPushWarning": "PR này đã tắt \"Cho phép chỉnh sửa từ người bảo trì\"; đẩy tới ngã ba có thể bị từ chối bởi GitHub."
+    },
+    "detailCommentRenderers": {
+      "commentPlaceholder": "Thêm một bình luận",
+      "sendComment": "Gửi bình luận",
+      "reopenThread": "Mở lại chủ đề",
+      "resolveThread": "Giải quyết chủ đề",
+      "reply": "Trả lời",
+      "comments_one": "{{count}} bình luận",
+      "comments_other": "{{count}} bình luận",
+      "resolvedThreadBy": "Luồng đã được giải quyết bởi {{author}}",
+      "resolvedCommentBy": "Bình luận đã được giải quyết bởi {{author}}",
+      "show": "Hiện"
+    },
+    "pickerProjection": {
+      "sources_one": "{{count}} nguồn",
+      "sources_other": "{{count}} nguồn",
+      "repos_one": "{{count}} kho lưu trữ",
+      "repos_other": "{{count}} kho lưu trữ",
+      "selectTarget": "Chọn mục tiêu",
+      "allSites": "Tất cả các trang web",
+      "allRepos": "Tất cả các kho lưu trữ",
+      "updatedSort": "Đã cập nhật",
+      "fieldDescending": "{{field}} mô tả",
+      "fieldAscending": "{{field}} tăng",
+      "viewOrder": "Xem đơn hàng",
+      "selectedFields": "trường {{selected}}/{{total}}",
+      "fields": "Trường",
+      "usesFieldDescending": "Sử dụng {{field}} mô tả",
+      "usesFieldAscending": "Sử dụng {{field}} tăng dần",
+      "usesGitHubRankOrder": "Sử dụng thứ tự xếp hạng GitHub",
+      "currentlyDescending": "Hiện tại desc · nhấn để tăng dần",
+      "currentlyAscending": "Hiện tại đang tăng · nhấn để giảm dần",
+      "sortAscending": "Sắp xếp tăng dần",
+      "viewNumber": "Xem #{{number}}",
+      "unsupportedLayout": "Bố cục không được hỗ trợ trên thiết bị di động"
+    },
+    "providerViewProjection": {
+      "defaultSubtitle": "{{subtitle}} · Mặc định",
+      "default": "Mặc định",
+      "openState": "Mở",
+      "allSites": "Tất cả các trang web",
+      "all": "Tất cả",
+      "list": "Danh sách",
+      "noGrouping": "Không nhóm",
+      "priority": "Mức ưu tiên",
+      "allWorkspaces": "Tất cả không gian làm việc",
+      "workspace": "Không gian làm việc",
+      "allTeams": "Tất cả team",
+      "teams_one": "{{count}} đội",
+      "teams_other": "{{count}} nhóm",
+      "projects": "Dự án",
+      "pullRequests": "PR",
+      "issues": "Issue",
+      "chooseProject": "Chọn dự án"
+    },
+    "workspaceCreateProjection": {
+      "nameRequired": "Tên là bắt buộc.",
+      "nameTooLong": "Tên không được dài quá 80 ký tự.",
+      "nameAlreadyExists": "\"{{name}}\" đã tồn tại.",
+      "openShell": "Mở một cái vỏ"
+    },
+    "workspaceAgentSelection": {
+      "blankTerminal": "Terminal trống"
+    },
+    "workspaceSshGate": {
+      "connected": "Đã kết nối",
+      "connecting": "Đang kết nối",
+      "deployingRelay": "Triển khai rơle",
+      "reconnecting": "Đang kết nối lại",
+      "authenticationFailed": "Xác thực không thành công",
+      "reconnectFailed": "Kết nối lại không thành công",
+      "connectionFailed": "Kết nối không thành công",
+      "disconnected": "Đã ngắt kết nối"
+    },
+    "worktreeCreateRetry": {
+      "createFailed": "Không tạo được không gian làm việc"
+    },
+    "hostedMerge": {
+      "merged": "Đã merge",
+      "closed": "Đã đóng",
+      "conflicts": "Xung đột",
+      "behind": "Tụt lại",
+      "blocked": "Bị chặn",
+      "checksPending": "Check đang chờ",
+      "ableToMerge": "Có thể merge",
+      "unknown": "Không rõ"
+    },
+    "pagination": {
+      "pageUnreachable": "Trang {{page}} nằm ngoài những gì tìm kiếm GitHub có thể trả về.",
+      "loadPageFailed": "Không thể tải trang {{page}} từ GitHub.",
+      "noMoreResults": "Không còn kết quả nào ở trang {{page}}."
+    }
+  },
+  "terminal": {
+    "webView": {
+      "loadFailed": "Tải WebView đầu cuối không thành công",
+      "httpError": "Lỗi HTTP WebView của thiết bị đầu cuối",
+      "renderProcessEnded": "Quá trình kết xuất Terminal WebView đã kết thúc",
+      "documentStartFailed": "tài liệu đầu cuối không khởi động được - {{message}}"
+    },
+    "keyDefinitions": {
+      "forwardDelete": "Chuyển tiếp xóa",
+      "arrowUp": "Mũi tên lên",
+      "arrowDown": "Mũi tên xuống",
+      "arrowLeft": "Mũi tên trái",
+      "arrowRight": "Mũi tên phải",
+      "accessoryArrowUp": "Mũi tên lên",
+      "accessoryArrowDown": "Mũi tên xuống",
+      "accessoryArrowLeft": "Mũi tên trái",
+      "accessoryArrowRight": "Mũi tên phải",
+      "interruptTerminal": "Thiết bị đầu cuối ngắt",
+      "sendEof": "Gửi EOF",
+      "clearScreen": "Xóa màn hình",
+      "suspendProcess": "Đình chỉ quá trình",
+      "reverseSearch": "Tìm kiếm ngược",
+      "startOfLine": "Bắt đầu dòng",
+      "endOfLine": "Cuối dòng",
+      "deleteWordBackward": "Xóa từ lùi",
+      "clearLineBeforeCursor": "Xóa dòng trước con trỏ"
+    },
+    "webviewEngineErrorState": {
+      "status": "trạng thái {{statusCode}}",
+      "code": "mã {{code}}",
+      "rendererCrashed": "trình kết xuất bị lỗi",
+      "title": "Thiết bị đầu cuối không tải được",
+      "reload": "Tải lại"
+    },
+    "webviewNotificationDispatch": {
+      "unknownError": "Lỗi thiết bị đầu cuối không xác định"
+    },
+    "webviewReadyWatchdog": {
+      "initializeFailed": "Thiết bị đầu cuối không khởi tạo - không có tín hiệu sẵn sàng từ chế độ xem thiết bị đầu cuối"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Điện thoại và máy tính của bạn phải kết nối cùng một mạng Wi-Fi hoặc Tailscale. Rơ-le tắt trong Prompt."
+    }
+  }
+}

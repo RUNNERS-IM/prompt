@@ -16,6 +16,17 @@ let chosenThisLaunch = false
 let started: Promise<void> | null = null
 const preferenceListeners = new Set<() => void>()
 
+// Saved before the 20-language set: Simplified Chinese was 'zh', Portuguese was once 'pt-BR'.
+const RENAMED_UI_LANGUAGES: Readonly<Record<string, SupportedUiLocale>> = {
+  zh: 'zh-Hans',
+  'pt-BR': 'pt'
+}
+
+export function readSavedMobileUiLanguage(value: unknown): MobileUiLanguagePreference | null {
+  const renamed = typeof value === 'string' ? (RENAMED_UI_LANGUAGES[value] ?? value) : value
+  return isMobileUiLanguagePreference(renamed) ? renamed : null
+}
+
 export function isMobileUiLanguagePreference(value: unknown): value is MobileUiLanguagePreference {
   return value === UI_LANGUAGE_SYSTEM || SUPPORTED_UI_LOCALES.some((locale) => locale === value)
 }
@@ -42,11 +53,12 @@ export function startMobileUiLanguage(): Promise<void> {
   }
   const deviceLocale = activateMobileUiLocale(resolveMobileUiLocale(UI_LANGUAGE_SYSTEM))
   const stored = AsyncStorage.getItem(UI_LANGUAGE_KEY)
-    .then((value) =>
-      !chosenThisLaunch && isMobileUiLanguagePreference(value) && value !== preference
-        ? adoptPreference(value)
+    .then((value) => {
+      const saved = readSavedMobileUiLanguage(value)
+      return !chosenThisLaunch && saved !== null && saved !== preference
+        ? adoptPreference(saved)
         : undefined
-    )
+    })
     .catch(() => undefined)
   started = Promise.all([deviceLocale, stored]).then(() => undefined)
   return started

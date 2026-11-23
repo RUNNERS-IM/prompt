@@ -16,10 +16,19 @@
       "ko": "./locales/ko.json",
       "es": "./locales/es.json",
       "fr": "./locales/fr.json",
-      "pt-BR": "./locales/pt-BR.json",
+      "pt": "./locales/pt.json",
       "ru": "./locales/ru.json",
       "tr": "./locales/tr.json",
-      "de": "./locales/de.json"
+      "de": "./locales/de.json",
+      "ar": "./locales/ar.json",
+      "fi": "./locales/fi.json",
+      "hi": "./locales/hi.json",
+      "id": "./locales/id.json",
+      "it": "./locales/it.json",
+      "nl": "./locales/nl.json",
+      "pl": "./locales/pl.json",
+      "th": "./locales/th.json",
+      "vi": "./locales/vi.json"
     },
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -98,14 +107,14 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt-BR", "ru", "tr", "de"]
+            "ios": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt", "ru", "tr", "de", "ar", "fi", "hi", "id", "it", "nl", "pl", "th", "vi"]
           }
         }
       ],
       [
         "./plugins/android-locale-config.js",
         {
-          "locales": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt-BR", "ru", "tr", "de"]
+          "locales": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "es", "fr", "pt", "ru", "tr", "de", "ar", "fi", "hi", "id", "it", "nl", "pl", "th", "vi"]
         }
       ],
       "expo-notifications",

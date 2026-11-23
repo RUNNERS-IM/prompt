@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Cho phép Prompt dùng camera để quét mã QR.",
+    "NSLocalNetworkUsageDescription": "Prompt kết nối với ứng dụng Prompt trên máy tính qua mạng cục bộ của bạn.",
+    "NSMicrophoneUsageDescription": "Cho phép Prompt dùng micrô để đọc chính tả bằng giọng nói. Giọng nói được gửi đến máy tính đã ghép nối để chuyển thành văn bản.",
+    "NSPhotoLibraryUsageDescription": "Cho phép Prompt đính kèm ảnh từ thư viện vào phiên terminal trên máy tính đã ghép nối."
+  }
+}

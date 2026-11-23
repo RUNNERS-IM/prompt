@@ -2650,11 +2650,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "Der Link konnte nicht geöffnet werden. Erneut versuchen.",
-      "socialProfile": "Prompt auf X",
       "sourceCode": "Prompt-Quellcode",
       "tagline": "Open-Source-Agenten-IDE für 100-mal produktivere Entwickler",
-      "title": "Über Prompt",
-      "website": "Prompt-Website"
+      "title": "Über Prompt"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "Prüfung fehlgeschlagen",
@@ -2712,7 +2710,6 @@
       "voice": "Spracheingabe"
     },
     "menuScreen": {
-      "privacyPolicy": "Datenschutzerklärung",
       "support": "Hilfe"
     },
     "nativeChatSettingsScreen": {
@@ -3827,6 +3824,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "Arbeitsbereich konnte nicht erstellt werden."
+    },
+    "hostedMerge": {
+      "merged": "Gemergt",
+      "closed": "Geschlossen",
+      "conflicts": "Konflikte",
+      "behind": "Im Rückstand",
+      "blocked": "Blockiert",
+      "checksPending": "Checks ausstehend",
+      "ableToMerge": "Merge möglich",
+      "unknown": "Unbekannt"
+    },
+    "pagination": {
+      "pageUnreachable": "Seite {{page}} liegt über dem, was die Suche GitHub zurückgeben kann.",
+      "loadPageFailed": "Seite {{page}} konnte nicht von GitHub geladen werden.",
+      "noMoreResults": "Keine weiteren Ergebnisse auf Seite {{page}}."
     }
   },
   "terminal": {
@@ -3934,6 +3946,11 @@
       "inProgress": "In Bearbeitung",
       "inReview": "Im Review",
       "pinned": "Angeheftet"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Ihr Telefon und Ihr Computer müssen mit demselben WLAN oder Tailscale verbunden sein. Relais ist in Prompt ausgeschaltet."
     }
   }
 }

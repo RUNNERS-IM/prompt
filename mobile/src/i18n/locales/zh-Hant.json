@@ -2646,11 +2646,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "無法開啟連結，請再試一次。",
-      "socialProfile": "Prompt 的 X 帳號",
       "sourceCode": "Prompt 原始碼",
       "tagline": "助開發者發揮 100 倍效率的開源代理程式 IDE",
-      "title": "關於",
-      "website": "Prompt 網站"
+      "title": "關於"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "無法檢查",
@@ -2708,7 +2706,6 @@
       "voice": "語音"
     },
     "menuScreen": {
-      "privacyPolicy": "隱私權政策",
       "support": "支援"
     },
     "nativeChatSettingsScreen": {
@@ -3823,6 +3820,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "建立工作區失敗"
+    },
+    "hostedMerge": {
+      "merged": "已合併",
+      "closed": "已關閉",
+      "conflicts": "衝突",
+      "behind": "落後",
+      "blocked": "已阻塞",
+      "checksPending": "等待檢查",
+      "ableToMerge": "可以合併",
+      "unknown": "未知"
+    },
+    "pagination": {
+      "pageUnreachable": "頁 {{page}} 超出了 GitHub 搜尋可以返回的範圍。",
+      "loadPageFailed": "無法從 GitHub 載入頁面 {{page}}。",
+      "noMoreResults": "在 {{page}} 頁上沒有更多結果。"
     }
   },
   "terminal": {
@@ -3930,6 +3942,11 @@
       "inProgress": "進行中",
       "inReview": "審查中",
       "pinned": "已固定"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "您的手機和電腦必須位於同一個 Wi-Fi 或 Tailscale 上。 Prompt 中繼電器關閉。"
     }
   }
 }
