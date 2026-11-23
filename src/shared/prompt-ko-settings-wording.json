@@ -346,5 +346,8 @@
   "keybindings.title.sidebarFocusWorktreeList": "워크스페이스 목록에 포커스",
   "keybindings.title.worktreeHistoryBack": "워크스페이스 기록 뒤로",
   "keybindings.title.worktreeHistoryForward": "워크스페이스 기록 앞으로",
-  "keybindings.group.global": "전역"
+  "keybindings.group.global": "전역",
+  "settings.appearance.menuBarIcon.title": "메뉴 막대 아이콘 표시",
+  "auto.components.settings.GeneralPane.editor_preview_tabs": "파일 탐색 시 미리 보기 탭 다시 쓰기",
+  "auto.components.settings.SshPane.c0f1c80166": "등록된 SSH 호스트가 없습니다."
 }
