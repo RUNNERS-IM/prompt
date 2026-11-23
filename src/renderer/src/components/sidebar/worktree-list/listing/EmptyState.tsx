@@ -12,6 +12,9 @@ export function SidebarWorktreeListEmptyState({
   onClearFilters: () => void
 }): React.JSX.Element {
   const discoveryCompleted = useAppStore((s) => s.startupWorktreeRefreshCompleted)
+  // Why: with no project yet a filter cannot be what hides rows, so "No workspaces found" and
+  // "Clear Filters" mislead a first-time user; the main pane already offers Add Project.
+  const hasProjects = useAppStore((s) => s.repos.length > 0 || s.folderWorkspaces.length > 0)
   return (
     <div
       data-worktree-sidebar-container
@@ -20,12 +23,12 @@ export function SidebarWorktreeListEmptyState({
     >
       <div className="worktree-sidebar-scrollbar flex h-full flex-col overflow-y-auto overflow-x-hidden pl-1 scrollbar-sleek pt-px">
         <div className="flex flex-col items-center gap-2 px-4 py-6 text-center text-[11px] text-muted-foreground">
-          {discoveryCompleted && (
+          {discoveryCompleted && hasProjects && (
             <span>
               {translate('auto.components.sidebar.WorktreeList.b7acbf038b', 'No workspaces found')}
             </span>
           )}
-          {hasFilters && (
+          {hasFilters && hasProjects && (
             <Button
               variant="secondary"
               size="xs"
