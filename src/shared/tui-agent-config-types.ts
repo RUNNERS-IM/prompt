@@ -66,6 +66,8 @@ export type TuiAgentConfig = {
   submitRetryDelayMs?: number
   /** How long an agent-prompt send keeps re-pressing Enter at `submitRetryDelayMs` while its composer holds the prompt, for TUIs that paint it before their session can submit (dsh). */
   submitRetryBudgetMs?: number
+  /** Re-press Enter only after reading the composer still holds the prompt, never blind; for TUIs whose draft paints at once (dsh, claude). */
+  submitRetryReadsDraft?: true
   /** Extra ms per logical prompt line before Enter, for TUIs that expand multiline paste slowly (antigravity). */
   submitLineSettleMsPerLine?: number
   /** Windows Shift+Enter encoding override; omitted agents keep the legacy Esc+CR path. */

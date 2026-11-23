@@ -27,11 +27,13 @@ export abstract class OrcaRuntimeWithResubmitHeldAgentPrompt extends OrcaRuntime
     held: HeldAgentPrompt
   ): Promise<number> {
     const agent = this.getPtyAgent(ptyId)
-    const retryDelayMs = agent ? TUI_AGENT_CONFIG[agent]?.submitRetryDelayMs : undefined
+    const config = agent ? TUI_AGENT_CONFIG[agent] : undefined
+    const retryDelayMs = config?.submitRetryDelayMs
     const prompt = held.prompt
     const gated = held.heldBudgetMs > 0 && prompt !== undefined
-    // Why: the draft reader knows dsh's launchpad, which its first-run guide covers once ready.
-    const readsLaunchDraft = agent === 'dsh'
+    // Why: these TUIs paint the draft at once (dsh's launchpad, Claude's composer), so Enter is
+    // pressed again only when the screen shows our prompt still waiting, never blind.
+    const readsLaunchDraft = config?.submitRetryReadsDraft === true
     let blind = options.composerReady === true && !readsLaunchDraft
     if (retryDelayMs === undefined || (!blind && !gated)) {
       return 0
