@@ -27,8 +27,9 @@ export function mobileWebAppBundleMaxAssets(routeCount, imageCount, catalogChunk
 
 // UI-language catalogs have their own allowance, like the font: one chunk per non-English locale,
 // fetched only for the active language, never before the first route. Code keeps the 9 MiB fence.
-export const MOBILE_WEB_APP_BUNDLE_MAX_CATALOG_CHUNKS = 10
-export const MOBILE_WEB_APP_BUNDLE_MAX_CATALOG_BYTES = 3 * 1024 * 1024
+// Why 19 and 5 MiB: the phone ships the desktop's 20 languages; 19 catalogs measured 3.43 MiB.
+export const MOBILE_WEB_APP_BUNDLE_MAX_CATALOG_CHUNKS = 19
+export const MOBILE_WEB_APP_BUNDLE_MAX_CATALOG_BYTES = 5 * 1024 * 1024
 
 // Keep total app byte budget below phone’s per-asset contract ceiling to fail at build; splitting alone cannot shrink code size.
 export const MOBILE_WEB_APP_BUNDLE_MAX_TOTAL_BYTES = 9 * 1024 * 1024
