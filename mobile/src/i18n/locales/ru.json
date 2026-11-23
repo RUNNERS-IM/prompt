@@ -2562,7 +2562,9 @@
     "presentation": {
       "loadingTabs": "Загрузка вкладок",
       "tabs_one": "Вкладки: {{count}}",
-      "tabs_other": "Вкладки: {{count}}"
+      "tabs_other": "Вкладки: {{count}}",
+      "tabs_few": "Вкладки: {{count}}",
+      "tabs_many": "Вкладки: {{count}}"
     },
     "terminalTabAgent": {
       "terminalNumber": "Терминал {{number}}",
@@ -2802,11 +2804,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "Не удалось открыть ссылку. Повторите попытку.",
-      "socialProfile": "Prompt в X",
       "sourceCode": "Исходный код Prompt",
       "tagline": "IDE с открытым кодом и агентами: разработка в 100 раз быстрее",
-      "title": "О приложении",
-      "website": "Сайт Prompt"
+      "title": "О приложении"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "Не удалось проверить",
@@ -2870,7 +2870,6 @@
       "voice": "Голос"
     },
     "menuScreen": {
-      "privacyPolicy": "Политика конфиденциальности",
       "support": "Поддержка"
     },
     "nativeChatSettingsScreen": {
@@ -4039,6 +4038,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "Не удалось создать рабочее пространство"
+    },
+    "hostedMerge": {
+      "merged": "Слит",
+      "closed": "Закрыто",
+      "conflicts": "Конфликты",
+      "behind": "Отстаёт",
+      "blocked": "Заблокировано",
+      "checksPending": "Проверки ожидаются",
+      "ableToMerge": "Можно слить",
+      "unknown": "Неизвестно"
+    },
+    "pagination": {
+      "pageUnreachable": "Страница {{page}} выходит за пределы того, что может вернуть поиск GitHub.",
+      "loadPageFailed": "Страница {{page}} не может быть загружена из GitHub.",
+      "noMoreResults": "На странице {{page}} больше нет результатов."
     }
   },
   "terminal": {
@@ -4152,6 +4166,11 @@
       "inProgress": "В работе",
       "inReview": "На проверке",
       "pinned": "Закреплено"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Ваш телефон и компьютер должны быть подключены к одной сети Wi-Fi или Tailscale. Реле выключено в Prompt."
     }
   }
 }

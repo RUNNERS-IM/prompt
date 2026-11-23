@@ -1,0 +1,3956 @@
+{
+  "settings": {
+    "appearance": {
+      "theme": {
+        "system": "Järjestelmä",
+        "light": "Vaalea",
+        "dark": "Tumma",
+        "heading": "TEEMA",
+        "description": "Järjestelmä noudattaa tämän laitteen vaaleaa tai tummaa asetusta."
+      },
+      "title": "Ulkoasu",
+      "language": {
+        "systemWithCurrent": "Järjestelmä ({{language}})",
+        "heading": "KIELI",
+        "description": "Järjestelmä noudattaa tämän laitteen kieltä. Lupakehotuksissa käytetään aina laitteen kieltä."
+      }
+    },
+    "aboutScreen": {
+      "title": "Tietoja",
+      "tagline": "Avoimen lähdekoodin agentti IDE 100x rakentajille",
+      "sourceCode": "Prompt lähdekoodi",
+      "openLinkFailed": "Linkkiä ei voitu avata. Yritä uudelleen."
+    },
+    "appUpdateSettingsRows": {
+      "checking": "Tarkistetaan…",
+      "upToDate": "Ajan tasalla",
+      "checkFailed": "Ei voinut tarkistaa",
+      "neverChecked": "Ei koskaan",
+      "lastCheckedJustNow": "Tarkastettu viimeksi juuri nyt",
+      "lastCheckedMinutes_one": "Tarkistettu viimeksi {{count}} min sitten",
+      "lastCheckedMinutes_other": "Tarkistettu viimeksi {{count}} min sitten",
+      "lastCheckedHours_one": "Tarkistettu viimeksi {{count}}h sitten",
+      "lastCheckedHours_other": "Tarkistettu viimeksi {{count}}h sitten",
+      "lastCheckedDays_one": "Tarkistettu viimeksi {{count}}pv sitten",
+      "lastCheckedDays_other": "Tarkistettu viimeksi {{count}}pv sitten",
+      "updateToVersion": "Päivitä numeroon Prompt {{version}}",
+      "update": "Päivitä",
+      "installedVersion": "Versio {{version}}",
+      "checkUpdatesStatus": "Tarkista päivitykset, {{status}}",
+      "checkUpdates": "Tarkista päivitykset"
+    },
+    "browserSettingsScreen": {
+      "desktopBrowser": "Prompt selain työpöydällä",
+      "desktopBrowserDescription": "Avaa suoratoistoselaimessa pariksi liitetyltä työpöydältä.",
+      "phoneBrowser": "Puhelimen selain",
+      "phoneBrowserDescription": "Avaa Safarissa, Chromessa tai muussa tämän puhelimen selaimessa.",
+      "title": "Selain",
+      "linksHeading": "LINKIT",
+      "linksDescription": "Valitse, missä päätteen lähdössä napautetut HTTP(S)-linkit avautuvat.",
+      "loadFailed": "Selainasetuksia ei voitu ladata. Yritä uudelleen.",
+      "saveFailed": "Selainasetuksia ei voitu tallentaa. Yritä uudelleen.",
+      "openTerminalLinks": "Avaa terminaalilinkit"
+    },
+    "menuItems": {
+      "appearance": "Ulkoasu",
+      "terminal": "Pääte",
+      "chatUi": "Chat-käyttöliittymä",
+      "browser": "Selain",
+      "voice": "Ääni",
+      "notifications": "Ilmoitukset",
+      "troubleshooting": "Vianetsintä",
+      "about": "Tietoja"
+    },
+    "nativeChatSettingsScreen": {
+      "title": "Chat-käyttöliittymä",
+      "defaultViewHeading": "OLETUSNÄKYMÄ",
+      "defaultViewDescription": "Valitse, kuinka tuetut agenttiistunnot (Claude, Codex ja muut keskusteluun kykenevät agentit) avautuvat tällä laitteella. Pääte näyttää raaka-CLI:n; Chat-käyttöliittymä näyttää keskustelukäyttöliittymän, kuten työpöytäsovelluksen. Voit silti vaihtaa yksittäistä istuntoa sen pitkän painalluksen valikosta.",
+      "openInChatUi": "Avaa istunnot Chat-käyttöliittymässä",
+      "on": "Päällä",
+      "off": "Pois"
+    },
+    "nativeNotificationDeliverySettings": {
+      "loadFailed": "Toimitusasetuksia ei voitu ladata. Yritä uudelleen avaamalla tämä näyttö.",
+      "saveFailed": "Toimitusasetuksia ei voitu tallentaa. Yritä uudelleen.",
+      "updateDesktopHint": "Yhdistä päivitetty työpöytä saadaksesi ilmoituksia tähän puhelimeen."
+    },
+    "notificationDisplayTest": {
+      "loadFailed": "Ei voitu ladata pariksi liitettyjä työpöytiä.",
+      "pairDesktop": "Muodosta laitepari työpöydän kanssa ja yritä uudelleen.",
+      "connectDesktop": "Yhdistä työpöytä ja yritä uudelleen.",
+      "updateDesktop": "Päivitä työpöytäsi suorittaaksesi tämän testin.",
+      "desktopUnreachable": "Työpöydälle ei saatu yhteyttä. Yritä uudelleen.",
+      "accepted": "Käyttäjän Prompt push-palvelu hyväksyy. Tarkista ilmoitus.",
+      "reconnectPhone": "Muodosta yhteys uudelleen rekisteröidäksesi tämän puhelimen ilmoituksia varten.",
+      "rateLimited": "Liikaa ilmoituksia. Yritä myöhemmin uudelleen.",
+      "pushServiceFailed": "Ei voitu lähettää käyttäjän Prompt push-palvelun kautta. Yritä uudelleen.",
+      "sendFailed": "Työntötestiä ei voitu lähettää.",
+      "troubleReceivingAlerts": "Onko sinulla ongelmia hälytysten vastaanottamisessa?",
+      "description": "Lähetä testi käyttäjän Prompt push-palvelun kautta.",
+      "sending": "Lähetetään…",
+      "sendButton": "Lähetä testi-ilmoitus",
+      "troubleshooting": "Vianetsintä"
+    },
+    "notificationSettingsScreen": {
+      "loadFailed": "Ilmoitusasetuksia ei voitu ladata. Yritä uudelleen.",
+      "saveFailed": "Ilmoitusasetuksia ei voitu tallentaa. Yritä uudelleen.",
+      "notificationsBlocked": "Ilmoitukset on poistettu käytöstä järjestelmäasetuksissa.",
+      "description": "Saat ilmoituksen tälle laitteelle, kun agentti tarvitsee syöttösi tai suorittaa tehtävän.",
+      "title": "Ilmoitukset",
+      "enableNotifications": "Ota ilmoitukset käyttöön",
+      "openSettingsFailed": "Järjestelmäasetuksia ei voitu avata. Yritä uudelleen.",
+      "openSettings": "Avaa asetukset"
+    },
+    "pendingCredentialCleanupCard": {
+      "title": "Pariliitoksen muodostaminen tunnistetietojen puhdistus",
+      "retryFailed": "Siivousta ei vieläkään voitu vahvistaa. Yritä myöhemmin uudelleen.",
+      "cleanupUnconfirmed_one": "Tämän laitteen {{count}} kirjautumistietojen puhdistamista ei voitu vahvistaa.",
+      "cleanupUnconfirmed_other": "Tämän laitteen {{count}} kirjautumistietojen puhdistamista ei voitu vahvistaa.",
+      "statusCheckFailed": "Tämän laitteen puhdistamisen tilaa ei voitu tarkistaa. Yritä uudelleen ollaksesi turvassa.",
+      "retryCleanup": "Yritä uudelleen tyhjentää pariliitoksen kirjautumistiedot"
+    },
+    "menuScreen": {
+      "support": "Tuki"
+    },
+    "uiLanguageSettingsSection": {
+      "pseudoLanguage": "Pseudo (en-XA)"
+    },
+    "voiceSettingsScreen": {
+      "toggleMode": "Vaihda",
+      "holdMode": "Pidä pohjassa",
+      "loadFailed": "Ääniasetusten lataaminen epäonnistui",
+      "updateFailed": "Päivitys epäonnistui",
+      "selectModelFailed": "Mallia ei voitu valita",
+      "downloadFailed": "Lataus epäonnistui",
+      "deleteFailed": "Poisto epäonnistui",
+      "noneSelected": "Ei valittu",
+      "title": "Ääni",
+      "connectDesktop": "Muodosta yhteys työpöydälle, jotta voit hallita ääniasetuksia.",
+      "loadFailedMessage": "Ääniasetusten lataaminen epäonnistui.",
+      "dictationHeading": "SANELE",
+      "enableDictation": "Ota äänisanelu käyttöön",
+      "dictationDescription": "Sano tekstiä mihin tahansa kohdennettuun ruutuun työpöydälläsi.",
+      "dictationMode": "Sanelun tila",
+      "dictationModeDescription": "Toggle: paina kerran aloittaaksesi, uudelleen lopettaaksesi. Pidä: sanele pitämällä.",
+      "speechModelHeading": "PUHEMALLI",
+      "speechModel": "Puhemalli"
+    }
+  },
+  "common": {
+    "back": "Takaisin",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "continue": "Jatka",
+    "ok": "OK",
+    "retry": "Yritä uudelleen",
+    "copied": "Kopioitu",
+    "remove": "Poista",
+    "settings": "Asetukset",
+    "delete": "Poista",
+    "unknown": "Tuntematon",
+    "confirm": "Vahvista",
+    "copy": "Kopioi",
+    "done": "Valmis",
+    "close": "Sulje",
+    "edit": "Muokkaa",
+    "refresh": "Päivitä",
+    "open": "Avoin"
+  },
+  "host": {
+    "edit": {
+      "missingHost": "Isäntä puuttuu.",
+      "hostRemoved": "Tämä isäntä poistettiin tästä puhelimesta.",
+      "loadFailed": "Isännän lataaminen epäonnistui.",
+      "saveFailed": "Isännän tallentaminen epäonnistui.",
+      "title": "Muokkaa isäntää",
+      "saveHost": "Tallenna isäntä",
+      "goBack": "Siirry taaksepäin",
+      "help": "Muuta näyttönimeä tai yhteysosoitetta. Jätä nimi tyhjäksi käyttääksesi nimeä työpöytäraporteissa. Osoitteen muokkaukset vaihtuvat vain sinne, missä tämä puhelin muodostaa yhteyden – ne eivät muodosta pariliitosta uudelleen. Käytä tätä, kun sama työpöytä on tavoitettavissa eri IP-osoitteesta (esimerkiksi kotiverkko vs Tailscale).",
+      "name": "Nimi",
+      "hostNamePlaceholder": "Isäntänimi",
+      "address": "Osoite",
+      "addressHint": "Hyväksyy IP-osoitteen, isäntä:portti tai ws:// / wss://. Wss:// URL ilman porttia käyttää numeroa 443. Paljaat osoitteet säilyttävät nykyisen portin (tai 6768).",
+      "connectionPreview": "Yhdistetään verkkoon {{endpoint}}"
+    }
+  },
+  "app": {
+    "mobileOnboarding": {
+      "saveChoiceFailed": "Valintaasi ei voitu tallentaa. Yritä uudelleen.",
+      "notificationSettingsFailed": "Ilmoitusasetuksia ei voitu päivittää. Yritä uudelleen.",
+      "progress": "Käyttöönoton eteneminen",
+      "stepProgress": "Vaihe {{step}}/{{total}}"
+    },
+    "notifications": {
+      "description": "Saat agenttihälytyksiä, vaikka sovellus olisi suljettu. Toimitetaan Prompt:n push-palvelun ja Applen tai Googlen kautta."
+    },
+    "pairConfirm": {
+      "connectTimedOut": "Yhteyttä ei voitu muodostaa {{seconds}} sekunnissa – katso alla olevasta lokista, missä se pysähtyi",
+      "pairingFailed": "Pariliitos epäonnistui: {{error}}",
+      "title": "Muodostetaanko laitepari tämän työpöydän kanssa?",
+      "description": "Avasit pariliitoslinkin työpöydältäsi. Vahvista lisätäksesi sen isäntiisi.",
+      "pairButton": "Pari",
+      "connecting": "Yhdistetään…",
+      "pairingLog": "Pariliitosloki",
+      "backToHome": "Takaisin kotiin"
+    },
+    "pairScan": {
+      "invalidQrCode": "Ei kelvollinen Prompt QR koodi",
+      "downloadQrCode": "Se on latauskoodi. Skannaa pariliitoskoodi vaiheessa 2 työpöydältäsi.",
+      "invalidPairingCode": "Ei kelvollinen pariliitoskoodi – kopioi se tietokoneeltasi ja liitä uudelleen",
+      "connectTimedOut": "Yhteyttä ei voitu muodostaa {{seconds}} sekunnissa – katso alla olevasta lokista, missä se pysähtyi",
+      "pairingFailed": "Pariliitos epäonnistui: {{error}}",
+      "title": "Yhdistä työpöydän kanssa",
+      "cameraDisabledTitle": "Kameran käyttö estetty",
+      "cameraPermissionDescription": "Skannaa QR-koodi työpöydältä Prompt tai liitä pariliitoskoodi sen sijaan.",
+      "cameraDisabledDescription": "Ota kameran käyttöoikeus käyttöön asetuksista tai liitä sen sijaan pariliitoskoodi.",
+      "openSettings": "Avaa asetukset",
+      "pasteInstead": "Liitä koodi sen sijaan",
+      "pasteCodeTitle": "Liitä pariliitoskoodi",
+      "pasteCodeMessage": "Kopioi QR:n alla näkyvä koodi tietokoneellesi.",
+      "pasteCodePlaceholder": "orca://pair?code=... or paste the code",
+      "openDesktopStep": "Avaa Prompt tietokoneellasi",
+      "openMobileSettingsStep": "Siirry kohtaan Asetukset → Mobiili",
+      "scanCodeStep": "Skannaa koodi QR",
+      "pastePairingCode": "Tai liitä pariliitoskoodi",
+      "connecting": "Yhdistetään…",
+      "pairingLog": "Pariliitosloki",
+      "tryAgain": "Yritä uudelleen"
+    },
+    "pair": {
+      "missingCode": "Pariliitoskoodi puuttuu",
+      "backToHome": "Takaisin kotiin"
+    },
+    "terminalSettings": {
+      "smallestText": "Pienin (50 %)",
+      "smallerText": "Pienempi (75 %)",
+      "defaultText": "Oletus (100 %)",
+      "largeText": "Suuri (125 %)",
+      "largerText": "Suurempi (150 %)",
+      "largestText": "Suurin (200 %)",
+      "restoreAfterMinutes_one": "{{count}} minuutin kuluttua",
+      "restoreAfterMinutes_other": "{{count}} minuutin kuluttua",
+      "keepPhoneSize": "Pidä puhelimen koossa (oletus)",
+      "restoreAfterSeconds_one": "{{count}}s kuluttua",
+      "restoreAfterSeconds_other": "{{count}}s kuluttua",
+      "title": "Pääte",
+      "leaveAppHeading": "KUN POISTAT SOVELLUKSEN",
+      "leaveAppDescription": "Kun käytät puhelimesi päätettä, Prompt kutistaa sen näytöllesi sopivaksi. Kun suljet sovelluksen tai vaihdat pois käytöstä, tämä hallitsee, pysyykö se puhelimen koossa (jotta interaktiiviset CLI-työkalut eivät juokse uudelleen) vai muuttaako sen kokoa takaisin työpöydällesi. Voit aina muuttaa kokoa manuaalisesti käyttämällä työpöydän bannerin Palauta-toimintoa.",
+      "noPairedDesktops": "Ei vielä pariksi liitettyjä pöytäkoneita. Yhdistä yksi ohjataksesi päätteen toimintaa.",
+      "textSizeHeading": "TEKSTIN KOKO",
+      "textSizeDescription": "Skaalaa päätteen tekstiä. Pienemmät koot sopivat useampaan sarakkeeseen, joissa on sivumarginaalit; suuremmat koot näyttävät vähemmän sarakkeita – panoroi vetämällä sivuttain. Voit myös nipistää zoomataksesi itse terminaaliin, mikä päivittää tämän asetuksen. Vain laitekohtainen näyttö; ei muuta työpöytäpäätettä.",
+      "textSize": "Tekstin koko",
+      "keyboardInputHeading": "NÄPPÄIMISTÖN TULO",
+      "keyboardInputDescription": "Automaattinen täydennys, automaattinen korjaus ja oikeinkirjoitusehdotukset koskevat vain puskuroitua komentosyöttöä. Käytä näppäimistön yläpuolella olevaa kaksinkertaista nuolipainiketta vaihtaaksesi reaaliaikaisesta syötöstä ja muokkaa sitten komentoa ennen kuin napautat Lähetä. Oletusarvoisesti pois päältä, jotta komentoja, lippuja tai polkuja ei kirjoiteta uudelleen.",
+      "autocomplete": "Automaattinen täydennys ja automaattinen korjaus",
+      "autocompleteOn": "Päällä",
+      "autocompleteOff": "Pois",
+      "restoreHost": "Palauta {{name}}",
+      "textSizePickerTitle": "Päätteen tekstin koko"
+    }
+  },
+  "accounts": {
+    "screen": {
+      "invalidSnapshot": "Virheellinen tilivedos isännästä",
+      "hostNotFound": "Isäntä ei löytynyt",
+      "switchFailed": "Tiliä ei voitu vaihtaa",
+      "default": "Järjestelmän oletus",
+      "agentLogin": "Käytä välittäjän omaa kirjautumistunnusta",
+      "sessionWindow": "5 h",
+      "weeklyWindow": "7 pv",
+      "title": "Tilit",
+      "refreshAccounts": "Päivitä tilit",
+      "resetsIn": "Nollautuu {{duration}} kuluttua",
+      "resetsNow": "Nollautuu nyt",
+      "durationDays": "{{days}} pv",
+      "durationDaysHours": "{{days}} pv {{hours}} t",
+      "durationHours": "{{hours}} t",
+      "durationHoursMinutes": "{{hours}} t {{minutes}} min",
+      "durationMinutes": "{{minutes}} min",
+      "connectingTo": "Yhdistetään verkkoon {{name}}…",
+      "connecting": "Yhdistetään isäntään…",
+      "loadingAccounts": "Ladataan tilejä…",
+      "manageAccountsHint": "Lisää tai todenna tilejä uudelleen valitsemalla työpöydän Asetukset → Tilit.",
+      "useReset": "Käytä nollausta"
+    }
+  },
+  "agentHistory": {
+    "sessionHistoryList": {
+      "messages_one": "{{count}} viesti",
+      "messages_other": "{{count}} viestiä",
+      "currentWorktree": "nykyinen työpuu",
+      "resumeSession": "Jatka agenttiistuntoa",
+      "userRole": "käyttäjä",
+      "assistantRole": "avustaja"
+    },
+    "panel": {
+      "workspace": "Työtila",
+      "project": "Projekti",
+      "all": "Kaikki",
+      "waitingForHost": "Odotetaan isäntiä...",
+      "missingResumeId": "Tästä istunnosta puuttuu ansioluettelon tunnus.",
+      "unknownHostPlatform": "Isäntäalustaa ei voida määrittää.",
+      "sessionQueued": "Agenttiistunto jonossa.",
+      "resumeFailed": "Istunnon jatkaminen epäonnistui.",
+      "title": "Agenttisessioiden historia",
+      "refreshSessions": "Päivitä agenttiistunnot",
+      "unavailable": "Agentin istuntohistoria ei saatavilla",
+      "updateHost": "Päivitä tämän isännän Prompt selataksesi agentin istuntohistoriaa.",
+      "loadFailed": "Ei voida ladata",
+      "placeholder": "Hae istuntoja, repo:, polku:",
+      "skipped_one": "{{count}} transkriptio ohitettu",
+      "skipped_other": "{{count}} transkriptiota ohitettu",
+      "noSessions": "Ei agenttiistuntoja",
+      "noSearchResults": "Yksikään istunto ei vastaa hakuasi.",
+      "emptyScope": "Ei aiempia agenttiistuntoja tässä laajuudessa."
+    },
+    "resumeTarget": {
+      "runtimeUnavailable": "Jatka historiasta ei ole käytettävissä suoritusaikaisännöidyissä työtiloissa.",
+      "differentHost": "Tämä sessio kuuluu toiselle koneelle. Avaa työtila samalla koneella jatkaaksesi sitä.",
+      "openWorkspace": "Avaa työtila ennen session jatkamista."
+    },
+    "sessionCard": {
+      "untitledSession": "Nimetön istunto"
+    },
+    "useAgentHistoryState": {
+      "waitingForHost": "Odotetaan isäntä…",
+      "hostUnreachable": "Isäntään ei saada yhteyttä",
+      "loadFailed": "Agenttiistuntoja ei voi ladata"
+    },
+    "worktreeNavigationActions": {
+      "sourceControl": "Lähdekoodinhallinta",
+      "agentSessionHistory": "Agenttisessioiden historia"
+    }
+  },
+  "diagnostics": {
+    "connectionDiagnosticsView": {
+      "connecting": "yhdistetään",
+      "handshaking": "kättely",
+      "connected": "yhdistetty",
+      "disconnected": "yhteys katkaistu",
+      "reconnecting": "yhdistäminen uudelleen",
+      "authFailed": "todennus epäonnistui",
+      "title": "Verkkodiagnostiikka",
+      "stateWithAttempt": "{{state}} · yritys {{attempts}}",
+      "copyReport": "Kopioi raportti",
+      "diagnosisHeading": "Mitä tämä ehdottaa",
+      "privacyHint": "Lähettää kokorajoitetun muokatun raportin, joka sisältää isäntänimen, päätepisteen, versiot, yhteyden tilan ja tapahtumat – ei koskaan päätteen sisältöä tai valtuustietoja.",
+      "sending": "Lähetetään…",
+      "sent": "Diagnostiikka lähetetty",
+      "retrySending": "Yritä lähettää uudelleen",
+      "sendDiagnostics": "Lähetä diagnostiikka numeroon Prompt",
+      "noEvents": "Ei vielä yhteystapahtumia. Tapahtumat näkyvät, kun sovellus soittaa tälle isännälle.",
+      "noHosts": "Ei pareja."
+    },
+    "mobileWebBundleProbeRow": {
+      "fetchBundle": "Hae mobiiliverkkopaketti",
+      "connecting": "Yhdistetään…",
+      "fetching": "Haetaan pakettia…",
+      "bundle": "Paketti",
+      "host": "Isäntä",
+      "build": "Rakenna",
+      "assets": "Omaisuus",
+      "bytes": "tavua",
+      "elapsed": "Kulunut",
+      "elapsedMilliseconds": "{{elapsedMs}} ms",
+      "unknownHost": "tuntematon isäntä"
+    },
+    "mobileWebShellUpdateFailureRow": {
+      "title": "Työtilan päivitykset"
+    },
+    "troubleshootCommonIssues": {
+      "notificationsTitle": "Push-ilmoitukset",
+      "allowNotifications": "Tarkista, että järjestelmäasetukset sallivat Prompt ilmoitukset ja että Tarkenna tai Älä häiritse -tila on pois päältä.",
+      "notificationNetwork": "Kokeile matkapuhelinverkkoa tai muuta Wi-Fi-verkkoa. Jos hälytykset saapuvat vaihdon jälkeen, verkkosi saattaa viivästyttää toimitusta.",
+      "wifiTitle": "Erilaiset WiFi-verkot",
+      "sameNetwork": "Molempien laitteiden on oltava samassa lähiverkossa (ellei niitä ole kytketty Tailscale:n kautta).",
+      "sameSubnet": "Ethernetin ja WiFin on jaettava sama aliverkko.",
+      "reconnectWifi": "Yritä yhdistää WiFi uudelleen molemmilla laitteilla.",
+      "firewallTitle": "Palomuurin estoportti {{port}}",
+      "linuxFirewall": "Linux: sudo ufw allow {{port}}",
+      "macosFirewall": "macOS: Järjestelmäasetukset → Verkko → Palomuuri — salli Prompt.",
+      "windowsFirewall": "Windows: Defender Firewall → Salli sovellus — ota Prompt käyttöön yksityisissä verkoissa.",
+      "restrictedNetwork": "Yritys-/kouluverkot voivat estää P2P:n – kokeile henkilökohtaista hotspotia.",
+      "desktopTitle": "Työpöytäsovellus ei toimi",
+      "openDesktop": "Prompt:n on oltava auki työpöydälläsi, jotta yhteydet voidaan hyväksyä.",
+      "restartDesktop": "Yritä käynnistää uudelleen Prompt — kumppanipalvelin käynnistyy käynnistyksen yhteydessä.",
+      "pairAfterUpdate": "Päivityksen jälkeen saatat joutua muodostamaan pariliitoksen uudelleen koodilla QR.",
+      "timeoutTitle": "Yhteyden aikakatkaisu",
+      "wifiSignal": "Tarkista puhelimesi WiFi-signaalin voimakkuus.",
+      "retryHost": "Palaa isäntäluetteloon ja yritä uudelleen napauttamalla isäntäsi.",
+      "restartBothApps": "Käynnistä molemmat sovellukset uudelleen, jos aikakatkaisut jatkuvat.",
+      "tailscaleTitle": "Tailscale Isäntä ei tavoitettavissa",
+      "keepTailscaleOn": "Isäntäosoitteet, kuten 100.x.x.x tai *.ts.net, muodostavat yhteyden Tailscale:n kautta – pidä se PÄÄLLÄ.",
+      "restartTailscale": "iOS/Android voi kiilata tunnelin äänettömästi: kytke Tailscale pois päältä ja takaisin päälle Tailscale-sovelluksessa.",
+      "checkTailnet": "Tarkista, että työpöytä on hereillä ja näkyy kytkettynä takaverkkoosi.",
+      "updateTailscale": "Päivitä Tailscale-sovellus – viimeisimmät julkaisut korjaavat uudelleenkytkentävirheet.",
+      "vpnTitle": "Muut VPN-häiriöt",
+      "vpnRouting": "Muut kuin Tailscale VPN:t voivat reitittää paikallista liikennettä etäpalvelimen kautta.",
+      "disableVpn": "Poista tämä VPN käytöstä tai ota käyttöön jaettu tunnelointi / \"Salli LAN\"."
+    },
+    "troubleshootView": {
+      "title": "Vianetsintä",
+      "running": "Juokse…",
+      "runAgain": "Juokse uudestaan",
+      "runDiagnostics": "Suorita diagnostiikka",
+      "viewNetworkDiagnostics": "Katso verkon diagnostiikka",
+      "commonIssues": "Yleisiä ongelmia"
+    },
+    "useTroubleshootDiagnostics": {
+      "pairedHosts": "Pariisännät",
+      "pairedCount": "{{count}} pariksi",
+      "noPairedHosts": "Ei mitään — skannaa QR pariliitoksen muodostamiseksi",
+      "hostDataFailed": "Isäntätietoja ei voitu lukea",
+      "internet": "Internet",
+      "connected": "Yhdistetty",
+      "unexpectedResponse": "Odottamaton vastaus",
+      "noConnection": "Ei yhteyttä",
+      "reachable": "tavoitettavissa osoitteessa {{endpoint}}",
+      "hosts": "Palvelimet",
+      "hostTestFailed": "Ei voitu testata",
+      "platform": "Alusta"
+    },
+    "webShellUpdateFailureCopy": {
+      "failedJustNow": "Viimeisin päivitys kohteesta {{hostName}} epäonnistui juuri nyt: {{reason}}{{offered}}. {{outcome}}",
+      "failedAgo": "Viimeisin päivitys käyttäjältä {{hostName}} epäonnistui {{time}} sitten: {{reason}}{{offered}}. {{outcome}}",
+      "reasonCopy": {
+        "noConnection": "ei ole yhteydessä isäntään",
+        "connectionLost": "yhteys katkesi",
+        "hostRefused": "isäntä kieltäytyi lukemasta",
+        "replyUnreadable": "isäntä lähetti vastauksen, jota tämä sovellus ei voinut lukea",
+        "chunkOversize": "pala oli suurempi kuin isäntä sallii",
+        "assetOverlong": "omaisuus oli pidempi kuin manifestissa kerrotaan",
+        "assetNoProgress": "omaisuuden lukeminen ei edistynyt",
+        "assetShort": "omaisuuserä ei ylittänyt ilmoitettua kokoaan",
+        "assetChecksumMismatch": "omaisuuden tarkistussumma ei täsmää",
+        "buildChangedMidFetch": "isännän rakenne muuttui latauksen aikana",
+        "chunkMisrouted": "pala vastasi väärään omaisuuteen tai offsetiin",
+        "assetEntryChanged": "sisältö ei enää vastannut luetteloa",
+        "rangeUndecodable": "pakattua lukua ei voitu purkaa",
+        "fetchStopped": "lataus lopetettiin",
+        "cacheWriteFailed": "latauksen tallentaminen tähän puhelimeen epäonnistui",
+        "unrecognisedError": "tunnistamaton virhe"
+      },
+      "hostCodeCopy": {
+        "unavailable": "isännällä ei ole työtilapakettia",
+        "buildChanged": "isännän rakenne muuttui latauksen aikana",
+        "assetUnknown": "isäntä ei tunnistanut omaisuutta",
+        "assetChanged": "isännässä muutettu ominaisuus",
+        "offsetInvalid": "isäntä kieltäytyi lukemasta",
+        "readLimited": "isäntä rajoitti samanaikaista lukemista"
+      },
+      "wallCopy": {
+        "bundleUnavailable": "isännällä ei ole työtilapakettia",
+        "bundleShellTooOld": "tämä sovellus on liian vanha tallennettuun nippuun",
+        "hostTooOldForBundle": "isäntä on liian vanha tallennettuun nippuun",
+        "bundleTooOldForHost": "tallennettu nippu on liian vanha isännälle",
+        "pageRouteUnlisted": "isännän työtila ei sisällä tätä näyttöä",
+        "pageRouteGrantMissing": "tämä näyttö tarvitsee uudemman sovelluksen"
+      },
+      "openedCached": "Palasi tallennettuun versioon.",
+      "openedCachedGeneration": "Palasi tallennettuun versioon (sukupolvi {{generation}}).",
+      "blockedWorkspace": "Estetty työtilan.",
+      "blockedReason": "Estetty: {{reason}}.",
+      "nativeRoute": "Näytti alkuperäisen näytön.",
+      "routeUnavailable": "Osoitti, että näyttö ei ole käytettävissä.",
+      "failed": "Näytti vikanäytön.",
+      "waiting": "Odotti isäntää.",
+      "offeredGeneration": "(sukupolvi {{generation}})"
+    }
+  },
+  "dictation": {
+    "setup": {
+      "serverUpdateRequired": "Päivitä tämän palvelimen Prompt käyttääksesi äänisanelua.",
+      "alreadyActive": "Sanelu on jo käytössä tietokoneessa tai toisessa puhelimessa.",
+      "repairRequired": "Yhdistä tämä puhelin uudelleen tietokoneeseen käyttääksesi sanelua.",
+      "sessionLost": "Sanelu menetti yhteyden tietokoneeseen. Yritä uudelleen.",
+      "desktopUpdateRequired": "Päivitä pariksi liitetty työpöytäsovellus Prompt käyttääksesi mobiiliääniasetuksia.",
+      "loadFailed": "Sanelumallien lataaminen epäonnistui",
+      "downloadFailed": "Latauksen aloittaminen epäonnistui",
+      "deleteFailed": "Mallin poistaminen epäonnistui",
+      "updateFailed": "Saneluasetusten päivittäminen epäonnistui",
+      "cloudModelNeedsKey": "Vaatii OpenAI-avaimen"
+    }
+  },
+  "home": {
+    "appUpdateCard": {
+      "title": "Prompt {{version}} on saatavilla",
+      "updateAccessibilityLabel": "Prompt {{version}} on saatavilla, päivitä napauttamalla",
+      "updateHint": "Päivitä napauttamalla",
+      "dismissAccessibilityLabel": "Hylkää Prompt {{version}} päivitys"
+    },
+    "accountUsageCards": {
+      "sectionHeading": "Tilin käyttö",
+      "systemDefault": "Järjestelmän oletus",
+      "sessionWindow": "5 h",
+      "weeklyWindow": "7 pv"
+    },
+    "emptyState": {
+      "openDesktopTitle": "Avaa Prompt työpöytä",
+      "openDesktopDescription": "Siirry kohtaan Asetukset → Mobiili ja luo pariliitoskoodi QR.",
+      "scanCodeTitle": "Skannaa koodi",
+      "scanCodeDescription": "Avaa skanneri napauttamalla yllä olevaa painiketta. Osoita QR-koodia näytölläsi.",
+      "connectedTitle": "Olet yhteydessä",
+      "connectedDescription": "Työpöytäsi tulee näkyviin tähän. Kaikki on salattu päästä päähän.",
+      "title": "Yhdistä työpöytäsi",
+      "description": "Muodosta laitepari tietokoneesi Prompt:n kanssa tarkistaaksesi agenttisi, hypätä mihin tahansa päätteeseen ja ajaa töitä puhelimestasi.",
+      "pairDesktop": "Yhdistä työpöytä",
+      "stepsHeading": "Miten se toimii"
+    },
+    "listFooter": {
+      "resumeHeading": "Jatka",
+      "tasksHeading": "Tehtävät",
+      "hostPickerTitle": "Avaa Tasks On"
+    },
+    "listHeader": {
+      "daysHours": "{{days}} pv {{hours}} t",
+      "hoursMinutes": "{{hours}} t {{minutes}} min",
+      "minutes": "{{minutes}} min",
+      "title": "Tervetuloa takaisin",
+      "agentsSpawned": "Käynnistetyt agentit",
+      "agentTime": "Agenttiaika",
+      "prsCreated": "Luodut PR:t",
+      "desktopsHeading": "Työpöydät"
+    },
+    "screen": {
+      "pairingCheckFailed": "Pariliitosta ei voitu tarkistaa",
+      "tryAgain": "Yritä uudelleen.",
+      "removeHostFailed": "Isäntää ei voitu poistaa",
+      "removeHostTitle": "Poista isäntä",
+      "removeHostMessage": "Poistetaanko \"{{name}}\"? Voit muodostaa pariliitoksen myöhemmin uudelleen."
+    },
+    "tasksCard": {
+      "title": "Tehtävät",
+      "noSources": "Tehtävälähteitä ei ole yhdistetty",
+      "openProviderTasks": "Avaa {{provider}} tehtävää"
+    }
+  },
+  "hooks": {
+    "dictationDesktopStart": {
+      "recordingFailed": "Mikrofonitallennuksen aloittaminen epäonnistui"
+    },
+    "useMobileDictation": {
+      "microphonePermissionDenied": "Mikrofonilupa evätty",
+      "microphoneInitFailed": "Mikrofonin alustus epäonnistui",
+      "noSpeech": "Puhetta ei havaittu.",
+      "microphoneInterrupted": "Sanelu pysähtyi, koska mikrofoni keskeytettiin. Yritä uudelleen.",
+      "inputClosed": "Sanelu lopetettiin, koska tämä istunto ei enää hyväksy syötettä. Yritä uudelleen."
+    }
+  },
+  "hostScreen": {
+    "hostListActionSheetActions": {
+      "reconnect": "Yhdistä uudelleen",
+      "connect": "Yhdistä",
+      "disconnect": "Katkaise yhteys",
+      "networkDiagnostics": "Verkkodiagnostiikka",
+      "editHost": "Muokkaa isäntää"
+    },
+    "hostPendingCreationRow": {
+      "creatingWorkspace": "Luodaan työtilaa…"
+    },
+    "hostRailActions": {
+      "accounts": "Tilit",
+      "tasks": "Tehtävät",
+      "floatingWorkspace": "Kelluva työtila",
+      "newWorkspace": "Uusi työtila",
+      "closeSearch": "Sulje haku",
+      "searchWorkspaces": "Hae työtiloja"
+    },
+    "hostScreenHeader": {
+      "workspaceOptions": "Työtilan asetukset",
+      "activeFilters_one": "Työtilan asetukset ({{count}} suodatin käytössä)",
+      "activeFilters_other": "Työtilan asetukset ({{count}} suodatinta käytössä)",
+      "backToHosts": "Takaisin isänteihin",
+      "reconnect": "Yhdistä uudelleen",
+      "floatingWorkspace": "Kelluva työtila",
+      "hideSidebar": "Piilota sivupalkki",
+      "accounts": "Tilit",
+      "tasks": "Tehtävät",
+      "closeSearch": "Sulje haku",
+      "searchWorkspaces": "Hae työtiloja"
+    },
+    "hostScreenOverlays": {
+      "deleteWorktree": "Poista worktree",
+      "deleteConfirmMessage": "Poistetaanko \"{{name}}\" ({{branch}})?",
+      "sleep": "Aseta lepotilaan",
+      "unpin": "Poista kiinnitys",
+      "pin": "Kiinnitä",
+      "primaryWorktreeDeleteHint": "Ensisijaista worktreetä ei voi poistaa. Poista sen sijaan projekti.",
+      "removeHost": "Poista isäntä",
+      "removeHostMessage": "Poistetaanko \"{{name}}\"? Voit muodostaa pariliitoksen myöhemmin uudelleen."
+    },
+    "hostWorkspaceList": {
+      "searchPlaceholder": "Hae työtiloja…",
+      "searchWorkspaces": "Hae työtiloja"
+    },
+    "workspaceDetailsSheet": {
+      "merged": "Mergattu",
+      "closed": "Suljettu",
+      "draft": "Luonnos",
+      "checksPassing": "Tarkastukset: Läpäisy",
+      "checksFailing": "Tarkistukset: Epäonnistui",
+      "checksPending": "Tarkistukset: Odottaa",
+      "createdFromCli": "Luotu Prompt CLI:stä",
+      "createdByNamedAutomation": "Luonut automaatio \"{{name}}\"",
+      "createdByAutomation": "Automaation luoma",
+      "openLinkWithTitle": "Avaa {{label}}, {{title}}",
+      "openLink": "Avaa {{label}}",
+      "prOpen": "Avoin"
+    },
+    "workspaceOptionControls": {
+      "none": "Ei mitään",
+      "status": "Tila",
+      "pr": "PR",
+      "project": "Projekti",
+      "name": "Nimi",
+      "agentActivitySort": "Agenttiaktiivisuus",
+      "recent": "Viimeaikaiset",
+      "manual": "Manuaalinen",
+      "agentActivitySortDescription": "Huomiota vaativat agentit ensin, sitten viimeisin aktiivisuus.",
+      "manualWorkspaceOrderDescription": "Järjestä työtilat ryhmissä vetämällä.",
+      "manualProjectOrderDescription": "Järjestä projektit vetämällä",
+      "recentProjectOrderDescription": "Viimeisin työtilan aktiivisuus",
+      "detailed": "Yksityiskohtainen",
+      "compact": "Tiivis",
+      "fullList": "Koko luettelo",
+      "githubTicket": "GitHub-tiketti",
+      "linearIssue": "Linear-issue",
+      "jiraIssue": "Jira-issue",
+      "prMrLink": "PR/MR-linkki",
+      "automation": "Automaatio",
+      "notes": "Muistiinpanot",
+      "ports": "Portit",
+      "agentActivity": "Agenttiaktiivisuus",
+      "host": "Isäntä",
+      "githubIssues": "GitHub issuet",
+      "linearIssues": "Linear-issuet",
+      "jiraIssues": "Jira-issuet",
+      "agentStatuses": "Agenttien tilat",
+      "branchFolderPath": "Branch / kansiopolku",
+      "branchName": "Branchin nimi",
+      "selectedCount": "{{count}} / {{total}}",
+      "allHosts": "Kaikki hostit",
+      "allProjects": "Kaikki projektit",
+      "searchProjectsPlaceholder": "Hae projekteja…",
+      "searchProjects": "Hae projekteja",
+      "hover": "Hiiren ollessa päällä",
+      "agentActivityLayout": "Agenttiaktiivisuuden asettelu"
+    },
+    "workspaceOptionsSheet": {
+      "hosts": "Palvelimet",
+      "projects": "Projektit",
+      "groupBy": "Ryhmittele",
+      "sortBy": "Lajittelu",
+      "projectOrder": "Projektien järjestys",
+      "cardLayout": "Korttien asettelu",
+      "showProperties": "Näytä ominaisuudet",
+      "cardDisplay": "Korttien näyttö",
+      "hideSleeping": "Piilota lepotilassa olevat",
+      "exceptDefaultBranch": "Paitsi oletusbranch",
+      "hideDefaultBranch": "Piilota oletusbranch",
+      "hideAutomationCreated": "Piilota automaation luomat",
+      "hideCliCreated": "Piilota CLI:n luomat",
+      "hideOtherClientWorkspaces": "Piilota muiden clientien työtilat",
+      "hideDetachedHead": "Piilota irrotettu HEAD",
+      "show": "Näytä",
+      "filters": "Suodattimet",
+      "localMac": "Paikallinen Mac",
+      "localWindows": "Paikalliset Windows",
+      "localLinux": "Paikallinen Linux",
+      "thisComputer": "Tämä tietokone",
+      "waitingForDesktop": "Odotellaan edelleen työpöytää",
+      "savingToDesktop": "Tallentaminen työpöydälle",
+      "backToOptions": "Takaisin työtilan asetuksiin",
+      "workspaceOptions": "Työtilan asetukset",
+      "syncedAcrossDevices": "Synkronoitu laitteidesi välillä",
+      "clearFilters": "Tyhjennä suodattimet"
+    }
+  },
+  "webShell": {
+    "shellStateScreen": {
+      "isolationUnavailable": "Tämän laitteen WebView on liian vanha avaamaan työtilaa turvallisesti.",
+      "downloadFailed": "Uusinta sovellusta ei voitu ladata tältä isännältä.",
+      "hostProfileUnreadable": "Tätä isäntäkonetta ei voitu lukea laitteellasi. Yritä uudelleen.",
+      "statusUnreadable": "Tämän isännän tilaa ei voitu lukea. Mene takaisin ja avaa se uudelleen.",
+      "renderProcessGone": "Työtila lakkasi vastaamasta.",
+      "documentLoadFailed": "Ladattua sovellusta ei voitu avata.",
+      "tryAgain": "Yritä uudelleen",
+      "connectToDownload": "Yhdistä tähän isäntään ladataksesi uusimman sovelluksen",
+      "openingWorkspace": "Työtilan avaaminen",
+      "checkingHost": "Checking host"
+    }
+  },
+  "navigation": {
+    "hostStackScreens": {
+      "host": "Isäntä",
+      "editHost": "Muokkaa isäntää",
+      "accounts": "Tilit",
+      "tasks": "Tehtävät",
+      "terminal": "Pääte",
+      "sourceControl": "Lähdekoodinhallinta",
+      "agentSessionHistory": "Agenttisessioiden historia",
+      "changes": "Muutokset",
+      "pullRequest": "Pull request",
+      "workspace": "Työtila"
+    }
+  },
+  "notifications": {
+    "notificationDeliverySection": {
+      "onlyWhenAway": "Vain poissa työpöydältä",
+      "onlyWhenAwayHint": "3 minuutin kuluttua ilman näppäimistön tai hiiren toimintaa tai lukittuna.",
+      "sound": "Notification sound",
+      "suppressWhileFocused": "Suppress while focused",
+      "suppressWhileFocusedHint": "Ohita tässä puhelimessa avoinna olevan työtilan hälytykset.",
+      "footer": "Varoitustyypit noudattavat kunkin pariksi liitetyn työpöydän ilmoitusasetuksia. Ilmoitukset keskeytyvät 7 päivän kuluttua ilman tätä sovellusta; avaa se ja yhdistä uudelleen jatkaaksesi."
+    },
+    "desktopChannel": {
+      "silentName": "Prompt silent notifications",
+      "name": "Desktop Notifications"
+    }
+  },
+  "onboarding": {
+    "onboardingPage": {
+      "sessionViewTitle": "Miten istuntojen pitäisi avautua?",
+      "notificationsTitle": "Älä missaa, kun agentti tarvitsee sinua",
+      "sessionViewDescription": "Valitse, avautuvatko tuetut agenttiistunnot tämän laitteen päätelaitteessa vai chat-käyttöliittymässä. Pidä istuntovälilehteä painettuna vaihtaaksesi sen näkymää tai muuta oletusasetusta myöhemmin asetuksissa.",
+      "notificationsDescription": "Saat ilmoituksen tähän puhelimeen, kun agentti lopettaa tai odottaa – vaikka et käyttäisi sovellusta.",
+      "notificationsDisclosure": "Toimitetaan Prompt:n push-palvelun kautta, kun työpöytäsi on ollut käyttämättömänä 3 minuuttia. Voit muuttaa tätä milloin tahansa asetuksista.",
+      "useChatUi": "Käytä Chat-käyttöliittymää",
+      "openInChatUi": "Avaa istunnot Chat-käyttöliittymässä",
+      "keepTerminal": "Pidä terminaali",
+      "openInTerminal": "Avaa istunnot terminaalissa",
+      "enableNotifications": "Ota ilmoitukset käyttöön",
+      "enableAgentNotifications": "Ota agenttiilmoitukset käyttöön",
+      "notNow": "Ei nyt",
+      "skipNotifications": "Ohita ilmoitukset toistaiseksi"
+    },
+    "notificationOnboardingPreview": {
+      "codexFinished": "Codex valmis",
+      "testsPassing": "Tests are passing.",
+      "claudeNeedsInput": "Claude needs input",
+      "waitingOnYou": "Waiting on you.",
+      "now": "nyt"
+    }
+  },
+  "connection": {
+    "connectionHealth": {
+      "signInRequired": "Sign-in required on {{host}}",
+      "signInDetail": "Kirjaudu sisään osoitteeseen Prompt työpöydälläsi yhdistääksesi uudelleen",
+      "hostOffline": "{{host}} is offline",
+      "hostOfflineDetail": "Tarkista, että se on hereillä, Prompt on käynnissä ja olet kirjautunut sisään",
+      "relayAccessExpired": "Välityksen käyttöoikeus vanhentui {{host}}",
+      "rePairDetail": "Muodosta laitepari uudelleen työpöydän kanssa",
+      "relayUnreachable": "Can't reach Relay",
+      "checkConnection": "Check your connection",
+      "tailscaleHint": "tarkista Tailscale",
+      "hostFallback": "Isäntä",
+      "pairingInvalid": "Pariliitos ei kelpaa – muodosta pariliitos uudelleen työpöydän kanssa",
+      "connected": "Yhdistetty",
+      "relayConnectFailed": "Ei saa yhteyttä releen kautta",
+      "connectingViaRelay": "Yhdistetään releen kautta…",
+      "disconnected": "Yhteys katkaistu",
+      "desktopUnreachable": "Työpöydälle ei saada yhteyttä",
+      "connectFailed": "Ei voi muodostaa yhteyttä",
+      "reconnecting": "Yhdistetään uudelleen…",
+      "connecting": "Yhdistetään…",
+      "labelWithHint": "{{label}} - {{hint}}"
+    },
+    "hostEndpoint": {
+      "addressRequired": "Anna isäntäosoite.",
+      "invalidPort": "Portin on oltava 1–65535.",
+      "invalidScheme": "Käytä ws:// tai wss:// (tai host:port).",
+      "invalidAddress": "Ei kelvollinen osoite.",
+      "pathOrQueryNotAllowed": "Isäntä ei saa sisältää polkua tai kyselyä.",
+      "invalidHostname": "Ei kelvollinen isäntänimi.",
+      "hostnameRequired": "Isäntänimi puuttuu."
+    },
+    "connectionPathLabel": {
+      "directTailscale": "Suora · Tailscale",
+      "directLan": "Suora · LAN",
+      "directViaTailscale": "Suoraan kautta Tailscale",
+      "directViaLan": "Suoraan LAN:in kautta"
+    },
+    "pairConfirmState": {
+      "missingCode": "Pariliitoskoodi puuttuu",
+      "invalidCode": "Ei kelvollinen pariliitoskoodi"
+    },
+    "rpcClientStreamRegistry": {
+      "interrupted": "Yhteys katkesi",
+      "endedBeforeReady": "Suoratoistopyyntö päättyi ennen kuin se oli valmis."
+    },
+    "rpcClientTerminalBinaryFrame": {
+      "unsupportedFrame": "Ei tuettu päätevirran kehys (opcode {{opcode}})."
+    }
+  },
+  "worktree": {
+    "agentRowDisplay": {
+      "working": "Työskentelee",
+      "monitoring": "Seuraa taustatehtäviä",
+      "blocked": "Estetty",
+      "waiting": "Odottaa syötettä",
+      "interrupted": "Keskeytetty",
+      "failed": "Epäonnistui",
+      "unconfirmed": "Vahvistus epäonnistui",
+      "idle": "Joutilas",
+      "unverifiable": "Ei viimeaikaisia päivityksiä",
+      "stopping": "Pysäytetään…",
+      "justNow": "juuri nyt",
+      "minutes_one": "{{count}} min",
+      "minutes_other": "{{count}} min",
+      "hours_one": "{{count}} t",
+      "hours_other": "{{count}} t",
+      "days_one": "{{count}} pv",
+      "days_other": "{{count}} pv",
+      "done": "Valmis"
+    },
+    "hostWorkspaceListStates": {
+      "checkHost": "Tarkista, että tietokoneesi on hereillä ja että Prompt on käynnissä",
+      "loadFailed": "Työtiloja ei voitu ladata tältä isännältä",
+      "retrying": "worktree.ps epäonnistui ({{error}}) — yritetään uudelleen automaattisesti",
+      "noMatches": "Ei vastaavia työtiloja",
+      "noFilterMatches": "Mikään työtila ei vastaa suodattimia",
+      "empty": "Ei työtiloja",
+      "reopen": "Avaa uudelleen päivittääksesi",
+      "reopenDetail": "Tämä isäntä luettelee työtilat tavalla, jota tämä sivu ei vielä tunne."
+    },
+    "workspaceListSections": {
+      "pinned": "Kiinnitetyt",
+      "all": "Kaikki",
+      "inReview": "Review-vaiheessa",
+      "inProgress": "Käynnissä",
+      "closed": "Suljettu",
+      "done": "Valmis"
+    }
+  },
+  "components": {
+    "agentLaunchNotice": {
+      "updateRequired": "Päivitä Prompt tietokoneellesi käynnistääksesi agentin puhelimestasi.",
+      "statusUnreadable": "Tämän isännän tilaa ei voitu lukea. Yritetään uudelleen…",
+      "copyFailed": "Kopiointi epäonnistui",
+      "copyPrompt": "Kopioi kehote"
+    },
+    "agentSpinner": {
+      "monitoring": "Seuraa taustatehtäviä",
+      "unconfirmed": "Vahvistus epäonnistui"
+    },
+    "agentStateDot": {
+      "monitoring": "Seuraa taustatehtäviä",
+      "unverifiable": "Ei viimeaikaisia päivityksiä"
+    },
+    "authFailedBanner": {
+      "message": "Todennus epäonnistui – yritä ensin muodostaa yhteys uudelleen; Jos se epäonnistuu jatkuvasti, muodosta pariliitos uudelleen työpöydältä."
+    },
+    "authFailedBannerActions": {
+      "repair": "Yhdistä uudelleen",
+      "webNote": "Yhdistä uudelleen tai poista tämä isäntä sovelluksesta Prompt."
+    },
+    "codexResetCreditAction": {
+      "earnedReset": "Ansaittu Codex hintarajan nollaus",
+      "resettingLabel": "Nollataan Codex nopeusrajaa",
+      "useResetLabel": "Käytä Codex nopeusrajan nollausta",
+      "scopedHint": "Käyttää yhtä ansaittua nollausta kohteelle {{scopeLabel}}",
+      "activeAccountHint": "Käyttää yhtä ansaittua nollausta aktiiviselle Codex tilille",
+      "resetting": "Nollataan…",
+      "useReset": "Käytä nollausta"
+    },
+    "customKeyModal": {
+      "editing": "Muokataan",
+      "navigation": "Siirtyminen",
+      "function": "Toiminto",
+      "addShortcut": "Lisää pikakuvake",
+      "shortcutCombo": "Pikanäppäinyhdistelmä",
+      "pickKey": "Valitse avain",
+      "textMacro": "Tekstimakro",
+      "shortcutComboHint": "Rakenna Ctrl-, Alt- ja Shift-näppäinsointuja",
+      "textMacroHint": "Lähetä mukautettu tekstikomento",
+      "manageShortcuts": "Hallitse pikakuvakkeita",
+      "manageShortcutsHint": "Näytä, piilota tai järjestä pikanäppäimet uudelleen",
+      "modifiers": "Muokkaimet",
+      "key": "Avain",
+      "moreKeys": "Lisää näppäimiä — Sarkain, nuolet, F1–F12…",
+      "add": "Lisää",
+      "label": "Label",
+      "labelPlaceholder": "esim. Rakenna",
+      "command": "Komento",
+      "commandPlaceholder": "esim. pnpm rakentaa",
+      "pressEnter": "Paina Enter"
+    },
+    "dragReorderRow": {
+      "dragToReorder": "Järjestä uudelleen vetämällä",
+      "reorderHint": "Käytä Siirrä ylös- ja Siirrä alas -toimintoja järjestyksen muuttamiseen ilman vetämistä",
+      "moveUp": "Siirrä ylös",
+      "moveDown": "Siirry alas"
+    },
+    "hostDiagnosticsLink": {
+      "viewDiagnostics": "Katso verkon diagnostiikka"
+    },
+    "hostProtocolGate": {
+      "checkingCompatibility": "Tarkistetaan isännän yhteensopivuutta"
+    },
+    "hostRouteNoticeBanner": {
+      "dismissNotice": "Ohita ilmoitus"
+    },
+    "jiraConnectPrompt": {
+      "updateDesktop": "Päivitä Prompt työpöytä",
+      "connectOnDesktop": "Yhdistä Jira työpöydällesi",
+      "credentialUnreadable": "Jira on tallennettu, mutta lukukelvoton: {{credentialError}}",
+      "connectHint": "Lisää Jira-sivustosi Prompt-työpöydälle kohdassa Asetukset → Integraatiot ja tarkista sitten uudelleen.",
+      "checkAgain": "Tarkista uudelleen"
+    },
+    "dictationSetupSheet": {
+      "loadFailed": "Lataus epäonnistui",
+      "downloadFailed": "Lataus epäonnistui",
+      "selectFailed": "Mallia ei voitu valita",
+      "updateFailed": "Päivitys epäonnistui",
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{details}} · {{progress}} %",
+      "modelExtracting": "{{details}} · poimitaan…",
+      "title": "Määritä äänisanelu",
+      "description": "Lataa tai valitse malli ja ota sanelu käyttöön pariksi liitetyssä tietokoneessa – kaikki täältä.",
+      "enabled": "Sanelu käytössä",
+      "recommended": "Suositeltu",
+      "inUse": "Käytössä",
+      "useModel": "Käytä {{model}}",
+      "use": "Käytä",
+      "downloadModel": "Lataa {{model}}",
+      "download": "Lataa"
+    },
+    "diffReviewBody": {
+      "loadingReview": "Ladataan arvostelua...",
+      "reviewUnavailable": "Arvostelu ei saatavilla",
+      "loadFailed": "Arvostelua ei voi ladata",
+      "noReviewableChanges": "Ei tarkistettavia muutoksia",
+      "tryDifferentFilter": "Kokeile toista arvostelusuodatinta.",
+      "loadingDiff": "Ladataan diffiä...",
+      "diffTruncated": "Diff katkaistu mobiiliesikatselua varten.",
+      "binaryDiff": "Binääriero",
+      "diffTooLarge": "Ero Liian suuri",
+      "deletedFile": "Poistettu tiedosto",
+      "diffUnavailable": "Diff Ei saatavilla",
+      "binaryMessage": "Tätä tiedostoa ei voi renderöidä tekstinä mobiililaitteella.",
+      "tooLargeMessage": "Tämä ero on liian suuri mobiiliesikatseluun.",
+      "deletedMessage": "Tämä tiedosto poistettiin. Lisää muistiinpano tiedostoon tai merkitse se tarkistetuksi.",
+      "selectFile": "Valitse tarkistettava tiedosto.",
+      "retryLabel": "Yritä ladata arvostelu uudelleen"
+    },
+    "diffReviewDrawers": {
+      "discardTitle": "Hylkää tiedosto",
+      "discardMessage": "Hylätäänkö muutokset kohteeseen \"{{filePath}}\"? Tätä ei voi kumota.",
+      "discard": "Hylkää",
+      "actionsTitle": "Tarkista toiminnot",
+      "stageableFiles_one": "{{count}} tarkistettua lavastettua tiedostoa voidaan lavastella",
+      "stageableFiles_other": "{{count}} tarkistettua lavastettua tiedostoa voidaan lavastella",
+      "sendNotes": "Lähetä muistiinpanoja",
+      "terminalLabel": "{{title}} ({{id}})",
+      "terminal": "Pääte",
+      "newAgentSession": "Uusi agenttiistunto",
+      "updateRequired": "Päivitä Prompt tietokoneellesi",
+      "statusUnreadable": "Tämän isännän tilaa ei voitu lukea. Yritetään uudelleen…",
+      "copyNotes": "Kopioi muistiinpanot",
+      "sendUnsentNotes": "Lähetä lähettämättömät muistiinpanot",
+      "clearSentNotes": "Tyhjennä lähetetyt muistiinpanot",
+      "stageReviewedFiles": "Vaiheessa tarkistetut tiedostot",
+      "markUnreviewed": "Merkitse tarkistamattomaksi",
+      "openInSession": "Avaa istunnossa",
+      "loadingSessions": "Ladataan agenttiistuntoja...",
+      "unsentNotes_one": "{{count}} lähettämätöntä muistiinpanoa",
+      "unsentNotes_other": "{{count}} lähettämätöntä muistiinpanoa",
+      "editNote": "Muokkaa huomautusta",
+      "addNote": "Lisää huomautus",
+      "lineNumber": "Rivi {{lineNumber}}",
+      "fileNote": "Tiedoston muistiinpano",
+      "cancelNote": "Peruuta muistiinpano",
+      "reviewNote": "Tarkista muistiinpano",
+      "saveLineNote": "Tallenna muistiinpano riville {{lineNumber}}",
+      "deleteNote": "Poista muistiinpano",
+      "completeTitle": "Arvostelu valmis",
+      "fileSummary_one": "{{fileCount}} tiedosto tarkistettu, {{count}} huomautus",
+      "fileSummary_other": "{{fileCount}} tiedostoa tarkistettu, {{count}} muistiinpanoja",
+      "filesSummary_one": "{{fileCount}} tiedostoa tarkistettu, {{count}} huomautus",
+      "filesSummary_other": "{{fileCount}} tiedostoa tarkistettu, {{count}} muistiinpanoa",
+      "stageReviewedLabel": "Vaihetarkistetut tiedostot",
+      "stageReviewed": "Vaihe tarkistettu",
+      "sendNotesLabel": "Lähetä muistiinpanot agentille"
+    },
+    "diffReviewFileSummary": {
+      "branchFrom": "Haara alkaen {{oldPath}}",
+      "stagedFrom": "Lavastus alkaen {{oldPath}}",
+      "unstagedFrom": "Lavastamaton kohteesta {{oldPath}}",
+      "branch": "Haara",
+      "staged": "Vaiheistetut",
+      "unstaged": "Muutokset",
+      "reviewed": "Arvosteltu",
+      "changed": "Muutettu",
+      "notes_one": "{{count}} muistiinpano",
+      "notes_other": "{{count}} muistiinpanoa",
+      "staleCount": "{{count}} vanhentunut",
+      "editFileNote": "Muokkaa tiedoston huomautusta",
+      "stale": "Vanhentunut",
+      "previousHunk": "Edellinen pätkä",
+      "hunk": "Hunk",
+      "nextHunk": "Seuraava pätkä"
+    },
+    "diffReviewFooter": {
+      "stageFile": "Stage tiedosto",
+      "stage": "Vaiheista",
+      "unstageFile": "Unstage-tiedosto",
+      "unstage": "Poista staged-tila",
+      "discardFile": "Hylkää tiedosto",
+      "discard": "Hylkää",
+      "previousFile": "Edellinen tiedosto",
+      "addFileNote": "Lisää muistiinpano tiedostoon",
+      "note": "Muistiinpano",
+      "markFileReviewed": "Merkitse tiedosto tarkistetuksi",
+      "reviewed": "Arvosteltu",
+      "markReviewed": "Merkitse arvosteltu",
+      "nextFile": "Seuraava tiedosto"
+    },
+    "diffReviewHeader": {
+      "filterAll": "Kaikki",
+      "showAllFiles": "Näytä kaikki arvostelutiedostot",
+      "filterUnreviewed": "Arvostelematon",
+      "showUnreviewedFiles": "Näytä tarkistamattomat arvostelutiedostot",
+      "filterNotes": "Muistiinpanot",
+      "showNotesFiles": "Näytä muistiinpanojen tarkistustiedostot",
+      "filterUnstaged": "Muutokset",
+      "showUnstagedFiles": "Näytä vaiheittamattomat arvostelutiedostot",
+      "filterStaged": "Vaiheistetut",
+      "showStagedFiles": "Näytä vaiheittaiset tarkistustiedostot",
+      "filterBranch": "Haara",
+      "showBranchFiles": "Näytä haaran tarkistustiedostot",
+      "title": "Muutokset",
+      "openPullRequestSidebar": "Avaa vetopyyntösivupalkki",
+      "openReviewActions": "Avaa tarkistustoiminnot",
+      "reviewedProgress": "{{reviewedCount}}/{{queueLength}} arvosteltu",
+      "unsentNotes_one": "{{count}} lähettämätön huomautus",
+      "unsentNotes_other": "{{count}} lähettämätöntä muistiinpanoa"
+    },
+    "diffReviewLine": {
+      "addedLineNumber": "Lisätty rivi {{number}}",
+      "addedLine": "Lisätty rivi",
+      "deletedLineNumber": "Poistettu rivi {{number}}",
+      "deletedLine": "Poistettu rivi",
+      "contextLineNumber": "Kontekstirivi {{number}}",
+      "contextLine": "Kontekstirivi",
+      "addNoteOnLine": "Lisää muistiinpano riville {{number}}",
+      "editNoteOnLine": "Muokkaa muistiinpanoa rivillä {{number}}"
+    },
+    "homeQuickActions": {
+      "title": "Pikatoiminnot",
+      "pairDesktop": "Yhdistä työpöytä",
+      "newWorkspace": "Uusi työtila"
+    },
+    "hostCard": {
+      "worktreeAccessibilitySummary": "{{summary}}, {{activeCount}} aktiivinen",
+      "pairingInvalid": "Pariliitos ei kelpaa",
+      "pairingTemporarilyUnavailable": "Pariliitos tilapäisesti poissa käytöstä",
+      "updateDesktopHint": "Päivitä työpöytä Prompt ja kirjaudu sisään muodostaaksesi yhteyden mistä tahansa",
+      "repairHint": "Muodosta laitepari työpöydän kanssa napauttamalla",
+      "unlockHint": "Avaa puhelimen lukitus ja yritä uudelleen napauttamalla",
+      "openHost": "Avaa {{title}}",
+      "hostActions": "Toiminnot kohteelle {{title}}"
+    },
+    "htmlPreview": {
+      "previewRenderedHtml": "Esikatsele renderöityä HTML:ää",
+      "preview": "Esikatselu",
+      "viewHtmlSource": "Näytä HTML-lähdekoodi",
+      "source": "Lähde",
+      "title": "HTML-esikatselu"
+    },
+    "prSidebar": {
+      "loading": "Ladataan vetopyyntöä…",
+      "loadFailed": "Jotain meni pieleen.",
+      "retryLoading": "Yritä ladata vetopyyntö uudelleen",
+      "notPermitted": "Ei sallittu — tiliäsi GitHub ei ole yhdistetty."
+    },
+    "richMarkdownEditor": {
+      "linkUrl": "Linkin URL",
+      "imageUrl": "Kuvan URL-osoite",
+      "insert": "Lisää"
+    },
+    "richMarkdownToolbar": {
+      "body": "Runko",
+      "heading1": "H1",
+      "heading2": "H2",
+      "heading3": "H3",
+      "bold": "Lihavointi",
+      "italic": "Kursiivi",
+      "strike": "Yliviivaus",
+      "bulletList": "Luettelomerkit",
+      "numberedList": "Numeroitu luettelo",
+      "checklist": "Tarkistuslista",
+      "quote": "Lainaus",
+      "link": "Linkki",
+      "image": "Kuva",
+      "inlineCode": "Rivinsisäinen koodi",
+      "codeBlock": "Koodilohko"
+    },
+    "searchField": {
+      "clearSearch": "Tyhjennä haku"
+    },
+    "sourceCopyButton": {
+      "copyFailed": "Kopiointi epäonnistui",
+      "clipboardRejected": "Leikepöytä hylkäsi tekstin.",
+      "failed": "Epäonnistui",
+      "copiedLoaded": "Kopioitu ladattu",
+      "copyLoaded": "Kopio ladattu",
+      "couldNotCopy": "Kopiointi epäonnistui"
+    },
+    "workspaceNameInput": {
+      "placeholder": "Työtilan nimi"
+    },
+    "newWorkspaceFab": {
+      "newWorkspace": "Uusi työtila"
+    },
+    "newWorkspaceSetupScriptField": {
+      "label": "Setup-skripti",
+      "hooks": "KOUKUT",
+      "run": "Suorita",
+      "skip": "Ohita",
+      "runSetupCommand": "Suorita setup-komento"
+    },
+    "newWorkspaceSshConnectionField": {
+      "label": "SSH Yhteys",
+      "connecting": "Yhdistetään...",
+      "connect": "Yhdistä",
+      "serverRecovery": "Sen palvelin on palautettava työpöydältä: Asetukset → SSH isännät → Palauta palvelin."
+    },
+    "newWorktreeFormSheet": {
+      "createWorktree": "Luo worktree",
+      "noProjectsFound": "Projekteja ei löytynyt",
+      "nameOrCreateFrom": "Nimi tai Luo kohteesta",
+      "workspaceName": "Työtilan nimi",
+      "agent": "Agentti",
+      "connectTargetFirst": "Yhdistä kohde ensin",
+      "advanced": "Lisäasetukset",
+      "note": "Muistiinpano",
+      "notePlaceholder": "Kirjoita muistiinpano",
+      "connectTarget": "Yhdistä kohde"
+    },
+    "newWorktreeModal": {
+      "remoteRepository": "Etävarasto"
+    },
+    "newWorktreeModalDrawers": {
+      "project": "Projekti",
+      "runOn": "Suorituspaikka",
+      "agent": "Agentti"
+    },
+    "newWorktreeProjectTargetFields": {
+      "project": "Projekti",
+      "selectProject": "Valitse projekti",
+      "runOn": "Suorituspaikka",
+      "selectRunTarget": "Valitse juoksukohde"
+    },
+    "protocolBlockScreen": {
+      "updateMobileTitle": "Päivitä Prompt mobiili",
+      "updateDesktopTitle": "Päivitä Prompt tietokoneellesi",
+      "refreshWorkspaceTitle": "Päivitä mobiilityötila",
+      "refreshWorkspaceBody": "Tämän isännän välimuistissa oleva työtila on vanhempi kuin työpöytä odottaa. Muodosta yhteys tähän isäntään ladataksesi nykyinen.",
+      "mobileTooOldAppStore": "Tämä työpöytä tarvitsee uudemman Prompt mobiilisovelluksen. Päivitä Prompt Mobile App Storesta ja yritä sitten tätä isäntää uudelleen.",
+      "mobileTooOldGitHubReleases": "Tämä työpöytä tarvitsee uudemman Prompt mobiilisovelluksen. Päivitä Prompt Mobiili julkaisusta GitHub ja yritä sitten tätä isäntää uudelleen.",
+      "workspaceNeedsUpdateAppStore": "Tämän työpöydän mobiilityötila tarvitsee uudemman Prompt mobiilisovelluksen. Päivitä Prompt Mobile App Storesta ja yritä sitten tätä isäntää uudelleen.",
+      "workspaceNeedsUpdateGitHubReleases": "Tämän työpöydän mobiilityötila tarvitsee uudemman Prompt mobiilisovelluksen. Päivitä Prompt Mobiili julkaisusta GitHub ja yritä sitten tätä isäntää uudelleen.",
+      "desktopTooOldBody": "Tämä pariksi liitetty työpöytäsovellus on liian vanha nykyiselle Prompt mobiilisovelluksellesi. Päivitä Prompt tietokoneellesi ja yritä sitten tätä isäntää uudelleen.",
+      "openAppStore": "Avaa App Store",
+      "openGitHubReleases": "Avaa GitHub julkaisut",
+      "getVersion": "Hanki Prompt {{version}}",
+      "refreshRecoveryNote": "Jos tämä viesti pysyy näkyvissä, poista tämä isäntä ja yhdistä se uudelleen.",
+      "updateRecoveryNote": "Onko jo päivitetty? Palaa Isäntiin ja päivitä yhteys. Jos tämä viesti pysyy näkyvissä, poista tämä isäntä ja yhdistä se uudelleen.",
+      "backToHosts": "Takaisin isänteihin"
+    },
+    "setupHookTrustDrawer": {
+      "scriptChangedTitle": "Käyttäjän {{repoName}} asennusohjelma muuttui",
+      "runSetupTitle": "Suoritetaanko asennus osoitteesta {{repoName}}?",
+      "description": "Tämän arkiston orca.yaml suoritetaan ennen työtilan alkamista. Suorita se vain, jos luotat tähän arkistoon.",
+      "newScriptLabel": "Uusi setup-skripti",
+      "scriptLabel": "Setup-skripti",
+      "runHooks": "Suorita hookit",
+      "alwaysTrustAndRun": "Luota aina ja juokse",
+      "dontRun": "Älä suorita"
+    },
+    "smartWorkspaceAdvancedFields": {
+      "name": "Nimi",
+      "workspaceName": "Työtilan nimi",
+      "branchName": "Branchin nimi",
+      "derivedFromName": "Johtuu nimestä"
+    },
+    "smartWorkspaceSourceDrawer": {
+      "title": "Nimi tai Luo kohteesta",
+      "crossRepoMessage": "Tämä kohde asuu {{owner}}/{{repo}}.",
+      "switchRepo": "Vaihda tilaan {{repoName}}",
+      "connectRepository": "Yhdistä arkisto hakulähteisiin.",
+      "gitHubRemoteRequired": "Tämä SSH repo tarvitsee GitHub kaukosäätimen ongelmien ja PR:n luetteloimiseksi.",
+      "noResults": "Tuloksia ei löytynyt.",
+      "typeWorkspaceName": "Kirjoita työtilan nimi alla olevaan kenttään.",
+      "searchPlaceholder": "Kirjoita nimi tai hae lähteestä"
+    },
+    "smartWorkspaceSourceField": {
+      "optional": "[Valinnainen]",
+      "openSelectedSource": "Avaa valittu lähde",
+      "searchPlaceholder": "Kirjoita nimi tai hae lähteestä"
+    },
+    "smartWorkspaceSourceRow": {
+      "useName": "Käytä \"{{name}}\"",
+      "nameWorkspace": "Nimeä tämä työtila",
+      "createBranch": "Luo haara \"{{name}}\"",
+      "newBranch": "Uusi branch",
+      "pullRequest": "PR #{{number}}",
+      "issue": "Numero #{{number}}",
+      "mergeRequest": "MR !{{number}}"
+    },
+    "terminalShortcutSettings": {
+      "shortcutBar": "OPKOPALKKI",
+      "shortcutBarDescription": "Näytä tai piilota ne vaihtamalla näppäimiä ja vedä näppäin haluamaasi järjestykseen päätteen pikavalintapalkissa pitämällä kahvaa.",
+      "resetDefaults": "Palauta oletukset",
+      "resetDescription": "Näytä jokainen sisäänrakennettu pikanäppäin alkuperäisessä järjestyksessä",
+      "customShortcuts": "MUKAUTETUT PIKAVALINNAT",
+      "empty": "Mukautettuja pikanäppäimiä ei ole vielä määritetty.",
+      "removeShortcut": "Poista {{label}}",
+      "addShortcut": "Lisää mukautettu pikakuvake…",
+      "addDescription": "Luo näppäinyhdistelmä tai tekstimakro"
+    },
+    "voiceModelList": {
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{size}} · {{progress}} %",
+      "modelExtracting": "{{size}} · poimitaan…",
+      "recommended": "Suositeltu",
+      "inUse": "Käytössä",
+      "useModel": "Käytä {{label}}",
+      "use": "Käytä",
+      "deleteModel": "Poista {{label}}",
+      "downloadModel": "Lataa {{label}}"
+    },
+    "workspaceDetailPlaceholder": {
+      "title": "Työtilaa ei ole auki",
+      "description": "Valitse työtila sivupalkista avataksesi sen terminaalin tähän."
+    },
+    "worktreeListRow": {
+      "folder": "Kansio",
+      "remoteHost": "Etäisäntä",
+      "project": "Projekti {{repo}}",
+      "child": "lapsi",
+      "children_one": "{{count}} alatyötila",
+      "children_other": "{{count}} alatyötilaa"
+    },
+    "accountsSnapshot": {
+      "invalidSnapshot": "Virheellinen tilivedos isännästä"
+    },
+    "codexResetCredit": {
+      "available_one": "{{count}} nollaus saatavilla",
+      "available_other": "{{count}} nollausta saatavilla",
+      "resetTitle": "Hintarajat nollattu",
+      "alreadyAppliedTitle": "Nollaus on jo käytössä",
+      "refresh": "Codex käyttö on päivitetty.",
+      "nothingToResetTitle": "Ei mitään nollattavaa",
+      "nothingToResetMessage": "Yksikään kelvollinen Codex nopeusrajoitusikkuna ei ole täyttynyt.",
+      "noResetTitle": "Nollausta ei ole saatavilla",
+      "noResetMessage": "Tällä tilillä ei ole saatavilla ansaittuja nollaushyvityksiä.",
+      "invalidResponse": "Virheellinen palautusvastaus isännältä",
+      "expiryNowSingle": "Vanhenee nyt",
+      "expiryNowMultiple": "Seuraava vanhenee nyt",
+      "expiryMinutesSingle": "Vanhenee {{minutes}} min kuluttua",
+      "expiryMinutesMultiple": "Seuraava vanhenee {{minutes}} min kuluttua",
+      "expiryHoursMinutesSingle": "Vanhenee {{hours}} h {{minutes}} min kuluttua",
+      "expiryHoursMinutesMultiple": "Seuraavaksi vanhenee {{hours}} h {{minutes}} min kuluttua",
+      "expiryHoursSingle": "Vanhenee {{hours}} tunnin kuluttua",
+      "expiryHoursMultiple": "Seuraava vanhenee {{hours}} tunnin kuluttua",
+      "expiryDaysHoursSingle": "Vanhenee {{days}}d {{hours}}h kuluttua",
+      "expiryDaysHoursMultiple": "Seuraava vanhenee {{days}}d {{hours}}h kuluttua",
+      "expiryDaysSingle": "Vanhenee {{days}}p kuluttua",
+      "expiryDaysMultiple": "Seuraava vanhenee {{days}}p kuluttua"
+    },
+    "markdownBlocks": {
+      "copyCode": "Kopioi koodi",
+      "openImage": "Avaa kuva"
+    },
+    "mountedBottomDrawer": {
+      "dismissDrawer": "Hylkää laatikko"
+    },
+    "newWorktreeAgentSelection": {
+      "blankTerminal": "Tyhjä pääte"
+    },
+    "useCodexResetCreditAction": {
+      "hostAccount": "{{identity}} isännässä",
+      "hostAccountConfirmMessage": "Tämä kuluttaa yhden ansaitun nollauksen hintaan {{identity}} isännässä ja nollaa välittömästi kelvolliset hintarajaikkunat.",
+      "hostSelectedAccount": "valittu hallinnoitu tili isännässä",
+      "hostSelectedAccountConfirmMessage": "Tämä kuluttaa yhden ansaitun nollauksen valitulle hallinnoidulle tilille isännässä ja nollaa välittömästi kelvolliset hintarajaikkunat.",
+      "wslAccount": "{{identity}} WSL:ssä {{distro}}",
+      "wslAccountConfirmMessage": "Tämä kuluttaa yhden ansaitun nollauksen {{identity}}:lle WSL:ssä {{distro}} ja nollaa välittömästi kelvolliset hintarajaikkunat.",
+      "wslSelectedAccount": "valittu hallinnoitu tili WSL:ssä {{distro}}",
+      "wslSelectedAccountConfirmMessage": "Tämä kuluttaa yhden ansaitun nollauksen valitulle hallinnoidulle tilille WSL:ssä {{distro}} ja nollaa välittömästi kelvolliset hintarajaikkunat.",
+      "detailsChanged": "Nollaustiedot muutettu",
+      "detailsChangedMessage": "Tili tai nollaustarjous muuttui ennen kuin isäntä otti yhteyttä Codex. Tarkista päivitetyt tiedot ja vahvista sitten uudelleen.",
+      "resetFailed": "Hintarajoja ei voitu nollata",
+      "confirmTitle": "Käytetäänkö nopeusrajan nollausta?"
+    },
+    "nativeScreenRecovery": {
+      "title": "Jotain meni pieleen",
+      "tryAgain": "Yritä uudelleen",
+      "home": "Koti"
+    }
+  },
+  "pullRequest": {
+    "linkPrForm": {
+      "title": "Linkitä olemassa oleva vetopyyntö",
+      "referenceLabel": "PR-numero tai GitHub URL-osoite",
+      "referencePlaceholder": "#123 tai https://github.com/owner/repo/pull/123",
+      "linkNumber": "Linkki #{{number}}",
+      "linkButton": "Linkin vetopyyntö"
+    },
+    "prViewPanel": {
+      "providerUnavailable": "Isännöity arvostelupaneeli ei ole saatavilla tälle palveluntarjoajalle.",
+      "branchUnavailable": "Nykyinen haara ei ole käytettävissä."
+    },
+    "prActionsSection": {
+      "unlinkFailed": "Noutopyynnön linkityksen poistaminen epäonnistui.",
+      "mergeConfirmTitle": "Yhdistetäänkö vetopyyntö?",
+      "mergeButton": "Yhdistä",
+      "closeConfirmTitle": "Suljetaanko vetopyyntö?",
+      "closeConfirmMessage": "#{{number}} suljetaan ilman yhdistämistä.",
+      "reopenConfirmTitle": "Avataanko vetopyyntö uudelleen?",
+      "reopenConfirmMessage": "#{{number}} avataan uudelleen.",
+      "reopenButton": "Avaa uudelleen",
+      "mergeAccessibilityLabel": "Yhdistä vetopyyntö",
+      "recheckAccessibilityLabel": "Tarkista yhdistämisen tila uudelleen",
+      "recheckButton": "Tarkista uudelleen",
+      "markReadyAccessibilityLabel": "Merkitse vetopyyntö valmiiksi tarkistettavaksi",
+      "markReadyButton": "Valmiina tarkastettavaksi",
+      "autoMergeLabel": "Yhdistä automaattisesti, kun olet valmis",
+      "autoMergeAccessibilityLabel": "Kytke automaattinen yhdistäminen päälle/pois",
+      "autoMergeOn": "Päällä",
+      "autoMergeOff": "Pois",
+      "closeAccessibilityLabel": "Sulje pull request",
+      "reopenAccessibilityLabel": "Avaa vetopyyntö uudelleen",
+      "unlinkAccessibilityLabel": "Poista vetopyyntö",
+      "unlinkButton": "Poista linkitys"
+    },
+    "prCheckDetail": {
+      "noDetails": "Tietoja ei ole saatavilla.",
+      "annotations": "Huomautukset",
+      "annotationsTruncated": "Näytetään 20 ensimmäistä merkintää",
+      "jobsTruncated": "Näytetään 100 ensimmäistä jobia"
+    },
+    "checksSection": {
+      "unavailable": "Checkit eivät ole käytettävissä",
+      "noChecks": "Ei shekkejä",
+      "failing": "{{count}} epäonnistuu",
+      "pendingCount": "{{count}} odottaa",
+      "passed": "{{count}} läpäissyt",
+      "neutralCount": "{{count}} neutraali",
+      "successful": "Onnistui",
+      "failed": "Epäonnistui",
+      "cancelled": "Peruutettu",
+      "timedOut": "Aikakatkaisu",
+      "actionRequired": "Toimenpide vaaditaan",
+      "neutral": "Neutraali",
+      "skipped": "Ohitettu",
+      "queued": "Jonossa",
+      "inProgress": "Käynnissä",
+      "pending": "Odottaa",
+      "loadDetailsFailed": "Tarkistuksen tietojen lataaminen epäonnistui",
+      "title": "Checkit",
+      "rerunFailing": "Suorita epäonnistuneet tarkistukset uudelleen",
+      "failingChecks_one": "{{count}} epäonnistunut check",
+      "failingChecks_other": "{{count}} epäonnistunutta checkiä",
+      "inspectOrFix": "Tarkastele tietoja tai käynnistä tekoälykorjaus.",
+      "fixFailing": "Korjaa epäonnistuneet tarkistukset tekoälyllä",
+      "fix": "Korjaa",
+      "checkDetails": "{{name}} tarkista tiedot",
+      "openOnWeb": "Avaa {{name}} verkossa"
+    },
+    "commentCard": {
+      "justNow": "juuri nyt",
+      "minutesAgo_one": "{{count}} min sitten",
+      "minutesAgo_other": "{{count}} min sitten",
+      "hoursAgo_one": "{{count}}h sitten",
+      "hoursAgo_other": "{{count}}h sitten",
+      "daysAgo_one": "{{count}}pv sitten",
+      "daysAgo_other": "{{count}}pv sitten",
+      "monthsAgo_one": "{{count}}kk sitten",
+      "monthsAgo_other": "{{count}}kk sitten",
+      "yearsAgo_one": "{{count}}v sitten",
+      "yearsAgo_other": "{{count}}v sitten",
+      "resolved": "ratkaistu",
+      "openOnGitHub": "Avaa kommentti GitHubissa",
+      "editPlaceholder": "Muokkaa kommenttia…",
+      "replyToComment": "Vastaa kommenttiin",
+      "reply": "Vastaa",
+      "editComment": "Muokkaa kommenttia",
+      "deleteComment": "Poista kommentti",
+      "unresolveThread": "Ratkaisematon lanka",
+      "resolveThread": "Ratkaise lanka",
+      "unresolve": "Palauta ratkaisemattomaksi",
+      "resolve": "Ratkaise",
+      "replyPlaceholder": "Kirjoita vastaus…",
+      "deleteConfirmTitle": "Poistetaanko kommentti?",
+      "deleteConfirmMessage": "Tämä poistaa pysyvästi kommentin kohteesta GitHub."
+    },
+    "commentsSection": {
+      "all": "Kaikki",
+      "humans": "Ihmiset",
+      "bots": "Botit",
+      "noBotComments": "Ei bottien kommentteja.",
+      "noHumanComments": "Ei ihmisten kommentteja.",
+      "noComments": "Ei vielä kommentteja.",
+      "description": "Kuvaus",
+      "descriptionLoadFailed": "Kuvausta ei voitu ladata. Yritä uudelleen napauttamalla Päivitä.",
+      "noDescription": "Kuvausta ei ole annettu.",
+      "title": "Kommentit",
+      "commentsLoadFailed": "Kommentteja ei voitu ladata. Yritä uudelleen napauttamalla Päivitä.",
+      "showMoreOf": "Näytä {{count}} lisää / {{remaining}}",
+      "showMore": "Näytä {{count}} lisää",
+      "addCommentPlaceholder": "Lisää kommentti…",
+      "comment": "Kommentti",
+      "resolvedThreadSingle": "Ratkaistu ketju, tekijä {{author}}",
+      "resolvedThreadCount": "Ratkaisi ketjun {{author}} ({{count}})",
+      "resolvedCommentSingle": "Ratkaistu kommentti, tekijä {{author}}",
+      "resolvedCommentCount": "Resolved comment by {{author}} ({{count}})"
+    },
+    "conflictingFilesSection": {
+      "detailsUnavailable": "Ristiriitatiedoston tiedot eivät ole saatavilla",
+      "refreshing": "Päivitetään ristiriidan tietoja…",
+      "localMergeClean": "GitHub raportoi ristiriidoista, mutta paikallinen Git ei toistanut niitä. Päivitä PR tai työnnä haaraa laskeaksesi yhdistettävyys uudelleen.",
+      "copyFailed": "Tekstin kopioiminen epäonnistui",
+      "copyCommands": "Kopioi komennot",
+      "commitsBehind_one": "{{count}} commit behind (base commit: {{baseCommit}})",
+      "commitsBehind_other": "{{count}} commits behind (base commit: {{baseCommit}})",
+      "title": "Ristiriidat",
+      "mustResolve": "Tässä branchissa on ristiriitoja, jotka on ratkaistava",
+      "runFromWorktree": "Suorita tästä worktreestä",
+      "copyRefreshCommands": "Kopioi yhdistettävyyden päivityskomennot",
+      "filesHeading": "Ristiriitaiset tiedostot",
+      "resolveWithAi": "Resolve conflicts with AI"
+    },
+    "reviewersSection": {
+      "requested": "Pyydetty",
+      "approved": "Hyväksytty",
+      "changesRequested": "Muutoksia pyydetty",
+      "commented": "Kommentoi",
+      "dismissed": "Hylätty",
+      "pending": "Odottaa",
+      "reviewed": "Arvosteltu",
+      "addOrRemove": "Lisää tai poista arvioijia",
+      "title": "Reviewerit",
+      "loading": "Ladataan arvioijia…",
+      "loadFailed": "Could not load reviewers. Yritä uudelleen napauttamalla Päivitä.",
+      "noReviewers": "Arvostelijoita ei pyydetty",
+      "removeReviewer": "Poista {{login}}"
+    },
+    "prSidebarHeader": {
+      "openOnWeb": "Open pull request #{{number}} on the web",
+      "openInBrowser": "Open pull request #{{number}} in browser",
+      "cancelEditingTitle": "Peruuta otsikon muokkaus",
+      "saveTitle": "Tallenna otsikko",
+      "editTitle": "Muokkaa vetopyynnön otsikkoa"
+    },
+    "prSidebarCreateEmptyState": {
+      "branchRequired": "Tarkista haara ennen vetopyynnön luomista.",
+      "createFailed": "Failed to create pull request.",
+      "title": "Vedä pyyntö",
+      "refreshPullRequest": "Päivitä vetopyyntö",
+      "createPullRequest": "Luo vetopyyntö",
+      "createPr": "Luo PR",
+      "linkedPrUnavailable": "Linked PR #{{number}} unavailable",
+      "noOpenPullRequest": "Ei avointa vetopyyntöä",
+      "refreshOrCreate": "Päivitä tarkistaaksesi uudelleen tai luo uusi PR tälle haaralle.",
+      "branchNotLinked": "{{branch}} is not linked to an open PR.",
+      "currentBranchNotLinked": "Nykyinen haara ei ole linkitetty avoimeen PR:ään.",
+      "linkExistingPullRequest": "Link an existing pull request",
+      "linkExistingPr": "Linkitä olemassa oleva PR"
+    },
+    "reviewerPickerDrawer": {
+      "title": "Reviewerit",
+      "searchPeople": "Etsi ihmisiä",
+      "loadFailed": "Ihmisten lataaminen epäonnistui",
+      "noMatches": "Ei vastaavia ihmisiä",
+      "removeReviewer": "Poista {{login}}",
+      "requestReviewer": "Pyyntö {{login}}"
+    },
+    "markdownBlocks": {
+      "details": "Tiedot"
+    },
+    "prActionsState": {
+      "mergedLabel": "Mergattu",
+      "mergedHint": "Tämä pull request on jo yhdistetty",
+      "closedLabel": "Suljettu",
+      "closedHint": "Tämä pull request on suljettu",
+      "draftLabel": "Luonnos",
+      "draftHint": "Tämä pull request on vielä luonnos",
+      "reviewRequiredLabel": "Hyväksyntä vaaditaan",
+      "reviewRequiredHint": "GitHub vaatii review-hyväksynnän ennen kuin tämän pull requestin voi yhdistää",
+      "changesRequestedLabel": "Muutoksia pyydetty",
+      "changesRequestedHint": "GitHub ilmoittaa, että tähän pull requestiin on pyydetty muutoksia",
+      "conflictsLabel": "Ristiriidat",
+      "conflictsHint": "GitHub ilmoittaa merge-ristiriidoista",
+      "mergeQueueLabel": "Merge, kun valmis",
+      "mergeQueueHint": "Tämä base branch käyttää GitHubin merge queuea",
+      "mergeQueueAutoMergeOnLabel": "Automaattinen merge päällä",
+      "mergeQueueAutoMergeOnHint": "Tämä base branch käyttää GitHubin merge queuea",
+      "mergeStatusUnavailableLabel": "Yhdistä",
+      "mergeStatusUnavailableHint": "Merge-tila ei ole saatavilla tälle PR:lle",
+      "behindLabel": "Jäljessä",
+      "behindHint": "Päivitä branch ennen mergeä",
+      "blockedLabel": "Estetty",
+      "blockedHint": "GitHubin mukaan tämä pull request on estetty",
+      "mergeableChecksFailedLabel": "Checkit epäonnistuivat",
+      "mergeableChecksFailedHint": "GitHubin mukaan tämän PR:n voi yhdistää, mutta jotkin checkit epäonnistuivat",
+      "mergeableChecksPendingLabel": "Checkit odottavat",
+      "mergeableChecksPendingHint": "GitHubin mukaan tämän PR:n voi yhdistää, mutta checkit ovat vielä käynnissä",
+      "mergeableChecksPassedLabel": "Voidaan yhdistää",
+      "mergeableChecksPassedHint": "GitHubin mukaan tämän PR:n voi yhdistää ja checkit läpäistiin",
+      "mergeableLabel": "Voidaan yhdistää",
+      "mergeableHint": "GitHubin mukaan tämän PR:n voi yhdistää",
+      "checksPassedLabel": "Checkit läpäisty",
+      "checksPassedHint": "Checkit läpäisty. Merge-kelpoisuus tarkistetaan uudelleen ennen mergeä.",
+      "checkingLabel": "Tarkistetaan",
+      "checkingHint": "GitHub laskee vielä tämän pull requestin merge-tilaa",
+      "stackDraft": "#{{number}} on vielä luonnos.",
+      "stackClosed": "#{{number}} on suljettu.",
+      "stackConflicts": "#{{number}} on yhdistämisristiriidat.",
+      "stackChangesRequested": "#{{number}} has requested changes.",
+      "stackReviewRequired": "#{{number}} still needs review approval.",
+      "stackBehind": "#{{number}} on päivitettävä.",
+      "stackBlocked": "#{{number}} on estetty.",
+      "methodMerge": "Luo merge commit",
+      "methodSquash": "Squash ja merge",
+      "methodRebase": "Rebase ja merge",
+      "mergeConfirmMessage": "Tämä yhdistää #{{number}} perushaaraansa.",
+      "queueThrough_one": "Jono #{{number}} · {{count}} PR",
+      "queueThrough_other": "Jono #{{number}} · {{count}} PR:n kautta",
+      "mergeThrough_one": "Yhdistä #{{number}} · {{count}} PR",
+      "mergeThrough_other": "Yhdistä #{{number}} · {{count}} PR:n kautta",
+      "queueStackMessage": "GitHub lisää tämän pull requestin ja kaikki sen alla olevat pull requestit merge-jonoon.",
+      "mergeStackMessage": "GitHub tekee merge-yhdistämisen tälle pull requestille ja kaikille sen alla oleville pull requesteille pinossa."
+    },
+    "prCheckDetailContent": {
+      "annotation": "Merkintä",
+      "unknown": "tuntematon",
+      "failedJobs": "Epäonnistuneet jobit",
+      "jobs": "Jobit"
+    },
+    "prChecksPresentation": {
+      "noChecks": "Ei shekkejä",
+      "failing_one": "{{count}} epäonnistuu",
+      "failing_other": "{{count}} epäonnistuu",
+      "pending_one": "{{count}} odottaa",
+      "pending_other": "{{count}} odottaa",
+      "passed_one": "{{count}} läpäissyt",
+      "passed_other": "{{count}} läpäissyt",
+      "neutral_one": "{{count}} neutraali",
+      "neutral_other": "{{count}} neutraali",
+      "unavailable": "Checkit eivät ole käytettävissä",
+      "stateOpen": "Avoin",
+      "stateMerged": "Mergattu",
+      "stateDraft": "Luonnos",
+      "stateClosed": "Suljettu"
+    },
+    "prCommentAudienceLabels": {
+      "all": "Kaikki",
+      "humans": "Ihmiset",
+      "bots": "Botit",
+      "noBotComments": "Ei bottien kommentteja.",
+      "noHumanComments": "Ei ihmisten kommentteja.",
+      "noComments": "Ei vielä kommentteja."
+    }
+  },
+  "workspace": {
+    "branchChoice": {
+      "title": "Tämän worktreen branch",
+      "existing": "Olemassa oleva branch",
+      "existingHint": "Uudet commitit tehdään tälle branchille.",
+      "new": "Uusi branch",
+      "newHint": "Luo uusi paikallinen branch",
+      "newName": "Uuden branchin nimi",
+      "automaticName": "Automaattinen nimi",
+      "hostUpdateRequired": "Päivitä Prompt työtilaisännässä käyttääksesi haaraa uudelleen tai luodaksesi erillisen haaran."
+    }
+  },
+  "browser": {
+    "addressField": {
+      "urlPlaceholder": "URL"
+    },
+    "pane": {
+      "invalidUrl": "Anna kelvollinen URL-osoite."
+    },
+    "paneView": {
+      "forward": "Eteenpäin",
+      "reload": "Lataa uudelleen",
+      "dialogTitle": "Selaimen valintaikkuna",
+      "keyboardPlaceholder": "Kirjoita sivulle…",
+      "sendText": "Lähetä tekstiä selaimeen"
+    },
+    "pointerModifiers": {
+      "clickModifier": "{{key}} napsautusmuuttaja"
+    },
+    "viewModeSwitch": {
+      "webView": "Näytä Web-sivuston näkymä",
+      "mobileView": "Näytä mobiilisivustonäkymä"
+    },
+    "useBrowserCommands": {
+      "sent": "Lähetetty",
+      "deliveryUnconfirmed": "Toimitusta ei ole vahvistettu – tarkista sivu ennen kuin yrität uudelleen",
+      "dialogAnswerFailed": "Vastaus ei päässyt sivulle."
+    }
+  },
+  "files": {
+    "fileExplorerPanel": {
+      "connecting": "Yhdistetään työpöytään...",
+      "waiting": "Odotetaan työpöytää...",
+      "loadFailed": "Tiedostoja ei voi ladata",
+      "loadInterrupted": "Kansion lataus keskeytetty",
+      "closeFiles": "Sulje tiedostot",
+      "backToSession": "Takaisin istuntoon",
+      "title": "Tiedostot",
+      "truncatedList": "{{worktreeLabel}} - Näytetään ensimmäiset 5000",
+      "emptyState": "Tiedostoja ei löytynyt"
+    },
+    "fileMarkdownPreview": {
+      "viewSource": "Näytä Markdown-lähde",
+      "viewPreview": "Näytä renderöity Markdown-esikatselu",
+      "copyLoadedSource": "Kopioi ladattu Markdown-lähde",
+      "copySource": "Kopioi Markdown-lähde"
+    },
+    "fileMediaPreview": {
+      "loadFailed": "Median lataaminen ei onnistu",
+      "waiting": "Odotetaan työpöytää...",
+      "downloading": "Ladataan {{bytes}}/{{total}}",
+      "loading": "Ladataan mediaa..."
+    },
+    "filePreviewBody": {
+      "emptyFile": "Tyhjä tiedosto",
+      "imageLabel": "{{title}} kuva"
+    },
+    "filePreviewEditableSource": {
+      "editorLabel": "{{title}} toimittaja"
+    },
+    "filePreviewScreen": {
+      "loading": "Ladataan esikatselua...",
+      "waiting": "Odotetaan työpöytää...",
+      "loadFailed": "Esikatselua ei voi ladata",
+      "title": "Esikatselu",
+      "saveFailed": "Tiedostoa ei voi tallentaa",
+      "backToFiles": "Takaisin tiedostoihin",
+      "saveArtifact": "Tallenna terminaalin artefakti",
+      "fileTitle": "Tiedosto",
+      "openFailed": "Tiedostoa ei voi avata",
+      "chooseWorkspaceFile": "Valitse tiedosto tässä työtilassa.",
+      "discardTitle": "Hylätäänkö muutokset?",
+      "discardMessage": "Tallentamattomat muokkaukset menetetään.",
+      "discardMessageSaving": "Käynnissä oleva tallennus ei ehkä ole valmis. Tallentamattomat muokkaukset menetetään.",
+      "discard": "Hylkää",
+      "stay": "Pysy"
+    },
+    "filePreviewSourceText": {
+      "previewLabel": "Tiedoston esikatselu",
+      "truncatedNote": "Esikatselu katkaistu. Tiedoston koko: {{size}}."
+    },
+    "markdownPreviewImage": {
+      "loadFailed": "Kuvaa ei voi ladata",
+      "expandImage": "Laajenna {{alt}}",
+      "expandFallback": "Laajenna kuva",
+      "imageLabel": "Markdown-kuva"
+    },
+    "pdfPreview": {
+      "openFailed": "Tätä PDF-tiedostoa ei voi avata",
+      "updateRequired": "Päivitä Prompt Mobile avataksesi PDF-tiedostoja",
+      "opening": "Avataan PDF...",
+      "open": "Avaa PDF"
+    },
+    "fileExplorerRow": {
+      "loading": "Ladataan…",
+      "loadFolderFailed": "Kansiota ei voi ladata",
+      "retryLoading": "Yritä ladata uudelleen {{path}}",
+      "openFolder": "Avaa kansio {{name}}",
+      "fileUnavailable": "{{name}} ei saatavilla mobiililaitteella",
+      "previewFile": "Esikatsele tiedosto {{name}}",
+      "unavailable": "Ei saatavilla mobiililaitteella"
+    },
+    "fileMutationOwnership": {
+      "sshOwnerChanged": "Yhteyttä SSH ei voitu vahvistaa. Yhdistä isäntä uudelleen ja yritä uudelleen."
+    },
+    "filePreviewResponse": {
+      "fileChanged": "Tiedostoa muutettu työpöydällä. Lataa esikatselu uudelleen ennen tallentamista",
+      "binaryUnavailable": "Binaariesikatselu ei ole käytettävissä",
+      "fileTooLarge": "Tiedosto on liian suuri mobiiliesikatseluun",
+      "reloadBeforeSaving": "Lataa esikatselu uudelleen ennen tallentamista",
+      "filesystemUnreachable": "Ei saada yhteyttä työpöydän tiedostojärjestelmään",
+      "fileNotFound": "Tiedostoa ei löydy",
+      "loadFailed": "Esikatselua ei voi ladata",
+      "unknownSize": "tuntematon koko",
+      "bytes": "{{size}} B",
+      "kilobytes": "{{size}} KB",
+      "megabytes": "{{size}} MB"
+    }
+  },
+  "session": {
+    "browserTabActionSheet": {
+      "title": "Selain",
+      "forward": "Eteenpäin",
+      "reload": "Lataa uudelleen"
+    },
+    "terminalLiveInputStatus": {
+      "listening": "Kuunnellaan",
+      "processing": "Käsittely",
+      "startingMic": "Käynnistetään mikrofoni",
+      "liveInput": "Live-tulo",
+      "uploadingImageTitle": "Ladataan kuvaa",
+      "releaseMicHint": "Pysäytä vapauttamalla mikrofoni",
+      "stopHint": "Pysäytä napauttamalla mikrofonia",
+      "transcribing": "Transkriptio työpöydällä",
+      "preparingMic": "Valmistellaan mikrofonia",
+      "uploadingImage": "Ladataan kuvaa isäntälle"
+    },
+    "diffCommentLineRow": {
+      "diffLine": "{{title}} eroviiva {{line}}",
+      "addNote": "Lisää muistiinpano riville {{line}}",
+      "line": "Rivi {{line}}",
+      "deleteNote": "Poista muistiinpano riviltä {{line}}",
+      "placeholder": "Lisää review-muistiinpano",
+      "saveNote": "Tallenna muistiinpano"
+    },
+    "markdownReader": {
+      "readOnly": "Vain luku",
+      "changedOnDesktop": "Vaihdettu työpöydällä",
+      "dismissKeyboard": "Ohita näppäimistö",
+      "dismissKeyboardHint": "Piilottaa ohjelmistonäppäimistön ja pitää merkintäeditorin auki.",
+      "discard": "Hylkää",
+      "copyLoadedSource": "Kopioi ladattu Markdown-lähde",
+      "copySource": "Kopioi Markdown-lähde",
+      "copyLoaded": "Kopio ladattu",
+      "copyPathLabel": "Kopioi merkintäpolku",
+      "copyPath": "Kopioi polku"
+    },
+    "nativeChatCardHeaderAction": {
+      "collapse": "Tiivistä"
+    },
+    "nativeChatFloatingControls": {
+      "scrollToLatest": "Vieritä uusimpaan"
+    },
+    "nativeChatFullContent": {
+      "partialOutput": "Näytetään {{shown}} / {{total}}.",
+      "showFullOutput": "Näytä koko tuloste",
+      "loadOutputFailed": "Näytä koko tulos – lataaminen ei onnistunut. Yritä uudelleen napauttamalla",
+      "partialMessage": "Näytetään osa tästä viestistä.",
+      "showFullMessage": "Näytä koko viesti",
+      "loadMessageFailed": "Näytä koko viesti – ei voitu ladata, yritä uudelleen napauttamalla"
+    },
+    "queuedCardText": {
+      "showLessHint": "Näyttää vähemmän viestiä",
+      "showMoreHint": "Näyttää koko viestin",
+      "showLess": "Näytä vähemmän",
+      "showMore": "Näytä enemmän"
+    },
+    "queuedMessageCardRow": {
+      "images_one": "{{count}} kuva",
+      "images_other": "{{count}} kuvaa",
+      "sendAgainHint": "Lähetä tämä viesti uudelleen",
+      "steerHint": "Lähetä keskeyttämättä mallia",
+      "sendHint": "Lähetä tämä viesti",
+      "steer": "Ohjaa",
+      "send": "Lähetä",
+      "deleteHint": "Poista tämä jonossa oleva viesti",
+      "moreActions": "Lisää toimintoja",
+      "showLessHint": "Näyttää vähemmän viestiä"
+    },
+    "queuedMessageComposer": {
+      "commandsNotAllowed": "Komentoja ei voi tallentaa jonossa olevaan viestiin.",
+      "editingAttributed": "Muokkaa viestiä · {{attribution}}",
+      "editing": "Muokataan viestiä"
+    },
+    "accessoryKeys": {
+      "dismissKeyboard": "Ohita näppäimistö",
+      "dismissKeyboardHint": "Piilottaa ohjelmistonäppäimistön ja pitää nykyisen pääteistunnon auki.",
+      "switchToDesktopMode": "Vaihda työpöytätilaan",
+      "switchToPhoneMode": "Siirry puhelintilaan",
+      "switchToBufferedInput": "Vaihda puskuroituun komentosyöttöön",
+      "switchToLiveInput": "Vaihda live-päätteen tuloon",
+      "pasteFromClipboard": "Liitä leikepöydältä",
+      "paste": "Liitä",
+      "sendKey": "Lähetä {{label}}",
+      "addCustomShortcut": "Lisää mukautettu pikakuvake"
+    },
+    "activeContent": {
+      "noTabs": "Ei välilehtiä tässä istunnossa",
+      "creatingTab": "Luodaan…",
+      "createTab": "Luo välilehti",
+      "fileTitle": "Tiedosto",
+      "terminalTakingLonger": "Terminaali kestää odotettua kauemmin",
+      "loadingTerminal": "Ladataan terminaalia",
+      "retryLoadingTerminal": "Yritä ladata terminaali uudelleen"
+    },
+    "commandDock": {
+      "liveInputLabel": "Live-päätteen tulo",
+      "liveInputHint": "Kirjoitettu teksti lähetetään suoraan aktiiviseen päätteeseen",
+      "commandPlaceholder": "Kirjoita komento…",
+      "sendCommand": "Lähetä komento"
+    },
+    "contentRow": {
+      "dismissCreationWarning": "Hylkää työtilan luomisvaroitus"
+    },
+    "diffLineRow": {
+      "diffLineLabel": "{{title}} eroviiva {{line}}",
+      "addNoteLabel": "Lisää muistiinpano riville {{line}}",
+      "lineNumber": "Rivi {{line}}",
+      "deleteNoteLabel": "Poista muistiinpano riviltä {{line}}",
+      "notePlaceholder": "Lisää review-muistiinpano",
+      "saveNote": "Tallenna muistiinpano"
+    },
+    "fileReader": {
+      "noReviewNotes": "Ei arvosteluhuomautuksia",
+      "reviewNotes_one": "{{count}} arvosteluhuomautus",
+      "reviewNotes_other": "{{count}} arvostelumuistiinpanoa",
+      "copyReviewNotes": "Kopioi arvostelumuistiinpanot",
+      "sendReviewNotes": "Lähetä arvostelumuistiinpanot tekoälylle",
+      "send": "Lähetä",
+      "imageLabel": "{{title}} kuva",
+      "previewLabel": "{{title}} esikatselu"
+    },
+    "header": {
+      "showSidebar": "Näytä sivupalkki",
+      "backToWorktrees": "Takaisin työpuihin",
+      "terminalTitle": "Pääte",
+      "reconnectToDesktop": "Yhdistä uudelleen työpöytään",
+      "openFileExplorer": "Avaa tiedostonhallinta",
+      "openSourceControl": "Avoimen lähdekoodin ohjaus",
+      "moreActions": "Lisää istuntotoimintoja"
+    },
+    "headerMoreActionsSheet": {
+      "agentHistory": "Agentin historia",
+      "agentHistoryHint": "Selaa ja jatka agenttiistuntoja",
+      "checks": "Checkit",
+      "checksHint": "Avaa vetopyyntöjen tarkistukset"
+    },
+    "routeScreen": {
+      "openingWorkspace": "Työtilan avaaminen"
+    },
+    "sheets": {
+      "newTab": "Uusi välilehti",
+      "terminal": "Pääte",
+      "browser": "Selain",
+      "browserUpdateRequired": "Mobiiliselaimen suoratoistoa varten tarvitaan työpöytäpäivitys",
+      "markdownNote": "Merkintähuomautus",
+      "sendReviewNotes": "Lähetä arvostelumuistiinpanot",
+      "notesHint": "Valitse agenttiistunto nykyisille muistiinpanoille.",
+      "copyNotes": "Kopioi muistiinpanot",
+      "notesCopied": "Muistiinpanot kopioitu",
+      "copyNotesFailed": "Muistiinpanojen kopioiminen ei onnistunut",
+      "markdown": "Markdown",
+      "copyPath": "Kopioi polku",
+      "file": "Tiedosto",
+      "chat": "Keskustelu",
+      "unsavedMarkdown": "Tallentamattomat alennusmuutokset",
+      "draftsHint": "Kopioi tai hylkää puhelinluonnokset ennen lähtöä.",
+      "copyAllAndLeave": "Kopioi kaikki ja jätä",
+      "copyDraftsFailed": "Luonnoksia ei voitu kopioida",
+      "discardAndLeave": "Hylkää ja jätä",
+      "discardChanges": "Hylkää muutokset",
+      "discardMessage": "Korvataanko puhelinluonnos uusimmalla työpöytätiedostolla?",
+      "discard": "Hylkää",
+      "newBrowser": "Uusi selain",
+      "urlPrompt": "Kirjoita URL-osoite tai jätä tyhjäksi uudelle välilehdelle.",
+      "shortcut": "Pikakuvake",
+      "removeShortcutMessage": "Poistetaanko tämä mukautettu pikakuvake?",
+      "renameTerminal": "Nimeä terminaali uudelleen",
+      "terminalName": "Päätteen nimi"
+    },
+    "tabStrip": {
+      "tabStatus": "{{title}}, {{status}}",
+      "newTab": "Uusi välilehti",
+      "quickCommandsUpdateRequired": "Nopeita komentoja varten tarvitaan työpöytäpäivitys",
+      "checkingCapabilities": "Tarkistetaan työpöydän ominaisuuksia – yritä hetken kuluttua uudelleen"
+    },
+    "terminalInputActions": {
+      "sendingImage": "Lähetetään kuvaa",
+      "attachPhoto": "Liitä valokuva",
+      "attachFileHint": "Paina pitkään liittääksesi tiedoston sen sijaan",
+      "stopDictation": "Lopeta sanelu",
+      "transcribingDictation": "Äänisantelyn litterointi",
+      "startingDictation": "Aloitetaan sanelu",
+      "startDictation": "Aloita sanelu"
+    },
+    "quickCommandEditorForm": {
+      "terminalCommand": "Päätekomento",
+      "agentPrompt": "Agentin kehote",
+      "label": "Label",
+      "labelPlaceholder": "Käynnistä dev-palvelin",
+      "action": "Toiminto",
+      "agent": "Agentti",
+      "chooseAgent": "Valitse agentti",
+      "prompt": "Kehote",
+      "commandText": "Komentoteksti",
+      "promptPlaceholder": "Pyydä agenttia tutkimaan tätä työtilaa",
+      "olderHostPromptTooLong": "Liian pitkä tälle isännälle. Päivitä Prompt isännässä tallentaaksesi pidemmät kehotteet.",
+      "promptTooLong": "Liian pitkä tallennettavaksi.",
+      "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
+      "promptSizeCharacters": "{{used}} / {{max}} merkkiä",
+      "promptHint": "Tukee taitoja, tiedostopolkuja ja sisäänrakennettuja komentoja.",
+      "advanced": "Lisäasetukset",
+      "appendEnter": "Lisää Enter",
+      "appendEnterDescription": "Lähetä heti sen sijaan, että teksti vain lisätään.",
+      "scope": "Laajuus",
+      "globalScope": "Yleinen",
+      "projectScope": "Projekti",
+      "addQuickCommand": "Lisää pikakomento"
+    },
+    "quickCommandRow": {
+      "copyFailed": "Kopiointi epäonnistui",
+      "copyCommand": "Kopioi {{label}}",
+      "nothingToCopy": "Ei kopioitavaa",
+      "runCommand": "Suorita {{label}}",
+      "editCommand": "Muokkaa {{label}}",
+      "deleteCommand": "Poista {{label}}"
+    },
+    "quickCommandsList": {
+      "searchPlaceholder": "Hae pikakomentoja…",
+      "emptyState": "Ei vielä pikakäskyjä.",
+      "noMatches": "Ei vastaavia pikakomentoja.",
+      "projectGroup": "Tämä projekti",
+      "globalGroup": "Yleinen",
+      "newCommand": "Uusi nopea komento"
+    },
+    "quickCommandsSheet": {
+      "deleteConfirmTitle": "Poistetaanko \"{{label}}\"?",
+      "untitled": "Nimetön",
+      "deleteConfirmMessage": "Tämä pikakomento poistetaan tallennettujen luettelosta.",
+      "editTitle": "Muokkaa pikakomentoa",
+      "addTitle": "Lisää pikakomento",
+      "chooseAgentTitle": "Valitse Agentti",
+      "title": "Pikakomennot",
+      "editorDescription": "Tallenna päätekomennot tai agenttikehotteet nopeaa käyttöä varten."
+    },
+    "quickCommandsTabButton": {
+      "quickCommands": "Nopeat komennot"
+    },
+    "aiVaultResumeLaunch": {
+      "createFailed": "Terminaalin luominen epäonnistui",
+      "sendFailed": "Jatka-komennon lähettäminen epäonnistui",
+      "inputLocked": "Päätteen tulo on lukittu"
+    },
+    "aiVaultResumePreparation": {
+      "prepareFailed": "Tätä vanhaa Codex istuntoa ei voitu valmistella. Yritä jatkaa uudelleen."
+    },
+    "floatingWorkspace": {
+      "title": "Kelluva työtila"
+    },
+    "githubPrMutations": {
+      "titleUpdateFailed": "Otsikon päivitys epäonnistui.",
+      "reviewThreadUpdateFailed": "Arvosteluketjun päivittäminen epäonnistui."
+    },
+    "githubPrRpc": {
+      "requestFailed": "Pyyntö epäonnistui: {{method}}"
+    },
+    "agentChildRow": {
+      "noRecentUpdate": "Ei viimeaikaisia päivityksiä",
+      "ended": "Päättynyt",
+      "minutes_one": "{{count}} min",
+      "minutes_other": "{{count}} min",
+      "hours_one": "{{count}} t",
+      "hours_other": "{{count}} t",
+      "days_one": "{{count}} pv",
+      "days_other": "{{count}} pv",
+      "noUpdate": "Ei päivitystä kohteessa {{value0}}",
+      "agent": "Agentti"
+    },
+    "agentMessageAttribution": {
+      "messageFromUnnamed": "Viesti agentilta",
+      "fromUnnamed": "Agentilta",
+      "unnamedSender": "agentti",
+      "messageFromMore": "Viesti lähettäjältä {{sender}} +{{count}}",
+      "fromMore": "Alkaen {{sender}} +{{count}}",
+      "messageFrom": "Viesti käyttäjältä {{sender}}",
+      "from": "Alkaen {{sender}}"
+    },
+    "backgroundTask": {
+      "monitoring": "Seuraa taustatehtäviä",
+      "stop": "Pysäytä",
+      "stopTask": "Pysäytä {{value0}}",
+      "stopAll": "Pysäytä taustatehtävät",
+      "agent": "Taustaagentti",
+      "workflow": "Taustatyönkulku",
+      "command": "Taustakomento",
+      "monitor": "Taustamonitori",
+      "task": "Taustatehtävä",
+      "detailsUnavailable": "Tehtävän tiedot eivät ole käytettävissä tälle sessiolle.",
+      "countAgents_one": "{{count}} agentti",
+      "countAgents_other": "{{count}} agenttia",
+      "countShell_one": "{{count}} komentotulkki",
+      "countShell_other": "{{count}} komentotulkkia",
+      "countShellCommandOne": "1 komentotulkkikomento",
+      "countMonitors_one": "{{count}} seuranta",
+      "countMonitors_other": "{{count}} seurantaa",
+      "countWorkflows_one": "{{count}} työnkulku",
+      "countWorkflows_other": "{{count}} workflowta",
+      "countTasks_one": "{{count}} tehtävä",
+      "countTasks_other": "{{count}} tehtävää",
+      "headerTotalCount_one": "{{count}} taustatehtävä",
+      "headerTotalCount_other": "{{count}} taustatehtävää",
+      "stateWorking": "työskentelee",
+      "stateMonitoring": "seurataan",
+      "stateWaiting": "odottaa",
+      "stateBlocked": "estetty",
+      "stateDone": "valmis",
+      "stateIdle": "pysäytetty",
+      "stateUnverifiable": "tila ei ole saatavilla",
+      "reasonWaiting": "vaatii hyväksynnän",
+      "reasonBlocked": "epäonnistui",
+      "groupAgents": "Agentit",
+      "groupShell": "Shell",
+      "groupMonitors": "Monitorit",
+      "groupWorkflows": "Työnkulut",
+      "groupTasks": "Tehtävät",
+      "stateWorkingCount_one": "{{value0}} työskentelee",
+      "stateWorkingCount_other": "{{value0}} työskentelee",
+      "stateMonitoringCount_one": "{{value0}} seuraa",
+      "stateMonitoringCount_other": "{{value0}} seuraa",
+      "stateWaitingCount_one": "{{value0}} odottaa",
+      "stateWaitingCount_other": "{{value0}} odottaa",
+      "stateBlockedCount_one": "{{value0}} estynyt",
+      "stateBlockedCount_other": "{{value0}} estynyt",
+      "stateDoneCount_one": "{{value0}} valmis",
+      "stateDoneCount_other": "{{value0}} valmis",
+      "stateIdleCount_one": "{{value0}} pysäytetty",
+      "stateIdleCount_other": "{{value0}} pysäytetty",
+      "stateUnverifiableCount_one": "{{value0}}, tila ei saatavilla",
+      "stateUnverifiableCount_other": "{{value0}}, tila ei saatavilla"
+    },
+    "bulkCloseSheetActions": {
+      "closeOtherTabs": "Sulje Muut välilehdet"
+    },
+    "bulkTabClose": {
+      "titleOthers": "Suljetaanko muut välilehdet?",
+      "titleRight": "Suljetaanko oikealla olevat välilehdet?",
+      "titleLeft": "Suljetaanko vasemmalla olevat välilehdet?",
+      "titleEditors": "Suljetaanko kaikki editorin välilehdet?",
+      "description": "Valitut välilehdet suljetaan. Kiinnitetyt välilehdet pysyvät auki.",
+      "confirm": "Sulje välilehdet"
+    },
+    "diffReviewLoaders": {
+      "committedChangesUnavailable": "Tehdyt muutokset eivät ole käytettävissä",
+      "committedChangesFailed": "Tehdyt muutokset epäonnistuivat",
+      "desktopUpdateRequired": "Päivitä Prompt työpöytä tarkistaaksesi muutokset mobiililaitteella.",
+      "changesLoadFailed": "Muutoksia ei voi ladata",
+      "invalidSourceControlResponse": "Lähteen ohjausvastaus oli virheellinen",
+      "reviewNotesLoadFailed": "Arvostelumuistiinpanoja ei voi ladata",
+      "diffLoadFailed": "Diffin lataaminen ei onnistu",
+      "committedDiffUnavailable": "Sitoutunut ero ei ole käytettävissä"
+    },
+    "diffReviewQueue": {
+      "staged": "Vaiheistetut",
+      "unstaged": "Muutokset",
+      "committedOnBranch": "Sitoutunut haaraan"
+    },
+    "diffReviewScreenModel": {
+      "branch": "Haara",
+      "staged": "Vaiheistetut",
+      "unstaged": "Muutokset"
+    },
+    "nativeChatAttachActions": {
+      "photos": "Valokuvat",
+      "files": "Tiedostot",
+      "fileTypes": "PDF, teksti, koodi…",
+      "workspaceFile": "Työtilan tiedosto",
+      "skills": "Skillit",
+      "availableSkills": "{{count}} käytettävissä",
+      "commands": "Komennot"
+    },
+    "nativeChatCliFork": {
+      "resumeInNewCli": "Jatka uudessa CLI:ssä"
+    },
+    "nativeChatRenderData": {
+      "notFoundTitle": "Tätä keskustelua ei vielä löydy",
+      "notFoundSubtitle": "Lähetä viesti aloittaaksesi sellaisen tai avaa päätenäkymä nähdäksesi, mitä {{agent}} tekee.",
+      "emptyTitle": "Aloita chat kanssa {{agent}}",
+      "emptySubtitle": "Pyydä {{agent}} tarkistamaan koodi, selittämään tulos tai tekemään muutos.",
+      "errorTitle": "Keskustelun lataaminen epäonnistui",
+      "errorSubtitle": "Transkriptiota ei voitu lukea. Vaihda takaisin päätteeseen jatkaaksesi työskentelyä.",
+      "defaultAgentLabel": "agentti"
+    },
+    "nativeChatToggleAction": {
+      "switchToTerminalView": "Vaihda terminaalinäkymään",
+      "switchToChatView": "Vaihda chat-näkymään"
+    },
+    "prSidebarState": {
+      "loadFailed": "Vetopyyntöä ei voi ladata"
+    },
+    "useNativeChatDictation": {
+      "insertFailedCopied": "Sanelua ei voitu lisätä, joten se kopioitiin leikepöydälle",
+      "insertFailed": "Sanelua ei voitu lisätä",
+      "inserted": "Sanelu lisätty",
+      "stoppedAfterSilence": "Pysähtyi minuutin hiljaisuuden jälkeen"
+    },
+    "quickCommandLaunch": {
+      "editBeforeRunning": "Muokkaa tätä pikakomentoa ennen sen suorittamista",
+      "defaultLabel": "Nopea komento",
+      "runFailed": "Ei voitu suorittaa {{label}}"
+    },
+    "routeHelpers": {
+      "connecting": "Yhdistetään",
+      "securing": "Turvaaminen",
+      "connected": "Yhdistetty",
+      "disconnected": "Yhteys katkaistu",
+      "reconnecting": "Yhdistetään uudelleen",
+      "pairingInvalid": "Pariliitos ei kelpaa"
+    },
+    "useTerminalCreateActions": {
+      "forkUnavailable": "Avaa {{agentName}}-chat yhdistetyllä, päivitetyllä isännällä ja yritä uudelleen.",
+      "forkBusy": "Toinen terminaali avataan. Odota ja yritä sitten {{agentName}} chattia uudelleen.",
+      "createFailed": "Terminaalin luominen epäonnistui",
+      "terminalTitle": "Pääte",
+      "sendNotesFailed": "Muistiinpanojen lähettäminen epäonnistui",
+      "inputLocked": "Toinen asiakas on lukinnut päätteen tulon.",
+      "notesSent": "Muistiinpanot lähetetty",
+      "sendNotesError": "Muistiinpanoja ei voitu lähettää"
+    },
+    "sourceControlLaunchAgent": {
+      "savedAgentUnavailable": "Tämän toiminnon tallennettu agentti ei ole käytettävissä tässä työtilaisännässä.",
+      "noEnabledAgent": "Tällä työtilan isännällä ei havaittu yhtään käyttöön otettua tekoälyagenttia."
+    },
+    "structuredComposerCommand": {
+      "removeAttachments": "Poista liitteet, ennen kuin käytät chat-session komentoa.",
+      "operationUnconfirmed": "Keskustelutoimintoa ei vahvistettu."
+    },
+    "structuredSendDelivery": {
+      "messageNotSent": "Viestiä ei lähetetty"
+    },
+    "terminalActionSheetActions": {
+      "switchToDesktop": "Vaihda työpöydälle",
+      "switchToPhone": "Vaihda puhelimeen",
+      "rename": "Nimeä uudelleen",
+      "clearTerminal": "Tyhjennä pääte"
+    },
+    "terminalRecords": {
+      "defaultTitle": "Pääte"
+    },
+    "presentation": {
+      "loadingTabs": "Ladataan välilehtiä",
+      "tabs_one": "{{count}}-välilehti",
+      "tabs_other": "{{count}} välilehteä"
+    },
+    "terminalTabAgent": {
+      "terminalNumber": "Pääte {{number}}",
+      "newBrowser": "Uusi selain",
+      "browser": "Selain",
+      "markdown": "Markdown",
+      "file": "Tiedosto",
+      "chat": "Keskustelu",
+      "terminal": "Pääte"
+    },
+    "terminalViewportResubscribe": {
+      "fitFailed": "Päätettä ei voitu sovittaa tälle näytölle"
+    },
+    "newTabAgentHostLaunch": {
+      "notesUnconfirmed": "Agentti aloitti, mutta ei voinut vahvistaa muistiinpanojen lähettämistä.",
+      "promptUnconfirmed": "Välittäjä aloitti, mutta ei voinut vahvistaa kehotteen lähetystä.",
+      "notesNotSent": "Agentti aloitti, mutta muistiinpanoja ei lähetetty.",
+      "notesSent": "Muistiinpanot lähetetty"
+    },
+    "prActionsEngine": {
+      "refreshFailed": "Vetopyynnön päivittäminen epäonnistui.",
+      "mergeFailed": "Vetopyynnön yhdistäminen epäonnistui."
+    },
+    "prAiTriageLaunch": {
+      "promptNotSent": "Välittäjä aloitti, mutta kehotusta ei lähetetty.",
+      "updateRequired": "Päivitä Prompt tietokoneellesi käynnistääksesi agentin puhelimestasi.",
+      "loadFailed": "Ei voitu ladata käytettävissä olevia agentteja.",
+      "emptyPrompt": "Tämän toiminnon tallennettu kehote on tyhjä. Päivitä Source Control AI -asetukset tietokoneellasi.",
+      "agentStartedIn": "Agentti aloitti vuonna {{label}}",
+      "agentStarted": "Agentti aloitti"
+    },
+    "sideRail": {
+      "backToWorktrees": "Takaisin työpuihin"
+    },
+    "useAttachmentInputLeaseGate": {
+      "reconnecting": "Liittäminen epäonnistui (yhdistäminen uudelleen)"
+    },
+    "useDiffReviewCommentActions": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "saveStateFailed": "Arvostelun tilan tallentaminen epäonnistui",
+      "saveFailed": "Arvostelun tallentaminen epäonnistui"
+    },
+    "useDiffReviewController": {
+      "missingWorktree": "Puuttuu työpuu",
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "loadFailed": "Arvostelun lataaminen epäonnistui"
+    },
+    "useDiffReviewDiffLoading": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "loadFailed": "Diffin lataaminen ei onnistu"
+    },
+    "useDiffReviewGitActions": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "actionFailed": "Lähteenhallintatoiminto epäonnistui",
+      "stageResults": "{{staged}} lavastettu, {{failed}} epäonnistui",
+      "reviewedFilesStaged_one": "{{count}} tarkistettu tiedosto lavastettu",
+      "reviewedFilesStaged_other": "{{count}} tarkistettua tiedostoa lavastettuna"
+    },
+    "useDiffReviewInteractions": {
+      "openFailed": "Ei voida avata istunnossa"
+    },
+    "useDiffReviewSendActions": {
+      "copyFailed": "Arvostelumuistiinpanoja ei voi kopioida",
+      "notesCopied": "Arvostelumuistiinpanot kopioitu",
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "sendFailed": "Muistiinpanojen lähettäminen epäonnistui",
+      "inputLocked": "Päätteen tulo on lukittu",
+      "notesSent": "Tarkista lähetetyt muistiinpanot",
+      "startingAgent": "Agentin perustaminen...",
+      "promptNotSent": "Agentti aloitti, mutta muistiinpanoja ei lähetetty. Käytä Kopioi muistiinpanoja liittääksesi ne.",
+      "notesSentWithWarning": "Tarkista lähetetyt muistiinpanot. {{warning}}",
+      "loadSessionsFailed": "Agenttiistuntoja ei voi ladata"
+    },
+    "useImageAttachment": {
+      "disconnected": "Kiinnitys epäonnistui (yhteys katkennut)",
+      "permissionDenied": "Valokuvauslupa evätty",
+      "imageTooLarge": "Kuva liian suuri liitettäväksi",
+      "attachFailed": "Kiinnitys epäonnistui"
+    },
+    "useNativeChatStop": {
+      "terminalNotReady": "Stop ei lähetetty (pääte ei ole valmis)",
+      "stopUnconfirmed": "Lopeta vahvistamaton – tarkista chat ennen kuin yrität uudelleen",
+      "stopNotSent": "Stop ei lähetetty"
+    },
+    "usePrAiTriage": {
+      "waitingForDesktop": "Odotetaan työpöytää…",
+      "launchFailed": "Agentin käynnistäminen epäonnistui"
+    },
+    "usePrCommentActions": {
+      "actionFailed": "Kommenttitoiminto epäonnistui"
+    },
+    "usePrTitleAction": {
+      "disconnected": "Ei yhdistetty työpöytään.",
+      "updateFailed": "Otsikon päivitys epäonnistui."
+    },
+    "useAccessorySelection": {
+      "copyFailed": "Kopiointi epäonnistui",
+      "selectionCleared": "Valinta tyhjennetty (vieritty puskurista)"
+    },
+    "useContentCreateActions": {
+      "noteCreateFailed": "Alennusmerkinnän luominen epäonnistui",
+      "untitledNoteCreateFailed": "Nimettömän alasmerkinnän luominen epäonnistui",
+      "browserUpdateRequired": "Mobiiliselaimen suoratoistoa varten tarvitaan työpöytäpäivitys",
+      "invalidUrl": "Anna kelvollinen URL-osoite",
+      "browserCreateFailed": "Selaimen luominen epäonnistui",
+      "browserUnavailable": "Selainsivu ei ole vielä saatavilla.",
+      "browserCommandFailed": "Selaimen komento epäonnistui"
+    },
+    "useDiffComments": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "saveNotesFailed": "Arvostelumuistiinpanojen tallentaminen epäonnistui",
+      "noteAdded": "Huomautus lisätty",
+      "saveNoteFailed": "Muistiinpanon tallentaminen epäonnistui",
+      "deleteNoteFailed": "Muistiinpanon poistaminen epäonnistui",
+      "notesCopied": "Muistiinpanot kopioitu",
+      "copyNotesFailed": "Muistiinpanojen kopioiminen ei onnistunut"
+    },
+    "useMarkdownActions": {
+      "copyFailed": "Kopiointi epäonnistui",
+      "pathCopied": "Polku kopioitu",
+      "copyPathFailed": "Polkua ei voitu kopioida",
+      "markdownTitle": "Markdown",
+      "saved": "Tallennettu",
+      "saveFailed": "Tallennus epäonnistui"
+    },
+    "usePanelRouteActions": {
+      "otherServerAgents": "Agentit toisella palvelimella",
+      "pairServerHint": "Yhdistä palvelin suoraan",
+      "detectingAgents": "Agenttien havaitseminen",
+      "noEnabledAgents": "Ei käytössä olevia agentteja",
+      "presetsUnavailable": "Agentin esiasetukset eivät ole käytettävissä",
+      "checkHostHint": "Tarkista isäntäyhteys",
+      "newSessionHint": "Uusi agenttiistunto",
+      "copyNotesHint": "Kopioi muistiinpanot sen sijaan"
+    },
+    "useStartup": {
+      "wakeAgents": "Avaa Prompt isännässä herättääksesi nukkuvia aineita."
+    },
+    "useTerminalInput": {
+      "clearFailed": "Päätettä ei voitu tyhjentää",
+      "cleared": "Terminaali tyhjennetty"
+    },
+    "useSessionTerminalSendActions": {
+      "inputTooLarge": "Syöttö liian suuri (enintään 256 KiB)",
+      "liveInputInterrupted": "Live-tulo keskeytetty. Kenttä tyhjennetty; tarkista päätelaite ennen kuin jatkat."
+    },
+    "useTerminalPaste": {
+      "clipboardReadFailed": "Leikepöytää ei voitu lukea",
+      "pasteTooLarge": "Liima liian suuri (max 256 KiB)",
+      "disconnected": "Liitäminen epäonnistui (yhteys katkennut)",
+      "terminalChanged": "Liitä peruutettu (pääte muutettu)",
+      "pasteFailed": "Liitäminen epäonnistui",
+      "imageTooLarge": "Kuva liian suuri liitettäväksi"
+    },
+    "useQuickCommands": {
+      "loadFailed": "Pikakomentojen lataaminen epäonnistui",
+      "saveFailed": "Pikakomennon tallennus epäonnistui"
+    },
+    "worktreeLabel": {
+      "fallback": "Työpuu"
+    },
+    "failure": {
+      "backgroundTasksRunning": "Taustatehtäviä on vielä käynnissä.",
+      "waitForBackgroundTasks": "Odota, että taustatehtävät valmistuvat.",
+      "agentStarting": "Agentti on vielä käynnistymässä.",
+      "waitForStart": "Odota, että agentti on käynnistynyt.",
+      "agentStillWorking": "Agentti työskentelee vielä.",
+      "runCommandWhenDone": "Suorita /{{command}}, kun se on valmis.",
+      "commandAfterAnswer": "Vastaa agentin kysymykseen tai hyväksyntäpyyntöön ja suorita sitten /{{command}}.",
+      "compactionFailed": "Tiivistys epäonnistui.",
+      "compactionFailedQuoted": "Tiivistys epäonnistui: {{detail}}.",
+      "compactionUnconfirmed": "Tiivistyksen valmistumista ei ole vahvistettu.",
+      "cancelUnconfirmed": "Peruutusta ei vahvistettu.",
+      "stopRefused": "{{agent}} ei pysähtynyt.",
+      "stopRefusedQuoted": "{{agent}} ei pysähtynyt: {{detail}}.",
+      "couldNotStop": "Agentin {{agent}} pysäyttäminen epäonnistui.",
+      "couldNotStopTheAgent": "Agentin pysäyttäminen epäonnistui.",
+      "noTurnToStop": "Agentilla {{agent}} ei ollut pysäytettävää vuoroa käynnissä.",
+      "backgroundTaskNotStopped": "Taustatehtävää ei pysäytetty.",
+      "backgroundTasksNotStopped": "Taustatehtäviä ei pysäytetty.",
+      "answerUnconfirmed": "Vastauksesi tallennettiin, mutta agentti ei vahvistanut sitä.",
+      "hostFault": "Prompt kohtasi ongelman, joten tämä ei mennyt läpi.",
+      "hostFaultTryAgain": "Prompt kohtasi ongelman, joten tämä ei mennyt läpi. Yritä uudelleen.",
+      "hostStopped": "{{agent}} ei koskaan lopettanut käynnistystä, joten Prompt lopetti sen.",
+      "providerRateLimited": "{{agent}} on pyyntörajan alainen ja yrittää uudelleen.",
+      "providerRetrying": "{{agent}} kohtasi tilapäisen ongelman ja yrittää uudelleen.",
+      "providerRetryingQuoted": "{{agent}} yrittää uudelleen: {{detail}}.",
+      "providerRetryNumber": "Uusintayritys {{attempt}}.",
+      "providerRetryNumberOf": "Uusintayritys {{attempt}}/{{maxRetries}}.",
+      "providerRetryLastError": "Viimeisin virhe: {{detail}}.",
+      "usageLimitReached": "{{agent}} saavutti käyttörajan.",
+      "usageLimitReachedNamed": "{{agent}} saavutti {{window}} käyttörajan.",
+      "usageLimitWindowSession": "sessio",
+      "usageLimitWindowWeekly": "viikoittaisen",
+      "usageLimitWindowWeeklyModel": "viikoittaisen mallikohtaisen",
+      "usageLimitWindowCredits": "lisäkäytön",
+      "usageLimitResetsAt": "Raja nollautuu {{when}}.",
+      "usageLimitSendAfterReset": "Jatka lähettämällä viesti, kun raja on nollautunut.",
+      "previousExitUnverifiable": "Aiemman {{agent}}-agentin pysäyttäminen epäonnistui.",
+      "sessionNotRestored": "{{agent}} ei voinut avata aiempaa sessiotaan uudelleen, joten tämä keskustelu jatkuu uudessa sessiossa. {{agent}} ei muista aiempia viestejä.",
+      "providerExitedRow": "{{agent}} pysähtyi, kun tätä vastausta oli vielä kesken. Voit jatkaa tässä keskustelussa.",
+      "providerExitedRejection": "{{agent}} pysähtyi ennen tämän viestin lähettämistä.",
+      "providerExitedAnswer": "{{agent}} on pysähtynyt, joten vastaustasi ei lähetetty. Lähetä viesti jatkaaksesi.",
+      "claudeEffortInvalid": "Clauden effort-arvo on virheellinen; valitse low, medium, high, xhigh tai max ja lähetä uudelleen.",
+      "modelUnavailable": "{{agent}} ei voinut käyttää kohdetta {{detail}}. Valitse toinen malli ja lähetä uudelleen.",
+      "providerRejected": "{{agent}} ei hyväksynyt tätä viestiä.",
+      "providerRejectedQuoted": "{{agent}} ei hyväksynyt tätä viestiä: {{detail}}.",
+      "attachmentEmpty": "Tämän viestin kuva on tyhjä, joten viestiä ei lähetetty.",
+      "attachmentTooLarge": "Viestin kuva on liian suuri, joten viestiä ei lähetetty.",
+      "attachmentLargerThan": "Viestin kuva on suurempi kuin {{size}} Mt, joten viestiä ei lähetetty.",
+      "attachmentTooMany": "Viestissä on liian monta kuvaa, joten sitä ei lähetetty.",
+      "attachmentAtMost": "{{agent}} hyväksyy enintään {{limit}} kuvaa yhdessä viestissä, joten tätä viestiä ei lähetetty.",
+      "attachmentTotalTooLarge": "Viestin kuvat ovat yhteensä liian suuria, joten viestiä ei lähetetty.",
+      "attachmentTotalMoreThan": "Viestin kuvien yhteiskoko ylittää {{size}} Mt, joten viestiä ei lähetetty.",
+      "attachmentUnsupportedType": "{{agent}} hyväksyy vain PNG-, JPEG-, GIF- ja WebP-kuvia, joten tätä viestiä ei lähetetty.",
+      "attachmentNotAFile": "Viestin kuva ei ole tiedosto, joten viestiä ei lähetetty.",
+      "attachmentNoSource": "Viestin kuvalla ei ole lähetettävää tiedostoa, joten viestiä ei lähetetty.",
+      "attachmentInvalid": "Viestin liitettä ei voi lähettää agentille.",
+      "attachmentUnreadable": "Viestin liitettä ei voitu lukea, joten viestiä ei lähetetty.",
+      "emptyMessage": "Viesti on tyhjä, joten sitä ei lähetetty.",
+      "commandUnavailable": "Tämä komento ei ole käytettävissä {{agent}}-keskusteluissa, joten sitä ei lähetetty.",
+      "queueFull": "Agentti odotti liian montaa viestiä, joten tätä ei lähetetty.",
+      "writeFailed": "Prompt ei voinut luovuttaa tätä viestiä agentille, joten sitä ei lähetetty.",
+      "cancelled": "Viesti peruttiin ennen kuin agentti aloitti sen käsittelyn.",
+      "chatClosed": "Keskustelu suljettiin ennen kuin tämä viesti lähetettiin.",
+      "hostRestarted": "Prompt käynnistyi uudelleen ennen tämän viestin lähettämistä.",
+      "notDelivered": "Viestiä ei toimitettu.",
+      "notDeliveredSendAgain": "Viestiä ei toimitettu. Jatka lähettämällä se uudelleen.",
+      "commandRefused": "Komentoa ei suoritettu.",
+      "commandRefusedTryAgain": "Komentoa ei suoritettu. Yritä uudelleen.",
+      "theAgent": "Agentti",
+      "providerStartFailed": "{{agent}} pysähtyi ennen kuin sen käynnistys valmistui.",
+      "runCommandAgain": "Suorita /{{command}} uudelleen.",
+      "sendToTryAgain": "Lähetä viesti uudelleen yrittääksesi.",
+      "sendAgainToTryOnceMore": "Lähetä viesti uudelleen yrittääksesi vielä kerran.",
+      "couldNotStart": "{{agent}} ei voinut käynnistyä.",
+      "couldNotRestart": "{{agent}} ei voinut käynnistyä uudelleen.",
+      "cliTooOld": "{{agent}} {{installedVersion}} on liian vanha chatteja varten. Päivitä versioon {{minimumVersion}} tai uudempaan.",
+      "startTimedOut": "{{agent}} käynnistyi liian hitaasti (ei vastausta kutsuun {{method}} {{seconds}} sekunnin kuluessa).",
+      "startTimedOutKeepsHappening": "Jos tämä toistuu, tätä chattia suorittava tietokone voi olla ylikuormittunut.",
+      "argumentsUnsupportedOption": "Tallennetuissa argumenteissa on tuettu asetus ({{option}}).",
+      "argumentsMissingValue": "Tallennetuissa argumenteissa täytyy antaa arvo kohteelle {{option}}.",
+      "argumentsMultipleValues": "Tallennetuissa argumenteissa kohteelle {{option}} on annettu useampi kuin yksi arvo.",
+      "argumentsPositionalPrompt": "Tallennetut argumentit sisältävät kehotteen.",
+      "editSavedArguments": "Muokkaa niitä kohdassa Asetukset > Agentit > Argumentit.",
+      "terminalAgentHoldsChat": "Tämä keskustelu on vielä auki pääteagentissa.",
+      "quitTerminalAgent": "Lopeta kyseinen agentti, jotta voit jatkaa keskustelua täällä.",
+      "startNewChat": "Jatka aloittamalla uusi keskustelu.",
+      "notSignedIn": "{{agent}} ei ole kirjautunut sisään.",
+      "claudeSystemNotSignedIn": "Claude ei ole kirjautunut sisään. Suorita `{{loginCommand}}` tai valitse tili Claude-tilien asetuksissa.",
+      "claudeManagedNotSignedIn": "Tämä Claude-tili ei ole kirjautunut sisään. Kirjaudu sisään uudelleen Claude-tilien asetuksissa.",
+      "codexSystemNotSignedIn": "Codex ei ole kirjautunut sisään. Suorita `{{loginCommand}}`.",
+      "codexManagedNotSignedIn": "Tämä Codex-tili ei ole kirjautunut sisään. Kirjaudu sisään uudelleen Codex-tilien asetuksissa.",
+      "antigravityNotSignedIn": "Antigravity ei ole kirjautunut sisään. Kirjaudu sisään kohdassa Asetukset → Tilit → Antigravity. Lähetä sitten viesti uudelleen.",
+      "agentCommandNotSignedIn": "Kirjaudu sisään agenttiin {{agent}} komennolla `{{loginCommand}}` tällä keskustelulla käytettävällä tietokoneella.",
+      "interactiveAgentNotSignedIn": "Kirjaudu sisään agenttiin {{agent}} suorittamalla `{{loginCommand}}` ja käyttämällä komentoa `{{slashCommand}}` tällä keskustelulla käytettävällä tietokoneella.",
+      "agentNotSignedIn": "Kirjaudu sisään agenttiin {{agent}}.",
+      "cliMissing": "Ohjelmaa {{agent}} ei löytynyt tätä chattia suorittavalta tietokoneelta. Asenna se tai tarkista sen Command-asetus kohdassa Asetukset → Agentit.",
+      "cliMissingInWslDistro": "{{agent}} ei ole asennettu WSL-distroon {{distro}}. Asenna se distron {{distro}} sisällä tai tarkista sen Command-asetus kohdassa Asetukset → Agentit.",
+      "signInFirst": "Kirjaudu ensin sisään.",
+      "signInThenRunCommand": "Kirjaudu sisään ja suorita sitten /{{command}} uudelleen.",
+      "signInThenSend": "Kirjaudu sisään ja lähetä sitten viesti uudelleen.",
+      "thenSendAgain": "Lähetä sitten viestisi uudelleen.",
+      "historyTooLarge": "Tämän keskustelun historia on liian suuri palautettavaksi tänne.",
+      "managedAccountEnvOverride": "Tämä Claude-käynnistys määrittää omat Anthropic-kirjautumismuuttujansa. Poista ne, jos haluat käyttää hallinnoitua Claude-tiliä.",
+      "accountSwitchInProgress": "Agentin {{agent}} määritykset muuttuvat tällä hostilla. Yritä uudelleen, kun muutos on valmis.",
+      "managedAccountUnsupported": "Kun Claude-tili lisätään WSL:ssä, Claude-chatit tarvitsevat Windowsin Claude-tilin.",
+      "launchFolderMissing": "Kansiota, jossa tämä chat suoritettiin, ei enää ole. Palauta se jatkaaksesi tätä chattia.",
+      "historyInOtherAccount": "Tämän chatin historia on toisessa Claude-tilissä. Vaihda takaisin kyseiseen tiliin jatkaaksesi sitä.",
+      "claudeAccountFolderMissing": "Valitun Claude-tilin kansio puuttuu. Kirjaudu siihen uudelleen tai valitse toinen tili.",
+      "claudeAccountSetupFailed": "Valittua Claude-tiliä ei voitu määrittää. Yritä uudelleen tai valitse toinen tili.",
+      "agentCommandNotRunnable": "{{agent}}:n komennon Asetukset → Agenttien on oltava ohjelman polku tai nimi, jonka Prompt voi löytää, ilman argumentteja tai muuttujia. Vaihda se tai nollaa se.",
+      "runtimeNotInstalled": "{{agent}} ei ole asennettu tietokoneeseen, jossa tämä keskustelu käy. Asenna se chatista Prompt:n nykyiseen versioon.",
+      "fullAccessAsRoot": "{{agent}} ei käytä Full access -tilaa, kun se suoritetaan rootina. Valitse agentille {{agent}} toinen käyttöoikeus kohdassa Asetukset → Agentit tätä chattia suorittavalla tietokoneella ja aloita sitten uusi chat.",
+      "launchPreparationFailed": "Prompt ei voinut valmistella {{agent}}:tä käynnistymään tätä keskustelua suorittavalla tietokoneella.",
+      "conversationOpenElsewhere": "Codex pitää tätä keskustelua vielä auki. Yritä hetken kuluttua uudelleen tai sulje muut Codex-päätteet.",
+      "conversationOpenInTerminal": "{{agent}} suorittaa tätä keskustelua jo toisessa päätteessä. Lopeta {{agent}} siellä tai sulje kyseinen pääte jatkaaksesi täällä.",
+      "chooseClaudeAccount": "Valitse tai lisää tili Claude-tilien asetuksissa.",
+      "chooseClaudeAccountThenRunCommand": "Valitse tai lisää tili Claude-tilien asetuksissa ja suorita sitten /{{command}} uudelleen.",
+      "chooseClaudeAccountThenSend": "Valitse tai lisää tili Claude-tilien asetuksissa ja lähetä sitten viesti uudelleen."
+    },
+    "writeNotice": {
+      "notDoneReadHistory": "Tämän keskustelun historiaa ei voitu ladata.",
+      "notDoneSend": "Viestiä ei lähetetty.",
+      "tryAgainComposerSend": "Lähetä se uudelleen.",
+      "messageNotSaved": "Viestiä ei voitu tallentaa.",
+      "notDoneStop": "Agenttia ei pysäytetty.",
+      "notDoneStopTask": "Taustatehtävää ei pysäytetty.",
+      "notDoneStopTasks": "Taustatehtäviä ei pysäytetty.",
+      "notDoneAnswer": "Vastausta ei lähetetty.",
+      "notDoneOption": "Asetusta ei muutettu.",
+      "notDoneCommand": "Komentoa ei suoritettu.",
+      "notDoneGoalChangeIncomplete": "Tavoitteen muuttamista ei voitu viimeistellä. Tarkista keskustelu.",
+      "notDoneQueuedEdit": "Muokkausta ei tallennettu.",
+      "restartFailed": "Agentti ei voinut käynnistyä uudelleen.",
+      "capacity": "Prompt tätä keskustelua käyttävissä tietokoneessa on saavuttanut pyyntörajan. Päivitä Prompt siellä ja yritä sitten uudelleen.",
+      "outcomeUnknown": "Prompt ei voinut vahvistaa, mitä tapahtui. Tarkista chat.",
+      "sendOutcomeLost": "Prompt ei voinut vahvistaa, että viestisi saapui edustajalle. Tarkista chat ja lähetä se tarvittaessa uudelleen.",
+      "continuationSuperseded": "Keskustelu on edennyt. Tarkista uusimmat viestit ennen kuin jatkat.",
+      "questionChanged": "Tähän kysymykseen on jo vastattu tai se on muuttunut.",
+      "cancelNotSaved": "Tämän kysymyksen tai hyväksyntäpyynnön peruuttaminen epäonnistui.",
+      "historyUnreadable": "Prompt ei voinut lukea tämän keskustelun tallennettua historiaa.",
+      "historyUnusable": "Keskustelua ei voi ladata.",
+      "historyUnavailable": "Prompt ei voinut avata tämän keskustelun historiaa juuri nyt.",
+      "savedByNewerOrca": "Chatit on tallentanut uudempi Prompt.",
+      "updateOrcaToKeepUsing": "Päivitä Prompt jatkaaksesi niiden käyttöä.",
+      "chatSavedByNewerOrca": "Tämän keskustelun on tallentanut uudempi Prompt.",
+      "updateOrcaToOpenChat": "Päivitä Prompt avataksesi sen.",
+      "unsupported": "Tämä vaatii uudemman Prompt tätä keskustelua suorittavassa tietokoneessa. Päivitä Prompt siellä ja yritä sitten uudelleen.",
+      "notAvailable": "Tämä ei ole käytettävissä tässä keskustelussa.",
+      "cannotRunHere": "Prompt ei voi käyttää tätä agenttia keskustelussa täällä.",
+      "unreachable": "Prompt ei saanut yhteyttä agenttiin.",
+      "recordFailed": "Prompt ei voinut tallentaa tätä keskusteluhistoriaan.",
+      "attachmentExpired": "Tämä liite on vanhentunut.",
+      "reattachFile": "Poista se ja liitä uudelleen.",
+      "conversationCleared": "Tämä keskustelu on tyhjennetty.",
+      "openCurrentConversation": "Jatka avaamalla nykyinen keskustelu.",
+      "clearUnfinished": "Edellinen /clear ei valmistunut.",
+      "commandRunning": "/compact tai /clear on vielä käynnissä.",
+      "waitForCommand": "Odota, että /compact tai /clear valmistuu.",
+      "agentStarting": "Agentti on vielä käynnistymässä.",
+      "waitForStart": "Odota, että agentti on käynnistynyt.",
+      "turnActive": "Agentti vastaa vielä.",
+      "waitForTurn": "Odota, että agentti lopettaa vastaamisen, tai pysäytä se.",
+      "promptPending": "Agentti odottaa vastausta kysymykseen tai hyväksyntäpyyntöön.",
+      "answerFirst": "Vastaa ensin kysymykseen tai hyväksyntäpyyntöön.",
+      "backgroundTasksRunning": "Taustatehtäviä on vielä käynnissä.",
+      "waitForBackgroundTasks": "Odota, että taustatehtävät valmistuvat.",
+      "messagesUnsettled": "Aiemmin lähettämääsi viestiä ei ole vielä vahvistettu.",
+      "settleEarlierMessage": "Odota, että aiempi viestisi menee perille, tai yritä sitä uudelleen.",
+      "agentStillWorking": "Agentti työskentelee vielä.",
+      "runClearWhenDone": "Suorita /clear, kun se on valmis.",
+      "clearAfterAnswer": "Vastaa agentin kysymykseen tai hyväksyntäpyyntöön ja suorita sitten /clear.",
+      "runCompactWhenDone": "Suorita /compact, kun se on valmis.",
+      "compactAfterAnswer": "Vastaa agentin kysymykseen tai hyväksyntäpyyntöön ja suorita sitten /compact.",
+      "clearAfterRetry": "Yritä aiempaa viestiäsi uudelleen ja suorita sitten /clear.",
+      "compactAfterRetry": "Yritä aiempaa viestiäsi uudelleen ja suorita sitten /compact.",
+      "clearAfterSending": "Aiempaa viestiäsi lähetetään vielä. Suorita /clear, kun se on lähtenyt.",
+      "compactAfterSending": "Aiempaa viestiäsi lähetetään vielä. Suorita /compact, kun se on lähtenyt.",
+      "pendingWork": "Odota, että odottava työ ja viestit valmistuvat, ennen kuin käytät tätä komentoa.",
+      "queueTooLarge": "Jonossa odottaa liikaa tekstiä.",
+      "shrinkQueue": "Poista jonossa oleva viesti tai odota, että jokin menee perille, ja yritä sitten uudelleen.",
+      "messageTooLarge": "Se ylittää yhden viestin 256 kt:n rajan.",
+      "shortenMessage": "Lyhennä tai jaa se ja lähetä sitten uudelleen.",
+      "optionRejected": "Agentti ei hyväksynyt tätä asetusta.",
+      "goalsUnsupported": "Tämä agentti ei tue tavoitteita.",
+      "agentRefused": "Agentti hylkäsi tämän.",
+      "ownerUnproven": "Keskustelun edellinen agentti voi olla vielä käynnissä.",
+      "reopenChat": "Avaa keskustelu uudelleen ja tarkista tilanne.",
+      "terminalAgentHoldsChat": "Tämä keskustelu on vielä auki pääteagentissa.",
+      "quitTerminalAgent": "Lopeta kyseinen agentti, jotta voit jatkaa keskustelua täällä.",
+      "hostReconciling": "Prompt tarkistaa edelleen tätä keskustelua uudelleenkäynnistyksen jälkeen.",
+      "waitMoment": "Odota hetki.",
+      "recordUnreadable": "Prompt ei voinut lukea tämän keskustelun tallennettua tilaa.",
+      "chatNotFound": "Prompt ei löydä tätä keskustelua.",
+      "startNewChat": "Jatka aloittamalla uusi keskustelu.",
+      "tryAgain": "Yritä uudelleen."
+    }
+  },
+  "chat": {
+    "composer": {
+      "addToMessage": "Lisää viestiin",
+      "attachImage": "Liitä kuva",
+      "placeholder": "Kysy mitä tahansa, @ mainitsee tiedostoja, / avaa komennot",
+      "cancelEditing": "Peruuta muokkaus",
+      "saveEditedMessage": "Tallenna muokattu viesti",
+      "sendMessage": "Lähetä viesti"
+    },
+    "composerAttachments": {
+      "file": "Tiedosto",
+      "fileMeta": "{{type}} · {{size}}",
+      "attachedImage": "Liitteenä kuva",
+      "removeImage": "Poista kuva",
+      "uploadingFile": "Ladataan {{name}}",
+      "removeFile": "Poista {{name}}"
+    },
+    "useImageUpload": {
+      "disconnected": "Kiinnitys epäonnistui (yhteys katkennut)",
+      "permissionDenied": "Valokuvauslupa evätty",
+      "imageTooLarge": "Kuva liian suuri liitettäväksi",
+      "attachFailed": "Kiinnitys epäonnistui"
+    },
+    "ask": {
+      "submit": "Lähetä",
+      "next": "Seuraava",
+      "skip": "Ohita",
+      "step": "Vaihe {{step}}",
+      "other": "Muut…",
+      "answerPlaceholder": "Kirjoita vastauksesi"
+    },
+    "permission": {
+      "reason": "Syy:",
+      "needsAccessTo": "Tarvitsee pääsyn:",
+      "planFile": "Suunnitelmatiedosto: {{filePath}}",
+      "newerVersionRequired": "Tämä pyyntö vaatii uudemman version Prompt."
+    },
+    "promptCard": {
+      "terminalExplanation": "Vastaa tähän OMP-kysymykseen päätteessä.",
+      "answerInTerminal": "Vastaa päätteessä"
+    },
+    "promptStrip": {
+      "expand": "Laajenna"
+    },
+    "question": {
+      "submitSelectedOptions": "Lähetä valitut vaihtoehdot",
+      "submitCount": "Lähetä ({{count}})",
+      "submit": "Lähetä",
+      "otherReplyPlaceholder": "Tai kirjoita vastaus…",
+      "replyPlaceholder": "Kirjoita vastauksesi…",
+      "sendReply": "Lähetä vastaus"
+    },
+    "queuedMessages": {
+      "deleteAll": "Poista kaikki jonossa olevat viestit",
+      "clearAll": "Tyhjennä kaikki",
+      "resumeSending": "Jatka jonossa olevien viestien lähettämistä",
+      "resume": "Jatka",
+      "title": "Jonossa olevat viestit",
+      "pausedState": "Tauolla",
+      "queuedState": "Jonossa",
+      "editMessage": "Muokkaa viestiä"
+    },
+    "sessionOptionPickers": {
+      "workingAnnouncement": "Agentti työskentelee. Mallin asetusten lukitus avautuu, kun tämä käännös päättyy.",
+      "modelFullAccessLabel": "Malli, {{value}}, täysi käyttöoikeus",
+      "modelLabel": "Malli, {{value}}",
+      "permissionsLabel": "Luvat, {{value}}",
+      "closePicker": "Sulje valitsin",
+      "backToModels": "Takaisin malleihin",
+      "agentWorking": "Agentti työskentelee",
+      "settingsLocked": "Mallin asetusten lukitus avautuu, kun tämä käännös päättyy.",
+      "dispatchUnconfirmed": "Lähetetty agentille – ei vahvistettu",
+      "permissions": "Käyttöoikeudet"
+    },
+    "sessionOptionRows": {
+      "defaultMarker": "Oletus",
+      "notReportedMarker": "Ei raportoitu"
+    },
+    "sessionOptionSegments": {
+      "dispatchUnconfirmed": "Lähetetty agentille – ei vahvistettu"
+    },
+    "stopButton": {
+      "stoppingState": "Pysäytetään…",
+      "stopAgent": "Pysäytä agentti"
+    },
+    "taskList": {
+      "taskStatus": "{{status}}: {{task}}",
+      "title": "Tehtävät",
+      "completed": "Valmis",
+      "inProgress": "Käynnissä",
+      "pending": "Odottaa",
+      "empty": "Ei tehtäviä",
+      "progress": "{{completed}} / {{total}} tehtävää suoritettu",
+      "added": "Lisätty {{task}}",
+      "removed": "Poistettu {{task}}",
+      "started": "Aloitettu {{task}}",
+      "finished": "Valmistui {{task}}",
+      "reset": "Merkitty odottavaksi: {{task}}",
+      "updated": "Päivitetty {{task}}",
+      "unchanged": "Tehtävät ennallaan",
+      "showAll": "Koko tehtäväluettelo"
+    },
+    "sessionOptionCopy": {
+      "on": "Päällä",
+      "off": "Pois",
+      "permissions": "Käyttöoikeudet",
+      "notSet": "Ei asetettu",
+      "model": "Malli",
+      "effort": "Työmäärä",
+      "fastMode": "Nopea tila",
+      "speed": "Nopeus",
+      "thinking": "Ajattelu",
+      "standard": "Vakio",
+      "minimal": "Minimaalinen",
+      "low": "Matala",
+      "medium": "Keskitaso",
+      "high": "Korkea",
+      "xhigh": "Erittäin korkea",
+      "max": "Maksimi",
+      "ultra": "Ultra",
+      "minimalShort": "Min",
+      "mediumShort": "Kesk.",
+      "xhighShort": "XHigh",
+      "fast": "Nopea",
+      "toggleOption": "Vaihda: {{value0}}",
+      "chooseInAgentPicker": "Valitse agenttivalitsimessa…",
+      "setWhenSessionStarts": "Asetetaan, kun sessio alkaa.",
+      "availableAfterSessionStarts": "Käytettävissä session alettua.",
+      "sessionOptions": "Sessiovalinnat"
+    },
+    "streamFrame": {
+      "streamFailed": "Transkriptiovirta epäonnistui",
+      "streamEnded": "Transkriptiovirta päättyi"
+    },
+    "turnStatus": {
+      "seconds_one": "{{count}}s",
+      "seconds_other": "{{count}}s",
+      "minutesSeconds": "{{minutes}}min {{seconds}}s",
+      "hoursMinutesSeconds": "{{hours}}h {{minutes}}min {{seconds}}s",
+      "thinking": "Ajattelu",
+      "working": "Työstetään…",
+      "stopping": "Pysäytetään…",
+      "queueAfterStop": "Lisää viesti jonoon suoritettavaksi pysäytyksen jälkeen",
+      "sendAfterStop": "Lähetä viesti suoritettavaksi pysäytyksen jälkeen",
+      "workingFor": "Työskennellyt {{value0}}",
+      "workedFor": "Työskenteli {{value0}}",
+      "interruptedAfter": "Keskeytetty {{value0}} jälkeen",
+      "failedAfter": "Epäonnistui {{value0}} jälkeen",
+      "toggleDetails": "Näytä tai piilota vuoron tiedot",
+      "responding": "Agentti vastaa"
+    },
+    "message": {
+      "copyMessage": "Kopioi viesti"
+    },
+    "messageActionsSheet": {
+      "copyMessage": "Kopioi viesti",
+      "copyFailed": "Kopiointi epäonnistui",
+      "clipboardRejected": "Leikepöytä hylkäsi tekstin.",
+      "selectText": "Valitse teksti"
+    },
+    "notice": {
+      "stoppedManually": "Pysäytetty manuaalisesti",
+      "compaction": "Konteksti tiivistetty",
+      "contextCleared": "Konteksti tyhjennetty",
+      "plan": "Tilaus"
+    },
+    "nativeChatProse": {
+      "attachedImage": "Liitteenä kuva",
+      "image": "kuva",
+      "openImageHint": "Avaa kuvan täysikokoisena"
+    },
+    "nativeChatToolLine": {
+      "durationMilliseconds": "{{milliseconds}}ms",
+      "durationSeconds": "{{seconds}}s",
+      "durationMinutes": "{{minutes}}min {{seconds}}s",
+      "durationHours": "{{hours}}h {{minutes}}min {{seconds}}s",
+      "result": "Tulos",
+      "exitCode": "poistu {{exitCode}}",
+      "copyCommand": "Kopioi komento",
+      "running": "Käynnissä",
+      "ran": "Suoritettu",
+      "reading": "Luetaan",
+      "read": "Lue",
+      "triedRead": "Yritti lukea",
+      "editing": "Muokataan",
+      "edited": "Muokattu",
+      "triedEdit": "Yritti muokata",
+      "added": "Lisätty",
+      "deleted": "Poistettu",
+      "renamed": "Nimetty uudelleen",
+      "subagent": "Aliagentti",
+      "searching": "Haetaan",
+      "searched": "Haettu",
+      "triedSearch": "Yritti hakea",
+      "listing": "Listataan",
+      "listed": "Listattu",
+      "triedList": "Yritti listata",
+      "fetching": "Noudetaan",
+      "fetched": "Noudettu",
+      "triedFetch": "Yritti noutaa",
+      "searchingWeb": "Haetaan verkosta",
+      "searchedWeb": "Haettu verkosta",
+      "triedSearchWeb": "Yritti hakea verkosta"
+    },
+    "nativeChatUserMessageFold": {
+      "showLess": "Näytä vähemmän",
+      "loadFailed": "Näytä koko viesti – ei voitu ladata, yritä uudelleen napauttamalla",
+      "showFullMessage": "Näytä koko viesti"
+    },
+    "askRow": {
+      "awaiting": "Odottaa käyttäjän syötettä:",
+      "awaitingUnnamed": "Odottaa käyttäjän syötettä",
+      "asked": "Kysyttiin:",
+      "questionCount": "{{value0}} kysymystä"
+    },
+    "hostStatus": {
+      "historyRepaired": "Osaa tämän keskustelun historiasta ei voitu ladata.",
+      "historyItemTooLarge": "Tämä keskustelun osa oli liian suuri näytettäväksi.",
+      "continuedOutside": "Jatkui tämän keskustelun ulkopuolella.",
+      "continuedOutsideRewound": "Jatkui tämän keskustelun ulkopuolella. Yllä olevat aiemmat vastaukset eivät enää kuulu tämän keskustelun historiaan."
+    },
+    "orcaStop": {
+      "update": "Prompt {{machine}} käynnistyi uudelleen päivityksen vuoksi tämän vastauksen ollessa käynnissä.",
+      "quit": "Prompt {{machine}} suljettiin tämän vastauksen ollessa käynnissä.",
+      "crash": "Prompt {{machine}} pysähtyi odottamatta tämän vastauksen ollessa käynnissä.",
+      "remote": "Prompt {{machine}} pysähtyi tämän vastauksen ollessa käynnissä.",
+      "canContinue": "Voit jatkaa tässä keskustelussa.",
+      "unnamedServer": "etäpalvelin"
+    },
+    "toolActivity": {
+      "count_one": "{{count}} työkalukutsu",
+      "count_other": "{{count}} työkalukutsua",
+      "runningPreview": "Juoksu {{preview}}",
+      "runningCommand": "Suoritetaan komento",
+      "runningNamedPreview": "Juoksu {{toolName}} {{preview}}",
+      "runningNamed": "Juoksu {{toolName}}",
+      "result": "Tulos",
+      "moreCalls": "+{{value0}} lisää",
+      "failedCount": "{{value0}} epäonnistui",
+      "failedCallsLabel": "Epäonnistuneet työkalukutsut: {{value0}}",
+      "interruptedCount": "{{value0}} keskeytetty",
+      "interruptedCallsLabel": "Keskeytetyt työkalukutsut: {{value0}}"
+    },
+    "toolRun": {
+      "liveRead_one": "Luetaan {{count}} tiedostoa",
+      "liveRead_other": "Luetaan {{count}} tiedostoa",
+      "liveSearch_one": "Haetaan ({{count}})",
+      "liveSearch_other": "Haetaan ({{count}})",
+      "liveListFiles_one": "Listataan {{count}} kansio",
+      "liveListFiles_other": "Listataan {{count}} kansiota",
+      "liveUnknown_one": "Suoritetaan {{count}} komentoa",
+      "liveUnknown_other": "Suoritetaan {{count}} komentoa",
+      "liveFileChange_one": "Muokataan {{count}} tiedostoa",
+      "liveFileChange_other": "Muokataan {{count}} tiedostoa",
+      "liveWebSearch_one": "Haetaan verkosta ({{count}})",
+      "liveWebSearch_other": "Haetaan verkosta ({{count}})",
+      "liveBrowserOnce": "Käytetään selainta",
+      "liveBrowserTimes_other": "Käytetään selainta ({{count}})",
+      "liveMcpToolCall_one": "Käytetään {{count}} integraatiota",
+      "liveMcpToolCall_other": "Käytetään {{count}} integraatiota",
+      "liveSubAgentActivity_one": "Suoritetaan {{count}} agenttia",
+      "liveSubAgentActivity_other": "Suoritetaan {{count}} agenttia",
+      "liveTodoListOnce": "Päivitetään suunnitelmaa",
+      "liveTodoListTimes_other": "Päivitetään suunnitelmaa ({{count}})",
+      "liveOther_one": "Käytetään {{count}} työkalua",
+      "liveOther_other": "Käytetään {{count}} työkalua",
+      "settledRead_one": "Luettu {{count}} tiedosto",
+      "settledRead_other": "Luettu {{count}} tiedostoa",
+      "settledSearch_one": "Hakuja: {{count}}",
+      "settledSearch_other": "Hakuja: {{count}}",
+      "settledListFiles_one": "Listattu {{count}} kansio",
+      "settledListFiles_other": "Listattu {{count}} kansiota",
+      "settledUnknown_one": "Suoritettu {{count}} komento",
+      "settledUnknown_other": "Suoritettu {{count}} komentoa",
+      "settledFileChange_one": "Muokattu {{count}} tiedosto",
+      "settledFileChange_other": "Muokattu {{count}} tiedostoa",
+      "settledWebSearch_one": "Verkkohakuja: {{count}}",
+      "settledWebSearch_other": "Verkkohakuja: {{count}}",
+      "settledBrowserOnce": "Käytti selainta",
+      "settledBrowserTimes_other": "Selainta käytetty {{count}} kertaa",
+      "settledMcpToolCall_one": "Käytetty {{count}} integraatio",
+      "settledMcpToolCall_other": "Käytetty {{count}} integraatiota",
+      "settledSubAgentActivity_one": "Suoritettu {{count}} agentti",
+      "settledSubAgentActivity_other": "Suoritettu {{count}} agenttia",
+      "settledTodoListOnce": "Päivitti suunnitelman",
+      "settledTodoListTimes_other": "Suunnitelmaa päivitetty {{count}} kertaa",
+      "settledOther_one": "Käytetty {{count}} työkalu",
+      "settledOther_other": "Käytetty {{count}} työkalua",
+      "pair": "{{value0}} ja {{value1}}",
+      "list": "{{value0}} ja {{value1}}",
+      "separator": ",",
+      "liveBrowserTimes_one": "Käytetään selainta ({{count}})",
+      "liveTodoListTimes_one": "Päivitetään suunnitelmaa ({{count}})",
+      "settledBrowserTimes_one": "Selainta käytetty {{count}} kertaa",
+      "settledTodoListTimes_one": "Suunnitelmaa päivitetty {{count}} kertaa"
+    },
+    "usageLimit": {
+      "theAgent": "Agentti",
+      "windowSession": "sessio",
+      "windowWeekly": "viikoittaisen",
+      "windowWeeklyModel": "viikoittaisen mallikohtaisen",
+      "windowCredits": "lisäkäytön",
+      "reachedNamed": "{{agent}} saavutti {{window}} käyttörajan.",
+      "reached": "{{agent}} saavutti käyttörajan.",
+      "resetsAt": "Raja nollautuu {{when}}."
+    },
+    "composerPlaceholder": {
+      "reconnecting": "Yhdistetään uudelleen…",
+      "waitingForTerminal": "Odotetaan terminaalia…",
+      "prompt": "Kysy mitä tahansa, @ mainitsee tiedostoja, / avaa komennot"
+    },
+    "nativeChatImageViewer": {
+      "closeImage": "Sulje kuva"
+    },
+    "nativeChatVisual": {
+      "defaultTitle": "Visualisointi",
+      "unavailable": "Visualisointi ei ole saatavilla",
+      "retryHint": "Yrittää ladata sen uudelleen",
+      "openFullscreen": "Avaa {{title}} koko näyttö"
+    },
+    "diffCard": {
+      "diffTruncated": "Diff katkaistu",
+      "diffGap": "Rivejä ei näytetä",
+      "copyDiff": "Kopioi diff"
+    },
+    "receipt": {
+      "emptyAnswer": "Tyhjä vastaus",
+      "unavailable": "Valittu vastaus ei ole saatavilla",
+      "resolved": "Ratkaistu",
+      "cancelled": "Peruutettu",
+      "resolver": "Vastattu laitteella {{device}}",
+      "cancelledBy": "Peruttu laitteella {{device}}"
+    },
+    "subagentGroup": {
+      "stateCompleted": "valmis",
+      "stateWorking": "työskentelee",
+      "stateIdle": "idle",
+      "stateFailed": "epäonnistui",
+      "stateStopped": "pysäytetty",
+      "stateUnverifiable": "tila ei ole saatavilla",
+      "stateWorkingCount_one": "{{count}} työskentelee",
+      "stateWorkingCount_other": "{{count}} työskentelee",
+      "stateIdleCount_one": "{{count}} joutilas",
+      "stateIdleCount_other": "{{count}} joutilas",
+      "stateFailedCount_one": "{{count}} epäonnistui",
+      "stateFailedCount_other": "{{count}} epäonnistui",
+      "stateStoppedCount_one": "{{count}} pysäytetty",
+      "stateStoppedCount_other": "{{count}} pysäytetty",
+      "stateUnverifiableCount_one": "{{count}}, tila ei saatavilla",
+      "stateUnverifiableCount_other": "{{count}}, tila ei saatavilla",
+      "started_one": "Käynnistetty {{count}} aliagentti",
+      "started_other": "Käynnistetty {{count}} aliagenttia",
+      "ran_one": "Suoritettu {{count}} aliagentti",
+      "ran_other": "Suoritettu {{count}} aliagenttia",
+      "tokens": "{{value0}} tokenia"
+    }
+  },
+  "sourceControl": {
+    "hostedReview": {
+      "prCopy": {
+        "shortLabel": "PR",
+        "reviewLabel": "vedä pyyntö",
+        "titleLabel": "Pull request"
+      },
+      "mrCopy": {
+        "shortLabel": "MR",
+        "reviewLabel": "yhdistämispyyntö",
+        "titleLabel": "Merge request"
+      }
+    },
+    "commitDropdown": {
+      "commit": "Sitoudu",
+      "commitStagedChanges": "Tee staged-muutoksista commit",
+      "commitPush": "Commit ja Push",
+      "commitForcePush": "Commit ja Force Push",
+      "commitSync": "Commit ja Sync",
+      "checkingBranchStatus": "Tarkistetaan branchin tilaa…",
+      "checkingPrStatus": "Tarkistetaan PR:n tilaa…",
+      "prAlreadyMerged": "PR on jo yhdistetty",
+      "checkOutBranchToPush": "Tee checkout branchiin ennen commitien pushaamista",
+      "linkedReviewTargetUnavailable": "Linkitetyn review-branchin kohde ei ole käytettävissä",
+      "publishBranchFirstToPush": "Julkaise branch ensin commitien pushaamiseksi",
+      "commitAndForcePush": "Tee staged-muutoksista commit ja force push lease-suojauksella",
+      "commitAndTryPush": "Tee staged-muutoksista commit ja yritä pushata",
+      "commitAndPush": "Tee staged-muutoksista commit ja push",
+      "checkOutBranchToSync": "Tee checkout branchiin ennen commitien synkronointia",
+      "publishBranchFirstToSync": "Julkaise branch ensin commitien synkronoimiseksi",
+      "useCommitAndForcePush": "Käytä toimintoa Commit ja Force Push – remotessa on vain paikallisten commitien vanhempia kopioita",
+      "commitThenPullPush": "Tee commit, sitten pull ja push",
+      "resolveConflicts": "Ratkaise ristiriidat ennen commitia",
+      "stageFile": "Valitse commitia varten vähintään yksi tiedosto staged-tilaan",
+      "enterMessage": "Kirjoita commit-viesti commitia varten"
+    },
+    "createPrAction": {
+      "createReview": "Luo {{titleLabel}}",
+      "createPullRequest": "Luo pull request",
+      "statusUnavailable": "Review-tila ei ole saatavilla",
+      "checkingStatus": "Tarkistetaan review-tilaa…",
+      "providerUnavailable": "Arvostelun luonti ei ole saatavilla tälle palveluntarjoajalle"
+    },
+    "prCreate": {
+      "notReady": "Tämä haara ei ole vielä valmis {{reviewLabel}}:lle.",
+      "existingNumber": "{{titleLabel}} #{{number}} on jo auki.",
+      "existing": "{{titleLabel}} on jo auki.",
+      "createdNotRefreshed": "{{titleLabel}} loi, mutta Prompt ei voinut vielä päivittää sitä.",
+      "lookupUnconfirmed": "Prompt ei voinut vahvistaa, onko tällä haaralla jo {{reviewLabel}}. Yritä hetken kuluttua uudelleen.",
+      "dirty": "Tee muutokset ennen {{reviewLabel}}:n luomista.",
+      "detachedHead": "Tee checkout branchiin ennen kuin luot kohteen {{reviewLabel}}.",
+      "defaultBranch": "Vaihda feature-branchiin ennen kuin luot kohteen {{reviewLabel}}.",
+      "noUpstream": "Julkaise sitoumukset ennen {{reviewLabel}}:n luomista.",
+      "needsSync": "Synkronoi tämä haara ennen {{reviewLabel}}:n luomista.",
+      "authRequired": "Todennus ennen {{reviewLabel}}:n luomista.",
+      "unsupportedMergeRequests": "Yhdistämispyyntöjen luomista ei tueta tässä repossa.",
+      "unsupportedPullRequests": "Vetopyyntöjen luomista ei tueta tässä repossa.",
+      "existingReview": "Tälle branchille on jo olemassa {{reviewLabel}}.",
+      "forkHeadUnsupported": "{{reviewLabel}}:n luomista tästä haarukasta ei tueta.",
+      "baseNotOnRemote": "Työnnä perushaara ennen {{reviewLabel}}:n luomista."
+    },
+    "hostedReviewCreate": {
+      "pushSucceeded": "Push onnistui, mutta {{shortLabel}} luominen epäonnistui: {{error}}"
+    },
+    "remoteDropdown": {
+      "push": "Työnnä",
+      "forcePush": "Force Push",
+      "pull": "Vedä",
+      "fastForward": "Pikakelaus eteenpäin",
+      "sync": "Synkronoi",
+      "publishBranch": "Julkaise branch",
+      "publishPrStatus": "PR:n tila",
+      "publishLinkedReview": "Linkitetty review",
+      "publishNoBranch": "Ei branchia",
+      "checkingBranchStatus": "Tarkistetaan branchin tilaa…",
+      "checkingPrStatus": "Tarkistetaan PR:n tilaa…",
+      "prAlreadyMerged": "PR on jo yhdistetty",
+      "linkedReviewTargetUnavailable": "Linkitetyn review-branchin kohde ei ole käytettävissä",
+      "checkOutBranchToPush": "Tee checkout branchiin ennen commitien pushaamista",
+      "pushAndSetUpstream": "Tee push tälle branchille ja aseta upstream tarvittaessa",
+      "pushToLinkedReview": "Pushaa päivitykset linkitettyyn review-branchiin",
+      "tryRegularPush": "Yritä tavallista pushia; Git voi vaatia force pushin",
+      "pushMayNeedSync": "Tee push paikallisille commiteille; Git voi vaatia synkronoinnin ensin",
+      "nothingToPush": "Ei pushattavaa",
+      "checkOutBranchToForcePush": "Tee checkout branchiin ennen commitien force pushausta",
+      "nothingToForcePush": "Ei force pushattavaa",
+      "checkOutBranchToPull": "Tee checkout branchiin ennen commitien pullaamista",
+      "publishBranchFirstToPull": "Julkaise branch ensin commitien pullaamiseksi",
+      "nothingNewToPull": "Ei uutta pullattavaa – remotessa on vain paikallisten commitien vanhempia kopioita",
+      "nothingToPull": "Ei pullattavaa",
+      "checkOutBranchToFastForward": "Tee checkout branchiin ennen fast-forwardia",
+      "publishBranchFirstToFastForward": "Julkaise branch ensin fast-forwardia varten",
+      "nothingNewToFastForward": "Ei uutta fast-forward-päivitettävää – remotessa on vain paikallisten commitien vanhempia kopioita",
+      "nothingToFastForward": "Ei fast-forward-päivitettävää",
+      "tryFastForwardPull": "Yritä fast-forward-pullia; Git voi hylätä paikalliset commitit",
+      "checkOutBranchToSync": "Tee checkout branchiin ennen commitien synkronointia",
+      "publishBranchFirstToSync": "Julkaise branch ensin commitien synkronoimiseksi",
+      "useForcePushToSync": "Käytä toimintoa Force Push – remotessa on vain paikallisten commitien vanhempia kopioita",
+      "branchUpToDate": "Branch on ajan tasalla",
+      "rebaseFromBase": "Rebase basesta",
+      "rebaseChooseRemoteBase": "Valitse remote base branch, josta rebase tehdään",
+      "rebaseDirtyHint": "Yritä rebasea; Git voi vaatia paikallisten muutosten commitia tai stashia ensin",
+      "fetch": "Hae",
+      "fetchTitle": "Tee fetch remotesta ilman merge-toimintoa",
+      "linkedReviewBranchExists": "Linkitetty review-branch on jo olemassa",
+      "checkOutBranchToPublish": "Tee checkout branchiin ennen commitien julkaisemista",
+      "branchAlreadyPublished": "Branch on jo julkaistu",
+      "publishToOrigin": "Julkaise tämä branch kohteeseen origin",
+      "nothingToPushTo": "Ei pushattavaa kohteeseen {{upstreamName}}",
+      "nothingToForcePushTo": "Ei force pushattavaa kohteeseen {{upstreamName}}",
+      "rebaseFromNamedBase": "Rebase kohteesta {{baseRef}}",
+      "rebaseWithLatestFrom": "Tee nykyiselle branchille rebase kohteen {{baseRef}} uusimpien commitien päälle"
+    },
+    "actions": {
+      "createPr": "Luo PR",
+      "pushAndCreatePr": "Push & Create PR",
+      "switchBranch": "Vaihda haaraa",
+      "commits": "Commitit",
+      "committing": "Sitoutuminen käynnissä.",
+      "forcePushing": "Pakkotyöntö käynnissä.",
+      "remoteOperationInProgress": "Kaukokäyttö käynnissä.",
+      "waitForRemoteOperation": "Yritä uudelleen, kun etäkäyttö on päättynyt.",
+      "resolveConflicts": "Ratkaise ristiriidat ennen sitoutumista.",
+      "commitStagedChanges": "Tee vaiheittaiset muutokset.",
+      "enterCommitMessage": "Syötä vahvistusviesti.",
+      "stageAllChanges": "Toteuta kaikki muutokset.",
+      "stageFileToCommit": "Aseta vähintään yksi tiedosto valmiiksi.",
+      "checkoutBeforePublish": "Tee checkout branchiin ennen commitien julkaisemista.",
+      "checkingReviewStatus": "Tarkistetaan arvostelun tilaa.",
+      "reviewAlreadyMerged": "Ei mitään sitovaa. Arvostelu on jo yhdistetty.",
+      "publishToOrigin": "Julkaise tämä haara alkuperään.",
+      "pushLinkedReview": "Lähetä päivitykset linkitetylle arvosteluhaaralle.",
+      "linkedReviewUnavailable": "Linkitetty arvosteluhaara ei ole käytettävissä.",
+      "forcePushWithLease": "Pakota työntö vuokrasopimuksella päivittääksesi etähaaran.",
+      "syncCounts": "Vedä {{behind}}, paina {{ahead}}.",
+      "pullCommits_one": "Vedä {{count}} sitoa.",
+      "pullCommits_other": "Vedä {{count}} sitoutuu.",
+      "pushCommits_one": "Paina {{count}} commit.",
+      "pushCommits_other": "Push {{count}} sitoutuu.",
+      "upToDate": "Ei commitattavaa. Branch on ajan tasalla."
+    },
+    "dropdownCounts": {
+      "pushCount_one": "Paina {{count}} commit",
+      "pushCount_other": "Push {{count}} commitia",
+      "pullCount_one": "Vedä {{count}} sitoa",
+      "pullCount_other": "Pull {{count}} commitia",
+      "fastForwardCount_one": "Pikakelaus {{count}} vahvistus",
+      "fastForwardCount_other": "Fast-forward {{count}} commitia",
+      "syncCounts": "Vedä {{behind}}, työnnä {{ahead}}",
+      "remoteBranchFallback": "remote-branch",
+      "titleForcePushOlderCopiesBranch": "Remotessa on vain paikallisten commitien vanhempia kopioita. Tee tälle branchille force push lease-suojauksella päivittääksesi kohteen {{upstreamName}}.",
+      "titleForcePushOlderCopiesCount_one": "Remotessa on vain vanhempia kopioita paikallisista commiteista. Tee force push {{count}} branchin commitille lease-suojauksella, jotta {{upstreamName}} päivittyy.",
+      "titleForcePushOlderCopiesCount_other": "Remotessa on vain vanhempia kopioita paikallisista commiteista. Tee force push {{count}} branchin commitille lease-suojauksella, jotta {{upstreamName}} päivittyy.",
+      "titleManualForcePushReplaceRemote_one": "Tee force push {{count}} paikalliselle commitille lease-suojauksella, jotta {{upstreamName}} päivittyy ja vain remotessa olevat commitit korvataan.",
+      "titleManualForcePushReplaceRemote_other": "Tee force push {{count}} paikalliselle commitille lease-suojauksella, jotta {{upstreamName}} päivittyy ja vain remotessa olevat commitit korvataan.",
+      "titleManualForcePush_one": "Tee force push {{count}} paikalliselle commitille lease-suojauksella, jotta {{upstreamName}} päivittyy.",
+      "titleManualForcePush_other": "Tee force push {{count}} paikalliselle commitille lease-suojauksella, jotta {{upstreamName}} päivittyy.",
+      "titleUnpublishedForcePushBranch": "Tee tälle branchille force push lease-suojauksella ja aseta upstream tarvittaessa.",
+      "titleUnpublishedForcePushCount_one": "Tee force push {{count}} branchin commitille lease-suojauksella ja määritä tarvittaessa upstream.",
+      "titleUnpublishedForcePushCount_other": "Tee force push {{count}} branchin commitille lease-suojauksella ja määritä tarvittaessa upstream."
+    },
+    "primaryAction": {
+      "forcePushFromDesktop": "Pakota työnnä tämän vetopyynnön haara työpöydältä",
+      "forcePush": "Force Push",
+      "commit": "Sitoudu",
+      "stageAll": "Stage kaikki",
+      "push": "Työnnä",
+      "pull": "Vedä",
+      "sync": "Synkronoi",
+      "publishBranch": "Julkaise branch"
+    },
+    "branchDiffPreviewDrawer": {
+      "committedOnBranch": "Sitoutunut haaraan",
+      "closePreview": "Sulje sitoutuneen eron esikatselu",
+      "loadFailed": "Ei voida ladata eroa",
+      "truncated": "Diff katkaistu mobiiliesikatselua varten."
+    },
+    "commitFailurePanel": {
+      "title": "Sitoutuminen epäonnistui",
+      "summary": "Sitoutuminen epäonnistui.",
+      "fixWithAi": "Korjaa commit-virhe tekoälyllä",
+      "fix": "Korjaa",
+      "hideFailureDetails": "Piilota toimitusvirheen tiedot",
+      "showFailureDetails": "Näytä toimitusvirheen tiedot",
+      "hideDetails": "Piilota tiedot",
+      "showDetails": "Näytä tiedot"
+    },
+    "gitHistoryList": {
+      "loadFailed": "Historian lataaminen epäonnistui",
+      "loadFilesFailed": "Toimitustiedostoja ei voi ladata",
+      "retryFiles": "Yritä vahvistaa tiedostot uudelleen",
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "noFileChanges": "Ei tiedostomuutoksia",
+      "noCommits": "Ei sitoumuksia."
+    },
+    "branchCard": {
+      "mergeState": "yhdistää",
+      "rebaseState": "rebase",
+      "cherryPickState": "kirsikkapoimi",
+      "changedCount": "{{count}} muutettu",
+      "stagedCount": "{{count}} lavastettu",
+      "branchCount": "{{count}} haarassa"
+    },
+    "content": {
+      "reconnecting": "Yhdistetään uudelleen työpöytään...",
+      "stageAll": "Stage kaikki",
+      "unstageAll": "Unstage All",
+      "openActions": "Avoimen lähdekoodin ohjaustoiminnot",
+      "emptyTitle": "Ei paikallisia muutoksia",
+      "emptyMessage": "Työpuu on puhdas.",
+      "commitMessageDisabled": "Toteutusviesti poistettu käytöstä. Ei lavastettuja tiedostoja.",
+      "noStagedFiles": "Ei lavastettuja tiedostoja",
+      "commitMessagePlaceholder": "Commit-viesti",
+      "regenerateHint": "Tyhjennä viesti luodaksesi sen uudelleen.",
+      "cancelGeneration": "Peruuta sitovan viestin luominen",
+      "generateMessage": "Luo commit-viesti tekoälyllä"
+    },
+    "fileList": {
+      "committedSection": "Commitattu branchiin"
+    },
+    "fileRows": {
+      "bothModified": "Molemmat muokkasivat",
+      "bothAdded": "Molemmat lisäsivät",
+      "deletedByUs": "Poistettu meidän puolella",
+      "deletedByThem": "Poistettu heidän puolellaan",
+      "addedByUs": "Lisätty meidän puolella",
+      "addedByThem": "Lisätty heidän puolellaan",
+      "bothDeleted": "Molemmat poistivat",
+      "unresolvedConflict": "Ratkaisematon ristiriita",
+      "openChangedFile": "Avaa muutettu tiedosto {{path}}",
+      "renamedFrom": "alkaen {{path}}",
+      "unstageFile": "Unstage {{path}}",
+      "stageFile": "Vaihe {{path}}",
+      "discardFile": "Hylkää {{path}}",
+      "committedSection": "Commitattu branchiin",
+      "loadingCommitted": "Ladataan tehtyjä muutoksia...",
+      "committedUnavailable": "Tehdyt muutokset eivät ole käytettävissä.",
+      "openCommittedChange": "Avaa tehty muutos {{path}}"
+    },
+    "header": {
+      "close": "Sulje lähteen ohjaus",
+      "backToSession": "Takaisin istuntoon",
+      "title": "Lähdekoodinhallinta",
+      "openNumberedPrWeb": "Open pull request #{{number}} on the web",
+      "openPrWeb": "Avaa vetopyyntö verkossa",
+      "refresh": "Päivitä lähteen ohjaus"
+    },
+    "modals": {
+      "actionsTitle": "Lähdekoodinhallinta",
+      "discardTitle": "Hylkää muutos",
+      "discardConfirmMessage": "Hylätäänkö muutokset kohteeseen \"{{path}}\"? Tätä ei voi kumota.",
+      "discardButton": "Hylkää",
+      "switchBranchTitle": "Vaihda haaraa",
+      "currentBranch": "nykyinen",
+      "prCreatedTitle": "Vetopyyntö luotu",
+      "openPrWithWarning": "Avaa se selaimessasi?\n\n{{warning}}",
+      "openPrMessage": "Avaa se selaimessasi?"
+    },
+    "panel": {
+      "unavailableTitle": "Lähteen hallinta ei ole käytettävissä",
+      "loadFailedTitle": "Ei voida ladata"
+    },
+    "prChip": {
+      "loading": "Ladataan vetopyyntöä…",
+      "createPr": "Luo vetopyyntö",
+      "loadingLabel": "Ladataan vetopyyntöä",
+      "unavailableLabel": "Vetopyyntö ei saatavilla: {{message}}",
+      "openWithComments_one": "Vedä pyyntö #{{number}}, {{state}}, {{checks}}, {{count}} ratkaisemattomia kommentteja. Avaa vetopyyntö.",
+      "openWithComments_other": "Vedä pyyntö #{{number}}, {{state}}, {{checks}}, {{count}} ratkaisemattomia kommentteja. Avaa vetopyyntö.",
+      "openLabel": "Vetopyyntö #{{number}}, {{state}}, {{checks}}. Avaa vetopyyntö."
+    },
+    "hostedReviewCopy": {
+      "updatingBranch": "Päivitetään haaraa...",
+      "stagingChanges": "Lavastusmuutokset...",
+      "generatingCommitMessage": "Luodaan vahvistusviestiä...",
+      "committingChanges": "Tehdään muutoksia...",
+      "publishingBranch": "Julkaisuhaara...",
+      "pushingCommits": "Sitoumusten työntäminen...",
+      "forcePushing": "Pakota työntäminen vuokrasopimuksella...",
+      "creatingReview": "Luodaan arvostelua..."
+    },
+    "branchBaseRef": {
+      "resolveFailed": "Haarakantaa ei voida ratkaista"
+    },
+    "branchCompareOutcome": {
+      "baseBranchUnavailable": "Perushaaraa ei voida ratkaista vertailua varten.",
+      "loadFailed": "Sitoutuneiden muutosten lataaminen epäonnistui"
+    },
+    "branchCompare": {
+      "sectionTitle": "Commitattu branchiin",
+      "summary": "{{files}} - vs {{baseRef}}",
+      "summaryWithCommits": "{{files}} - {{commits}} - vs {{baseRef}}",
+      "files_one": "{{count}} tiedosto",
+      "files_other": "{{count}} tiedostoa",
+      "commits_one": "{{count}} sitoutua",
+      "commits_other": "{{count}} sitoutuu"
+    },
+    "commitMessageAi": {
+      "generateFailed": "Toimitusviestin luominen epäonnistui"
+    },
+    "gitHistory": {
+      "justNow": "juuri nyt",
+      "minutes_one": "{{count}} min",
+      "minutes_other": "{{count}} min",
+      "hours_one": "{{count}} t",
+      "hours_other": "{{count}} t",
+      "days_one": "{{count}} pv",
+      "days_other": "{{count}} pv",
+      "months_one": "{{count}}kk",
+      "months_other": "{{count}}kk",
+      "years_one": "{{count}}v",
+      "years_other": "{{count}}v",
+      "noCommitMessage": "(ei sitovaa viestiä)",
+      "loadFailed": "Toimitushistorian lataaminen epäonnistui"
+    },
+    "gitStatus": {
+      "conflicts": "Ristiriidat",
+      "changes": "Muutokset",
+      "stagedChanges": "Vaiheistetut muutokset"
+    },
+    "hostedReviewCreateIntent": {
+      "resolveConflicts": "Ratkaise ristiriidat ennen vetopyynnön luomista.",
+      "branchChanged": "Haara muuttui vetopyyntöä valmisteltaessa.",
+      "resolveOrStageChanges": "Ratkaise tai toteuta muutokset ennen vetopyynnön luomista.",
+      "generateMessageFailed": "Toimitusviestiä ei voitu luoda. Lisää yksi lähteen hallintaan ja yritä sitten uudelleen.",
+      "reviewCommitMessage": "Tarkista commit-viesti ja yritä sitten Create PR uudelleen."
+    },
+    "hostedReviewGitPreparation": {
+      "refreshFailed": "Lähteen hallintaa ei voi päivittää",
+      "updateBranchFailed": "Remote-branchia ei voitu päivittää. Yritä Create PR uudelleen.",
+      "stageFailed": "Muutosten toteuttaminen epäonnistui",
+      "commitFailed": "Sitoutuminen epäonnistui"
+    },
+    "hostedReviewRemotePrerequisite": {
+      "publishFailed": "Haaraan julkaisu epäonnistui",
+      "pushFailed": "Sitoumusten työntäminen epäonnistui",
+      "forcePushFailed": "Vuokrauksen pakottaminen epäonnistui"
+    },
+    "hostedReviewService": {
+      "pushBeforeCreateFailed": "Push epäonnistui. Korjaa push-virhe ja yritä uudelleen.",
+      "createFailed": "Vetopyynnön luominen epäonnistui"
+    },
+    "prLink": {
+      "updatePullRequestFailed": "Linkitetyn vetopyynnön päivittäminen epäonnistui",
+      "updateReviewFailed": "Linkitetyn arvostelun päivittäminen epäonnistui"
+    },
+    "conflictAbort": {
+      "aborting": "Keskeytetään…",
+      "abortMerge": "Keskeytä merge",
+      "abortRebase": "Keskeytä rebase",
+      "abortOperation": "Keskeytä {{operation}}"
+    },
+    "hubTab": {
+      "changes": "Muutokset",
+      "pullRequest": "Pull request",
+      "commits": "Commitit"
+    },
+    "screenState": {
+      "noBranch": "Ei haaraa"
+    },
+    "useMobileCommitFailureRecovery": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "launchFailed": "Agentin käynnistäminen epäonnistui"
+    },
+    "useMobileCommitMessageGeneration": {
+      "generateFailed": "Toimitusviestin luominen epäonnistui"
+    },
+    "useMobileCreatePrRunner": {
+      "branchRequired": "Tarkista haara ennen vetopyynnön luomista."
+    },
+    "useMobileGitRequests": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "actionFailed": "Lähteenhallintatoiminto epäonnistui",
+      "commitFailed": "Sitoutuminen epäonnistui",
+      "branchUnavailable": "Sivukonttorin tila ei ole käytettävissä"
+    },
+    "actionSheetRunners": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "noBaseBranch": "Ei pohjahaaraa, jolle uudelleen perustaa"
+    },
+    "commitRunners": {
+      "commitFailed": "Sitoutuminen epäonnistui",
+      "actionFailed": "Lähteenhallintatoiminto epäonnistui"
+    },
+    "loaders": {
+      "connectingToDesktop": "Yhdistetään työpöytään...",
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "updateDesktop": "Päivitä Prompt työpöytä käyttääksesi lähteenhallintaa mobiililaitteella.",
+      "loadFailed": "Lähdeohjausta ei voi ladata"
+    },
+    "openers": {
+      "waitingForDesktop": "Odotetaan työpöytää...",
+      "openDiffFailed": "Diffin avaaminen ei onnistu",
+      "tabNotReady": "Tiedosto avattiin, mutta sen välilehti ei ole vielä valmis. Yritä uudelleen."
+    },
+    "runners": {
+      "actionFailed": "Lähteenhallintatoiminto epäonnistui"
+    },
+    "state": {
+      "syncStatus": "{{ahead}} edellä, {{behind}} jäljessä",
+      "noUpstream": "Ei ylävirtaan"
+    },
+    "textGenerationFailure": {
+      "openCodeInvalidEvents": "OpenCode palautti virheellisiä JSON-tapahtumia.",
+      "antigravityInvalidEvents": "Antigravity palautti virheellisiä JSON-tapahtumia.",
+      "antigravityInvalidResult": "Antigravity palautti virheellisen tuloksen.",
+      "antigravityNoFinalResult": "Antigravity ei palauttanut lopullista tulosta.",
+      "kimiUnreadableOutput": "Kimi palautti tulosteen Prompt ei voinut lukea. Yritä uudelleen.",
+      "kimiSessionOccupied": "Kimi ei voinut käyttää tätä sessiota, koska se on aktiivinen toisessa asiakasohjelmassa. Pysäytä sessio siellä tai sulje kyseinen asiakasohjelma ja yritä sitten uudelleen.",
+      "kimiInterrupted": "Kimi keskeytettiin ennen kuin se oli valmis tuottamaan tekstiä. Yritä uudelleen.",
+      "kimiFailed": "Kimi ei saanut tekstin tuottamista valmiiksi. Avaa Kimi suorituskoneessa ja tarkista virhe ennen uutta yritystä.",
+      "kimiAgentOptionsConflict": "Kimi sai ristiriitaisia tai toistuvia agenttiasetuksia. Jätä luontireseptiin tai CLI-argumentteihin vain yksi --agent- tai --agent-file-asetus ja yritä uudelleen.",
+      "kimiOptionRejected": "Kimi hylkäsi asetuksen tai argumentin. Korjaa luontiresepti tai CLI-argumentit ja yritä uudelleen.",
+      "kimiSessionNotFound": "Kimi ei löytänyt pyydettyä sessiota. Käytä olemassa olevaa sessiota tai aloita uusi.",
+      "kimiSessionOtherDirectory": "Tämä Kimi-sessio kuuluu toiseen kansioon. Jatka sitä siellä tai käytä tälle työtilalle luotua sessiota.",
+      "kimiCredentialVariableMissing": "Kimiltä puuttuu määritetty tunnistetietojen ympäristömuuttuja. Aseta se suorituskoneessa ennen uutta yritystä.",
+      "kimiCredentialsRequired": "Kimi tarvitsee palveluntarjoajan tunnistetiedot. Avaa Kimi suorituskoneessa, määritä palveluntarjoaja tai kirjaudu sisään ja yritä sitten uudelleen.",
+      "kimiModelMissing": "Kimillä ei ole käyttökelpoista mallia määritettynä. Avaa Kimi suorituskoneessa, määritä tai valitse malli ja yritä sitten uudelleen.",
+      "kimiPromptHookBlocked": "Kimin kehote-hook esti pyynnön tai vuoroa ei voitu aloittaa. Tarkista Kimin hookit ja asetukset ennen uutta yritystä.",
+      "kimiCancelled": "Kimi peruutti pyynnön ennen kuin se oli valmis tuottamaan tekstiä. Yritä uudelleen.",
+      "kimiEmptyPrompt": "Kimi sai tyhjän kehotteen. Korjaa syöte luontireseptissä tai CLI-argumenteissa ja yritä uudelleen.",
+      "kimiEmptyModel": "Kimi sai tyhjän mallin. Korjaa syöte luontireseptissä tai CLI-argumenteissa ja yritä uudelleen.",
+      "kimiEmptyAgent": "Kimi sai tyhjän agentin. Korjaa syöte luontireseptissä tai CLI-argumenteissa ja yritä uudelleen.",
+      "kimiEmptyAgentFilePath": "Kimi sai tyhjän agenttitiedoston polun. Korjaa syöte luontireseptissä tai CLI-argumenteissa ja yritä uudelleen.",
+      "kimiOutputFormatInvalid": "Kimin tulostemuoto edellyttää kehotetilaa sekä tuettua text- tai stream-json-arvoa. Korjaa luontiresepti tai CLI-argumentit ennen uutta yritystä.",
+      "kimiSessionIdRequired": "Kimi tarvitsee sessio-id:n jatkaakseen kehotetilassa. Korjaa luontiresepti tai CLI-argumentit ja yritä uudelleen.",
+      "kimiConflictingOptions": "Kimi sai ristiriitaiset asetukset: {{option}} ja {{otherOption}}. Korjaa luontiresepti tai CLI-argumentit ennen uutta yritystä.",
+      "kimiContinueSessionConflict": "Kimi sai ristiriitaiset asetukset: --continue, --session. Korjaa luontiresepti tai CLI-argumentit ennen uutta yritystä.",
+      "kimiAgentChangeOnResume": "Kimi ei voi vaihtaa agenttia sessiota jatkettaessa. Poista agentin ohitus tai aloita uusi sessio luontireseptissä tai CLI-argumenteissa.",
+      "kimiResponseBlocked": "Kimi ei voinut palauttaa vastausta, koska se estettiin. Muokkaa kehotetta tai mallin asetuksia ennen uutta yritystä.",
+      "kimiAuthFailed": "Kimi ei voinut todentaa käyttäjää. Kirjaudu sisään tai korjaa palveluntarjoajan tunnistetiedot suorituskoneessa ja yritä sitten uudelleen.",
+      "kimiConnectionFailed": "Kimi ei voinut yhdistää palveluntarjoajaansa. Tarkista suorituskoneen verkkoyhteys ja yritä sitten uudelleen.",
+      "kimiProviderLimited": "Kimi saavutti palveluntarjoajan rajan tai palveluntarjoaja on kuormitettu. Odota ennen uutta yritystä tai vähennä pyyntöjen tiheyttä.",
+      "kimiContextOverflow": "Kimin konteksti loppui. Lyhennä kehotetta tai aloita uusi sessio ja yritä sitten uudelleen.",
+      "kimiConfigInvalid": "Kimin asetukset ovat virheelliset. Tarkista mallin ja palveluntarjoajan asetukset suorituskoneessa ennen uutta yritystä.",
+      "promptTooLargeForWindows": "{{label}}-kehote on liian suuri Windowsin komentoriville. Tee push pienemmälle määrälle staged-muutoksia ja yritä uudelleen.",
+      "promptTooLargeForArgument": "{{label}}-kehote on liian suuri välitettäväksi yhtenä komentoriviargumenttina. Valmistele vähemmän muutoksia ja yritä uudelleen.",
+      "agentCouldNotStart": "{{label}} ei voitu käynnistää. Tarkista agentin komento Asetuksista ja yritä uudelleen.",
+      "agentFailedToStart": "{{label}} ei käynnistynyt. Tarkista agentin komento Asetuksista ja yritä uudelleen.",
+      "agentBinaryNotFound": "{{binary}} ei löytynyt PATH-muuttujasta. Asenna {{label}}, jotta voit käyttää tekoälyn commit-viestejä.",
+      "timedOut": "Luonti aikakatkaistiin {{seconds}} s jälkeen.",
+      "outputTooLarge": "{{label}}-CLI-komento tuotti liikaa tulostetta. Tarkista agentin CLI-asetukset ja yritä uudelleen.",
+      "windowsBatchUnsafeArguments": "{{label}} suorittaa Windowsin eräkomentosarjan, joka ei voi ottaa monirivistä kehotetta argumenttina. Osoita Asetukset agentin suoritettavassa tiedostossa tai käytä mukautettua komentoa ilman {prompt}, jotta Prompt lähettää kehotteen stdinissä.",
+      "cliTerminated": "{{label}}-CLI-komento päätettiin ennen sen päättymistä.",
+      "cliTerminatedWithDetail": "{{label}}-CLI-komento päätettiin ennen sen päättymistä: {{detail}}",
+      "cliFailed": "{{label}}-CLI-komento epäonnistui koodilla {{exitCode}}.",
+      "cliFailedWithDetail": "{{label}}-CLI-komento epäonnistui koodilla {{exitCode}}: {{detail}}",
+      "agentReportedError": "{{label}} ilmoitti virheestä.",
+      "emptyCommitMessage": "{{label}} palautti tyhjän viestin.",
+      "emptyCommitMessageWithDetail": "{{label}} palautti tyhjän viestin. CLI-tuloste: {{detail}}",
+      "emptyPullRequestDetails": "{{label}} palautti tyhjät tiedot.",
+      "emptyPullRequestDetailsWithDetail": "{{label}} palautti tyhjät tiedot. CLI-tuloste: {{detail}}",
+      "emptyJiraSummary": "{{label}} palautti tyhjän yhteenvedon.",
+      "emptyJiraSummaryWithDetail": "{{label}} palautti tyhjän yhteenvedon. CLI-tuloste: {{detail}}",
+      "commitMessageUnparseable": "Luotua commit-viestiä ei voitu jäsentää.",
+      "pullRequestDetailsUnparseable": "Luotuja pull requestin tietoja ei voitu jäsentää.",
+      "jiraSummaryEmptyAfterSanitization": "Luotu yhteenveto oli tyhjä puhdistuksen jälkeen.",
+      "jiraDescriptionRequired": "Kuvaus vaaditaan.",
+      "jiraAccountDisconnected": "Yhdistä valittu Jira-tili uudelleen tässä koneessa.",
+      "jiraSummaryBusyInOtherDraft": "Jira-otsikkoa luodaan jo toisessa luonnoksessa.",
+      "stagedChangesReadFailed": "Staged-muutosten lukeminen epäonnistui.",
+      "noStagedChanges": "Ei staged-muutoksia, joista tehdä yhteenveto.",
+      "noBranchChanges": "Ei branchin muutoksia, joista tehdä yhteenveto.",
+      "commandTemplateEmptyCommitMessage": "Commit-viestien komentomalli on tyhjä.",
+      "commandTemplateEmptyPullRequest": "Pull requestin tietojen komentomalli on tyhjä.",
+      "commandTemplateEmptyBranchName": "Branch-nimien komentomalli on tyhjä.",
+      "commandTemplateEmptyChatName": "Keskustelunimien komentomalli on tyhjä.",
+      "sourceControlAgentUnsupported": "Valitse tälle toiminnolle tuettu Lähdekoodinhallinnan tekoälyagentti kohdassa Asetukset -> Git -> Source Control AI. Tuetut agentit: {{agents}} tai Custom command.",
+      "chatNameAgentUnsupported": "Valitse tälle toiminnolle tuettu keskustelunimien agentti kohdassa Asetukset -> Chat -> Chat names. Tuetut agentit: {{agents}} tai Custom command.",
+      "sourceControlCustomCommandEmpty": "Custom command on tyhjä. Lisää komento kohdassa Asetukset -> Git -> Source Control AI.",
+      "chatNameCustomCommandEmpty": "Custom command on tyhjä. Lisää komento kohdassa Asetukset -> Chat -> Chat names.",
+      "agentCannotGenerateCommitMessage": "Agentti ”{{agent}}” ei tue Lähdekoodinhallinnan tekoälyn commit-viestejä. Tuetut agentit: {{agents}} tai Custom command.",
+      "agentCannotGeneratePullRequest": "Agentti ”{{agent}}” ei tue Lähdekoodinhallinnan tekoälyn pull requestin tietoja. Tuetut agentit: {{agents}} tai Custom command.",
+      "agentCannotGenerateBranchName": "Agentti ”{{agent}}” ei tue Lähdekoodinhallinnan tekoälyn branch-nimiä. Tuetut agentit: {{agents}} tai Custom command.",
+      "agentCannotGenerateChatName": "Agentti ”{{agent}}” ei tue keskustelunimiä. Tuetut agentit: {{agents}} tai Custom command.",
+      "noModelForAgent": "Mallia ei ole saatavilla kohteelle {{label}}.",
+      "planCustomCommandEmpty": "Custom command on tyhjä. Lisää komento kohdassa Asetukset → Git → AI Commit Messages.",
+      "planAgentUnsupported": "Agentti ”{{agent}}” ei tue tekoälyn commit-viestejä.",
+      "planModelUnavailable": "Malli ”{{model}}” ei ole saatavilla kohteelle {{label}}.",
+      "planModelWithoutThinking": "Malli ”{{model}}” ei tue ajattelutason valintaa.",
+      "planThinkingLevelInvalid": "Ajattelutaso \"{{level}}\" ei kelpaa mallille {{model}}."
+    }
+  },
+  "newWorkspace": {
+    "hostPicker": {
+      "title": "Luo työtila päällä"
+    },
+    "loadingDrawer": {
+      "loading": "Ladataan",
+      "downloading": "Ladataan",
+      "downloadProgress": "Ladataan… {{progress}}"
+    }
+  },
+  "tasks": {
+    "legacySurface": {
+      "sourceFallback": "Ensisijainen ongelmalähde ei ole saatavilla verkkotunnukselle {{repo}}. Käyttämällä alkuperää.",
+      "loadIssuesFailed": "Ei voitu ladata ongelmia kohteesta {{source}}.",
+      "retryLoadingIssues": "Yritä uudelleen latausongelmat paikasta {{source}}",
+      "retrying": "Yritetään uudelleen...",
+      "subIssueDataUnavailable": "Sub-issue-tiedot eivät ole saatavilla tokenillesi.",
+      "mergeMethodTitle": "Yhdistä menetelmä",
+      "pullRequestMergeMessage": "Valitse, kuinka tämä vetopyyntö yhdistetään.",
+      "mergeRequestMergeMessage": "Valitse, kuinka tämä yhdistämispyyntö yhdistetään.",
+      "mergeAction": "Yhdistä",
+      "mergeRequestTitle": "Merge request",
+      "mergePullRequestTitle": "Yhdistä vetopyyntö",
+      "updateItemTitle": "Päivitä kohde"
+    },
+    "prFileDiff": {
+      "noTextChanges": "Tekstimuutoksia ei löytynyt.",
+      "showingDiffLines": "Näytetään ensimmäinen {{limit}} / {{total}} erotusriviä.",
+      "commentPlaceholder": "Lisää arvostelukommentti",
+      "commentOnLine": "Kommentoi rivillä {{line}}"
+    },
+    "smartSourceModes": {
+      "smart": "Älykäs",
+      "branch": "Haara",
+      "name": "Nimi",
+      "openState": "Avoin",
+      "mergedState": "Mergattu",
+      "closedState": "Suljettu",
+      "allStates": "Kaikki"
+    },
+    "taskViewOptions": {
+      "noGitHubTasks": "Ei GitHub tehtävää",
+      "noGitLabTasks": "Ei GitLab tehtävää",
+      "noLinearTasks": "Ei Linear tehtävää",
+      "noJiraTasks": "Ei Jira-tehtäviä",
+      "assignedSubtitle": "Sinulle osoitetut ratkaisemattomat ongelmat",
+      "reportedSubtitle": "Ratkaisemattomia ongelmia, joista olet ilmoittanut",
+      "allSubtitle": "Ratkaisemattomia ongelmia valituilla sivustoilla",
+      "doneSubtitle": "Äskettäin ratkaistut ongelmasi"
+    },
+    "tasksCreateDrawers": {
+      "newIssueTitle": "Uusi {{providerLabel}} numero",
+      "repositorySubtitle": "Luo ongelma valittuun tietovarastoon.",
+      "linearTeamSubtitle": "Luo ongelma valitussa Linear tiimissä.",
+      "repository": "Arkisto",
+      "team": "Tiimi",
+      "issueSource": "Issue-lähde",
+      "fileIn": "Tiedosto paikkaan {{slug}}",
+      "upstream": "Vastavirtaan",
+      "origin": "Alkuperä",
+      "title": "Otsikko",
+      "titlePlaceholder": "Tehtävän otsikko",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Lisää konteksti",
+      "createIssue": "Luo ongelma",
+      "linearTeam": "Linear Joukkue",
+      "connectLinearWorkspace": "Yhdistä Linear työtila",
+      "linearConnectSubtitle": "Liitä henkilökohtainen API-avain selataksesi työtilan ongelmia.",
+      "personalApiKey": "Henkilökohtainen API-avain",
+      "linearSettingsLink": "Linear Asetukset / Suojaus / Uusi API-avain",
+      "keySecurityHint": "Avaimesi salataan isäntäkäyttöjärjestelmän avainnipun kautta ja tallennetaan paikallisesti.",
+      "connect": "Yhdistä",
+      "createWorkspaceIn": "Luo työtila sisään"
+    },
+    "filterPickers": {
+      "fieldsTitle": "Projektikentät",
+      "fieldsSubtitle": "Valitse, mitkä projektikentät näkyvät tuotekorteissa.",
+      "noFields": "Tässä näkymässä ei ole näytettäviä ylimääräisiä kenttiä.",
+      "fieldShown": "Näkyy korteissa",
+      "fieldHidden": "Piilossa korteilta",
+      "gitlabView": "GitLab Näytä",
+      "gitlabFilter": "GitLab Suodatin",
+      "linearFilter": "Linear Suodatin",
+      "linearWorkspace": "Linear Työtila",
+      "switchWorkspaceFailed": "Työtilan vaihtaminen epäonnistui",
+      "teamsTitle": "Linear Joukkueet",
+      "teamsSubtitle": "Valitse, mitkä joukkueet näkyvät Tasksissa.",
+      "allTeams": "Kaikki tiimit",
+      "teams_one": "{{count}} tiimi",
+      "teams_other": "{{count}} tiimiä",
+      "changeStatus": "Muuta tilaa",
+      "linearIssue": "Linear-issue",
+      "loadingStates": "Ladataan tiloja...",
+      "noStates": "Ei osavaltioita saatavilla",
+      "jiraFilter": "Jira suodatin",
+      "jiraSite": "Jiran sivusto"
+    },
+    "githubProjectList": {
+      "chooseProject": "Valitse GitHub projekti",
+      "browseProjects": "Selaa projekteja",
+      "noItems": "Ei projektikohteita",
+      "items": "Tuotteet",
+      "pullRequestSubtitle": "Vetopyyntö · {{repository}}{{number}}",
+      "issueSubtitle": "Ongelma · {{repository}}{{number}}",
+      "itemSubtitle": "Projektikohde · {{repository}}{{number}}",
+      "emptyField": "Tyhjä",
+      "moreFields_one": "+{{count}} kenttä",
+      "moreFields_other": "+{{count}} kenttää"
+    },
+    "githubProjectPickers": {
+      "title": "GitHub Projektit",
+      "subtitle": "Valitse Projektinäkymä Tehtävät-sivulle.",
+      "searchProjects": "Hae projekteja",
+      "addPlaceholder": "Lisää URL-osoitteella tai owner/number",
+      "adding": "Lisätään…",
+      "add": "Lisää",
+      "ownerLoadFailed": "Projekteja omistajalta {{owner}} ei voitu ladata.",
+      "organizationsLoadFailed": "Jotkut organisaatiot eivät latautuneet ({{count}}).",
+      "addByUrlHint": "Käytä Lisää URL-osoitteella tavoittaaksesi puuttuvat projektit.",
+      "organizationsError": "organisaatiot: {{message}}",
+      "loadFailed": "Projektien lataaminen epäonnistui",
+      "noProjects": "Projekteja ei ladattu",
+      "retryHint": "Yritä uudelleen napauttamalla.",
+      "pinned": "Kiinnitetyt",
+      "recent": "Viimeaikaiset",
+      "pin": "Kiinnitä",
+      "browseLoading": "Selaa kaikkia (ladataan...)",
+      "browseAll": "Selaa kaikkia",
+      "noMatches": "Ei vastaavia projekteja.",
+      "noMoreProjects": "Ei enää projekteja.",
+      "chooseView": "Valitse Projektinäkymä",
+      "view": "Projektinäkymä",
+      "unsupportedLayout": "Prompt ei tue tätä GitHub Projektin asettelua vielä.",
+      "sort": "Projektin lajittelu"
+    },
+    "githubViewControls": {
+      "source": "Lähde: {{source}}",
+      "sort": "Lajittele: {{sort}}",
+      "fields": "Kentät: {{fields}}",
+      "openView": "Avaa näkymä GitHubissa"
+    },
+    "itemActions": {
+      "creating": "Luodaan…",
+      "createWorkspace": "Luo työtila",
+      "copyLinearLink": "Kopioi Linear linkki",
+      "copyGitHubLink": "Kopioi GitHub-linkki",
+      "mergePullRequest": "Yhdistä vetopyyntö",
+      "mergeConflicts": "GitHub raporttien yhdistämisristiriidat.",
+      "mergeMergeRequest": "Yhdistä yhdistämispyyntö",
+      "changeStatus": "Vaihda tila"
+    },
+    "itemDetailContent": {
+      "pipelineJobs_one": "{{count}} työpaikkaa",
+      "pipelineJobs_other": "{{count}} työpaikkaa",
+      "type": "Tyyppi",
+      "status": "Tila",
+      "assignee": "Vastuuhenkilö",
+      "project": "Projekti",
+      "assignees": "Käsittelijät",
+      "description": "Kuvaus",
+      "checks": "Checkit",
+      "rerunFailed": "Uudelleenajo epäonnistui",
+      "rerunAll": "Suorita kaikki uudelleen",
+      "noChecks": "Sekkejä ei löytynyt.",
+      "pipeline": "Putkilinja",
+      "none": "Ei mitään",
+      "noPipelineRuns": "Tälle MR:lle ei ole pipeline-suorituksia.",
+      "subIssues": "Alakysymykset",
+      "noSubIssues": "Ei ala-asioita.",
+      "subIssueTitle": "Alaissuen otsikko",
+      "addSubIssue": "Lisää ala-aihe",
+      "discussion": "Keskustelu",
+      "noComments": "Ei kommentteja."
+    },
+    "itemDetailDrawer": {
+      "refreshDetails": "Päivitä tiedot"
+    },
+    "itemFieldEditors": {
+      "title": "Otsikko",
+      "saveTitle": "Tallenna otsikko",
+      "labels": "Labelit",
+      "none": "Ei mitään",
+      "loadingLabels": "Ladataan tunnisteita...",
+      "noLabels": "Ei tunnisteita tässä arkistossa.",
+      "addLabels": "Lisää tunnisteita pilkuilla erotettuina",
+      "removeLabels": "Poista tarrat pilkuilla erotettuina",
+      "updateLabels": "Päivitä tarrat",
+      "assignees": "Käsittelijät",
+      "loadingAssignees": "Ladataan valtuutettuja...",
+      "noAssignableUsers": "Tälle arkistolle ei löytynyt määritettäviä käyttäjiä.",
+      "addUsernames": "Lisää käyttäjätunnukset pilkuilla erotettuina",
+      "removeUsernames": "Poista käyttäjätunnukset pilkuilla erotettuina",
+      "updateAssignees": "Päivitä valtuutetut"
+    },
+    "itemReviewSections": {
+      "descriptionPlaceholder": "Kuvaus",
+      "saveDescription": "Tallenna kuvaus",
+      "noDescription": "Ei kuvausta.",
+      "reviewersTitle": "Reviewerit",
+      "noReviewersRequested": "Reviewereita ei ole pyydetty.",
+      "loadingReviewers": "Ladataan arvioijia...",
+      "noReviewerSuggestions": "Arvostelijaehdotuksia ei löytynyt.",
+      "reviewersPlaceholder": "Pyydä arvioijia",
+      "requestReview": "Pyydä tarkistusta",
+      "changedFilesTitle": "Muuttuneet tiedostot",
+      "hideFile": "Piilota",
+      "viewFile": "Näytä",
+      "markUnviewed": "Merkitse katsomattomaksi",
+      "markViewed": "Merkitse katsotuksi",
+      "binaryFile": "Binääritiedosto.",
+      "fileContentsUnavailable": "Tiedoston sisältö ei ole saatavilla."
+    },
+    "linearList": {
+      "changeStatusFrom": "Muuta tila {{status}}"
+    },
+    "linearViewControls": {
+      "groupLabel": "Ryhmä: {{group}}",
+      "orderLabel": "Järjestys: {{order}}",
+      "displayButton": "Näyttö"
+    },
+    "listDisplayPickers": {
+      "linearViewTitle": "Linear Näytä",
+      "linearGroupTitle": "Ryhmän Linear ongelmat",
+      "linearOrderTitle": "Tilaa Linear Issues",
+      "displayPropertiesTitle": "Näytön ominaisuudet",
+      "sortTasksTitle": "Lajittele tehtävät"
+    },
+    "listSurface": {
+      "updateDesktopTitle": "Päivitä Prompt työpöytä",
+      "updateDesktopMessage": "Tämä mobiili Tasks-näkymä tarvitsee uudemman työpöytäkäyttöympäristön.",
+      "jiraStatusFailed": "Jiran tilan lukeminen epäonnistui",
+      "connectLinearTitle": "Yhdistä Linear-tili",
+      "connectLinearMessage": "Selaa ja aloita määrittämiesi Linear ongelman käsittely suoraan Tasksista.",
+      "connectLinearButton": "Yhdistä Linear"
+    },
+    "options": {
+      "githubDescription": "Ongelmia ja vetopyyntöjä",
+      "gitlabDescription": "Ongelmat ja yhdistämispyynnöt",
+      "linearDescription": "Tehdyt ja tiimikysymykset",
+      "jiraDescription": "Määritetyt ja raportoidut ongelmat",
+      "openState": "Avoin",
+      "gitlabOpenDescription": "Avoimet ongelmat ja yhdistämispyynnöt",
+      "mergedState": "Mergattu",
+      "gitlabMergedDescription": "Yhdistetyt yhdistämispyynnöt",
+      "closedState": "Suljettu",
+      "gitlabClosedDescription": "Suljetut ongelmat ja yhdistämispyynnöt",
+      "all": "Kaikki",
+      "gitlabAllDescription": "Mikä tahansa GitLab tila",
+      "linearAllDescription": "Avoimet ongelmat yhdistetyissä työtiloissa",
+      "myIssues": "Omat ongelmani",
+      "linearAssignedDescription": "Sinulle määrätyt ongelmat",
+      "createdState": "Luotu",
+      "linearCreatedDescription": "Sinun luomiasi ongelmia",
+      "completedState": "Valmis",
+      "linearCompletedDescription": "Äskettäin valmistuneet numerot",
+      "list": "Luettelo",
+      "listDescription": "Tiivis ongelmarivit",
+      "board": "Taulu",
+      "boardDescription": "Ryhmitellyt sarakkeet",
+      "noGrouping": "Ei ryhmittelyä",
+      "status": "Tila",
+      "assignee": "Vastuuhenkilö",
+      "priority": "Prioriteetti",
+      "team": "Tiimi",
+      "updated": "Päivitetty",
+      "identifier": "Tunniste",
+      "labels": "Labelit",
+      "issues": "Issuet",
+      "githubIssuesDescription": "GitHub issuet",
+      "pullRequests": "PR:t",
+      "githubPullRequestsDescription": "GitHub vetopyyntöä",
+      "projects": "Projektit",
+      "githubProjectsDescription": "GitHub Projektinäkymät",
+      "githubOpenIssuesDescription": "Avaa GitHub ongelmaa",
+      "assignedToMe": "Minulle määritetyt",
+      "githubAssignedIssuesDescription": "Sinulle määrätyt avoimet ongelmat",
+      "openPullRequestsDescription": "Avaa vetopyynnöt",
+      "mine": "Omat",
+      "myPullRequestsDescription": "Vedä pyynnöt kirjoittaneet",
+      "needsReview": "Review tarvitaan",
+      "reviewRequestsDescription": "Tarkista sinulle osoitetut pyynnöt",
+      "projectMergeRequests": "Projektin MR:t",
+      "projectMergeRequestsDescription": "Yhdistä pyynnöt ja ongelmat arkiston mukaan",
+      "myTodos": "Omat tehtäväni",
+      "myTodosDescription": "Odottaa GitLab tehtävää",
+      "updatedSortDescription": "Uusin toiminta ensin",
+      "repository": "Arkisto",
+      "repositorySortDescription": "Ryhmittele arkiston mukaan, sitten uusin aktiviteetti"
+    },
+    "projectComments": {
+      "comments_one": "{{count}} kommentti",
+      "comments_other": "{{count}} kommenttia",
+      "discussion": "Keskustelu",
+      "noComments": "Ei kommentteja.",
+      "resolvedThreadBy": "Ratkaistu ketju, tekijä {{author}}",
+      "resolvedCommentBy": "Ratkaistu kommentti, tekijä {{author}}",
+      "show": "Näytä",
+      "editComment": "Muokkaa kommenttia",
+      "reopenThread": "Avaa lanka uudelleen",
+      "resolveThread": "Ratkaise lanka",
+      "reply": "Vastaa"
+    },
+    "projectDetailDrawer": {
+      "repositoryNotInOrca": "Arkisto ei sisällä Prompt",
+      "addRepositoryFromDesktop": "{{repository}} ei ole lisätty joukkoon Prompt. Lisää tämä arkisto työpöytäsovelluksesta ja päivitä sitten mobiilitehtävät.",
+      "openInGitHub": "Avaa GitHubissa",
+      "copyRepository": "Kopioi arkisto",
+      "projectSubtitle": "GitHub Projekti · {{repository}}{{itemNumber}}",
+      "type": "Tyyppi",
+      "pullRequest": "Vedä pyyntö",
+      "issue": "Ongelma",
+      "draftIssue": "Luonnosnumero",
+      "projectItem": "Projektikohde",
+      "status": "Tila",
+      "issueType": "Issue-tyyppi",
+      "noType": "Ei tyyppiä",
+      "loadingIssueTypes": "Ladataan ongelmatyyppejä...",
+      "noIssueTypes": "Tälle arkistolle ei ole määritetty ongelmatyyppejä.",
+      "clearType": "Kirkas tyyppi",
+      "createWorkspace": "Luo työtila",
+      "workspaceCreationRequirement": "Työtiloja voidaan luoda vain GitHub ongelmasta ja vetopyynnöstä.",
+      "copyGitHubLink": "Kopioi GitHub-linkki",
+      "reopenItem": "Avaa kohde uudelleen",
+      "closeItem": "Sulje kohde",
+      "mergePullRequest": "Yhdistä vetopyyntö",
+      "mergeRepositoryRequirement": "Yhdistäminen vaatii tämän arkiston paikassa Prompt."
+    },
+    "projectFieldEditors": {
+      "projectFields": "Projektikentät",
+      "invalidNumber": "Anna kelvollinen numero.",
+      "invalidDate": "Anna päivämäärä muodossa VVVV-KK-PP.",
+      "noIterations": "Iteraatioita ei ole saatavilla.",
+      "completedIteration": "Valmistettu · {{startDate}} · {{duration}}p",
+      "upcomingIteration": "Nykyinen ja tuleva · {{startDate}} · {{duration}}d",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "Numero",
+      "textPlaceholder": "Teksti",
+      "saveField": "Tallenna kenttä",
+      "clearField": "Tyhjennä kenttä"
+    },
+    "projectMetadataEditors": {
+      "labels": "Labelit",
+      "none": "Ei mitään",
+      "loadingLabels": "Ladataan tunnisteita...",
+      "noLabels": "Ei tunnisteita tässä arkistossa.",
+      "assignees": "Käsittelijät",
+      "loadingAssignees": "Ladataan valtuutettuja...",
+      "noAssignableUsers": "Tälle arkistolle ei löytynyt määritettäviä käyttäjiä.",
+      "title": "Otsikko",
+      "saveTitle": "Tallenna otsikko",
+      "description": "Kuvaus",
+      "saveDescription": "Tallenna kuvaus",
+      "noDescription": "Ei kuvausta."
+    },
+    "projectReviewPanels": {
+      "reviewers": "Reviewerit",
+      "noReviewers": "Reviewereita ei ole pyydetty.",
+      "loadingReviewers": "Ladataan arvioijia...",
+      "noSuggestions": "Arvostelijaehdotuksia ei löytynyt.",
+      "requestReviewers": "Pyydä arvioijia",
+      "requestReview": "Pyydä tarkistusta",
+      "checks": "Checkit",
+      "rerunFailed": "Uudelleenajo epäonnistui",
+      "rerunAll": "Suorita kaikki uudelleen",
+      "noChecks": "Sekkejä ei löytynyt.",
+      "changedFiles": "Muuttuneet tiedostot",
+      "hideFile": "Piilota",
+      "viewFile": "Näytä",
+      "markUnviewed": "Merkitse katsomattomaksi",
+      "markViewed": "Merkitse katsotuksi",
+      "binaryFile": "Binääritiedosto.",
+      "fileUnavailable": "Tiedoston sisältö ei ole saatavilla."
+    },
+    "providerControls": {
+      "projectMergeRequests": "Projektin MR:t",
+      "myTodos": "Omat tehtäväni",
+      "sort": "Lajittele: {{sortLabel}}"
+    },
+    "providerItemList": {
+      "previousPage": "Edellinen sivu",
+      "selectPage": "Valitse sivu, sivu {{page}}",
+      "selectPageOfTotal": "Valitse sivu, sivu {{page}}/{{total}}",
+      "page": "Sivu {{page}}",
+      "pageOfTotal": "Sivu {{page}}/{{total}}",
+      "nextPage": "Seuraava sivu",
+      "intoBranch": "kohtaan {{base}}"
+    },
+    "providerPickers": {
+      "taskSource": "Tehtävän lähde",
+      "repos": "Tietovarastot",
+      "repoDescription": "Valitse, mistä arkistoista haetaan.",
+      "allRepositories": "Kaikki repositoryt",
+      "issueSources": "GitHub Ongelman lähteet",
+      "issueSourcesDescription": "Valitse, kysyykö ja luoko kukin arkisto työtä alkupäästä vai alkuperästä.",
+      "noIssueSources": "Vaihtoehtoisia ongelmalähteitä ei ole saatavilla.",
+      "queryingSource": "Kysellään {{source}}",
+      "upstream": "Vastavirtaan",
+      "origin": "Alkuperä",
+      "githubView": "GitHub Näytä",
+      "pullRequests": "Vedä pyynnöt",
+      "issues": "Issuet",
+      "pages": "GitHub Sivut",
+      "pageHint": "Siirry ladatulle tai käytettävissä olevalle tulossivulle.",
+      "pageNumber": "Sivu {{page}}",
+      "pageLoaded": "Ladattu",
+      "pageNotLoaded": "Lataa vanhempia tuloksia"
+    },
+    "reviewerLinear": {
+      "unassigned": "Ei määritetty",
+      "issues": "Issuet"
+    },
+    "screenChrome": {
+      "refreshGitHub": "Päivitä GitHub-työt",
+      "refreshGitLab": "Päivitä GitLab-työkohteet",
+      "refreshLinear": "Päivitä Linear",
+      "refreshJira": "Päivitä Jira-issuet",
+      "title": "Tehtävät",
+      "newGitHubIssue": "Uusi GitHub-issue",
+      "newLinearIssue": "Uusi Linear-issue",
+      "connectLinear": "Yhdistä Linear"
+    },
+    "searchControl": {
+      "projectPlaceholder": "Hae projektinäkymää...",
+      "jiraPlaceholder": "Jira JQL, esim. projekti = ABC AND statusCategory != Valmis",
+      "providerPlaceholder": "Hae {{provider}} tehtävää..."
+    },
+    "workspaceCreateDrawer": {
+      "title": "Luo työtila",
+      "repository": "Arkisto",
+      "selectRepository": "Valitse arkisto",
+      "sshConnection": "SSH Yhteys",
+      "remoteRepository": "Etävarasto",
+      "connecting": "Yhdistetään...",
+      "connect": "Yhdistä",
+      "workspaceName": "Työtilan nimi",
+      "optional": "[Valinnainen]",
+      "agent": "Agentti",
+      "connectFirst": "Yhdistä arkisto ensin",
+      "detectingAgents": "Etsitään agentteja…",
+      "advanced": "Lisäasetukset",
+      "startFrom": "Aloita alkaen",
+      "defaultBranch": "Oletushaara",
+      "createFrom": "Luo kohteesta {{branch}}",
+      "addRepository": "Lisää Git-arkisto ennen Linear-työtilan luomista.",
+      "repositoryNotFound": "Arkistoa ei löydy.",
+      "connectRepository": "Yhdistä arkisto"
+    },
+    "workspaceOptionPickers": {
+      "baseBranchTitle": "Aloita alkaen",
+      "baseBranchSubtitle": "Valitse olemassa oleva haara tai viite.",
+      "searchBranches": "Hae brancheja",
+      "defaultBranch": "Oletushaara",
+      "defaultBranchSubtitle": "Käytä tämän arkiston määritettyä kantaa",
+      "noBranches": "Yksikään haara ei täsmää.",
+      "branchName": "Sivuliikkeen nimi: {{name}}",
+      "sparseCheckoutTitle": "Harva kassa",
+      "fullCheckout": "Täysi checkout",
+      "fullCheckoutSubtitle": "Käytä koko arkistoa",
+      "editPreset": "Muokkaa kohdetta {{name}}",
+      "newPreset": "Uusi esiasetus"
+    },
+    "workspaceTrustDrawers": {
+      "newSparsePreset": "Uusi harva esiasetus",
+      "editSparsePreset": "Muokkaa harvaa esiasetusta",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Renderöijän käyttöliittymä",
+      "directoriesLabel": "Kansiot",
+      "directories_one": "{{count}} hakemisto",
+      "directories_other": "{{count}} hakemistoja",
+      "setupTitle": "Suoritetaanko asennusohjelma?",
+      "setupSubtitle": "{{name}} vaatii asetukset ennen tämän työtilan luomista.",
+      "creating": "Luodaan…",
+      "runSetupAndCreate": "Suorita asennus ja luo",
+      "skipSetupAndCreate": "Ohita asennus ja luo",
+      "setupChangedTitle": "Käyttäjän {{name}} asennusohjelma muuttui",
+      "runSetupTitle": "Suoritetaanko asennus osoitteesta {{name}}?",
+      "trustSubtitle": "Tämän arkiston orca.yaml suoritetaan koneellasi ennen kuin työtila käynnistyy. Suorita se vain, jos luotat tähän arkistoon.",
+      "newSetupScript": "Uusi setup-skripti",
+      "setupScript": "Setup-skripti",
+      "trustFailed": "Asennusskriptin luottaminen epäonnistui.",
+      "runHooks": "Suorita hookit",
+      "alwaysTrustAndRun": "Luota aina ja juokse",
+      "dontRun": "Älä suorita"
+    },
+    "sparsePresetDraft": {
+      "repoRelativeDirectoriesRequired": "Käytä repositoryyn nähden suhteellisia kansioita, älä juurta, absoluuttisia polkuja tai ylätason osia.",
+      "directoryRequired": "Lisää vähintään yksi kansio."
+    },
+    "composerSource": {
+      "baseFailed": "Perushaaran ratkaiseminen epäonnistui.",
+      "forkPushWarning": "Tässä PR:ssa on \"Salli ylläpitäjien muokkaaminen\" pois päältä; haarukkaan työntäminen voidaan hylätä GitHub:lla."
+    },
+    "detailCommentRenderers": {
+      "commentPlaceholder": "Lisää kommentti",
+      "sendComment": "Lähetä kommentti",
+      "reopenThread": "Avaa lanka uudelleen",
+      "resolveThread": "Ratkaise lanka",
+      "reply": "Vastaa",
+      "comments_one": "{{count}} kommentti",
+      "comments_other": "{{count}} kommenttia",
+      "resolvedThreadBy": "Ratkaistu ketju, tekijä {{author}}",
+      "resolvedCommentBy": "Ratkaistu kommentti, tekijä {{author}}",
+      "show": "Näytä"
+    },
+    "pickerProjection": {
+      "sources_one": "{{count}} lähde",
+      "sources_other": "{{count}} lähdettä",
+      "repos_one": "{{count}} repo",
+      "repos_other": "{{count}} repoa",
+      "selectTarget": "Valitse kohde",
+      "allSites": "Kaikki sivustot",
+      "allRepos": "Kaikki repot",
+      "updatedSort": "Päivitetty",
+      "fieldDescending": "{{field}} kuvaus",
+      "fieldAscending": "{{field}} asc",
+      "viewOrder": "Katso tilaus",
+      "selectedFields": "{{selected}}/{{total}} kenttää",
+      "fields": "Kentät",
+      "usesFieldDescending": "Käyttää {{field}} desc",
+      "usesFieldAscending": "Käyttää {{field}} asc",
+      "usesGitHubRankOrder": "Käyttää GitHub järjestystä",
+      "currentlyDescending": "Currently desc · napauta nousevaksi",
+      "currentlyAscending": "Tällä hetkellä nouseva · napauta laskeaksesi",
+      "sortAscending": "Lajittele nousevasti",
+      "viewNumber": "Näytä #{{number}}",
+      "unsupportedLayout": "Asettelua ei tueta mobiililaitteella"
+    },
+    "providerViewProjection": {
+      "defaultSubtitle": "{{subtitle}} · Oletus",
+      "default": "Oletus",
+      "openState": "Avoin",
+      "allSites": "Kaikki sivustot",
+      "all": "Kaikki",
+      "list": "Luettelo",
+      "noGrouping": "Ei ryhmittelyä",
+      "priority": "Prioriteetti",
+      "allWorkspaces": "Kaikki työtilat",
+      "workspace": "Työtila",
+      "allTeams": "Kaikki tiimit",
+      "teams_one": "{{count}} tiimi",
+      "teams_other": "{{count}} tiimiä",
+      "projects": "Projektit",
+      "pullRequests": "PR:t",
+      "issues": "Issuet",
+      "chooseProject": "Valitse projekti"
+    },
+    "workspaceCreateProjection": {
+      "nameRequired": "Nimi on pakollinen.",
+      "nameTooLong": "Nimessä saa olla enintään 80 merkkiä.",
+      "nameAlreadyExists": "\"{{name}}\" on jo olemassa.",
+      "openShell": "Avaa kuori"
+    },
+    "workspaceAgentSelection": {
+      "blankTerminal": "Tyhjä pääte"
+    },
+    "workspaceSshGate": {
+      "connected": "Yhdistetty",
+      "connecting": "Yhdistetään",
+      "deployingRelay": "Releen käyttöönotto",
+      "reconnecting": "Yhdistetään uudelleen",
+      "authenticationFailed": "Todennus epäonnistui",
+      "reconnectFailed": "Uudelleen yhdistäminen epäonnistui",
+      "connectionFailed": "Yhteys epäonnistui",
+      "disconnected": "Yhteys katkaistu"
+    },
+    "worktreeCreateRetry": {
+      "createFailed": "Työtilan luominen epäonnistui"
+    },
+    "hostedMerge": {
+      "merged": "Mergattu",
+      "closed": "Suljettu",
+      "conflicts": "Ristiriidat",
+      "behind": "Jäljessä",
+      "blocked": "Estetty",
+      "checksPending": "Checkit odottavat",
+      "ableToMerge": "Voidaan yhdistää",
+      "unknown": "Tuntematon"
+    },
+    "pagination": {
+      "pageUnreachable": "Sivu {{page}} ylittää sen, mitä GitHub haku voi palauttaa.",
+      "loadPageFailed": "Sivua {{page}} ei voitu ladata kohteesta GitHub.",
+      "noMoreResults": "Ei enempää tuloksia sivulla {{page}}."
+    }
+  },
+  "terminal": {
+    "webView": {
+      "loadFailed": "Päätteen WebView-lataus epäonnistui",
+      "httpError": "Päätteen WebView HTTP-virhe",
+      "renderProcessEnded": "Päätteen WebView-renderöintiprosessi päättyi",
+      "documentStartFailed": "pääteasiakirja ei käynnistynyt - {{message}}"
+    },
+    "keyDefinitions": {
+      "forwardDelete": "Poista edelleen",
+      "arrowUp": "Nuoli ylös",
+      "arrowDown": "Nuoli alas",
+      "arrowLeft": "Nuoli vasemmalle",
+      "arrowRight": "Nuoli oikealle",
+      "accessoryArrowUp": "Nuoli ylös",
+      "accessoryArrowDown": "Nuoli alas",
+      "accessoryArrowLeft": "Nuoli vasemmalle",
+      "accessoryArrowRight": "Nuoli oikealle",
+      "interruptTerminal": "Keskeytä terminaali",
+      "sendEof": "Lähetä EOF",
+      "clearScreen": "Tyhjennä näyttö",
+      "suspendProcess": "Keskeytä prosessi",
+      "reverseSearch": "Käänteinen haku",
+      "startOfLine": "Linjan alku",
+      "endOfLine": "Rivin loppu",
+      "deleteWordBackward": "Poista sana taaksepäin",
+      "clearLineBeforeCursor": "Tyhjennä viiva ennen kohdistinta"
+    },
+    "webviewEngineErrorState": {
+      "status": "tila {{statusCode}}",
+      "code": "koodi {{code}}",
+      "rendererCrashed": "renderöijä kaatui",
+      "title": "Terminaalin lataaminen epäonnistui",
+      "reload": "Lataa uudelleen"
+    },
+    "webviewNotificationDispatch": {
+      "unknownError": "Tuntematon päätevirhe"
+    },
+    "webviewReadyWatchdog": {
+      "initializeFailed": "Pääte ei alustunut - ei valmiussignaalia päätenäkymästä"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Puhelimesi ja tietokoneesi on oltava samassa Wi-Fi-verkossa tai Tailscale. Rele on pois päältä kohdassa Prompt."
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Izinkan Prompt menggunakan kamera untuk memindai kode QR.",
+    "NSLocalNetworkUsageDescription": "Prompt terhubung ke aplikasi Prompt di komputer melalui jaringan lokal Anda.",
+    "NSMicrophoneUsageDescription": "Izinkan Prompt menggunakan mikrofon untuk dikte suara. Suara dikirim ke komputer yang dipasangkan untuk diubah menjadi teks.",
+    "NSPhotoLibraryUsageDescription": "Izinkan Prompt melampirkan foto dari galeri Anda ke sesi terminal di komputer yang dipasangkan."
+  }
+}

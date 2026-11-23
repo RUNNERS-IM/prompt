@@ -2650,11 +2650,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "Bağlantı açılamadı. Yeniden deneyin.",
-      "socialProfile": "X'te Prompt",
       "sourceCode": "Prompt kaynak kodu",
       "tagline": "100 kat daha üretken geliştiriciler için açık kaynaklı ajan IDE'si",
-      "title": "Hakkında",
-      "website": "Prompt web sitesi"
+      "title": "Hakkında"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "Kontrol edilemedi",
@@ -2712,7 +2710,6 @@
       "voice": "Ses"
     },
     "menuScreen": {
-      "privacyPolicy": "Gizlilik Politikası",
       "support": "Destek"
     },
     "nativeChatSettingsScreen": {
@@ -3827,6 +3824,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "Çalışma alanı oluşturulamadı"
+    },
+    "hostedMerge": {
+      "merged": "Merge edildi",
+      "closed": "Kapalı",
+      "conflicts": "Conflict'ler",
+      "behind": "Geride",
+      "blocked": "Engellendi",
+      "checksPending": "Kontroller beklemede",
+      "ableToMerge": "Merge edilebilir",
+      "unknown": "Bilinmiyor"
+    },
+    "pagination": {
+      "pageUnreachable": "Sayfa {{page}}, GitHub aramasının döndürebileceği sayfanın ötesinde.",
+      "loadPageFailed": "Sayfa {{page}}, GitHub'den yüklenemedi.",
+      "noMoreResults": "Sayfa {{page}}'da başka sonuç yok."
     }
   },
   "terminal": {
@@ -3934,6 +3946,11 @@
       "inProgress": "Devam ediyor",
       "inReview": "İncelemede",
       "pinned": "Sabitlenenler"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Telefonunuz ve bilgisayarınız aynı Wi-Fi veya Tailscale üzerinde olmalıdır. Röle Prompt'de kapalı."
     }
   }
 }

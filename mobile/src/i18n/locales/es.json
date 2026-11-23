@@ -2487,7 +2487,8 @@
     "presentation": {
       "loadingTabs": "Cargando pestañas",
       "tabs_one": "{{count}} pestaña",
-      "tabs_other": "{{count}} pestañas"
+      "tabs_other": "{{count}} pestañas",
+      "tabs_many": "{{count}} pestañas"
     },
     "terminalTabAgent": {
       "terminalNumber": "Terminal {{number}}",
@@ -2726,11 +2727,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "No se pudo abrir el enlace. Vuelve a intentarlo.",
-      "socialProfile": "Prompt en X",
       "sourceCode": "Código fuente de Prompt",
       "tagline": "IDE de código abierto con agentes para creadores 100x",
-      "title": "Acerca de",
-      "website": "Sitio web de Prompt"
+      "title": "Acerca de"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "No se pudo comprobar",
@@ -2791,7 +2790,6 @@
       "voice": "Voz"
     },
     "menuScreen": {
-      "privacyPolicy": "Política de privacidad",
       "support": "Soporte"
     },
     "nativeChatSettingsScreen": {
@@ -3933,6 +3931,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "No se pudo crear el espacio de trabajo"
+    },
+    "hostedMerge": {
+      "merged": "Fusionado",
+      "closed": "Cerrado",
+      "conflicts": "Conflictos",
+      "behind": "Por detrás",
+      "blocked": "Bloqueado",
+      "checksPending": "Comprobaciones pendientes",
+      "ableToMerge": "Se puede mergear",
+      "unknown": "Desconocido"
+    },
+    "pagination": {
+      "pageUnreachable": "La página {{page}} está más allá de lo que la búsqueda GitHub puede devolver.",
+      "loadPageFailed": "La página {{page}} no se pudo cargar desde GitHub.",
+      "noMoreResults": "No más resultados en la página {{page}}."
     }
   },
   "terminal": {
@@ -4043,6 +4056,11 @@
       "inProgress": "En curso",
       "inReview": "En revisión",
       "pinned": "Fijados"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Su teléfono y computadora deben estar en el mismo Wi-Fi o Tailscale. El relé está apagado en Prompt."
     }
   }
 }

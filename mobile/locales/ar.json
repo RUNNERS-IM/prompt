@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "اسمح لـ Prompt باستخدام الكاميرا لمسح رموز QR.",
+    "NSLocalNetworkUsageDescription": "يتصل Prompt بتطبيق Prompt على الكمبيوتر عبر شبكتك المحلية.",
+    "NSMicrophoneUsageDescription": "اسمح لـ Prompt باستخدام الميكروفون للإملاء الصوتي. يُرسل الصوت إلى الكمبيوتر المقترن لتحويله إلى نص.",
+    "NSPhotoLibraryUsageDescription": "اسمح لـ Prompt بإرفاق صور من مكتبتك بجلسة طرفية على الكمبيوتر المقترن."
+  }
+}

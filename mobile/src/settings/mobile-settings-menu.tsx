@@ -2,7 +2,8 @@ import type { ReactNode } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
-import { ChevronLeft, ChevronRight, type LucideIcon } from 'lucide-react-native'
+import { type LucideIcon } from 'lucide-react-native'
+import { BackChevron, ForwardChevron } from '../components/ReadingChevron'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
@@ -28,7 +29,7 @@ export function MobileSettingsFrame({
           style={styles.backButton}
           onPress={onBack ?? (() => router.back())}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>{t('common.settings', 'Settings')}</Text>
       </View>
@@ -74,7 +75,7 @@ export function MobileSettingsSection({
           >
             <Icon size={16} color={colors.textSecondary} />
             <Text style={styles.rowLabel}>{label}</Text>
-            {!external && <ChevronRight size={16} color={colors.textMuted} />}
+            {!external && <ForwardChevron size={16} color={colors.textMuted} />}
           </Pressable>
         </View>
       ))}

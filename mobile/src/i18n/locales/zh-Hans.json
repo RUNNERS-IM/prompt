@@ -2646,11 +2646,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "无法打开链接。请重试。",
-      "socialProfile": "Prompt 的 X 主页",
       "sourceCode": "Prompt 源代码",
       "tagline": "助力开发者百倍提效的开源智能体 IDE",
-      "title": "关于",
-      "website": "Prompt 网站"
+      "title": "关于"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "检查失败",
@@ -2708,7 +2706,6 @@
       "voice": "语音"
     },
     "menuScreen": {
-      "privacyPolicy": "隐私政策",
       "support": "支持"
     },
     "nativeChatSettingsScreen": {
@@ -3823,6 +3820,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "创建工作区失败"
+    },
+    "hostedMerge": {
+      "merged": "已合并",
+      "closed": "已关闭",
+      "conflicts": "冲突",
+      "behind": "在后面",
+      "blocked": "已阻塞",
+      "checksPending": "检查待定",
+      "ableToMerge": "可以合并",
+      "unknown": "未知"
+    },
+    "pagination": {
+      "pageUnreachable": "页 {{page}} 超出了 GitHub 搜索可以返回的范围。",
+      "loadPageFailed": "无法从 GitHub 加载页面 {{page}}。",
+      "noMoreResults": "第 {{page}} 页上没有更多结果。"
     }
   },
   "terminal": {
@@ -3930,6 +3942,11 @@
       "inProgress": "进行中",
       "inReview": "评审中",
       "pinned": "已固定"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "您的手机和计算机必须位于同一个 Wi-Fi 或 Tailscale 上。 Prompt 中继电器关闭。"
     }
   }
 }

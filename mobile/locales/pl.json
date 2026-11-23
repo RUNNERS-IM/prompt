@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Zezwól aplikacji Prompt na używanie aparatu do skanowania kodów QR.",
+    "NSLocalNetworkUsageDescription": "Prompt łączy się z aplikacją Prompt na komputerze przez sieć lokalną.",
+    "NSMicrophoneUsageDescription": "Zezwól aplikacji Prompt na używanie mikrofonu do dyktowania. Głos jest wysyłany do sparowanego komputera w celu zamiany na tekst.",
+    "NSPhotoLibraryUsageDescription": "Zezwól aplikacji Prompt na dołączanie zdjęć z biblioteki do sesji terminala na sparowanym komputerze."
+  }
+}

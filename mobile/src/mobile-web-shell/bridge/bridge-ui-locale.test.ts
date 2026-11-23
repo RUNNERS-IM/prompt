@@ -33,7 +33,7 @@ it('keeps an init whose language this page does not ship', async () => {
   pair = createFakeBridgePortPair()
   await pair.flush()
   const init = pair.readToPage().find((frame) => frame.type === 'init')
-  const read = readBridgeHostMessage(JSON.stringify({ ...init, uiLocale: 'it' }))
+  const read = readBridgeHostMessage(JSON.stringify({ ...init, uiLocale: 'sw' }))
   expect(read.ok).toBe(true)
   expect(
     read.ok && read.message.type === 'init' ? read.message.uiLocale : 'refused'

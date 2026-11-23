@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Salli Prompt käyttää kameraa QR-koodien lukemiseen.",
+    "NSLocalNetworkUsageDescription": "Prompt muodostaa yhteyden tietokoneen Prompt-sovellukseen lähiverkossa.",
+    "NSMicrophoneUsageDescription": "Salli Prompt käyttää mikrofonia sanelussa. Puhe lähetetään paritetulle tietokoneelle tekstiksi muunnettavaksi.",
+    "NSPhotoLibraryUsageDescription": "Salli Prompt liittää kuvia kirjastostasi paritetun tietokoneen päätteistuntoon."
+  }
+}

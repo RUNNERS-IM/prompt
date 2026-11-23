@@ -1,7 +1,8 @@
 import { View, Text, Pressable, ScrollView } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
-import { Check, ChevronLeft } from 'lucide-react-native'
+import { Check } from 'lucide-react-native'
+import { BackChevron } from '../components/ReadingChevron'
 import { colors, spacing } from '../theme/mobile-theme'
 import { appearanceSettingsStyles as styles } from './appearance-settings-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
@@ -39,7 +40,7 @@ export default function AppearanceSettingsScreen() {
           style={styles.backButton}
           onPress={() => router.back()}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>{t('settings.appearance.title', 'Appearance')}</Text>
       </View>

@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Consenti a Prompt di usare la fotocamera per scansionare i codici QR.",
+    "NSLocalNetworkUsageDescription": "Prompt si collega all'app Prompt sul computer tramite la rete locale.",
+    "NSMicrophoneUsageDescription": "Consenti a Prompt di usare il microfono per la dettatura vocale. La voce viene inviata al computer abbinato per la trascrizione.",
+    "NSPhotoLibraryUsageDescription": "Consenti a Prompt di allegare foto dalla tua libreria a una sessione del terminale sul computer abbinato."
+  }
+}

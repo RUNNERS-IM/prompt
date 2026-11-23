@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { ChevronLeft, Copy, Check, Send } from 'lucide-react-native'
+import { Copy, Check, Send } from 'lucide-react-native'
+import { BackChevron } from '../components/ReadingChevron'
 import { colors, spacing } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { ConnectionLog } from '../components/ConnectionLog'
@@ -60,7 +61,7 @@ export function ConnectionDiagnosticsView({
           style={styles.backButton}
           onPress={onBack}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>
           {t('diagnostics.connectionDiagnosticsView.title', 'Network diagnostics')}

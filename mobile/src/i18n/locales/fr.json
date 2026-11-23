@@ -2487,7 +2487,8 @@
     "presentation": {
       "loadingTabs": "Chargement des onglets",
       "tabs_one": "{{count}} onglet",
-      "tabs_other": "{{count}} onglets"
+      "tabs_other": "{{count}} onglets",
+      "tabs_many": "{{count}} onglets"
     },
     "terminalTabAgent": {
       "terminalNumber": "Terminal {{number}}",
@@ -2726,11 +2727,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "Impossible d'ouvrir le lien. Réessayez.",
-      "socialProfile": "Prompt sur X",
       "sourceCode": "Code source de Prompt",
       "tagline": "IDE open source avec agents pour les développeurs 100x",
-      "title": "À propos",
-      "website": "Site web de Prompt"
+      "title": "À propos"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "Échec de la vérification",
@@ -2791,7 +2790,6 @@
       "voice": "Voix"
     },
     "menuScreen": {
-      "privacyPolicy": "Politique de confidentialité",
       "support": "Assistance"
     },
     "nativeChatSettingsScreen": {
@@ -3933,6 +3931,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "Échec de la création de l'espace de travail"
+    },
+    "hostedMerge": {
+      "merged": "Fusionné",
+      "closed": "Fermé",
+      "conflicts": "Conflits",
+      "behind": "En retard",
+      "blocked": "Bloquée",
+      "checksPending": "Vérifications en attente",
+      "ableToMerge": "Peut merger",
+      "unknown": "Inconnu"
+    },
+    "pagination": {
+      "pageUnreachable": "La page {{page}} va au-delà de ce que la recherche GitHub peut renvoyer.",
+      "loadPageFailed": "La page {{page}} n'a pas pu être chargée à partir de GitHub.",
+      "noMoreResults": "Plus de résultats à la page {{page}}."
     }
   },
   "terminal": {
@@ -4043,6 +4056,11 @@
       "inProgress": "En cours",
       "inReview": "En revue",
       "pinned": "Épinglés"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Votre téléphone et votre ordinateur doivent être sur le même réseau Wi-Fi ou Tailscale. Le relais est désactivé dans Prompt."
     }
   }
 }
