@@ -44,12 +44,12 @@
       "unknownHostPlatform": "호스트 플랫폼을 확인할 수 없습니다.",
       "updateHost": "에이전트 세션 기록을 보려면 이 호스트의 Prompt를 업데이트하세요.",
       "waitingForHost": "호스트 대기 중…",
-      "workspace": "워크스페이스"
+      "workspace": "작업 창"
     },
     "resumeTarget": {
-      "differentHost": "이 세션은 다른 호스트에 속합니다. 재개하려면 같은 호스트의 워크스페이스를 여세요.",
-      "openWorkspace": "세션을 재개하기 전에 워크스페이스를 여세요.",
-      "runtimeUnavailable": "런타임에서 호스팅되는 워크스페이스에서는 기록에서 세션을 재개할 수 없습니다."
+      "differentHost": "이 세션은 다른 호스트에 속합니다. 재개하려면 같은 호스트의 작업 창을 여세요.",
+      "openWorkspace": "세션을 재개하기 전에 작업 창을 여세요.",
+      "runtimeUnavailable": "런타임에서 호스팅되는 작업 창에서는 기록에서 세션을 재개할 수 없습니다."
     },
     "sessionCard": {
       "untitledSession": "제목 없는 세션"
@@ -772,7 +772,7 @@
       "reorderHint": "드래그하지 않고 순서를 바꾸려면 '위로 이동'과 '아래로 이동' 동작을 사용하세요."
     },
     "homeQuickActions": {
-      "newWorkspace": "새 워크스페이스",
+      "newWorkspace": "새 작업 창",
       "pairDesktop": "컴퓨터 페어링",
       "title": "빠른 작업"
     },
@@ -817,7 +817,7 @@
       "dismissDrawer": "하단 패널 닫기"
     },
     "newWorkspaceFab": {
-      "newWorkspace": "새로운 워크스페이스"
+      "newWorkspace": "새로운 작업 창"
     },
     "newWorkspaceSetupScriptField": {
       "hooks": "훅",
@@ -845,7 +845,7 @@
       "noProjectsFound": "프로젝트를 찾을 수 없습니다.",
       "note": "메모",
       "notePlaceholder": "메모 쓰기",
-      "workspaceName": "워크스페이스 이름"
+      "workspaceName": "작업 창 이름"
     },
     "newWorktreeModal": {
       "remoteRepository": "원격 저장소"
@@ -876,13 +876,13 @@
       "openAppStore": "App Store 열기",
       "openGitHubReleases": "GitHub Releases 열기",
       "refreshRecoveryNote": "이 메시지가 계속 표시되면 이 호스트를 제거한 후 다시 페어링하세요.",
-      "refreshWorkspaceBody": "이 호스트용으로 캐시된 워크스페이스가 컴퓨터에서 요구하는 버전보다 오래되었습니다. 이 호스트에 다시 연결하여 최신 버전을 다운로드하세요.",
-      "refreshWorkspaceTitle": "모바일 워크스페이스 새로고침",
+      "refreshWorkspaceBody": "이 호스트용으로 캐시된 작업 창이 컴퓨터에서 요구하는 버전보다 오래되었습니다. 이 호스트에 다시 연결하여 최신 버전을 다운로드하세요.",
+      "refreshWorkspaceTitle": "모바일 작업 창 새로고침",
       "updateDesktopTitle": "컴퓨터의 Prompt 업데이트",
       "updateMobileTitle": "Prompt 모바일 업데이트",
       "updateRecoveryNote": "이미 업데이트하셨습니까? 호스트 화면으로 돌아가 연결을 새로고침하세요. 이 메시지가 계속 표시되면 이 호스트를 제거한 후 다시 페어링하세요.",
-      "workspaceNeedsUpdateAppStore": "이 컴퓨터의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
-      "workspaceNeedsUpdateGitHubReleases": "이 컴퓨터의 모바일 워크스페이스에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요."
+      "workspaceNeedsUpdateAppStore": "이 컴퓨터의 모바일 작업 창에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. App Store에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요.",
+      "workspaceNeedsUpdateGitHubReleases": "이 컴퓨터의 모바일 작업 창에는 더 최신 버전의 Prompt 모바일 앱이 필요합니다. GitHub Releases에서 Prompt 모바일을 업데이트한 후 이 호스트에 다시 연결하세요."
     },
     "richMarkdownEditor": {
       "imageUrl": "이미지 URL",
@@ -911,7 +911,7 @@
     },
     "setupHookTrustDrawer": {
       "alwaysTrustAndRun": "항상 신뢰하고 실행",
-      "description": "워크스페이스가 시작되기 전에 이 저장소의 orca.yaml이 실행됩니다. 이 저장소를 신뢰하는 경우에만 실행하세요.",
+      "description": "작업 창이 시작되기 전에 이 저장소의 orca.yaml이 실행됩니다. 이 저장소를 신뢰하는 경우에만 실행하세요.",
       "dontRun": "실행 안 함",
       "newScriptLabel": "새 설정 스크립트",
       "runHooks": "후크 실행",
@@ -923,7 +923,7 @@
       "branchName": "브랜치 이름",
       "derivedFromName": "이름을 바탕으로 생성",
       "name": "이름",
-      "workspaceName": "워크스페이스 이름"
+      "workspaceName": "작업 창 이름"
     },
     "smartWorkspaceSourceDrawer": {
       "connectRepository": "소스를 검색하려면 저장소를 연결하세요.",
@@ -933,7 +933,7 @@
       "searchPlaceholder": "이름 입력 또는 소스 검색",
       "switchRepo": "{{repoName}}(으)로 전환",
       "title": "이름 또는 '다음에서 만들기'",
-      "typeWorkspaceName": "아래 입력란에 워크스페이스 이름을 입력하세요."
+      "typeWorkspaceName": "아래 입력란에 작업 창 이름을 입력하세요."
     },
     "smartWorkspaceSourceField": {
       "openSelectedSource": "선택한 소스 열기",
@@ -944,7 +944,7 @@
       "createBranch": "\"{{name}}\" 브랜치 생성",
       "issue": "이슈 #{{number}}",
       "mergeRequest": "MR !{{number}}",
-      "nameWorkspace": "워크스페이스 이름 지정",
+      "nameWorkspace": "작업 창 이름 지정",
       "newBranch": "새 브랜치",
       "pullRequest": "PR #{{number}}",
       "useName": "\"{{name}}\" 사용"
@@ -994,11 +994,11 @@
       "useModel": "{{label}} 사용"
     },
     "workspaceDetailPlaceholder": {
-      "description": "사이드바에서 워크스페이스를 선택하면 해당 터미널이 여기에 열립니다.",
-      "title": "열린 워크스페이스 없음"
+      "description": "사이드바에서 작업 창을 선택하면 해당 터미널이 여기에 열립니다.",
+      "title": "열린 작업 창 없음"
     },
     "workspaceNameInput": {
-      "placeholder": "워크스페이스 이름"
+      "placeholder": "작업 창 이름"
     },
     "worktreeListRow": {
       "child": "하위",
@@ -1098,7 +1098,7 @@
       "unknownHost": "알 수 없는 호스트"
     },
     "mobileWebShellUpdateFailureRow": {
-      "title": "워크스페이스 업데이트"
+      "title": "작업 창 업데이트"
     },
     "troubleshootCommonIssues": {
       "allowNotifications": "시스템 설정에서 Prompt 알림이 허용되어 있고 집중 모드나 방해 금지 모드가 꺼져 있는지 확인하세요.",
@@ -1154,7 +1154,7 @@
     },
     "webShellUpdateFailureCopy": {
       "blockedReason": "차단됨: {{reason}}.",
-      "blockedWorkspace": "워크스페이스를 차단했습니다.",
+      "blockedWorkspace": "작업 창을 차단했습니다.",
       "failed": "오류 화면을 표시했습니다.",
       "failedAgo": "{{hostName}}에서 최신 업데이트를 받는 데 {{time}} 전에 실패했습니다: {{reason}}{{offered}}. {{outcome}}",
       "failedJustNow": "{{hostName}}에서 최신 업데이트를 받는 데 방금 실패했습니다: {{reason}}{{offered}}. {{outcome}}",
@@ -1164,7 +1164,7 @@
         "buildChanged": "다운로드 중 호스트의 빌드가 변경되었습니다",
         "offsetInvalid": "호스트가 읽기 오프셋을 거부했습니다",
         "readLimited": "호스트가 동시 읽기를 제한했습니다",
-        "unavailable": "호스트에 워크스페이스 번들이 없습니다"
+        "unavailable": "호스트에 작업 창 번들이 없습니다"
       },
       "nativeRoute": "네이티브 화면을 표시했습니다.",
       "offeredGeneration": " (세대 {{generation}})",
@@ -1193,10 +1193,10 @@
       "wallCopy": {
         "bundleShellTooOld": "이 앱의 버전이 너무 낮아 저장된 번들을 사용할 수 없습니다",
         "bundleTooOldForHost": "저장된 번들의 버전이 너무 낮아 이 호스트에서 사용할 수 없습니다",
-        "bundleUnavailable": "호스트에 워크스페이스 번들이 없습니다",
+        "bundleUnavailable": "호스트에 작업 창 번들이 없습니다",
         "hostTooOldForBundle": "호스트의 버전이 너무 낮아 저장된 번들을 사용할 수 없습니다",
         "pageRouteGrantMissing": "이 화면을 사용하려면 더 최신 버전의 앱이 필요합니다",
-        "pageRouteUnlisted": "호스트의 워크스페이스에 이 화면이 포함되어 있지 않습니다"
+        "pageRouteUnlisted": "호스트의 작업 창에 이 화면이 포함되어 있지 않습니다"
       }
     }
   },
@@ -1272,7 +1272,7 @@
     },
     "filePreviewScreen": {
       "backToFiles": "파일 목록으로 돌아가기",
-      "chooseWorkspaceFile": "이 워크스페이스 안의 파일을 선택하세요.",
+      "chooseWorkspaceFile": "이 작업 창 안의 파일을 선택하세요.",
       "discard": "버리기",
       "discardMessage": "저장하지 않은 편집 내용은 사라집니다.",
       "discardMessageSaving": "진행 중인 저장이 완료되지 않을 수 있습니다. 저장하지 않은 편집 내용은 사라집니다.",
@@ -1395,28 +1395,28 @@
       "reconnect": "다시 연결"
     },
     "hostPendingCreationRow": {
-      "creatingWorkspace": "워크스페이스 만드는 중…"
+      "creatingWorkspace": "작업 창 만드는 중…"
     },
     "hostRailActions": {
       "accounts": "계정",
       "closeSearch": "검색 닫기",
-      "floatingWorkspace": "플로팅 워크스페이스",
-      "newWorkspace": "새로운 워크스페이스",
-      "searchWorkspaces": "워크스페이스 검색",
+      "floatingWorkspace": "플로팅 작업 창",
+      "newWorkspace": "새로운 작업 창",
+      "searchWorkspaces": "작업 창 검색",
       "tasks": "작업"
     },
     "hostScreenHeader": {
       "accounts": "계정",
-      "activeFilters_one": "워크스페이스 옵션 (필터 {{count}}개 활성화됨)",
-      "activeFilters_other": "워크스페이스 옵션 (필터 {{count}}개 활성화됨)",
+      "activeFilters_one": "작업 창 옵션 (필터 {{count}}개 활성화됨)",
+      "activeFilters_other": "작업 창 옵션 (필터 {{count}}개 활성화됨)",
       "backToHosts": "호스트 목록으로 돌아가기",
       "closeSearch": "검색 닫기",
-      "floatingWorkspace": "플로팅 워크스페이스",
+      "floatingWorkspace": "플로팅 작업 창",
       "hideSidebar": "사이드바 숨기기",
       "reconnect": "다시 연결",
-      "searchWorkspaces": "워크스페이스 검색",
+      "searchWorkspaces": "작업 창 검색",
       "tasks": "작업",
-      "workspaceOptions": "워크스페이스 옵션"
+      "workspaceOptions": "작업 창 옵션"
     },
     "hostScreenOverlays": {
       "deleteConfirmMessage": "\"{{name}}\" ({{branch}})을(를) 삭제하시겠습니까?",
@@ -1429,8 +1429,8 @@
       "unpin": "고정 해제"
     },
     "hostWorkspaceList": {
-      "searchPlaceholder": "워크스페이스 검색…",
-      "searchWorkspaces": "워크스페이스 검색"
+      "searchPlaceholder": "작업 창 검색…",
+      "searchWorkspaces": "작업 창 검색"
     },
     "workspaceDetailsSheet": {
       "checksFailing": "체크: 실패",
@@ -1470,7 +1470,7 @@
       "linearIssues": "Linear 이슈",
       "manual": "수동",
       "manualProjectOrderDescription": "프로젝트를 드래그하여 정렬하세요.",
-      "manualWorkspaceOrderDescription": "워크스페이스를 드래그하여 각 그룹 내에서 정렬하세요.",
+      "manualWorkspaceOrderDescription": "작업 창을 드래그하여 각 그룹 내에서 정렬하세요.",
       "name": "이름",
       "none": "없음",
       "notes": "메모",
@@ -1479,25 +1479,25 @@
       "prMrLink": "PR/MR 링크",
       "project": "프로젝트",
       "recent": "최근",
-      "recentProjectOrderDescription": "가장 최근의 워크스페이스 활동",
+      "recentProjectOrderDescription": "가장 최근의 작업 창 활동",
       "searchProjects": "프로젝트 검색",
       "searchProjectsPlaceholder": "프로젝트 검색…",
       "selectedCount": "{{total}}개 중 {{count}}개",
       "status": "상태"
     },
     "workspaceOptionsSheet": {
-      "backToOptions": "워크스페이스 옵션으로 돌아가기",
+      "backToOptions": "작업 창 옵션으로 돌아가기",
       "cardDisplay": "카드 표시",
       "cardLayout": "카드 레이아웃",
       "clearFilters": "필터 지우기",
       "exceptDefaultBranch": "기본 브랜치는 제외",
       "filters": "필터",
       "groupBy": "그룹화 기준",
-      "hideAutomationCreated": "자동화로 생성된 워크스페이스 숨기기",
-      "hideCliCreated": "CLI로 생성된 워크스페이스 숨기기",
+      "hideAutomationCreated": "자동화로 생성된 작업 창 숨기기",
+      "hideCliCreated": "CLI로 생성된 작업 창 숨기기",
       "hideDefaultBranch": "기본 브랜치 숨기기",
       "hideDetachedHead": "분리된 HEAD 숨기기",
-      "hideOtherClientWorkspaces": "다른 클라이언트 워크스페이스 숨기기",
+      "hideOtherClientWorkspaces": "다른 클라이언트 작업 창 숨기기",
       "hideSleeping": "슬립 중인 항목 숨기기",
       "hosts": "호스트",
       "localLinux": "로컬 Linux",
@@ -1512,7 +1512,7 @@
       "syncedAcrossDevices": "기기 간 동기화됨",
       "thisComputer": "이 컴퓨터",
       "waitingForDesktop": "아직 컴퓨터 응답을 기다리는 중",
-      "workspaceOptions": "워크스페이스 옵션"
+      "workspaceOptions": "작업 창 옵션"
     }
   },
   "navigation": {
@@ -1526,12 +1526,12 @@
       "sourceControl": "소스 제어",
       "tasks": "작업",
       "terminal": "터미널",
-      "workspace": "워크스페이스"
+      "workspace": "작업 창"
     }
   },
   "newWorkspace": {
     "hostPicker": {
-      "title": "워크스페이스 생성 호스트"
+      "title": "작업 창 생성 호스트"
     },
     "loadingDrawer": {
       "downloadProgress": "다운로드 중… {{progress}}",
@@ -1550,7 +1550,7 @@
       "onlyWhenAwayHint": "키보드나 마우스를 3분간 사용하지 않거나 컴퓨터가 잠겨 있을 때 알림을 보냅니다.",
       "sound": "알림음",
       "suppressWhileFocused": "보고 있는 동안 알림 끄기",
-      "suppressWhileFocusedHint": "이 휴대폰에서 열어 둔 워크스페이스의 알림을 받지 않습니다."
+      "suppressWhileFocusedHint": "이 휴대폰에서 열어 둔 작업 창의 알림을 받지 않습니다."
     }
   },
   "onboarding": {
@@ -1968,7 +1968,7 @@
       "sendCommand": "명령 보내기"
     },
     "contentRow": {
-      "dismissCreationWarning": "워크스페이스 생성 경고 닫기"
+      "dismissCreationWarning": "작업 창 생성 경고 닫기"
     },
     "diffCommentLineRow": {
       "addNote": "{{line}}행에 메모 추가",
@@ -2137,7 +2137,7 @@
       "sendReviewNotes": "AI에 리뷰 메모 보내기"
     },
     "floatingWorkspace": {
-      "title": "플로팅 워크스페이스"
+      "title": "플로팅 작업 창"
     },
     "githubPrMutations": {
       "reviewThreadUpdateFailed": "리뷰 스레드를 업데이트하지 못했습니다.",
@@ -2180,7 +2180,7 @@
       "files": "파일",
       "photos": "사진",
       "skills": "스킬",
-      "workspaceFile": "워크스페이스 파일"
+      "workspaceFile": "작업 창 파일"
     },
     "nativeChatCardHeaderAction": {
       "collapse": "접기"
@@ -2273,7 +2273,7 @@
       "projectScope": "프로젝트",
       "prompt": "프롬프트",
       "promptHint": "스킬, 파일 경로, 기본 제공 명령을 지원합니다.",
-      "promptPlaceholder": "에이전트에게 이 워크스페이스를 조사하도록 요청하세요.",
+      "promptPlaceholder": "에이전트에게 이 작업 창을 조사하도록 요청하세요.",
       "promptSizeCharacters": "{{used}} / {{max}}자",
       "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
       "promptTooLong": "너무 길어서 저장할 수 없습니다.",
@@ -2323,7 +2323,7 @@
       "securing": "보안 연결 설정 중"
     },
     "routeScreen": {
-      "openingWorkspace": "워크스페이스 여는 중"
+      "openingWorkspace": "작업 창 여는 중"
     },
     "sheets": {
       "browser": "브라우저",
@@ -2359,8 +2359,8 @@
       "backToWorktrees": "워크트리로 돌아가기"
     },
     "sourceControlLaunchAgent": {
-      "noEnabledAgent": "이 워크스페이스 호스트에서는 활성화된 AI 에이전트가 감지되지 않았습니다.",
-      "savedAgentUnavailable": "이 작업에 저장된 에이전트는 이 워크스페이스 호스트에서 사용할 수 없습니다."
+      "noEnabledAgent": "이 작업 창 호스트에서는 활성화된 AI 에이전트가 감지되지 않았습니다.",
+      "savedAgentUnavailable": "이 작업에 저장된 에이전트는 이 작업 창 호스트에서 사용할 수 없습니다."
     },
     "structuredComposerCommand": {
       "operationUnconfirmed": "대화 작업이 확인되지 않았습니다.",
@@ -3225,7 +3225,7 @@
       "kimiSessionIdRequired": "Kimi가 프롬프트 모드에서 재개하려면 세션 ID가 필요합니다. 텍스트 생성 레시피 또는 CLI 인수를 수정한 후 다시 시도하세요.",
       "kimiSessionNotFound": "Kimi가 요청한 세션을 찾지 못했습니다. 기존 세션을 사용하거나 새 세션을 시작하세요.",
       "kimiSessionOccupied": "다른 클라이언트에서 활성 상태인 세션이므로 Kimi가 이 세션을 사용할 수 없습니다. 해당 클라이언트에서 세션을 중지하거나 클라이언트를 종료한 후 다시 시도하세요.",
-      "kimiSessionOtherDirectory": "이 Kimi 세션은 다른 디렉터리에 속합니다. 해당 디렉터리에서 재개하거나 이 워크스페이스용으로 만든 세션을 사용하세요.",
+      "kimiSessionOtherDirectory": "이 Kimi 세션은 다른 디렉터리에 속합니다. 해당 디렉터리에서 재개하거나 이 작업 창용으로 만든 세션을 사용하세요.",
       "kimiUnreadableOutput": "Kimi가 Prompt에서 읽을 수 없는 출력을 반환했습니다. 다시 시도하세요.",
       "noBranchChanges": "요약할 브랜치 변경 사항이 없습니다.",
       "noModelForAgent": "{{label}}에서 사용할 수 있는 모델이 없습니다.",
@@ -3293,11 +3293,11 @@
       "jiraSite": "Jira 사이트",
       "linearFilter": "Linear 필터",
       "linearIssue": "Linear 이슈",
-      "linearWorkspace": "Linear 워크스페이스",
+      "linearWorkspace": "Linear 작업 창",
       "loadingStates": "상태 로드 중…",
       "noFields": "이 보기에는 표시할 추가 필드가 없습니다.",
       "noStates": "사용 가능한 상태가 없습니다.",
-      "switchWorkspaceFailed": "워크스페이스를 전환하지 못했습니다.",
+      "switchWorkspaceFailed": "작업 창을 전환하지 못했습니다.",
       "teamsSubtitle": "작업 화면에 표시할 팀을 선택하세요.",
       "teamsTitle": "Linear 팀",
       "teams_one": "팀 {{count}}개",
@@ -3351,7 +3351,7 @@
       "changeStatus": "상태 변경",
       "copyGitHubLink": "GitHub 링크 복사",
       "copyLinearLink": "Linear 링크 복사",
-      "createWorkspace": "워크스페이스 만들기",
+      "createWorkspace": "작업 창 만들기",
       "creating": "만드는 중…",
       "mergeConflicts": "GitHub에서 병합 충돌이 보고되었습니다.",
       "mergeMergeRequest": "MR 병합",
@@ -3479,7 +3479,7 @@
       "issues": "이슈",
       "jiraDescription": "할당된 이슈 및 보고한 이슈",
       "labels": "라벨",
-      "linearAllDescription": "연결된 워크스페이스의 열린 이슈",
+      "linearAllDescription": "연결된 작업 창의 열린 이슈",
       "linearAssignedDescription": "할당받은 이슈",
       "linearCompletedDescription": "최근 완료된 이슈",
       "linearCreatedDescription": "직접 생성한 이슈",
@@ -3557,7 +3557,7 @@
       "closeItem": "항목 닫기",
       "copyGitHubLink": "GitHub 링크 복사",
       "copyRepository": "저장소 복사",
-      "createWorkspace": "워크스페이스 생성",
+      "createWorkspace": "작업 창 생성",
       "draftIssue": "초안 이슈",
       "issue": "이슈",
       "issueType": "이슈 유형",
@@ -3574,7 +3574,7 @@
       "repositoryNotInOrca": "Prompt에 없는 저장소",
       "status": "상태",
       "type": "유형",
-      "workspaceCreationRequirement": "워크스페이스는 GitHub 이슈와 PR에서만 생성할 수 있습니다."
+      "workspaceCreationRequirement": "작업 창은 GitHub 이슈와 PR에서만 생성할 수 있습니다."
     },
     "projectFieldEditors": {
       "clearField": "필드 비우기",
@@ -3660,7 +3660,7 @@
       "all": "모두",
       "allSites": "모든 사이트",
       "allTeams": "모든 팀",
-      "allWorkspaces": "모든 워크스페이스",
+      "allWorkspaces": "모든 작업 창",
       "chooseProject": "프로젝트 선택",
       "default": "기본",
       "defaultSubtitle": "{{subtitle}} · 기본",
@@ -3673,7 +3673,7 @@
       "pullRequests": "PR",
       "teams_one": "팀 {{count}}개",
       "teams_other": "팀 {{count}}개",
-      "workspace": "워크스페이스"
+      "workspace": "작업 창"
     },
     "reviewerLinear": {
       "issues": "이슈",
@@ -3719,15 +3719,15 @@
     },
     "tasksCreateDrawers": {
       "connect": "연결",
-      "connectLinearWorkspace": "Linear 워크스페이스 연결",
+      "connectLinearWorkspace": "Linear 작업 창 연결",
       "createIssue": "이슈 생성",
-      "createWorkspaceIn": "워크스페이스 생성 리포지토리",
+      "createWorkspaceIn": "작업 창 생성 리포지토리",
       "description": "설명",
       "descriptionPlaceholder": "배경 설명 추가",
       "fileIn": "{{slug}}에 이슈 등록",
       "issueSource": "이슈 소스",
       "keySecurityHint": "키는 호스트 OS 키체인을 통해 암호화되어 로컬에 저장됩니다.",
-      "linearConnectSubtitle": "해당 워크스페이스의 이슈를 보려면 개인 API 키를 붙여넣으세요.",
+      "linearConnectSubtitle": "해당 작업 창의 이슈를 보려면 개인 API 키를 붙여넣으세요.",
       "linearSettingsLink": "Linear 설정 / 보안 / 새 API 키",
       "linearTeam": "Linear 팀",
       "linearTeamSubtitle": "선택한 Linear 팀에 이슈를 생성하세요.",
@@ -3745,7 +3745,7 @@
       "blankTerminal": "빈 터미널"
     },
     "workspaceCreateDrawer": {
-      "addRepository": "Linear 워크스페이스를 생성하기 전에 Git 리포지토리를 추가하세요.",
+      "addRepository": "Linear 작업 창을 생성하기 전에 Git 리포지토리를 추가하세요.",
       "advanced": "고급",
       "agent": "에이전트",
       "connect": "연결",
@@ -3762,8 +3762,8 @@
       "selectRepository": "리포지토리 선택",
       "sshConnection": "SSH 연결",
       "startFrom": "시작 기준",
-      "title": "워크스페이스 생성",
-      "workspaceName": "워크스페이스 이름"
+      "title": "작업 창 생성",
+      "workspaceName": "작업 창 이름"
     },
     "workspaceCreateProjection": {
       "nameAlreadyExists": "\"{{name}}\"이(가) 이미 존재합니다.",
@@ -3812,14 +3812,14 @@
       "runSetupTitle": "{{name}}의 설정 스크립트를 실행하시겠습니까?",
       "setupChangedTitle": "{{name}}의 설정 스크립트가 변경되었습니다",
       "setupScript": "설정 스크립트",
-      "setupSubtitle": "{{name}}의 워크스페이스를 만들려면 먼저 설정 스크립트 실행 여부를 선택해야 합니다.",
+      "setupSubtitle": "{{name}}의 작업 창을 만들려면 먼저 설정 스크립트 실행 여부를 선택해야 합니다.",
       "setupTitle": "설정 스크립트를 실행하시겠습니까?",
       "skipSetupAndCreate": "설정 건너뛰고 만들기",
       "trustFailed": "설정 스크립트 신뢰 설정에 실패했습니다.",
-      "trustSubtitle": "워크스페이스가 시작되기 전에 이 저장소의 orca.yaml이 컴퓨터에서 실행됩니다. 이 저장소를 신뢰하는 경우에만 실행하세요."
+      "trustSubtitle": "작업 창이 시작되기 전에 이 저장소의 orca.yaml이 컴퓨터에서 실행됩니다. 이 저장소를 신뢰하는 경우에만 실행하세요."
     },
     "worktreeCreateRetry": {
-      "createFailed": "워크스페이스를 생성하지 못했습니다."
+      "createFailed": "작업 창을 생성하지 못했습니다."
     },
     "hostedMerge": {
       "merged": "병합됨",
@@ -3885,9 +3885,9 @@
       "documentLoadFailed": "다운로드한 앱을 열지 못했습니다.",
       "downloadFailed": "이 호스트에서 최신 앱을 다운로드하지 못했습니다.",
       "hostProfileUnreadable": "기기에서 이 호스트 정보를 읽지 못했습니다. 다시 시도하세요.",
-      "isolationUnavailable": "이 기기의 WebView 버전이 너무 오래되어 워크스페이스를 안전하게 열 수 없습니다.",
-      "openingWorkspace": "워크스페이스 여는 중",
-      "renderProcessGone": "워크스페이스가 응답하지 않습니다.",
+      "isolationUnavailable": "이 기기의 WebView 버전이 너무 오래되어 작업 창을 안전하게 열 수 없습니다.",
+      "openingWorkspace": "작업 창 여는 중",
+      "renderProcessGone": "작업 창이 응답하지 않습니다.",
       "statusUnreadable": "이 호스트의 상태를 읽지 못했습니다. 뒤로 돌아가 다시 열어 보세요.",
       "tryAgain": "다시 시도"
     }
@@ -3897,7 +3897,7 @@
       "automaticName": "자동 이름",
       "existing": "기존 브랜치",
       "existingHint": "새 커밋이 이 브랜치에 추가됩니다.",
-      "hostUpdateRequired": "브랜치를 재사용하거나 별도의 브랜치를 명시적으로 생성하려면 워크스페이스 호스트의 Prompt를 업데이트하세요.",
+      "hostUpdateRequired": "브랜치를 재사용하거나 별도의 브랜치를 명시적으로 생성하려면 작업 창 호스트의 Prompt를 업데이트하세요.",
       "new": "새 브랜치",
       "newHint": "새 로컬 브랜치 만들기",
       "newName": "새 브랜치 이름",
@@ -3927,12 +3927,12 @@
     },
     "hostWorkspaceListStates": {
       "checkHost": "컴퓨터가 절전 모드가 아니며 Prompt가 실행 중인지 확인하세요.",
-      "empty": "워크스페이스가 없습니다.",
-      "loadFailed": "이 호스트에서 워크스페이스를 불러오지 못했습니다.",
-      "noFilterMatches": "필터에 맞는 워크스페이스가 없습니다.",
-      "noMatches": "일치하는 워크스페이스가 없습니다.",
+      "empty": "작업 창이 없습니다.",
+      "loadFailed": "이 호스트에서 작업 창을 불러오지 못했습니다.",
+      "noFilterMatches": "필터에 맞는 작업 창이 없습니다.",
+      "noMatches": "일치하는 작업 창이 없습니다.",
       "reopen": "업데이트하려면 다시 여세요",
-      "reopenDetail": "이 페이지는 아직 이 호스트의 워크스페이스 목록 형식을 지원하지 않습니다.",
+      "reopenDetail": "이 페이지는 아직 이 호스트의 작업 창 목록 형식을 지원하지 않습니다.",
       "retrying": "worktree.ps가 실패했습니다({{error}}). 자동으로 다시 시도합니다."
     },
     "workspaceListSections": {
