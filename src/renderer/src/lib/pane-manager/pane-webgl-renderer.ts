@@ -30,6 +30,8 @@ import {
 export { primeTerminalWebglAddon } from './terminal-webgl-addon-loader'
 
 export const ENABLE_WEBGL_RENDERER = true
+// A worktree surface switched away from keeps its terminals' drawing buffers this long.
+export const HIDDEN_WORKTREE_WEBGL_KEEP_MS = 5 * 60_000
 let suggestedRendererType: 'dom' | undefined
 // Latch attach failures per pane to avoid repeated canvas/getContext allocation and stack warnings on title changes. Retry on rendering resume/GPU settings recovery; a global latch would strand unrelated panes on DOM.
 
@@ -277,11 +279,18 @@ export function attachWebgl(pane: ManagedPaneInternal): void {
     pane.webglAddon = addon
     const canvas = getXtermWebglCanvas(addon)
     if (canvas) {
-      // Why: panes of a hidden worktree surface keep their backing so switching worktrees never pays a reallocation.
+      // Why: panes of a hidden worktree surface keep their backing so switching back soon never pays a
+      // reallocation. Not forever: with many sessions each one held full-window buffers, several GB
+      // on a 5K display, so a surface left unvisited this long lets them go.
       releaseWebglCanvasBackingWhileHidden(
         canvas,
-        () => pane.container.closest('[data-worktree-surface-hidden]') === null,
-        (devicePixelSize) => restoreReleasedPaneWebglCanvas(pane, devicePixelSize)
+        (hiddenForMs) =>
+          hiddenForMs >= HIDDEN_WORKTREE_WEBGL_KEEP_MS ||
+          pane.container.closest('[data-worktree-surface-hidden]') === null,
+        (devicePixelSize) => restoreReleasedPaneWebglCanvas(pane, devicePixelSize),
+        // Why: glyph atlas pages stay in GPU memory after the backing goes; the reveal clears and
+        // repaints the atlas anyway, so a hidden pane can drop it for free.
+        () => clearWebglTextureAtlas(pane)
       )
     }
     refreshTerminalAfterWebglAttach(pane)
