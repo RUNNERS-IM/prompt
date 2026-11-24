@@ -20,6 +20,7 @@ import {
   recordRendererCrashBreadcrumb
 } from './lib/crash-diagnostics'
 import { installAutomationHostDiagnostic } from './components/automations/automation-host-diagnostics'
+import { installPromptTestShotScenes } from './lib/prompt-test-shot-scenes'
 import {
   applyCachedPluginAppTheme,
   applyDocumentTheme,
@@ -48,6 +49,7 @@ installRendererCrashDiagnostics()
 installTypingLatencyDiagnostic()
 installAppKeyboardRouter()
 installAutomationHostDiagnostic()
+installPromptTestShotScenes()
 
 if (
   import.meta.env.DEV &&

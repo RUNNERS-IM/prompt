@@ -46,6 +46,13 @@ function setPrompt(next: ClaudeAccountSwitchPrompt | null): void {
   }
 }
 
+/** Test shots (RUNNERS_TEST_SHOTS) open the dialog with made-up sessions; null closes it. */
+export function showClaudeAccountSwitchPromptForTestShots(
+  next: Omit<ClaudeAccountSwitchPrompt, 'id'> | null
+): void {
+  setPrompt(next ? { ...next, id: ++switchGeneration } : null)
+}
+
 export function getClaudeAccountSwitchPrompt(): ClaudeAccountSwitchPrompt | null {
   return prompt
 }

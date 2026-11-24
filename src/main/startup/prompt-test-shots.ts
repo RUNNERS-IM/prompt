@@ -14,6 +14,7 @@ import {
 } from '../runners-app-kit/test-shots'
 import { showPromptMenuPanelForTestShots } from '../tray/prompt-menu-panel-window'
 import { openPromptNoticesWindowForTestShots } from '../window/prompt-notices-window'
+import { addPromptTestShotAccounts } from './prompt-test-shot-accounts'
 
 const config = readTestShots()
 
@@ -111,6 +112,12 @@ async function escape(window: BrowserWindow): Promise<void> {
   await pause(500)
 }
 
+/** 화면 쪽 촬영 장면(lib/prompt-test-shot-scenes.ts)을 부르고 그려질 때까지 기다린다. */
+async function scene(window: BrowserWindow, name: string): Promise<void> {
+  await window.webContents.executeJavaScript(`window.__promptTestShotScenes?.${name}()`)
+  await pause(SETTLE_MS)
+}
+
 const SETTINGS_NAV = '[data-prompt-settings-sidebar] button'
 
 async function settingsLabels(window: BrowserWindow): Promise<string[]> {
@@ -144,16 +151,20 @@ async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<
   await pass.shot(window, 'popups', '새-판-알림')
   await setUpdateCardHidden(window, true)
 
-  // 계정: 사이드바의 Claude 계정 고르기 메뉴
-  const opened =
-    (await press(window, 'button', '시스템 기본값')) ||
-    (await press(window, 'button', 'System default'))
-  if (opened) {
+  // 계정: 사이드바의 Claude 계정 고르기 메뉴. 글이 언어마다 달라 단추 표시로 찾는다.
+  if (await press(window, '[data-prompt-claude-account-trigger]')) {
     await pass.shot(window, 'account', '계정 고르기')
     await escape(window)
   } else {
     pass.note('사이드바 계정 고르기 단추를 찾지 못함')
   }
+  // 계정을 바꾼 뒤 뜨는 창(세션 목록 포함)과 다시 켜는 중 알림. 지어낸 세션으로 연다.
+  await scene(window, 'accountSwitch')
+  await pass.shot(window, 'account', '계정 바꾸기 창')
+  await scene(window, 'clear')
+  await scene(window, 'restartToast')
+  await pass.shot(window, 'account', '다시 켜는 중 알림')
+  await scene(window, 'clear')
 
   // 설정: 사이드바에 보이는 탭 전부. 이름은 그 언어로 보이는 글 그대로 쓴다.
   window.webContents.send('ui:openSettings')
@@ -215,6 +226,7 @@ export async function startPromptTestShots(): Promise<void> {
   if (config.account) {
     config.warnings.push(`RUNNERS_TEST_ACCOUNT=${config.account} 는 Prompt 에서 아직 쓰지 않음`)
   }
+  const restoreAccounts = addPromptTestShotAccounts()
   const firstLanguage: unknown = await window.webContents.executeJavaScript(
     'window.api.settings.get().then((settings) => settings?.uiLanguage ?? null)'
   )
@@ -225,6 +237,7 @@ export async function startPromptTestShots(): Promise<void> {
       quit: () => {
         // 끄기 확인 창 등으로 멈추지 않게
         setTimeout(() => app.exit(0), 10_000).unref()
+        restoreAccounts()
         void window.webContents
           .executeJavaScript(
             `window.api.settings.set({ uiLanguage: ${JSON.stringify(firstLanguage ?? 'system')} })`
