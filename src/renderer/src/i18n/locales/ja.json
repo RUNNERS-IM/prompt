@@ -7734,7 +7734,7 @@
           "6b5a2cd3a5": "アクセシビリティ",
           "6b17602073": "アクセスをリセットする",
           "506f2acf7a": "アクセスをリセットしています…",
-          "statusGranted": "付与された",
+          "statusGranted": "許可済み",
           "statusUnsupported": "macOSのみ",
           "statusNotEnabled": "有効になっていません"
         },
@@ -7769,7 +7769,7 @@
           "actionRequest": "リクエスト",
           "actionOpenSettings": "設定を開く",
           "actionTriggerPrompt": "トリガープロンプト",
-          "statusGranted": "付与された",
+          "statusGranted": "許可済み",
           "statusDenied": "拒否されました",
           "statusNotRequested": "要求されていません",
           "statusRestricted": "制限付き",
@@ -8880,13 +8880,13 @@
         "ShortcutTerminalPolicyControl": {
           "0762983d13": "ターミナルファースト",
           "63308571d8": "まずは Orca",
-          "c43c7ff5f9": "誰が最初にショートカットを傍受するかを決める",
+          "c43c7ff5f9": "どちらが先にショートカットを受け取るかを決めます",
           "c3a554288e": "ターミナルのショートカット",
           "0f55c6f15c": "ショートカットが重なった場合に、Orca とフォーカスされたターミナルのどちらが優先されるかを選択します。"
         },
         "ShortcutsPane": {
-          "4b7ae34062": "直接。",
-          "38e86e206a": "ショートカットを視覚的にカスタマイズまたは編集する",
+          "4b7ae34062": "を直接編集します。",
+          "38e86e206a": "ショートカットを画面でカスタマイズするか、",
           "47f8f7aef9": "キーボードショートカット",
           "f0b35b0b2e": "ターミナルまたは TUI にキーボードフォーカスがある間は無効になります。",
           "5c65d5db9d": "ターミナルファースト",
