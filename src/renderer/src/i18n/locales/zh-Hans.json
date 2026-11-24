@@ -21293,6 +21293,8 @@
         "reasonNoSession": "无法恢复",
         "notMovedOne": "另有 1 个会话未移动。",
         "notMovedOther": "另有 {{count}} 个会话未移动。",
+        "notMovedNamesMore": "{{names}} 等另外 {{count}} 个",
+        "moveAll": "全部移动",
         "review": "查看",
         "restartCount_other": "重启 {{count}} 个会话",
         "reviewBody_other": "其他 {{count}} 个 Claude 会话未移至 {{next}}。",

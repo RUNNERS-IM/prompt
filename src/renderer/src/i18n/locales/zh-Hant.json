@@ -21133,6 +21133,8 @@
         "reasonNoSession": "無法繼續",
         "notMovedOne": "另有 1 個工作階段未移轉。",
         "notMovedOther": "另有 {{count}} 個工作階段未移轉。",
+        "notMovedNamesMore": "{{names}} 等另外 {{count}} 個",
+        "moveAll": "全部移動",
         "review": "審查",
         "restartCount_other": "重新啟動 {{count}} 個工作階段",
         "reviewBody_other": "其他 {{count}} 個 Claude 工作階段未移至 {{next}}。",

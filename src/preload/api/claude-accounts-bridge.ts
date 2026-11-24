@@ -3,6 +3,7 @@ import type { PreloadApi } from '../api-types'
 
 export const claudeAccountsApi = {
   list: () => ipcRenderer.invoke('claudeAccounts:list'),
+  probeRunningSessions: () => ipcRenderer.invoke('claudeAccounts:probeRunningSessions'),
   add: (args?: { runtime?: 'host' | 'wsl'; wslDistro?: string | null; copyLink?: boolean }) =>
     ipcRenderer.invoke('claudeAccounts:add', args),
   cancelPendingLogin: (): Promise<boolean> =>

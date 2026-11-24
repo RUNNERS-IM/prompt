@@ -21352,6 +21352,8 @@
         "reasonNoSession": "No se puede reanudar",
         "notMovedOne": "Otra sesión no se movió.",
         "notMovedOther": "Otras {{count}} sesiones no se movieron.",
+        "notMovedNamesMore": "{{names}} y {{count}} más",
+        "moveAll": "Mover todas",
         "review": "Revisar",
         "uncheckedOne": "No se pudo comprobar si Claude se ejecuta en 1 terminal. Si Claude se está ejecutando allí, seguirá usando {{previous}} hasta que se reinicie.",
         "uncheckedOther": "No se pudo comprobar si Claude se ejecuta en {{count}} terminales. Cualquier Claude que se esté ejecutando allí seguirá usando {{previous}} hasta que se reinicie.",

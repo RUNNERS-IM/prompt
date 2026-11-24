@@ -21131,6 +21131,8 @@
         "reasonNoSession": "Không thể tiếp tục",
         "notMovedOne": "1 phiên khác chưa được chuyển.",
         "notMovedOther": "{{count}} phiên khác chưa được chuyển.",
+        "notMovedNamesMore": "{{names}} và {{count}} phiên khác",
+        "moveAll": "Chuyển tất cả",
         "review": "Review",
         "restartCount_other": "Khởi động lại {{count}} phiên",
         "reviewBody_other": "{{count}} phiên Claude khác chưa được chuyển sang {{next}}.",

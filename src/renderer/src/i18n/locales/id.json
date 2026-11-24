@@ -21131,6 +21131,8 @@
         "reasonNoSession": "Tidak dapat dilanjutkan",
         "notMovedOne": "1 sesi lain tidak dipindahkan.",
         "notMovedOther": "{{count}} sesi lain tidak dipindahkan.",
+        "notMovedNamesMore": "{{names}} dan {{count}} lainnya",
+        "moveAll": "Pindahkan semua",
         "review": "Review",
         "restartCount_other": "Mulai ulang {{count}} sesi",
         "reviewBody_other": "{{count}} sesi Claude lainnya tidak dipindahkan ke {{next}}.",

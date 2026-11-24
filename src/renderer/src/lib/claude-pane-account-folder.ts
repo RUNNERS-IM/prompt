@@ -21,6 +21,8 @@ export type ClaudePaneFolder =
   | { kind: 'system-default' }
   | { kind: 'own-folder' }
 
+const PROMPT_PROFILE_HOME = /\/claude-profiles\/([^/]+)\/home$/
+
 /** Undefined means no hook evidence; without the host's default home every unmanaged folder is System default. */
 export function resolveClaudePaneFolder(
   transcriptPath: string | undefined,
@@ -41,6 +43,12 @@ export function resolveClaudePaneFolder(
     ) ?? host?.accounts.find((candidate) => isConfigDir(candidate.home))
   if (account) {
     return { kind: 'account', accountId: account.id }
+  }
+  // Why: a folder Prompt made for an account later removed or merged still takes the selected-account
+  // pointer on restart, so its sessions move like any account's; only a user's own folder stays put.
+  const formerAccountId = configDir.match(PROMPT_PROFILE_HOME)?.[1]
+  if (formerAccountId) {
+    return { kind: 'account', accountId: formerAccountId }
   }
   return !host?.systemDefaultHome || isConfigDir(host.systemDefaultHome)
     ? { kind: 'system-default' }

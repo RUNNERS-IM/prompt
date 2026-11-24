@@ -36,6 +36,7 @@ type StoreStub = {
   consumePendingPaneAccountRestart: (ptyId: string) => void
   agentStatusByPaneKey: Record<string, unknown>
   pendingPaneAccountRestarts: Record<string, string>
+  tabsByWorktree: Record<string, { id: string; title?: string; customTitle?: string }[]>
 }
 
 const store = vi.hoisted((): StoreStub => ({
@@ -45,7 +46,8 @@ const store = vi.hoisted((): StoreStub => ({
   queuePaneAccountRestarts: vi.fn(),
   consumePendingPaneAccountRestart: vi.fn(),
   agentStatusByPaneKey: {},
-  pendingPaneAccountRestarts: {}
+  pendingPaneAccountRestarts: {},
+  tabsByWorktree: {}
 }))
 const toastSuccess = vi.hoisted(() => vi.fn())
 const toastLoading = vi.hoisted(() => vi.fn())
@@ -340,10 +342,15 @@ describe('handleRunningClaudeSessionsAfterSwitch', () => {
       })
     )
 
+    store.tabsByWorktree = { 'wt-1': [{ id: 'tab-3', title: 'zsh', customTitle: '[SENSE] 홈' }] }
+
     await handleRunningClaudeSessionsAfterSwitch(SWITCH)
     expect(store.queuePaneAccountRestarts).toHaveBeenLastCalledWith(['pty-1', 'pty-2'], 'claude')
     const [, options] = toastLoading.mock.lastCall!
-    expect(options.description).toBe("1 other session wasn't moved.")
+    expect(options.description).toBe(
+      "1 other session wasn't moved. [SENSE] 홈 (Uses your own Claude folder)"
+    )
+    expect(options.cancel).toBeUndefined()
     options.action.onClick()
 
     expect(getClaudeAccountSwitchPrompt()).toMatchObject({

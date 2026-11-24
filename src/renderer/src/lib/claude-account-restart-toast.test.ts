@@ -112,4 +112,31 @@ describe('announceRestart', () => {
       expect.objectContaining({ duration: 5_000 })
     )
   })
+
+  it('names the sessions left behind with their reasons, and offers to move the movable ones', () => {
+    store.pendingPaneAccountRestarts = { 'pty-1': 'claude' }
+    const moveAll = vi.fn()
+    const review = vi.fn()
+    announceRestart([pane(1)], 'b@example.com', 5, review, {
+      lines: ['[SENSE] 홈 (Account unknown)', 'b (x)', 'c (x)', 'd (x)', 'e (x)'],
+      moveAll
+    })
+    const options = toast.loading.mock.calls.at(-1)![1]
+    expect(options.description).toBe(
+      "5 other sessions weren't moved. [SENSE] 홈 (Account unknown), b (x), c (x) and 2 more"
+    )
+    expect(options.action.label).toBe('Move all')
+    options.action.onClick()
+    expect(moveAll).toHaveBeenCalled()
+    expect(options.cancel.label).toBe('Review')
+  })
+
+  it('keeps Review as the only button when none of them can move', () => {
+    store.pendingPaneAccountRestarts = { 'pty-1': 'claude' }
+    announceRestart([pane(1)], 'b@example.com', 1, vi.fn(), { lines: ['a (WSL terminal)'] })
+    const options = toast.loading.mock.calls.at(-1)![1]
+    expect(options.description).toBe("1 other session wasn't moved. a (WSL terminal)")
+    expect(options.action.label).toBe('Review')
+    expect(options.cancel).toBeUndefined()
+  })
 })

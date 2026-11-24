@@ -172,13 +172,22 @@ export type ClaudeSwitchSessions = {
   onAccount: ClaudeSessionMoveCandidate[]
   /** On another account, or System default (null), that a restart could also move. */
   elsewhere: (ClaudeSessionMoveCandidate & { accountId: string | null })[]
-  cantMove: (ClaudeSessionMoveCandidate & { reason: ClaudeSessionCantMoveReason })[]
+  cantMove: (ClaudeSessionMoveCandidate & {
+    reason: ClaudeSessionCantMoveReason
+    /** Its folder is unknown but it can resume, so a restart on the selected account moves it. */
+    movable?: true
+  })[]
 }
 
 type ScannedPane =
   | { group: 'onAccount'; pane: LocalClaudePane }
   | { group: 'elsewhere'; pane: LocalClaudePane; accountId: string | null }
-  | { group: 'cantMove'; pane: LocalClaudePane; reason: ClaudeSessionCantMoveReason }
+  | {
+      group: 'cantMove'
+      pane: LocalClaudePane
+      reason: ClaudeSessionCantMoveReason
+      movable?: true
+    }
 
 function scanPane(
   pane: LocalClaudePane,
@@ -198,7 +207,10 @@ function scanPane(
   }
   const folder = resolveClaudePaneFolder(pane.transcriptPath, args.saved, args.host)
   if (!folder) {
-    return { group: 'cantMove', pane, reason: 'unknown-account' }
+    // Why movable: a restart reads the selected-account pointer, so it lands on the new account.
+    return isPaneResumable(pane)
+      ? { group: 'cantMove', pane, reason: 'unknown-account', movable: true }
+      : { group: 'cantMove', pane, reason: 'unknown-account' }
   }
   // Why: the shell function keeps a pane's own CLAUDE_CONFIG_DIR, so a restart lands in the same folder.
   if (folder.kind === 'own-folder') {
@@ -207,13 +219,7 @@ function scanPane(
   if (isClaudePaneOnAccount(folder, args.toAccountId, args.host)) {
     return null
   }
-  const resumable = resolveAgentAccountRestartResumeStartup('claude', {
-    tabId: pane.tabId,
-    leafId: pane.leafId,
-    worktreeId: pane.worktreeId,
-    shellOverride: pane.tab.shellOverride
-  })
-  if (!resumable) {
+  if (!isPaneResumable(pane)) {
     return { group: 'cantMove', pane, reason: 'no-session' }
   }
   return isClaudePaneOnAccount(folder, args.fromAccountId, args.host)
@@ -223,6 +229,17 @@ function scanPane(
         pane,
         accountId: folder.kind === 'account' ? folder.accountId : null
       }
+}
+
+function isPaneResumable(pane: LocalClaudePane): boolean {
+  return (
+    resolveAgentAccountRestartResumeStartup('claude', {
+      tabId: pane.tabId,
+      leafId: pane.leafId,
+      worktreeId: pane.worktreeId,
+      shellOverride: pane.tab.shellOverride
+    }) !== null
+  )
 }
 
 function isWslLane(laneKey: string): boolean {
@@ -292,7 +309,11 @@ export async function findClaudeSwitchSessions(args: {
     } else if (row.group === 'elsewhere') {
       found.elsewhere.push({ ...candidate, accountId: row.accountId })
     } else {
-      found.cantMove.push({ ...candidate, reason: row.reason })
+      found.cantMove.push(
+        row.movable
+          ? { ...candidate, reason: row.reason, movable: true }
+          : { ...candidate, reason: row.reason }
+      )
     }
   }
   if (unchecked.length > 0) {

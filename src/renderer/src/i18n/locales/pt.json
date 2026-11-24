@@ -21918,6 +21918,8 @@
         "reasonNoSession": "Não é possível retomar",
         "notMovedOne": "1 outra sessão não foi movida.",
         "notMovedOther": "{{count}} outras sessões não foram movidas.",
+        "notMovedNamesMore": "{{names}} e mais {{count}}",
+        "moveAll": "Mover todas",
         "review": "Revisar",
         "uncheckedOne": "Não foi possível verificar o Claude em 1 terminal. Se o Claude estiver em execução nele, ele continuará em {{previous}} até ser reiniciado.",
         "uncheckedOther": "Não foi possível verificar o Claude em {{count}} terminais. Qualquer Claude em execução neles continuará em {{previous}} até ser reiniciado.",

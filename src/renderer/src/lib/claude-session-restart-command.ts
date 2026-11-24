@@ -8,6 +8,7 @@ import type {
 } from '../../../shared/prompt-claude-login-sync'
 import { resolveAgentAccountRestartResumeStartup } from './agent-account-restart-startup'
 import { getClaudeAccountLabel } from './claude-account-label'
+import { fillClaudePaneSessionsFromProcesses } from './claude-running-session-fill'
 import { queueClaudeRestartsWithContinue } from './claude-account-switch-sessions'
 import { isClaudePaneOnAccount, resolveClaudePaneFolder } from './claude-pane-account-folder'
 import {
@@ -72,6 +73,8 @@ export async function handleClaudeSessionRestartRequest(
   listAccounts: () => Promise<ClaudeRateLimitAccountsState>
 ): Promise<PromptClaudeRestartResult> {
   const host = await listAccounts()
+  // Why: panes with no hook evidence would be skipped as unknown-account and have no resume id.
+  await fillClaudePaneSessionsFromProcesses()
   const launchAccountId = claudeLaunchAccountId(
     host,
     getProviderAccountActiveIdForView(host, HOST_VIEW)

@@ -71,16 +71,17 @@ export class ClaudeAccountSelection {
     this.pruneSelection()
     const settings = this.store.getSettings()
     const selection = normalizeClaudeRuntimeSelection(settings)
-    const accounts = settings.claudeManagedAccounts
-      .map((account): ClaudeManagedAccountSummary => {
-        try {
-          return this.summarize(account)
-        } catch (error) {
-          console.warn('[claude-accounts] Could not read account folder:', error)
-          return { ...this.savedSummary(account), needsSignIn: true }
-        }
-      })
-      .sort((a, b) => b.updatedAt - a.updatedAt)
+    const summaries = settings.claudeManagedAccounts.map((account): ClaudeManagedAccountSummary => {
+      try {
+        return this.summarize(account)
+      } catch (error) {
+        console.warn('[claude-accounts] Could not read account folder:', error)
+        return { ...this.savedSummary(account), needsSignIn: true }
+      }
+    })
+    const accounts = this.mergeSameLogin(summaries, selection.host).sort(
+      (a, b) => b.updatedAt - a.updatedAt
+    )
     const userConfigDir = this.runtimeAuth.router.userConfigDir()
     // Throttle parsing of the large, frequently rewritten personal state file.
     const systemDefault =
@@ -256,6 +257,48 @@ export class ClaudeAccountSelection {
     this.store.updateSettings(patch, { notifyListeners: true })
   }
 
+  /**
+   * Keep one entry per host login. Two entries end up on the same login when a folder's login
+   * changes under it (`/login` inside a session) or the same email is signed in again; the list
+   * then showed the account twice. The selected entry stays, else the one signed in last. The
+   * dropped entry's folder is kept: sessions may still run there, and a switch moves them off it.
+   */
+  private mergeSameLogin(
+    summaries: ClaudeManagedAccountSummary[],
+    selectedHostId: string | null
+  ): ClaudeManagedAccountSummary[] {
+    const keepByLogin = new Map<string, ClaudeManagedAccountSummary>()
+    const drop = new Set<string>()
+    for (const summary of summaries) {
+      const key = sameLoginKey(summary)
+      if (!key) {
+        continue
+      }
+      const kept = keepByLogin.get(key)
+      if (!kept) {
+        keepByLogin.set(key, summary)
+        continue
+      }
+      const keepNew =
+        summary.id === selectedHostId ||
+        (kept.id !== selectedHostId && signedInAt(summary) > signedInAt(kept))
+      drop.add(keepNew ? kept.id : summary.id)
+      if (keepNew) {
+        keepByLogin.set(key, summary)
+      }
+    }
+    if (drop.size === 0) {
+      return summaries
+    }
+    console.info('[claude-accounts] Merged saved accounts that share one login:', [...drop])
+    this.saveSettings({
+      claudeManagedAccounts: this.store
+        .getSettings()
+        .claudeManagedAccounts.filter((entry) => !drop.has(entry.id))
+    })
+    return summaries.filter((summary) => !drop.has(summary.id))
+  }
+
   private pruneSelection(): void {
     const settings = this.store.getSettings()
     const current = normalizeClaudeRuntimeSelection(settings)
@@ -270,4 +313,23 @@ export class ClaudeAccountSelection {
       })
     }
   }
+}
+
+/** Only host folders whose own login was read count; a saved email may be stale. */
+function sameLoginKey(summary: ClaudeManagedAccountSummary): string | null {
+  const email = summary.email?.trim().toLowerCase()
+  if (
+    !email ||
+    !summary.home ||
+    summary.needsSignIn ||
+    summary.runsOnSystemDefault ||
+    summary.managedAuthRuntime === 'wsl'
+  ) {
+    return null
+  }
+  return `${email}\n${summary.organizationUuid?.trim() ?? ''}`
+}
+
+function signedInAt(summary: ClaudeManagedAccountSummary): number {
+  return summary.lastAuthenticatedAt
 }
