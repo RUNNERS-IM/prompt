@@ -22009,7 +22009,7 @@
         "notMovedOne": "1 weitere Sitzung wurde nicht umgestellt.",
         "notMovedOther": "{{count}} weitere Sitzungen wurden nicht umgestellt.",
         "notMovedNamesMore": "{{names}} und {{count}} weitere",
-        "moveAll": "Alle verschieben",
+        "moveAll": "Alle umstellen",
         "review": "Prüfen",
         "restartCount_one": "{{count}} Sitzung neu starten",
         "restartCount_other": "{{count}} Sitzungen neu starten",
