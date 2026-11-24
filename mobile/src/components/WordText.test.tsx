@@ -9,7 +9,8 @@ vi.mock('react-native', () => ({
   Text: (props: Record<string, unknown>) => createElement('Text', props)
 }))
 
-const { WordText } = await vi.importActual<typeof import('./WordText')>('./WordText')
+const { WordText, keepParticles, keepWords } =
+  await vi.importActual<typeof import('./WordText')>('./WordText')
 
 let renderer: ReactTestRenderer | undefined
 
@@ -45,5 +46,27 @@ describe('WordText', () => {
     const props = renderText('카메라를 맞추세요.')
     expect(props.children).toBe('카메라를 맞추세요.')
     expect(props.lineBreakStrategyIOS).toBe('hangul-word')
+  })
+
+  it('keeps a particle on the line of the English word before it on iOS too', () => {
+    platform.OS = 'ios'
+    const props = renderText('Remotrol을 다시 켜거나')
+    expect(props.children).toBe('Remotrol⁠을 다시 켜거나')
+    expect(props.accessibilityLabel).toBe('Remotrol을 다시 켜거나')
+  })
+
+  it('joins particles and syllables on Android', () => {
+    expect(renderText('Mac에서 켜').children).toBe('Mac⁠에⁠서 켜')
+  })
+})
+
+describe('keepParticles', () => {
+  it('joins only after a Latin word, digit, closing mark or percent', () => {
+    expect(keepParticles('3개 · 50%가 (Mac)에서')).toBe('3⁠개 · 50%⁠가 (Mac)⁠에서')
+    expect(keepParticles('Google Chrome 끄기')).toBe('Google Chrome 끄기')
+  })
+
+  it('keepWords adds syllable joiners on top', () => {
+    expect(keepWords('Remotrol을 켜')).toBe('Remotrol⁠을 켜')
   })
 })
