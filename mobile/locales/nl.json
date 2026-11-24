@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "NSCameraUsageDescription": "Sta Prompt toe de camera te gebruiken om QR-codes te scannen.",
+    "NSLocalNetworkUsageDescription": "Prompt maakt via je lokale netwerk verbinding met de Prompt-app op je computer.",
+    "NSMicrophoneUsageDescription": "Sta Prompt toe de microfoon te gebruiken voor spraakdictaat. Je stem wordt naar de gekoppelde computer gestuurd om om te zetten in tekst.",
+    "NSPhotoLibraryUsageDescription": "Sta Prompt toe foto's uit je bibliotheek toe te voegen aan een terminalsessie op de gekoppelde computer."
+  }
+}

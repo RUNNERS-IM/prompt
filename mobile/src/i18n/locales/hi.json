@@ -1,0 +1,3954 @@
+{
+  "settings": {
+    "appearance": {
+      "theme": {
+        "system": "सिस्टम",
+        "light": "लाइट",
+        "dark": "डार्क",
+        "heading": "थीम",
+        "description": "सिस्टम इस डिवाइस की रोशनी या अंधेरे सेटिंग का अनुसरण करता है।"
+      },
+      "title": "दिखावट",
+      "language": {
+        "systemWithCurrent": "सिस्टम ({{language}})",
+        "heading": "भाषा",
+        "description": "सिस्टम इस डिवाइस की भाषा का अनुसरण करता है। अनुमति संकेत हमेशा डिवाइस भाषा का उपयोग करते हैं।"
+      }
+    },
+    "aboutScreen": {
+      "title": "जानकारी",
+      "tagline": "100x बिल्डरों के लिए ओपन-सोर्स एजेंट आईडीई",
+      "sourceCode": "Prompt स्रोत कोड",
+      "openLinkFailed": "लिंक नहीं खुल सका. पुनः प्रयास करें।"
+    },
+    "appUpdateSettingsRows": {
+      "checking": "जाँच हो रही है…",
+      "upToDate": "अप-टू-डेट",
+      "checkFailed": "जाँच नहीं हो सकी",
+      "neverChecked": "कभी नहीं",
+      "lastCheckedJustNow": "अंतिम बार अभी जाँच की गई",
+      "lastCheckedMinutes_one": "अंतिम बार जाँच की गई {{count}}m पहले",
+      "lastCheckedMinutes_other": "अंतिम बार जाँच की गई {{count}}m पहले",
+      "lastCheckedHours_one": "अंतिम बार जाँच {{count}} घंटे पहले की गई थी",
+      "lastCheckedHours_other": "अंतिम बार जाँच {{count}} घंटे पहले की गई थी",
+      "lastCheckedDays_one": "अंतिम बार जाँच {{count}} दिन पहले की गई थी",
+      "lastCheckedDays_other": "अंतिम बार जाँच {{count}} दिन पहले की गई थी",
+      "updateToVersion": "Prompt {{version}} पर अद्यतन करें",
+      "update": "अपडेट करें",
+      "installedVersion": "संस्करण {{version}}",
+      "checkUpdatesStatus": "अद्यतनों की जाँच करें, {{status}}",
+      "checkUpdates": "अपडेट जाँचें"
+    },
+    "browserSettingsScreen": {
+      "desktopBrowser": "Prompt डेस्कटॉप पर ब्राउज़र",
+      "desktopBrowserDescription": "अपने युग्मित डेस्कटॉप से स्ट्रीम किए गए ब्राउज़र में खोलें।",
+      "phoneBrowser": "फ़ोन ब्राउज़र",
+      "phoneBrowserDescription": "इस फ़ोन पर Safari, Chrome, या किसी अन्य ब्राउज़र में खोलें।",
+      "title": "ब्राउज़र",
+      "linksHeading": "कड़ियाँ",
+      "linksDescription": "चुनें कि टर्मिनल आउटपुट में टैप किए गए HTTP(S) लिंक कहां खुलें।",
+      "loadFailed": "ब्राउज़र प्राथमिकताएँ लोड नहीं हो सकीं. पुनः प्रयास करें।",
+      "saveFailed": "ब्राउज़र प्राथमिकताएँ सहेजी नहीं जा सकीं. पुनः प्रयास करें।",
+      "openTerminalLinks": "टर्मिनल लिंक खोलें"
+    },
+    "menuItems": {
+      "appearance": "दिखावट",
+      "terminal": "टर्मिनल",
+      "chatUi": "चैट यूआई",
+      "browser": "ब्राउज़र",
+      "voice": "वॉइस",
+      "notifications": "सूचनाएँ",
+      "troubleshooting": "समस्या निवारण",
+      "about": "जानकारी"
+    },
+    "nativeChatSettingsScreen": {
+      "title": "चैट यूआई",
+      "defaultViewHeading": "डिफ़ॉल्ट दृश्य",
+      "defaultViewDescription": "चुनें कि इस डिवाइस पर समर्थित एजेंट सत्र (Claude, Codex, और अन्य चैट-सक्षम एजेंट) कैसे खुलते हैं। टर्मिनल कच्चा सीएलआई दिखाता है; चैट यूआई डेस्कटॉप ऐप की तरह एक चैट इंटरफ़ेस दिखाता है। आप अभी भी इसके लॉन्ग-प्रेस मेनू से किसी भी व्यक्तिगत सत्र को स्विच कर सकते हैं।",
+      "openInChatUi": "चैट यूआई में सत्र खोलें",
+      "on": "चालू",
+      "off": "बंद"
+    },
+    "nativeNotificationDeliverySettings": {
+      "loadFailed": "डिलीवरी सेटिंग लोड नहीं की जा सकीं. पुनः प्रयास करने के लिए इस स्क्रीन को पुनः खोलें।",
+      "saveFailed": "डिलीवरी सेटिंग सहेजी नहीं जा सकीं. पुनः प्रयास करें।",
+      "updateDesktopHint": "इस फ़ोन पर सूचनाएं प्राप्त करने के लिए एक अद्यतन डेस्कटॉप को जोड़ें।"
+    },
+    "notificationDisplayTest": {
+      "loadFailed": "युग्मित डेस्कटॉप लोड नहीं किया जा सका.",
+      "pairDesktop": "एक डेस्कटॉप जोड़ें और पुनः प्रयास करें।",
+      "connectDesktop": "एक डेस्कटॉप कनेक्ट करें और पुनः प्रयास करें।",
+      "updateDesktop": "इस परीक्षण को चलाने के लिए अपने डेस्कटॉप को अपडेट करें।",
+      "desktopUnreachable": "डेस्कटॉप तक नहीं पहुंच सका. पुनः प्रयास करें।",
+      "accepted": "Prompt की पुश सेवा द्वारा स्वीकृत। अधिसूचना की जाँच करें.",
+      "reconnectPhone": "सूचनाओं के लिए इस फ़ोन को पंजीकृत करने के लिए पुनः कनेक्ट करें।",
+      "rateLimited": "बहुत सारी सूचनाएं. बाद में पुन: प्रयास।",
+      "pushServiceFailed": "Prompt की पुश सेवा के माध्यम से नहीं भेजा जा सका। पुनः प्रयास करें।",
+      "sendFailed": "पुश परीक्षण नहीं भेजा जा सका.",
+      "troubleReceivingAlerts": "अलर्ट प्राप्त करने में परेशानी हो रही है?",
+      "description": "Prompt की पुश सेवा के माध्यम से एक परीक्षण भेजें।",
+      "sending": "भेजा जा रहा है…",
+      "sendButton": "टेस्ट सूचना भेजें",
+      "troubleshooting": "समस्या निवारण"
+    },
+    "notificationSettingsScreen": {
+      "loadFailed": "अधिसूचना सेटिंग्स लोड नहीं हो सकीं. पुनः प्रयास करें।",
+      "saveFailed": "अधिसूचना सेटिंग्स सहेजी नहीं जा सकीं. पुनः प्रयास करें।",
+      "notificationsBlocked": "सिस्टम सेटिंग्स में सूचनाएं अक्षम हैं.",
+      "description": "जब किसी एजेंट को आपके इनपुट की आवश्यकता हो या कोई कार्य पूरा हो जाए तो इस डिवाइस पर सूचना प्राप्त करें।",
+      "title": "सूचनाएँ",
+      "enableNotifications": "सूचनाएं सक्षम करें",
+      "openSettingsFailed": "सिस्टम सेटिंग्स नहीं खुल सकीं. पुनः प्रयास करें।",
+      "openSettings": "सेटिंग्स खोलें"
+    },
+    "pendingCredentialCleanupCard": {
+      "title": "क्रेडेंशियल क्लीनअप जोड़ना",
+      "retryFailed": "सफ़ाई की अभी भी पुष्टि नहीं की जा सकी है. बाद में पुन: प्रयास।",
+      "cleanupUnconfirmed_one": "इस डिवाइस पर {{count}} क्रेडेंशियल के लिए सफ़ाई की पुष्टि नहीं की जा सकी।",
+      "cleanupUnconfirmed_other": "इस डिवाइस पर {{count}} क्रेडेंशियल के लिए सफ़ाई की पुष्टि नहीं की जा सकी।",
+      "statusCheckFailed": "इस डिवाइस पर सफ़ाई स्थिति की जाँच नहीं की जा सकी. सुरक्षित रहने के लिए पुनः प्रयास करें.",
+      "retryCleanup": "युग्मन क्रेडेंशियल साफ़ करने का पुनः प्रयास करें"
+    },
+    "menuScreen": {
+      "support": "समर्थन"
+    },
+    "uiLanguageSettingsSection": {
+      "pseudoLanguage": "छद्म (एन-एक्सए)"
+    },
+    "voiceSettingsScreen": {
+      "toggleMode": "टॉगल",
+      "holdMode": "दबाए रखें",
+      "loadFailed": "ध्वनि सेटिंग लोड करने में विफल",
+      "updateFailed": "अद्यतन नहीं किया जा सका",
+      "selectModelFailed": "मॉडल का चयन नहीं किया जा सका",
+      "downloadFailed": "डाउनलोड विफल रहा",
+      "deleteFailed": "हटाना विफल रहा",
+      "noneSelected": "कोई भी चयनित नहीं",
+      "title": "वॉइस",
+      "connectDesktop": "ध्वनि सेटिंग प्रबंधित करने के लिए डेस्कटॉप से कनेक्ट करें।",
+      "loadFailedMessage": "ध्वनि सेटिंग लोड करने में विफल.",
+      "dictationHeading": "श्रुतलेख",
+      "enableDictation": "बोलकर लिखना चालू करें",
+      "dictationDescription": "अपने डेस्कटॉप पर किसी भी केंद्रित फलक में पाठ को निर्देशित करें।",
+      "dictationMode": "बोलकर लिखने का मोड",
+      "dictationModeDescription": "टॉगल: शुरू करने के लिए एक बार दबाएँ, रोकने के लिए दोबारा दबाएँ। होल्ड करें: होल्ड करते समय निर्देश दें।",
+      "speechModelHeading": "भाषण मॉडल",
+      "speechModel": "स्पीच model"
+    }
+  },
+  "common": {
+    "back": "वापस जाएँ",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "continue": "जारी रखें",
+    "ok": "ठीक है",
+    "retry": "दोबारा कोशिश करें",
+    "copied": "कॉपी किया गया",
+    "remove": "हटाएँ",
+    "settings": "सेटिंग्स",
+    "delete": "हटाएँ",
+    "unknown": "अज्ञात",
+    "confirm": "पुष्टि करें",
+    "copy": "कॉपी करें",
+    "done": "हो गया",
+    "close": "बंद करें",
+    "edit": "संपादित करें",
+    "refresh": "रीफ़्रेश करें",
+    "open": "खोलें"
+  },
+  "host": {
+    "edit": {
+      "missingHost": "मेज़बान लापता.",
+      "hostRemoved": "इस होस्ट को इस फ़ोन से हटा दिया गया था.",
+      "loadFailed": "होस्ट लोड करने में विफल.",
+      "saveFailed": "होस्ट को सहेजने में विफल.",
+      "title": "होस्ट संपादित करें",
+      "saveHost": "होस्ट सहेजें",
+      "goBack": "पीछे जाएँ",
+      "help": "प्रदर्शन नाम या कनेक्शन पता बदलें. डेस्कटॉप रिपोर्ट वाले नाम का उपयोग करने के लिए नाम को खाली छोड़ दें। पता संपादन केवल वहीं स्विच करते हैं जहां यह फोन कनेक्ट होता है - वे दोबारा नहीं जुड़ते। इसका उपयोग तब करें जब एक ही डेस्कटॉप एक अलग आईपी पर पहुंच योग्य हो (उदाहरण के लिए होम लैन बनाम Tailscale)।",
+      "name": "नाम",
+      "hostNamePlaceholder": "होस्ट का नाम",
+      "address": "पता",
+      "addressHint": "IP, होस्ट:पोर्ट, या ws:// / wss:// स्वीकार करता है। बिना पोर्ट वाला wss:// URL 443 का उपयोग करता है। नंगे पते वर्तमान पोर्ट (या 6768) को बनाए रखते हैं।",
+      "connectionPreview": "{{endpoint}} से जुड़ता है"
+    }
+  },
+  "app": {
+    "mobileOnboarding": {
+      "saveChoiceFailed": "आपकी पसंद सहेजी नहीं जा सकी. पुनः प्रयास करें।",
+      "notificationSettingsFailed": "अधिसूचना सेटिंग्स अद्यतन नहीं की जा सकीं. पुनः प्रयास करें।",
+      "progress": "ऑनबोर्डिंग की प्रगति",
+      "stepProgress": "{{total}} का चरण {{step}}"
+    },
+    "notifications": {
+      "description": "ऐप बंद होने पर भी एजेंट अलर्ट प्राप्त करें। Prompt की पुश सेवा और Apple या Google के माध्यम से वितरित किया गया।"
+    },
+    "pairConfirm": {
+      "connectTimedOut": "{{seconds}}s के भीतर कनेक्ट नहीं हो सका - यह कहां रुका, इसके लिए नीचे लॉग देखें",
+      "pairingFailed": "युग्मन विफल: {{error}}",
+      "title": "इस डेस्कटॉप के साथ युग्मित करें?",
+      "description": "आपने अपने डेस्कटॉप से ​​एक युग्मन लिंक खोला। इसे अपने होस्ट में जोड़ने की पुष्टि करें।",
+      "pairButton": "जोड़ी",
+      "connecting": "कनेक्ट हो रहा है…",
+      "pairingLog": "युग्मन लॉग",
+      "backToHome": "घर वापस"
+    },
+    "pairScan": {
+      "invalidQrCode": "वैध Prompt QR कोड नहीं है",
+      "downloadQrCode": "वह डाउनलोड कोड है. चरण 2 में पेयरिंग कोड को अपने डेस्कटॉप पर स्कैन करें।",
+      "invalidPairingCode": "मान्य युग्मन कोड नहीं - इसे अपने कंप्यूटर से कॉपी करें और दोबारा पेस्ट करें",
+      "connectTimedOut": "{{seconds}}s के भीतर कनेक्ट नहीं हो सका - यह कहां रुका, इसके लिए नीचे लॉग देखें",
+      "pairingFailed": "युग्मन विफल: {{error}}",
+      "title": "डेस्कटॉप के साथ युग्मित करें",
+      "cameraDisabledTitle": "कैमरा पहुंच अक्षम",
+      "cameraPermissionDescription": "अपने डेस्कटॉप पर Prompt से QR कोड को स्कैन करें, या इसके बजाय पेयरिंग कोड पेस्ट करें।",
+      "cameraDisabledDescription": "सेटिंग्स में कैमरा एक्सेस सक्षम करें, या इसके बजाय पेयरिंग कोड पेस्ट करें।",
+      "openSettings": "सेटिंग्स खोलें",
+      "pasteInstead": "इसके बजाय कोड चिपकाएँ",
+      "pasteCodeTitle": "युग्मन कोड चिपकाएँ",
+      "pasteCodeMessage": "QR के अंतर्गत दिखाए गए कोड को अपने कंप्यूटर पर कॉपी करें।",
+      "pasteCodePlaceholder": "orca://pair?code=... or paste the code",
+      "openDesktopStep": "अपने कंप्यूटर पर Prompt खोलें",
+      "openMobileSettingsStep": "सेटिंग्स → मोबाइल पर जाएं",
+      "scanCodeStep": "QR कोड को स्कैन करें",
+      "pastePairingCode": "या पेयरिंग कोड पेस्ट करें",
+      "connecting": "कनेक्ट हो रहा है…",
+      "pairingLog": "युग्मन लॉग",
+      "tryAgain": "फिर कोशिश करें"
+    },
+    "pair": {
+      "missingCode": "युग्मन कोड गुम है",
+      "backToHome": "घर वापस"
+    },
+    "terminalSettings": {
+      "smallestText": "सबसे छोटा (50%)",
+      "smallerText": "छोटा (75%)",
+      "defaultText": "डिफ़ॉल्ट (100%)",
+      "largeText": "बड़ा (125%)",
+      "largerText": "बड़ा (150%)",
+      "largestText": "सबसे बड़ा (200%)",
+      "restoreAfterMinutes_one": "{{count}} मिनट के बाद",
+      "restoreAfterMinutes_other": "{{count}} मिनट के बाद",
+      "keepPhoneSize": "फ़ोन के आकार में रखें (डिफ़ॉल्ट)",
+      "restoreAfterSeconds_one": "{{count}} के बाद",
+      "restoreAfterSeconds_other": "{{count}} के बाद",
+      "title": "टर्मिनल",
+      "leaveAppHeading": "जब आप ऐप छोड़ते हैं",
+      "leaveAppDescription": "जब आप अपने फ़ोन पर टर्मिनल का उपयोग कर रहे होते हैं, तो Prompt इसे आपकी स्क्रीन पर फ़िट करने के लिए छोटा कर देता है। जब आप ऐप बंद करते हैं या स्विच करते हैं, तो यह नियंत्रित करता है कि क्या यह फोन के आकार पर रहता है (ताकि इंटरैक्टिव सीएलआई उपकरण फिर से प्रवाह न करें) या आपके डेस्कटॉप पर वापस आकार बदल जाए। आप मैन्युअल रूप से आकार बदलने के लिए डेस्कटॉप बैनर पर हमेशा रीस्टोर का उपयोग कर सकते हैं।",
+      "noPairedDesktops": "अभी तक कोई युग्मित डेस्कटॉप नहीं है. टर्मिनल व्यवहार को नियंत्रित करने के लिए एक को जोड़ें।",
+      "textSizeHeading": "पाठ का आकार",
+      "textSizeDescription": "टर्मिनल टेक्स्ट को स्केल करें. छोटे आकार पार्श्व हाशिये वाले अधिक स्तंभों में फिट होते हैं; बड़े आकार कम कॉलम दिखाते हैं - पैन करने के लिए किनारे की ओर खींचें। आप टर्मिनल में ज़ूम करने के लिए पिंच भी कर सकते हैं, जो इस सेटिंग को अपडेट करता है। केवल प्रति-डिवाइस प्रदर्शन; डेस्कटॉप टर्मिनल नहीं बदलता.",
+      "textSize": "टेक्स्ट आकार",
+      "keyboardInputHeading": "कीबोर्ड इनपुट",
+      "keyboardInputDescription": "स्वत: पूर्ण, स्वत: सुधार और वर्तनी सुझाव केवल बफ़र किए गए कमांड इनपुट पर लागू होते हैं। लाइव इनपुट से स्विच करने के लिए कीबोर्ड के ऊपर डबल-शेवरॉन बटन का उपयोग करें, फिर भेजें पर टैप करने से पहले अपना कमांड संपादित करें। आदेशों, फ़्लैगों या पथों को दोबारा लिखने से बचने के लिए डिफ़ॉल्ट रूप से बंद।",
+      "autocomplete": "स्वतः पूर्ण एवं स्वतः सुधार",
+      "autocompleteOn": "चालू",
+      "autocompleteOff": "बंद",
+      "restoreHost": "पुनर्स्थापित करें {{name}}",
+      "textSizePickerTitle": "टर्मिनल टेक्स्ट का आकार"
+    }
+  },
+  "accounts": {
+    "screen": {
+      "invalidSnapshot": "होस्ट से अमान्य खातों का स्नैपशॉट",
+      "hostNotFound": "होस्ट नहीं मिला",
+      "switchFailed": "खाता स्विच नहीं किया जा सका",
+      "default": "सिस्टम डिफ़ॉल्ट",
+      "agentLogin": "एजेंट के स्वयं के लॉगिन का उपयोग करें",
+      "sessionWindow": "5 घंटे",
+      "weeklyWindow": "7डी",
+      "title": "खाते",
+      "refreshAccounts": "खाते रीफ़्रेश करें",
+      "resetsIn": "{{duration}} में रीसेट होगा",
+      "resetsNow": "अभी रीसेट होगा",
+      "durationDays": "{{days}} दिन",
+      "durationDaysHours": "{{days}} दिन {{hours}} घं",
+      "durationHours": "{{hours}} घं",
+      "durationHoursMinutes": "{{hours}} घं {{minutes}} मि",
+      "durationMinutes": "{{minutes}} मि",
+      "connectingTo": "{{name}} से कनेक्ट हो रहा है...",
+      "connecting": "होस्ट से कनेक्ट हो रहा है...",
+      "loadingAccounts": "खाते लोड हो रहे हैं...",
+      "manageAccountsHint": "डेस्कटॉप सेटिंग्स → खाते से खाते जोड़ें या पुनः प्रमाणित करें।",
+      "useReset": "रीसेट का प्रयोग करें"
+    }
+  },
+  "agentHistory": {
+    "sessionHistoryList": {
+      "messages_one": "{{count}} संदेश",
+      "messages_other": "{{count}} संदेश",
+      "currentWorktree": "वर्तमान कार्यवृक्ष",
+      "resumeSession": "एजेंट सत्र फिर से शुरू करें",
+      "userRole": "उपयोगकर्ता",
+      "assistantRole": "सहायक"
+    },
+    "panel": {
+      "workspace": "वर्कस्पेस",
+      "project": "प्रोजेक्ट",
+      "all": "सभी",
+      "waitingForHost": "मेज़बान की प्रतीक्षा में...",
+      "missingResumeId": "इस सत्र में बायोडाटा आईडी गुम है।",
+      "unknownHostPlatform": "होस्ट प्लेटफ़ॉर्म निर्धारित करने में असमर्थ.",
+      "sessionQueued": "एजेंट सत्र कतारबद्ध.",
+      "resumeFailed": "सत्र फिर से शुरू करने में विफल.",
+      "title": "Agent सत्र इतिहास",
+      "refreshSessions": "एजेंट सत्र ताज़ा करें",
+      "unavailable": "एजेंट सत्र इतिहास अनुपलब्ध",
+      "updateHost": "एजेंट सत्र इतिहास ब्राउज़ करने के लिए इस होस्ट पर Prompt अपडेट करें।",
+      "loadFailed": "लोड करने में असमर्थ",
+      "placeholder": "खोज सत्र, रेपो:, पथ:",
+      "skipped_one": "{{count}} transcript छोड़ा गया",
+      "skipped_other": "{{count}} transcript छोड़े गए",
+      "noSessions": "कोई एजेंट सत्र नहीं",
+      "noSearchResults": "कोई भी सत्र आपकी खोज से मेल नहीं खाता.",
+      "emptyScope": "इस दायरे में कोई पिछला एजेंट सत्र नहीं है."
+    },
+    "resumeTarget": {
+      "runtimeUnavailable": "इतिहास से बायोडाटा रनटाइम-होस्टेड कार्यस्थानों में उपलब्ध नहीं है।",
+      "differentHost": "यह सत्र किसी दूसरे होस्ट का है। इसे फिर से शुरू करने के लिए उसी होस्ट पर वर्कस्पेस खोलें।",
+      "openWorkspace": "सत्र फिर शुरू करने से पहले कोई वर्कस्पेस खोलें।"
+    },
+    "sessionCard": {
+      "untitledSession": "शीर्षकहीन सत्र"
+    },
+    "useAgentHistoryState": {
+      "waitingForHost": "मेज़बान की प्रतीक्षा में...",
+      "hostUnreachable": "मेज़बान तक पहुंचने में असमर्थ",
+      "loadFailed": "एजेंट सत्र लोड करने में असमर्थ"
+    },
+    "worktreeNavigationActions": {
+      "sourceControl": "सोर्स कंट्रोल",
+      "agentSessionHistory": "Agent सत्र इतिहास"
+    }
+  },
+  "diagnostics": {
+    "connectionDiagnosticsView": {
+      "connecting": "कनेक्ट हो रहा है",
+      "handshaking": "हाथ मिलाना",
+      "connected": "कनेक्टेड",
+      "disconnected": "डिस्कनेक्ट हो गया",
+      "reconnecting": "पुनः कनेक्ट हो रहा है",
+      "authFailed": "प्रमाणीकरण विफल",
+      "title": "नेटवर्क डायग्नोस्टिक्स",
+      "stateWithAttempt": "{{state}} · प्रयास {{attempts}}",
+      "copyReport": "रिपोर्ट कॉपी करें",
+      "diagnosisHeading": "इससे क्या पता चलता है",
+      "privacyHint": "होस्ट नाम, समापन बिंदु, संस्करण, कनेक्शन स्थिति और घटनाओं सहित एक आकार-सीमित संशोधित रिपोर्ट भेजता है - कभी भी टर्मिनल सामग्री या क्रेडेंशियल नहीं।",
+      "sending": "भेजा जा रहा है…",
+      "sent": "डायग्नोस्टिक भेज दिए गए",
+      "retrySending": "भेजने का पुनः प्रयास करें",
+      "sendDiagnostics": "निदान को Prompt पर भेजें",
+      "noEvents": "अभी तक कोई कनेक्शन इवेंट नहीं. जैसे ही ऐप इस होस्ट को डायल करता है, इवेंट दिखाई देते हैं।",
+      "noHosts": "कोई युग्मित होस्ट नहीं."
+    },
+    "mobileWebBundleProbeRow": {
+      "fetchBundle": "मोबाइल वेब बंडल प्राप्त करें",
+      "connecting": "कनेक्ट हो रहा है…",
+      "fetching": "बंडल लाया जा रहा है...",
+      "bundle": "बंडल",
+      "host": "होस्ट",
+      "build": "निर्माण",
+      "assets": "संपत्ति",
+      "bytes": "बाइट्स",
+      "elapsed": "बीत गया",
+      "elapsedMilliseconds": "{{elapsedMs}} एमएस",
+      "unknownHost": "अज्ञात मेज़बान"
+    },
+    "mobileWebShellUpdateFailureRow": {
+      "title": "कार्यस्थान अद्यतन"
+    },
+    "troubleshootCommonIssues": {
+      "notificationsTitle": "सूचनाएं पुश करें",
+      "allowNotifications": "जांचें कि सिस्टम सेटिंग्स Prompt सूचनाओं की अनुमति देती हैं और फोकस या डू नॉट डिस्टर्ब बंद है।",
+      "notificationNetwork": "सेल्युलर या कोई अन्य वाई-फ़ाई नेटवर्क आज़माएँ। यदि स्विच करने के बाद अलर्ट आते हैं, तो आपका नेटवर्क डिलीवरी में देरी कर सकता है।",
+      "wifiTitle": "विभिन्न वाईफाई नेटवर्क",
+      "sameNetwork": "दोनों डिवाइस एक ही LAN पर होने चाहिए (जब तक कि Tailscale के माध्यम से कनेक्ट न किया गया हो)।",
+      "sameSubnet": "ईथरनेट और वाईफाई को एक ही सबनेट साझा करना होगा।",
+      "reconnectWifi": "दोनों डिवाइस पर वाईफ़ाई पुनः कनेक्ट करने का प्रयास करें।",
+      "firewallTitle": "फ़ायरवॉल ब्लॉकिंग पोर्ट {{port}}",
+      "linuxFirewall": "Linux: sudo ufw allow {{port}}",
+      "macosFirewall": "macOS: सिस्टम सेटिंग्स → नेटवर्क → फ़ायरवॉल - अनुमति दें Prompt।",
+      "windowsFirewall": "विंडोज़: डिफेंडर फ़ायरवॉल → ऐप को अनुमति दें - निजी नेटवर्क के लिए Prompt सक्षम करें।",
+      "restrictedNetwork": "कॉर्पोरेट/स्कूल नेटवर्क पी2पी को ब्लॉक कर सकते हैं - एक व्यक्तिगत हॉटस्पॉट आज़माएँ।",
+      "desktopTitle": "डेस्कटॉप ऐप नहीं चल रहा है",
+      "openDesktop": "Prompt कनेक्शन स्वीकार करने के लिए आपके डेस्कटॉप पर खुला होना चाहिए।",
+      "restartDesktop": "Prompt पुनः प्रारंभ करने का प्रयास करें - साथी सर्वर लॉन्च पर प्रारंभ होता है।",
+      "pairAfterUpdate": "अपडेट के बाद, आपको QR कोड के माध्यम से पुनः जोड़ने की आवश्यकता हो सकती है।",
+      "timeoutTitle": "कनेक्शन टाइमआउट",
+      "wifiSignal": "अपने फोन पर वाईफाई सिग्नल की ताकत जांचें।",
+      "retryHost": "होस्ट सूची पर वापस जाएँ और पुनः प्रयास करने के लिए अपने होस्ट पर टैप करें।",
+      "restartBothApps": "यदि टाइमआउट जारी रहता है तो दोनों ऐप्स को पुनरारंभ करें।",
+      "tailscaleTitle": "Tailscale होस्ट पहुंच से बाहर है",
+      "keepTailscaleOn": "100.x.x.x या *.ts.net जैसे होस्ट पते Tailscale के माध्यम से कनेक्ट होते हैं - इसे चालू रखें।",
+      "restartTailscale": "iOS/Android चुपचाप सुरंग को तोड़ सकता है: Tailscale ऐप में टॉगल करें Tailscale बंद करें और वापस चालू करें।",
+      "checkTailnet": "जांचें कि डेस्कटॉप सक्रिय है और आपके टेलनेट में कनेक्टेड दिखाई दे रहा है।",
+      "updateTailscale": "Tailscale ऐप को अपडेट करें - हालिया रिलीज़ रीकनेक्ट बग्स को ठीक करते हैं।",
+      "vpnTitle": "अन्य वीपीएन हस्तक्षेप",
+      "vpnRouting": "गैर-Tailscale वीपीएन एक दूरस्थ सर्वर के माध्यम से स्थानीय ट्रैफ़िक को रूट कर सकते हैं।",
+      "disableVpn": "उस वीपीएन को अक्षम करें या स्प्लिट टनलिंग सक्षम करें / \"LAN की अनुमति दें\"।"
+    },
+    "troubleshootView": {
+      "title": "समस्या निवारण",
+      "running": "चल रहा है...",
+      "runAgain": "फिर से चलाओ",
+      "runDiagnostics": "निदान चलाएँ",
+      "viewNetworkDiagnostics": "नेटवर्क डायग्नोस्टिक्स देखें",
+      "commonIssues": "सामान्य मुद्दे"
+    },
+    "useTroubleshootDiagnostics": {
+      "pairedHosts": "युग्मित मेज़बान",
+      "pairedCount": "{{count}} युग्मित",
+      "noPairedHosts": "कोई नहीं - युग्मित करने के लिए QR को स्कैन करें",
+      "hostDataFailed": "होस्ट डेटा नहीं पढ़ सका",
+      "internet": "इंटरनेट",
+      "connected": "कनेक्ट हो गया",
+      "unexpectedResponse": "अप्रत्याशित प्रतिक्रिया",
+      "noConnection": "कोई संबंध नहीं",
+      "reachable": "{{endpoint}} पर पहुंच योग्य",
+      "hosts": "होस्ट",
+      "hostTestFailed": "परीक्षण नहीं हो सका",
+      "platform": "मंच"
+    },
+    "webShellUpdateFailureCopy": {
+      "failedJustNow": "{{hostName}} से अंतिम अद्यतन अभी विफल हुआ: {{reason}}{{offered}}। {{outcome}}",
+      "failedAgo": "{{hostName}} से अंतिम अपडेट {{time}} पहले विफल रहा: {{reason}}{{offered}}। {{outcome}}",
+      "reasonCopy": {
+        "noConnection": "होस्ट से कनेक्ट नहीं है",
+        "connectionLost": "कनेक्शन टूट गया",
+        "hostRefused": "मेज़बान ने पढ़ने से इनकार कर दिया",
+        "replyUnreadable": "होस्ट ने एक उत्तर भेजा जिसे यह ऐप पढ़ नहीं सका",
+        "chunkOversize": "एक हिस्सा मेज़बान की अनुमति से बड़ा था",
+        "assetOverlong": "एक परिसंपत्ति प्रकट घोषणा से अधिक लंबी थी",
+        "assetNoProgress": "परिसंपत्ति की पढ़ी गई सामग्री में कोई प्रगति नहीं हुई",
+        "assetShort": "एक परिसंपत्ति अपने घोषित आकार से कम समय में समाप्त हो गई",
+        "assetChecksumMismatch": "परिसंपत्ति चेकसम बेमेल",
+        "buildChangedMidFetch": "डाउनलोड के दौरान होस्ट का निर्माण बदल गया",
+        "chunkMisrouted": "एक हिस्से ने गलत संपत्ति या ऑफसेट का उत्तर दिया",
+        "assetEntryChanged": "एक परिसंपत्ति अब मैनिफ़ेस्ट से मेल नहीं खाती",
+        "rangeUndecodable": "एक संपीड़ित रीड को डिकोड नहीं किया जा सका",
+        "fetchStopped": "डाउनलोड रोक दिया गया था",
+        "cacheWriteFailed": "इस फ़ोन पर डाउनलोड सहेजना विफल रहा",
+        "unrecognisedError": "एक अज्ञात त्रुटि"
+      },
+      "hostCodeCopy": {
+        "unavailable": "होस्ट के पास कोई कार्यस्थान बंडल नहीं है",
+        "buildChanged": "डाउनलोड के दौरान होस्ट का निर्माण बदल गया",
+        "assetUnknown": "मेज़बान ने किसी संपत्ति को नहीं पहचाना",
+        "assetChanged": "होस्ट पर एक संपत्ति बदल गई",
+        "offsetInvalid": "मेज़बान ने रीड ऑफ़सेट से इनकार कर दिया",
+        "readLimited": "मेजबान सीमित समवर्ती पढ़ता है"
+      },
+      "wallCopy": {
+        "bundleUnavailable": "होस्ट के पास कोई कार्यस्थान बंडल नहीं है",
+        "bundleShellTooOld": "यह ऐप सहेजे गए बंडल के लिए बहुत पुराना है",
+        "hostTooOldForBundle": "सहेजे गए बंडल के लिए होस्ट बहुत पुराना है",
+        "bundleTooOldForHost": "सहेजा गया बंडल होस्ट के लिए बहुत पुराना है",
+        "pageRouteUnlisted": "होस्ट के कार्यक्षेत्र में यह स्क्रीन शामिल नहीं है",
+        "pageRouteGrantMissing": "इस स्क्रीन को एक नए ऐप की आवश्यकता है"
+      },
+      "openedCached": "सहेजे गए संस्करण पर वापस आ गया।",
+      "openedCachedGeneration": "सहेजे गए संस्करण (पीढ़ी {{generation}}) पर वापस आ गया।",
+      "blockedWorkspace": "कार्यक्षेत्र को अवरुद्ध कर दिया.",
+      "blockedReason": "अवरुद्ध: {{reason}}।",
+      "nativeRoute": "देशी स्क्रीन दिखाई गई.",
+      "routeUnavailable": "दिखाया गया कि स्क्रीन उपलब्ध नहीं है.",
+      "failed": "विफलता स्क्रीन दिखाई गई.",
+      "waiting": "मेज़बान का इंतज़ार किया.",
+      "offeredGeneration": "(पीढ़ी {{generation}})"
+    }
+  },
+  "dictation": {
+    "setup": {
+      "serverUpdateRequired": "वॉइस डिक्टेशन का उपयोग करने के लिए इस सर्वर पर Prompt अपडेट करें।",
+      "alreadyActive": "कंप्यूटर या अन्य फ़ोन पर डिक्टेशन पहले से ही उपयोग में है.",
+      "repairRequired": "श्रुतलेख का उपयोग करने के लिए इस फ़ोन को कंप्यूटर के साथ पुनः जोड़ें।",
+      "sessionLost": "डिक्टेशन का कंप्यूटर से कनेक्शन टूट गया। पुनः प्रयास करें।",
+      "desktopUpdateRequired": "मोबाइल वॉयस सेटिंग्स का उपयोग करने के लिए युग्मित डेस्कटॉप Prompt ऐप को अपडेट करें।",
+      "loadFailed": "श्रुतलेख मॉडल लोड करने में विफल",
+      "downloadFailed": "डाउनलोड प्रारंभ करने में विफल",
+      "deleteFailed": "मॉडल हटाने में विफल",
+      "updateFailed": "श्रुतलेखन सेटिंग अद्यतन करने में विफल",
+      "cloudModelNeedsKey": "OpenAI कुंजी की आवश्यकता है"
+    }
+  },
+  "home": {
+    "appUpdateCard": {
+      "title": "Prompt {{version}} उपलब्ध है",
+      "updateAccessibilityLabel": "Prompt {{version}} उपलब्ध है, अपडेट करने के लिए टैप करें",
+      "updateHint": "अपडेट करने के लिए टैप करें",
+      "dismissAccessibilityLabel": "ख़ारिज करें Prompt {{version}} अद्यतन"
+    },
+    "accountUsageCards": {
+      "sectionHeading": "खाते का उपयोग",
+      "systemDefault": "सिस्टम डिफ़ॉल्ट",
+      "sessionWindow": "5 घंटे",
+      "weeklyWindow": "7डी"
+    },
+    "emptyState": {
+      "openDesktopTitle": "Prompt डेस्कटॉप खोलें",
+      "openDesktopDescription": "सेटिंग्स → मोबाइल पर जाएं और एक पेयरिंग QR कोड जेनरेट करें।",
+      "scanCodeTitle": "कोड को स्कैन करें",
+      "scanCodeDescription": "स्कैनर खोलने के लिए ऊपर दिए गए बटन को टैप करें। अपनी स्क्रीन पर QR कोड को इंगित करें।",
+      "connectedTitle": "आप जुड़े हुए हैं",
+      "connectedDescription": "आपका डेस्कटॉप यहां दिखाई देगा. सब कुछ शुरू से अंत तक एन्क्रिप्टेड है।",
+      "title": "अपना डेस्कटॉप कनेक्ट करें",
+      "description": "अपने एजेंटों की जांच करने, किसी भी टर्मिनल में जाने और अपने फोन से काम चलाने के लिए अपने कंप्यूटर पर Prompt के साथ युग्मित करें।",
+      "pairDesktop": "डेस्कटॉप जोड़ें",
+      "stepsHeading": "यह कैसे काम करता है"
+    },
+    "listFooter": {
+      "resumeHeading": "फिर से शुरू करें",
+      "tasksHeading": "कार्य",
+      "hostPickerTitle": "कार्य चालू खोलें"
+    },
+    "listHeader": {
+      "daysHours": "{{days}} दिन {{hours}} घं",
+      "hoursMinutes": "{{hours}} घं {{minutes}} मि",
+      "minutes": "{{minutes}} मि",
+      "title": "वापसी पर स्वागत है",
+      "agentsSpawned": "शुरू किए गए agent",
+      "agentTime": "Agent का समय",
+      "prsCreated": "बनाए गए PR",
+      "desktopsHeading": "डेस्कटॉप"
+    },
+    "screen": {
+      "pairingCheckFailed": "युग्मन की जाँच नहीं की जा सकी",
+      "tryAgain": "कृपया पुनः प्रयास करें.",
+      "removeHostFailed": "होस्ट को हटाया नहीं जा सका",
+      "removeHostTitle": "होस्ट हटाएँ",
+      "removeHostMessage": "\"{{name}}\" हटाएं? आप बाद में पुनः जोड़ सकते हैं."
+    },
+    "tasksCard": {
+      "title": "कार्य",
+      "noSources": "कोई कार्य स्रोत कनेक्ट नहीं है",
+      "openProviderTasks": "{{provider}} कार्य खोलें"
+    }
+  },
+  "hooks": {
+    "dictationDesktopStart": {
+      "recordingFailed": "माइक्रोफ़ोन रिकॉर्डिंग प्रारंभ करने में विफल"
+    },
+    "useMobileDictation": {
+      "microphonePermissionDenied": "माइक्रोफ़ोन की अनुमति अस्वीकृत",
+      "microphoneInitFailed": "माइक्रोफ़ोन प्रारंभ करने में विफल",
+      "noSpeech": "कोई आवाज़ नहीं मिली।",
+      "microphoneInterrupted": "माइक्रोफ़ोन बाधित होने के कारण ध्वनि श्रुतलेखन बंद हो गया। पुनः प्रयास करें।",
+      "inputClosed": "ध्वनि श्रुतलेखन बंद हो गया क्योंकि यह सत्र अब इनपुट स्वीकार नहीं कर रहा है। पुनः प्रयास करें।"
+    }
+  },
+  "hostScreen": {
+    "hostListActionSheetActions": {
+      "reconnect": "फिर से कनेक्ट करें",
+      "connect": "कनेक्ट करें",
+      "disconnect": "डिस्कनेक्ट करें",
+      "networkDiagnostics": "नेटवर्क डायग्नोस्टिक्स",
+      "editHost": "होस्ट संपादित करें"
+    },
+    "hostPendingCreationRow": {
+      "creatingWorkspace": "वर्कस्पेस बनाया जा रहा है…"
+    },
+    "hostRailActions": {
+      "accounts": "खाते",
+      "tasks": "कार्य",
+      "floatingWorkspace": "फ़्लोटिंग वर्कस्पेस",
+      "newWorkspace": "नया वर्कस्पेस",
+      "closeSearch": "खोज बंद करें",
+      "searchWorkspaces": "वर्कस्पेस खोजें"
+    },
+    "hostScreenHeader": {
+      "workspaceOptions": "वर्कस्पेस विकल्प",
+      "activeFilters_one": "वर्कस्पेस विकल्प ({{count}} फ़िल्टर चालू)",
+      "activeFilters_other": "वर्कस्पेस विकल्प ({{count}} फ़िल्टर चालू)",
+      "backToHosts": "मेज़बानों पर वापस जाएँ",
+      "reconnect": "फिर से कनेक्ट करें",
+      "floatingWorkspace": "फ़्लोटिंग वर्कस्पेस",
+      "hideSidebar": "साइडबार छिपाएँ",
+      "accounts": "खाते",
+      "tasks": "कार्य",
+      "closeSearch": "खोज बंद करें",
+      "searchWorkspaces": "वर्कस्पेस खोजें"
+    },
+    "hostScreenOverlays": {
+      "deleteWorktree": "worktree मिटाएँ",
+      "deleteConfirmMessage": "\"{{name}}\" ({{branch}}) हटाएं?",
+      "sleep": "sleep करें",
+      "unpin": "पिन हटाएँ",
+      "pin": "पिन करें",
+      "primaryWorktreeDeleteHint": "प्राथमिक worktree को हटाया नहीं जा सकता। इसके बजाय प्रोजेक्ट हटाएँ।",
+      "removeHost": "होस्ट हटाएँ",
+      "removeHostMessage": "\"{{name}}\" हटाएं? आप बाद में पुनः जोड़ सकते हैं."
+    },
+    "hostWorkspaceList": {
+      "searchPlaceholder": "कार्यस्थान खोजें...",
+      "searchWorkspaces": "वर्कस्पेस खोजें"
+    },
+    "workspaceDetailsSheet": {
+      "merged": "merge किया गया",
+      "closed": "बंद",
+      "draft": "ड्राफ़्ट",
+      "checksPassing": "जाँच: उत्तीर्ण होना",
+      "checksFailing": "जाँच: असफल होना",
+      "checksPending": "जाँच: लंबित",
+      "createdFromCli": "Prompt सीएलआई से बनाया गया",
+      "createdByNamedAutomation": "स्वचालन द्वारा बनाया गया \"{{name}}\"",
+      "createdByAutomation": "ऑटोमेशन द्वारा बनाया गया",
+      "openLinkWithTitle": "खोलें {{label}}, {{title}}",
+      "openLink": "{{label}} खोलें",
+      "prOpen": "खोलें"
+    },
+    "workspaceOptionControls": {
+      "none": "कोई नहीं",
+      "status": "स्थिति",
+      "pr": "PR",
+      "project": "प्रोजेक्ट",
+      "name": "नाम",
+      "agentActivitySort": "agent गतिविधि",
+      "recent": "हाल के",
+      "manual": "मैन्युअल",
+      "agentActivitySortDescription": "ध्यान चाहने वाले agent पहले, फिर सबसे हालिया गतिविधि।",
+      "manualWorkspaceOrderDescription": "हर समूह में वर्कस्पेस को खींचकर व्यवस्थित करें।",
+      "manualProjectOrderDescription": "प्रोजेक्ट को खींचकर व्यवस्थित करें।",
+      "recentProjectOrderDescription": "सबसे हालिया वर्कस्पेस गतिविधि",
+      "detailed": "विस्तृत",
+      "compact": "संक्षिप्त",
+      "fullList": "पूरी सूची",
+      "githubTicket": "GitHub टिकट",
+      "linearIssue": "Linear मुद्दा",
+      "jiraIssue": "जीरा मुद्दा",
+      "prMrLink": "PR/MR लिंक",
+      "automation": "ऑटोमेशन",
+      "notes": "नोट्स",
+      "ports": "पोर्ट",
+      "agentActivity": "agent गतिविधि",
+      "host": "होस्ट",
+      "githubIssues": "GitHub मुद्दे",
+      "linearIssues": "Linear issue",
+      "jiraIssues": "Jira issue",
+      "agentStatuses": "agent स्थितियाँ",
+      "branchFolderPath": "branch / फ़ोल्डर पथ",
+      "branchName": "branch का नाम",
+      "selectedCount": "{{total}} में से {{count}}",
+      "allHosts": "सभी होस्ट",
+      "allProjects": "सभी प्रोजेक्ट",
+      "searchProjectsPlaceholder": "प्रोजेक्ट खोजें...",
+      "searchProjects": "प्रोजेक्ट खोजें",
+      "hover": "होवर",
+      "agentActivityLayout": "agent गतिविधि का लेआउट"
+    },
+    "workspaceOptionsSheet": {
+      "hosts": "होस्ट",
+      "projects": "प्रोजेक्ट",
+      "groupBy": "इसके अनुसार समूहित करें",
+      "sortBy": "क्रमबद्ध करें",
+      "projectOrder": "प्रोजेक्ट क्रम",
+      "cardLayout": "कार्ड लेआउट",
+      "showProperties": "प्रॉपर्टी दिखाएँ",
+      "cardDisplay": "कार्ड प्रदर्शन",
+      "hideSleeping": "sleeping वर्कस्पेस छिपाएँ",
+      "exceptDefaultBranch": "डिफ़ॉल्ट branch को छोड़कर",
+      "hideDefaultBranch": "डिफ़ॉल्ट branch छिपाएँ",
+      "hideAutomationCreated": "ऑटोमेशन से बने वर्कस्पेस छिपाएँ",
+      "hideCliCreated": "CLI से बने वर्कस्पेस छिपाएँ",
+      "hideOtherClientWorkspaces": "अन्य क्लाइंट के वर्कस्पेस छिपाएँ",
+      "hideDetachedHead": "detached HEAD छिपाएँ",
+      "show": "दिखाएँ",
+      "filters": "फ़िल्टर",
+      "localMac": "स्थानीय Mac",
+      "localWindows": "स्थानीय खिड़कियाँ",
+      "localLinux": "स्थानीय लिनक्स",
+      "thisComputer": "यह कंप्यूटर",
+      "waitingForDesktop": "अभी भी डेस्कटॉप का इंतज़ार है",
+      "savingToDesktop": "डेस्कटॉप पर सहेजा जा रहा है",
+      "backToOptions": "कार्यस्थान विकल्पों पर वापस जाएँ",
+      "workspaceOptions": "वर्कस्पेस विकल्प",
+      "syncedAcrossDevices": "आपके सभी डिवाइसों पर समन्वयित किया गया",
+      "clearFilters": "फ़िल्टर साफ़ करें"
+    }
+  },
+  "webShell": {
+    "shellStateScreen": {
+      "isolationUnavailable": "कार्यस्थान को सुरक्षित रूप से खोलने के लिए इस डिवाइस का वेबव्यू बहुत पुराना है।",
+      "downloadFailed": "इस होस्ट से नवीनतम ऐप डाउनलोड नहीं किया जा सका.",
+      "hostProfileUnreadable": "आपके डिवाइस पर इस होस्ट को नहीं पढ़ा जा सका. पुनः प्रयास करें।",
+      "statusUnreadable": "इस होस्ट की स्थिति नहीं पढ़ सका. वापस जाओ और इसे फिर से खोलो।",
+      "renderProcessGone": "कार्यक्षेत्र ने प्रत्युत्तर देना बंद कर दिया.",
+      "documentLoadFailed": "डाउनलोड किया गया ऐप खोला नहीं जा सका.",
+      "tryAgain": "दोबारा कोशिश करें",
+      "connectToDownload": "नवीनतम ऐप डाउनलोड करने के लिए इस होस्ट से कनेक्ट करें",
+      "openingWorkspace": "कार्यक्षेत्र खोलना",
+      "checkingHost": "मेज़बान की जाँच हो रही है"
+    }
+  },
+  "navigation": {
+    "hostStackScreens": {
+      "host": "होस्ट",
+      "editHost": "होस्ट संपादित करें",
+      "accounts": "खाते",
+      "tasks": "कार्य",
+      "terminal": "टर्मिनल",
+      "sourceControl": "सोर्स कंट्रोल",
+      "agentSessionHistory": "Agent सत्र इतिहास",
+      "changes": "बदलाव",
+      "pullRequest": "अनुरोध खींचें",
+      "workspace": "वर्कस्पेस"
+    }
+  },
+  "notifications": {
+    "notificationDeliverySection": {
+      "onlyWhenAway": "केवल डेस्कटॉप से दूर होने पर",
+      "onlyWhenAwayHint": "3 मिनट के बाद बिना कीबोर्ड या माउस गतिविधि के, या लॉक होने पर।",
+      "sound": "अधिसूचना ध्वनि",
+      "suppressWhileFocused": "ध्यान केंद्रित करते समय दबाएँ",
+      "suppressWhileFocusedHint": "इस फ़ोन पर खुले कार्यक्षेत्र के लिए अलर्ट छोड़ें।",
+      "footer": "अलर्ट प्रकार प्रत्येक युग्मित डेस्कटॉप की अधिसूचना सेटिंग्स का पालन करते हैं। इस ऐप का उपयोग किए बिना 7 दिनों के बाद सूचनाएं रुक जाती हैं; इसे खोलें और फिर से शुरू करने के लिए पुनः कनेक्ट करें।"
+    },
+    "desktopChannel": {
+      "silentName": "Prompt मूक सूचनाएं",
+      "name": "डेस्कटॉप सूचनाएं"
+    }
+  },
+  "onboarding": {
+    "onboardingPage": {
+      "sessionViewTitle": "सत्र कैसे खुलने चाहिए?",
+      "notificationsTitle": "जब किसी एजेंट को आपकी आवश्यकता हो तो चूकें नहीं",
+      "sessionViewDescription": "चुनें कि क्या समर्थित एजेंट सत्र टर्मिनल में खुलते हैं या इस डिवाइस पर चैट यूआई में। किसी सत्र टैब का दृश्य बदलने के लिए उसे दबाकर रखें, या बाद में सेटिंग्स में डिफ़ॉल्ट को बदलें।",
+      "notificationsDescription": "जब कोई एजेंट काम ख़त्म कर रहा हो या प्रतीक्षा कर रहा हो तो इस फ़ोन पर एक सूचना प्राप्त करें - भले ही आप ऐप का उपयोग नहीं कर रहे हों।",
+      "notificationsDisclosure": "आपके डेस्कटॉप के 3 मिनट तक निष्क्रिय रहने के बाद Prompt की पुश सेवा के माध्यम से वितरित किया गया। इसे सेटिंग्स में किसी भी समय बदलें।",
+      "useChatUi": "चैट यूआई का प्रयोग करें",
+      "openInChatUi": "चैट यूआई में सत्र खोलें",
+      "keepTerminal": "टर्मिनल रखें",
+      "openInTerminal": "टर्मिनल में सत्र खोलें",
+      "enableNotifications": "सूचनाएं सक्षम करें",
+      "enableAgentNotifications": "एजेंट सूचनाएं सक्षम करें",
+      "notNow": "अभी नहीं",
+      "skipNotifications": "अभी के लिए सूचनाएं छोड़ें"
+    },
+    "notificationOnboardingPreview": {
+      "codexFinished": "Codex समाप्त",
+      "testsPassing": "परीक्षण बीत रहे हैं.",
+      "claudeNeedsInput": "Claude इनपुट की आवश्यकता है",
+      "waitingOnYou": "आपका इंतज़ार कर रहा हूँ.",
+      "now": "अभी"
+    }
+  },
+  "connection": {
+    "connectionHealth": {
+      "signInRequired": "{{host}} पर साइन-इन आवश्यक है",
+      "signInDetail": "पुनः कनेक्ट करने के लिए अपने डेस्कटॉप पर Prompt पर साइन इन करें",
+      "hostOffline": "{{host}} ऑफ़लाइन है",
+      "hostOfflineDetail": "जांचें कि यह सक्रिय है, Prompt चल रहा है, और आप साइन इन हैं",
+      "relayAccessExpired": "{{host}} के लिए रिले पहुंच समाप्त हो गई",
+      "rePairDetail": "अपने डेस्कटॉप के साथ पुनः युग्मित करें",
+      "relayUnreachable": "रिले तक नहीं पहुंच सकते",
+      "checkConnection": "अपना कनेक्शन जांचें",
+      "tailscaleHint": "जांचें Tailscale",
+      "hostFallback": "होस्ट",
+      "pairingInvalid": "युग्मित करना अमान्य - अपने डेस्कटॉप के साथ पुनः युग्मित करें",
+      "connected": "कनेक्ट हो गया",
+      "relayConnectFailed": "रिले के माध्यम से कनेक्ट नहीं किया जा सकता",
+      "connectingViaRelay": "रिले के माध्यम से कनेक्ट हो रहा है…",
+      "disconnected": "डिस्कनेक्ट हो गया",
+      "desktopUnreachable": "डेस्कटॉप तक नहीं पहुंच सकते",
+      "connectFailed": "कनेक्ट नहीं हो सका",
+      "reconnecting": "फिर से कनेक्ट हो रहा है…",
+      "connecting": "कनेक्ट हो रहा है…",
+      "labelWithHint": "{{label}} — {{hint}}"
+    },
+    "hostEndpoint": {
+      "addressRequired": "एक होस्ट पता दर्ज करें.",
+      "invalidPort": "पोर्ट 1-65535 होना चाहिए।",
+      "invalidScheme": "ws:// या wss:// (या होस्ट:पोर्ट) का उपयोग करें।",
+      "invalidAddress": "वैध पता नहीं.",
+      "pathOrQueryNotAllowed": "होस्ट में पथ या क्वेरी शामिल नहीं होनी चाहिए.",
+      "invalidHostname": "मान्य होस्टनाम नहीं.",
+      "hostnameRequired": "होस्टनाम गुम है."
+    },
+    "connectionPathLabel": {
+      "directTailscale": "प्रत्यक्ष · Tailscale",
+      "directLan": "प्रत्यक्ष · लैन",
+      "directViaTailscale": "Tailscale के माध्यम से प्रत्यक्ष",
+      "directViaLan": "LAN के माध्यम से प्रत्यक्ष"
+    },
+    "pairConfirmState": {
+      "missingCode": "युग्मन कोड गुम है",
+      "invalidCode": "मान्य युग्मन कोड नहीं"
+    },
+    "rpcClientStreamRegistry": {
+      "interrupted": "कनेक्शन बाधित हो गया",
+      "endedBeforeReady": "स्ट्रीमिंग अनुरोध तैयार होने से पहले ही समाप्त हो गया।"
+    },
+    "rpcClientTerminalBinaryFrame": {
+      "unsupportedFrame": "असमर्थित टर्मिनल स्ट्रीम फ़्रेम (ऑपकोड {{opcode}})।"
+    }
+  },
+  "worktree": {
+    "agentRowDisplay": {
+      "working": "काम जारी है",
+      "monitoring": "बैकग्राउंड कार्यों की निगरानी हो रही है",
+      "blocked": "अवरुद्ध",
+      "waiting": "इनपुट की प्रतीक्षा है",
+      "interrupted": "बाधित",
+      "failed": "विफल",
+      "unconfirmed": "पुष्टि नहीं हो सकी",
+      "idle": "निष्क्रिय",
+      "unverifiable": "हाल में कोई अपडेट नहीं",
+      "stopping": "रोका जा रहा है…",
+      "justNow": "अभी-अभी",
+      "minutes_one": "{{count}} मि.",
+      "minutes_other": "{{count}} मि.",
+      "hours_one": "{{count}} घं.",
+      "hours_other": "{{count}} घं.",
+      "days_one": "{{count}} दि.",
+      "days_other": "{{count}} दि.",
+      "done": "हो गया"
+    },
+    "hostWorkspaceListStates": {
+      "checkHost": "जांचें कि आपका कंप्यूटर चालू है और Prompt चल रहा है",
+      "loadFailed": "इस होस्ट से कार्यस्थान लोड नहीं किया जा सका",
+      "retrying": "वर्कट्री.पीएस विफल ({{error}}) - स्वचालित रूप से पुनः प्रयास किया जा रहा है",
+      "noMatches": "कोई मेल खाता कार्यस्थान नहीं",
+      "noFilterMatches": "कोई भी कार्यस्थान फ़िल्टर से मेल नहीं खाता",
+      "empty": "कोई कार्यस्थान नहीं",
+      "reopen": "अद्यतन करने के लिए पुनः खोलें",
+      "reopenDetail": "यह होस्ट कार्यस्थानों को उस तरीके से सूचीबद्ध करता है जिसे यह पृष्ठ अभी तक नहीं जानता है।"
+    },
+    "workspaceListSections": {
+      "pinned": "पिन किए गए",
+      "all": "सभी",
+      "inReview": "review में",
+      "inProgress": "प्रगति में",
+      "closed": "बंद",
+      "done": "हो गया"
+    }
+  },
+  "components": {
+    "agentLaunchNotice": {
+      "updateRequired": "अपने फोन से एजेंट शुरू करने के लिए अपने कंप्यूटर पर Prompt अपडेट करें।",
+      "statusUnreadable": "इस होस्ट की स्थिति नहीं पढ़ सका. पुनः प्रयास किया जा रहा है...",
+      "copyFailed": "कॉपी नहीं हो सका",
+      "copyPrompt": "prompt कॉपी करें"
+    },
+    "agentSpinner": {
+      "monitoring": "बैकग्राउंड कार्यों की निगरानी हो रही है",
+      "unconfirmed": "पुष्टि नहीं हो सकी"
+    },
+    "agentStateDot": {
+      "monitoring": "बैकग्राउंड कार्यों की निगरानी हो रही है",
+      "unverifiable": "हाल में कोई अपडेट नहीं"
+    },
+    "authFailedBanner": {
+      "message": "प्रमाणीकरण विफल - पहले पुन: कनेक्ट करने का प्रयास करें; यदि यह विफल रहता है, तो डेस्कटॉप से ​​पुनः जोड़ें।"
+    },
+    "authFailedBannerActions": {
+      "repair": "फिर से जोड़ें",
+      "webNote": "इस होस्ट को Prompt ऐप से दोबारा कनेक्ट करें या हटा दें।"
+    },
+    "codexResetCreditAction": {
+      "earnedReset": "अर्जित Codex दर-सीमा रीसेट",
+      "resettingLabel": "Codex दर सीमाएं रीसेट करना",
+      "useResetLabel": "Codex दर-सीमा रीसेट का उपयोग करें",
+      "scopedHint": "{{scopeLabel}} के लिए एक अर्जित रीसेट का उपयोग करता है",
+      "activeAccountHint": "सक्रिय Codex खाते के लिए एक अर्जित रीसेट का उपयोग करता है",
+      "resetting": "रीसेट हो रहा है…",
+      "useReset": "रीसेट का प्रयोग करें"
+    },
+    "customKeyModal": {
+      "editing": "संपादन",
+      "navigation": "नेविगेशन",
+      "function": "समारोह",
+      "addShortcut": "शॉर्टकट जोड़ें",
+      "shortcutCombo": "शॉर्टकट कॉम्बो",
+      "pickKey": "एक कुंजी चुनें",
+      "textMacro": "मैक्रो टेक्स्ट करें",
+      "shortcutComboHint": "Ctrl, Alt, और Shift कुंजी कॉर्ड बनाएं",
+      "textMacroHint": "कस्टम टेक्स्ट कमांड भेजें",
+      "manageShortcuts": "शॉर्टकट प्रबंधित करें",
+      "manageShortcutsHint": "शॉर्टकट कुंजियाँ दिखाएँ, छिपाएँ या पुनः व्यवस्थित करें",
+      "modifiers": "संशोधक",
+      "key": "कुंजी",
+      "moreKeys": "अधिक कुंजियाँ - टैब, तीर, F1–F12…",
+      "add": "जोड़ें",
+      "label": "लेबल",
+      "labelPlaceholder": "जैसे निर्माण",
+      "command": "कमांड",
+      "commandPlaceholder": "जैसे पीएनपीएम बिल्ड",
+      "pressEnter": "एंटर दबाएँ"
+    },
+    "dragReorderRow": {
+      "dragToReorder": "पुनः व्यवस्थित करने के लिए खींचें",
+      "reorderHint": "बिना खींचे ऊपर ले जाने और नीचे जाने की क्रियाओं को पुन: व्यवस्थित करने के लिए का उपयोग करें",
+      "moveUp": "ऊपर बढ़ो",
+      "moveDown": "नीचे जाएँ"
+    },
+    "hostDiagnosticsLink": {
+      "viewDiagnostics": "नेटवर्क डायग्नोस्टिक्स देखें"
+    },
+    "hostProtocolGate": {
+      "checkingCompatibility": "होस्ट अनुकूलता की जाँच करना"
+    },
+    "hostRouteNoticeBanner": {
+      "dismissNotice": "सूचना खारिज करें"
+    },
+    "jiraConnectPrompt": {
+      "updateDesktop": "अद्यतन करें Prompt डेस्कटॉप",
+      "connectOnDesktop": "जिरा को अपने डेस्कटॉप से कनेक्ट करें",
+      "credentialUnreadable": "जीरा सहेजा गया है लेकिन अपठनीय है: {{credentialError}}",
+      "connectHint": "अपनी जीरा साइट को सेटिंग्स → इंटीग्रेशन के अंतर्गत Prompt डेस्कटॉप में जोड़ें, फिर दोबारा जांचें।",
+      "checkAgain": "दोबारा जाँचें"
+    },
+    "dictationSetupSheet": {
+      "loadFailed": "लोड करने में विफल",
+      "downloadFailed": "डाउनलोड विफल रहा",
+      "selectFailed": "मॉडल का चयन नहीं किया जा सका",
+      "updateFailed": "अद्यतन नहीं किया जा सका",
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{details}} · {{progress}}%",
+      "modelExtracting": "{{details}} · निकालना…",
+      "title": "बोलकर लिखना सेट अप करें",
+      "description": "कोई मॉडल डाउनलोड करें या चुनें और युग्मित कंप्यूटर पर श्रुतलेख सक्षम करें - सब कुछ यहां से।",
+      "enabled": "श्रुतलेख सक्षम",
+      "recommended": "अनुशंसित",
+      "inUse": "उपयोग में",
+      "useModel": "उपयोग करें {{model}}",
+      "use": "उपयोग करें",
+      "downloadModel": "डाउनलोड करें {{model}}",
+      "download": "डाउनलोड करें"
+    },
+    "diffReviewBody": {
+      "loadingReview": "समीक्षा लोड हो रही है...",
+      "reviewUnavailable": "समीक्षा अनुपलब्ध",
+      "loadFailed": "समीक्षा लोड करने में असमर्थ",
+      "noReviewableChanges": "कोई समीक्षा योग्य परिवर्तन नहीं",
+      "tryDifferentFilter": "एक भिन्न समीक्षा फ़िल्टर आज़माएँ.",
+      "loadingDiff": "diff लोड हो रहा है…",
+      "diffTruncated": "मोबाइल पूर्वावलोकन के लिए अंतर को छोटा किया गया।",
+      "binaryDiff": "बाइनरी डिफ",
+      "diffTooLarge": "अंतर बहुत बड़ा",
+      "deletedFile": "हटाई गई फ़ाइल",
+      "diffUnavailable": "अंतर अनुपलब्ध",
+      "binaryMessage": "इस फ़ाइल को मोबाइल पर टेक्स्ट के रूप में प्रस्तुत नहीं किया जा सकता.",
+      "tooLargeMessage": "मोबाइल पूर्वावलोकन के लिए यह अंतर बहुत बड़ा है.",
+      "deletedMessage": "यह फ़ाइल हटा दी गई थी. एक फ़ाइल नोट जोड़ें या इसे समीक्षा के रूप में चिह्नित करें।",
+      "selectFile": "समीक्षा करने के लिए एक फ़ाइल का चयन करें.",
+      "retryLabel": "समीक्षा लोड करने का पुनः प्रयास करें"
+    },
+    "diffReviewDrawers": {
+      "discardTitle": "फ़ाइल त्यागें",
+      "discardMessage": "\"{{filePath}}\" में परिवर्तन खारिज करें? इसे असंपादित नहीं किया जा सकता है।",
+      "discard": "बदलाव छोड़ें",
+      "actionsTitle": "कार्रवाइयों की समीक्षा करें",
+      "stageableFiles_one": "{{count}} समीक्षा की गई गैर-चरणबद्ध फ़ाइलों को चरणबद्ध किया जा सकता है",
+      "stageableFiles_other": "{{count}} समीक्षा की गई गैर-चरणबद्ध फ़ाइलों को चरणबद्ध किया जा सकता है",
+      "sendNotes": "नोट्स भेजें",
+      "terminalLabel": "{{title}} ({{id}})",
+      "terminal": "टर्मिनल",
+      "newAgentSession": "नया एजेंट सत्र",
+      "updateRequired": "अपने कंप्यूटर पर Prompt अपडेट करें",
+      "statusUnreadable": "इस होस्ट की स्थिति नहीं पढ़ सका. पुनः प्रयास किया जा रहा है...",
+      "copyNotes": "नोट्स कॉपी करें",
+      "sendUnsentNotes": "न भेजे गए नोट भेजें",
+      "clearSentNotes": "भेजे गए नोट्स साफ़ करें",
+      "stageReviewedFiles": "स्टेज की समीक्षा की गई फ़ाइलें",
+      "markUnreviewed": "मार्क अनरिव्यूड",
+      "openInSession": "सत्र में खोलें",
+      "loadingSessions": "एजेंट सत्र लोड हो रहे हैं...",
+      "unsentNotes_one": "{{count}} न भेजे गए नोट",
+      "unsentNotes_other": "{{count}} न भेजे गए नोट",
+      "editNote": "नोट संपादित करें",
+      "addNote": "नोट जोड़ें",
+      "lineNumber": "पंक्ति {{lineNumber}}",
+      "fileNote": "फ़ाइल नोट",
+      "cancelNote": "नोट रद्द करें",
+      "reviewNote": "समीक्षा नोट",
+      "saveLineNote": "नोट को लाइन पर सहेजें {{lineNumber}}",
+      "deleteNote": "नोट हटाएँ",
+      "completeTitle": "समीक्षा पूर्ण",
+      "fileSummary_one": "{{fileCount}} फ़ाइल की समीक्षा की गई, {{count}} नोट",
+      "fileSummary_other": "{{fileCount}} फ़ाइल की समीक्षा की गई, {{count}} नोट्स",
+      "filesSummary_one": "{{fileCount}} फाइलों की समीक्षा की गई, {{count}} नोट",
+      "filesSummary_other": "{{fileCount}} फाइलों की समीक्षा की गई, {{count}} नोट्स",
+      "stageReviewedLabel": "स्टेज ने फाइलों की समीक्षा की",
+      "stageReviewed": "स्टेज की समीक्षा की गई",
+      "sendNotesLabel": "एजेंट को नोट्स भेजें"
+    },
+    "diffReviewFileSummary": {
+      "branchFrom": "{{oldPath}} से शाखा",
+      "stagedFrom": "{{oldPath}} से मंचन",
+      "unstagedFrom": "{{oldPath}} से अस्थिर",
+      "branch": "शाखा",
+      "staged": "मंचन किया",
+      "unstaged": "अस्थिर",
+      "reviewed": "समीक्षा की गई",
+      "changed": "बदल गया",
+      "notes_one": "{{count}} नोट",
+      "notes_other": "{{count}} नोट",
+      "editFileNote": "फ़ाइल नोट संपादित करें",
+      "stale": "बासी",
+      "previousHunk": "पिछला हंक",
+      "hunk": "हंक",
+      "nextHunk": "अगला बकवास"
+    },
+    "diffReviewFooter": {
+      "stageFile": "स्टेज फ़ाइल",
+      "stage": "Stage करें",
+      "unstageFile": "फ़ाइल को अनस्टेज करें",
+      "unstage": "Unstage करें",
+      "discardFile": "फ़ाइल त्यागें",
+      "discard": "बदलाव छोड़ें",
+      "previousFile": "पिछली फ़ाइल",
+      "addFileNote": "फ़ाइल नोट जोड़ें",
+      "note": "नोट",
+      "markFileReviewed": "फ़ाइल की समीक्षा की गई चिह्नित करें",
+      "reviewed": "समीक्षा की गई",
+      "markReviewed": "मार्क की समीक्षा की गई",
+      "nextFile": "अगली फ़ाइल"
+    },
+    "diffReviewHeader": {
+      "filterAll": "सभी",
+      "showAllFiles": "सभी समीक्षा फ़ाइलें दिखाएँ",
+      "filterUnreviewed": "समीक्षा नहीं की गई",
+      "showUnreviewedFiles": "समीक्षा न की गई समीक्षा फ़ाइलें दिखाएँ",
+      "filterNotes": "नोट्स",
+      "showNotesFiles": "नोट्स समीक्षा फ़ाइलें दिखाएँ",
+      "filterUnstaged": "अस्थिर",
+      "showUnstagedFiles": "अचरणबद्ध समीक्षा फ़ाइलें दिखाएँ",
+      "filterStaged": "मंचन किया",
+      "showStagedFiles": "चरणबद्ध समीक्षा फ़ाइलें दिखाएँ",
+      "filterBranch": "शाखा",
+      "showBranchFiles": "शाखा समीक्षा फ़ाइलें दिखाएँ",
+      "title": "बदलाव",
+      "openPullRequestSidebar": "पुल अनुरोध साइडबार खोलें",
+      "openReviewActions": "समीक्षा क्रियाएँ खोलें",
+      "reviewedProgress": "{{reviewedCount}}/{{queueLength}} की समीक्षा की गई",
+      "unsentNotes_one": "{{count}} न भेजा गया नोट",
+      "unsentNotes_other": "{{count}} न भेजे गए नोट"
+    },
+    "diffReviewLine": {
+      "addedLineNumber": "जोड़ी गई पंक्ति {{number}}",
+      "addedLine": "पंक्ति जोड़ी गई",
+      "deletedLineNumber": "हटाई गई पंक्ति {{number}}",
+      "deletedLine": "हटाई गई पंक्ति",
+      "contextLineNumber": "प्रसंग पंक्ति {{number}}",
+      "contextLine": "प्रसंग पंक्ति",
+      "addNoteOnLine": "लाइन पर नोट जोड़ें {{number}}",
+      "editNoteOnLine": "लाइन पर नोट संपादित करें {{number}}"
+    },
+    "homeQuickActions": {
+      "title": "त्वरित कार्रवाइयाँ",
+      "pairDesktop": "डेस्कटॉप जोड़ें",
+      "newWorkspace": "नया वर्कस्पेस"
+    },
+    "hostCard": {
+      "worktreeAccessibilitySummary": "{{summary}}, {{activeCount}} सक्रिय",
+      "pairingInvalid": "जोड़ी बनाना अमान्य",
+      "pairingTemporarilyUnavailable": "युग्मन अस्थायी रूप से अनुपलब्ध है",
+      "updateDesktopHint": "डेस्कटॉप को अपडेट करें Prompt और कहीं से भी कनेक्ट करने के लिए साइन इन करें",
+      "repairHint": "अपने डेस्कटॉप के साथ पुनः युग्मित करने के लिए टैप करें",
+      "unlockHint": "अपना फ़ोन अनलॉक करें, फिर पुनः प्रयास करने के लिए टैप करें",
+      "openHost": "खोलें {{title}}",
+      "hostActions": "{{title}} के लिए कार्रवाई"
+    },
+    "htmlPreview": {
+      "previewRenderedHtml": "प्रस्तुत HTML का पूर्वावलोकन करें",
+      "preview": "प्रीव्यू",
+      "viewHtmlSource": "HTML स्रोत देखें",
+      "source": "सोर्स",
+      "title": "HTML प्रीव्यू"
+    },
+    "prSidebar": {
+      "loading": "पुल अनुरोध लोड हो रहा है...",
+      "loadFailed": "कुछ ग़लत हो गया.",
+      "retryLoading": "पुल अनुरोध लोड करने का पुनः प्रयास करें",
+      "notPermitted": "अनुमति नहीं है - आपका GitHub खाता कनेक्ट नहीं है।"
+    },
+    "richMarkdownEditor": {
+      "linkUrl": "लिंक URL",
+      "imageUrl": "छवि यूआरएल",
+      "insert": "सम्मिलित करें"
+    },
+    "richMarkdownToolbar": {
+      "body": "शरीर",
+      "heading1": "एच1",
+      "heading2": "एच2",
+      "heading3": "H3",
+      "bold": "बोल्ड",
+      "italic": "इटैलिक",
+      "strike": "स्ट्राइक",
+      "bulletList": "बुलेट सूची",
+      "numberedList": "क्रमांकित सूची",
+      "checklist": "चेकलिस्ट",
+      "quote": "उद्धरण",
+      "link": "लिंक",
+      "image": "छवि",
+      "inlineCode": "इनलाइन कोड",
+      "codeBlock": "कोड ब्लॉक"
+    },
+    "searchField": {
+      "clearSearch": "खोज साफ़ करें"
+    },
+    "sourceCopyButton": {
+      "copyFailed": "प्रतिलिपि विफल",
+      "clipboardRejected": "क्लिपबोर्ड ने पाठ को अस्वीकार कर दिया.",
+      "failed": "विफल",
+      "copiedLoaded": "कॉपी लोड किया गया",
+      "copyLoaded": "प्रतिलिपि लोड की गई",
+      "couldNotCopy": "कॉपी नहीं हो सका"
+    },
+    "workspaceNameInput": {
+      "placeholder": "वर्कस्पेस का नाम"
+    },
+    "newWorkspaceFab": {
+      "newWorkspace": "नया वर्कस्पेस"
+    },
+    "newWorkspaceSetupScriptField": {
+      "label": "setup स्क्रिप्ट",
+      "hooks": "हुक",
+      "run": "चलाएँ",
+      "skip": "छोड़ें",
+      "runSetupCommand": "setup कमांड चलाएँ"
+    },
+    "newWorkspaceSshConnectionField": {
+      "label": "SSH कनेक्शन",
+      "connecting": "कनेक्ट हो रहा है...",
+      "connect": "कनेक्ट करें",
+      "serverRecovery": "इसके सर्वर को डेस्कटॉप से पुनर्प्राप्त करने की आवश्यकता है: सेटिंग्स → SSH होस्ट → सर्वर पुनर्प्राप्त करें।"
+    },
+    "newWorktreeFormSheet": {
+      "createWorktree": "worktree बनाएँ",
+      "noProjectsFound": "कोई प्रोजेक्ट नहीं मिला",
+      "nameOrCreateFrom": "नाम या 'से बनाएं'",
+      "workspaceName": "वर्कस्पेस का नाम",
+      "agent": "एजेंट",
+      "connectTargetFirst": "पहले लक्ष्य कनेक्ट करें",
+      "advanced": "उन्नत",
+      "note": "नोट",
+      "notePlaceholder": "नोट लिखें",
+      "connectTarget": "लक्ष्य कनेक्ट करें"
+    },
+    "newWorktreeModal": {
+      "remoteRepository": "दूरस्थ भंडार"
+    },
+    "newWorktreeModalDrawers": {
+      "project": "प्रोजेक्ट",
+      "runOn": "इस पर चलाएँ",
+      "agent": "एजेंट"
+    },
+    "newWorktreeProjectTargetFields": {
+      "project": "प्रोजेक्ट",
+      "selectProject": "एक प्रोजेक्ट चुनें",
+      "runOn": "इस पर चलाएँ",
+      "selectRunTarget": "एक रन लक्ष्य चुनें"
+    },
+    "protocolBlockScreen": {
+      "updateMobileTitle": "अद्यतन Prompt मोबाइल",
+      "updateDesktopTitle": "अपने कंप्यूटर पर Prompt अपडेट करें",
+      "refreshWorkspaceTitle": "मोबाइल कार्यक्षेत्र को ताज़ा करें",
+      "refreshWorkspaceBody": "इस होस्ट के लिए कैश किया गया कार्यस्थान डेस्कटॉप की अपेक्षा से पुराना है। वर्तमान होस्ट को डाउनलोड करने के लिए इस होस्ट से पुनः कनेक्ट करें।",
+      "mobileTooOldAppStore": "इस डेस्कटॉप को एक नए Prompt मोबाइल ऐप की आवश्यकता है। ऐप स्टोर से Prompt मोबाइल अपडेट करें, फिर इस होस्ट को दोबारा आज़माएं।",
+      "mobileTooOldGitHubReleases": "इस डेस्कटॉप को एक नए Prompt मोबाइल ऐप की आवश्यकता है। GitHub रिलीज़ से Prompt मोबाइल अपडेट करें, फिर इस होस्ट को दोबारा आज़माएँ।",
+      "workspaceNeedsUpdateAppStore": "इस डेस्कटॉप के मोबाइल कार्यक्षेत्र को एक नए Prompt मोबाइल ऐप की आवश्यकता है। ऐप स्टोर से Prompt मोबाइल अपडेट करें, फिर इस होस्ट को दोबारा आज़माएं।",
+      "workspaceNeedsUpdateGitHubReleases": "इस डेस्कटॉप के मोबाइल कार्यक्षेत्र को एक नए Prompt मोबाइल ऐप की आवश्यकता है। GitHub रिलीज़ से Prompt मोबाइल अपडेट करें, फिर इस होस्ट को दोबारा आज़माएँ।",
+      "desktopTooOldBody": "यह युग्मित डेस्कटॉप ऐप आपके वर्तमान Prompt मोबाइल ऐप के लिए बहुत पुराना है। अपने कंप्यूटर पर Prompt अपडेट करें, फिर इस होस्ट को दोबारा आज़माएं।",
+      "openAppStore": "App Store खोलें",
+      "openGitHubReleases": "GitHub रिलीज़ खोलें",
+      "getVersion": "प्राप्त करें Prompt {{version}}",
+      "refreshRecoveryNote": "यदि यह संदेश बना रहता है, तो इस होस्ट को हटा दें और इसे फिर से जोड़ दें।",
+      "updateRecoveryNote": "पहले से ही अद्यतन? होस्ट्स पर वापस जाएं और कनेक्शन रीफ्रेश करें। यदि यह संदेश बना रहता है, तो इस होस्ट को हटा दें और इसे फिर से जोड़ दें।",
+      "backToHosts": "मेज़बानों पर वापस जाएँ"
+    },
+    "setupHookTrustDrawer": {
+      "scriptChangedTitle": "{{repoName}} की सेटअप स्क्रिप्ट बदल गई",
+      "runSetupTitle": "{{repoName}} से सेटअप चलाएँ?",
+      "description": "इस रिपॉजिटरी का orca.yaml कार्यक्षेत्र शुरू होने से पहले चलता है। इसे केवल तभी चलाएं जब आपको इस रिपॉजिटरी पर भरोसा हो।",
+      "newScriptLabel": "नई setup script",
+      "scriptLabel": "setup स्क्रिप्ट",
+      "runHooks": "hook चलाएँ",
+      "alwaysTrustAndRun": "हमेशा भरोसा करो और भागो",
+      "dontRun": "न चलाएँ"
+    },
+    "smartWorkspaceAdvancedFields": {
+      "name": "नाम",
+      "workspaceName": "वर्कस्पेस का नाम",
+      "branchName": "branch का नाम",
+      "derivedFromName": "नाम से व्युत्पन्न"
+    },
+    "smartWorkspaceSourceDrawer": {
+      "title": "नाम या 'से बनाएं'",
+      "crossRepoMessage": "यह आइटम {{owner}}/{{repo}} में रहता है।",
+      "switchRepo": "{{repoName}} पर स्विच करें",
+      "connectRepository": "रिपॉजिटरी को खोज स्रोतों से कनेक्ट करें।",
+      "gitHubRemoteRequired": "इस SSH रेपो को मुद्दों और पीआर को सूचीबद्ध करने के लिए GitHub रिमोट की आवश्यकता है।",
+      "noResults": "कोई परिणाम नहीं मिला.",
+      "typeWorkspaceName": "नीचे दिए गए फ़ील्ड में कार्यस्थान का नाम टाइप करें.",
+      "searchPlaceholder": "कोई नाम लिखें या कोई स्रोत खोजें"
+    },
+    "smartWorkspaceSourceField": {
+      "optional": "[वैकल्पिक]",
+      "openSelectedSource": "चयनित स्रोत खोलें",
+      "searchPlaceholder": "कोई नाम लिखें या कोई स्रोत खोजें"
+    },
+    "smartWorkspaceSourceRow": {
+      "useName": "\"{{name}}\" का प्रयोग करें",
+      "nameWorkspace": "इस कार्यक्षेत्र को नाम दें",
+      "createBranch": "शाखा बनाएं \"{{name}}\"",
+      "newBranch": "नया branch",
+      "pullRequest": "PR #{{number}}",
+      "issue": "अंक #{{number}}",
+      "mergeRequest": "MR !{{number}}"
+    },
+    "terminalShortcutSettings": {
+      "shortcutBar": "शॉर्टकट बार",
+      "shortcutBarDescription": "कुंजियों को दिखाने या छिपाने के लिए उन्हें टॉगल करें, और कुंजी को टर्मिनल शॉर्टकट बार पर अपने इच्छित क्रम में खींचने के लिए पकड़ को दबाए रखें।",
+      "resetDefaults": "डिफ़ॉल्ट रीसेट करें",
+      "resetDescription": "प्रत्येक अंतर्निहित शॉर्टकट कुंजी को मूल क्रम में दिखाएं",
+      "customShortcuts": "कस्टम शॉर्टकट",
+      "empty": "अभी तक कोई कस्टम शॉर्टकट परिभाषित नहीं है.",
+      "removeShortcut": "हटाएँ {{label}}",
+      "addShortcut": "कस्टम शॉर्टकट जोड़ें…",
+      "addDescription": "कुंजी कॉम्बो या टेक्स्ट मैक्रो बनाएं"
+    },
+    "voiceModelList": {
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{size}} · {{progress}}%",
+      "modelExtracting": "{{size}} · निकालना…",
+      "recommended": "अनुशंसित",
+      "inUse": "उपयोग में",
+      "useModel": "उपयोग करें {{label}}",
+      "use": "उपयोग करें",
+      "deleteModel": "हटाएं {{label}}",
+      "downloadModel": "डाउनलोड करें {{label}}"
+    },
+    "workspaceDetailPlaceholder": {
+      "title": "कोई कार्यस्थल खुला नहीं",
+      "description": "यहां इसका टर्मिनल खोलने के लिए साइडबार से एक कार्यक्षेत्र चुनें।"
+    },
+    "worktreeListRow": {
+      "folder": "फ़ोल्डर",
+      "remoteHost": "दूरस्थ होस्ट",
+      "project": "परियोजना {{repo}}",
+      "child": "बच्चा",
+      "children_one": "{{count}} बालक",
+      "children_other": "{{count}} child"
+    },
+    "accountsSnapshot": {
+      "invalidSnapshot": "होस्ट से अमान्य खातों का स्नैपशॉट"
+    },
+    "codexResetCredit": {
+      "available_one": "{{count}} रीसेट उपलब्ध है",
+      "available_other": "{{count}} रीसेट उपलब्ध हैं",
+      "resetTitle": "दर सीमाएँ रीसेट",
+      "alreadyAppliedTitle": "रीसेट पहले से ही लागू है",
+      "refresh": "Codex उपयोग ताज़ा कर दिया गया है।",
+      "nothingToResetTitle": "रीसेट करने के लिए कुछ भी नहीं",
+      "nothingToResetMessage": "कोई पात्र Codex दर-सीमा विंडो समाप्त नहीं हुई है।",
+      "noResetTitle": "कोई रीसेट उपलब्ध नहीं है",
+      "noResetMessage": "इस खाते में कोई अर्जित रीसेट क्रेडिट उपलब्ध नहीं है।",
+      "invalidResponse": "होस्ट से अमान्य रीसेट प्रतिक्रिया",
+      "expiryNowSingle": "अभी समाप्त हो रहा है",
+      "expiryNowMultiple": "अगली अवधि अभी समाप्त हो रही है",
+      "expiryMinutesSingle": "{{minutes}} मी में समाप्त होता है",
+      "expiryMinutesMultiple": "अगला {{minutes}} मी में समाप्त होता है",
+      "expiryHoursMinutesSingle": "{{hours}} घंटे {{minutes}} मी में समाप्त होता है",
+      "expiryHoursMinutesMultiple": "अगला {{hours}} घंटा {{minutes}} मी में समाप्त होता है",
+      "expiryHoursSingle": "{{hours}} घंटे में समाप्त होता है",
+      "expiryHoursMultiple": "अगला {{hours}} घंटे में समाप्त हो जाता है",
+      "expiryDaysHoursSingle": "{{days}}डी {{hours}}एच में समाप्त होता है",
+      "expiryDaysHoursMultiple": "अगला {{days}}डी {{hours}}एच में समाप्त होता है",
+      "expiryDaysSingle": "{{days}}डी में समाप्त होता है",
+      "expiryDaysMultiple": "अगला {{days}}डी में समाप्त होता है"
+    },
+    "markdownBlocks": {
+      "copyCode": "कोड कॉपी करें",
+      "openImage": "छवि खोलें"
+    },
+    "mountedBottomDrawer": {
+      "dismissDrawer": "दराज को खारिज करें"
+    },
+    "newWorktreeAgentSelection": {
+      "blankTerminal": "खाली टर्मिनल"
+    },
+    "useCodexResetCreditAction": {
+      "hostAccount": "{{identity}} मेजबान पर",
+      "hostAccountConfirmMessage": "यह होस्ट पर {{identity}} के लिए एक अर्जित रीसेट खर्च करता है और पात्र दर-सीमा विंडो को तुरंत रीसेट करता है।",
+      "hostSelectedAccount": "होस्ट पर चयनित प्रबंधित खाता",
+      "hostSelectedAccountConfirmMessage": "यह होस्ट पर चयनित प्रबंधित खाते के लिए एक अर्जित रीसेट खर्च करता है और पात्र दर-सीमा विंडो को तुरंत रीसेट करता है।",
+      "wslAccount": "{{identity}} डब्ल्यूएसएल पर {{distro}}",
+      "wslAccountConfirmMessage": "यह WSL {{distro}} पर {{identity}} के लिए एक अर्जित रीसेट खर्च करता है और पात्र दर-सीमा विंडो को तुरंत रीसेट करता है।",
+      "wslSelectedAccount": "WSL पर चयनित प्रबंधित खाता {{distro}}",
+      "wslSelectedAccountConfirmMessage": "यह WSL {{distro}} पर चयनित प्रबंधित खाते के लिए एक अर्जित रीसेट खर्च करता है और पात्र दर-सीमा विंडो को तुरंत रीसेट करता है।",
+      "detailsChanged": "रीसेट विवरण बदल गया",
+      "detailsChangedMessage": "होस्ट से संपर्क करने से पहले खाता या रीसेट ऑफ़र बदल गया Codex। अद्यतन विवरण की समीक्षा करें, फिर दोबारा पुष्टि करें।",
+      "resetFailed": "दर सीमा रीसेट नहीं की जा सकी",
+      "confirmTitle": "दर-सीमा रीसेट का उपयोग करें?"
+    },
+    "nativeScreenRecovery": {
+      "title": "कुछ गलत हो गया",
+      "tryAgain": "दोबारा कोशिश करें",
+      "home": "होम"
+    }
+  },
+  "pullRequest": {
+    "linkPrForm": {
+      "title": "मौजूदा पुल अनुरोध को लिंक करें",
+      "referenceLabel": "पीआर नंबर या GitHub यूआरएल",
+      "referencePlaceholder": "#123 या https://github.com/owner/repo/pull/123",
+      "linkNumber": "लिंक #{{number}}",
+      "linkButton": "लिंक पुल अनुरोध"
+    },
+    "prViewPanel": {
+      "providerUnavailable": "इस प्रदाता के लिए होस्ट किया गया समीक्षा पैनल अनुपलब्ध है।",
+      "branchUnavailable": "वर्तमान शाखा अनुपलब्ध है."
+    },
+    "prActionsSection": {
+      "unlinkFailed": "पुल अनुरोध को अनलिंक करने में विफल.",
+      "mergeConfirmTitle": "मर्ज पुल अनुरोध?",
+      "mergeButton": "merge करें",
+      "closeConfirmTitle": "पुल अनुरोध बंद करें?",
+      "closeConfirmMessage": "#{{number}} विलय के बिना बंद कर दिया जाएगा।",
+      "reopenConfirmTitle": "पुल अनुरोध पुनः खोलें?",
+      "reopenConfirmMessage": "#{{number}} फिर से खोला जाएगा.",
+      "reopenButton": "फिर से खोलें",
+      "mergeAccessibilityLabel": "मर्ज पुल अनुरोध",
+      "recheckAccessibilityLabel": "मर्ज स्थिति दोबारा जांचें",
+      "recheckButton": "दोबारा जांचें",
+      "markReadyAccessibilityLabel": "पुल अनुरोध को समीक्षा के लिए तैयार चिह्नित करें",
+      "markReadyButton": "समीक्षा के लिए तैयार",
+      "autoMergeLabel": "तैयार होने पर स्वतः विलय",
+      "autoMergeAccessibilityLabel": "ऑटो-मर्ज टॉगल करें",
+      "autoMergeOn": "चालू",
+      "autoMergeOff": "बंद",
+      "closeAccessibilityLabel": "pull request बंद करें",
+      "reopenAccessibilityLabel": "पुल अनुरोध पुनः खोलें",
+      "unlinkAccessibilityLabel": "अनलिंक पुल अनुरोध",
+      "unlinkButton": "अनलिंक करें"
+    },
+    "prCheckDetail": {
+      "noDetails": "कोई विवरण उपलब्ध नहीं है.",
+      "annotations": "टिप्पणियाँ",
+      "annotationsTruncated": "पहले 20 annotation दिखाए जा रहे हैं",
+      "jobsTruncated": "पहले 100 job दिखाए जा रहे हैं"
+    },
+    "checksSection": {
+      "unavailable": "check उपलब्ध नहीं हैं",
+      "noChecks": "कोई जाँच नहीं",
+      "failing": "{{count}} विफल हो रहा है",
+      "pendingCount": "{{count}} लंबित",
+      "passed": "{{count}} उत्तीर्ण",
+      "neutralCount": "{{count}} तटस्थ",
+      "successful": "सफल",
+      "failed": "विफल",
+      "cancelled": "रद्द किया गया",
+      "timedOut": "समय समाप्त",
+      "actionRequired": "कार्रवाई ज़रूरी है",
+      "neutral": "तटस्थ",
+      "skipped": "छोड़ा गया",
+      "queued": "कतार में",
+      "inProgress": "प्रगति में",
+      "pending": "लंबित",
+      "loadDetailsFailed": "चेक विवरण लोड करने में विफल",
+      "title": "जाँच करता है",
+      "rerunFailing": "विफल जाँचें पुनः चलाएँ",
+      "failingChecks_one": "{{count}} विफल check",
+      "failingChecks_other": "{{count}} विफल check",
+      "inspectOrFix": "विवरण देखें या AI से ठीक करवाना शुरू करें।",
+      "fixFailing": "एआई के साथ असफल जांच को ठीक करें",
+      "fix": "ठीक करें",
+      "checkDetails": "{{name}} विवरण जांचें",
+      "openOnWeb": "वेब पर {{name}} खोलें"
+    },
+    "commentCard": {
+      "justNow": "अभी-अभी",
+      "minutesAgo_one": "{{count}} मी पहले",
+      "minutesAgo_other": "{{count}} मी पहले",
+      "hoursAgo_one": "{{count}} घंटे पहले",
+      "hoursAgo_other": "{{count}} घंटे पहले",
+      "daysAgo_one": "{{count}}दिन पहले",
+      "daysAgo_other": "{{count}}दिन पहले",
+      "monthsAgo_one": "{{count}}अभी कुछ समय पहले",
+      "monthsAgo_other": "{{count}}अभी कुछ समय पहले",
+      "yearsAgo_one": "{{count}}वर्ष पहले",
+      "yearsAgo_other": "{{count}}वर्ष पहले",
+      "resolved": "हल किया गया",
+      "openOnGitHub": "GitHub पर comment खोलें",
+      "editPlaceholder": "टिप्पणी संपादित करें...",
+      "replyToComment": "comment का जवाब दें",
+      "reply": "उत्तर दें",
+      "editComment": "टिप्पणी संपादित करें",
+      "deleteComment": "टिप्पणी हटाएँ",
+      "unresolveThread": "अनसुलझा धागा",
+      "resolveThread": "धागे का समाधान करें",
+      "unresolve": "सुलझा हुआ हटाएँ",
+      "resolve": "Resolve करें",
+      "replyPlaceholder": "उत्तर लिखें...",
+      "deleteConfirmTitle": "comment हटाएँ?",
+      "deleteConfirmMessage": "इससे GitHub पर टिप्पणी स्थायी रूप से हट जाती है।"
+    },
+    "commentsSection": {
+      "all": "सभी",
+      "humans": "इंसान",
+      "bots": "Bot",
+      "noBotComments": "Bot के कोई comment नहीं हैं।",
+      "noHumanComments": "इंसानों के कोई comment नहीं हैं।",
+      "noComments": "अभी तक कोई comment नहीं है।",
+      "description": "विवरण",
+      "descriptionLoadFailed": "विवरण लोड नहीं किया जा सका. पुनः प्रयास करने के लिए ताज़ा करें टैप करें।",
+      "noDescription": "कोई विवरण नहीं दिया गया।",
+      "title": "टिप्पणियाँ",
+      "commentsLoadFailed": "टिप्पणियाँ लोड नहीं की जा सकीं. पुनः प्रयास करने के लिए ताज़ा करें टैप करें।",
+      "showMoreOf": "{{remaining}} में से अधिक {{count}} दिखाएँ",
+      "showMore": "{{count}} और दिखाएँ",
+      "addCommentPlaceholder": "comment जोड़ें…",
+      "comment": "टिप्पणी करें",
+      "resolvedThreadSingle": "{{author}} द्वारा resolve किया गया थ्रेड",
+      "resolvedThreadCount": "{{author}} द्वारा हल किया गया थ्रेड ({{count}})",
+      "resolvedCommentSingle": "{{author}} द्वारा resolve किया गया comment",
+      "resolvedCommentCount": "{{author}} द्वारा समाधानित टिप्पणी ({{count}})"
+    },
+    "conflictingFilesSection": {
+      "detailsUnavailable": "conflict फ़ाइल का विवरण उपलब्ध नहीं है",
+      "refreshing": "conflict का विवरण रीफ़्रेश हो रहा है…",
+      "localMergeClean": "GitHub संघर्षों की रिपोर्ट करता है, लेकिन स्थानीय Git ने उन्हें पुन: प्रस्तुत नहीं किया। मर्जेबिलिटी की पुनर्गणना करने के लिए पीआर को रीफ्रेश करें या शाखा को पुश करें।",
+      "copyFailed": "पाठ की प्रतिलिपि बनाने में विफल",
+      "copyCommands": "कमांड कॉपी करें",
+      "commitsBehind_one": "{{count}} पीछे प्रतिबद्धता (आधार प्रतिबद्धता: {{baseCommit}})",
+      "commitsBehind_other": "{{count}} पीछे प्रतिबद्ध है (आधार प्रतिबद्धता: {{baseCommit}})",
+      "title": "Conflict",
+      "mustResolve": "इस branch में conflict हैं जिन्हें सुलझाना ज़रूरी है",
+      "runFromWorktree": "इस worktree से चलाएँ",
+      "copyRefreshCommands": "mergeability रीफ़्रेश कमांड कॉपी करें",
+      "filesHeading": "conflict वाली फ़ाइलें",
+      "resolveWithAi": "एआई के साथ विवादों का समाधान करें"
+    },
+    "reviewersSection": {
+      "requested": "अनुरोध किया",
+      "approved": "approve किया गया",
+      "changesRequested": "बदलाव का अनुरोध",
+      "commented": "टिप्पणी की",
+      "dismissed": "बर्खास्त",
+      "pending": "लंबित",
+      "reviewed": "समीक्षा की गई",
+      "addOrRemove": "समीक्षक जोड़ें या हटाएँ",
+      "title": "समीक्षक",
+      "loading": "समीक्षक लोड हो रहे हैं...",
+      "loadFailed": "समीक्षकों को लोड नहीं किया जा सका. पुनः प्रयास करने के लिए ताज़ा करें टैप करें।",
+      "noReviewers": "किसी समीक्षक ने अनुरोध नहीं किया",
+      "removeReviewer": "हटाएँ {{login}}"
+    },
+    "prSidebarHeader": {
+      "openOnWeb": "वेब पर पुल अनुरोध #{{number}} खोलें",
+      "openInBrowser": "ब्राउज़र में पुल अनुरोध #{{number}} खोलें",
+      "cancelEditingTitle": "शीर्षक संपादन रद्द करें",
+      "saveTitle": "शीर्षक सहेजें",
+      "editTitle": "पुल अनुरोध शीर्षक संपादित करें"
+    },
+    "prSidebarCreateEmptyState": {
+      "branchRequired": "पुल अनुरोध बनाने से पहले एक शाखा की जाँच करें।",
+      "createFailed": "पुल अनुरोध बनाने में विफल.",
+      "title": "अनुरोध खींचें",
+      "refreshPullRequest": "ताज़ा करें पुल अनुरोध",
+      "createPullRequest": "पुल अनुरोध बनाएं",
+      "createPr": "PR बनाएँ",
+      "linkedPrUnavailable": "लिंक्ड पीआर #{{number}} अनुपलब्ध है",
+      "noOpenPullRequest": "कोई खुला पुल अनुरोध नहीं",
+      "refreshOrCreate": "दोबारा जांच करने के लिए रीफ्रेश करें, या इस शाखा के लिए एक नया पीआर बनाएं।",
+      "branchNotLinked": "{{branch}} एक खुले पीआर से जुड़ा नहीं है।",
+      "currentBranchNotLinked": "वर्तमान शाखा किसी खुले पीआर से जुड़ी नहीं है।",
+      "linkExistingPullRequest": "किसी मौजूदा पुल अनुरोध को लिंक करें",
+      "linkExistingPr": "किसी मौजूदा पीआर को लिंक करें"
+    },
+    "reviewerPickerDrawer": {
+      "title": "समीक्षक",
+      "searchPeople": "लोगों को खोजें",
+      "loadFailed": "लोगों को लोड करने में विफल",
+      "noMatches": "कोई मेल खाता हुआ व्यक्ति नहीं",
+      "removeReviewer": "हटाएँ {{login}}",
+      "requestReviewer": "अनुरोध {{login}}"
+    },
+    "markdownBlocks": {
+      "details": "विवरण"
+    },
+    "prActionsState": {
+      "mergedLabel": "merge किया गया",
+      "mergedHint": "यह pull request पहले ही merge हो चुका है",
+      "closedLabel": "बंद",
+      "closedHint": "यह pull request बंद है",
+      "draftLabel": "ड्राफ़्ट",
+      "draftHint": "यह pull request अब भी draft है",
+      "reviewRequiredLabel": "Approval ज़रूरी",
+      "reviewRequiredHint": "इस pull request को merge करने से पहले GitHub को review approval चाहिए",
+      "changesRequestedLabel": "बदलाव का अनुरोध",
+      "changesRequestedHint": "GitHub ने इस pull request पर बदलाव का अनुरोध बताया है",
+      "conflictsLabel": "Conflict",
+      "conflictsHint": "GitHub ने merge conflict बताए हैं",
+      "mergeQueueLabel": "तैयार होने पर merge करें",
+      "mergeQueueHint": "यह base branch GitHub merge queue का उपयोग करती है",
+      "mergeQueueAutoMergeOnLabel": "Auto-merge चालू",
+      "mergeQueueAutoMergeOnHint": "यह base branch GitHub merge queue का उपयोग करती है",
+      "mergeStatusUnavailableLabel": "merge करें",
+      "mergeStatusUnavailableHint": "इस PR की merge स्थिति उपलब्ध नहीं है",
+      "behindLabel": "पीछे",
+      "behindHint": "merge करने से पहले branch अपडेट करें",
+      "blockedLabel": "अवरुद्ध",
+      "blockedHint": "GitHub के अनुसार यह pull request अवरुद्ध है",
+      "mergeableChecksFailedLabel": "Check विफल",
+      "mergeableChecksFailedHint": "GitHub के अनुसार यह PR merge हो सकता है, लेकिन कुछ check विफल रहे",
+      "mergeableChecksPendingLabel": "check लंबित हैं",
+      "mergeableChecksPendingHint": "GitHub के अनुसार यह PR merge हो सकता है, लेकिन check अब भी चल रहे हैं",
+      "mergeableChecksPassedLabel": "merge किया जा सकता है",
+      "mergeableChecksPassedHint": "GitHub के अनुसार यह PR merge हो सकता है और check सफल रहे",
+      "mergeableLabel": "merge किया जा सकता है",
+      "mergeableHint": "GitHub के अनुसार यह PR merge हो सकता है",
+      "checksPassedLabel": "Check सफल रहे",
+      "checksPassedHint": "Check सफल रहे। merge करने से पहले merge की पात्रता फिर जाँची जाएगी।",
+      "checkingLabel": "जाँच हो रही है",
+      "checkingHint": "GitHub अब भी इस pull request की merge स्थिति की गणना कर रहा है",
+      "stackDraft": "#{{number}} अभी भी एक मसौदा है।",
+      "stackClosed": "#{{number}} बंद है.",
+      "stackConflicts": "#{{number}} में मर्ज विरोध है।",
+      "stackChangesRequested": "#{{number}} ने परिवर्तन का अनुरोध किया है.",
+      "stackReviewRequired": "#{{number}} को अभी भी समीक्षा अनुमोदन की आवश्यकता है।",
+      "stackBehind": "#{{number}} अद्यतन किया जाना चाहिए।",
+      "stackBlocked": "#{{number}} अवरुद्ध है.",
+      "methodMerge": "merge commit बनाएँ",
+      "methodSquash": "Squash और merge करें",
+      "methodRebase": "Rebase और merge करें",
+      "mergeConfirmMessage": "यह #{{number}} को अपनी आधार शाखा में विलय कर देगा।",
+      "queueThrough_one": "#{{number}} · {{count}} पीआर के माध्यम से कतार",
+      "queueThrough_other": "#{{number}} · {{count}} पीआरएस के माध्यम से कतार",
+      "mergeThrough_one": "#{{number}} · {{count}} पीआर के माध्यम से विलय करें",
+      "mergeThrough_other": "#{{number}} · {{count}} पीआर के माध्यम से विलय करें",
+      "queueStackMessage": "GitHub इस pull request और इसके नीचे के हर pull request को merge queue में जोड़ देगा।",
+      "mergeStackMessage": "GitHub इस pull request और स्टैक में इसके नीचे के हर pull request को merge कर देगा।"
+    },
+    "prCheckDetailContent": {
+      "annotation": "टिप्पणी",
+      "unknown": "अज्ञात",
+      "failedJobs": "विफल job",
+      "jobs": "नौकरियाँ"
+    },
+    "prChecksPresentation": {
+      "noChecks": "कोई जाँच नहीं",
+      "failing_one": "{{count}} विफल हो रहा है",
+      "failing_other": "{{count}} विफल हो रहा है",
+      "pending_one": "{{count}} लंबित",
+      "pending_other": "{{count}} लंबित",
+      "passed_one": "{{count}} उत्तीर्ण",
+      "passed_other": "{{count}} उत्तीर्ण",
+      "neutral_one": "{{count}} तटस्थ",
+      "neutral_other": "{{count}} तटस्थ",
+      "unavailable": "check उपलब्ध नहीं हैं",
+      "stateOpen": "खोलें",
+      "stateMerged": "merge किया गया",
+      "stateDraft": "ड्राफ़्ट",
+      "stateClosed": "बंद"
+    },
+    "prCommentAudienceLabels": {
+      "all": "सभी",
+      "humans": "इंसान",
+      "bots": "Bot",
+      "noBotComments": "Bot के कोई comment नहीं हैं।",
+      "noHumanComments": "इंसानों के कोई comment नहीं हैं।",
+      "noComments": "अभी तक कोई comment नहीं है।"
+    }
+  },
+  "workspace": {
+    "branchChoice": {
+      "title": "इस worktree के लिए branch",
+      "existing": "मौजूदा branch",
+      "existingHint": "नए commit इसी branch पर जाएँगे।",
+      "new": "नया branch",
+      "newHint": "नया local branch बनाएँ",
+      "newName": "नए branch का नाम",
+      "automaticName": "अपने-आप बना नाम",
+      "hostUpdateRequired": "किसी शाखा का पुन: उपयोग करने या स्पष्ट रूप से एक अलग शाखा बनाने के लिए कार्यस्थान होस्ट पर Prompt अपडेट करें।"
+    }
+  },
+  "browser": {
+    "addressField": {
+      "urlPlaceholder": "URL"
+    },
+    "pane": {
+      "invalidUrl": "एक मान्य यूआरएल दर्ज करें."
+    },
+    "paneView": {
+      "forward": "आगे जाएँ",
+      "reload": "रीलोड करें",
+      "dialogTitle": "ब्राउज़र संवाद",
+      "keyboardPlaceholder": "पेज पर टाइप करें...",
+      "sendText": "ब्राउज़र पर टेक्स्ट भेजें"
+    },
+    "pointerModifiers": {
+      "clickModifier": "{{key}} संशोधक पर क्लिक करें"
+    },
+    "viewModeSwitch": {
+      "webView": "वेब वेबसाइट दृश्य दिखाएँ",
+      "mobileView": "मोबाइल वेबसाइट दृश्य दिखाएँ"
+    },
+    "useBrowserCommands": {
+      "sent": "भेजा गया",
+      "deliveryUnconfirmed": "डिलीवरी अपुष्ट - पुनः प्रयास करने से पहले पृष्ठ की जाँच करें",
+      "dialogAnswerFailed": "वह उत्तर पेज तक नहीं पहुंचा."
+    }
+  },
+  "files": {
+    "fileExplorerPanel": {
+      "connecting": "डेस्कटॉप से कनेक्ट हो रहा है...",
+      "waiting": "डेस्कटॉप की प्रतीक्षा में...",
+      "loadFailed": "फ़ाइलें लोड करने में असमर्थ",
+      "loadInterrupted": "फ़ोल्डर लोड बाधित हुआ",
+      "closeFiles": "फ़ाइलें बंद करें",
+      "backToSession": "सत्र पर वापस जाएँ",
+      "title": "फ़ाइलें",
+      "truncatedList": "{{worktreeLabel}} - पहले 5000 दिखा रहा हूँ",
+      "emptyState": "कोई फ़ाइल नहीं मिली"
+    },
+    "fileMarkdownPreview": {
+      "viewSource": "मार्कडाउन स्रोत देखें",
+      "viewPreview": "प्रस्तुत मार्कडाउन पूर्वावलोकन देखें",
+      "copyLoadedSource": "लोड किए गए मार्कडाउन स्रोत की प्रतिलिपि बनाएँ",
+      "copySource": "मार्कडाउन स्रोत की प्रतिलिपि बनाएँ"
+    },
+    "fileMediaPreview": {
+      "loadFailed": "मीडिया लोड करने में असमर्थ",
+      "waiting": "डेस्कटॉप की प्रतीक्षा में...",
+      "downloading": "{{total}} में से {{bytes}} डाउनलोड करना",
+      "loading": "मीडिया लोड हो रहा है..."
+    },
+    "filePreviewBody": {
+      "emptyFile": "खाली फ़ाइल",
+      "imageLabel": "{{title}} छवि"
+    },
+    "filePreviewEditableSource": {
+      "editorLabel": "{{title}} संपादक"
+    },
+    "filePreviewScreen": {
+      "loading": "प्रीव्यू लोड हो रहा है…",
+      "waiting": "डेस्कटॉप की प्रतीक्षा में...",
+      "loadFailed": "पूर्वावलोकन लोड करने में असमर्थ",
+      "title": "प्रीव्यू",
+      "saveFailed": "फ़ाइल सहेजने में असमर्थ",
+      "backToFiles": "फ़ाइलों पर वापस जाएँ",
+      "saveArtifact": "टर्मिनल आर्टिफैक्ट सहेजें",
+      "fileTitle": "फ़ाइल",
+      "openFailed": "फ़ाइल खोलने में असमर्थ",
+      "chooseWorkspaceFile": "इस कार्यक्षेत्र के अंदर एक फ़ाइल चुनें.",
+      "discardTitle": "परिवर्तन छोड़ दें?",
+      "discardMessage": "सहेजे न गए संपादन खो जाएंगे.",
+      "discardMessageSaving": "हो सकता है प्रगति में चल रही बचत समाप्त न हो. सहेजे न गए संपादन खो जाएंगे.",
+      "discard": "बदलाव छोड़ें",
+      "stay": "रहो"
+    },
+    "filePreviewSourceText": {
+      "previewLabel": "फ़ाइल पूर्वावलोकन",
+      "truncatedNote": "पूर्वावलोकन छोटा किया गया. फ़ाइल का आकार: {{size}}।"
+    },
+    "markdownPreviewImage": {
+      "loadFailed": "छवि लोड करने में असमर्थ",
+      "expandImage": "विस्तृत करें {{alt}}",
+      "expandFallback": "छवि को बड़ा करें",
+      "imageLabel": "मार्कडाउन छवि"
+    },
+    "pdfPreview": {
+      "openFailed": "इस पीडीएफ को खोलने में असमर्थ",
+      "updateRequired": "अपडेट करें Prompt पीडीएफ़ खोलने के लिए मोबाइल",
+      "opening": "पीडीएफ खुल रहा है...",
+      "open": "पीडीएफ खोलें"
+    },
+    "fileExplorerRow": {
+      "loading": "लोड हो रहा है…",
+      "loadFolderFailed": "फ़ोल्डर लोड करने में असमर्थ",
+      "retryLoading": "पुनः लोड करने का प्रयास करें {{path}}",
+      "openFolder": "फ़ोल्डर खोलें {{name}}",
+      "fileUnavailable": "{{name}} मोबाइल पर उपलब्ध नहीं है",
+      "previewFile": "पूर्वावलोकन फ़ाइल {{name}}",
+      "unavailable": "मोबाइल पर अनुपलब्ध"
+    },
+    "fileMutationOwnership": {
+      "sshOwnerChanged": "SSH कनेक्शन को सत्यापित नहीं किया जा सका। होस्ट को पुनः कनेक्ट करें और पुनः प्रयास करें।"
+    },
+    "filePreviewResponse": {
+      "fileChanged": "डेस्कटॉप पर फ़ाइल बदली गई. सहेजने से पहले पूर्वावलोकन पुनः लोड करें",
+      "binaryUnavailable": "बाइनरी पूर्वावलोकन अनुपलब्ध",
+      "fileTooLarge": "मोबाइल पूर्वावलोकन के लिए फ़ाइल बहुत बड़ी है",
+      "reloadBeforeSaving": "सहेजने से पहले पूर्वावलोकन पुनः लोड करें",
+      "filesystemUnreachable": "डेस्कटॉप फ़ाइल सिस्टम तक पहुंचने में असमर्थ",
+      "fileNotFound": "फ़ाइल नहीं मिली",
+      "loadFailed": "पूर्वावलोकन लोड करने में असमर्थ",
+      "unknownSize": "अज्ञात आकार",
+      "bytes": "{{size}} B",
+      "kilobytes": "{{size}} KB",
+      "megabytes": "{{size}} MB"
+    }
+  },
+  "session": {
+    "browserTabActionSheet": {
+      "title": "ब्राउज़र",
+      "forward": "आगे जाएँ",
+      "reload": "रीलोड करें"
+    },
+    "terminalLiveInputStatus": {
+      "listening": "सुन रहा है",
+      "processing": "प्रसंस्करण",
+      "startingMic": "माइक चालू करना",
+      "liveInput": "लाइव इनपुट",
+      "uploadingImageTitle": "छवि अपलोड हो रही है",
+      "releaseMicHint": "रोकने के लिए माइक छोड़ें",
+      "stopHint": "रोकने के लिए माइक टैप करें",
+      "transcribing": "डेस्कटॉप पर प्रतिलेखन",
+      "preparingMic": "माइक्रोफ़ोन तैयार किया जा रहा है",
+      "uploadingImage": "होस्ट पर छवि अपलोड हो रही है"
+    },
+    "diffCommentLineRow": {
+      "diffLine": "{{title}} भिन्न रेखा {{line}}",
+      "addNote": "लाइन पर नोट जोड़ें {{line}}",
+      "line": "पंक्ति {{line}}",
+      "deleteNote": "लाइन पर नोट हटाएं {{line}}",
+      "placeholder": "review नोट जोड़ें",
+      "saveNote": "नोट सहेजें"
+    },
+    "markdownReader": {
+      "readOnly": "केवल पढ़ें",
+      "changedOnDesktop": "डेस्कटॉप पर बदला गया",
+      "dismissKeyboard": "कीबोर्ड खारिज करें",
+      "dismissKeyboardHint": "सॉफ़्टवेयर कीबोर्ड छुपाता है और मार्कडाउन संपादक को खुला रखता है।",
+      "discard": "बदलाव छोड़ें",
+      "copyLoadedSource": "लोड किए गए मार्कडाउन स्रोत की प्रतिलिपि बनाएँ",
+      "copySource": "मार्कडाउन स्रोत की प्रतिलिपि बनाएँ",
+      "copyLoaded": "प्रतिलिपि लोड की गई",
+      "copyPathLabel": "मार्कडाउन पथ की प्रतिलिपि बनाएँ",
+      "copyPath": "पाथ कॉपी करें"
+    },
+    "nativeChatCardHeaderAction": {
+      "collapse": "समेटें"
+    },
+    "nativeChatFloatingControls": {
+      "scrollToLatest": "नवीनतम तक स्क्रॉल करें"
+    },
+    "nativeChatFullContent": {
+      "partialOutput": "{{total}} में से {{shown}} दिखाए जा रहे हैं।",
+      "showFullOutput": "पूरा आउटपुट दिखाएँ",
+      "loadOutputFailed": "पूर्ण आउटपुट दिखाएँ - लोड नहीं किया जा सका, पुनः प्रयास करने के लिए टैप करें",
+      "partialMessage": "इस संदेश का अंश दिखाया जा रहा है.",
+      "showFullMessage": "पूरा संदेश दिखाएँ",
+      "loadMessageFailed": "पूरा संदेश दिखाएँ - लोड नहीं किया जा सका, पुनः प्रयास करने के लिए टैप करें"
+    },
+    "queuedCardText": {
+      "showLessHint": "संदेश कम दिखाता है",
+      "showMoreHint": "पूरा संदेश दिखाता है",
+      "showLess": "कम दिखाएँ",
+      "showMore": "और दिखाएँ"
+    },
+    "queuedMessageCardRow": {
+      "images_one": "{{count}} छवि",
+      "images_other": "{{count}} छवियाँ",
+      "sendAgainHint": "यह संदेश दोबारा भेजें",
+      "steerHint": "model को रोके बिना सबमिट करें",
+      "sendHint": "यह संदेश भेजें",
+      "steer": "Steer करें",
+      "send": "भेजें",
+      "deleteHint": "इस पंक्तिबद्ध संदेश को हटाएँ",
+      "moreActions": "और कार्रवाइयाँ",
+      "showLessHint": "संदेश कम दिखाता है"
+    },
+    "queuedMessageComposer": {
+      "commandsNotAllowed": "queue में लगे संदेश में कमांड सहेजे नहीं जा सकते।",
+      "editingAttributed": "संदेश संपादित करना · {{attribution}}",
+      "editing": "संदेश संपादित किया जा रहा है"
+    },
+    "accessoryKeys": {
+      "dismissKeyboard": "कीबोर्ड खारिज करें",
+      "dismissKeyboardHint": "सॉफ़्टवेयर कीबोर्ड छुपाता है और वर्तमान टर्मिनल सत्र को खुला रखता है।",
+      "switchToDesktopMode": "डेस्कटॉप मोड पर स्विच करें",
+      "switchToPhoneMode": "फ़ोन मोड पर स्विच करें",
+      "switchToBufferedInput": "बफ़र्ड कमांड इनपुट पर स्विच करें",
+      "switchToLiveInput": "लाइव टर्मिनल इनपुट पर स्विच करें",
+      "pasteFromClipboard": "क्लिपबोर्ड से चिपकाएँ",
+      "paste": "पेस्ट करें",
+      "sendKey": "भेजें {{label}}",
+      "addCustomShortcut": "कस्टम शॉर्टकट जोड़ें"
+    },
+    "activeContent": {
+      "noTabs": "इस सत्र में कोई टैब नहीं",
+      "creatingTab": "बनाया जा रहा है…",
+      "createTab": "टैब बनाएं",
+      "fileTitle": "फ़ाइल",
+      "terminalTakingLonger": "टर्मिनल में अपेक्षा से अधिक समय लग रहा है",
+      "loadingTerminal": "लोड हो रहा है टर्मिनल",
+      "retryLoadingTerminal": "टर्मिनल लोड करने का पुनः प्रयास करें"
+    },
+    "commandDock": {
+      "liveInputLabel": "लाइव टर्मिनल इनपुट",
+      "liveInputHint": "टाइप किया गया टेक्स्ट सीधे सक्रिय टर्मिनल पर भेजा जाता है",
+      "commandPlaceholder": "कमांड लिखें…",
+      "sendCommand": "आदेश भेजें"
+    },
+    "contentRow": {
+      "dismissCreationWarning": "कार्यस्थान निर्माण चेतावनी ख़ारिज करें"
+    },
+    "diffLineRow": {
+      "diffLineLabel": "{{title}} भिन्न रेखा {{line}}",
+      "addNoteLabel": "लाइन पर नोट जोड़ें {{line}}",
+      "lineNumber": "पंक्ति {{line}}",
+      "deleteNoteLabel": "लाइन पर नोट हटाएं {{line}}",
+      "notePlaceholder": "review नोट जोड़ें",
+      "saveNote": "नोट सहेजें"
+    },
+    "fileReader": {
+      "noReviewNotes": "कोई समीक्षा नोट नहीं",
+      "reviewNotes_one": "{{count}} समीक्षा नोट",
+      "reviewNotes_other": "{{count}} समीक्षा नोट्स",
+      "copyReviewNotes": "समीक्षा नोट्स कॉपी करें",
+      "sendReviewNotes": "एआई को समीक्षा नोट्स भेजें",
+      "send": "भेजें",
+      "imageLabel": "{{title}} छवि",
+      "previewLabel": "{{title}} पूर्वावलोकन"
+    },
+    "header": {
+      "showSidebar": "साइडबार दिखाएँ",
+      "backToWorktrees": "कार्यवृक्ष पर वापस जाएँ",
+      "terminalTitle": "टर्मिनल",
+      "reconnectToDesktop": "डेस्कटॉप से पुनः कनेक्ट करें",
+      "openFileExplorer": "फ़ाइल एक्सप्लोरर खोलें",
+      "openSourceControl": "खुला स्रोत नियंत्रण",
+      "moreActions": "अधिक सत्र क्रियाएँ"
+    },
+    "headerMoreActionsSheet": {
+      "agentHistory": "एजेंट इतिहास",
+      "agentHistoryHint": "एजेंट सत्र ब्राउज़ करें और फिर से शुरू करें",
+      "checks": "जाँच करता है",
+      "checksHint": "पुल अनुरोध जांच खोलें"
+    },
+    "routeScreen": {
+      "openingWorkspace": "कार्यक्षेत्र खोलना"
+    },
+    "sheets": {
+      "newTab": "नया टैब",
+      "terminal": "टर्मिनल",
+      "browser": "ब्राउज़र",
+      "browserUpdateRequired": "मोबाइल ब्राउज़र स्ट्रीमिंग के लिए डेस्कटॉप अपडेट आवश्यक है",
+      "markdownNote": "मार्कडाउन नोट",
+      "sendReviewNotes": "समीक्षा नोट्स भेजें",
+      "notesHint": "वर्तमान नोट्स के लिए एक एजेंट सत्र चुनें।",
+      "copyNotes": "नोट्स कॉपी करें",
+      "notesCopied": "नोट्स कॉपी किए गए",
+      "copyNotesFailed": "नोट्स कॉपी नहीं किये जा सके",
+      "markdown": "Markdown",
+      "copyPath": "पाथ कॉपी करें",
+      "file": "फ़ाइल",
+      "chat": "चैट",
+      "unsavedMarkdown": "सहेजे न गए मार्कडाउन परिवर्तन",
+      "draftsHint": "जाने से पहले फ़ोन ड्राफ्ट कॉपी करें या हटा दें।",
+      "copyAllAndLeave": "सभी को कॉपी करें और छोड़ें",
+      "copyDraftsFailed": "ड्राफ्ट की प्रतिलिपि नहीं बनाई जा सकी",
+      "discardAndLeave": "त्यागें और छोड़ें",
+      "discardChanges": "परिवर्तन त्यागें",
+      "discardMessage": "फ़ोन ड्राफ्ट को नवीनतम डेस्कटॉप फ़ाइल से बदलें?",
+      "discard": "बदलाव छोड़ें",
+      "newBrowser": "नया ब्राउज़र",
+      "urlPrompt": "एक यूआरएल दर्ज करें, या नए टैब के लिए खाली छोड़ दें।",
+      "shortcut": "शॉर्टकट",
+      "removeShortcutMessage": "यह कस्टम शॉर्टकट हटाएं?",
+      "renameTerminal": "टर्मिनल का नाम बदलें",
+      "terminalName": "टर्मिनल का नाम"
+    },
+    "tabStrip": {
+      "tabStatus": "{{title}}, {{status}}",
+      "newTab": "नया टैब",
+      "quickCommandsUpdateRequired": "त्वरित आदेशों के लिए डेस्कटॉप अद्यतन आवश्यक है",
+      "checkingCapabilities": "डेस्कटॉप क्षमताओं की जाँच - थोड़ी देर में पुनः प्रयास करें"
+    },
+    "terminalInputActions": {
+      "sendingImage": "छवि भेजी जा रही है",
+      "attachPhoto": "एक फोटो संलग्न करें",
+      "attachFileHint": "इसके बजाय फ़ाइल संलग्न करने के लिए देर तक दबाएँ",
+      "stopDictation": "ध्वनि श्रुतलेख बंद करो",
+      "transcribingDictation": "ध्वनि श्रुतलेख का प्रतिलेखन",
+      "startingDictation": "ध्वनि श्रुतलेखन प्रारंभ करना",
+      "startDictation": "ध्वनि श्रुतलेखन प्रारंभ करें"
+    },
+    "quickCommandEditorForm": {
+      "terminalCommand": "टर्मिनल कमांड",
+      "agentPrompt": "Agent prompt",
+      "label": "लेबल",
+      "labelPlaceholder": "dev सर्वर शुरू करें",
+      "action": "कार्रवाई",
+      "agent": "एजेंट",
+      "chooseAgent": "Agent चुनें",
+      "prompt": "प्रॉम्प्ट",
+      "commandText": "आदेश पाठ",
+      "promptPlaceholder": "Agent से इस वर्कस्पेस की जाँच करने को कहें",
+      "olderHostPromptTooLong": "इस मेज़बान के लिए बहुत लंबा समय है। लंबे संकेतों को सहेजने के लिए होस्ट पर Prompt अपडेट करें।",
+      "promptTooLong": "सहेजने के लिए बहुत लंबा है।",
+      "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
+      "promptSizeCharacters": "{{used}} / {{max}} अक्षर",
+      "promptHint": "कौशल, फ़ाइल पथ और अंतर्निहित कमांड का समर्थन करता है।",
+      "advanced": "उन्नत",
+      "appendEnter": "Enter जोड़ें",
+      "appendEnterDescription": "केवल टेक्स्ट डालने के बजाय तुरंत सबमिट करें।",
+      "scope": "दायरा",
+      "globalScope": "ग्लोबल",
+      "projectScope": "प्रोजेक्ट",
+      "addQuickCommand": "क्विक कमांड जोड़ें"
+    },
+    "quickCommandRow": {
+      "copyFailed": "कॉपी नहीं हो सका",
+      "copyCommand": "प्रतिलिपि {{label}}",
+      "nothingToCopy": "कॉपी करने के लिए कुछ नहीं है",
+      "runCommand": "चलाएँ {{label}}",
+      "editCommand": "संपादित करें {{label}}",
+      "deleteCommand": "हटाएं {{label}}"
+    },
+    "quickCommandsList": {
+      "searchPlaceholder": "क्विक कमांड खोजें…",
+      "emptyState": "अभी तक कोई त्वरित आदेश नहीं.",
+      "noMatches": "कोई मेल खाता त्वरित आदेश नहीं.",
+      "projectGroup": "यह प्रोजेक्ट",
+      "globalGroup": "ग्लोबल",
+      "newCommand": "नया त्वरित आदेश"
+    },
+    "quickCommandsSheet": {
+      "deleteConfirmTitle": "\"{{label}}\" हटाएं?",
+      "untitled": "बिना शीर्षक",
+      "deleteConfirmMessage": "यह क्विक कमांड आपकी सहेजी गई सूची से हटा दिया जाएगा।",
+      "editTitle": "क्विक कमांड संपादित करें",
+      "addTitle": "क्विक कमांड जोड़ें",
+      "chooseAgentTitle": "एजेंट चुनें",
+      "title": "क्विक कमांड",
+      "editorDescription": "त्वरित पहुंच के लिए टर्मिनल कमांड या एजेंट प्रॉम्प्ट सहेजें।"
+    },
+    "quickCommandsTabButton": {
+      "quickCommands": "त्वरित आदेश"
+    },
+    "aiVaultResumeLaunch": {
+      "createFailed": "टर्मिनल बनाने में विफल",
+      "sendFailed": "बायोडाटा आदेश भेजने में विफल",
+      "inputLocked": "टर्मिनल इनपुट लॉक है"
+    },
+    "aiVaultResumePreparation": {
+      "prepareFailed": "यह लीगेसी Codex सत्र तैयार नहीं किया जा सका. पुनः प्रयास करें."
+    },
+    "floatingWorkspace": {
+      "title": "फ़्लोटिंग वर्कस्पेस"
+    },
+    "githubPrMutations": {
+      "titleUpdateFailed": "शीर्षक अद्यतन करने में विफल.",
+      "reviewThreadUpdateFailed": "समीक्षा थ्रेड अपडेट करने में विफल."
+    },
+    "githubPrRpc": {
+      "requestFailed": "अनुरोध विफल: {{method}}"
+    },
+    "agentChildRow": {
+      "noRecentUpdate": "हाल में कोई अपडेट नहीं",
+      "ended": "समाप्त",
+      "minutes_one": "{{count}} मि.",
+      "minutes_other": "{{count}} मि.",
+      "hours_one": "{{count}} घं.",
+      "hours_other": "{{count}} घं.",
+      "days_one": "{{count}} दि.",
+      "days_other": "{{count}} दि.",
+      "noUpdate": "{{value0}} में कोई अपडेट नहीं",
+      "agent": "एजेंट"
+    },
+    "agentMessageAttribution": {
+      "messageFromUnnamed": "एक एजेंट से संदेश",
+      "fromUnnamed": "एक एजेंट से",
+      "unnamedSender": "एक agent",
+      "messageFromMore": "{{sender}} +{{count}} से संदेश",
+      "fromMore": "से {{sender}} +{{count}}",
+      "messageFrom": "{{sender}} से संदेश",
+      "from": "से {{sender}}"
+    },
+    "backgroundTask": {
+      "monitoring": "बैकग्राउंड कार्यों की निगरानी हो रही है",
+      "stop": "रोकें",
+      "stopTask": "{{value0}} रोकें",
+      "stopAll": "बैकग्राउंड कार्य रोकें",
+      "agent": "बैकग्राउंड agent",
+      "workflow": "बैकग्राउंड workflow",
+      "command": "बैकग्राउंड कमांड",
+      "monitor": "बैकग्राउंड मॉनिटर",
+      "task": "बैकग्राउंड कार्य",
+      "detailsUnavailable": "इस सत्र के लिए कार्य का ब्योरा उपलब्ध नहीं है।",
+      "countAgents_one": "{{count}} एजेंट",
+      "countAgents_other": "{{count}} agent",
+      "countShell_one": "{{count}} shell",
+      "countShell_other": "{{count}} shell",
+      "countShellCommandOne": "1 shell कमांड",
+      "countMonitors_one": "{{count}} मॉनिटर",
+      "countMonitors_other": "{{count}} monitor",
+      "countWorkflows_one": "{{count}} वर्कफ़्लो",
+      "countWorkflows_other": "{{count}} workflow",
+      "countTasks_one": "{{count}} कार्य",
+      "countTasks_other": "{{count}} कार्य",
+      "headerTotalCount_one": "{{count}} बैकग्राउंड कार्य",
+      "headerTotalCount_other": "{{count}} बैकग्राउंड कार्य",
+      "stateWorking": "काम कर रहा है",
+      "stateMonitoring": "निगरानी में",
+      "stateWaiting": "प्रतीक्षा में",
+      "stateBlocked": "रुका हुआ",
+      "stateDone": "पूरा हुआ",
+      "stateIdle": "रुका हुआ",
+      "stateUnverifiable": "स्थिति उपलब्ध नहीं",
+      "reasonWaiting": "approve करना ज़रूरी",
+      "reasonBlocked": "विफल",
+      "groupAgents": "एजेंट",
+      "groupShell": "शैल",
+      "groupMonitors": "मॉनिटर",
+      "groupWorkflows": "वर्कफ़्लो",
+      "groupTasks": "कार्य",
+      "stateWorkingCount_one": "{{value0}} काम कर रहा है",
+      "stateWorkingCount_other": "{{value0}} काम कर रहा है",
+      "stateMonitoringCount_one": "{{value0}} निगरानी कर रहा है",
+      "stateMonitoringCount_other": "{{value0}} निगरानी कर रहा है",
+      "stateWaitingCount_one": "{{value0}} प्रतीक्षा कर रहा है",
+      "stateWaitingCount_other": "{{value0}} प्रतीक्षा कर रहा है",
+      "stateBlockedCount_one": "{{value0}} अवरुद्ध है",
+      "stateBlockedCount_other": "{{value0}} अवरुद्ध है",
+      "stateDoneCount_one": "{{value0}} पूरा हुआ",
+      "stateDoneCount_other": "{{value0}} पूरा हुआ",
+      "stateIdleCount_one": "{{value0}} रुका हुआ है",
+      "stateIdleCount_other": "{{value0}} रुका हुआ है",
+      "stateUnverifiableCount_one": "{{value0}} की स्थिति अनुपलब्ध है",
+      "stateUnverifiableCount_other": "{{value0}} की स्थिति अनुपलब्ध है"
+    },
+    "bulkCloseSheetActions": {
+      "closeOtherTabs": "अन्य टैब बंद करें"
+    },
+    "bulkTabClose": {
+      "titleOthers": "अन्य टैब बंद करें?",
+      "titleRight": "दाईं ओर के टैब बंद करें?",
+      "titleLeft": "बाईं ओर के टैब बंद करें?",
+      "titleEditors": "सभी एडिटर टैब बंद करें?",
+      "description": "चुने गए टैब बंद कर दिए जाएँगे। पिन किए गए टैब खुले रहेंगे।",
+      "confirm": "टैब बंद करें"
+    },
+    "diffReviewLoaders": {
+      "committedChangesUnavailable": "प्रतिबद्ध परिवर्तन अनुपलब्ध हैं",
+      "committedChangesFailed": "प्रतिबद्ध परिवर्तन विफल रहे",
+      "desktopUpdateRequired": "मोबाइल पर परिवर्तनों की समीक्षा करने के लिए Prompt डेस्कटॉप को अपडेट करें।",
+      "changesLoadFailed": "परिवर्तन लोड करने में असमर्थ",
+      "invalidSourceControlResponse": "स्रोत नियंत्रण प्रतिक्रिया अमान्य थी",
+      "reviewNotesLoadFailed": "समीक्षा नोट लोड करने में असमर्थ",
+      "diffLoadFailed": "अंतर लोड करने में असमर्थ",
+      "committedDiffUnavailable": "प्रतिबद्ध अंतर अनुपलब्ध है"
+    },
+    "diffReviewQueue": {
+      "staged": "मंचन किया",
+      "unstaged": "अस्थिर",
+      "committedOnBranch": "शाखा पर प्रतिबद्ध"
+    },
+    "diffReviewScreenModel": {
+      "branch": "शाखा",
+      "staged": "मंचन किया",
+      "unstaged": "अस्थिर"
+    },
+    "nativeChatAttachActions": {
+      "photos": "तस्वीरें",
+      "files": "फ़ाइलें",
+      "fileTypes": "पीडीएफ, पाठ, कोड...",
+      "workspaceFile": "वर्कस्पेस फ़ाइल",
+      "skills": "स्किल्स",
+      "availableSkills": "{{count}} उपलब्ध है",
+      "commands": "कमांड"
+    },
+    "nativeChatCliFork": {
+      "resumeInNewCli": "नई सीएलआई में फिर से शुरू करें"
+    },
+    "nativeChatRenderData": {
+      "notFoundTitle": "यह वार्तालाप अभी तक नहीं मिल सका",
+      "notFoundSubtitle": "इसे शुरू करने के लिए एक संदेश भेजें, या यह देखने के लिए टर्मिनल दृश्य खोलें कि {{agent}} क्या कर रहा है।",
+      "emptyTitle": "{{agent}} के साथ चैट प्रारंभ करें",
+      "emptySubtitle": "{{agent}} को कोड का निरीक्षण करने, आउटपुट समझाने या बदलाव करने के लिए कहें।",
+      "errorTitle": "बातचीत लोड नहीं हो सकी",
+      "errorSubtitle": "transcript पढ़ा नहीं जा सका। काम जारी रखने के लिए वापस टर्मिनल पर टॉगल करें।",
+      "defaultAgentLabel": "एजेंट"
+    },
+    "nativeChatToggleAction": {
+      "switchToTerminalView": "टर्मिनल दृश्य पर स्विच करें",
+      "switchToChatView": "चैट दृश्य पर स्विच करें"
+    },
+    "prSidebarState": {
+      "loadFailed": "पुल अनुरोध लोड करने में असमर्थ"
+    },
+    "useNativeChatDictation": {
+      "insertFailedCopied": "श्रुतलेख सम्मिलित नहीं किया जा सका, इसलिए इसे क्लिपबोर्ड पर कॉपी किया गया",
+      "insertFailed": "श्रुतलेख सम्मिलित नहीं किया जा सका",
+      "inserted": "श्रुतलेख डाला गया",
+      "stoppedAfterSilence": "एक मिनट के मौन के बाद रुक गया"
+    },
+    "quickCommandLaunch": {
+      "editBeforeRunning": "इस त्वरित आदेश को चलाने से पहले संपादित करें",
+      "defaultLabel": "त्वरित आदेश",
+      "runFailed": "नहीं चल सका {{label}}"
+    },
+    "routeHelpers": {
+      "connecting": "कनेक्ट हो रहा है…",
+      "securing": "सुरक्षित करना",
+      "connected": "कनेक्ट हो गया",
+      "disconnected": "डिस्कनेक्ट हो गया",
+      "reconnecting": "फिर से कनेक्ट हो रहा है",
+      "pairingInvalid": "जोड़ी बनाना अमान्य"
+    },
+    "useTerminalCreateActions": {
+      "forkUnavailable": "किसी कनेक्टेड, अपडेटेड होस्ट पर {{agentName}} चैट खोलें और पुनः प्रयास करें।",
+      "forkBusy": "एक और टर्मिनल खुल रहा है. प्रतीक्षा करें, फिर {{agentName}} चैट का पुनः प्रयास करें।",
+      "createFailed": "टर्मिनल बनाने में विफल",
+      "terminalTitle": "टर्मिनल",
+      "sendNotesFailed": "नोट्स भेजने में विफल",
+      "inputLocked": "टर्मिनल इनपुट किसी अन्य क्लाइंट द्वारा लॉक किया गया है।",
+      "notesSent": "नोट्स भेजे गए",
+      "sendNotesError": "नोट्स नहीं भेजे जा सके"
+    },
+    "sourceControlLaunchAgent": {
+      "savedAgentUnavailable": "इस क्रिया के लिए सहेजा गया एजेंट इस कार्यस्थान होस्ट पर उपलब्ध नहीं है।",
+      "noEnabledAgent": "इस वर्कस्पेस होस्ट पर कोई चालू AI agent नहीं मिला।"
+    },
+    "structuredComposerCommand": {
+      "removeAttachments": "चैट-सत्र कमांड इस्तेमाल करने से पहले अटैचमेंट हटाएँ।",
+      "operationUnconfirmed": "बातचीत संचालन की पुष्टि नहीं की गई."
+    },
+    "structuredSendDelivery": {
+      "messageNotSent": "संदेश नहीं भेजा गया"
+    },
+    "terminalActionSheetActions": {
+      "switchToDesktop": "डेस्कटॉप पर स्विच करें",
+      "switchToPhone": "फ़ोन पर स्विच करें",
+      "rename": "नाम बदलें",
+      "clearTerminal": "साफ़ टर्मिनल"
+    },
+    "terminalRecords": {
+      "defaultTitle": "टर्मिनल"
+    },
+    "presentation": {
+      "loadingTabs": "टैब लोड हो रहे हैं",
+      "tabs_one": "{{count}} टैब",
+      "tabs_other": "{{count}} टैब"
+    },
+    "terminalTabAgent": {
+      "terminalNumber": "टर्मिनल {{number}}",
+      "newBrowser": "नया ब्राउज़र",
+      "browser": "ब्राउज़र",
+      "markdown": "Markdown",
+      "file": "फ़ाइल",
+      "chat": "चैट",
+      "terminal": "टर्मिनल"
+    },
+    "terminalViewportResubscribe": {
+      "fitFailed": "टर्मिनल को इस स्क्रीन पर फ़िट नहीं किया जा सका"
+    },
+    "newTabAgentHostLaunch": {
+      "notesUnconfirmed": "एजेंट ने शुरुआत की, लेकिन पुष्टि नहीं कर सका कि नोट भेजे गए थे।",
+      "promptUnconfirmed": "एजेंट ने शुरुआत की, लेकिन संकेत भेजे जाने की पुष्टि नहीं कर सका।",
+      "notesNotSent": "एजेंट ने शुरुआत की, लेकिन नोट नहीं भेजे गए।",
+      "notesSent": "नोट्स भेजे गए"
+    },
+    "prActionsEngine": {
+      "refreshFailed": "पुल अनुरोध को ताज़ा करने में विफल.",
+      "mergeFailed": "पुल अनुरोध को मर्ज करने में विफल."
+    },
+    "prAiTriageLaunch": {
+      "promptNotSent": "एजेंट ने प्रारंभ किया, लेकिन संकेत नहीं भेजा गया.",
+      "updateRequired": "अपने फोन से एजेंट शुरू करने के लिए अपने कंप्यूटर पर Prompt अपडेट करें।",
+      "loadFailed": "उपलब्ध एजेंटों को लोड नहीं किया जा सका.",
+      "emptyPrompt": "इस क्रिया का सहेजा गया प्रॉम्प्ट खाली है. अपने कंप्यूटर पर सोर्स कंट्रोल एआई सेटिंग्स अपडेट करें।",
+      "agentStartedIn": "एजेंट की शुरुआत {{label}} से हुई",
+      "agentStarted": "एजेंट शुरू हुआ"
+    },
+    "sideRail": {
+      "backToWorktrees": "कार्यवृक्ष पर वापस जाएँ"
+    },
+    "useAttachmentInputLeaseGate": {
+      "reconnecting": "संलग्न करना विफल (पुनः कनेक्ट करना)"
+    },
+    "useDiffReviewCommentActions": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "saveStateFailed": "समीक्षा स्थिति सहेजने में विफल",
+      "saveFailed": "समीक्षा सहेजने में विफल"
+    },
+    "useDiffReviewController": {
+      "missingWorktree": "गुम वर्कट्री",
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "loadFailed": "समीक्षा लोड करने में असमर्थ"
+    },
+    "useDiffReviewDiffLoading": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "loadFailed": "अंतर लोड करने में असमर्थ"
+    },
+    "useDiffReviewGitActions": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "actionFailed": "स्रोत नियंत्रण कार्रवाई विफल रही",
+      "stageResults": "{{staged}} मंचन, {{failed}} असफल",
+      "reviewedFilesStaged_one": "{{count}} समीक्षा की गई फ़ाइल चरणबद्ध",
+      "reviewedFilesStaged_other": "{{count}} समीक्षा की गई फाइलों का मंचन किया गया"
+    },
+    "useDiffReviewInteractions": {
+      "openFailed": "सत्र में खोलने में असमर्थ"
+    },
+    "useDiffReviewSendActions": {
+      "copyFailed": "समीक्षा नोट्स की प्रतिलिपि बनाने में असमर्थ",
+      "notesCopied": "समीक्षा नोट कॉपी किए गए",
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "sendFailed": "नोट्स भेजने में विफल",
+      "inputLocked": "टर्मिनल इनपुट लॉक है",
+      "notesSent": "समीक्षा नोट भेजे गए",
+      "startingAgent": "एक एजेंट प्रारंभ करना...",
+      "promptNotSent": "एजेंट ने शुरुआत की, लेकिन नोट नहीं भेजे गए। उन्हें चिपकाने के लिए कॉपी नोट्स का उपयोग करें।",
+      "notesSentWithWarning": "समीक्षा नोट भेजे गए. {{warning}}",
+      "loadSessionsFailed": "एजेंट सत्र लोड करने में असमर्थ"
+    },
+    "useImageAttachment": {
+      "disconnected": "संलग्न करना विफल (डिस्कनेक्ट किया गया)",
+      "permissionDenied": "फ़ोटो की अनुमति अस्वीकृत",
+      "imageTooLarge": "छवि संलग्न करने के लिए बहुत बड़ी है",
+      "attachFailed": "संलग्न करना विफल"
+    },
+    "useNativeChatStop": {
+      "terminalNotReady": "स्टॉप नहीं भेजा गया (टर्मिनल तैयार नहीं)",
+      "stopUnconfirmed": "अपुष्ट होना बंद करें - पुनः प्रयास करने से पहले चैट की जाँच करें",
+      "stopNotSent": "स्टॉप नहीं भेजा गया"
+    },
+    "usePrAiTriage": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "launchFailed": "एजेंट लॉन्च करने में विफल"
+    },
+    "usePrCommentActions": {
+      "actionFailed": "टिप्पणी कार्रवाई विफल रही"
+    },
+    "usePrTitleAction": {
+      "disconnected": "डेस्कटॉप से कनेक्ट नहीं है.",
+      "updateFailed": "शीर्षक अद्यतन करने में विफल."
+    },
+    "useAccessorySelection": {
+      "copyFailed": "कॉपी नहीं हो सका",
+      "selectionCleared": "चयन साफ़ किया गया (बफ़र से बाहर स्क्रॉल किया गया)"
+    },
+    "useContentCreateActions": {
+      "noteCreateFailed": "मार्कडाउन नोट बनाने में विफल",
+      "untitledNoteCreateFailed": "शीर्षक रहित मार्कडाउन नोट बनाने में असमर्थ",
+      "browserUpdateRequired": "मोबाइल ब्राउज़र स्ट्रीमिंग के लिए डेस्कटॉप अपडेट आवश्यक है",
+      "invalidUrl": "एक मान्य यूआरएल दर्ज करें",
+      "browserCreateFailed": "ब्राउज़र बनाने में विफल",
+      "browserUnavailable": "ब्राउज़र पेज अभी तक उपलब्ध नहीं है.",
+      "browserCommandFailed": "ब्राउज़र कमांड विफल"
+    },
+    "useDiffComments": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "saveNotesFailed": "समीक्षा नोट सहेजने में विफल",
+      "noteAdded": "नोट जोड़ा गया",
+      "saveNoteFailed": "नोट सहेजने में विफल",
+      "deleteNoteFailed": "नोट हटाने में विफल",
+      "notesCopied": "नोट्स कॉपी किए गए",
+      "copyNotesFailed": "नोट्स कॉपी नहीं किये जा सके"
+    },
+    "useMarkdownActions": {
+      "copyFailed": "कॉपी नहीं हो सका",
+      "pathCopied": "पाथ कॉपी हो गया",
+      "copyPathFailed": "पथ की प्रतिलिपि नहीं बनाई जा सकी",
+      "markdownTitle": "Markdown",
+      "saved": "सहेजा गया",
+      "saveFailed": "सहेजना विफल"
+    },
+    "usePanelRouteActions": {
+      "otherServerAgents": "दूसरे सर्वर पर एजेंट",
+      "pairServerHint": "उस सर्वर को सीधे युग्मित करें",
+      "detectingAgents": "एजेंटों का पता लगाना",
+      "noEnabledAgents": "कोई सक्षम एजेंट नहीं",
+      "presetsUnavailable": "एजेंट प्रीसेट अनुपलब्ध",
+      "checkHostHint": "होस्ट कनेक्शन की जाँच करें",
+      "newSessionHint": "नया एजेंट सत्र",
+      "copyNotesHint": "इसके बजाय नोट्स कॉपी करें"
+    },
+    "useStartup": {
+      "wakeAgents": "सोते हुए एजेंटों को जगाने के लिए होस्ट पर Prompt खोलें।"
+    },
+    "useTerminalInput": {
+      "clearFailed": "टर्मिनल साफ़ नहीं किया जा सका",
+      "cleared": "टर्मिनल साफ़ हो गया"
+    },
+    "useSessionTerminalSendActions": {
+      "inputTooLarge": "इनपुट बहुत बड़ा (अधिकतम 256 KiB)",
+      "liveInputInterrupted": "लाइव इनपुट बाधित. मैदान साफ़ हो गया; जारी रखने से पहले टर्मिनल की जाँच करें।"
+    },
+    "useTerminalPaste": {
+      "clipboardReadFailed": "क्लिपबोर्ड नहीं पढ़ सका",
+      "pasteTooLarge": "पेस्ट बहुत बड़ा (अधिकतम 256 KiB)",
+      "disconnected": "चिपकाना विफल (डिस्कनेक्ट)",
+      "terminalChanged": "पेस्ट रद्द किया गया (टर्मिनल बदला गया)",
+      "pasteFailed": "चिपकाना विफल",
+      "imageTooLarge": "चिपकाने के लिए छवि बहुत बड़ी है"
+    },
+    "useQuickCommands": {
+      "loadFailed": "त्वरित आदेश लोड करने में विफल",
+      "saveFailed": "क्विक कमांड सहेजने में विफल"
+    },
+    "worktreeLabel": {
+      "fallback": "वर्कट्री"
+    },
+    "failure": {
+      "backgroundTasksRunning": "बैकग्राउंड कार्य अभी चल रहे हैं।",
+      "waitForBackgroundTasks": "बैकग्राउंड कार्य पूरे होने तक प्रतीक्षा करें।",
+      "agentStarting": "agent अभी शुरू हो रहा है।",
+      "waitForStart": "agent के शुरू होने तक प्रतीक्षा करें।",
+      "agentStillWorking": "agent अभी काम कर रहा है।",
+      "runCommandWhenDone": "यह पूरा होने पर /{{command}} चलाएँ।",
+      "commandAfterAnswer": "agent के प्रश्न या approval का उत्तर दें, फिर /{{command}} चलाएँ।",
+      "compactionFailed": "Compaction विफल रहा।",
+      "compactionFailedQuoted": "Compaction विफल रहा: {{detail}}।",
+      "compactionUnconfirmed": "Compaction पूरा होने की पुष्टि नहीं हुई।",
+      "cancelUnconfirmed": "रद्द करने की पुष्टि नहीं हुई।",
+      "stopRefused": "{{agent}} नहीं रुका।",
+      "stopRefusedQuoted": "{{agent}} नहीं रुका: {{detail}}।",
+      "couldNotStop": "{{agent}} को रोका नहीं जा सका।",
+      "couldNotStopTheAgent": "agent को रोका नहीं जा सका।",
+      "noTurnToStop": "{{agent}} का कोई turn चल नहीं रहा था जिसे रोका जाता।",
+      "backgroundTaskNotStopped": "बैकग्राउंड कार्य नहीं रोका गया।",
+      "backgroundTasksNotStopped": "बैकग्राउंड कार्य नहीं रोके गए।",
+      "answerUnconfirmed": "आपका उत्तर दर्ज हो गया, लेकिन agent ने इसकी पुष्टि नहीं की।",
+      "hostFault": "Prompt एक समस्या आ गई, इसलिए ऐसा नहीं हुआ।",
+      "hostFaultTryAgain": "Prompt एक समस्या आ गई, इसलिए ऐसा नहीं हुआ। पुनः प्रयास करें।",
+      "hostStopped": "{{agent}} शुरू करना कभी ख़त्म नहीं हुआ, इसलिए Prompt इसे रोक दिया।",
+      "providerRateLimited": "{{agent}} पर rate limit लगी है और वह दोबारा कोशिश कर रहा है।",
+      "providerRetrying": "{{agent}} में अस्थायी समस्या आई और वह दोबारा कोशिश कर रहा है।",
+      "providerRetryingQuoted": "{{agent}} दोबारा कोशिश कर रहा है: {{detail}}।",
+      "providerRetryNumber": "दोबारा प्रयास {{attempt}}।",
+      "providerRetryNumberOf": "दोबारा प्रयास {{attempt}}/{{maxRetries}}।",
+      "providerRetryLastError": "आख़िरी त्रुटि: {{detail}}।",
+      "usageLimitReached": "{{agent}} की उपयोग सीमा पूरी हो गई।",
+      "usageLimitReachedNamed": "{{agent}} की {{window}} सीमा पूरी हो गई।",
+      "usageLimitWindowSession": "सत्र",
+      "usageLimitWindowWeekly": "साप्ताहिक",
+      "usageLimitWindowWeeklyModel": "साप्ताहिक model",
+      "usageLimitWindowCredits": "अतिरिक्त उपयोग",
+      "usageLimitResetsAt": "यह {{when}} पर रीसेट होगी।",
+      "usageLimitSendAfterReset": "जारी रखने के लिए रीसेट होने के बाद संदेश भेजें।",
+      "previousExitUnverifiable": "पहले वाले {{agent}} को रोका नहीं जा सका।",
+      "sessionNotRestored": "{{agent}} अपना पिछला सत्र दोबारा नहीं खोल सका, इसलिए यह चैट नए सत्र में जारी है। {{agent}} को पिछले संदेश याद नहीं हैं।",
+      "providerExitedRow": "इस जवाब के दौरान {{agent}} रुक गया। आप इसी बातचीत में आगे बढ़ सकते हैं।",
+      "providerExitedRejection": "यह संदेश भेजे जाने से पहले {{agent}} रुक गया।",
+      "providerExitedAnswer": "{{agent}} रुक गया है, इसलिए आपका जवाब नहीं भेजा गया। आगे बढ़ने के लिए संदेश भेजें।",
+      "claudeEffortInvalid": "Claude effort अमान्य है; low, medium, high, xhigh या max चुनें और फिर भेजें।",
+      "modelUnavailable": "{{agent}} {{detail}} का उपयोग नहीं कर सका। कोई दूसरा model चुनें और फिर भेजें।",
+      "providerRejected": "{{agent}} ने यह संदेश स्वीकार नहीं किया।",
+      "providerRejectedQuoted": "{{agent}} ने यह संदेश स्वीकार नहीं किया: {{detail}}।",
+      "attachmentEmpty": "इस संदेश की एक इमेज खाली है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentTooLarge": "इस संदेश की एक छवि बहुत बड़ी है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentLargerThan": "इस संदेश की एक छवि {{size}} MB से बड़ी है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentTooMany": "इस संदेश में बहुत ज़्यादा छवियाँ हैं, इसलिए इसे नहीं भेजा गया।",
+      "attachmentAtMost": "{{agent}} एक संदेश में अधिकतम {{limit}} छवियाँ स्वीकार करता है, इसलिए यह संदेश नहीं भेजा गया।",
+      "attachmentTotalTooLarge": "इस संदेश की छवियाँ मिलाकर बहुत बड़ी हैं, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentTotalMoreThan": "इस संदेश की छवियों का कुल आकार {{size}} MB से अधिक है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentUnsupportedType": "{{agent}} केवल PNG, JPEG, GIF और WebP छवियाँ स्वीकार करता है, इसलिए यह संदेश नहीं भेजा गया।",
+      "attachmentNotAFile": "इस संदेश की एक छवि फ़ाइल नहीं है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentNoSource": "इस संदेश की एक छवि के लिए भेजने लायक़ फ़ाइल नहीं है, इसलिए संदेश नहीं भेजा गया।",
+      "attachmentInvalid": "इस संदेश का एक अटैचमेंट agent को नहीं भेजा जा सकता।",
+      "attachmentUnreadable": "इस संदेश का एक अटैचमेंट पढ़ा नहीं जा सका, इसलिए संदेश नहीं भेजा गया।",
+      "emptyMessage": "यह संदेश खाली है, इसलिए इसे नहीं भेजा गया।",
+      "commandUnavailable": "यह कमांड {{agent}} चैट में उपलब्ध नहीं है, इसलिए इसे नहीं भेजा गया।",
+      "queueFull": "agent के लिए बहुत ज़्यादा संदेश प्रतीक्षा में थे, इसलिए यह संदेश नहीं भेजा गया।",
+      "writeFailed": "Prompt यह संदेश एजेंट को नहीं दिया जा सका, इसलिए इसे नहीं भेजा गया।",
+      "cancelled": "agent के इसे शुरू करने से पहले यह संदेश वापस ले लिया गया।",
+      "chatClosed": "यह संदेश भेजे जाने से पहले चैट बंद हो गई।",
+      "hostRestarted": "Prompt यह संदेश भेजे जाने से पहले पुनः प्रारंभ किया गया।",
+      "notDelivered": "यह संदेश नहीं पहुँचा।",
+      "notDeliveredSendAgain": "यह संदेश नहीं पहुँचा। जारी रखने के लिए इसे दोबारा भेजें।",
+      "commandRefused": "यह कमांड नहीं चली।",
+      "commandRefusedTryAgain": "यह कमांड नहीं चली। दोबारा कोशिश करें।",
+      "theAgent": "Agent",
+      "providerStartFailed": "{{agent}} पूरी तरह शुरू होने से पहले ही रुक गया।",
+      "runCommandAgain": "/{{command}} दोबारा चलाएँ।",
+      "sendToTryAgain": "दोबारा कोशिश करने के लिए अपना संदेश भेजें।",
+      "sendAgainToTryOnceMore": "एक बार फिर कोशिश करने के लिए अपना संदेश दोबारा भेजें।",
+      "couldNotStart": "{{agent}} शुरू नहीं हो सका।",
+      "couldNotRestart": "{{agent}} फिर से शुरू नहीं हो सका।",
+      "cliTooOld": "{{agent}} {{installedVersion}} चैट के लिए बहुत पुराना है। {{minimumVersion}} या नए वर्शन पर अपडेट करें।",
+      "startTimedOut": "{{agent}} को शुरू होने में बहुत समय लगा ({{seconds}} सेकंड बाद भी {{method}} का कोई जवाब नहीं मिला)।",
+      "startTimedOutKeepsHappening": "अगर ऐसा बार-बार होता है, तो इस चैट को चला रहा कंप्यूटर ओवरलोड हो सकता है।",
+      "argumentsUnsupportedOption": "सहेजे गए Arguments में एक असमर्थित विकल्प ({{option}}) है।",
+      "argumentsMissingValue": "सहेजे गए Arguments में {{option}} के लिए मान ज़रूरी है।",
+      "argumentsMultipleValues": "सहेजे गए Arguments में {{option}} को एक से अधिक मान दिए गए हैं।",
+      "argumentsPositionalPrompt": "सहेजे गए Arguments में एक prompt शामिल है।",
+      "editSavedArguments": "इन्हें सेटिंग्स > Agents > Arguments में बदलें।",
+      "terminalAgentHoldsChat": "यह चैट अभी भी टर्मिनल agent में खुली है।",
+      "quitTerminalAgent": "चैट को यहाँ जारी रखने के लिए उस agent से बाहर निकलें।",
+      "startNewChat": "जारी रखने के लिए नई चैट शुरू करें।",
+      "notSignedIn": "{{agent}} साइन इन नहीं है।",
+      "claudeSystemNotSignedIn": "Claude साइन इन नहीं है। `{{loginCommand}}` चलाएँ, या Claude खाता सेटिंग्स में कोई खाता चुनें।",
+      "claudeManagedNotSignedIn": "यह Claude खाता साइन इन नहीं है। Claude खाता सेटिंग्स में दोबारा साइन इन करें।",
+      "codexSystemNotSignedIn": "Codex साइन इन नहीं है। `{{loginCommand}}` चलाएँ।",
+      "codexManagedNotSignedIn": "यह Codex खाता साइन इन नहीं है। Codex खाता सेटिंग्स में दोबारा साइन इन करें।",
+      "antigravityNotSignedIn": "Antigravity साइन इन नहीं है। सेटिंग्स → खाते → Antigravity में साइन इन करें। फिर अपना संदेश दोबारा भेजें।",
+      "agentCommandNotSignedIn": "इस चैट को चला रहे कंप्यूटर पर `{{loginCommand}}` से {{agent}} में साइन इन करें।",
+      "interactiveAgentNotSignedIn": "इस चैट को चला रहे कंप्यूटर पर `{{loginCommand}}` चलाकर और `{{slashCommand}}` का उपयोग करके {{agent}} में साइन इन करें।",
+      "agentNotSignedIn": "{{agent}} में साइन इन करें।",
+      "cliMissing": "इस चैट को चला रहे कंप्यूटर पर {{agent}} नहीं मिला। उसे इंस्टॉल करें, या सेटिंग्स → Agents में उसका Command जाँचें।",
+      "cliMissingInWslDistro": "{{agent}} WSL distro {{distro}} में इंस्टॉल नहीं है। उसे {{distro}} के अंदर इंस्टॉल करें, या सेटिंग्स → Agents में उसका Command जाँचें।",
+      "signInFirst": "पहले साइन इन करें।",
+      "signInThenRunCommand": "साइन इन करें, फिर /{{command}} दोबारा चलाएँ।",
+      "signInThenSend": "साइन इन करें, फिर अपना संदेश दोबारा भेजें।",
+      "thenSendAgain": "फिर अपना संदेश दोबारा भेजें।",
+      "historyTooLarge": "इस बातचीत का इतिहास यहाँ बहाल करने के लिए बहुत बड़ा है।",
+      "managedAccountEnvOverride": "यह Claude लॉन्च अपने Anthropic साइन-इन वैरिएबल खुद सेट करता है। प्रबंधित Claude खाते का उपयोग करने के लिए उन्हें हटाएँ।",
+      "accountSwitchInProgress": "इस host पर {{agent}} का सेटअप बदल रहा है। उसके पूरा होने के बाद फिर कोशिश करें।",
+      "managedAccountUnsupported": "WSL में Claude खाता जोड़े जाने के दौरान, Claude चैट के लिए Windows Claude खाता ज़रूरी है।",
+      "launchFolderMissing": "जिस फ़ोल्डर में यह चैट चली थी, वह अब मौजूद नहीं है। इस चैट को जारी रखने के लिए उसे बहाल करें।",
+      "historyInOtherAccount": "इस चैट का इतिहास किसी दूसरे Claude खाते में है। इसे जारी रखने के लिए उसी खाते पर वापस जाएँ।",
+      "claudeAccountFolderMissing": "चुने गए Claude खाते का फ़ोल्डर गुम है। उसमें दोबारा साइन इन करें या कोई दूसरा खाता चुनें।",
+      "claudeAccountSetupFailed": "चुना गया Claude खाता सेट अप नहीं हो सका। फिर कोशिश करें या कोई दूसरा खाता चुनें।",
+      "agentCommandNotRunnable": "{{agent}} सेटिंग्स में कमांड → एजेंटों को एक प्रोग्राम पथ या नाम होना चाहिए Prompt बिना किसी तर्क या चर के पाया जा सकता है। इसे बदलें या रीसेट करें.",
+      "runtimeNotInstalled": "{{agent}} इस चैट को चलाने वाले कंप्यूटर पर स्थापित नहीं है। इसे Prompt के वर्तमान संस्करण में चैट से इंस्टॉल करें।",
+      "fullAccessAsRoot": "root के रूप में चलते समय {{agent}} Full access का उपयोग नहीं करेगा। इस चैट को चला रहे कंप्यूटर के लिए सेटिंग्स → Agents में {{agent}} की कोई दूसरी अनुमति चुनें, फिर नई चैट शुरू करें।",
+      "launchPreparationFailed": "Prompt इस चैट को कंप्यूटर पर चलाने के लिए {{agent}} तैयार नहीं कर सका।",
+      "conversationOpenElsewhere": "Codex अब भी इस बातचीत को खुला रखे हुए है। थोड़ी देर बाद फिर कोशिश करें, या Codex के अन्य टर्मिनल बंद करें।",
+      "conversationOpenInTerminal": "{{agent}} यह बातचीत पहले से किसी दूसरे टर्मिनल में चला रहा है। यहाँ जारी रखने के लिए वहाँ {{agent}} से बाहर निकलें या वह टर्मिनल बंद करें।",
+      "chooseClaudeAccount": "Claude खाता सेटिंग्स में कोई खाता चुनें या जोड़ें।",
+      "chooseClaudeAccountThenRunCommand": "Claude खाता सेटिंग्स में कोई खाता चुनें या जोड़ें, फिर /{{command}} दोबारा चलाएँ।",
+      "chooseClaudeAccountThenSend": "Claude खाता सेटिंग्स में कोई खाता चुनें या जोड़ें, फिर अपना संदेश दोबारा भेजें।"
+    },
+    "writeNotice": {
+      "notDoneReadHistory": "इस चैट का इतिहास लोड नहीं हो सका।",
+      "notDoneSend": "आपका संदेश नहीं भेजा गया।",
+      "tryAgainComposerSend": "इसे दोबारा भेजें।",
+      "messageNotSaved": "आपका संदेश सहेजा नहीं जा सका।",
+      "notDoneStop": "agent को रोका नहीं गया।",
+      "notDoneStopTask": "बैकग्राउंड कार्य नहीं रोका गया।",
+      "notDoneStopTasks": "बैकग्राउंड कार्य नहीं रोके गए।",
+      "notDoneAnswer": "आपका उत्तर नहीं भेजा गया।",
+      "notDoneOption": "सेटिंग नहीं बदली गई।",
+      "notDoneCommand": "कमांड नहीं चली।",
+      "notDoneGoalChangeIncomplete": "लक्ष्य बदलना पूरा नहीं हो सका। चैट देखें।",
+      "notDoneQueuedEdit": "आपका बदलाव सहेजा नहीं गया।",
+      "restartFailed": "agent दोबारा शुरू नहीं हो सका।",
+      "capacity": "Prompt इस चैट को चलाने वाले कंप्यूटर पर अनुरोध सीमा समाप्त हो गई है। वहां Prompt अपडेट करें, फिर पुनः प्रयास करें।",
+      "outcomeUnknown": "Prompt पुष्टि नहीं हो सकी कि क्या हुआ। चैट जांचें.",
+      "sendOutcomeLost": "Prompt यह पुष्टि नहीं हो सकी कि आपका संदेश एजेंट तक पहुंच गया है। चैट की जांच करें, फिर जरूरत पड़ने पर दोबारा भेजें।",
+      "continuationSuperseded": "यह चैट आगे बढ़ चुकी है। जारी रखने से पहले ताज़ा संदेश देखें।",
+      "questionChanged": "इस प्रश्न का उत्तर पहले ही दिया जा चुका है या यह बदल गया है।",
+      "cancelNotSaved": "इस प्रश्न या approval को रद्द नहीं किया जा सका।",
+      "historyUnreadable": "Prompt इस चैट का सहेजा गया इतिहास नहीं पढ़ सका।",
+      "historyUnusable": "यह चैट लोड नहीं हो पा रही।",
+      "historyUnavailable": "Prompt अभी इस चैट का इतिहास नहीं खुल सका।",
+      "savedByNewerOrca": "चैट को एक नए Prompt द्वारा सहेजा गया था।",
+      "updateOrcaToKeepUsing": "उनका उपयोग जारी रखने के लिए Prompt अपडेट करें।",
+      "chatSavedByNewerOrca": "यह चैट एक नए Prompt द्वारा सहेजी गई थी।",
+      "updateOrcaToOpenChat": "इसे खोलने के लिए Prompt अपडेट करें।",
+      "unsupported": "इस चैट को चलाने वाले कंप्यूटर पर एक नए Prompt की आवश्यकता है। वहां Prompt अपडेट करें, फिर पुनः प्रयास करें।",
+      "notAvailable": "यह इस चैट में उपलब्ध नहीं है।",
+      "cannotRunHere": "Prompt इस एजेंट को यहां चैट में नहीं चला सकते।",
+      "unreachable": "Prompt एजेंट तक नहीं पहुंच सका।",
+      "recordFailed": "Prompt इसे चैट के इतिहास में सहेजा नहीं जा सका।",
+      "attachmentExpired": "यह अटैचमेंट समाप्त हो गया है।",
+      "reattachFile": "इसे हटाएँ और दोबारा अटैच करें।",
+      "conversationCleared": "यह बातचीत साफ़ कर दी गई है।",
+      "openCurrentConversation": "जारी रखने के लिए मौजूदा बातचीत खोलें।",
+      "clearUnfinished": "पिछला /clear पूरा नहीं हुआ।",
+      "commandRunning": "/compact या /clear अभी चल रहा है।",
+      "waitForCommand": "/compact या /clear पूरा होने तक प्रतीक्षा करें।",
+      "agentStarting": "agent अभी शुरू हो रहा है।",
+      "waitForStart": "agent के शुरू होने तक प्रतीक्षा करें।",
+      "turnActive": "agent अभी उत्तर दे रहा है।",
+      "waitForTurn": "agent का उत्तर पूरा होने तक प्रतीक्षा करें, या उसे रोकें।",
+      "promptPending": "agent किसी प्रश्न या approval के उत्तर की प्रतीक्षा में है।",
+      "answerFirst": "पहले प्रश्न या approval का उत्तर दें।",
+      "backgroundTasksRunning": "बैकग्राउंड कार्य अभी चल रहे हैं।",
+      "waitForBackgroundTasks": "बैकग्राउंड कार्य पूरे होने तक प्रतीक्षा करें।",
+      "messagesUnsettled": "आपके पहले भेजे गए एक संदेश की पुष्टि अभी नहीं हुई है।",
+      "settleEarlierMessage": "पहले वाले संदेश के पहुँचने तक प्रतीक्षा करें, या उसे दोबारा भेजें।",
+      "agentStillWorking": "agent अभी काम कर रहा है।",
+      "runClearWhenDone": "यह पूरा होने पर /clear चलाएँ।",
+      "clearAfterAnswer": "agent के प्रश्न या approval का उत्तर दें, फिर /clear चलाएँ।",
+      "runCompactWhenDone": "यह पूरा होने पर /compact चलाएँ।",
+      "compactAfterAnswer": "agent के प्रश्न या approval का उत्तर दें, फिर /compact चलाएँ।",
+      "clearAfterRetry": "अपना पिछला संदेश दोबारा भेजें, फिर /clear चलाएँ।",
+      "compactAfterRetry": "अपना पिछला संदेश दोबारा भेजें, फिर /compact चलाएँ।",
+      "clearAfterSending": "आपका पिछला संदेश अभी भेजा जा रहा है। उसके जाने के बाद /clear चलाएँ।",
+      "compactAfterSending": "आपका पिछला संदेश अभी भेजा जा रहा है। उसके जाने के बाद /compact चलाएँ।",
+      "pendingWork": "इस कमांड का उपयोग करने से पहले लंबित काम और संदेश पूरे होने तक प्रतीक्षा करें।",
+      "queueTooLarge": "कतार में बहुत ज़्यादा टेक्स्ट प्रतीक्षा में है।",
+      "shrinkQueue": "कतार का कोई संदेश हटाएँ, या किसी के पहुँचने तक प्रतीक्षा करें, फिर दोबारा कोशिश करें।",
+      "messageTooLarge": "यह एक संदेश की 256 KB सीमा से अधिक है।",
+      "shortenMessage": "इसे छोटा करें या बाँटें, फिर दोबारा भेजें।",
+      "optionRejected": "agent ने यह सेटिंग स्वीकार नहीं की।",
+      "goalsUnsupported": "यह agent लक्ष्यों को सपोर्ट नहीं करता।",
+      "agentRefused": "agent ने इसे अस्वीकार कर दिया।",
+      "ownerUnproven": "इस चैट का पिछला agent शायद अभी भी चल रहा है।",
+      "reopenChat": "दोबारा जाँचने के लिए चैट फिर से खोलें।",
+      "terminalAgentHoldsChat": "यह चैट अभी भी टर्मिनल agent में खुली है।",
+      "quitTerminalAgent": "चैट को यहाँ जारी रखने के लिए उस agent से बाहर निकलें।",
+      "hostReconciling": "Prompt पुनः प्रारंभ होने के बाद भी इस चैट की जाँच कर रहा है।",
+      "waitMoment": "थोड़ी देर प्रतीक्षा करें।",
+      "recordUnreadable": "Prompt इस चैट की सहेजी गई स्थिति को नहीं पढ़ सका।",
+      "chatNotFound": "Prompt यह चैट नहीं मिल सकी।",
+      "startNewChat": "जारी रखने के लिए नई चैट शुरू करें।",
+      "tryAgain": "दोबारा कोशिश करें।"
+    }
+  },
+  "chat": {
+    "composer": {
+      "addToMessage": "संदेश में जोड़ें",
+      "attachImage": "छवि संलग्न करें",
+      "placeholder": "कुछ भी पूछें, फ़ाइलें mention करने के लिए @, कमांड के लिए /",
+      "cancelEditing": "संपादन रद्द करें",
+      "saveEditedMessage": "संपादित संदेश सहेजें",
+      "sendMessage": "संदेश भेजें"
+    },
+    "composerAttachments": {
+      "file": "फ़ाइल",
+      "fileMeta": "{{type}} · {{size}}",
+      "attachedImage": "संलग्न छवि",
+      "removeImage": "छवि हटाएँ",
+      "uploadingFile": "अपलोड हो रहा है {{name}}",
+      "removeFile": "{{name}} हटाएँ"
+    },
+    "useImageUpload": {
+      "disconnected": "संलग्न करना विफल (डिस्कनेक्ट किया गया)",
+      "permissionDenied": "फ़ोटो की अनुमति अस्वीकृत",
+      "imageTooLarge": "छवि संलग्न करने के लिए बहुत बड़ी है",
+      "attachFailed": "संलग्न करना विफल"
+    },
+    "ask": {
+      "submit": "सबमिट करें",
+      "next": "आगे",
+      "skip": "छोड़ें",
+      "step": "चरण {{step}}",
+      "other": "अन्य...",
+      "answerPlaceholder": "अपना उत्तर लिखें"
+    },
+    "permission": {
+      "reason": "कारण:",
+      "needsAccessTo": "इस तक पहुंच की आवश्यकता है:",
+      "planFile": "योजना फ़ाइल: {{filePath}}",
+      "newerVersionRequired": "इस अनुरोध के लिए Prompt के एक नए संस्करण की आवश्यकता है।"
+    },
+    "promptCard": {
+      "terminalExplanation": "इस OMP प्रश्न का उत्तर टर्मिनल में दें।",
+      "answerInTerminal": "टर्मिनल में उत्तर दें"
+    },
+    "promptStrip": {
+      "expand": "फैलाएँ"
+    },
+    "question": {
+      "submitSelectedOptions": "चयनित विकल्प सबमिट करें",
+      "submitCount": "सबमिट करें ({{count}})",
+      "submit": "सबमिट करें",
+      "otherReplyPlaceholder": "या उत्तर लिखें...",
+      "replyPlaceholder": "अपना उत्तर लिखें...",
+      "sendReply": "उत्तर भेजें"
+    },
+    "queuedMessages": {
+      "deleteAll": "प्रत्येक पंक्तिबद्ध संदेश हटाएँ",
+      "clearAll": "सभी हटाएँ",
+      "resumeSending": "पंक्तिबद्ध संदेश भेजना फिर से शुरू करें",
+      "resume": "फिर से शुरू करें",
+      "title": "queue में लगे संदेश",
+      "pausedState": "रुका हुआ",
+      "queuedState": "कतार में",
+      "editMessage": "संदेश संपादित करें"
+    },
+    "sessionOptionPickers": {
+      "workingAnnouncement": "एजेंट काम कर रहा है. यह मोड़ समाप्त होने पर मॉडल सेटिंग्स अनलॉक हो जाती हैं।",
+      "modelFullAccessLabel": "मॉडल, {{value}}, पूर्ण पहुंच",
+      "modelLabel": "मॉडल, {{value}}",
+      "permissionsLabel": "अनुमतियाँ, {{value}}",
+      "closePicker": "पिकर बंद करें",
+      "backToModels": "मॉडलों पर वापस जाएँ",
+      "agentWorking": "एजेंट काम कर रहा है",
+      "settingsLocked": "यह मोड़ समाप्त होने पर मॉडल सेटिंग्स अनलॉक हो जाती हैं।",
+      "dispatchUnconfirmed": "agent को भेजा गया — पुष्टि नहीं हुई",
+      "permissions": "अनुमतियाँ"
+    },
+    "sessionOptionRows": {
+      "defaultMarker": "डिफ़ॉल्ट",
+      "notReportedMarker": "रिपोर्ट नहीं की गई"
+    },
+    "sessionOptionSegments": {
+      "dispatchUnconfirmed": "agent को भेजा गया — पुष्टि नहीं हुई"
+    },
+    "stopButton": {
+      "stoppingState": "रोका जा रहा है…",
+      "stopAgent": "agent को रोकें"
+    },
+    "taskList": {
+      "taskStatus": "{{status}}: {{task}}",
+      "title": "कार्य",
+      "completed": "पूरा हुआ",
+      "inProgress": "प्रगति में",
+      "pending": "लंबित",
+      "empty": "कोई कार्य नहीं",
+      "progress": "{{total}} में से {{completed}} कार्य पूर्ण",
+      "added": "{{task}} जोड़ा गया",
+      "removed": "{{task}} हटाया गया",
+      "started": "{{task}} शुरू हुआ",
+      "finished": "{{task}} पूरा हुआ",
+      "reset": "लंबित के रूप में चिह्नित: {{task}}",
+      "updated": "{{task}} अपडेट हुआ",
+      "unchanged": "कार्य अपरिवर्तित",
+      "showAll": "पूरी कार्य सूची"
+    },
+    "sessionOptionCopy": {
+      "on": "चालू",
+      "off": "बंद",
+      "permissions": "अनुमतियाँ",
+      "notSet": "सेट नहीं",
+      "model": "मॉडल",
+      "effort": "प्रयास",
+      "fastMode": "फ़ास्ट मोड",
+      "speed": "गति",
+      "thinking": "सोच-विचार",
+      "standard": "मानक",
+      "minimal": "न्यूनतम",
+      "low": "कम",
+      "medium": "मध्यम",
+      "high": "अधिक",
+      "xhigh": "बहुत उच्च",
+      "max": "अधिकतम",
+      "ultra": "अल्ट्रा",
+      "minimalShort": "कम",
+      "mediumShort": "मध्यम",
+      "xhighShort": "अति उच्च",
+      "fast": "तेज़",
+      "toggleOption": "{{value0}} टॉगल करें",
+      "chooseInAgentPicker": "agent picker में चुनें…",
+      "setWhenSessionStarts": "सत्र शुरू होने पर सेट होता है।",
+      "availableAfterSessionStarts": "सत्र शुरू होने के बाद उपलब्ध होगा।",
+      "sessionOptions": "सत्र विकल्प"
+    },
+    "streamFrame": {
+      "streamFailed": "ट्रांस्क्रिप्ट स्ट्रीम विफल रही",
+      "streamEnded": "प्रतिलेख स्ट्रीम समाप्त हो गई"
+    },
+    "turnStatus": {
+      "seconds_one": "{{count}}एस",
+      "seconds_other": "{{count}}एस",
+      "minutesSeconds": "{{minutes}}एम {{seconds}}एस",
+      "hoursMinutesSeconds": "{{hours}}एच {{minutes}}एम {{seconds}}एस",
+      "thinking": "सोच-विचार",
+      "working": "काम हो रहा है…",
+      "stopping": "रोका जा रहा है…",
+      "queueAfterStop": "रुकने के बाद चलने के लिए संदेश queue करें",
+      "sendAfterStop": "रुकने के बाद चलने के लिए संदेश भेजें",
+      "workingFor": "{{value0}} से काम कर रहा है",
+      "workedFor": "{{value0}} काम किया",
+      "interruptedAfter": "{{value0}} के बाद बाधित",
+      "failedAfter": "{{value0}} बाद विफल",
+      "toggleDetails": "turn का ब्योरा टॉगल करें",
+      "responding": "agent उत्तर दे रहा है"
+    },
+    "message": {
+      "copyMessage": "संदेश कॉपी करें"
+    },
+    "messageActionsSheet": {
+      "copyMessage": "संदेश कॉपी करें",
+      "copyFailed": "प्रतिलिपि विफल",
+      "clipboardRejected": "क्लिपबोर्ड ने पाठ को अस्वीकार कर दिया.",
+      "selectText": "पाठ का चयन करें"
+    },
+    "notice": {
+      "stoppedManually": "मैन्युअल रूप से रोका गया",
+      "compaction": "संदर्भ compact किया गया",
+      "contextCleared": "संदर्भ साफ़ किया गया",
+      "plan": "प्लान"
+    },
+    "nativeChatProse": {
+      "attachedImage": "संलग्न छवि",
+      "image": "छवि",
+      "openImageHint": "छवि को पूर्ण आकार में खोलता है"
+    },
+    "nativeChatToolLine": {
+      "durationMilliseconds": "{{milliseconds}} एमएस",
+      "durationSeconds": "{{seconds}}एस",
+      "durationMinutes": "{{minutes}}एम {{seconds}}एस",
+      "durationHours": "{{hours}}एच {{minutes}}एम {{seconds}}एस",
+      "result": "परिणाम",
+      "exitCode": "बाहर निकलें {{exitCode}}",
+      "copyCommand": "कमांड कॉपी करें",
+      "running": "चल रहा है",
+      "ran": "चलाया",
+      "reading": "पढ़ रहा है",
+      "read": "पढ़ें",
+      "triedRead": "पढ़ने की कोशिश की",
+      "editing": "संपादन",
+      "edited": "बदला गया",
+      "triedEdit": "edit करने की कोशिश की",
+      "added": "जोड़ा गया",
+      "deleted": "हटाया गया",
+      "renamed": "नाम बदला",
+      "subagent": "subagent",
+      "searching": "खोज रहा है",
+      "searched": "खोजा",
+      "triedSearch": "खोजने की कोशिश की",
+      "listing": "सूची बना रहा है",
+      "listed": "सूची बनाई",
+      "triedList": "सूची बनाने की कोशिश की",
+      "fetching": "fetch कर रहा है",
+      "fetched": "fetch किया",
+      "triedFetch": "fetch करने की कोशिश की",
+      "searchingWeb": "वेब पर खोज रहा है",
+      "searchedWeb": "वेब पर खोजा",
+      "triedSearchWeb": "वेब पर खोजने की कोशिश की"
+    },
+    "nativeChatUserMessageFold": {
+      "showLess": "कम दिखाएँ",
+      "loadFailed": "पूरा संदेश दिखाएँ - लोड नहीं किया जा सका, पुनः प्रयास करने के लिए टैप करें",
+      "showFullMessage": "पूरा संदेश दिखाएँ"
+    },
+    "askRow": {
+      "awaiting": "उपयोगकर्ता के इनपुट की प्रतीक्षा:",
+      "awaitingUnnamed": "उपयोगकर्ता के इनपुट की प्रतीक्षा",
+      "asked": "पूछा गया:",
+      "questionCount": "{{value0}} प्रश्न"
+    },
+    "hostStatus": {
+      "historyRepaired": "इस चैट के इतिहास का एक हिस्सा लोड नहीं हो सका।",
+      "historyItemTooLarge": "चैट का यह हिस्सा दिखाने के लिए बहुत बड़ा था।",
+      "continuedOutside": "इस चैट के बाहर जारी रखा गया।",
+      "continuedOutsideRewound": "इस चैट के बाहर जारी रखा गया। ऊपर के पिछले उत्तर अब इस बातचीत के इतिहास में नहीं हैं।"
+    },
+    "orcaStop": {
+      "update": "Prompt पर {{machine}} एक अद्यतन के लिए पुनः आरंभ किया गया जबकि यह प्रतिक्रिया प्रगति पर थी।",
+      "quit": "Prompt पर {{machine}} बंद था जबकि यह प्रतिक्रिया प्रगति पर थी।",
+      "crash": "Prompt पर {{machine}} अप्रत्याशित रूप से रुक गया जबकि यह प्रतिक्रिया प्रगति पर थी।",
+      "remote": "Prompt पर {{machine}} रुक गया जबकि यह प्रतिक्रिया प्रगति पर थी।",
+      "canContinue": "आप इसी बातचीत में आगे बढ़ सकते हैं।",
+      "unnamedServer": "दूरस्थ सर्वर"
+    },
+    "toolActivity": {
+      "count_one": "{{count}} टूल कॉल",
+      "count_other": "{{count}} tool call",
+      "runningPreview": "चल रहा है {{preview}}",
+      "runningCommand": "रनिंग कमांड",
+      "runningNamedPreview": "दौड़ना {{toolName}} {{preview}}",
+      "runningNamed": "चल रहा है {{toolName}}",
+      "result": "परिणाम",
+      "moreCalls": "+{{value0}} और",
+      "failedCount": "{{value0}} विफल रहा",
+      "failedCallsLabel": "विफल tool call: {{value0}}",
+      "interruptedCount": "{{value0}} बाधित",
+      "interruptedCallsLabel": "बाधित tool call: {{value0}}"
+    },
+    "toolRun": {
+      "liveRead_one": "{{count}} फ़ाइल पढ़ी जा रही है…",
+      "liveRead_other": "{{count}} फ़ाइलें पढ़ी जा रही हैं…",
+      "liveSearch_one": "{{count}} बार खोजा जा रहा है…",
+      "liveSearch_other": "{{count}} बार खोजा जा रहा है…",
+      "liveListFiles_one": "{{count}} डायरेक्टरी की सूची बनाई जा रही है…",
+      "liveListFiles_other": "{{count}} डायरेक्टरी की सूची बनाई जा रही है…",
+      "liveUnknown_one": "{{count}} कमांड चलाई जा रही है…",
+      "liveUnknown_other": "{{count}} कमांड चलाई जा रही हैं…",
+      "liveFileChange_one": "{{count}} फ़ाइल में बदलाव किया जा रहा है…",
+      "liveFileChange_other": "{{count}} फ़ाइलों में बदलाव किया जा रहा है…",
+      "liveWebSearch_one": "वेब पर {{count}} बार खोजा जा रहा है…",
+      "liveWebSearch_other": "वेब पर {{count}} बार खोजा जा रहा है…",
+      "liveBrowserOnce": "ब्राउज़र उपयोग कर रहा है",
+      "liveBrowserTimes_other": "ब्राउज़र का {{count}} बार उपयोग किया जा रहा है…",
+      "liveMcpToolCall_one": "{{count}} integration का उपयोग किया जा रहा है…",
+      "liveMcpToolCall_other": "{{count}} integration का उपयोग किया जा रहा है…",
+      "liveSubAgentActivity_one": "{{count}} agent चल रहा है…",
+      "liveSubAgentActivity_other": "{{count}} agent चल रहे हैं…",
+      "liveTodoListOnce": "योजना अपडेट कर रहा है",
+      "liveTodoListTimes_other": "योजना को {{count}} बार अपडेट किया जा रहा है…",
+      "liveOther_one": "{{count}} tool का उपयोग किया जा रहा है…",
+      "liveOther_other": "{{count}} tool का उपयोग किया जा रहा है…",
+      "settledRead_one": "{{count}} फ़ाइल पढ़ी गई",
+      "settledRead_other": "{{count}} फ़ाइलें पढ़ी गईं",
+      "settledSearch_one": "{{count}} बार खोजा गया",
+      "settledSearch_other": "{{count}} बार खोजा गया",
+      "settledListFiles_one": "{{count}} डायरेक्टरी की सूची बनाई गई",
+      "settledListFiles_other": "{{count}} डायरेक्टरी की सूची बनाई गई",
+      "settledUnknown_one": "{{count}} कमांड चलाई गई",
+      "settledUnknown_other": "{{count}} कमांड चलाई गईं",
+      "settledFileChange_one": "{{count}} फ़ाइल में बदलाव किया गया",
+      "settledFileChange_other": "{{count}} फ़ाइलों में बदलाव किया गया",
+      "settledWebSearch_one": "वेब पर {{count}} बार खोजा गया",
+      "settledWebSearch_other": "वेब पर {{count}} बार खोजा गया",
+      "settledBrowserOnce": "ब्राउज़र उपयोग किया",
+      "settledBrowserTimes_other": "ब्राउज़र का {{count}} बार उपयोग किया गया",
+      "settledMcpToolCall_one": "{{count}} integration का उपयोग किया गया",
+      "settledMcpToolCall_other": "{{count}} integration का उपयोग किया गया",
+      "settledSubAgentActivity_one": "{{count}} agent चलाया गया",
+      "settledSubAgentActivity_other": "{{count}} agent चलाए गए",
+      "settledTodoListOnce": "योजना अपडेट की",
+      "settledTodoListTimes_other": "योजना को {{count}} बार अपडेट किया गया",
+      "settledOther_one": "{{count}} tool का उपयोग किया गया",
+      "settledOther_other": "{{count}} tool का उपयोग किया गया",
+      "pair": "{{value0}} और {{value1}}",
+      "list": "{{value0}} और {{value1}}",
+      "separator": ",",
+      "liveBrowserTimes_one": "ब्राउज़र का {{count}} बार उपयोग किया जा रहा है…",
+      "liveTodoListTimes_one": "योजना को {{count}} बार अपडेट किया जा रहा है…",
+      "settledBrowserTimes_one": "ब्राउज़र का {{count}} बार उपयोग किया गया",
+      "settledTodoListTimes_one": "योजना को {{count}} बार अपडेट किया गया"
+    },
+    "usageLimit": {
+      "theAgent": "Agent",
+      "windowSession": "सत्र",
+      "windowWeekly": "साप्ताहिक",
+      "windowWeeklyModel": "साप्ताहिक model",
+      "windowCredits": "अतिरिक्त उपयोग",
+      "reachedNamed": "{{agent}} की {{window}} सीमा पूरी हो गई।",
+      "reached": "{{agent}} की उपयोग सीमा पूरी हो गई।",
+      "resetsAt": "यह {{when}} पर रीसेट होगी।"
+    },
+    "composerPlaceholder": {
+      "reconnecting": "फिर से कनेक्ट हो रहा है…",
+      "waitingForTerminal": "टर्मिनल की प्रतीक्षा की जा रही है...",
+      "prompt": "कुछ भी पूछें, फ़ाइलें mention करने के लिए @, कमांड के लिए /"
+    },
+    "nativeChatImageViewer": {
+      "closeImage": "छवि बंद करें"
+    },
+    "nativeChatVisual": {
+      "defaultTitle": "विज़ुअलाइज़ेशन",
+      "unavailable": "विज़ुअलाइज़ेशन उपलब्ध नहीं है",
+      "retryHint": "इसे दोबारा लोड करने का प्रयास करता है",
+      "openFullscreen": "{{title}} पूर्ण स्क्रीन खोलें"
+    },
+    "diffCard": {
+      "diffTruncated": "diff छोटा किया गया",
+      "diffGap": "जो पंक्तियाँ नहीं दिखाई गईं",
+      "copyDiff": "diff कॉपी करें"
+    },
+    "receipt": {
+      "emptyAnswer": "खाली उत्तर",
+      "unavailable": "चुना गया उत्तर उपलब्ध नहीं है",
+      "resolved": "सुलझा हुआ",
+      "cancelled": "रद्द किया गया",
+      "resolver": "{{device}} पर उत्तर दिया गया",
+      "cancelledBy": "{{device}} पर रद्द किया गया"
+    },
+    "subagentGroup": {
+      "stateCompleted": "पूरा हुआ",
+      "stateWorking": "काम कर रहा है",
+      "stateIdle": "idle",
+      "stateFailed": "विफल",
+      "stateStopped": "रुका हुआ",
+      "stateUnverifiable": "स्थिति उपलब्ध नहीं",
+      "stateWorkingCount_one": "{{count}} कार्यरत",
+      "stateWorkingCount_other": "{{count}} कार्यरत",
+      "stateIdleCount_one": "{{count}} निष्क्रिय",
+      "stateIdleCount_other": "{{count}} निष्क्रिय",
+      "stateFailedCount_one": "{{count}} विफल",
+      "stateFailedCount_other": "{{count}} विफल",
+      "stateStoppedCount_one": "{{count}} रुका हुआ है",
+      "stateStoppedCount_other": "{{count}} रुका हुआ है",
+      "stateUnverifiableCount_one": "{{count}} की स्थिति अनुपलब्ध है",
+      "stateUnverifiableCount_other": "{{count}} की स्थिति अनुपलब्ध है",
+      "started_one": "{{count}} subagent शुरू किया गया",
+      "started_other": "{{count}} subagent शुरू किए गए",
+      "ran_one": "{{count}} subagent चलाया गया",
+      "ran_other": "{{count}} subagent चलाए गए",
+      "tokens": "{{value0}} token"
+    }
+  },
+  "sourceControl": {
+    "hostedReview": {
+      "prCopy": {
+        "shortLabel": "PR",
+        "reviewLabel": "अनुरोध खींचें",
+        "titleLabel": "अनुरोध खींचें"
+      },
+      "mrCopy": {
+        "shortLabel": "MR",
+        "reviewLabel": "मर्ज अनुरोध",
+        "titleLabel": "मर्ज अनुरोध"
+      }
+    },
+    "commitDropdown": {
+      "commit": "Commit करें",
+      "commitStagedChanges": "staged परिवर्तन commit करें",
+      "commitPush": "Commit और Push करें",
+      "commitForcePush": "Commit और Force Push करें",
+      "commitSync": "Commit और Sync करें",
+      "checkingBranchStatus": "branch की स्थिति जाँची जा रही है…",
+      "checkingPrStatus": "PR की स्थिति जाँची जा रही है…",
+      "prAlreadyMerged": "PR पहले ही merge हो चुका है",
+      "checkOutBranchToPush": "commit push करने से पहले कोई branch checkout करें",
+      "linkedReviewTargetUnavailable": "लिंक किए गए review के branch का लक्ष्य उपलब्ध नहीं है",
+      "publishBranchFirstToPush": "commit push करने के लिए पहले branch publish करें",
+      "commitAndForcePush": "staged परिवर्तन commit करें और lease के साथ force push करें",
+      "commitAndTryPush": "staged परिवर्तन commit करें और push करने का प्रयास करें",
+      "commitAndPush": "staged परिवर्तन commit करें और push करें",
+      "checkOutBranchToSync": "commit sync करने से पहले कोई branch checkout करें",
+      "publishBranchFirstToSync": "commit sync करने के लिए पहले branch publish करें",
+      "useCommitAndForcePush": "Commit और Force Push करें — remote पर केवल local commit की पुरानी प्रतियाँ हैं",
+      "commitThenPullPush": "Commit करें, फिर pull और push करें",
+      "resolveConflicts": "commit करने से पहले conflict सुलझाएँ",
+      "stageFile": "commit करने के लिए कम से कम एक फ़ाइल stage करें",
+      "enterMessage": "commit करने के लिए commit का संदेश लिखें"
+    },
+    "createPrAction": {
+      "createReview": "बनाएं {{titleLabel}}",
+      "createPullRequest": "Pull request बनाएँ",
+      "statusUnavailable": "review की स्थिति उपलब्ध नहीं है",
+      "checkingStatus": "review की स्थिति जाँची जा रही है…",
+      "providerUnavailable": "इस प्रदाता के लिए समीक्षा निर्माण अनुपलब्ध है"
+    },
+    "prCreate": {
+      "notReady": "यह शाखा अभी तक {{reviewLabel}} के लिए तैयार नहीं है।",
+      "existingNumber": "{{titleLabel}} #{{number}} पहले से ही खुला है।",
+      "existing": "{{titleLabel}} पहले से ही खुला है।",
+      "createdNotRefreshed": "{{titleLabel}} बनाया गया, लेकिन Prompt इसे अभी तक ताज़ा नहीं किया जा सका।",
+      "lookupUnconfirmed": "Prompt पुष्टि नहीं कर सका कि इस शाखा में पहले से ही {{reviewLabel}} है या नहीं। थोड़ी देर में पुनः प्रयास करें.",
+      "dirty": "{{reviewLabel}} बनाने से पहले परिवर्तन करें।",
+      "detachedHead": "{{reviewLabel}} बनाने से पहले कोई branch checkout करें।",
+      "defaultBranch": "{{reviewLabel}} बनाने से पहले किसी feature branch पर जाएँ।",
+      "noUpstream": "{{reviewLabel}} बनाने से पहले कमिट प्रकाशित करें।",
+      "needsSync": "{{reviewLabel}} बनाने से पहले इस शाखा को सिंक करें।",
+      "authRequired": "{{reviewLabel}} बनाने से पहले प्रमाणित करें।",
+      "unsupportedMergeRequests": "इस रेपो के लिए मर्ज अनुरोध बनाना समर्थित नहीं है।",
+      "unsupportedPullRequests": "इस रेपो के लिए पुल अनुरोध बनाना समर्थित नहीं है।",
+      "existingReview": "इस branch के लिए {{reviewLabel}} पहले से मौजूद है।",
+      "forkHeadUnsupported": "इस फ़ोर्क से {{reviewLabel}} बनाना समर्थित नहीं है।",
+      "baseNotOnRemote": "{{reviewLabel}} बनाने से पहले आधार शाखा को पुश करें।"
+    },
+    "hostedReviewCreate": {
+      "pushSucceeded": "पुश सफल हुआ, लेकिन {{shortLabel}} निर्माण विफल रहा: {{error}}"
+    },
+    "remoteDropdown": {
+      "push": "धक्का",
+      "forcePush": "जबरदस्ती धक्का",
+      "pull": "खींचो",
+      "fastForward": "तेजी से आगे बढ़ना",
+      "sync": "सिंक करें",
+      "publishBranch": "branch प्रकाशित करें",
+      "publishPrStatus": "PR की स्थिति",
+      "publishLinkedReview": "लिंक किया गया review",
+      "publishNoBranch": "कोई branch नहीं",
+      "checkingBranchStatus": "branch की स्थिति जाँची जा रही है…",
+      "checkingPrStatus": "PR की स्थिति जाँची जा रही है…",
+      "prAlreadyMerged": "PR पहले ही merge हो चुका है",
+      "linkedReviewTargetUnavailable": "लिंक किए गए review के branch का लक्ष्य उपलब्ध नहीं है",
+      "checkOutBranchToPush": "commit push करने से पहले कोई branch checkout करें",
+      "pushAndSetUpstream": "इस branch को push करें और ज़रूरत हो तो upstream सेट करें",
+      "pushToLinkedReview": "लिंक किए गए review के branch में अपडेट push करें",
+      "tryRegularPush": "सामान्य push आज़माएँ; git force push माँग सकता है",
+      "pushMayNeedSync": "local commit push करें; git पहले sync करने को कह सकता है",
+      "nothingToPush": "push करने के लिए कुछ नहीं है",
+      "checkOutBranchToForcePush": "commit force push करने से पहले कोई branch checkout करें",
+      "nothingToForcePush": "force push करने के लिए कुछ नहीं है",
+      "checkOutBranchToPull": "commit pull करने से पहले कोई branch checkout करें",
+      "publishBranchFirstToPull": "commit pull करने के लिए पहले branch publish करें",
+      "nothingNewToPull": "pull करने के लिए कुछ नया नहीं है — remote पर केवल local commit की पुरानी प्रतियाँ हैं",
+      "nothingToPull": "pull करने के लिए कुछ नहीं है",
+      "checkOutBranchToFastForward": "fast-forward करने से पहले कोई branch checkout करें",
+      "publishBranchFirstToFastForward": "fast-forward करने के लिए पहले branch publish करें",
+      "nothingNewToFastForward": "fast-forward करने के लिए कुछ नया नहीं है — remote पर केवल local commit की पुरानी प्रतियाँ हैं",
+      "nothingToFastForward": "fast-forward करने के लिए कुछ नहीं है",
+      "tryFastForwardPull": "fast-forward pull आज़माएँ; git local commit को अस्वीकार कर सकता है",
+      "checkOutBranchToSync": "commit sync करने से पहले कोई branch checkout करें",
+      "publishBranchFirstToSync": "commit sync करने के लिए पहले branch publish करें",
+      "useForcePushToSync": "Force Push का उपयोग करें — remote पर केवल local commit की पुरानी प्रतियाँ हैं",
+      "branchUpToDate": "Branch अप-टू-डेट है",
+      "rebaseFromBase": "Base से rebase करें",
+      "rebaseChooseRemoteBase": "rebase करने के लिए कोई remote base branch चुनें",
+      "rebaseDirtyHint": "rebase करके देखें; git पहले local परिवर्तन commit या stash करने को कह सकता है",
+      "fetch": "Fetch करें",
+      "fetchTitle": "merge किए बिना remote से fetch करें",
+      "linkedReviewBranchExists": "लिंक किए गए review का branch पहले से मौजूद है",
+      "checkOutBranchToPublish": "commit publish करने से पहले कोई branch checkout करें",
+      "branchAlreadyPublished": "Branch पहले ही publish हो चुका है",
+      "publishToOrigin": "इस branch को origin पर publish करें",
+      "nothingToPushTo": "{{upstreamName}} पर push करने के लिए कुछ नहीं है",
+      "nothingToForcePushTo": "{{upstreamName}} पर force push करने के लिए कुछ नहीं है",
+      "rebaseFromNamedBase": "{{baseRef}} से rebase करें",
+      "rebaseWithLatestFrom": "{{baseRef}} के नवीनतम commit के साथ मौजूदा branch को rebase करें"
+    },
+    "actions": {
+      "createPr": "PR बनाएँ",
+      "pushAndCreatePr": "पुश करें और पीआर बनाएं",
+      "switchBranch": "शाखा बदलें",
+      "commits": "Commit",
+      "committing": "प्रतिबद्धता प्रगति पर है.",
+      "forcePushing": "बलपूर्वक धक्का प्रगति पर है.",
+      "remoteOperationInProgress": "रिमोट ऑपरेशन चल रहा है.",
+      "waitForRemoteOperation": "रिमोट ऑपरेशन समाप्त होने पर पुनः प्रयास करें।",
+      "resolveConflicts": "प्रतिबद्ध होने से पहले विवादों को हल करें।",
+      "commitStagedChanges": "चरणबद्ध परिवर्तन प्रतिबद्ध करें.",
+      "enterCommitMessage": "प्रतिबद्ध करने के लिए एक प्रतिबद्ध संदेश दर्ज करें.",
+      "stageAllChanges": "सभी परिवर्तन चरणबद्ध करें.",
+      "stageFileToCommit": "प्रतिबद्ध करने के लिए कम से कम एक फ़ाइल चरणबद्ध करें।",
+      "checkoutBeforePublish": "commit publish करने से पहले कोई branch checkout करें।",
+      "checkingReviewStatus": "समीक्षा स्थिति की जाँच की जा रही है.",
+      "reviewAlreadyMerged": "प्रतिबद्ध करने के लिए कुछ भी नहीं. समीक्षा पहले ही मर्ज हो चुकी है.",
+      "publishToOrigin": "इस शाखा को मूल में प्रकाशित करें।",
+      "pushLinkedReview": "लिंक की गई समीक्षा शाखा में अपडेट पुश करें।",
+      "linkedReviewUnavailable": "लिंक की गई समीक्षा शाखा अनुपलब्ध है.",
+      "forcePushWithLease": "दूरस्थ शाखा को अद्यतन करने के लिए पट्टे के साथ बलपूर्वक धक्का दें।",
+      "syncCounts": "खींचो {{behind}}, धकेलो {{ahead}}।",
+      "pullCommits_one": "खींचो {{count}} कमिट करता है।",
+      "pullCommits_other": "खींचो {{count}} कमिट करता है।",
+      "pushCommits_one": "पुश {{count}} कमिट करना ।",
+      "pushCommits_other": "पुश {{count}} कमिट करता है।",
+      "upToDate": "commit करने के लिए कुछ नहीं है। Branch अप-टू-डेट है।"
+    },
+    "dropdownCounts": {
+      "pushCount_one": "{{count}} commit push करें",
+      "pushCount_other": "{{count}} commit push करें",
+      "pullCount_one": "{{count}} commit pull करें",
+      "pullCount_other": "{{count}} commit pull करें",
+      "fastForwardCount_one": "{{count}} commit fast-forward करें",
+      "fastForwardCount_other": "{{count}} commit fast-forward करें",
+      "syncCounts": "{{behind}} pull करें, {{ahead}} push करें",
+      "remoteBranchFallback": "remote branch",
+      "titleForcePushOlderCopiesBranch": "Remote पर केवल local commit की पुरानी प्रतियाँ हैं। {{upstreamName}} को अपडेट करने के लिए इस branch को lease के साथ force push करें।",
+      "titleForcePushOlderCopiesCount_one": "Remote में local commit की केवल पुरानी प्रतियाँ हैं। {{upstreamName}} को अपडेट करने के लिए {{count}} branch commit को lease के साथ force push करें।",
+      "titleForcePushOlderCopiesCount_other": "Remote में local commit की केवल पुरानी प्रतियाँ हैं। {{upstreamName}} को अपडेट करने के लिए {{count}} branch commit को lease के साथ force push करें।",
+      "titleManualForcePushReplaceRemote_one": "{{upstreamName}} को अपडेट करने और remote-only commit को बदलने के लिए {{count}} local commit को lease के साथ force push करें।",
+      "titleManualForcePushReplaceRemote_other": "{{upstreamName}} को अपडेट करने और remote-only commit को बदलने के लिए {{count}} local commit को lease के साथ force push करें।",
+      "titleManualForcePush_one": "{{upstreamName}} को अपडेट करने के लिए {{count}} local commit को lease के साथ force push करें।",
+      "titleManualForcePush_other": "{{upstreamName}} को अपडेट करने के लिए {{count}} local commit को lease के साथ force push करें।",
+      "titleUnpublishedForcePushBranch": "इस branch को lease के साथ force push करें और ज़रूरत हो तो upstream सेट करें।",
+      "titleUnpublishedForcePushCount_one": "{{count}} branch commit को lease के साथ force push करें और ज़रूरत हो तो upstream सेट करें।",
+      "titleUnpublishedForcePushCount_other": "{{count}} branch commit को lease के साथ force push करें और ज़रूरत हो तो upstream सेट करें।"
+    },
+    "primaryAction": {
+      "forcePushFromDesktop": "इस पुल अनुरोध की शाखा को डेस्कटॉप से बलपूर्वक पुश करें",
+      "forcePush": "जबरदस्ती धक्का",
+      "commit": "Commit करें",
+      "stageAll": "सभी Stage करें",
+      "push": "धक्का",
+      "pull": "खींचो",
+      "sync": "सिंक करें",
+      "publishBranch": "branch प्रकाशित करें"
+    },
+    "branchDiffPreviewDrawer": {
+      "committedOnBranch": "शाखा पर प्रतिबद्ध",
+      "closePreview": "प्रतिबद्ध अंतर पूर्वावलोकन बंद करें",
+      "loadFailed": "डिफ लोड करने में असमर्थ",
+      "truncated": "मोबाइल पूर्वावलोकन के लिए अंतर को छोटा किया गया।"
+    },
+    "commitFailurePanel": {
+      "title": "प्रतिबद्धता विफल रही",
+      "summary": "प्रतिबद्धता विफल रही.",
+      "fixWithAi": "AI से commit की विफलता ठीक करें",
+      "fix": "ठीक करें",
+      "hideFailureDetails": "प्रतिबद्ध विफलता विवरण छिपाएँ",
+      "showFailureDetails": "प्रतिबद्ध विफलता विवरण दिखाएँ",
+      "hideDetails": "विवरण छिपाएँ",
+      "showDetails": "विवरण दिखाएँ"
+    },
+    "gitHistoryList": {
+      "loadFailed": "इतिहास लोड करने में विफल",
+      "loadFilesFailed": "प्रतिबद्ध फ़ाइलें लोड करने में असमर्थ",
+      "retryFiles": "प्रतिबद्ध फ़ाइलों का पुनः प्रयास करें",
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "noFileChanges": "कोई फ़ाइल परिवर्तन नहीं",
+      "noCommits": "कोई प्रतिबद्धता नहीं."
+    },
+    "branchCard": {
+      "mergeState": "विलय",
+      "rebaseState": "पुनःआधार",
+      "cherryPickState": "चेरी-पिक",
+      "changedCount": "{{count}} बदल गया",
+      "stagedCount": "{{count}} मंचन",
+      "branchCount": "{{count}} शाखा पर"
+    },
+    "content": {
+      "reconnecting": "डेस्कटॉप से पुनः कनेक्ट हो रहा है...",
+      "stageAll": "सभी Stage करें",
+      "unstageAll": "सभी को अस्थिर करें",
+      "openActions": "ओपन सोर्स नियंत्रण क्रियाएँ",
+      "emptyTitle": "कोई स्थानीय परिवर्तन नहीं",
+      "emptyMessage": "कामकाजी पेड़ साफ है.",
+      "commitMessageDisabled": "प्रतिबद्ध संदेश अक्षम किया गया. कोई चरणबद्ध फ़ाइलें नहीं.",
+      "noStagedFiles": "कोई चरणबद्ध फ़ाइलें नहीं",
+      "commitMessagePlaceholder": "commit का संदेश",
+      "regenerateHint": "फिर से बनाने के लिए संदेश साफ़ करें।",
+      "cancelGeneration": "प्रतिबद्ध संदेश निर्माण रद्द करें",
+      "generateMessage": "AI से commit का संदेश जनरेट करें"
+    },
+    "fileList": {
+      "committedSection": "Branch पर commit किए गए"
+    },
+    "fileRows": {
+      "bothModified": "दोनों ने बदला",
+      "bothAdded": "दोनों ने जोड़ा",
+      "deletedByUs": "हमारी ओर से हटाया गया",
+      "deletedByThem": "उनकी ओर से हटाया गया",
+      "addedByUs": "हमारी ओर से जोड़ा गया",
+      "addedByThem": "उनकी ओर से जोड़ा गया",
+      "bothDeleted": "दोनों ने हटाया",
+      "unresolvedConflict": "अनसुलझा conflict",
+      "openChangedFile": "परिवर्तित फ़ाइल खोलें {{path}}",
+      "renamedFrom": "{{path}} से",
+      "unstageFile": "अस्थिर {{path}}",
+      "stageFile": "चरण {{path}}",
+      "discardFile": "त्यागें {{path}}",
+      "committedSection": "Branch पर commit किए गए",
+      "loadingCommitted": "प्रतिबद्ध परिवर्तन लोड हो रहे हैं...",
+      "committedUnavailable": "प्रतिबद्ध परिवर्तन अनुपलब्ध हैं.",
+      "openCommittedChange": "प्रतिबद्ध परिवर्तन खोलें {{path}}"
+    },
+    "header": {
+      "close": "स्रोत नियंत्रण बंद करें",
+      "backToSession": "सत्र पर वापस जाएँ",
+      "title": "सोर्स कंट्रोल",
+      "openNumberedPrWeb": "वेब पर पुल अनुरोध #{{number}} खोलें",
+      "openPrWeb": "वेब पर पुल अनुरोध खोलें",
+      "refresh": "स्रोत नियंत्रण ताज़ा करें"
+    },
+    "modals": {
+      "actionsTitle": "सोर्स कंट्रोल",
+      "discardTitle": "परिवर्तन त्यागें",
+      "discardConfirmMessage": "\"{{path}}\" में परिवर्तन खारिज करें? इसे असंपादित नहीं किया जा सकता है।",
+      "discardButton": "बदलाव छोड़ें",
+      "switchBranchTitle": "स्विच शाखा",
+      "currentBranch": "वर्तमान",
+      "prCreatedTitle": "पुल अनुरोध बनाया गया",
+      "openPrWithWarning": "इसे अपने ब्राउज़र में खोलें?\n\n{{warning}}",
+      "openPrMessage": "इसे अपने ब्राउज़र में खोलें?"
+    },
+    "panel": {
+      "unavailableTitle": "स्रोत नियंत्रण अनुपलब्ध",
+      "loadFailedTitle": "लोड करने में असमर्थ"
+    },
+    "prChip": {
+      "loading": "पुल अनुरोध लोड हो रहा है...",
+      "createPr": "पुल अनुरोध बनाएं",
+      "loadingLabel": "पुल अनुरोध लोड हो रहा है",
+      "unavailableLabel": "पुल अनुरोध अनुपलब्ध: {{message}}",
+      "openWithComments_one": "अनुरोध खींचें #{{number}}, {{state}}, {{checks}}, {{count}} अनसुलझे टिप्पणियाँ। पुल अनुरोध खोलें.",
+      "openWithComments_other": "अनुरोध खींचें #{{number}}, {{state}}, {{checks}}, {{count}} अनसुलझे टिप्पणियाँ। पुल अनुरोध खोलें.",
+      "openLabel": "पुल अनुरोध #{{number}}, {{state}}, {{checks}}। पुल अनुरोध खोलें."
+    },
+    "hostedReviewCopy": {
+      "updatingBranch": "शाखा अपडेट हो रही है...",
+      "stagingChanges": "मंचन परिवर्तन...",
+      "generatingCommitMessage": "प्रतिबद्ध संदेश उत्पन्न हो रहा है...",
+      "committingChanges": "बदलाव के लिए प्रतिबद्ध...",
+      "publishingBranch": "प्रकाशन शाखा...",
+      "pushingCommits": "प्रतिबद्धताओं को आगे बढ़ा रहा है...",
+      "forcePushing": "पट्टे के साथ जबरदस्ती धक्का...",
+      "creatingReview": "समीक्षा बनाई जा रही है..."
+    },
+    "branchBaseRef": {
+      "resolveFailed": "शाखा आधार का समाधान करने में असमर्थ"
+    },
+    "branchCompareOutcome": {
+      "baseBranchUnavailable": "तुलना के लिए आधार शाखा को हल करने में असमर्थ.",
+      "loadFailed": "प्रतिबद्ध परिवर्तन लोड करने में असमर्थ"
+    },
+    "branchCompare": {
+      "sectionTitle": "Branch पर commit किए गए",
+      "summary": "{{files}} - बनाम {{baseRef}}",
+      "summaryWithCommits": "{{files}} - {{commits}} - बनाम {{baseRef}}",
+      "files_one": "{{count}} फ़ाइल",
+      "files_other": "{{count}} फ़ाइलें",
+      "commits_one": "{{count}} प्रतिबद्ध",
+      "commits_other": "{{count}} प्रतिबद्ध है"
+    },
+    "commitMessageAi": {
+      "generateFailed": "प्रतिबद्ध संदेश उत्पन्न करने में विफल"
+    },
+    "gitHistory": {
+      "justNow": "अभी-अभी",
+      "minutes_one": "{{count}} मि.",
+      "minutes_other": "{{count}} मि.",
+      "hours_one": "{{count}} घं.",
+      "hours_other": "{{count}} घं.",
+      "days_one": "{{count}} दि.",
+      "days_other": "{{count}} दि.",
+      "months_one": "{{count}} मो",
+      "months_other": "{{count}} मो",
+      "years_one": "{{count}}य",
+      "years_other": "{{count}}य",
+      "noCommitMessage": "(कोई प्रतिबद्ध संदेश नहीं)",
+      "loadFailed": "प्रतिबद्ध इतिहास लोड करने में विफल"
+    },
+    "gitStatus": {
+      "conflicts": "Conflict",
+      "changes": "बदलाव",
+      "stagedChanges": "Staged बदलाव"
+    },
+    "hostedReviewCreateIntent": {
+      "resolveConflicts": "पुल अनुरोध बनाने से पहले विवादों का समाधान करें।",
+      "branchChanged": "पुल अनुरोध तैयार करते समय शाखा बदल गई।",
+      "resolveOrStageChanges": "पुल अनुरोध बनाने से पहले समाधान करें या परिवर्तनों को चरणबद्ध करें।",
+      "generateMessageFailed": "प्रतिबद्ध संदेश उत्पन्न नहीं किया जा सका. स्रोत नियंत्रण में एक जोड़ें, फिर पुनः प्रयास करें।",
+      "reviewCommitMessage": "commit का संदेश देखें, फिर Create PR दोबारा आज़माएँ।"
+    },
+    "hostedReviewGitPreparation": {
+      "refreshFailed": "स्रोत नियंत्रण ताज़ा करने में असमर्थ",
+      "updateBranchFailed": "remote branch अपडेट नहीं हो सकी। Create PR दोबारा आज़माएँ।",
+      "stageFailed": "परिवर्तन चरणबद्ध करने में विफल",
+      "commitFailed": "प्रतिबद्धता विफल रही"
+    },
+    "hostedReviewRemotePrerequisite": {
+      "publishFailed": "शाखा प्रकाशित करने में विफल",
+      "pushFailed": "प्रतिबद्धताओं को आगे बढ़ाने में विफल",
+      "forcePushFailed": "पट्टे के साथ जबरदस्ती धक्का देने में विफल"
+    },
+    "hostedReviewService": {
+      "pushBeforeCreateFailed": "push विफल रहा। push की त्रुटि ठीक करें, फिर से कोशिश करें।",
+      "createFailed": "पुल अनुरोध बनाने में विफल"
+    },
+    "prLink": {
+      "updatePullRequestFailed": "लिंक किए गए पुल अनुरोध को अपडेट करने में विफल",
+      "updateReviewFailed": "लिंक की गई समीक्षा अपडेट करने में विफल"
+    },
+    "conflictAbort": {
+      "aborting": "गर्भपात हो रहा है...",
+      "abortMerge": "merge रद्द करें",
+      "abortRebase": "rebase रद्द करें",
+      "abortOperation": "निरस्त करें {{operation}}"
+    },
+    "hubTab": {
+      "changes": "बदलाव",
+      "pullRequest": "अनुरोध खींचें",
+      "commits": "Commit"
+    },
+    "screenState": {
+      "noBranch": "कोई शाखा नहीं"
+    },
+    "useMobileCommitFailureRecovery": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "launchFailed": "एजेंट लॉन्च करने में विफल"
+    },
+    "useMobileCommitMessageGeneration": {
+      "generateFailed": "प्रतिबद्ध संदेश उत्पन्न करने में विफल"
+    },
+    "useMobileCreatePrRunner": {
+      "branchRequired": "पुल अनुरोध बनाने से पहले एक शाखा की जाँच करें।"
+    },
+    "useMobileGitRequests": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "actionFailed": "स्रोत नियंत्रण कार्रवाई विफल रही",
+      "commitFailed": "प्रतिबद्धता विफल रही",
+      "branchUnavailable": "शाखा की स्थिति अनुपलब्ध"
+    },
+    "actionSheetRunners": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "noBaseBranch": "दोबारा आधार बनाने के लिए कोई आधार शाखा नहीं"
+    },
+    "commitRunners": {
+      "commitFailed": "प्रतिबद्धता विफल रही",
+      "actionFailed": "स्रोत नियंत्रण कार्रवाई विफल रही"
+    },
+    "loaders": {
+      "connectingToDesktop": "डेस्कटॉप से कनेक्ट हो रहा है...",
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "updateDesktop": "मोबाइल पर सोर्स कंट्रोल का उपयोग करने के लिए Prompt डेस्कटॉप को अपडेट करें।",
+      "loadFailed": "स्रोत नियंत्रण लोड करने में असमर्थ"
+    },
+    "openers": {
+      "waitingForDesktop": "डेस्कटॉप की प्रतीक्षा में...",
+      "openDiffFailed": "अंतर खोलने में असमर्थ",
+      "tabNotReady": "फ़ाइल खुल गई, लेकिन उसका टैब अभी तक तैयार नहीं है. पुनः प्रयास करें।"
+    },
+    "runners": {
+      "actionFailed": "स्रोत नियंत्रण कार्रवाई विफल रही"
+    },
+    "state": {
+      "syncStatus": "{{ahead}} आगे, {{behind}} पीछे",
+      "noUpstream": "कोई अपस्ट्रीम नहीं"
+    },
+    "textGenerationFailure": {
+      "openCodeInvalidEvents": "OpenCode ने अमान्य JSON events लौटाए।",
+      "antigravityInvalidEvents": "Antigravity ने अमान्य JSON events लौटाए।",
+      "antigravityInvalidResult": "Antigravity ने अमान्य परिणाम लौटाया।",
+      "antigravityNoFinalResult": "Antigravity ने कोई अंतिम परिणाम नहीं लौटाया।",
+      "kimiUnreadableOutput": "किमी ने आउटपुट दिया Prompt पढ़ नहीं सका। पुनः प्रयास करें।",
+      "kimiSessionOccupied": "Kimi इस सत्र का उपयोग नहीं कर सका क्योंकि यह किसी दूसरे client में सक्रिय है। वहाँ सत्र रोकें या उस client को बंद करें, फिर से कोशिश करें।",
+      "kimiInterrupted": "टेक्स्ट बनाना पूरा होने से पहले Kimi बाधित हो गया। फिर से कोशिश करें।",
+      "kimiFailed": "Kimi टेक्स्ट बनाना पूरा नहीं कर सका। दोबारा कोशिश करने से पहले विफलता की जाँच के लिए execution host पर Kimi खोलें।",
+      "kimiAgentOptionsConflict": "Kimi को परस्पर विरोधी या दोहराए गए agent विकल्प मिले। generation recipe या CLI आर्guments में केवल एक `--agent` या `--agent-file` विकल्प रखें, फिर से कोशिश करें।",
+      "kimiOptionRejected": "Kimi ने एक विकल्प या आर्guments को अस्वीकार कर दिया। generation recipe या CLI आर्guments सुधारें, फिर से कोशिश करें।",
+      "kimiSessionNotFound": "Kimi को अनुरोधित सत्र नहीं मिला। कोई मौजूदा सत्र उपयोग करें या नया सत्र शुरू करें।",
+      "kimiSessionOtherDirectory": "यह Kimi सत्र किसी दूसरी डायरेक्टरी का है। उसे वहीं फिर से शुरू करें या इस वर्कस्पेस के लिए बनाया गया सत्र उपयोग करें।",
+      "kimiCredentialVariableMissing": "Kimi में कॉन्फ़िगर किया गया credential environment variable मौजूद नहीं है। फिर से कोशिश करने से पहले उसे execution host पर सेट करें।",
+      "kimiCredentialsRequired": "Kimi को provider credentials चाहिए। provider कॉन्फ़िगर करने या साइन इन करने के लिए execution host पर Kimi खोलें, फिर से कोशिश करें।",
+      "kimiModelMissing": "Kimi में कोई उपयोग योग्य model कॉन्फ़िगर नहीं है। model कॉन्फ़िगर करने या चुनने के लिए execution host पर Kimi खोलें, फिर दोबारा कोशिश करें।",
+      "kimiPromptHookBlocked": "किसी Kimi prompt hook ने अनुरोध को रोक दिया या turn शुरू नहीं हो सका। फिर से कोशिश करने से पहले Kimi hooks और कॉन्फ़िगरेशन देखें।",
+      "kimiCancelled": "टेक्स्ट बनाना पूरा होने से पहले Kimi ने अनुरोध रद्द कर दिया। फिर से कोशिश करें।",
+      "kimiEmptyPrompt": "Kimi को खाली prompt मिला। generation recipe या CLI आर्guments में यह इनपुट सुधारें, फिर से कोशिश करें।",
+      "kimiEmptyModel": "Kimi को खाली model मिला। generation recipe या CLI आर्guments में यह इनपुट सुधारें, फिर से कोशिश करें।",
+      "kimiEmptyAgent": "Kimi को खाली agent मिला। generation recipe या CLI आर्guments में यह इनपुट सुधारें, फिर से कोशिश करें।",
+      "kimiEmptyAgentFilePath": "Kimi को खाली agent फ़ाइल पथ मिला। generation recipe या CLI आर्guments में यह इनपुट सुधारें, फिर से कोशिश करें।",
+      "kimiOutputFormatInvalid": "Kimi के आउटपुट फ़ॉर्मैट के लिए prompt mode और समर्थित text या stream-json मान ज़रूरी है। फिर से कोशिश करने से पहले generation recipe या CLI आर्guments सुधारें।",
+      "kimiSessionIdRequired": "prompt mode में फिर से शुरू करने के लिए Kimi को session id चाहिए। generation recipe या CLI आर्guments सुधारें, फिर से कोशिश करें।",
+      "kimiConflictingOptions": "Kimi को परस्पर विरोधी विकल्प मिले: {{option}} और {{otherOption}}। फिर से कोशिश करने से पहले generation recipe या CLI आर्guments सुधारें।",
+      "kimiContinueSessionConflict": "Kimi को परस्पर विरोधी विकल्प मिले: --continue, --session। फिर से कोशिश करने से पहले generation recipe या CLI आर्guments सुधारें।",
+      "kimiAgentChangeOnResume": "सत्र फिर से शुरू करते समय Kimi agent नहीं बदल सकता। generation recipe या CLI आर्guments में agent override हटाएँ या नया सत्र शुरू करें।",
+      "kimiResponseBlocked": "Kimi प्रतिक्रिया नहीं लौटा सका क्योंकि उसे रोक दिया गया था। फिर से कोशिश करने से पहले prompt या model कॉन्फ़िगरेशन बदलें।",
+      "kimiAuthFailed": "Kimi प्रमाणित नहीं हो सका। execution host पर साइन इन करें या provider credentials सुधारें, फिर से कोशिश करें।",
+      "kimiConnectionFailed": "Kimi अपने provider से कनेक्ट नहीं हो सका। execution host का नेटवर्क जाँचें, फिर से कोशिश करें।",
+      "kimiProviderLimited": "Kimi provider की सीमा तक पहुँच गया या provider व्यस्त है। फिर से कोशिश करने से पहले प्रतीक्षा करें या अनुरोधों की आवृत्ति घटाएँ।",
+      "kimiContextOverflow": "Kimi का context समाप्त हो गया। prompt छोटा करें या नया सत्र शुरू करें, फिर से कोशिश करें।",
+      "kimiConfigInvalid": "Kimi का कॉन्फ़िगरेशन अमान्य है। फिर से कोशिश करने से पहले execution host पर model और provider कॉन्फ़िगरेशन जाँचें।",
+      "promptTooLargeForWindows": "{{label}} का prompt Windows कमांड लाइन के लिए बहुत बड़ा है। कम बदलाव stage करें और फिर से कोशिश करें।",
+      "promptTooLargeForArgument": "{{label}} का prompt एक कमांड-लाइन आर्ग्युमेंट के रूप में भेजने के लिए बहुत बड़ा है। कम बदलाव stage करें और फिर से कोशिश करें।",
+      "agentCouldNotStart": "{{label}} शुरू नहीं हो सका। सेटिंग्स में agent कमांड जाँचें और फिर से कोशिश करें।",
+      "agentFailedToStart": "{{label}} शुरू होने में विफल रहा। सेटिंग्स में agent कमांड जाँचें और फिर से कोशिश करें।",
+      "agentBinaryNotFound": "PATH पर {{binary}} नहीं मिला। AI commit संदेशों के लिए {{label}} इंस्टॉल करें।",
+      "timedOut": "जनरेट करने का समय {{seconds}} सेकंड बाद समाप्त हो गया।",
+      "outputTooLarge": "{{label}} CLI कमांड ने बहुत ज़्यादा आउटपुट दिया। agent CLI का कॉन्फ़िगरेशन जाँचें और फिर से कोशिश करें।",
+      "windowsBatchUnsafeArguments": "{{label}} एक विंडोज़ बैच स्क्रिप्ट के माध्यम से चलता है जो मल्टी-लाइन प्रॉम्प्ट को तर्क के रूप में नहीं ले सकता है। एजेंट के निष्पादन योग्य पर सेटिंग्स को इंगित करें, या {प्रॉम्प्ट} के बिना एक कस्टम कमांड का उपयोग करें ताकि Prompt stdin पर प्रॉम्प्ट भेज सके।",
+      "cliTerminated": "{{label}} CLI कमांड बाहर निकलने से पहले ही समाप्त कर दिया गया।",
+      "cliTerminatedWithDetail": "{{label}} CLI कमांड बाहर निकलने से पहले ही समाप्त कर दिया गया: {{detail}}",
+      "cliFailed": "{{label}} CLI कमांड कोड {{exitCode}} के साथ विफल रहा।",
+      "cliFailedWithDetail": "{{label}} CLI कमांड कोड {{exitCode}} के साथ विफल रहा: {{detail}}",
+      "agentReportedError": "{{label}} ने त्रुटि बताई।",
+      "emptyCommitMessage": "{{label}} ने खाली संदेश लौटाया।",
+      "emptyCommitMessageWithDetail": "{{label}} ने खाली संदेश लौटाया। CLI आउटपुट: {{detail}}",
+      "emptyPullRequestDetails": "{{label}} ने खाली विवरण लौटाया।",
+      "emptyPullRequestDetailsWithDetail": "{{label}} ने खाली विवरण लौटाया। CLI आउटपुट: {{detail}}",
+      "emptyJiraSummary": "{{label}} ने खाली सारांश लौटाया।",
+      "emptyJiraSummaryWithDetail": "{{label}} ने खाली सारांश लौटाया। CLI आउटपुट: {{detail}}",
+      "commitMessageUnparseable": "जनरेट किया गया commit संदेश पार्स नहीं हो सका।",
+      "pullRequestDetailsUnparseable": "जनरेट किए गए pull request का विवरण पार्स नहीं हो सका।",
+      "jiraSummaryEmptyAfterSanitization": "सैनिटाइज़ करने के बाद जनरेट किया गया सारांश खाली रह गया।",
+      "jiraDescriptionRequired": "विवरण ज़रूरी है।",
+      "jiraAccountDisconnected": "इस होस्ट पर चुना हुआ Jira खाता फिर से कनेक्ट करें।",
+      "jiraSummaryBusyInOtherDraft": "किसी दूसरे ड्राफ़्ट में Jira शीर्षक पहले से जनरेट हो रहा है।",
+      "stagedChangesReadFailed": "staged बदलाव पढ़ने में विफल रहा।",
+      "noStagedChanges": "सारांश बनाने के लिए कोई staged बदलाव नहीं है।",
+      "noBranchChanges": "सारांश बनाने के लिए branch में कोई बदलाव नहीं है।",
+      "commandTemplateEmptyCommitMessage": "commit संदेशों के लिए कमांड टेम्पलेट खाली है।",
+      "commandTemplateEmptyPullRequest": "pull request के विवरण के लिए कमांड टेम्पलेट खाली है।",
+      "commandTemplateEmptyBranchName": "branch नामों के लिए कमांड टेम्पलेट खाली है।",
+      "commandTemplateEmptyChatName": "चैट नामों के लिए कमांड टेम्पलेट खाली है।",
+      "sourceControlAgentUnsupported": "सेटिंग्स -> Git -> Source Control AI में इस कार्य के लिए समर्थित Source Control AI agent चुनें। समर्थित agent: {{agents}}, या Custom command।",
+      "chatNameAgentUnsupported": "सेटिंग्स -> Chat -> Chat names में इस कार्य के लिए समर्थित चैट नाम agent चुनें। समर्थित agent: {{agents}}, या Custom command।",
+      "sourceControlCustomCommandEmpty": "Custom command खाली है। सेटिंग्स -> Git -> Source Control AI में एक जोड़ें।",
+      "chatNameCustomCommandEmpty": "Custom command खाली है। सेटिंग्स -> Chat -> Chat names में एक जोड़ें।",
+      "agentCannotGenerateCommitMessage": "Agent “{{agent}}” Source Control AI commit संदेशों का समर्थन नहीं करता। समर्थित agent: {{agents}}, या Custom command।",
+      "agentCannotGeneratePullRequest": "Agent “{{agent}}” Source Control AI pull request विवरण का समर्थन नहीं करता। समर्थित agent: {{agents}}, या Custom command।",
+      "agentCannotGenerateBranchName": "Agent “{{agent}}” Source Control AI branch नामों का समर्थन नहीं करता। समर्थित agent: {{agents}}, या Custom command।",
+      "agentCannotGenerateChatName": "Agent “{{agent}}” चैट नामों का समर्थन नहीं करता। समर्थित agent: {{agents}}, या Custom command।",
+      "noModelForAgent": "{{label}} के लिए कोई model उपलब्ध नहीं है।",
+      "planCustomCommandEmpty": "Custom command खाली है। सेटिंग्स → Git → AI Commit Messages में एक जोड़ें।",
+      "planAgentUnsupported": "Agent “{{agent}}” AI commit संदेशों का समर्थन नहीं करता।",
+      "planModelUnavailable": "Model “{{model}}” {{label}} के लिए उपलब्ध नहीं है।",
+      "planModelWithoutThinking": "Model “{{model}}” thinking effort स्तर का समर्थन नहीं करता।",
+      "planThinkingLevelInvalid": "{{model}} के लिए thinking level “{{level}}” मान्य नहीं है।"
+    }
+  },
+  "newWorkspace": {
+    "hostPicker": {
+      "title": "वर्कस्पेस ऑन बनाएं"
+    },
+    "loadingDrawer": {
+      "loading": "लोड हो रहा है",
+      "downloading": "डाउनलोड हो रहा है",
+      "downloadProgress": "डाउनलोड हो रहा है… {{progress}}"
+    }
+  },
+  "tasks": {
+    "legacySurface": {
+      "sourceFallback": "{{repo}} के लिए पसंदीदा समस्या स्रोत अपस्ट्रीम अनुपलब्ध है। उत्पत्ति का उपयोग करना.",
+      "loadIssuesFailed": "{{source}} से मुद्दों को लोड नहीं किया जा सका।",
+      "retryLoadingIssues": "{{source}} से मुद्दों को लोड करने का पुनः प्रयास करें",
+      "retrying": "पुनः प्रयास कर रहा हूँ...",
+      "subIssueDataUnavailable": "आपके token के लिए sub-issue डेटा उपलब्ध नहीं है।",
+      "mergeMethodTitle": "विलय विधि",
+      "pullRequestMergeMessage": "चुनें कि इस पुल अनुरोध को कैसे मर्ज किया जाना चाहिए।",
+      "mergeRequestMergeMessage": "चुनें कि इस मर्ज अनुरोध को कैसे मर्ज किया जाना चाहिए।",
+      "mergeAction": "merge करें",
+      "mergeRequestTitle": "मर्ज अनुरोध",
+      "mergePullRequestTitle": "मर्ज पुल अनुरोध",
+      "updateItemTitle": "आइटम अद्यतन करें"
+    },
+    "prFileDiff": {
+      "noTextChanges": "कोई पाठ परिवर्तन नहीं मिला.",
+      "showingDiffLines": "{{total}} भिन्न रेखाओं में से पहली {{limit}} दिखा रहा हूँ।",
+      "commentPlaceholder": "समीक्षा टिप्पणी जोड़ें",
+      "commentOnLine": "लाइन पर टिप्पणी करें {{line}}"
+    },
+    "smartSourceModes": {
+      "smart": "स्मार्ट",
+      "branch": "शाखा",
+      "name": "नाम",
+      "openState": "खोलें",
+      "mergedState": "merge किया गया",
+      "closedState": "बंद",
+      "allStates": "सभी"
+    },
+    "taskViewOptions": {
+      "noGitHubTasks": "सं GitHub कार्य",
+      "noGitLabTasks": "सं GitLab कार्य",
+      "noLinearTasks": "सं Linear कार्य",
+      "noJiraTasks": "कोई जीरा कार्य नहीं",
+      "assignedSubtitle": "आपको सौंपे गए अनसुलझे मुद्दे",
+      "reportedSubtitle": "आपके द्वारा रिपोर्ट किए गए अनसुलझे मुद्दे",
+      "allSubtitle": "चयनित साइटों पर अनसुलझे मुद्दे",
+      "doneSubtitle": "आपके हाल ही में हल किए गए मुद्दे"
+    },
+    "tasksCreateDrawers": {
+      "repositorySubtitle": "चयनित रिपॉजिटरी में एक समस्या बनाएँ।",
+      "linearTeamSubtitle": "चयनित Linear टीम में एक समस्या बनाएँ।",
+      "repository": "भण्डार",
+      "team": "टीम",
+      "issueSource": "Issue स्रोत",
+      "fileIn": "{{slug}} में फ़ाइल करें",
+      "upstream": "अपस्ट्रीम",
+      "origin": "उत्पत्ति",
+      "title": "शीर्षक",
+      "titlePlaceholder": "कार्य का शीर्षक",
+      "description": "विवरण",
+      "descriptionPlaceholder": "संदर्भ जोड़ें",
+      "createIssue": "मुद्दा बनाएँ",
+      "linearTeam": "Linear टीम",
+      "connectLinearWorkspace": "Linear कार्यस्थान कनेक्ट करें",
+      "linearConnectSubtitle": "उस कार्यक्षेत्र से समस्याओं को ब्राउज़ करने के लिए एक व्यक्तिगत एपीआई कुंजी चिपकाएँ।",
+      "personalApiKey": "व्यक्तिगत API key",
+      "linearSettingsLink": "Linear सेटिंग्स / सुरक्षा / नई एपीआई कुंजी",
+      "keySecurityHint": "आपकी कुंजी होस्ट ओएस किचेन के माध्यम से एन्क्रिप्ट की गई है और स्थानीय रूप से संग्रहीत है।",
+      "connect": "कनेक्ट करें",
+      "createWorkspaceIn": "में कार्यस्थान बनाएं"
+    },
+    "filterPickers": {
+      "fieldsTitle": "परियोजना क्षेत्र",
+      "fieldsSubtitle": "चुनें कि कौन से प्रोजेक्ट फ़ील्ड आइटम कार्ड पर दिखाई देंगे।",
+      "noFields": "इस दृश्य में दिखाने के लिए कोई अतिरिक्त फ़ील्ड नहीं है.",
+      "fieldShown": "कार्डों पर दिखाया गया",
+      "fieldHidden": "कार्डों से छिपा हुआ",
+      "gitlabView": "GitLab देखें",
+      "gitlabFilter": "GitLab फ़िल्टर",
+      "linearFilter": "Linear फ़िल्टर",
+      "linearWorkspace": "Linear कार्यक्षेत्र",
+      "switchWorkspaceFailed": "कार्यस्थान स्विच करने में विफल",
+      "teamsTitle": "Linear टीमें",
+      "teamsSubtitle": "चुनें कि कौन सी टीमें कार्य में दिखाई देंगी।",
+      "allTeams": "सभी team",
+      "teams_one": "{{count}} टीम",
+      "teams_other": "{{count}} टीमें",
+      "changeStatus": "स्थिति बदलें",
+      "linearIssue": "Linear मुद्दा",
+      "loadingStates": "स्थिति लोड हो रही है...",
+      "noStates": "कोई राज्य उपलब्ध नहीं",
+      "jiraFilter": "जीरा फ़िल्टर",
+      "jiraSite": "जीरा साइट"
+    },
+    "githubProjectList": {
+      "chooseProject": "एक GitHub प्रोजेक्ट चुनें",
+      "browseProjects": "प्रोजेक्ट ब्राउज़ करें",
+      "noItems": "कोई प्रोजेक्ट आइटम नहीं",
+      "items": "आइटम",
+      "pullRequestSubtitle": "अनुरोध खींचें · {{repository}}{{number}}",
+      "issueSubtitle": "अंक · {{repository}}{{number}}",
+      "itemSubtitle": "प्रोजेक्ट आइटम · {{repository}}{{number}}",
+      "emptyField": "खाली",
+      "moreFields_one": "+{{count}} फ़ील्ड",
+      "moreFields_other": "+{{count}} फ़ील्ड"
+    },
+    "githubProjectPickers": {
+      "title": "GitHub परियोजनाएं",
+      "subtitle": "कार्य पृष्ठ के लिए एक प्रोजेक्ट दृश्य चुनें।",
+      "searchProjects": "प्रोजेक्ट खोजें",
+      "addPlaceholder": "URL या owner/number से जोड़ें",
+      "adding": "जोड़ा जा रहा है…",
+      "add": "जोड़ें",
+      "ownerLoadFailed": "{{owner}} से प्रोजेक्ट लोड नहीं हो सके।",
+      "organizationsLoadFailed": "कुछ संगठनों ने लोड नहीं किया ({{count}}).",
+      "addByUrlHint": "गुम परियोजनाओं तक पहुंचने के लिए URL द्वारा जोड़ें का उपयोग करें।",
+      "organizationsError": "संगठन: {{message}}",
+      "loadFailed": "प्रोजेक्ट लोड नहीं हो सके",
+      "noProjects": "कोई प्रोजेक्ट लोड नहीं हुआ",
+      "retryHint": "पुनः प्रयास करने के लिए टैप करें.",
+      "pinned": "पिन किए गए",
+      "recent": "हाल के",
+      "pin": "पिन करें",
+      "browseLoading": "सभी ब्राउज़ करें (लोड हो रहा है...)",
+      "browseAll": "सभी देखें",
+      "noMatches": "कोई मेल खाता प्रोजेक्ट नहीं.",
+      "noMoreProjects": "कोई और प्रोजेक्ट नहीं.",
+      "chooseView": "प्रोजेक्ट दृश्य चुनें",
+      "view": "प्रोजेक्ट दृश्य",
+      "unsupportedLayout": "Prompt अभी तक इस GitHub प्रोजेक्ट लेआउट का समर्थन नहीं करता है।",
+      "sort": "प्रोजेक्ट सॉर्ट"
+    },
+    "githubViewControls": {
+      "source": "स्रोत: {{source}}",
+      "sort": "क्रमबद्ध करें: {{sort}}",
+      "fields": "फ़ील्ड्स: {{fields}}",
+      "openView": "GitHub में व्यू खोलें"
+    },
+    "itemActions": {
+      "creating": "बनाया जा रहा है…",
+      "createWorkspace": "कार्यक्षेत्र बनाएँ",
+      "copyLinearLink": "Linear लिंक कॉपी करें",
+      "copyGitHubLink": "GitHub लिंक कॉपी करें",
+      "mergePullRequest": "मर्ज पुल अनुरोध",
+      "mergeConflicts": "GitHub रिपोर्ट मर्ज संघर्ष।",
+      "mergeMergeRequest": "मर्ज मर्ज अनुरोध",
+      "changeStatus": "स्टेटस बदलें"
+    },
+    "itemDetailContent": {
+      "pipelineJobs_one": "{{count}} नौकरियाँ",
+      "pipelineJobs_other": "{{count}} नौकरियाँ",
+      "type": "टाइप",
+      "status": "स्थिति",
+      "assignee": "असाइन किया गया व्यक्ति",
+      "project": "प्रोजेक्ट",
+      "assignees": "असाइनी",
+      "description": "विवरण",
+      "checks": "जाँच करता है",
+      "rerunFailed": "दोबारा चलाना विफल रहा",
+      "rerunAll": "सभी को पुनः चलाएँ",
+      "noChecks": "कोई चेक नहीं मिला.",
+      "pipeline": "पाइपलाइन",
+      "none": "कोई नहीं",
+      "noPipelineRuns": "इस MR के लिए कोई pipeline run नहीं है।",
+      "subIssues": "उप-मुद्दे",
+      "noSubIssues": "कोई उप-मुद्दा नहीं.",
+      "subIssueTitle": "sub-issue का शीर्षक",
+      "addSubIssue": "उप-मुद्दा जोड़ें",
+      "discussion": "चर्चा",
+      "noComments": "कोई टिप्पणी नहीं."
+    },
+    "itemDetailDrawer": {
+      "refreshDetails": "विवरण ताज़ा करें"
+    },
+    "itemFieldEditors": {
+      "title": "शीर्षक",
+      "saveTitle": "शीर्षक सहेजें",
+      "labels": "लेबल",
+      "none": "कोई नहीं",
+      "loadingLabels": "लेबल लोड हो रहे हैं...",
+      "noLabels": "इस भंडार में कोई लेबल नहीं.",
+      "addLabels": "लेबल जोड़ें, अल्पविराम से अलग करें",
+      "removeLabels": "लेबल हटाएँ, अल्पविराम से अलग करें",
+      "updateLabels": "लेबल अद्यतन करें",
+      "assignees": "असाइनी",
+      "loadingAssignees": "असाइनी लोड हो रहे हैं...",
+      "noAssignableUsers": "इस रिपॉजिटरी के लिए कोई असाइन करने योग्य उपयोगकर्ता नहीं मिला।",
+      "addUsernames": "उपयोक्तानाम जोड़ें, अल्पविराम से अलग किया गया",
+      "removeUsernames": "उपयोक्तानाम हटाएँ, अल्पविराम से अलग करें",
+      "updateAssignees": "नियुक्तियों को अद्यतन करें"
+    },
+    "itemReviewSections": {
+      "descriptionPlaceholder": "विवरण",
+      "saveDescription": "विवरण सहेजें",
+      "noDescription": "कोई विवरण नहीं है।",
+      "reviewersTitle": "समीक्षक",
+      "noReviewersRequested": "किसी reviewer से अनुरोध नहीं किया गया।",
+      "loadingReviewers": "समीक्षक लोड हो रहे हैं...",
+      "noReviewerSuggestions": "कोई समीक्षक सुझाव नहीं मिला.",
+      "reviewersPlaceholder": "समीक्षकों से अनुरोध करें",
+      "requestReview": "समीक्षा का अनुरोध करें",
+      "changedFilesTitle": "बदली हुई फ़ाइलें",
+      "hideFile": "छिपाएँ",
+      "viewFile": "देखें",
+      "markUnviewed": "अवलोकित चिह्नित करें",
+      "markViewed": "देखा हुआ चिह्नित करें",
+      "binaryFile": "बाइनरी फ़ाइल.",
+      "fileContentsUnavailable": "फ़ाइल सामग्री अनुपलब्ध है."
+    },
+    "linearList": {
+      "changeStatusFrom": "{{status}} से स्थिति बदलें"
+    },
+    "linearViewControls": {
+      "groupLabel": "समूह: {{group}}",
+      "orderLabel": "आदेश: {{order}}",
+      "displayButton": "प्रदर्शन"
+    },
+    "listDisplayPickers": {
+      "linearViewTitle": "Linear देखें",
+      "linearGroupTitle": "समूह Linear मुद्दे",
+      "linearOrderTitle": "क्रम [को0] मुद्दे",
+      "displayPropertiesTitle": "गुण प्रदर्शित करें",
+      "sortTasksTitle": "कार्यों को क्रमबद्ध करें"
+    },
+    "listSurface": {
+      "updateDesktopTitle": "अद्यतन करें Prompt डेस्कटॉप",
+      "updateDesktopMessage": "इस मोबाइल कार्य दृश्य को एक नए डेस्कटॉप रनटाइम की आवश्यकता है।",
+      "jiraStatusFailed": "जीरा स्थिति पढ़ने में विफल",
+      "connectLinearTitle": "अपना Linear खाता कनेक्ट करें",
+      "connectLinearMessage": "ब्राउज़ करें और सीधे कार्य से अपने निर्दिष्ट Linear मुद्दों पर काम शुरू करें।",
+      "connectLinearButton": "Linear कनेक्ट करें"
+    },
+    "options": {
+      "githubDescription": "मुद्दे और पुल अनुरोध",
+      "gitlabDescription": "मुद्दे और मर्ज अनुरोध",
+      "linearDescription": "असाइन किया गया और टीम के मुद्दे",
+      "jiraDescription": "मुद्दों को सौंपा और रिपोर्ट किया",
+      "openState": "खोलें",
+      "gitlabOpenDescription": "मुद्दे खोलें और अनुरोध मर्ज करें",
+      "mergedState": "merge किया गया",
+      "gitlabMergedDescription": "मर्ज किए गए मर्ज अनुरोध",
+      "closedState": "बंद",
+      "gitlabClosedDescription": "बंद मुद्दे और मर्ज अनुरोध",
+      "all": "सभी",
+      "gitlabAllDescription": "कोई [को0] अवस्था",
+      "linearAllDescription": "जुड़े हुए कार्यस्थानों में खुले मुद्दे",
+      "myIssues": "मेरे मुद्दे",
+      "linearAssignedDescription": "आपको सौंपे गए मुद्दे",
+      "createdState": "बनाया गया",
+      "linearCreatedDescription": "आपके द्वारा बनाए गए मुद्दे",
+      "completedState": "पूरा हुआ",
+      "linearCompletedDescription": "हाल ही में पूरे हुए अंक",
+      "list": "सूची",
+      "listDescription": "संक्षिप्त अंक पंक्तियाँ",
+      "board": "बोर्ड",
+      "boardDescription": "समूहीकृत स्तंभ",
+      "noGrouping": "कोई समूहीकरण नहीं",
+      "status": "स्थिति",
+      "assignee": "असाइन किया गया व्यक्ति",
+      "priority": "प्राथमिकता",
+      "team": "टीम",
+      "updated": "अपडेट किया गया",
+      "identifier": "पहचानकर्ता",
+      "labels": "लेबल",
+      "issues": "मुद्दे",
+      "githubIssuesDescription": "GitHub मुद्दे",
+      "pullRequests": "PR",
+      "githubPullRequestsDescription": "GitHub अनुरोध खींचें",
+      "projects": "प्रोजेक्ट",
+      "githubProjectsDescription": "GitHub परियोजनाओं के दृश्य",
+      "githubOpenIssuesDescription": "GitHub अंक खोलें",
+      "assignedToMe": "मुझे असाइन किए गए",
+      "githubAssignedIssuesDescription": "आपको सौंपे गए खुले मुद्दे",
+      "openPullRequestsDescription": "पुल अनुरोध खोलें",
+      "mine": "मेरे",
+      "myPullRequestsDescription": "आपके द्वारा लिखित अनुरोध खींचें",
+      "needsReview": "Review चाहिए",
+      "reviewRequestsDescription": "आपको सौंपे गए अनुरोधों की समीक्षा करें",
+      "projectMergeRequests": "प्रोजेक्ट एमआर",
+      "projectMergeRequestsDescription": "रिपॉजिटरी द्वारा अनुरोधों और मुद्दों को मर्ज करें",
+      "myTodos": "मेरे टूडू",
+      "myTodosDescription": "लंबित [को0] कार्य",
+      "updatedSortDescription": "सबसे पहले नवीनतम गतिविधि",
+      "repository": "भण्डार",
+      "repositorySortDescription": "रिपॉजिटरी द्वारा समूह, फिर नवीनतम गतिविधि"
+    },
+    "projectComments": {
+      "comments_one": "{{count}} टिप्पणी करें",
+      "comments_other": "{{count}} comment",
+      "discussion": "चर्चा",
+      "noComments": "कोई टिप्पणी नहीं.",
+      "resolvedThreadBy": "{{author}} द्वारा resolve किया गया थ्रेड",
+      "resolvedCommentBy": "{{author}} द्वारा resolve किया गया comment",
+      "show": "दिखाएँ",
+      "editComment": "टिप्पणी संपादित करें",
+      "reopenThread": "धागा पुनः खोलें",
+      "resolveThread": "धागे का समाधान करें",
+      "reply": "उत्तर दें"
+    },
+    "projectDetailDrawer": {
+      "repositoryNotInOrca": "रिपॉजिटरी Prompt में नहीं है",
+      "addRepositoryFromDesktop": "{{repository}} को Prompt में नहीं जोड़ा गया है। इस रिपॉजिटरी को डेस्कटॉप ऐप से जोड़ें, फिर मोबाइल टास्क को रीफ्रेश करें।",
+      "openInGitHub": "GitHub में खोलें",
+      "copyRepository": "प्रतिलिपि भंडार",
+      "projectSubtitle": "GitHub परियोजना · {{repository}}{{itemNumber}}",
+      "type": "टाइप",
+      "pullRequest": "अनुरोध खींचें",
+      "issue": "मुद्दा",
+      "draftIssue": "ड्राफ्ट मुद्दा",
+      "projectItem": "प्रोजेक्ट आइटम",
+      "status": "स्थिति",
+      "issueType": "Issue का प्रकार",
+      "noType": "कोई प्रकार नहीं",
+      "loadingIssueTypes": "समस्या प्रकार लोड हो रहे हैं...",
+      "noIssueTypes": "इस रिपॉजिटरी के लिए कोई समस्या प्रकार कॉन्फ़िगर नहीं किया गया है।",
+      "clearType": "स्पष्ट प्रकार",
+      "createWorkspace": "कार्यक्षेत्र बनाएँ",
+      "workspaceCreationRequirement": "कार्यस्थान केवल GitHub मुद्दों और पुल अनुरोधों से बनाए जा सकते हैं।",
+      "copyGitHubLink": "GitHub लिंक कॉपी करें",
+      "reopenItem": "आइटम पुनः खोलें",
+      "closeItem": "आइटम बंद करें",
+      "mergePullRequest": "मर्ज पुल अनुरोध",
+      "mergeRepositoryRequirement": "मर्ज के लिए Prompt में इस रिपॉजिटरी की आवश्यकता होती है।"
+    },
+    "projectFieldEditors": {
+      "projectFields": "परियोजना क्षेत्र",
+      "invalidNumber": "एक वैध संख्या दर्ज करें.",
+      "invalidDate": "YYYY-MM-DD के रूप में दिनांक दर्ज करें।",
+      "noIterations": "कोई पुनरावृत्ति उपलब्ध नहीं है.",
+      "completedIteration": "पूर्ण · {{startDate}} · {{duration}}डी",
+      "upcomingIteration": "वर्तमान और आगामी · {{startDate}} · {{duration}}डी",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "संख्या",
+      "textPlaceholder": "टेक्स्ट",
+      "saveField": "फ़ील्ड सहेजें",
+      "clearField": "साफ़ फ़ील्ड"
+    },
+    "projectMetadataEditors": {
+      "labels": "लेबल",
+      "none": "कोई नहीं",
+      "loadingLabels": "लेबल लोड हो रहे हैं...",
+      "noLabels": "इस भंडार में कोई लेबल नहीं.",
+      "assignees": "असाइनी",
+      "loadingAssignees": "असाइनी लोड हो रहे हैं...",
+      "noAssignableUsers": "इस रिपॉजिटरी के लिए कोई असाइन करने योग्य उपयोगकर्ता नहीं मिला।",
+      "title": "शीर्षक",
+      "saveTitle": "शीर्षक सहेजें",
+      "description": "विवरण",
+      "saveDescription": "विवरण सहेजें",
+      "noDescription": "कोई विवरण नहीं है।"
+    },
+    "projectReviewPanels": {
+      "reviewers": "समीक्षक",
+      "noReviewers": "किसी reviewer से अनुरोध नहीं किया गया।",
+      "loadingReviewers": "समीक्षक लोड हो रहे हैं...",
+      "noSuggestions": "कोई समीक्षक सुझाव नहीं मिला.",
+      "requestReviewers": "समीक्षकों से अनुरोध करें",
+      "requestReview": "समीक्षा का अनुरोध करें",
+      "checks": "जाँच करता है",
+      "rerunFailed": "दोबारा चलाना विफल रहा",
+      "rerunAll": "सभी को पुनः चलाएँ",
+      "noChecks": "कोई चेक नहीं मिला.",
+      "changedFiles": "बदली हुई फ़ाइलें",
+      "hideFile": "छिपाएँ",
+      "viewFile": "देखें",
+      "markUnviewed": "अवलोकित चिह्नित करें",
+      "markViewed": "देखा हुआ चिह्नित करें",
+      "binaryFile": "बाइनरी फ़ाइल.",
+      "fileUnavailable": "फ़ाइल सामग्री अनुपलब्ध है."
+    },
+    "providerControls": {
+      "projectMergeRequests": "प्रोजेक्ट एमआर",
+      "myTodos": "मेरे टूडू",
+      "sort": "क्रमबद्ध करें: {{sortLabel}}"
+    },
+    "providerItemList": {
+      "previousPage": "पिछला पृष्ठ",
+      "selectPage": "पेज चुनें, पेज {{page}}",
+      "selectPageOfTotal": "पेज चुनें, {{total}} में से पेज {{page}}",
+      "page": "पृष्ठ {{page}}",
+      "pageOfTotal": "{{total}} का पृष्ठ {{page}}",
+      "nextPage": "अगला पृष्ठ",
+      "intoBranch": "{{base}} में"
+    },
+    "providerPickers": {
+      "taskSource": "कार्य स्रोत",
+      "repos": "भंडार",
+      "repoDescription": "क्वेरी करने के लिए कौन सी रिपॉजिटरी चुनें।",
+      "allRepositories": "सभी repository",
+      "issueSources": "GitHub अंक स्रोत",
+      "issueSourcesDescription": "चुनें कि क्या प्रत्येक रिपॉजिटरी अपस्ट्रीम या ओरिजिन से प्रश्न पूछती है और कार्य बनाती है।",
+      "noIssueSources": "कोई वैकल्पिक समस्या स्रोत उपलब्ध नहीं है.",
+      "queryingSource": "प्रश्नोत्तरी {{source}}",
+      "upstream": "अपस्ट्रीम",
+      "origin": "उत्पत्ति",
+      "githubView": "GitHub देखें",
+      "pullRequests": "अनुरोध खींचें",
+      "issues": "मुद्दे",
+      "pages": "GitHub पन्ने",
+      "pageHint": "लोड किए गए या उपलब्ध परिणाम पृष्ठ पर जाएं।",
+      "pageNumber": "पृष्ठ {{page}}",
+      "pageLoaded": "लदा हुआ",
+      "pageNotLoaded": "पुराने परिणाम लोड करता है"
+    },
+    "reviewerLinear": {
+      "unassigned": "असाइन नहीं किया गया",
+      "issues": "मुद्दे"
+    },
+    "screenChrome": {
+      "refreshGitHub": "GitHub कार्य रीफ़्रेश करें",
+      "refreshGitLab": "GitLab work item रीफ़्रेश करें",
+      "refreshLinear": "Linear रीफ़्रेश करें",
+      "refreshJira": "Jira issue रीफ़्रेश करें",
+      "title": "कार्य",
+      "newGitHubIssue": "नया GitHub issue",
+      "newLinearIssue": "नया Linear issue",
+      "connectLinear": "Linear कनेक्ट करें"
+    },
+    "searchControl": {
+      "projectPlaceholder": "प्रोजेक्ट दृश्य खोजें...",
+      "jiraPlaceholder": "जीरा जेक्यूएल, उदा. प्रोजेक्ट = एबीसी और स्थितिश्रेणी != हो गया",
+      "providerPlaceholder": "{{provider}} कार्य खोजें..."
+    },
+    "workspaceCreateDrawer": {
+      "title": "कार्यक्षेत्र बनाएँ",
+      "repository": "भण्डार",
+      "selectRepository": "एक भंडार चुनें",
+      "sshConnection": "SSH कनेक्शन",
+      "remoteRepository": "दूरस्थ भंडार",
+      "connecting": "कनेक्ट हो रहा है...",
+      "connect": "कनेक्ट करें",
+      "workspaceName": "कार्यस्थल का नाम",
+      "optional": "[वैकल्पिक]",
+      "agent": "एजेंट",
+      "connectFirst": "पहले रिपोजिटरी कनेक्ट करें",
+      "detectingAgents": "Agent का पता लगाया जा रहा है…",
+      "advanced": "उन्नत",
+      "startFrom": "से शुरू करें",
+      "defaultBranch": "डिफ़ॉल्ट शाखा",
+      "createFrom": "{{branch}} से बनाएं",
+      "addRepository": "Linear कार्यक्षेत्र बनाने से पहले एक Git रिपॉजिटरी जोड़ें।",
+      "repositoryNotFound": "भंडार नहीं मिला.",
+      "connectRepository": "रिपोजिटरी कनेक्ट करें"
+    },
+    "workspaceOptionPickers": {
+      "baseBranchTitle": "से प्रारंभ करें",
+      "baseBranchSubtitle": "कोई मौजूदा शाखा या रेफरी चुनें।",
+      "searchBranches": "branch खोजें",
+      "defaultBranch": "डिफ़ॉल्ट शाखा",
+      "defaultBranchSubtitle": "इस रिपॉजिटरी के कॉन्फ़िगर किए गए आधार का उपयोग करें",
+      "noBranches": "कोई शाखा मेल नहीं खाती.",
+      "branchName": "शाखा का नाम: {{name}}",
+      "sparseCheckoutTitle": "विरल चेकआउट",
+      "fullCheckout": "पूरा checkout",
+      "fullCheckoutSubtitle": "संपूर्ण भंडार का उपयोग करें",
+      "editPreset": "{{name}} संपादित करें",
+      "newPreset": "नया प्रीसेट"
+    },
+    "workspaceTrustDrawers": {
+      "newSparsePreset": "नया विरल प्रीसेट",
+      "editSparsePreset": "विरल प्रीसेट संपादित करें",
+      "nameLabel": "नाम",
+      "namePlaceholder": "रेंडरर यूआई",
+      "directoriesLabel": "डायरेक्टरी",
+      "directories_one": "{{count}} निर्देशिका",
+      "directories_other": "{{count}} निर्देशिकाएँ",
+      "setupTitle": "सेटअप स्क्रिप्ट चलाएँ?",
+      "setupSubtitle": "{{name}} इस कार्यक्षेत्र को बनाने से पहले एक सेटअप विकल्प की आवश्यकता होती है।",
+      "creating": "बनाया जा रहा है…",
+      "runSetupAndCreate": "सेटअप चलाएँ और बनाएँ",
+      "skipSetupAndCreate": "सेटअप छोड़ें और बनाएं",
+      "setupChangedTitle": "{{name}} की सेटअप स्क्रिप्ट बदल गई",
+      "runSetupTitle": "{{name}} से सेटअप चलाएँ?",
+      "trustSubtitle": "इस रिपॉजिटरी का orca.yaml कार्यक्षेत्र शुरू होने से पहले आपकी मशीन पर चलता है। इसे केवल तभी चलाएं जब आपको इस रिपॉजिटरी पर भरोसा हो।",
+      "newSetupScript": "नई setup script",
+      "setupScript": "setup स्क्रिप्ट",
+      "trustFailed": "सेटअप स्क्रिप्ट पर भरोसा करने में विफल.",
+      "runHooks": "hook चलाएँ",
+      "alwaysTrustAndRun": "हमेशा भरोसा करो और भागो",
+      "dontRun": "न चलाएँ"
+    },
+    "sparsePresetDraft": {
+      "repoRelativeDirectoriesRequired": "repo-relative डायरेक्टरी का उपयोग करें, root, absolute पाथ या parent सेगमेंट का नहीं।",
+      "directoryRequired": "कम से कम एक डायरेक्टरी जोड़ें।"
+    },
+    "composerSource": {
+      "baseFailed": "आधार शाखा का समाधान करने में विफल.",
+      "forkPushWarning": "इस पीआर में \"अनुरक्षकों से संपादन की अनुमति दें\" बंद है; कांटे पर धकेलने को GitHub द्वारा अस्वीकार किया जा सकता है।"
+    },
+    "detailCommentRenderers": {
+      "commentPlaceholder": "एक टिप्पणी जोड़ें",
+      "sendComment": "comment भेजें",
+      "reopenThread": "धागा पुनः खोलें",
+      "resolveThread": "धागे का समाधान करें",
+      "reply": "उत्तर दें",
+      "comments_one": "{{count}} टिप्पणी करें",
+      "comments_other": "{{count}} comment",
+      "resolvedThreadBy": "{{author}} द्वारा resolve किया गया थ्रेड",
+      "resolvedCommentBy": "{{author}} द्वारा resolve किया गया comment",
+      "show": "दिखाएँ"
+    },
+    "pickerProjection": {
+      "sources_one": "{{count}} स्रोत",
+      "sources_other": "{{count}} स्रोत",
+      "repos_one": "{{count}} रेपो",
+      "repos_other": "{{count}} रेपो",
+      "selectTarget": "लक्ष्य चुनें",
+      "allSites": "सभी साइटें",
+      "allRepos": "सभी रेपो",
+      "updatedSort": "अपडेट किया गया",
+      "fieldDescending": "{{field}} विवरण",
+      "fieldAscending": "{{field}} ए.एस.सी",
+      "viewOrder": "ऑर्डर देखें",
+      "selectedFields": "{{selected}}/{{total}} फ़ील्ड",
+      "fields": "खेत",
+      "usesFieldDescending": "{{field}} विवरण का उपयोग करता है",
+      "usesFieldAscending": "{{field}} एएससी का उपयोग करता है",
+      "usesGitHubRankOrder": "GitHub रैंक क्रम का उपयोग करता है",
+      "currentlyDescending": "वर्तमान में अवरोही के लिए · टैप करें",
+      "currentlyAscending": "वर्तमान में एएससी · नीचे उतरने के लिए टैप करें",
+      "sortAscending": "आरोही क्रम में लगाएं",
+      "viewNumber": "देखें #{{number}}",
+      "unsupportedLayout": "मोबाइल पर असमर्थित लेआउट"
+    },
+    "providerViewProjection": {
+      "defaultSubtitle": "{{subtitle}} · डिफ़ॉल्ट",
+      "default": "डिफ़ॉल्ट",
+      "openState": "खोलें",
+      "allSites": "सभी साइटें",
+      "all": "सभी",
+      "list": "सूची",
+      "noGrouping": "कोई समूहीकरण नहीं",
+      "priority": "प्राथमिकता",
+      "allWorkspaces": "सभी वर्कस्पेस",
+      "workspace": "वर्कस्पेस",
+      "allTeams": "सभी team",
+      "teams_one": "{{count}} टीम",
+      "teams_other": "{{count}} टीमें",
+      "projects": "प्रोजेक्ट",
+      "pullRequests": "PR",
+      "issues": "मुद्दे",
+      "chooseProject": "प्रोजेक्ट चुनें"
+    },
+    "workspaceCreateProjection": {
+      "nameRequired": "नाम ज़रूरी है।",
+      "nameTooLong": "नाम 80 वर्णों या उससे कम का होना चाहिए।",
+      "nameAlreadyExists": "\"{{name}}\" पहले से मौजूद है।",
+      "openShell": "एक खोल खोलो"
+    },
+    "workspaceAgentSelection": {
+      "blankTerminal": "खाली टर्मिनल"
+    },
+    "workspaceSshGate": {
+      "connected": "कनेक्ट हो गया",
+      "connecting": "कनेक्ट हो रहा है…",
+      "deployingRelay": "रिले की तैनाती",
+      "reconnecting": "फिर से कनेक्ट हो रहा है",
+      "authenticationFailed": "प्रमाणीकरण विफल रहा",
+      "reconnectFailed": "पुन: कनेक्ट विफल रहा",
+      "connectionFailed": "कनेक्शन विफल रहा",
+      "disconnected": "डिस्कनेक्ट हो गया"
+    },
+    "worktreeCreateRetry": {
+      "createFailed": "कार्यस्थान बनाने में विफल"
+    },
+    "hostedMerge": {
+      "merged": "merge किया गया",
+      "closed": "बंद",
+      "conflicts": "Conflict",
+      "behind": "पीछे",
+      "blocked": "अवरुद्ध",
+      "checksPending": "check लंबित हैं",
+      "ableToMerge": "merge किया जा सकता है",
+      "unknown": "अज्ञात"
+    },
+    "pagination": {
+      "pageUnreachable": "पृष्ठ {{page}} उस सीमा से परे है जिस पर GitHub खोज वापस आ सकती है।",
+      "loadPageFailed": "पृष्ठ {{page}} को GitHub से लोड नहीं किया जा सका।",
+      "noMoreResults": "पृष्ठ {{page}} पर कोई और परिणाम नहीं।"
+    }
+  },
+  "terminal": {
+    "webView": {
+      "loadFailed": "टर्मिनल वेबव्यू लोड विफल रहा",
+      "httpError": "टर्मिनल वेबव्यू HTTP त्रुटि",
+      "renderProcessEnded": "टर्मिनल वेबव्यू रेंडर प्रक्रिया समाप्त हो गई",
+      "documentStartFailed": "टर्मिनल दस्तावेज़ प्रारंभ होने में विफल - {{message}}"
+    },
+    "keyDefinitions": {
+      "forwardDelete": "अग्रेषित हटाएँ",
+      "arrowUp": "ऊपर तीर",
+      "arrowDown": "नीचे तीर",
+      "arrowLeft": "बायां तीर",
+      "arrowRight": "दाईं ओर तीर लगाएं",
+      "accessoryArrowUp": "ऊपर तीर",
+      "accessoryArrowDown": "नीचे तीर",
+      "accessoryArrowLeft": "बायां तीर",
+      "accessoryArrowRight": "दाहिना तीर",
+      "interruptTerminal": "इंटरप्ट टर्मिनल",
+      "sendEof": "ईओएफ भेजें",
+      "clearScreen": "स्क्रीन साफ़ करें",
+      "suspendProcess": "प्रक्रिया निलंबित करें",
+      "reverseSearch": "उलटी खोज",
+      "startOfLine": "लाइन की शुरुआत",
+      "endOfLine": "पंक्ति का अंत",
+      "deleteWordBackward": "पिछला शब्द हटाएँ",
+      "clearLineBeforeCursor": "कर्सर से पहले की रेखा साफ़ करें"
+    },
+    "webviewEngineErrorState": {
+      "status": "स्थिति {{statusCode}}",
+      "code": "कोड {{code}}",
+      "rendererCrashed": "रेंडरर क्रैश हो गया",
+      "title": "टर्मिनल लोड करने में विफल रहा",
+      "reload": "रीलोड करें"
+    },
+    "webviewNotificationDispatch": {
+      "unknownError": "अज्ञात टर्मिनल त्रुटि"
+    },
+    "webviewReadyWatchdog": {
+      "initializeFailed": "टर्मिनल प्रारंभ नहीं हुआ - टर्मिनल दृश्य से कोई तैयार सिग्नल नहीं"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "आपका फ़ोन और कंप्यूटर एक ही वाई-फ़ाई या Tailscale पर होने चाहिए. Prompt में रिले बंद है।"
+    }
+  }
+}

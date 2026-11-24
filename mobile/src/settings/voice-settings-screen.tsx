@@ -3,7 +3,7 @@ import { ActivityIndicator, Pressable, ScrollView, Switch, Text, View } from 're
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import type { VoiceSettingsOperations } from './voice-settings-operations'
 import { voiceSettingsStyles as styles } from './voice-settings-styles'
-import { ChevronLeft, ChevronRight } from 'lucide-react-native'
+import { BackChevron, ForwardChevron } from '../components/ReadingChevron'
 import { colors, spacing } from '../theme/mobile-theme'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import type { Translate } from '../i18n/mobile-i18n'
@@ -255,7 +255,7 @@ export default function VoiceSettingsScreen({
           style={styles.backButton}
           onPress={onBack}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>{t('settings.voiceSettingsScreen.title', 'Voice')}</Text>
       </View>
@@ -362,7 +362,7 @@ export default function VoiceSettingsScreen({
                   {selectedModelLabel}
                 </Text>
               </View>
-              <ChevronRight size={18} color={colors.textMuted} />
+              <ForwardChevron size={18} color={colors.textMuted} />
             </Pressable>
           </View>
 

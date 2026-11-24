@@ -1,8 +1,8 @@
 # Traditional Chinese (Taiwan) localization
 
-Traditional Chinese uses the built-in locale `zh-Hant`, labeled `繁體中文（台灣）`. Copy follows Taiwan conventions. System detection maps `zh-TW`, `zh-HK`, `zh-MO` and any `zh-Hant*` tag to `zh-Hant`. Bare `zh`, `zh-CN`, `zh-SG` and `zh-Hans*` stay on Simplified `zh`. The renderer and main process load the catalog lazily. Missing keys fall back to English, not Simplified: both i18next instances use `load: 'currentOnly'`.
+Traditional Chinese uses the built-in locale `zh-Hant`, labeled `繁體中文（台灣）`. Copy follows Taiwan conventions. System detection maps `zh-TW`, `zh-HK`, `zh-MO` and any `zh-Hant*` tag to `zh-Hant`. Bare `zh`, `zh-CN`, `zh-SG` and `zh-Hans*` stay on Simplified `zh-Hans`. The renderer and main process load the catalog lazily. Missing keys fall back to English, not Simplified: both i18next instances use `load: 'currentOnly'`.
 
-The catalog lives at `src/renderer/src/i18n/locales/zh-Hant.json` and is maintained by hand like every other built-in catalog. Do not regenerate it from `zh.json`, because character conversion carries over mainland terms (智慧體, 會話, 倉庫). Use `zh.json` only to check meaning.
+The catalog lives at `src/renderer/src/i18n/locales/zh-Hant.json` and is maintained by hand like every other built-in catalog. Do not regenerate it from `zh-Hans.json`, because character conversion carries over mainland terms (智慧體, 會話, 倉庫). Use `zh-Hans.json` only to check meaning.
 
 ## Glossary
 

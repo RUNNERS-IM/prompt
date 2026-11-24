@@ -1,0 +1,3952 @@
+{
+  "settings": {
+    "appearance": {
+      "theme": {
+        "system": "ระบบ",
+        "light": "สว่าง",
+        "dark": "มืด",
+        "heading": "ธีม",
+        "description": "ระบบจะเป็นไปตามการตั้งค่าสว่างหรือมืดของอุปกรณ์นี้"
+      },
+      "title": "รูปลักษณ์",
+      "language": {
+        "systemWithCurrent": "ระบบ ({{language}})",
+        "heading": "ภาษา",
+        "description": "ระบบเป็นไปตามภาษาของอุปกรณ์นี้ ข้อความแจ้งการอนุญาตจะใช้ภาษาของอุปกรณ์เสมอ"
+      }
+    },
+    "aboutScreen": {
+      "title": "เกี่ยวกับ",
+      "tagline": "เอเจนต์โอเพ่นซอร์ส IDE สำหรับผู้สร้าง 100x",
+      "sourceCode": "Prompt ซอร์สโค้ด",
+      "openLinkFailed": "ไม่สามารถเปิดลิงก์ได้ ลองอีกครั้ง"
+    },
+    "appUpdateSettingsRows": {
+      "checking": "กำลังตรวจสอบ…",
+      "upToDate": "เป็นเวอร์ชันล่าสุด",
+      "checkFailed": "ไม่สามารถตรวจสอบได้",
+      "neverChecked": "ไม่เคย",
+      "lastCheckedJustNow": "ตรวจสอบล่าสุดเมื่อสักครู่นี้",
+      "lastCheckedMinutes_one": "ตรวจสอบล่าสุดเมื่อ {{count}}ม.ที่แล้ว",
+      "lastCheckedMinutes_other": "ตรวจสอบล่าสุดเมื่อ {{count}}ม.ที่แล้ว",
+      "lastCheckedHours_one": "ตรวจสอบล่าสุดเมื่อ {{count}}ชั่วโมงที่แล้ว",
+      "lastCheckedHours_other": "ตรวจสอบล่าสุดเมื่อ {{count}}ชั่วโมงที่แล้ว",
+      "lastCheckedDays_one": "ตรวจสอบครั้งล่าสุด {{count}} วันที่แล้ว",
+      "lastCheckedDays_other": "ตรวจสอบครั้งล่าสุด {{count}} วันที่แล้ว",
+      "updateToVersion": "อัปเดตเป็น Prompt {{version}}",
+      "update": "อัปเดต",
+      "installedVersion": "เวอร์ชัน {{version}}",
+      "checkUpdatesStatus": "ตรวจสอบการอัปเดต {{status}}",
+      "checkUpdates": "ตรวจหาการอัปเดต"
+    },
+    "browserSettingsScreen": {
+      "desktopBrowser": "Prompt เบราว์เซอร์บนเดสก์ท็อป",
+      "desktopBrowserDescription": "เปิดในเบราว์เซอร์ที่สตรีมจากเดสก์ท็อปที่จับคู่ของคุณ",
+      "phoneBrowser": "เบราว์เซอร์โทรศัพท์",
+      "phoneBrowserDescription": "เปิดใน Safari, Chrome หรือเบราว์เซอร์อื่นบนโทรศัพท์เครื่องนี้",
+      "title": "เบราว์เซอร์",
+      "linksHeading": "ลิงค์",
+      "linksDescription": "เลือกตำแหน่งที่จะแตะลิงก์ HTTP(S) ในเอาต์พุตเทอร์มินัลที่เปิดอยู่",
+      "loadFailed": "ไม่สามารถโหลดการตั้งค่าเบราว์เซอร์ได้ ลองอีกครั้ง",
+      "saveFailed": "ไม่สามารถบันทึกการตั้งค่าเบราว์เซอร์ได้ ลองอีกครั้ง",
+      "openTerminalLinks": "เปิดลิงก์เทอร์มินัล"
+    },
+    "menuItems": {
+      "appearance": "รูปลักษณ์",
+      "terminal": "เทอร์มินัล",
+      "chatUi": "UI แชท",
+      "browser": "เบราว์เซอร์",
+      "voice": "เสียง",
+      "notifications": "การแจ้งเตือน",
+      "troubleshooting": "การแก้ไขปัญหา",
+      "about": "เกี่ยวกับ"
+    },
+    "nativeChatSettingsScreen": {
+      "title": "UI แชท",
+      "defaultViewHeading": "มุมมองเริ่มต้น",
+      "defaultViewDescription": "เลือกวิธีการเปิดเซสชันของตัวแทนที่รองรับ (Claude, Codex และตัวแทนที่สามารถแชทได้อื่นๆ) บนอุปกรณ์นี้ Terminal แสดง CLI แบบดิบ Chat UI แสดงอินเทอร์เฟซการแชทเหมือนกับแอปเดสก์ท็อป คุณยังสามารถสลับแต่ละเซสชันได้จากเมนูกดแบบยาว",
+      "openInChatUi": "เปิดเซสชันใน Chat UI",
+      "on": "เปิด",
+      "off": "ปิด"
+    },
+    "nativeNotificationDeliverySettings": {
+      "loadFailed": "ไม่สามารถโหลดการตั้งค่าการจัดส่งได้ เปิดหน้าจอนี้อีกครั้งเพื่อลองอีกครั้ง",
+      "saveFailed": "ไม่สามารถบันทึกการตั้งค่าการจัดส่งได้ ลองอีกครั้ง",
+      "updateDesktopHint": "จับคู่เดสก์ท็อปที่อัปเดตเพื่อรับการแจ้งเตือนบนโทรศัพท์เครื่องนี้"
+    },
+    "notificationDisplayTest": {
+      "loadFailed": "ไม่สามารถโหลดเดสก์ท็อปที่จับคู่ได้",
+      "pairDesktop": "จับคู่เดสก์ท็อปแล้วลองอีกครั้ง",
+      "connectDesktop": "เชื่อมต่อเดสก์ท็อปแล้วลองอีกครั้ง",
+      "updateDesktop": "อัปเดตเดสก์ท็อปของคุณเพื่อทำการทดสอบนี้",
+      "desktopUnreachable": "ไม่สามารถเข้าถึงเดสก์ท็อปได้ ลองอีกครั้ง",
+      "accepted": "ยอมรับโดยบริการพุชของ Prompt ตรวจสอบการแจ้งเตือน",
+      "reconnectPhone": "เชื่อมต่อใหม่เพื่อลงทะเบียนโทรศัพท์เครื่องนี้เพื่อรับการแจ้งเตือน",
+      "rateLimited": "มีการแจ้งเตือนมากเกินไป ลองอีกครั้งในภายหลัง",
+      "pushServiceFailed": "ไม่สามารถส่งผ่านบริการพุชของ Prompt ลองอีกครั้ง",
+      "sendFailed": "ไม่สามารถส่งการทดสอบแบบพุชได้",
+      "troubleReceivingAlerts": "มีปัญหาในการรับการแจ้งเตือน?",
+      "description": "ส่งการทดสอบผ่านบริการพุชของ Prompt",
+      "sending": "กำลังส่ง…",
+      "sendButton": "ส่งการแจ้งเตือนทดสอบ",
+      "troubleshooting": "การแก้ไขปัญหา"
+    },
+    "notificationSettingsScreen": {
+      "loadFailed": "ไม่สามารถโหลดการตั้งค่าการแจ้งเตือนได้ ลองอีกครั้ง",
+      "saveFailed": "ไม่สามารถบันทึกการตั้งค่าการแจ้งเตือนได้ ลองอีกครั้ง",
+      "notificationsBlocked": "การแจ้งเตือนถูกปิดใช้งานในการตั้งค่าระบบ",
+      "description": "รับการแจ้งเตือนบนอุปกรณ์นี้เมื่อตัวแทนต้องการข้อมูลของคุณหรือทำงานเสร็จสิ้น",
+      "title": "การแจ้งเตือน",
+      "enableNotifications": "เปิดใช้งานการแจ้งเตือน",
+      "openSettingsFailed": "ไม่สามารถเปิดการตั้งค่าระบบได้ ลองอีกครั้ง",
+      "openSettings": "เปิดการตั้งค่า"
+    },
+    "pendingCredentialCleanupCard": {
+      "title": "กำลังจับคู่การล้างข้อมูลรับรอง",
+      "retryFailed": "การล้างข้อมูลยังคงไม่สามารถยืนยันได้ ลองอีกครั้งในภายหลัง",
+      "cleanupUnconfirmed_one": "ไม่สามารถยืนยันการล้างข้อมูลรับรอง {{count}} บนอุปกรณ์นี้ได้",
+      "cleanupUnconfirmed_other": "ไม่สามารถยืนยันการล้างข้อมูลรับรอง {{count}} บนอุปกรณ์นี้",
+      "statusCheckFailed": "ตรวจสอบสถานะการล้างข้อมูลในอุปกรณ์นี้ไม่ได้ ลองอีกครั้งเพื่อความปลอดภัย",
+      "retryCleanup": "ลองล้างข้อมูลรับรองการจับคู่อีกครั้ง"
+    },
+    "menuScreen": {
+      "support": "สนับสนุน"
+    },
+    "uiLanguageSettingsSection": {
+      "pseudoLanguage": "ชื่อหลอก (en-XA)"
+    },
+    "voiceSettingsScreen": {
+      "toggleMode": "สลับ",
+      "holdMode": "กดค้าง",
+      "loadFailed": "โหลดการตั้งค่าเสียงไม่สำเร็จ",
+      "updateFailed": "ไม่สามารถอัปเดตได้",
+      "selectModelFailed": "ไม่สามารถเลือกรุ่นได้",
+      "downloadFailed": "ดาวน์โหลดไม่สำเร็จ",
+      "deleteFailed": "ลบไม่สำเร็จ",
+      "noneSelected": "ไม่มีการเลือกเลย",
+      "title": "เสียง",
+      "connectDesktop": "เชื่อมต่อกับเดสก์ท็อปเพื่อจัดการการตั้งค่าเสียง",
+      "loadFailedMessage": "โหลดการตั้งค่าเสียงไม่สำเร็จ",
+      "dictationHeading": "การเขียนตามคำบอก",
+      "enableDictation": "เปิดใช้งานการพิมพ์ด้วยเสียง",
+      "dictationDescription": "กำหนดข้อความลงในบานหน้าต่างที่โฟกัสบนเดสก์ท็อปของคุณ",
+      "dictationMode": "โหมดการพิมพ์ด้วยเสียง",
+      "dictationModeDescription": "สลับ: กดหนึ่งครั้งเพื่อเริ่ม และอีกครั้งเพื่อหยุด ถือ: กำหนดในขณะที่ถือ",
+      "speechModelHeading": "โมเดลคำพูด",
+      "speechModel": "โมเดลเสียงพูด"
+    }
+  },
+  "common": {
+    "back": "ย้อนกลับ",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "continue": "ดำเนินการต่อ",
+    "ok": "ตกลง",
+    "retry": "ลองอีกครั้ง",
+    "copied": "คัดลอกแล้ว",
+    "remove": "นำออก",
+    "settings": "การตั้งค่า",
+    "delete": "ลบ",
+    "unknown": "ไม่ทราบ",
+    "confirm": "ยืนยัน",
+    "copy": "คัดลอก",
+    "done": "เสร็จสิ้น",
+    "close": "ปิด",
+    "edit": "แก้ไข",
+    "refresh": "รีเฟรช",
+    "open": "เปิด"
+  },
+  "host": {
+    "edit": {
+      "missingHost": "ขาดโฮสต์",
+      "hostRemoved": "โฮสต์นี้ถูกนำออกจากโทรศัพท์เครื่องนี้แล้ว",
+      "loadFailed": "โหลดโฮสต์ไม่สำเร็จ",
+      "saveFailed": "บันทึกโฮสต์ไม่สำเร็จ",
+      "title": "แก้ไขโฮสต์",
+      "saveHost": "บันทึกโฮสต์",
+      "goBack": "ย้อนกลับ",
+      "help": "เปลี่ยนชื่อที่แสดงหรือที่อยู่การเชื่อมต่อ ปล่อยให้ชื่อว่างไว้เพื่อใช้ชื่อที่เดสก์ท็อปรายงาน การแก้ไขที่อยู่จะสลับเฉพาะตำแหน่งที่โทรศัพท์เครื่องนี้เชื่อมต่อเท่านั้น โดยจะไม่ทำการจับคู่ใหม่ ใช้สิ่งนี้เมื่อสามารถเข้าถึงเดสก์ท็อปเดียวกันได้ที่ IP อื่น (เช่น LAN ที่บ้านเทียบกับ Tailscale)",
+      "name": "ชื่อ",
+      "hostNamePlaceholder": "ชื่อโฮสต์",
+      "address": "ที่อยู่",
+      "addressHint": "ยอมรับ IP, โฮสต์: พอร์ต หรือ ws:// / wss:// wss:// URL ที่ไม่มีพอร์ตใช้ 443 ที่อยู่เปล่าจะเก็บพอร์ตปัจจุบันไว้ (หรือ 6768)",
+      "connectionPreview": "เชื่อมต่อกับ {{endpoint}}"
+    }
+  },
+  "app": {
+    "mobileOnboarding": {
+      "saveChoiceFailed": "ไม่สามารถบันทึกตัวเลือกของคุณได้ ลองอีกครั้ง",
+      "notificationSettingsFailed": "ไม่สามารถอัปเดตการตั้งค่าการแจ้งเตือนได้ ลองอีกครั้ง",
+      "progress": "ความคืบหน้าการเริ่มต้นใช้งาน",
+      "stepProgress": "ขั้นตอน {{step}} จาก {{total}}"
+    },
+    "notifications": {
+      "description": "รับการแจ้งเตือนจากตัวแทนแม้ในขณะที่แอปปิดอยู่ ส่งผ่านบริการพุชของ Prompt และ Apple หรือ Google"
+    },
+    "pairConfirm": {
+      "connectTimedOut": "ไม่สามารถเชื่อมต่อได้ภายใน {{seconds}} วินาที — ดูบันทึกด้านล่างว่าระบบหยุดทำงานเมื่อใด",
+      "pairingFailed": "การจับคู่ล้มเหลว: {{error}}",
+      "title": "จับคู่กับเดสก์ท็อปนี้หรือไม่?",
+      "description": "คุณเปิดลิงก์การจับคู่จากเดสก์ท็อปของคุณ ยืนยันเพื่อเพิ่มไปยังโฮสต์ของคุณ",
+      "pairButton": "จับคู่",
+      "connecting": "กำลังเชื่อมต่อ…",
+      "pairingLog": "บันทึกการจับคู่",
+      "backToHome": "กลับบ้าน"
+    },
+    "pairScan": {
+      "invalidQrCode": "ไม่ใช่รหัส Prompt QR ที่ถูกต้อง",
+      "downloadQrCode": "นั่นคือรหัสดาวน์โหลด สแกนรหัสการจับคู่ในขั้นตอนที่ 2 บนเดสก์ท็อปของคุณ",
+      "invalidPairingCode": "ไม่ใช่รหัสการจับคู่ที่ถูกต้อง — คัดลอกจากคอมพิวเตอร์ของคุณแล้ววางอีกครั้ง",
+      "connectTimedOut": "ไม่สามารถเชื่อมต่อได้ภายใน {{seconds}} วินาที — ดูบันทึกด้านล่างว่าระบบหยุดทำงานเมื่อใด",
+      "pairingFailed": "การจับคู่ล้มเหลว: {{error}}",
+      "title": "จับคู่กับเดสก์ท็อป",
+      "cameraDisabledTitle": "การเข้าถึงกล้องถูกปิดใช้งาน",
+      "cameraPermissionDescription": "สแกนรหัส QR จาก Prompt บนเดสก์ท็อปของคุณ หรือวางรหัสการจับคู่แทน",
+      "cameraDisabledDescription": "เปิดใช้งานการเข้าถึงกล้องในการตั้งค่าหรือวางรหัสการจับคู่แทน",
+      "openSettings": "เปิดการตั้งค่า",
+      "pasteInstead": "วางโค้ดแทน",
+      "pasteCodeTitle": "วางรหัสการจับคู่",
+      "pasteCodeMessage": "คัดลอกรหัสที่แสดงใต้ QR บนคอมพิวเตอร์ของคุณ",
+      "pasteCodePlaceholder": "orca://pair?code=... or paste the code",
+      "openDesktopStep": "เปิด Prompt บนคอมพิวเตอร์ของคุณ",
+      "openMobileSettingsStep": "ไปที่การตั้งค่า → มือถือ",
+      "scanCodeStep": "สแกนรหัส QR",
+      "pastePairingCode": "หรือวางรหัสการจับคู่",
+      "connecting": "กำลังเชื่อมต่อ…",
+      "pairingLog": "บันทึกการจับคู่",
+      "tryAgain": "ลองอีกครั้ง"
+    },
+    "pair": {
+      "missingCode": "รหัสการจับคู่หายไป",
+      "backToHome": "กลับบ้าน"
+    },
+    "terminalSettings": {
+      "smallestText": "เล็กที่สุด (50%)",
+      "smallerText": "เล็กกว่า (75%)",
+      "defaultText": "ค่าเริ่มต้น (100%)",
+      "largeText": "ใหญ่ (125%)",
+      "largerText": "ใหญ่กว่า (150%)",
+      "largestText": "ใหญ่ที่สุด (200%)",
+      "restoreAfterMinutes_one": "หลังจาก {{count}} นาที",
+      "restoreAfterMinutes_other": "หลังจาก {{count}} นาที",
+      "keepPhoneSize": "คงขนาดโทรศัพท์ไว้ (ค่าเริ่มต้น)",
+      "restoreAfterSeconds_one": "หลังจาก {{count}} วินาที",
+      "restoreAfterSeconds_other": "หลังจาก {{count}} วินาที",
+      "title": "เทอร์มินัล",
+      "leaveAppHeading": "เมื่อคุณออกจากแอป",
+      "leaveAppDescription": "ขณะที่คุณกำลังใช้เทอร์มินัลบนโทรศัพท์ Prompt จะย่อให้พอดีกับหน้าจอ เมื่อคุณปิดแอปหรือเปลี่ยนออกไป วิธีนี้จะควบคุมว่าจะคงขนาดไว้ที่โทรศัพท์ (ดังนั้นเครื่องมือ CLI แบบโต้ตอบจะไม่จัดเรียงใหม่) หรือปรับขนาดกลับไปเป็นเดสก์ท็อปของคุณ คุณสามารถใช้การคืนค่าบนแบนเนอร์เดสก์ท็อปเพื่อปรับขนาดด้วยตนเองได้ตลอดเวลา",
+      "noPairedDesktops": "ยังไม่มีเดสก์ท็อปที่จับคู่ จับคู่หนึ่งรายการเพื่อควบคุมพฤติกรรมของเทอร์มินัล",
+      "textSizeHeading": "ขนาดข้อความ",
+      "textSizeDescription": "ปรับขนาดข้อความเทอร์มินัล ขนาดที่เล็กกว่าจะพอดีกับคอลัมน์ที่มีระยะขอบด้านข้างมากขึ้น ขนาดที่ใหญ่กว่าจะแสดงคอลัมน์น้อยลง — ลากไปด้านข้างเพื่อเลื่อน คุณยังสามารถบีบนิ้วเพื่อซูมเข้าเทอร์มินัลได้ ซึ่งจะอัปเดตการตั้งค่านี้ การแสดงผลต่ออุปกรณ์เท่านั้น ไม่เปลี่ยนเทอร์มินัลเดสก์ท็อป",
+      "textSize": "ขนาดข้อความ",
+      "keyboardInputHeading": "อินพุตคีย์บอร์ด",
+      "keyboardInputDescription": "คำแนะนำในการเติมข้อความอัตโนมัติ แก้ไขอัตโนมัติ และการสะกดคำใช้กับอินพุตคำสั่งที่บัฟเฟอร์ไว้เท่านั้น ใช้ปุ่มเครื่องหมายตัววีสองตัวเหนือแป้นพิมพ์เพื่อสลับจากการป้อนข้อมูลสด จากนั้นแก้ไขคำสั่งของคุณก่อนที่จะแตะส่ง ปิดตามค่าเริ่มต้นเพื่อหลีกเลี่ยงการเขียนคำสั่ง แฟล็ก หรือเส้นทางใหม่",
+      "autocomplete": "เติมข้อความอัตโนมัติและแก้ไขอัตโนมัติ",
+      "autocompleteOn": "เปิด",
+      "autocompleteOff": "ปิด",
+      "restoreHost": "คืนค่า {{name}}",
+      "textSizePickerTitle": "ขนาดข้อความเทอร์มินัล"
+    }
+  },
+  "accounts": {
+    "screen": {
+      "invalidSnapshot": "สแนปชอตบัญชีไม่ถูกต้องจากโฮสต์",
+      "hostNotFound": "ไม่พบโฮสต์",
+      "switchFailed": "ไม่สามารถสลับบัญชีได้",
+      "default": "ค่าเริ่มต้นของระบบ",
+      "agentLogin": "ใช้ล็อกอินของตัวแทนเอง",
+      "sessionWindow": "5 ชม.",
+      "weeklyWindow": "7 วัน",
+      "title": "บัญชี",
+      "refreshAccounts": "รีเฟรชบัญชี",
+      "resetsIn": "รีเซ็ตในอีก {{duration}}",
+      "resetsNow": "รีเซ็ตตอนนี้",
+      "durationDays": "{{days}} วัน",
+      "durationDaysHours": "{{days}} วัน {{hours}} ชม.",
+      "durationHours": "{{hours}} ชม.",
+      "durationHoursMinutes": "{{hours}} ชม. {{minutes}} นาที",
+      "durationMinutes": "{{minutes}} นาที",
+      "connectingTo": "กำลังเชื่อมต่อกับ {{name}}...",
+      "connecting": "กำลังเชื่อมต่อกับโฮสต์...",
+      "loadingAccounts": "กำลังโหลดบัญชี...",
+      "manageAccountsHint": "เพิ่มหรือตรวจสอบบัญชีอีกครั้งจากการตั้งค่าเดสก์ท็อป → บัญชี",
+      "useReset": "ใช้การรีเซ็ต"
+    }
+  },
+  "agentHistory": {
+    "sessionHistoryList": {
+      "messages_one": "{{count}} ข้อความ",
+      "messages_other": "{{count}} ข้อความ",
+      "currentWorktree": "ต้นไม้งานปัจจุบัน",
+      "resumeSession": "ดำเนินการเซสชันตัวแทนต่อ",
+      "userRole": "ผู้ใช้",
+      "assistantRole": "ผู้ช่วย"
+    },
+    "panel": {
+      "workspace": "พื้นที่ทำงาน",
+      "project": "โปรเจกต์",
+      "all": "ทั้งหมด",
+      "waitingForHost": "รอเจ้าภาพ...",
+      "missingResumeId": "เซสชันนี้ไม่มีรหัสเรซูเม่",
+      "unknownHostPlatform": "ไม่สามารถระบุแพลตฟอร์มโฮสต์ได้",
+      "sessionQueued": "เซสชันตัวแทนอยู่ในคิว",
+      "resumeFailed": "ไม่สามารถดำเนินการเซสชันต่อได้",
+      "title": "ประวัติ session ของ agent",
+      "refreshSessions": "รีเฟรชเซสชันตัวแทน",
+      "unavailable": "ประวัติเซสชันของตัวแทนไม่พร้อมใช้งาน",
+      "updateHost": "อัปเดต Prompt บนโฮสต์นี้เพื่อเรียกดูประวัติเซสชันของตัวแทน",
+      "loadFailed": "ไม่สามารถโหลดได้",
+      "placeholder": "เซสชันการค้นหา, repo:, เส้นทาง:",
+      "skipped_one": "{{count}} ข้ามการถอดเสียง",
+      "skipped_other": "ข้าม {{count}} transcript",
+      "noSessions": "ไม่มีเซสชันตัวแทน",
+      "noSearchResults": "ไม่มีเซสชันที่ตรงกับการค้นหาของคุณ",
+      "emptyScope": "ไม่มีเซสชันตัวแทนที่ผ่านมาในขอบเขตนี้"
+    },
+    "resumeTarget": {
+      "runtimeUnavailable": "ดำเนินการต่อจากประวัติไม่พร้อมใช้งานในพื้นที่ทำงานที่โฮสต์โดยรันไทม์",
+      "differentHost": "session นี้เป็นของโฮสต์อื่น เปิด workspace บนโฮสต์เดียวกันเพื่อกลับมาทำต่อ",
+      "openWorkspace": "เปิด workspace ก่อนทำ session ต่อ"
+    },
+    "sessionCard": {
+      "untitledSession": "เซสชันที่ไม่มีชื่อ"
+    },
+    "useAgentHistoryState": {
+      "waitingForHost": "กำลังรอเจ้าภาพ...",
+      "hostUnreachable": "ไม่สามารถติดต่อโฮสต์ได้",
+      "loadFailed": "ไม่สามารถโหลดเซสชันตัวแทนได้"
+    },
+    "worktreeNavigationActions": {
+      "sourceControl": "การควบคุมแหล่งที่มา",
+      "agentSessionHistory": "ประวัติ session ของ agent"
+    }
+  },
+  "diagnostics": {
+    "connectionDiagnosticsView": {
+      "connecting": "กำลังเชื่อมต่อ",
+      "handshaking": "การจับมือกัน",
+      "connected": "เชื่อมต่อแล้ว",
+      "disconnected": "ตัดการเชื่อมต่อแล้ว",
+      "reconnecting": "กำลังเชื่อมต่อใหม่",
+      "authFailed": "การตรวจสอบสิทธิ์ล้มเหลว",
+      "title": "การวินิจฉัยเครือข่าย",
+      "stateWithAttempt": "{{state}} · พยายาม {{attempts}}",
+      "copyReport": "คัดลอกรายงาน",
+      "diagnosisHeading": "สิ่งนี้บ่งบอกถึงอะไร",
+      "privacyHint": "ส่งรายงานที่มีการจำกัดขนาด รวมถึงชื่อโฮสต์ จุดสิ้นสุด เวอร์ชัน สถานะการเชื่อมต่อ และเหตุการณ์ โดยไม่ต้องใช้เนื้อหาเทอร์มินัลหรือข้อมูลรับรอง",
+      "sending": "กำลังส่ง…",
+      "sent": "ส่งข้อมูลวินิจฉัยแล้ว",
+      "retrySending": "ลองส่งอีกครั้ง",
+      "sendDiagnostics": "ส่งการวินิจฉัยไปที่ Prompt",
+      "noEvents": "ยังไม่มีกิจกรรมการเชื่อมต่อ กิจกรรมจะปรากฏขึ้นเมื่อแอปหมุนหมายเลขโฮสต์นี้",
+      "noHosts": "ไม่มีโฮสต์ที่จับคู่"
+    },
+    "mobileWebBundleProbeRow": {
+      "fetchBundle": "ดึงข้อมูลชุดเว็บบนมือถือ",
+      "connecting": "กำลังเชื่อมต่อ…",
+      "fetching": "กำลังเรียกชุดข้อมูล...",
+      "bundle": "มัด",
+      "host": "โฮสต์",
+      "build": "บิลด์",
+      "assets": "สินทรัพย์",
+      "bytes": "ไบต์",
+      "elapsed": "ผ่านไปแล้ว",
+      "elapsedMilliseconds": "{{elapsedMs}} มิลลิวินาที",
+      "unknownHost": "โฮสต์ที่ไม่รู้จัก"
+    },
+    "mobileWebShellUpdateFailureRow": {
+      "title": "การอัปเดตพื้นที่ทำงาน"
+    },
+    "troubleshootCommonIssues": {
+      "notificationsTitle": "การแจ้งเตือนแบบพุช",
+      "allowNotifications": "ตรวจสอบว่าการตั้งค่าระบบอนุญาตการแจ้งเตือน Prompt และปิดโฟกัสหรือห้ามรบกวน",
+      "notificationNetwork": "ลองใช้มือถือหรือเครือข่าย Wi-Fi อื่น หากได้รับการแจ้งเตือนหลังจากการสลับ เครือข่ายของคุณอาจทำให้การจัดส่งล่าช้า",
+      "wifiTitle": "เครือข่าย WiFi ที่แตกต่างกัน",
+      "sameNetwork": "อุปกรณ์ทั้งสองต้องอยู่ใน LAN เดียวกัน (เว้นแต่จะเชื่อมต่อผ่าน Tailscale)",
+      "sameSubnet": "อีเธอร์เน็ตและ WiFi ต้องใช้ซับเน็ตเดียวกัน",
+      "reconnectWifi": "ลองเชื่อมต่อ WiFi อีกครั้งบนอุปกรณ์ทั้งสองเครื่อง",
+      "firewallTitle": "พอร์ตการบล็อคไฟร์วอลล์ {{port}}",
+      "linuxFirewall": "Linux: sudo ufw allow {{port}}",
+      "macosFirewall": "macOS: การตั้งค่าระบบ → เครือข่าย → ไฟร์วอลล์ — อนุญาต Prompt",
+      "windowsFirewall": "Windows: ไฟร์วอลล์ Defender → อนุญาตแอป — เปิดใช้งาน Prompt สำหรับเครือข่ายส่วนตัว",
+      "restrictedNetwork": "เครือข่ายองค์กร/โรงเรียนอาจบล็อก P2P — ลองใช้ฮอตสปอตส่วนบุคคล",
+      "desktopTitle": "แอพเดสก์ท็อปไม่ทำงาน",
+      "openDesktop": "Prompt ต้องเปิดอยู่บนเดสก์ท็อปของคุณจึงจะยอมรับการเชื่อมต่อ",
+      "restartDesktop": "ลองรีสตาร์ท Prompt — เซิร์ฟเวอร์ที่แสดงร่วมเริ่มต้นเมื่อเปิดตัว",
+      "pairAfterUpdate": "หลังการอัปเดต คุณอาจต้องจับคู่อีกครั้งโดยใช้รหัส QR",
+      "timeoutTitle": "หมดเวลาการเชื่อมต่อ",
+      "wifiSignal": "ตรวจสอบความแรงของสัญญาณ WiFi บนโทรศัพท์ของคุณ",
+      "retryHost": "กลับไปที่รายชื่อโฮสต์แล้วแตะโฮสต์ของคุณเพื่อลองอีกครั้ง",
+      "restartBothApps": "รีสตาร์ททั้งสองแอปหากยังหมดเวลาอยู่",
+      "tailscaleTitle": "Tailscale ไม่สามารถเข้าถึงโฮสต์ได้",
+      "keepTailscaleOn": "ที่อยู่โฮสต์เช่น 100.x.x.x หรือ *.ts.net เชื่อมต่อผ่าน Tailscale — เปิดไว้",
+      "restartTailscale": "iOS/Android สามารถลิ่มอุโมงค์อย่างเงียบ ๆ: สลับ Tailscale ปิดและเปิดใหม่ในแอป Tailscale",
+      "checkTailnet": "ตรวจสอบว่าเดสก์ท็อปเปิดอยู่และแสดงว่าเชื่อมต่ออยู่ใน tailnet ของคุณ",
+      "updateTailscale": "อัปเดตแอป Tailscale — รุ่นล่าสุดแก้ไขข้อบกพร่องในการเชื่อมต่อใหม่",
+      "vpnTitle": "การรบกวน VPN อื่น ๆ",
+      "vpnRouting": "VPN ที่ไม่ใช่ Tailscale สามารถกำหนดเส้นทางการรับส่งข้อมูลในเครื่องผ่านเซิร์ฟเวอร์ระยะไกลได้",
+      "disableVpn": "ปิดการใช้งาน VPN นั้นหรือเปิดใช้งาน split tunneling / \"อนุญาต LAN\""
+    },
+    "troubleshootView": {
+      "title": "การแก้ไขปัญหา",
+      "running": "กำลังดำเนินการ...",
+      "runAgain": "วิ่งอีกครั้ง",
+      "runDiagnostics": "เรียกใช้การวินิจฉัย",
+      "viewNetworkDiagnostics": "ดูการวินิจฉัยเครือข่าย",
+      "commonIssues": "ปัญหาทั่วไป"
+    },
+    "useTroubleshootDiagnostics": {
+      "pairedHosts": "โฮสต์ที่จับคู่",
+      "pairedCount": "{{count}} จับคู่แล้ว",
+      "noPairedHosts": "ไม่มี — สแกน QR เพื่อจับคู่",
+      "hostDataFailed": "ไม่สามารถอ่านข้อมูลโฮสต์ได้",
+      "internet": "อินเตอร์เน็ต",
+      "connected": "เชื่อมต่อแล้ว",
+      "unexpectedResponse": "การตอบสนองที่ไม่คาดคิด",
+      "noConnection": "ไม่มีการเชื่อมต่อ",
+      "reachable": "เข้าถึงได้ที่ {{endpoint}}",
+      "hosts": "โฮสต์",
+      "hostTestFailed": "ไม่สามารถทดสอบได้",
+      "platform": "แพลตฟอร์ม"
+    },
+    "webShellUpdateFailureCopy": {
+      "failedJustNow": "การอัปเดตครั้งล่าสุดจาก {{hostName}} ล้มเหลวในขณะนี้: {{reason}}{{offered}} {{outcome}}",
+      "failedAgo": "การอัปเดตครั้งล่าสุดจาก {{hostName}} ล้มเหลว {{time}} ที่แล้ว: {{reason}}{{offered}} {{outcome}}",
+      "reasonCopy": {
+        "noConnection": "ไม่ได้เชื่อมต่อกับโฮสต์",
+        "connectionLost": "การเชื่อมต่อลดลง",
+        "hostRefused": "เจ้าบ้านปฏิเสธการอ่าน",
+        "replyUnreadable": "โฮสต์ตอบกลับว่าแอปนี้อ่านไม่ได้",
+        "chunkOversize": "ชิ้นมีขนาดใหญ่กว่าที่โฮสต์อนุญาต",
+        "assetOverlong": "เนื้อหายาวเกินกว่าที่รายการประกาศ",
+        "assetNoProgress": "การอ่านเนื้อหาไม่มีความคืบหน้า",
+        "assetShort": "สินทรัพย์สิ้นสุดลงไม่ถึงขนาดที่ประกาศไว้",
+        "assetChecksumMismatch": "ผลรวมตรวจสอบสินทรัพย์ไม่ตรงกัน",
+        "buildChangedMidFetch": "บิลด์ของโฮสต์เปลี่ยนไประหว่างการดาวน์โหลด",
+        "chunkMisrouted": "ก้อนตอบเนื้อหาหรือออฟเซ็ตที่ไม่ถูกต้อง",
+        "assetEntryChanged": "เนื้อหาไม่ตรงกับรายการอีกต่อไป",
+        "rangeUndecodable": "ไม่สามารถถอดรหัสการอ่านแบบบีบอัดได้",
+        "fetchStopped": "การดาวน์โหลดหยุดลง",
+        "cacheWriteFailed": "บันทึกการดาวน์โหลดบนโทรศัพท์เครื่องนี้ล้มเหลว",
+        "unrecognisedError": "ข้อผิดพลาดที่ไม่รู้จัก"
+      },
+      "hostCodeCopy": {
+        "unavailable": "โฮสต์ไม่มีบันเดิลพื้นที่ทำงาน",
+        "buildChanged": "บิลด์ของโฮสต์เปลี่ยนไประหว่างการดาวน์โหลด",
+        "assetUnknown": "โฮสต์ไม่รู้จักเนื้อหา",
+        "assetChanged": "เนื้อหามีการเปลี่ยนแปลงบนโฮสต์",
+        "offsetInvalid": "โฮสต์ปฏิเสธออฟเซ็ตการอ่าน",
+        "readLimited": "โฮสต์จำกัดการอ่านพร้อมกัน"
+      },
+      "wallCopy": {
+        "bundleUnavailable": "โฮสต์ไม่มีบันเดิลพื้นที่ทำงาน",
+        "bundleShellTooOld": "แอปนี้เก่าเกินไปสำหรับบันเดิลที่บันทึกไว้",
+        "hostTooOldForBundle": "โฮสต์เก่าเกินไปสำหรับบันเดิลที่บันทึกไว้",
+        "bundleTooOldForHost": "บันเดิลที่บันทึกไว้เก่าเกินไปสำหรับโฮสต์",
+        "pageRouteUnlisted": "พื้นที่ทำงานของโฮสต์ไม่รวมหน้าจอนี้",
+        "pageRouteGrantMissing": "หน้าจอนี้ต้องการแอปที่ใหม่กว่า"
+      },
+      "openedCached": "กลับไปใช้เวอร์ชันที่บันทึกไว้",
+      "openedCachedGeneration": "ถอยกลับไปเป็นเวอร์ชันที่บันทึกไว้ (รุ่น {{generation}})",
+      "blockedWorkspace": "ปิดกั้นพื้นที่ทำงาน",
+      "blockedReason": "ถูกบล็อค: {{reason}}",
+      "nativeRoute": "แสดงหน้าจอดั้งเดิม",
+      "routeUnavailable": "แสดงว่าหน้าจอใช้งานไม่ได้",
+      "failed": "แสดงหน้าจอความล้มเหลว",
+      "waiting": "รอเจ้าภาพครับ.",
+      "offeredGeneration": "(รุ่น {{generation}})"
+    }
+  },
+  "dictation": {
+    "setup": {
+      "serverUpdateRequired": "อัปเดต Prompt บนเซิร์ฟเวอร์นี้เพื่อใช้การเขียนตามคำบอกด้วยเสียง",
+      "alreadyActive": "มีการใช้การเขียนตามคำบอกในคอมพิวเตอร์หรือโทรศัพท์เครื่องอื่นแล้ว",
+      "repairRequired": "จับคู่โทรศัพท์เครื่องนี้กับคอมพิวเตอร์อีกครั้งเพื่อใช้การเขียนตามคำบอก",
+      "sessionLost": "การเขียนตามคำบอกสูญเสียการเชื่อมต่อกับคอมพิวเตอร์ ลองอีกครั้ง",
+      "desktopUpdateRequired": "อัปเดตแอปเดสก์ท็อป Prompt ที่จับคู่เพื่อใช้การตั้งค่าเสียงมือถือ",
+      "loadFailed": "โหลดโมเดลการเขียนตามคำบอกไม่สำเร็จ",
+      "downloadFailed": "ไม่สามารถเริ่มการดาวน์โหลดได้",
+      "deleteFailed": "ลบโมเดลไม่สำเร็จ",
+      "updateFailed": "อัปเดตการตั้งค่าการเขียนตามคำบอกไม่สำเร็จ",
+      "cloudModelNeedsKey": "จำเป็นต้องมีคีย์ OpenAI"
+    }
+  },
+  "home": {
+    "appUpdateCard": {
+      "title": "Prompt {{version}} ใช้งานได้",
+      "updateAccessibilityLabel": "Prompt {{version}} พร้อมใช้งาน แตะเพื่ออัปเดต",
+      "updateHint": "แตะเพื่ออัปเดต",
+      "dismissAccessibilityLabel": "ยกเลิกการอัปเดต Prompt {{version}}"
+    },
+    "accountUsageCards": {
+      "sectionHeading": "การใช้งานบัญชี",
+      "systemDefault": "ค่าเริ่มต้นของระบบ",
+      "sessionWindow": "5 ชม.",
+      "weeklyWindow": "7 วัน"
+    },
+    "emptyState": {
+      "openDesktopTitle": "เปิดเดสก์ท็อป Prompt",
+      "openDesktopDescription": "ไปที่การตั้งค่า → มือถือ และสร้างรหัสการจับคู่ QR",
+      "scanCodeTitle": "สแกนรหัส",
+      "scanCodeDescription": "แตะปุ่มด้านบนเพื่อเปิดเครื่องสแกน ชี้ไปที่รหัส QR บนหน้าจอของคุณ",
+      "connectedTitle": "คุณเชื่อมต่อแล้ว",
+      "connectedDescription": "เดสก์ท็อปของคุณจะปรากฏที่นี่ ทุกอย่างถูกเข้ารหัสตั้งแต่ต้นทางถึงปลายทาง",
+      "title": "เชื่อมต่อเดสก์ท็อปของคุณ",
+      "description": "จับคู่กับ Prompt บนคอมพิวเตอร์ของคุณเพื่อตรวจสอบตัวแทนของคุณ เข้าสู่เทอร์มินัลใดก็ได้ และขับเคลื่อนงานจากโทรศัพท์ของคุณ",
+      "pairDesktop": "จับคู่เดสก์ท็อป",
+      "stepsHeading": "มันทำงานอย่างไร"
+    },
+    "listFooter": {
+      "resumeHeading": "ทำงานต่อ",
+      "tasksHeading": "งาน",
+      "hostPickerTitle": "เปิดงาน"
+    },
+    "listHeader": {
+      "daysHours": "{{days}} วัน {{hours}} ชม.",
+      "hoursMinutes": "{{hours}} ชม. {{minutes}} นาที",
+      "minutes": "{{minutes}} นาที",
+      "title": "ยินดีต้อนรับกลับมา",
+      "agentsSpawned": "agent ที่เริ่มทำงาน",
+      "agentTime": "เวลาของ agent",
+      "prsCreated": "PR ที่สร้าง",
+      "desktopsHeading": "เดสก์ท็อป"
+    },
+    "screen": {
+      "pairingCheckFailed": "ไม่สามารถตรวจสอบการจับคู่ได้",
+      "tryAgain": "โปรดลองอีกครั้ง",
+      "removeHostFailed": "ไม่สามารถลบโฮสต์ได้",
+      "removeHostTitle": "ลบโฮสต์",
+      "removeHostMessage": "ลบ \"{{name}}\" หรือไม่ คุณสามารถจับคู่ใหม่ได้ในภายหลัง"
+    },
+    "tasksCard": {
+      "title": "งาน",
+      "noSources": "ไม่มีการเชื่อมต่อแหล่งที่มาของงาน",
+      "openProviderTasks": "เปิด {{provider}} งาน"
+    }
+  },
+  "hooks": {
+    "dictationDesktopStart": {
+      "recordingFailed": "ไม่สามารถเริ่มการบันทึกไมโครโฟน"
+    },
+    "useMobileDictation": {
+      "microphonePermissionDenied": "การอนุญาตไมโครโฟนถูกปฏิเสธ",
+      "microphoneInitFailed": "ไม่สามารถเริ่มต้นไมโครโฟนได้",
+      "noSpeech": "ไม่พบเสียงพูด",
+      "microphoneInterrupted": "การเขียนตามคำบอกด้วยเสียงหยุดลงเนื่องจากไมโครโฟนถูกรบกวน ลองอีกครั้ง",
+      "inputClosed": "การเขียนตามคำบอกด้วยเสียงหยุดลงเนื่องจากเซสชันนี้ไม่ยอมรับอินพุตอีกต่อไป ลองอีกครั้ง"
+    }
+  },
+  "hostScreen": {
+    "hostListActionSheetActions": {
+      "reconnect": "เชื่อมต่อใหม่",
+      "connect": "เชื่อมต่อ",
+      "disconnect": "ตัดการเชื่อมต่อ",
+      "networkDiagnostics": "การวินิจฉัยเครือข่าย",
+      "editHost": "แก้ไขโฮสต์"
+    },
+    "hostPendingCreationRow": {
+      "creatingWorkspace": "กำลังสร้าง workspace…"
+    },
+    "hostRailActions": {
+      "accounts": "บัญชี",
+      "tasks": "งาน",
+      "floatingWorkspace": "Workspace แบบลอย",
+      "newWorkspace": "workspace ใหม่",
+      "closeSearch": "ปิดการค้นหา",
+      "searchWorkspaces": "ค้นหา workspace"
+    },
+    "hostScreenHeader": {
+      "workspaceOptions": "ตัวเลือก workspace",
+      "activeFilters_one": "ตัวเลือกพื้นที่ทำงาน (ใช้งานตัวกรอง {{count}})",
+      "activeFilters_other": "ตัวเลือก workspace (ใช้ตัวกรองอยู่ {{count}} รายการ)",
+      "backToHosts": "กลับสู่เจ้าบ้าน",
+      "reconnect": "เชื่อมต่อใหม่",
+      "floatingWorkspace": "Workspace แบบลอย",
+      "hideSidebar": "ซ่อนแถบด้านข้าง",
+      "accounts": "บัญชี",
+      "tasks": "งาน",
+      "closeSearch": "ปิดการค้นหา",
+      "searchWorkspaces": "ค้นหา workspace"
+    },
+    "hostScreenOverlays": {
+      "deleteWorktree": "ลบ worktree",
+      "deleteConfirmMessage": "ลบ \"{{name}}\" ({{branch}})?",
+      "sleep": "พักการทำงาน",
+      "unpin": "เลิกปักหมุด",
+      "pin": "ปักหมุด",
+      "primaryWorktreeDeleteHint": "worktree หลัก ไม่สามารถลบได้ ให้นำโปรเจกต์ออกแทน",
+      "removeHost": "ลบโฮสต์",
+      "removeHostMessage": "ลบ \"{{name}}\" หรือไม่ คุณสามารถจับคู่ใหม่ได้ในภายหลัง"
+    },
+    "hostWorkspaceList": {
+      "searchPlaceholder": "ค้นหาพื้นที่ทำงาน...",
+      "searchWorkspaces": "ค้นหา workspace"
+    },
+    "workspaceDetailsSheet": {
+      "merged": "Merge แล้ว",
+      "closed": "ปิดแล้ว",
+      "draft": "ฉบับร่าง",
+      "checksPassing": "การตรวจสอบ: ผ่าน",
+      "checksFailing": "การตรวจสอบ: ล้มเหลว",
+      "checksPending": "การตรวจสอบ: อยู่ระหว่างดำเนินการ",
+      "createdFromCli": "สร้างจาก Prompt CLI",
+      "createdByNamedAutomation": "สร้างโดยระบบอัตโนมัติ \"{{name}}\"",
+      "createdByAutomation": "สร้างโดยระบบอัตโนมัติ",
+      "openLinkWithTitle": "เปิด {{label}}, {{title}}",
+      "openLink": "เปิด {{label}}",
+      "prOpen": "เปิด"
+    },
+    "workspaceOptionControls": {
+      "none": "ไม่มี",
+      "status": "สถานะ",
+      "pr": "PR",
+      "project": "โปรเจกต์",
+      "name": "ชื่อ",
+      "agentActivitySort": "กิจกรรมของ agent",
+      "recent": "ล่าสุด",
+      "manual": "กำหนดเอง",
+      "agentActivitySortDescription": "agent ที่ต้องการความสนใจก่อน ตามด้วยกิจกรรมล่าสุด",
+      "manualWorkspaceOrderDescription": "ลาก workspace เพื่อจัดเรียงภายในแต่ละกลุ่ม",
+      "manualProjectOrderDescription": "ลากโปรเจกต์เพื่อจัดเรียง",
+      "recentProjectOrderDescription": "กิจกรรม workspace ล่าสุด",
+      "detailed": "แบบละเอียด",
+      "compact": "แบบกะทัดรัด",
+      "fullList": "รายการทั้งหมด",
+      "githubTicket": "ticket GitHub",
+      "linearIssue": "Linear ปัญหา",
+      "jiraIssue": "ประเด็นจิรา.",
+      "prMrLink": "ลิงก์ PR/MR",
+      "automation": "ระบบอัตโนมัติ",
+      "notes": "โน้ต",
+      "ports": "พอร์ต",
+      "agentActivity": "กิจกรรมของ agent",
+      "host": "โฮสต์",
+      "githubIssues": "GitHub ปัญหา",
+      "linearIssues": "Linear issue",
+      "jiraIssues": "Jira issue",
+      "agentStatuses": "สถานะ agent",
+      "branchFolderPath": "branch / พาธโฟลเดอร์",
+      "branchName": "ชื่อ branch",
+      "selectedCount": "{{count}} จาก {{total}}",
+      "allHosts": "ทุกโฮสต์",
+      "allProjects": "ทุกโปรเจกต์",
+      "searchProjectsPlaceholder": "ค้นหาโครงการ...",
+      "searchProjects": "ค้นหาโปรเจกต์",
+      "hover": "วางเมาส์เหนือ",
+      "agentActivityLayout": "เลย์เอาต์กิจกรรมของ agent"
+    },
+    "workspaceOptionsSheet": {
+      "hosts": "โฮสต์",
+      "projects": "โปรเจกต์",
+      "groupBy": "จัดกลุ่มตาม",
+      "sortBy": "เรียงตาม",
+      "projectOrder": "ลำดับโปรเจกต์",
+      "cardLayout": "เลย์เอาต์การ์ด",
+      "showProperties": "แสดงคุณสมบัติ",
+      "cardDisplay": "การแสดงการ์ด",
+      "hideSleeping": "ซ่อนที่พักการทำงาน",
+      "exceptDefaultBranch": "ยกเว้น default branch",
+      "hideDefaultBranch": "ซ่อน default branch",
+      "hideAutomationCreated": "ซ่อนที่สร้างโดยระบบอัตโนมัติ",
+      "hideCliCreated": "ซ่อนที่สร้างโดย CLI",
+      "hideOtherClientWorkspaces": "ซ่อน workspace จาก client อื่น",
+      "hideDetachedHead": "ซ่อน detached HEAD",
+      "show": "แสดง",
+      "filters": "ตัวกรอง",
+      "localMac": "ท้องถิ่น Mac",
+      "localWindows": "Windows ท้องถิ่น",
+      "localLinux": "ลินุกซ์ท้องถิ่น",
+      "thisComputer": "คอมพิวเตอร์เครื่องนี้",
+      "waitingForDesktop": "ยังรอเดสก์ท็อปอยู่นะครับ",
+      "savingToDesktop": "กำลังบันทึกลงบนเดสก์ท็อป",
+      "backToOptions": "กลับไปที่ตัวเลือกพื้นที่ทำงาน",
+      "workspaceOptions": "ตัวเลือก workspace",
+      "syncedAcrossDevices": "ซิงค์กับอุปกรณ์ของคุณ",
+      "clearFilters": "ล้างตัวกรอง"
+    }
+  },
+  "webShell": {
+    "shellStateScreen": {
+      "isolationUnavailable": "WebView ของอุปกรณ์นี้เก่าเกินกว่าจะเปิดพื้นที่ทำงานได้อย่างปลอดภัย",
+      "downloadFailed": "ไม่สามารถดาวน์โหลดแอปล่าสุดจากโฮสต์นี้ได้",
+      "hostProfileUnreadable": "ไม่สามารถอ่านโฮสต์นี้บนอุปกรณ์ของคุณได้ ลองอีกครั้ง",
+      "statusUnreadable": "ไม่สามารถอ่านสถานะของโฮสต์นี้ได้ กลับไปเปิดใหม่อีกครั้ง",
+      "renderProcessGone": "พื้นที่ทำงานหยุดตอบสนอง",
+      "documentLoadFailed": "ไม่สามารถเปิดแอปที่ดาวน์โหลดมาได้",
+      "tryAgain": "ลองอีกครั้ง",
+      "connectToDownload": "เชื่อมต่อกับโฮสต์นี้เพื่อดาวน์โหลดแอปล่าสุด",
+      "openingWorkspace": "กำลังเปิดพื้นที่ทำงาน",
+      "checkingHost": "กำลังตรวจสอบโฮสต์"
+    }
+  },
+  "navigation": {
+    "hostStackScreens": {
+      "host": "โฮสต์",
+      "editHost": "แก้ไขโฮสต์",
+      "accounts": "บัญชี",
+      "tasks": "งาน",
+      "terminal": "เทอร์มินัล",
+      "sourceControl": "การควบคุมแหล่งที่มา",
+      "agentSessionHistory": "ประวัติ session ของ agent",
+      "changes": "การเปลี่ยนแปลง",
+      "pullRequest": "ดึงคำขอ",
+      "workspace": "พื้นที่ทำงาน"
+    }
+  },
+  "notifications": {
+    "notificationDeliverySection": {
+      "onlyWhenAway": "เมื่ออยู่ห่างจากเดสก์ท็อปเท่านั้น",
+      "onlyWhenAwayHint": "หลังจาก 3 นาทีโดยไม่มีการทำงานของแป้นพิมพ์หรือเมาส์ หรือเมื่อถูกล็อค",
+      "sound": "เสียงแจ้งเตือน",
+      "suppressWhileFocused": "ระงับในขณะที่มีสมาธิ",
+      "suppressWhileFocusedHint": "ข้ามการแจ้งเตือนสำหรับพื้นที่ทำงานที่เปิดบนโทรศัพท์เครื่องนี้",
+      "footer": "ประเภทการแจ้งเตือนจะเป็นไปตามการตั้งค่าการแจ้งเตือนของเดสก์ท็อปแต่ละเครื่องที่จับคู่กัน การแจ้งเตือนจะหยุดชั่วคราวหลังจากผ่านไป 7 วันโดยไม่ต้องใช้แอพนี้ เปิดและเชื่อมต่อใหม่เพื่อดำเนินการต่อ"
+    },
+    "desktopChannel": {
+      "silentName": "Prompt การแจ้งเตือนแบบเงียบๆ",
+      "name": "การแจ้งเตือนบนเดสก์ท็อป"
+    }
+  },
+  "onboarding": {
+    "onboardingPage": {
+      "sessionViewTitle": "เซสชั่นควรเปิดอย่างไร?",
+      "notificationsTitle": "อย่าพลาดเมื่อตัวแทนต้องการคุณ",
+      "sessionViewDescription": "เลือกว่าจะให้เซสชันตัวแทนที่รองรับเปิดในเทอร์มินัลหรือ Chat UI บนอุปกรณ์นี้ กดแท็บเซสชั่นค้างไว้เพื่อสลับมุมมอง หรือเปลี่ยนค่าเริ่มต้นในภายหลังในการตั้งค่า",
+      "notificationsDescription": "รับการแจ้งเตือนทางโทรศัพท์นี้เมื่อตัวแทนเสร็จสิ้นหรือกำลังรออยู่ แม้ว่าคุณจะไม่ได้ใช้แอปก็ตาม",
+      "notificationsDisclosure": "ส่งผ่านบริการพุชของ Prompt หลังจากที่เดสก์ท็อปของคุณไม่ได้ใช้งานเป็นเวลา 3 นาที เปลี่ยนได้ตลอดเวลาในการตั้งค่า",
+      "useChatUi": "ใช้ UI แชท",
+      "openInChatUi": "เปิดเซสชันใน Chat UI",
+      "keepTerminal": "เก็บเทอร์มินัล",
+      "openInTerminal": "เปิดเซสชันในเทอร์มินัล",
+      "enableNotifications": "เปิดใช้งานการแจ้งเตือน",
+      "enableAgentNotifications": "เปิดใช้งานการแจ้งเตือนตัวแทน",
+      "notNow": "ไว้ภายหลัง",
+      "skipNotifications": "ข้ามการแจ้งเตือนไปก่อน"
+    },
+    "notificationOnboardingPreview": {
+      "codexFinished": "Codex เสร็จแล้ว",
+      "testsPassing": "การทดสอบกำลังผ่านไป",
+      "claudeNeedsInput": "Claude ต้องการอินพุต",
+      "waitingOnYou": "รอคุณอยู่.",
+      "now": "ตอนนี้"
+    }
+  },
+  "connection": {
+    "connectionHealth": {
+      "signInRequired": "ต้องลงชื่อเข้าใช้ใน {{host}}",
+      "signInDetail": "ลงชื่อเข้าใช้ Prompt บนเดสก์ท็อปของคุณเพื่อเชื่อมต่อใหม่",
+      "hostOffline": "{{host}} ออฟไลน์อยู่",
+      "hostOfflineDetail": "ตรวจสอบว่าตื่นอยู่ Prompt กำลังทำงาน และคุณลงชื่อเข้าใช้แล้ว",
+      "relayAccessExpired": "Relay access expired for {{host}}",
+      "rePairDetail": "Re-pair with your desktop",
+      "relayUnreachable": "เข้ารีเลย์ไม่ได้",
+      "checkConnection": "ตรวจสอบการเชื่อมต่อของคุณ",
+      "tailscaleHint": "ตรวจสอบ Tailscale",
+      "hostFallback": "โฮสต์",
+      "pairingInvalid": "Pairing invalid — re-pair with your desktop",
+      "connected": "เชื่อมต่อแล้ว",
+      "relayConnectFailed": "เชื่อมต่อผ่านรีเลย์ไม่ได้",
+      "connectingViaRelay": "กำลังเชื่อมต่อผ่านรีเลย์...",
+      "disconnected": "ตัดการเชื่อมต่อแล้ว",
+      "desktopUnreachable": "ไม่สามารถเข้าถึงเดสก์ท็อปได้",
+      "connectFailed": "ไม่สามารถเชื่อมต่อได้",
+      "reconnecting": "กำลังเชื่อมต่อใหม่…",
+      "connecting": "กำลังเชื่อมต่อ…",
+      "labelWithHint": "{{label}} — {{hint}}"
+    },
+    "hostEndpoint": {
+      "addressRequired": "ป้อนที่อยู่โฮสต์",
+      "invalidPort": "พอร์ตต้องเป็น 1–65535",
+      "invalidScheme": "Use ws:// or wss:// (or host:port).",
+      "invalidAddress": "ไม่ใช่ที่อยู่ที่ถูกต้อง",
+      "pathOrQueryNotAllowed": "Host must not include a path or query.",
+      "invalidHostname": "ไม่ใช่ชื่อโฮสต์ที่ถูกต้อง",
+      "hostnameRequired": "ไม่มีชื่อโฮสต์"
+    },
+    "connectionPathLabel": {
+      "directTailscale": "โดยตรง · Tailscale",
+      "directLan": "โดยตรง · แลน",
+      "directViaTailscale": "โดยตรงผ่าน Tailscale",
+      "directViaLan": "โดยตรงผ่านระบบ LAN"
+    },
+    "pairConfirmState": {
+      "missingCode": "รหัสการจับคู่หายไป",
+      "invalidCode": "ไม่ใช่รหัสการจับคู่ที่ถูกต้อง"
+    },
+    "rpcClientStreamRegistry": {
+      "interrupted": "การเชื่อมต่อถูกขัดจังหวะ",
+      "endedBeforeReady": "Streaming request ended before it was ready."
+    },
+    "rpcClientTerminalBinaryFrame": {
+      "unsupportedFrame": "Unsupported terminal stream frame (opcode {{opcode}})."
+    }
+  },
+  "worktree": {
+    "agentRowDisplay": {
+      "working": "กำลังทำงาน",
+      "monitoring": "กำลังเฝ้าดูงานเบื้องหลัง",
+      "blocked": "ถูกบล็อก",
+      "waiting": "รออินพุต",
+      "interrupted": "ถูกขัดจังหวะ",
+      "failed": "ล้มเหลว",
+      "unconfirmed": "ยืนยันไม่ได้",
+      "idle": "ว่าง",
+      "unverifiable": "ไม่มีการอัปเดตล่าสุด",
+      "stopping": "กำลังหยุด…",
+      "justNow": "เมื่อสักครู่",
+      "minutes_one": "{{count}} นาที",
+      "minutes_other": "{{count}} นาที",
+      "hours_one": "{{count}} ชม.",
+      "hours_other": "{{count}} ชม.",
+      "days_one": "{{count}} วัน",
+      "days_other": "{{count}} วัน",
+      "done": "เสร็จสิ้น"
+    },
+    "hostWorkspaceListStates": {
+      "checkHost": "ตรวจสอบว่าคอมพิวเตอร์ของคุณตื่นอยู่ และ Prompt กำลังทำงานอยู่",
+      "loadFailed": "Could not load workspaces from this host",
+      "retrying": "worktree.ps ล้มเหลว ({{error}}) — กำลังลองใหม่โดยอัตโนมัติ",
+      "noMatches": "ไม่มีพื้นที่ทำงานที่ตรงกัน",
+      "noFilterMatches": "No workspaces match filters",
+      "empty": "ไม่มีพื้นที่ทำงาน",
+      "reopen": "เปิดใหม่เพื่ออัพเดทครับ",
+      "reopenDetail": "โฮสต์นี้แสดงรายการพื้นที่ทำงานในลักษณะที่หน้านี้ยังไม่ทราบ"
+    },
+    "workspaceListSections": {
+      "pinned": "ปักหมุดแล้ว",
+      "all": "ทั้งหมด",
+      "inReview": "กำลังรีวิว",
+      "inProgress": "กำลังดำเนินการ",
+      "closed": "ปิดแล้ว",
+      "done": "เสร็จสิ้น"
+    }
+  },
+  "components": {
+    "agentLaunchNotice": {
+      "updateRequired": "อัปเดต Prompt บนคอมพิวเตอร์ของคุณเพื่อเริ่มตัวแทนจากโทรศัพท์ของคุณ",
+      "statusUnreadable": "ไม่สามารถอ่านสถานะของโฮสต์นี้ได้ กำลังลองอีกครั้ง...",
+      "copyFailed": "คัดลอกไม่สำเร็จ",
+      "copyPrompt": "คัดลอก prompt"
+    },
+    "agentSpinner": {
+      "monitoring": "กำลังเฝ้าดูงานเบื้องหลัง",
+      "unconfirmed": "ยืนยันไม่ได้"
+    },
+    "agentStateDot": {
+      "monitoring": "กำลังเฝ้าดูงานเบื้องหลัง",
+      "unverifiable": "ไม่มีการอัปเดตล่าสุด"
+    },
+    "authFailedBanner": {
+      "message": "การรับรองความถูกต้องล้มเหลว — ลองเชื่อมต่อใหม่ก่อน if it keeps failing, re-pair from desktop."
+    },
+    "authFailedBannerActions": {
+      "repair": "จับคู่ใหม่",
+      "webNote": "Reconnect or remove this host from the Prompt app."
+    },
+    "codexResetCreditAction": {
+      "earnedReset": "Earned Codex rate-limit reset",
+      "resettingLabel": "Resetting Codex rate limits",
+      "useResetLabel": "ใช้การรีเซ็ตขีดจำกัดอัตรา Codex",
+      "scopedHint": "ใช้การรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับ {{scopeLabel}}",
+      "activeAccountHint": "ใช้การรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับบัญชี Codex ที่ใช้งานอยู่",
+      "resetting": "กำลังรีเซ็ต…",
+      "useReset": "ใช้การรีเซ็ต"
+    },
+    "customKeyModal": {
+      "editing": "กำลังแก้ไข",
+      "navigation": "การนำทาง",
+      "function": "ฟังก์ชั่น",
+      "addShortcut": "เพิ่มทางลัด",
+      "shortcutCombo": "คำสั่งผสมทางลัด",
+      "pickKey": "เลือกกุญแจ",
+      "textMacro": "ข้อความมาโคร",
+      "shortcutComboHint": "สร้างคอร์ดคีย์ Ctrl, Alt และ Shift",
+      "textMacroHint": "ส่งคำสั่งข้อความที่กำหนดเอง",
+      "manageShortcuts": "จัดการทางลัด",
+      "manageShortcutsHint": "แสดง ซ่อน หรือจัดลำดับปุ่มลัดใหม่",
+      "modifiers": "ตัวดัดแปลง",
+      "key": "คีย์",
+      "moreKeys": "ปุ่มเพิ่มเติม — แท็บ, ลูกศร, F1–F12…",
+      "add": "เพิ่ม",
+      "label": "ป้ายกำกับ",
+      "labelPlaceholder": "เช่น สร้าง",
+      "command": "คำสั่ง",
+      "commandPlaceholder": "เช่น บิลด์ pnpm",
+      "pressEnter": "กด Enter"
+    },
+    "dragReorderRow": {
+      "dragToReorder": "ลากเพื่อเรียงลำดับใหม่",
+      "reorderHint": "ใช้การดำเนินการเลื่อนขึ้นและเลื่อนลงเพื่อเรียงลำดับใหม่โดยไม่ต้องลาก",
+      "moveUp": "เลื่อนขึ้น",
+      "moveDown": "เลื่อนลง"
+    },
+    "hostDiagnosticsLink": {
+      "viewDiagnostics": "ดูการวินิจฉัยเครือข่าย"
+    },
+    "hostProtocolGate": {
+      "checkingCompatibility": "กำลังตรวจสอบความเข้ากันได้ของโฮสต์"
+    },
+    "hostRouteNoticeBanner": {
+      "dismissNotice": "ปิดประกาศ"
+    },
+    "jiraConnectPrompt": {
+      "updateDesktop": "อัปเดต Prompt เดสก์ท็อป",
+      "connectOnDesktop": "เชื่อมต่อ Jira บนเดสก์ท็อปของคุณ",
+      "credentialUnreadable": "จิราถูกบันทึกไว้แต่อ่านไม่ได้: {{credentialError}}",
+      "connectHint": "เพิ่มไซต์ Jira ของคุณในเดสก์ท็อป Prompt ภายใต้การตั้งค่า → การรวมระบบ จากนั้นตรวจสอบอีกครั้ง",
+      "checkAgain": "ตรวจสอบอีกครั้ง"
+    },
+    "dictationSetupSheet": {
+      "loadFailed": "โหลดไม่สำเร็จ",
+      "downloadFailed": "ดาวน์โหลดไม่สำเร็จ",
+      "selectFailed": "ไม่สามารถเลือกรุ่นได้",
+      "updateFailed": "ไม่สามารถอัปเดตได้",
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{details}} · {{progress}}%",
+      "modelExtracting": "{{details}} · กำลังแยก...",
+      "title": "ตั้งค่าการพิมพ์ด้วยเสียง",
+      "description": "ดาวน์โหลดหรือเลือกรุ่นและเปิดใช้งานการเขียนตามคำบอกบนคอมพิวเตอร์ที่จับคู่ ทั้งหมดนี้ทำได้จากที่นี่",
+      "enabled": "เปิดใช้งานการเขียนตามคำบอกแล้ว",
+      "recommended": "แนะนำ",
+      "inUse": "กำลังใช้",
+      "useModel": "ใช้ {{model}}",
+      "use": "ใช้",
+      "downloadModel": "ดาวน์โหลด {{model}}",
+      "download": "ดาวน์โหลด"
+    },
+    "diffReviewBody": {
+      "loadingReview": "กำลังโหลดรีวิว...",
+      "reviewUnavailable": "รีวิวไม่พร้อมใช้งาน",
+      "loadFailed": "ไม่สามารถโหลดรีวิวได้",
+      "noReviewableChanges": "ไม่มีการเปลี่ยนแปลงที่ตรวจสอบได้",
+      "tryDifferentFilter": "ลองใช้ตัวกรองบทวิจารณ์อื่น",
+      "loadingDiff": "กำลังโหลด diff…",
+      "diffTruncated": "ส่วนต่างถูกตัดทอนสำหรับการดูตัวอย่างบนมือถือ",
+      "binaryDiff": "ส่วนต่างไบนารี่",
+      "diffTooLarge": "ความแตกต่างใหญ่เกินไป",
+      "deletedFile": "ไฟล์ที่ถูกลบ",
+      "diffUnavailable": "ความแตกต่างไม่พร้อมใช้งาน",
+      "binaryMessage": "ไฟล์นี้ไม่สามารถแสดงผลเป็นข้อความบนมือถือได้",
+      "tooLargeMessage": "ความแตกต่างนี้ใหญ่เกินไปสำหรับการดูตัวอย่างบนมือถือ",
+      "deletedMessage": "ไฟล์นี้ถูกลบแล้ว เพิ่มบันทึกไฟล์หรือทำเครื่องหมายว่าตรวจทานแล้ว",
+      "selectFile": "เลือกไฟล์เพื่อตรวจสอบ",
+      "retryLabel": "ลองโหลดรีวิวอีกครั้ง"
+    },
+    "diffReviewDrawers": {
+      "discardTitle": "ทิ้งไฟล์",
+      "discardMessage": "ยกเลิกการเปลี่ยนแปลง \"{{filePath}}\" หรือไม่ สิ่งนี้ไม่สามารถยกเลิกได้",
+      "discard": "ละทิ้ง",
+      "actionsTitle": "ตรวจสอบการดำเนินการ",
+      "stageableFiles_one": "{{count}} ไฟล์ที่ไม่ได้จัดเตรียมที่ตรวจสอบแล้วสามารถจัดฉากได้",
+      "stageableFiles_other": "{{count}} ไฟล์ที่ไม่ได้จัดเตรียมที่ตรวจสอบแล้วสามารถจัดฉากได้",
+      "sendNotes": "ส่งบันทึก",
+      "terminalLabel": "{{title}} ({{id}})",
+      "terminal": "เทอร์มินัล",
+      "newAgentSession": "เซสชันตัวแทนใหม่",
+      "updateRequired": "อัปเดต Prompt บนคอมพิวเตอร์ของคุณ",
+      "statusUnreadable": "ไม่สามารถอ่านสถานะของโฮสต์นี้ได้ กำลังลองอีกครั้ง...",
+      "copyNotes": "คัดลอกบันทึกย่อ",
+      "sendUnsentNotes": "ส่งบันทึกที่ยังไม่ได้ส่ง",
+      "clearSentNotes": "ล้างบันทึกที่ส่งแล้ว",
+      "stageReviewedFiles": "ไฟล์ที่ผ่านการตรวจสอบแล้ว",
+      "markUnreviewed": "ทำเครื่องหมายว่ายังไม่ได้ตรวจสอบ",
+      "openInSession": "เปิดในเซสชัน",
+      "loadingSessions": "กำลังโหลดเซสชันตัวแทน...",
+      "unsentNotes_one": "{{count}} บันทึกที่ยังไม่ได้ส่ง",
+      "unsentNotes_other": "{{count}} บันทึกที่ยังไม่ได้ส่ง",
+      "editNote": "แก้ไขหมายเหตุ",
+      "addNote": "เพิ่มหมายเหตุ",
+      "lineNumber": "เส้น {{lineNumber}}",
+      "fileNote": "ไฟล์บันทึก",
+      "cancelNote": "ยกเลิกบันทึก",
+      "reviewNote": "หมายเหตุรีวิว",
+      "saveLineNote": "บันทึกข้อความในบรรทัด {{lineNumber}}",
+      "deleteNote": "ลบโน้ต",
+      "completeTitle": "การตรวจสอบเสร็จสมบูรณ์",
+      "fileSummary_one": "{{fileCount}} ตรวจสอบไฟล์แล้ว {{count}} หมายเหตุ",
+      "fileSummary_other": "{{fileCount}} ตรวจสอบไฟล์แล้ว {{count}} บันทึก",
+      "filesSummary_one": "{{fileCount}} ตรวจสอบไฟล์แล้ว {{count}} หมายเหตุ",
+      "filesSummary_other": "ตรวจสอบไฟล์แล้ว {{fileCount}} ไฟล์ {{count}} บันทึก",
+      "stageReviewedLabel": "ไฟล์ที่ผ่านการตรวจสอบแล้ว",
+      "stageReviewed": "ตรวจสอบขั้นตอนแล้ว",
+      "sendNotesLabel": "ส่งบันทึกไปยังตัวแทน"
+    },
+    "diffReviewFileSummary": {
+      "branchFrom": "สาขาจาก {{oldPath}}",
+      "stagedFrom": "จัดแสดงตั้งแต่ {{oldPath}}",
+      "unstagedFrom": "ไม่ได้จัดฉากจาก {{oldPath}}",
+      "branch": "สาขา",
+      "staged": "staged",
+      "unstaged": "unstaged",
+      "reviewed": "ตรวจสอบแล้ว",
+      "changed": "มีการเปลี่ยนแปลง",
+      "notes_one": "{{count}} หมายเหตุ",
+      "notes_other": "{{count}} โน้ต",
+      "staleCount": "{{count}} เหม็นอับ",
+      "editFileNote": "แก้ไขบันทึกไฟล์",
+      "stale": "ค้าง",
+      "previousHunk": "ก้อนใหญ่ก่อนหน้า",
+      "hunk": "หนุ่มใหญ่",
+      "nextHunk": "ก้อนต่อไป"
+    },
+    "diffReviewFooter": {
+      "stageFile": "ไฟล์สเตจ",
+      "stage": "เวที",
+      "unstageFile": "ไฟล์ Unstage",
+      "unstage": "ไม่อยู่บนเวที",
+      "discardFile": "ทิ้งไฟล์",
+      "discard": "ละทิ้ง",
+      "previousFile": "ไฟล์ก่อนหน้า",
+      "addFileNote": "เพิ่มบันทึกไฟล์",
+      "note": "โน้ต",
+      "markFileReviewed": "ทำเครื่องหมายไฟล์ว่าตรวจสอบแล้ว",
+      "reviewed": "ตรวจสอบแล้ว",
+      "markReviewed": "มาร์ควิจารณ์แล้ว",
+      "nextFile": "ไฟล์ถัดไป"
+    },
+    "diffReviewHeader": {
+      "filterAll": "ทั้งหมด",
+      "showAllFiles": "แสดงไฟล์บทวิจารณ์ทั้งหมด",
+      "filterUnreviewed": "ยังไม่ได้ตรวจทาน",
+      "showUnreviewedFiles": "แสดงไฟล์บทวิจารณ์ที่ยังไม่ได้ตรวจสอบ",
+      "filterNotes": "โน้ต",
+      "showNotesFiles": "แสดงไฟล์รีวิวบันทึกย่อ",
+      "filterUnstaged": "unstaged",
+      "showUnstagedFiles": "แสดงไฟล์การตรวจสอบแบบไม่มีขั้นตอน",
+      "filterStaged": "staged",
+      "showStagedFiles": "แสดงไฟล์การตรวจสอบแบบเป็นฉาก",
+      "filterBranch": "สาขา",
+      "showBranchFiles": "แสดงไฟล์รีวิวสาขา",
+      "title": "การเปลี่ยนแปลง",
+      "openPullRequestSidebar": "เปิดแถบด้านข้างคำขอดึง",
+      "openReviewActions": "เปิดการดำเนินการตรวจสอบ",
+      "reviewedProgress": "{{reviewedCount}}/{{queueLength}} ตรวจสอบแล้ว",
+      "unsentNotes_one": "{{count}} บันทึกที่ยังไม่ได้ส่ง",
+      "unsentNotes_other": "{{count}} บันทึกที่ยังไม่ได้ส่ง"
+    },
+    "diffReviewLine": {
+      "addedLineNumber": "เพิ่มบรรทัด {{number}}",
+      "addedLine": "เพิ่มบรรทัดแล้ว",
+      "deletedLineNumber": "เส้นที่ถูกลบ {{number}}",
+      "deletedLine": "เส้นที่ถูกลบ",
+      "contextLineNumber": "บรรทัดบริบท {{number}}",
+      "contextLine": "บรรทัดบริบท",
+      "addNoteOnLine": "เพิ่มบันทึกในบรรทัด {{number}}",
+      "editNoteOnLine": "แก้ไขบันทึกในบรรทัด {{number}}"
+    },
+    "homeQuickActions": {
+      "title": "การทำงานด่วน",
+      "pairDesktop": "จับคู่เดสก์ท็อป",
+      "newWorkspace": "workspace ใหม่"
+    },
+    "hostCard": {
+      "worktreeAccessibilitySummary": "{{summary}}, {{activeCount}} ใช้งานอยู่",
+      "pairingInvalid": "การจับคู่ไม่ถูกต้อง",
+      "pairingTemporarilyUnavailable": "ไม่สามารถจับคู่ได้ชั่วคราว",
+      "updateDesktopHint": "อัปเดตเดสก์ท็อป Prompt และลงชื่อเข้าใช้เพื่อเชื่อมต่อได้จากทุกที่",
+      "repairHint": "แตะเพื่อจับคู่กับเดสก์ท็อปของคุณอีกครั้ง",
+      "unlockHint": "ปลดล็อคโทรศัพท์ของคุณ จากนั้นแตะเพื่อลองอีกครั้ง",
+      "openHost": "เปิด {{title}}",
+      "hostActions": "การดำเนินการสำหรับ {{title}}"
+    },
+    "htmlPreview": {
+      "previewRenderedHtml": "ดูตัวอย่าง HTML ที่แสดงผล",
+      "preview": "ตัวอย่าง",
+      "viewHtmlSource": "ดูซอร์ส HTML",
+      "source": "ซอร์ส",
+      "title": "ตัวอย่าง HTML"
+    },
+    "prSidebar": {
+      "loading": "กำลังโหลดคำขอดึง...",
+      "loadFailed": "มีบางอย่างผิดพลาด",
+      "retryLoading": "ลองโหลดคำขอดึงอีกครั้ง",
+      "notPermitted": "ไม่อนุญาต — บัญชี GitHub ของคุณไม่ได้เชื่อมต่อ"
+    },
+    "richMarkdownEditor": {
+      "linkUrl": "URL ของลิงก์",
+      "imageUrl": "URL รูปภาพ",
+      "insert": "แทรก"
+    },
+    "richMarkdownToolbar": {
+      "body": "ร่างกาย",
+      "heading1": "H1",
+      "heading2": "H2",
+      "heading3": "H3",
+      "bold": "ตัวหนา",
+      "italic": "ตัวเอียง",
+      "strike": "ขีดฆ่า",
+      "bulletList": "รายการสัญลักษณ์",
+      "numberedList": "รายการลำดับเลข",
+      "checklist": "รายการตรวจสอบ",
+      "quote": "อ้างอิง",
+      "link": "ลิงก์",
+      "image": "รูปภาพ",
+      "inlineCode": "โค้ดในบรรทัด",
+      "codeBlock": "บล็อกโค้ด"
+    },
+    "searchField": {
+      "clearSearch": "ล้างการค้นหา"
+    },
+    "sourceCopyButton": {
+      "copyFailed": "การคัดลอกล้มเหลว",
+      "clipboardRejected": "คลิปบอร์ดปฏิเสธข้อความ",
+      "failed": "ล้มเหลว",
+      "copiedLoaded": "คัดลอกโหลดแล้ว",
+      "copyLoaded": "โหลดสำเนาแล้ว",
+      "couldNotCopy": "คัดลอกไม่สำเร็จ"
+    },
+    "workspaceNameInput": {
+      "placeholder": "ชื่อ workspace"
+    },
+    "newWorkspaceFab": {
+      "newWorkspace": "workspace ใหม่"
+    },
+    "newWorkspaceSetupScriptField": {
+      "label": "สคริปต์ setup",
+      "hooks": "ตะขอ",
+      "run": "เรียกใช้",
+      "skip": "ข้าม",
+      "runSetupCommand": "เรียกใช้คำสั่ง setup"
+    },
+    "newWorkspaceSshConnectionField": {
+      "label": "SSH การเชื่อมต่อ",
+      "connecting": "กำลังเชื่อมต่อ...",
+      "connect": "เชื่อมต่อ",
+      "serverRecovery": "เซิร์ฟเวอร์ต้องการการกู้คืนจากเดสก์ท็อป: การตั้งค่า → โฮสต์ SSH → กู้คืนเซิร์ฟเวอร์"
+    },
+    "newWorktreeFormSheet": {
+      "createWorktree": "สร้าง worktree",
+      "noProjectsFound": "ไม่พบโครงการ",
+      "nameOrCreateFrom": "ชื่อหรือ 'สร้างจาก'",
+      "workspaceName": "ชื่อ workspace",
+      "agent": "ตัวแทน",
+      "connectTargetFirst": "เชื่อมต่อเป้าหมายก่อน",
+      "advanced": "ขั้นสูง",
+      "note": "โน้ต",
+      "notePlaceholder": "เขียนโน้ต",
+      "connectTarget": "เชื่อมต่อเป้าหมาย"
+    },
+    "newWorktreeModal": {
+      "remoteRepository": "พื้นที่เก็บข้อมูลระยะไกล"
+    },
+    "newWorktreeModalDrawers": {
+      "project": "โปรเจกต์",
+      "runOn": "เรียกใช้บน",
+      "agent": "ตัวแทน"
+    },
+    "newWorktreeProjectTargetFields": {
+      "project": "โปรเจกต์",
+      "selectProject": "เลือกโครงการ",
+      "runOn": "เรียกใช้บน",
+      "selectRunTarget": "เลือกเป้าหมายการวิ่ง"
+    },
+    "protocolBlockScreen": {
+      "updateMobileTitle": "อัปเดต Prompt มือถือ",
+      "updateDesktopTitle": "อัปเดต Prompt บนคอมพิวเตอร์ของคุณ",
+      "refreshWorkspaceTitle": "รีเฟรชพื้นที่ทำงานแบบเคลื่อนที่",
+      "refreshWorkspaceBody": "พื้นที่ทำงานที่แคชไว้สำหรับโฮสต์นี้เก่ากว่าที่เดสก์ท็อปคาดไว้ เชื่อมต่อกับโฮสต์นี้อีกครั้งเพื่อดาวน์โหลดโฮสต์ปัจจุบัน",
+      "mobileTooOldAppStore": "เดสก์ท็อปนี้ต้องการแอปมือถือ Prompt ที่ใหม่กว่า อัปเดต Prompt อุปกรณ์เคลื่อนที่จาก App Store จากนั้นลองโฮสต์นี้อีกครั้ง",
+      "mobileTooOldGitHubReleases": "เดสก์ท็อปนี้ต้องการแอปมือถือ Prompt ที่ใหม่กว่า อัปเดต Prompt มือถือจาก GitHub รีลีส จากนั้นลองโฮสต์นี้อีกครั้ง",
+      "workspaceNeedsUpdateAppStore": "พื้นที่ทำงานแบบเคลื่อนที่ของเดสก์ท็อปนี้ต้องการแอปมือถือ Prompt ที่ใหม่กว่า อัปเดต Prompt อุปกรณ์เคลื่อนที่จาก App Store จากนั้นลองโฮสต์นี้อีกครั้ง",
+      "workspaceNeedsUpdateGitHubReleases": "พื้นที่ทำงานแบบเคลื่อนที่ของเดสก์ท็อปนี้ต้องการแอปมือถือ Prompt ที่ใหม่กว่า อัปเดต Prompt มือถือจาก GitHub รีลีส จากนั้นลองโฮสต์นี้อีกครั้ง",
+      "desktopTooOldBody": "แอปเดสก์ท็อปที่จับคู่นี้เก่าเกินไปสำหรับแอป Prompt มือถือปัจจุบันของคุณ อัปเดต Prompt บนคอมพิวเตอร์ของคุณ จากนั้นลองใช้โฮสต์นี้อีกครั้ง",
+      "openAppStore": "เปิด App Store",
+      "openGitHubReleases": "เปิด GitHub การเผยแพร่",
+      "getVersion": "รับ Prompt {{version}}",
+      "refreshRecoveryNote": "หากข้อความนี้ยังคงอยู่ ให้ลบโฮสต์นี้ออกแล้วจับคู่อีกครั้ง",
+      "updateRecoveryNote": "ปรับปรุงแล้ว? กลับไปที่โฮสต์และรีเฟรชการเชื่อมต่อ หากข้อความนี้ยังคงอยู่ ให้ลบโฮสต์นี้ออกแล้วจับคู่อีกครั้ง",
+      "backToHosts": "กลับสู่เจ้าบ้าน"
+    },
+    "setupHookTrustDrawer": {
+      "scriptChangedTitle": "สคริปต์การตั้งค่าของ {{repoName}} เปลี่ยนไป",
+      "runSetupTitle": "เรียกใช้การตั้งค่าจาก {{repoName}}?",
+      "description": "orca.yaml ของที่เก็บนี้ทำงานก่อนที่พื้นที่ทำงานจะเริ่มทำงาน รันเฉพาะเมื่อคุณเชื่อถือที่เก็บนี้",
+      "newScriptLabel": "setup script ใหม่",
+      "scriptLabel": "สคริปต์ setup",
+      "runHooks": "เรียกใช้ hook",
+      "alwaysTrustAndRun": "ไว้วางใจและวิ่งอยู่เสมอ",
+      "dontRun": "ไม่เรียกใช้"
+    },
+    "smartWorkspaceAdvancedFields": {
+      "name": "ชื่อ",
+      "workspaceName": "ชื่อ workspace",
+      "branchName": "ชื่อ branch",
+      "derivedFromName": "มาจากชื่อ"
+    },
+    "smartWorkspaceSourceDrawer": {
+      "title": "ชื่อหรือ 'สร้างจาก'",
+      "crossRepoMessage": "รายการนี้อยู่ใน {{owner}}/{{repo}}",
+      "switchRepo": "สลับไปที่ {{repoName}}",
+      "connectRepository": "เชื่อมต่อที่เก็บกับแหล่งค้นหา",
+      "gitHubRemoteRequired": "repo SSH นี้ต้องการ GitHub รีโมตเพื่อแสดงรายการปัญหาและการประชาสัมพันธ์",
+      "noResults": "ไม่พบผลลัพธ์",
+      "typeWorkspaceName": "พิมพ์ชื่อพื้นที่ทำงานในช่องด้านล่าง",
+      "searchPlaceholder": "พิมพ์ชื่อหรือค้นหาแหล่งที่มา"
+    },
+    "smartWorkspaceSourceField": {
+      "optional": "[ไม่บังคับ]",
+      "openSelectedSource": "เปิดแหล่งที่เลือก",
+      "searchPlaceholder": "พิมพ์ชื่อหรือค้นหาแหล่งที่มา"
+    },
+    "smartWorkspaceSourceRow": {
+      "useName": "ใช้ \"{{name}}\"",
+      "nameWorkspace": "ตั้งชื่อพื้นที่ทำงานนี้",
+      "createBranch": "สร้างสาขา \"{{name}}\"",
+      "newBranch": "branch ใหม่",
+      "pullRequest": "PR #{{number}}",
+      "issue": "ฉบับที่ #{{number}}",
+      "mergeRequest": "MR !{{number}}"
+    },
+    "terminalShortcutSettings": {
+      "shortcutBar": "แถบทางลัด",
+      "shortcutBarDescription": "สลับปุ่มเพื่อแสดงหรือซ่อน และจับที่จับไว้เพื่อลากปุ่มตามลำดับที่คุณต้องการบนแถบทางลัดของเทอร์มินัล",
+      "resetDefaults": "รีเซ็ตค่าเริ่มต้น",
+      "resetDescription": "แสดงปุ่มลัดในตัวทุกปุ่มตามลำดับดั้งเดิม",
+      "customShortcuts": "ทางลัดแบบกำหนดเอง",
+      "empty": "ยังไม่มีการกำหนดทางลัดแบบกำหนดเอง",
+      "removeShortcut": "ลบ {{label}}",
+      "addShortcut": "เพิ่มทางลัดแบบกำหนดเอง...",
+      "addDescription": "สร้างคำสั่งผสมคีย์หรือแมโครข้อความ"
+    },
+    "voiceModelList": {
+      "modelSize": "{{size}} MB",
+      "modelProgress": "{{size}} · {{progress}}%",
+      "modelExtracting": "{{size}} · กำลังแยก...",
+      "recommended": "แนะนำ",
+      "inUse": "กำลังใช้",
+      "useModel": "ใช้ {{label}}",
+      "use": "ใช้",
+      "deleteModel": "ลบ {{label}}",
+      "downloadModel": "ดาวน์โหลด {{label}}"
+    },
+    "workspaceDetailPlaceholder": {
+      "title": "ไม่มีพื้นที่ทำงานเปิดอยู่",
+      "description": "เลือกพื้นที่ทำงานจากแถบด้านข้างเพื่อเปิดเทอร์มินัลที่นี่"
+    },
+    "worktreeListRow": {
+      "folder": "โฟลเดอร์",
+      "remoteHost": "โฮสต์ระยะไกล",
+      "project": "โครงการ {{repo}}",
+      "child": "เด็ก",
+      "children_one": "{{count}} เด็ก",
+      "children_other": "ย่อย {{count}} รายการ"
+    },
+    "accountsSnapshot": {
+      "invalidSnapshot": "สแนปชอตบัญชีไม่ถูกต้องจากโฮสต์"
+    },
+    "codexResetCredit": {
+      "available_one": "{{count}} รีเซ็ตได้",
+      "available_other": "{{count}} สามารถรีเซ็ตได้",
+      "resetTitle": "รีเซ็ตขีดจำกัดอัตราแล้ว",
+      "alreadyAppliedTitle": "รีเซ็ตแล้วใช้แล้ว",
+      "refresh": "Codex การใช้งานได้รับการรีเฟรชแล้ว",
+      "nothingToResetTitle": "ไม่มีอะไรจะรีเซ็ต",
+      "nothingToResetMessage": "ไม่มีกรอบเวลาจำกัดอัตราที่มีสิทธิ์ Codex หมดลง",
+      "noResetTitle": "ไม่มีการรีเซ็ต",
+      "noResetMessage": "บัญชีนี้ไม่มีเครดิตการรีเซ็ตที่ได้รับ",
+      "invalidResponse": "การตอบสนองการรีเซ็ตไม่ถูกต้องจากโฮสต์",
+      "expiryNowSingle": "หมดอายุตอนนี้",
+      "expiryNowMultiple": "รายการถัดไปหมดอายุตอนนี้",
+      "expiryMinutesSingle": "หมดอายุใน {{minutes}}ม",
+      "expiryMinutesMultiple": "ถัดไปจะหมดอายุใน {{minutes}}น",
+      "expiryHoursMinutesSingle": "หมดอายุใน {{hours}}ชม. {{minutes}}น",
+      "expiryHoursMinutesMultiple": "ถัดไปจะหมดอายุใน {{hours}}ชม. {{minutes}}น",
+      "expiryHoursSingle": "หมดอายุใน {{hours}}ชม",
+      "expiryHoursMultiple": "ถัดไปจะหมดอายุใน {{hours}}ชม",
+      "expiryDaysHoursSingle": "หมดอายุใน {{days}}วัน {{hours}}ชม",
+      "expiryDaysHoursMultiple": "ถัดไปจะหมดอายุใน {{days}}d {{hours}}h",
+      "expiryDaysSingle": "หมดอายุใน {{days}}ง",
+      "expiryDaysMultiple": "ถัดไปจะหมดอายุใน {{days}}ง"
+    },
+    "markdownBlocks": {
+      "copyCode": "คัดลอกโค้ด",
+      "openImage": "เปิดภาพ"
+    },
+    "mountedBottomDrawer": {
+      "dismissDrawer": "ยกเลิกลิ้นชัก"
+    },
+    "newWorktreeAgentSelection": {
+      "blankTerminal": "เทอร์มินัล เปล่า"
+    },
+    "useCodexResetCreditAction": {
+      "hostAccount": "{{identity}} บนโฮสต์",
+      "hostAccountConfirmMessage": "การดำเนินการนี้จะใช้จ่ายการรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับ {{identity}} บนโฮสต์ และรีเซ็ตกรอบเวลาจำกัดอัตราที่มีสิทธิ์ทันที",
+      "hostSelectedAccount": "บัญชีที่ได้รับการจัดการที่เลือกบนโฮสต์",
+      "hostSelectedAccountConfirmMessage": "การดำเนินการนี้จะใช้จ่ายการรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับบัญชีที่ได้รับการจัดการที่เลือกบนโฮสต์ และรีเซ็ตกรอบเวลาจำกัดอัตราที่มีสิทธิ์ทันที",
+      "wslAccount": "{{identity}} บน WSL {{distro}}",
+      "wslAccountConfirmMessage": "การดำเนินการนี้จะใช้จ่ายการรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับ {{identity}} บน WSL {{distro}} และรีเซ็ตกรอบเวลาจำกัดอัตราที่มีสิทธิ์ทันที",
+      "wslSelectedAccount": "บัญชีที่ได้รับการจัดการที่เลือกใน WSL {{distro}}",
+      "wslSelectedAccountConfirmMessage": "การดำเนินการนี้จะใช้จ่ายการรีเซ็ตที่ได้รับหนึ่งครั้งสำหรับบัญชีที่ได้รับการจัดการที่เลือกบน WSL {{distro}} และรีเซ็ตกรอบเวลาจำกัดอัตราที่มีสิทธิ์ทันที",
+      "detailsChanged": "รายละเอียดการรีเซ็ตมีการเปลี่ยนแปลง",
+      "detailsChangedMessage": "บัญชีหรือข้อเสนอการรีเซ็ตมีการเปลี่ยนแปลงก่อนที่โฮสต์จะติดต่อ Codex ตรวจสอบรายละเอียดที่อัปเดตแล้วยืนยันอีกครั้ง",
+      "resetFailed": "ไม่สามารถรีเซ็ตขีดจำกัดอัตราได้",
+      "confirmTitle": "ใช้การรีเซ็ตขีดจำกัดอัตราหรือไม่"
+    },
+    "nativeScreenRecovery": {
+      "title": "มีบางอย่างผิดพลาด",
+      "tryAgain": "ลองอีกครั้ง",
+      "home": "โฮม"
+    }
+  },
+  "pullRequest": {
+    "linkPrForm": {
+      "title": "เชื่อมโยงคำขอดึงที่มีอยู่",
+      "referenceLabel": "หมายเลข PR หรือ GitHub URL",
+      "referencePlaceholder": "#123 หรือ https://github.com/owner/repo/pull/123",
+      "linkNumber": "ลิงค์ #{{number}}",
+      "linkButton": "คำขอดึงลิงก์"
+    },
+    "prViewPanel": {
+      "providerUnavailable": "แผงตรวจสอบที่โฮสต์ไม่พร้อมใช้งานสำหรับผู้ให้บริการรายนี้",
+      "branchUnavailable": "สาขาปัจจุบันไม่พร้อมใช้งาน"
+    },
+    "prActionsSection": {
+      "unlinkFailed": "ไม่สามารถยกเลิกการเชื่อมโยงคำขอดึง",
+      "mergeConfirmTitle": "รวมคำขอดึง?",
+      "mergeButton": "ผสาน",
+      "closeConfirmTitle": "ปิดคำขอดึงไหม",
+      "closeConfirmMessage": "#{{number}} จะถูกปิดโดยไม่มีการรวม",
+      "reopenConfirmTitle": "เปิดคำขอดึงอีกครั้งหรือไม่",
+      "reopenConfirmMessage": "#{{number}} จะถูกเปิดอีกครั้ง",
+      "reopenButton": "เปิดใหม่",
+      "mergeAccessibilityLabel": "รวมคำขอดึง",
+      "recheckAccessibilityLabel": "ตรวจสอบสถานะการรวมอีกครั้ง",
+      "recheckButton": "ตรวจสอบอีกครั้ง",
+      "markReadyAccessibilityLabel": "ทำเครื่องหมายคำขอดึงพร้อมสำหรับการตรวจสอบ",
+      "markReadyButton": "พร้อมสำหรับการรีวิว",
+      "autoMergeLabel": "ผสานอัตโนมัติเมื่อพร้อม",
+      "autoMergeAccessibilityLabel": "สลับการรวมอัตโนมัติ",
+      "autoMergeOn": "เปิด",
+      "autoMergeOff": "ปิด",
+      "closeAccessibilityLabel": "ปิด pull request",
+      "reopenAccessibilityLabel": "เปิดคำขอดึงอีกครั้ง",
+      "unlinkAccessibilityLabel": "ยกเลิกการเชื่อมโยงคำขอดึง",
+      "unlinkButton": "ยกเลิกการเชื่อมโยง"
+    },
+    "prCheckDetail": {
+      "noDetails": "ไม่มีรายละเอียด",
+      "annotations": "คำอธิบายประกอบ",
+      "annotationsTruncated": "แสดง 20 annotation แรก",
+      "jobsTruncated": "แสดง 100 job แรก"
+    },
+    "checksSection": {
+      "unavailable": "ไม่มี checks",
+      "noChecks": "ไม่มีการตรวจสอบ",
+      "failing": "{{count}} ไม่ผ่าน",
+      "pendingCount": "{{count}} รอดำเนินการ",
+      "passed": "{{count}} ผ่านไป",
+      "neutralCount": "{{count}} เป็นกลาง",
+      "successful": "สำเร็จ",
+      "failed": "ล้มเหลว",
+      "cancelled": "ยกเลิกแล้ว",
+      "timedOut": "หมดเวลา",
+      "actionRequired": "ต้องดำเนินการ",
+      "neutral": "เป็นกลาง",
+      "skipped": "ข้ามแล้ว",
+      "queued": "อยู่ในคิว",
+      "inProgress": "กำลังดำเนินการ",
+      "pending": "รอดำเนินการ",
+      "loadDetailsFailed": "โหลดรายละเอียดการตรวจสอบไม่สำเร็จ",
+      "title": "เช็ค",
+      "rerunFailing": "ดำเนินการตรวจสอบที่ล้มเหลวอีกครั้ง",
+      "failingChecks_one": "{{count}} การตรวจสอบล้มเหลว",
+      "failingChecks_other": "{{count}} check ไม่ผ่าน",
+      "inspectOrFix": "ดูรายละเอียดหรือเริ่มให้ AI ลองแก้",
+      "fixFailing": "แก้ไขการตรวจสอบที่ล้มเหลวด้วย AI",
+      "fix": "แก้ไข",
+      "checkDetails": "{{name}} ตรวจสอบรายละเอียด",
+      "openOnWeb": "เปิด {{name}} บนเว็บ"
+    },
+    "commentCard": {
+      "justNow": "เมื่อสักครู่",
+      "minutesAgo_one": "{{count}}ม.ที่แล้ว",
+      "minutesAgo_other": "{{count}}ม.ที่แล้ว",
+      "hoursAgo_one": "{{count}}ชม.แล้ว",
+      "hoursAgo_other": "{{count}}ชม.แล้ว",
+      "daysAgo_one": "{{count}}วันที่ผ่านมา",
+      "daysAgo_other": "{{count}}วันที่ผ่านมา",
+      "monthsAgo_one": "{{count}}เดือนก่อน",
+      "monthsAgo_other": "{{count}}เดือนก่อน",
+      "yearsAgo_one": "{{count}}ปีที่แล้ว",
+      "yearsAgo_other": "{{count}}ปีที่แล้ว",
+      "resolved": "แก้ไขแล้ว",
+      "openOnGitHub": "เปิด comment บน GitHub",
+      "editPlaceholder": "แก้ไขความคิดเห็น...",
+      "replyToComment": "ตอบกลับ comment",
+      "reply": "ตอบกลับ",
+      "editComment": "แก้ไขความคิดเห็น",
+      "deleteComment": "ลบความคิดเห็น",
+      "unresolveThread": "ยกเลิกการแก้ไขเธรด",
+      "resolveThread": "แก้กระทู้",
+      "unresolve": "ยกเลิกสถานะแก้แล้ว",
+      "resolve": "แก้ไขแล้ว",
+      "replyPlaceholder": "เขียนตอบกลับ...",
+      "deleteConfirmTitle": "ลบ comment หรือไม่",
+      "deleteConfirmMessage": "การดำเนินการนี้จะลบความคิดเห็นใน GitHub อย่างถาวร"
+    },
+    "commentsSection": {
+      "all": "ทั้งหมด",
+      "humans": "มนุษย์",
+      "bots": "บอท",
+      "noBotComments": "ไม่มี comment จากบอท",
+      "noHumanComments": "ไม่มี comment จากมนุษย์",
+      "noComments": "ยังไม่มี comment",
+      "description": "คำอธิบาย",
+      "descriptionLoadFailed": "ไม่สามารถโหลดคำอธิบายได้ แตะรีเฟรชเพื่อลองอีกครั้ง",
+      "noDescription": "ไม่มีคำอธิบาย",
+      "title": "ความคิดเห็น",
+      "commentsLoadFailed": "ไม่สามารถโหลดความคิดเห็นได้ แตะรีเฟรชเพื่อลองอีกครั้ง",
+      "showMoreOf": "แสดง {{count}} เพิ่มเติมจาก {{remaining}}",
+      "showMore": "แสดงเพิ่มอีก {{count}} รายการ",
+      "addCommentPlaceholder": "เพิ่ม comment…",
+      "comment": "ความคิดเห็น",
+      "resolvedThreadSingle": "เธรดที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "resolvedThreadCount": "แก้ไขกระทู้โดย {{author}} ({{count}})",
+      "resolvedCommentSingle": "comment ที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "resolvedCommentCount": "แก้ไขความคิดเห็นโดย {{author}} ({{count}})"
+    },
+    "conflictingFilesSection": {
+      "detailsUnavailable": "ไม่มีรายละเอียดไฟล์ conflict",
+      "refreshing": "กำลังรีเฟรชรายละเอียด conflict…",
+      "localMergeClean": "GitHub รายงานข้อขัดแย้ง แต่ Git ในเครื่องไม่ได้ทำซ้ำ รีเฟรช PR หรือส่งสาขาเพื่อคำนวณความสามารถในการรวมใหม่",
+      "copyFailed": "ไม่สามารถคัดลอกข้อความ",
+      "copyCommands": "คัดลอกคำสั่ง",
+      "commitsBehind_one": "{{count}} กระทำที่อยู่เบื้องหลัง (การกระทำฐาน: {{baseCommit}})",
+      "commitsBehind_other": "{{count}} กระทำที่อยู่เบื้องหลัง (การกระทำฐาน: {{baseCommit}})",
+      "title": "ข้อขัดแย้ง",
+      "mustResolve": "branch นี้มี conflict ที่ต้องแก้",
+      "runFromWorktree": "รันจาก worktree นี้",
+      "copyRefreshCommands": "คัดลอกคำสั่งรีเฟรชความสามารถในการ merge",
+      "filesHeading": "ไฟล์ที่มี conflict",
+      "resolveWithAi": "แก้ไขข้อขัดแย้งกับ AI"
+    },
+    "reviewersSection": {
+      "requested": "ร้องขอ",
+      "approved": "Approve แล้ว",
+      "changesRequested": "ขอให้แก้ไข",
+      "commented": "แสดงความคิดเห็น",
+      "dismissed": "ถูกไล่ออก",
+      "pending": "รอดำเนินการ",
+      "reviewed": "ตรวจสอบแล้ว",
+      "addOrRemove": "เพิ่มหรือลบผู้วิจารณ์",
+      "title": "ผู้วิจารณ์",
+      "loading": "กำลังโหลดผู้ตรวจสอบ...",
+      "loadFailed": "ไม่สามารถโหลดผู้วิจารณ์ได้ แตะรีเฟรชเพื่อลองอีกครั้ง",
+      "noReviewers": "ไม่มีการร้องขอผู้ตรวจสอบ",
+      "removeReviewer": "ลบ {{login}}"
+    },
+    "prSidebarHeader": {
+      "openOnWeb": "เปิดคำขอดึง #{{number}} บนเว็บ",
+      "openInBrowser": "เปิดคำขอดึง #{{number}} ในเบราว์เซอร์",
+      "cancelEditingTitle": "ยกเลิกการแก้ไขชื่อ",
+      "saveTitle": "บันทึกชื่อ",
+      "editTitle": "แก้ไขชื่อคำขอดึง"
+    },
+    "prSidebarCreateEmptyState": {
+      "branchRequired": "ตรวจสอบสาขาก่อนที่จะสร้างคำขอดึง",
+      "createFailed": "ไม่สามารถสร้างคำขอดึงได้",
+      "title": "ดึงคำขอ",
+      "refreshPullRequest": "รีเฟรชคำขอดึง",
+      "createPullRequest": "สร้างคำขอดึง",
+      "createPr": "สร้าง PR",
+      "linkedPrUnavailable": "PR ที่ลิงก์ #{{number}} ไม่พร้อมใช้งาน",
+      "noOpenPullRequest": "ไม่มีคำขอดึงแบบเปิด",
+      "refreshOrCreate": "รีเฟรชเพื่อตรวจสอบอีกครั้ง หรือสร้าง PR ใหม่สำหรับสาขานี้",
+      "branchNotLinked": "{{branch}} ไม่ได้เชื่อมโยงกับ PR แบบเปิด",
+      "currentBranchNotLinked": "สาขาปัจจุบันไม่ได้เชื่อมโยงกับ PR แบบเปิด",
+      "linkExistingPullRequest": "เชื่อมโยงคำขอดึงที่มีอยู่",
+      "linkExistingPr": "เชื่อมโยง PR ที่มีอยู่"
+    },
+    "reviewerPickerDrawer": {
+      "title": "ผู้วิจารณ์",
+      "searchPeople": "ค้นหาผู้คน",
+      "loadFailed": "ไม่สามารถโหลดบุคคลได้",
+      "noMatches": "ไม่มีคนที่ตรงกัน",
+      "removeReviewer": "ลบ {{login}}",
+      "requestReviewer": "คำขอ {{login}}"
+    },
+    "markdownBlocks": {
+      "details": "รายละเอียด"
+    },
+    "prActionsState": {
+      "mergedLabel": "Merge แล้ว",
+      "mergedHint": "pull request นี้ merge แล้ว",
+      "closedLabel": "ปิดแล้ว",
+      "closedHint": "pull request นี้ปิดแล้ว",
+      "draftLabel": "ฉบับร่าง",
+      "draftHint": "pull request นี้ยังเป็น draft",
+      "reviewRequiredLabel": "ต้อง approve",
+      "reviewRequiredHint": "GitHub กำหนดให้ต้อง approve ก่อนจึงจะ merge pull request นี้ได้",
+      "changesRequestedLabel": "ขอให้แก้ไข",
+      "changesRequestedHint": "GitHub แจ้งว่า pull request นี้มีการขอให้แก้ไข",
+      "conflictsLabel": "ข้อขัดแย้ง",
+      "conflictsHint": "GitHub แจ้งว่ามี merge conflict",
+      "mergeQueueLabel": "merge เมื่อพร้อม",
+      "mergeQueueHint": "base branch นี้ใช้ merge queue ของ GitHub",
+      "mergeQueueAutoMergeOnLabel": "auto-merge เปิดอยู่",
+      "mergeQueueAutoMergeOnHint": "base branch นี้ใช้ merge queue ของ GitHub",
+      "mergeStatusUnavailableLabel": "ผสาน",
+      "mergeStatusUnavailableHint": "ไม่มีข้อมูลสถานะ merge ของ PR นี้",
+      "behindLabel": "ล้าหลัง",
+      "behindHint": "อัปเดต branch ก่อน merge",
+      "blockedLabel": "ถูกบล็อก",
+      "blockedHint": "GitHub แจ้งว่า pull request นี้ถูกบล็อก",
+      "mergeableChecksFailedLabel": "checks ไม่ผ่าน",
+      "mergeableChecksFailedHint": "GitHub แจ้งว่า PR นี้ merge ได้ แต่ checks บางรายการไม่ผ่าน",
+      "mergeableChecksPendingLabel": "checks กำลังรอ",
+      "mergeableChecksPendingHint": "GitHub แจ้งว่า PR นี้ merge ได้ แต่ checks ยังทำงานอยู่",
+      "mergeableChecksPassedLabel": "merge ได้",
+      "mergeableChecksPassedHint": "GitHub แจ้งว่า PR นี้ merge ได้และ checks ผ่านแล้ว",
+      "mergeableLabel": "merge ได้",
+      "mergeableHint": "GitHub แจ้งว่า PR นี้ merge ได้",
+      "checksPassedLabel": "checks ผ่าน",
+      "checksPassedHint": "checks ผ่านแล้ว จะตรวจสิทธิ์ในการ merge อีกครั้งก่อน merge",
+      "checkingLabel": "กำลังตรวจสอบ",
+      "checkingHint": "GitHub ยังคำนวณสถานะ merge ของ pull request นี้อยู่",
+      "stackDraft": "#{{number}} ยังคงเป็นแบบร่าง",
+      "stackClosed": "#{{number}} ปิดแล้ว",
+      "stackConflicts": "#{{number}} มีความขัดแย้งในการรวม",
+      "stackChangesRequested": "#{{number}} ได้ร้องขอการเปลี่ยนแปลง",
+      "stackReviewRequired": "#{{number}} ยังคงต้องได้รับอนุมัติการตรวจทาน",
+      "stackBehind": "#{{number}} จะต้องได้รับการอัปเดต",
+      "stackBlocked": "#{{number}} ถูกบล็อค",
+      "methodMerge": "สร้าง merge commit",
+      "methodSquash": "Squash และ merge",
+      "methodRebase": "Rebase และ merge",
+      "mergeConfirmMessage": "สิ่งนี้จะรวม #{{number}} เข้ากับสาขาฐาน",
+      "queueThrough_one": "เข้าคิวจนถึง #{{number}} · {{count}} PR",
+      "queueThrough_other": "เข้าคิวผ่าน #{{number}} · {{count}} PRs",
+      "mergeThrough_one": "ผสานผ่าน #{{number}} · {{count}} PR",
+      "mergeThrough_other": "ผสานผ่าน #{{number}} · {{count}} PR",
+      "queueStackMessage": "GitHub จะเพิ่ม pull request นี้และ pull request ทั้งหมดที่อยู่ใต้ลงใน merge queue",
+      "mergeStackMessage": "GitHub จะ merge pull request นี้และ pull request ทั้งหมดที่อยู่ใต้ใน stack"
+    },
+    "prCheckDetailContent": {
+      "annotation": "คำอธิบายประกอบ",
+      "unknown": "ไม่ทราบ",
+      "failedJobs": "job ที่ล้มเหลว",
+      "jobs": "งาน"
+    },
+    "prChecksPresentation": {
+      "noChecks": "ไม่มีการตรวจสอบ",
+      "failing_one": "{{count}} ไม่ผ่าน",
+      "failing_other": "{{count}} ไม่ผ่าน",
+      "pending_one": "{{count}} รอดำเนินการ",
+      "pending_other": "{{count}} รอดำเนินการ",
+      "passed_one": "{{count}} ผ่านไป",
+      "passed_other": "{{count}} ผ่านไป",
+      "neutral_one": "{{count}} เป็นกลาง",
+      "neutral_other": "{{count}} เป็นกลาง",
+      "unavailable": "ไม่มี checks",
+      "stateOpen": "เปิด",
+      "stateMerged": "Merge แล้ว",
+      "stateDraft": "ฉบับร่าง",
+      "stateClosed": "ปิดแล้ว"
+    },
+    "prCommentAudienceLabels": {
+      "all": "ทั้งหมด",
+      "humans": "มนุษย์",
+      "bots": "บอท",
+      "noBotComments": "ไม่มี comment จากบอท",
+      "noHumanComments": "ไม่มี comment จากมนุษย์",
+      "noComments": "ยังไม่มี comment"
+    }
+  },
+  "workspace": {
+    "branchChoice": {
+      "title": "branch สำหรับ worktree นี้",
+      "existing": "branch ที่มีอยู่",
+      "existingHint": "commit ใหม่จะอยู่บน branch นี้",
+      "new": "branch ใหม่",
+      "newHint": "สร้าง branch ในเครื่องใหม่",
+      "newName": "ชื่อ branch ใหม่",
+      "automaticName": "ชื่ออัตโนมัติ",
+      "hostUpdateRequired": "อัปเดต Prompt บนโฮสต์พื้นที่ทำงานเพื่อใช้สาขาซ้ำหรือสร้างสาขาแยกต่างหากอย่างชัดเจน"
+    }
+  },
+  "browser": {
+    "addressField": {
+      "urlPlaceholder": "URL"
+    },
+    "pane": {
+      "invalidUrl": "ป้อน URL ที่ถูกต้อง"
+    },
+    "paneView": {
+      "forward": "ไปข้างหน้า",
+      "reload": "โหลดใหม่",
+      "dialogTitle": "กล่องโต้ตอบเบราว์เซอร์",
+      "keyboardPlaceholder": "พิมพ์บนหน้า...",
+      "sendText": "ส่งข้อความไปยังเบราว์เซอร์"
+    },
+    "pointerModifiers": {
+      "clickModifier": "{{key}} ตัวแก้ไขการคลิก"
+    },
+    "viewModeSwitch": {
+      "webView": "แสดงมุมมองเว็บไซต์ของเว็บ",
+      "mobileView": "แสดงมุมมองเว็บไซต์บนมือถือ"
+    },
+    "useBrowserCommands": {
+      "sent": "ส่งแล้ว",
+      "deliveryUnconfirmed": "การจัดส่งไม่ได้รับการยืนยัน — ตรวจสอบหน้าก่อนลองอีกครั้ง",
+      "dialogAnswerFailed": "คำตอบนั้นไปไม่ถึงหน้า"
+    }
+  },
+  "files": {
+    "fileExplorerPanel": {
+      "connecting": "กำลังเชื่อมต่อกับเดสก์ท็อป...",
+      "waiting": "กำลังรอเดสก์ท็อป...",
+      "loadFailed": "ไม่สามารถโหลดไฟล์ได้",
+      "loadInterrupted": "การโหลดโฟลเดอร์ถูกขัดจังหวะ",
+      "closeFiles": "ปิดไฟล์",
+      "backToSession": "กลับไปที่เซสชั่น",
+      "title": "ไฟล์",
+      "truncatedList": "{{worktreeLabel}} - แสดง 5,000 รายการแรก",
+      "emptyState": "ไม่พบไฟล์"
+    },
+    "fileMarkdownPreview": {
+      "viewSource": "ดูแหล่งที่มาของ Markdown",
+      "viewPreview": "ดูตัวอย่าง Markdown ที่แสดงผล",
+      "copyLoadedSource": "คัดลอกแหล่ง Markdown ที่โหลด",
+      "copySource": "คัดลอกแหล่งที่มาของ Markdown"
+    },
+    "fileMediaPreview": {
+      "loadFailed": "ไม่สามารถโหลดสื่อได้",
+      "waiting": "กำลังรอเดสก์ท็อป...",
+      "downloading": "กำลังดาวน์โหลด {{bytes}} จาก {{total}}",
+      "loading": "กำลังโหลดสื่อ..."
+    },
+    "filePreviewBody": {
+      "emptyFile": "ไฟล์ว่าง",
+      "imageLabel": "{{title}} ภาพ"
+    },
+    "filePreviewEditableSource": {
+      "editorLabel": "{{title}} บรรณาธิการ"
+    },
+    "filePreviewScreen": {
+      "loading": "กำลังโหลดตัวอย่าง…",
+      "waiting": "กำลังรอเดสก์ท็อป...",
+      "loadFailed": "ไม่สามารถโหลดตัวอย่างได้",
+      "title": "ตัวอย่าง",
+      "saveFailed": "ไม่สามารถบันทึกไฟล์ได้",
+      "backToFiles": "กลับไปที่ไฟล์",
+      "saveArtifact": "บันทึกสิ่งประดิษฐ์เทอร์มินัล",
+      "fileTitle": "ไฟล์",
+      "openFailed": "ไม่สามารถเปิดไฟล์ได้",
+      "chooseWorkspaceFile": "เลือกไฟล์ภายในพื้นที่ทำงานนี้",
+      "discardTitle": "ทิ้งการเปลี่ยนแปลงหรือไม่",
+      "discardMessage": "การแก้ไขที่ไม่ได้บันทึกจะสูญหาย",
+      "discardMessageSaving": "การบันทึกที่กำลังดำเนินอยู่อาจไม่เสร็จสิ้น การแก้ไขที่ไม่ได้บันทึกจะสูญหาย",
+      "discard": "ละทิ้ง",
+      "stay": "อยู่"
+    },
+    "filePreviewSourceText": {
+      "previewLabel": "ดูตัวอย่างไฟล์",
+      "truncatedNote": "การแสดงตัวอย่างถูกตัดทอน ขนาดไฟล์: {{size}}"
+    },
+    "markdownPreviewImage": {
+      "loadFailed": "ไม่สามารถโหลดภาพได้",
+      "expandImage": "ขยาย {{alt}}",
+      "expandFallback": "ขยายรูปภาพ",
+      "imageLabel": "รูปภาพมาร์กดาวน์"
+    },
+    "pdfPreview": {
+      "openFailed": "ไม่สามารถเปิด PDF นี้",
+      "updateRequired": "อัปเดต Prompt มือถือเพื่อเปิด PDF",
+      "opening": "กำลังเปิด PDF...",
+      "open": "เปิด PDF"
+    },
+    "fileExplorerRow": {
+      "loading": "กำลังโหลด…",
+      "loadFolderFailed": "ไม่สามารถโหลดโฟลเดอร์ได้",
+      "retryLoading": "ลองโหลดอีกครั้ง {{path}}",
+      "openFolder": "เปิดโฟลเดอร์ {{name}}",
+      "fileUnavailable": "{{name}} ไม่สามารถใช้งานได้บนมือถือ",
+      "previewFile": "ดูตัวอย่างไฟล์ {{name}}",
+      "unavailable": "ไม่สามารถใช้งานได้บนมือถือ"
+    },
+    "fileMutationOwnership": {
+      "sshOwnerChanged": "ไม่สามารถตรวจสอบการเชื่อมต่อ SSH เชื่อมต่อโฮสต์ใหม่และลองอีกครั้ง"
+    },
+    "filePreviewResponse": {
+      "fileChanged": "ไฟล์มีการเปลี่ยนแปลงบนเดสก์ท็อป โหลดตัวอย่างซ้ำก่อนที่จะบันทึก",
+      "binaryUnavailable": "การแสดงตัวอย่างไบนารีไม่พร้อมใช้งาน",
+      "fileTooLarge": "ไฟล์ใหญ่เกินไปสำหรับการแสดงตัวอย่างบนมือถือ",
+      "reloadBeforeSaving": "โหลดตัวอย่างซ้ำก่อนที่จะบันทึก",
+      "filesystemUnreachable": "ไม่สามารถเข้าถึงระบบไฟล์เดสก์ท็อป",
+      "fileNotFound": "ไม่พบไฟล์",
+      "loadFailed": "ไม่สามารถโหลดตัวอย่างได้",
+      "unknownSize": "ขนาดที่ไม่รู้จัก",
+      "bytes": "{{size}} B",
+      "kilobytes": "{{size}} KB",
+      "megabytes": "{{size}} MB"
+    }
+  },
+  "session": {
+    "browserTabActionSheet": {
+      "title": "เบราว์เซอร์",
+      "forward": "ไปข้างหน้า",
+      "reload": "โหลดใหม่"
+    },
+    "terminalLiveInputStatus": {
+      "listening": "กำลังฟัง",
+      "processing": "กำลังประมวลผล",
+      "startingMic": "กำลังเริ่มไมค์",
+      "liveInput": "อินพุตสด",
+      "uploadingImageTitle": "กำลังอัพโหลดรูปภาพ",
+      "releaseMicHint": "ปล่อยไมโครโฟนเพื่อหยุด",
+      "stopHint": "แตะไมค์เพื่อหยุด",
+      "transcribing": "การถอดเสียงบนเดสก์ท็อป",
+      "preparingMic": "กำลังเตรียมไมโครโฟน",
+      "uploadingImage": "กำลังอัปโหลดภาพไปยังโฮสต์"
+    },
+    "diffCommentLineRow": {
+      "diffLine": "{{title}} เส้นต่าง {{line}}",
+      "addNote": "เพิ่มบันทึกในบรรทัด {{line}}",
+      "line": "เส้น {{line}}",
+      "deleteNote": "ลบบันทึกในบรรทัด {{line}}",
+      "placeholder": "เพิ่มโน้ตรีวิว",
+      "saveNote": "บันทึกหมายเหตุ"
+    },
+    "markdownReader": {
+      "readOnly": "อ่านอย่างเดียว",
+      "changedOnDesktop": "เปลี่ยนบนเดสก์ท็อปแล้ว",
+      "dismissKeyboard": "ปิดแป้นพิมพ์",
+      "dismissKeyboardHint": "ซ่อนแป้นพิมพ์ซอฟต์แวร์และเปิดโปรแกรมแก้ไขมาร์กดาวน์ไว้",
+      "discard": "ละทิ้ง",
+      "copyLoadedSource": "คัดลอกแหล่ง Markdown ที่โหลด",
+      "copySource": "คัดลอกแหล่งที่มาของ Markdown",
+      "copyLoaded": "โหลดสำเนาแล้ว",
+      "copyPathLabel": "คัดลอกเส้นทาง Markdown",
+      "copyPath": "คัดลอกเส้นทาง"
+    },
+    "nativeChatCardHeaderAction": {
+      "collapse": "ยุบ"
+    },
+    "nativeChatFloatingControls": {
+      "scrollToLatest": "เลื่อนไปที่ล่าสุด"
+    },
+    "nativeChatFullContent": {
+      "partialOutput": "แสดง {{shown}} จาก {{total}}",
+      "showFullOutput": "แสดงเอาต์พุตทั้งหมด",
+      "loadOutputFailed": "แสดงเอาต์พุตทั้งหมด — ไม่สามารถโหลดได้ แตะเพื่อลองอีกครั้ง",
+      "partialMessage": "กำลังแสดงส่วนหนึ่งของข้อความนี้",
+      "showFullMessage": "แสดงข้อความทั้งหมด",
+      "loadMessageFailed": "แสดงข้อความทั้งหมด ไม่สามารถโหลดได้ แตะเพื่อลองอีกครั้ง"
+    },
+    "queuedCardText": {
+      "showLessHint": "แสดงข้อความน้อยลง",
+      "showMoreHint": "แสดงข้อความทั้งหมด",
+      "showLess": "แสดงน้อยลง",
+      "showMore": "แสดงเพิ่มเติม"
+    },
+    "queuedMessageCardRow": {
+      "images_one": "{{count}} ภาพ",
+      "images_other": "{{count}} รูปภาพ",
+      "sendAgainHint": "ส่งข้อความนี้อีกครั้ง",
+      "steerHint": "ส่งโดยไม่ขัดจังหวะโมเดล",
+      "sendHint": "ส่งข้อความนี้",
+      "steer": "ปรับทิศทาง",
+      "send": "ส่ง",
+      "deleteHint": "ลบข้อความที่อยู่ในคิวนี้",
+      "moreActions": "การดำเนินการเพิ่มเติม",
+      "showLessHint": "แสดงข้อความน้อยลง"
+    },
+    "queuedMessageComposer": {
+      "commandsNotAllowed": "บันทึกคำสั่งในข้อความที่อยู่ในคิวไม่ได้",
+      "editingAttributed": "การแก้ไขข้อความ · {{attribution}}",
+      "editing": "กำลังแก้ไขข้อความ"
+    },
+    "accessoryKeys": {
+      "dismissKeyboard": "ปิดแป้นพิมพ์",
+      "dismissKeyboardHint": "ซ่อนแป้นพิมพ์ซอฟต์แวร์และเปิดเซสชันเทอร์มินัลปัจจุบันไว้",
+      "switchToDesktopMode": "สลับไปที่โหมดเดสก์ท็อป",
+      "switchToPhoneMode": "สลับไปโหมดโทรศัพท์",
+      "switchToBufferedInput": "สลับไปยังอินพุตคำสั่งบัฟเฟอร์",
+      "switchToLiveInput": "สลับไปที่อินพุตเทอร์มินัลแบบสด",
+      "pasteFromClipboard": "วางจากคลิปบอร์ด",
+      "paste": "วาง",
+      "sendKey": "ส่ง {{label}}",
+      "addCustomShortcut": "เพิ่มทางลัดที่กำหนดเอง"
+    },
+    "activeContent": {
+      "noTabs": "ไม่มีแท็บในเซสชันนี้",
+      "creatingTab": "กำลังสร้าง…",
+      "createTab": "สร้างแท็บ",
+      "fileTitle": "ไฟล์",
+      "terminalTakingLonger": "เทอร์มินัลใช้เวลานานกว่าที่คาดไว้",
+      "loadingTerminal": "กำลังโหลดเทอร์มินัล",
+      "retryLoadingTerminal": "ลองโหลดเทอร์มินัลอีกครั้ง"
+    },
+    "commandDock": {
+      "liveInputLabel": "อินพุตเทอร์มินัลสด",
+      "liveInputHint": "ข้อความที่พิมพ์จะถูกส่งไปยังเทอร์มินัลที่ใช้งานอยู่โดยตรง",
+      "commandPlaceholder": "พิมพ์คำสั่ง…",
+      "sendCommand": "ส่งคำสั่ง"
+    },
+    "contentRow": {
+      "dismissCreationWarning": "ปิดคำเตือนการสร้างพื้นที่ทำงาน"
+    },
+    "diffLineRow": {
+      "diffLineLabel": "{{title}} เส้นต่าง {{line}}",
+      "addNoteLabel": "เพิ่มบันทึกในบรรทัด {{line}}",
+      "lineNumber": "เส้น {{line}}",
+      "deleteNoteLabel": "ลบบันทึกในบรรทัด {{line}}",
+      "notePlaceholder": "เพิ่มโน้ตรีวิว",
+      "saveNote": "บันทึกหมายเหตุ"
+    },
+    "fileReader": {
+      "noReviewNotes": "ไม่มีบันทึกการทบทวน",
+      "reviewNotes_one": "{{count}} บันทึกการทบทวน",
+      "reviewNotes_other": "{{count}} บันทึกการทบทวน",
+      "copyReviewNotes": "คัดลอกบันทึกการทบทวน",
+      "sendReviewNotes": "ส่งบันทึกการตรวจสอบไปยัง AI",
+      "send": "ส่ง",
+      "imageLabel": "{{title}} ภาพ",
+      "previewLabel": "{{title}} ดูตัวอย่าง"
+    },
+    "header": {
+      "showSidebar": "แสดงแถบด้านข้าง",
+      "backToWorktrees": "กลับไปที่ต้นไม้ทำงาน",
+      "terminalTitle": "เทอร์มินัล",
+      "reconnectToDesktop": "เชื่อมต่อกับเดสก์ท็อปอีกครั้ง",
+      "openFileExplorer": "เปิดตัวสำรวจไฟล์",
+      "openSourceControl": "การควบคุมโอเพ่นซอร์ส",
+      "moreActions": "การดำเนินการเซสชันเพิ่มเติม"
+    },
+    "headerMoreActionsSheet": {
+      "agentHistory": "ประวัติตัวแทน",
+      "agentHistoryHint": "เรียกดูและดำเนินการเซสชันตัวแทนต่อ",
+      "checks": "เช็ค",
+      "checksHint": "เปิดการตรวจสอบคำขอดึง"
+    },
+    "routeScreen": {
+      "openingWorkspace": "กำลังเปิดพื้นที่ทำงาน"
+    },
+    "sheets": {
+      "newTab": "แท็บใหม่",
+      "terminal": "เทอร์มินัล",
+      "browser": "เบราว์เซอร์",
+      "browserUpdateRequired": "จำเป็นต้องมีการอัปเดตเดสก์ท็อปสำหรับการสตรีมเบราว์เซอร์มือถือ",
+      "markdownNote": "หมายเหตุมาร์กดาวน์",
+      "sendReviewNotes": "ส่งบันทึกการตรวจสอบ",
+      "notesHint": "เลือกเซสชันตัวแทนสำหรับบันทึกปัจจุบัน",
+      "copyNotes": "คัดลอกบันทึกย่อ",
+      "notesCopied": "คัดลอกหมายเหตุแล้ว",
+      "copyNotesFailed": "ไม่สามารถคัดลอกบันทึกได้",
+      "markdown": "Markdown",
+      "copyPath": "คัดลอกเส้นทาง",
+      "file": "ไฟล์",
+      "chat": "แชต",
+      "unsavedMarkdown": "การเปลี่ยนแปลงมาร์กดาวน์ที่ยังไม่ได้บันทึก",
+      "draftsHint": "คัดลอกหรือทิ้งร่างโทรศัพท์ก่อนออกเดินทาง",
+      "copyAllAndLeave": "คัดลอกทั้งหมด & ออก",
+      "copyDraftsFailed": "ไม่สามารถคัดลอกฉบับร่างได้",
+      "discardAndLeave": "ทิ้งและออก",
+      "discardChanges": "ยกเลิกการเปลี่ยนแปลง",
+      "discardMessage": "แทนที่ร่างโทรศัพท์ด้วยไฟล์เดสก์ท็อปล่าสุดหรือไม่",
+      "discard": "ละทิ้ง",
+      "newBrowser": "เบราว์เซอร์ใหม่",
+      "urlPrompt": "ป้อน URL หรือเว้นว่างไว้สำหรับแท็บใหม่",
+      "shortcut": "ทางลัด",
+      "removeShortcutMessage": "ต้องการนำทางลัดที่กำหนดเองนี้ออกไหม",
+      "renameTerminal": "เปลี่ยนชื่อเทอร์มินัล",
+      "terminalName": "ชื่อเทอร์มินัล"
+    },
+    "tabStrip": {
+      "tabStatus": "{{title}}, {{status}}",
+      "newTab": "แท็บใหม่",
+      "quickCommandsUpdateRequired": "จำเป็นต้องมีการอัปเดตเดสก์ท็อปสำหรับคำสั่งด่วน",
+      "checkingCapabilities": "กำลังตรวจสอบความสามารถของเดสก์ท็อป — โปรดลองอีกครั้งในอีกสักครู่"
+    },
+    "terminalInputActions": {
+      "sendingImage": "กำลังส่งภาพ",
+      "attachPhoto": "แนบรูปถ่าย",
+      "attachFileHint": "กดค้างเพื่อแนบไฟล์แทน",
+      "stopDictation": "หยุดการเขียนตามคำบอกด้วยเสียง",
+      "transcribingDictation": "การถอดเสียงตามคำบอก",
+      "startingDictation": "กำลังเริ่มเขียนตามคำบอกด้วยเสียง",
+      "startDictation": "เริ่มการเขียนตามคำบอกด้วยเสียง"
+    },
+    "quickCommandEditorForm": {
+      "terminalCommand": "คำสั่ง terminal",
+      "agentPrompt": "Prompt ของ agent",
+      "label": "ป้ายกำกับ",
+      "labelPlaceholder": "เริ่ม dev server",
+      "action": "การดำเนินการ",
+      "agent": "ตัวแทน",
+      "chooseAgent": "เลือก agent",
+      "prompt": "พรอมต์",
+      "commandText": "ข้อความคำสั่ง",
+      "promptPlaceholder": "ให้ agent ตรวจสอบ workspace นี้",
+      "olderHostPromptTooLong": "นานเกินไปสำหรับโฮสต์นี้ อัปเดต Prompt บนโฮสต์เพื่อบันทึกข้อความแจ้งที่ยาวขึ้น",
+      "promptTooLong": "ยาวเกินกว่าจะบันทึกได้",
+      "promptSizeKilobytes": "{{used}} KB / {{max}} KB",
+      "promptSizeCharacters": "{{used}} / {{max}} ตัวอักษร",
+      "promptHint": "รองรับทักษะ เส้นทางไฟล์ และคำสั่งในตัว",
+      "advanced": "ขั้นสูง",
+      "appendEnter": "ต่อ Enter",
+      "appendEnterDescription": "ส่งทันทีแทนที่จะแค่แทรกข้อความ",
+      "scope": "ขอบเขต",
+      "globalScope": "ส่วนกลาง",
+      "projectScope": "โปรเจกต์",
+      "addQuickCommand": "เพิ่มคำสั่งด่วน"
+    },
+    "quickCommandRow": {
+      "copyFailed": "คัดลอกไม่สำเร็จ",
+      "copyCommand": "คัดลอก {{label}}",
+      "nothingToCopy": "ไม่มีข้อมูลให้คัดลอก",
+      "runCommand": "วิ่ง {{label}}",
+      "editCommand": "แก้ไข {{label}}",
+      "deleteCommand": "ลบ {{label}}"
+    },
+    "quickCommandsList": {
+      "searchPlaceholder": "ค้นหาคำสั่งด่วน...",
+      "emptyState": "ยังไม่มีคำสั่งด่วน",
+      "noMatches": "ไม่มีคำสั่งด่วนที่ตรงกัน",
+      "projectGroup": "โครงการนี้",
+      "globalGroup": "ส่วนกลาง",
+      "newCommand": "คำสั่งด่วนใหม่"
+    },
+    "quickCommandsSheet": {
+      "deleteConfirmTitle": "ลบ \"{{label}}\"?",
+      "untitled": "ไม่มีชื่อ",
+      "deleteConfirmMessage": "คำสั่งด่วนนี้จะถูกนำออกจากรายการที่บันทึกไว้",
+      "editTitle": "แก้ไขคำสั่งด่วน",
+      "addTitle": "เพิ่มคำสั่งด่วน",
+      "chooseAgentTitle": "เลือกตัวแทน",
+      "title": "คำสั่งด่วน",
+      "editorDescription": "บันทึกคำสั่งเทอร์มินัลหรือพรอมต์ของตัวแทนเพื่อการเข้าถึงที่รวดเร็ว"
+    },
+    "quickCommandsTabButton": {
+      "quickCommands": "คำสั่งด่วน"
+    },
+    "aiVaultResumeLaunch": {
+      "createFailed": "ไม่สามารถสร้างเทอร์มินัล",
+      "sendFailed": "ไม่สามารถส่งคำสั่งดำเนินการต่อได้",
+      "inputLocked": "อินพุตเทอร์มินัลถูกล็อค"
+    },
+    "aiVaultResumePreparation": {
+      "prepareFailed": "ไม่สามารถเตรียมเซสชันเดิม Codex นี้ ลองดำเนินการต่ออีกครั้ง"
+    },
+    "floatingWorkspace": {
+      "title": "Workspace แบบลอย"
+    },
+    "githubPrMutations": {
+      "titleUpdateFailed": "ไม่สามารถอัปเดตชื่อได้",
+      "reviewThreadUpdateFailed": "อัปเดตชุดรีวิวไม่สำเร็จ"
+    },
+    "githubPrRpc": {
+      "requestFailed": "คำขอล้มเหลว: {{method}}"
+    },
+    "agentChildRow": {
+      "noRecentUpdate": "ไม่มีการอัปเดตล่าสุด",
+      "ended": "สิ้นสุดแล้ว",
+      "minutes_one": "{{count}} นาที",
+      "minutes_other": "{{count}} นาที",
+      "hours_one": "{{count}} ชม.",
+      "hours_other": "{{count}} ชม.",
+      "days_one": "{{count}} วัน",
+      "days_other": "{{count}} วัน",
+      "noUpdate": "ไม่มีการอัพเดตใน {{value0}}",
+      "agent": "ตัวแทน"
+    },
+    "agentMessageAttribution": {
+      "messageFromUnnamed": "ข้อความจากตัวแทน",
+      "fromUnnamed": "จากตัวแทน",
+      "unnamedSender": "agent",
+      "messageFromMore": "ข้อความจาก {{sender}} +{{count}}",
+      "fromMore": "ตั้งแต่ {{sender}} +{{count}}",
+      "messageFrom": "ข้อความจาก {{sender}}",
+      "from": "จาก {{sender}}"
+    },
+    "backgroundTask": {
+      "monitoring": "กำลังเฝ้าดูงานเบื้องหลัง",
+      "stop": "หยุด",
+      "stopTask": "หยุด {{value0}}",
+      "stopAll": "หยุดงานเบื้องหลัง",
+      "agent": "agent เบื้องหลัง",
+      "workflow": "เวิร์กโฟลว์เบื้องหลัง",
+      "command": "คำสั่งเบื้องหลัง",
+      "monitor": "การเฝ้าดูเบื้องหลัง",
+      "task": "งานเบื้องหลัง",
+      "detailsUnavailable": "ไม่มีรายละเอียดงานสำหรับ session นี้",
+      "countAgents_one": "{{count}} ตัวแทน",
+      "countAgents_other": "{{count}} agent",
+      "countShell_one": "{{count}} เปลือก",
+      "countShell_other": "{{count}} shell",
+      "countShellCommandOne": "shell command 1 รายการ",
+      "countMonitors_one": "{{count}} จอภาพ",
+      "countMonitors_other": "{{count}} monitor",
+      "countWorkflows_one": "{{count}} ขั้นตอนการทำงาน",
+      "countWorkflows_other": "{{count}} workflow",
+      "countTasks_one": "{{count}} งาน",
+      "countTasks_other": "{{count}} งาน",
+      "headerTotalCount_one": "{{count}} งานพื้นหลัง",
+      "headerTotalCount_other": "{{count}} งานเบื้องหลัง",
+      "stateWorking": "กำลังทำงาน",
+      "stateMonitoring": "กำลังเฝ้าดู",
+      "stateWaiting": "กำลังรอ",
+      "stateBlocked": "ถูกบล็อก",
+      "stateDone": "เสร็จแล้ว",
+      "stateIdle": "หยุดแล้ว",
+      "stateUnverifiable": "ไม่มีข้อมูลสถานะ",
+      "reasonWaiting": "ต้องได้รับการอนุมัติ",
+      "reasonBlocked": "ล้มเหลว",
+      "groupAgents": "ตัวแทน",
+      "groupShell": "เชลล์",
+      "groupMonitors": "การเฝ้าดู",
+      "groupWorkflows": "เวิร์กโฟลว์",
+      "groupTasks": "งาน",
+      "stateWorkingCount_one": "{{value0}} กำลังทำงาน",
+      "stateWorkingCount_other": "{{value0}} กำลังทำงาน",
+      "stateMonitoringCount_one": "{{value0}} กำลังติดตาม",
+      "stateMonitoringCount_other": "{{value0}} กำลังติดตาม",
+      "stateWaitingCount_one": "{{value0}} กำลังรอ",
+      "stateWaitingCount_other": "{{value0}} กำลังรอ",
+      "stateBlockedCount_one": "{{value0}} ถูกบล็อก",
+      "stateBlockedCount_other": "{{value0}} ถูกบล็อก",
+      "stateDoneCount_one": "{{value0}} เสร็จแล้ว",
+      "stateDoneCount_other": "{{value0}} เสร็จแล้ว",
+      "stateIdleCount_one": "{{value0}} หยุดแล้ว",
+      "stateIdleCount_other": "{{value0}} หยุดแล้ว",
+      "stateUnverifiableCount_one": "{{value0}} ไม่มีสถานะ",
+      "stateUnverifiableCount_other": "{{value0}} ไม่มีสถานะ"
+    },
+    "bulkCloseSheetActions": {
+      "closeOtherTabs": "ปิดแท็บอื่นๆ"
+    },
+    "bulkTabClose": {
+      "titleOthers": "ปิดแท็บอื่นหรือไม่",
+      "titleRight": "ปิดแท็บทางขวาหรือไม่",
+      "titleLeft": "ปิดแท็บทางซ้ายหรือไม่",
+      "titleEditors": "ปิดแท็บ editor ทั้งหมดหรือไม่",
+      "description": "แท็บที่เลือกจะถูกปิด แท็บที่ปักหมุดจะยังเปิดอยู่",
+      "confirm": "ปิดแท็บ"
+    },
+    "diffReviewLoaders": {
+      "committedChangesUnavailable": "การเปลี่ยนแปลงที่คอมมิตไม่พร้อมใช้งาน",
+      "committedChangesFailed": "การเปลี่ยนแปลงที่คอมมิตล้มเหลว",
+      "desktopUpdateRequired": "อัปเดต Prompt เดสก์ท็อปเพื่อตรวจสอบการเปลี่ยนแปลงบนมือถือ",
+      "changesLoadFailed": "ไม่สามารถโหลดการเปลี่ยนแปลงได้",
+      "invalidSourceControlResponse": "การตอบสนองของการควบคุมแหล่งที่มาไม่ถูกต้อง",
+      "reviewNotesLoadFailed": "ไม่สามารถโหลดบันทึกการทบทวนได้",
+      "diffLoadFailed": "โหลดความแตกต่างไม่ได้",
+      "committedDiffUnavailable": "ส่วนต่างที่คอมมิตไม่พร้อมใช้งาน"
+    },
+    "diffReviewQueue": {
+      "staged": "staged",
+      "unstaged": "unstaged",
+      "committedOnBranch": "มุ่งมั่นในสาขา"
+    },
+    "diffReviewScreenModel": {
+      "branch": "สาขา",
+      "staged": "staged",
+      "unstaged": "unstaged"
+    },
+    "nativeChatAttachActions": {
+      "photos": "ภาพถ่าย",
+      "files": "ไฟล์",
+      "fileTypes": "PDF, ข้อความ, โค้ด...",
+      "workspaceFile": "ไฟล์ใน workspace",
+      "skills": "สกิล",
+      "availableSkills": "{{count}} ใช้ได้",
+      "commands": "คำสั่ง"
+    },
+    "nativeChatCliFork": {
+      "resumeInNewCli": "ดำเนินการต่อใน CLI ใหม่"
+    },
+    "nativeChatRenderData": {
+      "notFoundTitle": "ยังไม่พบการสนทนานี้",
+      "notFoundSubtitle": "ส่งข้อความเพื่อเริ่มดำเนินการ หรือเปิดมุมมองเทอร์มินัลเพื่อดูว่า {{agent}} กำลังทำอะไรอยู่",
+      "emptyTitle": "เริ่มแชทกับ {{agent}}",
+      "emptySubtitle": "ขอให้ {{agent}} ตรวจสอบโค้ด อธิบายเอาต์พุต หรือทำการเปลี่ยนแปลง",
+      "errorTitle": "โหลดบทสนทนาไม่ได้",
+      "errorSubtitle": "อ่านบันทึกการสนทนาไม่ได้ สลับกลับไปที่ terminal เพื่อทำงานต่อ",
+      "defaultAgentLabel": "ตัวแทน"
+    },
+    "nativeChatToggleAction": {
+      "switchToTerminalView": "สลับไปที่มุมมองเทอร์มินัล",
+      "switchToChatView": "สลับไปที่มุมมองการแชท"
+    },
+    "prSidebarState": {
+      "loadFailed": "ไม่สามารถโหลดคำขอดึงได้"
+    },
+    "useNativeChatDictation": {
+      "insertFailedCopied": "ไม่สามารถแทรกการเขียนตามคำบอกได้ จึงคัดลอกไปที่คลิปบอร์ดแล้ว",
+      "insertFailed": "ไม่สามารถแทรกการเขียนตามคำบอก",
+      "inserted": "แทรกการเขียนตามคำบอกแล้ว",
+      "stoppedAfterSilence": "หยุดหลังจากเงียบไปหนึ่งนาที"
+    },
+    "quickCommandLaunch": {
+      "editBeforeRunning": "แก้ไขคำสั่งด่วนนี้ก่อนที่จะรัน",
+      "defaultLabel": "สั่งด่วน",
+      "runFailed": "ไม่สามารถเรียกใช้ {{label}}"
+    },
+    "routeHelpers": {
+      "connecting": "กำลังเชื่อมต่อ…",
+      "securing": "การรักษาความปลอดภัย",
+      "connected": "เชื่อมต่อแล้ว",
+      "disconnected": "ตัดการเชื่อมต่อแล้ว",
+      "reconnecting": "กำลังเชื่อมต่อใหม่",
+      "pairingInvalid": "การจับคู่ไม่ถูกต้อง"
+    },
+    "useTerminalCreateActions": {
+      "forkUnavailable": "เปิดแชท {{agentName}} บนโฮสต์ที่เชื่อมต่อและอัปเดตแล้วลองอีกครั้ง",
+      "forkBusy": "เทอร์มินัลอื่นกำลังเปิดอยู่ รอสักครู่ แล้วลองแชท {{agentName}} อีกครั้ง",
+      "createFailed": "ไม่สามารถสร้างเทอร์มินัล",
+      "terminalTitle": "เทอร์มินัล",
+      "sendNotesFailed": "ไม่สามารถส่งบันทึกได้",
+      "inputLocked": "อินพุตเทอร์มินัลถูกล็อคโดยไคลเอนต์อื่น",
+      "notesSent": "ส่งบันทึกแล้ว",
+      "sendNotesError": "ไม่สามารถส่งบันทึกได้"
+    },
+    "sourceControlLaunchAgent": {
+      "savedAgentUnavailable": "Agent ที่บันทึกไว้สำหรับการดำเนินการนี้ไม่พร้อมใช้งานบนโฮสต์พื้นที่ทำงานนี้",
+      "noEnabledAgent": "ไม่พบ AI agent ที่เปิดใช้งานบนโฮสต์ของ workspace นี้"
+    },
+    "structuredComposerCommand": {
+      "removeAttachments": "นำไฟล์แนบออกก่อนใช้คำสั่งของ chat session",
+      "operationUnconfirmed": "การดำเนินการสนทนาไม่ได้รับการยืนยัน"
+    },
+    "structuredSendDelivery": {
+      "messageNotSent": "ส่งข้อความไม่สำเร็จ"
+    },
+    "terminalActionSheetActions": {
+      "switchToDesktop": "สลับไปที่เดสก์ท็อป",
+      "switchToPhone": "สลับไปที่โทรศัพท์",
+      "rename": "เปลี่ยนชื่อ",
+      "clearTerminal": "ล้างเทอร์มินัล"
+    },
+    "terminalRecords": {
+      "defaultTitle": "เทอร์มินัล"
+    },
+    "presentation": {
+      "loadingTabs": "กำลังโหลดแท็บ",
+      "tabs_one": "แท็บ {{count}}",
+      "tabs_other": "{{count}} แท็บ"
+    },
+    "terminalTabAgent": {
+      "terminalNumber": "เทอร์มินัล {{number}}",
+      "newBrowser": "เบราว์เซอร์ใหม่",
+      "browser": "เบราว์เซอร์",
+      "markdown": "Markdown",
+      "file": "ไฟล์",
+      "chat": "แชต",
+      "terminal": "เทอร์มินัล"
+    },
+    "terminalViewportResubscribe": {
+      "fitFailed": "ไม่สามารถใส่เทอร์มินัลเข้ากับหน้าจอนี้ได้"
+    },
+    "newTabAgentHostLaunch": {
+      "notesUnconfirmed": "ตัวแทนเริ่มต้นแล้ว แต่ไม่สามารถยืนยันได้ว่าได้ส่งบันทึกย่อแล้ว",
+      "promptUnconfirmed": "ตัวแทนเริ่มทำงานแล้ว แต่ไม่สามารถยืนยันได้ว่ามีการส่งข้อความแจ้งแล้ว",
+      "notesNotSent": "ตัวแทนเริ่มต้นแล้วแต่ไม่ได้ส่งบันทึกย่อ",
+      "notesSent": "ส่งบันทึกแล้ว"
+    },
+    "prActionsEngine": {
+      "refreshFailed": "ไม่สามารถรีเฟรชคำขอดึงข้อมูลได้",
+      "mergeFailed": "ไม่สามารถรวมคำขอดึงได้"
+    },
+    "prAiTriageLaunch": {
+      "promptNotSent": "เจ้าหน้าที่เริ่มทำงานแล้ว แต่ไม่ได้ส่งข้อความแจ้ง",
+      "updateRequired": "อัปเดต Prompt บนคอมพิวเตอร์ของคุณเพื่อเริ่มตัวแทนจากโทรศัพท์ของคุณ",
+      "loadFailed": "ไม่สามารถโหลดตัวแทนที่มีอยู่ได้",
+      "emptyPrompt": "ข้อความแจ้งที่บันทึกไว้ของการดำเนินการนี้ว่างเปล่า อัปเดตการตั้งค่า AI การควบคุมแหล่งที่มาบนคอมพิวเตอร์ของคุณ",
+      "agentStartedIn": "ตัวแทนเริ่มต้นใน {{label}}",
+      "agentStarted": "ตัวแทนเริ่มแล้ว"
+    },
+    "sideRail": {
+      "backToWorktrees": "กลับไปที่ต้นไม้ทำงาน"
+    },
+    "useAttachmentInputLeaseGate": {
+      "reconnecting": "การแนบล้มเหลว (กำลังเชื่อมต่อใหม่)"
+    },
+    "useDiffReviewCommentActions": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "saveStateFailed": "บันทึกสถานะการตรวจสอบไม่สำเร็จ",
+      "saveFailed": "บันทึกรีวิวไม่สำเร็จ"
+    },
+    "useDiffReviewController": {
+      "missingWorktree": "ต้นไม้งานหายไป",
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "loadFailed": "ไม่สามารถโหลดบทวิจารณ์ได้"
+    },
+    "useDiffReviewDiffLoading": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "loadFailed": "โหลดความแตกต่างไม่ได้"
+    },
+    "useDiffReviewGitActions": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "actionFailed": "การดำเนินการควบคุมแหล่งที่มาล้มเหลว",
+      "stageResults": "{{staged}} จัดฉาก, {{failed}} ล้มเหลว",
+      "reviewedFilesStaged_one": "{{count}} ไฟล์ที่ตรวจสอบแล้วจัดฉาก",
+      "reviewedFilesStaged_other": "{{count}} ไฟล์ที่ตรวจสอบแล้วจัดฉาก"
+    },
+    "useDiffReviewInteractions": {
+      "openFailed": "ไม่สามารถเปิดในเซสชั่นได้"
+    },
+    "useDiffReviewSendActions": {
+      "copyFailed": "ไม่สามารถคัดลอกบันทึกการทบทวนได้",
+      "notesCopied": "คัดลอกบันทึกการรีวิวแล้ว",
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "sendFailed": "ไม่สามารถส่งบันทึกได้",
+      "inputLocked": "อินพุตเทอร์มินัลถูกล็อค",
+      "notesSent": "ส่งบันทึกการตรวจสอบแล้ว",
+      "startingAgent": "การเริ่มต้นตัวแทน...",
+      "promptNotSent": "ตัวแทนเริ่มต้นแล้วแต่ไม่ได้ส่งบันทึกย่อ ใช้ Copy Notes เพื่อวาง",
+      "notesSentWithWarning": "ส่งบันทึกการตรวจสอบแล้ว {{warning}}",
+      "loadSessionsFailed": "ไม่สามารถโหลดเซสชันตัวแทนได้"
+    },
+    "useImageAttachment": {
+      "disconnected": "การแนบล้มเหลว (ยกเลิกการเชื่อมต่อ)",
+      "permissionDenied": "การอนุญาตรูปภาพถูกปฏิเสธ",
+      "imageTooLarge": "รูปภาพใหญ่เกินกว่าจะแนบได้",
+      "attachFailed": "การแนบล้มเหลว"
+    },
+    "useNativeChatStop": {
+      "terminalNotReady": "หยุดไม่ส่ง (เทอร์มินัลไม่พร้อม)",
+      "stopUnconfirmed": "หยุดไม่ยืนยัน — ตรวจสอบแชทก่อนลองอีกครั้ง",
+      "stopNotSent": "หยุดไม่ส่ง"
+    },
+    "usePrAiTriage": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "launchFailed": "ไม่สามารถเปิดตัวตัวแทนได้"
+    },
+    "usePrCommentActions": {
+      "actionFailed": "การดำเนินการแสดงความคิดเห็นล้มเหลว"
+    },
+    "usePrTitleAction": {
+      "disconnected": "ไม่ได้เชื่อมต่อกับเดสก์ท็อป",
+      "updateFailed": "ไม่สามารถอัปเดตชื่อได้"
+    },
+    "useAccessorySelection": {
+      "copyFailed": "คัดลอกไม่สำเร็จ",
+      "selectionCleared": "ล้างการเลือกแล้ว (เลื่อนออกจากบัฟเฟอร์)"
+    },
+    "useContentCreateActions": {
+      "noteCreateFailed": "ไม่สามารถสร้างบันทึกย่อมาร์กดาวน์",
+      "untitledNoteCreateFailed": "ไม่สามารถสร้างบันทึกย่อมาร์กดาวน์ที่ไม่มีชื่อได้",
+      "browserUpdateRequired": "จำเป็นต้องมีการอัปเดตเดสก์ท็อปสำหรับการสตรีมเบราว์เซอร์มือถือ",
+      "invalidUrl": "ป้อน URL ที่ถูกต้อง",
+      "browserCreateFailed": "ไม่สามารถสร้างเบราว์เซอร์ได้",
+      "browserUnavailable": "หน้าเบราว์เซอร์ยังไม่พร้อมใช้งาน",
+      "browserCommandFailed": "คำสั่งเบราว์เซอร์ล้มเหลว"
+    },
+    "useDiffComments": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "saveNotesFailed": "ไม่สามารถบันทึกบันทึกการทบทวนได้",
+      "noteAdded": "เพิ่มหมายเหตุแล้ว",
+      "saveNoteFailed": "บันทึกบันทึกไม่สำเร็จ",
+      "deleteNoteFailed": "ลบบันทึกไม่สำเร็จ",
+      "notesCopied": "คัดลอกหมายเหตุแล้ว",
+      "copyNotesFailed": "ไม่สามารถคัดลอกบันทึกได้"
+    },
+    "useMarkdownActions": {
+      "copyFailed": "คัดลอกไม่สำเร็จ",
+      "pathCopied": "คัดลอกเส้นทางแล้ว",
+      "copyPathFailed": "ไม่สามารถคัดลอกเส้นทางได้",
+      "markdownTitle": "Markdown",
+      "saved": "บันทึกแล้ว",
+      "saveFailed": "บันทึกล้มเหลว"
+    },
+    "usePanelRouteActions": {
+      "otherServerAgents": "ตัวแทนบนเซิร์ฟเวอร์อื่น",
+      "pairServerHint": "จับคู่เซิร์ฟเวอร์นั้นโดยตรง",
+      "detectingAgents": "การตรวจจับตัวแทน",
+      "noEnabledAgents": "ไม่มีตัวแทนที่เปิดใช้งาน",
+      "presetsUnavailable": "ค่าที่ตั้งล่วงหน้าของตัวแทนไม่พร้อมใช้งาน",
+      "checkHostHint": "ตรวจสอบการเชื่อมต่อโฮสต์",
+      "newSessionHint": "เซสชั่นตัวแทนใหม่",
+      "copyNotesHint": "คัดลอกบันทึกย่อแทน"
+    },
+    "useStartup": {
+      "wakeAgents": "เปิด Prompt บนโฮสต์เพื่อปลุกตัวแทนที่หลับอยู่"
+    },
+    "useTerminalInput": {
+      "clearFailed": "ไม่สามารถล้างเทอร์มินัลได้",
+      "cleared": "ล้างเทอร์มินัลแล้ว"
+    },
+    "useSessionTerminalSendActions": {
+      "inputTooLarge": "อินพุตใหญ่เกินไป (สูงสุด 256 KiB)",
+      "liveInputInterrupted": "การป้อนข้อมูลสดถูกขัดจังหวะ เคลียร์ฟิลด์แล้ว ตรวจสอบเทอร์มินัลก่อนดำเนินการต่อ"
+    },
+    "useTerminalPaste": {
+      "clipboardReadFailed": "ไม่สามารถอ่านคลิปบอร์ดได้",
+      "pasteTooLarge": "วางใหญ่เกินไป (สูงสุด 256 KiB)",
+      "disconnected": "วางล้มเหลว (ยกเลิกการเชื่อมต่อ)",
+      "terminalChanged": "ยกเลิกการวางแล้ว (เปลี่ยนเทอร์มินัลแล้ว)",
+      "pasteFailed": "วางไม่สำเร็จ",
+      "imageTooLarge": "รูปภาพใหญ่เกินกว่าจะวาง"
+    },
+    "useQuickCommands": {
+      "loadFailed": "ไม่สามารถโหลดคำสั่งด่วนได้",
+      "saveFailed": "บันทึกคำสั่งด่วนไม่สำเร็จ"
+    },
+    "worktreeLabel": {
+      "fallback": "เวิร์คทรี"
+    },
+    "failure": {
+      "backgroundTasksRunning": "งานเบื้องหลังยังทำงานอยู่",
+      "waitForBackgroundTasks": "รอให้งานเบื้องหลังเสร็จ",
+      "agentStarting": "agent ยังเริ่มต้นไม่เสร็จ",
+      "waitForStart": "รอให้ agent เริ่มต้นเสร็จ",
+      "agentStillWorking": "agent ยังทำงานอยู่",
+      "runCommandWhenDone": "รัน /{{command}} เมื่อเสร็จแล้ว",
+      "commandAfterAnswer": "ตอบคำถามหรือการอนุมัติของ agent แล้วรัน /{{command}}",
+      "compactionFailed": "การย่อบริบทล้มเหลว",
+      "compactionFailedQuoted": "การย่อบริบทล้มเหลว: {{detail}}",
+      "compactionUnconfirmed": "ยืนยันไม่ได้ว่าการย่อบริบทเสร็จสมบูรณ์",
+      "cancelUnconfirmed": "ยืนยันการยกเลิกไม่ได้",
+      "stopRefused": "{{agent}} ไม่ได้หยุด",
+      "stopRefusedQuoted": "{{agent}} ไม่ได้หยุด: {{detail}}",
+      "couldNotStop": "หยุด {{agent}} ไม่ได้",
+      "couldNotStopTheAgent": "หยุด agent ไม่ได้",
+      "noTurnToStop": "{{agent}} ไม่มีรอบการทำงานที่ต้องหยุด",
+      "backgroundTaskNotStopped": "งานเบื้องหลังไม่ได้หยุด",
+      "backgroundTasksNotStopped": "งานเบื้องหลังไม่ได้หยุด",
+      "answerUnconfirmed": "บันทึกคำตอบของคุณแล้ว แต่ agent ไม่ได้ยืนยัน",
+      "hostFault": "Prompt ประสบปัญหา จึงไม่ผ่าน",
+      "hostFaultTryAgain": "Prompt ประสบปัญหา จึงไม่ผ่าน ลองอีกครั้ง",
+      "hostStopped": "{{agent}} ยังสตาร์ทไม่เสร็จ ดังนั้น Prompt จึงหยุดมัน",
+      "providerRateLimited": "{{agent}} ติด rate limit และกำลังลองใหม่",
+      "providerRetrying": "{{agent}} พบปัญหาชั่วคราวและกำลังลองใหม่",
+      "providerRetryingQuoted": "{{agent}} กำลังลองใหม่: {{detail}}",
+      "providerRetryNumber": "ลองใหม่ครั้งที่ {{attempt}}",
+      "providerRetryNumberOf": "ลองใหม่ครั้งที่ {{attempt}} จาก {{maxRetries}}",
+      "providerRetryLastError": "ข้อผิดพลาดล่าสุด: {{detail}}",
+      "usageLimitReached": "{{agent}} ถึงขีดจำกัดการใช้งานแล้ว",
+      "usageLimitReachedNamed": "{{agent}} ถึงขีดจำกัด{{window}}แล้ว",
+      "usageLimitWindowSession": "เซสชัน",
+      "usageLimitWindowWeekly": "รายสัปดาห์",
+      "usageLimitWindowWeeklyModel": "โมเดลรายสัปดาห์",
+      "usageLimitWindowCredits": "การใช้งานเพิ่มเติม",
+      "usageLimitResetsAt": "รีเซ็ตเมื่อ {{when}}",
+      "usageLimitSendAfterReset": "ส่งข้อความหลังรีเซ็ตเพื่อดำเนินการต่อ",
+      "previousExitUnverifiable": "หยุด {{agent}} จากครั้งก่อนไม่ได้",
+      "sessionNotRestored": "{{agent}} เปิด session ก่อนหน้าอีกครั้งไม่ได้ แชตนี้จึงดำเนินต่อใน session ใหม่ และ {{agent}} จะจำข้อความก่อนหน้าไม่ได้",
+      "providerExitedRow": "{{agent}} หยุดทำงานขณะที่การตอบกลับนี้ยังดำเนินอยู่ คุณสามารถสนทนาต่อได้",
+      "providerExitedRejection": "{{agent}} หยุดทำงานก่อนที่ข้อความนี้จะถูกส่ง",
+      "providerExitedAnswer": "{{agent}} หยุดทำงานแล้ว จึงไม่ได้ส่งคำตอบของคุณ ส่งข้อความเพื่อสนทนาต่อ",
+      "claudeEffortInvalid": "ระดับ effort ของ Claude ไม่ถูกต้อง เลือก low, medium, high, xhigh หรือ max แล้วส่งอีกครั้ง",
+      "modelUnavailable": "{{agent}} ใช้ {{detail}} ไม่ได้ เลือกโมเดลอื่นแล้วส่งอีกครั้ง",
+      "providerRejected": "{{agent}} ไม่ยอมรับข้อความนี้",
+      "providerRejectedQuoted": "{{agent}} ไม่ยอมรับข้อความนี้: {{detail}}",
+      "attachmentEmpty": "รูปภาพในข้อความนี้ว่างเปล่า จึงไม่ได้ส่งข้อความ",
+      "attachmentTooLarge": "รูปภาพในข้อความนี้มีขนาดใหญ่เกินไป จึงไม่ได้ส่งข้อความ",
+      "attachmentLargerThan": "รูปภาพในข้อความนี้มีขนาดใหญ่กว่า {{size}} MB จึงไม่ได้ส่งข้อความ",
+      "attachmentTooMany": "ข้อความนี้มีรูปภาพมากเกินไป จึงไม่ได้ส่ง",
+      "attachmentAtMost": "{{agent}} รับรูปภาพได้สูงสุด {{limit}} รูปต่อข้อความ จึงไม่ได้ส่งข้อความนี้",
+      "attachmentTotalTooLarge": "รูปภาพในข้อความนี้มีขนาดรวมใหญ่เกินไป จึงไม่ได้ส่งข้อความ",
+      "attachmentTotalMoreThan": "รูปภาพในข้อความนี้มีขนาดรวมกันเกิน {{size}} MB จึงไม่ได้ส่งข้อความ",
+      "attachmentUnsupportedType": "{{agent}} รับเฉพาะรูปภาพ PNG, JPEG, GIF และ WebP จึงไม่ได้ส่งข้อความนี้",
+      "attachmentNotAFile": "รูปภาพในข้อความนี้ไม่ใช่ไฟล์ จึงไม่ได้ส่งข้อความ",
+      "attachmentNoSource": "รูปภาพในข้อความนี้ไม่มีไฟล์ให้ส่ง จึงไม่ได้ส่งข้อความ",
+      "attachmentInvalid": "ไม่สามารถส่งไฟล์แนบในข้อความนี้ไปยัง agent ได้",
+      "attachmentUnreadable": "อ่านไฟล์แนบในข้อความนี้ไม่ได้ จึงไม่ได้ส่งข้อความ",
+      "emptyMessage": "ข้อความนี้ว่างเปล่า จึงไม่ได้ส่ง",
+      "commandUnavailable": "คำสั่งนี้ใช้ไม่ได้ในแชตของ {{agent}} จึงไม่ได้ส่ง",
+      "queueFull": "มีข้อความรอ agent มากเกินไป จึงไม่ได้ส่งข้อความนี้",
+      "writeFailed": "Prompt ไม่สามารถส่งข้อความนี้ให้กับตัวแทนได้ ดังนั้นจึงไม่ได้ส่ง",
+      "cancelled": "ข้อความนี้ถูกถอนก่อนที่ agent จะเริ่มทำงาน",
+      "chatClosed": "แชตถูกปิดก่อนที่จะส่งข้อความนี้",
+      "hostRestarted": "Prompt เริ่มต้นใหม่ก่อนที่จะส่งข้อความนี้",
+      "notDelivered": "ไม่ได้ส่งข้อความนี้",
+      "notDeliveredSendAgain": "ไม่ได้ส่งข้อความนี้ ส่งอีกครั้งเพื่อดำเนินการต่อ",
+      "commandRefused": "คำสั่งนี้ไม่ได้ทำงาน",
+      "commandRefusedTryAgain": "คำสั่งนี้ไม่ได้ทำงาน ลองอีกครั้ง",
+      "theAgent": "agent",
+      "providerStartFailed": "{{agent}} หยุดทำงานก่อนเริ่มต้นเสร็จ",
+      "runCommandAgain": "เรียกใช้ /{{command}} อีกครั้ง",
+      "sendToTryAgain": "ส่งข้อความของคุณเพื่อลองอีกครั้ง",
+      "sendAgainToTryOnceMore": "ส่งข้อความของคุณอีกครั้งเพื่อลองใหม่",
+      "couldNotStart": "{{agent}} เริ่มทำงานไม่ได้",
+      "couldNotRestart": "{{agent}} รีสตาร์ตไม่ได้",
+      "cliTooOld": "{{agent}} {{installedVersion}} เก่าเกินไปสำหรับแชต อัปเดตเป็น {{minimumVersion}} หรือใหม่กว่า",
+      "startTimedOut": "{{agent}} ใช้เวลาเริ่มต้นนานเกินไป (ไม่มีการตอบกลับ {{method}} หลังจาก {{seconds}} วินาที)",
+      "startTimedOutKeepsHappening": "หากยังเกิดขึ้นอีก เครื่องที่รันแชตนี้อาจทำงานหนักเกินไป",
+      "argumentsUnsupportedOption": "Arguments ที่บันทึกไว้มีตัวเลือกที่ไม่รองรับ ({{option}})",
+      "argumentsMissingValue": "Arguments ที่บันทึกไว้ต้องมีค่าสำหรับ {{option}}",
+      "argumentsMultipleValues": "Arguments ที่บันทึกไว้ระบุค่าให้ {{option}} มากกว่าหนึ่งค่า",
+      "argumentsPositionalPrompt": "Arguments ที่บันทึกไว้มี prompt รวมอยู่ด้วย",
+      "editSavedArguments": "แก้ไขได้ที่ การตั้งค่า > Agents > Arguments",
+      "terminalAgentHoldsChat": "แชตนี้ยังเปิดอยู่ใน terminal agent",
+      "quitTerminalAgent": "ปิด agent นั้นเพื่อดำเนินการต่อแชตที่นี่",
+      "startNewChat": "เริ่มแชตใหม่เพื่อดำเนินการต่อ",
+      "notSignedIn": "{{agent}} ยังไม่ได้ลงชื่อเข้าใช้",
+      "claudeSystemNotSignedIn": "Claude ยังไม่ได้ลงชื่อเข้าใช้ เรียกใช้ `{{loginCommand}}` หรือเลือกบัญชีในการตั้งค่าบัญชี Claude",
+      "claudeManagedNotSignedIn": "บัญชี Claude นี้ยังไม่ได้ลงชื่อเข้าใช้ ลงชื่อเข้าใช้อีกครั้งในการตั้งค่าบัญชี Claude",
+      "codexSystemNotSignedIn": "Codex ยังไม่ได้ลงชื่อเข้าใช้ เรียกใช้ `{{loginCommand}}`",
+      "codexManagedNotSignedIn": "บัญชี Codex นี้ยังไม่ได้ลงชื่อเข้าใช้ ลงชื่อเข้าใช้อีกครั้งในการตั้งค่าบัญชี Codex",
+      "antigravityNotSignedIn": "Antigravity ยังไม่ได้ลงชื่อเข้าใช้ ลงชื่อเข้าใช้ที่การตั้งค่า → บัญชี → Antigravity แล้วส่งข้อความของคุณอีกครั้ง",
+      "agentCommandNotSignedIn": "ลงชื่อเข้าใช้ {{agent}} ด้วย `{{loginCommand}}` บนคอมพิวเตอร์ที่รันแชตนี้",
+      "interactiveAgentNotSignedIn": "ลงชื่อเข้าใช้ {{agent}} โดยรัน `{{loginCommand}}` แล้วใช้ `{{slashCommand}}` บนคอมพิวเตอร์ที่รันแชตนี้",
+      "agentNotSignedIn": "ลงชื่อเข้าใช้ {{agent}}",
+      "cliMissing": "ไม่พบ {{agent}} บนเครื่องที่รันแชตนี้ ติดตั้ง หรือตรวจสอบคำสั่งในการตั้งค่า → Agents",
+      "cliMissingInWslDistro": "{{agent}} ไม่ได้ติดตั้งใน WSL distro {{distro}} ติดตั้งภายใน {{distro}} หรือตรวจสอบคำสั่งในการตั้งค่า → Agents",
+      "signInFirst": "ลงชื่อเข้าใช้ก่อน",
+      "signInThenRunCommand": "ลงชื่อเข้าใช้ แล้วเรียกใช้ /{{command}} อีกครั้ง",
+      "signInThenSend": "ลงชื่อเข้าใช้ แล้วส่งข้อความของคุณอีกครั้ง",
+      "thenSendAgain": "จากนั้นส่งข้อความอีกครั้ง",
+      "historyTooLarge": "ประวัติของการสนทนานี้ใหญ่เกินกว่าจะกู้คืนที่นี่",
+      "managedAccountEnvOverride": "การเปิด Claude นี้ตั้งตัวแปรลงชื่อเข้าใช้ Anthropic ของตัวเอง นำตัวแปรเหล่านั้นออกเพื่อใช้บัญชี Claude ที่จัดการโดยแอป",
+      "accountSwitchInProgress": "การตั้งค่าของ {{agent}} บนโฮสต์นี้กำลังเปลี่ยนแปลง ลองอีกครั้งหลังจากเสร็จสิ้น",
+      "managedAccountUnsupported": "ขณะที่เพิ่มบัญชี Claude ใน WSL แชต Claude ต้องใช้บัญชี Claude บน Windows",
+      "launchFolderMissing": "โฟลเดอร์ที่แชตนี้ทำงานอยู่ไม่มีอยู่แล้ว กู้คืนโฟลเดอร์เพื่อใช้แชตนี้ต่อ",
+      "historyInOtherAccount": "ประวัติของแชตนี้อยู่ในบัญชี Claude อื่น สลับกลับไปยังบัญชีนั้นเพื่อใช้ต่อ",
+      "claudeAccountFolderMissing": "ไม่พบโฟลเดอร์ของบัญชี Claude ที่เลือก ลงชื่อเข้าใช้อีกครั้งหรือเลือกบัญชีอื่น",
+      "claudeAccountSetupFailed": "ตั้งค่าบัญชี Claude ที่เลือกไม่ได้ ลองอีกครั้งหรือเลือกบัญชีอื่น",
+      "agentCommandNotRunnable": "คำสั่งของ {{agent}} ในการตั้งค่า → เอเจนต์ต้องเป็นพาธของโปรแกรมหรือชื่อที่ Prompt สามารถค้นหาได้ โดยไม่มีอาร์กิวเมนต์หรือตัวแปร เปลี่ยนหรือรีเซ็ต",
+      "runtimeNotInstalled": "ไม่ได้ติดตั้ง {{agent}} บนคอมพิวเตอร์ที่ใช้การแชทนี้ ติดตั้งจากการแชทในเวอร์ชันปัจจุบันของ Prompt",
+      "fullAccessAsRoot": "{{agent}} จะไม่ใช้สิทธิ์เข้าถึงทั้งหมดเมื่อรันในฐานะ root เลือกสิทธิ์อื่นสำหรับ {{agent}} ในการตั้งค่า → Agents ของเครื่องที่รันแชตนี้ แล้วเริ่มแชตใหม่",
+      "launchPreparationFailed": "Prompt ไม่สามารถเตรียม {{agent}} เพื่อเริ่มต้นบนคอมพิวเตอร์ที่กำลังแชทนี้",
+      "conversationOpenElsewhere": "Codex ยังเปิดการสนทนานี้ค้างอยู่ ลองอีกครั้งในอีกสักครู่ หรือปิด terminal Codex อื่น ๆ",
+      "conversationOpenInTerminal": "{{agent}} กำลังรันการสนทนานี้อยู่ใน terminal อื่น ออกจาก {{agent}} ที่นั่นหรือปิด terminal นั้นเพื่อใช้ต่อที่นี่",
+      "chooseClaudeAccount": "เลือกหรือเพิ่มบัญชีในการตั้งค่าบัญชี Claude",
+      "chooseClaudeAccountThenRunCommand": "เลือกหรือเพิ่มบัญชีในการตั้งค่าบัญชี Claude แล้วเรียกใช้ /{{command}} อีกครั้ง",
+      "chooseClaudeAccountThenSend": "เลือกหรือเพิ่มบัญชีในการตั้งค่าบัญชี Claude แล้วส่งข้อความของคุณอีกครั้ง"
+    },
+    "writeNotice": {
+      "notDoneReadHistory": "โหลดประวัติของแชตนี้ไม่ได้",
+      "notDoneSend": "ไม่ได้ส่งข้อความของคุณ",
+      "tryAgainComposerSend": "ส่งอีกครั้ง",
+      "messageNotSaved": "บันทึกข้อความของคุณไม่ได้",
+      "notDoneStop": "agent ไม่ได้หยุด",
+      "notDoneStopTask": "งานเบื้องหลังไม่ได้หยุด",
+      "notDoneStopTasks": "งานเบื้องหลังไม่ได้หยุด",
+      "notDoneAnswer": "ไม่ได้ส่งคำตอบของคุณ",
+      "notDoneOption": "ไม่ได้เปลี่ยนการตั้งค่า",
+      "notDoneCommand": "คำสั่งไม่ได้ทำงาน",
+      "notDoneGoalChangeIncomplete": "เปลี่ยนเป้าหมายไม่เสร็จสมบูรณ์ ตรวจสอบแชต",
+      "notDoneQueuedEdit": "ไม่ได้บันทึกการแก้ไขของคุณ",
+      "restartFailed": "agent เริ่มต้นใหม่ไม่ได้",
+      "capacity": "Prompt บนคอมพิวเตอร์ที่ใช้งานแชทนี้ถึงขีดจำกัดคำขอแล้ว อัปเดต Prompt ที่นั่น จากนั้นลองอีกครั้ง",
+      "outcomeUnknown": "Prompt ไม่สามารถยืนยันสิ่งที่เกิดขึ้นได้ ตรวจสอบการแชท",
+      "sendOutcomeLost": "Prompt ไม่สามารถยืนยันข้อความของคุณถึงตัวแทนได้ ตรวจสอบแชทแล้วส่งอีกครั้งหากจำเป็น",
+      "continuationSuperseded": "แชตนี้ดำเนินต่อไปแล้ว ดูข้อความล่าสุดก่อนทำต่อ",
+      "questionChanged": "คำถามนี้ได้รับคำตอบแล้วหรือมีการเปลี่ยนแปลง",
+      "cancelNotSaved": "ยกเลิกคำถามหรือการอนุมัตินี้ไม่ได้",
+      "historyUnreadable": "Prompt ไม่สามารถอ่านประวัติที่บันทึกไว้ของการแชทนี้",
+      "historyUnusable": "โหลดแชตนี้ไม่ได้",
+      "historyUnavailable": "Prompt ไม่สามารถเปิดประวัติการแชทนี้ได้ในขณะนี้",
+      "savedByNewerOrca": "การแชทได้รับการบันทึกโดย Prompt ที่ใหม่กว่า",
+      "updateOrcaToKeepUsing": "อัปเดต Prompt เพื่อใช้งานต่อไป",
+      "chatSavedByNewerOrca": "การแชทนี้ถูกบันทึกโดย Prompt ที่ใหม่กว่า",
+      "updateOrcaToOpenChat": "อัปเดต Prompt เพื่อเปิด",
+      "unsupported": "สิ่งนี้จำเป็นต้องมี Prompt ที่ใหม่กว่าบนคอมพิวเตอร์ที่ใช้งานแชทนี้ อัปเดต Prompt ที่นั่น จากนั้นลองอีกครั้ง",
+      "notAvailable": "ใช้งานนี้ไม่ได้ในแชตนี้",
+      "cannotRunHere": "Prompt ไม่สามารถเรียกใช้ตัวแทนนี้ในการแชทที่นี่",
+      "unreachable": "Prompt ไม่สามารถติดต่อตัวแทนได้",
+      "recordFailed": "Prompt ไม่สามารถบันทึกสิ่งนี้ลงในประวัติการแชทได้",
+      "attachmentExpired": "ไฟล์แนบนี้หมดอายุแล้ว",
+      "reattachFile": "นำออก แล้วแนบอีกครั้ง",
+      "conversationCleared": "ล้างการสนทนานี้แล้ว",
+      "openCurrentConversation": "เปิดการสนทนาปัจจุบันเพื่อดำเนินการต่อ",
+      "clearUnfinished": "/clear ครั้งล่าสุดทำไม่เสร็จ",
+      "commandRunning": "/compact หรือ /clear ยังทำงานอยู่",
+      "waitForCommand": "รอให้ /compact หรือ /clear ทำงานเสร็จ",
+      "agentStarting": "agent ยังเริ่มต้นไม่เสร็จ",
+      "waitForStart": "รอให้ agent เริ่มต้นเสร็จ",
+      "turnActive": "agent ยังตอบอยู่",
+      "waitForTurn": "รอให้ agent ตอบเสร็จ หรือหยุดการทำงาน",
+      "promptPending": "agent กำลังรอคำตอบของคำถามหรือการอนุมัติ",
+      "answerFirst": "ตอบคำถามหรือการอนุมัติก่อน",
+      "backgroundTasksRunning": "งานเบื้องหลังยังทำงานอยู่",
+      "waitForBackgroundTasks": "รอให้งานเบื้องหลังเสร็จ",
+      "messagesUnsettled": "ข้อความที่คุณส่งก่อนหน้ายังไม่ได้รับการยืนยัน",
+      "settleEarlierMessage": "รอให้ข้อความก่อนหน้าส่งสำเร็จ หรือลองส่งใหม่",
+      "agentStillWorking": "agent ยังทำงานอยู่",
+      "runClearWhenDone": "รัน /clear เมื่อเสร็จแล้ว",
+      "clearAfterAnswer": "ตอบคำถามหรือการอนุมัติของ agent แล้วรัน /clear",
+      "runCompactWhenDone": "รัน /compact เมื่อเสร็จแล้ว",
+      "compactAfterAnswer": "ตอบคำถามหรือการอนุมัติของ agent แล้วรัน /compact",
+      "clearAfterRetry": "ลองส่งข้อความก่อนหน้าอีกครั้ง แล้วรัน /clear",
+      "compactAfterRetry": "ลองส่งข้อความก่อนหน้าอีกครั้ง แล้วรัน /compact",
+      "clearAfterSending": "ข้อความก่อนหน้ายังอยู่ระหว่างการส่ง รัน /clear เมื่อส่งเสร็จแล้ว",
+      "compactAfterSending": "ข้อความก่อนหน้ายังอยู่ระหว่างการส่ง รัน /compact เมื่อส่งเสร็จแล้ว",
+      "pendingWork": "รอให้งานและข้อความที่ค้างอยู่เสร็จก่อนใช้คำสั่งนี้",
+      "queueTooLarge": "มีข้อความรอคิวมากเกินไป",
+      "shrinkQueue": "ลบข้อความในคิว หรือรอให้ส่งสำเร็จสักข้อความ แล้วลองอีกครั้ง",
+      "messageTooLarge": "เกินขีดจำกัด 256 KB ต่อข้อความ",
+      "shortenMessage": "ย่อหรือแบ่งข้อความ แล้วส่งอีกครั้ง",
+      "optionRejected": "agent ไม่ยอมรับการตั้งค่านี้",
+      "goalsUnsupported": "agent นี้ไม่รองรับเป้าหมาย",
+      "agentRefused": "agent ปฏิเสธคำขอนี้",
+      "ownerUnproven": "agent ก่อนหน้าในแชตนี้อาจยังทำงานอยู่",
+      "reopenChat": "เปิดแชตอีกครั้งเพื่อตรวจสอบ",
+      "terminalAgentHoldsChat": "แชตนี้ยังเปิดอยู่ใน terminal agent",
+      "quitTerminalAgent": "ปิด agent นั้นเพื่อดำเนินการต่อแชตที่นี่",
+      "hostReconciling": "Prompt ยังคงตรวจสอบการแชทนี้หลังจากรีสตาร์ทแล้ว",
+      "waitMoment": "รอสักครู่",
+      "recordUnreadable": "Prompt ไม่สามารถอ่านสถานะที่บันทึกไว้ของการแชทนี้",
+      "chatNotFound": "Prompt ไม่พบแชทนี้",
+      "startNewChat": "เริ่มแชตใหม่เพื่อดำเนินการต่อ",
+      "tryAgain": "ลองอีกครั้ง"
+    }
+  },
+  "chat": {
+    "composer": {
+      "addToMessage": "เพิ่มในข้อความ",
+      "attachImage": "แนบรูปภาพ",
+      "placeholder": "ถามได้ทุกเรื่อง พิมพ์ @ เพื่อระบุไฟล์ พิมพ์ / เพื่อใช้คำสั่ง",
+      "cancelEditing": "ยกเลิกการแก้ไข",
+      "saveEditedMessage": "บันทึกข้อความที่แก้ไข",
+      "sendMessage": "ส่งข้อความ"
+    },
+    "composerAttachments": {
+      "file": "ไฟล์",
+      "fileMeta": "{{type}} · {{size}}",
+      "attachedImage": "รูปภาพที่แนบมา",
+      "removeImage": "ลบรูปภาพ",
+      "uploadingFile": "กำลังอัพโหลด {{name}}",
+      "removeFile": "นำ {{name}} ออก"
+    },
+    "useImageUpload": {
+      "disconnected": "การแนบล้มเหลว (ยกเลิกการเชื่อมต่อ)",
+      "permissionDenied": "การอนุญาตรูปภาพถูกปฏิเสธ",
+      "imageTooLarge": "รูปภาพใหญ่เกินกว่าจะแนบได้",
+      "attachFailed": "การแนบล้มเหลว"
+    },
+    "ask": {
+      "submit": "ส่ง",
+      "next": "ถัดไป",
+      "skip": "ข้าม",
+      "step": "ขั้นตอน {{step}}",
+      "other": "อื่นๆ...",
+      "answerPlaceholder": "พิมพ์คำตอบของคุณ"
+    },
+    "permission": {
+      "reason": "เหตุผล:",
+      "needsAccessTo": "ต้องการเข้าถึง:",
+      "planFile": "ไฟล์แผน: {{filePath}}",
+      "newerVersionRequired": "คำขอนี้ต้องการเวอร์ชันที่ใหม่กว่าของ Prompt"
+    },
+    "promptCard": {
+      "terminalExplanation": "ตอบคำถาม OMP นี้ใน terminal",
+      "answerInTerminal": "ตอบใน terminal"
+    },
+    "promptStrip": {
+      "expand": "ขยาย"
+    },
+    "question": {
+      "submitSelectedOptions": "ส่งตัวเลือกที่เลือก",
+      "submitCount": "ส่ง ({{count}})",
+      "submit": "ส่ง",
+      "otherReplyPlaceholder": "หรือพิมพ์ตอบกลับ...",
+      "replyPlaceholder": "พิมพ์คำตอบของคุณ...",
+      "sendReply": "ส่งคำตอบ"
+    },
+    "queuedMessages": {
+      "deleteAll": "ลบทุกข้อความที่อยู่ในคิว",
+      "clearAll": "ล้างทั้งหมด",
+      "resumeSending": "ส่งข้อความที่อยู่ในคิวต่อ",
+      "resume": "ทำงานต่อ",
+      "title": "ข้อความในคิว",
+      "pausedState": "หยุดชั่วคราว",
+      "queuedState": "อยู่ในคิว",
+      "editMessage": "แก้ไขข้อความ"
+    },
+    "sessionOptionPickers": {
+      "workingAnnouncement": "ตัวแทนกำลังทำงาน การตั้งค่าโมเดลจะปลดล็อกเมื่อเทิร์นนี้เสร็จสิ้น",
+      "modelFullAccessLabel": "รุ่น {{value}} เข้าถึงได้เต็มรูปแบบ",
+      "modelLabel": "รุ่น {{value}}",
+      "permissionsLabel": "สิทธิ์ {{value}}",
+      "closePicker": "ปิดเครื่องมือเลือก",
+      "backToModels": "กลับไปที่รุ่น",
+      "agentWorking": "ตัวแทนกำลังทำงาน",
+      "settingsLocked": "การตั้งค่าโมเดลจะปลดล็อกเมื่อเทิร์นนี้เสร็จสิ้น",
+      "dispatchUnconfirmed": "ส่งไปยัง agent แล้ว แต่ยังไม่ได้รับการยืนยัน",
+      "permissions": "สิทธิ์"
+    },
+    "sessionOptionRows": {
+      "defaultMarker": "ค่าเริ่มต้น",
+      "notReportedMarker": "ไม่รายงาน"
+    },
+    "sessionOptionSegments": {
+      "dispatchUnconfirmed": "ส่งไปยัง agent แล้ว แต่ยังไม่ได้รับการยืนยัน"
+    },
+    "stopButton": {
+      "stoppingState": "กำลังหยุด…",
+      "stopAgent": "หยุด agent"
+    },
+    "taskList": {
+      "taskStatus": "{{status}}: {{task}}",
+      "title": "งาน",
+      "completed": "เสร็จสิ้น",
+      "inProgress": "กำลังดำเนินการ",
+      "pending": "รอดำเนินการ",
+      "empty": "ไม่มีงาน",
+      "progress": "เสร็จสิ้น {{completed}} จาก {{total}} งานแล้ว",
+      "added": "เพิ่ม {{task}} แล้ว",
+      "removed": "นำ {{task}} ออกแล้ว",
+      "started": "เริ่ม {{task}} แล้ว",
+      "finished": "{{task}} เสร็จแล้ว",
+      "reset": "ทำเครื่องหมายว่ารอดำเนินการ: {{task}}",
+      "updated": "อัปเดต {{task}} แล้ว",
+      "unchanged": "งานไม่มีการเปลี่ยนแปลง",
+      "showAll": "รายการงานทั้งหมด"
+    },
+    "sessionOptionCopy": {
+      "on": "เปิด",
+      "off": "ปิด",
+      "permissions": "สิทธิ์",
+      "notSet": "ไม่ได้ตั้งค่า",
+      "model": "โมเดล",
+      "effort": "ระดับความพยายาม",
+      "fastMode": "โหมดเร็ว",
+      "speed": "ความเร็ว",
+      "thinking": "การคิด",
+      "standard": "มาตรฐาน",
+      "minimal": "น้อยที่สุด",
+      "low": "ต่ำ",
+      "medium": "ปานกลาง",
+      "high": "สูง",
+      "xhigh": "สูงพิเศษ",
+      "max": "สูงสุด",
+      "ultra": "อัลตรา",
+      "minimalShort": "ต่ำสุด",
+      "mediumShort": "กลาง",
+      "xhighShort": "Xสูง",
+      "fast": "เร็ว",
+      "toggleOption": "สลับ {{value0}}",
+      "chooseInAgentPicker": "เลือกในตัวเลือก agent…",
+      "setWhenSessionStarts": "ตั้งค่าเมื่อ session เริ่มต้น",
+      "availableAfterSessionStarts": "ใช้ได้หลังจาก session เริ่มต้น",
+      "sessionOptions": "ตัวเลือก session"
+    },
+    "streamFrame": {
+      "streamFailed": "สตรีมการถอดเสียงล้มเหลว",
+      "streamEnded": "สตรีมการถอดเสียงสิ้นสุดแล้ว"
+    },
+    "turnStatus": {
+      "seconds_one": "{{count}}วิ",
+      "seconds_other": "{{count}}วิ",
+      "minutesSeconds": "{{minutes}}น. {{seconds}}วิ",
+      "hoursMinutesSeconds": "{{hours}}ชม. {{minutes}}นาที {{seconds}}วินาที",
+      "thinking": "การคิด",
+      "working": "กำลังทำงาน…",
+      "stopping": "กำลังหยุด…",
+      "queueAfterStop": "เข้าคิวข้อความเพื่อรันหลังหยุด",
+      "sendAfterStop": "ส่งข้อความเพื่อรันหลังหยุด",
+      "workingFor": "กำลังทำงานมา {{value0}}",
+      "workedFor": "ทำงานไป {{value0}}",
+      "interruptedAfter": "ถูกขัดจังหวะหลังผ่านไป {{value0}}",
+      "failedAfter": "ล้มเหลวหลังผ่านไป {{value0}}",
+      "toggleDetails": "สลับรายละเอียดของรอบนี้",
+      "responding": "agent กำลังตอบกลับ"
+    },
+    "message": {
+      "copyMessage": "คัดลอกข้อความ"
+    },
+    "messageActionsSheet": {
+      "copyMessage": "คัดลอกข้อความ",
+      "copyFailed": "การคัดลอกล้มเหลว",
+      "clipboardRejected": "คลิปบอร์ดปฏิเสธข้อความ",
+      "selectText": "เลือกข้อความ"
+    },
+    "notice": {
+      "stoppedManually": "หยุดด้วยตนเอง",
+      "compaction": "ย่อบริบทแล้ว",
+      "contextCleared": "ล้างบริบทแล้ว",
+      "plan": "แพ็กเกจ"
+    },
+    "nativeChatProse": {
+      "attachedImage": "รูปภาพที่แนบมา",
+      "image": "รูปภาพ",
+      "openImageHint": "เปิดภาพขนาดเต็ม"
+    },
+    "nativeChatToolLine": {
+      "durationMilliseconds": "{{milliseconds}}มิลลิวินาที",
+      "durationSeconds": "{{seconds}}วิ",
+      "durationMinutes": "{{minutes}}น. {{seconds}}วิ",
+      "durationHours": "{{hours}}ชม. {{minutes}}นาที {{seconds}}วินาที",
+      "result": "ผลลัพธ์",
+      "exitCode": "ออก {{exitCode}}",
+      "copyCommand": "คัดลอกคำสั่ง",
+      "running": "กำลังทำงาน",
+      "ran": "รันแล้ว",
+      "reading": "กำลังอ่าน",
+      "read": "อ่าน",
+      "triedRead": "พยายามอ่าน",
+      "editing": "กำลังแก้ไข",
+      "edited": "แก้ไขแล้ว",
+      "triedEdit": "พยายามแก้ไข",
+      "added": "เพิ่มแล้ว",
+      "deleted": "ลบแล้ว",
+      "renamed": "เปลี่ยนชื่อแล้ว",
+      "subagent": "ตัวแทนย่อย",
+      "searching": "กำลังค้นหา",
+      "searched": "ค้นหาแล้ว",
+      "triedSearch": "พยายามค้นหา",
+      "listing": "กำลังแสดงรายการ",
+      "listed": "แสดงรายการแล้ว",
+      "triedList": "พยายามแสดงรายการ",
+      "fetching": "กำลังดึงข้อมูล",
+      "fetched": "ดึงข้อมูลแล้ว",
+      "triedFetch": "พยายามดึงข้อมูล",
+      "searchingWeb": "กำลังค้นหาบนเว็บ",
+      "searchedWeb": "ค้นหาบนเว็บแล้ว",
+      "triedSearchWeb": "พยายามค้นหาบนเว็บ"
+    },
+    "nativeChatUserMessageFold": {
+      "showLess": "แสดงน้อยลง",
+      "loadFailed": "แสดงข้อความทั้งหมด ไม่สามารถโหลดได้ แตะเพื่อลองอีกครั้ง",
+      "showFullMessage": "แสดงข้อความทั้งหมด"
+    },
+    "askRow": {
+      "awaiting": "กำลังรอการป้อนข้อมูลจากผู้ใช้:",
+      "awaitingUnnamed": "กำลังรอการป้อนข้อมูลจากผู้ใช้",
+      "asked": "ถามว่า:",
+      "questionCount": "{{value0}} คำถาม"
+    },
+    "hostStatus": {
+      "historyRepaired": "โหลดประวัติของแชตนี้ได้เพียงบางส่วน",
+      "historyItemTooLarge": "ส่วนนี้ของแชตมีขนาดใหญ่เกินกว่าจะแสดง",
+      "continuedOutside": "ดำเนินต่อนอกแชตนี้",
+      "continuedOutsideRewound": "ดำเนินต่อนอกแชตนี้ คำตอบก่อนหน้าด้านบนไม่อยู่ในประวัติของการสนทนานี้อีกต่อไป"
+    },
+    "orcaStop": {
+      "update": "Prompt บน {{machine}} รีสตาร์ทเพื่ออัปเดตในขณะที่การตอบสนองนี้อยู่ระหว่างดำเนินการ",
+      "quit": "Prompt บน {{machine}} ถูกปิดในขณะที่การตอบกลับนี้อยู่ระหว่างดำเนินการ",
+      "crash": "Prompt บน {{machine}} หยุดโดยไม่คาดคิดขณะกำลังตอบสนองนี้",
+      "remote": "Prompt บน {{machine}} หยุดลงในขณะที่กำลังตอบสนองนี้",
+      "canContinue": "คุณสามารถสนทนาต่อในบทสนทนานี้ได้",
+      "unnamedServer": "เซิร์ฟเวอร์ระยะไกล"
+    },
+    "toolActivity": {
+      "count_one": "{{count}} การเรียกเครื่องมือ",
+      "count_other": "เรียกใช้เครื่องมือ {{count}} ครั้ง",
+      "runningPreview": "วิ่ง {{preview}}",
+      "runningCommand": "คำสั่งรัน",
+      "runningNamedPreview": "วิ่ง {{toolName}} {{preview}}",
+      "runningNamed": "วิ่ง {{toolName}}",
+      "result": "ผลลัพธ์",
+      "moreCalls": "อีก {{value0}} รายการ",
+      "failedCount": "{{value0}} ล้มเหลว",
+      "failedCallsLabel": "การเรียกเครื่องมือที่ล้มเหลว: {{value0}}",
+      "interruptedCount": "{{value0}} ถูกขัดจังหวะ",
+      "interruptedCallsLabel": "การเรียกเครื่องมือที่ถูกขัดจังหวะ: {{value0}}"
+    },
+    "toolRun": {
+      "liveRead_one": "กำลังอ่านไฟล์ {{count}}",
+      "liveRead_other": "กำลังอ่าน {{count}} ไฟล์",
+      "liveSearch_one": "กำลังค้นหา {{count}} ครั้ง",
+      "liveSearch_other": "กำลังค้นหา {{count}} ครั้ง",
+      "liveListFiles_one": "รายการ {{count}} ไดเรกทอรี",
+      "liveListFiles_other": "กำลังแสดงรายการ {{count}} โฟลเดอร์",
+      "liveUnknown_one": "กำลังรันคำสั่ง {{count}}",
+      "liveUnknown_other": "กำลังรัน {{count}} คำสั่ง",
+      "liveFileChange_one": "กำลังแก้ไขไฟล์ {{count}}",
+      "liveFileChange_other": "กำลังแก้ไข {{count}} ไฟล์",
+      "liveWebSearch_one": "ค้นหาเว็บ {{count}} ครั้ง",
+      "liveWebSearch_other": "กำลังค้นหาเว็บ {{count}} ครั้ง",
+      "liveBrowserOnce": "กำลังใช้เบราว์เซอร์",
+      "liveBrowserTimes_other": "กำลังใช้เบราว์เซอร์ {{count}} ครั้ง",
+      "liveMcpToolCall_one": "การใช้การรวม {{count}}",
+      "liveMcpToolCall_other": "กำลังใช้ {{count}} integration",
+      "liveSubAgentActivity_one": "กำลังเรียกใช้ตัวแทน {{count}}",
+      "liveSubAgentActivity_other": "กำลังรัน {{count}} agent",
+      "liveTodoListOnce": "กำลังอัปเดตแผน",
+      "liveTodoListTimes_other": "กำลังอัปเดตแผน {{count}} ครั้ง",
+      "liveOther_one": "การใช้เครื่องมือ {{count}}",
+      "liveOther_other": "กำลังใช้ {{count}} เครื่องมือ",
+      "settledRead_one": "อ่านไฟล์ {{count}}",
+      "settledRead_other": "อ่าน {{count}} ไฟล์",
+      "settledSearch_one": "ค้นหา {{count}} ครั้ง",
+      "settledSearch_other": "ค้นหา {{count}} ครั้ง",
+      "settledListFiles_one": "แสดงรายการไดเรกทอรี {{count}}",
+      "settledListFiles_other": "แสดงรายการ {{count}} โฟลเดอร์",
+      "settledUnknown_one": "รันคำสั่ง {{count}}",
+      "settledUnknown_other": "รัน {{count}} คำสั่ง",
+      "settledFileChange_one": "แก้ไขไฟล์ {{count}}",
+      "settledFileChange_other": "แก้ไข {{count}} ไฟล์",
+      "settledWebSearch_one": "ค้นหาเว็บ {{count}} ครั้ง",
+      "settledWebSearch_other": "ค้นหาเว็บ {{count}} ครั้ง",
+      "settledBrowserOnce": "ใช้เบราว์เซอร์แล้ว",
+      "settledBrowserTimes_other": "ใช้เบราว์เซอร์ {{count}} ครั้ง",
+      "settledMcpToolCall_one": "ใช้การรวม {{count}}",
+      "settledMcpToolCall_other": "ใช้ {{count}} integration",
+      "settledSubAgentActivity_one": "ตัวแทนรัน {{count}}",
+      "settledSubAgentActivity_other": "รัน {{count}} agent",
+      "settledTodoListOnce": "อัปเดตแผนแล้ว",
+      "settledTodoListTimes_other": "อัปเดตแผน {{count}} ครั้ง",
+      "settledOther_one": "เครื่องมือที่ใช้แล้ว {{count}}",
+      "settledOther_other": "ใช้ {{count}} เครื่องมือ",
+      "pair": "{{value0}} และ {{value1}}",
+      "list": "{{value0}} และ {{value1}}",
+      "separator": ","
+    },
+    "usageLimit": {
+      "theAgent": "agent",
+      "windowSession": "เซสชัน",
+      "windowWeekly": "รายสัปดาห์",
+      "windowWeeklyModel": "โมเดลรายสัปดาห์",
+      "windowCredits": "การใช้งานเพิ่มเติม",
+      "reachedNamed": "{{agent}} ถึงขีดจำกัด{{window}}แล้ว",
+      "reached": "{{agent}} ถึงขีดจำกัดการใช้งานแล้ว",
+      "resetsAt": "รีเซ็ตเมื่อ {{when}}"
+    },
+    "composerPlaceholder": {
+      "reconnecting": "กำลังเชื่อมต่อใหม่…",
+      "waitingForTerminal": "กำลังรอเทอร์มินัล...",
+      "prompt": "ถามได้ทุกเรื่อง พิมพ์ @ เพื่อระบุไฟล์ พิมพ์ / เพื่อใช้คำสั่ง"
+    },
+    "nativeChatImageViewer": {
+      "closeImage": "ปิดภาพ"
+    },
+    "nativeChatVisual": {
+      "defaultTitle": "การแสดงภาพ",
+      "unavailable": "ไม่มีภาพแสดงข้อมูล",
+      "retryHint": "ก็ลองโหลดใหม่ดูครับ",
+      "openFullscreen": "เปิด {{title}} แบบเต็มหน้าจอ"
+    },
+    "diffCard": {
+      "diffTruncated": "diff ถูกตัดทอน",
+      "diffGap": "บรรทัดที่ไม่ได้แสดง",
+      "copyDiff": "คัดลอก diff"
+    },
+    "receipt": {
+      "emptyAnswer": "คำตอบว่างเปล่า",
+      "unavailable": "ไม่พบคำตอบที่เลือก",
+      "resolved": "แก้แล้ว",
+      "cancelled": "ยกเลิกแล้ว",
+      "resolver": "ตอบบน {{device}} แล้ว",
+      "cancelledBy": "ยกเลิกบน {{device}} แล้ว"
+    },
+    "subagentGroup": {
+      "stateCompleted": "เสร็จสมบูรณ์",
+      "stateWorking": "กำลังทำงาน",
+      "stateIdle": "idle",
+      "stateFailed": "ล้มเหลว",
+      "stateStopped": "หยุดแล้ว",
+      "stateUnverifiable": "ไม่มีข้อมูลสถานะ",
+      "stateWorkingCount_one": "กำลังทำงาน {{count}}",
+      "stateWorkingCount_other": "กำลังทำงาน {{count}}",
+      "stateIdleCount_one": "ว่าง {{count}}",
+      "stateIdleCount_other": "ว่าง {{count}}",
+      "stateFailedCount_one": "ล้มเหลว {{count}}",
+      "stateFailedCount_other": "ล้มเหลว {{count}}",
+      "stateStoppedCount_one": "{{count}} หยุดแล้ว",
+      "stateStoppedCount_other": "{{count}} หยุดแล้ว",
+      "stateUnverifiableCount_one": "{{count}} ไม่มีสถานะ",
+      "stateUnverifiableCount_other": "{{count}} ไม่มีสถานะ",
+      "started_one": "เริ่มตัวแทนย่อย {{count}} แล้ว",
+      "started_other": "เริ่ม {{count}} subagent",
+      "ran_one": "รันตัวแทนย่อย {{count}}",
+      "ran_other": "รัน {{count}} subagent",
+      "tokens": "{{value0}} token"
+    }
+  },
+  "sourceControl": {
+    "hostedReview": {
+      "prCopy": {
+        "shortLabel": "PR",
+        "reviewLabel": "ดึงคำขอ",
+        "titleLabel": "ดึงคำขอ"
+      },
+      "mrCopy": {
+        "shortLabel": "MR",
+        "reviewLabel": "คำขอรวม",
+        "titleLabel": "รวมคำขอ"
+      }
+    },
+    "commitDropdown": {
+      "commit": "commit",
+      "commitStagedChanges": "commit การเปลี่ยนแปลงที่ staged",
+      "commitPush": "commit และ push",
+      "commitForcePush": "commit และ force push",
+      "commitSync": "commit และ sync",
+      "checkingBranchStatus": "กำลังตรวจสอบสถานะ branch…",
+      "checkingPrStatus": "กำลังตรวจสอบสถานะ PR…",
+      "prAlreadyMerged": "PR ถูก merge แล้ว",
+      "checkOutBranchToPush": "checkout branch ก่อน push commit",
+      "linkedReviewTargetUnavailable": "ไม่พบ branch เป้าหมายของรีวิวที่เชื่อมโยง",
+      "publishBranchFirstToPush": "publish branch ก่อนจึงจะ push commit ได้",
+      "commitAndForcePush": "commit การเปลี่ยนแปลงที่ staged แล้ว force push ด้วย lease",
+      "commitAndTryPush": "commit การเปลี่ยนแปลงที่ staged แล้วลอง push",
+      "commitAndPush": "commit การเปลี่ยนแปลงที่ staged แล้ว push",
+      "checkOutBranchToSync": "checkout branch ก่อน sync commit",
+      "publishBranchFirstToSync": "publish branch ก่อนจึงจะ sync commit ได้",
+      "useCommitAndForcePush": "ใช้ commit และ force push — remote มีเพียง commit เก่าของ local",
+      "commitThenPullPush": "commit แล้ว pull และ push",
+      "resolveConflicts": "แก้ conflict ก่อน commit",
+      "stageFile": "stage ไฟล์อย่างน้อยหนึ่งไฟล์เพื่อ commit",
+      "enterMessage": "ป้อนข้อความ commit เพื่อ commit"
+    },
+    "createPrAction": {
+      "createReview": "สร้าง {{titleLabel}}",
+      "createPullRequest": "สร้าง pull request",
+      "statusUnavailable": "ไม่มีสถานะรีวิว",
+      "checkingStatus": "กำลังตรวจสอบสถานะรีวิว…",
+      "providerUnavailable": "การสร้างบทวิจารณ์ไม่พร้อมใช้งานสำหรับผู้ให้บริการรายนี้"
+    },
+    "prCreate": {
+      "notReady": "สาขานี้ยังไม่พร้อมสำหรับ {{reviewLabel}}",
+      "existingNumber": "{{titleLabel}} #{{number}} เปิดอยู่แล้ว",
+      "existing": "{{titleLabel}} เปิดอยู่แล้ว",
+      "createdNotRefreshed": "{{titleLabel}} สร้างแล้ว แต่ Prompt ยังไม่สามารถรีเฟรชได้",
+      "lookupUnconfirmed": "Prompt ไม่สามารถยืนยันได้ว่าสาขานี้มี {{reviewLabel}} อยู่แล้วหรือไม่ โปรดลองอีกครั้งในอีกสักครู่",
+      "dirty": "ยอมรับการเปลี่ยนแปลงก่อนที่จะสร้าง {{reviewLabel}}",
+      "detachedHead": "checkout branch ก่อนสร้าง {{reviewLabel}}",
+      "defaultBranch": "สลับไปยัง feature branch ก่อนสร้าง {{reviewLabel}}",
+      "noUpstream": "เผยแพร่คอมมิตก่อนสร้าง {{reviewLabel}}",
+      "needsSync": "ซิงค์สาขานี้ก่อนที่จะสร้าง {{reviewLabel}}",
+      "authRequired": "ตรวจสอบสิทธิ์ก่อนสร้าง {{reviewLabel}}",
+      "unsupportedMergeRequests": "ไม่รองรับการสร้างคำขอรวมสำหรับ repo นี้",
+      "unsupportedPullRequests": "ไม่รองรับการสร้างคำขอดึงสำหรับ repo นี้",
+      "existingReview": "branch นี้มี {{reviewLabel}} อยู่แล้ว",
+      "forkHeadUnsupported": "ไม่สนับสนุนการสร้าง {{reviewLabel}} จากทางแยกนี้",
+      "baseNotOnRemote": "กดสาขาฐานก่อนที่จะสร้าง {{reviewLabel}}"
+    },
+    "hostedReviewCreate": {
+      "pushSucceeded": "พุชสำเร็จ แต่การสร้าง {{shortLabel}} ล้มเหลว: {{error}}"
+    },
+    "remoteDropdown": {
+      "push": "push",
+      "forcePush": "force push",
+      "pull": "pull",
+      "fastForward": "fast-forward",
+      "sync": "sync",
+      "publishBranch": "เผยแพร่ branch",
+      "publishPrStatus": "สถานะ PR",
+      "publishLinkedReview": "รีวิวที่เชื่อมโยง",
+      "publishNoBranch": "ไม่มี branch",
+      "checkingBranchStatus": "กำลังตรวจสอบสถานะ branch…",
+      "checkingPrStatus": "กำลังตรวจสอบสถานะ PR…",
+      "prAlreadyMerged": "PR ถูก merge แล้ว",
+      "linkedReviewTargetUnavailable": "ไม่พบ branch เป้าหมายของรีวิวที่เชื่อมโยง",
+      "checkOutBranchToPush": "checkout branch ก่อน push commit",
+      "pushAndSetUpstream": "push branch นี้และตั้ง upstream หากจำเป็น",
+      "pushToLinkedReview": "push การอัปเดตไปยัง branch ของรีวิวที่เชื่อมโยง",
+      "tryRegularPush": "ลอง push ตามปกติ แต่ git อาจต้องใช้ force push",
+      "pushMayNeedSync": "push commit ใน local แต่ git อาจต้องให้ sync ก่อน",
+      "nothingToPush": "ไม่มีอะไรให้ push",
+      "checkOutBranchToForcePush": "checkout branch ก่อน force push commit",
+      "nothingToForcePush": "ไม่มีอะไรให้ force push",
+      "checkOutBranchToPull": "checkout branch ก่อน pull commit",
+      "publishBranchFirstToPull": "publish branch ก่อนจึงจะ pull commit ได้",
+      "nothingNewToPull": "ไม่มีอะไรใหม่ให้ pull — remote มีเพียง commit เก่าของ local",
+      "nothingToPull": "ไม่มีอะไรให้ pull",
+      "checkOutBranchToFastForward": "checkout branch ก่อน fast-forward",
+      "publishBranchFirstToFastForward": "publish branch ก่อนจึงจะ fast-forward ได้",
+      "nothingNewToFastForward": "ไม่มีอะไรใหม่ให้ fast-forward — remote มีเพียง commit เก่าของ local",
+      "nothingToFastForward": "ไม่มีอะไรให้ fast-forward",
+      "tryFastForwardPull": "ลอง pull แบบ fast-forward แต่ git อาจปฏิเสธ commit ใน local",
+      "checkOutBranchToSync": "checkout branch ก่อน sync commit",
+      "publishBranchFirstToSync": "publish branch ก่อนจึงจะ sync commit ได้",
+      "useForcePushToSync": "ใช้ force push — remote มีเพียง commit เก่าของ local",
+      "branchUpToDate": "branch เป็นปัจจุบันแล้ว",
+      "rebaseFromBase": "rebase จาก base",
+      "rebaseChooseRemoteBase": "เลือก remote base branch เพื่อ rebase",
+      "rebaseDirtyHint": "ลอง rebase ได้ แต่ git อาจต้องให้ commit หรือ stash การเปลี่ยนแปลงใน local ก่อน",
+      "fetch": "fetch",
+      "fetchTitle": "fetch จาก remote โดยไม่ merge",
+      "linkedReviewBranchExists": "branch ของรีวิวที่เชื่อมโยงมีอยู่แล้ว",
+      "checkOutBranchToPublish": "checkout branch ก่อน publish commit",
+      "branchAlreadyPublished": "branch ถูก publish แล้ว",
+      "publishToOrigin": "publish branch นี้ไปยัง origin",
+      "nothingToPushTo": "ไม่มีอะไรให้ push ไปยัง {{upstreamName}}",
+      "nothingToForcePushTo": "ไม่มีอะไรให้ force push ไปยัง {{upstreamName}}",
+      "rebaseFromNamedBase": "rebase จาก {{baseRef}}",
+      "rebaseWithLatestFrom": "rebase branch ปัจจุบันด้วย commit ล่าสุดจาก {{baseRef}}"
+    },
+    "actions": {
+      "createPr": "สร้าง PR",
+      "pushAndCreatePr": "ผลักดันและสร้างประชาสัมพันธ์",
+      "switchBranch": "สลับสาขา",
+      "commits": "มุ่งมั่น",
+      "committing": "อยู่ระหว่างดำเนินการ",
+      "forcePushing": "กำลังดำเนินการผลักดัน",
+      "remoteOperationInProgress": "อยู่ระหว่างดำเนินการระยะไกล",
+      "waitForRemoteOperation": "ลองอีกครั้งเมื่อการดำเนินการระยะไกลเสร็จสิ้น",
+      "resolveConflicts": "แก้ไขข้อขัดแย้งก่อนที่จะกระทำ",
+      "commitStagedChanges": "ยอมรับการเปลี่ยนแปลงตามขั้นตอน",
+      "enterCommitMessage": "ป้อนข้อความคอมมิตที่จะคอมมิต",
+      "stageAllChanges": "ขั้นการเปลี่ยนแปลงทั้งหมด",
+      "stageFileToCommit": "สเตจอย่างน้อยหนึ่งไฟล์ที่จะคอมมิต",
+      "checkoutBeforePublish": "checkout branch ก่อน publish commit",
+      "checkingReviewStatus": "กำลังตรวจสอบสถานะการตรวจสอบ",
+      "reviewAlreadyMerged": "ไม่มีอะไรจะกระทำ รวมบทวิจารณ์แล้ว",
+      "publishToOrigin": "เผยแพร่สาขานี้ไปยังต้นทาง",
+      "pushLinkedReview": "พุชการอัปเดตไปยังสาขาการตรวจสอบที่เชื่อมโยง",
+      "linkedReviewUnavailable": "สาขาการตรวจสอบที่เชื่อมโยงไม่พร้อมใช้งาน",
+      "forcePushWithLease": "บังคับผลักดันด้วยสัญญาเช่าเพื่ออัปเดตสาขาระยะไกล",
+      "syncCounts": "ดึง {{behind}} กด {{ahead}}",
+      "pullCommits_one": "ดึง {{count}} กระทำ",
+      "pullCommits_other": "ดึง {{count}} กระทำ",
+      "pushCommits_one": "กด {{count}} คอมมิต",
+      "pushCommits_other": "กด {{count}} กระทำ",
+      "upToDate": "ไม่มีอะไรให้ commit branch เป็นปัจจุบันแล้ว"
+    },
+    "dropdownCounts": {
+      "pushCount_one": "กด {{count}} คอมมิต",
+      "pushCount_other": "Push {{count}} commit",
+      "pullCount_one": "ดึง {{count}} กระทำ",
+      "pullCount_other": "Pull {{count}} commit",
+      "fastForwardCount_one": "กรอไปข้างหน้า {{count}} กระทำ",
+      "fastForwardCount_other": "Fast-forward {{count}} commit",
+      "syncCounts": "pull {{behind}}, push {{ahead}}",
+      "remoteBranchFallback": "remote branch",
+      "titleForcePushOlderCopiesBranch": "remote มีเพียง commit เก่าของ local force push branch นี้ด้วย lease เพื่ออัปเดต {{upstreamName}}",
+      "titleForcePushOlderCopiesCount_one": "รีโมตมีเฉพาะสำเนาที่เก่ากว่าของคอมมิตในเครื่องเท่านั้น บังคับให้สาขา {{count}} กระทำการเช่าเพื่ออัปเดต {{upstreamName}}",
+      "titleForcePushOlderCopiesCount_other": "Remote มีแค่ commit เวอร์ชันเก่าของ commit ในเครื่อง Force push {{count}} branch commit ด้วย lease เพื่ออัปเดต {{upstreamName}}",
+      "titleManualForcePushReplaceRemote_one": "บังคับให้กด {{count}} คอมมิตภายในพร้อมการเช่าเพื่ออัปเดต {{upstreamName}} และแทนที่คอมมิตแบบรีโมตเท่านั้น",
+      "titleManualForcePushReplaceRemote_other": "Force push {{count}} commit ในเครื่องด้วย lease เพื่ออัปเดต {{upstreamName}} และแทนที่ commit ที่มีเฉพาะบน remote",
+      "titleManualForcePush_one": "บังคับให้กด {{count}} คอมมิตท้องถิ่นพร้อมการเช่าเพื่ออัปเดต {{upstreamName}}",
+      "titleManualForcePush_other": "Force push {{count}} commit ในเครื่องด้วย lease เพื่ออัปเดต {{upstreamName}}",
+      "titleUnpublishedForcePushBranch": "force push branch นี้ด้วย lease และตั้ง upstream หากจำเป็น",
+      "titleUnpublishedForcePushCount_one": "บังคับให้สาขา {{count}} กระทำการเช่าและตั้งค่าอัปสตรีมหากจำเป็น",
+      "titleUnpublishedForcePushCount_other": "Force push {{count}} branch commit ด้วย lease และตั้ง upstream หากจำเป็น"
+    },
+    "primaryAction": {
+      "forcePushFromDesktop": "บังคับให้สาขาของคำขอดึงนี้ดึงจากเดสก์ท็อป",
+      "forcePush": "force push",
+      "commit": "commit",
+      "stageAll": "stage ทั้งหมด",
+      "push": "push",
+      "pull": "pull",
+      "sync": "sync",
+      "publishBranch": "เผยแพร่ branch"
+    },
+    "branchDiffPreviewDrawer": {
+      "committedOnBranch": "มุ่งมั่นในสาขา",
+      "closePreview": "ปิดการแสดงตัวอย่างส่วนต่างที่คอมมิต",
+      "loadFailed": "โหลดส่วนต่างไม่ได้",
+      "truncated": "ส่วนต่างถูกตัดทอนสำหรับการดูตัวอย่างบนมือถือ"
+    },
+    "commitFailurePanel": {
+      "title": "คอมมิตล้มเหลว",
+      "summary": "คอมมิตล้มเหลว",
+      "fixWithAi": "แก้ commit ที่ล้มเหลวด้วย AI",
+      "fix": "แก้ไข",
+      "hideFailureDetails": "ซ่อนรายละเอียดความล้มเหลวในการคอมมิต",
+      "showFailureDetails": "แสดงรายละเอียดการคอมมิตความล้มเหลว",
+      "hideDetails": "ซ่อนรายละเอียด",
+      "showDetails": "แสดงรายละเอียด"
+    },
+    "gitHistoryList": {
+      "loadFailed": "โหลดประวัติไม่สำเร็จ",
+      "loadFilesFailed": "ไม่สามารถโหลดไฟล์คอมมิตได้",
+      "retryFiles": "ลองคอมมิตไฟล์อีกครั้ง",
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "noFileChanges": "ไม่มีการเปลี่ยนแปลงไฟล์",
+      "noCommits": "ไม่มีการคอมมิต"
+    },
+    "branchCard": {
+      "mergeState": "ผสาน",
+      "rebaseState": "รีบูต",
+      "cherryPickState": "เชอร์รี่เลือก",
+      "changedCount": "{{count}} เปลี่ยนแปลงแล้ว",
+      "stagedCount": "{{count}} จัดฉาก",
+      "branchCount": "{{count}} บนสาขา"
+    },
+    "content": {
+      "reconnecting": "กำลังเชื่อมต่อกับเดสก์ท็อปอีกครั้ง...",
+      "stageAll": "stage ทั้งหมด",
+      "unstageAll": "ยกเลิกการแสดงทั้งหมด",
+      "openActions": "การดำเนินการควบคุมโอเพ่นซอร์ส",
+      "emptyTitle": "ไม่มีการเปลี่ยนแปลงในท้องถิ่น",
+      "emptyMessage": "ต้นไม้ทำงานมีความสะอาด",
+      "commitMessageDisabled": "ข้อความยืนยันถูกปิดใช้งาน ไม่มีไฟล์ที่จัดฉาก",
+      "noStagedFiles": "ไม่มีไฟล์ที่จัดฉาก",
+      "commitMessagePlaceholder": "ข้อความ commit",
+      "regenerateHint": "ล้างข้อความเพื่อสร้างใหม่",
+      "cancelGeneration": "ยกเลิกการคอมมิตการสร้างข้อความ",
+      "generateMessage": "สร้างข้อความ commit ด้วย AI"
+    },
+    "fileList": {
+      "committedSection": "commit บน branch แล้ว"
+    },
+    "fileRows": {
+      "bothModified": "แก้ไขทั้งสองฝั่ง",
+      "bothAdded": "เพิ่มทั้งสองฝั่ง",
+      "deletedByUs": "ลบโดยฝั่งเรา",
+      "deletedByThem": "ลบโดยฝั่งอื่น",
+      "addedByUs": "เพิ่มโดยฝั่งเรา",
+      "addedByThem": "เพิ่มโดยฝั่งอื่น",
+      "bothDeleted": "ลบทั้งสองฝั่ง",
+      "unresolvedConflict": "conflict ที่ยังไม่ได้แก้ไข",
+      "openChangedFile": "เปิดไฟล์ที่เปลี่ยนแปลง {{path}}",
+      "renamedFrom": "จาก {{path}}",
+      "unstageFile": "ไม่ขึ้นเวที {{path}}",
+      "stageFile": "สเตจ {{path}}",
+      "discardFile": "ทิ้ง {{path}}",
+      "committedSection": "commit บน branch แล้ว",
+      "loadingCommitted": "กำลังโหลดการเปลี่ยนแปลงที่คอมมิต...",
+      "committedUnavailable": "การเปลี่ยนแปลงที่คอมมิตไม่พร้อมใช้งาน",
+      "openCommittedChange": "เปิดการเปลี่ยนแปลงที่คอมมิต {{path}}"
+    },
+    "header": {
+      "close": "ปิดการควบคุมแหล่งที่มา",
+      "backToSession": "กลับไปที่เซสชั่น",
+      "title": "การควบคุมแหล่งที่มา",
+      "openNumberedPrWeb": "เปิดคำขอดึง #{{number}} บนเว็บ",
+      "openPrWeb": "เปิดคำขอดึงบนเว็บ",
+      "refresh": "รีเฟรชการควบคุมแหล่งที่มา"
+    },
+    "modals": {
+      "actionsTitle": "การควบคุมแหล่งที่มา",
+      "discardTitle": "ยกเลิกการเปลี่ยนแปลง",
+      "discardConfirmMessage": "ยกเลิกการเปลี่ยนแปลง \"{{path}}\" หรือไม่ สิ่งนี้ไม่สามารถยกเลิกได้",
+      "discardButton": "ละทิ้ง",
+      "switchBranchTitle": "สลับสาขา",
+      "currentBranch": "ปัจจุบัน",
+      "prCreatedTitle": "สร้างคำขอดึงแล้ว",
+      "openPrWithWarning": "เปิดในเบราว์เซอร์ของคุณ?\n\n{{warning}}",
+      "openPrMessage": "เปิดในเบราว์เซอร์ของคุณ?"
+    },
+    "panel": {
+      "unavailableTitle": "การควบคุมแหล่งที่มาไม่พร้อมใช้งาน",
+      "loadFailedTitle": "ไม่สามารถโหลดได้"
+    },
+    "prChip": {
+      "loading": "กำลังโหลดคำขอดึง...",
+      "createPr": "สร้างคำขอดึง",
+      "loadingLabel": "กำลังโหลดคำขอดึง",
+      "unavailableLabel": "คำขอดึงไม่พร้อมใช้งาน: {{message}}",
+      "openWithComments_one": "ดึงคำขอ #{{number}}, {{state}}, {{checks}}, {{count}} ความคิดเห็นที่ยังไม่ได้รับการแก้ไข เปิดคำขอดึง",
+      "openWithComments_other": "ดึงคำขอ #{{number}}, {{state}}, {{checks}}, {{count}} ความคิดเห็นที่ยังไม่ได้รับการแก้ไข เปิดคำขอดึง",
+      "openLabel": "คำขอดึง #{{number}}, {{state}}, {{checks}} เปิดคำขอดึง"
+    },
+    "hostedReviewCopy": {
+      "updatingBranch": "กำลังอัปเดตสาขา...",
+      "stagingChanges": "กำลังเปลี่ยนแปลงการแสดงละคร...",
+      "generatingCommitMessage": "กำลังสร้างข้อความยืนยัน...",
+      "committingChanges": "กำลังดำเนินการเปลี่ยนแปลง...",
+      "publishingBranch": "สาขาสำนักพิมพ์...",
+      "pushingCommits": "กำลังผลักดันการกระทำ...",
+      "forcePushing": "แรงผลักดันด้วยสัญญาเช่า...",
+      "creatingReview": "กำลังสร้างบทวิจารณ์..."
+    },
+    "branchBaseRef": {
+      "resolveFailed": "ไม่สามารถแก้ไขฐานสาขาได้"
+    },
+    "branchCompareOutcome": {
+      "baseBranchUnavailable": "ไม่สามารถแก้ไขสาขาฐานเพื่อการเปรียบเทียบได้",
+      "loadFailed": "ไม่สามารถโหลดการเปลี่ยนแปลงที่คอมมิตได้"
+    },
+    "branchCompare": {
+      "sectionTitle": "commit บน branch แล้ว",
+      "summary": "{{files}} - เทียบกับ {{baseRef}}",
+      "summaryWithCommits": "{{files}} - {{commits}} - กับ {{baseRef}}",
+      "files_one": "{{count}} ไฟล์",
+      "files_other": "{{count}} ไฟล์",
+      "commits_one": "{{count}} กระทำ",
+      "commits_other": "{{count}} กระทำ"
+    },
+    "commitMessageAi": {
+      "generateFailed": "ไม่สามารถสร้างข้อความคอมมิต"
+    },
+    "gitHistory": {
+      "justNow": "เมื่อสักครู่",
+      "minutes_one": "{{count}} นาที",
+      "minutes_other": "{{count}} นาที",
+      "hours_one": "{{count}} ชม.",
+      "hours_other": "{{count}} ชม.",
+      "days_one": "{{count}} วัน",
+      "days_other": "{{count}} วัน",
+      "months_one": "{{count}}เดือน",
+      "months_other": "{{count}}เดือน",
+      "years_one": "{{count}}ปี",
+      "years_other": "{{count}}ปี",
+      "noCommitMessage": "(ไม่มีข้อความยืนยัน)",
+      "loadFailed": "โหลดประวัติการคอมมิตไม่สำเร็จ"
+    },
+    "gitStatus": {
+      "conflicts": "ข้อขัดแย้ง",
+      "changes": "การเปลี่ยนแปลง",
+      "stagedChanges": "การเปลี่ยนแปลงที่ staged"
+    },
+    "hostedReviewCreateIntent": {
+      "resolveConflicts": "แก้ไขข้อขัดแย้งก่อนที่จะสร้างคำขอดึง",
+      "branchChanged": "สาขามีการเปลี่ยนแปลงขณะเตรียมคำขอดึง",
+      "resolveOrStageChanges": "แก้ไขหรือดำเนินการเปลี่ยนแปลงก่อนสร้างคำขอดึง",
+      "generateMessageFailed": "ไม่สามารถสร้างข้อความยืนยันได้ เพิ่มหนึ่งรายการใน Source Control จากนั้นลองอีกครั้ง",
+      "reviewCommitMessage": "ตรวจสอบข้อความ commit แล้วลองสร้าง PR อีกครั้ง"
+    },
+    "hostedReviewGitPreparation": {
+      "refreshFailed": "ไม่สามารถรีเฟรชการควบคุมแหล่งที่มาได้",
+      "updateBranchFailed": "อัปเดต remote branch ไม่ได้ ลองสร้าง PR อีกครั้ง",
+      "stageFailed": "ไม่สามารถดำเนินการเปลี่ยนแปลงได้",
+      "commitFailed": "คอมมิตล้มเหลว"
+    },
+    "hostedReviewRemotePrerequisite": {
+      "publishFailed": "ไม่สามารถเผยแพร่สาขาได้",
+      "pushFailed": "ไม่สามารถพุชคอมมิต",
+      "forcePushFailed": "ล้มเหลวในการบังคับผลักดันด้วยสัญญาเช่า"
+    },
+    "hostedReviewService": {
+      "pushBeforeCreateFailed": "push ไม่สำเร็จ แก้ไขข้อผิดพลาดของ push แล้วลองอีกครั้ง",
+      "createFailed": "ไม่สามารถสร้างคำขอดึงได้"
+    },
+    "prLink": {
+      "updatePullRequestFailed": "ไม่สามารถอัปเดตคำขอดึงลิงก์ได้",
+      "updateReviewFailed": "ไม่สามารถอัปเดตการตรวจสอบที่เชื่อมโยงได้"
+    },
+    "conflictAbort": {
+      "aborting": "กำลังยกเลิก...",
+      "abortMerge": "ยกเลิก merge",
+      "abortRebase": "ยกเลิก rebase",
+      "abortOperation": "ยกเลิก {{operation}}"
+    },
+    "hubTab": {
+      "changes": "การเปลี่ยนแปลง",
+      "pullRequest": "ดึงคำขอ",
+      "commits": "มุ่งมั่น"
+    },
+    "screenState": {
+      "noBranch": "ไม่มีสาขา"
+    },
+    "useMobileCommitFailureRecovery": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "launchFailed": "ไม่สามารถเปิดตัวตัวแทนได้"
+    },
+    "useMobileCommitMessageGeneration": {
+      "generateFailed": "ไม่สามารถสร้างข้อความคอมมิต"
+    },
+    "useMobileCreatePrRunner": {
+      "branchRequired": "ตรวจสอบสาขาก่อนที่จะสร้างคำขอดึง"
+    },
+    "useMobileGitRequests": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "actionFailed": "การดำเนินการควบคุมแหล่งที่มาล้มเหลว",
+      "commitFailed": "คอมมิตล้มเหลว",
+      "branchUnavailable": "สถานะสาขาไม่พร้อมใช้งาน"
+    },
+    "actionSheetRunners": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "noBaseBranch": "ไม่มีสาขาฐานที่จะรีบูต"
+    },
+    "commitRunners": {
+      "commitFailed": "คอมมิตล้มเหลว",
+      "actionFailed": "การดำเนินการควบคุมแหล่งที่มาล้มเหลว"
+    },
+    "loaders": {
+      "connectingToDesktop": "กำลังเชื่อมต่อกับเดสก์ท็อป...",
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "updateDesktop": "อัปเดต Prompt เดสก์ท็อปเพื่อใช้การควบคุมแหล่งที่มาบนมือถือ",
+      "loadFailed": "ไม่สามารถโหลดการควบคุมแหล่งที่มาได้"
+    },
+    "openers": {
+      "waitingForDesktop": "กำลังรอเดสก์ท็อป...",
+      "openDiffFailed": "เปิดส่วนต่างไม่ได้",
+      "tabNotReady": "ไฟล์เปิดขึ้น แต่แท็บยังไม่พร้อม ลองอีกครั้ง"
+    },
+    "runners": {
+      "actionFailed": "การดำเนินการควบคุมแหล่งที่มาล้มเหลว"
+    },
+    "state": {
+      "syncStatus": "นำหน้า {{ahead}} ตามหลัง {{behind}}",
+      "noUpstream": "ไม่มีต้นน้ำ"
+    },
+    "textGenerationFailure": {
+      "openCodeInvalidEvents": "OpenCode ส่งคืน JSON event ที่ไม่ถูกต้อง",
+      "antigravityInvalidEvents": "Antigravity ส่งคืน JSON event ที่ไม่ถูกต้อง",
+      "antigravityInvalidResult": "Antigravity ส่งคืนผลลัพธ์ที่ไม่ถูกต้อง",
+      "antigravityNoFinalResult": "Antigravity ไม่ส่งคืนผลลัพธ์สุดท้าย",
+      "kimiUnreadableOutput": "Kimi ส่งคืนเอาต์พุต Prompt ไม่สามารถอ่านได้ ลองอีกครั้ง",
+      "kimiSessionOccupied": "Kimi ใช้ session นี้ไม่ได้เพราะกำลังใช้งานอยู่ในไคลเอนต์อื่น หยุด session ในไคลเอนต์นั้นหรือออกจากไคลเอนต์นั้น แล้วลองอีกครั้ง",
+      "kimiInterrupted": "Kimi ถูกขัดจังหวะก่อนสร้างข้อความเสร็จ ลองอีกครั้ง",
+      "kimiFailed": "Kimi สร้างข้อความไม่สำเร็จ เปิด Kimi บนโฮสต์ที่ใช้เรียกทำงานเพื่อดูสาเหตุของความล้มเหลวก่อนลองอีกครั้ง",
+      "kimiAgentOptionsConflict": "Kimi ได้รับตัวเลือก agent ที่ขัดแย้งกันหรือซ้ำกัน เหลือตัวเลือก --agent หรือ --agent-file เพียงตัวเดียวใน generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiOptionRejected": "Kimi ปฏิเสธตัวเลือกหรืออาร์กิวเมนต์ แก้ไข generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiSessionNotFound": "Kimi หา session ที่ร้องขอไม่พบ ใช้ session ที่มีอยู่หรือเริ่ม session ใหม่",
+      "kimiSessionOtherDirectory": "Kimi session นี้เป็นของโฟลเดอร์อื่น เปิดต่อในโฟลเดอร์นั้นหรือใช้ session ที่สร้างสำหรับ workspace นี้",
+      "kimiCredentialVariableMissing": "Kimi ไม่พบตัวแปรสภาพแวดล้อมของข้อมูลรับรองที่กำหนดไว้ ตั้งค่าบนโฮสต์ที่ใช้เรียกทำงานก่อนลองอีกครั้ง",
+      "kimiCredentialsRequired": "Kimi ต้องใช้ข้อมูลรับรองของผู้ให้บริการ เปิด Kimi บนโฮสต์ที่ใช้เรียกทำงานเพื่อตั้งค่าผู้ให้บริการหรือลงชื่อเข้าใช้ แล้วลองอีกครั้ง",
+      "kimiModelMissing": "Kimi ไม่มีโมเดลที่ใช้งานได้ เปิด Kimi บนโฮสต์ที่ใช้เรียกทำงานเพื่อตั้งค่าหรือเลือกโมเดล แล้วลองอีกครั้ง",
+      "kimiPromptHookBlocked": "hook ของ prompt ใน Kimi บล็อกคำขอ หรือไม่สามารถเริ่มรอบการทำงานได้ ตรวจสอบ hook และการตั้งค่าของ Kimi ก่อนลองอีกครั้ง",
+      "kimiCancelled": "Kimi ยกเลิกคำขอก่อนสร้างข้อความเสร็จ ลองอีกครั้ง",
+      "kimiEmptyPrompt": "Kimi ได้รับ prompt ที่ว่างเปล่า แก้ไขอินพุตนั้นใน generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiEmptyModel": "Kimi ได้รับโมเดลที่ว่างเปล่า แก้ไขอินพุตนั้นใน generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiEmptyAgent": "Kimi ได้รับ agent ที่ว่างเปล่า แก้ไขอินพุตนั้นใน generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiEmptyAgentFilePath": "Kimi ได้รับเส้นทางไฟล์ agent ที่ว่างเปล่า แก้ไขอินพุตนั้นใน generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiOutputFormatInvalid": "รูปแบบเอาต์พุตของ Kimi ต้องใช้โหมด prompt และค่า text หรือ stream-json ที่รองรับ แก้ไข generation recipe หรืออาร์กิวเมนต์ CLI ก่อนลองอีกครั้ง",
+      "kimiSessionIdRequired": "Kimi ต้องมี session id เพื่อทำงานต่อในโหมด prompt แก้ไข generation recipe หรืออาร์กิวเมนต์ CLI แล้วลองอีกครั้ง",
+      "kimiConflictingOptions": "Kimi ได้รับตัวเลือกที่ขัดแย้งกัน: {{option}} กับ {{otherOption}} แก้ไข generation recipe หรืออาร์กิวเมนต์ CLI ก่อนลองอีกครั้ง",
+      "kimiContinueSessionConflict": "Kimi ได้รับตัวเลือกที่ขัดแย้งกัน: --continue, --session แก้ไข generation recipe หรืออาร์กิวเมนต์ CLI ก่อนลองอีกครั้ง",
+      "kimiAgentChangeOnResume": "Kimi เปลี่ยน agent ไม่ได้ขณะทำ session ต่อ นำการแทนที่ agent ออกหรือเริ่ม session ใหม่ใน generation recipe หรืออาร์กิวเมนต์ CLI",
+      "kimiResponseBlocked": "Kimi ส่งคืนการตอบกลับไม่ได้เพราะถูกบล็อก แก้ไข prompt หรือการตั้งค่าโมเดลก่อนลองอีกครั้ง",
+      "kimiAuthFailed": "Kimi ยืนยันตัวตนไม่ได้ ลงชื่อเข้าใช้หรือแก้ไขข้อมูลรับรองของผู้ให้บริการบนโฮสต์ที่ใช้เรียกทำงาน แล้วลองอีกครั้ง",
+      "kimiConnectionFailed": "Kimi เชื่อมต่อกับผู้ให้บริการไม่ได้ ตรวจสอบเครือข่ายบนโฮสต์ที่ใช้เรียกทำงาน แล้วลองอีกครั้ง",
+      "kimiProviderLimited": "Kimi ถึงขีดจำกัดของผู้ให้บริการหรือผู้ให้บริการไม่ว่าง รอสักครู่ก่อนลองอีกครั้ง หรือลดความถี่ของคำขอ",
+      "kimiContextOverflow": "Kimi มี context ไม่พอ ย่อ prompt ให้สั้นลงหรือเริ่ม session ใหม่ แล้วลองอีกครั้ง",
+      "kimiConfigInvalid": "การตั้งค่าของ Kimi ไม่ถูกต้อง ตรวจสอบการตั้งค่าโมเดลและผู้ให้บริการบนโฮสต์ที่ใช้เรียกทำงานก่อนลองอีกครั้ง",
+      "promptTooLargeForWindows": "prompt ของ {{label}} ใหญ่เกินไปสำหรับบรรทัดคำสั่งของ Windows ลด staged changes แล้วลองอีกครั้ง",
+      "promptTooLargeForArgument": "prompt ของ {{label}} ใหญ่เกินกว่าจะส่งเป็นอาร์กิวเมนต์บรรทัดคำสั่งเดียวได้ ลด staged changes แล้วลองอีกครั้ง",
+      "agentCouldNotStart": "เริ่ม {{label}} ไม่ได้ ตรวจสอบคำสั่ง agent ในการตั้งค่า แล้วลองอีกครั้ง",
+      "agentFailedToStart": "{{label}} เริ่มต้นไม่สำเร็จ ตรวจสอบคำสั่ง agent ในการตั้งค่า แล้วลองอีกครั้ง",
+      "agentBinaryNotFound": "ไม่พบ {{binary}} ใน PATH ติดตั้ง {{label}} เพื่อใช้ commit message จาก AI",
+      "timedOut": "การสร้างหมดเวลาหลัง {{seconds}} วินาที",
+      "outputTooLarge": "คำสั่ง CLI ของ {{label}} สร้างเอาต์พุตมากเกินไป ตรวจสอบการกำหนดค่า CLI ของ agent แล้วลองอีกครั้ง",
+      "windowsBatchUnsafeArguments": "{{label}} ทำงานผ่านสคริปต์แบตช์ของ Windows ซึ่งไม่สามารถใช้พรอมต์หลายบรรทัดเป็นอาร์กิวเมนต์ได้ ชี้การตั้งค่าไปที่ปฏิบัติการของตัวแทน หรือใช้คำสั่งที่กำหนดเองโดยไม่มี {prompt} เพื่อให้ Prompt ส่งข้อความพร้อมท์บน stdin",
+      "cliTerminated": "คำสั่ง CLI ของ {{label}} ถูกยุติก่อนทำงานเสร็จ",
+      "cliTerminatedWithDetail": "คำสั่ง CLI ของ {{label}} ถูกยุติก่อนทำงานเสร็จ: {{detail}}",
+      "cliFailed": "คำสั่ง CLI ของ {{label}} ล้มเหลวด้วยรหัส {{exitCode}}",
+      "cliFailedWithDetail": "คำสั่ง CLI ของ {{label}} ล้มเหลวด้วยรหัส {{exitCode}}: {{detail}}",
+      "agentReportedError": "{{label}} รายงานข้อผิดพลาด",
+      "emptyCommitMessage": "{{label}} ส่งข้อความว่างกลับมา",
+      "emptyCommitMessageWithDetail": "{{label}} ส่งข้อความว่างกลับมา เอาต์พุต CLI: {{detail}}",
+      "emptyPullRequestDetails": "{{label}} ส่งรายละเอียดว่างกลับมา",
+      "emptyPullRequestDetailsWithDetail": "{{label}} ส่งรายละเอียดว่างกลับมา เอาต์พุต CLI: {{detail}}",
+      "emptyJiraSummary": "{{label}} ส่งสรุปว่างกลับมา",
+      "emptyJiraSummaryWithDetail": "{{label}} ส่งสรุปว่างกลับมา เอาต์พุต CLI: {{detail}}",
+      "commitMessageUnparseable": "แยกวิเคราะห์ commit message ที่สร้างไม่ได้",
+      "pullRequestDetailsUnparseable": "แยกวิเคราะห์รายละเอียด pull request ที่สร้างไม่ได้",
+      "jiraSummaryEmptyAfterSanitization": "สรุปที่สร้างว่างเปล่าหลังการล้างข้อมูล",
+      "jiraDescriptionRequired": "ต้องระบุคำอธิบาย",
+      "jiraAccountDisconnected": "เชื่อมต่อบัญชี Jira ที่เลือกบนโฮสต์นี้อีกครั้ง",
+      "jiraSummaryBusyInOtherDraft": "กำลังสร้างชื่อเรื่อง Jira ในแบบร่างอื่นอยู่",
+      "stagedChangesReadFailed": "อ่าน staged changes ไม่สำเร็จ",
+      "noStagedChanges": "ไม่มี staged changes ให้สรุป",
+      "noBranchChanges": "ไม่มีการเปลี่ยนแปลงบน branch ให้สรุป",
+      "commandTemplateEmptyCommitMessage": "เทมเพลตคำสั่งสำหรับ commit message ว่างเปล่า",
+      "commandTemplateEmptyPullRequest": "เทมเพลตคำสั่งสำหรับรายละเอียด pull request ว่างเปล่า",
+      "commandTemplateEmptyBranchName": "เทมเพลตคำสั่งสำหรับชื่อ branch ว่างเปล่า",
+      "commandTemplateEmptyChatName": "เทมเพลตคำสั่งสำหรับชื่อแชตว่างเปล่า",
+      "sourceControlAgentUnsupported": "เลือก agent ของ Source Control AI ที่รองรับสำหรับการดำเนินการนี้ใน การตั้งค่า -> Git -> Source Control AI agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "chatNameAgentUnsupported": "เลือก agent สำหรับตั้งชื่อแชตที่รองรับสำหรับการดำเนินการนี้ใน การตั้งค่า -> Chat -> Chat names agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "sourceControlCustomCommandEmpty": "คำสั่งกำหนดเองว่างเปล่า เพิ่มคำสั่งได้ใน การตั้งค่า -> Git -> Source Control AI",
+      "chatNameCustomCommandEmpty": "คำสั่งกำหนดเองว่างเปล่า เพิ่มคำสั่งได้ใน การตั้งค่า -> แชต -> ชื่อแชต",
+      "agentCannotGenerateCommitMessage": "agent \"{{agent}}\" ไม่รองรับ commit message ของ Source Control AI agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "agentCannotGeneratePullRequest": "agent \"{{agent}}\" ไม่รองรับรายละเอียด pull request ของ Source Control AI agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "agentCannotGenerateBranchName": "agent \"{{agent}}\" ไม่รองรับชื่อ branch ของ Source Control AI agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "agentCannotGenerateChatName": "agent \"{{agent}}\" ไม่รองรับการตั้งชื่อแชต agent ที่รองรับ: {{agents}} หรือคำสั่งกำหนดเอง",
+      "noModelForAgent": "ไม่มีโมเดลให้ใช้สำหรับ {{label}}",
+      "planCustomCommandEmpty": "คำสั่งกำหนดเองว่างเปล่า เพิ่มคำสั่งได้ใน การตั้งค่า → Git → AI Commit Messages",
+      "planAgentUnsupported": "agent \"{{agent}}\" ไม่รองรับ commit message จาก AI",
+      "planModelUnavailable": "โมเดล \"{{model}}\" ไม่พร้อมใช้งานสำหรับ {{label}}",
+      "planModelWithoutThinking": "โมเดล \"{{model}}\" ไม่รองรับระดับความพยายามในการคิด",
+      "planThinkingLevelInvalid": "ระดับการคิด \"{{level}}\" ใช้กับ {{model}} ไม่ได้"
+    }
+  },
+  "newWorkspace": {
+    "hostPicker": {
+      "title": "สร้างพื้นที่ทำงานบน"
+    },
+    "loadingDrawer": {
+      "loading": "กำลังโหลด…",
+      "downloading": "กำลังดาวน์โหลด…",
+      "downloadProgress": "กำลังดาวน์โหลด… {{progress}}"
+    }
+  },
+  "tasks": {
+    "legacySurface": {
+      "sourceFallback": "ต้นทางต้นทางของปัญหาที่ต้องการไม่พร้อมใช้งานสำหรับ {{repo}} โดยใช้แหล่งกำเนิด",
+      "loadIssuesFailed": "ไม่สามารถโหลดปัญหาจาก {{source}}",
+      "retryLoadingIssues": "ลองโหลดปัญหาอีกครั้งจาก {{source}}",
+      "retrying": "กำลังลองอีกครั้ง...",
+      "subIssueDataUnavailable": "ไม่มีข้อมูล sub-issue สำหรับ token ของคุณ",
+      "mergeMethodTitle": "วิธีการผสาน",
+      "pullRequestMergeMessage": "เลือกวิธีการรวมคำขอดึงนี้",
+      "mergeRequestMergeMessage": "เลือกวิธีการรวมคำขอรวมนี้",
+      "mergeAction": "ผสาน",
+      "mergeRequestTitle": "รวมคำขอ",
+      "mergePullRequestTitle": "รวมคำขอดึง",
+      "updateItemTitle": "อัปเดตรายการ"
+    },
+    "prFileDiff": {
+      "noTextChanges": "ไม่พบการเปลี่ยนแปลงข้อความ",
+      "showingDiffLines": "กำลังแสดงเส้นต่าง {{limit}} แรกของ {{total}}",
+      "commentPlaceholder": "เพิ่มความคิดเห็นรีวิว",
+      "commentOnLine": "แสดงความคิดเห็นในบรรทัด {{line}}"
+    },
+    "smartSourceModes": {
+      "smart": "อัจฉริยะ",
+      "branch": "สาขา",
+      "name": "ชื่อ",
+      "openState": "เปิด",
+      "mergedState": "Merge แล้ว",
+      "closedState": "ปิดแล้ว",
+      "allStates": "ทั้งหมด"
+    },
+    "taskViewOptions": {
+      "noGitHubTasks": "ไม่มีงาน GitHub",
+      "noGitLabTasks": "ไม่มีงาน GitLab",
+      "noLinearTasks": "ไม่มีงาน Linear",
+      "noJiraTasks": "ไม่มีงานจิรา",
+      "assignedSubtitle": "ปัญหาที่ยังไม่ได้รับการแก้ไขที่มอบหมายให้คุณ",
+      "reportedSubtitle": "ปัญหาที่คุณรายงานยังไม่ได้รับการแก้ไข",
+      "allSubtitle": "ปัญหาที่ไม่ได้รับการแก้ไขในไซต์ที่เลือก",
+      "doneSubtitle": "ปัญหาที่คุณเพิ่งแก้ไขไป"
+    },
+    "tasksCreateDrawers": {
+      "newIssueTitle": "ใหม่ {{providerLabel}} ฉบับ",
+      "repositorySubtitle": "สร้างปัญหาในพื้นที่เก็บข้อมูลที่เลือก",
+      "linearTeamSubtitle": "สร้างปัญหาในทีม Linear ที่เลือก",
+      "repository": "พื้นที่เก็บข้อมูล",
+      "team": "ทีม",
+      "issueSource": "แหล่งที่มาของ issue",
+      "fileIn": "ไฟล์ใน {{slug}}",
+      "upstream": "ต้นน้ำ",
+      "origin": "ต้นกำเนิด",
+      "title": "ชื่อเรื่อง",
+      "titlePlaceholder": "ชื่องาน",
+      "description": "คำอธิบาย",
+      "descriptionPlaceholder": "เพิ่มบริบท",
+      "createIssue": "สร้างประเด็น",
+      "linearTeam": "Linear ทีม",
+      "connectLinearWorkspace": "เชื่อมต่อพื้นที่ทำงาน Linear",
+      "linearConnectSubtitle": "วางคีย์ API ส่วนบุคคลเพื่อเรียกดูปัญหาจากพื้นที่ทำงานนั้น",
+      "personalApiKey": "API key ส่วนตัว",
+      "linearSettingsLink": "Linear การตั้งค่า / ความปลอดภัย / คีย์ API ใหม่",
+      "keySecurityHint": "คีย์ของคุณได้รับการเข้ารหัสผ่านพวงกุญแจระบบปฏิบัติการโฮสต์และจัดเก็บไว้ในเครื่อง",
+      "connect": "เชื่อมต่อ",
+      "createWorkspaceIn": "สร้างพื้นที่ทำงานใน"
+    },
+    "filterPickers": {
+      "fieldsTitle": "เขตข้อมูลโครงการ",
+      "fieldsSubtitle": "เลือกฟิลด์โครงการที่จะให้ปรากฏบนการ์ดรายการ",
+      "noFields": "มุมมองนี้ไม่มีฟิลด์พิเศษที่จะแสดง",
+      "fieldShown": "แสดงบนการ์ด",
+      "fieldHidden": "ซ่อนจากการ์ด",
+      "gitlabView": "GitLab ดู",
+      "gitlabFilter": "GitLab ตัวกรอง",
+      "linearFilter": "Linear ตัวกรอง",
+      "linearWorkspace": "Linear พื้นที่ทำงาน",
+      "switchWorkspaceFailed": "สลับพื้นที่ทำงานไม่สำเร็จ",
+      "teamsTitle": "Linear ทีม",
+      "teamsSubtitle": "เลือกทีมที่จะปรากฏในงาน",
+      "allTeams": "ทุกทีม",
+      "teams_one": "{{count}} ทีม",
+      "teams_other": "{{count}} ทีม",
+      "changeStatus": "เปลี่ยนสถานะ",
+      "linearIssue": "Linear ปัญหา",
+      "loadingStates": "กำลังโหลดสถานะ...",
+      "noStates": "ไม่มีรัฐที่มีอยู่",
+      "jiraFilter": "จิรา ฟิลเตอร์",
+      "jiraSite": "จิราไซต์"
+    },
+    "githubProjectList": {
+      "chooseProject": "เลือก GitHub โครงการ",
+      "browseProjects": "เรียกดูโปรเจกต์",
+      "noItems": "ไม่มีรายการโครงการ",
+      "items": "รายการ",
+      "pullRequestSubtitle": "ดึงคำขอ · {{repository}}{{number}}",
+      "issueSubtitle": "ปัญหา · {{repository}}{{number}}",
+      "itemSubtitle": "รายการโครงการ · {{repository}}{{number}}",
+      "emptyField": "ว่าง",
+      "moreFields_one": "+{{count}} ฟิลด์",
+      "moreFields_other": "+{{count}} ฟิลด์"
+    },
+    "githubProjectPickers": {
+      "title": "GitHub โครงการ",
+      "subtitle": "เลือกมุมมองโครงการสำหรับหน้างาน",
+      "searchProjects": "ค้นหาโปรเจกต์",
+      "addPlaceholder": "เพิ่มด้วย URL หรือ owner/number",
+      "adding": "กำลังเพิ่ม…",
+      "add": "เพิ่ม",
+      "ownerLoadFailed": "โหลดโปรเจกต์จาก {{owner}} ไม่ได้",
+      "organizationsLoadFailed": "บางองค์กรไม่โหลด ({{count}})",
+      "addByUrlHint": "ใช้เพิ่มด้วย URL เพื่อเข้าถึงโปรเจ็กต์ที่ขาดหายไป",
+      "organizationsError": "องค์กร: {{message}}",
+      "loadFailed": "โหลดโปรเจกต์ไม่สำเร็จ",
+      "noProjects": "ไม่มีการโหลดโปรเจ็กต์",
+      "retryHint": "แตะเพื่อลองอีกครั้ง",
+      "pinned": "ปักหมุดแล้ว",
+      "recent": "ล่าสุด",
+      "pin": "ปักหมุด",
+      "browseLoading": "เรียกดูทั้งหมด (กำลังโหลด...)",
+      "browseAll": "เรียกดูทั้งหมด",
+      "noMatches": "ไม่มีโครงการที่ตรงกัน",
+      "noMoreProjects": "ไม่มีโครงการอีกต่อไป",
+      "chooseView": "เลือกมุมมองโครงการ",
+      "view": "มุมมองโครงการ",
+      "unsupportedLayout": "Prompt ยังไม่รองรับโครงร่างโปรเจ็กต์ GitHub นี้",
+      "sort": "การเรียงลำดับโครงการ"
+    },
+    "githubViewControls": {
+      "source": "แหล่ง: {{source}}",
+      "sort": "จัดเรียง: {{sort}}",
+      "fields": "ฟิลด์: {{fields}}",
+      "openView": "เปิดมุมมองใน GitHub"
+    },
+    "itemActions": {
+      "creating": "กำลังสร้าง…",
+      "createWorkspace": "สร้างพื้นที่ทำงาน",
+      "copyLinearLink": "คัดลอกลิงก์ Linear",
+      "copyGitHubLink": "คัดลอกลิงก์ GitHub",
+      "mergePullRequest": "รวมคำขอดึง",
+      "mergeConflicts": "GitHub รายงานข้อขัดแย้งในการผสาน",
+      "mergeMergeRequest": "รวมคำขอรวม",
+      "changeStatus": "เปลี่ยนสถานะ"
+    },
+    "itemDetailContent": {
+      "pipelineJobs_one": "{{count}} งาน",
+      "pipelineJobs_other": "{{count}} งาน",
+      "type": "พิมพ์",
+      "status": "สถานะ",
+      "assignee": "ผู้รับผิดชอบ",
+      "project": "โปรเจกต์",
+      "assignees": "ผู้รับผิดชอบ",
+      "description": "คำอธิบาย",
+      "checks": "เช็ค",
+      "rerunFailed": "การรันซ้ำล้มเหลว",
+      "rerunAll": "รีรันทั้งหมด",
+      "noChecks": "ไม่พบการตรวจสอบ",
+      "pipeline": "ไปป์ไลน์",
+      "none": "ไม่มี",
+      "noPipelineRuns": "ไม่มี pipeline run สำหรับ MR นี้",
+      "subIssues": "ประเด็นย่อย",
+      "noSubIssues": "ไม่มีประเด็นย่อย",
+      "subIssueTitle": "ชื่อ sub-issue",
+      "addSubIssue": "เพิ่มประเด็นย่อย",
+      "discussion": "การอภิปราย",
+      "noComments": "ไม่มีความคิดเห็น"
+    },
+    "itemDetailDrawer": {
+      "refreshDetails": "รีเฟรชรายละเอียด"
+    },
+    "itemFieldEditors": {
+      "title": "ชื่อเรื่อง",
+      "saveTitle": "บันทึกชื่อ",
+      "labels": "ป้ายกำกับ",
+      "none": "ไม่มี",
+      "loadingLabels": "กำลังโหลดป้ายกำกับ...",
+      "noLabels": "ไม่มีป้ายกำกับในที่เก็บนี้",
+      "addLabels": "เพิ่มป้ายกำกับ โดยคั่นด้วยเครื่องหมายจุลภาค",
+      "removeLabels": "ลบป้ายกำกับ โดยคั่นด้วยเครื่องหมายจุลภาค",
+      "updateLabels": "อัปเดตป้ายกำกับ",
+      "assignees": "ผู้รับผิดชอบ",
+      "loadingAssignees": "กำลังโหลดผู้รับมอบหมาย...",
+      "noAssignableUsers": "ไม่พบผู้ใช้ที่สามารถมอบหมายได้สำหรับที่เก็บนี้",
+      "addUsernames": "เพิ่มชื่อผู้ใช้โดยคั่นด้วยเครื่องหมายจุลภาค",
+      "removeUsernames": "ลบชื่อผู้ใช้โดยคั่นด้วยเครื่องหมายจุลภาค",
+      "updateAssignees": "อัปเดตผู้รับมอบหมาย"
+    },
+    "itemReviewSections": {
+      "descriptionPlaceholder": "คำอธิบาย",
+      "saveDescription": "บันทึกคำอธิบาย",
+      "noDescription": "ไม่มีคำอธิบาย",
+      "reviewersTitle": "ผู้วิจารณ์",
+      "noReviewersRequested": "ไม่มีการขอ reviewer",
+      "loadingReviewers": "กำลังโหลดผู้วิจารณ์...",
+      "noReviewerSuggestions": "ไม่พบคำแนะนำของผู้ตรวจสอบ",
+      "reviewersPlaceholder": "ร้องขอผู้ตรวจสอบ",
+      "requestReview": "ขอรับการตรวจสอบ",
+      "changedFilesTitle": "ไฟล์ที่เปลี่ยนแปลง",
+      "hideFile": "ซ่อน",
+      "viewFile": "มุมมอง",
+      "markUnviewed": "ทำเครื่องหมายว่าไม่ได้ดู",
+      "markViewed": "ทำเครื่องหมายว่าดูแล้ว",
+      "binaryFile": "ไฟล์ไบนารี",
+      "fileContentsUnavailable": "เนื้อหาไฟล์ไม่พร้อมใช้งาน"
+    },
+    "linearList": {
+      "changeStatusFrom": "เปลี่ยนสถานะจาก {{status}}"
+    },
+    "linearViewControls": {
+      "groupLabel": "กลุ่ม: {{group}}",
+      "orderLabel": "คำสั่งซื้อ: {{order}}",
+      "displayButton": "จอแสดงผล"
+    },
+    "listDisplayPickers": {
+      "linearViewTitle": "Linear ดู",
+      "linearGroupTitle": "กลุ่ม Linear ปัญหา",
+      "linearOrderTitle": "สั่งซื้อ Linear ปัญหา",
+      "displayPropertiesTitle": "คุณสมบัติการแสดงผล",
+      "sortTasksTitle": "จัดเรียงงาน"
+    },
+    "listSurface": {
+      "updateDesktopTitle": "อัปเดต Prompt เดสก์ท็อป",
+      "updateDesktopMessage": "มุมมองงานบนมือถือนี้ต้องมีรันไทม์บนเดสก์ท็อปที่ใหม่กว่า",
+      "jiraStatusFailed": "อ่านสถานะจิราไม่สำเร็จ",
+      "connectLinearTitle": "เชื่อมต่อบัญชี Linear ของคุณ",
+      "connectLinearMessage": "เรียกดูและเริ่มแก้ไขปัญหา Linear ที่ได้รับมอบหมายของคุณได้โดยตรงจากงาน",
+      "connectLinearButton": "เชื่อมต่อ Linear"
+    },
+    "options": {
+      "githubDescription": "ปัญหาและคำขอดึง",
+      "gitlabDescription": "ปัญหาและคำขอรวม",
+      "linearDescription": "ปัญหาที่ได้รับมอบหมายและทีมงาน",
+      "jiraDescription": "ได้รับมอบหมายและรายงานประเด็นต่างๆ",
+      "openState": "เปิด",
+      "gitlabOpenDescription": "เปิดประเด็นและรวมคำขอ",
+      "mergedState": "Merge แล้ว",
+      "gitlabMergedDescription": "คำขอรวมที่รวมเข้าด้วยกัน",
+      "closedState": "ปิดแล้ว",
+      "gitlabClosedDescription": "ปัญหาที่ปิดและคำขอรวม",
+      "all": "ทั้งหมด",
+      "gitlabAllDescription": "สถานะ GitLab ใดๆ",
+      "linearAllDescription": "เปิดปัญหาในพื้นที่ทำงานที่เชื่อมต่อกัน",
+      "myIssues": "ปัญหาของฉัน",
+      "linearAssignedDescription": "ประเด็นที่มอบหมายให้กับคุณ",
+      "createdState": "สร้างเมื่อ",
+      "linearCreatedDescription": "ปัญหาที่คุณสร้างขึ้น",
+      "completedState": "เสร็จสิ้น",
+      "linearCompletedDescription": "ประเด็นที่เพิ่งเสร็จสิ้น",
+      "list": "รายการ",
+      "listDescription": "แถวปัญหาขนาดกะทัดรัด",
+      "board": "บอร์ด",
+      "boardDescription": "คอลัมน์ที่จัดกลุ่ม",
+      "noGrouping": "ไม่จัดกลุ่ม",
+      "status": "สถานะ",
+      "assignee": "ผู้รับผิดชอบ",
+      "priority": "ลำดับความสำคัญ",
+      "team": "ทีม",
+      "updated": "อัปเดตแล้ว",
+      "identifier": "ตัวระบุ",
+      "labels": "ป้ายกำกับ",
+      "issues": "ประเด็นต่างๆ",
+      "githubIssuesDescription": "GitHub ปัญหา",
+      "pullRequests": "PR",
+      "githubPullRequestsDescription": "GitHub คำขอดึง",
+      "projects": "โปรเจกต์",
+      "githubProjectsDescription": "GitHub มุมมองโครงการ",
+      "githubOpenIssuesDescription": "เปิดประเด็น GitHub",
+      "assignedToMe": "มอบหมายให้ฉัน",
+      "githubAssignedIssuesDescription": "เปิดประเด็นที่ได้รับมอบหมายให้คุณ",
+      "openPullRequestsDescription": "เปิดคำขอดึง",
+      "mine": "ของฉัน",
+      "myPullRequestsDescription": "ดึงคำขอที่คุณเขียน",
+      "needsReview": "ต้องรีวิว",
+      "reviewRequestsDescription": "คำขอตรวจสอบที่ได้รับมอบหมายให้กับคุณ",
+      "projectMergeRequests": "โครงการ MR",
+      "projectMergeRequestsDescription": "รวมคำขอและปัญหาตามพื้นที่เก็บข้อมูล",
+      "myTodos": "Todo ของฉัน",
+      "myTodosDescription": "สิ่งที่ต้องทำ GitLab ที่รอดำเนินการ",
+      "updatedSortDescription": "กิจกรรมใหม่ล่าสุดก่อนใคร",
+      "repository": "พื้นที่เก็บข้อมูล",
+      "repositorySortDescription": "จัดกลุ่มตามพื้นที่เก็บข้อมูล จากนั้นจึงทำกิจกรรมใหม่ล่าสุด"
+    },
+    "projectComments": {
+      "comments_one": "{{count}} ความคิดเห็น",
+      "comments_other": "{{count}} comment",
+      "discussion": "การอภิปราย",
+      "noComments": "ไม่มีความคิดเห็น",
+      "resolvedThreadBy": "เธรดที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "resolvedCommentBy": "comment ที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "show": "แสดง",
+      "editComment": "แก้ไขความคิดเห็น",
+      "reopenThread": "เปิดกระทู้อีกครั้ง",
+      "resolveThread": "แก้กระทู้",
+      "reply": "ตอบกลับ"
+    },
+    "projectDetailDrawer": {
+      "repositoryNotInOrca": "พื้นที่เก็บข้อมูลไม่ได้อยู่ใน Prompt",
+      "addRepositoryFromDesktop": "{{repository}} จะไม่ถูกเพิ่มเข้าไปใน Prompt เพิ่มพื้นที่เก็บข้อมูลนี้จากแอปเดสก์ท็อป จากนั้นรีเฟรชงานบนมือถือ",
+      "openInGitHub": "เปิดใน GitHub",
+      "copyRepository": "คัดลอกพื้นที่เก็บข้อมูล",
+      "projectSubtitle": "GitHub โครงการ · {{repository}}{{itemNumber}}",
+      "type": "พิมพ์",
+      "pullRequest": "ดึงคำขอ",
+      "issue": "ปัญหา",
+      "draftIssue": "ฉบับร่าง",
+      "projectItem": "รายการโครงการ",
+      "status": "สถานะ",
+      "issueType": "ประเภท issue",
+      "noType": "ไม่มีประเภท",
+      "loadingIssueTypes": "กำลังโหลดประเภทปัญหา...",
+      "noIssueTypes": "ไม่มีประเภทปัญหาที่กำหนดค่าไว้สำหรับที่เก็บนี้",
+      "clearType": "ชนิดใส",
+      "createWorkspace": "สร้างพื้นที่ทำงาน",
+      "workspaceCreationRequirement": "พื้นที่ทำงานสามารถสร้างได้จากปัญหา GitHub และคำขอดึงเท่านั้น",
+      "copyGitHubLink": "คัดลอกลิงก์ GitHub",
+      "reopenItem": "เปิดรายการอีกครั้ง",
+      "closeItem": "ปิดรายการ",
+      "mergePullRequest": "รวมคำขอดึง",
+      "mergeRepositoryRequirement": "การผสานต้องใช้พื้นที่เก็บข้อมูลนี้ใน Prompt"
+    },
+    "projectFieldEditors": {
+      "projectFields": "สาขาโครงการ",
+      "invalidNumber": "ป้อนหมายเลขที่ถูกต้อง",
+      "invalidDate": "ป้อนวันที่เป็น YYYY-MM-DD",
+      "noIterations": "ไม่มีการทำซ้ำ",
+      "completedIteration": "เสร็จสิ้น · {{startDate}} · {{duration}}ง",
+      "upcomingIteration": "ปัจจุบันและที่กำลังจะเกิดขึ้น · {{startDate}} · {{duration}}ง",
+      "datePlaceholder": "YYYY-MM-DD",
+      "numberPlaceholder": "หมายเลข",
+      "textPlaceholder": "ข้อความ",
+      "saveField": "บันทึกฟิลด์",
+      "clearField": "ล้างข้อมูลในช่อง"
+    },
+    "projectMetadataEditors": {
+      "labels": "ป้ายกำกับ",
+      "none": "ไม่มี",
+      "loadingLabels": "กำลังโหลดป้ายกำกับ...",
+      "noLabels": "ไม่มีป้ายกำกับในที่เก็บนี้",
+      "assignees": "ผู้รับผิดชอบ",
+      "loadingAssignees": "กำลังโหลดผู้รับมอบหมาย...",
+      "noAssignableUsers": "ไม่พบผู้ใช้ที่สามารถมอบหมายได้สำหรับที่เก็บนี้",
+      "title": "ชื่อเรื่อง",
+      "saveTitle": "บันทึกชื่อ",
+      "description": "คำอธิบาย",
+      "saveDescription": "บันทึกคำอธิบาย",
+      "noDescription": "ไม่มีคำอธิบาย"
+    },
+    "projectReviewPanels": {
+      "reviewers": "ผู้วิจารณ์",
+      "noReviewers": "ไม่มีการขอ reviewer",
+      "loadingReviewers": "กำลังโหลดผู้วิจารณ์...",
+      "noSuggestions": "ไม่พบคำแนะนำของผู้ตรวจสอบ",
+      "requestReviewers": "ร้องขอผู้ตรวจสอบ",
+      "requestReview": "ขอรับการตรวจสอบ",
+      "checks": "เช็ค",
+      "rerunFailed": "การรันซ้ำล้มเหลว",
+      "rerunAll": "รีรันทั้งหมด",
+      "noChecks": "ไม่พบการตรวจสอบ",
+      "changedFiles": "ไฟล์ที่เปลี่ยนแปลง",
+      "hideFile": "ซ่อน",
+      "viewFile": "มุมมอง",
+      "markUnviewed": "ทำเครื่องหมายว่าไม่ได้ดู",
+      "markViewed": "ทำเครื่องหมายว่าดูแล้ว",
+      "binaryFile": "ไฟล์ไบนารี",
+      "fileUnavailable": "เนื้อหาไฟล์ไม่พร้อมใช้งาน"
+    },
+    "providerControls": {
+      "projectMergeRequests": "โครงการ MR",
+      "myTodos": "Todo ของฉัน",
+      "sort": "จัดเรียง: {{sortLabel}}"
+    },
+    "providerItemList": {
+      "previousPage": "หน้าก่อนหน้า",
+      "selectPage": "เลือกหน้า หน้า {{page}}",
+      "selectPageOfTotal": "เลือกหน้า หน้า {{page}} จาก {{total}}",
+      "page": "หน้า {{page}}",
+      "pageOfTotal": "หน้า {{page}} จาก {{total}}",
+      "nextPage": "หน้าถัดไป",
+      "intoBranch": "เข้าสู่ {{base}}"
+    },
+    "providerPickers": {
+      "taskSource": "แหล่งที่มาของงาน",
+      "repos": "ที่เก็บ",
+      "repoDescription": "เลือกที่เก็บที่จะสืบค้น",
+      "allRepositories": "ทุก repository",
+      "issueSources": "GitHub แหล่งที่มาของปัญหา",
+      "issueSourcesDescription": "เลือกว่าแต่ละพื้นที่เก็บข้อมูลจะสืบค้นและสร้างงานจากต้นทางหรือต้นทาง",
+      "noIssueSources": "ไม่มีแหล่งที่มาของปัญหาอื่นที่มีอยู่",
+      "queryingSource": "กำลังสอบถาม {{source}}",
+      "upstream": "ต้นน้ำ",
+      "origin": "ต้นกำเนิด",
+      "githubView": "GitHub ดู",
+      "pullRequests": "ดึงคำขอ",
+      "issues": "ประเด็นต่างๆ",
+      "pages": "GitHub หน้า",
+      "pageHint": "ข้ามไปยังหน้าผลลัพธ์ที่โหลดหรือที่มีอยู่",
+      "pageNumber": "หน้า {{page}}",
+      "pageLoaded": "โหลดแล้ว",
+      "pageNotLoaded": "โหลดผลลัพธ์ที่เก่ากว่า"
+    },
+    "reviewerLinear": {
+      "unassigned": "ยังไม่มอบหมาย",
+      "issues": "ประเด็นต่างๆ"
+    },
+    "screenChrome": {
+      "refreshGitHub": "รีเฟรชงาน GitHub",
+      "refreshGitLab": "รีเฟรชรายการงาน GitLab",
+      "refreshLinear": "รีเฟรช Linear",
+      "refreshJira": "รีเฟรช Jira issue",
+      "title": "งาน",
+      "newGitHubIssue": "GitHub issue ใหม่",
+      "newLinearIssue": "Linear issue ใหม่",
+      "connectLinear": "เชื่อมต่อ Linear"
+    },
+    "searchControl": {
+      "projectPlaceholder": "ค้นหามุมมองโครงการ...",
+      "jiraPlaceholder": "จิรา JQL เช่น โครงการ = ABC และ statusCategory != เสร็จสิ้น",
+      "providerPlaceholder": "ค้นหา {{provider}} งาน..."
+    },
+    "workspaceCreateDrawer": {
+      "title": "สร้างพื้นที่ทำงาน",
+      "repository": "พื้นที่เก็บข้อมูล",
+      "selectRepository": "เลือกพื้นที่เก็บข้อมูล",
+      "sshConnection": "SSH การเชื่อมต่อ",
+      "remoteRepository": "พื้นที่เก็บข้อมูลระยะไกล",
+      "connecting": "กำลังเชื่อมต่อ...",
+      "connect": "เชื่อมต่อ",
+      "workspaceName": "ชื่อพื้นที่ทำงาน",
+      "optional": "[ไม่บังคับ]",
+      "agent": "ตัวแทน",
+      "connectFirst": "เชื่อมต่อที่เก็บก่อน",
+      "detectingAgents": "กำลังตรวจหา agent…",
+      "advanced": "ขั้นสูง",
+      "startFrom": "เริ่มจาก",
+      "defaultBranch": "สาขาเริ่มต้น",
+      "createFrom": "สร้างจาก {{branch}}",
+      "addRepository": "เพิ่มที่เก็บ Git ก่อนสร้างพื้นที่ทำงาน Linear",
+      "repositoryNotFound": "ไม่พบพื้นที่เก็บข้อมูล",
+      "connectRepository": "เชื่อมต่อพื้นที่เก็บข้อมูล"
+    },
+    "workspaceOptionPickers": {
+      "baseBranchTitle": "เริ่มจาก",
+      "baseBranchSubtitle": "เลือกสาขาที่มีอยู่หรือผู้อ้างอิง",
+      "searchBranches": "ค้นหา branch",
+      "defaultBranch": "สาขาเริ่มต้น",
+      "defaultBranchSubtitle": "ใช้ฐานที่กำหนดค่าของที่เก็บนี้",
+      "noBranches": "ไม่มีสาขาที่ตรงกัน",
+      "branchName": "ชื่อสาขา: {{name}}",
+      "sparseCheckoutTitle": "ชำระเงินกระจัดกระจาย",
+      "fullCheckout": "checkout ทั้งหมด",
+      "fullCheckoutSubtitle": "ใช้พื้นที่เก็บข้อมูลทั้งหมด",
+      "editPreset": "แก้ไข {{name}}",
+      "newPreset": "preset ใหม่"
+    },
+    "workspaceTrustDrawers": {
+      "newSparsePreset": "พรีเซ็ตเบาบางใหม่",
+      "editSparsePreset": "แก้ไขพรีเซ็ตกระจัดกระจาย",
+      "nameLabel": "ชื่อ",
+      "namePlaceholder": "UI ตัวเรนเดอร์",
+      "directoriesLabel": "โฟลเดอร์",
+      "directories_one": "{{count}} ไดเรกทอรี",
+      "directories_other": "{{count}} ไดเรกทอรี",
+      "setupTitle": "เรียกใช้สคริปต์การตั้งค่าหรือไม่",
+      "setupSubtitle": "{{name}} ต้องมีตัวเลือกการตั้งค่าก่อนที่จะสร้างพื้นที่ทำงานนี้",
+      "creating": "กำลังสร้าง…",
+      "runSetupAndCreate": "เรียกใช้การตั้งค่าและสร้าง",
+      "skipSetupAndCreate": "ข้ามการตั้งค่าและสร้าง",
+      "setupChangedTitle": "สคริปต์การตั้งค่าของ {{name}} เปลี่ยนไป",
+      "runSetupTitle": "เรียกใช้การตั้งค่าจาก {{name}}?",
+      "trustSubtitle": "orca.yaml ของที่เก็บนี้ทำงานบนเครื่องของคุณก่อนที่พื้นที่ทำงานจะเริ่มทำงาน รันเฉพาะเมื่อคุณเชื่อถือที่เก็บนี้",
+      "newSetupScript": "setup script ใหม่",
+      "setupScript": "สคริปต์ setup",
+      "trustFailed": "ไม่สามารถเชื่อถือสคริปต์การตั้งค่าได้",
+      "runHooks": "เรียกใช้ hook",
+      "alwaysTrustAndRun": "ไว้วางใจและวิ่งอยู่เสมอ",
+      "dontRun": "ไม่เรียกใช้"
+    },
+    "sparsePresetDraft": {
+      "repoRelativeDirectoriesRequired": "ใช้โฟลเดอร์แบบ relative ต่อ repo ห้ามใช้ root พาธ absolute หรือส่วนของพาธที่ชี้ขึ้นไปยังโฟลเดอร์แม่",
+      "directoryRequired": "เพิ่มโฟลเดอร์อย่างน้อย 1 โฟลเดอร์"
+    },
+    "composerSource": {
+      "baseFailed": "ไม่สามารถแก้ไขสาขาฐานได้",
+      "forkPushWarning": "PR นี้ปิด \"อนุญาตให้แก้ไขจากผู้ดูแล\" การกดไปที่ส้อมอาจถูกปฏิเสธโดย GitHub"
+    },
+    "detailCommentRenderers": {
+      "commentPlaceholder": "เพิ่มความคิดเห็น",
+      "sendComment": "ส่ง comment",
+      "reopenThread": "เปิดกระทู้อีกครั้ง",
+      "resolveThread": "แก้กระทู้",
+      "reply": "ตอบกลับ",
+      "comments_one": "{{count}} ความคิดเห็น",
+      "comments_other": "{{count}} comment",
+      "resolvedThreadBy": "เธรดที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "resolvedCommentBy": "comment ที่ {{author}} ทำเครื่องหมายว่าแก้ไขแล้ว",
+      "show": "แสดง"
+    },
+    "pickerProjection": {
+      "sources_one": "{{count}} แหล่งที่มา",
+      "sources_other": "{{count}} แหล่งที่มา",
+      "repos_one": "{{count}} ซื้อคืน",
+      "repos_other": "{{count}} ฝากคืน",
+      "selectTarget": "เลือกเป้าหมาย",
+      "allSites": "เว็บไซต์ทั้งหมด",
+      "allRepos": "รีโพสทั้งหมด",
+      "updatedSort": "อัปเดตแล้ว",
+      "fieldDescending": "{{field}} รายละเอียด",
+      "fieldAscending": "{{field}} เช่น",
+      "viewOrder": "ดูคำสั่งซื้อ",
+      "selectedFields": "ช่อง {{selected}}/{{total}}",
+      "fields": "เขตข้อมูล",
+      "usesFieldDescending": "ใช้รายละเอียด {{field}}",
+      "usesFieldAscending": "ใช้ {{field}} ตามลำดับ",
+      "usesGitHubRankOrder": "ใช้ลำดับอันดับ GitHub",
+      "currentlyDescending": "คำอธิบายปัจจุบัน · แตะเพื่อขึ้น",
+      "currentlyAscending": "ปัจจุบัน · แตะเพื่อลงจากมากไปน้อย",
+      "sortAscending": "เรียงลำดับจากน้อยไปมาก",
+      "viewNumber": "ดู #{{number}}",
+      "unsupportedLayout": "รูปแบบที่ไม่รองรับบนมือถือ"
+    },
+    "providerViewProjection": {
+      "defaultSubtitle": "{{subtitle}} · ค่าเริ่มต้น",
+      "default": "ค่าเริ่มต้น",
+      "openState": "เปิด",
+      "allSites": "เว็บไซต์ทั้งหมด",
+      "all": "ทั้งหมด",
+      "list": "รายการ",
+      "noGrouping": "ไม่จัดกลุ่ม",
+      "priority": "ลำดับความสำคัญ",
+      "allWorkspaces": "ทุก workspace",
+      "workspace": "พื้นที่ทำงาน",
+      "allTeams": "ทุกทีม",
+      "teams_one": "{{count}} ทีม",
+      "teams_other": "{{count}} ทีม",
+      "projects": "โปรเจกต์",
+      "pullRequests": "PR",
+      "issues": "ประเด็นต่างๆ",
+      "chooseProject": "เลือกโปรเจกต์"
+    },
+    "workspaceCreateProjection": {
+      "nameRequired": "ต้องระบุชื่อ",
+      "nameTooLong": "ชื่อต้องยาวไม่เกิน 80 ตัวอักษร",
+      "nameAlreadyExists": "\"{{name}}\" มีอยู่แล้ว",
+      "openShell": "เปิดเปลือก"
+    },
+    "workspaceAgentSelection": {
+      "blankTerminal": "เทอร์มินัล เปล่า"
+    },
+    "workspaceSshGate": {
+      "connected": "เชื่อมต่อแล้ว",
+      "connecting": "กำลังเชื่อมต่อ…",
+      "deployingRelay": "กำลังปรับใช้รีเลย์",
+      "reconnecting": "กำลังเชื่อมต่อใหม่",
+      "authenticationFailed": "การตรวจสอบสิทธิ์ล้มเหลว",
+      "reconnectFailed": "เชื่อมต่อใหม่ล้มเหลว",
+      "connectionFailed": "เชื่อมต่อไม่สำเร็จ",
+      "disconnected": "ตัดการเชื่อมต่อแล้ว"
+    },
+    "worktreeCreateRetry": {
+      "createFailed": "สร้างพื้นที่ทำงานไม่สำเร็จ"
+    },
+    "hostedMerge": {
+      "merged": "Merge แล้ว",
+      "closed": "ปิดแล้ว",
+      "conflicts": "ข้อขัดแย้ง",
+      "behind": "ล้าหลัง",
+      "blocked": "ถูกบล็อก",
+      "checksPending": "checks กำลังรอ",
+      "ableToMerge": "merge ได้",
+      "unknown": "ไม่ทราบ"
+    },
+    "pagination": {
+      "pageUnreachable": "หน้า {{page}} อยู่นอกเหนือสิ่งที่ GitHub การค้นหาสามารถส่งคืนได้",
+      "loadPageFailed": "ไม่สามารถโหลดหน้า {{page}} จาก GitHub",
+      "noMoreResults": "ไม่มีผลลัพธ์อีกต่อไปในหน้า {{page}}"
+    }
+  },
+  "terminal": {
+    "webView": {
+      "loadFailed": "โหลดเทอร์มินัล WebView ล้มเหลว",
+      "httpError": "ข้อผิดพลาด HTTP ของเทอร์มินัล WebView",
+      "renderProcessEnded": "กระบวนการเรนเดอร์ Terminal WebView สิ้นสุดลงแล้ว",
+      "documentStartFailed": "เอกสารเทอร์มินัลไม่สามารถเริ่มต้นได้ - {{message}}"
+    },
+    "keyDefinitions": {
+      "forwardDelete": "ส่งต่อลบ",
+      "arrowUp": "ลูกศรขึ้น",
+      "arrowDown": "ลูกศรลง",
+      "arrowLeft": "ลูกศรซ้าย",
+      "arrowRight": "ลูกศรขวา",
+      "accessoryArrowUp": "ลูกศรขึ้น",
+      "accessoryArrowDown": "ลูกศรลง",
+      "accessoryArrowLeft": "ลูกศรซ้าย",
+      "accessoryArrowRight": "ลูกศรขวา",
+      "interruptTerminal": "เทอร์มินัลขัดจังหวะ",
+      "sendEof": "ส่งอีฟ",
+      "clearScreen": "ล้างหน้าจอ",
+      "suspendProcess": "ระงับกระบวนการ",
+      "reverseSearch": "ค้นหาย้อนกลับ",
+      "startOfLine": "จุดเริ่มต้นของบรรทัด",
+      "endOfLine": "สิ้นสุดบรรทัด",
+      "deleteWordBackward": "ลบคำย้อนกลับ",
+      "clearLineBeforeCursor": "ล้างบรรทัดก่อนเคอร์เซอร์"
+    },
+    "webviewEngineErrorState": {
+      "status": "สถานะ {{statusCode}}",
+      "code": "รหัส {{code}}",
+      "rendererCrashed": "ตัวเรนเดอร์ขัดข้อง",
+      "title": "โหลดเทอร์มินัลไม่สำเร็จ",
+      "reload": "โหลดใหม่"
+    },
+    "webviewNotificationDispatch": {
+      "unknownError": "ข้อผิดพลาดเทอร์มินัลที่ไม่รู้จัก"
+    },
+    "webviewReadyWatchdog": {
+      "initializeFailed": "เทอร์มินัลไม่ได้เริ่มต้น - ไม่มีสัญญาณพร้อมจากมุมมองเทอร์มินัล"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "โทรศัพท์และคอมพิวเตอร์ของคุณต้องใช้ Wi-Fi เดียวกันหรือ Tailscale รีเลย์ปิดอยู่ใน Prompt"
+    }
+  }
+}

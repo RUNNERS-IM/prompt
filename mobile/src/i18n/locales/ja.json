@@ -2646,11 +2646,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "リンクを開けませんでした。再試行してください。",
-      "socialProfile": "Prompt の X アカウント",
       "sourceCode": "Prompt のソースコード",
       "tagline": "100 倍の生産性を目指す開発者向けのオープンソース Agent IDE",
-      "title": "Prompt について",
-      "website": "Prompt のウェブサイト"
+      "title": "Prompt について"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "確認できませんでした",
@@ -2708,7 +2706,6 @@
       "voice": "音声"
     },
     "menuScreen": {
-      "privacyPolicy": "プライバシーポリシー",
       "support": "サポート"
     },
     "nativeChatSettingsScreen": {
@@ -3823,6 +3820,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "ワークスペースの作成に失敗しました"
+    },
+    "hostedMerge": {
+      "merged": "マージ済み",
+      "closed": "クローズ",
+      "conflicts": "競合",
+      "behind": "遅れ",
+      "blocked": "ブロック中",
+      "checksPending": "保留中のチェック",
+      "ableToMerge": "マージ可能",
+      "unknown": "不明"
+    },
+    "pagination": {
+      "pageUnreachable": "ページ {{page}} は、GitHub 検索で返せる範囲を超えています。",
+      "loadPageFailed": "ページ {{page}} を GitHub からロードできませんでした。",
+      "noMoreResults": "ページ {{page}} にはこれ以上の結果はありません。"
     }
   },
   "terminal": {
@@ -3930,6 +3942,11 @@
       "inProgress": "進行中",
       "inReview": "レビュー中",
       "pinned": "ピン留め済み"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "スマートフォンとコンピュータは同じ Wi-Fi または Tailscale に接続されている必要があります。 Promptではリレーがオフになっています。"
     }
   }
 }

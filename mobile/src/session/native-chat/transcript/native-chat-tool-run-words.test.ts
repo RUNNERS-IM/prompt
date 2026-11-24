@@ -54,7 +54,7 @@ describe('mobile tool-run sentence continuations', () => {
     }
   )
 
-  it.each<SupportedUiLocale>(['ja', 'ko', 'zh', 'zh-Hant'])(
+  it.each<SupportedUiLocale>(['ja', 'ko', 'zh-Hans', 'zh-Hant'])(
     'preserves clause text in %s',
     (locale) => {
       expect(joinNativeChatToolRunClauses(['開始', 'Browser'], mobileWords(locale))).toBe(

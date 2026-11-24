@@ -3,7 +3,7 @@ import { AppState, View, Text, Pressable, Switch, ScrollView } from 'react-nativ
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useFocusEffect } from 'expo-router'
 import type { NotificationSettingsOperations } from './notification-settings-operations'
-import { ChevronLeft } from 'lucide-react-native'
+import { BackChevron } from '../components/ReadingChevron'
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
@@ -137,7 +137,7 @@ export default function NotificationsScreen({
           style={styles.backButton}
           onPress={onBack}
         >
-          <ChevronLeft size={22} color={colors.textSecondary} />
+          <BackChevron size={22} color={colors.textSecondary} />
         </Pressable>
         <Text style={styles.heading}>
           {t('settings.notificationSettingsScreen.title', 'Notifications')}

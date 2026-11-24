@@ -2487,7 +2487,8 @@
     "presentation": {
       "loadingTabs": "Carregando abas",
       "tabs_one": "{{count}} aba",
-      "tabs_other": "{{count}} abas"
+      "tabs_other": "{{count}} abas",
+      "tabs_many": "{{count}} abas"
     },
     "terminalTabAgent": {
       "terminalNumber": "Terminal {{number}}",
@@ -2726,11 +2727,9 @@
   "settings": {
     "aboutScreen": {
       "openLinkFailed": "Não foi possível abrir o link. Tente novamente.",
-      "socialProfile": "Prompt no X",
       "sourceCode": "Código-fonte do Prompt",
       "tagline": "IDE de código aberto com agentes para quem cria 100x mais",
-      "title": "Sobre",
-      "website": "Site do Prompt"
+      "title": "Sobre"
     },
     "appUpdateSettingsRows": {
       "checkFailed": "Falha ao verificar",
@@ -2791,7 +2790,6 @@
       "voice": "Voz"
     },
     "menuScreen": {
-      "privacyPolicy": "Política de Privacidade",
       "support": "Suporte"
     },
     "nativeChatSettingsScreen": {
@@ -3933,6 +3931,21 @@
     },
     "worktreeCreateRetry": {
       "createFailed": "Falha ao criar espaço de trabalho"
+    },
+    "hostedMerge": {
+      "merged": "Mesclado",
+      "closed": "Fechado",
+      "conflicts": "Conflitos",
+      "behind": "Atrás",
+      "blocked": "Bloqueado",
+      "checksPending": "Verificações pendentes",
+      "ableToMerge": "Pode ser mergeado",
+      "unknown": "Desconhecido"
+    },
+    "pagination": {
+      "pageUnreachable": "A página {{page}} está além do que a pesquisa GitHub pode retornar.",
+      "loadPageFailed": "A página {{page}} não pôde ser carregada de GitHub.",
+      "noMoreResults": "Não há mais resultados na página {{page}}."
     }
   },
   "terminal": {
@@ -4043,6 +4056,11 @@
       "inProgress": "Em andamento",
       "inReview": "Em revisão",
       "pinned": "Fixados"
+    }
+  },
+  "prompt": {
+    "connection": {
+      "directOnly": "Seu telefone e computador devem estar no mesmo Wi-Fi ou Tailscale. O relé está desligado em Prompt."
     }
   }
 }

@@ -26,8 +26,6 @@ const PLURAL_POLYFILL_PATH = path.join('mobile', 'src', 'i18n', 'plural-rules-po
 // The runtime owns the subscription that every other caller must go through.
 const I18N_RUNTIME_DIR = 'mobile/src/i18n/'
 const UI_LOCALE_SOURCE_PATH = path.join('src', 'shared', 'ui-locale.ts')
-// Apple lproj and Android locale_config name these by script/region; the rest match the UI locale id.
-const NATIVE_LOCALE_TAGS = { zh: 'zh-Hans', pt: 'pt-BR' }
 const PLURAL_SUFFIX_RE = /^(.*)_(zero|one|two|few|many|other)$/
 const FUNCTION_LIKE_KINDS = new Set([
   ts.SyntaxKind.FunctionDeclaration,
@@ -275,7 +273,8 @@ export function collectLiveSwitchViolations(filePath, sourceText) {
 async function collectNativeLocaleProblems(root, supportedLocales) {
   const problems = []
   const expo = (await readJson(root, APP_CONFIG_PATH)).expo
-  const expected = supportedLocales.map((locale) => NATIVE_LOCALE_TAGS[locale] ?? locale).sort()
+  // Apple lproj and Android locale_config use the UI locale id as is (zh-Hans, zh-Hant, pt).
+  const expected = [...supportedLocales].sort()
   const pluginLocales = (name) =>
     expo.plugins.find((plugin) => Array.isArray(plugin) && plugin[0] === name)?.[1]
   const declared = {

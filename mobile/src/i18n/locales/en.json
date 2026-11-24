@@ -18,9 +18,7 @@
     "aboutScreen": {
       "title": "About",
       "tagline": "Open-source agent IDE for 100x builders",
-      "website": "Prompt website",
       "sourceCode": "Prompt source code",
-      "socialProfile": "Prompt on X",
       "openLinkFailed": "Could not open the link. Try again."
     },
     "appUpdateSettingsRows": {
@@ -112,7 +110,6 @@
       "retryCleanup": "Retry clearing pairing credentials"
     },
     "menuScreen": {
-      "privacyPolicy": "Privacy Policy",
       "support": "Support"
     },
     "uiLanguageSettingsSection": {

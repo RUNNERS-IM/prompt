@@ -9,6 +9,8 @@ import { colors } from '../src/theme/mobile-theme'
 import { themedStyleSheet } from '../src/theme/themed-styles'
 import { useMobileColorScheme } from '../src/theme/use-mobile-color-scheme'
 import { isOverlayPageRoute } from '../src/new-workspace/overlay-page-route'
+import { useMobileUiLocale } from '../src/i18n/use-mobile-translation'
+import { routeDirection } from '../src/i18n/ui-direction'
 
 // Provide shell insets below ExpoRoot (WebView CSS env insets are zero); pad only sides to avoid DefaultNavigator’s duplicate all-edge SafeAreaView.
 export default function PageRootLayout() {
@@ -19,12 +21,14 @@ export default function PageRootLayout() {
     () => client.getShellSession()?.safeAreaInsets ?? ZERO_SAFE_AREA_INSETS
   )
   const { width, height } = useWindowDimensions()
-  const transparent = isOverlayPageRoute(usePathname())
+  const pathname = usePathname()
+  const transparent = isOverlayPageRoute(pathname)
+  const direction = routeDirection(useMobileUiLocale(), pathname)
   const frame = useMemo(() => ({ x: 0, y: 0, width, height }), [width, height])
   return (
     <SafeAreaFrameContext.Provider value={frame}>
       <SafeAreaInsetsContext.Provider value={insets}>
-        <View style={[styles.root, transparent && styles.transparent]}>
+        <View style={[styles.root, transparent && styles.transparent, { direction }]}>
           <SideSafeArea>
             <Slot />
           </SideSafeArea>
