@@ -958,7 +958,7 @@
       "approveForMe": "الموافقة نيابةً عني",
       "codexHistorySharing": {
         "title": "مشاركة سجل Codex بين الحسابات",
-        "description": "يتيح لكل حساب Codex ولمجلد ~/.codex الخاص بك استئناف المحادثات التي بدأت في الآخرين. عطّله لإبقاء سجل كل حساب منفصلًا. التعطيل لا يزيل ما شُورك بالفعل.",
+        "description": "يتيح لكل حساب Codex ولمجلد ⁦~/.codex⁩ الخاص بك استئناف المحادثات التي بدأت في الآخرين. عطّله لإبقاء سجل كل حساب منفصلًا. التعطيل لا يزيل ما شُورك بالفعل.",
         "unsupported": "حدّث Orca على {{host}} لتغيير هذا الإعداد هناك.",
         "updateFailed": "تعذّر تحديث الإعداد على {{host}}."
       },
@@ -4129,7 +4129,7 @@
               "5b3f634a55": "إضافة أمر سريع",
               "f9b184fc16": "تعديل الأمر السريع",
               "command_label": "الأمر",
-              "agent_toolbar_hint": "يدعم /goal وskills والمسارات",
+              "agent_toolbar_hint": "يدعم ⁦/goal⁩ وskills والمسارات",
               "agent_footer_hint": "لا بأس بـ prompts متعددة الأسطر، لكن اجعلها مركّزة.",
               "resize_hint": "اسحب الزاوية لتغيير الحجم",
               "length_over_limit": "طويل جدًا للحفظ.",
@@ -5762,7 +5762,7 @@
         },
         "GrokUsagePane": {
           "g8h9i0j1k2": "استخدام Grok",
-          "b2d3e4f5c6": "رصيد الاشتراك الأسبوعي من Grok CLI OAuth (~/.grok/auth.json). المصدر نفسه المستخدم في شريط الحالة.",
+          "b2d3e4f5c6": "رصيد الاشتراك الأسبوعي من Grok CLI OAuth (⁦~/.grok/auth.json⁩). المصدر نفسه المستخدم في شريط الحالة.",
           "c3e4f5a6b7": "الإعداد في الحسابات",
           "h9i0j1k2l3": " • {{value0}}",
           "i0j1k2l3m4": "تحديث استخدام Grok",
@@ -6469,7 +6469,7 @@
           "foundRepositories_other": "تم العثور على {{count}} repository في {{path}}."
         },
         "AddRepoRemoteStep": {
-          "6680289908": "/home/user/project",
+          "6680289908": "⁦/home/user/project⁩",
           "ef410aa881": "مسار المضيف",
           "44637f43bd": "هدف SSH",
           "serverDescription": "اختر مضيف SSH يتصل به {{server}}، وأدخل مسار Git repository عليه.",
@@ -6486,7 +6486,7 @@
           "e1710bf831": "فتح كمجلد",
           "8da4d1a5be": "إضافة مشروع Git",
           "ac66a3ed2d": "تصفّح نظام ملفات المضيف",
-          "92d25420a0": "/home/user/project",
+          "92d25420a0": "⁦/home/user/project⁩",
           "867692f505": "مسار المضيف",
           "423b5d3d31": "أضف Git repository أو مجلدًا موجودًا بالفعل على المضيف المحدد.",
           "3d0c035483": "فتح مشروع المضيف",
@@ -6516,7 +6516,7 @@
         "AddRepoSteps": {
           "569326d9cc": "اختيار مجلد",
           "a93ef169b5": "تصفّح نظام ملفات المضيف",
-          "2ce3f6edf8": "/path/to/destination",
+          "2ce3f6edf8": "⁦/path/to/destination⁩",
           "b698a4a29d": "https://github.com/user/repo.git",
           "3d4acbe693": "Git URL",
           "5b2ea674b1": "أدخل Git URL واختر مكان الاستنساخ.",
@@ -6528,7 +6528,7 @@
           "69f5b5380d": "جارٍ الاستنساخ…",
           "cloneOnHostDescription": "أدخل Git URL واختر مكان الاستنساخ على {{value0}}.",
           "cloneParentFolder": "المجلد الأصلي",
-          "remoteCloneParentPlaceholder": "/home/user/projects"
+          "remoteCloneParentPlaceholder": "⁦/home/user/projects⁩"
         },
         "AutoRenameFailedDialog": {
           "dismissError": "تجاهل الخطأ",
@@ -6545,7 +6545,7 @@
           "632b456b1b": "تغيير",
           "afaf54f245": "تغيير المجلد الأصلي",
           "f520f83a97": "تصفّح نظام ملفات المضيف",
-          "2a20a603a3": "/home/user/projects",
+          "2a20a603a3": "⁦/home/user/projects⁩",
           "134e37f711": "الموقع",
           "b589b77997": "انتقل إلى مجلد وانقر «تحديد» لاختياره."
         },
@@ -7674,12 +7674,12 @@
           "usernamePlaceholder": "deploy",
           "port": "منفذ",
           "identityFile": "ملف الهوية",
-          "identityFilePlaceholder": "~/.ssh/id_ed25519 (اختياري)",
+          "identityFilePlaceholder": "⁦~/.ssh/id_ed25519⁩ (اختياري)",
           "nameInOrca": "الاسم في Orca",
           "serverNamePlaceholder": "Dev box",
           "accessLink": "رابط الوصول",
           "pairingCodePlaceholder": "orca://pair?code=...",
-          "sshImportAlreadySynced": "~/.ssh/config متزامن بالفعل.",
+          "sshImportAlreadySynced": "⁦~/.ssh/config⁩ متزامن بالفعل.",
           "sshImportFailed": "تعذّر استيراد إعدادات SSH.",
           "sshAlreadyExists": "مضيف SSH هذا موجود بالفعل في Orca.",
           "advanced": "متقدم",
@@ -7687,16 +7687,16 @@
           "sshTunnel": "أستخدم نفق SSH",
           "sshTunnelHelp": "وإلا فسيشير هذا الرابط إلى هذا الجهاز نفسه ولن يتمكن من تحديد الكمبيوتر الآخر.",
           "loopbackBlocked": "فعّل تجاوز نفق SSH أو أنشئ رابطًا جديدًا باستخدام عنوان Tailscale أو LAN للمضيف الآخر.",
-          "sshConfigPickerLoadFailed": "تعذّرت قراءة ~/.ssh/config.",
+          "sshConfigPickerLoadFailed": "تعذّرت قراءة ⁦~/.ssh/config⁩.",
           "sshConfigPickerResolveFailed": "تعذّر حل مضيف إعدادات SSH هذا.",
           "sshConfigPickerRestartRequired": "أعد تشغيل Orca لإكمال تطبيق تحديث منتقي إعدادات SSH.",
           "sshConfigPickerFilled": "تمت التعبئة من {{value0}}. راجع ثم احفظ.",
-          "sshConfigPickerTitle": "اختر من ~/.ssh/config",
+          "sshConfigPickerTitle": "اختر من ⁦~/.ssh/config⁩",
           "sshConfigPickerImportDescription": "اختر مضيفًا لملء النموذج، أو أضف كل مضيف جديد إلى قائمة مضيفي Orca.",
           "sshConfigPickerFilter": "تصفية المضيفين…",
           "sshConfigPickerHostsLabel": "مضيفو إعدادات SSH",
-          "sshConfigPickerLoading": "جارٍ قراءة ~/.ssh/config…",
-          "sshConfigPickerEmpty": "لا يوجد مضيفون في ~/.ssh/config",
+          "sshConfigPickerLoading": "جارٍ قراءة ⁦~/.ssh/config⁩…",
+          "sshConfigPickerEmpty": "لا يوجد مضيفون في ⁦~/.ssh/config⁩",
           "sshConfigPickerNoMatch": "لا يوجد مضيفون مطابقون",
           "sshConfigPickerEmptyHint": "أضف إدخال Host هناك، أو ارجع واكتب التفاصيل يدويًا.",
           "sshConfigPickerNoMatchHint": "جرّب تصفية أخرى، أو ارجع واكتب يدويًا.",
@@ -7704,12 +7704,12 @@
           "sshConfigPickerInOrca": "في Orca",
           "sshConfigPickerPreviouslyRemoved": "أُزيل من Orca",
           "sshConfigPickerBack": "رجوع",
-          "fillFromSshConfig": "تعبئة من ~/.ssh/config…",
+          "fillFromSshConfig": "تعبئة من ⁦~/.ssh/config⁩…",
           "sshConfigPickerAddingAll": "جارٍ إضافة المضيفين…",
           "sshConfigPickerAddAll": "إضافة كل {{value0}} إلى Orca",
           "sshConfigPickerNoNewHosts": "لا يوجد مضيفون جدد للإضافة",
           "sshConfigPickerAddAllEmpty": "إضافة الكل إلى Orca",
-          "identityFileFromConfigHint": "تُرك فارغًا عمدًا: يستخدم Orca كل مفتاح يحدده ~/.ssh/config للمضيف {{value0}}. اكتب مسارًا لاستخدام ذلك المفتاح فقط.",
+          "identityFileFromConfigHint": "تُرك فارغًا عمدًا: يستخدم Orca كل مفتاح يحدده ⁦~/.ssh/config⁩ للمضيف {{value0}}. اكتب مسارًا لاستخدام ذلك المفتاح فقط.",
           "sshConfigPickerRetry": "إعادة المحاولة",
           "sshConfigPickerResolving": "جارٍ القراءة…",
           "pairingHelpShareComputer": "أنشئ هذا ضمن الإعدادات ← خوادم Orca البعيدة ← مشاركة هذا الكمبيوتر، على الكمبيوتر الآخر.",
@@ -7899,7 +7899,7 @@
           "running": "قيد التشغيل",
           "stopped": "متوقف",
           "title": "إضافة توزيعة WSL",
-          "description": "يشغّل Orca خادمه داخل التوزيعة، فتعمل git والملفات والطرفيات أصلًا في Linux. تنتقل المشاريع في هذه التوزيعة التي فتحتها عبر \\\\wsl.localhost إلى هذا المضيف تلقائيًا بمجرد أن تصبح طرفياتها خاملة؛ أما المشاريع على محرك Windows (/mnt/…) فتبقى على هذا الكمبيوتر. يمكنك إعادة مشروع منقول من الشريط الجانبي.",
+          "description": "يشغّل Orca خادمه داخل التوزيعة، فتعمل git والملفات والطرفيات أصلًا في Linux. تنتقل المشاريع في هذه التوزيعة التي فتحتها عبر \\\\wsl.localhost إلى هذا المضيف تلقائيًا بمجرد أن تصبح طرفياتها خاملة؛ أما المشاريع على محرك Windows (⁦/mnt/⁩…) فتبقى على هذا الكمبيوتر. يمكنك إعادة مشروع منقول من الشريط الجانبي.",
           "distro": "التوزيعة",
           "loading": "جارٍ البحث عن توزيعات WSL…",
           "placeholder": "اختر توزيعة",
@@ -8243,9 +8243,9 @@
           "opencodeGo": {
             "apiKey": {
               "title": "مفتاح OpenCode Go API",
-              "description": "تجاوز اختياري. وإلا فسيستخدم Orca المفتاح الذي حفظه OpenCode عند تشغيل /connect، ثم OPENCODE_API_KEY.",
+              "description": "تجاوز اختياري. وإلا فسيستخدم Orca المفتاح الذي حفظه OpenCode عند تشغيل ⁦/connect⁩، ثم OPENCODE_API_KEY.",
               "label": "مفتاح OpenCode Go API",
-              "placeholder": "اتركه فارغًا لاستخدام المفتاح المحفوظ بواسطة /connect أو OPENCODE_API_KEY",
+              "placeholder": "اتركه فارغًا لاستخدام المفتاح المحفوظ بواسطة ⁦/connect⁩ أو OPENCODE_API_KEY",
               "help": "يُستخدم لعرض استخدام OpenCode Go في شريط الحالة. لا حاجة إلى cookie الجلسة أدناه إلا لحسابات وحدة التحكم القديمة (OpenCode Black).",
               "checking": "جارٍ الفحص…",
               "unavailable": "الحالة غير متاحة"
@@ -8320,7 +8320,7 @@
           "3f1bdf3cb4": "نص البيئة كبير جدًا بحيث لا يمكن تحليله بأمان.",
           "codexSessionSource": "مجلد Codex home للاستيراد منه",
           "codexSessionSourceInfo": "حول استيراد سجل Codex",
-          "codexSessionSourceTooltip": "يشغّل Orca ‏Codex في مجلد home معزول. وجّه هذا الحقل إلى مجلد Codex home الحالي لديك لاستيراد سجل الجلسات منه. إذا تُرك فارغًا فسيُستخدم ~/.codex.",
+          "codexSessionSourceTooltip": "يشغّل Orca ‏Codex في مجلد home معزول. وجّه هذا الحقل إلى مجلد Codex home الحالي لديك لاستيراد سجل الجلسات منه. إذا تُرك فارغًا فسيُستخدم ⁦~/.codex⁩.",
           "storedDefaultUndetected": "تم حفظه كافتراضي، لكن لم يتم اكتشافه حاليًا",
           "noAgentsDetected": "لم يتم اكتشاف أي وكيل. إذا كان أحدها مثبّتًا، فربما انتهت مهلة الفحص."
         },
@@ -9165,7 +9165,7 @@
         "OpenAiTranscriptionKeyDialog": {
           "fa83512e48": "حفظ المفتاح",
           "07b26f2742": "مسح المفتاح",
-          "d246b2bdb3": "تُخزَّن مفاتيح وقت التشغيل المحلي في ~/.orca باستخدام التخزين المشفّر في Electron عند توفره.",
+          "d246b2bdb3": "تُخزَّن مفاتيح وقت التشغيل المحلي في ⁦~/.orca⁩ باستخدام التخزين المشفّر في Electron عند توفره.",
           "c3380e4ca5": "sk-...",
           "2f797018f0": "تم إعداد مفتاح API",
           "16015322f9": "مفتاح API",
@@ -9453,9 +9453,9 @@
           "hostSetupBlockedVersion": "إصدار خادم Orca غير متوافق",
           "hostSetupMissingCapability": "حدّث Orca على هذا المضيف لإعداد المشاريع",
           "hostSetupConnectionRequired": "اتصل بهذا المضيف قبل استيراد المشروع أو استنساخه",
-          "setupExistingFolderPathPlaceholder": "/path/to/project/on/host",
+          "setupExistingFolderPathPlaceholder": "⁦/path/to/project/on/host⁩",
           "cloneUrlPlaceholder": "عنوان URL للـ repository",
-          "cloneDestinationPlaceholder": "/destination/on/host",
+          "cloneDestinationPlaceholder": "⁦/destination/on/host⁩",
           "setupKindGit": "repository من Git",
           "setupKindFolder": "مجلد",
           "settingUpHost": "جارٍ الاستيراد…",
@@ -9786,7 +9786,7 @@
           "25b0004fbf": "الطرفية نشطة",
           "781cb74d22": "يعمل من أجزاء الطرفية.",
           "cb02e00202": "الطرفية",
-          "d8c988dab4": "~/.orca/keybindings.json",
+          "d8c988dab4": "⁦~/.orca/keybindings.json⁩",
           "shortcutUnavailable": "الاختصار لم يعد متاحًا."
         },
         "SourceControlAiActionRecipeDefaults": {
@@ -9854,7 +9854,7 @@
           "0cda732f43": "فشل اختبار الاتصال",
           "noFilterMatch": "لا توجد مضيفات مطابقة.",
           "addHost": "إضافة مضيف",
-          "alreadyInSync": "~/.ssh/config متزامن بالفعل",
+          "alreadyInSync": "⁦~/.ssh/config⁩ متزامن بالفعل",
           "syncedServer_zero": "تمت مزامنة {{count}} خادم",
           "syncedServer_one": "تمت مزامنة {{count}} خادم",
           "syncedServer_two": "تمت مزامنة {{count}} خادمين",
@@ -9898,7 +9898,7 @@
         "SshTargetDestructiveActions": {
           "3bb0cf0ee4": "سيؤدي هذا إلى إزالة الهدف وإنهاء أي طرفيات بعيدة نشطة.",
           "4808966c41": "إزالة هدف SSH",
-          "bulkDescription": "تختفي المضيفات المُزالة من قوائم اختيار المضيف في مساحات العمل والأتمتة والشريط الجانبي. لن يتغير الملف ~/.ssh/config، ولن تعيدها عمليات المزامنة اللاحقة.",
+          "bulkDescription": "تختفي المضيفات المُزالة من قوائم اختيار المضيف في مساحات العمل والأتمتة والشريط الجانبي. لن يتغير الملف ⁦~/.ssh/config⁩، ولن تعيدها عمليات المزامنة اللاحقة.",
           "bulkAction": "إزالة {{count}}",
           "bulkProgress": "جارٍ إزالة {{done}} من {{count}}…",
           "bulkTitle_zero": "إزالة {{count}} مضيف SSH؟",
@@ -9923,7 +9923,7 @@
           "f42d844544": "مثال: cloudflared access ssh --hostname %h",
           "c7d0e18ecb": "أمر الوكيل (Proxy Command)",
           "cb91f6375c": "اختياري. يُستخدم وكيل SSH افتراضيًا.",
-          "d6a5f2ee5c": "~/.ssh/id_ed25519 (اتركه فارغًا لاستخدام وكيل SSH)",
+          "d6a5f2ee5c": "⁦~/.ssh/id_ed25519⁩ (اتركه فارغًا لاستخدام وكيل SSH)",
           "63c0c145c1": "ملف الهوية",
           "c94cfa634c": "منفذ",
           "47e082bc17": "deploy",
@@ -10093,7 +10093,7 @@
             "tuiDescription": "تقارير عجلة منفصلة لتطبيقات الطرفية بملء الشاشة."
           },
           "8dbe0bc942": "وسائط shell، وسيط واحد في كل سطر",
-          "f58cb71f53": "--rcfile\n/path/to/rcfile",
+          "f58cb71f53": "--rcfile\n⁦/path/to/rcfile⁩",
           "48b91a3ed2": "وسائط مخصصة",
           "7bd83fc1d0": "-l (افتراضي)",
           "5ffc4777b6": "وضع وسائط shell",
@@ -10103,7 +10103,7 @@
           "e3ae5aed18": ". بدّل إلى shell النظام أو اختر ملفًا تنفيذيًا على هذا المضيف.",
           "59573d0b33": "أدخل اسم shell موجودًا في PATH أو مسار ملف تنفيذي. يشغّله Orca كـ login shell.",
           "5e06e87730": "الملف التنفيذي لـ shell المخصص",
-          "c2bf02ce2f": "fish أو nu أو /bin/zsh",
+          "c2bf02ce2f": "fish أو nu أو ⁦/bin/zsh⁩",
           "f51cc79784": "shell مخصص",
           "dd3f4c35da": "shell النظام ({{value0}})",
           "fd05fb109c": "shell الطرفية",
@@ -10289,7 +10289,7 @@
           "d8216eb22e": "تؤدي هذه الخطوة إلى إزالة أمر shell من WSL. يبقى Orca نفسه مثبتًا على Windows.",
           "e49688f67f": "هل تريد تسجيل `{{value0}}` في WSL؟",
           "61ac55278e": "هل تريد إزالة `{{value0}}` من WSL؟",
-          "7aa456a460": "تسجيل `orca-ide` في ~/.local/bin داخل WSL.",
+          "7aa456a460": "تسجيل `orca-ide` في ⁦~/.local/bin⁩ داخل WSL.",
           "0307677bb9": "جارٍ التحقق من تسجيل WSL CLI…"
         },
         "accounts": {
@@ -11742,7 +11742,7 @@
             "2cd40ba0d0": "المضيفات",
             "5220501141": "config",
             "3b12e064a4": "استيراد",
-            "7f251a45a8": "استورد المضيفات من ~/.ssh/config.",
+            "7f251a45a8": "استورد المضيفات من ⁦~/.ssh/config⁩.",
             "41a3127094": "استيراد من إعدادات SSH",
             "f9493b80c0": "الخادم",
             "8fb1cc87cc": "المضيف",
@@ -12560,7 +12560,7 @@
         },
         "GrokAccountsSection": {
           "a1b2c3d4e5": "Grok (xAI)",
-          "f6e5d4c3b2": "يعرض استخدام الرصيد الأسبوعي من تسجيل دخولك إلى Grok CLI (ملف الجلسة ~/.grok/auth.json).",
+          "f6e5d4c3b2": "يعرض استخدام الرصيد الأسبوعي من تسجيل دخولك إلى Grok CLI (ملف الجلسة ⁦~/.grok/auth.json⁩).",
           "0d8e77bc40": "وثائق Grok CLI",
           "ad47a33f72": "جارٍ التحميل…",
           "b2c3d4e5f6": "تم تسجيل الدخول",
@@ -12568,7 +12568,7 @@
           "f6a7b8c9d0": "في الطرفية، شغّل grok login، ثم انقر «تحديث الاستخدام» هنا.",
           "3325d996cb": "تحديث الاستخدام",
           "a8f3e2c1b4": "الرصيد الأسبوعي",
-          "b7e2d9f0a3": "نسبة الرصيد الأسبوعي نفسها المعروضة في شاشة grok /usage في الطرفية.",
+          "b7e2d9f0a3": "نسبة الرصيد الأسبوعي نفسها المعروضة في شاشة grok ⁦/usage⁩ في الطرفية.",
           "c6d1a8f4e2": "تُعاد التهيئة {{when}}",
           "e6dadc1e2b": "الاستخدام الشهري",
           "75e396bf42": "الاستخدام الشهري المضمَّن لحسابات Grok ذات الفوترة الموحّدة.",
@@ -12630,7 +12630,7 @@
         },
         "LinearAgentSkillPane": {
           "title": "Linear",
-          "description": "كيف يعمل Linear في Orca: تصفّح issues، وابدأ مساحات عمل مرتبطة، ودع الوكلاء يحدّثون التذاكر باستخدام /orca-linear.",
+          "description": "كيف يعمل Linear في Orca: تصفّح issues، وابدأ مساحات عمل مرتبطة، ودع الوكلاء يحدّثون التذاكر باستخدام ⁦/orca-linear⁩.",
           "skillTitle": "skill الخاصة بـ Linear",
           "howToUse": "أمثلة prompt",
           "howToUseDescription": "انقر بطاقة لنسخ prompt. استخدمها في worktree مرتبط بـ Linear بعد تثبيت skill.",
@@ -12910,7 +12910,7 @@
           "manageKeys": "إدارة المفاتيح",
           "addAccess": "إضافة وصول",
           "setupSkillTitle": "2. تثبيت skill الوكيل",
-          "setupSkillBody": "يمنح وكلاء البرمجة الأمر /orca-linear للقراءة والتحديثات والفرز وإرفاق pull requests أو merge requests.",
+          "setupSkillBody": "يمنح وكلاء البرمجة الأمر ⁦/orca-linear⁩ للقراءة والتحديثات والفرز وإرفاق pull requests أو merge requests.",
           "setupVisibleTitle": "3. إظهار Linear في المهام",
           "setupVisibleBody": "يُبقي Linear في منتقي المصادر في المهام وفي اختصارات الشريط الجانبي.",
           "openTaskSources": "مصادر المهام",
@@ -12922,8 +12922,8 @@
           "notesIntro": "تذكيرات سريعة بعد ربط Linear وتثبيت skill.",
           "noteLinkedTitle": "ابدأ من issue في Linear",
           "noteLinkedBody": "تعمل إجراءات التذاكر بأفضل شكل في worktree يُنشأ من المهام ليبقى issue مرتبطًا كسياق.",
-          "noteSlashTitle": "اذكر /orca-linear",
-          "noteSlashBody": "في المحادثة، استخدم /orca-linear (أو اطلب بلغة عادية) ليحمّل الوكيل skill في هذه الدورة.",
+          "noteSlashTitle": "اذكر ⁦/orca-linear⁩",
+          "noteSlashBody": "في المحادثة، استخدم ⁦/orca-linear⁩ (أو اطلب بلغة عادية) ليحمّل الوكيل skill في هذه الدورة.",
           "noteKeysTitle": "المفاتيح تتبع بيئة التشغيل",
           "noteKeysBody": "تُخزَّن مفاتيح API ومساحات العمل لبيئة التشغيل النشطة.",
           "noteVisibilityTitle": "الإخفاء ≠ قطع الاتصال",
@@ -12939,7 +12939,7 @@
           "connectedHint": "تُخزَّن مساحات العمل والمفاتيح لبيئة التشغيل النشطة. يمكنك إضافة وصول آخر في أي وقت.",
           "recheck": "إعادة فحص الاتصال",
           "skillTitle": "تثبيت skill الوكيل لـ Linear",
-          "skillDescription": "يمنح الوكلاء الأمر /orca-linear لقراءة التذاكر ونشر التحديثات ونقل الحالات وإرفاق pull requests أو merge requests.",
+          "skillDescription": "يمنح الوكلاء الأمر ⁦/orca-linear⁩ لقراءة التذاكر ونشر التحديثات ونقل الحالات وإرفاق pull requests أو merge requests.",
           "skillBlocked": "اربط Linear أولًا، ثم ثبّت skill للوكلاء.",
           "skillPanelTitle": "skill الخاصة بـ Linear",
           "showDescription": "تضمين Linear في منتقي المصادر بصفحة المهام وفي اختصارات الشريط الجانبي."
@@ -13457,7 +13457,7 @@
           "behindNoTemplate": "يشغّل إصدارًا من خادم Orca لا يستطيع هذا التطبيق تحديثه؛ لا يتضمن هذا الإصدار خادمًا لهذا المضيف.",
           "behindMigrating": "يشغّل خادم Orca، وسيتحدّث بعد اكتمال نقل مشاريعه.",
           "behindCheckFailed": "يشغّل خادم Orca؛ تعذّر على Orca التحقق مما إذا كان أقدم من هذا التطبيق.",
-          "runtimeNoexec": "لا يسمح هذا المضيف بتشغيل البرامج من ~/.orca-remote، لذلك لا يستطيع Orca تشغيل خادمه هناك. يعني هذا عادةً أن المجلد الرئيسي مُحمَّل بالخيار noexec. اطلب من مسؤول المضيف السماح بتشغيل البرامج هناك، ثم اتصل مرة أخرى.",
+          "runtimeNoexec": "لا يسمح هذا المضيف بتشغيل البرامج من ⁦~/.orca-remote⁩، لذلك لا يستطيع Orca تشغيل خادمه هناك. يعني هذا عادةً أن المجلد الرئيسي مُحمَّل بالخيار noexec. اطلب من مسؤول المضيف السماح بتشغيل البرامج هناك، ثم اتصل مرة أخرى.",
           "setupContactLost": "فقد Orca الاتصال بهذا المضيف أثناء إعداد خادمه. لم يُوقف أي شيء على المضيف. اتصل مرة أخرى للمتابعة.",
           "nodeDownloadBlocked": "تعذّر على هذا الكمبيوتر وعلى هذا المضيف تنزيل Node.js الذي يحتاج إليه خادم Orca. استخدم مرآة Node.js، أو تحقق من الشبكة على الجهازين.",
           "nodeDownloadBlockedNoMirror": "تعذّر على هذا الكمبيوتر وعلى هذا المضيف تنزيل Node.js الذي يحتاج إليه خادم Orca. تحقق من الشبكة أو الوكيل (proxy) على الجهازين، ثم اتصل مرة أخرى.",
@@ -13490,7 +13490,7 @@
         "ZcodeCliSetupSection": {
           "title": "استخدام GLM مع ZCode",
           "description": "سجّل الدخول لاستخدام GLM وكيلَ برمجة. مفتاح API الخاص بالحصة أعلاه يراقب الاستخدام فقط؛ أما ZCode فيتولى تسجيل الدخول واختيار النموذج بنفسه.",
-          "help": "اختر تسجيل الدخول عبر المتصفح لموقع خطتك، أو استخدم إعداد مفتاح API المُخفى في ZCode. بعد تسجيل الدخول، شغّل ZCode واستخدم /model لاختيار نموذج GLM.",
+          "help": "اختر تسجيل الدخول عبر المتصفح لموقع خطتك، أو استخدم إعداد مفتاح API المُخفى في ZCode. بعد تسجيل الدخول، شغّل ZCode واستخدم ⁦/model⁩ لاختيار نموذج GLM.",
           "zai": "تسجيل الدخول إلى Z.AI عبر المتصفح",
           "bigmodel": "تسجيل الدخول إلى BigModel عبر المتصفح",
           "apiKey": "إعداد مفتاح API في ZCode",
@@ -13498,7 +13498,7 @@
           "loading": "جارٍ تحميل طرفية تسجيل الدخول…",
           "terminalTitle": "تسجيل الدخول إلى ZCode",
           "terminalLabel": "طرفية تسجيل الدخول إلى ZCode",
-          "apiKeyInstructions": "اضغط Enter لتشغيل ZCode، ثم أدخل /login واختر خيار مفتاح API لموقع خطتك. أدخل المفتاح في موجّه ZCode المُخفى.",
+          "apiKeyInstructions": "اضغط Enter لتشغيل ZCode، ثم أدخل ⁦/login⁩ واختر خيار مفتاح API لموقع خطتك. أدخل المفتاح في موجّه ZCode المُخفى.",
           "oauthInstructions": "اضغط Enter لتشغيل أمر تسجيل الدخول، ثم افتح عنوان URL للتفويض الذي يعرضه ZCode. يُحفظ تسجيل الدخول على مضيف تنفيذ هذه الطرفية."
         },
         "ZcodePlanAccountsSection": {
@@ -13655,7 +13655,7 @@
         },
         "SshPaneToolbar": {
           "filter": "تصفية المضيفين",
-          "sync": "مزامنة ~/.ssh/config",
+          "sync": "مزامنة ⁦~/.ssh/config⁩",
           "more": "المزيد من إجراءات مضيف SSH",
           "restoreRemoved": "استعادة المضيفين المُزالين…",
           "selected": "{{count}} محدد",
@@ -13683,16 +13683,16 @@
         },
         "SshRestoreRemovedHosts": {
           "title": "استعادة المضيفين المُزالين؟",
-          "description": "المضيفون من ~/.ssh/config الذين أزلتهم في Orca يعودون إلى الإعدادات وإلى كل منتقي مضيفين.",
-          "none": "لا يوجد مضيفون مُزالون من ~/.ssh/config.",
+          "description": "المضيفون من ⁦~/.ssh/config⁩ الذين أزلتهم في Orca يعودون إلى الإعدادات وإلى كل منتقي مضيفين.",
+          "none": "لا يوجد مضيفون مُزالون من ⁦~/.ssh/config⁩.",
           "confirm": "استعادة"
         },
         "SshTargetList": {
           "addedInOrca": "أُضيفت في Orca",
-          "fromConfig": "من ~/.ssh/config",
+          "fromConfig": "من ⁦~/.ssh/config⁩",
           "filteredCount": "{{count}} من {{total}}",
           "selectManualGroup": "تحديد كل المضيفين المضافين في Orca",
-          "selectConfigGroup": "تحديد كل المضيفين من ~/.ssh/config"
+          "selectConfigGroup": "تحديد كل المضيفين من ⁦~/.ssh/config⁩"
         },
         "serverList": {
           "addTitle": "إضافة خادم",
@@ -16541,8 +16541,8 @@
             "051c97d15a": ".pp-card[data-card=\"starter\"] .pp-cta",
             "4fa59ca545": "✓ تم التحديث",
             "1bec24acc1": "@keyframes browserFlash { 0% { opacity: 0; } 20% { opacity: 0.85; } 100% { opacity: 0; } } @keyframes browserTabIn { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } } @keyframes browserViewIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }",
-            "73bbb46073": "/pricing",
-            "f39be6ca14": "/signup"
+            "73bbb46073": "⁦/pricing⁩",
+            "f39be6ca14": "⁦/signup⁩"
           },
           "BrowserUseSkillSetupCard": {
             "cbc45022d4": "يتيح للوكلاء التنقل في الصفحات والتحقق منها في متصفح Orca.",
@@ -18598,7 +18598,7 @@
           "b28b140eaf": "مساحة العمل",
           "0d17f4ca8f": "اختيار المشروع",
           "02d351877e": "المشروع",
-          "a4ac8fcc62": "/goal",
+          "a4ac8fcc62": "⁦/goal⁩",
           "827b25a81e": "يدعم skills ومسارات الملفات والأوامر المضمّنة مثل",
           "6d778190b7": "شغّل تدقيق التبعيات الأسبوعي ولخّص التغييرات الخطرة.",
           "058c23cb3f": "Prompt",
@@ -20441,9 +20441,9 @@
         "reattachFile": "أزله ثم أرفقه مرة أخرى.",
         "conversationCleared": "مُسحت هذه المحادثة.",
         "openCurrentConversation": "افتح المحادثة الحالية للمتابعة.",
-        "clearUnfinished": "لم يكتمل آخر /clear.",
-        "commandRunning": "ما زال /compact أو /clear قيد التشغيل.",
-        "waitForCommand": "انتظر حتى ينتهي /compact أو /clear.",
+        "clearUnfinished": "لم يكتمل آخر ⁦/clear⁩.",
+        "commandRunning": "ما زال ⁦/compact⁩ أو ⁦/clear⁩ قيد التشغيل.",
+        "waitForCommand": "انتظر حتى ينتهي ⁦/compact⁩ أو ⁦/clear⁩.",
         "agentStarting": "ما زال الوكيل قيد البدء.",
         "waitForStart": "انتظر حتى ينتهي الوكيل من البدء.",
         "turnActive": "ما زال الوكيل يرد.",
@@ -20472,14 +20472,14 @@
         "startNewChat": "ابدأ محادثة جديدة للمتابعة.",
         "tryAgain": "حاول مرة أخرى.",
         "agentStillWorking": "ما زال الوكيل يعمل.",
-        "runClearWhenDone": "شغّل /clear عند الانتهاء.",
-        "clearAfterAnswer": "أجب عن سؤال الوكيل أو طلب الموافقة، ثم شغّل /clear.",
-        "runCompactWhenDone": "شغّل /compact عند الانتهاء.",
-        "compactAfterAnswer": "أجب عن سؤال الوكيل أو طلب الموافقة، ثم شغّل /compact.",
-        "clearAfterRetry": "أعد محاولة رسالتك السابقة، ثم شغّل /clear.",
-        "compactAfterRetry": "أعد محاولة رسالتك السابقة، ثم شغّل /compact.",
-        "clearAfterSending": "ما زالت رسالتك السابقة قيد الإرسال. شغّل /clear بعد وصولها.",
-        "compactAfterSending": "ما زالت رسالتك السابقة قيد الإرسال. شغّل /compact بعد وصولها.",
+        "runClearWhenDone": "شغّل ⁦/clear⁩ عند الانتهاء.",
+        "clearAfterAnswer": "أجب عن سؤال الوكيل أو طلب الموافقة، ثم شغّل ⁦/clear⁩.",
+        "runCompactWhenDone": "شغّل ⁦/compact⁩ عند الانتهاء.",
+        "compactAfterAnswer": "أجب عن سؤال الوكيل أو طلب الموافقة، ثم شغّل ⁦/compact⁩.",
+        "clearAfterRetry": "أعد محاولة رسالتك السابقة، ثم شغّل ⁦/clear⁩.",
+        "compactAfterRetry": "أعد محاولة رسالتك السابقة، ثم شغّل ⁦/compact⁩.",
+        "clearAfterSending": "ما زالت رسالتك السابقة قيد الإرسال. شغّل ⁦/clear⁩ بعد وصولها.",
+        "compactAfterSending": "ما زالت رسالتك السابقة قيد الإرسال. شغّل ⁦/compact⁩ بعد وصولها.",
         "pendingWork": "انتظر حتى ينتهي العمل والرسائل المعلقة قبل استخدام هذا الأمر."
       },
       "taskList": {
@@ -21285,7 +21285,7 @@
       "resumeCommand": {
         "description": "فتح سجل جلسات الوكيل",
         "argumentHint": "[search]",
-        "workspaceUnavailable": "لم يتم تحميل مساحة عمل هذه المحادثة بعد. جرّب /resume مرة أخرى بعد لحظة.",
+        "workspaceUnavailable": "لم يتم تحميل مساحة عمل هذه المحادثة بعد. جرّب ⁦/resume⁩ مرة أخرى بعد لحظة.",
         "replaceTitle": "استبدال هذه المحادثة؟",
         "replaceDescription": "استئناف «{{title}}» هنا سيوقف ما يفعله {{agent}} في هذه المحادثة.",
         "replace": "استبدال"
@@ -21420,7 +21420,7 @@
         "toggleValueKnown": "لهذا الخيار قيمة معروفة؛ اختر «تشغيل» أو «إيقاف» بدلًا من ذلك."
       },
       "composerErrors": {
-        "goalObjectiveMissing": "صف الهدف بعد /goal.",
+        "goalObjectiveMissing": "صف الهدف بعد ⁦/goal⁩.",
         "commandUnavailable": "الأمر /{{name}} غير متاح في جلسات المحادثة. استخدم قائمة الشرطة المائلة لعرض الأوامر المتاحة.",
         "commandTakesNoArguments": "استخدم /{{name}} دون وسائط.",
         "commandUnsupportedByHost": "الأمر /{{name}} غير مدعوم في مضيف المحادثة هذا.",
@@ -22692,7 +22692,7 @@
       "openSettings": "فتح الإعدادات"
     },
     "codexSharedSettingsNotice": {
-      "title": "يستخدم Codex في Orca الآن ~/.codex",
+      "title": "يستخدم Codex في Orca الآن ⁦~/.codex⁩",
       "description": "قد يطلب Codex مجددًا الوثوق بالمجلدات أو الموافقة على الأوامر. أعد إضافة أي خوادم MCP أضفتها في Orca فقط.",
       "dismiss": "تجاهل"
     },
@@ -22738,7 +22738,7 @@
     },
     "claudeDiffPanelNotice": {
       "title": "يمكن لـ Claude Code فتح لوحة diff الخاصة به بجانب المحادثة في الطرفيات العريضة. هذه اللوحة تخص Claude وليست جزءًا من Orca.",
-      "body": "لإخفائها، اكتب /diff في Claude Code. يتذكر Claude هذا الاختيار في الجلسات اللاحقة.",
+      "body": "لإخفائها، اكتب ⁦/diff⁩ في Claude Code. يتذكر Claude هذا الاختيار في الجلسات اللاحقة.",
       "gotIt": "حسنًا"
     },
     "paneTopBanner": {
@@ -22886,7 +22886,7 @@
       "chatOtherClient": "تسجيل الدخول قيد التنفيذ في عميل آخر.",
       "chatReadFailed": "تعذّر التحقق من تسجيل الدخول على {{host}}.",
       "scope": "إدارة حساب agy الأصلي على {{host}}.",
-      "signIn": "شغّل agy على هذا المضيف وأكمل تسجيل الدخول عبر المتصفح، ثم احفظ الحساب الحالي. لإضافة حساب مختلف، استخدم /logout في agy وسجّل الدخول مرة أخرى.",
+      "signIn": "شغّل agy على هذا المضيف وأكمل تسجيل الدخول عبر المتصفح، ثم احفظ الحساب الحالي. لإضافة حساب مختلف، استخدم ⁦/logout⁩ في agy وسجّل الدخول مرة أخرى.",
       "docs": "تعليمات تسجيل الدخول",
       "retry": "إعادة المحاولة",
       "identityUnknown": "هوية الحساب المسجَّل غير متاحة",
@@ -22922,7 +22922,7 @@
       "systemDefault": "افتراضي النظام",
       "unnamedAccount": "حساب Claude",
       "systemDefaultNamed": "افتراضي النظام: {{value0}}",
-      "systemDefaultIsSaved": "تم تسجيل الدخول في System default باسم {{value0}}، وهو أيضًا حساب محفوظ. ربما نسخ إصدار أقدم من Orca تسجيل الدخول هذا إلى هناك. إذا لم يكن تسجيل الدخول لك، فحدّد System default وشغّل claude /login.",
+      "systemDefaultIsSaved": "تم تسجيل الدخول في System default باسم {{value0}}، وهو أيضًا حساب محفوظ. ربما نسخ إصدار أقدم من Orca تسجيل الدخول هذا إلى هناك. إذا لم يكن تسجيل الدخول لك، فحدّد System default وشغّل claude ⁦/login⁩.",
       "systemDefaultIsSavedDismiss": "تجاهل",
       "signInRequired": "سجّل الدخول مرة أخرى لاستخدام هذا الحساب",
       "signInAgain": "تسجيل الدخول مجددًا",
@@ -23093,7 +23093,7 @@
       "envTokenKeyringFallback": "يوجد في سلسلة المفاتيح لديك تسجيل دخول `gh` سيحل محله بعد إزالة متغير البيئة.",
       "envTokenLoginAfterUnset": "بعد إلغاء تعيينه، شغّل `gh auth login` لتسجيل الدخول بشكل طبيعي، ثم أعد المحاولة.",
       "envTokenRemoveWindows": "ابحث عن المكان الذي عُيّن فيه `{{varName}}` (متغيرات البيئة للنظام أو المستخدم، أو ملف تعريف PowerShell)، وأزله، ثم أعد تشغيل Orca لتُلتقط البيئة الجديدة.",
-      "envTokenRemovePosix": "ابحث عن المكان الذي صُدّر فيه `{{varName}}` (عادةً `~/.zshrc` أو `~/.zshenv` أو `~/.bashrc` أو `~/.profile`، أو مدير الأسرار في shell لديك)، وأزله، ثم أعد تشغيل Orca لتُلتقط البيئة الجديدة.",
+      "envTokenRemovePosix": "ابحث عن المكان الذي صُدّر فيه `{{varName}}` (عادةً `⁦~/.zshrc⁩` أو `⁦~/.zshenv⁩` أو `⁦~/.bashrc⁩` أو `⁦~/.profile⁩`، أو مدير الأسرار في shell لديك)، وأزله، ثم أعد تشغيل Orca لتُلتقط البيئة الجديدة.",
       "envTokenActive": "المتغير `{{varName}}` معيَّن في بيئتك، لذا تستخدم `gh` هذا token بدلًا من تسجيل الدخول في سلسلة المفاتيح. لا يستطيع `gh auth refresh` تعديل tokens المقدَّمة عبر البيئة، ولهذا لم يفد تشغيله.",
       "envTokenInherited": "ورثت Orca المتغير `{{varName}}` من shell لديك، وتستخدم `gh` هذا token. لا ينطبق `gh auth refresh` على tokens المقدَّمة عبر البيئة.",
       "envTokenInheritedDetailWindows": "ألغِ تعيين `{{varName}}` في shell الذي يشغّل Orca (أو في متغيرات البيئة للمستخدم)، ثم أعد تشغيل Orca.",
@@ -24599,7 +24599,7 @@
       "workspaceChanged": "تغيّرت مساحة العمل أثناء بدء المحاكي. أعد ربط المحاكي.",
       "noIosSimulators": "لم يتم العثور على أي محاكيات iOS. أضف واحدًا في Xcode Settings > Platforms.",
       "simctlUnavailable": "xcrun simctl غير متاح.",
-      "simulatorToolsUnavailable": "أدوات Xcode Simulator غير متاحة. ثبّت Xcode كاملًا، وافتحه مرة واحدة، ثم حدده بالأمر `sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`.",
+      "simulatorToolsUnavailable": "أدوات Xcode Simulator غير متاحة. ثبّت Xcode كاملًا، وافتحه مرة واحدة، ثم حدده بالأمر `sudo xcode-select --switch ⁦/Applications/Xcode.app/Contents/Developer⁩`.",
       "requiresMacosXcode": "يتطلب iOS Simulator نظام macOS مع Xcode Command Line Tools.",
       "simulatorNotFound": "لم يتم العثور على المحاكي {{udid}}. أنشئ واحدًا عبر Xcode > Window > Devices and Simulators.",
       "serveSimUnavailable": "serve-sim غير متاح.",
@@ -25028,7 +25028,7 @@
         "description": "السمة واللغة والتكبير والخطوط وألوان الطرفية."
       },
       "cli": {
-        "installDescriptionMac": "سجّل `prompt` في /usr/local/bin.",
+        "installDescriptionMac": "سجّل `prompt` في ⁦/usr/local/bin⁩.",
         "notInstalled": "سجّل {{path}} لاستخدام Prompt من طرفيات أخرى."
       },
       "advanced": {
