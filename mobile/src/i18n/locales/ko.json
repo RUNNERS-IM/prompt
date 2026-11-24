@@ -3934,7 +3934,7 @@
   },
   "prompt": {
     "connection": {
-      "directOnly": "휴대폰과 컴퓨터가 같은 Wi-Fi 나 Tailscale 에 있어야 연결됩니다. Prompt 에서는 중계 연결이 꺼져 있습니다."
+      "directOnly": "휴대폰과 컴퓨터가 같은 Wi-Fi나 Tailscale에 있어야 연결됩니다. Prompt에서는 중계 연결이 꺼져 있습니다."
     }
   }
 }

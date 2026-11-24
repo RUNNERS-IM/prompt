@@ -6,6 +6,7 @@ import type { MobileAgentLaunchAvailability } from '../session/mobile-agent-laun
 import { colors, spacing, typography } from '../theme/mobile-theme'
 import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
+import { WordText } from './WordText'
 
 type Props = {
   availability: MobileAgentLaunchAvailability
@@ -61,8 +62,8 @@ export function AgentLaunchNotice({
       : t('components.agentLaunchNotice.copyPrompt', 'Copy prompt')
   return (
     <View style={styles.notice}>
-      {confirmation ? <Text style={styles.successText}>{confirmation}</Text> : null}
-      {message ? <Text style={errorStyle}>{message}</Text> : null}
+      {confirmation ? <WordText style={styles.successText}>{confirmation}</WordText> : null}
+      {message ? <WordText style={errorStyle}>{message}</WordText> : null}
       {note ? <Text style={styles.warningText}>{note}</Text> : null}
       {undeliveredPrompt ? (
         <Pressable

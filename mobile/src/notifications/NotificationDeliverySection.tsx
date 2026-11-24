@@ -20,7 +20,7 @@ export function NotificationDeliverySection({ value, disabled, onChange }: Props
       <View key={key} style={[styles.row, disabled && styles.disabled]}>
         <View style={styles.labelGroup}>
           <Text style={styles.label}>{label}</Text>
-          {hint && <Text style={styles.hint}>{hint}</Text>}
+          {hint && <WordText style={styles.hint}>{hint}</WordText>}
         </View>
         <Switch
           accessibilityLabel={label}
