@@ -1,7 +1,6 @@
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
 import type { AppState } from '@/store/types'
-import { makePaneKey } from '../../../shared/stable-pane-id'
 import type { NotMovedSessions } from './claude-account-restart-toast'
 import type {
   ClaudeSessionCantMoveReason,
@@ -36,7 +35,8 @@ export function claudeSwitchSessionName(
   return (
     tab?.customTitle?.trim() ||
     tab?.title?.trim() ||
-    state.agentStatusByPaneKey[makePaneKey(session.tabId, session.leafId)]?.prompt?.trim() ||
+    // Why not makePaneKey: it throws on a malformed leaf id, and a toast must never fail.
+    state.agentStatusByPaneKey[`${session.tabId}:${session.leafId}`]?.prompt?.trim() ||
     translate('accounts.claude.switchSessions.session', 'Claude session')
   )
 }

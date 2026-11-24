@@ -109,6 +109,8 @@ function rejectHostOnlySignIn(): Promise<never> {
 export function createClaudeAccountsApi(): PreloadApi['claudeAccounts'] {
   return {
     list: async () => (await fetchAccountsSnapshot(false)).claude,
+    // Why empty: a paired client cannot read the host's processes; the host fills its own panes.
+    probeRunningSessions: () => Promise.resolve([]),
     add: rejectHostOnlySignIn,
     cancelPendingLogin: () => Promise.resolve(false),
     reauthenticate: rejectHostOnlySignIn,
