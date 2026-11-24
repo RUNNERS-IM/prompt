@@ -45,7 +45,7 @@ function Step({ number, text }: { number: number; text: string }) {
       <View style={styles.stepBadge}>
         <Text style={styles.stepNumber}>{number}</Text>
       </View>
-      <Text style={styles.stepText}>{text}</Text>
+      <WordText style={styles.stepText}>{text}</WordText>
     </View>
   )
 }
@@ -374,7 +374,7 @@ export default function PairScanScreen() {
 
       {status === 'error' && (
         <View style={styles.centered}>
-          <Text style={styles.errorText}>{errorMessage}</Text>
+          <WordText style={styles.errorText}>{errorMessage}</WordText>
           {logs.length > 0 && (
             <View style={styles.logSlot}>
               <ConnectionLog entries={logs} title={t('app.pairScan.pairingLog', 'Pairing log')} />

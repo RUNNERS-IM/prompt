@@ -248,7 +248,7 @@ export function PrSidebarCreateEmptyState({
             action={commitFailureRecoveryAction}
           />
         ) : createWarning ? (
-          <Text style={styles.bodyText}>{createWarning}</Text>
+          <WordText style={styles.bodyText}>{createWarning}</WordText>
         ) : null}
         <Pressable
           style={({ pressed }) => [

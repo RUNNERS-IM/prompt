@@ -13,6 +13,7 @@ import {
 import { TASK_SECONDARY_DRAWER_Z_INDEX, setupSourceLabel } from './mobile-tasks-legacy-foundation'
 import { styles } from './mobile-tasks-legacy-styles'
 import { translate } from '../i18n/mobile-i18n'
+import { WordText } from '../components/WordText'
 
 export function renderMobileTasksWorkspaceSparseDrawer(model: ConnectionPresentationModel) {
   const {
@@ -251,12 +252,12 @@ export function renderMobileTasksOrcaYamlTrustDrawer(model: ConnectionPresentati
                     { name: orcaYamlTrustPrompt.repoName }
                   )}
             </Text>
-            <Text style={styles.sheetSubtitle}>
+            <WordText style={styles.sheetSubtitle}>
               {translate(
                 'tasks.workspaceTrustDrawers.trustSubtitle',
                 "This repository's orca.yaml runs on your machine before the workspace starts. Only run it if you trust this repository."
               )}
-            </Text>
+            </WordText>
           </View>
 
           <View style={styles.setupPromptBox}>
