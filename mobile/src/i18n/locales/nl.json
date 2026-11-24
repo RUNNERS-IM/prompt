@@ -1810,7 +1810,7 @@
       "terminalTitle": "Terminal",
       "reconnectToDesktop": "Maak opnieuw verbinding met het bureaublad",
       "openFileExplorer": "Bestandsverkenner openen",
-      "openSourceControl": "Open source-controle",
+      "openSourceControl": "Broncodebeheer openen",
       "moreActions": "Meer sessieacties"
     },
     "headerMoreActionsSheet": {

@@ -1810,7 +1810,7 @@
       "terminalTitle": "thiết bị đầu cuối",
       "reconnectToDesktop": "Kết nối lại với máy tính để bàn",
       "openFileExplorer": "Mở trình khám phá tệp",
-      "openSourceControl": "Kiểm soát nguồn mở",
+      "openSourceControl": "Mở quản lý mã nguồn",
       "moreActions": "Thêm hành động trong phiên"
     },
     "headerMoreActionsSheet": {

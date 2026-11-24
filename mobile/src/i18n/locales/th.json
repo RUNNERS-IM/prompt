@@ -1810,7 +1810,7 @@
       "terminalTitle": "เทอร์มินัล",
       "reconnectToDesktop": "เชื่อมต่อกับเดสก์ท็อปอีกครั้ง",
       "openFileExplorer": "เปิดตัวสำรวจไฟล์",
-      "openSourceControl": "การควบคุมโอเพ่นซอร์ส",
+      "openSourceControl": "เปิดการควบคุมซอร์ส",
       "moreActions": "การดำเนินการเซสชันเพิ่มเติม"
     },
     "headerMoreActionsSheet": {

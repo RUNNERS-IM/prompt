@@ -1810,7 +1810,7 @@
       "terminalTitle": "Pääte",
       "reconnectToDesktop": "Yhdistä uudelleen työpöytään",
       "openFileExplorer": "Avaa tiedostonhallinta",
-      "openSourceControl": "Avoimen lähdekoodin ohjaus",
+      "openSourceControl": "Avaa versionhallinta",
       "moreActions": "Lisää istuntotoimintoja"
     },
     "headerMoreActionsSheet": {

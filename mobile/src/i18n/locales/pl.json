@@ -1880,7 +1880,7 @@
       "terminalTitle": "Terminal",
       "reconnectToDesktop": "Połącz się ponownie z pulpitem",
       "openFileExplorer": "Otwórz eksplorator plików",
-      "openSourceControl": "Kontrola open source",
+      "openSourceControl": "Otwórz kontrolę źródła",
       "moreActions": "Więcej działań sesyjnych"
     },
     "headerMoreActionsSheet": {

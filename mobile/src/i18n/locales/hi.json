@@ -1809,7 +1809,7 @@
       "terminalTitle": "टर्मिनल",
       "reconnectToDesktop": "डेस्कटॉप से पुनः कनेक्ट करें",
       "openFileExplorer": "फ़ाइल एक्सप्लोरर खोलें",
-      "openSourceControl": "खुला स्रोत नियंत्रण",
+      "openSourceControl": "सोर्स कंट्रोल खोलें",
       "moreActions": "अधिक सत्र क्रियाएँ"
     },
     "headerMoreActionsSheet": {
