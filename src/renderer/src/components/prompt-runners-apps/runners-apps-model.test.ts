@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import bundled from '../../../../../resources/runners-apps/runners-apps.json'
+import bundled from '../runners-account/runners-apps.json'
 import {
   buildRunnersAppGroups,
   isSafeRunnersAppUrl,

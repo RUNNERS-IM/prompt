@@ -45,10 +45,10 @@
   /* 쓸 수 없는 단추. 투명도로 흐리지 않고 이 색으로 칠한다 */
   --r-disabled-bg: rgba(10, 10, 10, 0.06);
   --r-disabled-text: #767676;
-  /* 위험: 단추 바탕(흰 글자 5.3)과 글자 */
+  /* 위험: 단추 바탕(흰 글자 5.3)과 글자. 글자는 회색 단추(#ebebeb) 위에서도 4.5 를 넘게(5.26, 손 올림 4.7) 조금 어둡게 둔다 */
   --r-danger: #d70f0f;
   --r-on-danger: #ffffff;
-  --r-danger-text: #d70f0f;
+  --r-danger-text: #c20c0c;
   --r-mark-bg: #0a0a0a;
   --r-mark-fg: #ffffff;
   --r-success: #34c759;
