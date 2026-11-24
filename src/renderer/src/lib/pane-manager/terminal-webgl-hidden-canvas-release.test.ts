@@ -84,4 +84,17 @@ describe('releaseWebglCanvasBackingWhileHidden', () => {
     expect(canvas.width).toBe(0)
     stopReleasingWebglCanvasBacking(canvas)
   })
+
+  it('reports the release so the pane can drop its glyph atlas too', () => {
+    vi.useFakeTimers()
+    const { canvas } = makeCanvas()
+    const onRelease = vi.fn()
+    releaseWebglCanvasBackingWhileHidden(canvas, () => true, vi.fn(), onRelease)
+    vi.advanceTimersByTime(HIDDEN_WEBGL_CANVAS_RELEASE_DELAY_MS - 1)
+    expect(onRelease).not.toHaveBeenCalled()
+    vi.advanceTimersByTime(1)
+    expect(canvas.width).toBe(0)
+    expect(onRelease).toHaveBeenCalledTimes(1)
+    stopReleasingWebglCanvasBacking(canvas)
+  })
 })

@@ -287,7 +287,10 @@ export function attachWebgl(pane: ManagedPaneInternal): void {
         (hiddenForMs) =>
           hiddenForMs >= HIDDEN_WORKTREE_WEBGL_KEEP_MS ||
           pane.container.closest('[data-worktree-surface-hidden]') === null,
-        (devicePixelSize) => restoreReleasedPaneWebglCanvas(pane, devicePixelSize)
+        (devicePixelSize) => restoreReleasedPaneWebglCanvas(pane, devicePixelSize),
+        // Why: glyph atlas pages stay in GPU memory after the backing goes; the reveal clears and
+        // repaints the atlas anyway, so a hidden pane can drop it for free.
+        () => clearWebglTextureAtlas(pane)
       )
     }
     refreshTerminalAfterWebglAttach(pane)

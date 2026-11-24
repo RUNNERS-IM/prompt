@@ -27,7 +27,8 @@ const releasesByCanvas = new WeakMap<HTMLCanvasElement, CanvasRelease>()
 export function releaseWebglCanvasBackingWhileHidden(
   canvas: HTMLCanvasElement,
   canRelease: (hiddenForMs: number) => boolean,
-  restore: (devicePixelSize: { width: number; height: number } | null) => void
+  restore: (devicePixelSize: { width: number; height: number } | null) => void,
+  onRelease?: () => void
 ): void {
   const view = canvas.ownerDocument.defaultView
   if (!view?.ResizeObserver || !view.MutationObserver || releasesByCanvas.has(canvas)) {
@@ -55,6 +56,7 @@ export function releaseWebglCanvasBackingWhileHidden(
       release.released = true
       canvas.width = 0
       canvas.height = 0
+      onRelease?.()
     }, HIDDEN_WEBGL_CANVAS_RELEASE_DELAY_MS)
   }
   const release: CanvasRelease = {
