@@ -144,7 +144,7 @@
   "auto.components.settings.token.source.control.integration.cards.6154b02093": "Bitbucket 자격 증명이 설정되어 있지만 인증할 수 없습니다. 토큰과 repo 권한을 확인하고, 환경 변수를 바꿨다면 Prompt를 다시 시작하세요.",
   "auto.components.settings.bitbucket.integration.card.storedCredential": "이 컴퓨터의 Prompt에 저장되었습니다. ORCA_BITBUCKET_* 환경 변수는 설정 시 우선순위를 갖습니다.",
   "auto.components.settings.BrowserLinkRoutingSetting.descriptionBase": "Prompt 어디에서든 http(s) 링크를 내장 브라우저에서 엽니다. 로그인 페이지는 계속 시스템 브라우저에서 열립니다.",
-  "auto.components.settings.BrowserLinkRoutingSetting.description": "Prompt 어디에서든 http(s) 링크를 내장 브라우저에서 엽니다. 로그인 페이지와 {{shortcut}}은(는) 항상 시스템 브라우저를 사용합니다.",
+  "auto.components.settings.BrowserLinkRoutingSetting.description": "Prompt 어디에서든 http(s) 링크를 내장 브라우저에서 엽니다. 로그인 페이지와 {{shortcut}}으로 연 링크는 항상 시스템 브라우저에서 열립니다.",
   "auto.components.settings.BrowserLinkRoutingModifierSetting.titleOrca": "Shift를 누른 채 클릭하면 Prompt에서 열기",
   "auto.components.settings.BrowserLinkRoutingModifierSetting.descriptionSystem": "링크가 Prompt에서 열리므로, {{chord}}+클릭 시 시스템 기본 브라우저에서 대신 열립니다.",
   "auto.components.settings.BrowserLinkRoutingModifierSetting.descriptionOrca": "링크는 시스템 기본 브라우저에서 열립니다. 켜면 {{chord}}+클릭할 때 Prompt 내장 브라우저에서 엽니다.",
@@ -354,5 +354,7 @@
   "auto.components.terminal.pane.TerminalContextMenu.ec85df5914": "빠른 명령",
   "auto.components.settings.Settings.13d4fe30ad": "빠른 명령",
   "keybindings.title.tabOpenQuickCommandsMenu": "빠른 명령 메뉴 전환",
-  "keybindings.group.quickCommands": "빠른 명령"
+  "keybindings.group.quickCommands": "빠른 명령",
+  "auto.components.settings.GitPane.aefa1ecb59": "Git 사용자 이름이 설정되지 않았습니다.",
+  "auto.components.settings.terminal.search.694b8764ac": "JIS 엔(¥)을 백슬래시(\\)로 바꾸기"
 }
