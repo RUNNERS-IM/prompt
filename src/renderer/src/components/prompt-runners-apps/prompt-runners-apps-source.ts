@@ -1,4 +1,5 @@
-import runnersAppsJson from '../../../../../resources/runners-apps/runners-apps.json'
+// The list itself is the runners-app-kit copy (npm run kit keeps it current), so names match the account text.
+import runnersAppsJson from '../runners-account/runners-apps.json'
 import { buildRunnersAppGroups, type RunnersAppGroup } from './runners-apps-model'
 
 // The list and its icons are bundled into the renderer, so the cards show without a network.
