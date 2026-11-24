@@ -4,19 +4,13 @@ import type { CodexAccountSelectionTarget } from '../../../shared/codex-selectio
 import type { ClaudeAccountSwitchRunningSessions } from '../../../shared/claude-account-switch-settings'
 import type { RuntimeClientTarget } from '../../../shared/runtime-client-target'
 import { getClaudeAccountLabel } from './claude-account-label'
-import {
-  announceRestart,
-  warnUncheckedSessions,
-  type RestartingPane
-} from './claude-account-restart-toast'
+import { warnUncheckedSessions } from './claude-account-restart-toast'
+import { restartClaudeSessions } from './claude-account-switch-restart'
 import { findClaudeLoginFollowers } from './claude-login-followers'
 import { setClaudeLoginUnmovedPanes } from './claude-login-unmoved-panes'
 import { fillClaudePaneSessionsFromProcesses } from './claude-running-session-fill'
 import { notMovedSessions } from './claude-switch-session-labels'
-import {
-  findClaudeSessionsStoppedAtUsageLimit,
-  markContinueAfterRestart
-} from './claude-usage-limit-sessions'
+import { findClaudeSessionsStoppedAtUsageLimit } from './claude-usage-limit-sessions'
 import type { ClaudeHostFolders } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
@@ -59,54 +53,6 @@ export function getClaudeAccountSwitchPrompt(): ClaudeAccountSwitchPrompt | null
 export function subscribeClaudeAccountSwitchPrompt(listener: () => void): () => void {
   promptListeners.add(listener)
   return () => promptListeners.delete(listener)
-}
-
-function queueClaudeRestarts(ptyIds: string[]): void {
-  useAppStore.getState().queuePaneAccountRestarts(ptyIds, 'claude')
-}
-
-/**
- * Restart these sessions on the selected account. Those stopped at their usage limit, picker included,
- * get a continue line once resumed. All are queued together; each runs as soon as its turn allows.
- */
-async function restartClaudeSessions(
-  sessions: readonly ClaudeSessionMoveCandidate[],
-  announce: RestartAnnouncement
-): Promise<void> {
-  const stopped = await findClaudeSessionsStoppedAtUsageLimit(sessions)
-  queueClaudeRestartsWithContinue(sessions, stopped, announce)
-}
-
-type RestartAnnouncement = {
-  account: string
-  others?: number
-  review?: () => void
-  notMoved?: ReturnType<typeof notMovedSessions>
-  /** The continue line; the window's own wording when absent. */
-  continueText?: string
-}
-
-/** Queue the restarts already sorted out; `stopped` get the continue line once resumed. */
-export function queueClaudeRestartsWithContinue(
-  sessions: readonly ClaudeSessionMoveCandidate[],
-  stopped: readonly ClaudeSessionMoveCandidate[],
-  announce: RestartAnnouncement
-): void {
-  const panes = currentPanes(sessions)
-  const stoppedPtyIds = currentPanes(stopped).map((pane) => pane.ptyId)
-  markContinueAfterRestart(stoppedPtyIds, announce.continueText)
-  queueClaudeRestarts(panes.map((pane) => pane.ptyId))
-  const { account, others = 0, review, notMoved } = announce
-  announceRestart(panes, account, others, review, notMoved)
-}
-
-/** Why now: a reattach can rebind a pane while the dialog is open, and a closed pane has none. */
-function currentPanes(sessions: readonly ClaudeSessionMoveCandidate[]): RestartingPane[] {
-  const layouts = useAppStore.getState().terminalLayoutsByTabId
-  return sessions.flatMap((session) => {
-    const ptyId = layouts[session.tabId]?.ptyIdsByLeafId?.[session.leafId]
-    return ptyId ? [{ ptyId, tabId: session.tabId, leafId: session.leafId }] : []
-  })
 }
 
 /** Answers the open dialog. "Don't ask again" only turns restarts on, as native chat's resume prompt does. */

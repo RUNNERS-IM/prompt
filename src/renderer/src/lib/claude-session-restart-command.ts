@@ -9,7 +9,7 @@ import type {
 import { resolveAgentAccountRestartResumeStartup } from './agent-account-restart-startup'
 import { getClaudeAccountLabel } from './claude-account-label'
 import { fillClaudePaneSessionsFromProcesses } from './claude-running-session-fill'
-import { queueClaudeRestartsWithContinue } from './claude-account-switch-sessions'
+import { queueClaudeRestartsWithContinue } from './claude-account-switch-restart'
 import { isClaudePaneOnAccount, resolveClaudePaneFolder } from './claude-pane-account-folder'
 import {
   claudeLaunchAccountId,
