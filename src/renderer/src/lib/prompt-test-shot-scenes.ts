@@ -1,5 +1,7 @@
 import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
+import { useAppStore } from '@/store'
+import type { ProviderRateLimits } from '../../../shared/rate-limit-types'
 import { showClaudeAccountSwitchPromptForTestShots } from './claude-account-switch-sessions'
 import {
   announceRestart,
@@ -25,7 +27,50 @@ function session(worktreeId: string, n: number): ClaudeSessionMoveCandidate {
   }
 }
 
+const HOUR = 3_600_000
+
+function usage(session: number, weekly: number, resetsInHours: number): ProviderRateLimits {
+  const now = Date.now()
+  return {
+    provider: 'claude',
+    session: {
+      usedPercent: session,
+      windowMinutes: 300,
+      resetsAt: now + 2 * HOUR,
+      resetDescription: null
+    },
+    weekly: {
+      usedPercent: weekly,
+      windowMinutes: 10080,
+      resetsAt: now + resetsInHours * HOUR,
+      resetDescription: null
+    },
+    updatedAt: now,
+    error: null,
+    status: 'ok'
+  }
+}
+
 const scenes = {
+  /** 계정 고르기 메뉴의 사용량 칸. 가짜 계정은 토큰이 없어 받아오기가 실패하므로 숫자를 지어 넣는다. */
+  accountUsage(): void {
+    const store = useAppStore.getState()
+    const fakes = (store.settings?.claudeManagedAccounts ?? []).filter((account) =>
+      account.email.endsWith('@example.com')
+    )
+    const now = Date.now()
+    useAppStore.setState({
+      rateLimits: {
+        ...store.rateLimits,
+        inactiveClaudeAccounts: fakes.map((account, index) => ({
+          accountId: account.id,
+          rateLimits: index === 0 ? usage(34, 81, 26) : usage(12, 46, 120),
+          updatedAt: now,
+          isFetching: false
+        }))
+      }
+    })
+  },
   /** 바꾼 계정에 아직 남은 세션을 다시 켤지 묻는 창(세션 목록 포함). */
   accountSwitch(): void {
     showClaudeAccountSwitchPromptForTestShots({
@@ -37,6 +82,11 @@ const scenes = {
         cantMove: [{ ...session('docs', 5), reason: 'own-folder' }]
       }
     })
+  },
+  /** 계정 바꾸기 창의 세션 목록을 맨 아래로 내린다(옮길 수 없음 묶음이 보이게). */
+  scrollSwitchList(): void {
+    const list = document.querySelector('[role="dialog"] .overflow-y-auto')
+    list?.scrollTo({ top: list.scrollHeight })
   },
   /** 다시 켜는 중 알림(옮기지 못한 세션 줄 포함). */
   restartToast(): void {

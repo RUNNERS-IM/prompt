@@ -153,6 +153,8 @@ async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<
 
   // 계정: 사이드바의 Claude 계정 고르기 메뉴. 글이 언어마다 달라 단추 표시로 찾는다.
   if (await press(window, '[data-prompt-claude-account-trigger]')) {
+    // 메뉴를 열면 사용량을 다시 받아온다. 그 실패가 끝난 뒤에 지어낸 숫자를 넣는다.
+    await scene(window, 'accountUsage')
     await pass.shot(window, 'account', '계정 고르기')
     await escape(window)
   } else {
@@ -161,6 +163,8 @@ async function promptScenes(window: BrowserWindow, pass: TestShotPass): Promise<
   // 계정을 바꾼 뒤 뜨는 창(세션 목록 포함)과 다시 켜는 중 알림. 지어낸 세션으로 연다.
   await scene(window, 'accountSwitch')
   await pass.shot(window, 'account', '계정 바꾸기 창')
+  await scene(window, 'scrollSwitchList')
+  await pass.shot(window, 'account', '계정 바꾸기 창 아래')
   await scene(window, 'clear')
   await scene(window, 'restartToast')
   await pass.shot(window, 'account', '다시 켜는 중 알림')
