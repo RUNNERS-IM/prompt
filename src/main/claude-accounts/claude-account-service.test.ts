@@ -179,6 +179,7 @@ describe('ClaudeAccountService', () => {
 
   it('refuses a second account for the same login and deletes its folder', async () => {
     const f = fixture()
+    f.signIn('b', 'b@example.test')
     const begun = await f.service.beginSignIn({ runtime: 'host' })
     f.signIn(begun.accountId, 'B@example.test')
     await expect(f.service.finishSignIn(begun)).rejects.toThrow('already added')
@@ -188,10 +189,47 @@ describe('ClaudeAccountService', () => {
     expect(f.settings().claudeManagedAccounts).toHaveLength(2)
   })
 
+  it('replaces a signed-out entry when the same email signs in again, keeping its folder', async () => {
+    const f = fixture()
+    const begun = await f.service.beginSignIn({ runtime: 'host' })
+    f.signIn(begun.accountId, 'B@example.test')
+    const state = await f.service.finishSignIn(begun)
+    expect(state.accounts.map((row) => row.id).sort()).toEqual(['a', begun.accountId].sort())
+    expect(f.settings().claudeManagedAccounts.map((entry) => entry.id)).not.toContain('b')
+    expect(f.runtimeAuth.removeAccountFolder).not.toHaveBeenCalledWith('b', expect.anything())
+  })
+
+  it('still refuses when the signed-out entry is the selected account', async () => {
+    const f = fixture()
+    f.signIn('a', 'a@example.test')
+    const begun = await f.service.beginSignIn({ runtime: 'host' })
+    rmSync(join(f.home('a'), '.claude.json'))
+    f.signIn(begun.accountId, 'a@example.test')
+    await expect(f.service.finishSignIn(begun)).rejects.toThrow('already added')
+  })
+
+  it('lists one entry when two saved folders hold the same login, keeping the selected one', () => {
+    const f = fixture([
+      account('a', { lastAuthenticatedAt: 1 }),
+      account('b', { lastAuthenticatedAt: 5 }),
+      account('c', { lastAuthenticatedAt: 9 })
+    ])
+    f.signIn('a', 'same@example.test', 'org')
+    f.signIn('b', 'shared@example.test', 'org')
+    f.signIn('c', 'Shared@example.test', 'org')
+    const ids = f.service.listAccounts().accounts.map((row) => row.id)
+    expect(ids.sort()).toEqual(['a', 'c'])
+    expect(f.settings().claudeManagedAccounts.map((entry) => entry.id)).toEqual(['a', 'c'])
+    expect(existsSync(f.home('b'))).toBe(true)
+
+    f.signIn('a', 'shared@example.test', 'org')
+    expect(f.service.listAccounts().accounts.map((row) => row.id)).toEqual(['a'])
+  })
+
   it.each([
     { email: 'new@example.test', organizationUuid: 'new-org', duplicate: false },
-    { email: 'imported@example.test', organizationUuid: 'saved-org', duplicate: true },
-    { email: 'current@example.test', organizationUuid: 'current-org', duplicate: true }
+    { email: 'imported@example.test', organizationUuid: 'saved-org', duplicate: 'replaced' },
+    { email: 'current@example.test', organizationUuid: 'current-org', duplicate: 'refused' }
   ])(
     'finishes sign-in for $email despite an invalid imported account ID',
     async ({ email, organizationUuid, duplicate }) => {
@@ -224,10 +262,16 @@ describe('ClaudeAccountService', () => {
 
       const begun = await f.service.beginSignIn({ runtime: 'host' })
       f.signIn(begun.accountId, email, organizationUuid)
-      if (duplicate) {
+      if (duplicate === 'refused') {
         await expect(f.service.finishSignIn(begun)).rejects.toThrow('already added')
         expect(existsSync(f.home(begun.accountId))).toBe(false)
         expect(f.settings().claudeManagedAccounts).toEqual([imported, account('a')])
+      } else if (duplicate === 'replaced') {
+        await f.service.finishSignIn(begun)
+        expect(f.settings().claudeManagedAccounts.map((entry) => entry.id)).toEqual([
+          'a',
+          begun.accountId
+        ])
       } else {
         await expect(f.service.finishSignIn(begun)).resolves.toMatchObject({
           accounts: expect.arrayContaining([
@@ -455,6 +499,7 @@ describe('ClaudeAccountService', () => {
 
   it('refuses a hidden login to an already added account and deletes its folder', async () => {
     const f = fixture()
+    f.signIn('b', 'b@example.test')
     f.runLogin.mockImplementationOnce(async () => {
       f.signIn(newId(f), 'B@example.test')
       return ''

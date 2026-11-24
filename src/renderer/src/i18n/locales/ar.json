@@ -22966,6 +22966,8 @@
         "reasonNoSession": "لا يمكن الاستئناف",
         "notMovedOne": "لم يتم نقل جلسة أخرى واحدة.",
         "notMovedOther": "لم يتم نقل {{count}} جلسات أخرى.",
+        "notMovedNamesMore": "{{names}} و{{count}} أخرى",
+        "moveAll": "نقل الكل",
         "review": "مراجعة",
         "restartCount_zero": "إعادة تشغيل {{count}} من الجلسات",
         "restartCount_one": "إعادة تشغيل {{count}} جلسة",

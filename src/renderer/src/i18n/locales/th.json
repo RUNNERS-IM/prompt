@@ -21131,6 +21131,8 @@
         "reasonNoSession": "ทำต่อไม่ได้",
         "notMovedOne": "session อื่นอีก 1 รายการไม่ได้ถูกย้าย",
         "notMovedOther": "session อื่นอีก {{count}} รายการไม่ได้ถูกย้าย",
+        "notMovedNamesMore": "{{names}} และอีก {{count}} รายการ",
+        "moveAll": "ย้ายทั้งหมด",
         "review": "รีวิว",
         "restartCount_other": "รีสตาร์ท {{count}} session",
         "reviewBody_other": "Claude session อื่นอีก {{count}} session ไม่ได้ถูกย้ายไปยัง {{next}}",

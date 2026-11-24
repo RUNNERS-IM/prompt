@@ -22232,6 +22232,8 @@
         "reasonNoSession": "Nie można wznowić",
         "notMovedOne": "1 inna sesja nie została przeniesiona.",
         "notMovedOther": "Liczba innych sesji, które nie zostały przeniesione: {{count}}.",
+        "notMovedNamesMore": "{{names}} i {{count}} więcej",
+        "moveAll": "Przenieś wszystkie",
         "review": "Review",
         "restartCount_one": "Uruchom ponownie {{count}} sesję",
         "restartCount_few": "Uruchom ponownie {{count}} sesje",

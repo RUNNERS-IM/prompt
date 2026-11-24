@@ -1,13 +1,18 @@
-import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
 import type { CodexAccountSelectionTarget } from '../../../shared/codex-selection-lane'
 import type { ClaudeAccountSwitchRunningSessions } from '../../../shared/claude-account-switch-settings'
 import type { RuntimeClientTarget } from '../../../shared/runtime-client-target'
 import { getClaudeAccountLabel } from './claude-account-label'
-import { announceRestart, type RestartingPane } from './claude-account-restart-toast'
+import {
+  announceRestart,
+  warnUncheckedSessions,
+  type RestartingPane
+} from './claude-account-restart-toast'
 import { findClaudeLoginFollowers } from './claude-login-followers'
 import { setClaudeLoginUnmovedPanes } from './claude-login-unmoved-panes'
+import { fillClaudePaneSessionsFromProcesses } from './claude-running-session-fill'
+import { notMovedSessions } from './claude-switch-session-labels'
 import {
   findClaudeSessionsStoppedAtUsageLimit,
   markContinueAfterRestart
@@ -76,6 +81,7 @@ type RestartAnnouncement = {
   account: string
   others?: number
   review?: () => void
+  notMoved?: ReturnType<typeof notMovedSessions>
   /** The continue line; the window's own wording when absent. */
   continueText?: string
 }
@@ -90,7 +96,8 @@ export function queueClaudeRestartsWithContinue(
   const stoppedPtyIds = currentPanes(stopped).map((pane) => pane.ptyId)
   markContinueAfterRestart(stoppedPtyIds, announce.continueText)
   queueClaudeRestarts(panes.map((pane) => pane.ptyId))
-  announceRestart(panes, announce.account, announce.others ?? 0, announce.review)
+  const { account, others = 0, review, notMoved } = announce
+  announceRestart(panes, account, others, review, notMoved)
 }
 
 /** Why now: a reattach can rebind a pane while the dialog is open, and a closed pane has none. */
@@ -163,6 +170,8 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
   if (readPolicy() === 'keep') {
     return 'show-confirmation'
   }
+  // Why first: a pane with no hook evidence has no known folder and would be left behind.
+  await fillClaudePaneSessionsFromProcesses()
   let uncheckedCount = 0
   let unmoved: ClaudeSessionMoveCandidate[] = []
   const found = await findClaudeSwitchSessions({
@@ -241,6 +250,14 @@ export async function handleRunningClaudeSessionsAfterSwitch(args: {
     await restartClaudeSessions(moving, {
       account: nextAccountLabel,
       others: notMoving,
+      notMoved: notMovedSessions(
+        found.cantMove.filter((session) => !strandedStopped.includes(session)),
+        (movable) => {
+          if (generation === switchGeneration) {
+            void restartClaudeSessions(movable, { account: nextAccountLabel })
+          }
+        }
+      ),
       review: () => {
         if (generation === switchGeneration) {
           setPrompt({
@@ -341,22 +358,6 @@ export async function handleRunningClaudeSessionsAfterLogin(args: {
 }
 
 /** Why a toast: these sessions keep the previous account, and only a manual restart moves them. */
-function warnUncheckedSessions(count: number, previous: string): void {
-  toast.warning(
-    count === 1
-      ? translate(
-          'accounts.claude.switchSessions.uncheckedOne',
-          "Couldn't check 1 terminal for Claude. If Claude is running there, it stays on {{previous}} until restarted.",
-          { previous }
-        )
-      : translate(
-          'accounts.claude.switchSessions.uncheckedOther',
-          "Couldn't check {{count}} terminals for Claude. Any Claude running there stays on {{previous}} until restarted.",
-          { count, previous }
-        )
-  )
-}
-
 function readPolicy(): ClaudeAccountSwitchRunningSessions {
   return useAppStore.getState().settings?.claudeAccountSwitchRunningSessions ?? 'ask'
 }

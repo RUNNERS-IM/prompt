@@ -21550,6 +21550,8 @@
         "reasonNoSession": "再開できません",
         "notMovedOne": "他の 1 件のセッションは移動されませんでした。",
         "notMovedOther": "他の {{count}} 件のセッションは移動されませんでした。",
+        "notMovedNamesMore": "{{names}} ほか {{count}} 件",
+        "moveAll": "すべて移動",
         "review": "確認",
         "uncheckedOne": "1 つのターミナルで Claude を確認できませんでした。そこで Claude が実行中の場合、再起動するまで {{previous}} のままになります。",
         "uncheckedOther": "{{count}} 個のターミナルで Claude を確認できませんでした。そこで実行中の Claude は、再起動するまで {{previous}} のままになります。",

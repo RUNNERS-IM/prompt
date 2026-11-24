@@ -6,7 +6,6 @@ import { formatAgentTypeLabel } from '@/lib/agent-status'
 import type { ClaudeAccountSwitchPromptSessions } from '@/lib/claude-account-switch-sessions'
 import {
   isClaudePaneMidTurn,
-  type ClaudeSessionCantMoveReason,
   type ClaudeSessionMoveCandidate
 } from '@/lib/claude-session-account-move'
 import {
@@ -21,6 +20,7 @@ import {
   toggleResumeSelection
 } from './native-chat-resume-on-restart-grouping'
 import { moveInTree } from './native-chat-resume-tree-keys'
+import { cantMoveReasonLabel } from '@/lib/claude-switch-session-labels'
 
 type SessionRowData = ClaudeSessionMoveCandidate & { reason?: string }
 
@@ -149,22 +149,6 @@ function sessionGroups(
     }
   ]
   return groups.filter((group) => group.sessions.length > 0)
-}
-
-function cantMoveReasonLabel(reason: ClaudeSessionCantMoveReason): string {
-  switch (reason) {
-    case 'wsl-terminal':
-      return translate('accounts.claude.switchSessions.reasonWsl', 'WSL terminal')
-    case 'own-folder':
-      return translate(
-        'accounts.claude.switchSessions.reasonOwnFolder',
-        'Uses your own Claude folder'
-      )
-    case 'unknown-account':
-      return translate('accounts.claude.switchSessions.reasonUnknownAccount', 'Account unknown')
-    case 'no-session':
-      return translate('accounts.claude.switchSessions.reasonNoSession', "Can't resume")
-  }
 }
 
 function groupByWorkspace(sessions: readonly SessionRowData[]): [string, SessionRowData[]][] {

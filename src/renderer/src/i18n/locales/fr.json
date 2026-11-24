@@ -22221,6 +22221,8 @@
         "reasonNoSession": "Reprise impossible",
         "notMovedOne": "1 autre session n'a pas été déplacée.",
         "notMovedOther": "{{count}} autres sessions n'ont pas été déplacées.",
+        "notMovedNamesMore": "{{names}} et {{count}} autres",
+        "moveAll": "Tout déplacer",
         "review": "Vérifier",
         "uncheckedOne": "Impossible de vérifier la présence de Claude dans 1 terminal. Si Claude y est en cours d’exécution, il reste sur {{previous}} jusqu’à son redémarrage.",
         "uncheckedOther": "Impossible de vérifier la présence de Claude dans {{count}} terminaux. Toute instance de Claude qui y tourne reste sur {{previous}} jusqu’à son redémarrage.",

@@ -22748,6 +22748,8 @@
         "reasonNoSession": "Нельзя продолжить",
         "notMovedOne": "Ещё одна сессия не перенесена.",
         "notMovedOther": "Другие сессии не перенесены: {{count}}.",
+        "notMovedNamesMore": "{{names}} и ещё {{count}}",
+        "moveAll": "Перенести все",
         "review": "Проверить",
         "restartCount_one": "Перезапустить {{count}} сессию",
         "restartCount_few": "Перезапустить {{count}} сессии",

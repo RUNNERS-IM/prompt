@@ -97,22 +97,28 @@ export class ClaudeAccountRegistration {
       managedAuthRuntime: target.runtime ?? 'host',
       wslDistro: target.runtime === 'wsl' ? (target.wslDistro ?? null) : null
     } as const
-    if (
-      !saved &&
-      // Compare current folder logins; saved identities may be stale.
-      findDuplicateClaudeAccount(selection.list().accounts, {
-        email: login.email,
-        organizationUuid: login.organizationUuid,
-        ...scope
-      })
-    ) {
+    // Compare current folder logins; saved identities may be stale.
+    const duplicate = saved
+      ? null
+      : findDuplicateClaudeAccount(selection.list().accounts, {
+          email: login.email,
+          organizationUuid: login.organizationUuid,
+          ...scope
+        })
+    // Why replace a signed-out one: signing the same email in again is how users fix it, and
+    // refusing left the old entry beside the new folder, so the account showed twice.
+    const replaced =
+      duplicate?.needsSignIn && !isSelectedAnywhere(store.getSettings(), duplicate.id)
+        ? duplicate.id
+        : null
+    if (duplicate && !replaced) {
       await runtimeAuth.removeAccountFolder(signIn.accountId, target)
       throw new Error('This Claude account is already added.')
     }
     const now = Date.now()
     selection.saveSettings({
       claudeManagedAccounts: [
-        ...accounts.filter((entry) => entry.id !== signIn.accountId),
+        ...accounts.filter((entry) => entry.id !== signIn.accountId && entry.id !== replaced),
         {
           id: signIn.accountId,
           email: login.email,
@@ -134,6 +140,20 @@ export class ClaudeAccountRegistration {
     selection.refreshUsage(undefined, target)
     return selection.list()
   }
+}
+
+function isSelectedAnywhere(
+  settings: ReturnType<ClaudeAccountStore['getSettings']>,
+  accountId: string
+): boolean {
+  return (
+    settings.activeClaudeManagedAccountId === accountId ||
+    Object.values(settings.activeClaudeManagedAccountIdsByRuntime ?? {}).some((value) =>
+      typeof value === 'object' && value !== null
+        ? Object.values(value).includes(accountId)
+        : value === accountId
+    )
+  )
 }
 
 function signInTarget(request: ClaudeAccountSelectionTarget): ClaudeAccountSelectionTarget {
