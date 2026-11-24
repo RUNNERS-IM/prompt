@@ -2,6 +2,7 @@ import type {
   ClaudeRateLimitAccountsState,
   CodexRateLimitAccountsState
 } from '../../shared/managed-account-types'
+import type { ClaudeRunningSessionEvidence } from '../../shared/claude-running-session-evidence'
 import type { CodexConfigSyncStatus } from '../../shared/codex-config-sync-types'
 import type { CursorAccountStatus, GrokAccountStatus } from '../../shared/rate-limit-types'
 import type { ZcodePlanCredentialsStatus } from '../../shared/zcode-plan-sites'
@@ -43,6 +44,8 @@ export type CodexAccountsApi = {
 
 export type ClaudeAccountsApi = {
   list: () => Promise<ClaudeRateLimitAccountsState>
+  /** Each running Claude's pane, config folder and session, read from the host's processes. */
+  probeRunningSessions: () => Promise<ClaudeRunningSessionEvidence[]>
   add: (args?: {
     runtime?: 'host' | 'wsl'
     wslDistro?: string | null

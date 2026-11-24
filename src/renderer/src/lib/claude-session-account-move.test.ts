@@ -350,6 +350,20 @@ describe('resolveClaudePaneFolder', () => {
       )
     ).toEqual({ kind: 'account', accountId: 'acct-w' })
   })
+
+  it("counts a Prompt account folder no longer saved as that account, not the user's own", () => {
+    const host = { accounts: [], systemDefaultHome: SYSTEM_FOLDER }
+    expect(
+      resolveClaudePaneFolder(
+        '/Users/me/Library/Application Support/Prompt/claude-profiles/bbee418c/home/projects/-r/s.jsonl',
+        accounts,
+        host
+      )
+    ).toEqual({ kind: 'account', accountId: 'bbee418c' })
+    expect(
+      resolveClaudePaneFolder('/Users/me/my-claude/projects/-r/s.jsonl', accounts, host)
+    ).toEqual({ kind: 'own-folder' })
+  })
 })
 
 describe('isClaudePaneMidTurn', () => {
