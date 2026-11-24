@@ -161,7 +161,8 @@ export function TerminalPane({
                 label: translate(
                   'auto.components.settings.TerminalPane.dd3f4c35da',
                   'System shell ({{value0}})',
-                  { value0: systemShell }
+                  // Why: in Arabic the path's slashes and the brackets flipped to "(bin/zsh/)"; an LTR isolate keeps the path whole.
+                  { value0: `\u2066${systemShell}\u2069` }
                 )
               },
               {
