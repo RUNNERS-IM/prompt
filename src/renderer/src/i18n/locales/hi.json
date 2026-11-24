@@ -21498,6 +21498,8 @@
         "reasonNoSession": "फिर से शुरू नहीं हो सकता",
         "notMovedOne": "1 अन्य सत्र स्थानांतरित नहीं हुआ।",
         "notMovedOther": "{{count}} अन्य सत्र स्थानांतरित नहीं हुए।",
+        "notMovedNamesMore": "{{names}} और {{count}} अन्य",
+        "moveAll": "सभी ले जाएँ",
         "review": "Review",
         "restartCount_one": "{{count}} सत्र रीस्टार्ट करें",
         "restartCount_other": "{{count}} सत्र रीस्टार्ट करें",

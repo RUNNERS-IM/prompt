@@ -22,7 +22,19 @@ type Extra = {
   description?: string
   classNames?: typeof INLINE_ACTION_CLASS_NAMES
   action?: { label: string; onClick: () => void }
+  cancel?: { label: string; onClick: () => void }
 }
+
+/** The sessions the switch left behind, by name and reason, and how to move the ones it can. */
+export type NotMovedSessions = {
+  /** "name (reason)" for each, in list order. */
+  lines: readonly string[]
+  /** Restarts those a restart can move; absent when none can. */
+  moveAll?: () => void
+}
+
+// 알림에 이름을 몇 개까지 적을지. 나머지는 「외 N개」로 줄이고 검토 창에서 모두 본다.
+const NOT_MOVED_NAMES_SHOWN = 3
 
 type Batch = {
   panes: RestartingPane[]
@@ -36,24 +48,54 @@ type Batch = {
 
 let batch: Batch | null = null
 
-function notMovedExtra(others: number, review: (() => void) | undefined): Extra {
+function notMovedNames(lines: readonly string[]): string {
+  const shown = lines.slice(0, NOT_MOVED_NAMES_SHOWN).join(', ')
+  const rest = lines.length - NOT_MOVED_NAMES_SHOWN
+  return rest > 0
+    ? translate(
+        'accounts.claude.switchSessions.notMovedNamesMore',
+        '{{names}} and {{count}} more',
+        {
+          names: shown,
+          count: rest
+        }
+      )
+    : shown
+}
+
+function notMovedExtra(
+  others: number,
+  review: (() => void) | undefined,
+  notMoved?: NotMovedSessions
+): Extra {
   if (others === 0 || !review) {
     return {}
   }
+  const reviewButton = {
+    label: translate('accounts.claude.switchSessions.review', 'Review'),
+    onClick: review
+  }
+  const summary =
+    others === 1
+      ? translate('accounts.claude.switchSessions.notMovedOne', "1 other session wasn't moved.")
+      : translate(
+          'accounts.claude.switchSessions.notMovedOther',
+          "{{count}} other sessions weren't moved.",
+          { count: others }
+        )
+  const names = notMoved && notMoved.lines.length > 0 ? notMovedNames(notMoved.lines) : ''
   return {
-    description:
-      others === 1
-        ? translate('accounts.claude.switchSessions.notMovedOne', "1 other session wasn't moved.")
-        : translate(
-            'accounts.claude.switchSessions.notMovedOther',
-            "{{count}} other sessions weren't moved.",
-            { count: others }
-          ),
+    description: names ? `${summary} ${names}` : summary,
     classNames: INLINE_ACTION_CLASS_NAMES,
-    action: {
-      label: translate('accounts.claude.switchSessions.review', 'Review'),
-      onClick: review
-    }
+    ...(notMoved?.moveAll
+      ? {
+          action: {
+            label: translate('accounts.claude.switchSessions.moveAll', 'Move all'),
+            onClick: notMoved.moveAll
+          },
+          cancel: reviewButton
+        }
+      : { action: reviewButton })
   }
 }
 
@@ -154,7 +196,8 @@ export function announceRestart(
   panes: readonly RestartingPane[],
   account: string,
   others: number,
-  review: (() => void) | undefined
+  review: (() => void) | undefined,
+  notMoved?: NotMovedSessions
 ): void {
   if (panes.length === 0) {
     return
@@ -166,7 +209,7 @@ export function announceRestart(
     batch.allRunAt = null
     batch.deadline = Date.now() + RESTART_SETTLE_MS
     if (others > 0) {
-      batch.extra = notMovedExtra(others, review)
+      batch.extra = notMovedExtra(others, review, notMoved)
     }
     showProgress(batch)
     return
@@ -179,7 +222,7 @@ export function announceRestart(
   batch = {
     panes: [...panes],
     account,
-    extra: notMovedExtra(others, review),
+    extra: notMovedExtra(others, review, notMoved),
     startedAt: now,
     deadline: now + RESTART_SETTLE_MS,
     allRunAt: null,
@@ -190,6 +233,23 @@ export function announceRestart(
     }
   }
   showProgress(batch)
+}
+
+/** Terminals whose foreground could not be read, so a Claude there may still be on the old account. */
+export function warnUncheckedSessions(count: number, previous: string): void {
+  toast.warning(
+    count === 1
+      ? translate(
+          'accounts.claude.switchSessions.uncheckedOne',
+          "Couldn't check 1 terminal for Claude. If Claude is running there, it stays on {{previous}} until restarted.",
+          { previous }
+        )
+      : translate(
+          'accounts.claude.switchSessions.uncheckedOther',
+          "Couldn't check {{count}} terminals for Claude. Any Claude running there stays on {{previous}} until restarted.",
+          { count, previous }
+        )
+  )
 }
 
 export function resetClaudeAccountRestartToastForTests(): void {

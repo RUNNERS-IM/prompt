@@ -21865,6 +21865,8 @@
         "reasonNoSession": "Impossibile riprendere",
         "notMovedOne": "1 altra sessione non è stata spostata.",
         "notMovedOther": "{{count}} altre sessioni non sono state spostate.",
+        "notMovedNamesMore": "{{names}} e altre {{count}}",
+        "moveAll": "Sposta tutte",
         "review": "Review",
         "restartCount_one": "Riavvia {{count}} sessione",
         "restartCount_many": "Riavvia {{count}} sessioni",

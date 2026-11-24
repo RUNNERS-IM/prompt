@@ -21498,6 +21498,8 @@
         "reasonNoSession": "Kan niet worden hervat",
         "notMovedOne": "1 andere sessie is niet verplaatst.",
         "notMovedOther": "{{count}} andere sessies zijn niet verplaatst.",
+        "notMovedNamesMore": "{{names}} en nog {{count}}",
+        "moveAll": "Alles verplaatsen",
         "review": "Review",
         "restartCount_one": "{{count}} sessie opnieuw starten",
         "restartCount_other": "{{count}} sessies opnieuw starten",

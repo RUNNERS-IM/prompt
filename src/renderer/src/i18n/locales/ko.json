@@ -20839,6 +20839,8 @@
         "reasonNoSession": "재개할 수 없음",
         "notMovedOne": "다른 세션 1개는 옮겨지지 않았습니다.",
         "notMovedOther": "다른 세션 {{count}}개는 옮겨지지 않았습니다.",
+        "notMovedNamesMore": "{{names}} 외 {{count}}개",
+        "moveAll": "모두 옮기기",
         "review": "검토",
         "uncheckedOne": "터미널 1개에서 Claude 실행 여부를 확인할 수 없습니다. 그곳에서 Claude가 실행 중이면 다시 시작할 때까지 {{previous}}을(를) 계속 사용합니다.",
         "uncheckedOther": "터미널 {{count}}개에서 Claude 실행 여부를 확인할 수 없습니다. 그곳에서 실행 중인 Claude는 다시 시작할 때까지 {{previous}}을(를) 계속 사용합니다.",

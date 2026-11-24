@@ -21498,6 +21498,8 @@
         "reasonNoSession": "Ei voi jatkaa",
         "notMovedOne": "1 muuta sessiota ei siirretty.",
         "notMovedOther": "{{count}} muuta sessiota ei siirretty.",
+        "notMovedNamesMore": "{{names}} ja {{count}} muuta",
+        "moveAll": "Siirrä kaikki",
         "review": "Review",
         "restartCount_one": "Käynnistä {{count}} sessio uudelleen",
         "restartCount_other": "Käynnistä {{count}} sessiota uudelleen",

@@ -21447,6 +21447,8 @@
         "reasonNoSession": "Sürdürülemiyor",
         "notMovedOne": "Diğer 1 oturum taşınmadı.",
         "notMovedOther": "Diğer {{count}} oturum taşınmadı.",
+        "notMovedNamesMore": "{{names}} ve {{count}} tane daha",
+        "moveAll": "Tümünü taşı",
         "review": "İncele",
         "restartCount_other": "{{count}} oturumu yeniden başlat",
         "restartCount_one": "{{count}} oturumu yeniden başlat",

@@ -21498,6 +21498,8 @@
         "reasonNoSession": "Can't resume",
         "notMovedOne": "1 other session wasn't moved.",
         "notMovedOther": "{{count}} other sessions weren't moved.",
+        "notMovedNamesMore": "{{names}} and {{count}} more",
+        "moveAll": "Move all",
         "review": "Review",
         "restartCount_other": "Restart {{count}} sessions",
         "reviewBody_one": "{{count}} other Claude session wasn't moved to {{next}}.",
