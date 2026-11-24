@@ -624,17 +624,17 @@
       "ariaActiveCount_other": "필터: {{count}}개 활성."
     },
     "linearIssue": {
-      "createLabel": "Linear 문제 {{value0}}: {{value1}}에서 작업 트리 만들기",
-      "pendingLabel": "Linear 문제 {{value0}}에서 작업 트리 만들기",
+      "createLabel": "Linear 문제 {{value0}}: {{value1}}에서 워크트리 만들기",
+      "pendingLabel": "Linear 문제 {{value0}}에서 워크트리 만들기",
       "loadingLabel": "Linear 문제 로드 중 {{value0}}",
-      "createHint": "Linear 문제에서 작업 트리 만들기",
+      "createHint": "Linear 문제에서 워크트리 만들기",
       "loadingHint": "Linear 문제 로드 중…"
     },
     "renderCapOverflow": "{{value0}} 더보기",
     "seeMore": "자세히 보기",
     "taskUrl": {
       "loadingHint": "{{value0}} 로드 중…",
-      "createHint": "{{value0}}에서 작업 트리 만들기"
+      "createHint": "{{value0}}에서 워크트리 만들기"
     },
     "tasksHeader": "작업",
     "taskCreate": "작업 창 만들기",
@@ -1103,13 +1103,13 @@
             "f91fe27f2a": "큰 변경 사항을 더 작은 PR로 분할",
             "9e37a5b1b3": "독립적인 작업을 병렬로 실행",
             "bddc4c09b8": "단계별 워크플로 실행",
-            "ab0e9803b7": "다른 작업 트리로 작업 인계",
+            "ab0e9803b7": "다른 워크트리로 작업 인계",
             "5e0d489fe1": "진행 중인 작업 인계",
             "handoffSummary": "계속하려면 컨텍스트가 충분한 다른 에이전트에게 소유권을 이전하세요.",
             "worktreeHandoffSummary": "이미 다른 브랜치에서 실행 중인 에이전트로 작업을 이동합니다.",
             "childSequenceSummary": "각 단계가 직전 단계에 의존할 때 하위 에이전트를 순서대로 사용합니다.",
             "childParallelSummary": "하위 에이전트 간에 겹치지 않는 조사 또는 구현 작업을 분할합니다.",
-            "prSplitSummary": "병렬 구현을 계속 검토할 수 있도록 각 하위 에이전트에 자체 작업 트리를 제공합니다."
+            "prSplitSummary": "병렬 구현을 계속 검토할 수 있도록 각 하위 에이전트에 자체 워크트리를 제공합니다."
           }
         }
       },
@@ -1264,7 +1264,7 @@
             "attachPr": "리뷰 링크 첨부",
             "triageFollowups": "후속 조치 분류 및 생성",
             "readTicketSummary": "작업을 시작하기 전에 연결된 Linear 이슈의 전체 맥락을 확인하세요.",
-            "readTicketPrompt": "{{value0}}을 사용하여 이 작업 트리에 연결된 Linear 이슈를 읽고, 시작하기 전에 목표와 수락 기준을 요약하세요.",
+            "readTicketPrompt": "{{value0}}을 사용하여 이 워크트리에 연결된 Linear 이슈를 읽고, 시작하기 전에 목표와 수락 기준을 요약하세요.",
             "postUpdateSummary": "Linear 이슈에 진행 상황이나 완료 요약을 댓글로 남기세요.",
             "postUpdatePrompt": "{{value0}}을 사용하여 연결된 Linear 이슈에 변경 내용과 검증 방법을 포함한 완료 업데이트를 게시하세요.",
             "moveStateSummary": "작업 진행에 맞춰 Linear 워크플로 상태를 변경하세요.",
@@ -1346,7 +1346,7 @@
         "sparseCheckoutUnsupported": "프로비저닝된 루트 레시피는 스파스 체크아웃을 지원하지 않습니다."
       },
       "worktreeJumpNavigation": {
-        "filteredNotice": "이 작업 트리는 사이드바 필터에 의해 숨겨져 있습니다. 작업 창이 열렸지만 Spaces에 표시되지 않습니다."
+        "filteredNotice": "이 워크트리는 사이드바 필터에 의해 숨겨져 있습니다. 작업 창이 열렸지만 Spaces에 표시되지 않습니다."
       },
       "file": {
         "preview": {
@@ -1399,7 +1399,7 @@
         "provisioningVm": "VM 프로비저닝 중…",
         "settingUpWorkspace": "작업 창 설정 중…",
         "preparingWorkspace": "작업 창 준비 중…",
-        "creatingWorktree": "작업 트리 만드는 중…",
+        "creatingWorktree": "워크트리 만드는 중…",
         "fetchingBaseBranch": "기본 브랜치 가져오는 중…"
       },
       "duplicatePairedServers": {
@@ -1484,12 +1484,12 @@
         "0e3cf53060": "브라우저 탭 {{value0}}을(를) 찾을 수 없습니다",
         "2f6637fe6c": "브라우저 탭 {{value0}}이(가) 고정되어 있습니다",
         "a8d2bf8e9e": "닫을 활성 브라우저 탭이 없습니다.",
-        "f000b2ff76": "활성 작업 트리 없음",
+        "f000b2ff76": "활성 워크트리 없음",
         "7a64b31991": "원격 런타임이 활성화된 동안에는 로컬 terminal 생성을 사용할 수 없습니다.",
         "ef223fbb6b": "장치가 연결을 시도했지만 페어링되지 않았습니다.",
         "11992d0337": "귀하의 휴대폰이거나 다른 Orca 클라이언트인 경우 설정 → 모바일에서 다시 페어링하세요.",
         "6573cfe955": "Open Mobile Settings",
-        "unresolvedTerminalWorktreeOwner": "작업 트리 소유자를 확인할 수 없어 터미널 생성을 사용할 수 없습니다."
+        "unresolvedTerminalWorktreeOwner": "워크트리 소유자를 확인할 수 없어 터미널 생성을 사용할 수 없습니다."
       },
       "useSettingsNavigationMetadata": {
         "4a728cd56b": "아직 구체화되고 있는 새로운 기능입니다. 한번 시도해 보세요.",
@@ -2120,7 +2120,7 @@
         "connectProject": "{{name}} 연결"
       },
       "NewWorkspaceComposerModal": {
-        "createWorktree": "작업 트리 만들기",
+        "createWorktree": "워크트리 만들기",
         "createWorkspace": "작업 창 만들기"
       },
       "PullRequestConfirmation": {
@@ -2738,9 +2738,9 @@
         "4ee378034d": "다음으로 이동...",
         "f7fda8d562": "워크트리를 만들거나 Orca에서 탭을 열어 시작하세요.",
         "1628fd7dfa": "활성 워크트리, 설정, 작업 또는 열린 탭이 없습니다.",
-        "b781ae05e3": "작업 트리, 설정, 탭 및 작업을 검색하려면 입력하세요.",
+        "b781ae05e3": "워크트리, 설정, 탭 및 작업을 검색하려면 입력하세요.",
         "f60f8730be": "전환할 다른 워크트리가 없습니다.",
-        "c4afa68159": "작업 트리, 프로젝트, 설정, 작업, 탭 제목, agent 프롬프트, URL, PR 또는 포트를 입력해 보세요.",
+        "c4afa68159": "워크트리, 프로젝트, 설정, 작업, 탭 제목, agent 프롬프트, URL, PR 또는 포트를 입력해 보세요.",
         "dbd9d87eec": "검색어와 일치하는 결과가 없습니다.",
         "2c38630a01": "작업 창이 더 이상 존재하지 않습니다.",
         "7726ce9970": "모바일 에뮬레이터 탭이 더 이상 존재하지 않습니다.",
@@ -3191,10 +3191,10 @@
           "WorktreeCreationPanel": {
             "dabd226118": "닫기",
             "34dd5ee38b": "다시 시도",
-            "ed2a664f8b": "작업 트리를 만들 수 없습니다.",
-            "a3346fc6ed": "작업 트리 생성 취소",
+            "ed2a664f8b": "워크트리를 만들 수 없습니다.",
+            "a3346fc6ed": "워크트리 생성 취소",
             "532aea14ce": "취소",
-            "767951265d": "작업 트리를 만드는 중에 문제가 발생했습니다.",
+            "767951265d": "워크트리를 만드는 중에 문제가 발생했습니다.",
             "vmProvisioningTitle": "VM 프로비저닝",
             "cancelProvisioning": "취소",
             "vmProvisioningLogEmpty": "레시피 출력을 기다리는 중…"
@@ -3528,7 +3528,7 @@
                   "2317900211": "포크 컨텍스트를 복사하지 못했습니다.",
                   "88e34d00eb": "새 작업 창에서 열린 최상위 세션 포크",
                   "fd3d12a1e1": "포크 작업 창을 생성하지 못했습니다.",
-                  "38e41edc6e": "이 작업 창은 git 작업 트리로 포크할 수 없습니다.",
+                  "38e41edc6e": "이 작업 창은 git 워크트리로 포크할 수 없습니다.",
                   "f867385bb5": "이 포크의 소스 작업 창을 찾을 수 없습니다.",
                   "046e8d853c": "포크할 terminal 컨텍스트가 없습니다.",
                   "c00421d320": "포크 컨텍스트가 복사되었습니다. agent를 실행하고 붙여넣어 포크를 시작합니다.",
@@ -3541,7 +3541,7 @@
             "drop": {
               "handler": {
                 "0c77693641": "Worktree가 준비되지 않았습니다. 잠시 후에 다시 시도하세요.",
-                "ce8248b835": "작업 트리 경로를 사용할 수 없습니다.",
+                "ce8248b835": "워크트리 경로를 사용할 수 없습니다.",
                 "internalTooManyPaths": "터미널에 안전하게 붙여넣기에는 드롭된 경로가 너무 많습니다.",
                 "internalPathsTooLarge": "터미널에 안전하게 붙여넣기에는 경로 목록이 너무 큽니다.",
                 "internalHostMismatch": "이 터미널과 같은 호스트의 파일을 드롭하세요.",
@@ -4058,7 +4058,7 @@
             "d450654fa2": "Claude 계정",
             "11e2354daf": "Claude 사용 런타임",
             "3dd7ddfae1": "Claude 세부정보 및 계정 전환 도구 열기",
-            "59c6e7b4e0": "보이는 세션은 지금 다시 시작됩니다. 나머지는 해당 작업 트리가 활성화될 때 다시 시작됩니다.",
+            "59c6e7b4e0": "보이는 세션은 지금 다시 시작됩니다. 나머지는 해당 워크트리가 활성화될 때 다시 시작됩니다.",
             "c676918adc": "시스템 기본값",
             "3325d996cb": "rate-limit 새로고침",
             "cd9d7b40ff": "{{value0}} 세션 다시 시작",
@@ -4195,7 +4195,7 @@
             "status": {
               "popover": {
                 "rows": {
-                  "a49ea79246": "작업 트리로 이동",
+                  "a49ea79246": "워크트리로 이동",
                   "f2b813345f": "작업 창을 사용할 수 없음",
                   "0e72c8d9fb": "프로세스 중지",
                   "536d48a5dc": "{{value0}} 복사",
@@ -4532,7 +4532,7 @@
           "6afacbee37": "Claude 사용량 추적",
           "0cb1a36d7d": "토큰, 모델 및 세션 통계를 표시하기 위해 로컬 Claude 사용 로그를 읽습니다.",
           "5ce4842c2c": "모든 로컬 Claude 사용",
-          "4f8368c272": "Orca 작업 트리만 해당",
+          "4f8368c272": "Orca 워크트리만 해당",
           "cfe2282ffa": "알 수 없음",
           "7765a4c3e1": "해당 없음",
           "2d41fd45c6": "• 마지막 스캔 오류: {{value0}}",
@@ -4582,7 +4582,7 @@
           "408210470c": "Codex 사용 추적",
           "13badcd8f2": "토큰, 모델 및 세션 통계를 표시하기 위해 로컬 Codex 사용 로그를 읽습니다.",
           "4fe8820098": "모든 로컬 Codex 사용",
-          "201766b754": "Orca 작업 트리만 해당",
+          "201766b754": "Orca 워크트리만 해당",
           "bf6cf2d4dd": "알 수 없음",
           "8a6655f7a2": "• 마지막 스캔 오류: {{value0}}",
           "rangeLast7Days": "최근 7일",
@@ -4623,7 +4623,7 @@
           "bea80ceae0": "OpenCode 사용 추적",
           "b8b3522436": "토큰, 모델 및 세션 통계를 표시하기 위해 로컬 OpenCode 사용 로그를 읽습니다.",
           "144a6050e9": "모든 로컬 OpenCode 사용",
-          "e04c58327c": "Orca 작업 트리만 해당",
+          "e04c58327c": "Orca 워크트리만 해당",
           "362231082f": "알 수 없음",
           "6cc7782458": "• 마지막 스캔 오류: {{value0}}",
           "rangeLast7Days": "최근 7일",
@@ -5017,8 +5017,8 @@
         "SkillInstallTargetFields": {
           "8e6a972229": "이 머신에는 알려진 작업 창이 없습니다.",
           "7a366323e7": "폴더",
-          "d628c416a2": "Git 작업 트리",
-          "5845cfe543": "작업 트리 또는 폴더 선택",
+          "d628c416a2": "Git 워크트리",
+          "5845cfe543": "워크트리 또는 폴더 선택",
           "0e5b43a9e3": "작업 창",
           "0c10a406fb": "WSL ·",
           "e5b0d15e64": "호스트 운영 체제",
@@ -5540,7 +5540,7 @@
           "ff1e819a11": "설정 스크립트 추가",
           "70715947fb": "설정 스크립트는 비워둘 수 없습니다.",
           "888b83bf78": "설정 스크립트를 저장하지 못했습니다.",
-          "a49196d538": "Orca가 새 작업 트리를 생성할 때 실행됩니다.",
+          "a49196d538": "Orca가 새 워크트리를 생성할 때 실행됩니다.",
           "savedSetupCommand": "설정 명령을 저장했습니다.",
           "savedWithSkippedFields_one": "지원되지 않는 필드 {{count}}개를 건너뛰었습니다. 설정 명령을 저장했습니다.",
           "savedWithSkippedFields_other": "지원되지 않는 필드 {{count}}개를 건너뛰었습니다. 설정 명령을 저장했습니다.",
@@ -5551,8 +5551,8 @@
           "3933401d28": "구성",
           "31b8b01a45": "설정",
           "4a98f907ae": "다시 시도",
-          "0a98169776": "Orca가 새 작업 트리를 생성할 때 실행할 설정 명령을 추가합니다.",
-          "aef6c0a213": "Orca가 작업 트리를 생성할 때마다 실행되도록 감지된 명령을 저장합니다.",
+          "0a98169776": "Orca가 새 워크트리를 생성할 때 실행할 설정 명령을 추가합니다.",
+          "aef6c0a213": "Orca가 워크트리를 생성할 때마다 실행되도록 감지된 명령을 저장합니다.",
           "0155fb9ed3": "지금은 이 repo의 설정 스크립트를 확인할 수 없습니다.",
           "eefa756190": "수동으로 구성",
           "ca4efcbc25": "저장",
@@ -5614,7 +5614,7 @@
         },
         "SidebarNav": {
           "80611a8b10": "검색",
-          "0c3395fd32": "작업 트리 및 브라우저 탭 검색",
+          "0c3395fd32": "워크트리 및 브라우저 탭 검색",
           "c86d83b5c3": "신규",
           "1b5c41caee": "Orca 모바일",
           "f323383e9a": "자동화",
@@ -5787,7 +5787,7 @@
           "35ccfe2475": "프로젝트 {{value0}}",
           "57eaa61b55": "하위 작업 창 숨기기",
           "8cb634cda6": "하위 작업 창 표시",
-          "0d224eff10": "기본 작업 트리",
+          "0d224eff10": "기본 워크트리",
           "runtimeHostDisconnected": "서버 연결 끊김",
           "runtimeHostDisconnectedNamed": "{{hostName}} 연결 끊김",
           "runtimeHostProject": "Orca 서버의 프로젝트",
@@ -5883,8 +5883,8 @@
           "changeParentWorkspace": "상위 워크트리 변경...",
           "setParentWorkspace": "상위 워크트리 설정...",
           "workspaceSection": "작업 창",
-          "primaryDeleteDisabled": "기본 작업 트리는 삭제할 수 없습니다. 대신 프로젝트를 제거하세요.",
-          "deleteWorktree": "작업 트리 삭제",
+          "primaryDeleteDisabled": "기본 워크트리는 삭제할 수 없습니다. 대신 프로젝트를 제거하세요.",
+          "deleteWorktree": "워크트리 삭제",
           "sleepWithDescendants": "하위 항목도 패널 닫기 ({{value0}})",
           "sleepWithDescendantsDescription": "이 작업 창과 모든 하위 작업 창의 활성 패널을 닫아 메모리와 CPU 사용량을 줄입니다.",
           "deleteWithDescendants": "하위 항목과 함께 삭제…"
@@ -5928,7 +5928,7 @@
         },
         "WorktreeMetaDialog": {
           "3db0a2a593": "취소",
-          "030d484fc0": "이 작업 트리에 대한 참고 사항...",
+          "030d484fc0": "이 워크트리에 대한 참고 사항...",
           "7f21e0464f": "맞춤 표시 이름...",
           "ad5e4e514f": "표시 이름",
           "2174f17011": "저장",
@@ -6088,7 +6088,7 @@
           "header": {
             "create": {
               "state": {
-                "992cfbc44b": "{{value0}}에 대한 새 작업 트리 만들기",
+                "992cfbc44b": "{{value0}}에 대한 새 워크트리 만들기",
                 "3a70acd808": "{{value0}}에 대한 작업 창을 만들기 전에 SSH 대상을 다시 연결하세요.",
                 "6d022563a8": "작업 창을 만들기 전에 SSH 대상을 다시 연결하세요.",
                 "62e71f2d5d": "{{value0}}에 대한 작업 창 만들기"
@@ -6454,7 +6454,7 @@
           "cancel": "취소",
           "forget": "Orca에서 제거",
           "removeTitle": "Orca에서 “{{name}}”을(를) 제거할까요?",
-          "savedHostBody": "이 작업 창의 프로젝트는 {{host}}의 Orca 서버가 관리하지 않아서 Orca가 그곳에서 삭제할 수 없습니다. Orca에서 제거만 할 수 있으며, {{host}}의 파일, Git 작업 트리, 브랜치는 그대로 남습니다."
+          "savedHostBody": "이 작업 창의 프로젝트는 {{host}}의 Orca 서버가 관리하지 않아서 Orca가 그곳에서 삭제할 수 없습니다. Orca에서 제거만 할 수 있으며, {{host}}의 파일, Git 워크트리, 브랜치는 그대로 남습니다."
         },
         "MarkdownImageLightbox": {
           "image": "Image",
@@ -6528,9 +6528,9 @@
           "jumpToTop": "맨 위로 이동"
         },
         "RepoScanUnavailableIndicator": {
-          "title": "{{value0}}에 대한 작업 트리 스캔에 실패했습니다.",
+          "title": "{{value0}}에 대한 워크트리 스캔에 실패했습니다.",
           "retry": "스캔 재시도",
-          "retained": "기존 작업 트리는 스캔이 성공할 때까지 유지됩니다. 다시 시도하려면 경고 아이콘을 클릭하세요.",
+          "retained": "기존 워크트리는 스캔이 성공할 때까지 유지됩니다. 다시 시도하려면 경고 아이콘을 클릭하세요.",
           "xcodeLicense": "Apple 개발자 도구를 사용하려면 Git을 실행하기 전에 라이선스 동의가 필요합니다.",
           "developerTools": "Apple 명령줄 개발자 도구가 없거나 사용할 수 없습니다.",
           "architectureMismatch": "CPU 아키텍처가 이 실행 호스트와 호환되지 않기 때문에 Git 관련 실행 파일을 실행할 수 없습니다. 호스트 아키텍처용 Git 및 관련 도구를 설치합니다.",
@@ -7018,7 +7018,7 @@
           "e784ea62dc": "고급",
           "d9b65054ef": ") 작업을 요약하는 짧은 이름으로 변경됩니다. Orca가 직접 이름 붙인 브랜치만 이름을 바꾸며, 푸시된 후에는 이름을 바꾸지 않습니다.",
           "12ea4a408d": "에이전트가 새 작업 창에서 작업을 시작하면 Orca가 자동으로 만든 브랜치 이름을 바꿉니다(예:",
-          "ef787db0e3": "브랜치 및 작업 트리 자동 이름 바꾸기",
+          "ef787db0e3": "브랜치 및 워크트리 자동 이름 바꾸기",
           "6a051586d2": "에이전트가 시작되면 자동으로 만든 브랜치 이름을 작업 내용에 맞게 바꿉니다.",
           "ec3e0c388e": "저장",
           "cfd82406dd": "저장 중...",
@@ -7486,8 +7486,8 @@
           "0e9fc0eadc": "작업 창 디렉터리",
           "e2955d9ccb": "새 작업 창을 만들 위치를 설정합니다.",
           "7511097c5d": "작업 창",
-          "externalWorktrees": "외부 작업 트리",
-          "externalWorktreesDescription": "이 호스트에서 Orca 외부에서 만든 작업 트리 중 기본적으로 표시할 항목을 선택합니다.",
+          "externalWorktrees": "외부 워크트리",
+          "externalWorktreesDescription": "이 호스트에서 Orca 외부에서 만든 워크트리 중 기본적으로 표시할 항목을 선택합니다.",
           "31e300af1c": "아티팩트를 삭제하기 전에 확인",
           "fb29a73a17": "공유 아티팩트를 삭제하고 공개 링크를 끊기 전에 확인 대화상자를 표시합니다.",
           "bf46474e33": "공유 아티팩트를 삭제하기 전에 확인창을 표시합니다. 삭제하면 공개 링크가 있는 사람도 더 이상 접근할 수 없습니다."
@@ -7526,7 +7526,7 @@
           "2cde9044a8": "graphql",
           "1ec5c91e1d": "브랜치 이름에 Git 사용자 이름, 사용자 지정 접두사 또는 접두사 없음을 사용할지 선택합니다.",
           "330f584b50": "브랜치 접두사",
-          "1ffaadf0a0": "작업 트리를 생성할 때 브랜치 이름에 접두사가 추가됩니다.",
+          "1ffaadf0a0": "워크트리를 생성할 때 브랜치 이름에 접두사가 추가됩니다.",
           "813e15b346": "custom",
           "2351aa5a31": "Git 사용자 이름",
           "cc63fce906": "브랜치 이름 지정",
@@ -7540,7 +7540,7 @@
           "changesFirst": "변경 사항 먼저",
           "stagedFirst": "스테이징된 항목 먼저",
           "compareAgainstUpstreamTitle": "기본 비교 기준",
-          "compareAgainstUpstreamDescription": "소스 제어에서 커밋된 변경 사항을 비교할 기본 기준을 선택합니다. 브랜치 업스트림은 현재 브랜치를 자동으로 따라가고, 업스트림이 없으면 저장소 기본 브랜치를 씁니다. 비교 기준은 각 worktree의 Git 패널에서 따로 바꿀 수 있습니다. Pull Request와 리베이스 대상은 바뀌지 않습니다.",
+          "compareAgainstUpstreamDescription": "소스 제어에서 커밋된 변경 사항을 비교할 기본 기준을 선택합니다. 브랜치 업스트림은 현재 브랜치를 자동으로 따라가고, 업스트림이 없으면 저장소 기본 브랜치를 씁니다. 비교 기준은 각 워크트리의 Git 패널에서 따로 바꿀 수 있습니다. Pull Request와 리베이스 대상은 바뀌지 않습니다.",
           "compareBaseRepositoryDefault": "저장소 기본값",
           "compareBaseBranchUpstream": "브랜치 업스트림",
           "refreshLocalBaseDescription": "작업 창을 만들면 Orca가 원격 기준 브랜치를 새로고침하고 <mainBranch>main</mainBranch>이나 <masterBranch>master</masterBranch> 같은 해당 로컬 브랜치를 안전하게 앞으로 이동(fast-forward)합니다. 그러면 <diffCommand>git diff main...HEAD</diffCommand> 같은 명령이 오래된 이력과 비교하지 않습니다. 해당 브랜치에 커밋되지 않은 변경 사항이나 로컬에만 있는 커밋이 있으면 Orca는 업데이트를 건너뜁니다.",
@@ -7630,7 +7630,7 @@
           "detectedServers_other": "{{detected}}개 감지됨 · 서버 {{count}}개"
         },
         "MobileEmulatorAgentControlRow": {
-          "8af7a8bc38": "명령은 현재 작업 트리의 활성 에뮬레이터를 대상으로 합니다. 좌표는 0..1에서 정규화됩니다.",
+          "8af7a8bc38": "명령은 현재 워크트리의 활성 에뮬레이터를 대상으로 합니다. 좌표는 0..1에서 정규화됩니다.",
           "c7f3fe0a6e": "일반 에뮬레이터 명령",
           "d94ca6a623": "에이전트가 모바일 에뮬레이터 제어를 비롯한 Orca CLI 명령을 쓸 수 있게 합니다.",
           "67e19ee03c": "Orca CLI 스킬",
@@ -7777,11 +7777,11 @@
           "f79084947b": "새로운 앱"
         },
         "OrchestrationPane": {
-          "52e0634e2c": "핸드오프, 작업 트리 핸드오버, 순차 또는 병렬 하위 에이전트 작업에 오케스트레이션을 사용하도록 조율 에이전트에게 요청하세요.",
+          "52e0634e2c": "핸드오프, 워크트리 핸드오버, 순차 또는 병렬 하위 에이전트 작업에 오케스트레이션을 사용하도록 조율 에이전트에게 요청하세요.",
           "ae79504732": "사용 방법",
           "9bedd2a6e5": "에이전트가 Orca로 컨텍스트를 넘겨주고 작업을 함께 조율할 수 있습니다.",
           "07641b9768": "오케스트레이션 스킬",
-          "2aacdb0517": "핸드오프, 작업 트리 핸드오버, 하위 에이전트 작업 전반에 걸쳐 코딩 에이전트를 조율합니다.",
+          "2aacdb0517": "핸드오프, 워크트리 핸드오버, 하위 에이전트 작업 전반에 걸쳐 코딩 에이전트를 조율합니다.",
           "191ac34567": "에이전트 오케스트레이션",
           "nestedWorkerDepthTitle": "하위 에이전트 최대 생성 단계",
           "nestedWorkerDepthDescription": "하위 에이전트를 몇 단계까지 생성할 수 있는지 설정합니다. 1이면 조율 에이전트만 하위 에이전트를 생성할 수 있고, 생성된 하위 에이전트는 자신의 하위 에이전트를 생성할 수 없습니다.",
@@ -7892,15 +7892,15 @@
           "4084720f47": "{{artifact_url}} 완료",
           "13394103bd": "사용자 지정 GitHub 이슈 명령",
           "2cc27dc12b": "연결된 이슈 명령을 사용자마다 바꿀 때 씁니다(선택).",
-          "b91a0f297d": "작업 트리가 보관되기 전에 실행되는 로컬 및 공유 스크립트입니다.",
+          "b91a0f297d": "워크트리가 보관되기 전에 실행되는 로컬 및 공유 스크립트입니다.",
           "9a100323ff": "아카이브 스크립트",
-          "21fb607a87": "새 작업 트리가 생성될 때의 기본 동작입니다.",
+          "21fb607a87": "새 워크트리가 생성될 때의 기본 동작입니다.",
           "793dcee97d": "실행 시기",
           "63e1783173": "설정 스크립트가 있을 때 기본 동작을 선택합니다.",
           "fb6bebcf7e": "설정 스크립트 실행 시기",
-          "30d555acd2": "새 작업 트리가 생성된 후 실행되는 로컬 및 공유 스크립트입니다.",
+          "30d555acd2": "새 워크트리가 생성된 후 실행되는 로컬 및 공유 스크립트입니다.",
           "52b31baf02": "설정 스크립트",
-          "8567127a40": "작업 트리가 생성되거나 보관될 때 실행되는 스크립트입니다. 로컬 스크립트는 이 시스템에 저장됩니다. `orca.yaml` 스크립트는 팀과 공유됩니다.",
+          "8567127a40": "워크트리가 생성되거나 보관될 때 실행되는 스크립트입니다. 로컬 스크립트는 이 시스템에 저장됩니다. `orca.yaml` 스크립트는 팀과 공유됩니다.",
           "ff082fe7c6": "작업트리 후크",
           "5d940bde5c": "로컬 스크립트 추가",
           "8c2893fae0": "단일 셸 스크립트로 실행됩니다. 이 컴퓨터에 저장되었습니다.",
@@ -7928,11 +7928,11 @@
           "8d6c56bff8": "둘 다 실행",
           "0fa21e19ec": "일반적으로 브랜치 이름을 기반으로 하는 작업 창의 이름입니다.",
           "54c73d88d0": "생성 중인 워크트리의 경로입니다. 초기 설정 명령은 이 디렉터리에서 실행됩니다.",
-          "30952c4aa4": "기본 repo 체크아웃 경로입니다. .env와 같은 공유 파일을 작업 트리에 복사하는 데 유용합니다.",
+          "30952c4aa4": "기본 repo 체크아웃 경로입니다. .env와 같은 공유 파일을 워크트리에 복사하는 데 유용합니다.",
           "9b821fa19d": "# 예: echo \"$ORCA_WORKSPACE_NAME 정리 중\"",
-          "6f90ebe3fd": "작업 트리가 보관되거나 제거되기 전에 실행됩니다.",
+          "6f90ebe3fd": "워크트리가 보관되거나 제거되기 전에 실행됩니다.",
           "a3fc966677": "# 예: pnpm install cp \"$ORCA_ROOT_PATH/.env\" \"$ORCA_WORKTREE_PATH/.env\"",
-          "f0710e1c83": "새 작업 트리가 생성된 후 실행됩니다. deps를 설치하고, env 파일을 복사하고, 마이그레이션을 실행하세요.",
+          "f0710e1c83": "새 워크트리가 생성된 후 실행됩니다. deps를 설치하고, env 파일을 복사하고, 마이그레이션을 실행하세요.",
           "8561b0665f": "orca.yaml을 먼저 사용한 다음 로컬 명령을 실행합니다.",
           "0e8b2a520d": "orca.yaml은 무시하고 로컬 명령만 실행하세요.",
           "83dc78202a": "로컬 전용",
@@ -7991,8 +7991,8 @@
         "RepositoryPane": {
           "15a99d9b9f": "상대 경로는 이 프로젝트 루트에서 확인됩니다.",
           "8ccacbeb5a": "글로벌 사용",
-          "e9bd57a336": "작업 트리 위치",
-          "e63bb96a9b": "이 프로젝트에서 새 작업 트리를 만들 디렉터리입니다.",
+          "e9bd57a336": "워크트리 위치",
+          "e63bb96a9b": "이 프로젝트에서 새 워크트리를 만들 디렉터리입니다.",
           "f88db4fece": "기본 워크트리 기준 참조",
           "8984d06520": "워크트리를 생성할 때 사용할 기본 기준 브랜치 또는 참조입니다.",
           "e641c359de": "사이드바와 탭에 사용되는 프로젝트 아이콘과 색상입니다.",
@@ -8056,8 +8056,8 @@
           "hostStateDisconnected": "연결 끊김",
           "hostStateUnknown": "알 수 없음",
           "nestedHostLabel": "{{value0}} ({{value1}} 경유)",
-          "externalWorktrees": "외부 작업 트리",
-          "externalWorktreesDescription": "이 프로젝트에서 Orca 밖에서 만든 작업 트리를 표시할지 따로 정합니다.",
+          "externalWorktrees": "외부 워크트리",
+          "externalWorktreesDescription": "이 프로젝트에서 Orca 밖에서 만든 워크트리를 표시할지 따로 정합니다.",
           "externalWorktreesInherited": "전역 설정 사용 중: {{value0}}",
           "show": "표시",
           "hide": "숨기기",
@@ -8811,9 +8811,9 @@
           "ab40b8a5f1": "일치하는 항목이 없습니다. 사용자 정의 경로를 추가하려면 계속 입력하세요.",
           "4cd2a4c077": "경로를 입력하세요(예: .env 또는 node_modules)…",
           "241325302c": "경로 추가",
-          "7ff265071d": "새 작업 트리를 만들면, 여기 적힌 경로를 macOS에서는 가능하면 APFS clone-copy로 복사하고, 그렇지 않으면 기본 체크아웃을 가리키는 심볼릭 링크로 만듭니다.",
-          "4755f120b6": "작업 트리 공유 경로",
-          "b07ef5a8b6": "기본 체크아웃에서 새로 생성된 작업 트리에 배치할 경로입니다.",
+          "7ff265071d": "새 워크트리를 만들면, 여기 적힌 경로를 macOS에서는 가능하면 APFS clone-copy로 복사하고, 그렇지 않으면 기본 체크아웃을 가리키는 심볼릭 링크로 만듭니다.",
+          "4755f120b6": "워크트리 공유 경로",
+          "b07ef5a8b6": "기본 체크아웃에서 새로 생성된 워크트리에 배치할 경로입니다.",
           "d72ba8dc68": "경로 {{value0}}개",
           "9ea912d811": "경로 1개"
         },
@@ -9160,7 +9160,7 @@
               "title": "고정된 워크트리를 원래 목록에도 표시",
               "description": "고정된 워크트리는 Pinned에 유지하면서 전체, 프로젝트, 상태 및 PR에도 표시합니다.",
               "pinned": "고정된",
-              "worktree": "작업 트리",
+              "worktree": "워크트리",
               "workspace": "작업 창",
               "all": "모두",
               "project": "프로젝트",
@@ -9213,14 +9213,14 @@
                 "672387fb77": "브랜치 이름을 생성할 때 사용되는 에이전트 명령 템플릿입니다.",
                 "722551c5b3": "브랜치 이름 명령 템플릿",
                 "f41833025e": "생성",
-                "ed677944cc": "작업 트리",
+                "ed677944cc": "워크트리",
                 "3ef3cbe98c": "에이전트",
                 "f0acf64301": "생물 이름",
                 "7803423877": "자동",
                 "55a1860e47": "이름 변경",
                 "9319bd9827": "브랜치",
                 "ea94b9da8a": "에이전트가 시작되면 자동으로 만든 브랜치 이름을 작업 내용에 맞게 바꿉니다.",
-                "427f2cd1eb": "브랜치 및 작업 트리 자동 이름 바꾸기"
+                "427f2cd1eb": "브랜치 및 워크트리 자동 이름 바꾸기"
               }
             }
           }
@@ -9286,8 +9286,8 @@
             "291f480a5e": "홈",
             "a942905148": "새 브라우저 탭을 만들 때 열리는 URL입니다. 빈 탭을 열려면 비워 두세요.",
             "c3903322d2": "기본 홈 페이지",
-            "19ea5607cf": "로컬호스트 작업 트리 레이블",
-            "4e0fdf0a3f": "브라우저 탭을 쉽게 구분할 수 있도록 작업 창 포트를 작업 트리마다 다른 Orca 로컬 호스트 URL로 엽니다.",
+            "19ea5607cf": "로컬호스트 워크트리 레이블",
+            "4e0fdf0a3f": "브라우저 탭을 쉽게 구분할 수 있도록 작업 창 포트를 워크트리마다 다른 Orca 로컬 호스트 URL로 엽니다.",
             "terminalLinkActions": {
               "terminal": "터미널",
               "chat": "채팅",
@@ -9298,7 +9298,7 @@
               "disable": "비활성화"
             },
             "6f5199381e": "포트",
-            "8f036ea11f": "작업 트리",
+            "8f036ea11f": "워크트리",
             "c4e3bf3282": "탭",
             "a8c55c9c91": "파비콘",
             "660c1dd007": "라벨",
@@ -9519,7 +9519,7 @@
               "popout": "팝업",
               "board": "보드",
               "inWindow": "창 내부",
-              "worktrees": "작업 트리"
+              "worktrees": "워크트리"
             },
             "browserExtensions": {
               "title": "브라우저 확장 프로그램",
@@ -9654,7 +9654,7 @@
             "84c67d0108": "삭제",
             "a0c44061ee": "자동화 및 실행 기록을 삭제하기 전에 확인 대화 상자를 표시합니다.",
             "d0a65b27fd": "자동화를 삭제하기 전에 확인하세요",
-            "df10666259": "작업 트리",
+            "df10666259": "워크트리",
             "ae98c9cf36": "작업 창을 삭제하기 전에 확인 대화상자를 표시합니다.",
             "913242091d": "작업 창을 삭제하기 전에 확인",
             "93f6ec5e70": "디렉터리",
@@ -9676,8 +9676,8 @@
             "005be5c699": "가로 스크롤 대신 파일 편집기에서 긴 줄을 자동으로 줄 바꿈합니다.",
             "editorFontFamily": "편집기 글꼴",
             "editorFontFamilyDesc": "파일 편집기 및 diff 보기에서 사용되는 글꼴입니다. 비워두면 터미널 글꼴을 따릅니다.",
-            "externalWorktrees": "외부 작업 트리",
-            "externalWorktreesDescription": "Orca 외부에서 만든 작업 트리를 기본적으로 표시할지 선택합니다.",
+            "externalWorktrees": "외부 워크트리",
+            "externalWorktreesDescription": "Orca 외부에서 만든 워크트리를 기본적으로 표시할지 선택합니다.",
             "editor_preview_tabs_short": "파일을 탐색하면 새 탭을 여는 대신 하나의 미리보기 탭을 재사용합니다.",
             "preview": "미리보기",
             "reuse": "재사용",
@@ -9731,7 +9731,7 @@
             "65b69d9f80": "graphql",
             "1139f61512": "현재 GitHub CLI REST, 검색 및 GraphQL 속도 제한.",
             "ff86e354c4": "GitHub API 예산",
-            "035134fcd9": "작업 트리",
+            "035134fcd9": "워크트리",
             "0c75583ca9": "안전하게",
             "bae91effdd": "최신 기준 브랜치",
             "de06e9d105": "기본 참조",
@@ -9748,7 +9748,7 @@
             "769ddd7f81": "custom",
             "1d2fae1fa2": "Git 사용자 이름",
             "f83c8937c4": "브랜치 이름 지정",
-            "5ecd91c5ef": "작업 트리를 생성할 때 브랜치 이름에 접두사가 추가됩니다.",
+            "5ecd91c5ef": "워크트리를 생성할 때 브랜치 이름에 접두사가 추가됩니다.",
             "68bd65fdb8": "브랜치 접두사",
             "sourceControlGroupOrderTitle": "소스 제어 그룹 순서",
             "sourceControlGroupOrderDescription": "소스 제어에서 변경 사항, 스테이징된 변경 사항 또는 추적되지 않는 파일 중 무엇을 먼저 표시할지 선택합니다.",
@@ -9759,7 +9759,7 @@
             "sourceControl": "소스 제어",
             "gitChanges": "git 변경 사항",
             "compareAgainstUpstreamTitle": "기본 비교 기준",
-            "compareAgainstUpstreamDescription": "소스 제어에서 커밋된 변경 사항을 비교할 기본 기준을 선택합니다. 브랜치 업스트림은 현재 브랜치를 자동으로 따라가고, 업스트림이 없으면 저장소 기본 브랜치를 씁니다. 비교 기준은 각 worktree의 Git 패널에서 따로 바꿀 수 있습니다. Pull Request와 리베이스 대상은 바뀌지 않습니다.",
+            "compareAgainstUpstreamDescription": "소스 제어에서 커밋된 변경 사항을 비교할 기본 기준을 선택합니다. 브랜치 업스트림은 현재 브랜치를 자동으로 따라가고, 업스트림이 없으면 저장소 기본 브랜치를 씁니다. 비교 기준은 각 워크트리의 Git 패널에서 따로 바꿀 수 있습니다. Pull Request와 리베이스 대상은 바뀌지 않습니다.",
             "compareBase": "비교 기준",
             "currentBranch": "현재 브랜치",
             "upstream": "upstream",
@@ -9996,7 +9996,7 @@
             "4ada6bfde9": "필터링",
             "fa60d8e4ab": "억제",
             "a4c3b29a3c": "집중된",
-            "7247b97a31": "Orca가 활성 작업 트리에 집중할 때 알림을 보내지 마세요.",
+            "7247b97a31": "Orca가 활성 워크트리에 집중할 때 알림을 보내지 마세요.",
             "96562a72c6": "집중하는 동안 억제",
             "a2ab73b325": "주목",
             "ae0487f8fd": "벨",
@@ -10130,12 +10130,12 @@
             "fbfd2386e8": "아카이브 스크립트",
             "4c17787d7b": "보관소",
             "8655e3387b": "훅",
-            "acd1157f0c": "작업 트리가 보관되기 전에 실행되는 로컬 및 공유 스크립트입니다.",
+            "acd1157f0c": "워크트리가 보관되기 전에 실행되는 로컬 및 공유 스크립트입니다.",
             "bce0ca23c6": "아카이브 스크립트",
             "491b05d6e6": "설정 명령",
             "a31b43a7f8": "설정 스크립트",
             "5590388dfa": "설정",
-            "baaf70bb37": "새 작업 트리가 생성된 후 실행되는 로컬 및 공유 스크립트입니다.",
+            "baaf70bb37": "새 워크트리가 생성된 후 실행되는 로컬 및 공유 스크립트입니다.",
             "b79df26937": "설정 스크립트",
             "d73fb47b45": ".claude/mcp.json",
             "db11b337c4": ".claude.json",
@@ -10148,11 +10148,11 @@
             "84da7fa2d7": "node_modules",
             "0a3a582794": "환경",
             "3c180a251c": "링크",
-            "f1c53f2820": "작업 트리",
+            "f1c53f2820": "워크트리",
             "7e228fc439": "심볼릭 링크",
             "c06adcf136": "심볼릭 링크",
-            "ed885e589f": "기본 체크아웃에서 새로 생성된 작업 트리에 배치할 경로입니다.",
-            "01b3377ebc": "작업 트리 공유 경로",
+            "ed885e589f": "기본 체크아웃에서 새로 생성된 워크트리에 배치할 경로입니다.",
+            "01b3377ebc": "워크트리 공유 경로",
             "fff8834983": "프롬프트",
             "fa3131f223": "모델",
             "130d76dc16": "이름 변경",
@@ -10176,18 +10176,18 @@
             "095fca94fe": "사전 설정",
             "aa42616e3d": "체크아웃",
             "4f3c0230c2": "스파스",
-            "90a331fd68": "스파스 작업 트리를 만들 때 쓸 디렉터리 묶음입니다.",
+            "90a331fd68": "스파스 워크트리를 만들 때 쓸 디렉터리 묶음입니다.",
             "1f0f20bbb6": "스파스 체크아웃 사전 설정",
             "4733ec2395": "../worktrees",
             "58d8bca414": "상대적인",
             "a325a89dff": "작업 창 경로",
-            "f3e6dee5fe": "작업 트리 경로",
-            "cd33a5525e": "이 프로젝트에서 새 작업 트리를 만들 디렉터리입니다.",
-            "443d127b5a": "작업 트리 위치",
+            "f3e6dee5fe": "워크트리 경로",
+            "cd33a5525e": "이 프로젝트에서 새 워크트리를 만들 디렉터리입니다.",
+            "443d127b5a": "워크트리 위치",
             "9811f3d152": "브랜치",
             "f41cef5083": "기본 참조",
-            "f571081ec4": "작업 트리를 생성할 때 기본 기본 브랜치 또는 참조입니다.",
-            "094adbe930": "기본 작업 트리 기반",
+            "f571081ec4": "워크트리를 생성할 때 기본 기본 브랜치 또는 참조입니다.",
+            "094adbe930": "기본 워크트리 기반",
             "27733eb6c1": "파비콘",
             "1e73e840ff": "이모티콘",
             "cb4b4de666": "아바타",
@@ -10212,8 +10212,8 @@
             "ghAccount": "gh 계정",
             "login": "로그인",
             "token": "token",
-            "externalWorktrees": "외부 작업 트리",
-            "externalWorktreesDescription": "이 프로젝트에서 Orca 밖에서 만든 작업 트리를 표시할지 따로 정합니다.",
+            "externalWorktrees": "외부 워크트리",
+            "externalWorktreesDescription": "이 프로젝트에서 Orca 밖에서 만든 워크트리를 표시할지 따로 정합니다.",
             "copy": "copy",
             "clone": "clone",
             "apfs": "apfs",
@@ -11014,8 +11014,8 @@
           "2a9588b1c2": "이 바인딩 제거"
         },
         "BrowserLocalhostWorktreeLabelsSetting": {
-          "8ac8c3ad19": "로컬호스트 작업 트리 레이블",
-          "1db3c8b983": "브라우저 탭을 쉽게 구분할 수 있도록 작업 창 포트를 작업 트리마다 다른 Orca 로컬 호스트 URL로 엽니다."
+          "8ac8c3ad19": "로컬호스트 워크트리 레이블",
+          "1db3c8b983": "브라우저 탭을 쉽게 구분할 수 있도록 작업 창 포트를 워크트리마다 다른 Orca 로컬 호스트 URL로 엽니다."
         },
         "AgentRuntimeSetting": {
           "label": "에이전트 런타임",
@@ -13985,7 +13985,7 @@
             "toolRole": "도구",
             "systemRole": "시스템",
             "sessionRole": "세션",
-            "worktree": "작업 트리",
+            "worktree": "워크트리",
             "conversationNotSaved": "대화가 저장되지 않음",
             "recoverableEmptyOpenLogHint": "로그를 열어 복구하세요.",
             "emptyConversationDetail": "이 세션에는 저장된 대화가 없어 재개할 수 없습니다.",
@@ -14029,7 +14029,7 @@
             "systemRole": "시스템",
             "sessionRole": "세션",
             "jumpToOriginalPane": "원래 창으로 이동",
-            "jumpToWorktree": "작업 트리로 이동",
+            "jumpToWorktree": "워크트리로 이동",
             "recoverableBadge": "저장 안 됨",
             "subagentCountSingular": "서브에이전트 1개",
             "subagentCountPlural": "서브에이전트 {{value0}}개",
@@ -14093,15 +14093,15 @@
             }
           },
           "AiVaultSessionWorktree": {
-            "currentWorktree": "현재 작업 트리",
-            "activeWorktree": "활성 작업 트리",
-            "archivedWorktree": "보관된 작업 트리",
-            "unavailableWorktree": "사용할 수 없는 작업 트리",
-            "jumpToWorktree": "작업 트리로 이동",
-            "noRecordedWorktree": "이 세션에 기록된 작업 트리가 없습니다.",
-            "archivedJumpUnavailable": "이 세션은 보관된 작업 트리에 있습니다.",
-            "noActiveWorktreeMatch": "이 세션과 일치하는 활성 작업 트리가 없습니다.",
-            "noActiveWorktreeTarget": "사용 가능한 활성 작업 트리가 없습니다.",
+            "currentWorktree": "현재 워크트리",
+            "activeWorktree": "활성 워크트리",
+            "archivedWorktree": "보관된 워크트리",
+            "unavailableWorktree": "사용할 수 없는 워크트리",
+            "jumpToWorktree": "워크트리로 이동",
+            "noRecordedWorktree": "이 세션에 기록된 워크트리가 없습니다.",
+            "archivedJumpUnavailable": "이 세션은 보관된 워크트리에 있습니다.",
+            "noActiveWorktreeMatch": "이 세션과 일치하는 활성 워크트리가 없습니다.",
+            "noActiveWorktreeTarget": "사용 가능한 활성 워크트리가 없습니다.",
             "activeFolder": "폴더",
             "archivedFolder": "보관된 폴더",
             "archivedFolderJumpUnavailable": "이 세션은 보관된 폴더에 있습니다.",
@@ -15207,7 +15207,7 @@
           "FeatureTipsModal": {
             "c169298e4d": "완료",
             "3c6c478462": "X가 끝나면 리뷰 작업을 보냅니다.”",
-            "298301b7a0": "작업 트리",
+            "298301b7a0": "워크트리",
             "864e2db28f": "“agent가 들어오면",
             "4795ac2d4a": "다음과 같이 질문해 보세요.",
             "53905bd076": "개발 미리보기: 스킬 설정 terminal 열기.",
@@ -15215,10 +15215,10 @@
             "ce13a742d0": "CLI 명령을 PATH에 등록했습니다.",
             "d1a86c7eb5": "설정을 열어 CLI 설정을 완료하세요.",
             "cliInstallFailed": "Orca CLI를 설치하지 못했습니다.",
-            "splitPrPrompt": "“이 PR을 두 개의 <term>작업 트리</term>로 나누고 각각 PR을 만들어 줘.”"
+            "splitPrPrompt": "“이 PR을 두 개의 <term>워크트리</term>로 나누고 각각 PR을 만들어 줘.”"
           },
           "CmdJPaletteFeatureTipVisual": {
-            "ab94e16d44": "작업 트리 \"{{value0}}\" 만들기"
+            "ab94e16d44": "워크트리 \"{{value0}}\" 만들기"
           },
           "CliSkillSetupPanel": {
             "title": "스킬 설정",
@@ -15398,7 +15398,7 @@
           "diffLoadTimedOut": "차이점 로드를 완료하지 못했습니다.",
           "diffLoadFailed": "차이점을 로드할 수 없습니다.",
           "moreNotesInSourceControl_other": "소스 제어에 메모 {{count}}개 더 있음",
-          "clearNotesConfirm_other": "이 작업 트리에서 메모 {{count}}개를 지울까요?",
+          "clearNotesConfirm_other": "이 워크트리에서 메모 {{count}}개를 지울까요?",
           "changedFilesVs_other": "{{baseRef}} 대비 변경된 파일 {{count}}개",
           "changedFilesIn_other": "{{compareRef}}에서 변경된 파일 {{count}}개",
           "changedFiles_other": "변경된 파일 {{count}}개",
@@ -15926,7 +15926,7 @@
         },
         "useLocalImagePick": {
           "175cb8b8ce": "이미지를 삽입하지 못했습니다.",
-          "91d835dc88": "작업 트리 경로를 사용할 수 없습니다."
+          "91d835dc88": "워크트리 경로를 사용할 수 없습니다."
         },
         "useRichMarkdownReviewData": {
           "f9d2acd6b0": "보내지 않은 모든 메모"
@@ -16137,7 +16137,7 @@
           "daysAgo": "{{days}}일 전"
         },
         "editorHeader": {
-          "worktreePathCopied": "작업 트리 경로 복사됨",
+          "worktreePathCopied": "워크트리 경로 복사됨",
           "checkDetails": "검사 세부 정보",
           "checkDetailsCopied": "검사 세부 정보 복사됨",
           "filePathCopied": "파일 경로 복사됨"
@@ -16468,9 +16468,9 @@
             "actions": {
               "c884a6398e": "저장된 terminal 명령을 만듭니다.",
               "a43ab56fc1": "빠른 명령 추가",
-              "54853d52a2": "현재 작업 트리를 삭제합니다.",
+              "54853d52a2": "현재 워크트리를 삭제합니다.",
               "9537b910fe": "작업트리 삭제",
-              "0b1f25f796": "새 작업 트리를 시작합니다.",
+              "0b1f25f796": "새 워크트리를 시작합니다.",
               "52ac9da671": "작업트리 생성",
               "f70812764a": "활성 작업 창에서 terminal 탭을 엽니다.",
               "34980395d4": "새 Terminal 탭",
@@ -16492,12 +16492,12 @@
                 "newTerminalTab": "새 terminal 탭",
                 "newShell": "새 셸",
                 "terminalTab": "terminal 탭",
-                "createWorktree": "작업 트리 만들기",
-                "addWorktree": "작업 트리 추가",
-                "newWorktree": "새 작업 트리",
-                "deleteWorktree": "작업 트리 삭제",
-                "deleteCurrentWorktree": "현재 작업 트리 삭제",
-                "removeWorktree": "작업 트리 제거",
+                "createWorktree": "워크트리 만들기",
+                "addWorktree": "워크트리 추가",
+                "newWorktree": "새 워크트리",
+                "deleteWorktree": "워크트리 삭제",
+                "deleteCurrentWorktree": "현재 워크트리 삭제",
+                "removeWorktree": "워크트리 제거",
                 "trashWorktree": "워크트리 휴지통으로 이동",
                 "addQuickCommand": "빠른 명령 추가",
                 "newQuickCommand": "새로운 빠른 명령",
@@ -16860,7 +16860,7 @@
           "57b722cbba": "에이전트",
           "6ff66f9012": "새로운 실행",
           "a2e688226d": "워크트리",
-          "6f9610e667": "작업 트리는 선택한 작업 창에서 실행됩니다. 새로 실행하면 매번 선택한 브랜치에서 새 작업 창이 생성됩니다.",
+          "6f9610e667": "워크트리는 선택한 작업 창에서 실행됩니다. 새로 실행하면 매번 선택한 브랜치에서 새 작업 창이 생성됩니다.",
           "2c3fd9bfa1": "작업 창 모드 도움말",
           "b28b140eaf": "작업 창",
           "0d17f4ca8f": "프로젝트 선택",
@@ -19551,7 +19551,7 @@
           "singleError": "{{value0}}: {{value1}}을(를) 확인할 수 없습니다. 일부 작업 창이 누락되었을 수 있습니다. 다시 시도하려면 새로고침하세요.",
           "noWorkspaces": "작업 창을 찾을 수 없습니다.",
           "fallbackRepository": "저장소",
-          "gitListFailed": "Git이 작업 트리를 나열할 수 없습니다.",
+          "gitListFailed": "Git이 워크트리를 나열할 수 없습니다.",
           "multipleErrorsWithMore_other": "저장소 {{count}}개({{names}}, 외 {{moreCount}}개)를 확인하지 못했습니다. 일부 작업 창이 누락되었을 수 있습니다. 새로고침하여 다시 시도하세요.",
           "multipleErrorsCount_other": "저장소 {{count}}개({{names}})를 확인하지 못했습니다. 일부 작업 창이 누락되었을 수 있습니다. 새로고침하여 다시 시도하세요.",
           "readyCount_other": "작업 창 {{count}}개를 찾았습니다."
@@ -19592,9 +19592,9 @@
         }
       },
       "creation": {
-        "worktreeReadyToast": "작업 트리 {{name}} 준비 완료",
+        "worktreeReadyToast": "워크트리 {{name}} 준비 완료",
         "workspaceReadyToast": "작업 창 {{name}} 준비 완료",
-        "goToWorktree": "작업 트리로 이동",
+        "goToWorktree": "워크트리로 이동",
         "goToWorkspace": "작업 창으로 이동"
       },
       "delete": {
@@ -21745,7 +21745,7 @@
     },
     "compact": {
       "linked": "연결됨",
-      "linkedAndUnavailable": "연결된 작업 트리의 {{value0}} · {{value1}}을(를) 사용할 수 없습니다.",
+      "linkedAndUnavailable": "연결된 워크트리의 {{value0}} · {{value1}}을(를) 사용할 수 없습니다.",
       "linkedAndScannedCount_other": "연결된 워크트리에서 {{size}} 사용 · 작업 창 {{count}}개"
     },
     "changes": {
@@ -21783,7 +21783,7 @@
       "notManaged": "관리되지 않음"
     },
     "metric": {
-      "linkedWorktrees": "연결된 작업 트리"
+      "linkedWorktrees": "연결된 워크트리"
     },
     "window": {
       "errorTitle": "Space에서 오류가 발생했습니다.",
@@ -21793,7 +21793,7 @@
       "pending": "삭제가 진행 중입니다.",
       "unmanaged": "이 작업 창은 더 이상 Orca에서 관리하지 않습니다.",
       "unavailable": "이 작업 창은 보호되어 있거나 사용할 수 없습니다.",
-      "main": "기본 작업 트리가 보호됩니다."
+      "main": "기본 워크트리가 보호됩니다."
     },
     "rowActions": "{{name}}에 대한 작업"
   },
@@ -22552,7 +22552,7 @@
     },
     "startPoint": {
       "repoNotFound": "리포지토리를 찾을 수 없습니다",
-      "folderUnsupported": "폴더 모드에서는 작업 트리를 만들 수 없습니다.",
+      "folderUnsupported": "폴더 모드에서는 워크트리를 만들 수 없습니다.",
       "fetchFailed": "{{ref}} 가져오기에 실패했습니다: {{detail}}",
       "remoteRefMissing": "가져온 후 {{ref}} 원격 참조가 존재하지 않습니다.",
       "github": {
