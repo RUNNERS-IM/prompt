@@ -24,6 +24,7 @@ import { ptyMailboxLeaf } from '../pty-mailbox-leaf'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
 import { startedMainTerminalSurfaces } from '../../terminal/surface/main-terminal-surfaces'
 import { mainPaneVerdict } from '../../terminal/surface/main-pane-verdict'
+import { runningClaudeSessionIdForPane } from '../../../claude-accounts/claude-running-session-cache'
 import { terminalTabChosenName } from '../../../../shared/tab-title-resolution'
 
 export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRuntimeWithRefreshFloatingWorkspacePtyLiveness {
@@ -113,8 +114,12 @@ export abstract class OrcaRuntimeWithWriteOrchestrationPointerPty extends OrcaRu
       return {}
     }
     // The hook's conversation id belongs to the published agent only; another agent's id would resume the wrong chat.
-    const agentSessionId =
+    const hookSessionId =
       hookAgent === agentIdentity ? hookRow?.providerSession?.id?.trim() : undefined
+    // Why the process: hooks that never reached this Prompt leave a running Claude without an id.
+    const agentSessionId =
+      hookSessionId ||
+      (agentIdentity === 'claude' && paneKey ? runningClaudeSessionIdForPane(paneKey) : undefined)
     return agentSessionId ? { agentIdentity, agentSessionId } : { agentIdentity }
   }
 

@@ -1,4 +1,5 @@
 import { defineMethod } from '../../core'
+import { refreshClaudeRunningSessions } from '../../../../claude-accounts/claude-running-session-cache'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../../shared/layout-owner-switch'
 import { remoteFileContentBudget } from '../files-remote-content-budget'
 import { remoteRpcResultExceedsContentBudget } from '../../../../../shared/remote-rpc-content-budget'
@@ -26,6 +27,8 @@ export const TERMINAL_QUERY_METHODS = [
       if (ORCA_LAYOUT_OWNER_IS_MAIN && params.placeUnshownLiveTerminals && params.worktree) {
         await runtime.placeUnshownLiveTerminalsOf(params.worktree)
       }
+      // Why: a Claude pane without hook evidence gets its conversation id from its process.
+      await refreshClaudeRunningSessions()
       return runtime.listTerminals(params.worktree, params.limit, {
         handles: params.handles,
         requireFreshPtyLiveness: params.requireFreshPtyLiveness,

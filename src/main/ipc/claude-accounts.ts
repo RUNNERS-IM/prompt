@@ -4,6 +4,7 @@ import type { ClaudeAccountSelectionTarget } from '../claude-accounts/runtime-se
 import { openAccountSignInLink } from './account-sign-in-link-opener'
 import { listClaudeProfileHomesAsync } from '../claude-accounts/claude-profile-homes'
 import { probeClaudeRunningSessions } from '../claude-accounts/claude-running-session-probe'
+import { rememberClaudeRunningSessions } from '../claude-accounts/claude-running-session-cache'
 import { getAppEnvironment } from '../../shared/app-environment'
 
 export function registerClaudeAccountHandlers(claudeAccounts: ClaudeAccountService): void {
@@ -13,11 +14,13 @@ export function registerClaudeAccountHandlers(claudeAccounts: ClaudeAccountServi
     const host = claudeAccounts.listAccounts()
     // Why every profile folder: a session can still run on an account removed from the list.
     const profileHomes = await listClaudeProfileHomesAsync(getAppEnvironment().getPath('userData'))
-    return probeClaudeRunningSessions([
+    const evidence = await probeClaudeRunningSessions([
       ...(host.systemDefaultHome ? [host.systemDefaultHome] : []),
       ...host.accounts.flatMap((account) => (account.home ? [account.home] : [])),
       ...profileHomes
     ])
+    rememberClaudeRunningSessions(evidence)
+    return evidence
   })
   ipcMain.handle(
     'claudeAccounts:add',
