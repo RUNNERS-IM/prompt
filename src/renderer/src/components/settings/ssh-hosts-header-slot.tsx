@@ -25,7 +25,7 @@ export function SshHostsHeaderSlotProvider({
 
 export function SshHostsHeaderSlot(): React.JSX.Element | null {
   const context = useContext(SshHostsHeaderSlotContext)
-  return context ? <div ref={context.setSlot} className="flex items-center gap-1.5" /> : null
+  return context ? <div ref={context.setSlot} className="flex flex-wrap items-center gap-1.5" /> : null
 }
 
 /** Renders inline when no section header provides a slot (tests, other hosts of the pane). */

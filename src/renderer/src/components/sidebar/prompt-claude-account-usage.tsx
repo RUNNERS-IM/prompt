@@ -37,20 +37,21 @@ function UsageLine({
     window.resetsAt && window.resetsAt > now
       ? formatLocalizedResetCountdown(window.resetsAt - now)
       : null
+  // 다시 차는 때는 따로 한 줄에 둔다. 한 줄에 몰면 독일어 · 아랍어 등 17개 언어에서 잘렸다(사용자 답: 권장안대로, 11-25).
   return (
-    <div className="flex min-w-0 items-center gap-2 text-[11px] leading-4 text-muted-foreground">
-      <span className="w-10 shrink-0 truncate">{label}</span>
-      <div className="h-[4px] w-14 shrink-0 overflow-hidden rounded-full bg-muted">
+    <>
+      <span className="truncate">{label}</span>
+      <div className="h-[4px] overflow-hidden rounded-full bg-muted">
         <div
           className={cn('h-full rounded-full', barColor(used))}
           style={{ width: `${getDisplayedUsagePercentage(used, display)}%` }}
         />
       </div>
-      <span className="w-9 shrink-0 tabular-nums text-foreground/80">
+      <span className="tabular-nums text-foreground/80">
         {formatBareUsagePercentage(used, display)}
       </span>
-      {reset ? <span className="min-w-0 truncate">{reset}</span> : null}
-    </div>
+      {reset ? <span className="col-span-3 col-start-2 min-w-0 truncate">{reset}</span> : null}
+    </>
   )
 }
 
@@ -63,8 +64,9 @@ function UsageLines({
   weekly: RateLimitWindow | null
   now: number
 }): React.JSX.Element {
+  // 이름 칸은 가장 긴 이름에 맞춰 두 줄의 막대가 같은 자리에서 시작한다.
   return (
-    <>
+    <div className="grid min-w-0 grid-cols-[minmax(0,max-content)_3.5rem_2.25rem_minmax(0,1fr)] items-center gap-x-2 gap-y-0.5 text-[11px] leading-4 text-muted-foreground">
       <UsageLine
         label={translate('auto.components.status.bar.tooltip.94038ad2fa', 'Session')}
         window={session}
@@ -75,7 +77,7 @@ function UsageLines({
         window={weekly}
         now={now}
       />
-    </>
+    </div>
   )
 }
 

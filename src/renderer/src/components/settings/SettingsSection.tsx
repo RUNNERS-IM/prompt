@@ -31,6 +31,8 @@ type SettingsSectionProps = {
   isActive?: boolean
   /** Header-scoped actions, such as Import from Ghostty. */
   headerAction?: React.ReactNode
+  /** Puts headerAction under the description instead of beside the title, for a row of several buttons. */
+  headerActionBelow?: boolean
   /** Drops the title block while the body shows its own page header (a plugin's page). */
   hideHeader?: boolean
   /** Click handler on the section title — the hook for hidden staff
@@ -51,6 +53,7 @@ export function SettingsSection({
   forceVisible = false,
   isActive,
   headerAction,
+  headerActionBelow = false,
   hideHeader = false,
   onTitleClick
 }: SettingsSectionProps): React.JSX.Element | null {
@@ -85,7 +88,10 @@ export function SettingsSection({
       <div
         hidden={hideHeader || absorbed}
         data-prompt-section-header=""
-        className="flex items-start justify-between gap-4 border-b border-border/60 pb-5"
+        className={cn(
+          'flex border-b border-border/60 pb-5',
+          headerActionBelow ? 'flex-col gap-4' : 'items-start justify-between gap-4'
+        )}
       >
         <div className="min-w-0 flex-1 space-y-2">
           <h2

@@ -65,6 +65,8 @@ export function renderSshSettingsSection(context: SettingsRenderContext): React.
         )}
         searchEntries={navigation.getSectionSearchEntries('ssh')}
         headerAction={mounted ? <SshHostsHeaderSlot /> : undefined}
+        // 단추 셋이 제목 옆에 있으면 긴 언어에서 설명이 좁아져 설명 아래로 내린다(사용자 답: 권장안대로, 11-25).
+        headerActionBelow
         // Host groups already supply surfaces; another frame would nest cards.
         bodyClassName="rounded-none border-0 bg-transparent px-0 py-0 shadow-none"
       >
