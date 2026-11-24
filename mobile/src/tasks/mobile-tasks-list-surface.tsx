@@ -14,6 +14,7 @@ import { renderMobileTasksGitHubProjectList } from './mobile-tasks-github-projec
 import { renderMobileTasksLinearList } from './mobile-tasks-linear-list'
 import { renderMobileTasksProviderItemList } from './mobile-tasks-provider-item-list'
 import { JiraConnectPrompt } from '../components/JiraConnectPrompt'
+import { WordText } from '../components/WordText'
 
 export function renderMobileTasksListSurface(
   model: ConnectionPresentationModel,
@@ -40,12 +41,12 @@ export function renderMobileTasksListSurface(
         <Text style={styles.emptyText}>
           {translate('tasks.listSurface.updateDesktopTitle', 'Update Prompt desktop')}
         </Text>
-        <Text style={styles.centeredHint}>
+        <WordText style={styles.centeredHint}>
           {translate(
             'tasks.listSurface.updateDesktopMessage',
             'This mobile Tasks view needs a newer desktop runtime.'
           )}
-        </Text>
+        </WordText>
       </View>
     ) : (
       <View style={styles.centered}>

@@ -83,9 +83,9 @@ export function MobileOnboardingPage({
           </WordText>
         ) : null}
         {error ? (
-          <Text style={styles.error} accessibilityRole="alert">
+          <WordText style={styles.error} accessibilityRole="alert">
             {error}
-          </Text>
+          </WordText>
         ) : null}
         {isSessionView ? (
           <SessionViewChoices busyChoice={busyChoice} disabled={busy} onChoice={onSessionChoice} />

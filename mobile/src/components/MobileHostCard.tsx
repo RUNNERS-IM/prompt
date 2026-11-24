@@ -16,6 +16,7 @@ import { themedStyleSheet } from '../theme/themed-styles'
 import { useMobileColorScheme } from '../theme/use-mobile-color-scheme'
 import { homeHostWorktreeSummary, type HostWorktreeInfo } from '../worktree/home-worktree-info'
 import { StatusDot } from './StatusDot'
+import { WordText } from './WordText'
 
 function hostCardWorktreeSummaries(info: HostWorktreeInfo | undefined, t: Translate) {
   const now = Date.now()
@@ -142,19 +143,19 @@ export function MobileHostCard(props: {
             </Text>
           ) : null}
           {discoveryHint ? (
-            <Text style={styles.discoveryHint} numberOfLines={2}>
+            <WordText style={styles.discoveryHint} numberOfLines={2}>
               {discoveryHint}
-            </Text>
+            </WordText>
           ) : null}
           {credentialHint ? (
-            <Text style={styles.discoveryHint} numberOfLines={2}>
+            <WordText style={styles.discoveryHint} numberOfLines={2}>
               {credentialHint}
-            </Text>
+            </WordText>
           ) : null}
           {verdictDetail ? (
-            <Text style={styles.discoveryHint} numberOfLines={2}>
+            <WordText style={styles.discoveryHint} numberOfLines={2}>
               {verdictDetail}
-            </Text>
+            </WordText>
           ) : null}
         </View>
       </Pressable>
