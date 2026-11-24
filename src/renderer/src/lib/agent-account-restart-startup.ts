@@ -27,6 +27,10 @@ import type { ProjectExecutionRuntimeResolution } from '../../../shared/project-
 import { resolveAgentLaunchCommand } from '../../../shared/tui-agent-launch-command'
 import { resolveStartupShell } from '../../../shared/tui-agent-startup-shell'
 import { resumeRecordedCwdNotice } from '@/lib/resume-recorded-cwd-notice'
+import {
+  isClaudeSessionRunningElsewhere,
+  noteClaudeResumeLaunch
+} from '@/lib/claude-resume-duplicate-guard'
 
 export type AgentAccountRestartStartup = {
   command: string
@@ -68,6 +72,10 @@ export function resolveAgentAccountRestartResumeStartup(
     normalizeAgentProviderSession(entry?.providerSession) ??
     normalizeAgentProviderSession(sleeping?.agent === agent ? sleeping.providerSession : undefined)
   if (!providerSession) {
+    return null
+  }
+  if (agent === 'claude' && isClaudeSessionRunningElsewhere(state, providerSession.id, paneKey)) {
+    console.warn('[account-restart] skipped: this Claude conversation already runs in another pane')
     return null
   }
   const projectRuntime = getLocalProjectExecutionRuntimeContext(state, args.worktreeId)
@@ -117,6 +125,9 @@ export function resolveAgentAccountRestartResumeStartup(
   })
   if (!startupPlan) {
     return null
+  }
+  if (agent === 'claude') {
+    noteClaudeResumeLaunch(providerSession.id, paneKey)
   }
   return {
     startupCommandDelivery: 'shell-ready',

@@ -21,6 +21,7 @@ import {
   resolveAgentAccountRestartResumeStartup,
   type AgentAccountRestartStartup
 } from './agent-account-restart-startup'
+import { resetClaudeResumeDuplicateGuardForTests } from './claude-resume-duplicate-guard'
 
 let projectRuntimeContext: ProjectExecutionRuntimeResolution | undefined
 
@@ -72,6 +73,7 @@ function build(): AgentAccountRestartStartup {
 
 describe('buildPaneAccountRestartStartup for Codex', () => {
   beforeEach(() => {
+    resetClaudeResumeDuplicateGuardForTests()
     seedAgentStatus(null)
     projectRuntimeContext = undefined
     useAppStore.setState({ settings: getDefaultSettings('/home/dev') })
@@ -208,6 +210,7 @@ describe('buildPaneAccountRestartStartup for Claude', () => {
   const pane = { tabId: TAB_ID, leafId: LEAF_ID, worktreeId: WORKTREE_ID }
 
   beforeEach(() => {
+    resetClaudeResumeDuplicateGuardForTests()
     seedAgentStatus(null)
     projectRuntimeContext = undefined
     useAppStore.setState({ tabsByWorktree: {}, worktreesByRepo: {} })
