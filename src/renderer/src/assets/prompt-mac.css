@@ -86,6 +86,17 @@ html.prompt-mac-vibrancy .prompt-right-panel {
   border-left: 0 !important;
 }
 
+/* Arabic mirrors the frame, so the outer gap moves to the other side of each side card. */
+html.prompt-mac-vibrancy[data-workspace-dir='rtl'] .prompt-sidebar-column,
+html.prompt-mac-vibrancy[data-workspace-dir='rtl'] .prompt-shell-row > .prompt-sidebar {
+  margin: var(--prompt-gap) var(--prompt-gap) var(--prompt-gap) 0;
+}
+
+html.prompt-mac-vibrancy[data-workspace-dir='rtl'] .prompt-right-panel {
+  margin: var(--prompt-gap) 0 var(--prompt-gap) var(--prompt-gap);
+  border-right: 0 !important;
+}
+
 /* The tab group wrapper draws a seam toward the sidebar; the card edge replaces it. */
 html.prompt-mac-vibrancy
   .prompt-main-column

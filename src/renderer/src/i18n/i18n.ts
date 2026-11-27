@@ -28,6 +28,7 @@ import {
 import { resolveUiLocale } from './supported-languages'
 import type { SupportedUiLocale } from '../../../shared/ui-locale'
 import type { UiLanguage } from '../../../shared/ui-language'
+import { uiTextDirection } from '../../../shared/ui-text-direction'
 import type { PluginLanguagePackRegistration } from '../../../shared/plugins/artifacts/plugin-language-pack-artifact'
 import { withTimeout } from '../../../shared/promise-timeout-fallback'
 import { supportedIntlLocale } from './intl-locale-support'
@@ -101,10 +102,12 @@ export const i18n = orcaI18n.i18n
 i18n.store.on('added', advanceTranslationResourceVersion)
 i18n.store.on('removed', advanceTranslationResourceVersion)
 i18n.on('languageChanged', advanceTranslationResourceVersion)
-// Prompt: <html lang> lets CSS fix Arabic punctuation order while the layout stays left to right.
+// Prompt: <html lang> lets CSS fix Arabic punctuation order.
+// data-workspace-dir mirrors the workspace frame (sidebars swap sides) while terminals keep dir=ltr.
 i18n.on('languageChanged', (language) => {
   if (typeof document !== 'undefined') {
     document.documentElement.lang = language
+    document.documentElement.dataset.workspaceDir = uiTextDirection(language)
   }
 })
 

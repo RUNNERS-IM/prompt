@@ -3499,3 +3499,11 @@ html.native-shell .app-layout {
 :where(:root:lang(ko)) :where(.xterm, pre, code, kbd, input, textarea, .font-mono) {
   word-break: normal;
 }
+
+/* Arabic mirrors the workspace frame: the right panel sits at the window's left, under the
+   floating title controls, so its header leaves that width free instead of the window-controls width. */
+html[data-workspace-dir='rtl'] .right-sidebar-header-inset,
+html[data-workspace-dir='rtl'] .right-sidebar-header-side-inset {
+  padding-right: 0;
+  padding-left: var(--collapsed-sidebar-header-width, 0px);
+}

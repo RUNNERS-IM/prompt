@@ -6,6 +6,7 @@ import { resolveLeftSidebarStyleVariables } from '@/lib/left-sidebar-appearance'
 import { resolveLeftTitlebarChromeLayout } from '@/lib/titlebar-left-chrome'
 import { shouldShowWorktreeCreationSurface } from '@/lib/worktree-creation-surface'
 import { useAppStore } from '../store'
+import { useWorkspaceMirrored } from '../hooks/useWorkspaceMirrored'
 import { FLOATING_TERMINAL_WORKTREE_ID } from '../../../shared/constants'
 import { selectActiveTerminalChromeState } from '../store/active-terminal-chrome-selector'
 import { useSystemPrefersDark } from '../components/terminal-pane/use-system-prefers-dark'
@@ -52,6 +53,7 @@ export function useAppChromeLayout() {
   )
 
   const systemPrefersDark = useSystemPrefersDark()
+  const workspaceMirrored = useWorkspaceMirrored()
   const leftSidebarStyle = useMemo(
     () => resolveLeftSidebarStyleVariables(settings, systemPrefersDark),
     [settings, systemPrefersDark]
@@ -89,7 +91,8 @@ export function useAppChromeLayout() {
     workspaceChromeActive,
     stackedSidebarOpen,
     creationLayoutActive,
-    sidebarOpen
+    sidebarOpen,
+    workspaceMirrored
   })
 
   // Fit terminals before paint in the width-change frame to avoid transient wrong sizes.
@@ -120,7 +123,8 @@ export function useAppChromeLayout() {
     settings?.showTitlebarAppName,
     showSidebar,
     leftTitlebarChromeLayout.isFloating,
-    sidebarOpen
+    sidebarOpen,
+    workspaceMirrored
   ])
 
   return {
@@ -128,6 +132,7 @@ export function useAppChromeLayout() {
     activePendingCreationId,
     activeTabCanExpand,
     collapsedSidebarHeaderWidth,
+    workspaceMirrored,
     creationLayoutActive,
     hasActiveWorktree,
     isFullScreen,

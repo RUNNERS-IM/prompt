@@ -3,6 +3,7 @@ import { PanelRight } from 'lucide-react'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 import { useSidebarResize } from '@/hooks/useSidebarResize'
+import { useWorkspaceMirrored } from '@/hooks/useWorkspaceMirrored'
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip'
 import { ContextMenu, ContextMenuTrigger } from '@/components/ui/context-menu'
 import { getTopActivityBarLayout } from './activity-bar-overflow'
@@ -69,12 +70,14 @@ function RightSidebarInner(): React.JSX.Element {
     windowWidth,
     activityBarSideWidth
   )
+  // Arabic puts this panel at the window's left, so it grows rightward from its right edge.
+  const workspaceMirrored = useWorkspaceMirrored()
   const { containerRef, onResizeStart } = useSidebarResize<HTMLDivElement>({
     isOpen: rightSidebarOpen,
     width: renderedRightSidebarWidth,
     minWidth: RIGHT_SIDEBAR_MIN_WIDTH,
     maxWidth,
-    deltaSign: -1,
+    deltaSign: workspaceMirrored ? 1 : -1,
     renderedExtraWidth: activityBarSideWidth,
     setWidth: setRightSidebarWidth
   })
@@ -140,7 +143,9 @@ function RightSidebarInner(): React.JSX.Element {
       <div
         className="prompt-right-panel flex flex-col flex-1 min-w-0 bg-sidebar overflow-hidden"
         style={{
-          borderLeft: rightSidebarOpen ? '1px solid var(--sidebar-border)' : 'none'
+          [workspaceMirrored ? 'borderRight' : 'borderLeft']: rightSidebarOpen
+            ? '1px solid var(--sidebar-border)'
+            : 'none'
         }}
       >
         {activityBarPosition === 'top' ? (
@@ -170,7 +175,10 @@ function RightSidebarInner(): React.JSX.Element {
         {panelContent}
 
         <div
-          className="absolute top-0 left-0 w-1 h-full cursor-col-resize hover:bg-ring/20 active:bg-ring/30 transition-colors z-10"
+          className={cn(
+            'absolute top-0 w-1 h-full cursor-col-resize hover:bg-ring/20 active:bg-ring/30 transition-colors z-10',
+            workspaceMirrored ? 'right-0' : 'left-0'
+          )}
           onMouseDown={onResizeStart}
         />
       </div>

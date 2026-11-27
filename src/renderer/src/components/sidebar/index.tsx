@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useAppStore } from '@/store'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { useSidebarResize } from '@/hooks/useSidebarResize'
+import { useWorkspaceMirrored } from '@/hooks/useWorkspaceMirrored'
 import SidebarHeader from './SidebarHeader'
 import SidebarNav from './SidebarNav'
 import { PromptComputerPicker } from './prompt-computer-picker'
@@ -45,6 +46,9 @@ const MAX_WIDTH = 500
 // Straddle the terminal seam so the resize divider sits on the border.
 export const WORKTREE_SIDEBAR_RESIZE_HANDLE_CLASS_NAME =
   'group absolute -right-1.5 top-0 z-10 flex h-full w-3 cursor-col-resize items-stretch justify-center'
+// Arabic puts the sidebar on the right, so its seam (and handle) is the left edge.
+export const WORKTREE_SIDEBAR_MIRRORED_RESIZE_HANDLE_CLASS_NAME =
+  'group absolute -left-1.5 top-0 z-10 flex h-full w-3 cursor-col-resize items-stretch justify-center'
 export const WORKTREE_SIDEBAR_RESIZE_HANDLE_LINE_CLASS_NAME =
   'h-full w-px bg-transparent transition-colors group-hover:bg-ring/50 group-active:bg-ring'
 
@@ -140,12 +144,13 @@ function Sidebar({
     }
   }, [agentDashboardDrawerOpen, setAgentDashboardDrawerOpen, showAgentDashboard])
 
+  const workspaceMirrored = useWorkspaceMirrored()
   const { containerRef, onResizeStart, isResizing } = useSidebarResize<HTMLDivElement>({
     isOpen: sidebarOpen,
     width: sidebarWidth,
     minWidth: MIN_WIDTH,
     maxWidth: MAX_WIDTH,
-    deltaSign: 1,
+    deltaSign: workspaceMirrored ? -1 : 1,
     setWidth: setSidebarWidth,
     onDraftWidthChange: setSidebarLiveWidth
   })
@@ -249,7 +254,12 @@ function Sidebar({
         {sidebarOpen && (
           <div
             data-sidebar-resize-handle=""
-            className={cn(WORKTREE_SIDEBAR_RESIZE_HANDLE_CLASS_NAME, isResizing && 'bg-ring/10')}
+            className={cn(
+              workspaceMirrored
+                ? WORKTREE_SIDEBAR_MIRRORED_RESIZE_HANDLE_CLASS_NAME
+                : WORKTREE_SIDEBAR_RESIZE_HANDLE_CLASS_NAME,
+              isResizing && 'bg-ring/10'
+            )}
             onMouseDown={onResizeStart}
           >
             <div

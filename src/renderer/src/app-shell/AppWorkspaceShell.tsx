@@ -82,7 +82,11 @@ function ActivePage({ layout }: { layout: AppChromeLayout }): React.JSX.Element 
       {activeView === 'terminal' && creationLayoutActive && activePendingCreationId ? (
         <WorktreeCreationPanel
           creationId={activePendingCreationId}
-          reserveCollapsedSidebarHeaderSpace={layout.leftTitlebarChromeLayout.isFloating}
+          // Mirrored, an open right panel (now at the left) takes the floating header's corner instead.
+          reserveCollapsedSidebarHeaderSpace={
+            layout.leftTitlebarChromeLayout.isFloating &&
+            !(layout.workspaceMirrored && layout.rightSidebarOpen)
+          }
         />
       ) : null}
       {activeView === 'terminal' && !hasActiveWorktree && !creationLayoutActive ? (
@@ -104,6 +108,17 @@ export function AppWorkspaceShell(props: {
   const scrollAnchorRef = useRef<VirtualizedScrollAnchor>(null)
   const sidebarScrollRefs = { scrollOffsetRef, scrollAnchorRef }
   const { setOpenWithFocus } = floatingWorkspace
+  const mirrored = layout.workspaceMirrored
+  // Arabic: the header floats over the window's top-left corner beside the traffic lights, whichever side the sidebar is on.
+  const mirroredFloatingHeader =
+    mirrored && layout.leftTitlebarChromeLayout.shouldMount ? (
+      <div
+        className="titlebar-left titlebar-left-floating absolute top-0 left-0 z-10 w-max border-r border-border"
+        data-workspace-mirrored-header=""
+      >
+        {titlebarLeftControls}
+      </div>
+    ) : null
   const toggleFloatingWorkspace = useCallback(
     () => setOpenWithFocus((open) => !open),
     [setOpenWithFocus]
@@ -121,7 +136,10 @@ export function AppWorkspaceShell(props: {
         'The app is still running. Retry the shell or use the menu to report the crash details.'
       )}
     >
-      <div className="flex flex-row flex-1 min-h-0 overflow-hidden">
+      <div
+        className={`relative flex flex-1 min-h-0 overflow-hidden ${mirrored ? 'flex-row-reverse' : 'flex-row'}`}
+      >
+        {mirroredFloatingHeader}
         {/* Keep the non-workspace titlebar from spanning the right sidebar. */}
         <div className="flex flex-col flex-1 min-w-0 min-h-0">
           {/* Workspace tab groups reach the top; other pages retain the titlebar. */}
@@ -131,29 +149,38 @@ export function AppWorkspaceShell(props: {
               {titlebarMainStrip}
             </div>
           ) : null}
-          <div className="prompt-shell-row flex flex-row flex-1 min-h-0 overflow-hidden">
+          <div
+            className={`prompt-shell-row flex flex-1 min-h-0 overflow-hidden ${mirrored ? 'flex-row-reverse' : 'flex-row'}`}
+          >
             {layout.showSidebar ? (
               layout.leftTitlebarChromeLayout.shouldMount ? (
                 /* Remove the collapsed header from flex layout so panes reclaim the left edge. */
                 <div
                   className={`flex min-h-0 flex-col shrink-0${layout.sidebarOpen ? ' prompt-sidebar-column' : ' relative w-0 overflow-visible'}`}
                 >
-                  <div
-                    // The floating header covers the center border; restore the seam and size to its own controls.
-                    className={`titlebar-left${
-                      layout.leftTitlebarChromeLayout.isFloating
-                        ? ' titlebar-left-floating absolute top-0 left-0 z-10 w-max border-r border-border'
-                        : ''
-                    }`}
-                    style={{
-                      // Why: custom sidebar appearances are scoped to the sidebar root; mirror those vars onto the header in the same left-column panel.
-                      ...(layout.sidebarOpen ? layout.leftSidebarStyle : undefined),
-                      // Why: size from the wrapper's live width so the header tracks in-flight drag resizes (persisted to Zustand only on mouseup).
-                      width: layout.sidebarOpen ? '100%' : undefined
-                    }}
-                  >
-                    {titlebarLeftControls}
-                  </div>
+                  {mirrored ? (
+                    // The controls float at the window's left; keep the sidebar's 36px drag strip on this side.
+                    layout.sidebarOpen ? (
+                      <div className="titlebar-left" style={layout.leftSidebarStyle} />
+                    ) : null
+                  ) : (
+                    <div
+                      // The floating header covers the center border; restore the seam and size to its own controls.
+                      className={`titlebar-left${
+                        layout.leftTitlebarChromeLayout.isFloating
+                          ? ' titlebar-left-floating absolute top-0 left-0 z-10 w-max border-r border-border'
+                          : ''
+                      }`}
+                      style={{
+                        // Why: custom sidebar appearances are scoped to the sidebar root; mirror those vars onto the header in the same left-column panel.
+                        ...(layout.sidebarOpen ? layout.leftSidebarStyle : undefined),
+                        // Why: size from the wrapper's live width so the header tracks in-flight drag resizes (persisted to Zustand only on mouseup).
+                        width: layout.sidebarOpen ? '100%' : undefined
+                      }}
+                    >
+                      {titlebarLeftControls}
+                    </div>
+                  )}
                   {/* Keep a shrinkable flex viewport below the fixed header so the sidebar can scroll. */}
                   <div className="flex min-h-0 flex-1">
                     <WorktreeSidebar layout={layout} scrollRefs={sidebarScrollRefs} />
@@ -168,7 +195,15 @@ export function AppWorkspaceShell(props: {
               {layout.stackedSidebarOpen &&
               layout.activeView !== 'automations' &&
               layout.activeView !== 'artifacts' ? (
-                <div className="titlebar">{titlebarMainStrip}</div>
+                <div className="titlebar">
+                  {mirrored ? (
+                    <div
+                      className="shrink-0 self-stretch"
+                      style={{ width: 'var(--collapsed-sidebar-header-width)' }}
+                    />
+                  ) : null}
+                  {titlebarMainStrip}
+                </div>
               ) : null}
               <div className="relative flex flex-1 min-w-0 min-h-0 overflow-hidden">
                 {/* Match the open sidebar header’s alignment to prevent toggle jitter. */}

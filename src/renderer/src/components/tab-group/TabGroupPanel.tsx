@@ -1,3 +1,4 @@
+import { useWorkspaceMirrored } from '@/hooks/useWorkspaceMirrored'
 import { Suspense, useCallback, useMemo } from 'react'
 import { lazyWithRetry as lazy } from '@/lib/lazy-with-retry'
 import { useDroppable } from '@dnd-kit/core'
@@ -74,6 +75,10 @@ export default function TabGroupPanel({
 }): React.JSX.Element {
   const rightSidebarOpen = useAppStore((state) => state.rightSidebarOpen)
   const sidebarOpen = useAppStore((state) => state.sidebarOpen)
+  const workspaceMirrored = useWorkspaceMirrored()
+  // Mirrored, the worktree sidebar is on the right, so the window's top-left header sits over this strip
+  // unless the right sidebar (now on the left) takes that corner.
+  const headerCoversStrip = workspaceMirrored ? !rightSidebarOpen : !sidebarOpen
   const model = useTabGroupWorkspaceModel({ groupId, worktreeId })
   const {
     activeTab,
@@ -281,7 +286,7 @@ export default function TabGroupPanel({
         >
           <div className="flex h-full items-stretch pr-1.5">
             {/* Why: Electron drag hit-test respects no-drag only on DOM descendants, not z-index siblings, so this no-drag spacer keeps the collapsed left-sidebar's floating toggle clickable. */}
-            {reserveCollapsedSidebarHeaderSpace && !sidebarOpen ? (
+            {reserveCollapsedSidebarHeaderSpace && headerCoversStrip ? (
               <div
                 className="shrink-0"
                 style={
