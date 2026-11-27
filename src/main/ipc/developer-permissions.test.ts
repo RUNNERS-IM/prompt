@@ -189,6 +189,32 @@ describe('registerDeveloperPermissionHandlers', () => {
     expect(terminalHostsStatusMock).not.toHaveBeenCalled()
   })
 
+  // 마이크 · 카메라 · USB · 블루투스는 앱 권한에서 뺐다. 옛 화면이 물어도 macOS 에 묻지 않는다.
+  it('never asks macOS for microphone or camera and lists only the kept permissions', async () => {
+    getMacosFullDiskAccessStatusMock.mockResolvedValue('granted')
+    getMediaAccessStatusMock.mockReturnValue('granted')
+    registerDeveloperPermissionHandlers()
+
+    for (const id of ['microphone', 'camera', 'usb', 'bluetooth']) {
+      await expect(getRequestHandler()({}, { id })).resolves.toEqual({
+        id,
+        status: 'unsupported',
+        openedSystemSettings: false
+      })
+    }
+    expect(askForMediaAccessMock).not.toHaveBeenCalled()
+
+    const states = await getStatusHandler()()
+    expect(states.map((state) => state.id)).toEqual([
+      'screen',
+      'accessibility',
+      'full-disk-access',
+      'automation',
+      'local-network'
+    ])
+    expect(getMediaAccessStatusMock.mock.calls).toEqual([['screen']])
+  })
+
   it('keeps the local-network status unknown when UDP send settles without an error', async () => {
     registerDeveloperPermissionHandlers()
 

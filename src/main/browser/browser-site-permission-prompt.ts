@@ -1,5 +1,4 @@
 import {
-  BROWSER_SITE_PERMISSIONS,
   BROWSER_SITE_PERMISSION_LOCAL_FILES_ORIGIN,
   isBrowserSitePermissionDecision,
   type BrowserSitePermission,
@@ -13,8 +12,8 @@ import {
   setBrowserSitePermissionDecisions
 } from './browser-site-permission-store'
 
+// geolocation 과 media(카메라 · 마이크)는 여기 없으므로 묻지 않고 거절된다. 앱에 위치 · 카메라 · 마이크 권한이 없다.
 const SITE_PERMISSION_BY_ELECTRON_PERMISSION: Partial<Record<string, BrowserSitePermission>> = {
-  geolocation: 'location',
   notifications: 'notifications',
   'clipboard-read': 'clipboard',
   midi: 'midi',
@@ -27,21 +26,8 @@ const SITE_PERMISSION_BY_ELECTRON_PERMISSION: Partial<Record<string, BrowserSite
   'loopback-network': 'local-network'
 }
 
-const SITE_PERMISSION_BY_MEDIA_TYPE: Partial<Record<string, BrowserSitePermission>> = {
-  video: 'camera',
-  audio: 'microphone'
-}
-
-/** Null means no site prompt applies; an empty device list must not grant media access. */
-export function browserSitePermissionsFor(
-  permission: string,
-  mediaTypes: readonly string[] | undefined
-): BrowserSitePermission[] | null {
-  if (permission === 'media') {
-    const requested = new Set((mediaTypes ?? []).map((type) => SITE_PERMISSION_BY_MEDIA_TYPE[type]))
-    // Preserve camera-before-microphone prompt order regardless of Chromium's order.
-    return BROWSER_SITE_PERMISSIONS.filter((sitePermission) => requested.has(sitePermission))
-  }
+/** Null means no site prompt applies, so the request is auto-granted or denied without asking. */
+export function browserSitePermissionsFor(permission: string): BrowserSitePermission[] | null {
   const sitePermission = SITE_PERMISSION_BY_ELECTRON_PERMISSION[permission]
   return sitePermission ? [sitePermission] : null
 }

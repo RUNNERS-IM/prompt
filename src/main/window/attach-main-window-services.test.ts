@@ -576,7 +576,7 @@ describe('attachMainWindowServices', () => {
     expect(removeHandlerMock).toHaveBeenCalledWith('app:reload')
   })
 
-  it('only allows the explicit permission allowlist', async () => {
+  it('only allows the explicit permission allowlist', () => {
     attachMainWindowServices(createMainWindow() as never, createStore(), createRuntime() as never)
 
     expect(setPermissionRequestHandlerMock).toHaveBeenCalledTimes(1)
@@ -584,34 +584,19 @@ describe('attachMainWindowServices', () => {
     const callback = vi.fn()
 
     permissionHandler(null, 'media', callback, { mediaTypes: ['audio'] })
-    await vi.waitFor(() => expect(callback).toHaveBeenCalledWith(true))
     permissionHandler(null, 'fullscreen', callback)
     permissionHandler(null, 'pointerLock', callback)
     permissionHandler(null, 'clipboard-read', callback)
 
-    expect(callback.mock.calls).toEqual([[true], [true], [true], [false]])
+    expect(callback.mock.calls).toEqual([[false], [true], [true], [false]])
   })
 
-  it('requests macOS media access only when the renderer asks for media', async () => {
-    const platform = Object.getOwnPropertyDescriptor(process, 'platform')
-    Object.defineProperty(process, 'platform', { value: 'darwin' })
-    try {
-      attachMainWindowServices(createMainWindow() as never, createStore(), createRuntime() as never)
+  it('never asks macOS for camera or microphone access', () => {
+    attachMainWindowServices(createMainWindow() as never, createStore(), createRuntime() as never)
+    const permissionHandler = setPermissionRequestHandlerMock.mock.calls[0][0]
+    permissionHandler(null, 'media', vi.fn(), { mediaTypes: ['audio', 'video'] })
 
-      expect(systemPreferencesAskForMediaAccessMock).not.toHaveBeenCalled()
-
-      const permissionHandler = setPermissionRequestHandlerMock.mock.calls[0][0]
-      const callback = vi.fn()
-      permissionHandler(null, 'media', callback, { mediaTypes: ['audio', 'video'] })
-
-      await vi.waitFor(() => expect(callback).toHaveBeenCalledWith(true))
-      expect(systemPreferencesAskForMediaAccessMock.mock.calls).toEqual([
-        ['microphone'],
-        ['camera']
-      ])
-    } finally {
-      Object.defineProperty(process, 'platform', platform ?? { value: process.platform })
-    }
+    expect(systemPreferencesAskForMediaAccessMock).not.toHaveBeenCalled()
   })
 
   it('clears browser guest registrations when the main window closes', () => {

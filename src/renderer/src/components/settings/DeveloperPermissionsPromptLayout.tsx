@@ -1,25 +1,8 @@
 import { RefreshCw } from 'lucide-react'
-import type { DeveloperPermissionId } from '../../../../shared/developer-permissions-types'
 import { Button } from '../ui/button'
 import { translate } from '@/i18n/i18n'
 import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 import { SettingsSubsectionHeader } from './SettingsFormControls'
-
-// Prompt runs Claude sessions only; voice, webcam and hardware-device permissions have no use there.
-const PROMPT_HIDDEN_PERMISSION_IDS: ReadonlySet<DeveloperPermissionId> = new Set([
-  'microphone',
-  'camera',
-  'usb',
-  'bluetooth'
-])
-
-export function promptVisibleDeveloperPermissions<T extends { id: DeveloperPermissionId }>(
-  permissions: T[]
-): T[] {
-  return PROMPT_SIMPLE_SETTINGS
-    ? permissions.filter((permission) => !PROMPT_HIDDEN_PERMISSION_IDS.has(permission.id))
-    : permissions
-}
 
 // Prompt: the rows are one settings box, which already draws the border and pads each row.
 export const DEVELOPER_PERMISSION_LIST_CLASS = PROMPT_SIMPLE_SETTINGS

@@ -208,31 +208,13 @@ const windowsRuntimeResources = existsSync(
   : []
 
 // Shared with the terminal host helper so its purpose strings cannot drift from the app's.
+// 폴더 · 로컬 네트워크 · AppleEvents 만 둔다. 위치 · 연락처 · 캘린더 · 미리 알림 · 마이크 · 카메라 · 블루투스 · 소리 녹음은
+// 쓰는 기능이 없어 뺐다(2026-11-27 사용자: 「필요없는 기능, 권한 싹다 제거해줘」). 다시 넣으면 entitlements.mac.plist 도 같이 본다.
 const macUsageDescriptions = {
   NSAppleEventsUsageDescription:
     'Prompt allows terminal-launched developer tools to automate local apps when you request it.',
-  NSBluetoothAlwaysUsageDescription:
-    'Prompt allows terminal-launched developer tools to access Bluetooth devices when you request it.',
-  NSBluetoothPeripheralUsageDescription:
-    'Prompt allows terminal-launched developer tools to access Bluetooth devices when you request it.',
-  NSCalendarsUsageDescription:
-    'Prompt allows terminal-launched developer tools to access your calendars when you request it.',
-  NSCalendarsFullAccessUsageDescription:
-    'Prompt allows terminal-launched developer tools to access your calendars when you request it.',
-  NSCameraUsageDescription: "Application requests access to the device's camera.",
-  NSContactsUsageDescription:
-    'Prompt allows terminal-launched developer tools to access your contacts when you request it.',
-  NSLocationUsageDescription:
-    'Prompt allows terminal-launched developer tools to access location when you request it.',
   NSLocalNetworkUsageDescription:
     'Prompt allows terminal-launched developer tools to discover and connect to local development servers when you request it.',
-  NSMicrophoneUsageDescription: "Application requests access to the device's microphone.",
-  NSRemindersUsageDescription:
-    'Prompt allows terminal-launched developer tools to access your reminders when you request it.',
-  NSRemindersFullAccessUsageDescription:
-    'Prompt allows terminal-launched developer tools to access your reminders when you request it.',
-  NSAudioCaptureUsageDescription:
-    'Prompt allows terminal-launched developer tools to capture desktop audio when you request it.',
   NSBonjourServices: ['_http._tcp', '_https._tcp'],
   ...MACOS_FOLDER_USAGE_DESCRIPTIONS
 }

@@ -1,8 +1,6 @@
 /** What a site in the built-in browser can ask for, in the order prompts and settings list them. */
+// 카메라 · 마이크 · 위치는 앱 권한에서 뺐으므로 사이트에도 묻지 않고 거절한다(2026-11-27 사용자: 「위치는 왜 필요한지 모르겠어」).
 export const BROWSER_SITE_PERMISSIONS = [
-  'camera',
-  'microphone',
-  'location',
   'notifications',
   'clipboard',
   'midi',
@@ -19,7 +17,7 @@ export const BROWSER_SITE_PERMISSION_LOCAL_FILES_ORIGIN = 'file://'
 /** A remembered answer; a permission with none is asked again. */
 export type BrowserSitePermissionDecision = 'allow' | 'block'
 
-/** A site asks for one or more permissions at once, e.g. camera and microphone for a call. */
+/** A site asks for one or more permissions at once. */
 export type BrowserSitePermissionPrompt = {
   /** Origin of the page in the tab, e.g. `https://meet.google.com`. */
   origin: string

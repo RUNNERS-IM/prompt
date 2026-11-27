@@ -34,7 +34,6 @@ export type BrowserSessionRegistryMocks = {
   installBrowserSessionUserAgentPolicyMock: RegistryMock
   browserManagerHandleGuestWillDownloadMock: RegistryMock
   browserManagerNotifyPermissionDeniedMock: RegistryMock
-  requestSystemMediaAccessMock: RegistryMock
 }
 
 export function installModuleMocks(
@@ -58,7 +57,6 @@ export function installModuleMocks(
   const installBrowserSessionUserAgentPolicyMock: RegistryMock = vi.fn(() => vi.fn())
   const browserManagerHandleGuestWillDownloadMock: RegistryMock = vi.fn()
   const browserManagerNotifyPermissionDeniedMock: RegistryMock = vi.fn()
-  const requestSystemMediaAccessMock: RegistryMock = vi.fn().mockResolvedValue(true)
 
   vi.doMock('electron', () => ({
     app: { getPath: vi.fn(() => USER_DATA) },
@@ -139,10 +137,6 @@ export function installModuleMocks(
       resolvePagePromptTarget: vi.fn(() => null)
     }
   }))
-  vi.doMock('../browser-media-access', () => ({
-    hasSystemMediaAccess: vi.fn(() => true),
-    requestSystemMediaAccess: requestSystemMediaAccessMock
-  }))
   vi.doMock('../browser-session-ua', () => ({
     installBrowserSessionUserAgentPolicy: installBrowserSessionUserAgentPolicyMock
   }))
@@ -193,7 +187,6 @@ export function installModuleMocks(
     sessionFromPartitionMock,
     installBrowserSessionUserAgentPolicyMock,
     browserManagerHandleGuestWillDownloadMock,
-    browserManagerNotifyPermissionDeniedMock,
-    requestSystemMediaAccessMock
+    browserManagerNotifyPermissionDeniedMock
   }
 }

@@ -225,7 +225,7 @@ describe('BrowserSessionRegistry persistence', () => {
         details
       )
 
-    // Only camera has a saved answer; this guest has no prompt window.
+    // Only camera has a saved answer, which no longer counts; this guest has no prompt window.
     request('fullscreen')
     request('clipboard-read')
     request('clipboard-sanitized-write')
@@ -242,9 +242,13 @@ describe('BrowserSessionRegistry persistence', () => {
       notifications: false,
       'persistent-storage': true,
       geolocation: false,
-      media: true
+      media: false
     })
-    expect(browserManagerNotifyPermissionDeniedMock).not.toHaveBeenCalled()
+    // 위치 · 카메라 · 마이크는 앱이 권한을 갖지 않아 저장된 답과 상관없이 거절하고 안내만 띄운다.
+    expect(
+      browserManagerNotifyPermissionDeniedMock.mock.calls.map(([notice]) => notice.permission)
+    ).toEqual(['geolocation', 'media'])
+    browserManagerNotifyPermissionDeniedMock.mockClear()
 
     requestHandler(guestWc, 'mediaKeySystem', permissionCallback, {
       requestingUrl: 'https://widget.example.net/embed',
@@ -282,7 +286,7 @@ describe('BrowserSessionRegistry persistence', () => {
     expect(checkHandler(null, 'notifications', 'https://example.com')).toBe(false)
     expect(checkHandler(null, 'persistent-storage', '')).toBe(true)
     expect(checkHandler(null, 'geolocation', 'https://example.com')).toBe(false)
-    expect(checkHandler(guestWc, 'media', '', { mediaType: 'video' })).toBe(true)
+    expect(checkHandler(guestWc, 'media', '', { mediaType: 'video' })).toBe(false)
     expect(checkHandler(guestWc, 'media', '', { mediaType: 'audio' })).toBe(false)
 
     requestHandler(guestWc, 'storage-access', permissionCallback, {})
@@ -421,12 +425,8 @@ describe('BrowserSessionRegistry persistence', () => {
     })
 
     seedSitePermissions(fsState, { default: { 'https://example.com': { camera: 'allow' } } })
-    const {
-      sessionFromPartitionMock,
-      browserManagerNotifyPermissionDeniedMock,
-      requestSystemMediaAccessMock
-    } = installModuleMocks(fsState)
-    requestSystemMediaAccessMock.mockResolvedValue(false)
+    const { sessionFromPartitionMock, browserManagerNotifyPermissionDeniedMock } =
+      installModuleMocks(fsState)
     const { browserSessionRegistry } = await import('./browser-session-registry')
 
     browserSessionRegistry.initializeBrowserSessionsFromPersistedState()

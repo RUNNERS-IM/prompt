@@ -3,7 +3,6 @@
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { DeveloperPermissionRequestResult } from '../../../../shared/developer-permissions-types'
 import type { SpeechModelManifest } from '../../../../shared/speech-types'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { getDefaultVoiceSettings } from '../../../../shared/constants'
@@ -28,11 +27,6 @@ vi.mock('sonner', () => ({
   }
 }))
 
-const deniedMicrophoneResult: DeveloperPermissionRequestResult = {
-  id: 'microphone',
-  status: 'denied',
-  openedSystemSettings: false
-}
 const EMPTY_SPEECH_CATALOG: SpeechModelManifest[] = []
 
 function makeSettings(voiceEnabled?: boolean): GlobalSettings {
@@ -47,14 +41,9 @@ function makeSettings(voiceEnabled?: boolean): GlobalSettings {
   } as GlobalSettings
 }
 
-function installWindowApi(
-  requestMicrophonePermission: () => Promise<DeveloperPermissionRequestResult>
-) {
+function installWindowApi() {
   Object.assign(window, {
     api: {
-      developerPermissions: {
-        request: vi.fn(requestMicrophonePermission)
-      },
       speech: {
         getCatalog: vi.fn(async () => EMPTY_SPEECH_CATALOG),
         getOpenAiApiKeyStatus: vi.fn(async () => ({ configured: false })),
@@ -71,7 +60,6 @@ async function renderVoicePane(args: {
   voiceEnabled?: boolean
   markFeatureTipsSeen: (ids: string[]) => void
   updateSettings: (updates: Partial<GlobalSettings>) => void
-  requestMicrophonePermission?: () => Promise<DeveloperPermissionRequestResult>
   recordFeatureInteraction?: (id: string) => void
 }): Promise<{
   button: HTMLButtonElement
@@ -89,7 +77,7 @@ async function renderVoicePane(args: {
     })
   )
   useShortcutLabelMock.mockReturnValue('Ctrl+Shift+Y')
-  installWindowApi(args.requestMicrophonePermission ?? vi.fn(async () => deniedMicrophoneResult))
+  installWindowApi()
 
   const container = document.createElement('div')
   document.body.appendChild(container)
@@ -146,23 +134,19 @@ describe('VoicePane', () => {
     expect(refreshModelStates).toHaveBeenCalledTimes(1)
   })
 
-  it('clicking the switch marks the voice tip seen before disabling voice settings', async () => {
+  it('clicking the switch marks the voice tip seen before disabling voice settings', () => {
     const calls: string[] = []
-    const requestMicrophonePermission = vi.fn()
     const updateVoiceSettings = vi.fn((updates: { enabled?: boolean }) => {
       calls.push(`settings:${String(updates.enabled)}`)
     })
 
-    await handleVoiceDictationToggle({
+    handleVoiceDictationToggle({
       voiceEnabled: true,
       markFeatureTipsSeen: (ids) => calls.push(`seen:${ids.join(',')}`),
-      updateVoiceSettings,
-      requestMicrophonePermission
+      updateVoiceSettings
     })
 
     expect(calls).toEqual(['seen:voice-dictation', 'settings:false'])
-    expect(updateVoiceSettings).toHaveBeenCalledWith({ enabled: false })
-    expect(requestMicrophonePermission).not.toHaveBeenCalled()
   })
 
   it('clicking the switch marks the voice tip seen before the disable settings update', async () => {
@@ -173,8 +157,7 @@ describe('VoicePane', () => {
     const { button, root } = await renderVoicePane({
       voiceEnabled: true,
       markFeatureTipsSeen: (ids) => calls.push(`seen:${ids.join(',')}`),
-      updateSettings,
-      requestMicrophonePermission: vi.fn(async () => deniedMicrophoneResult)
+      updateSettings
     })
 
     await clickSwitch(button)
@@ -186,10 +169,10 @@ describe('VoicePane', () => {
         voice: expect.objectContaining({ enabled: false })
       })
     )
-    expect(window.api.developerPermissions.request).not.toHaveBeenCalled()
   })
 
-  it('clicking the switch marks the voice tip seen before requesting microphone permission', async () => {
+  // 앱에 맥 마이크 권한이 없으므로 켤 때 권한을 묻지 않고 바로 켠다.
+  it('enables voice settings without asking for microphone permission', async () => {
     const calls: string[] = []
     const updateSettings = vi.fn((updates: Partial<GlobalSettings>) => {
       calls.push(`settings:${String(updates.voice?.enabled)}`)
@@ -197,46 +180,14 @@ describe('VoicePane', () => {
     const { button, root } = await renderVoicePane({
       voiceEnabled: false,
       markFeatureTipsSeen: (ids) => calls.push(`seen:${ids.join(',')}`),
-      updateSettings,
-      requestMicrophonePermission: async () => {
-        calls.push('permission-request')
-        return deniedMicrophoneResult
-      }
+      updateSettings
     })
 
     await clickSwitch(button)
     root.unmount()
 
-    expect(calls).toEqual(['seen:voice-dictation', 'permission-request'])
-    expect(updateSettings).not.toHaveBeenCalled()
-  })
-
-  it('marks the voice tip seen before requesting microphone permission when enabling is denied', async () => {
-    const calls: string[] = []
-    const updateVoiceSettings = vi.fn((updates: { enabled?: boolean }) => {
-      calls.push(`settings:${String(updates.enabled)}`)
-    })
-
-    await handleVoiceDictationToggle({
-      voiceEnabled: false,
-      markFeatureTipsSeen: (ids) => calls.push(`seen:${ids.join(',')}`),
-      updateVoiceSettings,
-      requestMicrophonePermission: async () => {
-        calls.push('permission-request')
-        return deniedMicrophoneResult
-      },
-      setPermissionPending: (pending) => calls.push(`pending:${String(pending)}`),
-      notifyPermissionRequired: () => calls.push('permission-required')
-    })
-
-    expect(calls).toEqual([
-      'seen:voice-dictation',
-      'pending:true',
-      'permission-request',
-      'permission-required',
-      'pending:false'
-    ])
-    expect(updateVoiceSettings).not.toHaveBeenCalled()
+    expect(calls).toEqual(['seen:voice-dictation', 'settings:true'])
+    expect(window.api).not.toHaveProperty('developerPermissions')
   })
 
   it('does not record voice feature interaction from the settings switch', async () => {
@@ -269,7 +220,7 @@ describe('VoicePane', () => {
       })
     )
     useShortcutLabelMock.mockReturnValue('Ctrl+Shift+Y')
-    installWindowApi(vi.fn(async () => deniedMicrophoneResult))
+    installWindowApi()
     window.api.speech.getOpenAiApiKeyStatus = vi.fn(async () => ({
       configured: true,
       protection: 'sealed' as const

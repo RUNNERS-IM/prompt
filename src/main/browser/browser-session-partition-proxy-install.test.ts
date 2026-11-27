@@ -41,10 +41,6 @@ vi.mock('./browser-manager', () => ({
     handleGuestWillDownload: vi.fn()
   }
 }))
-vi.mock('./browser-media-access', () => ({
-  hasSystemMediaAccess: vi.fn(() => false),
-  requestSystemMediaAccess: vi.fn(async () => false)
-}))
 vi.mock('./browser-session-ua', () => ({
   installBrowserSessionUserAgentPolicy: vi.fn(() => vi.fn())
 }))

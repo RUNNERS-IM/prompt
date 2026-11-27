@@ -6,7 +6,7 @@ import { sitePermissionPrompt } from './browser-site-permission-prompt'
 const signal = new AbortController().signal
 const details = {
   origin: 'https://meet.example.com',
-  permissions: ['camera' as const, 'microphone' as const]
+  permissions: ['clipboard' as const, 'midi' as const]
 }
 
 describe('browser site permission prompt', () => {
@@ -17,7 +17,7 @@ describe('browser site permission prompt', () => {
     expect(confirm).toHaveBeenCalledWith(
       expect.objectContaining({
         title: 'meet.example.com wants to',
-        description: 'Use your camera\nUse your microphone',
+        description: 'See text and images copied to the clipboard\nUse your MIDI devices',
         confirmLabel: 'Allow',
         cancelLabel: 'Block'
       })
@@ -27,7 +27,7 @@ describe('browser site permission prompt', () => {
   it('calls a local file "this file"', async () => {
     const confirm = vi.fn(async (_options: ConfirmationDialogOptions) => true)
 
-    await sitePermissionPrompt.ask(confirm, { origin: 'file://', permissions: ['camera'] }, signal)
+    await sitePermissionPrompt.ask(confirm, { origin: 'file://', permissions: ['clipboard'] }, signal)
     expect(confirm.mock.calls[0][0].title).toBe('This file wants to')
   })
 

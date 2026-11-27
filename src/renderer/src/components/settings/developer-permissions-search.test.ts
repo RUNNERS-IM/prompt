@@ -15,10 +15,10 @@ const MACOS_LOCAL_NETWORK_LABEL = {
 
 function getLanEntry() {
   const entry = getDeveloperPermissionsPaneSearchEntries().find((candidate) =>
-    candidate.keywords?.includes('usb')
+    candidate.keywords?.includes('lan')
   )
   if (!entry) {
-    throw new Error('LAN, USB, and Bluetooth search entry is missing')
+    throw new Error('Local Network search entry is missing')
   }
   return entry
 }

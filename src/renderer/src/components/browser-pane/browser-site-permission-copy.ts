@@ -7,12 +7,6 @@ import { translate } from '@/i18n/i18n'
 /** The setting's name, e.g. in Settings → Browser → Site permissions. */
 export function browserSitePermissionLabel(permission: BrowserSitePermission): string {
   switch (permission) {
-    case 'camera':
-      return translate('auto.components.browserPane.sitePermission.label.camera', 'Camera')
-    case 'microphone':
-      return translate('auto.components.browserPane.sitePermission.label.microphone', 'Microphone')
-    case 'location':
-      return translate('auto.components.browserPane.sitePermission.label.location', 'Location')
     case 'notifications':
       return translate(
         'auto.components.browserPane.sitePermission.label.notifications',
@@ -43,18 +37,6 @@ export function browserSitePermissionLabel(permission: BrowserSitePermission): s
 /** What the site asks to do, finishing "{site} wants to". */
 export function browserSitePermissionRequestLine(permission: BrowserSitePermission): string {
   switch (permission) {
-    case 'camera':
-      return translate('auto.components.browserPane.sitePermission.ask.camera', 'Use your camera')
-    case 'microphone':
-      return translate(
-        'auto.components.browserPane.sitePermission.ask.microphone',
-        'Use your microphone'
-      )
-    case 'location':
-      return translate(
-        'auto.components.browserPane.sitePermission.ask.location',
-        'Know your location'
-      )
     case 'notifications':
       return translate(
         'auto.components.browserPane.sitePermission.ask.notifications',

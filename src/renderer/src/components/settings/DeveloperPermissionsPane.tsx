@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import {
   Accessibility,
-  Bluetooth,
-  Camera,
   HardDrive,
-  Mic,
   MonitorUp,
   Network,
   RefreshCw,
   ShieldCheck,
-  Usb,
   Workflow
 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -44,38 +40,6 @@ type PermissionDefinition = {
 }
 
 const PERMISSIONS: PermissionDefinition[] = [
-  {
-    id: 'microphone',
-    get label() {
-      return translate('auto.components.settings.DeveloperPermissionsPane.16381e040a', 'Microphone')
-    },
-    get description() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.cc8151d9fa',
-        'Voice input, transcription, audio recording, sox, ffmpeg, and Whisper CLIs.'
-      )
-    },
-    get actionLabel() {
-      return translate('auto.components.settings.DeveloperPermissionsPane.actionRequest', 'Request')
-    },
-    icon: <Mic className="size-4" />
-  },
-  {
-    id: 'camera',
-    get label() {
-      return translate('auto.components.settings.DeveloperPermissionsPane.e5b5f3d6b9', 'Camera')
-    },
-    get description() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.550cfa3750',
-        'Webcam capture and camera-driven local test apps.'
-      )
-    },
-    get actionLabel() {
-      return translate('auto.components.settings.DeveloperPermissionsPane.actionRequest', 'Request')
-    },
-    icon: <Camera className="size-4" />
-  },
   {
     id: 'screen',
     get label() {
@@ -180,47 +144,7 @@ const PERMISSIONS: PermissionDefinition[] = [
     },
     icon: <Network className="size-4" />
   },
-  {
-    id: 'usb',
-    get label() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.bf51e4a542',
-        'USB Devices'
-      )
-    },
-    get description() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.dfbc12c8c8',
-        'Hardware debugging and device tools that talk to USB devices.'
-      )
-    },
-    get actionLabel() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.actionOpenSettings',
-        'Open Settings'
-      )
-    },
-    icon: <Usb className="size-4" />
-  },
-  {
-    id: 'bluetooth',
-    get label() {
-      return translate('auto.components.settings.DeveloperPermissionsPane.b2210b1b4f', 'Bluetooth')
-    },
-    get description() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.4cfaa7e98a',
-        'Bluetooth device tools and local hardware experiments.'
-      )
-    },
-    get actionLabel() {
-      return translate(
-        'auto.components.settings.DeveloperPermissionsPane.actionOpenSettings',
-        'Open Settings'
-      )
-    },
-    icon: <Bluetooth className="size-4" />
-  }
+
 ]
 
 export function DeveloperPermissionsPane({
@@ -342,7 +266,7 @@ export function DeveloperPermissionsPane({
 
       <div className={promptLayout.DEVELOPER_PERMISSION_LIST_CLASS}>
         <promptLayout.PermissionsHeader loading={loading} onRefresh={() => void refresh()} />
-        {promptLayout.promptVisibleDeveloperPermissions(PERMISSIONS).map((permission) => {
+        {PERMISSIONS.map((permission) => {
           const state = stateById.get(permission.id)
           const status = state?.status
           const pending = pendingId === permission.id

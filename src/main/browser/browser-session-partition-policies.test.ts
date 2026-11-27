@@ -90,10 +90,6 @@ vi.mock('./browser-manager', () => ({
 vi.mock('./doc-preview-download-block-notice', () => ({
   noticeDocPreviewDownloadBlocked: mocks.noticeDocPreviewDownloadBlocked
 }))
-vi.mock('./browser-media-access', () => ({
-  hasSystemMediaAccess: () => false,
-  requestSystemMediaAccess: async () => false
-}))
 vi.mock('./browser-session-ua', () => ({
   installBrowserSessionUserAgentPolicy: vi.fn(() => vi.fn())
 }))
@@ -268,8 +264,8 @@ describe('partition permission policy', () => {
     }
 
     for (const decision of ['allow', 'block'] as const) {
-      memory.set('https://a.test', ['location', 'clipboard', 'midi'], decision)
-      for (const permission of ['geolocation', 'clipboard-read', 'midi']) {
+      memory.set('https://a.test', ['window-management', 'clipboard', 'midi'], decision)
+      for (const permission of ['window-management', 'clipboard-read', 'midi']) {
         const answer = await new Promise<boolean>((resolve) => {
           requestHandler(tab, permission, resolve, {
             requestingUrl: 'about:srcdoc',

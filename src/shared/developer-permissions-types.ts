@@ -1,6 +1,5 @@
+// 마이크 · 카메라 · USB · 블루투스는 앱 권한에서 뺐다(2026-11-27 사용자: 「필요없는 기능, 권한 싹다 제거해줘」).
 export type DeveloperPermissionId =
-  | 'microphone'
-  | 'camera'
   | 'screen'
   | 'accessibility'
   | 'full-disk-access'
@@ -8,8 +7,6 @@ export type DeveloperPermissionId =
   | 'files-and-folders'
   | 'automation'
   | 'local-network'
-  | 'usb'
-  | 'bluetooth'
 
 export type DeveloperPermissionStatus =
   | 'granted'

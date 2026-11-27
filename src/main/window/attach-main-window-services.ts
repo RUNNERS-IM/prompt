@@ -22,7 +22,6 @@ import { registerDaemonManagementHandlers } from '../ipc/pty/pty-management'
 import { registerPreviousVersionSessionTabsHandler } from '../ipc/pty/previous-version-session-tabs-ipc'
 import { registerSshHandlers } from '../ipc/ssh/ssh'
 import { browserManager } from '../browser/browser-manager'
-import { hasSystemMediaAccess, requestSystemMediaAccess } from '../browser/browser-media-access'
 import type { OrcaRuntimeService, RuntimeWorktreeLifecycleEvent } from '../runtime/orca-runtime'
 import type { PreQuitCleanupFailureMode, UpdateInstallMode } from '../updater'
 import { scheduleHistoryGc } from '../terminal-history-gc'
@@ -138,26 +137,15 @@ export function attachMainWindowServices(
   scheduleMainWindowAutoUpdaterSetup(mainWindow, store, options)
   registerRuntimeWindowLifecycle(mainWindow, runtime)
 
-  const allowedPermissions = new Set(['media', 'fullscreen', 'pointerLock'])
+  // media(카메라 · 마이크)는 허용하지 않는다. 앱에 그 권한이 없어 macOS 에 물으면 앱이 꺼진다.
+  const allowedPermissions = new Set(['fullscreen', 'pointerLock'])
   mainWindow.webContents.session.setPermissionRequestHandler(
-    (_webContents, permission, callback, details) => {
-      if (permission === 'media') {
-        void requestSystemMediaAccess(details).then(callback, (error: unknown) => {
-          console.error('[permissions] Failed to request media access:', error)
-          callback(false)
-        })
-        return
-      }
+    (_webContents, permission, callback) => {
       callback(allowedPermissions.has(permission))
     }
   )
-  mainWindow.webContents.session.setPermissionCheckHandler(
-    (_webContents, permission, _origin, details) => {
-      if (permission !== 'media') {
-        return allowedPermissions.has(permission)
-      }
-      return hasSystemMediaAccess(details?.mediaType)
-    }
+  mainWindow.webContents.session.setPermissionCheckHandler((_webContents, permission) =>
+    allowedPermissions.has(permission)
   )
 
   mainWindow.on('closed', () => {

@@ -4,18 +4,15 @@ import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import { useShortcutLabel } from '@/hooks/useShortcutLabel'
 import { translate } from '@/i18n/i18n'
-import { VoiceMicrophoneSetting } from './VoiceMicrophoneSetting'
 
 type VoiceDictationSettingsSectionProps = {
   voiceSettings: VoiceSettings
-  permissionPending: boolean
   onToggleVoiceDictation: () => void
   onUpdateVoiceSettings: (updates: Partial<VoiceSettings>) => void
 }
 
 export function VoiceDictationSettingsSection({
   voiceSettings,
-  permissionPending,
   onToggleVoiceDictation,
   onUpdateVoiceSettings
 }: VoiceDictationSettingsSectionProps): React.JSX.Element {
@@ -42,10 +39,7 @@ export function VoiceDictationSettingsSection({
             'auto.components.settings.VoicePane.0121960365',
             'Enable voice dictation'
           )}
-          aria-busy={permissionPending}
-          disabled={permissionPending}
-          onCheckedChange={() => void onToggleVoiceDictation()}
-          className="disabled:cursor-wait disabled:opacity-70"
+          onCheckedChange={onToggleVoiceDictation}
         />
       </div>
 
@@ -83,13 +77,6 @@ export function VoiceDictationSettingsSection({
           ))}
         </div>
       </div>
-
-      <Separator />
-
-      <VoiceMicrophoneSetting
-        voiceSettings={voiceSettings}
-        onUpdateVoiceSettings={onUpdateVoiceSettings}
-      />
 
       <Separator />
     </>

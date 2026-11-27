@@ -301,7 +301,7 @@ describe('BrowserSessionRegistry', () => {
     const profile = await browserSessionRegistry.createProfile('isolated', 'Delete Test')
     expect(profile).not.toBeNull()
     expect(browserSessionRegistry.isAllowedPartition(profile!.partition)).toBe(true)
-    setBrowserSitePermissionDecisions(profile!.id, 'https://example.com', ['camera'], 'allow')
+    setBrowserSitePermissionDecisions(profile!.id, 'https://example.com', ['clipboard'], 'allow')
     const deleted = await browserSessionRegistry.deleteProfile(profile!.id)
     expect(deleted).toBe(true)
     expect(browserSessionRegistry.isAllowedPartition(profile!.partition)).toBe(false)
@@ -493,29 +493,23 @@ describe('BrowserSessionRegistry', () => {
     expect(checkHandler(null, 'pointerLock', '', {})).toBe(true)
   })
 
-  it('asks macOS for the camera only after the user allowed the site', async () => {
+  it('refuses camera and location even for a site the user once allowed', async () => {
     configureBrowserSitePermissionStore(mkdtempSync(join(tmpdir(), 'orca-site-permissions-')))
     const profile = await browserSessionRegistry.createProfile('isolated', 'Media Test')
     if (!profile) {
       throw new Error('Expected the profile')
     }
-    setBrowserSitePermissionDecisions(profile.id, 'https://example.com', ['camera'], 'allow')
+    setBrowserSitePermissionDecisions(profile.id, 'https://example.com', ['notifications'], 'allow')
     const mockSession = sessionFromPartitionMock.mock.results[0]?.value
     const requestHandler = mockSession.setPermissionRequestHandler.mock.calls[0][0]
     const checkHandler = mockSession.setPermissionCheckHandler.mock.calls[0][0]
 
     const allowedSite = vi.fn()
-    const otherSite = vi.fn()
     const allowedGuest = { id: 7, getURL: vi.fn(() => 'https://example.com/') }
-    const otherGuest = { id: 8, getURL: vi.fn(() => 'https://other.test/') }
     requestHandler(allowedGuest, 'media', allowedSite, { mediaTypes: ['video'] })
-    requestHandler(otherGuest, 'media', otherSite, { mediaTypes: ['video'] })
-    await vi.waitFor(() => expect(allowedSite).toHaveBeenCalledWith(true))
-    await vi.waitFor(() => expect(otherSite).toHaveBeenCalledWith(false))
+    await vi.waitFor(() => expect(allowedSite).toHaveBeenCalledWith(false))
 
-    expect(checkHandler(allowedGuest, 'media', '', { mediaType: 'video' })).toBe(true)
-    expect(checkHandler(otherGuest, 'media', '', { mediaType: 'video' })).toBe(false)
-    expect(checkHandler(null, 'notifications', 'https://example.com', {})).toBe(false)
+    expect(checkHandler(allowedGuest, 'media', '', { mediaType: 'video' })).toBe(false)
     expect(checkHandler(null, 'persistent-storage', '', {})).toBe(true)
     expect(checkHandler(null, 'geolocation', 'https://example.com', {})).toBe(false)
   })

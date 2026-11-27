@@ -32,7 +32,6 @@ export function VoicePane({ settings, updateSettings }: VoicePaneProps): React.J
   const markFeatureTipsSeen = useAppStore((s) => s.markFeatureTipsSeen)
   const settingsSearchQuery = useAppStore((s) => s.settingsSearchQuery ?? '')
   const [catalog, setCatalog] = useState<SpeechModelManifest[]>([])
-  const [permissionPending, setPermissionPending] = useState(false)
   const [openAiDialogOpen, setOpenAiDialogOpen] = useState(false)
   const [openAiApiKeyDraft, setOpenAiApiKeyDraft] = useState('')
   const [openAiKeyPending, setOpenAiKeyPending] = useState(false)
@@ -99,45 +98,14 @@ export function VoicePane({ settings, updateSettings }: VoicePaneProps): React.J
     return cleanup
   }, [refreshModelStates])
 
-  const toggleVoiceDictation = async (): Promise<void> => {
-    await handleVoiceDictationToggle({
+  const toggleVoiceDictation = (): void => {
+    handleVoiceDictationToggle({
       voiceEnabled: voiceSettings.enabled,
       markFeatureTipsSeen,
-      updateVoiceSettings,
-      requestMicrophonePermission: () =>
-        window.api.developerPermissions.request({ id: 'microphone' }),
-      setPermissionPending,
-      isMounted: () => mountedRef.current,
-      notifyPermissionGranted: () =>
-        toast.success(
-          translate(
-            'auto.components.settings.VoicePane.cd9fe37556',
-            'Microphone permission granted'
-          )
-        ),
-      notifyPermissionOpenedSystemSettings: () =>
-        toast.message(
-          translate(
-            'auto.components.settings.VoicePane.1eac933202',
-            'Opened macOS Privacy & Security. Enable dictation again after granting access.'
-          )
-        ),
-      notifyPermissionRequired: () =>
-        toast.message(
-          translate(
-            'auto.components.settings.VoicePane.f9a9cf6928',
-            'Microphone permission is required before enabling voice dictation.'
-          )
-        ),
-      notifyPermissionRequestFailed: () =>
-        toast.error(
-          translate(
-            'auto.components.settings.VoicePane.ad5d036ecc',
-            'Could not request microphone permission. Voice dictation was not enabled.'
-          )
-        )
+      updateVoiceSettings
     })
   }
+
 
   const selectedModel = catalog.find((m) => m.id === voiceSettings.sttModel)
   const showOpenAiSettingsRow =
@@ -218,8 +186,7 @@ export function VoicePane({ settings, updateSettings }: VoicePaneProps): React.J
     <div ref={handlePaneRef} className="space-y-1">
       <VoiceDictationSettingsSection
         voiceSettings={voiceSettings}
-        permissionPending={permissionPending}
-        onToggleVoiceDictation={() => void toggleVoiceDictation()}
+        onToggleVoiceDictation={toggleVoiceDictation}
         onUpdateVoiceSettings={updateVoiceSettings}
       />
 

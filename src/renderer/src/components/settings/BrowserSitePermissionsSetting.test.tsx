@@ -71,7 +71,7 @@ it("never shows or edits one profile's sites under another", async () => {
   const sitePermissionsList = vi.fn(({ profileId }: { profileId: string }) =>
     profileId === 'work'
       ? workList.promise
-      : Promise.resolve([{ origin: 'https://a.test', decisions: { location: 'block' } }])
+      : Promise.resolve([{ origin: 'https://a.test', decisions: { midi: 'block' } }])
   )
   const sitePermissionsSet = vi.fn(({ profileId }: { profileId: string }) =>
     profileId === 'default' ? defaultWrite.promise : Promise.resolve([])
@@ -85,7 +85,7 @@ it("never shows or edits one profile's sites under another", async () => {
   expect(await screen.findByText('a.test')).toBeInTheDocument()
   fireEvent.change(permissionSelects()[0], { target: { value: 'allow' } })
   expect(sitePermissionsSet).toHaveBeenLastCalledWith(
-    expect.objectContaining({ profileId: 'default', permission: 'location', decision: 'allow' })
+    expect.objectContaining({ profileId: 'default', permission: 'midi', decision: 'allow' })
   )
 
   // Switch to Work while its sites are still loading, then let Default's reply land late.
@@ -96,16 +96,16 @@ it("never shows or edits one profile's sites under another", async () => {
   expect(screen.queryByText('a.test')).not.toBeInTheDocument()
   expect(permissionSelects()).toEqual([])
   await act(async () => {
-    defaultWrite.resolve([{ origin: 'https://a.test', decisions: { location: 'allow' } }])
+    defaultWrite.resolve([{ origin: 'https://a.test', decisions: { midi: 'allow' } }])
   })
   expect(screen.queryByText('a.test')).not.toBeInTheDocument()
 
   await act(async () => {
-    workList.resolve([{ origin: 'https://b.test', decisions: { camera: 'allow' } }])
+    workList.resolve([{ origin: 'https://b.test', decisions: { clipboard: 'allow' } }])
   })
   expect(screen.getByText('b.test')).toBeInTheDocument()
   fireEvent.change(permissionSelects()[0], { target: { value: 'block' } })
   expect(sitePermissionsSet).toHaveBeenLastCalledWith(
-    expect.objectContaining({ profileId: 'work', permission: 'camera', decision: 'block' })
+    expect.objectContaining({ profileId: 'work', permission: 'clipboard', decision: 'block' })
   )
 })

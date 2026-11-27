@@ -12,8 +12,6 @@ import type {
 } from '../../shared/developer-permissions-types'
 
 const PRIVACY_PANE_URLS: Partial<Record<DeveloperPermissionId, string>> = {
-  camera: 'x-apple.systempreferences:com.apple.preference.security?Privacy_Camera',
-  microphone: 'x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone',
   screen: 'x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture',
   accessibility: 'x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility',
   'full-disk-access': 'x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles',
@@ -21,20 +19,15 @@ const PRIVACY_PANE_URLS: Partial<Record<DeveloperPermissionId, string>> = {
     'x-apple.systempreferences:com.apple.preference.security?Privacy_FilesAndFolders',
   automation: 'x-apple.systempreferences:com.apple.preference.security?Privacy_Automation',
   'local-network':
-    'x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_LocalNetwork',
-  bluetooth: 'x-apple.systempreferences:com.apple.preference.security?Privacy_Bluetooth'
+    'x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_LocalNetwork'
 }
 
 const DEVELOPER_PERMISSION_IDS: DeveloperPermissionId[] = [
-  'microphone',
-  'camera',
   'screen',
   'accessibility',
   'full-disk-access',
   'automation',
-  'local-network',
-  'usb',
-  'bluetooth'
+  'local-network'
 ]
 const APPLE_EVENTS_PROMPT_TIMEOUT_MS = 3_000
 
@@ -42,13 +35,13 @@ function unsupportedOffMac(): DeveloperPermissionStatus | null {
   return process.platform === 'darwin' ? null : 'unsupported'
 }
 
-function getMediaStatus(mediaType: 'microphone' | 'camera' | 'screen'): DeveloperPermissionStatus {
+function getScreenStatus(): DeveloperPermissionStatus {
   const unsupported = unsupportedOffMac()
   if (unsupported) {
     return unsupported
   }
   try {
-    return systemPreferences.getMediaAccessStatus(mediaType)
+    return systemPreferences.getMediaAccessStatus('screen')
   } catch {
     return 'unknown'
   }
@@ -146,10 +139,8 @@ function triggerLocalNetworkPrompt(): Promise<void> {
 
 async function getPermissionState(id: DeveloperPermissionId): Promise<DeveloperPermissionState> {
   switch (id) {
-    case 'microphone':
-    case 'camera':
     case 'screen':
-      return { id, status: getMediaStatus(id) }
+      return { id, status: getScreenStatus() }
     case 'accessibility':
       return { id, status: getAccessibilityStatus() }
     case 'full-disk-access':
@@ -165,9 +156,6 @@ async function getPermissionState(id: DeveloperPermissionId): Promise<DeveloperP
     case 'automation':
     case 'local-network':
       return { id, status: unsupportedOffMac() ?? 'unknown' }
-    case 'usb':
-    case 'bluetooth':
-      return { id, status: unsupportedOffMac() ?? 'ready' }
   }
 }
 
@@ -176,20 +164,6 @@ async function requestPermission(
 ): Promise<DeveloperPermissionRequestResult> {
   if (process.platform !== 'darwin') {
     return { id, status: 'unsupported', openedSystemSettings: false }
-  }
-
-  if (id === 'microphone' || id === 'camera') {
-    // Previously denied/restricted access cannot prompt again; fall back to Privacy settings.
-    const granted = await systemPreferences.askForMediaAccess(id)
-    if (granted) {
-      return { id, status: 'granted', openedSystemSettings: false }
-    }
-    const status = getMediaStatus(id)
-    if (status === 'denied' || status === 'restricted' || status === 'unknown') {
-      await openPrivacyPane(id)
-      return { id, status, openedSystemSettings: true }
-    }
-    return { id, status, openedSystemSettings: false }
   }
 
   if (id === 'accessibility') {

@@ -7,7 +7,6 @@ import {
   applyProxyToBrowserSession,
   invalidateBrowserSessionProxyApplication
 } from './browser-session-proxy'
-import { hasSystemMediaAccess, requestSystemMediaAccess } from './browser-media-access'
 import { isAutoGrantedBrowserSessionPermission } from './browser-session-permission-policy'
 import {
   answerBrowserLocalNetworkCheck,
@@ -206,8 +205,7 @@ export async function installBrowserSessionPartitionPolicies(
         callback(false)
         return
       }
-      const mediaRequest = 'mediaTypes' in details ? details : undefined
-      const sitePermissions = browserSitePermissionsFor(permission, mediaRequest?.mediaTypes)
+      const sitePermissions = browserSitePermissionsFor(permission)
       if (!sitePermissions) {
         const allowed = isAutoGranted(permission)
         if (!allowed) {
@@ -216,26 +214,14 @@ export async function installBrowserSessionPartitionPolicies(
         callback(allowed)
         return
       }
-      const decide = async (): Promise<boolean> => {
-        const allowed = await decideBrowserSitePermissions({
-          requester: webContents,
-          frameOrigin: sitePermissions.includes('notifications')
-            ? browserSitePermissionRequestingOrigin(webContents, details)
-            : null,
-          memory: siteMemory,
-          permissions: sitePermissions
-        })
-        if (!allowed || permission !== 'media') {
-          return allowed
-        }
-        // macOS also gates camera and mic per app; distinguish OS refusal from a site decision.
-        const granted = await requestSystemMediaAccess(mediaRequest)
-        if (!granted) {
-          notifyDenied()
-        }
-        return granted
-      }
-      void decide().then(callback, (error: unknown) => {
+      void decideBrowserSitePermissions({
+        requester: webContents,
+        frameOrigin: sitePermissions.includes('notifications')
+          ? browserSitePermissionRequestingOrigin(webContents, details)
+          : null,
+        memory: siteMemory,
+        permissions: sitePermissions
+      }).then(callback, (error: unknown) => {
         console.error('[permissions] Browser site permission failed:', error)
         callback(false)
       })
@@ -247,10 +233,7 @@ export async function installBrowserSessionPartitionPolicies(
       if (allowsBrowserWebAuthnPermission(permission, details)) {
         return true
       }
-      const sitePermissions = browserSitePermissionsFor(
-        permission,
-        details?.mediaType ? [details.mediaType] : undefined
-      )
+      const sitePermissions = browserSitePermissionsFor(permission)
       if (sitePermissions) {
         const source = {
           // Service-worker checks have no WebContents; use their requesting origin.
@@ -265,14 +248,11 @@ export async function installBrowserSessionPartitionPolicies(
             memory: siteMemory
           })
         }
-        return (
-          isBrowserSitePermissionAllowed({
-            source,
-            memory: siteMemory,
-            permissions: sitePermissions
-          }) &&
-          (permission !== 'media' || hasSystemMediaAccess(details?.mediaType))
-        )
+        return isBrowserSitePermissionAllowed({
+          source,
+          memory: siteMemory,
+          permissions: sitePermissions
+        })
       }
       return isAutoGranted(permission)
     })

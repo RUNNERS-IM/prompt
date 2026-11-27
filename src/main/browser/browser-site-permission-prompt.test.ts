@@ -123,35 +123,35 @@ describe('browser site permission prompts', () => {
     vi.useRealTimers()
   })
 
-  it('asks once for camera and microphone together, then remembers Allow', async () => {
-    const call = ask(['camera', 'microphone'])
+  it('asks once for clipboard and MIDI together, then remembers Allow', async () => {
+    const call = ask(['clipboard', 'midi'])
     expect(sentRequests(renderer)).toMatchObject([
       {
         kind: 'site-permission',
         details: {
           origin: 'https://meet.example.com',
-          permissions: ['camera', 'microphone']
+          permissions: ['clipboard', 'midi']
         }
       }
     ])
     await answerLatest('allow')
     await expect(call).resolves.toBe(true)
 
-    await expect(ask(['camera'])).resolves.toBe(true)
+    await expect(ask(['clipboard'])).resolves.toBe(true)
     expect(sentRequests(renderer)).toHaveLength(1)
-    expect(allowedOnCheck(['camera', 'microphone'])).toBe(true)
+    expect(allowedOnCheck(['clipboard', 'midi'])).toBe(true)
   })
 
   it('asks only for what is unanswered, and a remembered Block refuses the whole request', async () => {
-    const camera = ask(['camera'])
+    const clipboard = ask(['clipboard'])
     await answerLatest('allow')
-    await camera
-    const both = ask(['camera', 'microphone'])
-    expect(sentRequests(renderer).at(-1)?.details.permissions).toEqual(['microphone'])
+    await clipboard
+    const both = ask(['clipboard', 'midi'])
+    expect(sentRequests(renderer).at(-1)?.details.permissions).toEqual(['midi'])
     await answerLatest('block')
     await expect(both).resolves.toBe(false)
 
-    await expect(ask(['camera', 'microphone'])).resolves.toBe(false)
+    await expect(ask(['clipboard', 'midi'])).resolves.toBe(false)
     expect(sentRequests(renderer)).toHaveLength(2)
   })
 
@@ -189,11 +189,11 @@ describe('browser site permission prompts', () => {
   })
 
   it("gives a frame the tab's answers for what the tab delegates", async () => {
-    const call = ask(['camera'])
+    const call = ask(['clipboard'])
     await answerLatest('allow')
     await call
 
-    await expect(ask(['camera'], { frameOrigin: 'https://video.example.net' })).resolves.toBe(true)
+    await expect(ask(['clipboard'], { frameOrigin: 'https://video.example.net' })).resolves.toBe(true)
     expect(sentRequests(renderer)).toHaveLength(1)
   })
 
@@ -221,19 +221,19 @@ describe('browser site permission prompts', () => {
   })
 
   it('asks for a local file, and every local file shares the answer', async () => {
-    const call = ask(['camera'], { guest: mockGuest('file:///Users/me/lab/permission-lab.html') })
+    const call = ask(['clipboard'], { guest: mockGuest('file:///Users/me/lab/permission-lab.html') })
     expect(sentRequests(renderer).at(-1)?.details.origin).toBe('file://')
     await answerLatest('allow')
     await expect(call).resolves.toBe(true)
 
     await expect(
-      ask(['camera'], { guest: mockGuest('file:///Users/me/other/page.html') })
+      ask(['clipboard'], { guest: mockGuest('file:///Users/me/other/page.html') })
     ).resolves.toBe(true)
     expect(sentRequests(renderer)).toHaveLength(1)
   })
 
   it('refuses an opaque page without asking', async () => {
-    await expect(ask(['camera'], { guest: mockGuest('data:text/html,<p>hi</p>') })).resolves.toBe(
+    await expect(ask(['clipboard'], { guest: mockGuest('data:text/html,<p>hi</p>') })).resolves.toBe(
       false
     )
     expect(sentRequests(renderer)).toEqual([])
@@ -242,7 +242,7 @@ describe('browser site permission prompts', () => {
   it('refuses without asking when no window can show the question', async () => {
     mocks.resolvePagePromptTarget.mockReturnValue(null)
 
-    await expect(ask(['camera'])).resolves.toBe(false)
+    await expect(ask(['clipboard'])).resolves.toBe(false)
     expect(sentRequests(renderer)).toEqual([])
   })
 
