@@ -37,12 +37,19 @@ export const NOT_REOPENED: HeldPaneReopenOutcome = {
 
 type AppState = ReturnType<typeof useAppStore.getState>
 
-/** The agent session a cold restore of this pane would resume; read-only, so pre-spawn checks can share it. */
-export function findColdRestoreResumeSource(session: ConnectPanePtySession, state: AppState) {
+/**
+ * The agent session a cold restore of this pane would resume; read-only, so pre-spawn checks can share it.
+ * includeDone 은 입력을 기다리던('done') 대화 줄도 쓴다. 복원 때는 쓰지 않고, 맨 셸로 뜬 탭을 나중에 한 번 다시 열 때만 쓴다.
+ */
+export function findColdRestoreResumeSource(
+  session: ConnectPanePtySession,
+  state: AppState,
+  includeDone = false
+) {
   const entry = state.agentStatusByPaneKey[session.cacheKey]
   const sleepingRecordEntry = session.getSleepingRecordForPane(state)
   const sleepingRecord = sleepingRecordEntry?.record
-  const liveEntry = entry && entry.state !== 'done' ? entry : null
+  const liveEntry = entry && (includeDone || entry.state !== 'done') ? entry : null
   const agent = liveEntry ? liveEntry.agentType : sleepingRecord?.agent
   if (!agent || !isResumableTuiAgent(agent)) {
     return null
@@ -54,12 +61,14 @@ export function findColdRestoreResumeSource(session: ConnectPanePtySession, stat
 }
 
 export function bindBuildColdRestoreAgentResumeStartup(session: ConnectPanePtySession): void {
-  session.buildColdRestoreAgentResumeStartup = (): ColdRestoreAgentResumeStartup | null => {
+  session.buildColdRestoreAgentResumeStartup = (
+    options: { includeDone?: boolean } = {}
+  ): ColdRestoreAgentResumeStartup | null => {
     if (session.pendingStartupCommand) {
       return null
     }
     const state = useAppStore.getState()
-    const source = findColdRestoreResumeSource(session, state)
+    const source = findColdRestoreResumeSource(session, state, options.includeDone === true)
     if (!source) {
       return null
     }
@@ -163,6 +172,26 @@ export function bindBuildColdRestoreAgentResumeStartup(session: ConnectPanePtySe
       sleepingRecordEntry
     }
   }
+}
+
+/**
+ * 복원 명령 없이 맨 셸로 뜨는 탭 가운데, 입력을 기다리던('done') Claude 대화 줄 때문에만 빠진 탭이면
+ * 나중에 한 번 다시 열 명령을 돌려준다. 거절 · 다른 컴퓨터 기록처럼 일부러 빠진 탭은 null 이다.
+ */
+export function buildBareShellClaudeResume(
+  session: ConnectPanePtySession
+): ColdRestoreAgentResumeStartup | null {
+  const state = useAppStore.getState()
+  if (
+    findColdRestoreResumeSource(session, state) !== null ||
+    findColdRestoreResumeSource(session, state, true) === null
+  ) {
+    return null
+  }
+  const startup = session.buildColdRestoreAgentResumeStartup({
+    includeDone: true
+  })
+  return startup?.agent === 'claude' && startup.resumeProviderSession ? startup : null
 }
 
 /** Keeps the reattach fallback's actual fresh-agent outcome with the pane's start. */

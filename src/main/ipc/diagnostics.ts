@@ -19,6 +19,7 @@ import {
   resolveDiagnosticOrcaChannel,
   resolveDiagnosticTokenEndpoint
 } from '../observability/diagnostic-upload-endpoint'
+import { registerAgentResumeDiagnosticsHandler } from './agent-resume-diagnostics'
 
 export type DiagnosticsBundlePreview = Omit<CollectedBundle, 'payload'>
 type UploadBundleIpcResult = UploadBundleResult | { canceled: true }
@@ -202,6 +203,7 @@ async function confirmBundleUpload(bundle: CollectedBundle): Promise<boolean> {
 }
 
 export function registerDiagnosticsHandlers(): void {
+  registerAgentResumeDiagnosticsHandler()
   ipcMain.handle('diagnostics:getStatus', (): DiagnosticsStatus => {
     return getDiagnosticsStatus()
   })

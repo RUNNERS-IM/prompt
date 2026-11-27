@@ -35,7 +35,9 @@ export function createWebDiagnosticsApi(): Partial<PreloadApi> {
       openBundlePreview: () => Promise.reject(new Error('Review files are unavailable on web.')),
       discardBundlePreview: () => Promise.resolve(),
       uploadBundle: () => Promise.reject(new Error('Sending diagnostics is unavailable on web.')),
-      deleteBundle: () => Promise.reject(new Error('Sent diagnostics are unavailable on web.'))
+      deleteBundle: () => Promise.reject(new Error('Sent diagnostics are unavailable on web.')),
+      // 웹에는 이 맥 진단 기록 파일이 없다.
+      recordAgentResume: () => Promise.resolve()
     }
   }
 }

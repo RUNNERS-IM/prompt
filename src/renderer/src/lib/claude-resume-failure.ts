@@ -10,6 +10,7 @@ import { useAppStore } from '@/store'
 import { isExpectedAgentProcess } from '../../../shared/agent-process-recognition'
 import { isShellProcess } from '../../../shared/shell-process-detection'
 import { TUI_AGENT_CONFIG } from '../../../shared/tui-agent-config'
+import type { AgentResumeDiagnosticStage } from '../../../shared/agent-resume-diagnostics'
 import type { AgentAccountRestartStartup } from './agent-account-restart-startup'
 
 export type ClaudeResumeFailure = {
@@ -32,6 +33,9 @@ const retryStartups = new Map<string, AgentAccountRestartStartup>()
 
 // 다시 연 Claude 가 뜨는지 아직 지켜보는 창(tabId:leafId). 다시 시작 알림이 결과를 낼 때를 정한다.
 const watching = new Set<string>()
+
+// 맨 셸로 복원돼 저절로 한 번 다시 연 창(tabId:leafId). 다음 감시 결과를 그 다시 열기의 결과로 기록한다.
+const autoRetried = new Set<string>()
 
 function notify(): void {
   for (const listener of listeners) {
@@ -66,6 +70,21 @@ function clearFailure(ptyId: string): void {
 
 function boundPtyId(pane: Pick<ClaudeResumeFailure, 'tabId' | 'leafId'>): string | undefined {
   return useAppStore.getState().terminalLayoutsByTabId[pane.tabId]?.ptyIdsByLeafId?.[pane.leafId]
+}
+
+/** 이 맥 진단 기록에만 남긴다. 기록이 실패해도 탭 동작에는 손대지 않는다. */
+function recordResumeDiagnostic(stage: AgentResumeDiagnosticStage, startedAt: number): void {
+  try {
+    void window.api?.diagnostics
+      ?.recordAgentResume?.({
+        stage,
+        agent: 'claude',
+        elapsedMs: Date.now() - startedAt
+      })
+      ?.catch(() => {})
+  } catch {
+    // 진단 기록은 덤이다.
+  }
 }
 
 type ResumeOutcome = 'running' | 'failed' | 'unknown'
@@ -145,18 +164,45 @@ export function watchClaudeResumeStart(
 ): void {
   clearFailure(pane.ptyId)
   const key = `${pane.tabId}:${pane.leafId}`
+  const wasAutoRetry = autoRetried.delete(key)
+  const startedAt = Date.now()
   watching.add(key)
   notify()
   void readResumeOutcome(pane)
     .then((outcome) => {
       if (outcome === 'failed' && boundPtyId(pane) === pane.ptyId) {
+        recordResumeDiagnostic(wasAutoRetry ? 'auto-retry-failed' : 'resume-failed', startedAt)
         reportFailure({ ...pane, failedAt: Date.now() })
+      } else if (outcome === 'running' && wasAutoRetry) {
+        recordResumeDiagnostic('auto-retry-recovered', startedAt)
       }
     })
     .finally(() => {
       watching.delete(key)
       notify()
     })
+}
+
+/**
+ * 재부팅 뒤 명령 없이 맨 셸로 복원된 탭인데 마지막 저장 때 Claude 대화가 붙어 있었으면,
+ * 45초 뒤에도 셸에 머물러 있을 때 그 대화를 한 번 저절로 다시 연다.
+ * 다시 연 탭은 watchClaudeResumeStart 가 이어 받아, 또 실패하면 「다시 시도」 줄을 띄운다.
+ */
+export function watchBareShellClaudeRestore(
+  pane: Pick<ClaudeResumeFailure, 'tabId' | 'leafId' | 'ptyId' | 'startup'>
+): void {
+  const key = `${pane.tabId}:${pane.leafId}`
+  const startedAt = Date.now()
+  void readResumeOutcome(pane).then((outcome) => {
+    // 셸에 머문 경우만 다시 연다. 사용자가 직접 Claude 나 다른 프로그램을 켰으면 손대지 않는다.
+    if (outcome !== 'failed' || boundPtyId(pane) !== pane.ptyId) {
+      return
+    }
+    recordResumeDiagnostic('bare-shell-auto-retry', startedAt)
+    autoRetried.add(key)
+    retryStartups.set(pane.ptyId, pane.startup)
+    useAppStore.getState().queuePaneAccountRestarts([pane.ptyId], 'claude')
+  })
 }
 
 export function retryClaudeResume(ptyId: string): void {

@@ -24,6 +24,7 @@ import { deferHiddenAgentResume } from './hidden-agent-resume-deferral'
 import { holdInPlaceResumeUntilSettled } from './in-place-resume-hold'
 import { attachToMainResumedSleepPane, mainResumedSleepPane } from './main-resumed-sleep-pane'
 import { startPaneThroughMainThenAttach } from './main-pane-start-request'
+import { buildBareShellClaudeResume } from './cold-restore-resume-startup'
 
 export function bindDeferredColdRestoreAndSnapshot(session: ConnectPanePtySession): void {
   session.applyColdRestoreAgentResumeStartup = (
@@ -96,6 +97,8 @@ export function bindDeferredColdRestoreAndSnapshot(session: ConnectPanePtySessio
     if (mainPane && startup?.sleepingRecordEntry) {
       return attachToMainResumedSleepPane(session, mainPane, startup, options, automatic)
     }
+    // 명령 없이 맨 셸로 뜨는 Claude 탭은 연결된 뒤 45초를 지켜보고 한 번 다시 연다.
+    session.bareShellClaudeResume = startup === null ? buildBareShellClaudeResume(session) : null
     return startPaneThroughMainThenAttach(session, () => {
       session.applyColdRestoreAgentResumeStartup(startup)
       const spawned = session.startFreshSpawn(startup, options)

@@ -1,6 +1,7 @@
 import type { ResourceViewAdmission } from '../../shared/resource-view-admission'
 import type { TelemetryConsentState } from '../../shared/telemetry-consent-types'
 import type { MemorySnapshot, StatsSummary } from '../../shared/process-stats-types'
+import type { AgentResumeDiagnostic } from '../../shared/agent-resume-diagnostics'
 
 export type StatsApi = {
   getSummary: () => Promise<StatsSummary>
@@ -44,6 +45,8 @@ export type DiagnosticsApi = {
   discardBundlePreview: (bundleSubmissionId: string) => Promise<void>
   uploadBundle: (bundleSubmissionId: string) => Promise<DiagnosticsUploadPayload>
   deleteBundle: (ticketId: string) => Promise<void>
+  /** 다시 열지 못한 대화를 이 맥 진단 기록에만 남긴다. */
+  recordAgentResume: (diagnostic: AgentResumeDiagnostic) => Promise<void>
 }
 
 export type TelemetryApi = {
