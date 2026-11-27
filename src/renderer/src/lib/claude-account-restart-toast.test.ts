@@ -113,6 +113,23 @@ describe('announceRestart', () => {
     )
   })
 
+  it('closes within five minutes even when more restarts keep arriving', () => {
+    store.pendingPaneAccountRestarts = { 'pty-0': 'claude' }
+    announceRestart([pane(0)], 'b@example.com', 0, undefined)
+    for (let n = 1; n <= 20; n += 1) {
+      vi.advanceTimersByTime(20_000)
+      announceRestart([pane(n)], 'b@example.com', 0, undefined)
+    }
+
+    expect(toast.info).toHaveBeenCalledWith(
+      expect.stringContaining('Claude sessions on b@example.com'),
+      expect.objectContaining({ id: 'claude-account-restart', duration: 5_000 })
+    )
+    const settledAt = toast.info.mock.invocationCallOrder[0]
+    const loadingAfter = toast.loading.mock.invocationCallOrder.filter((order) => order > settledAt)
+    expect(loadingAfter.length).toBeGreaterThan(0)
+  })
+
   it('names the sessions left behind with their reasons, and offers to move the movable ones', () => {
     store.pendingPaneAccountRestarts = { 'pty-1': 'claude' }
     const moveAll = vi.fn()

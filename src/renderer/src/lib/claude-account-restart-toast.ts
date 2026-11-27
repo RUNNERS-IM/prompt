@@ -16,6 +16,10 @@ const RESTART_TOAST_ID = 'claude-account-restart'
 const RESUME_WATCH_START_MS = 3_000
 // 이 시간이 지나도 남은 세션은 하던 턴이 끝나거나 탭이 열릴 때 다시 시작된다고 알리고 알림을 닫는다.
 const RESTART_SETTLE_MS = 2 * 60_000
+// 진행 중에 다시 시작이 또 들어오면 기한을 늘리지만, 처음 시작에서 이 시간을 넘기지는 않는다.
+// 한도에 멈춘 세션을 20초 간격으로 하나씩 이어 가거나 명령줄 다시 시작이 잇달아 오면 기한이 끝없이 밀려
+// 「다시 시작하는 중」 알림이 사라지지 않았다(2026-11-27 사용자: 「이거 왜 안사라지냐」).
+const RESTART_MAX_MS = 5 * 60_000
 const RESULT_MS = 5_000
 
 type Extra = {
@@ -207,7 +211,7 @@ export function announceRestart(
     batch.panes.push(...panes.filter((pane) => !known.has(pane.ptyId)))
     batch.account = account
     batch.allRunAt = null
-    batch.deadline = Date.now() + RESTART_SETTLE_MS
+    batch.deadline = Math.min(Date.now() + RESTART_SETTLE_MS, batch.startedAt + RESTART_MAX_MS)
     if (others > 0) {
       batch.extra = notMovedExtra(others, review, notMoved)
     }
