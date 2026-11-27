@@ -16,6 +16,19 @@ describe('claudeUsageLimitScreen', () => {
     ).toBe('picker')
   })
 
+  it('names the picker in the newer Claude Code wording', () => {
+    expect(
+      claudeUsageLimitScreen([
+        "  ⎿ You've hit your weekly limit · resets Nov 28 at 9am",
+        ' What do you want to do?',
+        ' ❯ 1. Wait for limit to reset',
+        '   2. Wait here, then continue automatically when the limit resets',
+        '   3. Continue with usage credits'
+      ])
+    ).toBe('picker')
+    expect(claudeUsageLimitScreen(['   3. Continue with usage credits'])).toBe('picker')
+  })
+
   it('names a session whose last lines say it stopped at the limit', () => {
     expect(claudeUsageLimitScreen(['> go', 'Stopped for limit · resets 3pm', '❯ '])).toBe('stopped')
   })
