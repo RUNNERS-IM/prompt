@@ -162,9 +162,6 @@ function ComposerProbe({
           sendButtonDisabled={false}
           isWorking={false}
           attachDisabled={disabled}
-          dictationDisabled
-          isDictating={false}
-          isDictationHoldMode={false}
           imeEnterGesture={imeEnterGesture}
           onDraftChange={(value, input) => {
             setDraft(value)
@@ -184,9 +181,6 @@ function ComposerProbe({
           mentionFiles={{ files: [], loading: false, failed: false }}
           onRemoveImageAttachment={attachments.removeImageAttachment}
           onAttach={() => {}}
-          onDictationToggle={() => {}}
-          onDictationHoldStart={() => {}}
-          onDictationHoldEnd={() => {}}
           onSend={() => {}}
           sessionOptionsSurface={null}
           sessionOptionsSnapshot={[]}

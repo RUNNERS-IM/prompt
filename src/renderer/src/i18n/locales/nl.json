@@ -722,12 +722,9 @@
         "profile": "Browserprofiel",
         "empty": "Er zijn nog geen sites toegestaan of geblokkeerd.",
         "title": "Sitetoestemmingen",
-        "description": "Sites vragen eerst toestemming voordat ze de camera, microfoon, locatie en meer gebruiken. Wijzig per site wat is toegestaan of geblokkeerd.",
+        "description": "Sites vragen toestemming voordat ze meldingen tonen, het klembord lezen, je lokale netwerk bereiken en meer. Wijzig per site wat je hebt toegestaan of geblokkeerd.",
         "search": {
           "permissions": "toestemmingen",
-          "camera": "camera",
-          "microphone": "microfoon",
-          "location": "locatie",
           "notifications": "meldingen",
           "clipboard": "klembord",
           "localNetwork": "lokaal netwerk"
@@ -7895,10 +7892,6 @@
           "fa809e8ada": "macOS Privacy & Security geopend",
           "48d87edcd2": "Toestemming verleend",
           "a552887288": "Kan ontwikkelaarstoestemmingen niet laden",
-          "4cfaa7e98a": "Bluetooth-apparaattools en lokale hardware-experimenten.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Hardwaredebugging en apparaattools die met USB-apparaten communiceren.",
-          "bf51e4a542": "USB-apparaten",
           "f903bf20b5": "Staat terminals en ontwikkeltools toe verbinding te maken met services op het lokale netwerk. macOS geeft de huidige status van deze toestemming niet door aan Orca.",
           "e7bb06007c": "Lokaal netwerk",
           "4a73f5217a": "Apple Events voor scripts die andere lokale apps bedienen.",
@@ -7909,10 +7902,6 @@
           "5b2f22ca2d": "Toegankelijkheid",
           "0639db5496": "Tools voor schermafbeeldingen, visuele automatisering en UI-inspectie.",
           "f24f31a884": "Schermopname",
-          "550cfa3750": "Webcamopname en lokale testapps die op de camera werken.",
-          "e5b5f3d6b9": "Camera",
-          "cc8151d9fa": "Spraakinvoer, transcriptie, audio-opname, sox, ffmpeg en Whisper-CLI's.",
-          "16381e040a": "Microfoon",
           "dac08ec03e": "Bezig…",
           "actionRequest": "Aanvragen",
           "actionOpenSettings": "Instellingen openen",
@@ -9501,9 +9490,7 @@
           "f9a9cf6928": "Toestemming voor de microfoon is vereist voordat dicteren kan worden ingeschakeld.",
           "1eac933202": "Privacy en beveiliging van macOS geopend. Schakel dicteren opnieuw in nadat toegang is verleend.",
           "cd9fe37556": "Toestemming voor de microfoon verleend",
-          "openAiKeyName": "Uw OpenAI-transcriptiesleutel",
-          "dictationShortcutDescription": "Druk op {{shortcut}} om tekst te dicteren in een actief deelvenster.",
-          "dictationModesDescription": "Schakelen: druk één keer op {{shortcut}} om te starten en nogmaals om te stoppen. Ingedrukt houden: dicteer zolang {{shortcut}} ingedrukt is."
+          "openAiKeyName": "Uw OpenAI-transcriptiesleutel"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "{{value0}} verwijderen",
@@ -11334,8 +11321,6 @@
               "322d457a0d": "transcriptie",
               "dcc7846641": "De OpenAI API-sleutel configureren die wordt gebruikt voor cloudmodellen voor spraak-naar-tekst.",
               "ebfd0b32e5": "OpenAI-transcriptie",
-              "microphoneTitle": "Microfoon",
-              "microphoneDescription": "Kiezen welk invoerapparaat voor dicteren wordt gebruikt.",
               "micInput": "invoer",
               "micDevice": "apparaat",
               "micAirpods": "airpods",
@@ -12279,19 +12264,6 @@
           "devChannelUnsupported": "{{value0}}-builds worden alleen voor {{value1}} geproduceerd. Linux blijft op Stable of RC.",
           "downloadInstaller": "Installatieprogramma downloaden",
           "manualInstallHint": "{{value0}}-builds zijn op Windows niet ondertekend, dus de updater in de app kan er geen installeren over een ondertekende build heen. Voer het gedownloade installatieprogramma eenmalig uit. Windows waarschuwt dan voor een onbekende uitgever. Daarna werkt elke volgende wissel, ook terug naar Stable, vanuit de app."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Systeemstandaard",
-          "unavailable": "niet beschikbaar",
-          "label": "Microfoon",
-          "description": "Invoerapparaat voor spraakdictaat. Met Systeemstandaard wordt de microfooninstelling van het besturingssysteem gevolgd.",
-          "accessHint": "Sta microfoontoegang toe om invoerapparaten weer te geven.",
-          "allowAccess": "Toegang toestaan",
-          "noMicrophoneFound": "Er is geen microfoon gevonden. Sluit er een aan en probeer het opnieuw.",
-          "openFailedDetail": "Kan de microfoon niet openen. {{value0}}",
-          "openFailed": "Kan de microfoon niet openen.",
-          "openedSystemSettings": "Privacy en beveiliging van macOS is geopend. Verleen microfoontoegang en probeer het opnieuw.",
-          "permissionDenied": "Microfoontoegang is geblokkeerd. Verleen toegang in de systeeminstellingen en probeer het opnieuw."
         },
         "TerminalTccAttributionNotice": {
           "body": "De terminal-daemon is gestart door een Orca-installatie die niet meer bestaat, waardoor macOS de opdrachten ervan niet aan Orca kan toeschrijven. Toestemmingen voor Toegankelijkheid en Automatisering worden stilzwijgend genegeerd (osascript mislukt met fout -25211). Door de daemon opnieuw te starten wordt dit opgelost. Actieve terminalsessies worden daarbij gesloten.",
@@ -16925,26 +16897,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Spraakfout: {{value0}}",
-          "7afff43472": "Dicteren is voltooid, maar er was geen tekstveld actief.",
-          "55127a3706": "Dicteren mislukt: {{value0}}",
-          "bb7f599ee7": "Instellingen openen",
-          "2d5b9fabf9": "Toegang tot microfoon geweigerd. Verleen toegang in de systeeminstellingen en start Orca daarna opnieuw.",
-          "5d2c3e7ae3": "Geen spraak gedetecteerd.",
-          "micFallback": "Geselecteerde microfoon niet beschikbaar. De standaardmicrofoon van het systeem wordt gebruikt.",
-          "micDisconnected": "Microfoon losgekoppeld. Dicteren is gestopt."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Dicteren stoppen",
-          "7f3660a7ba": "Microfoon starten…",
-          "f082d0cb9d": "Verwerken…",
-          "3de5a129e7": "Luisteren",
-          "4977162383": "Te luid",
-          "25f2b7a6a5": "Spreken"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "{{count}} onderliggende agent verbergen",
@@ -18693,9 +18645,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Camera",
-            "microphone": "Microfoon",
-            "location": "Locatie",
             "notifications": "Meldingen",
             "clipboard": "Klembord",
             "midi": "MIDI-apparaten",
@@ -18704,9 +18653,6 @@
             "localNetwork": "Lokaal netwerk"
           },
           "ask": {
-            "camera": "De camera gebruiken",
-            "microphone": "De microfoon gebruiken",
-            "location": "De locatie weten",
             "notifications": "Meldingen tonen",
             "clipboard": "Tekst en afbeeldingen zien die naar het klembord zijn gekopieerd",
             "midi": "De MIDI-apparaten gebruiken",
@@ -19354,8 +19300,6 @@
         "noFiles": "Geen overeenkomende bestanden",
         "filesLoadFailed": "Bestanden laden mislukt",
         "attach": "Bestand bijvoegen",
-        "startDictation": "Dicteren starten",
-        "stopDictation": "Dicteren stoppen",
         "noSkills": "Geen overeenkomende skills",
         "noCommandsOrSkills": "Geen overeenkomende opdrachten of skills",
         "noCommands": "Geen overeenkomende opdrachten",
@@ -20678,7 +20622,6 @@
     },
     "voice": {
       "demoPrompt": "Review deze diff op randgevallen en voeg tests toe voor alles wat je vindt.",
-      "startDictation": "Dicteren starten",
       "agentPromptTitle": "Agent-prompt",
       "listening": "Luisteren…",
       "unassignedInstruction": "Wijs een sneltoets voor dicteren toe voordat u spraakdictatie start in een actief deelvenster.",
@@ -22347,7 +22290,6 @@
       "workspaceOpenBoard": "Werkruimtebord tonen/verbergen",
       "dashboardToggle": "Agent-dashboard in- of uitschakelen",
       "workspaceSelectByIndex": "Werkruimte 1–9 selecteren",
-      "voiceDictation": "Dicteren",
       "viewTasks": "Taken openen",
       "sidebarLeftToggle": "Zijbalk tonen/verbergen",
       "sidebarRightToggle": "Rechterzijbalk in-/uitschakelen",

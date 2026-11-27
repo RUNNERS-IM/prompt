@@ -776,12 +776,9 @@
         "profile": "Profil przeglądarki",
         "empty": "Żadna witryna nie została jeszcze dozwolona ani zablokowana.",
         "title": "Uprawnienia witryn",
-        "description": "Witryny pytają przed użyciem kamery, mikrofonu, lokalizacji i innych funkcji. Zezwolenia i blokady można zmienić osobno dla każdej witryny.",
+        "description": "Witryny pytają o zgodę przed wyświetlaniem powiadomień, odczytem schowka, dostępem do sieci lokalnej i nie tylko. Zmień, na co zezwolono lub co zablokowano dla każdej witryny.",
         "search": {
           "permissions": "uprawnienia",
-          "camera": "kamera",
-          "microphone": "mikrofon",
-          "location": "lokalizacja",
           "notifications": "powiadomienia",
           "clipboard": "schowek",
           "localNetwork": "sieć lokalna"
@@ -8251,10 +8248,6 @@
           "fa809e8ada": "Otwarto macOS Privacy & Security",
           "48d87edcd2": "Przyznano uprawnienie",
           "a552887288": "Nie można wczytać uprawnień deweloperskich",
-          "4cfaa7e98a": "Narzędzia urządzeń Bluetooth i lokalne eksperymenty ze sprzętem.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Narzędzia do debugowania sprzętu i urządzeń komunikujące się z urządzeniami USB.",
-          "bf51e4a542": "Urządzenia USB",
           "f903bf20b5": "Umożliwia terminalom i narzędziom deweloperskim łączenie się z usługami w sieci lokalnej. macOS nie przekazuje aplikacji Orca bieżącego stanu tego uprawnienia.",
           "e7bb06007c": "Sieć lokalna",
           "4a73f5217a": "Zdarzenia Apple Events dla skryptów sterujących innymi aplikacjami lokalnymi.",
@@ -8265,10 +8258,6 @@
           "5b2f22ca2d": "Dostępność",
           "0639db5496": "Narzędzia do zrzutów ekranu, automatyzacji wizualnej i inspekcji interfejsu.",
           "f24f31a884": "Nagrywanie ekranu",
-          "550cfa3750": "Przechwytywanie obrazu z kamery i lokalne aplikacje testowe sterowane kamerą.",
-          "e5b5f3d6b9": "Kamera",
-          "cc8151d9fa": "Wprowadzanie głosowe, transkrypcja, nagrywanie dźwięku, sox, ffmpeg i CLI Whisper.",
-          "16381e040a": "Mikrofon",
           "dac08ec03e": "Trwa przetwarzanie…",
           "actionRequest": "Zażądaj",
           "actionOpenSettings": "Otwórz ustawienia",
@@ -9875,9 +9864,7 @@
           "f9a9cf6928": "Przed włączeniem dyktowania głosowego wymagane jest uprawnienie do mikrofonu.",
           "1eac933202": "Otwarto Prywatność i ochrona w macOS. Po przyznaniu dostępu włącz dyktowanie ponownie.",
           "cd9fe37556": "Przyznano uprawnienie do mikrofonu",
-          "openAiKeyName": "Twój klucz transkrypcji OpenAI",
-          "dictationShortcutDescription": "Naciśnij {{shortcut}}, aby dyktować tekst do dowolnego aktywnego panelu.",
-          "dictationModesDescription": "Przełączanie: naciśnij {{shortcut}} raz, aby zacząć, i ponownie, aby zatrzymać. Przytrzymanie: dyktuj, gdy {{shortcut}} jest przytrzymany."
+          "openAiKeyName": "Twój klucz transkrypcji OpenAI"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Usuń {{value0}}",
@@ -11708,8 +11695,6 @@
               "322d457a0d": "transkrypcja",
               "dcc7846641": "Konfiguruje klucz API OpenAI używany przez chmurowe modele zamiany mowy na tekst.",
               "ebfd0b32e5": "Transkrypcja OpenAI",
-              "microphoneTitle": "Mikrofon",
-              "microphoneDescription": "Wybierz urządzenie wejściowe używane do dyktowania głosowego.",
               "micInput": "wejście",
               "micDevice": "urządzenie",
               "micAirpods": "airpods",
@@ -12655,19 +12640,6 @@
           "devChannelUnsupported": "Buildy {{value0}} są tworzone tylko dla {{value1}}. W systemie Linux dostępne są wyłącznie wersje Stable lub RC.",
           "downloadInstaller": "Pobierz instalator",
           "manualInstallHint": "Buildy {{value0}} są niepodpisane w systemie Windows, więc wbudowany aktualizator nie może zainstalować ich na podpisanym buildzie. Uruchom pobrany instalator raz — Windows wyświetli ostrzeżenie o nieznanym wydawcy — a każde kolejne przełączenie, także z powrotem na Stable, będzie działać stąd."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Domyślne systemowe",
-          "unavailable": "niedostępne",
-          "label": "Mikrofon",
-          "description": "Urządzenie wejściowe używane do dyktowania głosowego. Opcja „Domyślne systemowe” korzysta z ustawienia mikrofonu w systemie operacyjnym.",
-          "accessHint": "Zezwól na dostęp do mikrofonu, aby wyświetlić listę urządzeń wejściowych.",
-          "allowAccess": "Zezwól na dostęp",
-          "noMicrophoneFound": "Nie znaleziono mikrofonu. Podłącz mikrofon i spróbuj ponownie.",
-          "openFailedDetail": "Nie można otworzyć mikrofonu. {{value0}}",
-          "openFailed": "Nie można otworzyć mikrofonu.",
-          "openedSystemSettings": "Otwarto ustawienia Prywatność i ochrona w systemie macOS. Przyznaj dostęp do mikrofonu i spróbuj ponownie.",
-          "permissionDenied": "Dostęp do mikrofonu jest zablokowany. Przyznaj go w ustawieniach systemu i spróbuj ponownie."
         },
         "TerminalTccAttributionNotice": {
           "body": "Demon terminala został uruchomiony przez instalację Orca, która już nie istnieje, więc macOS nie może przypisać jego poleceń do Orca — uprawnienia Dostępności i Automatyzacji są po cichu ignorowane (osascript kończy się błędem -25211). Restart demona rozwiązuje problem; uruchomione sesje terminala zostaną zamknięte.",
@@ -17445,26 +17417,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Błąd rozpoznawania mowy: {{value0}}",
-          "7afff43472": "Dyktowanie zakończone, ale żadne pole tekstowe nie było aktywne.",
-          "55127a3706": "Dyktowanie nie powiodło się: {{value0}}",
-          "bb7f599ee7": "Otwórz ustawienia",
-          "2d5b9fabf9": "Odmowa dostępu do mikrofonu. Przyznaj dostęp w ustawieniach systemu, a następnie uruchom Orca ponownie.",
-          "5d2c3e7ae3": "Nie wykryto mowy.",
-          "micFallback": "Wybrany mikrofon jest niedostępny. Używany jest domyślny mikrofon systemu.",
-          "micDisconnected": "Mikrofon odłączony. Dyktowanie zatrzymane."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Zatrzymaj dyktowanie",
-          "7f3660a7ba": "Uruchamianie mikrofonu…",
-          "f082d0cb9d": "Przetwarzanie…",
-          "3de5a129e7": "Nasłuchiwanie",
-          "4977162383": "Zbyt głośno",
-          "25f2b7a6a5": "Mówienie"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Ukryj {{count}} agenta podrzędnego",
@@ -19275,9 +19227,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Kamera",
-            "microphone": "Mikrofon",
-            "location": "Lokalizacja",
             "notifications": "Powiadomienia",
             "clipboard": "Schowek",
             "midi": "Urządzenia MIDI",
@@ -19286,9 +19235,6 @@
             "localNetwork": "Sieć lokalna"
           },
           "ask": {
-            "camera": "Używanie aparatu",
-            "microphone": "Używanie mikrofonu",
-            "location": "Sprawdzanie lokalizacji",
             "notifications": "Wyświetlanie powiadomień",
             "clipboard": "Wyświetlanie tekstu i obrazów skopiowanych do schowka",
             "midi": "Używanie urządzeń MIDI",
@@ -19952,8 +19898,6 @@
         "noFiles": "Brak pasujących plików",
         "filesLoadFailed": "Nie udało się załadować plików",
         "attach": "Załącz plik",
-        "startDictation": "Rozpocznij dyktowanie",
-        "stopDictation": "Zatrzymaj dyktowanie",
         "noSkills": "Brak pasujących skilli",
         "noCommandsOrSkills": "Brak pasujących poleceń lub skilli",
         "noCommands": "Brak pasujących poleceń",
@@ -21390,7 +21334,6 @@
     },
     "voice": {
       "demoPrompt": "Sprawdź ten diff pod kątem przypadków brzegowych i dodaj testy do wszystkiego, co znajdziesz.",
-      "startDictation": "Rozpocznij dyktowanie",
       "agentPromptTitle": "Prompt agenta",
       "listening": "Słucham…",
       "unassignedInstruction": "Przypisz skrót dyktowania, zanim rozpoczniesz dyktowanie głosowe w aktywnym panelu.",
@@ -23105,7 +23048,6 @@
       "workspaceOpenBoard": "Przełącz tablicę obszaru roboczego",
       "dashboardToggle": "Przełącz Pulpit agentów",
       "workspaceSelectByIndex": "Wybierz obszar roboczy 1–9",
-      "voiceDictation": "Dyktowanie",
       "viewTasks": "Otwórz zadania",
       "sidebarLeftToggle": "Przełącz pasek boczny",
       "sidebarRightToggle": "Przełącz prawy pasek boczny",

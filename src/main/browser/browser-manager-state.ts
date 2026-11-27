@@ -159,7 +159,6 @@ export abstract class BrowserManagerState extends BrowserManagerViewportScrollSt
   protected browserGuestStateChangedListener: ((worktreeId: string) => void) | null = null
   protected certificateTrustController: BrowserCertificateTrustController | null = null
   protected siteDisplayController: BrowserSiteDisplayController | null = null
-  protected shouldForwardDictationShortcut: (() => boolean) | null = null
   protected readonly pendingLoadFailuresByGuestId = new Map<
     number,
     { code: number; description: string; validatedUrl: string }
@@ -169,10 +168,6 @@ export abstract class BrowserManagerState extends BrowserManagerViewportScrollSt
   protected readonly pendingDownloadIdsByGuestId = new Map<number, string[]>()
   protected readonly downloadsById = new Map<string, ActiveDownload>()
   protected readonly grabSessionController = new BrowserGrabSessionController()
-
-  setDictationShortcutForwardingPredicate(predicate: (() => boolean) | null): void {
-    this.shouldForwardDictationShortcut = predicate
-  }
 
   setBrowserGuestStateChangedListener(listener: ((worktreeId: string) => void) | null): void {
     this.browserGuestStateChangedListener = listener

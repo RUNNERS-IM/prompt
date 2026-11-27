@@ -77,9 +77,6 @@ function HeldField({
       sendButtonDisabled
       isWorking={false}
       attachDisabled
-      dictationDisabled
-      isDictating={false}
-      isDictationHoldMode={false}
       imeEnterGesture={imeEnterGesture}
       goalMode={{ active: goalActive, exit: vi.fn(), interceptPick: (pick) => pick }}
       onDraftChange={vi.fn()}
@@ -94,9 +91,6 @@ function HeldField({
       mentionFiles={{ files: [], loading: false, failed: false }}
       onRemoveImageAttachment={vi.fn()}
       onAttach={vi.fn()}
-      onDictationToggle={vi.fn()}
-      onDictationHoldStart={vi.fn()}
-      onDictationHoldEnd={vi.fn()}
       onSend={vi.fn()}
       sessionOptionsSurface={null}
       sessionOptionsSnapshot={[]}

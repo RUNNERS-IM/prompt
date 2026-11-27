@@ -33,7 +33,6 @@ function rendererMessagesForGuestChord(keybindings: KeybindingOverrides): unknow
     guest,
     resolveRenderer: () => renderer,
     resolveWorkspaceId: () => 'workspace-1',
-    shouldForwardDictationShortcut: () => true,
     getKeybindings: () => keybindings
   })
   const isMac = process.platform === 'darwin'

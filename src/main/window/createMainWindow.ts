@@ -1,7 +1,6 @@
 import { app, BrowserWindow, nativeTheme, powerMonitor, screen } from 'electron'
 import { join } from 'node:path'
 import { getAppIconPath } from '../app-icon'
-import { browserManager } from '../browser/browser-manager'
 import { getBrowserClientHostId } from '../browser/browser-client-host-id'
 import { formatBrowserClientHostIdArgument } from '../../shared/browser-client-host-id-argument'
 import { markSystemSessionEnding } from '../crash-reporting/expected-teardown-state'
@@ -94,10 +93,6 @@ export function createMainWindow(
   })()
 
   const settings = store?.getSettings()
-  browserManager.setDictationShortcutForwardingPredicate(() => {
-    // Webview guests have no safe transcript target; yield the dictation shortcut to the page.
-    return false
-  })
   const blur = settings?.windowBackgroundBlur ?? false
   // Only Windows acrylic is visible; macOS transparency adds WindowServer compositing behind opaque content (#8482). Creation-time only.
   const platformBlurOptions =
@@ -222,7 +217,6 @@ export function createMainWindow(
     state.clearInitialRevealFallbackTimer()
     closeLifecycle.dispose()
     focus.dispose()
-    browserManager.setDictationShortcutForwardingPredicate(null)
     powerMonitor.removeListener('resume', onSystemResume)
     clearTrustedUIRendererWebContentsId(rendererWebContentsId)
     state.dispose()

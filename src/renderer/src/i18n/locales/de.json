@@ -1232,12 +1232,9 @@
         "profile": "Browser-Profil",
         "empty": "Bisher wurden keine Websites zugelassen oder blockiert.",
         "title": "Website-Berechtigungen",
-        "description": "Websites fragen vor dem Zugriff auf Kamera, Mikrofon, Standort und weitere Funktionen nach. Zugelassene und blockierte Zugriffe pro Website ändern.",
+        "description": "Websites fragen nach, bevor sie Benachrichtigungen anzeigen, die Zwischenablage lesen, auf Ihr lokales Netzwerk zugreifen und mehr. Zugelassene und blockierte Zugriffe pro Website ändern.",
         "search": {
           "permissions": "Berechtigungen",
-          "camera": "Kamera",
-          "microphone": "Mikrofon",
-          "location": "Standort",
           "notifications": "Benachrichtigungen",
           "clipboard": "Zwischenablage",
           "localNetwork": "lokales Netzwerk"
@@ -8405,10 +8402,6 @@
           "fa809e8ada": "macOS-Bereich „Privacy & Security“ geöffnet",
           "48d87edcd2": "Berechtigung erteilt",
           "a552887288": "Entwicklerberechtigungen konnten nicht geladen werden",
-          "4cfaa7e98a": "Tools für Bluetooth-Geräte und lokale Hardwareexperimente.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Hardware-Debugging und Tools zur Kommunikation mit USB-Geräten.",
-          "bf51e4a542": "USB-Geräte",
           "f903bf20b5": "Ermöglicht Terminals und Entwicklungstools, eine Verbindung zu Diensten im lokalen Netzwerk herzustellen. macOS meldet Orca den aktuellen Status dieser Berechtigung nicht.",
           "e7bb06007c": "Lokales Netzwerk",
           "4a73f5217a": "Apple Events für Skripte, die andere lokale Apps steuern.",
@@ -8419,10 +8412,6 @@
           "5b2f22ca2d": "Bedienungshilfen",
           "0639db5496": "Tools für Bildschirmfotos, visuelle Automatisierung und die Untersuchung von Benutzeroberflächen.",
           "f24f31a884": "Bildschirmaufnahme",
-          "550cfa3750": "Webcam-Aufnahmen und lokale Test-Apps mit Kamerasteuerung.",
-          "e5b5f3d6b9": "Kamera",
-          "cc8151d9fa": "Spracheingabe, Transkription, Audioaufnahmen sowie die CLIs sox, ffmpeg und Whisper.",
-          "16381e040a": "Mikrofon",
           "dac08ec03e": "Wird bearbeitet…",
           "actionRequest": "Anfordern",
           "actionOpenSettings": "Einstellungen öffnen",
@@ -10011,9 +10000,7 @@
           "f9a9cf6928": "Zum Aktivieren des Diktats ist eine Mikrofonberechtigung erforderlich.",
           "1eac933202": "Die macOS-Einstellungen „Privacy & Security“ wurden geöffnet. Nach der Zugriffsfreigabe das Diktat erneut aktivieren.",
           "cd9fe37556": "Mikrofonberechtigung erteilt",
-          "openAiKeyName": "OpenAI-Transkriptionsschlüssel",
-          "dictationShortcutDescription": "Mit {{shortcut}} Text in den jeweils fokussierten Bereich diktieren.",
-          "dictationModesDescription": "Umschalten: {{shortcut}} einmal zum Starten und erneut zum Stoppen drücken. Gedrückt halten: Diktieren, solange {{shortcut}} gedrückt bleibt."
+          "openAiKeyName": "OpenAI-Transkriptionsschlüssel"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "{{value0}} entfernen",
@@ -11844,8 +11831,6 @@
               "322d457a0d": "Transkription",
               "dcc7846641": "Den OpenAI-API-Schlüssel für cloudbasierte Spracherkennungsmodelle konfigurieren.",
               "ebfd0b32e5": "OpenAI-Transkription",
-              "microphoneTitle": "Mikrofon",
-              "microphoneDescription": "Das Eingabegerät für das Sprachdiktat auswählen.",
               "micInput": "Eingabe",
               "micDevice": "Gerät",
               "micAirpods": "airpods",
@@ -12789,19 +12774,6 @@
           "devChannelUnsupported": "{{value0}}-Builds werden nur für {{value1}} erstellt. Linux bleibt bei Stable oder RC.",
           "downloadInstaller": "Installationsprogramm herunterladen",
           "manualInstallHint": "{{value0}}-Builds sind unter Windows nicht signiert und können daher vom integrierten Updater nicht über einen signierten Build installiert werden. Das heruntergeladene Installationsprogramm einmal ausführen – Windows warnt dabei vor einem unbekannten Herausgeber – danach funktioniert jeder weitere Wechsel, auch zurück zu Stable, von hier aus."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Systemstandard",
-          "unavailable": "nicht verfügbar",
-          "label": "Mikrofon",
-          "description": "Eingabegerät für das Diktat. Der Systemstandard folgt der Mikrofoneinstellung des Betriebssystems.",
-          "accessHint": "Mikrofonzugriff erlauben, um Eingabegeräte aufzulisten.",
-          "allowAccess": "Zugriff erlauben",
-          "noMicrophoneFound": "Kein Mikrofon gefunden. Ein Mikrofon anschließen und erneut versuchen.",
-          "openFailedDetail": "Das Mikrofon konnte nicht geöffnet werden. {{value0}}",
-          "openFailed": "Das Mikrofon konnte nicht geöffnet werden.",
-          "openedSystemSettings": "„Privacy & Security“ von macOS wurde geöffnet. Mikrofonzugriff gewähren und erneut versuchen.",
-          "permissionDenied": "Der Mikrofonzugriff ist blockiert. In den Systemeinstellungen gewähren und erneut versuchen."
         },
         "TerminalTccAttributionNotice": {
           "body": "Der Terminal-Daemon wurde von einer nicht mehr vorhandenen Orca-Installation gestartet. Deshalb kann macOS seine Befehle nicht Orca zuordnen – Berechtigungen für Accessibility und Automation werden ohne Meldung ignoriert (osascript schlägt mit Fehler -25211 fehl). Ein Neustart des Daemons behebt das Problem; laufende Terminal-Sitzungen werden geschlossen.",
@@ -17435,26 +17407,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Spracherkennungsfehler: {{value0}}",
-          "7afff43472": "Diktat beendet, aber kein Textfeld war fokussiert.",
-          "55127a3706": "Diktat fehlgeschlagen: {{value0}}",
-          "bb7f599ee7": "Einstellungen öffnen",
-          "2d5b9fabf9": "Mikrofonzugriff verweigert. Zugriff in den Systemeinstellungen erlauben und anschließend Orca neu starten.",
-          "5d2c3e7ae3": "Keine Sprache erkannt.",
-          "micFallback": "Ausgewähltes Mikrofon nicht verfügbar. Systemstandard wird verwendet.",
-          "micDisconnected": "Mikrofon getrennt. Diktat gestoppt."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Diktat stoppen",
-          "7f3660a7ba": "Mikrofon wird gestartet…",
-          "f082d0cb9d": "Wird verarbeitet…",
-          "3de5a129e7": "Hört zu",
-          "4977162383": "Zu laut",
-          "25f2b7a6a5": "Sprache erkannt"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "{{count}} untergeordneten Agenten ausblenden",
@@ -19203,9 +19155,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Kamera",
-            "microphone": "Mikrofon",
-            "location": "Standort",
             "notifications": "Benachrichtigungen",
             "clipboard": "Zwischenablage",
             "midi": "MIDI-Geräte",
@@ -19214,9 +19163,6 @@
             "localNetwork": "Lokales Netzwerk"
           },
           "ask": {
-            "camera": "Die Kamera verwenden",
-            "microphone": "Das Mikrofon verwenden",
-            "location": "Den Standort ermitteln",
             "notifications": "Benachrichtigungen anzeigen",
             "clipboard": "In die Zwischenablage kopierte Texte und Bilder lesen",
             "midi": "MIDI-Geräte verwenden",
@@ -19864,8 +19810,6 @@
         "noFiles": "Keine passenden Dateien",
         "filesLoadFailed": "Dateien konnten nicht geladen werden",
         "attach": "Datei anhängen",
-        "startDictation": "Diktat starten",
-        "stopDictation": "Diktat stoppen",
         "noSkills": "Keine passenden Skills",
         "noCommandsOrSkills": "Keine passenden Befehle oder Skills",
         "noCommands": "Keine passenden Befehle",
@@ -21188,7 +21132,6 @@
     },
     "voice": {
       "demoPrompt": "Diesen Diff auf Sonderfälle prüfen und Tests für alle gefundenen Fälle hinzufügen.",
-      "startDictation": "Diktat starten",
       "agentPromptTitle": "Agenten-Prompt",
       "listening": "Warten auf Spracheingabe…",
       "unassignedInstruction": "Vor dem Diktieren in einem fokussierten Bereich ein Tastenkürzel für das Diktat zuweisen.",
@@ -22857,7 +22800,6 @@
       "workspaceOpenBoard": "Arbeitsbereichsübersicht ein-/ausblenden",
       "dashboardToggle": "Agenten-Dashboard ein-/ausblenden",
       "workspaceSelectByIndex": "Arbeitsbereich 1–9 auswählen",
-      "voiceDictation": "Diktieren",
       "viewTasks": "Aufgaben öffnen",
       "sidebarLeftToggle": "Seitenleiste ein-/ausblenden",
       "sidebarRightToggle": "Rechte Seitenleiste ein-/ausblenden",

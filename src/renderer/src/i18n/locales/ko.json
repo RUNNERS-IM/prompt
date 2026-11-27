@@ -256,9 +256,6 @@
         "block": "차단",
         "search": {
           "permissions": "권한",
-          "camera": "카메라",
-          "microphone": "마이크",
-          "location": "위치",
           "notifications": "알림",
           "clipboard": "클립보드",
           "localNetwork": "로컬 네트워크"
@@ -267,7 +264,7 @@
         "profile": "브라우저 프로필",
         "ask": "다시 확인",
         "empty": "아직 허용되거나 차단된 사이트가 없습니다.",
-        "description": "사이트는 카메라, 마이크, 위치 등을 쓰기 전에 먼저 묻습니다. 사이트마다 허용하거나 차단한 항목을 바꿀 수 있습니다."
+        "description": "사이트는 알림을 띄우거나 클립보드를 읽거나 로컬 네트워크에 접속하기 전에 먼저 묻습니다. 사이트마다 허용하거나 차단한 항목을 바꿀 수 있습니다."
       },
       "profileScope": {
         "optionShared": "공유됨",
@@ -7242,10 +7239,6 @@
           "fa809e8ada": "macOS '개인정보 보호 및 보안'을 열었습니다",
           "48d87edcd2": "권한이 허용되었습니다",
           "a552887288": "개발자 권한을 로드할 수 없습니다.",
-          "4cfaa7e98a": "블루투스 장치 도구 및 로컬 하드웨어 실험.",
-          "b2210b1b4f": "블루투스",
-          "dfbc12c8c8": "USB 장치와 통신하는 하드웨어 디버깅 및 장치 도구입니다.",
-          "bf51e4a542": "USB 장치",
           "f903bf20b5": "터미널과 개발 도구가 로컬 네트워크의 서비스에 연결하도록 허용합니다. macOS는 이 권한의 현재 상태를 Orca에 알려 주지 않습니다.",
           "e7bb06007c": "로컬 네트워크",
           "4a73f5217a": "다른 로컬 앱을 제어하는 스크립트에 필요한 Apple Events 권한입니다.",
@@ -7256,10 +7249,6 @@
           "5b2f22ca2d": "접근성",
           "0639db5496": "스크린샷, 시각적 자동화, UI 검사 도구.",
           "f24f31a884": "화면 녹화",
-          "550cfa3750": "웹캠 캡처 및 카메라 기반 로컬 테스트 앱.",
-          "e5b5f3d6b9": "카메라",
-          "cc8151d9fa": "음성 입력, 전사, 오디오 녹음, sox, ffmpeg 및 Whisper CLI.",
-          "16381e040a": "마이크",
           "dac08ec03e": "작업 중...",
           "actionRequest": "권한 요청",
           "actionOpenSettings": "설정 열기",
@@ -8798,9 +8787,7 @@
           "1eac933202": "macOS 개인정보 보호 및 보안을 열었습니다. 권한을 허용한 뒤 받아쓰기를 다시 켜세요.",
           "cd9fe37556": "마이크 권한이 부여되었습니다.",
           "6fa734ed95": "{{value0}} 삭제",
-          "openAiKeyName": "OpenAI 트랜스크립션 키",
-          "dictationShortcutDescription": "{{shortcut}} 단축키를 눌러 포커스된 패널에 텍스트를 받아쓰세요.",
-          "dictationModesDescription": "토글: {{shortcut}} 단축키를 한 번 누르면 받아쓰기를 시작하고, 다시 누르면 중지합니다. 길게 누르기: {{shortcut}} 단축키를 누르고 있는 동안 받아쓰기합니다."
+          "openAiKeyName": "OpenAI 트랜스크립션 키"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "{{value0}} 제거",
@@ -10635,8 +10622,6 @@
               "322d457a0d": "전사",
               "dcc7846641": "클라우드 음성-텍스트 변환 모델에 쓸 OpenAI API 키를 설정합니다.",
               "ebfd0b32e5": "OpenAI 전사",
-              "microphoneTitle": "마이크로폰",
-              "microphoneDescription": "음성 받아쓰기에서 사용할 입력 장치를 선택하세요.",
               "micInput": "입력",
               "micDevice": "장치",
               "micAirpods": "에어팟",
@@ -11767,19 +11752,6 @@
           "devChannelUnsupported": "{{value0}} 버전은 {{value1}}용으로만 제공됩니다. Linux에서는 Stable 또는 RC를 사용하세요.",
           "downloadInstaller": "설치 프로그램 다운로드",
           "manualInstallHint": "{{value0}} 버전은 Windows에서 서명되지 않아서, 앱 안의 업데이트 기능으로는 서명된 버전 위에 설치할 수 없습니다. 내려받은 설치 프로그램을 한 번 실행하세요. Windows에서 알 수 없는 게시자 경고가 나타납니다. 그 뒤로는 Stable로 돌아가는 것까지 여기서 버전을 바꿀 수 있습니다."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "시스템 기본값",
-          "unavailable": "사용할 수 없음",
-          "label": "마이크로폰",
-          "description": "음성 받아쓰기에 사용되는 입력 장치입니다. 시스템 기본값은 OS 마이크 설정을 따릅니다.",
-          "accessHint": "입력 장치를 나열하려면 마이크 액세스를 허용하세요.",
-          "allowAccess": "액세스 허용",
-          "noMicrophoneFound": "마이크를 찾을 수 없습니다. 하나를 연결한 후 다시 시도해 보세요.",
-          "openFailedDetail": "마이크를 열 수 없습니다. {{value0}}",
-          "openFailed": "마이크를 열 수 없습니다.",
-          "openedSystemSettings": "macOS 개인 정보 보호 및 보안을 열었습니다. 마이크 액세스 권한을 부여한 후 다시 시도하세요.",
-          "permissionDenied": "마이크 접근이 차단되어 있습니다. 시스템 설정에서 허용한 뒤 다시 시도하세요."
         },
         "TerminalTccAttributionNotice": {
           "body": "터미널 데몬을 시작한 Orca 설치본이 이제 없어서, macOS가 그 명령을 Orca의 명령으로 인식하지 못합니다. 그래서 손쉬운 사용과 자동화 권한이 조용히 무시됩니다(osascript가 오류 -25211로 실패함). 데몬을 다시 시작하면 해결됩니다. 실행 중인 터미널 세션은 닫힙니다.",
@@ -16234,26 +16206,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "음성 오류: {{value0}}",
-          "7afff43472": "받아쓰기가 완료되었지만 텍스트 필드에 초점이 맞춰지지 않았습니다.",
-          "55127a3706": "받아쓰기 실패: {{value0}}",
-          "bb7f599ee7": "설정 열기",
-          "2d5b9fabf9": "마이크 액세스가 거부되었습니다. 시스템 설정에서 액세스 권한을 부여한 다음 Orca를 다시 시작하세요.",
-          "5d2c3e7ae3": "음성이 감지되지 않았습니다.",
-          "micFallback": "선택한 마이크를 사용할 수 없습니다. 시스템 기본값을 사용합니다.",
-          "micDisconnected": "마이크 연결이 끊어졌습니다. 받아쓰기가 중지되었습니다."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "받아쓰기 중지",
-          "7f3660a7ba": "마이크 시작 중…",
-          "f082d0cb9d": "처리 중…",
-          "3de5a129e7": "듣는 중",
-          "4977162383": "음량이 너무 큽니다",
-          "25f2b7a6a5": "말하는 중"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "하위 에이전트 {{count}}개 숨기기",
@@ -18023,9 +17975,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "카메라",
-            "microphone": "마이크",
-            "location": "위치",
             "notifications": "알림",
             "clipboard": "클립보드",
             "windowManagement": "창 관리",
@@ -18037,9 +17986,6 @@
           "block": "차단",
           "ask": {
             "notifications": "알림 표시",
-            "camera": "카메라 사용",
-            "location": "위치 정보 확인",
-            "microphone": "마이크 사용",
             "idleDetection": "이 장치의 사용 여부 감지",
             "localNetwork": "이 장치의 앱과 로컬 네트워크의 장치에 액세스",
             "clipboard": "클립보드에 복사된 텍스트 및 이미지 보기",
@@ -18622,8 +18568,6 @@
         "noFiles": "일치하는 파일이 없습니다",
         "filesLoadFailed": "파일을 불러오지 못했습니다",
         "attach": "파일첨부",
-        "startDictation": "받아쓰기 시작",
-        "stopDictation": "받아쓰기 중지",
         "noSkills": "어울리는 스킬 없음",
         "localAttachmentUnsupported": "원격 세션에는 로컬 첨부 파일을 사용할 수 없습니다.",
         "attachFailed": "{{files}}을(를) 첨부할 수 없습니다.",
@@ -20365,7 +20309,6 @@
     },
     "voice": {
       "demoPrompt": "극단적인 경우에 대해 이 차이점을 검토하고 찾은 항목에 대한 테스트를 추가하세요.",
-      "startDictation": "받아쓰기 시작",
       "agentPromptTitle": "에이전트 프롬프트",
       "listening": "청취...",
       "unassignedInstruction": "초점이 맞춰진 창에서 음성 받아쓰기를 시작하기 전에 받아쓰기 바로가기를 할당하세요.",
@@ -21828,7 +21771,6 @@
       "workspaceOpenBoard": "작업 창 보드 전환",
       "dashboardToggle": "에이전트 대시보드 전환",
       "workspaceSelectByIndex": "작업 창 1–9 선택",
-      "voiceDictation": "받아쓰기",
       "viewTasks": "작업 열기",
       "sidebarLeftToggle": "사이드바 전환",
       "sidebarRightToggle": "오른쪽 사이드바 전환",

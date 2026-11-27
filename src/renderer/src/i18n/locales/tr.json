@@ -1232,12 +1232,9 @@
         "profile": "Tarayıcı profili",
         "empty": "Henüz izin verilen veya engellenen site yok.",
         "title": "Site izinleri",
-        "description": "Siteler kameranızı, mikrofonunuzu, konumunuzu ve daha fazlasını kullanmadan önce izin ister. Her site için izin veya engelleme tercihlerinizi değiştirin.",
+        "description": "Siteler bildirim göstermeden, panoyu okumadan, yerel ağınıza erişmeden ve daha fazlasından önce izin ister. Her site için izin verdiğiniz veya engellediğiniz şeyleri değiştirin.",
         "search": {
           "permissions": "izinler",
-          "camera": "kamera",
-          "microphone": "mikrofon",
-          "location": "konum",
           "notifications": "bildirimler",
           "clipboard": "pano",
           "localNetwork": "yerel ağ"
@@ -8405,10 +8402,6 @@
           "fa809e8ada": "macOS Gizlilik ve Güvenlik açıldı",
           "48d87edcd2": "İzin verildi",
           "a552887288": "Geliştirici izinleri yüklenemedi",
-          "4cfaa7e98a": "Bluetooth cihaz araçları ve yerel donanım denemeleri.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "USB cihazlarıyla iletişim kuran donanım hata ayıklama ve cihaz araçları.",
-          "bf51e4a542": "USB Cihazları",
           "f903bf20b5": "Terminallerin ve geliştirme araçlarının yerel ağınızdaki hizmetlere bağlanmasına izin verir. macOS, bu iznin geçerli durumunu Orca'ya bildirmez.",
           "e7bb06007c": "Yerel Ağ",
           "4a73f5217a": "Diğer yerel uygulamaları kontrol eden betikler için Apple Events.",
@@ -8419,10 +8412,6 @@
           "5b2f22ca2d": "Erişilebilirlik",
           "0639db5496": "Ekran görüntüsü, görsel otomasyon ve UI inceleme araçları.",
           "f24f31a884": "Ekran Kaydı",
-          "550cfa3750": "Web kamerası yakalama ve kamera tabanlı yerel test uygulamaları.",
-          "e5b5f3d6b9": "Kamera",
-          "cc8151d9fa": "Ses girişi, transkripsiyon, ses kaydı, sox, ffmpeg ve Whisper CLI'leri.",
-          "16381e040a": "Mikrofon",
           "dac08ec03e": "Çalışılıyor...",
           "actionRequest": "İste",
           "actionOpenSettings": "Ayarları Aç",
@@ -10011,9 +10000,7 @@
           "f9a9cf6928": "Sesli dikteyi etkinleştirmeden önce mikrofon izni gereklidir.",
           "1eac933202": "macOS Gizlilik ve Güvenlik açıldı. Erişimi verdikten sonra dikteyi tekrar etkinleştirin.",
           "cd9fe37556": "Mikrofon izni verildi",
-          "openAiKeyName": "OpenAI transkripsiyon anahtarınız",
-          "dictationShortcutDescription": "Odaktaki herhangi bir bölmeye metin dikte etmek için {{shortcut}} tuşlarına basın.",
-          "dictationModesDescription": "Aç/kapat: başlatmak için {{shortcut}} tuşlarına bir kez, durdurmak için tekrar basın. Basılı tut: {{shortcut}} basılıyken dikte edin."
+          "openAiKeyName": "OpenAI transkripsiyon anahtarınız"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "{{value0}} kaldırılsın mı",
@@ -11844,8 +11831,6 @@
               "322d457a0d": "yazıya dökme",
               "dcc7846641": "Bulut konuşmadan metne modelleri için kullanılan OpenAI API anahtarını yapılandırın.",
               "ebfd0b32e5": "OpenAI Yazıya Dökme",
-              "microphoneTitle": "Mikrofon",
-              "microphoneDescription": "Sesli diktenin hangi giriş cihazını kullanacağını seçin.",
               "micInput": "giriş",
               "micDevice": "cihaz",
               "micAirpods": "airpods",
@@ -12789,19 +12774,6 @@
           "devChannelUnsupported": "{{value0}} sürümleri yalnızca {{value1}} için üretilir. Linux, Kararlı veya RC'de kalır.",
           "downloadInstaller": "Yükleyiciyi indir",
           "manualInstallHint": "{{value0}} sürümleri Windows'ta imzasızdır, bu yüzden uygulama içi güncelleyici bunu imzalı bir sürümün üzerine yükleyemez. İndirilen yükleyiciyi bir kez çalıştırın; Windows bilinmeyen bir yayımcı konusunda uyaracaktır ve Kararlı'ya dönüş dahil sonraki her geçiş buradan çalışır."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Sistem varsayılanı",
-          "unavailable": "kullanılamıyor",
-          "label": "Mikrofon",
-          "description": "Sesli dikte için kullanılan giriş cihazı. Sistem varsayılanı, işletim sistemi mikrofon ayarını izler.",
-          "accessHint": "Giriş cihazlarını listelemek için mikrofon erişimine izin verin.",
-          "allowAccess": "Erişime izin ver",
-          "noMicrophoneFound": "Mikrofon bulunamadı. Bir tane bağlayıp tekrar deneyin.",
-          "openFailedDetail": "Mikrofon açılamadı. {{value0}}",
-          "openFailed": "Mikrofon açılamadı.",
-          "openedSystemSettings": "macOS Gizlilik ve Güvenlik açıldı. Mikrofon erişimi verip tekrar deneyin.",
-          "permissionDenied": "Mikrofon erişimi engellendi. Sistem ayarlarınızdan izin verip tekrar deneyin."
         },
         "TerminalTccAttributionNotice": {
           "body": "Terminal daemon'u artık var olmayan bir Orca kurulumu tarafından başlatıldı, bu yüzden macOS komutlarını Orca'ya atfedemiyor; Erişilebilirlik ve Otomasyon izinleri sessizce yok sayılıyor (osascript -25211 hatasıyla başarısız oluyor). Daemon'u yeniden başlatmak bunu düzeltir; çalışan terminal oturumları kapanacaktır.",
@@ -17435,26 +17407,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Konuşma hatası: {{value0}}",
-          "7afff43472": "Dikte tamamlandı, ancak odaklanılmış bir metin alanı yoktu.",
-          "55127a3706": "Dikte tamamlanamadı: {{value0}}",
-          "bb7f599ee7": "Ayarları Aç",
-          "2d5b9fabf9": "Mikrofon erişimi reddedildi. Sistem ayarlarından erişim verin, ardından Orca'yı yeniden başlatın.",
-          "5d2c3e7ae3": "Konuşma algılanmadı.",
-          "micFallback": "Seçili mikrofon kullanılamıyor. Sistem varsayılanı kullanılıyor.",
-          "micDisconnected": "Mikrofon bağlantısı kesildi. Dikte durduruldu."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Dikteyi durdur",
-          "7f3660a7ba": "Mikrofon başlatılıyor…",
-          "f082d0cb9d": "İşleniyor…",
-          "3de5a129e7": "Dinliyor",
-          "4977162383": "Çok yüksek sesli",
-          "25f2b7a6a5": "Konuşuyor"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "{{count}} alt ajanı gizle",
@@ -19203,9 +19155,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Kamera",
-            "microphone": "Mikrofon",
-            "location": "Konum",
             "notifications": "Bildirimler",
             "clipboard": "Pano",
             "midi": "MIDI cihazları",
@@ -19214,9 +19163,6 @@
             "localNetwork": "Yerel ağ"
           },
           "ask": {
-            "camera": "Kameranızı kullanmak",
-            "microphone": "Mikrofonunuzu kullanmak",
-            "location": "Konumunuzu öğrenmek",
             "notifications": "Bildirim göstermek",
             "clipboard": "Panoya kopyalanan metin ve resimleri görmek",
             "midi": "MIDI cihazlarınızı kullanmak",
@@ -19864,8 +19810,6 @@
         "noFiles": "Eşleşen dosya yok",
         "filesLoadFailed": "Dosyalar yüklenemedi",
         "attach": "Dosya ekle",
-        "startDictation": "Sesli yazmayı başlat",
-        "stopDictation": "Sesli yazmayı durdur",
         "noSkills": "Eşleşen beceri yok",
         "noCommandsOrSkills": "Eşleşen komut veya beceri yok",
         "noCommands": "Eşleşen komut yok",
@@ -21188,7 +21132,6 @@
     },
     "voice": {
       "demoPrompt": "Bu diff'i uç durumlar için inceleyin ve bulduğunuz her şey için test ekleyin.",
-      "startDictation": "Sesli yazmayı başlat",
       "agentPromptTitle": "Ajan istemi",
       "listening": "Dinleniyor...",
       "unassignedInstruction": "Odaklanmış bir bölmede sesli yazmayı başlatmadan önce bir sesli yazma kısayolu atayın.",
@@ -22701,7 +22644,6 @@
       "workspaceOpenBoard": "Çalışma alanı panosunu göster/gizle",
       "dashboardToggle": "Ajan panosunu göster/gizle",
       "workspaceSelectByIndex": "1–9 numaralı çalışma alanını seç",
-      "voiceDictation": "Dikte",
       "viewTasks": "Görevler bölümünü aç",
       "sidebarLeftToggle": "Kenar çubuğunu göster/gizle",
       "sidebarRightToggle": "Sağ kenar çubuğunu göster/gizle",

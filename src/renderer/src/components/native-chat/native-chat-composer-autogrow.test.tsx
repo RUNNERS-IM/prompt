@@ -56,9 +56,6 @@ function TestField({
       sendButtonDisabled={false}
       isWorking={false}
       attachDisabled={false}
-      dictationDisabled={false}
-      isDictating={false}
-      isDictationHoldMode={false}
       imeEnterGesture={imeEnterGesture}
       onDraftChange={vi.fn()}
       onTextareaSelect={vi.fn()}
@@ -72,9 +69,6 @@ function TestField({
       mentionFiles={{ files: [], loading: false, failed: false }}
       onRemoveImageAttachment={vi.fn()}
       onAttach={vi.fn()}
-      onDictationToggle={vi.fn()}
-      onDictationHoldStart={vi.fn()}
-      onDictationHoldEnd={vi.fn()}
       onSend={vi.fn()}
       sessionOptionsSurface={null}
       sessionOptionsSnapshot={[]}

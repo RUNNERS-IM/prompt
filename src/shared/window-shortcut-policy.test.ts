@@ -36,7 +36,7 @@ describe('resolveWindowShortcutAction', () => {
         { code: 'KeyE', key: 'e', meta: false, control: true, alt: false, shift: false },
         'linux'
       )
-    ).toEqual({ type: 'dictationKeyDown' })
+    ).toBeNull()
   })
 
   it.each(['darwin', 'linux', 'win32'] as const)(

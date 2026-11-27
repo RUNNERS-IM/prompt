@@ -2,7 +2,6 @@ import type { VoiceSettings } from '../../../../shared/speech-types'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
-import { useShortcutLabel } from '@/hooks/useShortcutLabel'
 import { translate } from '@/i18n/i18n'
 
 type VoiceDictationSettingsSectionProps = {
@@ -16,8 +15,6 @@ export function VoiceDictationSettingsSection({
   onToggleVoiceDictation,
   onUpdateVoiceSettings
 }: VoiceDictationSettingsSectionProps): React.JSX.Element {
-  const shortcutLabel = useShortcutLabel('voice.dictation')
-
   return (
     <>
       <div className="flex items-center justify-between gap-4 py-2">
@@ -25,13 +22,6 @@ export function VoiceDictationSettingsSection({
           <Label>
             {translate('auto.components.settings.VoicePane.0121960365', 'Enable voice dictation')}
           </Label>
-          <p className="text-xs text-muted-foreground">
-            {translate(
-              'auto.components.settings.VoicePane.dictationShortcutDescription',
-              'Press {{shortcut}} to dictate text into any focused pane.',
-              { shortcut: shortcutLabel }
-            )}
-          </p>
         </div>
         <Switch
           checked={voiceSettings.enabled}
@@ -50,13 +40,6 @@ export function VoiceDictationSettingsSection({
           <Label>
             {translate('auto.components.settings.VoicePane.ba4a900d1d', 'Dictation mode')}
           </Label>
-          <p className="text-xs text-muted-foreground">
-            {translate(
-              'auto.components.settings.VoicePane.dictationModesDescription',
-              'Toggle: press {{shortcut}} once to start, again to stop. Hold: dictate while {{shortcut}} is held.',
-              { shortcut: shortcutLabel }
-            )}
-          </p>
         </div>
         <div className="flex shrink-0 items-center rounded-md border border-border/60 bg-background/50 p-0.5">
           {(['toggle', 'hold'] as const).map((mode) => (

@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { ArrowUp, CircleAlert, Mic, Plus, Square } from 'lucide-react'
+import { ArrowUp, CircleAlert, Plus, Square } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { translate } from '@/i18n/i18n'
@@ -18,7 +18,6 @@ import type { NativeChatOptionPickerRequest } from './native-chat-composer-types
 export type NativeChatComposerActionsProps = {
   editSession?: { cancel: () => void }
   attachDisabled: boolean
-  dictationDisabled: boolean
   sendDisabled: boolean
   /** Shown on the disabled send button: what the user can do to send. */
   sendBlockedReason?: string | null
@@ -27,12 +26,7 @@ export type NativeChatComposerActionsProps = {
   isWorking: boolean
   /** This client's Stop request is in flight: the Stop control is disabled and says so. */
   isStopping?: boolean
-  isDictating: boolean
-  isDictationHoldMode: boolean
   onAttach: () => void
-  onDictationToggle: () => void
-  onDictationHoldStart: () => void
-  onDictationHoldEnd: () => void
   onSend: () => void
   onStop?: () => void
   sessionOptionsSurface: SessionOptionsSurface | null
@@ -51,18 +45,12 @@ export type NativeChatComposerActionsProps = {
 export const NativeChatComposerActions = memo(function NativeChatComposerActions({
   editSession,
   attachDisabled,
-  dictationDisabled,
   sendDisabled,
   sendBlockedReason,
   draftNotSaved,
   isWorking,
   isStopping = false,
-  isDictating,
-  isDictationHoldMode,
   onAttach,
-  onDictationToggle,
-  onDictationHoldStart,
-  onDictationHoldEnd,
   onSend,
   onStop,
   sessionOptionsSurface,
@@ -86,9 +74,6 @@ export const NativeChatComposerActions = memo(function NativeChatComposerActions
       onSend()
     }
   }
-  const dictationLabel = isDictating
-    ? translate('components.native-chat.composer.stopDictation', 'Stop dictation')
-    : translate('components.native-chat.composer.startDictation', 'Start dictation')
   const sendReason = stops ? null : (sendBlockedReason ?? null)
   const sendButton = editSession ? (
     <Button
@@ -161,50 +146,6 @@ export const NativeChatComposerActions = memo(function NativeChatComposerActions
           focusComposer={focusComposer}
         />
         {contextUsage ? <NativeChatContextUsageRing usage={contextUsage} /> : null}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              type="button"
-              variant={isDictating ? 'secondary' : 'ghost'}
-              size="icon-sm"
-              aria-label={dictationLabel}
-              disabled={dictationDisabled}
-              onClick={isDictationHoldMode ? undefined : onDictationToggle}
-              onPointerDown={(event) => {
-                if (!isDictationHoldMode || dictationDisabled) {
-                  return
-                }
-                event.preventDefault()
-                onDictationHoldStart()
-              }}
-              onPointerUp={() => {
-                if (isDictationHoldMode && !dictationDisabled) {
-                  onDictationHoldEnd()
-                }
-              }}
-              onPointerCancel={() => {
-                if (isDictationHoldMode && !dictationDisabled) {
-                  onDictationHoldEnd()
-                }
-              }}
-              onPointerLeave={(event) => {
-                if (isDictationHoldMode && event.buttons === 1 && !dictationDisabled) {
-                  onDictationHoldEnd()
-                }
-              }}
-              className="pointer-coarse:size-11"
-            >
-              {isDictating ? (
-                <Square className="size-3.5 fill-current" />
-              ) : (
-                <Mic className="size-4" />
-              )}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="top" sideOffset={4}>
-            {dictationLabel}
-          </TooltipContent>
-        </Tooltip>
         <DraftNotSavedIcon shown={draftNotSaved === true} />
         {editSession ? (
           <Button type="button" variant="ghost" size="sm" onClick={editSession.cancel}>

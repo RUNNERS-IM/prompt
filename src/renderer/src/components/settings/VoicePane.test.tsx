@@ -232,9 +232,7 @@ describe('VoicePane', () => {
         voice: {
           ...getDefaultVoiceSettings(),
           enabled,
-          openAiApiKeyConfigured: true,
-          microphoneDeviceId: 'usb-mic',
-          microphoneDeviceLabel: 'USB Microphone'
+          openAiApiKeyConfigured: true
         }
       }) as GlobalSettings
 
@@ -270,9 +268,7 @@ describe('VoicePane', () => {
       voice: {
         ...getDefaultVoiceSettings(),
         enabled: false,
-        openAiApiKeyConfigured: false,
-        microphoneDeviceId: 'usb-mic',
-        microphoneDeviceLabel: 'USB Microphone'
+        openAiApiKeyConfigured: false
       }
     })
   })

@@ -17,8 +17,7 @@ import {
   forwardGuestShortcutInput,
   type GuestShortcutForwardContext,
   type GuestShortcutInput,
-  type IsMobileEmulatorEnabled,
-  type ShouldForwardDictationShortcut
+  type IsMobileEmulatorEnabled
 } from './browser-guest-shortcut-dispatch'
 
 // Focused guest key events do not reach renderer shortcut handlers.
@@ -26,7 +25,6 @@ export function setupGuestShortcutForwarding(args: {
   browserTabId: string
   guest: Electron.WebContents
   resolveRenderer: ResolveRenderer
-  shouldForwardDictationShortcut?: ShouldForwardDictationShortcut
   isMobileEmulatorEnabled?: IsMobileEmulatorEnabled
   getKeybindings?: () => KeybindingOverrides | undefined
   resolveWorktreeId?: (browserTabId: string) => string | null
@@ -36,7 +34,6 @@ export function setupGuestShortcutForwarding(args: {
     browserTabId,
     guest,
     resolveRenderer,
-    shouldForwardDictationShortcut,
     isMobileEmulatorEnabled,
     getKeybindings,
     resolveWorktreeId,
@@ -58,7 +55,6 @@ export function setupGuestShortcutForwarding(args: {
   const forwardContext: GuestShortcutForwardContext = {
     browserTabId,
     resolveRenderer,
-    shouldForwardDictationShortcut,
     isMobileEmulatorEnabled,
     getKeybindings,
     resolveWorktreeId,

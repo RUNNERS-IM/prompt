@@ -722,12 +722,9 @@
         "profile": "Browser profile",
         "empty": "No sites have been allowed or blocked yet.",
         "title": "Site permissions",
-        "description": "Sites ask before using your camera, microphone, location and more. Change what you allowed or blocked for each site.",
+        "description": "Sites ask before showing notifications, reading the clipboard, reaching your local network and more. Change what you allowed or blocked for each site.",
         "search": {
           "permissions": "permissions",
-          "camera": "camera",
-          "microphone": "microphone",
-          "location": "location",
           "notifications": "notifications",
           "clipboard": "clipboard",
           "localNetwork": "local network"
@@ -7895,10 +7892,6 @@
           "fa809e8ada": "Opened macOS Privacy & Security",
           "48d87edcd2": "Permission granted",
           "a552887288": "Could not load developer permissions",
-          "4cfaa7e98a": "Bluetooth device tools and local hardware experiments.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Hardware debugging and device tools that talk to USB devices.",
-          "bf51e4a542": "USB Devices",
           "f903bf20b5": "Allows terminals and development tools to connect to services on your local network. macOS does not report this permission's current status to Orca.",
           "e7bb06007c": "Local Network",
           "4a73f5217a": "Apple Events for scripts that control other local apps.",
@@ -7909,10 +7902,6 @@
           "5b2f22ca2d": "Accessibility",
           "0639db5496": "Screenshot, visual automation, and UI inspection tools.",
           "f24f31a884": "Screen Recording",
-          "550cfa3750": "Webcam capture and camera-driven local test apps.",
-          "e5b5f3d6b9": "Camera",
-          "cc8151d9fa": "Voice input, transcription, audio recording, sox, ffmpeg, and Whisper CLIs.",
-          "16381e040a": "Microphone",
           "dac08ec03e": "Working...",
           "actionRequest": "Request",
           "actionOpenSettings": "Open Settings",
@@ -9501,9 +9490,7 @@
           "f9a9cf6928": "Microphone permission is required before enabling voice dictation.",
           "1eac933202": "Opened macOS Privacy & Security. Enable dictation again after granting access.",
           "cd9fe37556": "Microphone permission granted",
-          "openAiKeyName": "Your OpenAI transcription key",
-          "dictationShortcutDescription": "Press {{shortcut}} to dictate text into any focused pane.",
-          "dictationModesDescription": "Toggle: press {{shortcut}} once to start, again to stop. Hold: dictate while {{shortcut}} is held."
+          "openAiKeyName": "Your OpenAI transcription key"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Remove {{value0}}",
@@ -11334,8 +11321,6 @@
               "322d457a0d": "transcription",
               "dcc7846641": "Configure the OpenAI API key used for cloud speech-to-text models.",
               "ebfd0b32e5": "OpenAI transcription",
-              "microphoneTitle": "Microphone",
-              "microphoneDescription": "Choose which input device voice dictation uses.",
               "micInput": "input",
               "micDevice": "device",
               "micAirpods": "airpods",
@@ -12279,19 +12264,6 @@
           "devChannelUnsupported": "{{value0}} builds are produced only for {{value1}}. Linux stays on Stable or RC.",
           "downloadInstaller": "Download installer",
           "manualInstallHint": "{{value0}} builds are unsigned on Windows, so the in-app updater cannot install one over a signed build. Run the downloaded installer once — Windows will warn about an unknown publisher — and every later switch, including back to Stable, works from here."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "System default",
-          "unavailable": "unavailable",
-          "label": "Microphone",
-          "description": "Input device used for voice dictation. System default follows the OS microphone setting.",
-          "accessHint": "Allow microphone access to list input devices.",
-          "allowAccess": "Allow access",
-          "noMicrophoneFound": "No microphone was found. Connect one, then try again.",
-          "openFailedDetail": "Could not open the microphone. {{value0}}",
-          "openFailed": "Could not open the microphone.",
-          "openedSystemSettings": "Opened macOS Privacy & Security. Grant microphone access, then try again.",
-          "permissionDenied": "Microphone access is blocked. Grant it in your system settings, then try again."
         },
         "TerminalTccAttributionNotice": {
           "body": "The terminal daemon was started by an Orca install that no longer exists, so macOS can’t attribute its commands to Orca — Accessibility and Automation grants are silently ignored (osascript fails with error -25211). Restarting the daemon fixes this; running terminal sessions will close.",
@@ -16925,26 +16897,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Speech error: {{value0}}",
-          "7afff43472": "Dictation finished, but no text field was focused.",
-          "55127a3706": "Dictation failed: {{value0}}",
-          "bb7f599ee7": "Open Settings",
-          "2d5b9fabf9": "Microphone access denied. Grant access in system settings, then restart Orca.",
-          "5d2c3e7ae3": "No speech detected.",
-          "micFallback": "Selected microphone unavailable. Using system default.",
-          "micDisconnected": "Microphone disconnected. Dictation stopped."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Stop dictation",
-          "7f3660a7ba": "Starting mic…",
-          "f082d0cb9d": "Processing…",
-          "3de5a129e7": "Listening",
-          "4977162383": "Too loud",
-          "25f2b7a6a5": "Speaking"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Hide {{count}} child agent",
@@ -18693,9 +18645,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Camera",
-            "microphone": "Microphone",
-            "location": "Location",
             "notifications": "Notifications",
             "clipboard": "Clipboard",
             "midi": "MIDI devices",
@@ -18704,9 +18653,6 @@
             "localNetwork": "Local network"
           },
           "ask": {
-            "camera": "Use your camera",
-            "microphone": "Use your microphone",
-            "location": "Know your location",
             "notifications": "Show notifications",
             "clipboard": "See text and images copied to the clipboard",
             "midi": "Use your MIDI devices",
@@ -19354,8 +19300,6 @@
         "noFiles": "No matching files",
         "filesLoadFailed": "Couldn't load files",
         "attach": "Attach file",
-        "startDictation": "Start dictation",
-        "stopDictation": "Stop dictation",
         "noSkills": "No matching skills",
         "noCommandsOrSkills": "No matching commands or skills",
         "noCommands": "No matching commands",
@@ -20678,7 +20622,6 @@
     },
     "voice": {
       "demoPrompt": "Review this diff for edge cases and add tests for anything you find.",
-      "startDictation": "Start dictation",
       "agentPromptTitle": "Agent prompt",
       "listening": "Listening...",
       "unassignedInstruction": "Assign a dictation shortcut before starting voice dictation in a focused pane.",
@@ -22347,7 +22290,6 @@
       "workspaceOpenBoard": "Toggle Workspace Board",
       "dashboardToggle": "Toggle Agent Dashboard",
       "workspaceSelectByIndex": "Select Workspace 1–9",
-      "voiceDictation": "Dictation",
       "viewTasks": "Open Tasks",
       "sidebarLeftToggle": "Toggle Sidebar",
       "sidebarRightToggle": "Toggle Right Sidebar",

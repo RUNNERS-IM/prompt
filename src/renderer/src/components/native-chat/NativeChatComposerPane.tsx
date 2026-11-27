@@ -17,7 +17,6 @@ import { useNativeChatFileDrops } from './use-native-chat-file-drops'
 import { useNativeChatComposerKeyDown } from './use-native-chat-composer-keydown'
 import { useNativeChatSendLifecycle } from './use-native-chat-send-lifecycle'
 import { useNativeChatSessionOptions } from './use-native-chat-session-options'
-import { useNativeChatDictation } from './use-native-chat-dictation'
 import { useNativeChatSessionOptionCommand } from './use-native-chat-session-option-command'
 import type {
   NativeChatComposerHandle,
@@ -224,7 +223,6 @@ export const NativeChatComposerPane = forwardRef<NativeChatComposerHandle, Nativ
     })
 
     useImperativeHandle(ref, () => localHandle.current!)
-    const dictation = useNativeChatDictation(textareaRef, disabled)
     const { dispatch: dispatchSessionOptionCommand, isDispatching: isDispatchingSessionOption } =
       useNativeChatSessionOptionCommand({
         agent,
@@ -386,9 +384,6 @@ export const NativeChatComposerPane = forwardRef<NativeChatComposerHandle, Nativ
             (structuredTransport?.runtime === 'remote' &&
               structuredTransport.sessionPending === true)
           }
-          dictationDisabled={dictation.dictationDisabled}
-          isDictating={dictation.isDictating}
-          isDictationHoldMode={dictation.isDictationHoldMode}
           imeEnterGesture={imeEnterGesture}
           {...draftEvents}
           onKeyDown={handleKeyDown}
@@ -400,9 +395,6 @@ export const NativeChatComposerPane = forwardRef<NativeChatComposerHandle, Nativ
           onChooseMentionFile={completeMention}
           onRemoveImageAttachment={(id) => removeImageAttachment(id)}
           onAttach={pickAttachments}
-          onDictationToggle={dictation.toggleDictation}
-          onDictationHoldStart={dictation.startHoldDictation}
-          onDictationHoldEnd={dictation.stopHoldDictation}
           onSend={send}
           onStop={interrupt}
           sessionOptionsSurface={sessionOptionsSurface}

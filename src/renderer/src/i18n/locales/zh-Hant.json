@@ -1200,12 +1200,9 @@
         "profile": "瀏覽器設定檔",
         "empty": "尚未允許或封鎖任何網站。",
         "title": "網站權限",
-        "description": "網站在使用攝影機、麥克風、位置等功能前，會先請求許可。可變更各網站已允許或封鎖的權限。",
+        "description": "網站在顯示通知、讀取剪貼簿、連線至區域網路等操作前會請求您的許可。您可以變更對各個網站允許或封鎖的權限。",
         "search": {
           "permissions": "權限",
-          "camera": "攝影機",
-          "microphone": "麥克風",
-          "location": "位置",
           "notifications": "通知",
           "clipboard": "剪貼簿",
           "localNetwork": "區域網路"
@@ -8248,10 +8245,6 @@
           "fa809e8ada": "已開啟 macOS「隱私權與安全性」",
           "48d87edcd2": "已授予權限",
           "a552887288": "無法載入開發者權限",
-          "4cfaa7e98a": "藍芽裝置工具和本機硬體實驗。",
-          "b2210b1b4f": "藍芽",
-          "dfbc12c8c8": "與 USB 裝置通訊的硬體除錯和裝置工具。",
-          "bf51e4a542": "USB 裝置",
           "f903bf20b5": "允許終端機和開發工具連線到您區域網路上的服務。macOS 不會向 Orca 回報此權限的目前狀態。",
           "e7bb06007c": "區域網路",
           "4a73f5217a": "用於控制其他本機應用程式的指令碼的 Apple 事件。",
@@ -8262,10 +8255,6 @@
           "5b2f22ca2d": "輔助使用",
           "0639db5496": "螢幕截圖、視覺自動化和 UI 檢查工具。",
           "f24f31a884": "螢幕錄製",
-          "550cfa3750": "網路攝影機影像擷取，以及使用攝影機的本機測試應用程式。",
-          "e5b5f3d6b9": "相機",
-          "cc8151d9fa": "語音輸入、轉錄、錄音、sox、ffmpeg 和 Whisper CLI。",
-          "16381e040a": "麥克風",
           "dac08ec03e": "處理中...",
           "actionRequest": "要求",
           "actionOpenSettings": "開啟設定",
@@ -9851,9 +9840,7 @@
           "f9a9cf6928": "啟用語音聽寫之前需要麥克風權限。",
           "1eac933202": "已開啟 macOS 的「隱私權與安全性」。授予存取權限後再次啟用聽寫。",
           "cd9fe37556": "已授予麥克風權限",
-          "openAiKeyName": "您的 OpenAI 轉錄金鑰",
-          "dictationShortcutDescription": "按 {{shortcut}} 可將文字聽寫到目前取得焦點的任意窗格中。",
-          "dictationModesDescription": "切換：按一次 {{shortcut}} 開始，再按一次停止。按住：按住 {{shortcut}} 期間進行聽寫。"
+          "openAiKeyName": "您的 OpenAI 轉錄金鑰"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "刪除 {{value0}}",
@@ -11684,8 +11671,6 @@
               "322d457a0d": "轉錄",
               "dcc7846641": "設定用於雲端語音轉文字模型的 OpenAI API 金鑰。",
               "ebfd0b32e5": "OpenAI 轉錄",
-              "microphoneTitle": "麥克風",
-              "microphoneDescription": "選擇語音聽寫所使用的輸入裝置。",
               "micInput": "輸入",
               "micDevice": "裝置",
               "micAirpods": "AirPods",
@@ -12629,19 +12614,6 @@
           "devChannelUnsupported": "{{value0}} 版本僅針對 {{value1}} 產生。 Linux 保持穩定版或 RC 版。",
           "downloadInstaller": "下載安裝程式",
           "manualInstallHint": "{{value0}} 版本在 Windows 上未簽署，因此應用程式內的更新程式無法將其覆蓋安裝到已簽署的版本上。請先執行一次下載的安裝程式 — Windows 會警告發布者不明 — 之後每次切換（包括切回穩定版）都可在此完成。"
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "系統預設",
-          "unavailable": "不可用",
-          "label": "麥克風",
-          "description": "用於語音聽寫的輸入裝置，系統預設會跟隨作業系統的麥克風設定。",
-          "accessHint": "允許麥克風存取以列出輸入裝置。",
-          "allowAccess": "允許存取",
-          "noMicrophoneFound": "沒有找到麥克風。請接上麥克風，然後重試。",
-          "openFailedDetail": "無法打開麥克風。 {{value0}}",
-          "openFailed": "無法打開麥克風。",
-          "openedSystemSettings": "已開啟 macOS 的「隱私權與安全性」。授予麥克風存取權限，然後再試一次。",
-          "permissionDenied": "麥克風存取遭到封鎖。請在系統設定中允許麥克風存取，然後重試。"
         },
         "TerminalTccAttributionNotice": {
           "body": "終端機常駐行程是由已不存在的 Orca 安裝副本啟動的，因此 macOS 無法將其命令歸屬於 Orca —「輔助使用」和「自動化」的授權會被忽略，且不會顯示提示（osascript 執行失敗，錯誤碼為 -25211）。重新啟動常駐行程即可解決此問題；正在執行的終端機工作階段將會關閉。",
@@ -17225,26 +17197,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "語音錯誤：{{value0}}",
-          "7afff43472": "聽寫完成，但沒有聚焦文字欄位。",
-          "55127a3706": "聽寫失敗：{{value0}}",
-          "bb7f599ee7": "開啟設定",
-          "2d5b9fabf9": "麥克風存取被拒絕。在系統設定中授予存取權限，然後重新啟動 Orca。",
-          "5d2c3e7ae3": "未偵測到語音。",
-          "micFallback": "所選麥克風不可用。使用系統預設值。",
-          "micDisconnected": "麥克風已中斷連線。聽寫已停止。"
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "停止聽寫",
-          "7f3660a7ba": "啟動麥克風...",
-          "f082d0cb9d": "正在處理…",
-          "3de5a129e7": "正在聆聽",
-          "4977162383": "聲音太大",
-          "25f2b7a6a5": "正在說話"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "隱藏 {{count}} 個子代理程式",
@@ -18965,9 +18917,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "攝影機",
-            "microphone": "麥克風",
-            "location": "位置",
             "notifications": "通知",
             "clipboard": "剪貼簿",
             "midi": "MIDI 裝置",
@@ -18976,9 +18925,6 @@
             "localNetwork": "區域網路"
           },
           "ask": {
-            "camera": "使用相機",
-            "microphone": "使用麥克風",
-            "location": "取得位置資訊",
             "notifications": "顯示通知",
             "clipboard": "查看複製到剪貼簿的文字和圖片",
             "midi": "使用 MIDI 裝置",
@@ -19618,8 +19564,6 @@
         "noFiles": "沒有符合的檔案",
         "filesLoadFailed": "無法載入檔案",
         "attach": "附加檔案",
-        "startDictation": "開始聽寫",
-        "stopDictation": "停止聽寫",
         "noSkills": "沒有符合的技能",
         "noCommandsOrSkills": "沒有符合的命令或技能",
         "noCommands": "沒有符合的命令",
@@ -20890,7 +20834,6 @@
     },
     "voice": {
       "demoPrompt": "審查這份差異的邊界情況，並為發現的問題新增測試。",
-      "startDictation": "開始聽寫",
       "agentPromptTitle": "代理程式提示詞",
       "listening": "正在聆聽…",
       "unassignedInstruction": "在聚焦的窗格中使用語音聽寫前，請先設定聽寫快速鍵。",
@@ -22386,7 +22329,6 @@
       "workspaceOpenBoard": "顯示或隱藏工作區看板",
       "dashboardToggle": "顯示或隱藏代理程式儀表板",
       "workspaceSelectByIndex": "選取工作區 1–9",
-      "voiceDictation": "聽寫",
       "viewTasks": "開啟任務",
       "sidebarLeftToggle": "顯示或隱藏側邊欄",
       "sidebarRightToggle": "顯示或隱藏右側邊欄",

@@ -1,12 +1,11 @@
 import { PROMPT_SIMPLE_SETTINGS } from '@/lib/prompt-hidden-settings'
 
-// Prompt runs Claude only and hides the browser, dictation, tasks, plugins, floating workspace and
+// Prompt runs Claude only and hides the browser, tasks, plugins, floating workspace and
 // mobile emulator features, so their shortcuts would bind actions nobody can reach.
 const PROMPT_HIDDEN_SHORTCUT_IDS: ReadonlySet<string> = new Set([
   'tab.newBrowser',
   'tab.newBrowserSplitRight',
   'tab.newSimulator',
-  'voice.dictation',
   'view.tasks',
   'view.plugins',
   'floatingTerminal.toggle',

@@ -761,14 +761,11 @@
         "block": "ブロック",
         "search": {
           "permissions": "権限",
-          "camera": "カメラ",
-          "microphone": "マイクロフォン",
-          "location": "場所",
           "notifications": "通知",
           "clipboard": "クリップボード",
           "localNetwork": "ローカル ネットワーク"
         },
-        "description": "サイトはカメラ、マイク、位置情報などを使用する前に許可を求めます。サイトごとに許可またはブロックした内容を変更できます。",
+        "description": "サイトは通知の表示、クリップボードの読み取り、ローカルネットワークへの接続などの前に許可を求めます。サイトごとに許可またはブロックした内容を変更できます。",
         "profile": "ブラウザプロファイル",
         "title": "サイトの権限",
         "ask": "再度確認する",
@@ -7747,10 +7744,6 @@
           "fa809e8ada": "macOS のプライバシーとセキュリティを開きました",
           "48d87edcd2": "許可が与えられました",
           "a552887288": "開発者権限を読み込めませんでした",
-          "4cfaa7e98a": "Bluetooth デバイスツールとローカルハードウェア実験。",
-          "b2210b1b4f": "ブルートゥース",
-          "dfbc12c8c8": "ハードウェアデバッグおよび USB デバイスと通信するデバイスツール。",
-          "bf51e4a542": "USB デバイス",
           "f903bf20b5": "ネットワーク上の開発サーバーを検出してアクセスします。",
           "e7bb06007c": "LAN",
           "4a73f5217a": "他のローカルアプリを制御するスクリプトの Apple Events。",
@@ -7761,10 +7754,6 @@
           "5b2f22ca2d": "アクセシビリティ",
           "0639db5496": "スクリーンショット、ビジュアル自動化、UI 検査ツール。",
           "f24f31a884": "画面録画",
-          "550cfa3750": "Web カメラキャプチャおよびカメラ駆動のローカルテストアプリ。",
-          "e5b5f3d6b9": "カメラ",
-          "cc8151d9fa": "音声入力、文字起こし、オーディオ録音、sox、ffmpeg、および Whisper CLI。",
-          "16381e040a": "マイクロフォン",
           "dac08ec03e": "処理中…",
           "actionRequest": "リクエスト",
           "actionOpenSettings": "設定を開く",
@@ -9340,9 +9329,7 @@
           "1eac933202": "macOS のプライバシーとセキュリティを開きました。アクセスを許可した後、ディクテーションを再度有効にします。",
           "cd9fe37556": "マイクの許可が与えられました",
           "6fa734ed95": "{{value0}} を削除",
-          "openAiKeyName": "OpenAI 転写キー",
-          "dictationShortcutDescription": "{{shortcut}} を押すと、フォーカスされているペインにテキストを音声入力できます。",
-          "dictationModesDescription": "トグル: {{shortcut}} を1回押すと開始し、もう一度押すと停止します。ホールド: {{shortcut}} を押している間、音声入力します。"
+          "openAiKeyName": "OpenAI 転写キー"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "{{value0}} を削除",
@@ -11177,8 +11164,6 @@
               "322d457a0d": "転写",
               "dcc7846641": "クラウド音声テキスト変換モデルに使用される OpenAI API キーを構成します。",
               "ebfd0b32e5": "OpenAI 文字起こし",
-              "microphoneTitle": "マイクロフォン",
-              "microphoneDescription": "音声ディクテーションが使用する入力デバイスを選択します。",
               "micInput": "入力",
               "micDevice": "デバイス",
               "micAirpods": "エアポッド",
@@ -12245,19 +12230,6 @@
           "devChannelUnsupported": "{{value0}} のバージョンは {{value1}} 向けにのみ提供されます。Linux では Stable または RC を利用してください。",
           "downloadInstaller": "インストーラーをダウンロードする",
           "manualInstallHint": "{{value0}} の Windows 版は署名されていないため、アプリ内の更新機能では署名済みのバージョンに上書きインストールできません。ダウンロードしたインストーラーを一度実行してください。Windows に発行元不明の警告が表示されます。その後は、Stable に戻す場合も含め、ここからバージョンを切り替えられます。"
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "システムのデフォルト",
-          "unavailable": "利用不可",
-          "label": "マイクロフォン",
-          "description": "音声ディクテーションに使用される入力デバイス。システムのデフォルトは OS のマイク設定に従います。",
-          "accessHint": "入力デバイスの一覧を表示するには、マイクへのアクセスを許可してください。",
-          "allowAccess": "アクセスを許可する",
-          "noMicrophoneFound": "マイクが見つかりませんでした。 1 つ接続してから、再試行してください。",
-          "openFailedDetail": "マイクを開けませんでした。 {{value0}}",
-          "openFailed": "マイクを開けませんでした。",
-          "openedSystemSettings": "macOS のプライバシーとセキュリティを開きました。マイクへのアクセスを許可してから、再試行してください。",
-          "permissionDenied": "マイクへのアクセスがブロックされています。システム設定で許可してから、もう一度試してください。"
         },
         "TerminalTccAttributionNotice": {
           "body": "ターミナルデーモンは、もう存在しない Orca インストールによって起動されたため、macOS はそのコマンドを Orca に起因させることができません。アクセシビリティと自動化の許可は暗黙的に無視されます (osascript はエラー -25211 で失敗します)。デーモンを再起動するとこの問題は解決します。実行中のターミナルセッションが終了します。",
@@ -16739,26 +16711,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "音声エラー: {{value0}}",
-          "7afff43472": "ディクテーションは終了しましたが、テキストフィールドにフォーカスがありませんでした。",
-          "55127a3706": "ディクテーションが失敗しました: {{value0}}",
-          "bb7f599ee7": "設定を開く",
-          "2d5b9fabf9": "マイクへのアクセスが拒否されました。システム設定でアクセスを許可し、Orca を再起動。",
-          "5d2c3e7ae3": "音声が検出されませんでした。",
-          "micFallback": "選択したマイクが使用できません。システムのデフォルトを使用します。",
-          "micDisconnected": "マイクが接続されていません。ディクテーションが停止しました。"
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "ディクテーションを停止する",
-          "7f3660a7ba": "マイクを起動中…",
-          "f082d0cb9d": "処理中…",
-          "3de5a129e7": "聞き取り中",
-          "4977162383": "音量が大きすぎます",
-          "25f2b7a6a5": "発話中"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "{{count}} 件の子 Agent を非表示",
@@ -18528,9 +18480,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "カメラ",
-            "microphone": "マイク",
-            "location": "位置",
             "notifications": "通知",
             "clipboard": "クリップボード",
             "idleDetection": "デバイスの使用",
@@ -18541,10 +18490,7 @@
           "allow": "許可する",
           "block": "ブロック",
           "ask": {
-            "microphone": "マイクを使用する",
             "notifications": "通知を表示する",
-            "camera": "カメラを使用する",
-            "location": "位置情報を取得する",
             "idleDetection": "このデバイスを操作中かどうかを検出する",
             "localNetwork": "このデバイス上のアプリとローカル ネットワーク上のデバイスにアクセスする",
             "windowManagement": "すべてのディスプレイ上のウィンドウを管理",
@@ -19127,8 +19073,6 @@
         "noFiles": "一致するファイルがありません",
         "filesLoadFailed": "ファイルを読み込めませんでした",
         "attach": "ファイルを添付する",
-        "startDictation": "ディクテーションを開始する",
-        "stopDictation": "ディクテーションを停止する",
         "noSkills": "一致するスキルがありません",
         "localAttachmentUnsupported": "ローカル添付ファイルはリモートセッションでは使用できません。",
         "attachFailed": "{{files}} を添付できませんでした。",
@@ -20870,7 +20814,6 @@
     },
     "voice": {
       "demoPrompt": "特殊なケースについてはこの差分を確認し、見つかったものについてはテストを追加してください。",
-      "startDictation": "ディクテーションを開始する",
       "agentPromptTitle": "Agent プロンプト",
       "listening": "リスニング…",
       "unassignedInstruction": "フォーカスされたペインで音声ディクテーションを開始する前に、ディクテーションショートカットを割り当てます。",
@@ -22333,7 +22276,6 @@
       "workspaceOpenBoard": "ワークスペースボードの切り替え",
       "dashboardToggle": "Agent ダッシュボードの切り替え",
       "workspaceSelectByIndex": "ワークスペース 1–9 を選択",
-      "voiceDictation": "ディクテーション",
       "viewTasks": "タスクを開く",
       "sidebarLeftToggle": "サイドバーの切り替え",
       "sidebarRightToggle": "右サイドバーの切り替え",

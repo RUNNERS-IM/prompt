@@ -1,17 +1,9 @@
 // @vitest-environment happy-dom
 
-import { act, cleanup, fireEvent, render, renderHook, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-const voice = vi.hoisted(() => ({
-  dictationState: 'idle',
-  settings: { voice: { enabled: true, sttModel: 'configured' } }
-}))
-vi.mock('../../store', () => ({
-  useAppStore: (selector: (state: typeof voice) => unknown) => selector(voice)
-}))
-vi.mock('../dictation/dictation-control-events', () => ({ dispatchDictationControl: vi.fn() }))
 
 vi.mock('@/i18n/i18n', () => ({
   translate: (_key: string, fallback: string) => fallback
@@ -41,54 +33,18 @@ vi.mock('./NativeChatSessionOptionPickers', () => ({
 }))
 
 import { NativeChatComposerActions } from './NativeChatComposerActions'
-import { useNativeChatDictation } from './use-native-chat-dictation'
-import { dispatchDictationControl } from '../dictation/dictation-control-events'
 
 afterEach(() => {
   cleanup()
-  voice.dictationState = 'idle'
   vi.clearAllMocks()
 })
 
 describe('NativeChatComposerActions', () => {
-  it.each(['starting', 'listening'])('blocks new dictation but preserves %s Stop', (state) => {
-    const input = document.createElement('textarea')
-    const focus = vi.spyOn(input, 'focus')
-    const { result, rerender } = renderHook(
-      (disabled: boolean) => useNativeChatDictation({ current: input }, disabled),
-      { initialProps: true }
-    )
-    act(() => {
-      result.current.toggleDictation()
-      result.current.startHoldDictation()
-    })
-    expect(dispatchDictationControl).not.toHaveBeenCalled()
-    rerender(false)
-    act(() => result.current.startHoldDictation())
-    expect(dispatchDictationControl).toHaveBeenLastCalledWith('start')
-    voice.dictationState = state
-    rerender(true)
-    expect(result.current.dictationDisabled).toBe(false)
-    focus.mockClear()
-    act(() => {
-      result.current.toggleDictation()
-      result.current.stopHoldDictation()
-    })
-    expect(dispatchDictationControl).toHaveBeenLastCalledWith('stop')
-    expect(focus).not.toHaveBeenCalled()
-  })
-
   it("disables the Stop control and names it Stopping while a person's Stop is ending the turn", () => {
     const props = {
       attachDisabled: false,
-      dictationDisabled: false,
       isWorking: true,
-      isDictating: false,
-      isDictationHoldMode: false,
       onAttach: vi.fn(),
-      onDictationToggle: vi.fn(),
-      onDictationHoldStart: vi.fn(),
-      onDictationHoldEnd: vi.fn(),
       onSend: vi.fn(),
       sessionOptionsSurface: null,
       sessionOptionsSnapshot: []
@@ -105,15 +61,9 @@ describe('NativeChatComposerActions', () => {
     render(
       <NativeChatComposerActions
         attachDisabled={false}
-        dictationDisabled={false}
         sendDisabled={false}
         isWorking
-        isDictating={false}
-        isDictationHoldMode={false}
         onAttach={vi.fn()}
-        onDictationToggle={vi.fn()}
-        onDictationHoldStart={vi.fn()}
-        onDictationHoldEnd={vi.fn()}
         onSend={vi.fn()}
         onStop={vi.fn()}
         sessionOptionsSurface={null}
@@ -134,15 +84,9 @@ describe('NativeChatComposerActions', () => {
     render(
       <NativeChatComposerActions
         attachDisabled={false}
-        dictationDisabled={false}
         sendDisabled={false}
         isWorking
-        isDictating={false}
-        isDictationHoldMode={false}
         onAttach={vi.fn()}
-        onDictationToggle={vi.fn()}
-        onDictationHoldStart={vi.fn()}
-        onDictationHoldEnd={vi.fn()}
         onSend={onSend}
         onStop={onStop}
         sessionOptionsSurface={null}
@@ -162,15 +106,9 @@ describe('NativeChatComposerActions', () => {
       render(
         <NativeChatComposerActions
           attachDisabled={false}
-          dictationDisabled={false}
           sendDisabled={false}
           isWorking={isWorking}
-          isDictating={false}
-          isDictationHoldMode={false}
           onAttach={vi.fn()}
-          onDictationToggle={vi.fn()}
-          onDictationHoldStart={vi.fn()}
-          onDictationHoldEnd={vi.fn()}
           onSend={vi.fn()}
           onStop={vi.fn()}
           sessionOptionsSurface={null}
@@ -188,16 +126,10 @@ describe('NativeChatComposerActions', () => {
     render(
       <NativeChatComposerActions
         attachDisabled={false}
-        dictationDisabled={false}
         sendDisabled
         sendBlockedReason="An image couldn't be brought back. Remove it to send."
         isWorking={false}
-        isDictating={false}
-        isDictationHoldMode={false}
         onAttach={vi.fn()}
-        onDictationToggle={vi.fn()}
-        onDictationHoldStart={vi.fn()}
-        onDictationHoldEnd={vi.fn()}
         onSend={vi.fn()}
         sessionOptionsSurface={null}
         sessionOptionsSnapshot={[]}
@@ -213,15 +145,9 @@ describe('NativeChatComposerActions', () => {
   it('marks a draft that could not be saved only after storage refused it', () => {
     const props = {
       attachDisabled: false,
-      dictationDisabled: false,
       sendDisabled: false,
       isWorking: false,
-      isDictating: false,
-      isDictationHoldMode: false,
       onAttach: vi.fn(),
-      onDictationToggle: vi.fn(),
-      onDictationHoldStart: vi.fn(),
-      onDictationHoldEnd: vi.fn(),
       onSend: vi.fn(),
       sessionOptionsSurface: null,
       sessionOptionsSnapshot: []

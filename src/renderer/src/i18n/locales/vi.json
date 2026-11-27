@@ -695,12 +695,9 @@
         "profile": "Hồ sơ trình duyệt",
         "empty": "Chưa có trang web nào được cho phép hoặc bị chặn.",
         "title": "Quyền của trang web",
-        "description": "Các trang web sẽ hỏi trước khi dùng camera, micro, vị trí và nhiều quyền khác. Thay đổi những gì bạn đã cho phép hoặc chặn với từng trang web.",
+        "description": "Trang web sẽ hỏi trước khi hiển thị thông báo, đọc bảng nhớ tạm, truy cập mạng cục bộ và nhiều quyền khác. Thay đổi những gì bạn đã cho phép hoặc chặn cho từng trang.",
         "search": {
           "permissions": "quyền",
-          "camera": "camera",
-          "microphone": "micro",
-          "location": "vị trí",
           "notifications": "thông báo",
           "clipboard": "bộ nhớ tạm",
           "localNetwork": "mạng cục bộ"
@@ -7717,10 +7714,6 @@
           "fa809e8ada": "Đã mở Quyền riêng tư & Bảo mật của macOS",
           "48d87edcd2": "Đã cấp quyền",
           "a552887288": "Không thể tải quyền dành cho nhà phát triển",
-          "4cfaa7e98a": "Công cụ thiết bị Bluetooth và thử nghiệm phần cứng cục bộ.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Công cụ gỡ lỗi phần cứng và thiết bị giao tiếp với thiết bị USB.",
-          "bf51e4a542": "Thiết bị USB",
           "f903bf20b5": "Cho phép terminal và công cụ phát triển kết nối với các dịch vụ trên mạng cục bộ của bạn. macOS không báo trạng thái hiện tại của quyền này cho Orca.",
           "e7bb06007c": "Mạng cục bộ",
           "4a73f5217a": "Apple Events cho các script điều khiển ứng dụng cục bộ khác.",
@@ -7731,10 +7724,6 @@
           "5b2f22ca2d": "Trợ năng",
           "0639db5496": "Công cụ chụp màn hình, tự động hóa trực quan và kiểm tra giao diện.",
           "f24f31a884": "Ghi màn hình",
-          "550cfa3750": "Chụp webcam và các ứng dụng thử nghiệm cục bộ dùng camera.",
-          "e5b5f3d6b9": "Camera",
-          "cc8151d9fa": "Nhập bằng giọng nói, phiên âm, ghi âm, sox, ffmpeg và các CLI Whisper.",
-          "16381e040a": "Micrô",
           "dac08ec03e": "Đang xử lý…",
           "actionRequest": "Yêu cầu",
           "actionOpenSettings": "Mở Cài đặt",
@@ -9314,9 +9303,7 @@
           "f9a9cf6928": "Cần cấp quyền truy cập micro trước khi bật nhập bằng giọng nói.",
           "1eac933202": "Đã mở Quyền riêng tư & Bảo mật của macOS. Bật lại nhập bằng giọng nói sau khi cấp quyền truy cập.",
           "cd9fe37556": "Đã cấp quyền truy cập micro",
-          "openAiKeyName": "OpenAI API key dùng để phiên âm",
-          "dictationShortcutDescription": "Nhấn {{shortcut}} để nhập văn bản bằng giọng nói vào pane đang focus.",
-          "dictationModesDescription": "Bật/tắt: nhấn {{shortcut}} một lần để bắt đầu, nhấn lần nữa để dừng. Giữ: nhập bằng giọng nói khi đang giữ {{shortcut}}."
+          "openAiKeyName": "OpenAI API key dùng để phiên âm"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Gỡ {{value0}}",
@@ -11147,8 +11134,6 @@
               "322d457a0d": "phiên âm",
               "dcc7846641": "Cấu hình khóa API OpenAI dùng cho các model chuyển giọng nói thành văn bản trên cloud.",
               "ebfd0b32e5": "Phiên âm OpenAI",
-              "microphoneTitle": "Micrô",
-              "microphoneDescription": "Chọn thiết bị đầu vào mà tính năng nhập bằng giọng nói sử dụng.",
               "micInput": "đầu vào",
               "micDevice": "thiết bị",
               "micAirpods": "airpods",
@@ -12091,19 +12076,6 @@
           "devChannelUnsupported": "Các bản build {{value0}} chỉ được tạo cho {{value1}}. Linux giữ nguyên bản Stable hoặc RC.",
           "downloadInstaller": "Tải trình cài đặt",
           "manualInstallHint": "Các bản build {{value0}} chưa được ký trên Windows, nên trình cập nhật trong ứng dụng không thể cài đè lên bản build đã ký. Hãy chạy trình cài đặt đã tải xuống một lần — Windows sẽ cảnh báo về nhà xuất bản không xác định — và mọi lần chuyển sau đó, kể cả quay lại Stable, đều thực hiện được từ đây."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Mặc định của hệ thống",
-          "unavailable": "không khả dụng",
-          "label": "Micrô",
-          "description": "Thiết bị đầu vào dùng cho nhập bằng giọng nói. Mặc định của hệ thống sẽ theo cài đặt micrô của hệ điều hành.",
-          "accessHint": "Cho phép truy cập micrô để liệt kê các thiết bị đầu vào.",
-          "allowAccess": "Cho phép truy cập",
-          "noMicrophoneFound": "Không tìm thấy micrô nào. Hãy kết nối một micrô rồi thử lại.",
-          "openFailedDetail": "Không thể mở micrô. {{value0}}",
-          "openFailed": "Không thể mở micrô.",
-          "openedSystemSettings": "Đã mở Privacy & Security của macOS. Cấp quyền truy cập micrô rồi thử lại.",
-          "permissionDenied": "Quyền truy cập micrô đang bị chặn. Hãy cấp quyền trong cài đặt hệ thống rồi thử lại."
         },
         "TerminalTccAttributionNotice": {
           "body": "Terminal daemon được khởi động bởi một bản cài đặt Orca không còn tồn tại, nên macOS không thể gán các lệnh của nó cho Orca — các quyền Accessibility và Automation bị bỏ qua mà không có thông báo (osascript lỗi với mã -25211). Khởi động lại daemon sẽ khắc phục được sự cố này; các phiên terminal đang chạy sẽ bị đóng.",
@@ -16665,26 +16637,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Lỗi giọng nói: {{value0}}",
-          "7afff43472": "Đã nhập bằng giọng nói xong nhưng không có trường văn bản nào được chọn.",
-          "55127a3706": "Nhập bằng giọng nói thất bại: {{value0}}",
-          "bb7f599ee7": "Mở Cài đặt",
-          "2d5b9fabf9": "Quyền truy cập micrô bị từ chối. Hãy cấp quyền trong cài đặt hệ thống rồi khởi động lại Orca.",
-          "5d2c3e7ae3": "Không phát hiện giọng nói.",
-          "micFallback": "Micrô đã chọn không khả dụng. Đang dùng micrô mặc định của hệ thống.",
-          "micDisconnected": "Micrô đã ngắt kết nối. Đã dừng nhập bằng giọng nói."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Dừng nhập bằng giọng nói",
-          "7f3660a7ba": "Đang khởi động micrô…",
-          "f082d0cb9d": "Đang xử lý…",
-          "3de5a129e7": "Đang nghe",
-          "4977162383": "Quá to",
-          "25f2b7a6a5": "Đang nói"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "Ẩn {{count}} agent con",
@@ -18402,9 +18354,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Camera",
-            "microphone": "Micrô",
-            "location": "Vị trí",
             "notifications": "Thông báo",
             "clipboard": "Bộ nhớ tạm",
             "midi": "Thiết bị MIDI",
@@ -18413,9 +18362,6 @@
             "localNetwork": "Mạng cục bộ"
           },
           "ask": {
-            "camera": "Sử dụng camera của bạn",
-            "microphone": "Sử dụng micro của bạn",
-            "location": "Biết vị trí của bạn",
             "notifications": "Hiển thị thông báo",
             "clipboard": "Xem văn bản và hình ảnh đã sao chép vào bộ nhớ tạm",
             "midi": "Sử dụng các thiết bị MIDI của bạn",
@@ -19055,8 +19001,6 @@
         "noFiles": "Không có tệp nào khớp",
         "filesLoadFailed": "Không thể tải các tệp",
         "attach": "Đính kèm tệp",
-        "startDictation": "Bắt đầu nhập bằng giọng nói",
-        "stopDictation": "Dừng nhập bằng giọng nói",
         "noSkills": "Không có skill phù hợp",
         "noCommandsOrSkills": "Không có lệnh hoặc skill phù hợp",
         "noCommands": "Không có lệnh phù hợp",
@@ -20322,7 +20266,6 @@
     },
     "voice": {
       "demoPrompt": "Review diff này để tìm các trường hợp biên và thêm test cho mọi vấn đề tìm thấy.",
-      "startDictation": "Bắt đầu nhập bằng giọng nói",
       "agentPromptTitle": "Prompt cho agent",
       "listening": "Đang nghe…",
       "unassignedInstruction": "Gán phím tắt nhập bằng giọng nói trước khi bắt đầu nhập bằng giọng nói trong pane đang focus.",
@@ -21968,7 +21911,6 @@
       "workspaceOpenBoard": "Bật/tắt Workspace Board",
       "dashboardToggle": "Bật/tắt Bảng điều khiển agent",
       "workspaceSelectByIndex": "Chọn không gian làm việc 1–9",
-      "voiceDictation": "Nhập bằng giọng nói",
       "viewTasks": "Mở tác vụ",
       "sidebarLeftToggle": "Bật/tắt thanh bên",
       "sidebarRightToggle": "Bật/tắt thanh bên phải",

@@ -81,9 +81,6 @@ function fieldProps(overrides: Partial<TestFieldProps> = {}): TestFieldProps {
     sendButtonDisabled: false,
     isWorking: false,
     attachDisabled: false,
-    dictationDisabled: false,
-    isDictating: false,
-    isDictationHoldMode: false,
     onDraftChange: vi.fn(),
     onTextareaSelect: vi.fn(),
     onKeyDown: vi.fn(),
@@ -96,9 +93,6 @@ function fieldProps(overrides: Partial<TestFieldProps> = {}): TestFieldProps {
     mentionFiles: { files: [], loading: false, failed: false },
     onRemoveImageAttachment: vi.fn(),
     onAttach: vi.fn(),
-    onDictationToggle: vi.fn(),
-    onDictationHoldStart: vi.fn(),
-    onDictationHoldEnd: vi.fn(),
     onSend: vi.fn(),
     sessionOptionsSurface: null,
     sessionOptionsSnapshot: [],
@@ -130,8 +124,7 @@ describe('queued edit placeholder ownership', () => {
       disabled: true,
       canSend: false,
       sendButtonDisabled: true,
-      attachDisabled: true,
-      dictationDisabled: true
+      attachDisabled: true
     })
     const view = render(<TestField {...props} />)
 

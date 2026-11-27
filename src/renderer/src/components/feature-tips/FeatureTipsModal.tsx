@@ -24,7 +24,6 @@ import { translate } from '@/i18n/i18n'
 import { NativeChatUpgradeTipDialog } from './NativeChatUpgradeTipDialog'
 import { SessionSearchTipDialog } from './SessionSearchTipDialog'
 import { useSessionSearchTipSetup } from './use-session-search-tip-setup'
-import { VoiceDictationTipDialog } from './VoiceDictationTipDialog'
 
 export default function FeatureTipsModal(): JSX.Element | null {
   const activeModal = useAppStore((s) => s.activeModal)
@@ -97,13 +96,6 @@ export default function FeatureTipsModal(): JSX.Element | null {
     markCurrentTipSeen()
     closeModal()
     openSettingsTarget({ pane: 'shortcuts', repoId: null })
-    openSettingsPage()
-  }
-
-  const openVoiceSettings = (): void => {
-    markCurrentTipSeen()
-    closeModal()
-    openSettingsTarget({ pane: 'voice', repoId: null })
     openSettingsPage()
   }
 
@@ -342,20 +334,9 @@ export default function FeatureTipsModal(): JSX.Element | null {
     )
   }
 
+  // 맥 받아쓰기 안내 창은 마이크 권한과 함께 지웠다(2026-11-27). Prompt 에서는 이 안내가 원래 숨겨져 있다.
   if (currentTip.action !== 'enable-voice') {
     currentTip.action satisfies never
-    return null
   }
-
-  return (
-    <VoiceDictationTipDialog
-      open={isOpen}
-      tip={currentTip}
-      primaryBusy={primaryBusy}
-      onOpenChange={handleOpenChange}
-      onPrimaryAction={() => void handlePrimaryAction()}
-      onSkip={handleSkip}
-      onVoiceSettingsClick={openVoiceSettings}
-    />
-  )
+  return null
 }

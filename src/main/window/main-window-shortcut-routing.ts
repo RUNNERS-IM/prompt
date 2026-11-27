@@ -68,31 +68,6 @@ export function installMainWindowShortcutRouting(args: {
         ? getWindowShortcutActionId(action)
         : null
 
-    // Hold dictation needs renderer keyup; consume only single-keydown toggles in main.
-    if (action.type === 'dictationKeyDown') {
-      const voiceSettings = store?.getSettings().voice
-      // No model still forwards: the renderer's startDictation shows the setup toast.
-      if (!voiceSettings?.enabled) {
-        return false
-      }
-      const dictationMode = voiceSettings.dictationMode ?? 'toggle'
-      if (dictationMode === 'hold') {
-        return false
-      }
-      if (isAutoRepeat) {
-        event.preventDefault()
-        return true
-      }
-      event.preventDefault()
-      if (capturedTerminalActionId) {
-        mainWindow.webContents.send('ui:terminalShortcutCaptured', {
-          actionId: capturedTerminalActionId
-        })
-      }
-      mainWindow.webContents.send('ui:dictationKeyDown')
-      return true
-    }
-
     if (
       (action.type === 'toggleQuickCommandsMenu' || action.type === 'deleteCurrentWorkspace') &&
       isAutoRepeat

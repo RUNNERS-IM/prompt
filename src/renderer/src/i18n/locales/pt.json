@@ -1142,7 +1142,6 @@
   "featureTips": {
     "voice": {
       "demoPrompt": "Revise este diff em busca de casos extremos e adicione testes para tudo o que encontrar.",
-      "startDictation": "Iniciar ditado",
       "agentPromptTitle": "Prompt do agente",
       "listening": "Ouvindo...",
       "unassignedInstruction": "Atribua um atalho de ditado antes de iniciar o ditado por voz em um painel em foco.",
@@ -1884,12 +1883,9 @@
         "profile": "Perfil do navegador",
         "empty": "Nenhum site foi permitido ou bloqueado ainda.",
         "title": "Permissões dos sites",
-        "description": "Os sites pedem permissão antes de usar sua câmera, microfone, localização e outros recursos. Altere o que você permitiu ou bloqueou para cada site.",
+        "description": "Os sites pedem permissão antes de mostrar notificações, ler a área de transferência, acessar sua rede local e mais. Altere o que você permitiu ou bloqueou para cada site.",
         "search": {
           "permissions": "permissões",
-          "camera": "câmera",
-          "microphone": "microfone",
-          "location": "localização",
           "notifications": "notificações",
           "clipboard": "área de transferência",
           "localNetwork": "rede local"
@@ -5902,10 +5898,6 @@
           "fa809e8ada": "Privacidade e Segurança do macOS aberta",
           "48d87edcd2": "Permissão concedida",
           "a552887288": "Não foi possível carregar as permissões de desenvolvedor",
-          "4cfaa7e98a": "Ferramentas de dispositivos Bluetooth e experimentos de hardware local.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Depuração de hardware e ferramentas de dispositivo que se comunicam com dispositivos USB.",
-          "bf51e4a542": "Dispositivos USB",
           "f903bf20b5": "Permite que terminais e ferramentas de desenvolvimento se conectem a serviços na sua rede local. O macOS não relata ao Orca o status atual desta permissão.",
           "e7bb06007c": "Rede Local",
           "4a73f5217a": "Apple Events para scripts que controlam outros apps locais.",
@@ -5916,10 +5908,6 @@
           "5b2f22ca2d": "Acessibilidade",
           "0639db5496": "Captura de tela, automação visual e ferramentas de inspeção de UI.",
           "f24f31a884": "Gravação de Tela",
-          "550cfa3750": "Captura de webcam e apps de teste local baseados em câmera.",
-          "e5b5f3d6b9": "Câmera",
-          "cc8151d9fa": "Entrada de voz, transcrição, gravação de áudio, sox, ffmpeg e CLIs do Whisper.",
-          "16381e040a": "Microfone",
           "dac08ec03e": "Processando...",
           "actionRequest": "Solicitar",
           "actionOpenSettings": "Abrir Configurações",
@@ -7003,9 +6991,7 @@
           "f9a9cf6928": "A permissão do microfone é necessária antes de ativar o ditado por voz.",
           "1eac933202": "Privacidade e Segurança do macOS aberta. Ative o ditado novamente após conceder o acesso.",
           "cd9fe37556": "Permissão do microfone concedida",
-          "openAiKeyName": "Sua chave de transcrição da OpenAI",
-          "dictationShortcutDescription": "Pressione {{shortcut}} para ditar texto em qualquer painel com foco.",
-          "dictationModesDescription": "Alternar: pressione {{shortcut}} uma vez para iniciar e novamente para parar. Manter pressionado: dite enquanto mantém {{shortcut}} pressionado."
+          "openAiKeyName": "Sua chave de transcrição da OpenAI"
         },
         "NotificationsPane": {
           "906b4afebf": "Enviar Notificação de Teste",
@@ -7100,8 +7086,6 @@
               "322d457a0d": "transcrição",
               "dcc7846641": "Configure a chave de API da OpenAI usada para modelos de voz para texto na nuvem.",
               "ebfd0b32e5": "Transcrição da OpenAI",
-              "microphoneTitle": "Microfone",
-              "microphoneDescription": "Escolha qual dispositivo de entrada o ditado por voz usa.",
               "micInput": "entrada",
               "micDevice": "dispositivo",
               "micAirpods": "airpods",
@@ -8549,19 +8533,6 @@
               }
             }
           }
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Padrão do sistema",
-          "unavailable": "indisponível",
-          "label": "Microfone",
-          "description": "Dispositivo de entrada usado para ditado por voz. O padrão do sistema segue a configuração de microfone do SO.",
-          "accessHint": "Permita o acesso ao microfone para listar dispositivos de entrada.",
-          "allowAccess": "Permitir acesso",
-          "noMicrophoneFound": "Nenhum microfone foi encontrado. Conecte um e tente novamente.",
-          "openFailedDetail": "Não foi possível abrir o microfone. {{value0}}",
-          "openFailed": "Não foi possível abrir o microfone.",
-          "openedSystemSettings": "Privacidade e Segurança do macOS aberta. Conceda acesso ao microfone e tente novamente.",
-          "permissionDenied": "O acesso ao microfone está bloqueado. Conceda-o nas configurações do sistema e tente novamente."
         },
         "AdvancedPane": {
           "40b29e0bf3": "Reiniciar",
@@ -19683,26 +19654,6 @@
         "157bb5ecbb": "Abrir GitHub",
         "8c967b4d15": "Mais tarde"
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Erro de fala: {{value0}}",
-          "7afff43472": "O ditado terminou, mas nenhum campo de texto estava em foco.",
-          "55127a3706": "Falha no ditado: {{value0}}",
-          "bb7f599ee7": "Abrir Configurações",
-          "2d5b9fabf9": "Acesso ao microfone negado. Conceda acesso nas configurações do sistema e reinicie o Orca.",
-          "5d2c3e7ae3": "Nenhuma fala detectada.",
-          "micFallback": "O microfone selecionado não está disponível. Usando o padrão do sistema.",
-          "micDisconnected": "Microfone desconectado. O ditado foi interrompido."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Parar ditado",
-          "7f3660a7ba": "Iniciando microfone…",
-          "f082d0cb9d": "Processando…",
-          "3de5a129e7": "Ouvindo",
-          "4977162383": "Muito alto",
-          "25f2b7a6a5": "Falando"
-        }
-      },
       "link": {
         "routing": {
           "preference": {
@@ -20202,9 +20153,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Câmera",
-            "microphone": "Microfone",
-            "location": "Localização",
             "notifications": "Notificações",
             "clipboard": "Área de transferência",
             "midi": "Dispositivos MIDI",
@@ -20213,9 +20161,6 @@
             "localNetwork": "Rede local"
           },
           "ask": {
-            "camera": "Usar sua câmera",
-            "microphone": "Usar seu microfone",
-            "location": "Saber sua localização",
             "notifications": "Mostrar notificações",
             "clipboard": "Ver textos e imagens copiados para a área de transferência",
             "midi": "Usar seus dispositivos MIDI",
@@ -20578,8 +20523,6 @@
         "locked": "A entrada está retida por outro dispositivo.",
         "placeholder": "Enviar uma mensagem…",
         "attach": "Anexar arquivo",
-        "startDictation": "Iniciar ditado",
-        "stopDictation": "Parar ditado",
         "noSkills": "Nenhuma skill correspondente",
         "noCommandsOrSkills": "Nenhum comando ou skill correspondente",
         "noCommands": "Nenhum comando correspondente",
@@ -23029,7 +22972,6 @@
       "workspaceOpenBoard": "Alternar Quadro do Espaço de Trabalho",
       "dashboardToggle": "Alternar Painel de Agentes",
       "workspaceSelectByIndex": "Selecionar Espaço de Trabalho 1–9",
-      "voiceDictation": "Ditado",
       "viewTasks": "Abrir Tarefas",
       "sidebarLeftToggle": "Alternar Barra Lateral",
       "sidebarRightToggle": "Alternar Barra Lateral Direita",

@@ -722,12 +722,9 @@
         "profile": "Selainprofiili",
         "empty": "Sivustoja ei ole vielä sallittu tai estetty.",
         "title": "Sivustojen käyttöoikeudet",
-        "description": "Sivustot kysyvät lupaa ennen kameran, mikrofonin, sijainnin ja muun käyttöä. Muuta, mitä kullekin sivustolle on sallittu tai estetty.",
+        "description": "Sivustot kysyvät lupaa ennen ilmoitusten näyttämistä, leikepöydän lukemista, paikalliseen verkkoon yhdistämistä ja muuta. Muuta kunkin sivuston sallimia tai estämiä oikeuksia.",
         "search": {
           "permissions": "käyttöoikeudet",
-          "camera": "kamera",
-          "microphone": "mikrofoni",
-          "location": "sijainti",
           "notifications": "ilmoitukset",
           "clipboard": "leikepöytä",
           "localNetwork": "paikallisverkko"
@@ -7895,10 +7892,6 @@
           "fa809e8ada": "macOS:n Tietosuoja ja turvallisuus avattu",
           "48d87edcd2": "Käyttöoikeus myönnetty",
           "a552887288": "Kehittäjän käyttöoikeuksien lataus epäonnistui",
-          "4cfaa7e98a": "Bluetooth-laitetyökalut ja paikalliset laitteistokokeilut.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Laitteiston virheenkorjaus- ja laitetyökalut, jotka kommunikoivat USB-laitteiden kanssa.",
-          "bf51e4a542": "USB-laitteet",
           "f903bf20b5": "Sallii päätteiden ja kehitystyökalujen muodostaa yhteyden paikallisen verkon palveluihin. macOS ei kerro tämän käyttöoikeuden nykyistä tilaa Orcalle.",
           "e7bb06007c": "Paikallinen verkko",
           "4a73f5217a": "Apple Events -tapahtumat skripteille, jotka ohjaavat muita paikallisia sovelluksia.",
@@ -7909,10 +7902,6 @@
           "5b2f22ca2d": "Esteettömyys",
           "0639db5496": "Kuvakaappaus-, visuaalisen automaation ja käyttöliittymän tarkastustyökalut.",
           "f24f31a884": "Näytön tallennus",
-          "550cfa3750": "Web-kameran kuvaus ja kameraohjatut paikalliset testisovellukset.",
-          "e5b5f3d6b9": "Kamera",
-          "cc8151d9fa": "Äänisyöte, litterointi, äänitys, sox, ffmpeg ja Whisper CLI -työkalut.",
-          "16381e040a": "Mikrofoni",
           "dac08ec03e": "Työstetään…",
           "actionRequest": "Pyydä",
           "actionOpenSettings": "Avaa asetukset",
@@ -9501,9 +9490,7 @@
           "f9a9cf6928": "Mikrofonin käyttöoikeus tarvitaan ennen äänisanelun käyttöönottoa.",
           "1eac933202": "macOS:n Tietosuoja ja turvallisuus avattiin. Ota sanelu uudelleen käyttöön, kun olet myöntänyt käyttöoikeuden.",
           "cd9fe37556": "Mikrofonin käyttöoikeus myönnetty",
-          "openAiKeyName": "OpenAI-transkriptioavaimesi",
-          "dictationShortcutDescription": "Sanele teksti mihin tahansa aktiiviseen ruutuun painamalla {{shortcut}}.",
-          "dictationModesDescription": "Vaihda: aloita painamalla {{shortcut}} kerran ja lopeta painamalla uudelleen. Pidä pohjassa: sanele, kun {{shortcut}} on painettuna."
+          "openAiKeyName": "OpenAI-transkriptioavaimesi"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Poista {{value0}}",
@@ -11334,8 +11321,6 @@
               "322d457a0d": "litterointi",
               "dcc7846641": "Määritä pilvipohjaisissa puheesta tekstiksi -malleissa käytettävä OpenAI API -avain.",
               "ebfd0b32e5": "OpenAI-transkriptio",
-              "microphoneTitle": "Mikrofoni",
-              "microphoneDescription": "Valitse, mitä syöttölaitetta äänisanelu käyttää.",
               "micInput": "syöte",
               "micDevice": "laite",
               "micAirpods": "airpods",
@@ -12279,19 +12264,6 @@
           "devChannelUnsupported": "{{value0}}-buildit tuotetaan vain alustalle {{value1}}. Linux pysyy Stable- tai RC-versiossa.",
           "downloadInstaller": "Lataa asennusohjelma",
           "manualInstallHint": "{{value0}}-buildit ovat Windowsissa allekirjoittamattomia, joten sovelluksen sisäinen päivitys ei voi asentaa sellaista allekirjoitetun buildin päälle. Suorita ladattu asennusohjelma kerran – Windows varoittaa tuntemattomasta julkaisijasta – jonka jälkeen kaikki myöhemmät vaihdot, myös takaisin Stableen, onnistuvat täältä."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Järjestelmän oletus",
-          "unavailable": "ei saatavilla",
-          "label": "Mikrofoni",
-          "description": "Äänisanelussa käytettävä syöttölaite. Järjestelmän oletus noudattaa käyttöjärjestelmän mikrofoniasetusta.",
-          "accessHint": "Salli mikrofonin käyttö, jotta syöttölaitteet voidaan luetella.",
-          "allowAccess": "Salli käyttö",
-          "noMicrophoneFound": "Mikrofonia ei löytynyt. Liitä mikrofoni ja yritä uudelleen.",
-          "openFailedDetail": "Mikrofonia ei voitu avata. {{value0}}",
-          "openFailed": "Mikrofonia ei voitu avata.",
-          "openedSystemSettings": "macOS:n Tietosuoja ja turvallisuus avattiin. Myönnä mikrofonin käyttöoikeus ja yritä uudelleen.",
-          "permissionDenied": "Mikrofonin käyttö on estetty. Myönnä käyttöoikeus järjestelmäasetuksissa ja yritä uudelleen."
         },
         "TerminalTccAttributionNotice": {
           "body": "Pääte-daemonin käynnisti Orca-asennus, jota ei enää ole, joten macOS ei voi yhdistää sen komentoja Orcaan – Esteettömyyden ja Automaation käyttöoikeudet ohitetaan äänettömästi (osascript epäonnistuu virheeseen -25211). Daemonin uudelleenkäynnistys korjaa tämän, mutta käynnissä olevat pääte-sessiot sulkeutuvat.",
@@ -16925,26 +16897,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Puhevirhe: {{value0}}",
-          "7afff43472": "Sanelu valmistui, mutta mikään tekstikenttä ei ollut kohdistettuna.",
-          "55127a3706": "Sanelu epäonnistui: {{value0}}",
-          "bb7f599ee7": "Avaa asetukset",
-          "2d5b9fabf9": "Mikrofonin käyttö estetty. Myönnä käyttöoikeus järjestelmäasetuksissa ja käynnistä Orca uudelleen.",
-          "5d2c3e7ae3": "Puhetta ei havaittu.",
-          "micFallback": "Valittu mikrofoni ei ole käytettävissä. Käytetään järjestelmän oletusta.",
-          "micDisconnected": "Mikrofoni irrotettiin. Sanelu pysäytettiin."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Lopeta sanelu",
-          "7f3660a7ba": "Käynnistetään mikrofonia…",
-          "f082d0cb9d": "Käsitellään…",
-          "3de5a129e7": "Kuunnellaan",
-          "4977162383": "Liian kova",
-          "25f2b7a6a5": "Puhutaan"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Piilota {{count}} alagentti",
@@ -18693,9 +18645,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Kamera",
-            "microphone": "Mikrofoni",
-            "location": "Sijainti",
             "notifications": "Ilmoitukset",
             "clipboard": "Leikepöytä",
             "midi": "MIDI-laitteet",
@@ -18704,9 +18653,6 @@
             "localNetwork": "Paikallinen verkko"
           },
           "ask": {
-            "camera": "Käytä kameraa",
-            "microphone": "Käytä mikrofonia",
-            "location": "Tietää sijainti",
             "notifications": "Näytä ilmoituksia",
             "clipboard": "Nähdä leikepöydälle kopioidut tekstit ja kuvat",
             "midi": "Käyttää MIDI-laitteita",
@@ -19354,8 +19300,6 @@
         "noFiles": "Ei vastaavia tiedostoja",
         "filesLoadFailed": "Tiedostojen lataaminen epäonnistui",
         "attach": "Liitä tiedosto",
-        "startDictation": "Aloita sanelu",
-        "stopDictation": "Lopeta sanelu",
         "noSkills": "Ei vastaavia skillejä",
         "noCommandsOrSkills": "Ei vastaavia komentoja tai skillejä",
         "noCommands": "Ei vastaavia komentoja",
@@ -20678,7 +20622,6 @@
     },
     "voice": {
       "demoPrompt": "Tarkista tämä diff reunatapausten varalta ja lisää testit kaikelle löytyneelle.",
-      "startDictation": "Aloita sanelu",
       "agentPromptTitle": "Agentin kehote",
       "listening": "Kuunnellaan…",
       "unassignedInstruction": "Määritä sanelun pikanäppäin ennen äänisanelun aloittamista kohdistetussa ruudussa.",
@@ -22347,7 +22290,6 @@
       "workspaceOpenBoard": "Näytä/piilota työtilataulu",
       "dashboardToggle": "Vaihda agenttien koontinäkymä",
       "workspaceSelectByIndex": "Valitse työtila 1–9",
-      "voiceDictation": "Sanelu",
       "viewTasks": "Avaa tehtävät",
       "sidebarLeftToggle": "Näytä/piilota sivupalkki",
       "sidebarRightToggle": "Näytä/piilota oikea sivupalkki",

@@ -695,12 +695,9 @@
         "profile": "Profil browser",
         "empty": "Belum ada situs yang diizinkan atau diblokir.",
         "title": "Izin situs",
-        "description": "Situs meminta konfirmasi sebelum menggunakan kamera, mikrofon, lokasi, dan lainnya. Ubah apa yang diizinkan atau diblokir untuk setiap situs.",
+        "description": "Situs meminta izin sebelum menampilkan notifikasi, membaca papan klip, mengakses jaringan lokal, dan lainnya. Ubah yang Anda izinkan atau blokir untuk setiap situs.",
         "search": {
           "permissions": "izin",
-          "camera": "kamera",
-          "microphone": "mikrofon",
-          "location": "lokasi",
           "notifications": "notifikasi",
           "clipboard": "clipboard",
           "localNetwork": "jaringan lokal"
@@ -7717,10 +7714,6 @@
           "fa809e8ada": "Privacy & Security macOS dibuka.",
           "48d87edcd2": "Izin diberikan",
           "a552887288": "Tidak dapat memuat izin developer.",
-          "4cfaa7e98a": "Alat perangkat Bluetooth dan eksperimen hardware lokal.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Alat debugging hardware dan perangkat yang berkomunikasi dengan perangkat USB.",
-          "bf51e4a542": "Perangkat USB",
           "f903bf20b5": "Mengizinkan terminal dan alat pengembangan terhubung ke layanan di jaringan lokal Anda. macOS tidak melaporkan status izin ini kepada Orca.",
           "e7bb06007c": "Jaringan lokal",
           "4a73f5217a": "Apple Events untuk skrip yang mengendalikan aplikasi lokal lain.",
@@ -7731,10 +7724,6 @@
           "5b2f22ca2d": "Aksesibilitas",
           "0639db5496": "Alat screenshot, otomatisasi visual, dan inspeksi UI.",
           "f24f31a884": "Perekaman layar",
-          "550cfa3750": "Pengambilan webcam dan aplikasi uji lokal berbasis kamera.",
-          "e5b5f3d6b9": "Kamera",
-          "cc8151d9fa": "Input suara, transkripsi, perekaman audio, sox, ffmpeg, dan CLI Whisper.",
-          "16381e040a": "Mikrofon",
           "dac08ec03e": "Memproses…",
           "actionRequest": "Minta",
           "actionOpenSettings": "Buka Pengaturan",
@@ -9314,9 +9303,7 @@
           "f9a9cf6928": "Izin mikrofon diperlukan sebelum mengaktifkan dikte suara.",
           "1eac933202": "Privasi & Keamanan macOS dibuka. Aktifkan dikte lagi setelah memberikan akses.",
           "cd9fe37556": "Izin mikrofon diberikan.",
-          "openAiKeyName": "Kunci transkripsi OpenAI Anda",
-          "dictationShortcutDescription": "Tekan {{shortcut}} untuk mendikte teks ke pane mana pun yang sedang fokus.",
-          "dictationModesDescription": "Toggle: tekan {{shortcut}} sekali untuk memulai, tekan lagi untuk berhenti. Tahan: mendikte selama {{shortcut}} ditahan."
+          "openAiKeyName": "Kunci transkripsi OpenAI Anda"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Hapus {{value0}}",
@@ -11147,8 +11134,6 @@
               "322d457a0d": "transkripsi",
               "dcc7846641": "Konfigurasikan API key OpenAI yang dipakai untuk model speech-to-text cloud.",
               "ebfd0b32e5": "Transkripsi OpenAI",
-              "microphoneTitle": "Mikrofon",
-              "microphoneDescription": "Pilih perangkat input yang dipakai dikte suara.",
               "micInput": "input",
               "micDevice": "perangkat",
               "micAirpods": "airpods",
@@ -12091,19 +12076,6 @@
           "devChannelUnsupported": "Build {{value0}} hanya dibuat untuk {{value1}}. Linux tetap menggunakan Stable atau RC.",
           "downloadInstaller": "Unduh installer",
           "manualInstallHint": "Build {{value0}} tidak ditandatangani di Windows, sehingga updater di dalam aplikasi tidak dapat memasangnya di atas build yang sudah ditandatangani. Jalankan installer yang diunduh satu kali — Windows akan memperingatkan tentang penerbit yang tidak dikenal — dan setiap peralihan berikutnya, termasuk kembali ke Stable, dapat dilakukan dari sini."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Default sistem",
-          "unavailable": "tidak tersedia",
-          "label": "Mikrofon",
-          "description": "Perangkat input yang digunakan untuk dikte suara. Default sistem mengikuti pengaturan mikrofon OS.",
-          "accessHint": "Izinkan akses mikrofon untuk menampilkan daftar perangkat input.",
-          "allowAccess": "Izinkan akses",
-          "noMicrophoneFound": "Mikrofon tidak ditemukan. Hubungkan mikrofon, lalu coba lagi.",
-          "openFailedDetail": "Tidak dapat membuka mikrofon. {{value0}}",
-          "openFailed": "Tidak dapat membuka mikrofon.",
-          "openedSystemSettings": "Privacy & Security macOS dibuka. Berikan akses mikrofon, lalu coba lagi.",
-          "permissionDenied": "Akses mikrofon diblokir. Berikan akses di pengaturan sistem, lalu coba lagi."
         },
         "TerminalTccAttributionNotice": {
           "body": "Daemon terminal dimulai oleh instalasi Orca yang sudah tidak ada, sehingga macOS tidak dapat mengaitkan perintahnya dengan Orca — izin Accessibility dan Automation diabaikan tanpa pemberitahuan (osascript gagal dengan error -25211). Memulai ulang daemon akan memperbaikinya; sesi terminal yang berjalan akan ditutup.",
@@ -16665,26 +16637,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Galat ucapan: {{value0}}",
-          "7afff43472": "Dikte selesai, tetapi tidak ada kolom teks yang difokuskan.",
-          "55127a3706": "Dikte gagal: {{value0}}",
-          "bb7f599ee7": "Buka Pengaturan",
-          "2d5b9fabf9": "Akses mikrofon ditolak. Berikan akses di pengaturan sistem, lalu mulai ulang Orca.",
-          "5d2c3e7ae3": "Tidak ada ucapan terdeteksi.",
-          "micFallback": "Mikrofon yang dipilih tidak tersedia. Menggunakan default sistem.",
-          "micDisconnected": "Mikrofon terputus. Dikte dihentikan."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Hentikan dikte",
-          "7f3660a7ba": "Memulai mikrofon…",
-          "f082d0cb9d": "Memproses…",
-          "3de5a129e7": "Mendengarkan",
-          "4977162383": "Terlalu keras",
-          "25f2b7a6a5": "Berbicara"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "Sembunyikan {{count}} agen turunan",
@@ -18402,9 +18354,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Kamera",
-            "microphone": "Mikrofon",
-            "location": "Lokasi",
             "notifications": "Notifikasi",
             "clipboard": "Papan klip",
             "midi": "Perangkat MIDI",
@@ -18413,9 +18362,6 @@
             "localNetwork": "Jaringan lokal"
           },
           "ask": {
-            "camera": "Menggunakan kamera Anda",
-            "microphone": "Menggunakan mikrofon Anda",
-            "location": "Mengetahui lokasi Anda",
             "notifications": "Menampilkan notifikasi",
             "clipboard": "Melihat teks dan gambar yang disalin ke papan klip",
             "midi": "Menggunakan perangkat MIDI Anda",
@@ -19055,8 +19001,6 @@
         "noFiles": "Tidak ada file yang cocok",
         "filesLoadFailed": "Tidak dapat memuat file",
         "attach": "Lampirkan file",
-        "startDictation": "Mulai dikte",
-        "stopDictation": "Hentikan dikte",
         "noSkills": "Tidak ada skill yang cocok",
         "noCommandsOrSkills": "Tidak ada perintah atau skill yang cocok",
         "noCommands": "Tidak ada perintah yang cocok",
@@ -20322,7 +20266,6 @@
     },
     "voice": {
       "demoPrompt": "Review diff ini untuk kasus tepi dan tambahkan tes untuk setiap temuan.",
-      "startDictation": "Mulai dikte",
       "agentPromptTitle": "Prompt agen",
       "listening": "Mendengarkan…",
       "unassignedInstruction": "Tetapkan pintasan dikte sebelum memulai dikte suara di panel yang difokuskan.",
@@ -21968,7 +21911,6 @@
       "workspaceOpenBoard": "Tampilkan/sembunyikan Workspace Board",
       "dashboardToggle": "Aktifkan/nonaktifkan Dasbor agen",
       "workspaceSelectByIndex": "Pilih Workspace 1–9",
-      "voiceDictation": "Dikte",
       "viewTasks": "Buka Tugas",
       "sidebarLeftToggle": "Tampilkan/sembunyikan sidebar",
       "sidebarRightToggle": "Tampilkan/sembunyikan sidebar kanan",

@@ -770,9 +770,6 @@
         "block": "Bloquear",
         "search": {
           "permissions": "permisos",
-          "camera": "cámara",
-          "microphone": "micrófono",
-          "location": "ubicación",
           "notifications": "notificaciones",
           "clipboard": "portapapeles",
           "localNetwork": "red local"
@@ -780,7 +777,7 @@
         "profile": "Perfil del navegador",
         "ask": "Preguntar de nuevo",
         "empty": "Ningún sitio ha sido permitido ni bloqueado todavía.",
-        "description": "Los sitios piden permiso para usar tu cámara, micrófono, ubicación y otros recursos. Cambia los permisos que has concedido o bloqueado para cada sitio.",
+        "description": "Los sitios piden permiso antes de mostrar notificaciones, leer el portapapeles, acceder a tu red local y más. Cambia los permisos que has concedido o bloqueado para cada sitio.",
         "title": "Permisos del sitio"
       },
       "profileScope": {
@@ -8047,10 +8044,6 @@
           "fa809e8ada": "Se abrió Privacidad y seguridad de macOS",
           "48d87edcd2": "Permiso concedido",
           "a552887288": "No se pudieron cargar los permisos de desarrollador",
-          "4cfaa7e98a": "Herramientas de dispositivos Bluetooth y experimentos de hardware local.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Depuración de hardware y herramientas que se comunican con dispositivos USB.",
-          "bf51e4a542": "Dispositivos USB",
           "f903bf20b5": "Descubrimiento y acceso para servidores de desarrollo en tu red.",
           "e7bb06007c": "LAN",
           "4a73f5217a": "Apple Events para scripts que controlan otras apps locales.",
@@ -8061,10 +8054,6 @@
           "5b2f22ca2d": "Accesibilidad",
           "0639db5496": "Herramientas de capturas de pantalla, automatización visual e inspección de UI.",
           "f24f31a884": "Grabación de pantalla",
-          "550cfa3750": "Captura de webcam y apps locales de prueba controladas por cámara.",
-          "e5b5f3d6b9": "Cámara",
-          "cc8151d9fa": "Entrada de voz, transcripción, grabación de audio, sox, ffmpeg y CLI de Whisper.",
-          "16381e040a": "Micrófono",
           "dac08ec03e": "Trabajando...",
           "actionRequest": "Pedido",
           "actionOpenSettings": "Abrir ajustes",
@@ -9611,9 +9600,7 @@
           "1eac933202": "Se abrió Privacidad y seguridad de macOS. Vuelve a habilitar el dictado después de otorgar acceso.",
           "cd9fe37556": "Permiso de micrófono concedido",
           "6fa734ed95": "Eliminar {{value0}}",
-          "openAiKeyName": "Su clave de transcripción OpenAI",
-          "dictationShortcutDescription": "Pulsa {{shortcut}} para dictar texto en cualquier panel con foco.",
-          "dictationModesDescription": "Alternar: pulsa {{shortcut}} una vez para empezar y otra para parar. Mantener: dicta mientras {{shortcut}} se mantiene presionado."
+          "openAiKeyName": "Su clave de transcripción OpenAI"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Quitar {{value0}}",
@@ -11448,8 +11435,6 @@
               "322d457a0d": "transcripción",
               "dcc7846641": "Configure la clave API de OpenAI utilizada para los modelos de voz a texto en la nube.",
               "ebfd0b32e5": "Transcripción OpenAI",
-              "microphoneTitle": "Micrófono",
-              "microphoneDescription": "Elija qué dispositivo de entrada utiliza el dictado de voz.",
               "micInput": "aporte",
               "micDevice": "dispositivo",
               "micAirpods": "airpods",
@@ -12781,19 +12766,6 @@
           "usingCliOnHostHelp": "Orca lee el Coding Plan seleccionado del almacén de credenciales de la CLI de ZCode en {{host}}. Guarda una clave de API abajo para vincular el plan allí.",
           "notConfiguredOnHostHelp": "Guarda la clave de API del plan abajo o inicia sesión con la CLI de ZCode en {{host}}.",
           "keyOnHostDescription": "Pega la clave de API desde la página API Keys de la consola seleccionada. Se guarda en {{host}} y se envía desde allí solo a ese sitio para actualizar el uso."
-        },
-        "VoiceMicrophoneSetting": {
-          "label": "Micrófono",
-          "systemDefault": "Valor predeterminado del sistema",
-          "unavailable": "indisponible",
-          "description": "Dispositivo de entrada utilizado para dictado de voz. La configuración predeterminada del sistema sigue la configuración del micrófono del sistema operativo.",
-          "accessHint": "Permitir el acceso al micrófono para enumerar los dispositivos de entrada.",
-          "allowAccess": "Permitir acceso",
-          "noMicrophoneFound": "No se encontró ningún micrófono. Conecte uno y vuelva a intentarlo.",
-          "openFailedDetail": "No se pudo abrir el micrófono. {{value0}}",
-          "openFailed": "No se pudo abrir el micrófono.",
-          "openedSystemSettings": "Se abrió Privacidad y seguridad de macOS. Concede acceso al micrófono y vuelve a intentarlo.",
-          "permissionDenied": "El acceso al micrófono está bloqueado. Concédelo en la configuración de tu sistema y vuelve a intentarlo."
         },
         "EphemeralVmCleanupStopDialog": {
           "stopping": "Parada…",
@@ -17159,26 +17131,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Error de voz: {{value0}}",
-          "7afff43472": "El dictado finalizó, pero no se centró ningún campo de texto.",
-          "55127a3706": "Dictado fallido: {{value0}}",
-          "bb7f599ee7": "Abrir configuración",
-          "2d5b9fabf9": "Acceso al micrófono denegado. Conceda acceso en la configuración del sistema, luego reinicie Orca.",
-          "5d2c3e7ae3": "No se detectó ninguna voz.",
-          "micFallback": "Micrófono seleccionado no disponible. Se usará el predeterminado del sistema.",
-          "micDisconnected": "Micrófono desconectado. Dictado detenido."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Detener dictado",
-          "7f3660a7ba": "Iniciando micrófono…",
-          "f082d0cb9d": "Procesando…",
-          "3de5a129e7": "Escuchando",
-          "4977162383": "Volumen demasiado alto",
-          "25f2b7a6a5": "Hablando"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Ocultar {{count}} agente secundario",
@@ -19018,9 +18970,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Cámara",
-            "microphone": "Micrófono",
-            "location": "Ubicación",
             "notifications": "Notificaciones",
             "clipboard": "Portapapeles",
             "midi": "Dispositivos MIDI",
@@ -19033,9 +18982,6 @@
           "ask": {
             "clipboard": "Leer el texto y las imágenes del portapapeles",
             "notifications": "Mostrar notificaciones",
-            "microphone": "Usar el micrófono",
-            "location": "Acceder a tu ubicación",
-            "camera": "Usar la cámara",
             "midi": "Usar tus dispositivos MIDI",
             "windowManagement": "Gestionar ventanas en todas tus pantallas",
             "idleDetection": "Detectar cuándo estás usando este dispositivo",
@@ -19588,8 +19534,6 @@
         "noFiles": "No hay archivos coincidentes",
         "filesLoadFailed": "No se pudieron cargar los archivos",
         "attach": "Adjuntar archivo",
-        "startDictation": "Iniciar dictado",
-        "stopDictation": "Detener dictado",
         "noSkills": "Sin habilidades coincidentes",
         "localAttachmentUnsupported": "Los archivos adjuntos locales no están disponibles para sesiones remotas.",
         "attachFailed": "No se pudo adjuntar {{files}}.",
@@ -21381,7 +21325,6 @@
     },
     "voice": {
       "demoPrompt": "Revisa este diff en busca de casos límite y agrega pruebas para lo que encuentres.",
-      "startDictation": "Iniciar dictado",
       "agentPromptTitle": "Prompt del agente",
       "listening": "Escuchando...",
       "unassignedInstruction": "Asigna un atajo de dictado antes de iniciar el dictado por voz en un panel enfocado.",
@@ -23029,7 +22972,6 @@
       "workspaceOpenBoard": "Alternar tablero de espacios de trabajo",
       "dashboardToggle": "Alternar panel de agentes",
       "workspaceSelectByIndex": "Seleccionar espacio de trabajo 1–9",
-      "voiceDictation": "Dictado",
       "viewTasks": "Abrir tareas",
       "sidebarLeftToggle": "Alternar barra lateral",
       "sidebarRightToggle": "Alternar barra lateral derecha",

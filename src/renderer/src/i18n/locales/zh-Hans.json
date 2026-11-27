@@ -761,16 +761,13 @@
         "block": "阻止",
         "search": {
           "permissions": "权限",
-          "camera": "摄像头",
-          "microphone": "麦克风",
-          "location": "位置",
           "notifications": "通知",
           "clipboard": "剪贴板",
           "localNetwork": "本地网络"
         },
         "title": "站点权限",
         "empty": "尚未允许或阻止任何网站。",
-        "description": "网站在使用摄像头、麦克风、位置等资源前会请求您的许可。您可以更改对各个网站允许或阻止的权限。",
+        "description": "网站在显示通知、读取剪贴板、访问本地网络等操作前会请求您的许可。您可以更改对各个网站允许或阻止的权限。",
         "profile": "浏览器配置文件",
         "ask": "再次询问"
       },
@@ -7747,10 +7744,6 @@
           "fa809e8ada": "打开 macOS 隐私和安全",
           "48d87edcd2": "已获得许可",
           "a552887288": "无法加载开发者权限",
-          "4cfaa7e98a": "蓝牙设备工具和本地硬件实验。",
-          "b2210b1b4f": "蓝牙",
-          "dfbc12c8c8": "与 USB 设备通信的硬件调试和设备工具。",
-          "bf51e4a542": "USB 设备",
           "f903bf20b5": "允许终端和开发工具连接到本地网络上的服务。macOS 不会向 Orca 提供此权限的当前状态。",
           "e7bb06007c": "局域网",
           "4a73f5217a": "用于控制其他本地应用程序的脚本的 Apple 事件。",
@@ -7761,10 +7754,6 @@
           "5b2f22ca2d": "辅助功能",
           "0639db5496": "屏幕截图、视觉自动化和 UI 检查工具。",
           "f24f31a884": "屏幕录制",
-          "550cfa3750": "网络摄像头捕获和摄像头驱动的本地测试应用程序。",
-          "e5b5f3d6b9": "相机",
-          "cc8151d9fa": "语音输入、转录、录音、sox、ffmpeg 和 Whisper CLI。",
-          "16381e040a": "麦克风",
           "dac08ec03e": "处理中...",
           "actionRequest": "请求授权",
           "actionOpenSettings": "打开设置",
@@ -9303,9 +9292,7 @@
           "1eac933202": "打开 macOS 隐私和安全。授予访问权限后再次启用听写。",
           "cd9fe37556": "已授予麦克风权限",
           "6fa734ed95": "删除 {{value0}}",
-          "openAiKeyName": "您的 OpenAI 转录密钥",
-          "dictationShortcutDescription": "按 {{shortcut}} 可将文本听写到当前聚焦的任意窗格中。",
-          "dictationModesDescription": "切换：按一次 {{shortcut}} 开始，再按一次停止。按住：按住 {{shortcut}} 期间进行听写。"
+          "openAiKeyName": "您的 OpenAI 转录密钥"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "删除 {{value0}}",
@@ -11140,8 +11127,6 @@
               "322d457a0d": "转录",
               "dcc7846641": "配置用于云语音转文本模型的 OpenAI API 密钥。",
               "ebfd0b32e5": "OpenAI 转录",
-              "microphoneTitle": "麦克风",
-              "microphoneDescription": "选择语音听写使用的输入设备。",
               "micInput": "输入",
               "micDevice": "设备",
               "micAirpods": "耳机",
@@ -12195,19 +12180,6 @@
           "cardTitle": "Cloud VM",
           "cardDescription": "根据环境配方为每个工作区创建。",
           "setUpRecipes": "设置配方"
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "系统默认",
-          "unavailable": "不可用",
-          "label": "麦克风",
-          "description": "用于语音听写的输入设备，系统默认会跟随操作系统的麦克风设置。",
-          "accessHint": "允许麦克风访问以列出输入设备。",
-          "allowAccess": "允许访问",
-          "noMicrophoneFound": "没有找到麦克风。连接一个，然后重试。",
-          "openFailedDetail": "无法打开麦克风。 {{value0}}",
-          "openFailed": "无法打开麦克风。",
-          "openedSystemSettings": "打开 macOS 隐私和安全。授予麦克风访问权限，然后重试。",
-          "permissionDenied": "麦克风访问被阻止。在您的系统设置中授予它，然后重试。"
         },
         "GlobalWorktreeVisibilitySourcesSetting": {
           "saveFailed": "无法保存可见性默认设置。",
@@ -16739,26 +16711,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "语音错误：{{value0}}",
-          "7afff43472": "听写完成，但没有聚焦文本字段。",
-          "55127a3706": "听写失败：{{value0}}",
-          "bb7f599ee7": "打开设置",
-          "2d5b9fabf9": "麦克风访问被拒绝。在系统设置中授予访问权限，然后重新启动 Orca。",
-          "5d2c3e7ae3": "未检测到语音。",
-          "micFallback": "所选麦克风不可用。使用系统默认值。",
-          "micDisconnected": "麦克风已断开。听写停止了。"
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "停止听写",
-          "7f3660a7ba": "正在启动麦克风…",
-          "f082d0cb9d": "正在处理…",
-          "3de5a129e7": "正在聆听",
-          "4977162383": "音量过大",
-          "25f2b7a6a5": "正在说话"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_other": "隐藏 {{count}} 个子智能体",
@@ -18528,9 +18480,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "摄像头",
-            "microphone": "麦克风",
-            "location": "位置",
             "notifications": "通知",
             "clipboard": "剪贴板",
             "midi": "MIDI 设备",
@@ -18542,9 +18491,6 @@
           "block": "阻止",
           "ask": {
             "notifications": "显示通知",
-            "microphone": "使用麦克风",
-            "location": "获取位置信息",
-            "camera": "使用摄像头",
             "midi": "使用 MIDI 设备",
             "clipboard": "查看复制到剪贴板的文本和图像",
             "windowManagement": "管理所有显示器上的窗口",
@@ -19092,8 +19038,6 @@
         "noFiles": "没有匹配的文件",
         "filesLoadFailed": "无法加载文件",
         "attach": "附加文件",
-        "startDictation": "开始听写",
-        "stopDictation": "停止听写",
         "noSkills": "没有匹配的技能",
         "localAttachmentUnsupported": "远程会话不支持本地附件。",
         "attachFailed": "无法附加 {{files}}。",
@@ -20870,7 +20814,6 @@
     },
     "voice": {
       "demoPrompt": "查看此差异以了解边缘情况，并为您发现的任何内容添加测试。",
-      "startDictation": "开始听写",
       "agentPromptTitle": "智能体提示",
       "listening": "听...",
       "unassignedInstruction": "在焦点窗格中开始语音听写之前指定听写快捷方式。",
@@ -22386,7 +22329,6 @@
       "workspaceOpenBoard": "切换工作区看板",
       "dashboardToggle": "切换智能体仪表盘",
       "workspaceSelectByIndex": "选择工作区 1–9",
-      "voiceDictation": "听写",
       "viewTasks": "打开任务",
       "sidebarLeftToggle": "切换侧边栏",
       "sidebarRightToggle": "切换右侧边栏",

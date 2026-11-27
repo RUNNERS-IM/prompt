@@ -1005,15 +1005,12 @@
         "block": "Bloquer",
         "search": {
           "permissions": "autorisations",
-          "camera": "caméra",
-          "microphone": "micro",
-          "location": "emplacement",
           "clipboard": "presse-papiers",
           "localNetwork": "réseau local",
           "notifications": "notifications"
         },
         "empty": "Aucun site n'a encore été autorisé ou bloqué.",
-        "description": "Les sites demandent votre autorisation avant d’utiliser votre caméra, votre microphone, votre position et d’autres ressources. Modifiez les autorisations accordées ou bloquées pour chaque site.",
+        "description": "Les sites demandent votre autorisation avant d’afficher des notifications, de lire le presse-papiers, d’accéder à votre réseau local et plus encore. Modifiez les autorisations accordées ou bloquées pour chaque site.",
         "title": "Autorisations du site",
         "ask": "Demander à nouveau",
         "profile": "Profil du navigateur"
@@ -8286,10 +8283,6 @@
           "fa809e8ada": "Panneau Confidentialité et sécurité de macOS ouvert",
           "48d87edcd2": "Autorisation accordée",
           "a552887288": "Impossible de charger les autorisations développeur",
-          "4cfaa7e98a": "Outils pour appareils Bluetooth et expérimentations matérielles locales.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Débogage matériel et outils d'appareils communiquant avec des périphériques USB.",
-          "bf51e4a542": "Périphériques USB",
           "f903bf20b5": "Permet aux terminaux et outils de développement de se connecter aux services de votre réseau local. macOS ne signale pas à Orca l'état actuel de cette autorisation.",
           "e7bb06007c": "Réseau local",
           "4a73f5217a": "Événements Apple pour les scripts qui contrôlent d'autres applications locales.",
@@ -8300,10 +8293,6 @@
           "5b2f22ca2d": "Accessibilité",
           "0639db5496": "Outils de capture d'écran, d'automatisation visuelle et d'inspection d'UI.",
           "f24f31a884": "Enregistrement de l'écran",
-          "550cfa3750": "Capture webcam et applications de test locales utilisant la caméra.",
-          "e5b5f3d6b9": "Caméra",
-          "cc8151d9fa": "Saisie vocale, transcription, enregistrement audio, CLI sox, ffmpeg et Whisper.",
-          "16381e040a": "Microphone",
           "dac08ec03e": "Traitement...",
           "actionRequest": "Demander",
           "actionOpenSettings": "Ouvrir les paramètres",
@@ -9896,9 +9885,7 @@
           "f9a9cf6928": "L'autorisation d'accès au micro est requise avant d'activer la dictée vocale.",
           "1eac933202": "Panneau Confidentialité et sécurité de macOS ouvert. Réactivez la dictée après avoir accordé l'accès.",
           "cd9fe37556": "Autorisation d'accès au micro accordée",
-          "openAiKeyName": "Votre clé de transcription OpenAI",
-          "dictationShortcutDescription": "Appuyez sur {{shortcut}} pour dicter du texte dans n'importe quel volet actif.",
-          "dictationModesDescription": "Bascule : appuyez une fois sur {{shortcut}} pour démarrer, puis à nouveau pour arrêter. Maintien : dictez tant que {{shortcut}} est maintenu."
+          "openAiKeyName": "Votre clé de transcription OpenAI"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Supprimer {{value0}}",
@@ -11729,8 +11716,6 @@
               "322d457a0d": "transcription",
               "dcc7846641": "Configurez la clé d'API OpenAI utilisée pour les modèles de reconnaissance vocale dans le cloud.",
               "ebfd0b32e5": "Transcription OpenAI",
-              "microphoneTitle": "Microphone",
-              "microphoneDescription": "Choisissez le périphérique d'entrée utilisé par la dictée vocale.",
               "micInput": "entrée",
               "micDevice": "appareil",
               "micAirpods": "airpods",
@@ -12745,19 +12730,6 @@
           "downloadInstaller": "Télécharger l'installateur",
           "manualInstallHint": "Les versions {{value0}} ne sont pas signées sous Windows. La mise à jour intégrée ne peut donc pas les installer par-dessus une version signée. Exécutez une fois le programme d’installation téléchargé ; Windows affichera un avertissement concernant un éditeur inconnu. Vous pourrez ensuite changer de version depuis ici, y compris pour revenir à Stable.",
           "cacheHint": "La liste des versions est mise en cache pendant 5 minutes. Actualisez-la pour rechercher de nouvelles versions."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Valeur par défaut du système",
-          "unavailable": "indisponible",
-          "label": "Microphone",
-          "description": "Périphérique d'entrée utilisé pour la dictée vocale. Le défaut système suit le réglage du micro de l'OS.",
-          "accessHint": "Autorisez l'accès au microphone pour lister les périphériques d'entrée.",
-          "allowAccess": "Autoriser l'accès",
-          "noMicrophoneFound": "Aucun microphone n'a été trouvé. Connectez-en un, puis réessayez.",
-          "openFailedDetail": "Impossible d'ouvrir le micro. {{value0}}",
-          "openFailed": "Impossible d'ouvrir le micro.",
-          "openedSystemSettings": "Ouverture de la confidentialité et de la sécurité de macOS. Accordez l’accès au microphone, puis réessayez.",
-          "permissionDenied": "L'accès au microphone est bloqué. Accordez-le dans les paramètres de votre système, puis réessayez."
         },
         "TerminalTccAttributionNotice": {
           "body": "Le daemon du terminal a été démarré par une installation d'Orca qui n'existe plus, donc macOS ne peut pas attribuer ses commandes à Orca — les autorisations Accessibilité et Automatisation sont ignorées silencieusement (osascript échoue avec l'erreur -25211). Redémarrer le daemon corrige le problème ; les sessions de terminal en cours seront fermées.",
@@ -17398,26 +17370,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Erreur vocale : {{value0}}",
-          "7afff43472": "La dictée est terminée, mais aucun champ de texte n'avait le focus.",
-          "55127a3706": "Échec de la dictée : {{value0}}",
-          "bb7f599ee7": "Ouvrir les paramètres",
-          "2d5b9fabf9": "Accès au micro refusé. Accordez l'autorisation dans les réglages système, puis redémarrez Orca.",
-          "5d2c3e7ae3": "Aucune parole détectée.",
-          "micFallback": "Micro sélectionné indisponible. Utilisation du micro par défaut du système.",
-          "micDisconnected": "Micro déconnecté. Dictée arrêtée."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Arrêter la dictée",
-          "7f3660a7ba": "Démarrage du micro…",
-          "f082d0cb9d": "Traitement…",
-          "3de5a129e7": "Écoute en cours",
-          "4977162383": "Trop fort",
-          "25f2b7a6a5": "Vous parlez"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Masquer {{count}} agent enfant",
@@ -19257,9 +19209,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Caméra",
-            "location": "Emplacement",
-            "microphone": "Microphone",
             "notifications": "Notifications",
             "clipboard": "Presse-papiers",
             "windowManagement": "Gestion des fenêtres",
@@ -19272,11 +19221,8 @@
           "ask": {
             "windowManagement": "Gérer les fenêtres sur tous vos écrans",
             "clipboard": "Voir le texte et les images copiés dans le presse-papiers",
-            "microphone": "Utiliser votre microphone",
             "notifications": "Afficher les notifications",
-            "camera": "Utiliser votre caméra",
             "midi": "Utiliser vos appareils MIDI",
-            "location": "Accéder à votre position",
             "idleDetection": "Détecter quand vous utilisez cet appareil",
             "localNetwork": "Accéder aux applications de cet appareil et aux appareils de votre réseau local"
           },
@@ -19823,8 +19769,6 @@
         "noFiles": "Aucun fichier correspondant",
         "filesLoadFailed": "Impossible de charger les fichiers",
         "attach": "Joindre un fichier",
-        "startDictation": "Démarrer la dictée",
-        "stopDictation": "Arrêter la dictée",
         "noSkills": "Aucune skill correspondante",
         "noCommandsOrSkills": "Aucune commande ou skill correspondante",
         "noCommands": "Aucune commande correspondante",
@@ -21292,7 +21236,6 @@
     },
     "voice": {
       "demoPrompt": "Relisez ce diff à la recherche de cas limites et ajoutez des tests pour tout ce que vous trouvez.",
-      "startDictation": "Démarrer la dictée",
       "agentPromptTitle": "Prompt d'agent",
       "listening": "Écoute...",
       "unassignedInstruction": "Assignez un raccourci de dictée avant de lancer la dictée vocale dans un volet actif.",
@@ -23029,7 +22972,6 @@
       "workspaceOpenBoard": "Afficher/masquer le tableau des espaces de travail",
       "dashboardToggle": "Afficher/masquer le tableau de bord des agents",
       "workspaceSelectByIndex": "Sélectionner l'espace de travail 1–9",
-      "voiceDictation": "Dictée",
       "viewTasks": "Ouvrir les tâches",
       "sidebarLeftToggle": "Afficher/masquer la barre latérale",
       "sidebarRightToggle": "Afficher/masquer la barre latérale droite",

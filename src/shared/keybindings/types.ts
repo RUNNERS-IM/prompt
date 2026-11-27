@@ -38,7 +38,6 @@ export type KeybindingActionId =
   | 'workspace.delete'
   | 'workspace.openBoard'
   | 'workspace.selectByIndex'
-  | 'voice.dictation'
   | 'view.tasks'
   | 'view.plugins'
   | 'dashboard.toggle'

@@ -749,12 +749,9 @@
         "profile": "Profilo del browser",
         "empty": "Nessun sito è stato ancora consentito o bloccato.",
         "title": "Autorizzazioni dei siti",
-        "description": "I siti chiedono prima di usare fotocamera, microfono, posizione e altro. Modifica ciò che hai consentito o bloccato per ogni sito.",
+        "description": "I siti chiedono il permesso prima di mostrare notifiche, leggere gli appunti, accedere alla rete locale e altro. Modifica ciò che hai consentito o bloccato per ogni sito.",
         "search": {
           "permissions": "autorizzazioni",
-          "camera": "fotocamera",
-          "microphone": "microfono",
-          "location": "posizione",
           "notifications": "notifiche",
           "clipboard": "appunti",
           "localNetwork": "rete locale"
@@ -8073,10 +8070,6 @@
           "fa809e8ada": "Aperto Privacy e sicurezza di macOS",
           "48d87edcd2": "Autorizzazione concessa",
           "a552887288": "Impossibile caricare le autorizzazioni per sviluppatori",
-          "4cfaa7e98a": "Strumenti per dispositivi Bluetooth ed esperimenti hardware locali.",
-          "b2210b1b4f": "Bluetooth",
-          "dfbc12c8c8": "Strumenti di debug hardware e per dispositivi che comunicano con dispositivi USB.",
-          "bf51e4a542": "Dispositivi USB",
           "f903bf20b5": "Consente ai terminali e agli strumenti di sviluppo di connettersi ai servizi della rete locale. macOS non comunica a Orca lo stato attuale di questa autorizzazione.",
           "e7bb06007c": "Rete locale",
           "4a73f5217a": "Apple Events per gli script che controllano altre app locali.",
@@ -8087,10 +8080,6 @@
           "5b2f22ca2d": "Accessibilità",
           "0639db5496": "Strumenti per screenshot, automazione visiva e ispezione dell'interfaccia.",
           "f24f31a884": "Registrazione schermo",
-          "550cfa3750": "Acquisizione dalla webcam e app di test locali che usano la fotocamera.",
-          "e5b5f3d6b9": "Fotocamera",
-          "cc8151d9fa": "Input vocale, trascrizione, registrazione audio, sox, ffmpeg e CLI di Whisper.",
-          "16381e040a": "Microfono",
           "dac08ec03e": "Operazione in corso…",
           "actionRequest": "Richiedi",
           "actionOpenSettings": "Apri impostazioni",
@@ -9688,9 +9677,7 @@
           "f9a9cf6928": "L'autorizzazione al microfono è necessaria prima di abilitare la dettatura vocale.",
           "1eac933202": "Aperto Privacy e sicurezza di macOS. Abilita di nuovo la dettatura dopo aver concesso l'accesso.",
           "cd9fe37556": "Autorizzazione al microfono concessa",
-          "openAiKeyName": "La tua chiave di trascrizione OpenAI",
-          "dictationShortcutDescription": "Premi {{shortcut}} per dettare testo in qualsiasi riquadro attivo",
-          "dictationModesDescription": "Alterna: premi {{shortcut}} una volta per iniziare, di nuovo per fermare. Tieni premuto: detta finché {{shortcut}} è premuto."
+          "openAiKeyName": "La tua chiave di trascrizione OpenAI"
         },
         "WorktreeSymlinksSection": {
           "1c1e35b219": "Rimuovi {{value0}}",
@@ -11521,8 +11508,6 @@
               "322d457a0d": "trascrizione",
               "dcc7846641": "Configura la chiave API di OpenAI usata per i modelli di riconoscimento vocale cloud.",
               "ebfd0b32e5": "Trascrizione OpenAI",
-              "microphoneTitle": "Microfono",
-              "microphoneDescription": "Scegli quale dispositivo di input usa la dettatura vocale.",
               "micInput": "input",
               "micDevice": "dispositivo",
               "micAirpods": "airpods",
@@ -12467,19 +12452,6 @@
           "devChannelUnsupported": "Le build {{value0}} vengono create solo per {{value1}}. Linux resta su Stable o RC.",
           "downloadInstaller": "Scarica il programma di installazione",
           "manualInstallHint": "Le build {{value0}} non sono firmate su Windows, quindi l'updater integrato non può installarne una sopra una build firmata. Esegui una volta il programma di installazione scaricato (Windows avviserà di un editore sconosciuto) e da lì in poi ogni cambio successivo, anche il ritorno a Stable, funzionerà da qui."
-        },
-        "VoiceMicrophoneSetting": {
-          "systemDefault": "Predefinito di sistema",
-          "unavailable": "non disponibile",
-          "label": "Microfono",
-          "description": "Dispositivo di input usato per la dettatura vocale. Con Predefinito del sistema si segue l'impostazione del microfono del sistema operativo.",
-          "accessHint": "Consenti l'accesso al microfono per elencare i dispositivi di input.",
-          "allowAccess": "Consenti l'accesso",
-          "noMicrophoneFound": "Nessun microfono trovato. Collegane uno e riprova.",
-          "openFailedDetail": "Impossibile aprire il microfono. {{value0}}",
-          "openFailed": "Impossibile aprire il microfono.",
-          "openedSystemSettings": "Hai aperto Privacy e sicurezza di macOS. Concedi l'accesso al microfono e riprova.",
-          "permissionDenied": "L'accesso al microfono è bloccato. Concedilo nelle impostazioni di sistema e riprova."
         },
         "TerminalTccAttributionNotice": {
           "body": "Il daemon del terminale è stato avviato da un'installazione di Orca che non esiste più, quindi macOS non può attribuire i suoi comandi a Orca: le autorizzazioni di Accessibilità e Automazione vengono ignorate senza avvisi (osascript fallisce con l'errore -25211). Riavviando il daemon il problema si risolve, ma le sessioni di terminale in esecuzione verranno chiuse.",
@@ -17185,26 +17157,6 @@
           }
         }
       },
-      "dictation": {
-        "DictationController": {
-          "de136f1199": "Errore vocale: {{value0}}",
-          "7afff43472": "Dettatura terminata, ma nessun campo di testo era attivo.",
-          "55127a3706": "Dettatura non riuscita: {{value0}}",
-          "bb7f599ee7": "Apri impostazioni",
-          "2d5b9fabf9": "Accesso al microfono negato. Concedi l'accesso nelle impostazioni di sistema, poi riavvia Orca.",
-          "5d2c3e7ae3": "Nessun parlato rilevato.",
-          "micFallback": "Il microfono selezionato non è disponibile. Viene usato quello predefinito del sistema.",
-          "micDisconnected": "Microfono scollegato. Dettatura interrotta."
-        },
-        "DictationIndicator": {
-          "335e1bc6cb": "Interrompi dettatura",
-          "7f3660a7ba": "Avvio del microfono…",
-          "f082d0cb9d": "Elaborazione…",
-          "3de5a129e7": "In ascolto",
-          "4977162383": "Troppo forte",
-          "25f2b7a6a5": "Sta parlando"
-        }
-      },
       "dashboard": {
         "DashboardAgentChildDisclosure": {
           "hideChildAgents_one": "Nascondi {{count}} agente figlio",
@@ -18984,9 +18936,6 @@
         },
         "sitePermission": {
           "label": {
-            "camera": "Fotocamera",
-            "microphone": "Microfono",
-            "location": "Posizione",
             "notifications": "Notifiche",
             "clipboard": "Appunti",
             "midi": "Dispositivi MIDI",
@@ -18995,9 +18944,6 @@
             "localNetwork": "Rete locale"
           },
           "ask": {
-            "camera": "Usare la fotocamera",
-            "microphone": "Usare il microfono",
-            "location": "Conoscere la tua posizione",
             "notifications": "Mostrare notifiche",
             "clipboard": "Vedere testo e immagini copiati negli appunti",
             "midi": "Usare i tuoi dispositivi MIDI",
@@ -19653,8 +19599,6 @@
         "noFiles": "Nessun file corrispondente",
         "filesLoadFailed": "Impossibile caricare i file",
         "attach": "Allega file",
-        "startDictation": "Avvia dettatura",
-        "stopDictation": "Interrompi dettatura",
         "noSkills": "Nessuna skill corrispondente",
         "noCommandsOrSkills": "Nessun comando o skill corrispondente",
         "noCommands": "Nessun comando corrispondente",
@@ -21034,7 +20978,6 @@
     },
     "voice": {
       "demoPrompt": "Controlla questo diff per i casi limite e aggiungi test per tutto ciò che trovi.",
-      "startDictation": "Avvia dettatura",
       "agentPromptTitle": "Prompt dell'agente",
       "listening": "In ascolto…",
       "unassignedInstruction": "Assegna una scorciatoia di dettatura prima di avviare la dettatura vocale in un riquadro attivo.",
@@ -22726,7 +22669,6 @@
       "workspaceOpenBoard": "Mostra/nascondi la bacheca dei workspace",
       "dashboardToggle": "Attiva/disattiva la dashboard degli agenti",
       "workspaceSelectByIndex": "Seleziona workspace 1–9",
-      "voiceDictation": "Dettatura",
       "viewTasks": "Apri attività",
       "sidebarLeftToggle": "Mostra/nascondi la barra laterale",
       "sidebarRightToggle": "Mostra/nascondi barra laterale destra",

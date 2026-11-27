@@ -60,9 +60,6 @@ export type NativeChatComposerFieldProps = {
   /** After Stop, describe whether the host queues the next message as a card or holds the send. */
   afterStop?: NativeChatAfterStopSend
   attachDisabled: boolean
-  dictationDisabled: boolean
-  isDictating: boolean
-  isDictationHoldMode: boolean
   imeEnterGesture: ReturnType<typeof useImeEnterGestureOwnership>
   onDraftChange: (value: string, element: NativeChatComposerInput) => void
   onTextareaSelect: (element: NativeChatComposerInput) => void
@@ -75,9 +72,6 @@ export type NativeChatComposerFieldProps = {
   onChooseMentionFile: (path: string) => void
   onRemoveImageAttachment: (id: string) => void
   onAttach: () => void
-  onDictationToggle: () => void
-  onDictationHoldStart: () => void
-  onDictationHoldEnd: () => void
   onSend: () => void
   onStop?: () => void
   sessionOptionsSurface: SessionOptionsSurface | null
@@ -142,9 +136,6 @@ export function NativeChatComposerField({
   isStopping = false,
   afterStop,
   attachDisabled,
-  dictationDisabled,
-  isDictating,
-  isDictationHoldMode,
   imeEnterGesture,
   onDraftChange,
   onTextareaSelect,
@@ -157,9 +148,6 @@ export function NativeChatComposerField({
   onChooseMentionFile,
   onRemoveImageAttachment,
   onAttach,
-  onDictationToggle,
-  onDictationHoldStart,
-  onDictationHoldEnd,
   onSend,
   onStop,
   sessionOptionsSurface,
@@ -229,9 +217,6 @@ export function NativeChatComposerField({
   })
   const editorPaste = useLatestHandler(onPaste)
   const attach = useLatestHandler(onAttach)
-  const dictationToggle = useLatestHandler(onDictationToggle)
-  const dictationHoldStart = useLatestHandler(onDictationHoldStart)
-  const dictationHoldEnd = useLatestHandler(onDictationHoldEnd)
   const send = useLatestHandler(onSend)
   const stop = useLatestHandler(onStop ?? noop)
   const exitGoalMode = useLatestHandler(goalMode?.exit ?? noop)
@@ -359,18 +344,12 @@ export function NativeChatComposerField({
               <NativeChatComposerActions
                 editSession={editSession}
                 attachDisabled={attachDisabled}
-                dictationDisabled={dictationDisabled}
                 sendDisabled={sendButtonDisabled}
                 sendBlockedReason={sendBlockedReason}
                 draftNotSaved={draftNotSaved}
                 isWorking={isWorking}
                 isStopping={isStopping}
-                isDictating={isDictating}
-                isDictationHoldMode={isDictationHoldMode}
                 onAttach={attach}
-                onDictationToggle={dictationToggle}
-                onDictationHoldStart={dictationHoldStart}
-                onDictationHoldEnd={dictationHoldEnd}
                 onSend={send}
                 onStop={onStop ? stop : undefined}
                 sessionOptionsSurface={sessionOptionsSurface}
