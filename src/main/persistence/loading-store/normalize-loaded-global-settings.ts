@@ -32,6 +32,7 @@ export function normalizeLoadedGlobalSettings(
     migratedExternalVisibility,
     migratedTerminalScrollback,
     migratedTerminalTuiScrollSensitivity,
+    migratedKoreanTerminalFont,
     migratedSourceControlAi,
     migratedOptionAsAlt,
     migratedFloatingTerminalEnabled,
@@ -101,6 +102,7 @@ export function normalizeLoadedGlobalSettings(
         : defaults.settings.terminalRightClickToPaste,
     terminalRightClickToPasteDefaultedForPlatform: true,
     ...migratedTerminalTuiScrollSensitivity.settings,
+    ...migratedKoreanTerminalFont.settings,
     experimentalActivity: migratedExperimentalActivity,
     experimentalActivityDefaultedOffForAllUsers: true,
     agentsSidebarMigratedFromExperimental:

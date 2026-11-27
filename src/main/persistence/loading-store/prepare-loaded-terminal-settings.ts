@@ -17,6 +17,7 @@ import {
   osc52ClipboardDefaultOnOverridesPersistedOff
 } from '../../../shared/osc52-clipboard-settings'
 import {
+  migrateKoreanTerminalFontDefault,
   migrateTerminalScrollbackRows,
   migrateTerminalTuiScrollSensitivityDefault
 } from '../applying-settings/terminal-settings-migrations'
@@ -40,6 +41,7 @@ export type PreparedLoadedTerminalSettings = {
     >
     needsSave: boolean
   }
+  migratedKoreanTerminalFont: ReturnType<typeof migrateKoreanTerminalFontDefault>
   migratedSourceControlAi: NonNullable<GlobalSettings['sourceControlAi']>
   migratedOptionAsAlt: GlobalSettings['terminalMacOptionAsAlt']
   migratedFloatingTerminalEnabled: GlobalSettings['floatingTerminalEnabled']
@@ -54,7 +56,8 @@ export type PreparedLoadedTerminalSettings = {
 
 export function prepareLoadedTerminalSettings(
   parsed: PersistedState,
-  markNeedsSave: () => void
+  markNeedsSave: () => void,
+  koreanUi = false
 ): PreparedLoadedTerminalSettings {
   const homeDir = homedir()
   const defaults = getDefaultPersistedState(homeDir)
@@ -80,6 +83,10 @@ export function prepareLoadedTerminalSettings(
     parsed.settings
   )
   if (migratedTerminalTuiScrollSensitivity.needsSave) {
+    markNeedsSave()
+  }
+  const migratedKoreanTerminalFont = migrateKoreanTerminalFontDefault(parsed.settings, koreanUi)
+  if (migratedKoreanTerminalFont.needsSave) {
     markNeedsSave()
   }
   const rawSourceControlAi = parsed.settings?.sourceControlAi
@@ -178,6 +185,7 @@ export function prepareLoadedTerminalSettings(
     migratedExternalVisibility,
     migratedTerminalScrollback,
     migratedTerminalTuiScrollSensitivity,
+    migratedKoreanTerminalFont,
     migratedSourceControlAi,
     migratedOptionAsAlt,
     migratedFloatingTerminalEnabled,

@@ -28,6 +28,23 @@
   unicode-range: U+E000-F8FF, U+F0000-FFFFD, U+100000-10FFFD;
 }
 
+/* Prompt: 한글이 정확히 두 칸 폭인 코딩 글꼴. 한국어 화면의 터미널 기본 글꼴로 쓴다(SIL OFL 1.1, D2Coding-OFL.txt). */
+@font-face {
+  font-family: 'D2Coding';
+  src: url('./fonts/D2Coding-Regular.ttf') format('truetype');
+  font-weight: 100 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'D2Coding';
+  src: url('./fonts/D2Coding-Bold.ttf') format('truetype');
+  font-weight: 601 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* A matching chat can use a different scheme from the document; portaled menus stay outside it. */
 @custom-variant dark (&:is(.dark *:not(:where([data-native-chat-scheme='light'], [data-native-chat-scheme='light'] *)), [data-native-chat-scheme='dark'], [data-native-chat-scheme='dark'] *));
 

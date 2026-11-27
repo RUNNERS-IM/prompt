@@ -103,6 +103,8 @@ export type GlobalSettings = GlobalSettingsBase & {
   terminalFontFamily: string
   terminalFontWeight: number
   terminalFontWeightBold: number
+  /** One-shot guard: Korean UI profiles moved from the unrenderable SF Mono default to bundled D2Coding. */
+  terminalFontKoreanDefaultApplied?: boolean
   terminalLineHeight: number
   terminalScrollSensitivity: number
   terminalFastScrollSensitivity: number

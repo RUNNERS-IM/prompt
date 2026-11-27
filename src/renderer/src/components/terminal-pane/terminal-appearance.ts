@@ -9,6 +9,7 @@ import {
   resolveEffectiveTerminalAppearance
 } from '@/lib/terminal-theme'
 import { buildFontFamily } from '@/lib/monospace-font-family'
+import { terminalFontFamilyReadyForMeasure } from '@/lib/bundled-terminal-fonts'
 import { safeFit, safeFitAndThen } from '@/lib/pane-manager/pane-tree-ops'
 import { canApplyPaneMetricOptions } from '@/lib/pane-manager/pane-fit'
 import {
@@ -183,7 +184,7 @@ export function applyTerminalAppearance(
     const paneSize = paneFontSizes.get(pane.id)
     const metricOptions = {
       fontSize: paneSize ?? settings.terminalFontSize,
-      fontFamily: buildFontFamily(settings.terminalFontFamily),
+      fontFamily: buildFontFamily(terminalFontFamilyReadyForMeasure(settings.terminalFontFamily)),
       fontWeight: terminalFontWeights.fontWeight,
       fontWeightBold: terminalFontWeights.fontWeightBold,
       lineHeight: normalizeTerminalLineHeight(settings.terminalLineHeight)

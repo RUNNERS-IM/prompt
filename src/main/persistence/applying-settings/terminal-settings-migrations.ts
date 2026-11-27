@@ -162,6 +162,46 @@ export function migrateTerminalTuiScrollSensitivityDefault(settings: GlobalSetti
   }
 }
 
+const LEGACY_MAC_TERMINAL_FONT_FAMILY = 'SF Mono'
+const LEGACY_TERMINAL_FONT_SIZE = 14
+export const KOREAN_TERMINAL_FONT_FAMILY = 'D2Coding'
+// 같은 크기에서 D2Coding 영문이 Menlo 보다 작아 보여 한 단계 올린다(시안 「터미널 한글 글자 간격」 1A).
+const KOREAN_TERMINAL_FONT_SIZE = 15
+
+/**
+ * Korean UI: the stored "SF Mono" default never renders (macOS hides it from apps), so Hangul fell back
+ * to a glyph 28% narrower than its two cells and showed gaps. Move untouched defaults to bundled D2Coding once.
+ */
+export function migrateKoreanTerminalFontDefault(
+  settings: Partial<GlobalSettings> | undefined,
+  koreanUi: boolean
+): {
+  settings: Pick<GlobalSettings, 'terminalFontKoreanDefaultApplied'> &
+    Partial<Pick<GlobalSettings, 'terminalFontFamily' | 'terminalFontSize'>>
+  needsSave: boolean
+} {
+  if (settings?.terminalFontKoreanDefaultApplied === true) {
+    return { settings: { terminalFontKoreanDefaultApplied: true }, needsSave: false }
+  }
+  const family = settings?.terminalFontFamily
+  const keptDefaultFamily =
+    family === undefined || family.trim() === '' || family.trim() === LEGACY_MAC_TERMINAL_FONT_FAMILY
+  if (!koreanUi || !keptDefaultFamily) {
+    return { settings: { terminalFontKoreanDefaultApplied: true }, needsSave: true }
+  }
+  const size = settings?.terminalFontSize
+  return {
+    settings: {
+      terminalFontKoreanDefaultApplied: true,
+      terminalFontFamily: KOREAN_TERMINAL_FONT_FAMILY,
+      ...(size === undefined || size === LEGACY_TERMINAL_FONT_SIZE
+        ? { terminalFontSize: KOREAN_TERMINAL_FONT_SIZE }
+        : {})
+    },
+    needsSave: true
+  }
+}
+
 export function getWorkspaceLayoutHistoryKey(layout: OrcaWorkspaceLayout): string {
   return `${normalizeRuntimePathForComparison(layout.path)}:${layout.nestWorkspaces}`
 }

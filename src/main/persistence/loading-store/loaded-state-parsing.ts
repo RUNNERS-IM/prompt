@@ -10,6 +10,7 @@ import { pruneWorkspaceSessionBrowserHistory } from '../../../shared/workspace-s
 import { clearMissingProjectGroupMemberships } from '../../../shared/project-groups'
 import { migrateWorkspaceSessionTerminalScrollbackSnapshots } from '../../terminal-scrollback-snapshots'
 import { logStartupMilestone } from '../../startup/startup-diagnostics'
+import { isKoreanUiLanguage } from '../../i18n/system-language'
 import {
   PROTECTED_SECRET_SLOT,
   sshPtyOwnerLeaseSecretSlot
@@ -166,9 +167,13 @@ export class LoadedStateParsingOperations {
           })
           .filter((record): record is SshPtyConsumerRecovery => record !== null)
 
-        const terminalSettings = prepareLoadedTerminalSettings(parsed, () => {
-          this.runtime.loadNeedsSave = true
-        })
+        const terminalSettings = prepareLoadedTerminalSettings(
+          parsed,
+          () => {
+            this.runtime.loadNeedsSave = true
+          },
+          isKoreanUiLanguage(parsed.settings?.uiLanguage)
+        )
         const profileSettings = prepareLoadedProfileSettings(
           parsed,
           terminalSettings.defaults,

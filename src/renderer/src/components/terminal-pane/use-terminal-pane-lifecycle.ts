@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import type { IDisposable } from '@xterm/xterm'
 import { normalizeDesktopTerminalScrollbackRows } from '../../../../shared/terminal-scrollback-policy'
 import { applyTerminalAppearance } from './terminal-appearance'
+import { subscribeBundledTerminalFontSettled } from '@/lib/bundled-terminal-fonts'
 import { installMouseHideWhileTyping } from './mouse-hide-while-typing'
 import {
   applyTerminalScrollbackRowsToMountedPanes,
@@ -118,6 +119,38 @@ export function useTerminalPaneLifecycle(deps: UseTerminalPaneLifecycleDeps): vo
     deps.paneLastThemeModeRef,
     systemPrefersDarkRef
   ])
+
+  // 앱에 넣은 글꼴은 늦게 읽히므로, 다 읽히면 그 글꼴로 칸을 다시 재도록 모양을 한 번 더 입힌다.
+  useEffect(
+    () =>
+      subscribeBundledTerminalFontSettled(() => {
+        const manager = deps.managerRef.current
+        const currentSettings = deps.settingsRef.current
+        if (!manager || !currentSettings) {
+          return
+        }
+        applyTerminalAppearance(
+          manager,
+          currentSettings,
+          systemPrefersDarkRef.current,
+          deps.paneFontSizesRef.current,
+          deps.paneTransportsRef.current,
+          deps.effectiveMacOptionAsAltRef.current,
+          deps.paneMode2031Ref.current,
+          deps.paneLastThemeModeRef.current
+        )
+      }),
+    [
+      deps.managerRef,
+      deps.settingsRef,
+      deps.paneFontSizesRef,
+      deps.paneTransportsRef,
+      deps.effectiveMacOptionAsAltRef,
+      deps.paneMode2031Ref,
+      deps.paneLastThemeModeRef,
+      systemPrefersDarkRef
+    ]
+  )
 
   useEffect(() => {
     deps.managerRef.current?.setTerminalGpuAcceleration(

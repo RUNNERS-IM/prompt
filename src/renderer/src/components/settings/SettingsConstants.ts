@@ -23,7 +23,14 @@ export function mergeFontSuggestions(
   return Array.from(new Set([DEFAULT_APP_FONT_FAMILY, ...systemFonts, ...previousFonts]))
 }
 
+// 앱에 함께 담긴 터미널 글꼴. 시스템에 설치되지 않아 글꼴 목록 조회에 안 잡히므로 따로 넣는다.
+const BUNDLED_TERMINAL_FONT_SUGGESTIONS = ['D2Coding']
+
 export function getFallbackTerminalFonts(): string[] {
+  return [...BUNDLED_TERMINAL_FONT_SUGGESTIONS, ...getPlatformFallbackTerminalFonts()]
+}
+
+function getPlatformFallbackTerminalFonts(): string[] {
   const nav =
     typeof navigator !== 'undefined'
       ? (navigator as Navigator & { userAgentData?: { platform?: string } })

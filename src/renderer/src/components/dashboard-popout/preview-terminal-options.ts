@@ -11,6 +11,7 @@ import {
 } from '@/lib/pane-manager/pane-terminal-options'
 import { buildLocalConptyTerminalOptions } from '@/lib/pane-manager/windows-pty-compatibility'
 import { buildFontFamily } from '@/lib/monospace-font-family'
+import { terminalFontFamilyReadyForMeasure } from '@/lib/bundled-terminal-fonts'
 import { resolveTerminalMinimumContrastRatio } from '../../../../shared/terminal-contrast-correction'
 
 /** Options a live settings change can write onto an open preview terminal. */
@@ -25,7 +26,7 @@ export function buildPreviewAppearanceOptions(
   )
   return {
     fontSize: settings?.terminalFontSize ?? 14,
-    fontFamily: buildFontFamily(settings?.terminalFontFamily ?? ''),
+    fontFamily: buildFontFamily(terminalFontFamilyReadyForMeasure(settings?.terminalFontFamily ?? '')),
     fontWeight: fontWeights.fontWeight,
     fontWeightBold: fontWeights.fontWeightBold,
     cursorStyle,
