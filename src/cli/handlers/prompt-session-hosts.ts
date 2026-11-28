@@ -241,6 +241,22 @@ export async function readRemoteSessionList(
   return asRecord(asRecord(JSON.parse(output))?.result)?.items
 }
 
+// 세션마다 화면을 읽고 /compact 를 보내므로 목록 읽기보다 오래 걸린다.
+const COMPACT_TIMEOUT_MS = 3 * 60_000
+
+export async function readRemoteCompact(
+  host: string,
+  args: readonly string[],
+  run: CommandRunner = runCommand
+): Promise<unknown> {
+  const output = await run(
+    'ssh',
+    [...SSH_OPTIONS, host, remoteCommand(args)],
+    COMPACT_TIMEOUT_MS
+  )
+  return asRecord(asRecord(JSON.parse(output))?.result)?.items
+}
+
 export function skippedHostLabel(reason: string): string {
   const label = resolveCliLocale() === 'ko' ? '건너뜀' : 'skipped'
   const firstLine = reason.split('\n')[0].trim().slice(0, 60)

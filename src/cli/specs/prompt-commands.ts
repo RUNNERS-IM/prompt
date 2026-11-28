@@ -253,6 +253,25 @@ export const PROMPT_NEW_COMMAND_SPECS: CommandSpec[] = [
     ['for', 'timeout-ms']
   ),
   sessionSpec(
+    'compact',
+    'Send /compact to idle Claude sessions to shrink their conversation',
+    'prompt session compact [<session>] [--all-hosts] [--idle <minutes>] [--dry-run] [--json]',
+    ['all-hosts', 'idle', 'dry-run'],
+    {
+      flagAliases: { all: 'all-hosts' },
+      notes: [
+        'Without <session>, every Claude session on this Mac is looked at, except the one running this command. --all-hosts (or --all) does the same on every online Mac on your Tailscale network over SSH. macOS only.',
+        'A session is left alone while it is writing an answer, has text in its input box or a choice open, or runs background work (agents, shells, monitors). Without <session> it is also left alone until it has been quiet for --idle minutes (default 30).',
+        '--dry-run lists what would be sent and sends nothing. Each compaction asks the model for a summary, so it uses tokens.'
+      ],
+      examples: [
+        'prompt session compact --dry-run',
+        'prompt session compact --all',
+        'prompt session compact app'
+      ]
+    }
+  ),
+  sessionSpec(
     'restart',
     'Move Claude sessions onto the selected account and continue their work',
     'prompt session restart [<session>] [--all] [--limited] [--continue <text>] [--json]',

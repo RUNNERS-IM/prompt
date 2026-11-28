@@ -23,7 +23,8 @@ export const PROMPT_COMMAND_HANDLER_GROUP: HandlerGroup = {
     'prompt session read',
     'prompt session send',
     'prompt session wait',
-    'prompt session restart'
+    'prompt session restart',
+    'prompt session compact'
   ],
   load: async () => ({
     ...(await import('./handlers/prompt-project.js')).PROMPT_PROJECT_HANDLERS,

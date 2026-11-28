@@ -15,6 +15,7 @@ import {
 import { terminalRow } from './prompt-lists'
 import { assertNoAttachWithoutHost, sendToHost } from './prompt-session-hosts'
 import { listAllHosts, listLocalSessions, type SessionItem } from './prompt-session-listing'
+import { compactSessions } from './prompt-session-compact'
 
 function formatSessionItems(result: { items: SessionItem[] }): string {
   if (result.items.length === 0) {
@@ -254,6 +255,7 @@ export const PROMPT_SESSION_HANDLERS: Record<string, CommandHandler> = {
     await onSessionTerminal('send')(ctx)
   },
   'prompt session wait': onSessionTerminal('wait'),
+  'prompt session compact': compactSessions,
   'prompt session restart': async (ctx) => {
     const panes = await restartPanes(ctx)
     const continueText = getOptionalStringFlag(ctx.flags, 'continue')
